@@ -1,0 +1,456 @@
+{
+  "count": 10000,
+  "text_bytes": 256,
+  "cache": "warm OS cache, 10 query warmups; no document cache",
+  "timing_window": "queries only; initial open and 20 commits excluded",
+  "flushed": false,
+  "runs": 3,
+  "results": {
+    "baseline": {
+      "median": {
+        "narrow": {
+          "p50_ms": 0.004,
+          "p95_ms": 0.0045000000000000005
+        },
+        "broad": {
+          "p50_ms": 1.3422,
+          "p95_ms": 2.1449
+        },
+        "range": {
+          "p50_ms": 0.22790000000000002,
+          "p95_ms": 0.3115
+        },
+        "second_page": {
+          "p50_ms": 1.5504,
+          "p95_ms": 2.3809
+        },
+        "last_page": {
+          "p50_ms": 1.3692000000000002,
+          "p95_ms": 2.0194
+        },
+        "broad_text": {
+          "p50_ms": 2.0203,
+          "p95_ms": 3.1081
+        },
+        "get_100": {
+          "p50_ms": 0.07619999999999999,
+          "p95_ms": 0.10569999999999999
+        }
+      },
+      "raw": [
+        {
+          "broad": {
+            "max_ms": 3.1669,
+            "p50_ms": 1.3422,
+            "p95_ms": 2.0731
+          },
+          "broad_text": {
+            "max_ms": 2.7296,
+            "p50_ms": 1.9287,
+            "p95_ms": 2.7296
+          },
+          "count": 10000,
+          "counts_verified": true,
+          "database": "data/wal-delta-query-v2-20261009-baseline-0",
+          "flushed": false,
+          "get_100": {
+            "max_ms": 0.20929999999999999,
+            "p50_ms": 0.07619999999999999,
+            "p95_ms": 0.0875
+          },
+          "get_repeats": 100,
+          "last_page": {
+            "max_ms": 2.2298,
+            "p50_ms": 1.3692000000000002,
+            "p95_ms": 2.0000999999999998
+          },
+          "last_repeats": 100,
+          "narrow": {
+            "max_ms": 0.0054,
+            "p50_ms": 0.004,
+            "p95_ms": 0.0043
+          },
+          "open_excluded": true,
+          "range": {
+            "max_ms": 0.481,
+            "p50_ms": 0.2256,
+            "p95_ms": 0.29090000000000005
+          },
+          "second_page": {
+            "max_ms": 3.1876,
+            "p50_ms": 1.5504,
+            "p95_ms": 2.3809
+          },
+          "small_repeats": 200,
+          "stats": {
+            "compaction_running": false,
+            "delta_keys": 10000,
+            "disk_index_bytes": 0,
+            "disk_posting_entries": 0,
+            "documents": 10000,
+            "generation": 1,
+            "log_bytes": 4633512,
+            "resident_documents": 10000,
+            "resident_text_bytes": 2880232,
+            "segments": 0,
+            "sequence": 20,
+            "source_bytes": 4633512
+          },
+          "text_bytes": 256,
+          "text_repeats": 20,
+          "warmup": 10,
+          "writes_before_queries": true
+        },
+        {
+          "broad": {
+            "max_ms": 3.0563000000000002,
+            "p50_ms": 1.3063,
+            "p95_ms": 2.3108
+          },
+          "broad_text": {
+            "max_ms": 3.711,
+            "p50_ms": 2.9309000000000003,
+            "p95_ms": 3.711
+          },
+          "count": 10000,
+          "counts_verified": true,
+          "database": "data/wal-delta-query-v2-20261009-baseline-1",
+          "flushed": false,
+          "get_100": {
+            "max_ms": 0.3063,
+            "p50_ms": 0.0799,
+            "p95_ms": 0.16540000000000002
+          },
+          "get_repeats": 100,
+          "last_page": {
+            "max_ms": 3.1613,
+            "p50_ms": 1.9305999999999999,
+            "p95_ms": 2.6370999999999998
+          },
+          "last_repeats": 100,
+          "narrow": {
+            "max_ms": 0.0081,
+            "p50_ms": 0.004,
+            "p95_ms": 0.0053
+          },
+          "open_excluded": true,
+          "range": {
+            "max_ms": 0.6162,
+            "p50_ms": 0.22790000000000002,
+            "p95_ms": 0.3115
+          },
+          "second_page": {
+            "max_ms": 3.7779,
+            "p50_ms": 1.8085,
+            "p95_ms": 2.7103
+          },
+          "small_repeats": 200,
+          "stats": {
+            "compaction_running": false,
+            "delta_keys": 10000,
+            "disk_index_bytes": 0,
+            "disk_posting_entries": 0,
+            "documents": 10000,
+            "generation": 1,
+            "log_bytes": 4633512,
+            "resident_documents": 10000,
+            "resident_text_bytes": 2880232,
+            "segments": 0,
+            "sequence": 20,
+            "source_bytes": 4633512
+          },
+          "text_bytes": 256,
+          "text_repeats": 20,
+          "warmup": 10,
+          "writes_before_queries": true
+        },
+        {
+          "broad": {
+            "max_ms": 2.5667,
+            "p50_ms": 1.4495,
+            "p95_ms": 2.1449
+          },
+          "broad_text": {
+            "max_ms": 3.1081,
+            "p50_ms": 2.0203,
+            "p95_ms": 3.1081
+          },
+          "count": 10000,
+          "counts_verified": true,
+          "database": "data/wal-delta-query-v2-20261009-baseline-2",
+          "flushed": false,
+          "get_100": {
+            "max_ms": 0.1806,
+            "p50_ms": 0.06899999999999999,
+            "p95_ms": 0.10569999999999999
+          },
+          "get_repeats": 100,
+          "last_page": {
+            "max_ms": 3.812,
+            "p50_ms": 1.3669,
+            "p95_ms": 2.0194
+          },
+          "last_repeats": 100,
+          "narrow": {
+            "max_ms": 0.0069,
+            "p50_ms": 0.004,
+            "p95_ms": 0.0045000000000000005
+          },
+          "open_excluded": true,
+          "range": {
+            "max_ms": 0.7057,
+            "p50_ms": 0.24649999999999997,
+            "p95_ms": 0.4012
+          },
+          "second_page": {
+            "max_ms": 2.5879000000000003,
+            "p50_ms": 1.4903,
+            "p95_ms": 1.9756
+          },
+          "small_repeats": 200,
+          "stats": {
+            "compaction_running": false,
+            "delta_keys": 10000,
+            "disk_index_bytes": 0,
+            "disk_posting_entries": 0,
+            "documents": 10000,
+            "generation": 1,
+            "log_bytes": 4633512,
+            "resident_documents": 10000,
+            "resident_text_bytes": 2880232,
+            "segments": 0,
+            "sequence": 20,
+            "source_bytes": 4633512
+          },
+          "text_bytes": 256,
+          "text_repeats": 20,
+          "warmup": 10,
+          "writes_before_queries": true
+        }
+      ]
+    },
+    "candidate": {
+      "median": {
+        "narrow": {
+          "p50_ms": 0.0070999999999999995,
+          "p95_ms": 0.007500000000000001
+        },
+        "broad": {
+          "p50_ms": 1.9023,
+          "p95_ms": 2.6731
+        },
+        "range": {
+          "p50_ms": 0.4016,
+          "p95_ms": 0.5559000000000001
+        },
+        "second_page": {
+          "p50_ms": 2.0932,
+          "p95_ms": 3.3165
+        },
+        "last_page": {
+          "p50_ms": 2.4234,
+          "p95_ms": 3.411
+        },
+        "broad_text": {
+          "p50_ms": 2.5874,
+          "p95_ms": 3.7445
+        },
+        "get_100": {
+          "p50_ms": 0.4532,
+          "p95_ms": 0.632
+        }
+      },
+      "raw": [
+        {
+          "broad": {
+            "max_ms": 4.0261000000000005,
+            "p50_ms": 1.9023,
+            "p95_ms": 2.6731
+          },
+          "broad_text": {
+            "max_ms": 3.5475,
+            "p50_ms": 2.2591,
+            "p95_ms": 3.5475
+          },
+          "count": 10000,
+          "counts_verified": true,
+          "database": "data/wal-delta-query-v2-20261009-candidate-0",
+          "flushed": false,
+          "get_100": {
+            "max_ms": 0.727,
+            "p50_ms": 0.4646,
+            "p95_ms": 0.632
+          },
+          "get_repeats": 100,
+          "last_page": {
+            "max_ms": 2.7718000000000003,
+            "p50_ms": 1.8284,
+            "p95_ms": 2.5143
+          },
+          "last_repeats": 100,
+          "narrow": {
+            "max_ms": 0.007700000000000001,
+            "p50_ms": 0.0072,
+            "p95_ms": 0.007500000000000001
+          },
+          "open_excluded": true,
+          "range": {
+            "max_ms": 0.7052,
+            "p50_ms": 0.3856,
+            "p95_ms": 0.4767
+          },
+          "second_page": {
+            "max_ms": 3.2785,
+            "p50_ms": 1.9621,
+            "p95_ms": 2.8595
+          },
+          "small_repeats": 200,
+          "stats": {
+            "compaction_running": false,
+            "delta_keys": 10000,
+            "disk_index_bytes": 0,
+            "disk_posting_entries": 0,
+            "documents": 10000,
+            "generation": 1,
+            "log_bytes": 4633512,
+            "resident_documents": 0,
+            "resident_text_bytes": 160232,
+            "segments": 0,
+            "sequence": 20,
+            "source_bytes": 4633512
+          },
+          "text_bytes": 256,
+          "text_repeats": 20,
+          "warmup": 10,
+          "writes_before_queries": true
+        },
+        {
+          "broad": {
+            "max_ms": 2.8514,
+            "p50_ms": 1.8747,
+            "p95_ms": 2.5552
+          },
+          "broad_text": {
+            "max_ms": 3.7445,
+            "p50_ms": 2.5874,
+            "p95_ms": 3.7445
+          },
+          "count": 10000,
+          "counts_verified": true,
+          "database": "data/wal-delta-query-v2-20261009-candidate-1",
+          "flushed": false,
+          "get_100": {
+            "max_ms": 0.6830999999999999,
+            "p50_ms": 0.44939999999999997,
+            "p95_ms": 0.5996
+          },
+          "get_repeats": 100,
+          "last_page": {
+            "max_ms": 3.7243,
+            "p50_ms": 2.7605,
+            "p95_ms": 3.411
+          },
+          "last_repeats": 100,
+          "narrow": {
+            "max_ms": 0.007700000000000001,
+            "p50_ms": 0.0070999999999999995,
+            "p95_ms": 0.0074
+          },
+          "open_excluded": true,
+          "range": {
+            "max_ms": 0.8706,
+            "p50_ms": 0.4016,
+            "p95_ms": 0.6295
+          },
+          "second_page": {
+            "max_ms": 5.2059999999999995,
+            "p50_ms": 2.0932,
+            "p95_ms": 3.8633
+          },
+          "small_repeats": 200,
+          "stats": {
+            "compaction_running": false,
+            "delta_keys": 10000,
+            "disk_index_bytes": 0,
+            "disk_posting_entries": 0,
+            "documents": 10000,
+            "generation": 1,
+            "log_bytes": 4633512,
+            "resident_documents": 0,
+            "resident_text_bytes": 160232,
+            "segments": 0,
+            "sequence": 20,
+            "source_bytes": 4633512
+          },
+          "text_bytes": 256,
+          "text_repeats": 20,
+          "warmup": 10,
+          "writes_before_queries": true
+        },
+        {
+          "broad": {
+            "max_ms": 3.0994,
+            "p50_ms": 1.9313,
+            "p95_ms": 2.7175
+          },
+          "broad_text": {
+            "max_ms": 4.4546,
+            "p50_ms": 2.8686,
+            "p95_ms": 4.4546
+          },
+          "count": 10000,
+          "counts_verified": true,
+          "database": "data/wal-delta-query-v2-20261009-candidate-2",
+          "flushed": false,
+          "get_100": {
+            "max_ms": 0.8416,
+            "p50_ms": 0.4532,
+            "p95_ms": 0.6648000000000001
+          },
+          "get_repeats": 100,
+          "last_page": {
+            "max_ms": 4.2807,
+            "p50_ms": 2.4234,
+            "p95_ms": 3.6275
+          },
+          "last_repeats": 100,
+          "narrow": {
+            "max_ms": 0.17650000000000002,
+            "p50_ms": 0.0070999999999999995,
+            "p95_ms": 0.010499999999999999
+          },
+          "open_excluded": true,
+          "range": {
+            "max_ms": 0.8899,
+            "p50_ms": 0.4106,
+            "p95_ms": 0.5559000000000001
+          },
+          "second_page": {
+            "max_ms": 3.9926,
+            "p50_ms": 2.1377,
+            "p95_ms": 3.3165
+          },
+          "small_repeats": 200,
+          "stats": {
+            "compaction_running": false,
+            "delta_keys": 10000,
+            "disk_index_bytes": 0,
+            "disk_posting_entries": 0,
+            "documents": 10000,
+            "generation": 1,
+            "log_bytes": 4633512,
+            "resident_documents": 0,
+            "resident_text_bytes": 160232,
+            "segments": 0,
+            "sequence": 20,
+            "source_bytes": 4633512
+          },
+          "text_bytes": 256,
+          "text_repeats": 20,
+          "warmup": 10,
+          "writes_before_queries": true
+        }
+      ]
+    }
+  }
+}

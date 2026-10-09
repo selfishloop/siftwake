@@ -1,0 +1,23 @@
+{
+  "runs": 3,
+  "count": 100000,
+  "text_bytes": 256,
+  "sample_interval_ms": 20,
+  "memory_window": "open + ingest + final maintenance; reopen verification excluded",
+  "median": {
+    "baseline": {
+      "ingest_s": 11.32477160000417,
+      "maintenance_s": 9.713849200008553,
+      "peak_working_set_bytes": 103632896,
+      "sampled_peak_private_bytes": 103251968,
+      "ingest_plus_maintenance_s": 21.038620800012723
+    },
+    "candidate": {
+      "ingest_s": 11.645627300007618,
+      "maintenance_s": 9.152815800000099,
+      "peak_working_set_bytes": 96808960,
+      "sampled_peak_private_bytes": 95031296,
+      "ingest_plus_maintenance_s": 20.798443100007717
+    }
+  }
+}

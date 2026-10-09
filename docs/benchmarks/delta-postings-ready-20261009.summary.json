@@ -1,0 +1,346 @@
+{
+  "baseline": {
+    "runs": [
+      {
+        "broad": {
+          "max_ms": 0.40499999999999997,
+          "p50_ms": 0.2206,
+          "p95_ms": 0.2841
+        },
+        "broad_text": {
+          "max_ms": 232.8392,
+          "p50_ms": 196.7489,
+          "p95_ms": 232.8392
+        },
+        "counts_verified": true,
+        "database": "data/delta-postings-v1-20261009-bitmap-0",
+        "get_100": {
+          "max_ms": 2.2476000000000003,
+          "p50_ms": 1.5376999999999998,
+          "p95_ms": 2.0883
+        },
+        "get_repeats": 100,
+        "last_page": {
+          "max_ms": 5.5040000000000004,
+          "p50_ms": 4.4988,
+          "p95_ms": 5.1643
+        },
+        "last_repeats": 100,
+        "narrow": {
+          "max_ms": 4.126399999999999,
+          "p50_ms": 2.7047,
+          "p95_ms": 3.1684
+        },
+        "open_excluded": true,
+        "range": {
+          "max_ms": 0.7141,
+          "p50_ms": 0.397,
+          "p95_ms": 0.5435
+        },
+        "second_page": {
+          "max_ms": 0.34459999999999996,
+          "p50_ms": 0.22440000000000002,
+          "p95_ms": 0.2692
+        },
+        "small_repeats": 200,
+        "text_repeats": 20,
+        "warmup": 10,
+        "writes": false
+      },
+      {
+        "broad": {
+          "max_ms": 0.30610000000000004,
+          "p50_ms": 0.21780000000000002,
+          "p95_ms": 0.2408
+        },
+        "broad_text": {
+          "max_ms": 236.5646,
+          "p50_ms": 197.457,
+          "p95_ms": 236.5646
+        },
+        "counts_verified": true,
+        "database": "data/delta-postings-v1-20261009-bitmap-0",
+        "get_100": {
+          "max_ms": 2.4507000000000003,
+          "p50_ms": 1.4893,
+          "p95_ms": 2.0161
+        },
+        "get_repeats": 100,
+        "last_page": {
+          "max_ms": 5.5383000000000004,
+          "p50_ms": 4.414000000000001,
+          "p95_ms": 5.064
+        },
+        "last_repeats": 100,
+        "narrow": {
+          "max_ms": 6.624599999999999,
+          "p50_ms": 2.7339,
+          "p95_ms": 3.0695
+        },
+        "open_excluded": true,
+        "range": {
+          "max_ms": 0.6899000000000001,
+          "p50_ms": 0.3877,
+          "p95_ms": 0.48769999999999997
+        },
+        "second_page": {
+          "max_ms": 0.5261,
+          "p50_ms": 0.2263,
+          "p95_ms": 0.29760000000000003
+        },
+        "small_repeats": 200,
+        "text_repeats": 20,
+        "warmup": 10,
+        "writes": false
+      },
+      {
+        "broad": {
+          "max_ms": 0.3205,
+          "p50_ms": 0.21800000000000003,
+          "p95_ms": 0.23709999999999998
+        },
+        "broad_text": {
+          "max_ms": 228.3546,
+          "p50_ms": 194.7792,
+          "p95_ms": 228.3546
+        },
+        "counts_verified": true,
+        "database": "data/delta-postings-v1-20261009-bitmap-0",
+        "get_100": {
+          "max_ms": 2.4133,
+          "p50_ms": 1.5042,
+          "p95_ms": 1.8313
+        },
+        "get_repeats": 100,
+        "last_page": {
+          "max_ms": 5.7877,
+          "p50_ms": 4.3117,
+          "p95_ms": 4.9004
+        },
+        "last_repeats": 100,
+        "narrow": {
+          "max_ms": 6.653700000000001,
+          "p50_ms": 2.6944,
+          "p95_ms": 3.0955000000000004
+        },
+        "open_excluded": true,
+        "range": {
+          "max_ms": 0.5923,
+          "p50_ms": 0.3892,
+          "p95_ms": 0.5067
+        },
+        "second_page": {
+          "max_ms": 0.4172,
+          "p50_ms": 0.2278,
+          "p95_ms": 0.2654
+        },
+        "small_repeats": 200,
+        "text_repeats": 20,
+        "warmup": 10,
+        "writes": false
+      }
+    ],
+    "median": {
+      "narrow": {
+        "p50_ms": 2.7047,
+        "p95_ms": 3.0955000000000004
+      },
+      "broad": {
+        "p50_ms": 0.21800000000000003,
+        "p95_ms": 0.2408
+      },
+      "range": {
+        "p50_ms": 0.3892,
+        "p95_ms": 0.5067
+      },
+      "broad_text": {
+        "p50_ms": 196.7489,
+        "p95_ms": 232.8392
+      },
+      "last_page": {
+        "p50_ms": 4.414000000000001,
+        "p95_ms": 5.064
+      },
+      "second_page": {
+        "p50_ms": 0.2263,
+        "p95_ms": 0.2692
+      },
+      "get_100": {
+        "p50_ms": 1.5042,
+        "p95_ms": 2.0161
+      }
+    }
+  },
+  "bitmap": {
+    "runs": [
+      {
+        "broad": {
+          "max_ms": 0.3851,
+          "p50_ms": 0.2195,
+          "p95_ms": 0.2452
+        },
+        "broad_text": {
+          "max_ms": 276.98479999999995,
+          "p50_ms": 201.4872,
+          "p95_ms": 276.98479999999995
+        },
+        "counts_verified": true,
+        "database": "data/delta-postings-v1-20261009-bitmap-0",
+        "get_100": {
+          "max_ms": 2.9147000000000003,
+          "p50_ms": 2.206,
+          "p95_ms": 2.6923
+        },
+        "get_repeats": 100,
+        "last_page": {
+          "max_ms": 5.3474,
+          "p50_ms": 4.3285,
+          "p95_ms": 4.8464
+        },
+        "last_repeats": 100,
+        "narrow": {
+          "max_ms": 3.5158,
+          "p50_ms": 2.6694,
+          "p95_ms": 2.9797000000000002
+        },
+        "open_excluded": true,
+        "range": {
+          "max_ms": 0.7102999999999999,
+          "p50_ms": 0.3923,
+          "p95_ms": 0.472
+        },
+        "second_page": {
+          "max_ms": 0.4347,
+          "p50_ms": 0.2245,
+          "p95_ms": 0.26580000000000004
+        },
+        "small_repeats": 200,
+        "text_repeats": 20,
+        "warmup": 10,
+        "writes": false
+      },
+      {
+        "broad": {
+          "max_ms": 0.5474,
+          "p50_ms": 0.2231,
+          "p95_ms": 0.2796
+        },
+        "broad_text": {
+          "max_ms": 223.2026,
+          "p50_ms": 199.00650000000002,
+          "p95_ms": 223.2026
+        },
+        "counts_verified": true,
+        "database": "data/delta-postings-v1-20261009-bitmap-0",
+        "get_100": {
+          "max_ms": 2.2144999999999997,
+          "p50_ms": 1.4710999999999999,
+          "p95_ms": 1.9980000000000002
+        },
+        "get_repeats": 100,
+        "last_page": {
+          "max_ms": 6.1453999999999995,
+          "p50_ms": 4.5986,
+          "p95_ms": 5.4879999999999995
+        },
+        "last_repeats": 100,
+        "narrow": {
+          "max_ms": 3.7941,
+          "p50_ms": 2.6961,
+          "p95_ms": 3.2657
+        },
+        "open_excluded": true,
+        "range": {
+          "max_ms": 0.8421000000000001,
+          "p50_ms": 0.3963,
+          "p95_ms": 0.545
+        },
+        "second_page": {
+          "max_ms": 0.479,
+          "p50_ms": 0.22619999999999998,
+          "p95_ms": 0.2793
+        },
+        "small_repeats": 200,
+        "text_repeats": 20,
+        "warmup": 10,
+        "writes": false
+      },
+      {
+        "broad": {
+          "max_ms": 0.3832,
+          "p50_ms": 0.2119,
+          "p95_ms": 0.2667
+        },
+        "broad_text": {
+          "max_ms": 219.74689999999998,
+          "p50_ms": 199.2749,
+          "p95_ms": 219.74689999999998
+        },
+        "counts_verified": true,
+        "database": "data/delta-postings-v1-20261009-bitmap-0",
+        "get_100": {
+          "max_ms": 2.1888,
+          "p50_ms": 1.5012999999999999,
+          "p95_ms": 1.8259
+        },
+        "get_repeats": 100,
+        "last_page": {
+          "max_ms": 6.1563,
+          "p50_ms": 4.6171,
+          "p95_ms": 5.3588000000000005
+        },
+        "last_repeats": 100,
+        "narrow": {
+          "max_ms": 4.224399999999999,
+          "p50_ms": 2.6866,
+          "p95_ms": 3.1189
+        },
+        "open_excluded": true,
+        "range": {
+          "max_ms": 0.6965,
+          "p50_ms": 0.4028,
+          "p95_ms": 0.5582
+        },
+        "second_page": {
+          "max_ms": 0.4279,
+          "p50_ms": 0.225,
+          "p95_ms": 0.254
+        },
+        "small_repeats": 200,
+        "text_repeats": 20,
+        "warmup": 10,
+        "writes": false
+      }
+    ],
+    "median": {
+      "narrow": {
+        "p50_ms": 2.6866,
+        "p95_ms": 3.1189
+      },
+      "broad": {
+        "p50_ms": 0.2195,
+        "p95_ms": 0.2667
+      },
+      "range": {
+        "p50_ms": 0.3963,
+        "p95_ms": 0.545
+      },
+      "broad_text": {
+        "p50_ms": 199.2749,
+        "p95_ms": 223.2026
+      },
+      "last_page": {
+        "p50_ms": 4.5986,
+        "p95_ms": 5.3588000000000005
+      },
+      "second_page": {
+        "p50_ms": 0.225,
+        "p95_ms": 0.26580000000000004
+      },
+      "get_100": {
+        "p50_ms": 1.5012999999999999,
+        "p95_ms": 1.9980000000000002
+      }
+    }
+  }
+}

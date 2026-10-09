@@ -1,0 +1,42 @@
+[package]
+name = "fdb"
+version = "0.3.1"
+edition = "2024"
+default-run = "fdb"
+rust-version = "1.89"
+description = "Purpose-built durable document and content index for SDB and Fundops"
+license = "MIT"
+
+[dependencies]
+serde = { version = "1", features = ["derive"] }
+serde_json = "1"
+
+[features]
+# Opt-in query experiment; default search keeps key-based hydration.
+experimental-direct-slot = []
+experimental-grouped-read = ["experimental-direct-slot"]
+experimental-paged-metadata = ["experimental-grouped-read"]
+experimental-streaming-open = ["experimental-paged-metadata"]
+experimental-wal-delta = ["serde_json/raw_value"]
+experimental-shared-documents = []
+experimental-builder-budget = ["experimental-write-buffer-budget"]
+# Opt-in benchmark/API control; enabled builds still default to synced commits.
+experimental-wal-sync-control = []
+experimental-merge-postings = ["experimental-write-buffer-budget", "experimental-streaming-metadata"]
+experimental-streaming-metadata = ["experimental-streaming-open"]
+diagnostic-timing = []
+diagnostic-memory = []
+experimental-shared-delta-text = []
+experimental-compact-delta-postings = []
+experimental-delta-bitmaps = ["experimental-compact-delta-postings"]
+experimental-write-buffer-budget = ["experimental-write-pipeline"]
+# Components can be toggled independently for leave-one-out measurement.
+experimental-write-merge-policy = ["experimental-streaming-open"]
+experimental-write-record-spool = ["experimental-streaming-open"]
+experimental-write-maintenance-slots = ["experimental-streaming-open"]
+experimental-write-merge-slot = ["experimental-streaming-open"]
+experimental-write-pipeline = ["experimental-write-merge-policy", "experimental-write-record-spool", "experimental-write-merge-slot"]
+
+[profile.release]
+lto = "thin"
+codegen-units = 1

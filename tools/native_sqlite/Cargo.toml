@@ -1,0 +1,15 @@
+[package]
+name = "fdb-native-sqlite-bench"
+version = "0.1.0"
+edition = "2024"
+publish = false
+
+# Isolated comparator only. Never add SQLite to the FDB engine manifest.
+[dependencies]
+fdb = { path = "../.." }
+rusqlite = { version = "=0.40.2", features = ["bundled"] }
+serde_json = "1"
+
+[profile.release]
+lto = "thin"
+codegen-units = 1

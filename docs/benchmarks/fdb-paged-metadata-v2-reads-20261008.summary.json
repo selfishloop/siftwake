@@ -1,0 +1,92 @@
+{
+  "runs": 5,
+  "cache": "warm local OS cache",
+  "includes_stdio": true,
+  "queries": {
+    "exact": {
+      "baseline": {
+        "median_run_p50_ms": 1.334200002020225,
+        "median_run_p95_ms": 1.8098000000463799,
+        "worst_run_p95_ms": 1.9183999975211918,
+        "total": 999950,
+        "hits": 50
+      },
+      "candidate": {
+        "median_run_p50_ms": 5.721399997128174,
+        "median_run_p95_ms": 7.468199997674674,
+        "worst_run_p95_ms": 8.346299990080297,
+        "total": 999950,
+        "hits": 50
+      },
+      "candidate_to_baseline_p50_ratio": 4.28826262064527
+    },
+    "last_page": {
+      "baseline": {
+        "median_run_p50_ms": 263.469299999997,
+        "median_run_p95_ms": 267.64750000438653,
+        "worst_run_p95_ms": 327.3859999899287,
+        "total": 999950,
+        "hits": 50
+      },
+      "candidate": {
+        "median_run_p50_ms": 30.09429998928681,
+        "median_run_p95_ms": 31.411899995873682,
+        "worst_run_p95_ms": 37.5035999895772,
+        "total": 999950,
+        "hits": 50
+      },
+      "candidate_to_baseline_p50_ratio": 0.11422317510725975
+    },
+    "narrow": {
+      "baseline": {
+        "median_run_p50_ms": 12.76779999898281,
+        "median_run_p95_ms": 14.22929999534972,
+        "worst_run_p95_ms": 17.715900001348928,
+        "total": 1,
+        "hits": 1
+      },
+      "candidate": {
+        "median_run_p50_ms": 16.96829999855254,
+        "median_run_p95_ms": 20.368999990751036,
+        "worst_run_p95_ms": 22.867599996970966,
+        "total": 1,
+        "hits": 1
+      },
+      "candidate_to_baseline_p50_ratio": 1.3289916821930463
+    },
+    "range": {
+      "baseline": {
+        "median_run_p50_ms": 4.340500003308989,
+        "median_run_p95_ms": 5.238600002485327,
+        "worst_run_p95_ms": 5.6502999941585585,
+        "total": 133336,
+        "hits": 50
+      },
+      "candidate": {
+        "median_run_p50_ms": 8.026800001971424,
+        "median_run_p95_ms": 9.184999988065101,
+        "worst_run_p95_ms": 12.06090000050608,
+        "total": 133336,
+        "hits": 50
+      },
+      "candidate_to_baseline_p50_ratio": 1.849280035906503
+    },
+    "second_page": {
+      "baseline": {
+        "median_run_p50_ms": 1.3018000026931986,
+        "median_run_p95_ms": 1.7348999972455204,
+        "worst_run_p95_ms": 2.4163999914890155,
+        "total": 999950,
+        "hits": 50
+      },
+      "candidate": {
+        "median_run_p50_ms": 5.615900008706376,
+        "median_run_p95_ms": 6.538599991472438,
+        "worst_run_p95_ms": 7.783099994412623,
+        "total": 999950,
+        "hits": 50
+      },
+      "candidate_to_baseline_p50_ratio": 4.31394991326475
+    }
+  }
+}

@@ -1,0 +1,440 @@
+{
+  "runs": 3,
+  "memory_window": "open + queries; query timers exclude open",
+  "results": {
+    "baseline": {
+      "query_median": {
+        "narrow": {
+          "p50_ms": 2.6952,
+          "p95_ms": 3.1311
+        },
+        "broad": {
+          "p50_ms": 0.21780000000000002,
+          "p95_ms": 0.2714
+        },
+        "range": {
+          "p50_ms": 0.4,
+          "p95_ms": 0.5773
+        },
+        "second_page": {
+          "p50_ms": 0.203,
+          "p95_ms": 0.2477
+        },
+        "last_page": {
+          "p50_ms": 4.6505,
+          "p95_ms": 5.7777
+        },
+        "broad_text": {
+          "p50_ms": 204.98350000000002,
+          "p95_ms": 225.869
+        },
+        "get_100": {
+          "p50_ms": 1.5645,
+          "p95_ms": 2.2762
+        }
+      },
+      "memory_median": {
+        "peak_working_set_bytes": 7102464,
+        "sampled_peak_private_bytes": 3145728
+      },
+      "rows": [
+        {
+          "broad": {
+            "max_ms": 0.42719999999999997,
+            "p50_ms": 0.21780000000000002,
+            "p95_ms": 0.2714
+          },
+          "broad_text": {
+            "max_ms": 274.2853,
+            "p50_ms": 208.8621,
+            "p95_ms": 274.2853
+          },
+          "counts_verified": true,
+          "database": "C:\\Users\\Serkan\\Documents\\ChatGPT\\fdb\\data\\merge-postings-v2-20261009-candidate-0",
+          "get_100": {
+            "max_ms": 2.3154999999999997,
+            "p50_ms": 1.5614999999999999,
+            "p95_ms": 2.2217000000000002
+          },
+          "get_repeats": 100,
+          "last_page": {
+            "max_ms": 6.3108,
+            "p50_ms": 4.6505,
+            "p95_ms": 5.7777
+          },
+          "last_repeats": 100,
+          "narrow": {
+            "max_ms": 4.4164,
+            "p50_ms": 2.6952,
+            "p95_ms": 3.1998
+          },
+          "open_excluded": true,
+          "range": {
+            "max_ms": 0.7783,
+            "p50_ms": 0.4105,
+            "p95_ms": 0.5773
+          },
+          "second_page": {
+            "max_ms": 0.3729,
+            "p50_ms": 0.1951,
+            "p95_ms": 0.2407
+          },
+          "small_repeats": 200,
+          "text_repeats": 20,
+          "warmup": 10,
+          "writes": false
+        },
+        {
+          "broad": {
+            "max_ms": 0.3956,
+            "p50_ms": 0.21680000000000002,
+            "p95_ms": 0.2678
+          },
+          "broad_text": {
+            "max_ms": 225.869,
+            "p50_ms": 200.8352,
+            "p95_ms": 225.869
+          },
+          "counts_verified": true,
+          "database": "C:\\Users\\Serkan\\Documents\\ChatGPT\\fdb\\data\\merge-postings-v2-20261009-candidate-0",
+          "get_100": {
+            "max_ms": 2.6184,
+            "p50_ms": 1.5645,
+            "p95_ms": 2.2762
+          },
+          "get_repeats": 100,
+          "last_page": {
+            "max_ms": 6.63,
+            "p50_ms": 4.783,
+            "p95_ms": 5.860200000000001
+          },
+          "last_repeats": 100,
+          "narrow": {
+            "max_ms": 4.0600000000000005,
+            "p50_ms": 2.7328,
+            "p95_ms": 3.1311
+          },
+          "open_excluded": true,
+          "range": {
+            "max_ms": 0.7946,
+            "p50_ms": 0.4,
+            "p95_ms": 0.6563
+          },
+          "second_page": {
+            "max_ms": 0.4484,
+            "p50_ms": 0.203,
+            "p95_ms": 0.2477
+          },
+          "small_repeats": 200,
+          "text_repeats": 20,
+          "warmup": 10,
+          "writes": false
+        },
+        {
+          "broad": {
+            "max_ms": 0.3613,
+            "p50_ms": 0.2221,
+            "p95_ms": 0.29369999999999996
+          },
+          "broad_text": {
+            "max_ms": 223.9928,
+            "p50_ms": 204.98350000000002,
+            "p95_ms": 223.9928
+          },
+          "counts_verified": true,
+          "database": "C:\\Users\\Serkan\\Documents\\ChatGPT\\fdb\\data\\merge-postings-v2-20261009-candidate-0",
+          "get_100": {
+            "max_ms": 2.7,
+            "p50_ms": 1.7535999999999998,
+            "p95_ms": 2.3627000000000002
+          },
+          "get_repeats": 100,
+          "last_page": {
+            "max_ms": 5.3408,
+            "p50_ms": 4.4101,
+            "p95_ms": 5.023
+          },
+          "last_repeats": 100,
+          "narrow": {
+            "max_ms": 3.3616,
+            "p50_ms": 2.6602,
+            "p95_ms": 3.0267
+          },
+          "open_excluded": true,
+          "range": {
+            "max_ms": 0.8833,
+            "p50_ms": 0.3914,
+            "p95_ms": 0.4658
+          },
+          "second_page": {
+            "max_ms": 0.45199999999999996,
+            "p50_ms": 0.2161,
+            "p95_ms": 0.29359999999999997
+          },
+          "small_repeats": 200,
+          "text_repeats": 20,
+          "warmup": 10,
+          "writes": false
+        }
+      ],
+      "memory_runs": [
+        {
+          "exit_code": 0,
+          "executable": "C:\\Users\\Serkan\\Documents\\ChatGPT\\fdb\\output\\fdb-stream-metadata-ready-v2-20261009.exe",
+          "elapsed_s": 8.4010748,
+          "peak_working_set_bytes": 7102464,
+          "sampled_peak_private_bytes": 3145728,
+          "sample_interval_ms": 20,
+          "samples": 226,
+          "database": "C:\\Users\\Serkan\\Documents\\ChatGPT\\fdb\\data\\merge-postings-v2-20261009-candidate-0",
+          "stdout": "C:\\Users\\Serkan\\Documents\\ChatGPT\\fdb\\docs\\benchmarks\\merge-postings-ready-v2-20261009-baseline-0.jsonl",
+          "workload": "open and ready queries; no API commits",
+          "includes_os_file_cache": false
+        },
+        {
+          "exit_code": 0,
+          "executable": "C:\\Users\\Serkan\\Documents\\ChatGPT\\fdb\\output\\fdb-stream-metadata-ready-v2-20261009.exe",
+          "elapsed_s": 8.1119979,
+          "peak_working_set_bytes": 7106560,
+          "sampled_peak_private_bytes": 3162112,
+          "sample_interval_ms": 20,
+          "samples": 223,
+          "database": "C:\\Users\\Serkan\\Documents\\ChatGPT\\fdb\\data\\merge-postings-v2-20261009-candidate-0",
+          "stdout": "C:\\Users\\Serkan\\Documents\\ChatGPT\\fdb\\docs\\benchmarks\\merge-postings-ready-v2-20261009-baseline-1.jsonl",
+          "workload": "open and ready queries; no API commits",
+          "includes_os_file_cache": false
+        },
+        {
+          "exit_code": 0,
+          "executable": "C:\\Users\\Serkan\\Documents\\ChatGPT\\fdb\\output\\fdb-stream-metadata-ready-v2-20261009.exe",
+          "elapsed_s": 8.1550056,
+          "peak_working_set_bytes": 7024640,
+          "sampled_peak_private_bytes": 3080192,
+          "sample_interval_ms": 20,
+          "samples": 220,
+          "database": "C:\\Users\\Serkan\\Documents\\ChatGPT\\fdb\\data\\merge-postings-v2-20261009-candidate-0",
+          "stdout": "C:\\Users\\Serkan\\Documents\\ChatGPT\\fdb\\docs\\benchmarks\\merge-postings-ready-v2-20261009-baseline-2.jsonl",
+          "workload": "open and ready queries; no API commits",
+          "includes_os_file_cache": false
+        }
+      ]
+    },
+    "candidate": {
+      "query_median": {
+        "narrow": {
+          "p50_ms": 2.6925999999999997,
+          "p95_ms": 3.1376
+        },
+        "broad": {
+          "p50_ms": 0.2245,
+          "p95_ms": 0.2643
+        },
+        "range": {
+          "p50_ms": 0.4082,
+          "p95_ms": 0.5356
+        },
+        "second_page": {
+          "p50_ms": 0.2088,
+          "p95_ms": 0.275
+        },
+        "last_page": {
+          "p50_ms": 4.4703,
+          "p95_ms": 5.3762
+        },
+        "broad_text": {
+          "p50_ms": 207.8355,
+          "p95_ms": 238.16889999999998
+        },
+        "get_100": {
+          "p50_ms": 1.5558,
+          "p95_ms": 2.1666
+        }
+      },
+      "memory_median": {
+        "peak_working_set_bytes": 7094272,
+        "sampled_peak_private_bytes": 3158016
+      },
+      "rows": [
+        {
+          "broad": {
+            "max_ms": 0.3702,
+            "p50_ms": 0.2245,
+            "p95_ms": 0.25339999999999996
+          },
+          "broad_text": {
+            "max_ms": 284.4935,
+            "p50_ms": 210.8086,
+            "p95_ms": 284.4935
+          },
+          "counts_verified": true,
+          "database": "C:\\Users\\Serkan\\Documents\\ChatGPT\\fdb\\data\\merge-postings-v2-20261009-candidate-0",
+          "get_100": {
+            "max_ms": 2.8668,
+            "p50_ms": 2.0619,
+            "p95_ms": 2.4028
+          },
+          "get_repeats": 100,
+          "last_page": {
+            "max_ms": 5.9146,
+            "p50_ms": 4.4703,
+            "p95_ms": 5.031
+          },
+          "last_repeats": 100,
+          "narrow": {
+            "max_ms": 3.4368,
+            "p50_ms": 2.6885,
+            "p95_ms": 3.1376
+          },
+          "open_excluded": true,
+          "range": {
+            "max_ms": 0.7071,
+            "p50_ms": 0.4094,
+            "p95_ms": 0.5328
+          },
+          "second_page": {
+            "max_ms": 0.4781,
+            "p50_ms": 0.2195,
+            "p95_ms": 0.28669999999999995
+          },
+          "small_repeats": 200,
+          "text_repeats": 20,
+          "warmup": 10,
+          "writes": false
+        },
+        {
+          "broad": {
+            "max_ms": 0.38499999999999995,
+            "p50_ms": 0.2285,
+            "p95_ms": 0.2643
+          },
+          "broad_text": {
+            "max_ms": 223.82150000000001,
+            "p50_ms": 207.8355,
+            "p95_ms": 223.82150000000001
+          },
+          "counts_verified": true,
+          "database": "C:\\Users\\Serkan\\Documents\\ChatGPT\\fdb\\data\\merge-postings-v2-20261009-candidate-0",
+          "get_100": {
+            "max_ms": 2.2811,
+            "p50_ms": 1.5413000000000001,
+            "p95_ms": 2.1578999999999997
+          },
+          "get_repeats": 100,
+          "last_page": {
+            "max_ms": 6.5296,
+            "p50_ms": 4.5924,
+            "p95_ms": 6.232200000000001
+          },
+          "last_repeats": 100,
+          "narrow": {
+            "max_ms": 3.6868,
+            "p50_ms": 2.7753,
+            "p95_ms": 3.1611000000000002
+          },
+          "open_excluded": true,
+          "range": {
+            "max_ms": 0.7632,
+            "p50_ms": 0.4082,
+            "p95_ms": 0.5448000000000001
+          },
+          "second_page": {
+            "max_ms": 0.44989999999999997,
+            "p50_ms": 0.2088,
+            "p95_ms": 0.275
+          },
+          "small_repeats": 200,
+          "text_repeats": 20,
+          "warmup": 10,
+          "writes": false
+        },
+        {
+          "broad": {
+            "max_ms": 0.48069999999999996,
+            "p50_ms": 0.21760000000000002,
+            "p95_ms": 0.2765
+          },
+          "broad_text": {
+            "max_ms": 238.16889999999998,
+            "p50_ms": 206.1648,
+            "p95_ms": 238.16889999999998
+          },
+          "counts_verified": true,
+          "database": "C:\\Users\\Serkan\\Documents\\ChatGPT\\fdb\\data\\merge-postings-v2-20261009-candidate-0",
+          "get_100": {
+            "max_ms": 2.4033,
+            "p50_ms": 1.5558,
+            "p95_ms": 2.1666
+          },
+          "get_repeats": 100,
+          "last_page": {
+            "max_ms": 6.8565,
+            "p50_ms": 4.4419,
+            "p95_ms": 5.3762
+          },
+          "last_repeats": 100,
+          "narrow": {
+            "max_ms": 3.7394,
+            "p50_ms": 2.6925999999999997,
+            "p95_ms": 3.0515
+          },
+          "open_excluded": true,
+          "range": {
+            "max_ms": 0.8688,
+            "p50_ms": 0.3947,
+            "p95_ms": 0.5356
+          },
+          "second_page": {
+            "max_ms": 0.33080000000000004,
+            "p50_ms": 0.19799999999999998,
+            "p95_ms": 0.2229
+          },
+          "small_repeats": 200,
+          "text_repeats": 20,
+          "warmup": 10,
+          "writes": false
+        }
+      ],
+      "memory_runs": [
+        {
+          "exit_code": 0,
+          "executable": "C:\\Users\\Serkan\\Documents\\ChatGPT\\fdb\\output\\fdb-merge-postings-ready-v2-20261009.exe",
+          "elapsed_s": 8.573714,
+          "peak_working_set_bytes": 7663616,
+          "sampled_peak_private_bytes": 3469312,
+          "sample_interval_ms": 20,
+          "samples": 233,
+          "database": "C:\\Users\\Serkan\\Documents\\ChatGPT\\fdb\\data\\merge-postings-v2-20261009-candidate-0",
+          "stdout": "C:\\Users\\Serkan\\Documents\\ChatGPT\\fdb\\docs\\benchmarks\\merge-postings-ready-v2-20261009-candidate-0.jsonl",
+          "workload": "open and ready queries; no API commits",
+          "includes_os_file_cache": false
+        },
+        {
+          "exit_code": 0,
+          "executable": "C:\\Users\\Serkan\\Documents\\ChatGPT\\fdb\\output\\fdb-merge-postings-ready-v2-20261009.exe",
+          "elapsed_s": 8.2464519,
+          "peak_working_set_bytes": 7090176,
+          "sampled_peak_private_bytes": 3158016,
+          "sample_interval_ms": 20,
+          "samples": 226,
+          "database": "C:\\Users\\Serkan\\Documents\\ChatGPT\\fdb\\data\\merge-postings-v2-20261009-candidate-0",
+          "stdout": "C:\\Users\\Serkan\\Documents\\ChatGPT\\fdb\\docs\\benchmarks\\merge-postings-ready-v2-20261009-candidate-1.jsonl",
+          "workload": "open and ready queries; no API commits",
+          "includes_os_file_cache": false
+        },
+        {
+          "exit_code": 0,
+          "executable": "C:\\Users\\Serkan\\Documents\\ChatGPT\\fdb\\output\\fdb-merge-postings-ready-v2-20261009.exe",
+          "elapsed_s": 8.1153912,
+          "peak_working_set_bytes": 7094272,
+          "sampled_peak_private_bytes": 3153920,
+          "sample_interval_ms": 20,
+          "samples": 224,
+          "database": "C:\\Users\\Serkan\\Documents\\ChatGPT\\fdb\\data\\merge-postings-v2-20261009-candidate-0",
+          "stdout": "C:\\Users\\Serkan\\Documents\\ChatGPT\\fdb\\docs\\benchmarks\\merge-postings-ready-v2-20261009-candidate-2.jsonl",
+          "workload": "open and ready queries; no API commits",
+          "includes_os_file_cache": false
+        }
+      ]
+    }
+  }
+}

@@ -1,0 +1,58 @@
+{
+  "layout": {
+    "fences_still_grow_linearly": true,
+    "not_total_heap_or_rss": true,
+    "original_selected_record_id_capacity_bytes": 50005000,
+    "phase": "layout",
+    "prototype_fence_capacity_bytes": 1875720,
+    "records": 1000100,
+    "runs": 15,
+    "shared_page_payload_budget_bytes": 262144
+  },
+  "independent_processes": 5,
+  "bulk_lookup_only": true,
+  "workloads": [
+    {
+      "workload": "scattered_existing_keys",
+      "resident_median_ms": 51.609700000000004,
+      "paged_median_ms": 294.8444,
+      "resident_min_max_ms": [
+        41.4102,
+        72.38650000000001
+      ],
+      "paged_min_max_ms": [
+        275.9045,
+        347.8313
+      ],
+      "median_slowdown": 5.712964810878575,
+      "page_reads": [
+        18709,
+        18709,
+        18709,
+        18709,
+        18709
+      ]
+    },
+    {
+      "workload": "first_50_per_run",
+      "resident_median_ms": 8.8723,
+      "paged_median_ms": 15.451400000000001,
+      "resident_min_max_ms": [
+        8.737200000000001,
+        9.5995
+      ],
+      "paged_min_max_ms": [
+        11.0075,
+        15.836400000000001
+      ],
+      "median_slowdown": 1.7415326352805927,
+      "page_reads": [
+        15,
+        15,
+        15,
+        15,
+        15
+      ]
+    }
+  ]
+}

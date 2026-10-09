@@ -1,0 +1,15 @@
+{
+  "op": "commit",
+  "mutations": [
+    {
+      "op": "put",
+      "document": {
+        "key": { "scope": "shared", "collection": "kap_reports", "id": "sample-report" },
+        "title": "Örnek KAP raporu",
+        "text": "Şirketin teknoloji yatırımları ve portföy dağılımı",
+        "fields": { "fund_code": "ABC", "as_of": 20261007 },
+        "links": [{ "scope": "shared", "collection": "funds", "id": "ABC" }]
+      }
+    }
+  ]
+}

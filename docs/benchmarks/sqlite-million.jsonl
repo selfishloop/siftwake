@@ -1,0 +1,25 @@
+{"phase": "ingest", "sqlite_version": "3.53.1", "count": 1000000, "text_bytes": 256, "journal_mode": "wal", "synchronous": 2, "cache_kib": 2048, "mmap_bytes": 0, "fts": "external-content trigram detail=none columnsize=0"}
+{"phase": "ingest_progress", "records": 50000, "elapsed_s": 5.111497700000655}
+{"phase": "ingest_progress", "records": 100000, "elapsed_s": 12.371546200000012}
+{"phase": "ingest_progress", "records": 150000, "elapsed_s": 19.40229250000084}
+{"phase": "ingest_progress", "records": 200000, "elapsed_s": 27.4554633000007}
+{"phase": "ingest_progress", "records": 250000, "elapsed_s": 35.120031200000085}
+{"phase": "ingest_progress", "records": 300000, "elapsed_s": 42.150483900000836}
+{"phase": "ingest_progress", "records": 350000, "elapsed_s": 49.42431639999995}
+{"phase": "ingest_progress", "records": 400000, "elapsed_s": 57.928117600000405}
+{"phase": "ingest_progress", "records": 450000, "elapsed_s": 65.97832120000021}
+{"phase": "ingest_progress", "records": 500000, "elapsed_s": 72.66064410000035}
+{"phase": "ingest_progress", "records": 550000, "elapsed_s": 79.68312260000039}
+{"phase": "ingest_progress", "records": 600000, "elapsed_s": 85.6829073000008}
+{"phase": "ingest_progress", "records": 650000, "elapsed_s": 90.43107060000057}
+{"phase": "ingest_progress", "records": 700000, "elapsed_s": 94.98789660000057}
+{"phase": "ingest_progress", "records": 750000, "elapsed_s": 99.55129100000067}
+{"phase": "ingest_progress", "records": 800000, "elapsed_s": 107.76351100000011}
+{"phase": "ingest_progress", "records": 850000, "elapsed_s": 114.58882530000028}
+{"phase": "ingest_progress", "records": 900000, "elapsed_s": 121.67845350000061}
+{"phase": "ingest_progress", "records": 950000, "elapsed_s": 129.14660730000014}
+{"phase": "ingest_progress", "records": 1000000, "elapsed_s": 137.40350810000018}
+{"phase": "maintenance", "ingest_ms": 137404.07050000067, "batches": {"p50_ms": 42.113200000130746, "p95_ms": 80.15640000030544, "max_ms": 1032.933100000264}}
+{"phase": "queries", "reopen_ms": 3.915499999493477, "maintenance_ms": 3671.6952999995556, "checkpoint": [0, 0, 0]}
+{"phase": "integrity"}
+{"phase": "result", "count": 1000000, "text_bytes": 256, "logical_text_bytes": 256000000, "ingest_ms": 137404.07050000067, "batches": {"p50_ms": 42.113200000130746, "p95_ms": 80.15640000030544, "max_ms": 1032.933100000264}, "maintenance_ms": 3671.6952999995556, "reopen_ms": 3.915499999493477, "changed_reopen_ms": 43.75679999975546, "integrity_ms": 21506.515499999296, "narrow": {"p50_ms": 214.59739999954763, "p95_ms": 257.79529999999795, "max_ms": 266.65739999953075}, "broad": {"p50_ms": 114.26159999973606, "p95_ms": 117.40069999996194, "max_ms": 117.40069999996194}, "range": {"p50_ms": 39.789700000255834, "p95_ms": 40.677299999515526, "max_ms": 40.677299999515526}, "documents": 999950, "verified_updates": 50, "verified_deletes": 50, "query_plans": {"text": [[4, 0, 156, "SCAN search VIRTUAL TABLE INDEX 0:L0"], [12, 0, 45, "SEARCH d USING INTEGER PRIMARY KEY (rowid=?)"]], "range": [[3, 0, 46, "SEARCH docs USING COVERING INDEX range_idx (scope=? AND collection=? AND source=? AND day>? AND day<?)"]]}}
