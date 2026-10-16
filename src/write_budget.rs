@@ -75,21 +75,21 @@ impl Drop for Lease<'_> {
 static POOL: Pool = Pool::new(256 * 1024);
 // One admission pool for streamed input and builder/maintenance workspaces.
 // Reservations are conservative workspace allowances, never process RSS.
-#[cfg(feature = "experimental-builder-budget")]
+#[cfg(feature = "bounded-engine")]
 static WORKING_POOL: Pool = Pool::with_baseline(16 * 1024 * 1024, 2 * 1024 * 1024);
-#[cfg(feature = "experimental-builder-budget")]
+#[cfg(feature = "bounded-engine")]
 pub(crate) fn reserve_working(bytes: usize) -> Result<Lease<'static>> {
     WORKING_POOL.reserve(bytes, bytes)
 }
-#[cfg(feature = "experimental-builder-budget")]
+#[cfg(feature = "bounded-engine")]
 thread_local! { static STREAM_WORKSPACE: std::cell::Cell<bool> = const { std::cell::Cell::new(false) }; }
-#[cfg(feature = "experimental-builder-budget")]
+#[cfg(feature = "bounded-engine")]
 pub(crate) struct WorkingScope {
     _lease: Option<Lease<'static>>,
     owns_thread: bool,
     _thread_bound: std::marker::PhantomData<std::rc::Rc<()>>,
 }
-#[cfg(feature = "experimental-builder-budget")]
+#[cfg(feature = "bounded-engine")]
 impl WorkingScope {
     pub(crate) fn streamed() -> Result<Self> {
         if STREAM_WORKSPACE.with(std::cell::Cell::get) {
@@ -124,7 +124,7 @@ impl WorkingScope {
         })
     }
 }
-#[cfg(feature = "experimental-builder-budget")]
+#[cfg(feature = "bounded-engine")]
 impl Drop for WorkingScope {
     fn drop(&mut self) {
         if self.owns_thread {
@@ -132,7 +132,7 @@ impl Drop for WorkingScope {
         }
     }
 }
-#[cfg(feature = "experimental-builder-budget")]
+#[cfg(feature = "bounded-engine")]
 pub(crate) fn builder_working() -> Result<Option<Lease<'static>>> {
     // The streamed scope already allows 6 MiB intake/index plus 8 MiB builder.
     // Nested builders consume that allowance instead of reserving it twice.
@@ -142,17 +142,17 @@ pub(crate) fn builder_working() -> Result<Option<Lease<'static>>> {
         reserve_working(8 * 1024 * 1024).map(Some)
     }
 }
-#[cfg(feature = "experimental-builder-budget")]
+#[cfg(feature = "bounded-engine")]
 pub fn working_snapshot() -> Snapshot {
     pool_snapshot(&WORKING_POOL)
 }
-#[cfg(feature = "experimental-builder-budget")]
+#[cfg(feature = "bounded-engine")]
 static POSTING_POOL: Pool = Pool::new(2 * 1024 * 1024);
-#[cfg(feature = "experimental-builder-budget")]
+#[cfg(feature = "bounded-engine")]
 pub(crate) fn reserve_postings() -> Result<Lease<'static>> {
     POSTING_POOL.reserve(1024 * 1024, 256 * 1024)
 }
-#[cfg(feature = "experimental-builder-budget")]
+#[cfg(feature = "bounded-engine")]
 pub fn posting_snapshot() -> Snapshot {
     pool_snapshot(&POSTING_POOL)
 }

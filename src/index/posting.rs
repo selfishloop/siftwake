@@ -14,7 +14,7 @@ impl Default for Posting {
     }
 }
 impl Posting {
-    #[cfg(feature = "experimental-builder-budget")]
+    #[cfg(feature = "bounded-engine")]
     pub fn heap_bytes(&self) -> usize {
         match self {
             Self::Tiny { .. } => 0,

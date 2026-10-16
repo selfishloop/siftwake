@@ -21,7 +21,7 @@ fn merge_reuse_rejects_runtime_source_or_index_corruption_before_publication() {
         let path = temp.source(0, extension);
         let mut bytes = fs::read(&path).unwrap();
         bytes[32] ^= 0x40;
-        #[cfg(all(windows, feature = "experimental-builder-budget"))]
+        #[cfg(all(windows, feature = "bounded-engine"))]
         if extension == "fdb" {
             assert!(fs::write(&path, &bytes).is_err());
             // Existing source handles also remain valid for the merge worker.
@@ -847,7 +847,7 @@ fn process_kill_after_scheduling_merge_recovers_acknowledged_sources() {
     child.kill().unwrap();
     child.wait().unwrap();
     assert_eq!(t.ready(), before);
-    #[cfg(all(windows, feature = "experimental-builder-budget"))]
+    #[cfg(all(windows, feature = "bounded-engine"))]
     for position in 0..2 {
         // A killed process releases the source lease without cleanup code.
         assert!(

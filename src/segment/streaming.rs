@@ -18,7 +18,7 @@ pub(super) struct Parsed {
     pub pages: Vec<super::term_pages::Fence>,
     pub collections: Vec<(String, String)>,
     pub bloom: super::term_pages::Bloom,
-    #[cfg(feature = "experimental-builder-budget")]
+    #[cfg(feature = "bounded-engine")]
     pub universal: super::covering::Universal,
     pub live: usize,
     pub entries: u64,
@@ -92,7 +92,7 @@ fn parse_entries(
         pages: Vec::new(),
         collections: Vec::new(),
         bloom: super::term_pages::Bloom::default(),
-        #[cfg(feature = "experimental-builder-budget")]
+        #[cfg(feature = "bounded-engine")]
         universal: super::covering::Universal::default(),
         live: 0,
         entries: 0,
@@ -172,7 +172,7 @@ fn parse_entries(
                         parsed.entries += posting.count as u64;
                         // Reversed legacy field order keeps the ordinary scan:
                         // its live count is not known yet, so no proof is made.
-                        #[cfg(feature = "experimental-builder-budget")]
+                        #[cfg(feature = "bounded-engine")]
                         if records_seen {
                             parsed.universal.observe(&term, posting.count, parsed.live);
                         }
@@ -238,7 +238,7 @@ fn parse_entries(
 #[cfg(test)]
 mod tests {
     use super::*;
-    #[cfg(feature = "experimental-builder-budget")]
+    #[cfg(feature = "bounded-engine")]
     #[test]
     fn universal_gram_uses_live_count_and_reversed_order_falls_back() {
         let directory = Directory {

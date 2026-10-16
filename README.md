@@ -1,5 +1,17 @@
 # FDB
 
+Güncel varsayılan profil **`bounded-engine`**: normal derleme ölçülmüş
+sayfalı indeks/arama ve akışlı yazma birleşimini içerir. Özel deneysel
+feature seçmeden `Database::commit_streamed` kullanılabilir; mevcut
+`commit(Vec<Mutation>)` limitleri ve davranışı korunur. Yaklaşık9MiB
+akışlı ölçüm normal Vec API'sinin toplam RAM garantisi değildir.
+[Kullanım, sınırlar ve eski feature adları](docs/DEFAULT-PROFILE.md).
+[Varsayılana taşıma ölçümleri ve açık sınırlar](docs/DEFAULT-PROFILE-VALIDATION-10K-20261016.md):
+151/92/170 test, format/hash eşitliği ve gerçek CLI kontrolü geçti.
+Alt tarihli raporlardaki default seçimi o ölçümün tarihsel durumudur.
+
+## Önceki ölçümlerin günlüğü
+
 [Kısa bloklu arama kontrolü](docs/INTERLEAVED-SEARCH-10K-20261016.md):
 aynı mevcut10k/dört süreç çifti×8 blok×25 tur; iki farklı-sürüm serisinde
 8/8 sayfada yeni p95 düşük. Ishmael tek-sonuç -%6,51 / -%3,05,
@@ -334,6 +346,8 @@ Sonraki anahtar yerleşimi aynı anahtarı docs/indeks/shadow arasında paylaş�
 belge lookup standart Rust HashMap kullanır, flush/sorgu sıralaması korunur.
 [Anahtar paylaşımı ölçümleri](docs/SHARED-KEYS-VALIDATION.md).
 
+## Motor ve kullanım
+
 SDB ve Fundops verilerini, bağlantılı kayıtları ve dosyalardan çıkarılmış metinleri
 saklamak ve aramak için Rust ile yazılan özel veritabanı motoru. **SQLite,
 RocksDB, LMDB, sled, Tantivy veya başka bir veritabanı/arama motoru kullanılmaz.**
@@ -347,6 +361,12 @@ JSON Lines süreci ve örnek istemci/aktarım yardımcıları hazırdır.
 Güncel ölçüm ve hata testleri: [0.3.1 doğrulama sonuçları](docs/VALIDATION-0.3.1.md).
 Bir milyon kayıt için ayrı benchmark: [SQLite karşılaştırması](docs/SQLITE-COMPARISON.md).
 SQLite yalnız karşılaştırma aracında kullanılır; FDB motorunun bağımlılığı değildir.
+
+## Önceki geliştirme aşamalarının teknik notları
+
+Bu bölüm ilk prototiplerin kararlarını ve sınırlarını korur. Güncel varsayılan
+bileşen seçimi [DEFAULT-PROFILE](docs/DEFAULT-PROFILE.md) içindedir; aşağıdaki
+eski default-kapalı ifadeleri bugünkü derleme ayarı değildir.
 
 Bellek planının geliştirme aşaması başladı: [aşama 1 doğrulaması](docs/MEMORY-STAGE1-VALIDATION.md)
 ve [uygulama planı](docs/MEMORY-PERFORMANCE-PLAN.md). İlk sayfa sorguları artık
@@ -589,12 +609,13 @@ izin verilmez. Güncel kalıcı biçim [mimari belgesinde](docs/ARCHITECTURE.md)
   garantisi iddia edilmez. I/O hatasında yazmanın sonucu belirsiz olabilir; motor
   yeniden açılıp kayıt sürümü kontrol edilmelidir.
 
-Sentetik ölçüm için boş bir hedef klasörle:
+Güncel indeks testleri aynı mevcut corpus'un ilk 10.000 belgesiyle yapılır.
+Yeni sentetik corpus veya veritabanı klasörü üretilmez. Mevcut sabit FDB
+slotunda tam sayfa/anahtar/sürüm doğrulaması için:
 
 ```powershell
-cargo run --release --example measure -- data/benchmark
-cargo run --release --example measure_disk -- data/content-benchmark 50000 1024
-.\tools\measure-scale.ps1 -DatabasePath data/scale-new -Count 1000000 -TextBytes 256
+cargo build --release --example measure_content_reads
+.\target\release\examples\measure_content_reads.exe --record-reads --matrix 0 --matrix-check
 ```
 
 Testler gerçek süreç sonlandırmasını, her olası son-işlem kesilme konumunu, tam
@@ -611,6 +632,7 @@ get100 yaklaşık 6 kat yavaşladı. Hız kapısı geçmediği için default kap
 `experimental-merge-postings`, flush sırasında RAM delta listelerini, merge sırasında
 mevcut SEG03/SEG04 listelerini yeniden kullanır. Metin/alan indeksini yeniden
 üretmeden listeleri güncel kayıt ID'lerine taşır.
-Kaynak/cache bütünlüğü korunur, kalıcı format değişmez; varsayılan kapalıdır.
+Kaynak/cache bütünlüğü korunur, kalıcı format değişmez; güncel bounded-engine
+varsayılanının parçasıdır.
 Feature bağımsızdır; başka yazma/açılış deneylerini otomatik açmaz.
 [Merge posting doğrulaması](docs/MERGE-POSTINGS-VALIDATION.md).

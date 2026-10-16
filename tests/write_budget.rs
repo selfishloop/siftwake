@@ -53,7 +53,7 @@ fn concurrent_databases_stream_sources_and_release_shared_buffer_reservations() 
     let budget = fdb::write_budget::snapshot();
     assert_eq!(budget.in_use_bytes, 0);
     assert!(budget.peak_reserved_bytes <= budget.limit_bytes);
-    #[cfg(feature = "experimental-builder-budget")]
+    #[cfg(feature = "bounded-engine")]
     {
         let postings = fdb::write_budget::posting_snapshot();
         assert_eq!(postings.in_use_bytes, 0);

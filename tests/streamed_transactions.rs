@@ -1,4 +1,4 @@
-#![cfg(feature = "experimental-builder-budget")]
+#![cfg(feature = "bounded-engine")]
 use fdb::{Database, Document, Error, Guard, Key, Mutation, Query, Range};
 use serde_json::json;
 use std::{collections::BTreeMap, path::PathBuf};

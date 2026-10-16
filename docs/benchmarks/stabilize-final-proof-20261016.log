@@ -1,0 +1,161 @@
+{
+  "checkpoint": "42116f769afe21c098f46731f29d28a6b6a21c5b",
+  "default_profile": "bounded-engine",
+  "compatibility_alias": "experimental-builder-budget",
+  "same_component_feature_closure": true,
+  "no_algorithm_or_persistent_format_change": true,
+  "no_new_dependency": true,
+  "tests": {
+    "default": {
+      "passed": 151,
+      "failed": 0,
+      "ignored_helpers": 4
+    },
+    "reference": {
+      "passed": 92,
+      "failed": 0,
+      "ignored_helpers": 2
+    },
+    "all": {
+      "passed": 170,
+      "failed": 0,
+      "ignored_helpers": 6
+    }
+  },
+  "idle": {
+    "control": {
+      "private_bytes": 1984512.0,
+      "working_set_bytes": 5857280.0,
+      "samples_per_profile": 2,
+      "scope": "after strict open plus5s; no oracle/search/input, sampled process counters, not system RAM or query peak"
+    },
+    "default": {
+      "private_bytes": 1980416.0,
+      "working_set_bytes": 5865472.0,
+      "samples_per_profile": 2,
+      "scope": "after strict open plus5s; no oracle/search/input, sampled process counters, not system RAM or query peak"
+    }
+  },
+  "broad_read": {
+    "lower": 24,
+    "higher": 14,
+    "increases": [
+      {
+        "text": "quixote",
+        "offset": 0,
+        "limit": 50,
+        "percent": 2.7481382683116395,
+        "faster_pairs": 2
+      },
+      {
+        "text": "mesopotamia",
+        "offset": 0,
+        "limit": 50,
+        "percent": 3.5144826183149958,
+        "faster_pairs": 1
+      },
+      {
+        "text": "darcy",
+        "offset": 0,
+        "limit": 50,
+        "percent": 4.916628454708394,
+        "faster_pairs": 3
+      },
+      {
+        "text": "fossil",
+        "offset": 0,
+        "limit": 50,
+        "percent": 0.4583608278876383,
+        "faster_pairs": 2
+      },
+      {
+        "text": "man",
+        "offset": 0,
+        "limit": 50,
+        "percent": 10.405489706799752,
+        "faster_pairs": 1
+      },
+      {
+        "text": "zzxqnever",
+        "offset": 0,
+        "limit": 50,
+        "percent": 13.097713097713104,
+        "faster_pairs": 1
+      },
+      {
+        "text": "holmes elementary",
+        "offset": 0,
+        "limit": 50,
+        "percent": 0.6105082809823026,
+        "faster_pairs": 1
+      },
+      {
+        "text": "fossil geologist",
+        "offset": 0,
+        "limit": 50,
+        "percent": 2.7498562928208514,
+        "faster_pairs": 2
+      },
+      {
+        "text": "QUİXOTE",
+        "offset": 0,
+        "limit": 50,
+        "percent": 6.137978576731351,
+        "faster_pairs": 1
+      },
+      {
+        "text": "zxzxzxzxzxzxzxzxzxzxzxzxzxzxzxzxzxzxzxzxzxzxzxzxzxzxzxzxzxzxzxzxzxzxzxzxzxzxzxzxzxzxzxzxzxzxzxzxzxzxzxzxzxzxzxzxzxzxzxzxzxzxzxzxzxzxzxzxzxzxzxzxzxzxzxzxzxzxzxzxzxzxzxzxzxzxzxzxzxzxzxzxzxzxzxzxzxzxzxzxzxzxzxzxzxzxzxzxzxzxzxzxzxzxzxzxzxzxzxzxzxzxzxzxzxzxzxzxzxzxzxzxzxzxzxzxzxzxzxzxzxzxzxzxzxzxzxzxzxzx",
+        "offset": 0,
+        "limit": 50,
+        "percent": 3.2432432432432323,
+        "faster_pairs": 1
+      },
+      {
+        "text": "the",
+        "offset": 0,
+        "limit": 1,
+        "percent": 24.221921515561572,
+        "faster_pairs": 2
+      },
+      {
+        "text": "the",
+        "offset": 0,
+        "limit": 200,
+        "percent": 1.7774403301795028,
+        "faster_pairs": 2
+      },
+      {
+        "text": "the",
+        "offset": 5000,
+        "limit": 50,
+        "percent": 2.5292510334197216,
+        "faster_pairs": 1
+      },
+      {
+        "text": "quixote",
+        "offset": 57,
+        "limit": 50,
+        "percent": 1.3285641287685168,
+        "faster_pairs": 2
+      }
+    ]
+  },
+  "same_executable_write_control_verified": true,
+  "all_16_streamed_run_file_hashes_equal": true,
+  "core_file_count": 122,
+  "same_core_as_earlier_measured_profile": true,
+  "all_read_source_cache_sqlite_hashes_unchanged": true,
+  "same_existing_corpus_sha256": "11F826FCE3F4AE790FEB9FC6DF9B1169F52C2FD699E89FC4A8A4B77AAA41731B",
+  "no_new_corpus_or_database_copies": true,
+  "only_fixed_slots_reset_for_write_measurements": true,
+  "fixture_git_status": "",
+  "legacy_alias_and_isolated_comparator_check": true,
+  "default_release_cli_smoke_passed": true,
+  "release_cli_sha256": "3096793118AD079D40D88DAE072D61BD97E50C3C7122F724BC71422427A294A8",
+  "current_limitations": [
+    "owned commit(Vec) does not share streamed-ingest RAM bound",
+    "initial streamed write batch +4.88 percent, repeat and same-exe control differ; no new speed gain or zero-regression guarantee",
+    "broad query increases remain individually recorded",
+    "query-peak RAM, retained generations/disk, concurrent latency and genuine cold OS-cache performance remain open"
+  ]
+}

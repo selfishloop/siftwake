@@ -56,21 +56,25 @@ def row(variant, pair):
             'retained_disk_bytes': memory['retained_disk_bytes']}
 
 
-rows = [row(e, n) for n in range(4) for e in ('control', 'fdb')]
-sql = [row('sqlite', n) for n in (0, 3)]
+design = read(Path(f'{prefix}-design.json'))
+first_pair = design.get('first_pair', 0)
+pair_indices = list(range(first_pair, first_pair + design.get('fdb_pairs', 4)))
+rows = [row(e, n) for n in pair_indices for e in ('control', 'fdb')]
+sql_indices = (0, 3) if args.sqlite_prefix else design.get('sqlite_references_after_pairs', [0, 3])
+sql = [row('sqlite', n) for n in sql_indices]
 fields = [k for k in rows[0] if k not in ('variant', 'pair')]
 medians = {e: {k: statistics.median(r[k] for r in group if r['variant'] == e) for k in fields}
-           for e, group in (('control', rows), ('fdb', rows), ('sqlite', sql))}
+           for e, group in (('control', rows), ('fdb', rows), ('sqlite', sql)) if group}
 paired = {}
 for field in fields:
-    control = [next(r[field] for r in rows if r['pair'] == n and r['variant'] == 'control') for n in range(4)]
-    candidate = [next(r[field] for r in rows if r['pair'] == n and r['variant'] == 'fdb') for n in range(4)]
+    control = [next(r[field] for r in rows if r['pair'] == n and r['variant'] == 'control') for n in pair_indices]
+    candidate = [next(r[field] for r in rows if r['pair'] == n and r['variant'] == 'fdb') for n in pair_indices]
     changes = [100 * (b / a - 1) for a, b in zip(control, candidate)]
     paired[field] = {'change_of_medians_percent': 100 * (medians['fdb'][field] / medians['control'][field] - 1),
                      'paired_change_percent': changes, 'median_paired_change_percent': statistics.median(changes),
                      'lower_pairs': sum(b < a for a, b in zip(control, candidate)),
                      'higher_pairs': sum(b > a for a, b in zip(control, candidate))}
-files = [read(Path(f'{source(n)}-{e}-{n}-files.json')) for n in range(4) for e in ('control', 'fdb')]
+files = [read(Path(f'{source(n)}-{e}-{n}-files.json')) for n in pair_indices for e in ('control', 'fdb')]
 assert all(f == files[0] for f in files)
 original_hashes = {r['engine']: r['sha256'] for r in read(Path(f'{prefix}-executables.json'))}
 if tail:
@@ -78,7 +82,7 @@ if tail:
     assert original_hashes == tail_hashes
 sql_hashes = {r['engine']: r['sha256'] for r in read(Path(f'{sql_prefix}-executables.json'))}
 assert original_hashes['sqlite'] == sql_hashes['sqlite']
-result = {'design': read(Path(f'{prefix}-design.json')), 'rows': rows, 'sqlite_unpaired_references': sql,
+result = {'design': design, 'rows': rows, 'sqlite_unpaired_references': sql,
           'sqlite_reference_logs': {'prefix': str(sql_prefix.relative_to(root)),
                                     'tail': str(sql_tail.relative_to(root)) if sql_tail else None,
                                     'reused_from_previous_stage': sql_prefix != prefix},
@@ -86,10 +90,11 @@ result = {'design': read(Path(f'{prefix}-design.json')), 'rows': rows, 'sqlite_u
                      'reason': 'phase monitor failed after initial pair3 candidate; incomplete attempt excluded, complete pair3 rerun; initial pairs0..2 retained',
                      'same_frozen_executables_verified': True,
                      'combined_balanced_order': ['control/fdb', 'fdb/control', 'control/fdb', 'fdb/control']} if tail else None,
-          'medians': medians, 'paired_fdb_changes': paired, 'all_eight_fdb_core_file_hashes_equal': True,
+          'medians': medians, 'paired_fdb_changes': paired, 'all_fdb_core_file_hashes_equal': True,
+          'all_eight_fdb_core_file_hashes_equal': len(files) == 8,
           'core_file_count_per_run': len(files[0]),
           'memory_scope': 'phase private peaks sampled20ms/phase100ms; OS lifetime high-water marks include startup/input/indexing/maintenance, not phase-specific; neither is total system RAM',
-          'sqlite_scope': 'two unpaired references, not a paired SQLite/FDB performance gate; FULL WAL, cache2MiB/mmap0/tempFILE; maintenance FTS optimize+checkpoint differs from FDB flush/drain merge',
+          'sqlite_scope': f'{len(sql)} unpaired references, not a paired SQLite/FDB performance gate; FULL WAL, cache2MiB/mmap0/tempFILE; maintenance FTS optimize+checkpoint differs from FDB flush/drain merge',
           'interpretation': 'Differences of medians and medians of paired ratios are separate; no statistical significance or default promotion is implied.'}
 Path(f'{prefix}-summary.json').write_text(json.dumps(result, indent=2), encoding='utf-8')
 print(json.dumps({k: result[k] for k in ('medians', 'paired_fdb_changes', 'all_eight_fdb_core_file_hashes_equal')}, indent=2))

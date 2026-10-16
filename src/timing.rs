@@ -39,14 +39,14 @@ pub fn take() -> BTreeMap<&'static str, Counter> {
 }
 
 /// One aggregate publication per long-text extraction, never per scalar.
-#[cfg(feature = "experimental-builder-budget")]
+#[cfg(feature = "bounded-engine")]
 #[derive(Default)]
 pub(crate) struct GramWork {
     pub windows: u64,
     pub hits: u64,
     pub distinct: u64,
 }
-#[cfg(feature = "experimental-builder-budget")]
+#[cfg(feature = "bounded-engine")]
 impl Drop for GramWork {
     fn drop(&mut self) {
         let mut values = counters().lock().expect("timing mutex poisoned");

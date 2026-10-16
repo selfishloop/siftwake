@@ -1,4 +1,10 @@
 //! Standalone FDB engine: transactional WAL and immutable indexed segments.
+//!
+//! The default `bounded-engine` profile provides paged indexes, checked grouped
+//! search and `Database::commit_streamed` for bounded streamed ingest. The
+//! owned `Database::commit` API retains its existing limits and delta behavior;
+//! caller-owned batches and query results are not a total process memory cap.
+//! `--no-default-features` retains the reference implementation for comparison.
 pub mod adapters;
 mod binary_batch;
 #[cfg(test)]

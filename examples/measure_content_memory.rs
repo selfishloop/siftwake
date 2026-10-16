@@ -22,9 +22,9 @@ fn main() -> input::Result<()> {
         return Err("idle|ingest|verify <db> <from> <to>".into());
     }
     let streamed = args.len() == 5;
-    #[cfg(not(feature = "experimental-builder-budget"))]
+    #[cfg(not(feature = "bounded-engine"))]
     if streamed {
-        return Err("streamed input requires experimental-builder-budget".into());
+        return Err("streamed input requires the bounded-engine profile".into());
     }
     let from: usize = args[2].parse()?;
     let to: usize = args[3].parse()?;
@@ -82,13 +82,13 @@ fn main() -> input::Result<()> {
             })
         });
         let sequence = if streamed {
-            #[cfg(feature = "experimental-builder-budget")]
+            #[cfg(feature = "bounded-engine")]
             {
                 db.commit_streamed(
                     changes.map(|r| r.map_err(|e| fdb::Error::Invalid(e.to_string()))),
                 )?
             }
-            #[cfg(not(feature = "experimental-builder-budget"))]
+            #[cfg(not(feature = "bounded-engine"))]
             {
                 unreachable!()
             }
@@ -135,7 +135,7 @@ fn main() -> input::Result<()> {
         "{}",
         json!({"phase":"controlled_buffer_budget","write":fdb::write_budget::snapshot(),"not_total_process_memory":true})
     );
-    #[cfg(feature = "experimental-builder-budget")]
+    #[cfg(feature = "bounded-engine")]
     println!(
         "{}",
         json!({"phase":"controlled_posting_budget","posting":fdb::write_budget::posting_snapshot(),"working":fdb::write_budget::working_snapshot(),"streamed_input":streamed,"not_total_process_memory":true})

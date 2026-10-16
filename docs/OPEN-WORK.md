@@ -5,7 +5,19 @@ tamamlanan işi kanıt/rapor bağlantısıyla kapat. Zamanlanmış otomasyon de�
 bu repo içindeki çalışma takibidir. Yeni corpus yok; aynı ilk10k belge ve sabit
 iki DB slotu kullanılır. Büyük koşu için önce10k sonuçları iyileştirilir.
 
-Son kısa-blok kontrolü: iki farklı-sürüm serisinde8/8 sayfanın yeni p95'i
+Güncel varsayılan `bounded-engine` olarak kalıcılaştırıldı: aynı ölçülmüş
+birleşim, eski feature adı uyumluluk alias'ı, özel bayrak gerektirmeyen
+streamed API; normal Vec/strict open/WAL sync/format aynı. Default151,
+no-default92,all170 test ve Clippy/fmt geçti. Streamed tepe private9,252MiB
+(ayrı tekrar9,182MiB), WS13,139/13,043MiB; Vec79,111MiB, boşta1,889MiB.
+İlk write+bakım+%4,88, ayrı tekrar-%0,87; A/A-%2,33: artış kanıtsız
+kapatılmadı. Geniş arama24/14, yoğun sayfa5/3; üç küçük sayfa artışı
+%0,26…1,30.16 streamed koşu122 core hash'i aynı; önceki profile de eşit.
+Bu dar taşıma tamamlandı; genel hız/Vec-query RAM/disk/concurrent/cold
+kapıları açık kalır. [Son ölçüm ve karar](DEFAULT-PROFILE-VALIDATION-10K-20261016.md),
+[normal kullanım ve sınırlar](DEFAULT-PROFILE.md).
+
+Önceki kısa-blok kontrolü: iki farklı-sürüm serisinde8/8 sayfanın yeni p95'i
 düşük; ishmael tek-sonuç -%6,51 / -%3,05, quixote /28/10 -%4,39 / -%2,45.
 Aynı-kod kontrolünde the tek-sonuç +%6,44 ve4/4 yüksek olabilir. Bu düzende
 gerileme tekrarlanmadı; yeni worker/codegen ve cache oturum ömrü nedeniyle
@@ -29,6 +41,7 @@ deneysel profilde tutulur; genel/default kabul kapısı geçmedi.
 
 | İş | Durum / kapanış kanıtı |
 |---|---|
+| Kabul edilen birleşimi normal derlemeye taşı ve yerelde sabitle | Tamamlandı (dar kapsam): checkpoint42116f7; bounded-engine default, eski feature alias'ı ve no-default reference korunur. Runtime algoritmaları/bağımlılıklar/kalıcı biçim/protokol aynı; bağımsız rkyv/WAL-delta/shared-documents/sync-off deneyleri kapalı.151/92/170 test, Clippy/fmt, eski alias ve comparator check, varsayılan fdb.exe stats/get/search geçti.2 çift Vec,4 çift streamed+2 SQLite referansı,2 çift A/A ve2 çift tekrar,38-case/yoğun sayfa/açılış/idle ölçüldü. İlk streamed+%4,88 tekrar-%0,87; broad24 düşük/14 yüksek ve pages5/3. Kalan hız artışları kapatılmadı; genel hız/Vec-query RAM/disk/eşzamanlı/cold kapıları açık.122 dosya16 streamed ingestte ve önceki profille byte-eşit. Yeni corpus/DB kopyası yok; yalnız sabit slotlar sıfırlandı. [Sonuç/karar](DEFAULT-PROFILE-VALIDATION-10K-20261016.md) |
 | Kısa bloklarla eski/yeni aramayı ve etiket etkisini sınama | Ölçüldü:4 süreç çifti×8 blok×25 tur,800 örnek/sayfa/variant/seri; ilk A/B ve ters etiketli BA8/8 yeni p95 düşük. Ishmael /130/1 -%6,51 / -%3,05 (4/4 ve3/4 hızlı), quixote /28/10 -%4,39 / -%2,45 (3/4 ve2/4). A/A6 düşük/2 yüksek, the /0/1 +%6,44/4 çift yüksek fakat blok medyanı-%1,01; tek p95 yönü kod nedeni ilan edilmez. Kilit/CRC/kaynak/format/default ve motor aynı; yeni corpus/reset/DB kopyası yok,139 dosya hash'i aynı. Bu kısa-oturum/codegen düzeninde gerileme tekrarlanmadı; kesintisiz oturumun yerleşim/ortam katkısı ve genel kabul kapısı açık. Yazma/bakım, query/normal API RAM'i, disk ve concurrent/cold işleri korunur.8 example testi/fmt/Clippy geçti. [Kanıt/sınırlar](INTERLEAVED-SEARCH-10K-20261016.md) |
 | Yazma sonrası arama gerilemesinin nedenini ayır | İncelendi, tam kapanmadı. Normal dört-çift aynı-CPU A/B8 yüksek p95; A/A2 düşük/6 yüksek, aynı kodda ishmael +%4,23. İlk A/A son çift bütün sayfalarda+%44,79…54,91. Profilde sekiz sayfa/1.920 doğrulamanın aday/read/byte/CRC/doğrulama/ham-kanıt sayıları iki sürümde aynı; ek body fold/scan ve write gram çağrısı0. Normal yeniden derlemeler eski measured kontrol/aday `.text`'leriyle eşleşir; sorgu kaynakları aynı ama machine code/yerleşim aynı değil. Motor aramasına tahmine dayalı düzeltme yapılmadı; kalan quixote ve kod/yerleşim katkısı açık. %11,49 yazma+bakım kazancı önceki ölçümdür, yeniden ölçülmedi. Yeni RAM/disk kazancı veya concurrent/cold sonucu yok. [Kanıt/sınırlar](SEARCH-ATTRIBUTION-10K-20261016.md) |
 | Uzun gövdede indeks parçası üretim CPU maliyetini azalt | Dar kazanç uygulandı/ölçüldü: son body-only sürüm, aynı10k/dört dengeli çift, yazma30,859→27,290s; yazma+bakım31,908→28,241s (-%11,49),4/4 hızlı, çift farkları-%10,81…11,93. CPU-%11,86/4/4. Son bakım0,988→0,940s,3/4 düşük; ayrı merge optimizasyonu sayılmaz. Geçici8KiB tablo/63-bit scalar keys yalnız BodyCache'te, query grams eski haliyle aynı. Yeni format/feature yok,122 core dosyanın byte'ı sekiz koşuda aynı. OS private commit9,021→9,107MiB (+88KiB),WS12,986→13,014MiB (+28KiB); sıfır RAM artışı şartı kanıtlanmadı. Read matrix33 düşük/5 yüksek; genel/default kapısı açık, feature kapalı. Payload tekrar çöz/kodla, merge tamponları, kalan arama artışları, query/normal API RAM'i, disk/eski nesil ve concurrent/cold açık. SQLite önceki adımın iki unpaired referansı, son FDB'yle paired gate değil. [Sonuç/kanıtlar](GRAM-BODY-WRITES-10K-20261016.md) |

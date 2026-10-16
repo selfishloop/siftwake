@@ -1,5 +1,16 @@
 # FDB mimarisi — 0.3.1
 
+2026-10-16 varsayılan profil: `bounded-engine`, önceki ölçülmüş
+builder-budget birleşiminin aynısını varsayılan derlemeye taşır.
+Kaynak cfg'leri yeni ada bağlı; `experimental-builder-budget` yalnız
+uyumluluk alias'ıdır. Bağımsız rkyv/WAL-delta/shared-documents/sync-control
+deneyleri ve diagnostic sayaçlar açılmaz. Normal commit ve strict open
+semantiği korunur; akışlı API artık özel derleme bayrağı gerektirmez.
+Yeni kalıcı biçim veya bağımlılık yoktur. Önceki tarihli raporlardaki
+default-kapalı durumu tarihsel kanıttır; güncel kullanım/sınırlar
+[DEFAULT-PROFILE](DEFAULT-PROFILE.md) içindedir.
+[Geçiş doğrulaması ve kalan performans sınırları](DEFAULT-PROFILE-VALIDATION-10K-20261016.md).
+
 2026-10-16 kısa bloklu ölçüm: iki worker oracle'ı resident tutar; DB
 her blokta tek süreçte açılır/kaynak doğrulanır/ısınır,25 turdan sonra
 kapanıp kilit bırakılır. Kilit veya motor API'si değişmedi. Dört süreç
@@ -286,7 +297,7 @@ kaybolabilir; process-kill testi OS cache'ini ayakta tuttuğundan bunu kanıtlam
 
 ## Posting oluşturucu kotası
 
-`experimental-builder-budget` posting spill tahmini tamponuna oluşturucu başına
+`bounded-engine` (eski `experimental-builder-budget` alias'ı) posting spill tahmini tamponuna oluşturucu başına
 1 MiB tercih/256 KiB minimum ve ortak 2 MiB havuz uygular. I/O lease önce değil,
 posting lease sonrasında alınır. Geçici spill merge fan-in en fazla32 okuyucudur;
 ara dosyalar aynı geçici codec ile yazılır ve Drop temizliği sahipliği izler.
@@ -328,7 +339,10 @@ sırası, visibility ve offset davranışı korunur. Bu sorgu değişikliği def
 ve deneysel indeks yollarında uygulanır; belge paylaşımı default kapalıdır.
 [Anahtar paylaşımı doğrulaması](SHARED-KEYS-VALIDATION.md).
 
-## Deneysel flush/merge posting yeniden kullanımı
+## Flush/merge posting yeniden kullanımı
+
+Bu bileşen güncel `bounded-engine` varsayılanının parçasıdır. Aşağıdaki
+tasarım ayrıntıları ve bağlantılı ölçümler ilk bileşen deneyinin kapsamını korur.
 
 `experimental-merge-postings` bağımsızdır; write-buffer-budget/streaming-metadata
 yollarını otomatik açmaz. Worker önce input kaynak prefix checksum ve immutable
@@ -352,7 +366,7 @@ mevcut delta dictionary'sinden oluşturulur: scope/collection/exact/numeric/gram
 listeleri sorted checkpoint slot'larına remap edilir. Tombstone slot'ları korunur;
 RAM slot sırası disk kayıt sırası sayılmaz. Bir term'in remapped ID listesi dışında
 toplu posting kopyası yoktur. Source replay ve normal open_source doğrulaması
-sürer; metin/terim çıkarımı yeniden yapılmaz. Varsayılan kapalıdır.
+sürer; metin/terim çıkarımı yeniden yapılmaz. Güncel bounded-engine varsayılanında açıktır.
 [Önceki merge doğrulaması](MERGE-POSTINGS-VALIDATION.md).
 
 ## Deneysel WAL konumlu delta
@@ -371,7 +385,10 @@ shadow/record keys ve builder allocation'ları RAM'dedir. Toplam heap/RSS bütç
 değildir. RAM azalması unflushed delta okuma hızını korumadı; bu yol default'a
 alınmaz. Karar/ayrı query kapısı: [WAL delta doğrulaması](WAL-DELTA-VALIDATION.md).
 
-## Deneysel akışlı metadata
+## Akışlı metadata
+
+Güncel bounded-engine varsayılanında açıktır; eski component adı ve
+tasarım/ölçüm tarihçesi aşağıda korunur.
 
 `experimental-streaming-metadata` streaming-open/paged-metadata içerir.
 SEG03 checksum/bounds kontrolünden sonra kayıt JSON'u tek entry scratch ile
@@ -406,7 +423,9 @@ Record leaf, JSON scratch, directory fence, root/deletion ve token alanları ort
 I/O reservation kotası dışında kalır. Sabit toplam RAM garantisi değildir.
 Ölçüm: [metadata akışı doğrulaması](STREAMING-METADATA-VALIDATION.md).
 
-## Deneysel delta posting yerleşimi
+## Delta posting yerleşimi
+
+Compact ve bitmap bileşenleri güncel bounded-engine varsayılanında açıktır.
 
 `experimental-compact-delta-postings` posting içindeki Arc<Key> yerine u32
 slot numarası tutar. Bir key→slot B-tree ve Option<Slot> Vec'i anahtar ile
@@ -452,7 +471,9 @@ allocator kapasitesi ve proses belleği bu sayaç değildir.
 
 Ölçüm: [ortak delta metni doğrulaması](SHARED-DELTA-TEXT-VALIDATION.md).
 
-## Deneysel checkpoint yazma bütçesi
+## Checkpoint yazma bütçesi
+
+Bu bileşen güncel bounded-engine varsayılanına dahildir.
 
 `experimental-write-buffer-budget` write-pipeline içerir. Yalnız unpublished
 run checkpoint'inde değişiklikler doğrudan checksummed BufWriter üzerinden
@@ -468,7 +489,10 @@ birlikte tutulmaz. Delta, caller/WAL, posting/spill/body/token, packed metadata,
 page/output ve tekil belge bu kota dışındadır. Tam heap/RSS bütçesi değildir.
 Detaylar: [yazma bütçesi doğrulaması](WRITE-BUFFER-BUDGET-VALIDATION.md).
 
-## Deneysel disk metadata yolu
+## Disk metadata yolu
+
+Bu bileşenler güncel bounded-engine varsayılanına dahildir; maintenance-slots
+da birleşim içinde açıktır. Bağımsız feature adları karşılaştırma amacıyla korunur.
 
 `experimental-write-pipeline` streaming-open/paged-metadata yolunu içerir.
 Merge-policy, record-spool, maintenance-slots ve merge-slot artık bağımsız

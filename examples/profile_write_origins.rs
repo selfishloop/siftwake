@@ -49,7 +49,7 @@ fn main() -> Result<(), Box<dyn std::error::Error>> {
         "{}",
         json!({"phase":"write_buffer_budget","reservation":fdb::write_budget::snapshot(),"not_total_heap_or_rss":true})
     );
-    #[cfg(feature = "experimental-builder-budget")]
+    #[cfg(feature = "bounded-engine")]
     println!(
         "{}",
         json!({"phase":"posting_budget","reservation":fdb::write_budget::posting_snapshot(),"not_total_heap_or_rss":true})

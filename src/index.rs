@@ -38,7 +38,7 @@ fn ascii_prefix_word(bytes: &[u8]) -> usize {
 }
 
 fn ascii_prefix(bytes: &[u8]) -> usize {
-    #[cfg(feature = "experimental-builder-budget")]
+    #[cfg(feature = "bounded-engine")]
     {
         // Check four words together so a long ASCII run needs one branch per
         // 32 bytes. Once a block is mixed, locate its first high byte exactly.
@@ -56,7 +56,7 @@ fn ascii_prefix(bytes: &[u8]) -> usize {
         }
         blocks.len() * 32 + ascii_prefix_word(tail)
     }
-    #[cfg(not(feature = "experimental-builder-budget"))]
+    #[cfg(not(feature = "bounded-engine"))]
     ascii_prefix_word(bytes)
 }
 
@@ -70,9 +70,9 @@ pub(crate) fn fold_into(text: &str, output: &mut String) {
         return;
     }
     output.reserve(text.len());
-    #[cfg(feature = "experimental-builder-budget")]
+    #[cfg(feature = "bounded-engine")]
     fold_changed_runs(text, output);
-    #[cfg(not(feature = "experimental-builder-budget"))]
+    #[cfg(not(feature = "bounded-engine"))]
     {
         let mut offset = 0;
         while offset < text.len() {
@@ -107,7 +107,7 @@ pub(crate) fn fold_into(text: &str, output: &mut String) {
 
 // Unchanged Unicode punctuation stays in the same copied span as its ASCII
 // neighbours. Split output only where Unicode folding actually changes bytes.
-#[cfg(feature = "experimental-builder-budget")]
+#[cfg(feature = "bounded-engine")]
 fn fold_changed_runs(text: &str, output: &mut String) {
     let mut copied = 0;
     let mut offset = 0;
@@ -244,7 +244,7 @@ pub(crate) fn grams(text: &str) -> BTreeSet<String> {
         .collect()
 }
 
-#[cfg(feature = "experimental-builder-budget")]
+#[cfg(feature = "bounded-engine")]
 mod packed_grams;
 
 #[cfg(feature = "experimental-compact-delta-postings")]
@@ -311,13 +311,13 @@ impl BodyCache {
         let body_grams = {
             #[cfg(feature = "diagnostic-timing")]
             let _span = crate::timing::span("body.grams");
-            #[cfg(feature = "experimental-builder-budget")]
+            #[cfg(feature = "bounded-engine")]
             if folded.len() >= 1024 {
                 packed_grams::extract(&folded)
             } else {
                 grams(&folded)
             }
-            #[cfg(not(feature = "experimental-builder-budget"))]
+            #[cfg(not(feature = "bounded-engine"))]
             grams(&folded)
         };
         let value = BodyTerms {
@@ -362,7 +362,7 @@ pub(crate) struct Index {
     #[cfg(feature = "experimental-compact-delta-postings")]
     free: Vec<u32>,
     body_cache: BodyCache,
-    #[cfg(feature = "experimental-builder-budget")]
+    #[cfg(feature = "bounded-engine")]
     builder_gram_bytes: usize,
 }
 
@@ -508,7 +508,7 @@ impl Index {
     ) -> crate::Result<()> {
         self.change_impl(stored, add, provided, true)
     }
-    #[cfg(feature = "experimental-builder-budget")]
+    #[cfg(feature = "bounded-engine")]
     pub(crate) fn add_builder(&mut self, stored: &StoredDocument) -> crate::Result<()> {
         self.change_impl(stored, true, None, false)
     }
@@ -591,7 +591,7 @@ impl Index {
         let title = fold(&doc.title);
         let title_grams = grams(&title);
         let body = self.body_cache.get(&doc.text);
-        #[cfg(feature = "experimental-builder-budget")]
+        #[cfg(feature = "bounded-engine")]
         if !retain_text && !self.grams.contains_key(&key.scope) {
             self.builder_gram_bytes += 96 + key.scope.len();
         }
@@ -604,13 +604,13 @@ impl Index {
             for gram in title_grams.union(&body.grams) {
                 if add {
                     if let Some(posting) = scope_grams.get_mut(gram) {
-                        #[cfg(feature = "experimental-builder-budget")]
+                        #[cfg(feature = "bounded-engine")]
                         let before = posting.heap_bytes();
                         #[cfg(feature = "experimental-compact-delta-postings")]
                         posting.insert(posting_key);
                         #[cfg(not(feature = "experimental-compact-delta-postings"))]
                         posting.insert(posting_key.clone());
-                        #[cfg(feature = "experimental-builder-budget")]
+                        #[cfg(feature = "bounded-engine")]
                         if !retain_text {
                             let after = posting.heap_bytes();
                             if after >= before {
@@ -621,7 +621,7 @@ impl Index {
                         }
                     } else {
                         change(scope_grams, gram.clone(), &posting_key, true);
-                        #[cfg(feature = "experimental-builder-budget")]
+                        #[cfg(feature = "bounded-engine")]
                         if !retain_text {
                             self.builder_gram_bytes += 96 + gram.len();
                         }
@@ -671,7 +671,7 @@ impl Index {
         }
         Ok(())
     }
-    #[cfg(feature = "experimental-builder-budget")]
+    #[cfg(feature = "bounded-engine")]
     pub(crate) fn builder_memory_bytes(&self) -> usize {
         let post = |p: &Posting| p.heap_bytes();
         let key = |k: &Key| k.scope.capacity() + k.collection.capacity() + k.id.capacity();

@@ -8,14 +8,14 @@ use std::fs::{File, OpenOptions};
 use std::io::Seek;
 use std::io::{BufReader, BufWriter, Read, Write};
 use std::path::PathBuf;
-#[cfg(feature = "experimental-builder-budget")]
+#[cfg(feature = "bounded-engine")]
 mod bounded;
 
 pub(crate) struct Spills {
     stem: PathBuf,
     buffered: BTreeMap<Term, Vec<u32>>,
     paths: Vec<PathBuf>,
-    #[cfg(feature = "experimental-builder-budget")]
+    #[cfg(feature = "bounded-engine")]
     all_paths: Vec<PathBuf>,
     lengths: BTreeMap<PathBuf, u64>,
     estimated: usize,
@@ -27,7 +27,7 @@ impl Spills {
             stem,
             buffered: BTreeMap::new(),
             paths: vec![],
-            #[cfg(feature = "experimental-builder-budget")]
+            #[cfg(feature = "bounded-engine")]
             all_paths: vec![],
             lengths: BTreeMap::new(),
             estimated: 0,
@@ -62,7 +62,7 @@ impl Spills {
                 .create_new(true)
                 .open(&path)?,
         );
-        #[cfg(feature = "experimental-builder-budget")]
+        #[cfg(feature = "bounded-engine")]
         self.all_paths.push(path.clone());
         self.paths.push(path);
         for (term, ids) in std::mem::take(&mut self.buffered) {
@@ -93,7 +93,7 @@ impl Spills {
         self.estimated = 0;
         Ok(())
     }
-    #[cfg(any(test, not(feature = "experimental-builder-budget")))]
+    #[cfg(any(test, not(feature = "bounded-engine")))]
     pub fn merge(
         &mut self,
         writer: &mut impl Write,
@@ -113,7 +113,7 @@ impl Spills {
         mut emit: impl FnMut(Term, u64, u32) -> Result<()>,
     ) -> Result<()> {
         self.flush()?;
-        #[cfg(feature = "experimental-builder-budget")]
+        #[cfg(feature = "bounded-engine")]
         bounded::collapse(self)?;
         let mut readers: Vec<_> = self
             .paths
@@ -198,9 +198,9 @@ fn copy_ids(
 }
 impl Drop for Spills {
     fn drop(&mut self) {
-        #[cfg(feature = "experimental-builder-budget")]
+        #[cfg(feature = "bounded-engine")]
         let paths = &self.all_paths;
-        #[cfg(not(feature = "experimental-builder-budget"))]
+        #[cfg(not(feature = "bounded-engine"))]
         let paths = &self.paths;
         for path in paths {
             let _ = std::fs::remove_file(path);
@@ -380,7 +380,7 @@ mod tests {
         }
     }
 
-    #[cfg(feature = "experimental-builder-budget")]
+    #[cfg(feature = "bounded-engine")]
     #[test]
     fn multiple_stages_preserve_all_ids_and_release_every_owned_file() {
         let mut s = spills();
@@ -403,7 +403,7 @@ mod tests {
         assert!(paths.iter().all(|p| !p.exists()));
     }
 
-    #[cfg(feature = "experimental-builder-budget")]
+    #[cfg(feature = "bounded-engine")]
     #[test]
     fn every_staged_cut_and_crc_corruption_fail_closed_and_cleanup() {
         let mut s = spills();

@@ -88,7 +88,7 @@ impl Cursor<'_> {
     }
 }
 
-#[cfg(any(test, not(feature = "experimental-builder-budget")))]
+#[cfg(any(test, not(feature = "bounded-engine")))]
 pub(super) fn merge(
     inputs: &[(&DiskIndex, &[u32])],
     writer: &mut impl Write,

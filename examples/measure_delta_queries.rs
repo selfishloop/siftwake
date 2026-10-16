@@ -23,11 +23,11 @@ fn fold(text: &str) -> String {
 }
 fn commit(db: &mut Database, changes: Vec<Mutation>, streamed: bool) -> fdb::Result<u64> {
     if streamed {
-        #[cfg(feature = "experimental-builder-budget")]
+        #[cfg(feature = "bounded-engine")]
         {
             return db.commit_streamed(changes.into_iter().map(Ok));
         }
-        #[cfg(not(feature = "experimental-builder-budget"))]
+        #[cfg(not(feature = "bounded-engine"))]
         {
             return Err(fdb::Error::Invalid(
                 "streamed input requires experimental-builder-budget".into(),

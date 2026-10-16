@@ -1,0 +1,148 @@
+{
+  "medians": {
+    "control": {
+      "ingest_s": 23.511993699999998,
+      "maintenance_s": 0.86259975,
+      "combined_s": 24.31067315,
+      "cpu_s": 22.4921875,
+      "sampled_indexing_private_bytes": 9601024.0,
+      "sampled_maintenance_private_bytes": 8464384.0,
+      "os_lifetime_private_commit_bytes": 9601024.0,
+      "os_lifetime_working_set_bytes": 13740032.0,
+      "retained_disk_bytes": 1521041630.0
+    },
+    "fdb": {
+      "ingest_s": 24.6841309,
+      "maintenance_s": 0.79205895,
+      "combined_s": 25.4981731,
+      "cpu_s": 23.5703125,
+      "sampled_indexing_private_bytes": 9701376.0,
+      "sampled_maintenance_private_bytes": 8439808.0,
+      "os_lifetime_private_commit_bytes": 9701376.0,
+      "os_lifetime_working_set_bytes": 13776896.0,
+      "retained_disk_bytes": 1521041630.0
+    },
+    "sqlite": {
+      "ingest_s": 34.86605095,
+      "maintenance_s": 1.2889925,
+      "combined_s": 36.15504345,
+      "cpu_s": 35.03125,
+      "sampled_indexing_private_bytes": 8806400.0,
+      "sampled_maintenance_private_bytes": 7610368.0,
+      "os_lifetime_private_commit_bytes": 8806400.0,
+      "os_lifetime_working_set_bytes": 13250560.0,
+      "retained_disk_bytes": 583860224.0
+    }
+  },
+  "paired_fdb_changes": {
+    "ingest_s": {
+      "change_of_medians_percent": 4.985273537224533,
+      "paired_change_percent": [
+        -6.593186467954593,
+        5.852638942554456,
+        1.233929629566699,
+        6.654916436446068
+      ],
+      "median_paired_change_percent": 3.5432842860605773,
+      "lower_pairs": 1,
+      "higher_pairs": 3
+    },
+    "maintenance_s": {
+      "change_of_medians_percent": -8.177697709743125,
+      "paired_change_percent": [
+        -40.56228323995504,
+        -8.496778390706405,
+        -5.670111082345075,
+        5.129496488362517
+      ],
+      "median_paired_change_percent": -7.08344473652574,
+      "lower_pairs": 3,
+      "higher_pairs": 1
+    },
+    "combined_s": {
+      "change_of_medians_percent": 4.884685597445082,
+      "paired_change_percent": [
+        -7.858653374058799,
+        5.316392855595509,
+        1.0017352593467255,
+        6.606363362871037
+      ],
+      "median_paired_change_percent": 3.159064057471117,
+      "lower_pairs": 1,
+      "higher_pairs": 3
+    },
+    "cpu_s": {
+      "change_of_medians_percent": 4.793331017714486,
+      "paired_change_percent": [
+        -8.039702233250622,
+        5.4804270462633475,
+        1.1004126547455195,
+        7.719298245614037
+      ],
+      "median_paired_change_percent": 3.2904198505044335,
+      "lower_pairs": 1,
+      "higher_pairs": 3
+    },
+    "sampled_indexing_private_bytes": {
+      "change_of_medians_percent": 1.0452218430034188,
+      "paired_change_percent": [
+        -0.6875805758487341,
+        0.08442380751372269,
+        0.5515485787017438,
+        1.5444015444015413
+      ],
+      "median_paired_change_percent": 0.31798619310773324,
+      "lower_pairs": 1,
+      "higher_pairs": 3
+    },
+    "sampled_maintenance_private_bytes": {
+      "change_of_medians_percent": -0.290345995644814,
+      "paired_change_percent": [
+        -1.179941002949858,
+        -1.191043353978083,
+        -2.826691380908253,
+        0.8374384236453203
+      ],
+      "median_paired_change_percent": -1.1854921784639705,
+      "lower_pairs": 3,
+      "higher_pairs": 1
+    },
+    "os_lifetime_private_commit_bytes": {
+      "change_of_medians_percent": 1.0452218430034188,
+      "paired_change_percent": [
+        -0.6875805758487341,
+        0.08442380751372269,
+        0.5515485787017438,
+        1.5444015444015413
+      ],
+      "median_paired_change_percent": 0.31798619310773324,
+      "lower_pairs": 1,
+      "higher_pairs": 3
+    },
+    "os_lifetime_working_set_bytes": {
+      "change_of_medians_percent": 0.2682963183783027,
+      "paired_change_percent": [
+        -2.0945541591861128,
+        -0.11880011880012198,
+        -0.08910008910009148,
+        2.650015229972591
+      ],
+      "median_paired_change_percent": -0.10395010395010673,
+      "lower_pairs": 3,
+      "higher_pairs": 1
+    },
+    "retained_disk_bytes": {
+      "change_of_medians_percent": 0.0,
+      "paired_change_percent": [
+        0.0,
+        0.0,
+        0.0,
+        0.0
+      ],
+      "median_paired_change_percent": 0.0,
+      "lower_pairs": 0,
+      "higher_pairs": 0
+    }
+  },
+  "all_eight_fdb_core_file_hashes_equal": true
+}

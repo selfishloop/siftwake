@@ -118,7 +118,7 @@ fn prefetched_corrupt_record_is_checked_before_it_matches() {
     assert!(matches(&index, &mut scratch, 4).is_err());
 }
 
-#[cfg(feature = "experimental-builder-budget")]
+#[cfg(feature = "bounded-engine")]
 #[test]
 fn raw_ascii_positive_still_rejects_payload_corruption_and_truncation() {
     for read_window_enabled in [false, true] {
@@ -210,7 +210,7 @@ fn read_window_never_uses_a_valid_vfy_to_hide_corrupt_index_blocks_or_cuts() {
     assert!(matches(&index, &mut exact, 60).is_err());
 }
 
-#[cfg(feature = "experimental-builder-budget")]
+#[cfg(feature = "bounded-engine")]
 #[test]
 fn covering_needs_source_authorization_and_rejects_modified_unselected_payload() {
     let temp = Temp::new();

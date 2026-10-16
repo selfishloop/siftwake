@@ -231,7 +231,7 @@ fn deferred_open_checks_source_before_reads_searches_and_writes() {
     assert_eq!(db.get(&expected.key).unwrap().unwrap().document, expected);
     assert_eq!(db.pending_source_checks().unwrap(), 0);
     // Explicit full checks revisit previously verified sources.
-    #[cfg(all(windows, feature = "experimental-builder-budget"))]
+    #[cfg(all(windows, feature = "bounded-engine"))]
     let db = {
         assert!(fs::write(&source, &changed).is_err());
         db.check_integrity().unwrap();
@@ -239,7 +239,7 @@ fn deferred_open_checks_source_before_reads_searches_and_writes() {
         fs::write(&source, &changed).unwrap();
         Database::open_deferred(&temp.0).unwrap()
     };
-    #[cfg(not(all(windows, feature = "experimental-builder-budget")))]
+    #[cfg(not(all(windows, feature = "bounded-engine")))]
     fs::write(&source, &changed).unwrap();
     assert!(matches!(db.check_integrity(), Err(Error::Corrupt(_))));
     drop(db);

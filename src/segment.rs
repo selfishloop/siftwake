@@ -14,25 +14,25 @@ use std::sync::atomic::{AtomicU64, Ordering};
 mod payload_bench;
 
 pub(crate) mod block_check;
-#[cfg(feature = "experimental-builder-budget")]
+#[cfg(feature = "bounded-engine")]
 mod covering;
-#[cfg(feature = "experimental-builder-budget")]
+#[cfg(feature = "bounded-engine")]
 pub(crate) use covering::SourceLease;
-#[cfg(feature = "experimental-builder-budget")]
+#[cfg(feature = "bounded-engine")]
 mod posting_spool;
 #[cfg(feature = "experimental-streaming-open")]
 mod term_pages;
-#[cfg(feature = "experimental-builder-budget")]
+#[cfg(feature = "bounded-engine")]
 type PostingOutput = posting_spool::Postings;
-#[cfg(not(feature = "experimental-builder-budget"))]
+#[cfg(not(feature = "bounded-engine"))]
 type PostingOutput = Vec<(Term, Posting)>;
 #[cfg(feature = "experimental-merge-postings")]
 fn posting_output(stem: &Path) -> Result<PostingOutput> {
-    #[cfg(feature = "experimental-builder-budget")]
+    #[cfg(feature = "bounded-engine")]
     {
         PostingOutput::new(stem)
     }
-    #[cfg(not(feature = "experimental-builder-budget"))]
+    #[cfg(not(feature = "bounded-engine"))]
     {
         let _ = stem;
         Ok(Vec::new())
@@ -40,11 +40,11 @@ fn posting_output(stem: &Path) -> Result<PostingOutput> {
 }
 #[cfg(feature = "experimental-merge-postings")]
 fn push_posting(output: &mut PostingOutput, term: Term, posting: Posting) -> Result<()> {
-    #[cfg(feature = "experimental-builder-budget")]
+    #[cfg(feature = "bounded-engine")]
     {
         output.push(term, posting)
     }
-    #[cfg(not(feature = "experimental-builder-budget"))]
+    #[cfg(not(feature = "bounded-engine"))]
     {
         output.push((term, posting));
         Ok(())
@@ -85,9 +85,9 @@ struct QueryTextScratch {
     text: String,
     window: String,
     found: Vec<bool>,
-    #[cfg(feature = "experimental-builder-budget")]
+    #[cfg(feature = "bounded-engine")]
     raw_probes: u8,
-    #[cfg(feature = "experimental-builder-budget")]
+    #[cfg(feature = "bounded-engine")]
     raw_hits: u8,
 }
 impl QueryTextScratch {
@@ -125,7 +125,7 @@ impl QueryTextScratch {
         if terms.iter().all(|term| self.title.contains(term)) {
             return true;
         }
-        #[cfg(feature = "experimental-builder-budget")]
+        #[cfg(feature = "bounded-engine")]
         if self.raw_probes < 8
             && text.len() > 1024
             && terms.iter().all(|term| {
@@ -234,7 +234,7 @@ impl QueryTextScratch {
 // Positive-only, allocation-free ASCII spellings. General mixed-case and
 // Unicode spellings still use the canonical fold verifier. Cap only the
 // speculative stack buffer, never the accepted query/document size.
-#[cfg(feature = "experimental-builder-budget")]
+#[cfg(feature = "bounded-engine")]
 fn ascii_case_proven(text: &str, term: &str) -> bool {
     let mut end = text.len().min(64 * 1024);
     while !text.is_char_boundary(end) {
@@ -260,7 +260,7 @@ fn ascii_case_proven(text: &str, term: &str) -> bool {
 #[cfg(test)]
 mod query_scratch_tests {
     use super::*;
-    #[cfg(feature = "experimental-builder-budget")]
+    #[cfg(feature = "bounded-engine")]
     #[test]
     fn speculative_scan_budget_never_limits_match_semantics() {
         let mut scratch = QueryTextScratch::default();
@@ -297,7 +297,7 @@ mod query_scratch_tests {
             }
         }
     }
-    #[cfg(feature = "experimental-builder-budget")]
+    #[cfg(feature = "bounded-engine")]
     #[test]
     fn ascii_proof_and_unicode_fallback_match_folded_contains() {
         let mut scratch = QueryTextScratch::default();
@@ -548,9 +548,9 @@ pub(crate) struct Builder {
     // Leases are last: release reservations after owned buffers and spill files.
     #[cfg(feature = "experimental-write-buffer-budget")]
     _write_lease: crate::write_budget::Lease<'static>,
-    #[cfg(feature = "experimental-builder-budget")]
+    #[cfg(feature = "bounded-engine")]
     _posting_lease: crate::write_budget::Lease<'static>,
-    #[cfg(feature = "experimental-builder-budget")]
+    #[cfg(feature = "bounded-engine")]
     _working_lease: Option<crate::write_budget::Lease<'static>>,
 }
 
@@ -563,9 +563,9 @@ impl Builder {
     ) -> Result<Self> {
         // Acquire posting quota before I/O quota: waiters must not hold all I/O
         // reservations while active builders need I/O to finish and release.
-        #[cfg(feature = "experimental-builder-budget")]
+        #[cfg(feature = "bounded-engine")]
         let working_lease = crate::write_budget::builder_working()?;
-        #[cfg(feature = "experimental-builder-budget")]
+        #[cfg(feature = "bounded-engine")]
         let posting_lease = crate::write_budget::reserve_postings()?;
         #[cfg(feature = "experimental-write-buffer-budget")]
         let write_lease = crate::write_budget::reserve(16 * 1024, 16 * 1024)?;
@@ -591,13 +591,13 @@ impl Builder {
         Ok(Self {
             #[cfg(feature = "experimental-write-buffer-budget")]
             _write_lease: write_lease,
-            #[cfg(feature = "experimental-builder-budget")]
+            #[cfg(feature = "bounded-engine")]
             postings: crate::spill::Spills::new(temporary.clone(), posting_lease.bytes),
-            #[cfg(not(feature = "experimental-builder-budget"))]
+            #[cfg(not(feature = "bounded-engine"))]
             postings: crate::spill::Spills::new(temporary.clone(), 4 * 1024 * 1024),
-            #[cfg(feature = "experimental-builder-budget")]
+            #[cfg(feature = "bounded-engine")]
             _posting_lease: posting_lease,
-            #[cfg(feature = "experimental-builder-budget")]
+            #[cfg(feature = "bounded-engine")]
             _working_lease: working_lease,
             #[cfg(feature = "experimental-write-record-spool")]
             records: record_spool::Records::new(&temporary)?,
@@ -720,14 +720,14 @@ impl Builder {
         #[cfg(feature = "diagnostic-timing")]
         let _span = crate::timing::span("builder.finish");
         let writer = self.writer.as_mut().unwrap();
-        #[cfg(not(feature = "experimental-builder-budget"))]
+        #[cfg(not(feature = "bounded-engine"))]
         let postings: Vec<_> = self
             .postings
             .merge(writer, &mut self.offset)?
             .into_iter()
             .map(|(term, offset, count)| (term, Posting { offset, count }))
             .collect();
-        #[cfg(feature = "experimental-builder-budget")]
+        #[cfg(feature = "bounded-engine")]
         let postings = {
             let mut postings = posting_output(&self.temporary)?;
             self.postings
@@ -750,9 +750,9 @@ impl Builder {
     pub(crate) fn finish_reused(mut self, inputs: &[(&DiskIndex, &[u32])]) -> Result<DiskIndex> {
         #[cfg(feature = "diagnostic-timing")]
         let _span = crate::timing::span("builder.finish_reused");
-        #[cfg(not(feature = "experimental-builder-budget"))]
+        #[cfg(not(feature = "bounded-engine"))]
         let postings = reuse::merge(inputs, self.writer.as_mut().unwrap(), &mut self.offset)?;
-        #[cfg(feature = "experimental-builder-budget")]
+        #[cfg(feature = "bounded-engine")]
         let postings = {
             let mut postings = posting_output(&self.temporary)?;
             reuse::merge_with(
@@ -821,7 +821,7 @@ impl Builder {
     }
 
     fn finish_directory(mut self, postings: PostingOutput) -> Result<DiskIndex> {
-        #[cfg(feature = "experimental-builder-budget")]
+        #[cfg(feature = "bounded-engine")]
         let mut postings = postings;
         let writer = self.writer.as_mut().unwrap();
         let directory_offset = self.offset;
@@ -838,9 +838,9 @@ impl Builder {
             sink.write_all(b"{\"records\":")?;
             self.records.write_json(&mut sink)?;
             sink.write_all(b",\"postings\":")?;
-            #[cfg(not(feature = "experimental-builder-budget"))]
+            #[cfg(not(feature = "bounded-engine"))]
             serde_json::to_writer(&mut sink, &postings)?;
-            #[cfg(feature = "experimental-builder-budget")]
+            #[cfg(feature = "bounded-engine")]
             postings.write_json(&mut sink)?;
             sink.write_all(b"}")?;
             Ok(())
@@ -900,7 +900,7 @@ struct PackedRecord {
 }
 
 pub(crate) struct DiskIndex {
-    #[cfg(feature = "experimental-builder-budget")]
+    #[cfg(feature = "bounded-engine")]
     covering: covering::Covering,
     file: File,
     verification: Option<block_check::Checks>,
@@ -1002,11 +1002,11 @@ impl DiskIndex {
             #[cfg(feature = "experimental-streaming-open")]
             term_page_root_capacity_bytes: self.term_pages.as_ref().map_or(0, |p| p.root_bytes())
                 + {
-                    #[cfg(feature = "experimental-builder-budget")]
+                    #[cfg(feature = "bounded-engine")]
                     {
                         self.covering.root_bytes()
                     }
-                    #[cfg(not(feature = "experimental-builder-budget"))]
+                    #[cfg(not(feature = "bounded-engine"))]
                     {
                         0
                     }
@@ -1057,7 +1057,7 @@ impl DiskIndex {
         let mut file = File::open(path)?;
         let metadata = file.metadata()?;
         let size = metadata.len();
-        #[cfg(feature = "experimental-builder-budget")]
+        #[cfg(feature = "bounded-engine")]
         let covering = covering::Covering::new(&metadata);
         if size < HEADER_SIZE + FOOTER_SIZE {
             return Err(Error::Corrupt("truncated segment".into()));
@@ -1124,7 +1124,7 @@ impl DiskIndex {
                 parsed.bloom,
             )?);
             return Ok(Self {
-                #[cfg(feature = "experimental-builder-budget")]
+                #[cfg(feature = "bounded-engine")]
                 covering: covering.with_grams(parsed.universal),
                 file,
                 verification,
@@ -1153,7 +1153,7 @@ impl DiskIndex {
                 parsed.bloom,
             )?);
             Ok(Self {
-                #[cfg(feature = "experimental-builder-budget")]
+                #[cfg(feature = "bounded-engine")]
                 covering: covering.with_grams(parsed.universal),
                 file,
                 verification,
@@ -1948,11 +1948,11 @@ impl DiskIndex {
             })
             .collect()
     }
-    #[cfg(feature = "experimental-builder-budget")]
+    #[cfg(feature = "bounded-engine")]
     pub(crate) fn authorize_text_covering(&self) {
         self.covering.authorize();
     }
-    #[cfg(feature = "experimental-builder-budget")]
+    #[cfg(feature = "bounded-engine")]
     pub(crate) fn bind_text_source(&mut self, path: PathBuf, lease: SourceLease) -> Result<()> {
         self.covering.bind_source(path, lease)
     }
@@ -1961,9 +1961,9 @@ impl DiskIndex {
         q: &Query,
         terms: &'a [String],
     ) -> Result<std::borrow::Cow<'a, [String]>> {
-        #[cfg(not(feature = "experimental-builder-budget"))]
+        #[cfg(not(feature = "bounded-engine"))]
         let _ = q;
-        #[cfg(feature = "experimental-builder-budget")]
+        #[cfg(feature = "bounded-engine")]
         if self.binary_payload
             && terms
                 .iter()

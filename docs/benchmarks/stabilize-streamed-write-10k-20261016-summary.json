@@ -1,0 +1,320 @@
+{
+  "design": {
+    "fdb_pairs": 4,
+    "first_pair": 0,
+    "balanced_first_position": true,
+    "orders": [
+      "control/fdb",
+      "fdb/control",
+      "control/fdb",
+      "fdb/control"
+    ],
+    "sqlite_reference_processes": 2,
+    "sqlite_references_after_pairs": [
+      0,
+      3
+    ],
+    "sqlite_is_not_paired_performance_gate": true,
+    "input": "same first10000 existing records;500 records/transaction;20 transactions; synced WAL",
+    "input_api": "commit_streamed(iterator); caller holds one input record",
+    "cache": "OS cache, no eviction; no hardware/power isolation",
+    "query": "40 boundary full-document gets inside ingest; independent full verify outside timing",
+    "databases": "only fixed data/benchmark-work/fdb and sqlite slots; reset owned slot per ingest",
+    "normal_build": {
+      "fdb": "default: bounded-engine; no feature flags",
+      "control": "checkpoint: explicit experimental-builder-budget"
+    },
+    "diagnostic_timing_and_allocation": false
+  },
+  "rows": [
+    {
+      "variant": "control",
+      "pair": 0,
+      "ingest_s": 33.5512974,
+      "maintenance_s": 1.2982674,
+      "combined_s": 34.8495648,
+      "cpu_s": 31.484375,
+      "sampled_indexing_private_bytes": 9531392,
+      "sampled_maintenance_private_bytes": 8331264,
+      "os_lifetime_private_commit_bytes": 9531392,
+      "os_lifetime_working_set_bytes": 13688832,
+      "retained_disk_bytes": 1521041630.0
+    },
+    {
+      "variant": "fdb",
+      "pair": 0,
+      "ingest_s": 31.3391978,
+      "maintenance_s": 0.7716605,
+      "combined_s": 32.1108583,
+      "cpu_s": 28.953125,
+      "sampled_indexing_private_bytes": 9465856,
+      "sampled_maintenance_private_bytes": 8232960,
+      "os_lifetime_private_commit_bytes": 9465856,
+      "os_lifetime_working_set_bytes": 13402112,
+      "retained_disk_bytes": 1521041630.0
+    },
+    {
+      "variant": "control",
+      "pair": 1,
+      "ingest_s": 23.1671356,
+      "maintenance_s": 0.8993797,
+      "combined_s": 24.066515300000002,
+      "cpu_s": 21.953125,
+      "sampled_indexing_private_bytes": 9703424,
+      "sampled_maintenance_private_bytes": 8597504,
+      "os_lifetime_private_commit_bytes": 9703424,
+      "os_lifetime_working_set_bytes": 13791232,
+      "retained_disk_bytes": 1521041630.0
+    },
+    {
+      "variant": "fdb",
+      "pair": 1,
+      "ingest_s": 24.5230244,
+      "maintenance_s": 0.8229614,
+      "combined_s": 25.3459858,
+      "cpu_s": 23.15625,
+      "sampled_indexing_private_bytes": 9711616,
+      "sampled_maintenance_private_bytes": 8495104,
+      "os_lifetime_private_commit_bytes": 9711616,
+      "os_lifetime_working_set_bytes": 13774848,
+      "retained_disk_bytes": 1521041630.0
+    },
+    {
+      "variant": "control",
+      "pair": 2,
+      "ingest_s": 23.7290112,
+      "maintenance_s": 0.8258198,
+      "combined_s": 24.554831,
+      "cpu_s": 22.71875,
+      "sampled_indexing_private_bytes": 9654272,
+      "sampled_maintenance_private_bytes": 8839168,
+      "os_lifetime_private_commit_bytes": 9654272,
+      "os_lifetime_working_set_bytes": 13791232,
+      "retained_disk_bytes": 1521041630.0
+    },
+    {
+      "variant": "fdb",
+      "pair": 2,
+      "ingest_s": 24.0218105,
+      "maintenance_s": 0.7789949,
+      "combined_s": 24.8008054,
+      "cpu_s": 22.96875,
+      "sampled_indexing_private_bytes": 9707520,
+      "sampled_maintenance_private_bytes": 8589312,
+      "os_lifetime_private_commit_bytes": 9707520,
+      "os_lifetime_working_set_bytes": 13778944,
+      "retained_disk_bytes": 1521041630.0
+    },
+    {
+      "variant": "control",
+      "pair": 3,
+      "ingest_s": 23.2949762,
+      "maintenance_s": 0.7658393,
+      "combined_s": 24.0608155,
+      "cpu_s": 22.265625,
+      "sampled_indexing_private_bytes": 9547776,
+      "sampled_maintenance_private_bytes": 8314880,
+      "os_lifetime_private_commit_bytes": 9547776,
+      "os_lifetime_working_set_bytes": 13447168,
+      "retained_disk_bytes": 1521041630.0
+    },
+    {
+      "variant": "fdb",
+      "pair": 3,
+      "ingest_s": 24.8452374,
+      "maintenance_s": 0.805123,
+      "combined_s": 25.650360399999997,
+      "cpu_s": 23.984375,
+      "sampled_indexing_private_bytes": 9695232,
+      "sampled_maintenance_private_bytes": 8384512,
+      "os_lifetime_private_commit_bytes": 9695232,
+      "os_lifetime_working_set_bytes": 13803520,
+      "retained_disk_bytes": 1521041630.0
+    }
+  ],
+  "sqlite_unpaired_references": [
+    {
+      "variant": "sqlite",
+      "pair": 0,
+      "ingest_s": 36.0658411,
+      "maintenance_s": 1.4616272000000001,
+      "combined_s": 37.5274683,
+      "cpu_s": 36.390625,
+      "sampled_indexing_private_bytes": 8806400,
+      "sampled_maintenance_private_bytes": 7610368,
+      "os_lifetime_private_commit_bytes": 8806400,
+      "os_lifetime_working_set_bytes": 13250560,
+      "retained_disk_bytes": 583860224.0
+    },
+    {
+      "variant": "sqlite",
+      "pair": 3,
+      "ingest_s": 33.6662608,
+      "maintenance_s": 1.1163578,
+      "combined_s": 34.7826186,
+      "cpu_s": 33.671875,
+      "sampled_indexing_private_bytes": 8806400,
+      "sampled_maintenance_private_bytes": 7610368,
+      "os_lifetime_private_commit_bytes": 8806400,
+      "os_lifetime_working_set_bytes": 13250560,
+      "retained_disk_bytes": 583860224.0
+    }
+  ],
+  "sqlite_reference_logs": {
+    "prefix": "docs\\benchmarks\\stabilize-streamed-write-10k-20261016",
+    "tail": null,
+    "reused_from_previous_stage": false
+  },
+  "resume": null,
+  "medians": {
+    "control": {
+      "ingest_s": 23.511993699999998,
+      "maintenance_s": 0.86259975,
+      "combined_s": 24.31067315,
+      "cpu_s": 22.4921875,
+      "sampled_indexing_private_bytes": 9601024.0,
+      "sampled_maintenance_private_bytes": 8464384.0,
+      "os_lifetime_private_commit_bytes": 9601024.0,
+      "os_lifetime_working_set_bytes": 13740032.0,
+      "retained_disk_bytes": 1521041630.0
+    },
+    "fdb": {
+      "ingest_s": 24.6841309,
+      "maintenance_s": 0.79205895,
+      "combined_s": 25.4981731,
+      "cpu_s": 23.5703125,
+      "sampled_indexing_private_bytes": 9701376.0,
+      "sampled_maintenance_private_bytes": 8439808.0,
+      "os_lifetime_private_commit_bytes": 9701376.0,
+      "os_lifetime_working_set_bytes": 13776896.0,
+      "retained_disk_bytes": 1521041630.0
+    },
+    "sqlite": {
+      "ingest_s": 34.86605095,
+      "maintenance_s": 1.2889925,
+      "combined_s": 36.15504345,
+      "cpu_s": 35.03125,
+      "sampled_indexing_private_bytes": 8806400.0,
+      "sampled_maintenance_private_bytes": 7610368.0,
+      "os_lifetime_private_commit_bytes": 8806400.0,
+      "os_lifetime_working_set_bytes": 13250560.0,
+      "retained_disk_bytes": 583860224.0
+    }
+  },
+  "paired_fdb_changes": {
+    "ingest_s": {
+      "change_of_medians_percent": 4.985273537224533,
+      "paired_change_percent": [
+        -6.593186467954593,
+        5.852638942554456,
+        1.233929629566699,
+        6.654916436446068
+      ],
+      "median_paired_change_percent": 3.5432842860605773,
+      "lower_pairs": 1,
+      "higher_pairs": 3
+    },
+    "maintenance_s": {
+      "change_of_medians_percent": -8.177697709743125,
+      "paired_change_percent": [
+        -40.56228323995504,
+        -8.496778390706405,
+        -5.670111082345075,
+        5.129496488362517
+      ],
+      "median_paired_change_percent": -7.08344473652574,
+      "lower_pairs": 3,
+      "higher_pairs": 1
+    },
+    "combined_s": {
+      "change_of_medians_percent": 4.884685597445082,
+      "paired_change_percent": [
+        -7.858653374058799,
+        5.316392855595509,
+        1.0017352593467255,
+        6.606363362871037
+      ],
+      "median_paired_change_percent": 3.159064057471117,
+      "lower_pairs": 1,
+      "higher_pairs": 3
+    },
+    "cpu_s": {
+      "change_of_medians_percent": 4.793331017714486,
+      "paired_change_percent": [
+        -8.039702233250622,
+        5.4804270462633475,
+        1.1004126547455195,
+        7.719298245614037
+      ],
+      "median_paired_change_percent": 3.2904198505044335,
+      "lower_pairs": 1,
+      "higher_pairs": 3
+    },
+    "sampled_indexing_private_bytes": {
+      "change_of_medians_percent": 1.0452218430034188,
+      "paired_change_percent": [
+        -0.6875805758487341,
+        0.08442380751372269,
+        0.5515485787017438,
+        1.5444015444015413
+      ],
+      "median_paired_change_percent": 0.31798619310773324,
+      "lower_pairs": 1,
+      "higher_pairs": 3
+    },
+    "sampled_maintenance_private_bytes": {
+      "change_of_medians_percent": -0.290345995644814,
+      "paired_change_percent": [
+        -1.179941002949858,
+        -1.191043353978083,
+        -2.826691380908253,
+        0.8374384236453203
+      ],
+      "median_paired_change_percent": -1.1854921784639705,
+      "lower_pairs": 3,
+      "higher_pairs": 1
+    },
+    "os_lifetime_private_commit_bytes": {
+      "change_of_medians_percent": 1.0452218430034188,
+      "paired_change_percent": [
+        -0.6875805758487341,
+        0.08442380751372269,
+        0.5515485787017438,
+        1.5444015444015413
+      ],
+      "median_paired_change_percent": 0.31798619310773324,
+      "lower_pairs": 1,
+      "higher_pairs": 3
+    },
+    "os_lifetime_working_set_bytes": {
+      "change_of_medians_percent": 0.2682963183783027,
+      "paired_change_percent": [
+        -2.0945541591861128,
+        -0.11880011880012198,
+        -0.08910008910009148,
+        2.650015229972591
+      ],
+      "median_paired_change_percent": -0.10395010395010673,
+      "lower_pairs": 3,
+      "higher_pairs": 1
+    },
+    "retained_disk_bytes": {
+      "change_of_medians_percent": 0.0,
+      "paired_change_percent": [
+        0.0,
+        0.0,
+        0.0,
+        0.0
+      ],
+      "median_paired_change_percent": 0.0,
+      "lower_pairs": 0,
+      "higher_pairs": 0
+    }
+  },
+  "all_fdb_core_file_hashes_equal": true,
+  "all_eight_fdb_core_file_hashes_equal": true,
+  "core_file_count_per_run": 122,
+  "memory_scope": "phase private peaks sampled20ms/phase100ms; OS lifetime high-water marks include startup/input/indexing/maintenance, not phase-specific; neither is total system RAM",
+  "sqlite_scope": "2 unpaired references, not a paired SQLite/FDB performance gate; FULL WAL, cache2MiB/mmap0/tempFILE; maintenance FTS optimize+checkpoint differs from FDB flush/drain merge",
+  "interpretation": "Differences of medians and medians of paired ratios are separate; no statistical significance or default promotion is implied."
+}

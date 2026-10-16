@@ -1,4 +1,4 @@
-//! Opt-in streamed transactions. Existing WAL/source/manifest codecs are retained.
+//! Streamed transactions in the default bounded-engine profile. Existing codecs are retained.
 use super::*;
 use std::io::{Read, Seek, SeekFrom, Write};
 
@@ -151,7 +151,8 @@ impl Drop for Stage {
 
 impl Database {
     /// Stream one atomic transaction without collecting its documents in a Vec.
-    /// Opt-in profile: <=256 KiB per encoded entry, <=1 MiB key admission,
+    /// Available in the default bounded-engine profile: <=256 KiB per encoded entry,
+    /// <=1 MiB key admission,
     /// <=4 MiB estimated index admission (not an exact heap measurement);
     /// at most 10k mutations and the existing 64 MiB frame limit. A complete
     /// synced WAL frame precedes source/manifest publication. Each successful

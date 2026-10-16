@@ -6,7 +6,7 @@ use crate::{
     Error, Guard, Key, Mutation, Options, Query, Result, SearchPage, Stats, StoredDocument,
     validate_doc, validate_key,
 };
-#[cfg(feature = "experimental-builder-budget")]
+#[cfg(feature = "bounded-engine")]
 mod streamed;
 use std::cmp::Reverse;
 #[cfg(any(
@@ -252,10 +252,10 @@ pub struct Database {
 }
 
 fn open_source(dir: &Path, mut source: Source, legacy_unknown: bool) -> Result<Run> {
-    #[cfg(feature = "experimental-builder-budget")]
+    #[cfg(feature = "bounded-engine")]
     let mut file =
         crate::segment::SourceLease::open(&source.path(dir, "fdb"), source.kind == Kind::Run)?;
-    #[cfg(not(feature = "experimental-builder-budget"))]
+    #[cfg(not(feature = "bounded-engine"))]
     let mut file = File::open(source.path(dir, "fdb"))?;
     if source.kind == Kind::Run && file.metadata()?.len() != source.end {
         return Err(Error::Corrupt("immutable source length mismatch".into()));
@@ -373,7 +373,7 @@ fn open_source(dir: &Path, mut source: Source, legacy_unknown: bool) -> Result<R
     };
     source.sequence = sequence;
     source.keys = index.len();
-    #[cfg(feature = "experimental-builder-budget")]
+    #[cfg(feature = "bounded-engine")]
     let index = {
         let mut index = index;
         index.bind_text_source(source.path(dir, "fdb"), file)?;
@@ -547,9 +547,9 @@ fn open_source_deferred(dir: &Path, source: Source) -> Result<Run> {
     if source.kind != Kind::Run {
         return open_source(dir, source, false);
     }
-    #[cfg(feature = "experimental-builder-budget")]
+    #[cfg(feature = "bounded-engine")]
     let file = crate::segment::SourceLease::open(&source.path(dir, "fdb"), true)?;
-    #[cfg(not(feature = "experimental-builder-budget"))]
+    #[cfg(not(feature = "bounded-engine"))]
     let file = File::open(source.path(dir, "fdb"))?;
     if file.metadata()?.len() != source.end {
         return Err(Error::Corrupt("immutable source length mismatch".into()));
@@ -573,7 +573,7 @@ fn open_source_deferred(dir: &Path, source: Source) -> Result<Run> {
     if index.len() != source.keys || index.sequence != source.sequence {
         return Err(Error::Corrupt("manifest/index identity mismatch".into()));
     }
-    #[cfg(feature = "experimental-builder-budget")]
+    #[cfg(feature = "bounded-engine")]
     let index = {
         let mut index = index;
         index.bind_text_source(source.path(dir, "fdb"), file)?;
@@ -702,13 +702,13 @@ fn write_run_prepared(
     source.end = file.metadata()?.len();
     source.checksum = format::prefix_crc(&mut file, source.end)?;
     // Finish the writer lifetime before binding the immutable source fingerprint.
-    #[cfg(feature = "experimental-builder-budget")]
+    #[cfg(feature = "bounded-engine")]
     drop(file);
     #[cfg(feature = "experimental-write-maintenance-slots")]
     drop(_workspace);
     // The large source Batch/encode buffers have been dropped before waiting.
     // A single source writer and a single builder may overlap, never two of either.
-    #[cfg(feature = "experimental-builder-budget")]
+    #[cfg(feature = "bounded-engine")]
     let _builder_working = crate::write_budget::WorkingScope::builder()?;
     #[cfg(feature = "experimental-write-maintenance-slots")]
     let _builder_workspace = builder_workspace()?;
@@ -1094,7 +1094,7 @@ impl Database {
                 *checked = true;
             }
         }
-        #[cfg(feature = "experimental-builder-budget")]
+        #[cfg(feature = "bounded-engine")]
         run.index.authorize_text_covering();
         Ok(())
     }

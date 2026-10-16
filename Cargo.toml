@@ -16,16 +16,20 @@ simdutf8 = "=0.1.5"
 rkyv = { version = "=0.8.18", optional = true }
 
 [features]
+default = ["bounded-engine"]
+# The measured bounded ingest, paged dictionary and checked search profile.
+bounded-engine = ["experimental-write-buffer-budget", "experimental-write-maintenance-slots", "experimental-streaming-metadata", "experimental-merge-postings", "experimental-delta-bitmaps"]
 experimental-rkyv-payload = ["dep:rkyv"]
-# Opt-in query experiment; default search keeps key-based hydration.
+# Independent component switch; included by the bounded-engine default profile.
 experimental-direct-slot = []
-# Grouped page hydration and query-local contiguous payload reads; default off.
+# Grouped page hydration and query-local contiguous payload reads; included by default.
 experimental-grouped-read = ["experimental-direct-slot"]
 experimental-paged-metadata = ["experimental-grouped-read"]
 experimental-streaming-open = ["experimental-paged-metadata"]
 experimental-wal-delta = ["serde_json/raw_value"]
 experimental-shared-documents = []
-experimental-builder-budget = ["experimental-write-buffer-budget", "experimental-write-maintenance-slots", "experimental-streaming-metadata", "experimental-merge-postings", "experimental-delta-bitmaps"]
+# Compatibility alias for existing callers and archived benchmark commands.
+experimental-builder-budget = ["bounded-engine"]
 # Opt-in benchmark/API control; enabled builds still default to synced commits.
 experimental-wal-sync-control = []
 # Independent flush/merge posting reuse; other write/open experiments are explicit.
