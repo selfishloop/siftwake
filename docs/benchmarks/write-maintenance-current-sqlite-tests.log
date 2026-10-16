@@ -1,0 +1,23 @@
+   Compiling cfg-if v1.0.5
+   Compiling simdutf8 v0.1.5
+   Compiling crc32fast v1.5.0
+   Compiling fdb v0.3.1 (C:\Users\Serkan\Documents\ChatGPT\fdb)
+   Compiling fdb-native-sqlite-bench v0.1.0 (C:\Users\Serkan\Documents\ChatGPT\fdb\tools\native_sqlite)
+    Finished `test` profile [unoptimized + debuginfo] target(s) in 9.23s
+     Running unittests src\bin\content_memory.rs (tools\native_sqlite\target\debug\deps\content_memory-5633972b9acc461f.exe)
+
+running 1 test
+test input::tests::corpus_crc_uses_standard_ieee_vector ... ok
+
+test result: ok. 1 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.00s
+
+     Running unittests src\bin\content_reads.rs (tools\native_sqlite\target\debug\deps\content_reads-8d20ce1d3861399d.exe)
+
+running 4 tests
+test input::tests::corpus_crc_uses_standard_ieee_vector ... ok
+test matrix::tests::shuffle_is_reproducible_permutation ... ok
+test reads::tests::nearest_rank_percentiles ... ok
+test reads::tests::turkish_oracle_vectors ... ok
+
+test result: ok. 4 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.00s
+

@@ -93,11 +93,25 @@ impl Spills {
         self.estimated = 0;
         Ok(())
     }
+    #[cfg(any(test, not(feature = "experimental-builder-budget")))]
     pub fn merge(
         &mut self,
         writer: &mut impl Write,
         offset: &mut u64,
     ) -> Result<Vec<(Term, u64, u32)>> {
+        let mut result = Vec::new();
+        self.merge_with(writer, offset, |term, start, count| {
+            result.push((term, start, count));
+            Ok(())
+        })?;
+        Ok(result)
+    }
+    pub fn merge_with(
+        &mut self,
+        writer: &mut impl Write,
+        offset: &mut u64,
+        mut emit: impl FnMut(Term, u64, u32) -> Result<()>,
+    ) -> Result<()> {
         self.flush()?;
         #[cfg(feature = "experimental-builder-budget")]
         bounded::collapse(self)?;
@@ -112,7 +126,6 @@ impl Spills {
                 heap.push(Reverse((term, n)));
             }
         }
-        let mut result = vec![];
         while let Some(Reverse((term, n))) = heap.pop() {
             let mut same = vec![n];
             while heap.peek().is_some_and(|Reverse((next, _))| next == &term) {
@@ -137,9 +150,9 @@ impl Spills {
                     heap.push(Reverse((next, n)));
                 }
             }
-            result.push((term, start, count));
+            emit(term, start, count)?;
         }
-        Ok(result)
+        Ok(())
     }
     fn cursor(&self, path: &PathBuf) -> Result<Cursor> {
         let expected = *self

@@ -1,0 +1,734 @@
+{
+  "same_all_db_cache_sqlite_hashes_before_reads_and_after_six_fixed_slot_ingests": true,
+  "file_count": 124,
+  "corpus_bytes": 2740862279,
+  "corpus_sha256": "11F826FCE3F4AE790FEB9FC6DF9B1169F52C2FD699E89FC4A8A4B77AAA41731B",
+  "corpus_unchanged": true,
+  "fixtures_git_status": "",
+  "no_new_corpus": true,
+  "benchmark_resets": "six FDB-only resets in owned fixed slot, same first10k; no SQLite reset or DB copies",
+  "normal_reader_matches_measured_candidate": false,
+  "normal_reader_text_matches_measured_candidate": true,
+  "cargo_toml_unchanged": true,
+  "cargo_lock_unchanged": true,
+  "normalizer_unchanged": true,
+  "artifacts": [
+    {
+      "path": "Cargo.toml",
+      "bytes": 2269,
+      "sha256": "56BA21D2D0BA7D59FEAE71FA0EE4497950337A5C43D1FA306D78EE28E2C79F8A"
+    },
+    {
+      "path": "Cargo.lock",
+      "bytes": 10361,
+      "sha256": "57F2192106DC532AFC442099A68F285CC6475427E30716505DF143CB5ADEA55C"
+    },
+    {
+      "path": "src/index.rs",
+      "bytes": 36064,
+      "sha256": "39A78C6C9123AAA4B877072F2B801228860F52659895FD9C87C966475108C899"
+    },
+    {
+      "path": "src/engine.rs",
+      "bytes": 84201,
+      "sha256": "BDDC0F022EA877FEF69ACA8A6AB842F3DE41EC3519F49F10A5451B0CBF96BF75"
+    },
+    {
+      "path": "src/segment.rs",
+      "bytes": 89854,
+      "sha256": "EB5B78B8C38A56A041269BE887E0108543361E2AB1B5A9ABCF807C8D3160FDE1"
+    },
+    {
+      "path": "src/segment/covering.rs",
+      "bytes": 10986,
+      "sha256": "FAF9B8A30580D90BD15AC282211CFBEA401F00674AD36A8376BC02DC692EBE8B"
+    },
+    {
+      "path": "src/segment/window_tests.rs",
+      "bytes": 7394,
+      "sha256": "5B20AC594C13E53F2C37C6120276CDF5B8846633850729A89FC6E05161639B9D"
+    },
+    {
+      "path": "tests/segments.rs",
+      "bytes": 29612,
+      "sha256": "4F5A7D892F8650BEE51E1E2D657D756D79B777056D246BA19114D0945F5E98F8"
+    },
+    {
+      "path": "tests/native_binary.rs",
+      "bytes": 19575,
+      "sha256": "AB682A928CFA1163B9C7A10EA44D36E167BB9817C333CC37133E8D10953B84D6"
+    },
+    {
+      "path": "tests/streamed_transactions.rs",
+      "bytes": 24790,
+      "sha256": "070B5AB2178C1C804F1CAEBC8958DA732C3012883D0C8AB8E7B02156F9AD7916"
+    },
+    {
+      "path": "examples/measure_content_reads.rs",
+      "bytes": 11836,
+      "sha256": "68061E082870EF414E85631183CCB6F1C46C5F4D9D23ABEB730A641C84BED908"
+    },
+    {
+      "path": "examples/measure_content_memory.rs",
+      "bytes": 8455,
+      "sha256": "0081DE1D11E295D6D65AFA37AD19E21ACA9F418760804F6F29F68C493A8E4AFB"
+    },
+    {
+      "path": "target/release/examples/measure_content_reads.exe",
+      "bytes": 1861632,
+      "sha256": "48F004AEC7A3126EF4C47E4BE18A87D2E47A7D1E5B0AAB12C854088E00FFDAC7"
+    },
+    {
+      "path": "target/release/examples/measure_content_memory.exe",
+      "bytes": 1819648,
+      "sha256": "509BDC9A736DDE26200B820158E1188268A7E2FD28E6B35C35604960130EF81F"
+    },
+    {
+      "path": "output/source-lease-reads-control-20261015.exe",
+      "bytes": 1857024,
+      "sha256": "63D654316F17C9184ACF699A132CE4F2D83416EA16C1B5FD95358C6AFC046146"
+    },
+    {
+      "path": "output/source-lease-reads-candidate-20261015.exe",
+      "bytes": 1861632,
+      "sha256": "2ED6FE317E712BA22423D78FC0C3C174D2CC836900B954DCA0B9E308205A98FD"
+    },
+    {
+      "path": "output/source-lease-memory-control-20261015.exe",
+      "bytes": 1815040,
+      "sha256": "F3D1EE438D76162D6DAF22722B6DC11AC9217E2901E3BCAD176B1FC022C9EA4A"
+    },
+    {
+      "path": "output/source-lease-memory-candidate-20261015.exe",
+      "bytes": 1819648,
+      "sha256": "509BDC9A736DDE26200B820158E1188268A7E2FD28E6B35C35604960130EF81F"
+    },
+    {
+      "path": "output/source-lease-profile-candidate-20261015.exe",
+      "bytes": 1914880,
+      "sha256": "BD7016A2AECE80734E1C2FF8A0B4CF7A89A08953D18CAD5A44C3C0516DE41607"
+    }
+  ],
+  "files": [
+    {
+      "path": "C:\\Users\\Serkan\\Documents\\ChatGPT\\fdb\\data\\benchmark-work\\fdb\\generation-0000000000000001.fdb",
+      "bytes": 13555005,
+      "sha256": "89520B24820E63F0627857FDEFEB1232FDEF85213CBD74565AFFF1374AD3622D"
+    },
+    {
+      "path": "C:\\Users\\Serkan\\Documents\\ChatGPT\\fdb\\data\\benchmark-work\\fdb\\generation-0000000000000001.ready",
+      "bytes": 87,
+      "sha256": "BBD415A4DC162ECDA4984B2366633D96F8C28FC0F22910669526EC96A8563438"
+    },
+    {
+      "path": "C:\\Users\\Serkan\\Documents\\ChatGPT\\fdb\\data\\benchmark-work\\fdb\\generation-0000000000000003.fdb",
+      "bytes": 13494059,
+      "sha256": "AD64D76EE8C1236A4E677B7F974BFFF666A80071D41E9FFAC3C89C192BD2C0B1"
+    },
+    {
+      "path": "C:\\Users\\Serkan\\Documents\\ChatGPT\\fdb\\data\\benchmark-work\\fdb\\generation-0000000000000003.ready",
+      "bytes": 169,
+      "sha256": "DC5E13209D36B544FC6B1FA9125B9E3DA5DE9845D19370391266F8C9BDD01021"
+    },
+    {
+      "path": "C:\\Users\\Serkan\\Documents\\ChatGPT\\fdb\\data\\benchmark-work\\fdb\\generation-0000000000000005.fdb",
+      "bytes": 13552206,
+      "sha256": "F7B77BBF9946E6590C9024B80415A04ADEA5E9933D4005E67287D5212FD48377"
+    },
+    {
+      "path": "C:\\Users\\Serkan\\Documents\\ChatGPT\\fdb\\data\\benchmark-work\\fdb\\generation-0000000000000005.ready",
+      "bytes": 251,
+      "sha256": "CEF6D06DE1385A66228E4DD124F2BD68512A5DA3E3F8357D9B9B227D54D30A11"
+    },
+    {
+      "path": "C:\\Users\\Serkan\\Documents\\ChatGPT\\fdb\\data\\benchmark-work\\fdb\\generation-0000000000000007.fdb",
+      "bytes": 13145198,
+      "sha256": "81994B98BEE4DD6A26743E6750CDDF9A3B56EF086C5C22802352565E90A4767D"
+    },
+    {
+      "path": "C:\\Users\\Serkan\\Documents\\ChatGPT\\fdb\\data\\benchmark-work\\fdb\\generation-0000000000000007.ready",
+      "bytes": 333,
+      "sha256": "2190BB35A2D88E701418B47B7162BC76B72B547D470D288ABC46F6EF422A5474"
+    },
+    {
+      "path": "C:\\Users\\Serkan\\Documents\\ChatGPT\\fdb\\data\\benchmark-work\\fdb\\generation-0000000000000009.fdb",
+      "bytes": 12938924,
+      "sha256": "AD915481715C81347C57C56AFE63D0A9B377B46508E4DD8E80F9B03314FDCFC9"
+    },
+    {
+      "path": "C:\\Users\\Serkan\\Documents\\ChatGPT\\fdb\\data\\benchmark-work\\fdb\\generation-0000000000000009.ready",
+      "bytes": 415,
+      "sha256": "A94F184F01E440355D96BD69B61BD03CC1983DBA4C0F58EDB4D10C46FFB4DDF0"
+    },
+    {
+      "path": "C:\\Users\\Serkan\\Documents\\ChatGPT\\fdb\\data\\benchmark-work\\fdb\\generation-000000000000000b.ready",
+      "bytes": 171,
+      "sha256": "28E15DA7BB0AB7586388FEB50A6168A03109BC18C2F6F079D1AB25B2189D5804"
+    },
+    {
+      "path": "C:\\Users\\Serkan\\Documents\\ChatGPT\\fdb\\data\\benchmark-work\\fdb\\generation-000000000000000d.fdb",
+      "bytes": 13098699,
+      "sha256": "839748D02AC1DC637BE80FAAB24B203A32B5A009A439F7D620478EB6643489D3"
+    },
+    {
+      "path": "C:\\Users\\Serkan\\Documents\\ChatGPT\\fdb\\data\\benchmark-work\\fdb\\generation-000000000000000d.ready",
+      "bytes": 256,
+      "sha256": "443C8C5B7FBE25D1AECCECF79A9958E74F6D72C89DA022D8B307F26C6C3B9445"
+    },
+    {
+      "path": "C:\\Users\\Serkan\\Documents\\ChatGPT\\fdb\\data\\benchmark-work\\fdb\\generation-000000000000000f.fdb",
+      "bytes": 13552372,
+      "sha256": "54F09B40A6D44E796EBA742C8BC12F29854890699FC98429DD7AA3B50FA5D26B"
+    },
+    {
+      "path": "C:\\Users\\Serkan\\Documents\\ChatGPT\\fdb\\data\\benchmark-work\\fdb\\generation-000000000000000f.ready",
+      "bytes": 340,
+      "sha256": "A6D975B1CAE55C3FDB19B2DCA3D782DC8C932FB0A4EC3B26D1E5D05463A15DF4"
+    },
+    {
+      "path": "C:\\Users\\Serkan\\Documents\\ChatGPT\\fdb\\data\\benchmark-work\\fdb\\generation-0000000000000011.fdb",
+      "bytes": 13380758,
+      "sha256": "899880087DD292CDEB63F71A29337577BA831CEDAD33B3AA9007884373BC81C6"
+    },
+    {
+      "path": "C:\\Users\\Serkan\\Documents\\ChatGPT\\fdb\\data\\benchmark-work\\fdb\\generation-0000000000000011.ready",
+      "bytes": 424,
+      "sha256": "604A885D0AB86122FD2A0458B2D441D92EAA2FBEB194F6B6B8BF7AB32E4C8481"
+    },
+    {
+      "path": "C:\\Users\\Serkan\\Documents\\ChatGPT\\fdb\\data\\benchmark-work\\fdb\\generation-0000000000000013.fdb",
+      "bytes": 12976513,
+      "sha256": "58F54226ACEB4F60A09F2637CF442B5954C843421D00B9C1CEE9CBDEDC33D50A"
+    },
+    {
+      "path": "C:\\Users\\Serkan\\Documents\\ChatGPT\\fdb\\data\\benchmark-work\\fdb\\generation-0000000000000013.ready",
+      "bytes": 508,
+      "sha256": "D3A1461D364F4E848EA1386F76BEDDA00B889DECEDCD68BED3731FD94B48AA6E"
+    },
+    {
+      "path": "C:\\Users\\Serkan\\Documents\\ChatGPT\\fdb\\data\\benchmark-work\\fdb\\generation-0000000000000015.ready",
+      "bytes": 257,
+      "sha256": "8AE1F1803780C942F9DD58760BB6FE2634402CD7595FB527096051A30B410B1A"
+    },
+    {
+      "path": "C:\\Users\\Serkan\\Documents\\ChatGPT\\fdb\\data\\benchmark-work\\fdb\\generation-0000000000000017.fdb",
+      "bytes": 12977328,
+      "sha256": "9AF1AEE62CD6E3F72C5F2C170912EF6B5D0FBFCEEFD2BCF4D392CCF007F74D32"
+    },
+    {
+      "path": "C:\\Users\\Serkan\\Documents\\ChatGPT\\fdb\\data\\benchmark-work\\fdb\\generation-0000000000000017.ready",
+      "bytes": 340,
+      "sha256": "50EF46D34C46C5FDE2316BCEE7194548704BADBE6720DF3948F822834F26F24C"
+    },
+    {
+      "path": "C:\\Users\\Serkan\\Documents\\ChatGPT\\fdb\\data\\benchmark-work\\fdb\\generation-0000000000000019.fdb",
+      "bytes": 13208507,
+      "sha256": "6EC99EB2C560F35179C6E090A3C0BF67ABCA1333DD1C6A16047C0EE32ADAA418"
+    },
+    {
+      "path": "C:\\Users\\Serkan\\Documents\\ChatGPT\\fdb\\data\\benchmark-work\\fdb\\generation-0000000000000019.ready",
+      "bytes": 425,
+      "sha256": "882320B92CCA71657866A3602A389CFC398F953A4D191F12A4907945BDDE5A21"
+    },
+    {
+      "path": "C:\\Users\\Serkan\\Documents\\ChatGPT\\fdb\\data\\benchmark-work\\fdb\\generation-000000000000001b.fdb",
+      "bytes": 13752690,
+      "sha256": "874BFF0C2757CDB3A241B408679C252111A0E43D5C2ACDE26B45261A9C94A8C2"
+    },
+    {
+      "path": "C:\\Users\\Serkan\\Documents\\ChatGPT\\fdb\\data\\benchmark-work\\fdb\\generation-000000000000001b.ready",
+      "bytes": 510,
+      "sha256": "212C6AE091250945975544300E4C333040264A7075F8D5972A1037FC077C1FB1"
+    },
+    {
+      "path": "C:\\Users\\Serkan\\Documents\\ChatGPT\\fdb\\data\\benchmark-work\\fdb\\generation-000000000000001d.fdb",
+      "bytes": 13548811,
+      "sha256": "869D4FFCA92D5876B94CC8E84EA45846801EABC25C6EC2451605B92A805F71D8"
+    },
+    {
+      "path": "C:\\Users\\Serkan\\Documents\\ChatGPT\\fdb\\data\\benchmark-work\\fdb\\generation-000000000000001d.ready",
+      "bytes": 595,
+      "sha256": "2E021439674F1766D2D3853B0CE8B615DD9E218620D1E695FB986EAE5D2D65ED"
+    },
+    {
+      "path": "C:\\Users\\Serkan\\Documents\\ChatGPT\\fdb\\data\\benchmark-work\\fdb\\generation-000000000000001f.ready",
+      "bytes": 344,
+      "sha256": "F7646013525743DC419AE0C7CB08A2DA6319866A0D9A02C7E8F7DE3AA2398FCD"
+    },
+    {
+      "path": "C:\\Users\\Serkan\\Documents\\ChatGPT\\fdb\\data\\benchmark-work\\fdb\\generation-0000000000000021.fdb",
+      "bytes": 13321675,
+      "sha256": "7FFDA7A8866412C67B7D902965E83DE901786376476A8F069467306964168168"
+    },
+    {
+      "path": "C:\\Users\\Serkan\\Documents\\ChatGPT\\fdb\\data\\benchmark-work\\fdb\\generation-0000000000000021.ready",
+      "bytes": 428,
+      "sha256": "91D91E9A2B178034D9F17E4601D024158BC8414A0E51C9867CDC46F363ADE785"
+    },
+    {
+      "path": "C:\\Users\\Serkan\\Documents\\ChatGPT\\fdb\\data\\benchmark-work\\fdb\\generation-0000000000000023.fdb",
+      "bytes": 13362399,
+      "sha256": "E26212FBEC2CA2EC20BF8E45944E676E2FCBD19C61F35E94E106C7B66E735536"
+    },
+    {
+      "path": "C:\\Users\\Serkan\\Documents\\ChatGPT\\fdb\\data\\benchmark-work\\fdb\\generation-0000000000000023.ready",
+      "bytes": 513,
+      "sha256": "C98FF257C9034E7FC54D2386EF17E8A741B83811323399DCBECF96DF66EACEA8"
+    },
+    {
+      "path": "C:\\Users\\Serkan\\Documents\\ChatGPT\\fdb\\data\\benchmark-work\\fdb\\generation-0000000000000025.fdb",
+      "bytes": 13854423,
+      "sha256": "4A1721B9DBEC7A1BEC4E42B93FA4B007D1D824BC15C28FC714C949D8A0205F4F"
+    },
+    {
+      "path": "C:\\Users\\Serkan\\Documents\\ChatGPT\\fdb\\data\\benchmark-work\\fdb\\generation-0000000000000025.ready",
+      "bytes": 598,
+      "sha256": "E200C3D5C74920B51D8AD7FE59628F23E46DB5F25D130EAF4B2820AFC1599E80"
+    },
+    {
+      "path": "C:\\Users\\Serkan\\Documents\\ChatGPT\\fdb\\data\\benchmark-work\\fdb\\generation-0000000000000027.fdb",
+      "bytes": 13610455,
+      "sha256": "C6AEB8C26D19A4860A35A0B71DE85DF65B24B3491D0A282A3D1A77622368A320"
+    },
+    {
+      "path": "C:\\Users\\Serkan\\Documents\\ChatGPT\\fdb\\data\\benchmark-work\\fdb\\generation-0000000000000027.ready",
+      "bytes": 681,
+      "sha256": "A60A053493D0B8C1CA2A8B08E248B2B41DE49AB239FCE76038D9D14B02092213"
+    },
+    {
+      "path": "C:\\Users\\Serkan\\Documents\\ChatGPT\\fdb\\data\\benchmark-work\\fdb\\generation-0000000000000029.ready",
+      "bytes": 430,
+      "sha256": "521FF4DF7E0187BA41BCDB32A1EA7B09A843FA871FD1FFFD81EB9251C236E57E"
+    },
+    {
+      "path": "C:\\Users\\Serkan\\Documents\\ChatGPT\\fdb\\data\\benchmark-work\\fdb\\generation-000000000000002b.fdb",
+      "bytes": 13292245,
+      "sha256": "BFFDAF1DD80F1C944B4F9B4A96B8B73F0C77D23F1CC05FE33436B5BACB4440D1"
+    },
+    {
+      "path": "C:\\Users\\Serkan\\Documents\\ChatGPT\\fdb\\data\\benchmark-work\\fdb\\generation-000000000000002b.ready",
+      "bytes": 515,
+      "sha256": "8F3E1677C6A32325F3BDF658C2248E04A2135FC0BD651EA4401B6C3D5A810435"
+    },
+    {
+      "path": "C:\\Users\\Serkan\\Documents\\ChatGPT\\fdb\\data\\benchmark-work\\fdb\\generation-000000000000002d.fdb",
+      "bytes": 13781882,
+      "sha256": "C292F0B01935863D622A964E5D413EC824AA83CFB78B96025E8DF7574B7E50E1"
+    },
+    {
+      "path": "C:\\Users\\Serkan\\Documents\\ChatGPT\\fdb\\data\\benchmark-work\\fdb\\generation-000000000000002d.ready",
+      "bytes": 600,
+      "sha256": "014FD9DBEE9BDD200087C84263958AABC24D9F87BEAF91D0E2FB1EE29CA88AB8"
+    },
+    {
+      "path": "C:\\Users\\Serkan\\Documents\\ChatGPT\\fdb\\data\\benchmark-work\\fdb\\generation-000000000000002f.fdb",
+      "bytes": 13496820,
+      "sha256": "48E0FDAF25C23FA916606FD380C0E8C281418EA2297DA54AB4A0ECE50FA7C06C"
+    },
+    {
+      "path": "C:\\Users\\Serkan\\Documents\\ChatGPT\\fdb\\data\\benchmark-work\\fdb\\generation-000000000000002f.ready",
+      "bytes": 685,
+      "sha256": "A2EAB0CF9464EBDBBD992B206CCCF8BDD00CC76E2F88FF21862C6D16D64AD242"
+    },
+    {
+      "path": "C:\\Users\\Serkan\\Documents\\ChatGPT\\fdb\\data\\benchmark-work\\fdb\\generation-0000000000000031.fdb",
+      "bytes": 45,
+      "sha256": "90CB6CCA105E6739077374A0D2B9B4099570C40DEE94C183AE007FA2964F6B83"
+    },
+    {
+      "path": "C:\\Users\\Serkan\\Documents\\ChatGPT\\fdb\\data\\benchmark-work\\fdb\\generation-0000000000000031.ready",
+      "bytes": 770,
+      "sha256": "895AE246A686EAE30B78E738E5EFC41347BC15113D0E5D80FAA2CC34CD7809FC"
+    },
+    {
+      "path": "C:\\Users\\Serkan\\Documents\\ChatGPT\\fdb\\data\\benchmark-work\\fdb\\generation-0000000000000033.ready",
+      "bytes": 516,
+      "sha256": "8BDD54E328388818E8D7ABB752C256406A11D9C5368D39BD004F0D3FB9E15141"
+    },
+    {
+      "path": "C:\\Users\\Serkan\\Documents\\ChatGPT\\fdb\\data\\benchmark-work\\fdb\\LOCK",
+      "bytes": 0,
+      "sha256": "E3B0C44298FC1C149AFBF4C8996FB92427AE41E4649B934CA495991B7852B855"
+    },
+    {
+      "path": "C:\\Users\\Serkan\\Documents\\ChatGPT\\fdb\\data\\benchmark-work\\fdb\\run-0000000000000002.fdb",
+      "bytes": 13555005,
+      "sha256": "73D5F3AA2228E502ADB5A9749CF666B4CDDB92A66418E8ED72F40198610279E9"
+    },
+    {
+      "path": "C:\\Users\\Serkan\\Documents\\ChatGPT\\fdb\\data\\benchmark-work\\fdb\\run-0000000000000002.idx",
+      "bytes": 18334486,
+      "sha256": "0C95AD5EDD8141F5BAD9FDD6647DD2F5FB378F1BC0E8A717078D4D1487CA5717"
+    },
+    {
+      "path": "C:\\Users\\Serkan\\Documents\\ChatGPT\\fdb\\data\\benchmark-work\\fdb\\run-0000000000000002.records04.idx",
+      "bytes": 22424,
+      "sha256": "34796B57F42530C61DAEAAD94784204E954A49B41DBAFA4C3B4C3B440CA11B37"
+    },
+    {
+      "path": "C:\\Users\\Serkan\\Documents\\ChatGPT\\fdb\\data\\benchmark-work\\fdb\\run-0000000000000004.fdb",
+      "bytes": 13494059,
+      "sha256": "CA263DFBAE6208552D4A369572BA7CEB8634CCD2A2666AFAFB8B92C176D8CCAA"
+    },
+    {
+      "path": "C:\\Users\\Serkan\\Documents\\ChatGPT\\fdb\\data\\benchmark-work\\fdb\\run-0000000000000004.idx",
+      "bytes": 18282721,
+      "sha256": "1D7005C0B7D0308075DED1F45B706CC21829674005A206876C713A7A1C85B585"
+    },
+    {
+      "path": "C:\\Users\\Serkan\\Documents\\ChatGPT\\fdb\\data\\benchmark-work\\fdb\\run-0000000000000004.records04.idx",
+      "bytes": 22424,
+      "sha256": "A38FF43A8979953B45E2CB855EFA7A7E8332E1060A289A9C54F1991834ACBCBC"
+    },
+    {
+      "path": "C:\\Users\\Serkan\\Documents\\ChatGPT\\fdb\\data\\benchmark-work\\fdb\\run-0000000000000006.fdb",
+      "bytes": 13552206,
+      "sha256": "129B1BE5FEB0EDE25F2F7CEA465F6AFA2CC4276BF8F050B27BB3154521DD979A"
+    },
+    {
+      "path": "C:\\Users\\Serkan\\Documents\\ChatGPT\\fdb\\data\\benchmark-work\\fdb\\run-0000000000000006.idx",
+      "bytes": 18329500,
+      "sha256": "379A84A2F5B77F1A1DCCFD806F1028FC675572D225954E64E2F0F6A7EACE64A7"
+    },
+    {
+      "path": "C:\\Users\\Serkan\\Documents\\ChatGPT\\fdb\\data\\benchmark-work\\fdb\\run-0000000000000006.records04.idx",
+      "bytes": 22424,
+      "sha256": "850D5A75115F5BE1BA3C2227DAF3C84791D726006188008136DEDD7365795B7F"
+    },
+    {
+      "path": "C:\\Users\\Serkan\\Documents\\ChatGPT\\fdb\\data\\benchmark-work\\fdb\\run-0000000000000008.fdb",
+      "bytes": 13145198,
+      "sha256": "D9F94A0B233C105170A5BB77DE2D5ED1A32176BB10B4D5BC49E0A0051DF7D4B5"
+    },
+    {
+      "path": "C:\\Users\\Serkan\\Documents\\ChatGPT\\fdb\\data\\benchmark-work\\fdb\\run-0000000000000008.idx",
+      "bytes": 17912440,
+      "sha256": "A99BBC169F13FCAB638E04E32C53484E7EFD69C516F7C56C9A3A82E4E0EF609A"
+    },
+    {
+      "path": "C:\\Users\\Serkan\\Documents\\ChatGPT\\fdb\\data\\benchmark-work\\fdb\\run-0000000000000008.records04.idx",
+      "bytes": 22424,
+      "sha256": "8813A6B927EF005F50F41DC04F5CCD41E9E37A610114F1C0E228661E994FFAA2"
+    },
+    {
+      "path": "C:\\Users\\Serkan\\Documents\\ChatGPT\\fdb\\data\\benchmark-work\\fdb\\run-000000000000000a.fdb",
+      "bytes": 53746407,
+      "sha256": "06B659638EBE050747065DF81D367E260C967E8710950BF6D12D19DFAF897843"
+    },
+    {
+      "path": "C:\\Users\\Serkan\\Documents\\ChatGPT\\fdb\\data\\benchmark-work\\fdb\\run-000000000000000a.idx",
+      "bytes": 70872210,
+      "sha256": "6BADC1A8DDAFBC1BF48BCC40419F2144ED484C525FEA8CB01576B709D668138D"
+    },
+    {
+      "path": "C:\\Users\\Serkan\\Documents\\ChatGPT\\fdb\\data\\benchmark-work\\fdb\\run-000000000000000a.records04.idx",
+      "bytes": 89121,
+      "sha256": "32174B3E3BA7DA8298C581A309A57AB5AE8C1AD77E37F712298C963BF6835A58"
+    },
+    {
+      "path": "C:\\Users\\Serkan\\Documents\\ChatGPT\\fdb\\data\\benchmark-work\\fdb\\run-000000000000000c.fdb",
+      "bytes": 12938924,
+      "sha256": "25B9B219FF12FB7A8FCA0E4A0E7B2D3F1767147714391DFC1E3F2123875B48E6"
+    },
+    {
+      "path": "C:\\Users\\Serkan\\Documents\\ChatGPT\\fdb\\data\\benchmark-work\\fdb\\run-000000000000000c.idx",
+      "bytes": 17645977,
+      "sha256": "2C5C77A6631D3C332A0124F0247B5BC2AD98AA4E11882F6F5FC92599FFFA8371"
+    },
+    {
+      "path": "C:\\Users\\Serkan\\Documents\\ChatGPT\\fdb\\data\\benchmark-work\\fdb\\run-000000000000000c.records04.idx",
+      "bytes": 22424,
+      "sha256": "A6C9D2B645BE4F9183F80412995D3A2E1CBCBB600C3F5CBBB5B2FA91BD8D9165"
+    },
+    {
+      "path": "C:\\Users\\Serkan\\Documents\\ChatGPT\\fdb\\data\\benchmark-work\\fdb\\run-000000000000000e.fdb",
+      "bytes": 13098699,
+      "sha256": "C12127A73CCC08B3B5A5706818A86D3E86CEB66BEB106F43EC64542122010123"
+    },
+    {
+      "path": "C:\\Users\\Serkan\\Documents\\ChatGPT\\fdb\\data\\benchmark-work\\fdb\\run-000000000000000e.idx",
+      "bytes": 17813427,
+      "sha256": "EC864908797DA8C2DCBA5A58BBB0DB14ED5B2C5CCB10C137FC615D9A2461A941"
+    },
+    {
+      "path": "C:\\Users\\Serkan\\Documents\\ChatGPT\\fdb\\data\\benchmark-work\\fdb\\run-000000000000000e.records04.idx",
+      "bytes": 22424,
+      "sha256": "58D72605A7A3F1CED684A96920443731F9CAD3030AEBFFE6FC3D5D30360F5A91"
+    },
+    {
+      "path": "C:\\Users\\Serkan\\Documents\\ChatGPT\\fdb\\data\\benchmark-work\\fdb\\run-0000000000000010.fdb",
+      "bytes": 13552372,
+      "sha256": "CDD68E6173C492D753C5C3EE4E8184815CB8307C5A904904E1BB51BE344BF498"
+    },
+    {
+      "path": "C:\\Users\\Serkan\\Documents\\ChatGPT\\fdb\\data\\benchmark-work\\fdb\\run-0000000000000010.idx",
+      "bytes": 18337406,
+      "sha256": "D9953EB077C686F69E9B4DE0FDF0BC2045CB7E68B3B175817734ACEF8FBE8A8B"
+    },
+    {
+      "path": "C:\\Users\\Serkan\\Documents\\ChatGPT\\fdb\\data\\benchmark-work\\fdb\\run-0000000000000010.records04.idx",
+      "bytes": 22424,
+      "sha256": "A97F4568E552166F67D087BC887BE351BA79F784A5696542E6B084AF43B08641"
+    },
+    {
+      "path": "C:\\Users\\Serkan\\Documents\\ChatGPT\\fdb\\data\\benchmark-work\\fdb\\run-0000000000000012.fdb",
+      "bytes": 13380758,
+      "sha256": "270857571A9C4C158CCE1CB44433193C7C46051A8EE6C700009673496CBD044F"
+    },
+    {
+      "path": "C:\\Users\\Serkan\\Documents\\ChatGPT\\fdb\\data\\benchmark-work\\fdb\\run-0000000000000012.idx",
+      "bytes": 18135981,
+      "sha256": "AF9579A33DFD1C4ED3CED42CD8FAE9DEA3D7AB88A12BF0570239201EF652A871"
+    },
+    {
+      "path": "C:\\Users\\Serkan\\Documents\\ChatGPT\\fdb\\data\\benchmark-work\\fdb\\run-0000000000000012.records04.idx",
+      "bytes": 22424,
+      "sha256": "F53D1791C881F63E9180D20A727EA4F54593AC5DB92B355D8BF787BB2C9861E0"
+    },
+    {
+      "path": "C:\\Users\\Serkan\\Documents\\ChatGPT\\fdb\\data\\benchmark-work\\fdb\\run-0000000000000014.fdb",
+      "bytes": 52970692,
+      "sha256": "AE2E811E20D3F95D997C39E14489C74353FB9FB21F79F852B4569662420ECA62"
+    },
+    {
+      "path": "C:\\Users\\Serkan\\Documents\\ChatGPT\\fdb\\data\\benchmark-work\\fdb\\run-0000000000000014.idx",
+      "bytes": 69949707,
+      "sha256": "922640C236946BD3CB6E7E669281C7A8113CB779D61FA29BF77B14BC82BAB396"
+    },
+    {
+      "path": "C:\\Users\\Serkan\\Documents\\ChatGPT\\fdb\\data\\benchmark-work\\fdb\\run-0000000000000014.records04.idx",
+      "bytes": 89121,
+      "sha256": "2ADD91417F45C5D5C187AD9738A58104C68BD1ECEF265774F0305F70725AB433"
+    },
+    {
+      "path": "C:\\Users\\Serkan\\Documents\\ChatGPT\\fdb\\data\\benchmark-work\\fdb\\run-0000000000000016.fdb",
+      "bytes": 12976513,
+      "sha256": "5A45CE85409755DBB06F041CBE018D8B965D45E1AC8EA4B0197BD0151AA17020"
+    },
+    {
+      "path": "C:\\Users\\Serkan\\Documents\\ChatGPT\\fdb\\data\\benchmark-work\\fdb\\run-0000000000000016.idx",
+      "bytes": 17671250,
+      "sha256": "BE6A4521B224AA0D1CBAC742AFE1F53F886640633FF0AFE561547A5C7DAB9678"
+    },
+    {
+      "path": "C:\\Users\\Serkan\\Documents\\ChatGPT\\fdb\\data\\benchmark-work\\fdb\\run-0000000000000016.records04.idx",
+      "bytes": 22424,
+      "sha256": "1F5FF536DE5EE73FBAB8FEDE5A3FCCA245C557531D74A40E4C1AAD06E88EA054"
+    },
+    {
+      "path": "C:\\Users\\Serkan\\Documents\\ChatGPT\\fdb\\data\\benchmark-work\\fdb\\run-0000000000000018.fdb",
+      "bytes": 12977328,
+      "sha256": "AA2CAAEC74C8CC08B87A407B81646783094B61C04A9B6E5C7341DAAE040D3DE9"
+    },
+    {
+      "path": "C:\\Users\\Serkan\\Documents\\ChatGPT\\fdb\\data\\benchmark-work\\fdb\\run-0000000000000018.idx",
+      "bytes": 17685545,
+      "sha256": "836A7220DA01CBE7D423546E79EE551558C95BEC022A8D33631188115F626014"
+    },
+    {
+      "path": "C:\\Users\\Serkan\\Documents\\ChatGPT\\fdb\\data\\benchmark-work\\fdb\\run-0000000000000018.records04.idx",
+      "bytes": 22424,
+      "sha256": "210D6D395C87CF46F2C4F804CAC28C72D36B6E550A56E3C7C738E34250045495"
+    },
+    {
+      "path": "C:\\Users\\Serkan\\Documents\\ChatGPT\\fdb\\data\\benchmark-work\\fdb\\run-000000000000001a.fdb",
+      "bytes": 13208507,
+      "sha256": "E0B2802BD8D109DABDBAD272B92036603D824B6CF1FE72F8ABA659AC6B8F5DF5"
+    },
+    {
+      "path": "C:\\Users\\Serkan\\Documents\\ChatGPT\\fdb\\data\\benchmark-work\\fdb\\run-000000000000001a.idx",
+      "bytes": 17916921,
+      "sha256": "390A38144AD060F1643764365C6671D825B4FA9B26AF671F1824C56FEDE2441A"
+    },
+    {
+      "path": "C:\\Users\\Serkan\\Documents\\ChatGPT\\fdb\\data\\benchmark-work\\fdb\\run-000000000000001a.records04.idx",
+      "bytes": 22424,
+      "sha256": "807C225D289E4DE1A1B1F758E55CCB064E2D3F26F85A81550092190E81E84464"
+    },
+    {
+      "path": "C:\\Users\\Serkan\\Documents\\ChatGPT\\fdb\\data\\benchmark-work\\fdb\\run-000000000000001c.fdb",
+      "bytes": 13752690,
+      "sha256": "33B2B5BB60963AE66EF06B9BA97563014F63C0DB7B7E4E3C21FB3F0616005361"
+    },
+    {
+      "path": "C:\\Users\\Serkan\\Documents\\ChatGPT\\fdb\\data\\benchmark-work\\fdb\\run-000000000000001c.idx",
+      "bytes": 18611888,
+      "sha256": "DB191B371F96ADA19D2F732BDCC3C40687790457B1406765E2C51F75D6606439"
+    },
+    {
+      "path": "C:\\Users\\Serkan\\Documents\\ChatGPT\\fdb\\data\\benchmark-work\\fdb\\run-000000000000001c.records04.idx",
+      "bytes": 22424,
+      "sha256": "9C8666F646581623E52FF1851FF870072ABAB04DF1BBC2CBDEF0DDF5CEAB00C8"
+    },
+    {
+      "path": "C:\\Users\\Serkan\\Documents\\ChatGPT\\fdb\\data\\benchmark-work\\fdb\\run-000000000000001e.fdb",
+      "bytes": 52914977,
+      "sha256": "40FC3CCBCC80F9756934790874E0D947101D16DA540D1A965536285D3D331B7C"
+    },
+    {
+      "path": "C:\\Users\\Serkan\\Documents\\ChatGPT\\fdb\\data\\benchmark-work\\fdb\\run-000000000000001e.idx",
+      "bytes": 69894154,
+      "sha256": "12235F5540D86F581DD63A7B85557CF9340D4A82F8694A12C110DDBF83B66148"
+    },
+    {
+      "path": "C:\\Users\\Serkan\\Documents\\ChatGPT\\fdb\\data\\benchmark-work\\fdb\\run-000000000000001e.records04.idx",
+      "bytes": 89121,
+      "sha256": "D06B2F40CE4831DB3BBD2ACBC4793FBE8648FD7A304C740CEA4A19FB45170043"
+    },
+    {
+      "path": "C:\\Users\\Serkan\\Documents\\ChatGPT\\fdb\\data\\benchmark-work\\fdb\\run-0000000000000020.fdb",
+      "bytes": 13548811,
+      "sha256": "657952F4ABC8F22B155BD72190D28D903A650C0763F1CFF74DD22EEC3AE934AF"
+    },
+    {
+      "path": "C:\\Users\\Serkan\\Documents\\ChatGPT\\fdb\\data\\benchmark-work\\fdb\\run-0000000000000020.idx",
+      "bytes": 18289180,
+      "sha256": "8E1887A96142EFCA07CFCA6099B8FDFA3F546EE2A42060E37CFA8F5B269DD5D3"
+    },
+    {
+      "path": "C:\\Users\\Serkan\\Documents\\ChatGPT\\fdb\\data\\benchmark-work\\fdb\\run-0000000000000020.records04.idx",
+      "bytes": 22424,
+      "sha256": "F56D0E33443359C0A63B65ECA14394A6BFEAAB6E58A709DE99FD348E3EB5AD58"
+    },
+    {
+      "path": "C:\\Users\\Serkan\\Documents\\ChatGPT\\fdb\\data\\benchmark-work\\fdb\\run-0000000000000022.fdb",
+      "bytes": 13321675,
+      "sha256": "0F41DB5ED3F09BB6ECFCD6CD6761FB87D8185BAABAFB06D4FD86F24F865BFE53"
+    },
+    {
+      "path": "C:\\Users\\Serkan\\Documents\\ChatGPT\\fdb\\data\\benchmark-work\\fdb\\run-0000000000000022.idx",
+      "bytes": 18115746,
+      "sha256": "C6D61F91AB838E4268083BE7F4B89CEFE7480F29F78279A16D8E2DA59E234D30"
+    },
+    {
+      "path": "C:\\Users\\Serkan\\Documents\\ChatGPT\\fdb\\data\\benchmark-work\\fdb\\run-0000000000000022.records04.idx",
+      "bytes": 22424,
+      "sha256": "4B910997B3F11B6B0EFD33D5E49FD48B1BCB5764D626D7B1EF00DA583079A37C"
+    },
+    {
+      "path": "C:\\Users\\Serkan\\Documents\\ChatGPT\\fdb\\data\\benchmark-work\\fdb\\run-0000000000000024.fdb",
+      "bytes": 13362399,
+      "sha256": "CA37560725382D30811521F27F1A0B32F88204DB80E096F8E106200DCD46A407"
+    },
+    {
+      "path": "C:\\Users\\Serkan\\Documents\\ChatGPT\\fdb\\data\\benchmark-work\\fdb\\run-0000000000000024.idx",
+      "bytes": 18094001,
+      "sha256": "CAE2816F987D97B97B79F456C3480A28C5FEBEB0E15E2C4BDD124DC5FEAC4276"
+    },
+    {
+      "path": "C:\\Users\\Serkan\\Documents\\ChatGPT\\fdb\\data\\benchmark-work\\fdb\\run-0000000000000024.records04.idx",
+      "bytes": 22424,
+      "sha256": "734A38A32FBAE2F203E832A68DD60319770936912D315FBECF7D696E193182F8"
+    },
+    {
+      "path": "C:\\Users\\Serkan\\Documents\\ChatGPT\\fdb\\data\\benchmark-work\\fdb\\run-0000000000000026.fdb",
+      "bytes": 13854423,
+      "sha256": "B07A0A8E103D1A76B46FCCF1D9FCA6D2CC020E516A38F16B625712EBE9FB7A73"
+    },
+    {
+      "path": "C:\\Users\\Serkan\\Documents\\ChatGPT\\fdb\\data\\benchmark-work\\fdb\\run-0000000000000026.idx",
+      "bytes": 18679351,
+      "sha256": "CB8898DB568E6A088A6C0E95B72E96D676D3D517162865231C0E62061D5397CC"
+    },
+    {
+      "path": "C:\\Users\\Serkan\\Documents\\ChatGPT\\fdb\\data\\benchmark-work\\fdb\\run-0000000000000026.records04.idx",
+      "bytes": 22424,
+      "sha256": "67EEFA8EC5855BAD6E2E32D4797BA94C44E576297466245A5D078562E5D74C65"
+    },
+    {
+      "path": "C:\\Users\\Serkan\\Documents\\ChatGPT\\fdb\\data\\benchmark-work\\fdb\\run-0000000000000028.fdb",
+      "bytes": 54087247,
+      "sha256": "5A9FDCF1E0DF35BBF77BBC1B3305568CEEDB3DA2753EFE0729188CE5B21B6C86"
+    },
+    {
+      "path": "C:\\Users\\Serkan\\Documents\\ChatGPT\\fdb\\data\\benchmark-work\\fdb\\run-0000000000000028.idx",
+      "bytes": 71177214,
+      "sha256": "D653E9308C19D9AE5E775974CB4EF445C6C0ACB019AD981CFF4EEC04344211C0"
+    },
+    {
+      "path": "C:\\Users\\Serkan\\Documents\\ChatGPT\\fdb\\data\\benchmark-work\\fdb\\run-0000000000000028.records04.idx",
+      "bytes": 89121,
+      "sha256": "55E4013DCCC8430E2C2BDC8C5018869B94E30DF7377FBDD8D05E76F11E44FAF3"
+    },
+    {
+      "path": "C:\\Users\\Serkan\\Documents\\ChatGPT\\fdb\\data\\benchmark-work\\fdb\\run-000000000000002a.fdb",
+      "bytes": 13610455,
+      "sha256": "8C84FACFCC10E1DF16C76081F8FE834ED980793FD90FF047BC63E0D9715D7A8C"
+    },
+    {
+      "path": "C:\\Users\\Serkan\\Documents\\ChatGPT\\fdb\\data\\benchmark-work\\fdb\\run-000000000000002a.idx",
+      "bytes": 18385427,
+      "sha256": "C9000EC597E31C51B87CC11F270A91A4BA998B476EAED5F1FFA34ECB78065314"
+    },
+    {
+      "path": "C:\\Users\\Serkan\\Documents\\ChatGPT\\fdb\\data\\benchmark-work\\fdb\\run-000000000000002a.records04.idx",
+      "bytes": 22424,
+      "sha256": "76577B2596D066E891A80303AFF8937215D86F74047460D98F021E1560DE186A"
+    },
+    {
+      "path": "C:\\Users\\Serkan\\Documents\\ChatGPT\\fdb\\data\\benchmark-work\\fdb\\run-000000000000002c.fdb",
+      "bytes": 13292245,
+      "sha256": "B684F22EF5479283669A9507C7C81B3C7EEDD3B6D852A478664896592490CE67"
+    },
+    {
+      "path": "C:\\Users\\Serkan\\Documents\\ChatGPT\\fdb\\data\\benchmark-work\\fdb\\run-000000000000002c.idx",
+      "bytes": 18036245,
+      "sha256": "5AFC78D6D29E7050591AD9512393DA4369F150BED317A9D3E53BB9BF64A501E8"
+    },
+    {
+      "path": "C:\\Users\\Serkan\\Documents\\ChatGPT\\fdb\\data\\benchmark-work\\fdb\\run-000000000000002c.records04.idx",
+      "bytes": 22424,
+      "sha256": "035573C98ADDD83E7D78BCF2E4B4649A5063B6DC532311AB8EBA378AB8AC990D"
+    },
+    {
+      "path": "C:\\Users\\Serkan\\Documents\\ChatGPT\\fdb\\data\\benchmark-work\\fdb\\run-000000000000002e.fdb",
+      "bytes": 13781882,
+      "sha256": "C553B538A546C468C0FCB48FFDB748F4FBD2FBC6CD24CF70A0B7DA8342E62AFB"
+    },
+    {
+      "path": "C:\\Users\\Serkan\\Documents\\ChatGPT\\fdb\\data\\benchmark-work\\fdb\\run-000000000000002e.idx",
+      "bytes": 18605588,
+      "sha256": "60E25748DAF75E3B53F3857795A386B83E865010866016EE4502CA1E77464383"
+    },
+    {
+      "path": "C:\\Users\\Serkan\\Documents\\ChatGPT\\fdb\\data\\benchmark-work\\fdb\\run-000000000000002e.records04.idx",
+      "bytes": 22424,
+      "sha256": "59C2FD6308185EBF16D4E0496C2925DBA76850D5D3894EF6B4B0D2EE1A77E7F2"
+    },
+    {
+      "path": "C:\\Users\\Serkan\\Documents\\ChatGPT\\fdb\\data\\benchmark-work\\fdb\\run-0000000000000030.fdb",
+      "bytes": 13496820,
+      "sha256": "85325D12352B27186BD8283861DF01DF5107B3A678F2BB5E234266DF3516137E"
+    },
+    {
+      "path": "C:\\Users\\Serkan\\Documents\\ChatGPT\\fdb\\data\\benchmark-work\\fdb\\run-0000000000000030.idx",
+      "bytes": 18308076,
+      "sha256": "5FA3800A250B4F2F323BA86B6E006FF83DBC2A4E7DDEF17BB48599DA19FBBB3D"
+    },
+    {
+      "path": "C:\\Users\\Serkan\\Documents\\ChatGPT\\fdb\\data\\benchmark-work\\fdb\\run-0000000000000030.records04.idx",
+      "bytes": 22424,
+      "sha256": "4E37A54F724DF48ED5B74BA2239E557A76FD5383B929B412B9AFE4B036203C15"
+    },
+    {
+      "path": "C:\\Users\\Serkan\\Documents\\ChatGPT\\fdb\\data\\benchmark-work\\fdb\\run-0000000000000032.fdb",
+      "bytes": 54181341,
+      "sha256": "713AFAFFF8FF93628BAAE025F14B74B8B33C247934B25179B00C8E01A5308BB2"
+    },
+    {
+      "path": "C:\\Users\\Serkan\\Documents\\ChatGPT\\fdb\\data\\benchmark-work\\fdb\\run-0000000000000032.idx",
+      "bytes": 71349296,
+      "sha256": "CD28B6F50859BA9FFF64FC386E06971B6D444F3F81B53D3713E673F2413A851B"
+    },
+    {
+      "path": "C:\\Users\\Serkan\\Documents\\ChatGPT\\fdb\\data\\benchmark-work\\fdb\\run-0000000000000032.records04.idx",
+      "bytes": 89121,
+      "sha256": "5BCD9FCE1AAB05E35BCA41CA8F5D85025DC9E3AF6753DE1E4FD38A6DC45317B9"
+    },
+    {
+      "path": "C:\\Users\\Serkan\\Documents\\ChatGPT\\fdb\\data\\benchmark-work\\sqlite\\sqlite.db",
+      "bytes": 583860224,
+      "sha256": "E0A576DE81380673C30EB19B262AC2F2FB0C6A8A2F3430A5593882E2783B7086"
+    }
+  ]
+}

@@ -1,0 +1,29 @@
+{
+  "engine": "sqlite",
+  "run": 1,
+  "phase": "short",
+  "order": [
+    "sqlite",
+    "fdb"
+  ],
+  "exit_code": 0,
+  "executable": "C:\\Users\\Serkan\\Documents\\ChatGPT\\fdb\\output\\sqlite-native-general-scale-20261011.exe",
+  "database": "C:\\Users\\Serkan\\Documents\\ChatGPT\\fdb\\data\\native-sqlite-general-20261011-short-sqlite-1",
+  "peak_working_set_bytes": 10231808,
+  "sampled_peak_private_bytes": 4997120,
+  "sample_interval_ms": 20,
+  "samples": 341,
+  "elapsed_s": 13.6392006,
+  "cpu_ms": 12296.875,
+  "retained_engine_disk_bytes": 107192320.0,
+  "files": [
+    {
+      "name": "sqlite.db",
+      "bytes": 107192320
+    }
+  ],
+  "features": "default only",
+  "wal_sync": "on",
+  "includes_os_file_cache": false,
+  "window": "whole native process: ordinary benchmark phases and oracle; separate SQLite integrity excluded"
+}

@@ -367,12 +367,7 @@ impl PagedRecords {
             Ok(None)
         })
     }
-    pub fn text_document(
-        &self,
-        slot: u32,
-        cursor: &mut TextCursor,
-        payload: &File,
-    ) -> Result<StoredDocument> {
+    fn query_leaf(&self, slot: u32, cursor: &mut TextCursor) -> Result<()> {
         if slot as usize >= self.count || self.deleted(slot) {
             return Err(corrupt("text slot"));
         }
@@ -390,6 +385,32 @@ impl PagedRecords {
             cursor.bytes = self.page(&fence, |bytes| Ok(bytes.to_vec()))?;
             cursor.leaf = Some(leaf_id);
         }
+        Ok(())
+    }
+    pub fn query_metadata(&self, slot: u32, cursor: &mut TextCursor) -> Result<PackedRecord> {
+        self.query_leaf(slot, cursor)?;
+        numeric_metadata(&cursor.bytes, slot as usize % LEAF)
+    }
+    pub fn query_identity(
+        &self,
+        slot: u32,
+        cursor: &mut TextCursor,
+        parts: (&str, &str, &str),
+    ) -> Result<bool> {
+        self.query_leaf(slot, cursor)?;
+        Ok(compare_leaf_parts(
+            &cursor.bytes,
+            slot as usize % LEAF,
+            [parts.0, parts.1, parts.2],
+        )? == std::cmp::Ordering::Equal)
+    }
+    pub fn text_document(
+        &self,
+        slot: u32,
+        cursor: &mut TextCursor,
+        payload: &File,
+    ) -> Result<StoredDocument> {
+        self.query_leaf(slot, cursor)?;
         let local = slot as usize % LEAF;
         let record = numeric_metadata(&cursor.bytes, local)?;
         if record.deleted {
@@ -604,8 +625,7 @@ fn decode_text_payload(
     }
     #[cfg(feature = "diagnostic-timing")]
     let json = crate::timing::span("text.json_deserialize");
-    let stored: StoredDocument =
-        serde_json::from_slice(bytes).map_err(|e| corrupt(&e.to_string()))?;
+    let stored = crate::payload::decode(bytes)?;
     #[cfg(feature = "diagnostic-timing")]
     drop(json);
     if stored.version != record.version
@@ -676,6 +696,9 @@ fn numeric_metadata(bytes: &[u8], local: usize) -> Result<PackedRecord> {
     Ok(record)
 }
 fn compare_leaf_key(bytes: &[u8], local: usize, key: &Key) -> Result<std::cmp::Ordering> {
+    compare_leaf_parts(bytes, local, [&key.scope, &key.collection, &key.id])
+}
+fn compare_leaf_parts(bytes: &[u8], local: usize, parts: [&str; 3]) -> Result<std::cmp::Ordering> {
     let count = leaf_count(bytes)?;
     if local >= count {
         return Err(corrupt("local comparison slot"));
@@ -696,10 +719,7 @@ fn compare_leaf_key(bytes: &[u8], local: usize, key: &Key) -> Result<std::cmp::O
         return Err(corrupt("comparison offset"));
     }
     cursor.position = offset;
-    for (base, query) in bases
-        .into_iter()
-        .zip([&key.scope, &key.collection, &key.id])
-    {
+    for (base, query) in bases.into_iter().zip(parts) {
         let prefix = cursor.u16()?;
         let suffix = cursor.u16()?;
         if prefix > base.len() || prefix + suffix > 1024 {
@@ -847,6 +867,41 @@ mod tests {
         let mut text_cursor = TextCursor::default();
         for slot in [0, 63, 64, 2047, 2048, 2099] {
             assert_eq!(paged.record(slot).unwrap(), source.record(slot).unwrap());
+            let key = source.key(slot).unwrap();
+            let metadata = paged.query_metadata(slot, &mut text_cursor).unwrap();
+            let expected = source.metadata(slot).unwrap();
+            assert_eq!(
+                (
+                    metadata.offset,
+                    metadata.len,
+                    metadata.checksum,
+                    metadata.version
+                ),
+                (
+                    expected.offset,
+                    expected.len,
+                    expected.checksum,
+                    expected.version
+                )
+            );
+            assert!(
+                paged
+                    .query_identity(
+                        slot,
+                        &mut text_cursor,
+                        (&key.scope, &key.collection, &key.id)
+                    )
+                    .unwrap()
+            );
+            assert!(
+                !paged
+                    .query_identity(
+                        slot,
+                        &mut text_cursor,
+                        (&key.scope, &key.collection, "wrong-id")
+                    )
+                    .unwrap()
+            );
             assert_eq!(
                 serde_json::to_value(
                     paged
@@ -963,16 +1018,16 @@ mod tests {
         let mut payload = vec![0; record.len as usize];
         read_at(&source.file, record.offset, &mut payload).unwrap();
         // CRC-valid key/version changes still fail identity verification.
-        let mut value: serde_json::Value = serde_json::from_slice(&payload).unwrap();
-        value["document"]["key"]["id"] = serde_json::json!("00000009");
-        let changed = serde_json::to_vec(&value).unwrap();
+        let mut value = crate::payload::decode(&payload).unwrap();
+        value.document.key.id = "00000009".into();
+        let changed = crate::payload::encode(&value).unwrap();
         let mut metadata = record;
         metadata.len = changed.len() as u32;
         metadata.checksum = crc(&changed);
         assert!(decode_text_payload(&bytes, 0, &metadata, &changed).is_err());
-        value["document"]["key"]["id"] = serde_json::json!("00000000");
-        value["version"] = serde_json::json!(2);
-        let changed = serde_json::to_vec(&value).unwrap();
+        value.document.key.id = "00000000".into();
+        value.version = 2;
+        let changed = crate::payload::encode(&value).unwrap();
         metadata.len = changed.len() as u32;
         metadata.checksum = crc(&changed);
         assert!(decode_text_payload(&bytes, 0, &metadata, &changed).is_err());

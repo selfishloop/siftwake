@@ -1,0 +1,515 @@
+{
+  "scope": "same existing first10k fixed DB, runtime prefix prototype removed, release experimental-builder-budget diagnostic-timing, record reads, 3 processes x 3 warm iterations each, OS cache no eviction; instrumented nested wall spans, not CPU attribution or normal p95; source and index spans are children of covering_guard",
+  "rows": [
+    {
+      "text": "the",
+      "offset": 0,
+      "limit": 1,
+      "median_ms": {
+        "query.covering_guard": 0.2778,
+        "query.covering_source_metadata": 0.2478,
+        "query.covering_index_metadata": 0.0267,
+        "query.fold.body": 0.0,
+        "query.scan.body": 0.0,
+        "query.term_page_decode": 0.0,
+        "query.posting_intersection": 0.0004,
+        "search.filter_visibility_text": 0.326,
+        "search.merge_page_hydration": 0.0203,
+        "search.total": 0.3466
+      },
+      "per_process_median_ms": {
+        "query.covering_guard": [
+          0.2778,
+          0.2534,
+          0.3354
+        ],
+        "query.covering_source_metadata": [
+          0.2478,
+          0.2266,
+          0.3063
+        ],
+        "query.covering_index_metadata": [
+          0.0268,
+          0.0247,
+          0.0267
+        ],
+        "query.fold.body": [
+          0.0,
+          0.0,
+          0.0
+        ],
+        "query.scan.body": [
+          0.0,
+          0.0,
+          0.0
+        ],
+        "query.term_page_decode": [
+          0.0,
+          0.0,
+          0.0
+        ],
+        "query.posting_intersection": [
+          0.0005,
+          0.0002,
+          0.0004
+        ],
+        "search.filter_visibility_text": [
+          0.326,
+          0.301,
+          0.3889
+        ],
+        "search.merge_page_hydration": [
+          0.0203,
+          0.0202,
+          0.021
+        ],
+        "search.total": [
+          0.3466,
+          0.3229,
+          0.4103
+        ]
+      },
+      "counts": {
+        "query.covering_guard": [
+          5
+        ],
+        "query.covering_source_metadata": [
+          5
+        ],
+        "query.covering_index_metadata": [
+          5
+        ],
+        "query.fold.body": [
+          0
+        ],
+        "query.scan.body": [
+          0
+        ],
+        "query.term_page_decode": [
+          0
+        ],
+        "query.posting_intersection": [
+          5
+        ],
+        "search.filter_visibility_text": [
+          1
+        ],
+        "search.merge_page_hydration": [
+          1
+        ],
+        "search.total": [
+          1
+        ]
+      },
+      "guard_fraction_of_search": 0.8015002885170225
+    },
+    {
+      "text": "the",
+      "offset": 0,
+      "limit": 50,
+      "median_ms": {
+        "query.covering_guard": 0.3313,
+        "query.covering_source_metadata": 0.2958,
+        "query.covering_index_metadata": 0.0305,
+        "query.fold.body": 0.0,
+        "query.scan.body": 0.0,
+        "query.term_page_decode": 0.0,
+        "query.posting_intersection": 0.011,
+        "search.filter_visibility_text": 0.4209,
+        "search.merge_page_hydration": 0.6484,
+        "search.total": 1.0818
+      },
+      "per_process_median_ms": {
+        "query.covering_guard": [
+          0.3452,
+          0.3313,
+          0.2982
+        ],
+        "query.covering_source_metadata": [
+          0.3128,
+          0.2958,
+          0.2652
+        ],
+        "query.covering_index_metadata": [
+          0.0348,
+          0.0287,
+          0.0305
+        ],
+        "query.fold.body": [
+          0.0,
+          0.0,
+          0.0
+        ],
+        "query.scan.body": [
+          0.0,
+          0.0,
+          0.0
+        ],
+        "query.term_page_decode": [
+          0.0,
+          0.0,
+          0.0
+        ],
+        "query.posting_intersection": [
+          0.011,
+          0.011,
+          0.0105
+        ],
+        "search.filter_visibility_text": [
+          0.4431,
+          0.4209,
+          0.3779
+        ],
+        "search.merge_page_hydration": [
+          0.6484,
+          0.6704,
+          0.5886
+        ],
+        "search.total": [
+          1.0818,
+          1.1522,
+          0.9674
+        ]
+      },
+      "counts": {
+        "query.covering_guard": [
+          5
+        ],
+        "query.covering_source_metadata": [
+          5
+        ],
+        "query.covering_index_metadata": [
+          5
+        ],
+        "query.fold.body": [
+          0
+        ],
+        "query.scan.body": [
+          0
+        ],
+        "query.term_page_decode": [
+          0
+        ],
+        "query.posting_intersection": [
+          250
+        ],
+        "search.filter_visibility_text": [
+          1
+        ],
+        "search.merge_page_hydration": [
+          1
+        ],
+        "search.total": [
+          1
+        ]
+      },
+      "guard_fraction_of_search": 0.30624884451839524
+    },
+    {
+      "text": "the",
+      "offset": 0,
+      "limit": 200,
+      "median_ms": {
+        "query.covering_guard": 0.5402,
+        "query.covering_source_metadata": 0.4913,
+        "query.covering_index_metadata": 0.0454,
+        "query.fold.body": 0.0,
+        "query.scan.body": 0.0,
+        "query.term_page_decode": 0.0,
+        "query.posting_intersection": 0.0428,
+        "search.filter_visibility_text": 0.763,
+        "search.merge_page_hydration": 5.5796,
+        "search.total": 6.3344
+      },
+      "per_process_median_ms": {
+        "query.covering_guard": [
+          0.6293,
+          0.5402,
+          0.4691
+        ],
+        "query.covering_source_metadata": [
+          0.572,
+          0.4913,
+          0.3976
+        ],
+        "query.covering_index_metadata": [
+          0.0554,
+          0.0454,
+          0.0428
+        ],
+        "query.fold.body": [
+          0.0,
+          0.0,
+          0.0
+        ],
+        "query.scan.body": [
+          0.0,
+          0.0,
+          0.0
+        ],
+        "query.term_page_decode": [
+          0.0,
+          0.0,
+          0.0
+        ],
+        "query.posting_intersection": [
+          0.045,
+          0.0428,
+          0.0418
+        ],
+        "search.filter_visibility_text": [
+          0.9123,
+          0.763,
+          0.6757
+        ],
+        "search.merge_page_hydration": [
+          5.9558,
+          5.0953,
+          5.5796
+        ],
+        "search.total": [
+          6.9101,
+          5.8605,
+          6.3344
+        ]
+      },
+      "counts": {
+        "query.covering_guard": [
+          5
+        ],
+        "query.covering_source_metadata": [
+          5
+        ],
+        "query.covering_index_metadata": [
+          5
+        ],
+        "query.fold.body": [
+          0
+        ],
+        "query.scan.body": [
+          0
+        ],
+        "query.term_page_decode": [
+          0
+        ],
+        "query.posting_intersection": [
+          1000
+        ],
+        "search.filter_visibility_text": [
+          1
+        ],
+        "search.merge_page_hydration": [
+          1
+        ],
+        "search.total": [
+          1
+        ]
+      },
+      "guard_fraction_of_search": 0.08528037383177571
+    },
+    {
+      "text": "he",
+      "offset": 0,
+      "limit": 50,
+      "median_ms": {
+        "query.covering_guard": 0.2813,
+        "query.covering_source_metadata": 0.2519,
+        "query.covering_index_metadata": 0.0272,
+        "query.fold.body": 0.0,
+        "query.scan.body": 0.0,
+        "query.term_page_decode": 0.0,
+        "query.posting_intersection": 0.0102,
+        "search.filter_visibility_text": 0.3503,
+        "search.merge_page_hydration": 0.6106,
+        "search.total": 0.985
+      },
+      "per_process_median_ms": {
+        "query.covering_guard": [
+          0.4539,
+          0.2813,
+          0.2793
+        ],
+        "query.covering_source_metadata": [
+          0.4201,
+          0.2519,
+          0.2506
+        ],
+        "query.covering_index_metadata": [
+          0.0308,
+          0.0272,
+          0.0254
+        ],
+        "query.fold.body": [
+          0.0,
+          0.0,
+          0.0
+        ],
+        "query.scan.body": [
+          0.0,
+          0.0,
+          0.0
+        ],
+        "query.term_page_decode": [
+          0.0,
+          0.0,
+          0.0
+        ],
+        "query.posting_intersection": [
+          0.0102,
+          0.0099,
+          0.0103
+        ],
+        "search.filter_visibility_text": [
+          0.5367,
+          0.3486,
+          0.3503
+        ],
+        "search.merge_page_hydration": [
+          0.7153,
+          0.6106,
+          0.5327
+        ],
+        "search.total": [
+          1.2664,
+          0.985,
+          0.8945
+        ]
+      },
+      "counts": {
+        "query.covering_guard": [
+          5
+        ],
+        "query.covering_source_metadata": [
+          5
+        ],
+        "query.covering_index_metadata": [
+          5
+        ],
+        "query.fold.body": [
+          0
+        ],
+        "query.scan.body": [
+          0
+        ],
+        "query.term_page_decode": [
+          0
+        ],
+        "query.posting_intersection": [
+          250
+        ],
+        "search.filter_visibility_text": [
+          1
+        ],
+        "search.merge_page_hydration": [
+          1
+        ],
+        "search.total": [
+          1
+        ]
+      },
+      "guard_fraction_of_search": 0.2855837563451777
+    },
+    {
+      "text": "the zx",
+      "offset": 0,
+      "limit": 50,
+      "median_ms": {
+        "query.covering_guard": 0.9383,
+        "query.covering_source_metadata": 0.8842,
+        "query.covering_index_metadata": 0.0567,
+        "query.fold.body": 94.2336,
+        "query.scan.body": 20.616,
+        "query.term_page_decode": 0.0,
+        "query.posting_intersection": 0.5281,
+        "search.filter_visibility_text": 283.1918,
+        "search.merge_page_hydration": 0.0018,
+        "search.total": 283.1944
+      },
+      "per_process_median_ms": {
+        "query.covering_guard": [
+          0.9348,
+          0.9857,
+          0.9383
+        ],
+        "query.covering_source_metadata": [
+          0.8842,
+          0.9361,
+          0.8738
+        ],
+        "query.covering_index_metadata": [
+          0.0567,
+          0.0459,
+          0.0576
+        ],
+        "query.fold.body": [
+          90.9666,
+          94.2336,
+          102.2156
+        ],
+        "query.scan.body": [
+          20.6054,
+          20.616,
+          23.4582
+        ],
+        "query.term_page_decode": [
+          0.0,
+          0.0,
+          0.0
+        ],
+        "query.posting_intersection": [
+          0.5281,
+          0.5016,
+          0.5826
+        ],
+        "search.filter_visibility_text": [
+          272.8437,
+          283.1918,
+          320.0576
+        ],
+        "search.merge_page_hydration": [
+          0.0018,
+          0.0016,
+          0.0018
+        ],
+        "search.total": [
+          272.8464,
+          283.1944,
+          320.0619
+        ]
+      },
+      "counts": {
+        "query.covering_guard": [
+          5
+        ],
+        "query.covering_source_metadata": [
+          5
+        ],
+        "query.covering_index_metadata": [
+          5
+        ],
+        "query.fold.body": [
+          263627
+        ],
+        "query.scan.body": [
+          263627
+        ],
+        "query.term_page_decode": [
+          0
+        ],
+        "query.posting_intersection": [
+          10000
+        ],
+        "search.filter_visibility_text": [
+          1
+        ],
+        "search.merge_page_hydration": [
+          1
+        ],
+        "search.total": [
+          1
+        ]
+      },
+      "guard_fraction_of_search": 0.00331327173136192
+    }
+  ]
+}

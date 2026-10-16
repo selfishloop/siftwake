@@ -188,7 +188,7 @@ fn valid_crc_still_requires_matching_key_and_version() {
         } else {
             wrong.version = 2;
         }
-        let bytes = serde_json::to_vec(&wrong).unwrap();
+        let bytes = crate::payload::encode(&wrong).unwrap();
         assert_eq!(bytes.len(), index.records[0].len as usize);
         index.records[0].checksum = crc(&bytes);
         temp.replace(index.records[0].offset, &bytes);

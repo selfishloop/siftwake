@@ -1,0 +1,101 @@
+{
+  "seed": 20261009,
+  "count": 100000,
+  "sources": [
+    {
+      "book_id": 1342,
+      "title": "Pride and Prejudice",
+      "url": "https://www.gutenberg.org/cache/epub/1342/pg1342.txt",
+      "raw_sha256": "3f6bb9d6f78e0293b56acd4714dd68cb7d6d1d293402031ce9d5a216bcaf9d75",
+      "body_sha256": "cb7c0d9af2041d31e655fafe79becb0877c3fc775690c7a558eb8707035e5138",
+      "body_bytes": 737913
+    },
+    {
+      "book_id": 84,
+      "title": "Frankenstein; or, the modern prometheus",
+      "url": "https://www.gutenberg.org/cache/epub/84/pg84.txt",
+      "raw_sha256": "7810cd483cffcf2cc8a1d8f0d5807931e69d4f48cd14149b8c76f88af82fead3",
+      "body_sha256": "3839fa35c116713f811903545470041a86079268307ae9fd3ed4d04c88788bc0",
+      "body_bytes": 421535
+    },
+    {
+      "book_id": 2701,
+      "title": "Moby Dick; Or, The Whale",
+      "url": "https://www.gutenberg.org/cache/epub/2701/pg2701.txt",
+      "raw_sha256": "b5e88b71a1cda068e9ab1d94344c9d932338ba6da1a66def97a1aecd9cfcc87d",
+      "body_sha256": "6b74a36cf4b629ac137c8832b2ba2be071a02c348f3accde0c026a893a2f30eb",
+      "body_bytes": 1234541
+    },
+    {
+      "book_id": 1661,
+      "title": "The Adventures of Sherlock Holmes",
+      "url": "https://www.gutenberg.org/cache/epub/1661/pg1661.txt",
+      "raw_sha256": "922e2a12ccb43a4c9544c260b2166c6ad2097aeb5957faeee113f173bb857cd0",
+      "body_sha256": "f9544c4c28388b5e38ab4fffcf9aa719eeda1ba46ee3bb426815e978825bdc13",
+      "body_bytes": 575793
+    },
+    {
+      "book_id": 98,
+      "title": "A Tale of Two Cities",
+      "url": "https://www.gutenberg.org/cache/epub/98/pg98.txt",
+      "raw_sha256": "d54c2b80d40a40b982cd88852c6180bb944d95acdb028af3d0e01a1750681784",
+      "body_sha256": "68f9a91b64b42adee3282d918cdcca8a37310e17c76b597a2a5fcc7724d9db02",
+      "body_bytes": 771502
+    },
+    {
+      "book_id": 76,
+      "title": "Adventures of Huckleberry Finn",
+      "url": "https://www.gutenberg.org/cache/epub/76/pg76.txt",
+      "raw_sha256": "d617a37aa7ae1e1a93dcde2634db2bccb86824e31e29a55230bdbf77d6872d59",
+      "body_sha256": "15070045ff4635e595fa2906b8ebd33d9790a14f4cbfa9ba6590a1037977f7f4",
+      "body_bytes": 590656
+    },
+    {
+      "book_id": 1228,
+      "title": "On the Origin of Species By Means of Natural Selection",
+      "url": "https://www.gutenberg.org/cache/epub/1228/pg1228.txt",
+      "raw_sha256": "362142cb7c6f90850477520cfe2a62fe423ae92ea8eb6d9cd8b30ddb39de60b9",
+      "body_sha256": "0160c4b72817cc36834391e06676853491a4a623e64bb1cc856a8f012322b2a3",
+      "body_bytes": 934491
+    },
+    {
+      "book_id": 1232,
+      "title": "The Prince",
+      "url": "https://www.gutenberg.org/cache/epub/1232/pg1232.txt",
+      "raw_sha256": "33496a305f7a4b933784fb5aec95f920fbc3d4687794817e4cc444aa6578d2e4",
+      "body_sha256": "fd42f9e36b078646f3825154cf8bd3ea9df1b098f41e3dbe0d666b326b3ef0d0",
+      "body_bytes": 283425
+    }
+  ],
+  "unique_text_sha256_count": 100000,
+  "min_text_bytes": 2048,
+  "max_text_bytes": 51200,
+  "total_text_bytes": 2655160287,
+  "language": "English real book passages; overlapping windows, no identical bodies; not 100k independent source books",
+  "queries": [
+    {
+      "name": "common",
+      "text": "the",
+      "total": 100000,
+      "candidates": 100000
+    },
+    {
+      "name": "rare",
+      "text": "abbreviation",
+      "total": 264,
+      "candidates": 529
+    },
+    {
+      "name": "short",
+      "text": "of",
+      "total": 100000,
+      "candidates": 100000
+    },
+    {
+      "name": "and",
+      "text": "the whale",
+      "total": 16537,
+      "candidates": 75664
+    }
+  ]
+}

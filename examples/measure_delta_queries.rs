@@ -1,141 +1,169 @@
-//! Fresh 10k unflushed delta: expose WAL hydration cost hidden by ready-run queries.
-#[path = "../tools/bench_support/corpus.rs"]
-mod corpus;
-#[path = "../tools/bench_support/verify.rs"]
-mod verify;
-use fdb::{Database, Guard, Mutation, Options, Query, Range, StoredDocument};
-use serde_json::{Value, json};
+//! Bounded long-text query comparison; reset only the owned fixed FDB workspace.
+#[path = "../tools/bench_support/memory_corpus.rs"]
+mod input;
+use fdb::{Database, Guard, Mutation, Options, Query, StoredDocument};
+use serde_json::json;
 use std::time::Instant;
-fn measured(
-    db: &Database,
-    q: &Query,
-    expected: (usize, Vec<StoredDocument>),
-    repeats: usize,
-) -> fdb::Result<Value> {
-    let mut times = Vec::new();
-    for repeat in 0..repeats + 10 {
-        let start = Instant::now();
-        let page = db.search(q)?;
-        let ms = start.elapsed().as_secs_f64() * 1000.;
-        assert_eq!(page.total, expected.0);
-        assert_eq!(page.hits, expected.1);
-        if repeat >= 10 {
-            times.push(ms);
+
+fn fold(text: &str) -> String {
+    text.chars()
+        .flat_map(|c| {
+            match c {
+                'I' | 'İ' | 'ı' => 'i',
+                'Ç' | 'ç' => 'c',
+                'Ğ' | 'ğ' => 'g',
+                'Ö' | 'ö' => 'o',
+                'Ş' | 'ş' => 's',
+                'Ü' | 'ü' => 'u',
+                _ => c,
+            }
+            .to_lowercase()
+        })
+        .collect()
+}
+fn commit(db: &mut Database, changes: Vec<Mutation>, streamed: bool) -> fdb::Result<u64> {
+    if streamed {
+        #[cfg(feature = "experimental-builder-budget")]
+        {
+            return db.commit_streamed(changes.into_iter().map(Ok));
+        }
+        #[cfg(not(feature = "experimental-builder-budget"))]
+        {
+            return Err(fdb::Error::Invalid(
+                "streamed input requires experimental-builder-budget".into(),
+            ));
         }
     }
-    Ok(corpus::samples(times))
+    db.commit(changes)
 }
-// Independent corpus transformation; search totals/page predicates remain in verify.
-fn decorate(mut stored: StoredDocument, mode: &str) -> StoredDocument {
-    let id: usize = stored.document.key.id.parse().expect("corpus integer ID");
-    if mode == "unique" || (mode == "mixed" && id.is_multiple_of(2)) {
-        stored.document.text.push_str(&format!(" unique-{id:010}"));
-        stored.document.fields.insert(
-            "metadata".into(),
-            json!({"file_id":id,"labels":["ş","archive"]}),
-        );
-    }
-    stored
-}
-fn expected(
-    kind: &str,
-    count: usize,
-    body: &str,
-    offset: usize,
-    mode: &str,
-) -> (usize, Vec<StoredDocument>) {
-    let (total, hits) = verify::expected(kind, count, body, false, offset);
-    (
-        total,
-        hits.into_iter()
-            .map(|stored| decorate(stored, mode))
-            .collect(),
-    )
-}
-fn main() -> Result<(), Box<dyn std::error::Error>> {
-    let mut args = std::env::args().skip(1);
-    let path = args.next().ok_or("new benchmark directory required")?;
-    let mode = args.next().unwrap_or_else(|| "repeated".into());
-    if !["repeated", "unique", "mixed"].contains(&mode.as_str()) {
-        return Err("mode repeated|unique|mixed required".into());
-    }
-    if std::path::Path::new(&path).exists() {
-        return Err("benchmark directory already exists".into());
-    }
-    let body = corpus::body(256);
-    let count = 10_000;
-    let mut db = Database::open_with_options(
-        &path,
-        Options {
-            max_delta_keys: count + 1,
-            max_delta_bytes: 64 * 1024 * 1024,
-        },
-    )?;
-    for first in (0..count).step_by(500) {
-        db.commit(
-            (first..first + 500)
-                .map(|id| Mutation::Put {
-                    document: decorate(verify::get(id, &body), &mode).document,
-                    guard: Guard::Any,
-                })
-                .collect(),
-        )?;
-    }
-    assert_eq!(db.stats()?.documents, count);
-    assert_eq!(db.stats()?.delta_keys, count);
-    assert_eq!(db.stats()?.segments, 0);
-    let mut exact = Query::new("shared");
-    exact.collection = Some("contents".into());
-    exact.exact.insert("source".into(), json!("synthetic"));
-    let broad = measured(&db, &exact, expected("exact", count, &body, 0, &mode), 200)?;
-    exact.offset = 50;
-    let second = measured(&db, &exact, expected("exact", count, &body, 50, &mode), 200)?;
-    exact.offset = count - 50;
-    let last = measured(
-        &db,
-        &exact,
-        expected("exact", count, &body, count - 50, &mode),
-        100,
-    )?;
-    exact.offset = 0;
-    exact.ranges = vec![Range {
-        field: "day".into(),
-        min: 2,
-        max: 5,
-    }];
-    let range = measured(&db, &exact, expected("range", count, &body, 0, &mode), 200)?;
-    let mut text = Query::new("shared");
-    text.collection = Some("contents".into());
-    text.text = "rapor-0000005000".into();
-    let narrow = measured(
-        &db,
-        &text,
-        (1, vec![decorate(verify::get(5_000, &body), &mode)]),
-        200,
-    )?;
-    text.text = "teknoloji".into();
-    let broad_text = measured(&db, &text, expected("text", count, &body, 0, &mode), 20)?;
-    let expected: Vec<_> = (0..100)
-        .map(|n| decorate(verify::get(n * 97 + 1, &body), &mode))
+
+fn queries(db: &Database, docs: &[StoredDocument], state: &str) -> input::Result<()> {
+    let folded: Vec<_> = docs
+        .iter()
+        .map(|d| fold(&format!("{}\n{}", d.document.title, d.document.text)))
         .collect();
-    let mut times = Vec::new();
-    for repeat in 0..110 {
-        let start = Instant::now();
-        let actual = (0..100)
-            .map(|n| db.get(&corpus::key(n * 97 + 1)))
-            .collect::<fdb::Result<Vec<_>>>()?;
-        let ms = start.elapsed().as_secs_f64() * 1000.;
-        assert_eq!(
-            actual,
-            expected.iter().cloned().map(Some).collect::<Vec<_>>()
-        );
-        if repeat >= 10 {
-            times.push(ms);
+    for text in [
+        "the",
+        "quixote",
+        "he",
+        "the man",
+        "istanbul",
+        "updatedunique",
+    ] {
+        let terms: Vec<_> = text.split_whitespace().map(fold).collect();
+        let mut expected: Vec<_> = docs
+            .iter()
+            .zip(&folded)
+            .filter(|(_, body)| terms.iter().all(|t| body.contains(t)))
+            .map(|(d, _)| d.clone())
+            .collect();
+        expected.sort_by(|a, b| a.document.key.cmp(&b.document.key));
+        let mut q = Query::new(&docs[0].document.key.scope);
+        q.collection = Some(docs[0].document.key.collection.clone());
+        q.text = text.into();
+        let mut samples = Vec::new();
+        for turn in 0..11 {
+            #[cfg(feature = "diagnostic-timing")]
+            let _ = fdb::timing::take();
+            let start = Instant::now();
+            let page = db.search(&q)?;
+            let elapsed = start.elapsed().as_secs_f64() * 1000.;
+            #[cfg(feature = "diagnostic-timing")]
+            if turn == 1 {
+                println!(
+                    "{}",
+                    json!({"phase":"query_profile","state":state,"text":text,"elapsed_ms":elapsed,"counters":fdb::timing::take(),"instrumented":true,"nested_spans_do_not_sum":true})
+                );
+            }
+            assert_eq!(page.total, expected.len(), "{state} {text}");
+            assert_eq!(
+                page.hits,
+                expected.iter().take(50).cloned().collect::<Vec<_>>(),
+                "{state} {text}"
+            );
+            if turn != 0 {
+                samples.push(elapsed);
+            }
         }
+        samples.sort_by(f64::total_cmp);
+        println!(
+            "{}",
+            json!({"phase":"query","state":state,"text":text,"total":expected.len(),"p50_ms":samples[5],"p95_ms":samples[9],"samples_ms":samples,"full_page_oracle":true,"cache":"one untimed query per text; no OS eviction","delta_bitmaps":cfg!(feature="experimental-delta-bitmaps")})
+        );
     }
+    Ok(())
+}
+
+fn main() -> input::Result<()> {
+    let streamed = std::env::args().any(|arg| arg == "--streamed");
+    let path = std::env::args()
+        .nth(1)
+        .ok_or("fresh database path required")?;
+    if std::path::Path::new(&path).exists() {
+        return Err("fresh database required".into());
+    }
+    input::phase("input");
+    let mut source = input::Input::open()?;
+    source.skip(0)?;
+    let mut docs = (0..1000)
+        .map(|_| source.read())
+        .collect::<input::Result<Vec<_>>>()?;
+    let options = Options {
+        max_delta_keys: 2000,
+        max_delta_bytes: 128 * 1024 * 1024,
+    };
+    let mut db = Database::open_with_options(&path, options.clone())?;
+    commit(
+        &mut db,
+        docs.iter()
+            .rev()
+            .map(|s| Mutation::Put {
+                document: s.document.clone(),
+                guard: Guard::Missing,
+            })
+            .collect(),
+        streamed,
+    )?;
+    for s in &mut docs {
+        s.version = 1;
+    }
+    let stats = db.stats()?;
+    assert_eq!(stats.documents, 1000);
+    assert_eq!(stats.delta_keys, if streamed { 0 } else { 1000 });
+    assert_eq!(
+        stats.resident_documents,
+        if streamed || cfg!(feature = "experimental-wal-delta") {
+            0
+        } else {
+            1000
+        }
+    );
+    queries(&db, &docs, "delta")?;
+    let mut changes = Vec::new();
+    for s in docs.iter_mut().take(40) {
+        changes.push(Mutation::Delete {
+            key: s.document.key.clone(),
+            guard: Guard::Version { version: 1 },
+        });
+    }
+    commit(&mut db, changes, streamed)?;
+    let mut changes = Vec::new();
+    for s in docs.iter_mut().take(40) {
+        s.document.text = "İSTANBUL updatedunique".into();
+        s.version = 3;
+        changes.push(Mutation::Put {
+            document: s.document.clone(),
+            guard: Guard::Missing,
+        });
+    }
+    commit(&mut db, changes, streamed)?;
+    queries(&db, &docs, "reused_slots")?;
+    drop(db);
+    let db = Database::open_with_options(&path, options)?;
+    queries(&db, &docs, "reopened_delta")?;
     println!(
         "{}",
-        json!({"database":path,"corpus_mode":mode,"counts_verified":true,"open_excluded":true,"writes_before_queries":true,"flushed":false,"count":count,"text_bytes":256,"stats":db.stats()?,"small_repeats":200,"last_repeats":100,"get_repeats":100,"text_repeats":20,"warmup":10,"narrow":narrow,"broad":broad,"second_page":second,"last_page":last,"range":range,"broad_text":broad_text,"get_100":corpus::samples(times)})
+        json!({"phase":"result","documents":1000,"text_bytes_initial":source.text_bytes,"crc_checked_input":true,"reverse_ingest_and_delete_reinsert_verified":true,"sequence":db.stats()?.sequence,"streamed_input":streamed,"physical_delta_keys":db.stats()?.delta_keys,"scope":"first 1000 long corpus records; normal input uses unflushed delta, streamed input uses published runs; see flags for both variants; no SQLite comparison or process RAM measurement"})
     );
     Ok(())
 }

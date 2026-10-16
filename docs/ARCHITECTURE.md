@@ -1,5 +1,279 @@
 # FDB mimarisi — 0.3.1
 
+2026-10-16 kısa bloklu ölçüm: iki worker oracle'ı resident tutar; DB
+her blokta tek süreçte açılır/kaynak doğrulanır/ısınır,25 turdan sonra
+kapanıp kilit bırakılır. Kilit veya motor API'si değişmedi. Dört süreç
+çifti×8 blok, aynı CPU, diagnostic kapalı. İki farklı-sürüm serisinde8/8
+yeni p95 düşük; same-exe kontrolünde the tek-sonuç +%6,44/4 çift yüksek.
+Bu yeni benchmark/codegen/cache düzeni önceki kesintisiz oturumun tüm
+nedenlerini kapatmaz; yeni motor optimizasyonu/default terfisi yok.
+[Kanıt/sınırlar](INTERLEAVED-SEARCH-10K-20261016.md).
+
+2026-10-16 arama teşhisi: yalnız benchmark araçlarına profile-pages,
+çağıran-thread çevrim sayacı ve isteğe bağlı CPU affinity eklendi.
+Sekiz sayfada1.920 instrumented doğrulamada tüm iş sayıları aynı, body
+gram çıkarımı0. Normal aynı-CPU A/A'da ishmael +%4,23 p95; A/B +%3,45,
+quixote +%9,64. Ortam kararsızlığı kanıtlı; kod üretimi/yerleşim etkisi
+ayrılmadı ve genel/default kapısı açık. Yeni format/bağımlılık/feature yok,
+motorun arama davranışı aynı. [Kanıt/sınırlar](SEARCH-ATTRIBUTION-10K-20261016.md).
+
+2026-10-16 body gram üretimi: builder-budget içinde BodyCache'in en az1024B
+folded gövdesinde üç21-bit scalar geçici u64 anahtarına paketlenir.1024 giriş/
+8KiB stack tablosu tam anahtar eşitliğini kanıtlar; çakışma ağaç probe'una
+döner. Tekrarsız set BTreeSet<u64>, çıktı aynı BTreeSet<String>. Whitespace
+pencereyi keser. Query grams kaynağı aynı; çıkarıcı inline(never), yalnız write
+body yolunda. Yeni kalıcı biçim/feature yok. Son dört paired10k yazma+bakım
+31,908→28,241s (-%11,49),4/4 hızlı;122 core dosya sekiz koşuda aynı.
+Private commit +88KiB/WS+28KiB medyan; global RAM/hız kapısı geçmedi/default
+kapalı. Read matrix33/5,800 örnekli sayfalar1/7; ishmael tek-sonuç +%4,87,
+4/4 yüksek. Bu artışlar kapatılmadı; diğer açık işler raporda.
+[Ölçüm/uyumluluk/sınırlar](GRAM-BODY-WRITES-10K-20261016.md).
+
+2026-10-16 builder-budget contains: payload CRC/UTF-8/schema/key/version
+kontrolünden sonra ASCII parçanın özgün body'deki lowercase/Titlecase/UPPERCASE
+yazımı pozitif kanıt olabilir; eksiklik/mixed-case/Unicode eski fold yolundadır.
+Body ilk64KiB/UTF-8 sınırı,128-byte stack yazım tamponu, run/query'de8 denemede
+en az6 başarı yoksa spekülasyonu durdurma. Boyutlar semantik limit değildir;
+ek büyük cache/feature/format yok.56 adayda815→0 body fold/scan, read/CRC56
+kalır. Aynı10k/4 pair/800 örnekte dar sayfalar%4–15 düşük, dördü4/4 hızlı;
+geniş matrix21/17, genel/default kapısı geçmedi. Diğer açık işler korunur.
+[Ölçüm/kanıt/sınırlar](RAW-TEXT-PROOF-10K-20261016.md).
+
+2026-10-15 ölçüm kontrolü: dar posting'lerde aynı256KiB adaptif pencereyi
+açma denemesi hedefte payload request56→56, window hit0→0; geniş38-case
+9 düşük/29 yüksek. Runtime bütünüyle geri alındı; önceki source lease kalır.
+Yeni format/feature/bağımlılık yok. Test runner `-Candidate`/çift `-Pairs`
+parametreleriyle aynı executable A/A ve dengeli varsayılan4 çift sağlar;
+her sıra/hash/örnek sayısı raporlanır. Özet pooled p95 yanında çift farkı ve
+medyanını verir, eski üç-çift logları okur. A/A dalgalanması motor regresyonu
+diye sunulmaz; önceki açık işleri kapatmaz.
+[Ölçüm ve reddedilme kanıtı](BENCHMARK-CONTROL-10K-20261015.md).
+
+2026-10-15 source lease: builder-budget içinde Windows/plain-path Run dosyası
+CRC/schema doğrulamasından önce FILE_SHARE_READ ile açılır. Aynı handle
+Arc<DiskIndex> ömrünce kalır; mevcut writer açılışı reddettirir ve son sahip
+kapanana kadar write/truncate/delete/rename engellenir. Aktif WAL/Legacy,
+reparse/junction ve Windows dışı yollar önceki metadata guard'ını kullanır.
+Covering source path guard'ı yalnız bu OS güvencesi varsa atlanır; index
+handle guard ve source authorization/ilk tam doğrulama sürer. Yeni format,
+feature, bağımlılık veya unsafe yok. Aynı10k/üç çift/600 örnek the /0/1 p95
+0,8123→0,2459ms,3/3 hızlı. Geniş matrix14/38 düşük; genel kapı geçmedi,
+diğer artışlar açık/default kapalı. [Ölçüm/test/sınırlar](SOURCE-LEASE-10K-20261015.md).
+
+2026-10-15 küçük sayfa teşhisi: diagnostic-timing içinde covering guard,
+source path metadata ve index handle metadata span'leri ayrıldı; normal
+build'de sayaç yok, mevcut kontroller aynı. Aynı10k/3 proses ×3 warm örnekte
+limit1 toplam0,3466ms/guard0,2778ms; fold/scan0. Posting full-prefix ve
+GetFileAttributesExW varyantları yoğun sayfa kapısını geçmedi ve kaldırıldı;
+Windows dependency/feature eklenmedi, değişmeyen Unicode-aralık normalizer'ı
+korunur. Harness --pages-only ile200 örnek/proses ve loglarda limit sağlar.
+Bu teşhis aşamasında sahiplik tasarımı açıktı; sonraki uygulama yukarıda.
+[Deneyler ve kanıt](PAGE-GUARD-10K-20261015.md).
+
+2026-10-15 builder-budget query normalizer'ı değişmeyen Unicode işaretlerinde
+kopyalama aralığını korur; yalnız Türkçe/Unicode fold sonucu gerçekten değişen
+scalar'da aralığı böler. ASCII lowercase tüm aralıkta, byte sonucu öncekiyle
+aynı. Ek heap buffer/cache yok;32-bayt prefix ve iki-tampon chunk yolu,
+CRC/schema/identity/source izinleri, default ve kalıcı format aynı. Aynı10k/üç
+çift matrix35 düşük/3 yüksek; zx/the zx/quixote whale3/3 hızlı. İndeksleme
+private9,13→9,18MiB, bakım+0,94MiB/WS+0,375MiB ve tek-sonuç sayfasında
+0/3 hızlanma nedeniyle genel RAM/hız kapısı geçmedi; default'a geçiş reddedildi.
+[Kanıt ve sınırlar](CHANGED-RUNS-10K-20261015.md).
+
+2026-10-15 doğrudan overlap tamponuna normalleştirme ve tek residual parça
+varyantı denendi; aynı10k üçer pair32/6 ve21/17. İki parçalı arama gerilemesi
+iki denemede0/3 hızlı kaldı; iki runtime değişikliği geri alındı. fold_into ve
+iki-tampon chunk döngüsü önceki halindedir. Yeni format/feature/heap cache yok.
+[Reddedilen deney ve sınırlar](CHUNK-COPY-REJECTED-10K-20261015.md).
+
+2026-10-14 builder-budget sorgu normalizer'ında ASCII prefix araması dört
+8-bayt word'ün OR'u ile32 baytta bir kontrol edilir; mixed blok ve tail mevcut
+8-bayt exact-position yolunu kullanır. Güvenli array loads; Türkçe/Unicode fold
+sonucu, buffer/cache yapısı, CRC/identity/source guards ve kalıcı format aynı.
+Default8-bayt algoritması korunur. Aynı10k/üç pair matrix33/5; zx/the zx3/3
+hızlı. Tek RAM/write teyidi indexing9,14MiB/WS13,34MiB,bakım+0,66MiB ve
+toplam+%3,41 nedeniyle genel gate geçmedi.
+[Kanıt ve sınırlar](WIDE-FOLD-10K-20261014.md).
+
+2026-10-14 builder-budget profilinde bütün canlı kayıtları kaplayan gramdan
+iki Unicode karakterlik alt-parça kanıtı da türetilir. Parse sırasında en fazla
+64 gram/16 KiB owned kapasite/run; source authorize/fingerprint guards korunur.
+Scope ayrılır, kanıt yoksa mevcut payload taraması sürer: izole kısa metin
+gram üretmeyebilir, özetten yokluk kanıtı çıkarılmaz. Reversed directory order
+geçerlidir ve kısa-parça taramasına döner. Format/default aynı. Aynı 10k/üç
+paired `he`132→1,81ms; indexing private9,09MiB/disk aynı/WS+0,30MiB.
+Genel matrix15/23 nedeniyle default kapısı geçmedi.
+[Kanıt ve sınırlar](SHORT-COVERAGE-10K-20261014.md).
+
+2026-10-14 builder-budget profilinde complete trigram posting'i kesin contains
+kanıtı olarak kullanılabilir. Yalnız source kontrolünden sonra authorize edilir;
+source/index length+mtime bağları tekrar kontrol edilir, bilgi yoksa payload
+doğrulaması sürer. İki karakter/uzun parça için payload taraması aynı, mixed
+AND'de yalnız kesin parçalar çıkarılır. Dönen belge CRC/schema/key/version
+hydrate edilir. Kaynak/.idx/payload biçimi değişmez, yeni text/result cache yok.
+Genel count/prefix yolunu kullanır; offset5000/9950 ölçümünde3/3 hızlı.
+Bu tüm aramalar veya ilk pending-source latency için hız garantisi değildir.
+[Ölçüm/korunan kontroller/sınırlar](COVERED-TEXT-10K-20261014.md).
+
+2026-10-14 düşük RAM profilinde binary-query record cursor ve borrowed key
+karşılaştırması eklendi. Genel tüm-gram Bloom/fence preflight ve mevcut1MiB
+directory cache içinde64KiB hot posting konumu/960KiB page payı kullanılır.
+Payload CRC/validation/key/version kontrolleri sürer; source/payload formatı
+ve default seçimi aynı. RAM'in bu10k profilde kabulü genel heap garantisi veya
+hız kapısının kapanması değildir. [Ölçüm/sınırlar](BOUNDED-SPEED-10K-20261014.md).
+
+2026-10-14 opt-in `experimental-builder-budget` altında `commit_streamed`:
+tek native staging frame/synced WAL, index-only bitmap delta, işlem sonunda
+source/manifest yayını ve resident delta0. Ortak16MiB working allowance,
+14MiB intake+builder ve2MiB earmarked cache/scratch; RSS ölçümü değildir.
+Posting directory spool ve mevcut IDX byte aralıklarında sparse/page-cache
+term dictionary;64KiB/run genel Bloom, AND early-out. Format aynı/default kapalı.
+Ölçüm indexing111→9,13MiB; toplam27,24→31,54s ve aktif-data arama gerilemesi
+nedeniyle default kapısı reddedildi. [Kanıt/sınırlar](BOUNDED-MEMORY-10K-20261014.md).
+
+2026-10-13 existing experimental-wal-delta encode_located ortak tek-frame
+encode kullanır; ikinci payload→frame kopyası kaldırılır. Pending flush
+öncesi limit kontrolü, sonrası encode; row offsets/checksum aynı. RAM'de
+tam belge yerine WAL referansı ölçüldü fakat delta search hız kapısı geçmedi;
+default kapalı. [RAM kazanımı/hız kaybı](COPY-REDUCTION-10K-20261013.md).
+
+2026-10-13 delta gram dictionary scope→gram→posting olarak RAM'de gruplanır;
+scope bir kez sahiplenilir, mevcut gram update borrowed lookup kullanır.
+Kalıcı Term::Gram sırası/codeci ve document/folded body temsili aynı.
+[Üç write/RAM pair ve unflushed delta arama ölçümü](DELTA-DICTIONARY-10K-20261013.md).
+
+2026-10-13 commit frame limit validation pending flush öncesinde korunur;
+non-WAL-delta encode pending flush sonrası, başarılı append/sync sonrası
+encoded Vec drop delta apply öncesinde yapılır. Aynı codec/durability/source
+yolu; yeni feature/format yok. [Indexing private124→112MiB,3/3 pair hızlı](RAM-LIFETIME-10K-20261013.md).
+
+2026-10-13 ASCII prefix araması güvenli8-byte load ile, query token fold'u
+aynı sözleşmeli fold_into ile hızlandırıldı. Experimental payload window,
+tamamlanan pencerenin en az3/4'ü kullanılmazsa sorgunun kalanında exact read'e
+döner; broad seed yarı-live eşiği korunur. CRC/schema/source guards ve
+kalıcı biçimler aynı. [11 önceki case düşüşü,36/2 genel matris](REGRESSION-READS-10K-20261013.md).
+
+2026-10-13 experimental-grouped-read altında query-local256 KiB native payload
+window: broad seed ve fiziksel adjacency ile etkinleşir; record CRC/schema /
+identity ve VFY block/source guard'ları korunur. Default compile dışı, yeni
+feature/format yok. [Geniş query%20–22 kazanç fakat11 matrix regresyonu](WINDOW-READS-10K-20261013.md).
+
+2026-10-13 OFF1 string64+ byte için pinned simdutf80.1.5 safe basic API;
+kısa/invalid girdide std UTF-8 ile aynı validity ve detailed error korunur.
+CRC/offset/typed grammar/doc limits/key/version aynı. Frame reuse/pre-plan
+prototipleri regresyon nedeniyle geri alındı; source replay allocation aynı.
+[İlk search208→173 ms, warm query%18–27 ve strict/memory sınırları](UTF8-READS-10K-20261013.md).
+
+2026-10-13 ortak IEEE CRC:128+ byte girdide pinned crc32fast1.5.0 runtime CPU
+dispatch, küçük başlıklarda mevcut table yolu. Raw state complement sözleşmesi,
+crc_combine ve bütün byte/format/checksum değerleri aynı. Strict/deferred,
+WAL/source/index/cache kontrolleri korunur; opt-in API kararı değişmez.
+[İlk search381→229 ms, strict962→582 ms ve dört warm-query ölçümü](CRC-READS-10K-20261013.md).
+
+2026-10-13 deferred native source doğrulaması: TXN2 frame'ları ortak framing /
+whole-source CRC kontrolünden geçer; OFF1 borrowed görünümünde owned belge
+üretmeden validate_doc ile aynı key/text/field/link/scope/size limitleri ve
+version kontrol edilir. Strict ve experimental-streaming-open replay aynı;
+source verified işareti ancak tam kaynak/count/sequence kontrolünden sonra.
+[Tekrarlı ilk arama ölçümü](BORROWED-SOURCE-10K-20261013.md).
+
+2026-10-13 opt-in `open_record_reads` + explicit `prepare_record_reads`: REF01
+slot→source offset/len/CRC tablosu source end/CRC/sequence veSEG04 root'a bağlı;
+SVFY actual source block CRC'si manifest root'a bağlı. Positive get gerçek
+source kaydını kontrol eder; negative/tombstone get, search vewrite tam source
+kontrolünü korur. Default yollar, source/WAL/SEG04 biçimi ve0.1 aynı.
+[İlk get107→0,20 ms; warm-search regresyonları ve sınırlar](SOURCE-RECORD-READS-10K-20261013.md).
+
+2026-10-12 VFY01 derived block checksum cache: explicit `prepare_open_checks`
+tam integrity sonrası küçük CRC table yazar; `open_deferred` header/directory
+ve touched payload/posting block'larını256 KiB CRC ile kontrol eder. Table CRC,
+SEG04 prefix root ve binding şart; cache yok/bozuksa full fallback. Source
+kontrolleri aynı; default strict veSEG04/OFF1 değişmedi. [298→60 ms open,
+first-use maliyeti ve compatibility testleri](BLOCK-OPEN-10K-20261012.md).
+
+2026-10-12 opt-in `open_deferred`: index CRC/grammar ve active WAL açılışta,
+immutable kaynak doğrulaması segmentin ilk kullanımında. Get lookup öncesi,
+search ve publication/write öncesi source kontrolleri şart. `check_integrity`
+bütün kaynakları ve WAL'i yeniden kontrol eder; stats pending kaynaklarda
+provisional. Default strict aynı; format değişmedi. [319 ms open, ilk-use
+maliyeti ve güvence sınırları](DEFERRED-OPEN-10K-20261012.md).
+
+2026-10-12 normal immutable open: replay sırasında doğrulanan frame CRC'leri
+header/footer ile birleştirilerek manifestteki tam kaynak CRC kontrol edilir.
+Ayrı source prefix taraması kaldırıldı; bütünlük karşılaştırması publication'dan
+önce biter. Legacy unknown ve streaming-open önceki taramayı korur.
+[Beş çift:946→747 ms; bozulma/kill testleri](OPEN-SOURCE-10K-20261012.md).
+
+2026-10-12 aday seçiciliği profili: dar/negatif sorgularda false-positive payload
+ve metin normalleştirme maliyeti baskın. Karışık Unicode girdinin ASCII run'ları
+topluca dönüştürülür; bütün Unicode scalar eşitliği, CRC ve kesin toplam korunur.
+Hedef dört sorguda üç çiftte kazanç; 34/38 p95 düşüş, dört artış raporlandı.
+[Profil, SQLite dahil tam matris ve sınırlar](SELECTIVITY-READS-10K-20261012.md).
+
+2026-10-12 geniş okuma matrisi: mevcut 10k DB, 30 query girişi + 8 sayfa,
+beşer proses, exact full-document oracle. SQLite comparator p95'inde tüm
+senaryolarda FDB hızlı; fakat az/hiç sonuçlu bazı sorgular hâlâ pahalı.
+Motor/format değişikliği yok; negatif scan kontrolü küçük koşu farkları gösterdi.
+[38 senaryo, get boyutları, p99 sınırları ve kaynak hash'leri](READ-MATRIX-10K-20261012.md).
+
+2026-10-12 normal contains yolu uzun gövdeyi UTF-8 sınırlarında 1 KiB
+parçalarla katlar; terim örtüşmesini korur ve tüm AND terimlerini bulunca durur.
+Tam payload CRC/biçim/kimlik doğrulaması ve kesin toplam değişmedi.
+[Aynı 10k DB: geniş p95 %46–48 düşüş, test ve ölçüm sınırları](CONTAINS-CHUNK-SCAN-10K-20261012.md).
+
+2026-10-12 mevcut 10k DB üzerinde read-only ölçüm: sıcak cache, tam toplam
+ve ilk 50 full belge, dar contains p95 FDB10,63 / SQLite19,70 ms.
+Geniş sorgular FDB'de ~771–773 ms; delta boş, feature default kararı değişmedi.
+[Kapsam, koşu değişkenliği ve hash doğrulaması](CONTENT-READS-10K-20261012.md).
+
+2026-10-12 flush RAM delta dictionary'sini yeniden kullanır; mevcut bitmap
+yoluyla birlikte 10k gövde fold/grams geçişi (önce20k), sıfır builder terim üretimi.
+Format ve source doğrulaması korunur; default kapalı.
+[Aynı belgelerde iki SQLite eşleşmesi](DELTA-FLUSH-10K-20261012.md).
+
+2026-10-12 bağımsız merge posting reuse ölçümü: builder terim üretimi
+20k → 10k; 10k belgede son bakım medyanı 24,85 → 4,55 s.
+Kaynak/payload doğrulaması sürer, format aynı; default kapalı.
+[Corpus, SQLite ve doğrulama sınırları](MERGE-REUSE-10K-20261012.md).
+
+2026-10-12: default TXN2 output tamponu toplam payload uzunluğu ve footer
+için önceden ayrılır; frame baytları ve sync davranışı aynı kalır.
+[10k tekrar ölçümü ve opt-in bitmap değerlendirmesi](CONTENT-OPTIMIZATION-10K-20261012.md).
+
+## Güncel kalıcı payload: FDBLOG04 / FDBSEG04
+
+2026-10-11 kullanıcı kararıyla yeni veritabanları default olarak native OFF1
+ikili belge payload'ı yazar. `FDBLOG04` içindeki `TXN2` binary Batch change
+listesini, `FDBSEG04` / `FDBEND04` ise ikili belge payload'larını sürümlendirir.
+Manifest ve index directory formatı aynı kalır. rkyv runtime/feature gerekmez;
+genel API fields/protokol JSON biçimini kullanabilir. WAL, source/checkpoint,
+flush ve merge yeni codec'i kullanır. Contains adayında CRC/grammar/identity
+doğrulandıktan sonra title/text ödünç alınır; tüm belge yalnız hidrasyonda çözülür.
+Default frame output'u ve query payload tamponu tekrar kopyalamayı azaltır;
+normalleştirme ve CRC/UTF-8 tarama maliyeti sürer.
+
+Ek payload-bench dosyası yoktur, ancak `.fdb` ve `.idx` içindeki mevcut payload
+kopyaları halen vardır. RAM yerleşimi, directory JSON, source/cache ayrımı ve
+index köken doğrulaması korunur. Eski parser/0.1 fixture korunmuştur; eski
+veri migration'ı artık ürün gereksinimi değildir.
+[Format ayrıntıları ve testler](NATIVE-BINARY-VALIDATION-20261011.md).
+
+[Kalıcı sürümün genel ölçümü](NATIVE-GENERAL-PERFORMANCE-20261011.md): aynı
+fold/query/maintenance koduyla default JSON kontrolü, iki 100k corpus ve üçer
+eşleşmiş process çifti. Uzun contains 27/27 hızlı, açılış ve uzun belge get
+üç çiftte hızlı; kısa yazma/küçük sorgular karışık. Kaynak/index kopyalama düzeni
+iki varyantta da korunur; source-offset yerleşimi henüz ölçülmedi. RAM kazancı
+gösterilmedi, kısa corpus WS arttı; disk kısa %10,42 / uzun %1,75 küçüldü.
+
+[Yeni SQLite karşılaştırması](NATIVE-SQLITE-GENERAL-20261011.md): native ikili
+FDB uzun yaygın/iki karakter/AND sayfalarında21/21 eşleşmiş karşılaştırmada hızlı;
+dar sorgu karışık. Kısa yazma+bakımda SQLite üç çiftte hızlı, RAM/diskte küçük.
+Bu SQL/schema/cache sözleşmesi genel motor eşdeğerliği değildir; source-offset
+düzeni bu ölçümde de değişmedi.
+
+Aşağıdaki JSON/SEG03 ve deneysel performans bölümleri önceki sürümleri ve
+ölçüm geçmişini açıklar. Kalıcı payload/codec için bu bölüm güncel sözleşmedir.
+
 ## Deneysel commit sync kontrolü
 
 `experimental-wal-sync-control` altında `Database::set_wal_sync(false)` yalnız
@@ -54,11 +328,11 @@ sırası, visibility ve offset davranışı korunur. Bu sorgu değişikliği def
 ve deneysel indeks yollarında uygulanır; belge paylaşımı default kapalıdır.
 [Anahtar paylaşımı doğrulaması](SHARED-KEYS-VALIDATION.md).
 
-## Deneysel merge posting yeniden kullanımı
+## Deneysel flush/merge posting yeniden kullanımı
 
-`experimental-merge-postings` write-buffer-budget/streaming-metadata yollarını
-kullanır. Worker önce input kaynak prefix checksum ve immutable length'i,
-SEG03 bütün dosya checksum/footer'ını doğrular. Legacy kaynak WAL append'i
+`experimental-merge-postings` bağımsızdır; write-buffer-budget/streaming-metadata
+yollarını otomatik açmaz. Worker önce input kaynak prefix checksum ve immutable
+length'i, SEG03/SEG04 bütün dosya checksum/footer'ını doğrular. Legacy kaynak WAL append'i
 nedeniyle checkpoint prefix'inden uzun olabilir; yalnız published prefix bağlanır.
 MergeKeys en yeni kayıtları seçer; her input için u32 old→new slot map kurulur.
 Tombstone/eski sürüm u32::MAX ile dışarıda kalır, output tombstone slotları korunur.
@@ -67,14 +341,19 @@ Kaynak checkpoint mevcut codec ile tamamlanır. Bu kaynak akışı Builder'a
 payload/record olarak eklenir; terms/grams üretimi yapılmaz. Input term dictionary
 iterator'ları heap ile, her eş term'in posting'leri 8 KiB/input penceresiyle
 birleştirilir. Source ID sırası, bounds, monotonic remap ve duplicate output ID
-kontrol edilir. Boş kalan term atılır. SEG03 directory/footer aynı biçimde yazılır.
+kontrol edilir. Boş kalan term atılır. SEG03/SEG04 directory/footer aynı biçimde yazılır.
 Sonra normal open_source bütün authoritative kaynak doğrulamasını tekrar yapar;
-worker manifest yayınlamaz. Bu ek JSON doğrulama geçişi hız ölçümüne dahildir.
+worker manifest yayınlamaz. Bu ek kaynak doğrulama geçişi hız ölçümüne dahildir;
+native TXN2 binary payload veya legacy JSON mevcut codec ile okunur.
 
 Map 4 byte/input fiziksel kayıt, root/term dictionaries ve scratch ortak I/O
 reservation kotası dışında kalır; toplam heap/RSS bütçesi değildir. Flush indexleri
-henüz yeniden üretir, yalnız merge'deki terms üretimi kaldırılmıştır. Varsayılan
-kapalıdır. [Doğrulama ve ölçüm](MERGE-POSTINGS-VALIDATION.md).
+mevcut delta dictionary'sinden oluşturulur: scope/collection/exact/numeric/gram/link
+listeleri sorted checkpoint slot'larına remap edilir. Tombstone slot'ları korunur;
+RAM slot sırası disk kayıt sırası sayılmaz. Bir term'in remapped ID listesi dışında
+toplu posting kopyası yoktur. Source replay ve normal open_source doğrulaması
+sürer; metin/terim çıkarımı yeniden yapılmaz. Varsayılan kapalıdır.
+[Önceki merge doğrulaması](MERGE-POSTINGS-VALIDATION.md).
 
 ## Deneysel WAL konumlu delta
 
@@ -522,3 +801,83 @@ SDB için hacim+tam referans+parent+ad, Fundops için açık doğal anahtar örn
 adapters modülündedir. Dosya içerikleri çıkarılmış UTF-8 bölüm kayıtları olarak
 metadata kayıtlarına links ile bağlanabilir. Extractor, canlı USN takibi,
 HTTP servisi, SQL, MVCC, dağıtık replikasyon ve otomatik GC bu sürümde yoktur.
+
+## İzole rkyv payload deneyi
+
+`experimental-rkyv-payload` default kapalıdır. `rkyv_payload` modülü belgeyi
+archive olarak kodlar; fields için kendi düz postorder değer grafını kullanır.
+Contains doğrulaması güvenli bytecheck/graph kontrolünden sonra yalnız archived
+title/text/key/version'ı okur, sonuç sayfasını tam belgeye dönüştürür. CRC ile
+archive doğrulama maliyeti benchmark'ta ayrı ölçülür.
+
+Default `Database`, WAL, manifest, SEG03 veya protokol rkyv arşiv codec'ini çağırmaz. Benchmark'ın
+`PLOADB01` taşıyıcısı atılabilir export'tur, kalıcı `.fdb`/`.ready` kaynağı veya
+`.idx` cache'i değildir. 0.1 fixture korunur. Üretimde codec kullanımı ayrı format
+sürümü ve uyumluluk testi gerektirir. Ölçüm ve karar:
+[rkyv payload doğrulaması](RKYV-PAYLOAD-VALIDATION.md).
+
+Aynı deneysel modüldeki `TextMatcher`, eski fold, ASCII hızlandırılmış fold
+ve iki tekrar kullanılan String tamponuyla fold seçeneklerini karşılaştırır.
+Normalizasyon ve alt dize tarama süreleri ayrı profillenir. Bu payload deneyinde
+motor sorgu yolu değiştirilmedi; normalleştirilmiş corpus/cache saklanmadı.
+[Normalleştirme ölçümü](FOLD-VALIDATION-20261011.md).
+
+## Disk sorgusunda tekrar kullanılan normalleştirme tamponları
+
+Payload deneyinin ardından default disk contains doğrulamasındaki iki döngü
+ortak `QueryTextScratch` kullanır. Paylaşılan `index::fold_into`, ASCII için
+toplu lowercase ve UTF-8 için aynı Türkçe/Unicode eşlemelerini uygular. Başlık
+ve gövde tamponları sorgu içinde tekrar kullanılır. Başlık bütün terimleri
+karşılıyorsa gövdeye gerek kalmaz. Eski 256 KiB gövde cache'i korunur; başlık
+cache'lenmez. Her scratch sonraki adayda 128 KiB üzeri kapasitesini bırakır;
+büyük tek belge geçici olarak daha fazla alan ister. Bu bir proses RAM sınırı
+değildir. Sorgu sonunda scratch ve cache bırakılır.
+
+Yazma/gram üretimi/terim hazırlamasındaki `index::fold` ve delta yerleşimi aynı
+kalır. JSON payload ve kaynak doğrulaması korunur; rkyv motor tarafından
+çağrılmaz. [Gerçek API, sayfalama ve bellek ölçümü](ENGINE-FOLD-VALIDATION-20261011.md).
+
+## Bağımsız offset payload deneyi
+
+`experimental-rkyv-payload` mevcut deney altyapısında `binary` codec'ini de
+açar; yeni feature eklenmedi. `rkyv_payload::binary` rkyv kodlamasını kullanmaz.
+`OFF1` başlığı sürüm, beş UTF-8 metin başlangıcı, fields/links başlangıçları ve
+son offset'i taşır. Fields null/bool/tamsayı/float/string/list/map etiketleriyle,
+links uzunluklu UTF-8 anahtar parçalarıyla saklanır. Unsigned sayı etiketi JSON
+u64 değerlerini yuvarlamadan korur; metinler sıkıştırılmaz.
+
+`checked` tüm offset'leri, UTF-8'i, metadata gramerini, sıralı map anahtarlarını,
+sonlu float'ları ve 128 derinlik sınırını kontrol eder. Metinler byte tamponundan
+ödünç alınır; metadata doğrulamasında alan ağacı oluşturulmaz. Tam belge yalnız
+ilk 50 sonuç için oluşturulur. Benchmark taşıyıcısı her okumada CRC ve
+key/version kimliğini ayrıca doğrular; JSON da aynı taşıyıcıyı ve reusable fold'u
+kullanır. Açılış tüm kayıtları doğrular. Dosya ayrı `binary.payload-bench`
+çıktısıdır; `.fdb`, `.ready`, `.idx`, WAL/manifest/protokol ve default motor
+yolları değişmez. [Ölçüm ve kabul kararı](BINARY-PAYLOAD-VALIDATION-20261011.md).
+
+## Gerçek API üzerinde geçici payload bağlama
+
+Aynı feature altında yalnız açık `Database::attach_payload_benchmark` çağrısı,
+tek immutable segment ve boş delta koşulunda JSON veya binary benchmark
+export'unu bağlayabilir. Normal `Database::open` dosyayı keşfetmez/bağlamaz.
+Bağlama tüm 100k kaydı mevcut indeksin tam belgeleriyle karşılaştırır; kaynak
+`.fdb` doğrulaması daha önce normal açılışta yapılır. Corpus'a özel ordinal
+key/version sözleşmesi nedeniyle bu genel bir motor payload API'si değildir.
+Paged metadata/tombstone/çok segment bu bağlama deneyinde desteklenmez.
+
+Posting/adayı üretme, görünürlük maskeleri, filtreler, sıralama, toplam ve
+sayfalama normal `Database::search` içindedir. Contains doğrulamasında borrowed
+title/text ve aynı `QueryTextScratch` kullanılır; sonuç hidrasyonu aynı bağlı
+codec'ten tam belge üretir. JSON kontrolü ve binary aynı positional I/O,
+tekrar kullanılan byte tamponu ve her okumada CRC/identity kontrolünü kullanır.
+Metadata/UTF-8 doğrulaması binary için de her adayda sürer. Mutex payload
+tamponunu korur; eşzamanlı sorgu throughput'u bu deneyin kapsamı değildir.
+
+Original SEG03 ve JSON kaynak dosyaları korunur. Geçici payload ek dosyadır;
+disk büyümesi ve tam bağlama süresi gerçek maliyet olarak ölçülür, kaynak/cache
+yerine geçmediği için kalıcı binary format tasarımı veya disk tasarrufu sonucu
+çıkarılamaz. Motor stats bu ek export'u içermez; benchmark ayrıca
+`overlay_bytes`, `attach_ms` ve `total_ready_ms` kaydeder. Bozuk overlay ve tam
+belge uyuşmazlığı reddedilir, normal reopen otomatik olarak JSON yolunu kullanır.
+
+[Gerçek motor sonuçları ve reddedilen geçici overlay kapısı](ENGINE-BINARY-VALIDATION-20261011.md).

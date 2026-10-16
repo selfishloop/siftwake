@@ -1,5 +1,8 @@
 //! Standalone FDB engine: transactional WAL and immutable indexed segments.
 pub mod adapters;
+mod binary_batch;
+#[cfg(test)]
+mod binary_batch_tests;
 mod bounded;
 mod engine;
 mod format;
@@ -10,13 +13,17 @@ mod manifest;
 #[cfg(feature = "diagnostic-memory")]
 pub mod memory;
 pub mod model;
+mod payload;
 mod query;
+#[cfg(feature = "experimental-rkyv-payload")]
+pub mod rkyv_payload;
 mod segment;
 #[cfg(all(
     feature = "experimental-shared-documents",
     not(feature = "experimental-wal-delta")
 ))]
 mod shared_documents;
+mod source_records;
 mod spill;
 #[cfg(feature = "diagnostic-timing")]
 pub mod timing;
@@ -100,6 +107,8 @@ pub struct IndexMemoryLayout {
     pub paged_deletion_capacity_bytes: usize,
     pub terms: usize,
     pub term_string_capacity_bytes: usize,
+    #[cfg(feature = "experimental-streaming-open")]
+    pub term_page_root_capacity_bytes: usize,
 }
 
 #[derive(Debug, Clone)]
@@ -119,7 +128,10 @@ impl Default for Options {
 }
 
 fn validate_key(key: &Key) -> Result<()> {
-    for s in [&key.scope, &key.collection, &key.id] {
+    validate_key_parts([&key.scope, &key.collection, &key.id])
+}
+fn validate_key_parts(parts: [&str; 3]) -> Result<()> {
+    for s in parts {
         if s.is_empty() || s.len() > 1024 || s.chars().any(char::is_control) {
             return Err(Error::Invalid(
                 "key components must be 1..1024 bytes without controls".into(),
@@ -149,8 +161,8 @@ fn validate_doc(doc: &Document) -> Result<()> {
             ));
         }
     }
-    if serde_json::to_vec(doc)?.len() > 4 * 1024 * 1024 {
-        return Err(Error::Invalid("serialized document exceeds 4 MiB".into()));
+    if payload::encoded_len(doc)? > 4 * 1024 * 1024 {
+        return Err(Error::Invalid("binary document exceeds 4 MiB".into()));
     }
     Ok(())
 }

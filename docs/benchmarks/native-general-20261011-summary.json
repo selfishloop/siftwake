@@ -1,0 +1,489 @@
+{
+  "corpus_short": "100000 unique keys/titles, repeated 256 UTF-8-byte Turkish body, batch500, delta10000 keys/16MiB, sync on",
+  "corpus_long": "100000 unique overlapping real book windows, 2-50KiB, 2655160287 body bytes, same fields/links/versions",
+  "cache": "OS file cache; no forced eviction; query warmups; independent processes in JSON/binary, binary/JSON, JSON/binary order",
+  "reference": "isolated current source snapshot with default JSON encode/accounting/SEG03 reinstated; same fold/query/maintenance code; not historical release",
+  "placement": "both variants duplicate payload in source and index; source-offset layout unmeasured",
+  "short": {
+    "peak_working_set_bytes": {
+      "json_median": 97964032,
+      "binary_median": 104763392,
+      "paired_gain_percent": [
+        -6.940669816448551,
+        -5.132050320753145,
+        -8.80602092014627
+      ],
+      "gain_range_percent": [
+        -8.80602092014627,
+        -5.132050320753145
+      ],
+      "all_pairs_faster": false
+    },
+    "sampled_peak_private_bytes": {
+      "json_median": 96907264,
+      "binary_median": 101019648,
+      "paired_gain_percent": [
+        -4.243628217591614,
+        -2.2112101274256686,
+        -7.538035961272476
+      ],
+      "gain_range_percent": [
+        -7.538035961272476,
+        -2.2112101274256686
+      ],
+      "all_pairs_faster": false
+    },
+    "retained_engine_disk_bytes": {
+      "json_median": 466991541.0,
+      "binary_median": 418320443.0,
+      "paired_gain_percent": [
+        10.422265443133583,
+        10.422265443133583,
+        10.422265443133583
+      ],
+      "gain_range_percent": [
+        10.422265443133583,
+        10.422265443133583
+      ],
+      "all_pairs_faster": true
+    },
+    "elapsed_s": {
+      "json_median": 21.4600906,
+      "binary_median": 19.1350196,
+      "paired_gain_percent": [
+        -14.118457728216255,
+        13.817064686576867,
+        11.552368785762344
+      ],
+      "gain_range_percent": [
+        -14.118457728216255,
+        13.817064686576867
+      ],
+      "all_pairs_faster": false
+    },
+    "cpu_ms": {
+      "json_median": 25046.875,
+      "binary_median": 22484.375,
+      "paired_gain_percent": [
+        -16.067329762815607,
+        13.911416094822208,
+        11.771919068056407
+      ],
+      "gain_range_percent": [
+        -16.067329762815607,
+        13.911416094822208
+      ],
+      "all_pairs_faster": false
+    },
+    "ingest_ms": {
+      "json_median": 10203.1205,
+      "binary_median": 9974.9122,
+      "paired_gain_percent": [
+        -35.443117996071805,
+        10.733376160254567,
+        2.2366520124897105
+      ],
+      "gain_range_percent": [
+        -35.443117996071805,
+        10.733376160254567
+      ],
+      "all_pairs_faster": false
+    },
+    "maintenance_ms": {
+      "json_median": 7303.916499999999,
+      "binary_median": 6326.258400000001,
+      "paired_gain_percent": [
+        -7.900333024712196,
+        13.79508582564167,
+        17.78223778982138
+      ],
+      "gain_range_percent": [
+        -7.900333024712196,
+        17.78223778982138
+      ],
+      "all_pairs_faster": false
+    },
+    "reopen_ms": {
+      "json_median": 739.8666000000001,
+      "binary_median": 552.2321000000001,
+      "paired_gain_percent": [
+        -2.186435862204758,
+        25.360585273074904,
+        29.607391789198584
+      ],
+      "gain_range_percent": [
+        -2.186435862204758,
+        29.607391789198584
+      ],
+      "all_pairs_faster": false
+    },
+    "changed_reopen_ms": {
+      "json_median": 700.897,
+      "binary_median": 562.0371,
+      "paired_gain_percent": [
+        11.606245974771706,
+        19.049960265203023,
+        25.311290513309757
+      ],
+      "gain_range_percent": [
+        11.606245974771706,
+        25.311290513309757
+      ],
+      "all_pairs_faster": true
+    },
+    "write_plus_maintenance_ms": {
+      "json_median": 17507.037,
+      "binary_median": 15980.028900000001,
+      "paired_gain_percent": [
+        -23.531495532584966,
+        12.013365702900732,
+        8.722253228801648
+      ],
+      "gain_range_percent": [
+        -23.531495532584966,
+        12.013365702900732
+      ],
+      "all_pairs_faster": false
+    },
+    "narrow_p50_ms": {
+      "json_median": 4.4811,
+      "binary_median": 4.1831000000000005,
+      "paired_gain_percent": [
+        2.56187096918167,
+        6.8351893095768315,
+        6.5817947419310245
+      ],
+      "gain_range_percent": [
+        2.56187096918167,
+        6.8351893095768315
+      ],
+      "all_pairs_faster": true
+    },
+    "broad_p50_ms": {
+      "json_median": 0.3049,
+      "binary_median": 0.2802,
+      "paired_gain_percent": [
+        15.283699573630708,
+        -13.203613620569833,
+        22.831175984577246
+      ],
+      "gain_range_percent": [
+        -13.203613620569833,
+        22.831175984577246
+      ],
+      "all_pairs_faster": false
+    },
+    "range_p50_ms": {
+      "json_median": 0.5927,
+      "binary_median": 0.5317,
+      "paired_gain_percent": [
+        23.6882065125696,
+        -14.846416382252551,
+        16.76581089542894
+      ],
+      "gain_range_percent": [
+        -14.846416382252551,
+        23.6882065125696
+      ],
+      "all_pairs_faster": false
+    },
+    "broad_text_p50_ms": {
+      "json_median": 542.692,
+      "binary_median": 379.5188,
+      "paired_gain_percent": [
+        38.32799720980175,
+        24.04551759665105,
+        27.333183463179846
+      ],
+      "gain_range_percent": [
+        24.04551759665105,
+        38.32799720980175
+      ],
+      "all_pairs_faster": true
+    },
+    "last_page_p50_ms": {
+      "json_median": 22.343,
+      "binary_median": 22.644299999999998,
+      "paired_gain_percent": [
+        -14.478360112787,
+        1.613595437511334,
+        -6.956521739130433
+      ],
+      "gain_range_percent": [
+        -14.478360112787,
+        1.613595437511334
+      ],
+      "all_pairs_faster": false
+    },
+    "second_page_p50_ms": {
+      "json_median": 0.32,
+      "binary_median": 0.30729999999999996,
+      "paired_gain_percent": [
+        3.9687500000000138,
+        5.372117400419292,
+        1.1608057357459933
+      ],
+      "gain_range_percent": [
+        1.1608057357459933,
+        5.372117400419292
+      ],
+      "all_pairs_faster": true
+    },
+    "get_100_p50_ms": {
+      "json_median": 1.2819,
+      "binary_median": 1.0907,
+      "paired_gain_percent": [
+        -1.6849988298619112,
+        26.557134199717197,
+        8.497679814385148
+      ],
+      "gain_range_percent": [
+        -1.6849988298619112,
+        26.557134199717197
+      ],
+      "all_pairs_faster": false
+    }
+  },
+  "long": {
+    "peak_working_set_bytes": {
+      "json_median": 136630272,
+      "binary_median": 136568832,
+      "paired_gain_percent": [
+        0.04496807266840543,
+        -0.026988125224901044,
+        0.06594131223211341
+      ],
+      "gain_range_percent": [
+        -0.026988125224901044,
+        0.06594131223211341
+      ],
+      "all_pairs_faster": false
+    },
+    "sampled_peak_private_bytes": {
+      "json_median": 140492800,
+      "binary_median": 138481664,
+      "paired_gain_percent": [
+        1.4314868804664722,
+        -21.025838340190013,
+        1.7480989424001399
+      ],
+      "gain_range_percent": [
+        -21.025838340190013,
+        1.7480989424001399
+      ],
+      "all_pairs_faster": false
+    },
+    "retained_engine_disk_bytes": {
+      "json_median": 6293010040.0,
+      "binary_median": 6182926010.0,
+      "paired_gain_percent": [
+        1.749306441595952,
+        1.749306441595952,
+        1.749306441595952
+      ],
+      "gain_range_percent": [
+        1.749306441595952,
+        1.749306441595952
+      ],
+      "all_pairs_faster": true
+    },
+    "elapsed_s": {
+      "json_median": 156.8313525,
+      "binary_median": 115.2699083,
+      "paired_gain_percent": [
+        33.28966378705472,
+        24.18621786107792,
+        26.500724209465712
+      ],
+      "gain_range_percent": [
+        24.18621786107792,
+        33.28966378705472
+      ],
+      "all_pairs_faster": true
+    },
+    "cpu_ms": {
+      "json_median": 147390.625,
+      "binary_median": 108515.625,
+      "paired_gain_percent": [
+        32.53467843631778,
+        23.84467265725289,
+        26.3754903000106
+      ],
+      "gain_range_percent": [
+        23.84467265725289,
+        32.53467843631778
+      ],
+      "all_pairs_faster": true
+    },
+    "open_ms": {
+      "json_median": 27448.4166,
+      "binary_median": 18728.1069,
+      "paired_gain_percent": [
+        35.37614499175804,
+        29.307719702855287,
+        31.34136956849838
+      ],
+      "gain_range_percent": [
+        29.307719702855287,
+        35.37614499175804
+      ],
+      "all_pairs_faster": true
+    },
+    "get_100_p50_ms": {
+      "json_median": 6.5509,
+      "binary_median": 4.1558,
+      "paired_gain_percent": [
+        50.37628417469356,
+        25.836104662107036,
+        48.02716324208052
+      ],
+      "gain_range_percent": [
+        25.836104662107036,
+        50.37628417469356
+      ],
+      "all_pairs_faster": true
+    },
+    "queries": {
+      "and:0": {
+        "json_median": 15576.016599999999,
+        "binary_median": 12623.6543,
+        "paired_gain_percent": [
+          19.37630145878466,
+          19.98349934898397,
+          18.95454002020002
+        ],
+        "gain_range_percent": [
+          18.95454002020002,
+          19.98349934898397
+        ],
+        "all_pairs_faster": true
+      },
+      "and:50": {
+        "json_median": 15813.129,
+        "binary_median": 13295.275800000001,
+        "paired_gain_percent": [
+          14.700637012308675,
+          15.51145999047561,
+          21.25910374853705
+        ],
+        "gain_range_percent": [
+          14.700637012308675,
+          21.25910374853705
+        ],
+        "all_pairs_faster": true
+      },
+      "common:0": {
+        "json_median": 11464.8772,
+        "binary_median": 7722.2191,
+        "paired_gain_percent": [
+          44.9326147330067,
+          25.202745390426266,
+          32.644554622879
+        ],
+        "gain_range_percent": [
+          25.202745390426266,
+          44.9326147330067
+        ],
+        "all_pairs_faster": true
+      },
+      "common:50": {
+        "json_median": 11096.3186,
+        "binary_median": 7615.2,
+        "paired_gain_percent": [
+          45.475371013541306,
+          29.45640097248109,
+          30.83886053916699
+        ],
+        "gain_range_percent": [
+          29.45640097248109,
+          45.475371013541306
+        ],
+        "all_pairs_faster": true
+      },
+      "common:99950": {
+        "json_median": 11094.9609,
+        "binary_median": 7665.5471,
+        "paired_gain_percent": [
+          42.008542435270584,
+          29.521626344803074,
+          31.37333296997667
+        ],
+        "gain_range_percent": [
+          29.521626344803074,
+          42.008542435270584
+        ],
+        "all_pairs_faster": true
+      },
+      "rare:0": {
+        "json_median": 265.2924,
+        "binary_median": 240.6197,
+        "paired_gain_percent": [
+          26.849954024253183,
+          8.858152436200013,
+          9.300191034496274
+        ],
+        "gain_range_percent": [
+          8.858152436200013,
+          26.849954024253183
+        ],
+        "all_pairs_faster": true
+      },
+      "rare:50": {
+        "json_median": 255.5016,
+        "binary_median": 239.0315,
+        "paired_gain_percent": [
+          27.877768653610364,
+          8.204688842876477,
+          6.446182724491746
+        ],
+        "gain_range_percent": [
+          6.446182724491746,
+          27.877768653610364
+        ],
+        "all_pairs_faster": true
+      },
+      "short:0": {
+        "json_median": 11061.5212,
+        "binary_median": 7438.433,
+        "paired_gain_percent": [
+          44.34855594181498,
+          32.753977816360376,
+          28.396025987692266
+        ],
+        "gain_range_percent": [
+          28.396025987692266,
+          44.34855594181498
+        ],
+        "all_pairs_faster": true
+      },
+      "short:50": {
+        "json_median": 10986.0185,
+        "binary_median": 7498.789900000001,
+        "paired_gain_percent": [
+          32.57983954787624,
+          27.224670693378044,
+          33.00239903518607
+        ],
+        "gain_range_percent": [
+          27.224670693378044,
+          33.00239903518607
+        ],
+        "all_pairs_faster": true
+      }
+    }
+  },
+  "processes": 12,
+  "short_search_calls": 792,
+  "long_search_calls": 186,
+  "total_search_calls": 978,
+  "long_get_calls": 2400,
+  "unmeasured": [
+    "long-corpus ingest",
+    "cold cache",
+    "source-offset single-copy layout",
+    "concurrent throughput",
+    "update/delete latency",
+    "power loss"
+  ],
+  "all_processes_and_oracles_passed": true
+}

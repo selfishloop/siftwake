@@ -1,0 +1,74 @@
+
+running 11 tests
+test runtime_document_corruption_is_reported_before_returning_payload ... ok
+test deleted_disk_fields_and_links_never_leak_through_old_postings ... ok
+test automatic_maintenance_preserves_guards_and_does_not_run_for_rejected_batch ... ok
+test numeric_groups_unicode_and_exact_filters_work_across_collections ... ok
+test delta_byte_watermark_bounds_resident_long_content_after_next_write ... ok
+test missing_corrupt_and_wrong_generation_segments_rebuild_from_log ... ok
+test v01_checkpoint_fixture_opens_without_rewriting_authoritative_bytes ... ok
+test disk_delta_merge_masks_stale_results_and_preserves_page_order ... ok
+test postings_cross_block_boundaries_without_losing_page_entries ... ok
+test checkpoint_evicts_content_and_postings_from_resident_state ... ok
+test killing_compaction_before_publication_preserves_acknowledged_data ... ok
+
+test result: ok. 11 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 5.70s
+
+
+running 21 tests
+test buffered_wal_child ... ignored, subprocess helper; invoked by buffered_wal_process_kill
+test adapters_preserve_volume_hardlinks_and_fund_identity ... ok
+test invalid_batch_and_cross_scope_reference_do_not_write ... ok
+test guard_failure_is_atomic_and_does_not_write ... ok
+test complete_garbage_header_is_not_a_torn_write ... ok
+test exclusive_lock_released_on_drop ... ok
+test stale_postings_removed_and_short_unicode_terms_work ... ok
+test truncated_published_checkpoint_and_missing_marker_are_errors ... ok
+test acknowledged_commit_survives_process_kill ... ok
+test synced_and_buffered_commits_produce_identical_wal_bytes ... ok
+test empty_checkpoint_after_deleting_all_documents_reopens ... ok
+test buffered_wal_process_kill ... ok
+test corrupt_latest_checkpoint_never_falls_back_to_stale_generation ... ok
+test durable_batch_update_delete_compaction ... ok
+test incomplete_unpublished_generation_is_ignored ... ok
+test combined_indexes_turkish_pagination_and_scope ... ok
+test every_single_byte_corruption_in_committed_frame_is_rejected ... ok
+test randomized_operations_match_reference_across_reopens ... ok
+test every_partial_transaction_cut_recovers_previous_commit ... ok
+test buffered_wal_keeps_atomic_frames_and_rejects_corruption ... ok
+test multi_frame_checkpoint_preserves_versions_and_can_accept_writes ... ok
+
+test result: ok. 20 passed; 0 failed; 1 ignored; 0 measured; 0 filtered out; finished in 29.13s
+
+
+running 5 tests
+test export_child ... ignored, child helper invoked by export_process_kill
+test archive_cuts_misalignment_and_turkish_contains_keep_safe_access ... ok
+test old_json_fixture_still_opens_with_rkyv_feature_enabled ... ok
+test export_process_kill ... ok
+test every_export_cut_byte_corruption_and_runtime_payload_error_fail_closed ... ok
+
+test result: ok. 4 passed; 0 failed; 1 ignored; 0 measured; 0 filtered out; finished in 25.10s
+
+
+running 17 tests
+test every_manifest_section_is_checksummed_and_no_fallback_occurs ... ok
+test whitespace_and_short_terms_preserve_substring_and_semantics ... ok
+test manifest_copied_under_another_generation_is_rejected ... ok
+test process_kill_after_scheduling_merge_recovers_acknowledged_sources ... ok
+test full_filter_count_excludes_hidden_tombstones_and_unflushed_deletes ... ok
+test flush_writes_only_delta_and_does_not_rewrite_existing_sources ... ok
+test older_referenced_source_corruption_is_rejected_even_with_valid_cache ... ok
+test repeated_content_cache_keeps_titles_and_large_uncached_text_independent ... ok
+test streaming_open_preserves_large_exact_fields_on_rebuild_and_reopen ... ok
+test bounded_prefix_boundary_and_offset_overflow_preserve_exact_pages ... ok
+test tombstone_survives_merge_and_does_not_resurrect_old_document ... ok
+test merge_reuse_rejects_runtime_source_or_index_corruption_before_publication ... ok
+test writes_during_background_merge_and_unflushed_wal_survive_publication ... ok
+test bounded_first_page_merges_numeric_unions_and_newer_visibility_in_key_order ... ok
+test grouped_hydration_preserves_large_pages_delta_versions_and_oversized_documents ... ok
+test random_multi_segment_operations_match_reference_with_fields_and_links ... ok
+test paged_metadata_deep_offsets_interleaved_runs_and_delta_match_model ... ok
+
+test result: ok. 17 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 25.80s
+

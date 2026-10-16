@@ -1,0 +1,1642 @@
+{
+  "processes": 8,
+  "search_calls": 0,
+  "sampled_full_document_checks": 80,
+  "scope": "10k current engine comparison, no derived profile; same streamed long corpus; fresh DB; idle fresh process 5s after opened marker; thresholds are preliminary10k checks, not50k acceptance",
+  "fdb_features": "default only",
+  "indexing_repeats": 1,
+  "idle_repeats": 3,
+  "cache": "OS cache, no forced eviction; no searches/books/oracle resident",
+  "unmeasured": [
+    "30-query rare/AND/accent p95 set",
+    "update visibility",
+    "concurrent writer/readers",
+    "cold cache",
+    "DLL",
+    "derived profile",
+    "compression",
+    "single-copy payload",
+    "temporary disk peak"
+  ],
+  "engines": {
+    "fdb": {
+      "10000": {
+        "idle_private_bytes": 22511616,
+        "idle_working_set_bytes": 24875008,
+        "idle_private_samples": [
+          22511616,
+          23003136,
+          22294528
+        ],
+        "open_ms": 943.7084,
+        "indexing_peak_private_bytes": 189952000,
+        "increment_indexing_peak_private_bytes": 189952000,
+        "increment_indexing_peak_working_set_bytes": 192241664,
+        "indexing_peak_private_bytes_without_final_maintenance": 189952000,
+        "maintenance_peak_private_bytes": 151011328,
+        "increment_ingest_ms": 60932.6694,
+        "increment_maintenance_ms": 13931.6094,
+        "total_ingest_ms": 60932.6694,
+        "total_maintenance_ms": 13931.6094,
+        "write_plus_maintenance_ms": 74864.2788,
+        "text_bytes": 264842858,
+        "retained_disk_bytes": 1513745887.0,
+        "live_disk_bytes": 621143804,
+        "disk_over_text_ratio": 5.715637938781041,
+        "gates": {
+          "idle_private_15MiB": false,
+          "indexing_private_60MiB": false,
+          "open_500ms": false,
+          "disk_text40percent": false,
+          "disk_sqlite120percent": true,
+          "retained_disk_sqlite120percent": false,
+          "maintenance_sqlite2x": false,
+          "rare_query_p95": "unmeasured",
+          "update_visible20ms": "unmeasured"
+        },
+        "ingest_run": {
+          "memory": {
+            "engine": "fdb",
+            "mode": "ingest",
+            "from": 0,
+            "to": 10000,
+            "run": 0,
+            "exit_code": 0,
+            "low_disk_stop": false,
+            "phases": {
+              "runtime_baseline": {
+                "sampled_peak_private_bytes": 1363968,
+                "sampled_peak_working_set_bytes": 5578752,
+                "samples": 26
+              },
+              "maintenance": {
+                "sampled_peak_private_bytes": 151011328,
+                "sampled_peak_working_set_bytes": 151191552,
+                "samples": 374
+              },
+              "startup": {
+                "sampled_peak_private_bytes": 720896,
+                "sampled_peak_working_set_bytes": 4677632,
+                "samples": 4
+              },
+              "indexing": {
+                "sampled_peak_private_bytes": 189952000,
+                "sampled_peak_working_set_bytes": 192241664,
+                "samples": 1577
+              }
+            },
+            "idle": null,
+            "os_peak_working_set_bytes": 192249856,
+            "samples": 1981,
+            "sample_interval_ms": 20,
+            "phase_poll_ms": 100,
+            "elapsed_s": 76.0355238,
+            "cpu_ms": 90000.0,
+            "retained_disk_bytes": 1513745887.0,
+            "files": [
+              {
+                "name": "generation-0000000000000001.fdb",
+                "bytes": 27049019
+              },
+              {
+                "name": "generation-0000000000000001.ready",
+                "bytes": 87
+              },
+              {
+                "name": "generation-0000000000000003.fdb",
+                "bytes": 26697359
+              },
+              {
+                "name": "generation-0000000000000003.ready",
+                "bytes": 170
+              },
+              {
+                "name": "generation-0000000000000005.fdb",
+                "bytes": 26037578
+              },
+              {
+                "name": "generation-0000000000000005.ready",
+                "bytes": 253
+              },
+              {
+                "name": "generation-0000000000000007.fdb",
+                "bytes": 26933085
+              },
+              {
+                "name": "generation-0000000000000007.ready",
+                "bytes": 335
+              },
+              {
+                "name": "generation-0000000000000009.fdb",
+                "bytes": 25953796
+              },
+              {
+                "name": "generation-0000000000000009.ready",
+                "bytes": 419
+              },
+              {
+                "name": "generation-000000000000000c.fdb",
+                "bytes": 26961152
+              },
+              {
+                "name": "generation-000000000000000c.ready",
+                "bytes": 507
+              },
+              {
+                "name": "generation-000000000000000d.ready",
+                "bytes": 424
+              },
+              {
+                "name": "generation-000000000000000f.fdb",
+                "bytes": 26870441
+              },
+              {
+                "name": "generation-000000000000000f.ready",
+                "bytes": 510
+              },
+              {
+                "name": "generation-0000000000000012.fdb",
+                "bytes": 27216777
+              },
+              {
+                "name": "generation-0000000000000012.ready",
+                "bytes": 596
+              },
+              {
+                "name": "generation-0000000000000013.ready",
+                "bytes": 514
+              },
+              {
+                "name": "generation-0000000000000015.fdb",
+                "bytes": 26902655
+              },
+              {
+                "name": "generation-0000000000000015.ready",
+                "bytes": 600
+              },
+              {
+                "name": "generation-0000000000000018.fdb",
+                "bytes": 27278657
+              },
+              {
+                "name": "generation-0000000000000018.ready",
+                "bytes": 685
+              },
+              {
+                "name": "generation-0000000000000019.ready",
+                "bytes": 599
+              },
+              {
+                "name": "generation-000000000000001b.fdb",
+                "bytes": 45
+              },
+              {
+                "name": "generation-000000000000001b.ready",
+                "bytes": 685
+              },
+              {
+                "name": "generation-000000000000001d.ready",
+                "bytes": 599
+              },
+              {
+                "name": "generation-000000000000001f.ready",
+                "bytes": 514
+              },
+              {
+                "name": "run-0000000000000002.fdb",
+                "bytes": 27049056
+              },
+              {
+                "name": "run-0000000000000002.idx",
+                "bytes": 35983031
+              },
+              {
+                "name": "run-0000000000000004.fdb",
+                "bytes": 26697396
+              },
+              {
+                "name": "run-0000000000000004.idx",
+                "bytes": 35599354
+              },
+              {
+                "name": "run-0000000000000006.fdb",
+                "bytes": 26037615
+              },
+              {
+                "name": "run-0000000000000006.idx",
+                "bytes": 34825719
+              },
+              {
+                "name": "run-0000000000000008.fdb",
+                "bytes": 26933122
+              },
+              {
+                "name": "run-0000000000000008.idx",
+                "bytes": 35834141
+              },
+              {
+                "name": "run-000000000000000a.fdb",
+                "bytes": 53746407
+              },
+              {
+                "name": "run-000000000000000a.idx",
+                "bytes": 70872210
+              },
+              {
+                "name": "run-000000000000000b.fdb",
+                "bytes": 25953833
+              },
+              {
+                "name": "run-000000000000000b.idx",
+                "bytes": 34721544
+              },
+              {
+                "name": "run-000000000000000e.fdb",
+                "bytes": 26961189
+              },
+              {
+                "name": "run-000000000000000e.idx",
+                "bytes": 35883951
+              },
+              {
+                "name": "run-0000000000000010.fdb",
+                "bytes": 52970692
+              },
+              {
+                "name": "run-0000000000000010.idx",
+                "bytes": 69949707
+              },
+              {
+                "name": "run-0000000000000011.fdb",
+                "bytes": 26870478
+              },
+              {
+                "name": "run-0000000000000011.idx",
+                "bytes": 35753399
+              },
+              {
+                "name": "run-0000000000000014.fdb",
+                "bytes": 27216814
+              },
+              {
+                "name": "run-0000000000000014.idx",
+                "bytes": 36134902
+              },
+              {
+                "name": "run-0000000000000016.fdb",
+                "bytes": 52914977
+              },
+              {
+                "name": "run-0000000000000016.idx",
+                "bytes": 69894154
+              },
+              {
+                "name": "run-0000000000000017.fdb",
+                "bytes": 26902692
+              },
+              {
+                "name": "run-0000000000000017.idx",
+                "bytes": 35790010
+              },
+              {
+                "name": "run-000000000000001a.fdb",
+                "bytes": 27278694
+              },
+              {
+                "name": "run-000000000000001a.idx",
+                "bytes": 36267641
+              },
+              {
+                "name": "run-000000000000001c.fdb",
+                "bytes": 54087247
+              },
+              {
+                "name": "run-000000000000001c.idx",
+                "bytes": 71177214
+              },
+              {
+                "name": "run-000000000000001e.fdb",
+                "bytes": 54181341
+              },
+              {
+                "name": "run-000000000000001e.idx",
+                "bytes": 71349296
+              }
+            ],
+            "features": "default only",
+            "cache": "OS cache, no eviction, no search warmup",
+            "includes_os_file_cache": false,
+            "input": "streamed CRC-checked JSON corpus, batch500; no books/oracle resident",
+            "executable": "C:\\Users\\Serkan\\Documents\\ChatGPT\\fdb\\output\\content-memory-reserve-10k-20261012.exe",
+            "database": "C:\\Users\\Serkan\\Documents\\ChatGPT\\fdb\\data\\content-memory-reserve-10k-20261012-0-fdb"
+          },
+          "opening": {
+            "open_ms": 5.5946,
+            "phase": "opened",
+            "stats": {
+              "compaction_running": false,
+              "delta_keys": 0,
+              "disk_index_bytes": 0,
+              "disk_posting_entries": 0,
+              "documents": 0,
+              "generation": 1,
+              "log_bytes": 45,
+              "resident_documents": 0,
+              "resident_text_bytes": 0,
+              "segments": 0,
+              "sequence": 0,
+              "source_bytes": 45
+            }
+          },
+          "result": {
+            "all_input_crc_verified": true,
+            "database": "C:\\Users\\Serkan\\Documents\\ChatGPT\\fdb\\data\\content-memory-reserve-10k-20261012-0-fdb",
+            "from": 0,
+            "ingest_ms": 60932.6694,
+            "maintenance_ms": 13931.6094,
+            "phase": "result",
+            "sampled_full_document_checks": 40,
+            "stats": {
+              "compaction_running": false,
+              "delta_keys": 0,
+              "disk_index_bytes": 353242581,
+              "disk_posting_entries": 19221340,
+              "documents": 10000,
+              "generation": 31,
+              "log_bytes": 45,
+              "resident_documents": 0,
+              "resident_text_bytes": 0,
+              "segments": 5,
+              "sequence": 20,
+              "source_bytes": 267900709
+            },
+            "text_bytes": 264842858,
+            "to": 10000
+          }
+        },
+        "idle_runs": [
+          {
+            "memory": {
+              "engine": "fdb",
+              "mode": "idle",
+              "from": 0,
+              "to": 10000,
+              "run": 0,
+              "exit_code": 0,
+              "low_disk_stop": false,
+              "phases": {
+                "runtime_baseline": {
+                  "sampled_peak_private_bytes": 798720,
+                  "sampled_peak_working_set_bytes": 5017600,
+                  "samples": 28
+                },
+                "startup": {
+                  "sampled_peak_private_bytes": 729088,
+                  "sampled_peak_working_set_bytes": 4673536,
+                  "samples": 3
+                },
+                "opening": {
+                  "sampled_peak_private_bytes": 33107968,
+                  "sampled_peak_working_set_bytes": 33865728,
+                  "samples": 27
+                },
+                "idle_wait": {
+                  "sampled_peak_private_bytes": 22511616,
+                  "sampled_peak_working_set_bytes": 24838144,
+                  "samples": 133
+                },
+                "idle_ready": {
+                  "sampled_peak_private_bytes": 22511616,
+                  "sampled_peak_working_set_bytes": 24838144,
+                  "samples": 47
+                }
+              },
+              "idle": {
+                "private_bytes": 22511616,
+                "working_set_bytes": 24838144,
+                "elapsed_process_s": 7.1728431,
+                "after_open_wait_s": 5,
+                "search_calls": 0
+              },
+              "os_peak_working_set_bytes": 40923136,
+              "samples": 238,
+              "sample_interval_ms": 20,
+              "phase_poll_ms": 100,
+              "elapsed_s": 9.0976349,
+              "cpu_ms": 1000.0,
+              "retained_disk_bytes": 1513745887.0,
+              "files": [
+                {
+                  "name": "generation-0000000000000001.fdb",
+                  "bytes": 27049019
+                },
+                {
+                  "name": "generation-0000000000000001.ready",
+                  "bytes": 87
+                },
+                {
+                  "name": "generation-0000000000000003.fdb",
+                  "bytes": 26697359
+                },
+                {
+                  "name": "generation-0000000000000003.ready",
+                  "bytes": 170
+                },
+                {
+                  "name": "generation-0000000000000005.fdb",
+                  "bytes": 26037578
+                },
+                {
+                  "name": "generation-0000000000000005.ready",
+                  "bytes": 253
+                },
+                {
+                  "name": "generation-0000000000000007.fdb",
+                  "bytes": 26933085
+                },
+                {
+                  "name": "generation-0000000000000007.ready",
+                  "bytes": 335
+                },
+                {
+                  "name": "generation-0000000000000009.fdb",
+                  "bytes": 25953796
+                },
+                {
+                  "name": "generation-0000000000000009.ready",
+                  "bytes": 419
+                },
+                {
+                  "name": "generation-000000000000000c.fdb",
+                  "bytes": 26961152
+                },
+                {
+                  "name": "generation-000000000000000c.ready",
+                  "bytes": 507
+                },
+                {
+                  "name": "generation-000000000000000d.ready",
+                  "bytes": 424
+                },
+                {
+                  "name": "generation-000000000000000f.fdb",
+                  "bytes": 26870441
+                },
+                {
+                  "name": "generation-000000000000000f.ready",
+                  "bytes": 510
+                },
+                {
+                  "name": "generation-0000000000000012.fdb",
+                  "bytes": 27216777
+                },
+                {
+                  "name": "generation-0000000000000012.ready",
+                  "bytes": 596
+                },
+                {
+                  "name": "generation-0000000000000013.ready",
+                  "bytes": 514
+                },
+                {
+                  "name": "generation-0000000000000015.fdb",
+                  "bytes": 26902655
+                },
+                {
+                  "name": "generation-0000000000000015.ready",
+                  "bytes": 600
+                },
+                {
+                  "name": "generation-0000000000000018.fdb",
+                  "bytes": 27278657
+                },
+                {
+                  "name": "generation-0000000000000018.ready",
+                  "bytes": 685
+                },
+                {
+                  "name": "generation-0000000000000019.ready",
+                  "bytes": 599
+                },
+                {
+                  "name": "generation-000000000000001b.fdb",
+                  "bytes": 45
+                },
+                {
+                  "name": "generation-000000000000001b.ready",
+                  "bytes": 685
+                },
+                {
+                  "name": "generation-000000000000001d.ready",
+                  "bytes": 599
+                },
+                {
+                  "name": "generation-000000000000001f.ready",
+                  "bytes": 514
+                },
+                {
+                  "name": "run-0000000000000002.fdb",
+                  "bytes": 27049056
+                },
+                {
+                  "name": "run-0000000000000002.idx",
+                  "bytes": 35983031
+                },
+                {
+                  "name": "run-0000000000000004.fdb",
+                  "bytes": 26697396
+                },
+                {
+                  "name": "run-0000000000000004.idx",
+                  "bytes": 35599354
+                },
+                {
+                  "name": "run-0000000000000006.fdb",
+                  "bytes": 26037615
+                },
+                {
+                  "name": "run-0000000000000006.idx",
+                  "bytes": 34825719
+                },
+                {
+                  "name": "run-0000000000000008.fdb",
+                  "bytes": 26933122
+                },
+                {
+                  "name": "run-0000000000000008.idx",
+                  "bytes": 35834141
+                },
+                {
+                  "name": "run-000000000000000a.fdb",
+                  "bytes": 53746407
+                },
+                {
+                  "name": "run-000000000000000a.idx",
+                  "bytes": 70872210
+                },
+                {
+                  "name": "run-000000000000000b.fdb",
+                  "bytes": 25953833
+                },
+                {
+                  "name": "run-000000000000000b.idx",
+                  "bytes": 34721544
+                },
+                {
+                  "name": "run-000000000000000e.fdb",
+                  "bytes": 26961189
+                },
+                {
+                  "name": "run-000000000000000e.idx",
+                  "bytes": 35883951
+                },
+                {
+                  "name": "run-0000000000000010.fdb",
+                  "bytes": 52970692
+                },
+                {
+                  "name": "run-0000000000000010.idx",
+                  "bytes": 69949707
+                },
+                {
+                  "name": "run-0000000000000011.fdb",
+                  "bytes": 26870478
+                },
+                {
+                  "name": "run-0000000000000011.idx",
+                  "bytes": 35753399
+                },
+                {
+                  "name": "run-0000000000000014.fdb",
+                  "bytes": 27216814
+                },
+                {
+                  "name": "run-0000000000000014.idx",
+                  "bytes": 36134902
+                },
+                {
+                  "name": "run-0000000000000016.fdb",
+                  "bytes": 52914977
+                },
+                {
+                  "name": "run-0000000000000016.idx",
+                  "bytes": 69894154
+                },
+                {
+                  "name": "run-0000000000000017.fdb",
+                  "bytes": 26902692
+                },
+                {
+                  "name": "run-0000000000000017.idx",
+                  "bytes": 35790010
+                },
+                {
+                  "name": "run-000000000000001a.fdb",
+                  "bytes": 27278694
+                },
+                {
+                  "name": "run-000000000000001a.idx",
+                  "bytes": 36267641
+                },
+                {
+                  "name": "run-000000000000001c.fdb",
+                  "bytes": 54087247
+                },
+                {
+                  "name": "run-000000000000001c.idx",
+                  "bytes": 71177214
+                },
+                {
+                  "name": "run-000000000000001e.fdb",
+                  "bytes": 54181341
+                },
+                {
+                  "name": "run-000000000000001e.idx",
+                  "bytes": 71349296
+                }
+              ],
+              "features": "default only",
+              "cache": "OS cache, no eviction, no search warmup",
+              "includes_os_file_cache": false,
+              "input": "streamed CRC-checked JSON corpus, batch500; no books/oracle resident",
+              "executable": "C:\\Users\\Serkan\\Documents\\ChatGPT\\fdb\\output\\content-memory-reserve-10k-20261012.exe",
+              "database": "C:\\Users\\Serkan\\Documents\\ChatGPT\\fdb\\data\\content-memory-reserve-10k-20261012-0-fdb"
+            },
+            "opening": {
+              "open_ms": 986.7842999999999,
+              "phase": "opened",
+              "stats": {
+                "compaction_running": false,
+                "delta_keys": 0,
+                "disk_index_bytes": 353242581,
+                "disk_posting_entries": 19221340,
+                "documents": 10000,
+                "generation": 31,
+                "log_bytes": 45,
+                "resident_documents": 0,
+                "resident_text_bytes": 0,
+                "segments": 5,
+                "sequence": 20,
+                "source_bytes": 267900709
+              }
+            },
+            "result": null
+          },
+          {
+            "memory": {
+              "engine": "fdb",
+              "mode": "idle",
+              "from": 0,
+              "to": 10000,
+              "run": 1,
+              "exit_code": 0,
+              "low_disk_stop": false,
+              "phases": {
+                "runtime_baseline": {
+                  "sampled_peak_private_bytes": 790528,
+                  "sampled_peak_working_set_bytes": 5017600,
+                  "samples": 27
+                },
+                "startup": {
+                  "sampled_peak_private_bytes": 720896,
+                  "sampled_peak_working_set_bytes": 4661248,
+                  "samples": 2
+                },
+                "opening": {
+                  "sampled_peak_private_bytes": 33206272,
+                  "sampled_peak_working_set_bytes": 36536320,
+                  "samples": 24
+                },
+                "idle_wait": {
+                  "sampled_peak_private_bytes": 23003136,
+                  "sampled_peak_working_set_bytes": 24875008,
+                  "samples": 135
+                },
+                "idle_ready": {
+                  "sampled_peak_private_bytes": 23003136,
+                  "sampled_peak_working_set_bytes": 24875008,
+                  "samples": 52
+                }
+              },
+              "idle": {
+                "private_bytes": 23003136,
+                "working_set_bytes": 24875008,
+                "elapsed_process_s": 7.1308148,
+                "after_open_wait_s": 5,
+                "search_calls": 0
+              },
+              "os_peak_working_set_bytes": 41062400,
+              "samples": 240,
+              "sample_interval_ms": 20,
+              "phase_poll_ms": 100,
+              "elapsed_s": 9.0752409,
+              "cpu_ms": 953.125,
+              "retained_disk_bytes": 1513745887.0,
+              "files": [
+                {
+                  "name": "generation-0000000000000001.fdb",
+                  "bytes": 27049019
+                },
+                {
+                  "name": "generation-0000000000000001.ready",
+                  "bytes": 87
+                },
+                {
+                  "name": "generation-0000000000000003.fdb",
+                  "bytes": 26697359
+                },
+                {
+                  "name": "generation-0000000000000003.ready",
+                  "bytes": 170
+                },
+                {
+                  "name": "generation-0000000000000005.fdb",
+                  "bytes": 26037578
+                },
+                {
+                  "name": "generation-0000000000000005.ready",
+                  "bytes": 253
+                },
+                {
+                  "name": "generation-0000000000000007.fdb",
+                  "bytes": 26933085
+                },
+                {
+                  "name": "generation-0000000000000007.ready",
+                  "bytes": 335
+                },
+                {
+                  "name": "generation-0000000000000009.fdb",
+                  "bytes": 25953796
+                },
+                {
+                  "name": "generation-0000000000000009.ready",
+                  "bytes": 419
+                },
+                {
+                  "name": "generation-000000000000000c.fdb",
+                  "bytes": 26961152
+                },
+                {
+                  "name": "generation-000000000000000c.ready",
+                  "bytes": 507
+                },
+                {
+                  "name": "generation-000000000000000d.ready",
+                  "bytes": 424
+                },
+                {
+                  "name": "generation-000000000000000f.fdb",
+                  "bytes": 26870441
+                },
+                {
+                  "name": "generation-000000000000000f.ready",
+                  "bytes": 510
+                },
+                {
+                  "name": "generation-0000000000000012.fdb",
+                  "bytes": 27216777
+                },
+                {
+                  "name": "generation-0000000000000012.ready",
+                  "bytes": 596
+                },
+                {
+                  "name": "generation-0000000000000013.ready",
+                  "bytes": 514
+                },
+                {
+                  "name": "generation-0000000000000015.fdb",
+                  "bytes": 26902655
+                },
+                {
+                  "name": "generation-0000000000000015.ready",
+                  "bytes": 600
+                },
+                {
+                  "name": "generation-0000000000000018.fdb",
+                  "bytes": 27278657
+                },
+                {
+                  "name": "generation-0000000000000018.ready",
+                  "bytes": 685
+                },
+                {
+                  "name": "generation-0000000000000019.ready",
+                  "bytes": 599
+                },
+                {
+                  "name": "generation-000000000000001b.fdb",
+                  "bytes": 45
+                },
+                {
+                  "name": "generation-000000000000001b.ready",
+                  "bytes": 685
+                },
+                {
+                  "name": "generation-000000000000001d.ready",
+                  "bytes": 599
+                },
+                {
+                  "name": "generation-000000000000001f.ready",
+                  "bytes": 514
+                },
+                {
+                  "name": "run-0000000000000002.fdb",
+                  "bytes": 27049056
+                },
+                {
+                  "name": "run-0000000000000002.idx",
+                  "bytes": 35983031
+                },
+                {
+                  "name": "run-0000000000000004.fdb",
+                  "bytes": 26697396
+                },
+                {
+                  "name": "run-0000000000000004.idx",
+                  "bytes": 35599354
+                },
+                {
+                  "name": "run-0000000000000006.fdb",
+                  "bytes": 26037615
+                },
+                {
+                  "name": "run-0000000000000006.idx",
+                  "bytes": 34825719
+                },
+                {
+                  "name": "run-0000000000000008.fdb",
+                  "bytes": 26933122
+                },
+                {
+                  "name": "run-0000000000000008.idx",
+                  "bytes": 35834141
+                },
+                {
+                  "name": "run-000000000000000a.fdb",
+                  "bytes": 53746407
+                },
+                {
+                  "name": "run-000000000000000a.idx",
+                  "bytes": 70872210
+                },
+                {
+                  "name": "run-000000000000000b.fdb",
+                  "bytes": 25953833
+                },
+                {
+                  "name": "run-000000000000000b.idx",
+                  "bytes": 34721544
+                },
+                {
+                  "name": "run-000000000000000e.fdb",
+                  "bytes": 26961189
+                },
+                {
+                  "name": "run-000000000000000e.idx",
+                  "bytes": 35883951
+                },
+                {
+                  "name": "run-0000000000000010.fdb",
+                  "bytes": 52970692
+                },
+                {
+                  "name": "run-0000000000000010.idx",
+                  "bytes": 69949707
+                },
+                {
+                  "name": "run-0000000000000011.fdb",
+                  "bytes": 26870478
+                },
+                {
+                  "name": "run-0000000000000011.idx",
+                  "bytes": 35753399
+                },
+                {
+                  "name": "run-0000000000000014.fdb",
+                  "bytes": 27216814
+                },
+                {
+                  "name": "run-0000000000000014.idx",
+                  "bytes": 36134902
+                },
+                {
+                  "name": "run-0000000000000016.fdb",
+                  "bytes": 52914977
+                },
+                {
+                  "name": "run-0000000000000016.idx",
+                  "bytes": 69894154
+                },
+                {
+                  "name": "run-0000000000000017.fdb",
+                  "bytes": 26902692
+                },
+                {
+                  "name": "run-0000000000000017.idx",
+                  "bytes": 35790010
+                },
+                {
+                  "name": "run-000000000000001a.fdb",
+                  "bytes": 27278694
+                },
+                {
+                  "name": "run-000000000000001a.idx",
+                  "bytes": 36267641
+                },
+                {
+                  "name": "run-000000000000001c.fdb",
+                  "bytes": 54087247
+                },
+                {
+                  "name": "run-000000000000001c.idx",
+                  "bytes": 71177214
+                },
+                {
+                  "name": "run-000000000000001e.fdb",
+                  "bytes": 54181341
+                },
+                {
+                  "name": "run-000000000000001e.idx",
+                  "bytes": 71349296
+                }
+              ],
+              "features": "default only",
+              "cache": "OS cache, no eviction, no search warmup",
+              "includes_os_file_cache": false,
+              "input": "streamed CRC-checked JSON corpus, batch500; no books/oracle resident",
+              "executable": "C:\\Users\\Serkan\\Documents\\ChatGPT\\fdb\\output\\content-memory-reserve-10k-20261012.exe",
+              "database": "C:\\Users\\Serkan\\Documents\\ChatGPT\\fdb\\data\\content-memory-reserve-10k-20261012-0-fdb"
+            },
+            "opening": {
+              "open_ms": 943.7084,
+              "phase": "opened",
+              "stats": {
+                "compaction_running": false,
+                "delta_keys": 0,
+                "disk_index_bytes": 353242581,
+                "disk_posting_entries": 19221340,
+                "documents": 10000,
+                "generation": 31,
+                "log_bytes": 45,
+                "resident_documents": 0,
+                "resident_text_bytes": 0,
+                "segments": 5,
+                "sequence": 20,
+                "source_bytes": 267900709
+              }
+            },
+            "result": null
+          },
+          {
+            "memory": {
+              "engine": "fdb",
+              "mode": "idle",
+              "from": 0,
+              "to": 10000,
+              "run": 2,
+              "exit_code": 0,
+              "low_disk_stop": false,
+              "phases": {
+                "runtime_baseline": {
+                  "sampled_peak_private_bytes": 782336,
+                  "sampled_peak_working_set_bytes": 5013504,
+                  "samples": 28
+                },
+                "startup": {
+                  "sampled_peak_private_bytes": 724992,
+                  "sampled_peak_working_set_bytes": 4681728,
+                  "samples": 2
+                },
+                "opening": {
+                  "sampled_peak_private_bytes": 35758080,
+                  "sampled_peak_working_set_bytes": 39157760,
+                  "samples": 24
+                },
+                "idle_wait": {
+                  "sampled_peak_private_bytes": 22294528,
+                  "sampled_peak_working_set_bytes": 24883200,
+                  "samples": 130
+                },
+                "idle_ready": {
+                  "sampled_peak_private_bytes": 22294528,
+                  "sampled_peak_working_set_bytes": 24883200,
+                  "samples": 53
+                }
+              },
+              "idle": {
+                "private_bytes": 22294528,
+                "working_set_bytes": 24883200,
+                "elapsed_process_s": 7.0498264,
+                "after_open_wait_s": 5,
+                "search_calls": 0
+              },
+              "os_peak_working_set_bytes": 40701952,
+              "samples": 237,
+              "sample_interval_ms": 20,
+              "phase_poll_ms": 100,
+              "elapsed_s": 9.0341635,
+              "cpu_ms": 968.75,
+              "retained_disk_bytes": 1513745887.0,
+              "files": [
+                {
+                  "name": "generation-0000000000000001.fdb",
+                  "bytes": 27049019
+                },
+                {
+                  "name": "generation-0000000000000001.ready",
+                  "bytes": 87
+                },
+                {
+                  "name": "generation-0000000000000003.fdb",
+                  "bytes": 26697359
+                },
+                {
+                  "name": "generation-0000000000000003.ready",
+                  "bytes": 170
+                },
+                {
+                  "name": "generation-0000000000000005.fdb",
+                  "bytes": 26037578
+                },
+                {
+                  "name": "generation-0000000000000005.ready",
+                  "bytes": 253
+                },
+                {
+                  "name": "generation-0000000000000007.fdb",
+                  "bytes": 26933085
+                },
+                {
+                  "name": "generation-0000000000000007.ready",
+                  "bytes": 335
+                },
+                {
+                  "name": "generation-0000000000000009.fdb",
+                  "bytes": 25953796
+                },
+                {
+                  "name": "generation-0000000000000009.ready",
+                  "bytes": 419
+                },
+                {
+                  "name": "generation-000000000000000c.fdb",
+                  "bytes": 26961152
+                },
+                {
+                  "name": "generation-000000000000000c.ready",
+                  "bytes": 507
+                },
+                {
+                  "name": "generation-000000000000000d.ready",
+                  "bytes": 424
+                },
+                {
+                  "name": "generation-000000000000000f.fdb",
+                  "bytes": 26870441
+                },
+                {
+                  "name": "generation-000000000000000f.ready",
+                  "bytes": 510
+                },
+                {
+                  "name": "generation-0000000000000012.fdb",
+                  "bytes": 27216777
+                },
+                {
+                  "name": "generation-0000000000000012.ready",
+                  "bytes": 596
+                },
+                {
+                  "name": "generation-0000000000000013.ready",
+                  "bytes": 514
+                },
+                {
+                  "name": "generation-0000000000000015.fdb",
+                  "bytes": 26902655
+                },
+                {
+                  "name": "generation-0000000000000015.ready",
+                  "bytes": 600
+                },
+                {
+                  "name": "generation-0000000000000018.fdb",
+                  "bytes": 27278657
+                },
+                {
+                  "name": "generation-0000000000000018.ready",
+                  "bytes": 685
+                },
+                {
+                  "name": "generation-0000000000000019.ready",
+                  "bytes": 599
+                },
+                {
+                  "name": "generation-000000000000001b.fdb",
+                  "bytes": 45
+                },
+                {
+                  "name": "generation-000000000000001b.ready",
+                  "bytes": 685
+                },
+                {
+                  "name": "generation-000000000000001d.ready",
+                  "bytes": 599
+                },
+                {
+                  "name": "generation-000000000000001f.ready",
+                  "bytes": 514
+                },
+                {
+                  "name": "run-0000000000000002.fdb",
+                  "bytes": 27049056
+                },
+                {
+                  "name": "run-0000000000000002.idx",
+                  "bytes": 35983031
+                },
+                {
+                  "name": "run-0000000000000004.fdb",
+                  "bytes": 26697396
+                },
+                {
+                  "name": "run-0000000000000004.idx",
+                  "bytes": 35599354
+                },
+                {
+                  "name": "run-0000000000000006.fdb",
+                  "bytes": 26037615
+                },
+                {
+                  "name": "run-0000000000000006.idx",
+                  "bytes": 34825719
+                },
+                {
+                  "name": "run-0000000000000008.fdb",
+                  "bytes": 26933122
+                },
+                {
+                  "name": "run-0000000000000008.idx",
+                  "bytes": 35834141
+                },
+                {
+                  "name": "run-000000000000000a.fdb",
+                  "bytes": 53746407
+                },
+                {
+                  "name": "run-000000000000000a.idx",
+                  "bytes": 70872210
+                },
+                {
+                  "name": "run-000000000000000b.fdb",
+                  "bytes": 25953833
+                },
+                {
+                  "name": "run-000000000000000b.idx",
+                  "bytes": 34721544
+                },
+                {
+                  "name": "run-000000000000000e.fdb",
+                  "bytes": 26961189
+                },
+                {
+                  "name": "run-000000000000000e.idx",
+                  "bytes": 35883951
+                },
+                {
+                  "name": "run-0000000000000010.fdb",
+                  "bytes": 52970692
+                },
+                {
+                  "name": "run-0000000000000010.idx",
+                  "bytes": 69949707
+                },
+                {
+                  "name": "run-0000000000000011.fdb",
+                  "bytes": 26870478
+                },
+                {
+                  "name": "run-0000000000000011.idx",
+                  "bytes": 35753399
+                },
+                {
+                  "name": "run-0000000000000014.fdb",
+                  "bytes": 27216814
+                },
+                {
+                  "name": "run-0000000000000014.idx",
+                  "bytes": 36134902
+                },
+                {
+                  "name": "run-0000000000000016.fdb",
+                  "bytes": 52914977
+                },
+                {
+                  "name": "run-0000000000000016.idx",
+                  "bytes": 69894154
+                },
+                {
+                  "name": "run-0000000000000017.fdb",
+                  "bytes": 26902692
+                },
+                {
+                  "name": "run-0000000000000017.idx",
+                  "bytes": 35790010
+                },
+                {
+                  "name": "run-000000000000001a.fdb",
+                  "bytes": 27278694
+                },
+                {
+                  "name": "run-000000000000001a.idx",
+                  "bytes": 36267641
+                },
+                {
+                  "name": "run-000000000000001c.fdb",
+                  "bytes": 54087247
+                },
+                {
+                  "name": "run-000000000000001c.idx",
+                  "bytes": 71177214
+                },
+                {
+                  "name": "run-000000000000001e.fdb",
+                  "bytes": 54181341
+                },
+                {
+                  "name": "run-000000000000001e.idx",
+                  "bytes": 71349296
+                }
+              ],
+              "features": "default only",
+              "cache": "OS cache, no eviction, no search warmup",
+              "includes_os_file_cache": false,
+              "input": "streamed CRC-checked JSON corpus, batch500; no books/oracle resident",
+              "executable": "C:\\Users\\Serkan\\Documents\\ChatGPT\\fdb\\output\\content-memory-reserve-10k-20261012.exe",
+              "database": "C:\\Users\\Serkan\\Documents\\ChatGPT\\fdb\\data\\content-memory-reserve-10k-20261012-0-fdb"
+            },
+            "opening": {
+              "open_ms": 938.8996,
+              "phase": "opened",
+              "stats": {
+                "compaction_running": false,
+                "delta_keys": 0,
+                "disk_index_bytes": 353242581,
+                "disk_posting_entries": 19221340,
+                "documents": 10000,
+                "generation": 31,
+                "log_bytes": 45,
+                "resident_documents": 0,
+                "resident_text_bytes": 0,
+                "segments": 5,
+                "sequence": 20,
+                "source_bytes": 267900709
+              }
+            },
+            "result": null
+          }
+        ]
+      }
+    },
+    "sqlite": {
+      "10000": {
+        "idle_private_bytes": 1376256,
+        "idle_working_set_bytes": 6303744,
+        "idle_private_samples": [
+          1376256,
+          1368064,
+          1380352
+        ],
+        "open_ms": 7.935700000000001,
+        "indexing_peak_private_bytes": 8966144,
+        "increment_indexing_peak_private_bytes": 8966144,
+        "increment_indexing_peak_working_set_bytes": 14151680,
+        "indexing_peak_private_bytes_without_final_maintenance": 8966144,
+        "maintenance_peak_private_bytes": 7589888,
+        "increment_ingest_ms": 40969.6471,
+        "increment_maintenance_ms": 1505.744,
+        "total_ingest_ms": 40969.6471,
+        "total_maintenance_ms": 1505.744,
+        "write_plus_maintenance_ms": 42475.3911,
+        "text_bytes": 264842858,
+        "retained_disk_bytes": 583860224.0,
+        "live_disk_bytes": 583860224,
+        "disk_over_text_ratio": 2.2045534035129615,
+        "gates": {
+          "idle_private_15MiB": true,
+          "indexing_private_60MiB": true,
+          "open_500ms": true,
+          "disk_text40percent": false
+        },
+        "ingest_run": {
+          "memory": {
+            "engine": "sqlite",
+            "mode": "ingest",
+            "from": 0,
+            "to": 10000,
+            "run": 0,
+            "exit_code": 0,
+            "low_disk_stop": false,
+            "phases": {
+              "runtime_baseline": {
+                "sampled_peak_private_bytes": 860160,
+                "sampled_peak_working_set_bytes": 5898240,
+                "samples": 29
+              },
+              "maintenance": {
+                "sampled_peak_private_bytes": 7589888,
+                "sampled_peak_working_set_bytes": 12587008,
+                "samples": 38
+              },
+              "startup": {
+                "sampled_peak_private_bytes": 761856,
+                "sampled_peak_working_set_bytes": 4784128,
+                "samples": 3
+              },
+              "indexing": {
+                "sampled_peak_private_bytes": 8966144,
+                "sampled_peak_working_set_bytes": 14151680,
+                "samples": 1078
+              }
+            },
+            "idle": null,
+            "os_peak_working_set_bytes": 14151680,
+            "samples": 1148,
+            "sample_interval_ms": 20,
+            "phase_poll_ms": 100,
+            "elapsed_s": 43.5969276,
+            "cpu_ms": 40375.0,
+            "retained_disk_bytes": 583860224.0,
+            "files": [
+              {
+                "name": "sqlite.db",
+                "bytes": 583860224
+              }
+            ],
+            "features": "default only",
+            "cache": "OS cache, no eviction, no search warmup",
+            "includes_os_file_cache": false,
+            "input": "streamed CRC-checked JSON corpus, batch500; no books/oracle resident",
+            "executable": "C:\\Users\\Serkan\\Documents\\ChatGPT\\fdb\\output\\content-memory-sqlite-10k-20261011.exe",
+            "database": "C:\\Users\\Serkan\\Documents\\ChatGPT\\fdb\\data\\content-memory-reserve-10k-20261012-0-sqlite"
+          },
+          "opening": {
+            "cache_kib": 2048,
+            "documents": 0,
+            "full_integrity_on_open": false,
+            "mmap_bytes": 0,
+            "open_ms": 13.3753,
+            "phase": "opened",
+            "sqlite_version": "3.53.2"
+          },
+          "result": {
+            "all_input_crc_verified": true,
+            "documents": 10000,
+            "from": 0,
+            "ingest_ms": 40969.6471,
+            "maintenance_ms": 1505.744,
+            "phase": "result",
+            "sampled_full_document_checks": 40,
+            "text_bytes": 264842858,
+            "to": 10000
+          }
+        },
+        "idle_runs": [
+          {
+            "memory": {
+              "engine": "sqlite",
+              "mode": "idle",
+              "from": 0,
+              "to": 10000,
+              "run": 0,
+              "exit_code": 0,
+              "low_disk_stop": false,
+              "phases": {
+                "runtime_baseline": {
+                  "sampled_peak_private_bytes": 1376256,
+                  "sampled_peak_working_set_bytes": 6303744,
+                  "samples": 27
+                },
+                "startup": {
+                  "sampled_peak_private_bytes": 749568,
+                  "sampled_peak_working_set_bytes": 4710400,
+                  "samples": 3
+                },
+                "idle_wait": {
+                  "sampled_peak_private_bytes": 1376256,
+                  "sampled_peak_working_set_bytes": 6303744,
+                  "samples": 132
+                },
+                "idle_ready": {
+                  "sampled_peak_private_bytes": 1376256,
+                  "sampled_peak_working_set_bytes": 6303744,
+                  "samples": 48
+                }
+              },
+              "idle": {
+                "private_bytes": 1376256,
+                "working_set_bytes": 6303744,
+                "elapsed_process_s": 6.1852675,
+                "after_open_wait_s": 5,
+                "search_calls": 0
+              },
+              "os_peak_working_set_bytes": 6303744,
+              "samples": 210,
+              "sample_interval_ms": 20,
+              "phase_poll_ms": 100,
+              "elapsed_s": 8.1078296,
+              "cpu_ms": 15.625,
+              "retained_disk_bytes": 583892992.0,
+              "files": [
+                {
+                  "name": "sqlite.db",
+                  "bytes": 583860224
+                },
+                {
+                  "name": "sqlite.db-shm",
+                  "bytes": 32768
+                },
+                {
+                  "name": "sqlite.db-wal",
+                  "bytes": 0
+                }
+              ],
+              "features": "default only",
+              "cache": "OS cache, no eviction, no search warmup",
+              "includes_os_file_cache": false,
+              "input": "streamed CRC-checked JSON corpus, batch500; no books/oracle resident",
+              "executable": "C:\\Users\\Serkan\\Documents\\ChatGPT\\fdb\\output\\content-memory-sqlite-10k-20261011.exe",
+              "database": "C:\\Users\\Serkan\\Documents\\ChatGPT\\fdb\\data\\content-memory-reserve-10k-20261012-0-sqlite"
+            },
+            "opening": {
+              "cache_kib": 2048,
+              "documents": 10000,
+              "full_integrity_on_open": false,
+              "mmap_bytes": 0,
+              "open_ms": 1.5955,
+              "phase": "opened",
+              "sqlite_version": "3.53.2"
+            },
+            "result": null
+          },
+          {
+            "memory": {
+              "engine": "sqlite",
+              "mode": "idle",
+              "from": 0,
+              "to": 10000,
+              "run": 1,
+              "exit_code": 0,
+              "low_disk_stop": false,
+              "phases": {
+                "runtime_baseline": {
+                  "sampled_peak_private_bytes": 1368064,
+                  "sampled_peak_working_set_bytes": 6303744,
+                  "samples": 27
+                },
+                "startup": {
+                  "sampled_peak_private_bytes": 737280,
+                  "sampled_peak_working_set_bytes": 4706304,
+                  "samples": 3
+                },
+                "idle_wait": {
+                  "sampled_peak_private_bytes": 1368064,
+                  "sampled_peak_working_set_bytes": 6303744,
+                  "samples": 133
+                },
+                "idle_ready": {
+                  "sampled_peak_private_bytes": 1368064,
+                  "sampled_peak_working_set_bytes": 6303744,
+                  "samples": 53
+                }
+              },
+              "idle": {
+                "private_bytes": 1368064,
+                "working_set_bytes": 6303744,
+                "elapsed_process_s": 6.1152102,
+                "after_open_wait_s": 5,
+                "search_calls": 0
+              },
+              "os_peak_working_set_bytes": 6303744,
+              "samples": 216,
+              "sample_interval_ms": 20,
+              "phase_poll_ms": 100,
+              "elapsed_s": 8.0935352,
+              "cpu_ms": 31.25,
+              "retained_disk_bytes": 583892992.0,
+              "files": [
+                {
+                  "name": "sqlite.db",
+                  "bytes": 583860224
+                },
+                {
+                  "name": "sqlite.db-shm",
+                  "bytes": 32768
+                },
+                {
+                  "name": "sqlite.db-wal",
+                  "bytes": 0
+                }
+              ],
+              "features": "default only",
+              "cache": "OS cache, no eviction, no search warmup",
+              "includes_os_file_cache": false,
+              "input": "streamed CRC-checked JSON corpus, batch500; no books/oracle resident",
+              "executable": "C:\\Users\\Serkan\\Documents\\ChatGPT\\fdb\\output\\content-memory-sqlite-10k-20261011.exe",
+              "database": "C:\\Users\\Serkan\\Documents\\ChatGPT\\fdb\\data\\content-memory-reserve-10k-20261012-0-sqlite"
+            },
+            "opening": {
+              "cache_kib": 2048,
+              "documents": 10000,
+              "full_integrity_on_open": false,
+              "mmap_bytes": 0,
+              "open_ms": 7.935700000000001,
+              "phase": "opened",
+              "sqlite_version": "3.53.2"
+            },
+            "result": null
+          },
+          {
+            "memory": {
+              "engine": "sqlite",
+              "mode": "idle",
+              "from": 0,
+              "to": 10000,
+              "run": 2,
+              "exit_code": 0,
+              "low_disk_stop": false,
+              "phases": {
+                "runtime_baseline": {
+                  "sampled_peak_private_bytes": 753664,
+                  "sampled_peak_working_set_bytes": 4714496,
+                  "samples": 21
+                },
+                "startup": {
+                  "sampled_peak_private_bytes": 753664,
+                  "sampled_peak_working_set_bytes": 4714496,
+                  "samples": 2
+                },
+                "idle_wait": {
+                  "sampled_peak_private_bytes": 1380352,
+                  "sampled_peak_working_set_bytes": 6307840,
+                  "samples": 132
+                },
+                "idle_ready": {
+                  "sampled_peak_private_bytes": 1380352,
+                  "sampled_peak_working_set_bytes": 6307840,
+                  "samples": 49
+                }
+              },
+              "idle": {
+                "private_bytes": 1380352,
+                "working_set_bytes": 6307840,
+                "elapsed_process_s": 6.1584145,
+                "after_open_wait_s": 5,
+                "search_calls": 0
+              },
+              "os_peak_working_set_bytes": 6307840,
+              "samples": 204,
+              "sample_interval_ms": 20,
+              "phase_poll_ms": 100,
+              "elapsed_s": 8.0889152,
+              "cpu_ms": 31.25,
+              "retained_disk_bytes": 583892992.0,
+              "files": [
+                {
+                  "name": "sqlite.db",
+                  "bytes": 583860224
+                },
+                {
+                  "name": "sqlite.db-shm",
+                  "bytes": 32768
+                },
+                {
+                  "name": "sqlite.db-wal",
+                  "bytes": 0
+                }
+              ],
+              "features": "default only",
+              "cache": "OS cache, no eviction, no search warmup",
+              "includes_os_file_cache": false,
+              "input": "streamed CRC-checked JSON corpus, batch500; no books/oracle resident",
+              "executable": "C:\\Users\\Serkan\\Documents\\ChatGPT\\fdb\\output\\content-memory-sqlite-10k-20261011.exe",
+              "database": "C:\\Users\\Serkan\\Documents\\ChatGPT\\fdb\\data\\content-memory-reserve-10k-20261012-0-sqlite"
+            },
+            "opening": {
+              "cache_kib": 2048,
+              "documents": 10000,
+              "full_integrity_on_open": false,
+              "mmap_bytes": 0,
+              "open_ms": 8.0786,
+              "phase": "opened",
+              "sqlite_version": "3.53.2"
+            },
+            "result": null
+          }
+        ]
+      }
+    }
+  },
+  "all_processes_passed": true
+}

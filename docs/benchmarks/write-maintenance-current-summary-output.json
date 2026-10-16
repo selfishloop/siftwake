@@ -1,0 +1,152 @@
+{
+  "runs": [
+    {
+      "run": 0,
+      "engine": "fdb",
+      "ingest_s": 25.2485496,
+      "maintenance_s": 1.5331424999999999,
+      "combined_s": 26.7816921,
+      "observed_os_peak_ws_bytes": 134983680,
+      "sampled_indexing_private_bytes": 131231744,
+      "sampled_maintenance_private_bytes": 101867520,
+      "idle_private_bytes": 22208512,
+      "idle_ws_bytes": 24027136,
+      "retained_disk_bytes": 1513744522.0,
+      "stats": {
+        "compaction_running": false,
+        "delta_keys": 0,
+        "disk_index_bytes": 353242581,
+        "disk_posting_entries": 19221340,
+        "documents": 10000,
+        "generation": 31,
+        "log_bytes": 45,
+        "resident_documents": 0,
+        "resident_text_bytes": 0,
+        "segments": 5,
+        "sequence": 20,
+        "source_bytes": 267900709
+      }
+    },
+    {
+      "run": 0,
+      "engine": "sqlite",
+      "ingest_s": 34.1586356,
+      "maintenance_s": 1.0541156,
+      "combined_s": 35.21275119999999,
+      "observed_os_peak_ws_bytes": 14426112,
+      "sampled_indexing_private_bytes": 8749056,
+      "sampled_maintenance_private_bytes": 8683520,
+      "idle_private_bytes": 1302528,
+      "idle_ws_bytes": 5591040,
+      "retained_disk_bytes": 583860224.0,
+      "stats": null
+    },
+    {
+      "run": 1,
+      "engine": "fdb",
+      "ingest_s": 46.3373157,
+      "maintenance_s": 2.2757753,
+      "combined_s": 48.613091,
+      "observed_os_peak_ws_bytes": 133873664,
+      "sampled_indexing_private_bytes": 130134016,
+      "sampled_maintenance_private_bytes": 103530496,
+      "idle_private_bytes": 22728704,
+      "idle_ws_bytes": 24129536,
+      "retained_disk_bytes": 1513744522.0,
+      "stats": {
+        "compaction_running": false,
+        "delta_keys": 0,
+        "disk_index_bytes": 353242581,
+        "disk_posting_entries": 19221340,
+        "documents": 10000,
+        "generation": 31,
+        "log_bytes": 45,
+        "resident_documents": 0,
+        "resident_text_bytes": 0,
+        "segments": 5,
+        "sequence": 20,
+        "source_bytes": 267900709
+      }
+    },
+    {
+      "run": 1,
+      "engine": "sqlite",
+      "ingest_s": 46.622165,
+      "maintenance_s": 1.4910038,
+      "combined_s": 48.1131688,
+      "observed_os_peak_ws_bytes": 13242368,
+      "sampled_indexing_private_bytes": 8724480,
+      "sampled_maintenance_private_bytes": 6918144,
+      "idle_private_bytes": 1294336,
+      "idle_ws_bytes": 5578752,
+      "retained_disk_bytes": 583860224.0,
+      "stats": null
+    },
+    {
+      "run": 2,
+      "engine": "fdb",
+      "ingest_s": 35.8071319,
+      "maintenance_s": 1.9192651,
+      "combined_s": 37.726397,
+      "observed_os_peak_ws_bytes": 134111232,
+      "sampled_indexing_private_bytes": 130359296,
+      "sampled_maintenance_private_bytes": 103641088,
+      "idle_private_bytes": 22216704,
+      "idle_ws_bytes": 24027136,
+      "retained_disk_bytes": 1513744522.0,
+      "stats": {
+        "compaction_running": false,
+        "delta_keys": 0,
+        "disk_index_bytes": 353242581,
+        "disk_posting_entries": 19221340,
+        "documents": 10000,
+        "generation": 31,
+        "log_bytes": 45,
+        "resident_documents": 0,
+        "resident_text_bytes": 0,
+        "segments": 5,
+        "sequence": 20,
+        "source_bytes": 267900709
+      }
+    },
+    {
+      "run": 2,
+      "engine": "sqlite",
+      "ingest_s": 44.9545993,
+      "maintenance_s": 1.4576632,
+      "combined_s": 46.412262500000004,
+      "observed_os_peak_ws_bytes": 13185024,
+      "sampled_indexing_private_bytes": 8732672,
+      "sampled_maintenance_private_bytes": 8646656,
+      "idle_private_bytes": 1290240,
+      "idle_ws_bytes": 5578752,
+      "retained_disk_bytes": 583860224.0,
+      "stats": null
+    }
+  ],
+  "median": {
+    "fdb": {
+      "ingest_s": 35.8071319,
+      "maintenance_s": 1.9192651,
+      "combined_s": 37.726397,
+      "observed_os_peak_ws_bytes": 134111232,
+      "sampled_indexing_private_bytes": 130359296,
+      "sampled_maintenance_private_bytes": 103530496,
+      "idle_private_bytes": 22216704,
+      "idle_ws_bytes": 24027136,
+      "retained_disk_bytes": 1513744522.0
+    },
+    "sqlite": {
+      "ingest_s": 44.9545993,
+      "maintenance_s": 1.4576632,
+      "combined_s": 46.412262500000004,
+      "observed_os_peak_ws_bytes": 13242368,
+      "sampled_indexing_private_bytes": 8732672,
+      "sampled_maintenance_private_bytes": 8646656,
+      "idle_private_bytes": 1294336,
+      "idle_ws_bytes": 5578752,
+      "retained_disk_bytes": 583860224.0
+    }
+  },
+  "scope": "same first 10k existing corpus, batch500, synced WAL; warm OS cache without eviction; whole-process sampled memory, no engine-only allocation claim"
+}

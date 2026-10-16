@@ -1,0 +1,16 @@
+    Checking fdb v0.3.1 (C:\Users\Serkan\Documents\ChatGPT\fdb)
+error: you seem to be trying to use `match` for destructuring a single pattern. Consider using `if let`
+   --> tests\streamed_transactions.rs:188:9
+    |
+188 | /         match db {
+189 | |             Ok(db) => assert!(db.search(&query).is_err()),
+190 | |             Err(_) => {}
+191 | |         }
+    | |_________^ help: try: `if let Ok(db) = db { assert!(db.search(&query).is_err()) }`
+    |
+    = help: for further information visit https://rust-lang.github.io/rust-clippy/rust-1.99.0/index.html#single_match
+    = note: `-D clippy::single-match` implied by `-D warnings`
+    = help: to override `-D warnings` add `#[allow(clippy::single_match)]`
+
+error: could not compile `fdb` (test "streamed_transactions") due to 1 previous error
+warning: build failed, waiting for other jobs to finish...

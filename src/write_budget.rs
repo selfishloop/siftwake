@@ -8,6 +8,7 @@ pub struct Snapshot {
     pub peak_reserved_bytes: usize,
     pub waits: usize,
     pub reduced_leases: usize,
+    pub baseline_reserved_bytes: usize,
 }
 struct State {
     used: usize,
@@ -19,18 +20,23 @@ pub(crate) struct Pool {
     limit: usize,
     state: Mutex<State>,
     wake: Condvar,
+    baseline: usize,
 }
 impl Pool {
     const fn new(limit: usize) -> Self {
+        Self::with_baseline(limit, 0)
+    }
+    const fn with_baseline(limit: usize, baseline: usize) -> Self {
         Self {
             limit,
             state: Mutex::new(State {
-                used: 0,
-                peak: 0,
+                used: baseline,
+                peak: baseline,
                 waits: 0,
                 reduced: 0,
             }),
             wake: Condvar::new(),
+            baseline,
         }
     }
     pub(crate) fn reserve(&self, preferred: usize, minimum: usize) -> Result<Lease<'_>> {
@@ -67,6 +73,79 @@ impl Drop for Lease<'_> {
     }
 }
 static POOL: Pool = Pool::new(256 * 1024);
+// One admission pool for streamed input and builder/maintenance workspaces.
+// Reservations are conservative workspace allowances, never process RSS.
+#[cfg(feature = "experimental-builder-budget")]
+static WORKING_POOL: Pool = Pool::with_baseline(16 * 1024 * 1024, 2 * 1024 * 1024);
+#[cfg(feature = "experimental-builder-budget")]
+pub(crate) fn reserve_working(bytes: usize) -> Result<Lease<'static>> {
+    WORKING_POOL.reserve(bytes, bytes)
+}
+#[cfg(feature = "experimental-builder-budget")]
+thread_local! { static STREAM_WORKSPACE: std::cell::Cell<bool> = const { std::cell::Cell::new(false) }; }
+#[cfg(feature = "experimental-builder-budget")]
+pub(crate) struct WorkingScope {
+    _lease: Option<Lease<'static>>,
+    owns_thread: bool,
+    _thread_bound: std::marker::PhantomData<std::rc::Rc<()>>,
+}
+#[cfg(feature = "experimental-builder-budget")]
+impl WorkingScope {
+    pub(crate) fn streamed() -> Result<Self> {
+        if STREAM_WORKSPACE.with(std::cell::Cell::get) {
+            return Err(Error::Invalid(
+                "nested streamed transactions are unsupported".into(),
+            ));
+        }
+        let lease = reserve_working(14 * 1024 * 1024)?;
+        STREAM_WORKSPACE.with(|state| {
+            assert!(!state.replace(true));
+        });
+        Ok(Self {
+            _lease: Some(lease),
+            owns_thread: true,
+            _thread_bound: std::marker::PhantomData,
+        })
+    }
+    pub(crate) fn builder() -> Result<Self> {
+        if STREAM_WORKSPACE.with(std::cell::Cell::get) {
+            return Ok(Self {
+                _lease: None,
+                owns_thread: false,
+                _thread_bound: std::marker::PhantomData,
+            });
+        }
+        let lease = reserve_working(8 * 1024 * 1024)?;
+        STREAM_WORKSPACE.with(|state| state.set(true));
+        Ok(Self {
+            _lease: Some(lease),
+            owns_thread: true,
+            _thread_bound: std::marker::PhantomData,
+        })
+    }
+}
+#[cfg(feature = "experimental-builder-budget")]
+impl Drop for WorkingScope {
+    fn drop(&mut self) {
+        if self.owns_thread {
+            STREAM_WORKSPACE.with(|state| state.set(false));
+        }
+    }
+}
+#[cfg(feature = "experimental-builder-budget")]
+pub(crate) fn builder_working() -> Result<Option<Lease<'static>>> {
+    // The streamed scope already allows 6 MiB intake/index plus 8 MiB builder.
+    // Nested builders consume that allowance instead of reserving it twice.
+    if STREAM_WORKSPACE.with(std::cell::Cell::get) {
+        Ok(None)
+    } else {
+        reserve_working(8 * 1024 * 1024).map(Some)
+    }
+}
+#[cfg(feature = "experimental-builder-budget")]
+pub fn working_snapshot() -> Snapshot {
+    pool_snapshot(&WORKING_POOL)
+}
 #[cfg(feature = "experimental-builder-budget")]
 static POSTING_POOL: Pool = Pool::new(2 * 1024 * 1024);
 #[cfg(feature = "experimental-builder-budget")]
@@ -86,6 +165,7 @@ pub fn snapshot() -> Snapshot {
 fn pool_snapshot(pool: &Pool) -> Snapshot {
     let s = pool.state.lock().unwrap_or_else(|e| e.into_inner());
     Snapshot {
+        baseline_reserved_bytes: pool.baseline,
         limit_bytes: pool.limit,
         in_use_bytes: s.used,
         peak_reserved_bytes: s.peak,

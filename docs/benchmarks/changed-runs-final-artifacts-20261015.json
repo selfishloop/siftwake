@@ -1,0 +1,96 @@
+{
+  "artifacts": [
+    {
+      "path": "src/index.rs",
+      "bytes": 36064,
+      "sha256": "39a78c6c9123aaa4b877072f2b801228860f52659895fd9c87c966475108c899"
+    },
+    {
+      "path": "src/segment.rs",
+      "bytes": 89741,
+      "sha256": "8e54aead33a29202266535c814b691c717ac276b0c4bfda4679b089ca3cfea3d"
+    },
+    {
+      "path": "target/release/examples/measure_content_reads.exe",
+      "bytes": 1856000,
+      "sha256": "df8dc490752f97e5df99752416c8e5785cfd5eea6599f45c1570ee5e8dfd0533"
+    },
+    {
+      "path": "target/release/examples/measure_content_memory.exe",
+      "bytes": 1815040,
+      "sha256": "f3d1ee438d76162d6daf22722b6dc11ac9217e2901e3bcad176b1fc022c9ea4a"
+    },
+    {
+      "path": "output/changed-runs-reads-control-20261015.exe",
+      "bytes": 1854464,
+      "sha256": "64fee2151b7b2817d4e1bfb2d4b190bb90192147776ac83e81fefd7ac3289ff9"
+    },
+    {
+      "path": "output/changed-runs-reads-candidate-20261015.exe",
+      "bytes": 1856000,
+      "sha256": "a58aa5f267e5298e1660ea3052efbce4a3803c38d31a8c722812906d5fb2ded1"
+    },
+    {
+      "path": "output/changed-runs-reads-final-20261015.exe",
+      "bytes": 1856000,
+      "sha256": "e7731f126e1e7a6112fe8fb482f91a21b4302a27ff194f95e8bf37652fab0ed1"
+    },
+    {
+      "path": "output/changed-runs-memory-control-20261015.exe",
+      "bytes": 1813504,
+      "sha256": "184cb7513a929f418a0886575f760ad8424385448396b06a29a7ab2604748e1f"
+    },
+    {
+      "path": "output/changed-runs-memory-candidate-20261015.exe",
+      "bytes": 1815040,
+      "sha256": "2f7b3077bc77880cb0789b2e07ce432f1d89d4478c6caa00b2c48fe2d956b84e"
+    },
+    {
+      "path": "output/changed-runs-memory-final-20261015.exe",
+      "bytes": 1815040,
+      "sha256": "f3d1ee438d76162d6daf22722b6dc11ac9217e2901e3bcad176b1fc022c9ea4a"
+    },
+    {
+      "path": "output/changed-runs-profile-candidate-20261015.exe",
+      "bytes": 1907712,
+      "sha256": "da68cf5193f79575c83f55bc69671fa1762fc96931a52a5e5de3761c7ee71bf1"
+    },
+    {
+      "path": "output/wide-fold-profile-candidate-20261014.exe",
+      "bytes": 1906176,
+      "sha256": "2f478a0f6c8f6f272466a2d383560d2ebeaf264b6d6ad64d0d5c1af0f68d81eb"
+    }
+  ],
+  "checks": [
+    {
+      "kind": "reads",
+      "measured_vs_final_sections_identical": {
+        ".text": true,
+        ".rdata": false,
+        ".data": true,
+        ".pdata": true,
+        ".reloc": true
+      },
+      "whole_file_identical": false
+    },
+    {
+      "kind": "memory",
+      "measured_vs_final_sections_identical": {
+        ".text": true,
+        ".rdata": false,
+        ".data": true,
+        ".pdata": true,
+        ".reloc": true
+      },
+      "whole_file_identical": false
+    }
+  ],
+  "segment_runtime_and_format_unchanged": true,
+  "diagnostic_disabled_in_final_normal_examples": true,
+  "all_124_db_cache_sqlite_hashes_still_unchanged": true,
+  "fixtures_git_status_empty": true,
+  "whole_executable_differences_are_not_reported_as_byte_identity": true,
+  "performance_measured_frozen_candidates_in_matrix_and_checkpoints_metadata": true,
+  "final_matrix_38_pages_versions_passed": true,
+  "corpus_proof": "changed-runs-post-ingest-hashes-20261015.json"
+}

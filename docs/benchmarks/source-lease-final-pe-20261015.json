@@ -1,0 +1,78 @@
+{
+  "same_length": true,
+  "text_equal": true,
+  "different_byte_count": 9,
+  "different_offsets": [
+    248,
+    249,
+    1640036,
+    1640037,
+    1640064,
+    1640065,
+    1640092,
+    1640093,
+    1640444
+  ],
+  "artifacts": [
+    {
+      "path": "output/source-lease-reads-candidate-20261015.exe",
+      "sections": {
+        ".text": {
+          "bytes": 1510400,
+          "offset": 1024,
+          "sha256": "fd63bf583938cd457ab52f535fe78343d73f886eb03a62a6bdb65e590f5e8b95"
+        },
+        ".rdata": {
+          "bytes": 300544,
+          "offset": 1511424,
+          "sha256": "e3ccec7aca9c7d8d974038dc23206eb26821b11257d1328966ef9a82fca38aee"
+        },
+        ".data": {
+          "bytes": 1024,
+          "offset": 1811968,
+          "sha256": "efe72eff97e10bb7e1d49e5e329a9b4d9d47549f45ae85e8341bd142f53e9f10"
+        },
+        ".pdata": {
+          "bytes": 46080,
+          "offset": 1812992,
+          "sha256": "04e0620abdd6629e9398a84c16af98fb6af493f7dd8c5e407258c107b1e0b4c6"
+        },
+        ".reloc": {
+          "bytes": 2560,
+          "offset": 1859072,
+          "sha256": "2346300ceffa52ae5ed90576076bac77bda6951a896382b1735143881e10a421"
+        }
+      }
+    },
+    {
+      "path": "target/release/examples/measure_content_reads.exe",
+      "sections": {
+        ".text": {
+          "bytes": 1510400,
+          "offset": 1024,
+          "sha256": "fd63bf583938cd457ab52f535fe78343d73f886eb03a62a6bdb65e590f5e8b95"
+        },
+        ".rdata": {
+          "bytes": 300544,
+          "offset": 1511424,
+          "sha256": "6fc7325b0516b2221860dc330944e0f2a5df002f6c946fc0888510cb47185376"
+        },
+        ".data": {
+          "bytes": 1024,
+          "offset": 1811968,
+          "sha256": "efe72eff97e10bb7e1d49e5e329a9b4d9d47549f45ae85e8341bd142f53e9f10"
+        },
+        ".pdata": {
+          "bytes": 46080,
+          "offset": 1812992,
+          "sha256": "04e0620abdd6629e9398a84c16af98fb6af493f7dd8c5e407258c107b1e0b4c6"
+        },
+        ".reloc": {
+          "bytes": 2560,
+          "offset": 1859072,
+          "sha256": "2346300ceffa52ae5ed90576076bac77bda6951a896382b1735143881e10a421"
+        }
+      }
+    }
+  ]
+}

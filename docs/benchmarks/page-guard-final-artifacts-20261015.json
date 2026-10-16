@@ -1,0 +1,99 @@
+{
+  "artifacts": [
+    {
+      "path": "Cargo.toml",
+      "bytes": 2269,
+      "sha256": "56ba21d2d0ba7d59feae71fa0ee4497950337a5c43d1fa306d78ee28e2c79f8a"
+    },
+    {
+      "path": "Cargo.lock",
+      "bytes": 10361,
+      "sha256": "57f2192106dc532afc442099a68f285cc6475427e30716505df143cb5adea55c"
+    },
+    {
+      "path": "src/index.rs",
+      "bytes": 36064,
+      "sha256": "39a78c6c9123aaa4b877072f2b801228860f52659895fd9c87c966475108c899"
+    },
+    {
+      "path": "src/segment.rs",
+      "bytes": 89741,
+      "sha256": "8e54aead33a29202266535c814b691c717ac276b0c4bfda4679b089ca3cfea3d"
+    },
+    {
+      "path": "src/segment/covering.rs",
+      "bytes": 6476,
+      "sha256": "ac0616395e34a357a90b5e350f8eee8b6a96ccb1495d0522c6c3e21dcfcf9518"
+    },
+    {
+      "path": "examples/measure_content_reads.rs",
+      "bytes": 11836,
+      "sha256": "68061e082870ef414e85631183ccb6f1c46c5f4d9d23abeb730a641c84bed908"
+    },
+    {
+      "path": "tools/bench_support/read_matrix.rs",
+      "bytes": 11520,
+      "sha256": "166c9a6e7aeba3fbee1d4aad5af54af1f73d9a850b382ec77e4efa56b0d22148"
+    },
+    {
+      "path": "tools/measure-window-matrix.ps1",
+      "bytes": 2223,
+      "sha256": "d356ba5a5f516f1eea9354c6edad80e3fe7dcd09577d67aa6662d15afb7e4b0b"
+    },
+    {
+      "path": "tests/segments.rs",
+      "bytes": 28487,
+      "sha256": "a91f027c9e49420d45698534d83d4287192c8ba1bf404d578b767d9f390b43d5"
+    },
+    {
+      "path": "tests/streamed_transactions.rs",
+      "bytes": 22152,
+      "sha256": "a1c7ad8029653e4a46fa987342730fb449a2a8d1b3e6942af568d9ec0bb11a77"
+    },
+    {
+      "path": "target/release/examples/measure_content_reads.exe",
+      "bytes": 1857024,
+      "sha256": "9733c089f9814d082df12ca97a03cc4fdf0d1ce133290c66d842b50fbe18b764"
+    },
+    {
+      "path": "target/release/examples/measure_content_memory.exe",
+      "bytes": 1815040,
+      "sha256": "f3233a379f526139819ecbeff11486f0751418e13c5dc583ffc986a35158ba21"
+    },
+    {
+      "path": "output/full-prefix-reads-control-20261015.exe",
+      "bytes": 1857024,
+      "sha256": "63d654316f17c9184acf699a132ce4f2d83416ea16c1b5fd95358c6afc046146"
+    },
+    {
+      "path": "output/full-prefix-reads-candidate-final-20261015.exe",
+      "bytes": 1857536,
+      "sha256": "0a77c58206d492f83cbe9a514b3a52baf43495a943f0b982b5e2c3207afedb66"
+    },
+    {
+      "path": "output/page-stamp-reads-candidate-20261015.exe",
+      "bytes": 1858560,
+      "sha256": "fd931fc2778363244040e453bcfa293f359f94423aa93c8baa1b41afa36d9319"
+    },
+    {
+      "path": "output/page-guard-profile-20261015.exe",
+      "bytes": 1910272,
+      "sha256": "01e49fb8f153a84bb3b6001f5697e601469b82be7dbec7248db1f472459d661b"
+    }
+  ],
+  "normal_reader_code_section_matches_pre_experiment_control": true,
+  "final_normal_reader_and_memory_diagnostic_disabled": true,
+  "full_prefix_and_windows_source_stamp_prototypes_removed": true,
+  "retained_runtime_change": "diagnostic-timing spans only; normal build source guards, normalizer and segment code unchanged",
+  "all_124_db_cache_sqlite_hashes_unchanged_after_final_check": true,
+  "final_38_case_full_page_version_check_passed": true,
+  "full_data_and_fixture_proof": "page-guard-final-data-proof-20261015.json",
+  "tests_passed": [
+    "default all-targets",
+    "experimental-builder-budget all-targets",
+    "all-features all-targets",
+    "default Clippy -D warnings",
+    "all-features Clippy -D warnings",
+    "fmt --check"
+  ]
+}

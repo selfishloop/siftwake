@@ -1,0 +1,1160 @@
+{
+  "engine": "fdb",
+  "mode": "ingest",
+  "from": 0,
+  "to": 50000,
+  "run": 0,
+  "exit_code": 0,
+  "low_disk_stop": false,
+  "phases": {
+    "result": {
+      "sampled_peak_private_bytes": 124817408,
+      "sampled_peak_working_set_bytes": 126156800,
+      "samples": 3
+    },
+    "runtime_baseline": {
+      "sampled_peak_private_bytes": 16154624,
+      "sampled_peak_working_set_bytes": 19759104,
+      "samples": 24
+    },
+    "startup": {
+      "sampled_peak_private_bytes": 712704,
+      "sampled_peak_working_set_bytes": 4681728,
+      "samples": 2
+    },
+    "indexing": {
+      "sampled_peak_private_bytes": 289636352,
+      "sampled_peak_working_set_bytes": 270852096,
+      "samples": 7990
+    },
+    "maintenance": {
+      "sampled_peak_private_bytes": 244105216,
+      "sampled_peak_working_set_bytes": 244682752,
+      "samples": 344
+    }
+  },
+  "idle": null,
+  "os_peak_working_set_bytes": 278814720,
+  "samples": 8363,
+  "sample_interval_ms": 20,
+  "phase_poll_ms": 100,
+  "elapsed_s": 324.7353048,
+  "cpu_ms": 429031.25,
+  "retained_disk_bytes": 7579857662.0,
+  "files": [
+    {
+      "name": "generation-0000000000000001.fdb",
+      "bytes": 27049019
+    },
+    {
+      "name": "generation-0000000000000001.ready",
+      "bytes": 87
+    },
+    {
+      "name": "generation-0000000000000003.fdb",
+      "bytes": 26697359
+    },
+    {
+      "name": "generation-0000000000000003.ready",
+      "bytes": 170
+    },
+    {
+      "name": "generation-0000000000000005.fdb",
+      "bytes": 26037578
+    },
+    {
+      "name": "generation-0000000000000005.ready",
+      "bytes": 253
+    },
+    {
+      "name": "generation-0000000000000007.fdb",
+      "bytes": 26933085
+    },
+    {
+      "name": "generation-0000000000000007.ready",
+      "bytes": 335
+    },
+    {
+      "name": "generation-0000000000000009.fdb",
+      "bytes": 25953796
+    },
+    {
+      "name": "generation-0000000000000009.ready",
+      "bytes": 419
+    },
+    {
+      "name": "generation-000000000000000c.fdb",
+      "bytes": 26961152
+    },
+    {
+      "name": "generation-000000000000000c.ready",
+      "bytes": 507
+    },
+    {
+      "name": "generation-000000000000000d.ready",
+      "bytes": 424
+    },
+    {
+      "name": "generation-000000000000000f.fdb",
+      "bytes": 26870441
+    },
+    {
+      "name": "generation-000000000000000f.ready",
+      "bytes": 510
+    },
+    {
+      "name": "generation-0000000000000012.fdb",
+      "bytes": 27216777
+    },
+    {
+      "name": "generation-0000000000000012.ready",
+      "bytes": 596
+    },
+    {
+      "name": "generation-0000000000000013.ready",
+      "bytes": 514
+    },
+    {
+      "name": "generation-0000000000000015.fdb",
+      "bytes": 26902655
+    },
+    {
+      "name": "generation-0000000000000015.ready",
+      "bytes": 600
+    },
+    {
+      "name": "generation-0000000000000018.fdb",
+      "bytes": 27278657
+    },
+    {
+      "name": "generation-0000000000000018.ready",
+      "bytes": 685
+    },
+    {
+      "name": "generation-0000000000000019.ready",
+      "bytes": 599
+    },
+    {
+      "name": "generation-000000000000001b.fdb",
+      "bytes": 26474955
+    },
+    {
+      "name": "generation-000000000000001b.ready",
+      "bytes": 685
+    },
+    {
+      "name": "generation-000000000000001e.fdb",
+      "bytes": 26630957
+    },
+    {
+      "name": "generation-000000000000001e.ready",
+      "bytes": 771
+    },
+    {
+      "name": "generation-000000000000001f.ready",
+      "bytes": 685
+    },
+    {
+      "name": "generation-0000000000000021.fdb",
+      "bytes": 26522046
+    },
+    {
+      "name": "generation-0000000000000021.ready",
+      "bytes": 771
+    },
+    {
+      "name": "generation-0000000000000024.fdb",
+      "bytes": 26806775
+    },
+    {
+      "name": "generation-0000000000000024.ready",
+      "bytes": 856
+    },
+    {
+      "name": "generation-0000000000000025.ready",
+      "bytes": 771
+    },
+    {
+      "name": "generation-0000000000000027.fdb",
+      "bytes": 26753683
+    },
+    {
+      "name": "generation-0000000000000027.ready",
+      "bytes": 857
+    },
+    {
+      "name": "generation-000000000000002a.fdb",
+      "bytes": 26891774
+    },
+    {
+      "name": "generation-000000000000002a.ready",
+      "bytes": 943
+    },
+    {
+      "name": "generation-000000000000002b.ready",
+      "bytes": 856
+    },
+    {
+      "name": "generation-000000000000002d.fdb",
+      "bytes": 27002840
+    },
+    {
+      "name": "generation-000000000000002d.ready",
+      "bytes": 942
+    },
+    {
+      "name": "generation-0000000000000030.fdb",
+      "bytes": 26475742
+    },
+    {
+      "name": "generation-0000000000000030.ready",
+      "bytes": 1028
+    },
+    {
+      "name": "generation-0000000000000031.ready",
+      "bytes": 941
+    },
+    {
+      "name": "generation-0000000000000033.fdb",
+      "bytes": 27208540
+    },
+    {
+      "name": "generation-0000000000000033.ready",
+      "bytes": 1027
+    },
+    {
+      "name": "generation-0000000000000036.fdb",
+      "bytes": 27118959
+    },
+    {
+      "name": "generation-0000000000000036.ready",
+      "bytes": 1113
+    },
+    {
+      "name": "generation-0000000000000037.ready",
+      "bytes": 1027
+    },
+    {
+      "name": "generation-0000000000000039.fdb",
+      "bytes": 26825884
+    },
+    {
+      "name": "generation-0000000000000039.ready",
+      "bytes": 1113
+    },
+    {
+      "name": "generation-000000000000003c.fdb",
+      "bytes": 27044668
+    },
+    {
+      "name": "generation-000000000000003c.ready",
+      "bytes": 1199
+    },
+    {
+      "name": "generation-000000000000003d.ready",
+      "bytes": 1113
+    },
+    {
+      "name": "generation-000000000000003f.fdb",
+      "bytes": 27294020
+    },
+    {
+      "name": "generation-000000000000003f.ready",
+      "bytes": 1199
+    },
+    {
+      "name": "generation-0000000000000042.fdb",
+      "bytes": 25938327
+    },
+    {
+      "name": "generation-0000000000000042.ready",
+      "bytes": 1285
+    },
+    {
+      "name": "generation-0000000000000043.ready",
+      "bytes": 1199
+    },
+    {
+      "name": "generation-0000000000000045.fdb",
+      "bytes": 26336031
+    },
+    {
+      "name": "generation-0000000000000045.ready",
+      "bytes": 1285
+    },
+    {
+      "name": "generation-0000000000000048.fdb",
+      "bytes": 27192773
+    },
+    {
+      "name": "generation-0000000000000048.ready",
+      "bytes": 1370
+    },
+    {
+      "name": "generation-0000000000000049.ready",
+      "bytes": 1283
+    },
+    {
+      "name": "generation-000000000000004b.fdb",
+      "bytes": 26533477
+    },
+    {
+      "name": "generation-000000000000004b.ready",
+      "bytes": 1369
+    },
+    {
+      "name": "generation-000000000000004e.fdb",
+      "bytes": 27707384
+    },
+    {
+      "name": "generation-000000000000004e.ready",
+      "bytes": 1455
+    },
+    {
+      "name": "generation-000000000000004f.ready",
+      "bytes": 1369
+    },
+    {
+      "name": "generation-0000000000000051.fdb",
+      "bytes": 26400384
+    },
+    {
+      "name": "generation-0000000000000051.ready",
+      "bytes": 1455
+    },
+    {
+      "name": "generation-0000000000000054.fdb",
+      "bytes": 26918218
+    },
+    {
+      "name": "generation-0000000000000054.ready",
+      "bytes": 1541
+    },
+    {
+      "name": "generation-0000000000000055.ready",
+      "bytes": 1455
+    },
+    {
+      "name": "generation-0000000000000057.fdb",
+      "bytes": 26383562
+    },
+    {
+      "name": "generation-0000000000000057.ready",
+      "bytes": 1541
+    },
+    {
+      "name": "generation-000000000000005a.fdb",
+      "bytes": 27002894
+    },
+    {
+      "name": "generation-000000000000005a.ready",
+      "bytes": 1627
+    },
+    {
+      "name": "generation-000000000000005b.ready",
+      "bytes": 1541
+    },
+    {
+      "name": "generation-000000000000005d.fdb",
+      "bytes": 27333781
+    },
+    {
+      "name": "generation-000000000000005d.ready",
+      "bytes": 1627
+    },
+    {
+      "name": "generation-0000000000000060.fdb",
+      "bytes": 26928844
+    },
+    {
+      "name": "generation-0000000000000060.ready",
+      "bytes": 1713
+    },
+    {
+      "name": "generation-0000000000000061.ready",
+      "bytes": 1627
+    },
+    {
+      "name": "generation-0000000000000063.fdb",
+      "bytes": 26954232
+    },
+    {
+      "name": "generation-0000000000000063.ready",
+      "bytes": 1713
+    },
+    {
+      "name": "generation-0000000000000066.fdb",
+      "bytes": 26729256
+    },
+    {
+      "name": "generation-0000000000000066.ready",
+      "bytes": 1801
+    },
+    {
+      "name": "generation-0000000000000067.ready",
+      "bytes": 1716
+    },
+    {
+      "name": "generation-0000000000000069.fdb",
+      "bytes": 26724246
+    },
+    {
+      "name": "generation-0000000000000069.ready",
+      "bytes": 1802
+    },
+    {
+      "name": "generation-000000000000006c.fdb",
+      "bytes": 27541062
+    },
+    {
+      "name": "generation-000000000000006c.ready",
+      "bytes": 1889
+    },
+    {
+      "name": "generation-000000000000006d.ready",
+      "bytes": 1804
+    },
+    {
+      "name": "generation-000000000000006f.fdb",
+      "bytes": 26239523
+    },
+    {
+      "name": "generation-000000000000006f.ready",
+      "bytes": 1891
+    },
+    {
+      "name": "generation-0000000000000072.fdb",
+      "bytes": 27652419
+    },
+    {
+      "name": "generation-0000000000000072.ready",
+      "bytes": 1978
+    },
+    {
+      "name": "generation-0000000000000073.ready",
+      "bytes": 1891
+    },
+    {
+      "name": "generation-0000000000000075.fdb",
+      "bytes": 26677239
+    },
+    {
+      "name": "generation-0000000000000075.ready",
+      "bytes": 1978
+    },
+    {
+      "name": "generation-0000000000000078.fdb",
+      "bytes": 25980058
+    },
+    {
+      "name": "generation-0000000000000078.ready",
+      "bytes": 2065
+    },
+    {
+      "name": "generation-0000000000000079.ready",
+      "bytes": 1977
+    },
+    {
+      "name": "generation-000000000000007b.fdb",
+      "bytes": 26614076
+    },
+    {
+      "name": "generation-000000000000007b.ready",
+      "bytes": 2062
+    },
+    {
+      "name": "generation-000000000000007e.fdb",
+      "bytes": 27400725
+    },
+    {
+      "name": "generation-000000000000007e.ready",
+      "bytes": 2149
+    },
+    {
+      "name": "generation-000000000000007f.ready",
+      "bytes": 2060
+    },
+    {
+      "name": "generation-0000000000000081.fdb",
+      "bytes": 26659695
+    },
+    {
+      "name": "generation-0000000000000081.ready",
+      "bytes": 2147
+    },
+    {
+      "name": "generation-0000000000000084.fdb",
+      "bytes": 26872508
+    },
+    {
+      "name": "generation-0000000000000084.ready",
+      "bytes": 2234
+    },
+    {
+      "name": "generation-0000000000000085.ready",
+      "bytes": 2149
+    },
+    {
+      "name": "generation-0000000000000087.fdb",
+      "bytes": 26167821
+    },
+    {
+      "name": "generation-0000000000000087.ready",
+      "bytes": 2236
+    },
+    {
+      "name": "generation-000000000000008a.fdb",
+      "bytes": 27146025
+    },
+    {
+      "name": "generation-000000000000008a.ready",
+      "bytes": 2323
+    },
+    {
+      "name": "generation-000000000000008b.ready",
+      "bytes": 2236
+    },
+    {
+      "name": "generation-000000000000008d.fdb",
+      "bytes": 27506847
+    },
+    {
+      "name": "generation-000000000000008d.ready",
+      "bytes": 2322
+    },
+    {
+      "name": "generation-0000000000000090.fdb",
+      "bytes": 26783978
+    },
+    {
+      "name": "generation-0000000000000090.ready",
+      "bytes": 2408
+    },
+    {
+      "name": "generation-0000000000000091.ready",
+      "bytes": 2321
+    },
+    {
+      "name": "generation-0000000000000093.fdb",
+      "bytes": 45
+    },
+    {
+      "name": "generation-0000000000000093.ready",
+      "bytes": 2410
+    },
+    {
+      "name": "generation-0000000000000095.ready",
+      "bytes": 2324
+    },
+    {
+      "name": "generation-0000000000000097.ready",
+      "bytes": 2238
+    },
+    {
+      "name": "run-0000000000000002.fdb",
+      "bytes": 27049056
+    },
+    {
+      "name": "run-0000000000000002.idx",
+      "bytes": 35983031
+    },
+    {
+      "name": "run-0000000000000004.fdb",
+      "bytes": 26697396
+    },
+    {
+      "name": "run-0000000000000004.idx",
+      "bytes": 35599354
+    },
+    {
+      "name": "run-0000000000000006.fdb",
+      "bytes": 26037615
+    },
+    {
+      "name": "run-0000000000000006.idx",
+      "bytes": 34825719
+    },
+    {
+      "name": "run-0000000000000008.fdb",
+      "bytes": 26933122
+    },
+    {
+      "name": "run-0000000000000008.idx",
+      "bytes": 35834141
+    },
+    {
+      "name": "run-000000000000000a.fdb",
+      "bytes": 53746407
+    },
+    {
+      "name": "run-000000000000000a.idx",
+      "bytes": 70872210
+    },
+    {
+      "name": "run-000000000000000b.fdb",
+      "bytes": 25953833
+    },
+    {
+      "name": "run-000000000000000b.idx",
+      "bytes": 34721544
+    },
+    {
+      "name": "run-000000000000000e.fdb",
+      "bytes": 26961189
+    },
+    {
+      "name": "run-000000000000000e.idx",
+      "bytes": 35883951
+    },
+    {
+      "name": "run-0000000000000010.fdb",
+      "bytes": 52970692
+    },
+    {
+      "name": "run-0000000000000010.idx",
+      "bytes": 69949707
+    },
+    {
+      "name": "run-0000000000000011.fdb",
+      "bytes": 26870478
+    },
+    {
+      "name": "run-0000000000000011.idx",
+      "bytes": 35753399
+    },
+    {
+      "name": "run-0000000000000014.fdb",
+      "bytes": 27216814
+    },
+    {
+      "name": "run-0000000000000014.idx",
+      "bytes": 36134902
+    },
+    {
+      "name": "run-0000000000000016.fdb",
+      "bytes": 52914977
+    },
+    {
+      "name": "run-0000000000000016.idx",
+      "bytes": 69894154
+    },
+    {
+      "name": "run-0000000000000017.fdb",
+      "bytes": 26902692
+    },
+    {
+      "name": "run-0000000000000017.idx",
+      "bytes": 35790010
+    },
+    {
+      "name": "run-000000000000001a.fdb",
+      "bytes": 27278694
+    },
+    {
+      "name": "run-000000000000001a.idx",
+      "bytes": 36267641
+    },
+    {
+      "name": "run-000000000000001c.fdb",
+      "bytes": 54087247
+    },
+    {
+      "name": "run-000000000000001c.idx",
+      "bytes": 71177214
+    },
+    {
+      "name": "run-000000000000001d.fdb",
+      "bytes": 26474992
+    },
+    {
+      "name": "run-000000000000001d.idx",
+      "bytes": 35340021
+    },
+    {
+      "name": "run-0000000000000020.fdb",
+      "bytes": 26630994
+    },
+    {
+      "name": "run-0000000000000020.idx",
+      "bytes": 35523479
+    },
+    {
+      "name": "run-0000000000000022.fdb",
+      "bytes": 54181341
+    },
+    {
+      "name": "run-0000000000000022.idx",
+      "bytes": 71349296
+    },
+    {
+      "name": "run-0000000000000023.fdb",
+      "bytes": 26522083
+    },
+    {
+      "name": "run-0000000000000023.idx",
+      "bytes": 35416616
+    },
+    {
+      "name": "run-0000000000000026.fdb",
+      "bytes": 26806812
+    },
+    {
+      "name": "run-0000000000000026.idx",
+      "bytes": 35730878
+    },
+    {
+      "name": "run-0000000000000028.fdb",
+      "bytes": 53105941
+    },
+    {
+      "name": "run-0000000000000028.idx",
+      "bytes": 70156900
+    },
+    {
+      "name": "run-0000000000000029.fdb",
+      "bytes": 26753720
+    },
+    {
+      "name": "run-0000000000000029.idx",
+      "bytes": 35726833
+    },
+    {
+      "name": "run-000000000000002c.fdb",
+      "bytes": 26891811
+    },
+    {
+      "name": "run-000000000000002c.idx",
+      "bytes": 35824810
+    },
+    {
+      "name": "run-000000000000002e.fdb",
+      "bytes": 53328850
+    },
+    {
+      "name": "run-000000000000002e.idx",
+      "bytes": 70434886
+    },
+    {
+      "name": "run-000000000000002f.fdb",
+      "bytes": 27002877
+    },
+    {
+      "name": "run-000000000000002f.idx",
+      "bytes": 35935901
+    },
+    {
+      "name": "run-0000000000000032.fdb",
+      "bytes": 26475779
+    },
+    {
+      "name": "run-0000000000000032.idx",
+      "bytes": 35340753
+    },
+    {
+      "name": "run-0000000000000034.fdb",
+      "bytes": 53645486
+    },
+    {
+      "name": "run-0000000000000034.idx",
+      "bytes": 70837723
+    },
+    {
+      "name": "run-0000000000000035.fdb",
+      "bytes": 27208577
+    },
+    {
+      "name": "run-0000000000000035.idx",
+      "bytes": 36169477
+    },
+    {
+      "name": "run-0000000000000038.fdb",
+      "bytes": 27118996
+    },
+    {
+      "name": "run-0000000000000038.idx",
+      "bytes": 36047674
+    },
+    {
+      "name": "run-000000000000003a.fdb",
+      "bytes": 53478611
+    },
+    {
+      "name": "run-000000000000003a.idx",
+      "bytes": 70565841
+    },
+    {
+      "name": "run-000000000000003b.fdb",
+      "bytes": 26825921
+    },
+    {
+      "name": "run-000000000000003b.idx",
+      "bytes": 35744455
+    },
+    {
+      "name": "run-000000000000003e.fdb",
+      "bytes": 27044705
+    },
+    {
+      "name": "run-000000000000003e.idx",
+      "bytes": 36006151
+    },
+    {
+      "name": "run-0000000000000040.fdb",
+      "bytes": 54327528
+    },
+    {
+      "name": "run-0000000000000040.idx",
+      "bytes": 71507586
+    },
+    {
+      "name": "run-0000000000000041.fdb",
+      "bytes": 27294057
+    },
+    {
+      "name": "run-0000000000000041.idx",
+      "bytes": 36306188
+    },
+    {
+      "name": "run-0000000000000044.fdb",
+      "bytes": 25938364
+    },
+    {
+      "name": "run-0000000000000044.idx",
+      "bytes": 34703081
+    },
+    {
+      "name": "run-0000000000000046.fdb",
+      "bytes": 53870581
+    },
+    {
+      "name": "run-0000000000000046.idx",
+      "bytes": 71044429
+    },
+    {
+      "name": "run-0000000000000047.fdb",
+      "bytes": 26336068
+    },
+    {
+      "name": "run-0000000000000047.idx",
+      "bytes": 35218955
+    },
+    {
+      "name": "run-000000000000004a.fdb",
+      "bytes": 27192810
+    },
+    {
+      "name": "run-000000000000004a.idx",
+      "bytes": 36163958
+    },
+    {
+      "name": "run-000000000000004c.fdb",
+      "bytes": 53232376
+    },
+    {
+      "name": "run-000000000000004c.idx",
+      "bytes": 70305769
+    },
+    {
+      "name": "run-000000000000004d.fdb",
+      "bytes": 26533514
+    },
+    {
+      "name": "run-000000000000004d.idx",
+      "bytes": 35398231
+    },
+    {
+      "name": "run-0000000000000050.fdb",
+      "bytes": 27707421
+    },
+    {
+      "name": "run-0000000000000050.idx",
+      "bytes": 36744547
+    },
+    {
+      "name": "run-0000000000000052.fdb",
+      "bytes": 53528833
+    },
+    {
+      "name": "run-0000000000000052.idx",
+      "bytes": 70668840
+    },
+    {
+      "name": "run-0000000000000053.fdb",
+      "bytes": 26400421
+    },
+    {
+      "name": "run-0000000000000053.idx",
+      "bytes": 35265083
+    },
+    {
+      "name": "run-0000000000000056.fdb",
+      "bytes": 26918255
+    },
+    {
+      "name": "run-0000000000000056.idx",
+      "bytes": 35837883
+    },
+    {
+      "name": "run-0000000000000058.fdb",
+      "bytes": 54240890
+    },
+    {
+      "name": "run-0000000000000058.idx",
+      "bytes": 71432609
+    },
+    {
+      "name": "run-0000000000000059.fdb",
+      "bytes": 26383599
+    },
+    {
+      "name": "run-0000000000000059.idx",
+      "bytes": 35184331
+    },
+    {
+      "name": "run-000000000000005c.fdb",
+      "bytes": 27002931
+    },
+    {
+      "name": "run-000000000000005c.idx",
+      "bytes": 35952849
+    },
+    {
+      "name": "run-000000000000005e.fdb",
+      "bytes": 53318631
+    },
+    {
+      "name": "run-000000000000005e.idx",
+      "bytes": 70392254
+    },
+    {
+      "name": "run-000000000000005f.fdb",
+      "bytes": 27333818
+    },
+    {
+      "name": "run-000000000000005f.idx",
+      "bytes": 36256073
+    },
+    {
+      "name": "run-0000000000000062.fdb",
+      "bytes": 26928881
+    },
+    {
+      "name": "run-0000000000000062.idx",
+      "bytes": 35863379
+    },
+    {
+      "name": "run-0000000000000064.fdb",
+      "bytes": 53386485
+    },
+    {
+      "name": "run-0000000000000064.idx",
+      "bytes": 70421379
+    },
+    {
+      "name": "run-0000000000000065.fdb",
+      "bytes": 26954269
+    },
+    {
+      "name": "run-0000000000000065.idx",
+      "bytes": 35871987
+    },
+    {
+      "name": "run-0000000000000068.fdb",
+      "bytes": 26729293
+    },
+    {
+      "name": "run-0000000000000068.idx",
+      "bytes": 35604813
+    },
+    {
+      "name": "run-000000000000006a.fdb",
+      "bytes": 54262654
+    },
+    {
+      "name": "run-000000000000006a.idx",
+      "bytes": 71408367
+    },
+    {
+      "name": "run-000000000000006b.fdb",
+      "bytes": 26724283
+    },
+    {
+      "name": "run-000000000000006b.idx",
+      "bytes": 35663156
+    },
+    {
+      "name": "run-000000000000006e.fdb",
+      "bytes": 27541099
+    },
+    {
+      "name": "run-000000000000006e.idx",
+      "bytes": 36514301
+    },
+    {
+      "name": "run-0000000000000070.fdb",
+      "bytes": 53683517
+    },
+    {
+      "name": "run-0000000000000070.idx",
+      "bytes": 70772488
+    },
+    {
+      "name": "run-0000000000000071.fdb",
+      "bytes": 26239560
+    },
+    {
+      "name": "run-0000000000000071.idx",
+      "bytes": 35152039
+    },
+    {
+      "name": "run-0000000000000074.fdb",
+      "bytes": 27652456
+    },
+    {
+      "name": "run-0000000000000074.idx",
+      "bytes": 36674489
+    },
+    {
+      "name": "run-0000000000000076.fdb",
+      "bytes": 54265337
+    },
+    {
+      "name": "run-0000000000000076.idx",
+      "bytes": 71465125
+    },
+    {
+      "name": "run-0000000000000077.fdb",
+      "bytes": 26677276
+    },
+    {
+      "name": "run-0000000000000077.idx",
+      "bytes": 35580830
+    },
+    {
+      "name": "run-000000000000007a.fdb",
+      "bytes": 25980095
+    },
+    {
+      "name": "run-000000000000007a.idx",
+      "bytes": 34770757
+    },
+    {
+      "name": "run-000000000000007c.fdb",
+      "bytes": 53891971
+    },
+    {
+      "name": "run-000000000000007c.idx",
+      "bytes": 71117070
+    },
+    {
+      "name": "run-000000000000007d.fdb",
+      "bytes": 26614113
+    },
+    {
+      "name": "run-000000000000007d.idx",
+      "bytes": 35479548
+    },
+    {
+      "name": "run-0000000000000080.fdb",
+      "bytes": 27400762
+    },
+    {
+      "name": "run-0000000000000080.idx",
+      "bytes": 36365461
+    },
+    {
+      "name": "run-0000000000000082.fdb",
+      "bytes": 52657326
+    },
+    {
+      "name": "run-0000000000000082.idx",
+      "bytes": 69639549
+    },
+    {
+      "name": "run-0000000000000083.fdb",
+      "bytes": 26659732
+    },
+    {
+      "name": "run-0000000000000083.idx",
+      "bytes": 35553019
+    },
+    {
+      "name": "run-0000000000000086.fdb",
+      "bytes": 26872545
+    },
+    {
+      "name": "run-0000000000000086.idx",
+      "bytes": 35814030
+    },
+    {
+      "name": "run-0000000000000088.fdb",
+      "bytes": 54014830
+    },
+    {
+      "name": "run-0000000000000088.idx",
+      "bytes": 71141172
+    },
+    {
+      "name": "run-0000000000000089.fdb",
+      "bytes": 26167858
+    },
+    {
+      "name": "run-0000000000000089.idx",
+      "bytes": 35037089
+    },
+    {
+      "name": "run-000000000000008c.fdb",
+      "bytes": 27146062
+    },
+    {
+      "name": "run-000000000000008c.idx",
+      "bytes": 36122364
+    },
+    {
+      "name": "run-000000000000008e.fdb",
+      "bytes": 53532232
+    },
+    {
+      "name": "run-000000000000008e.idx",
+      "bytes": 70654256
+    },
+    {
+      "name": "run-000000000000008f.fdb",
+      "bytes": 27506884
+    },
+    {
+      "name": "run-000000000000008f.idx",
+      "bytes": 36500992
+    },
+    {
+      "name": "run-0000000000000092.fdb",
+      "bytes": 26784015
+    },
+    {
+      "name": "run-0000000000000092.idx",
+      "bytes": 35637523
+    },
+    {
+      "name": "run-0000000000000094.fdb",
+      "bytes": 53313875
+    },
+    {
+      "name": "run-0000000000000094.idx",
+      "bytes": 70448193
+    },
+    {
+      "name": "run-0000000000000096.fdb",
+      "bytes": 54290854
+    },
+    {
+      "name": "run-0000000000000096.idx",
+      "bytes": 71425626
+    }
+  ],
+  "features": "default only",
+  "cache": "OS cache, no eviction, no search warmup",
+  "includes_os_file_cache": false,
+  "input": "streamed CRC-checked JSON corpus, batch500; no books/oracle resident",
+  "executable": "C:\\Users\\Serkan\\Documents\\ChatGPT\\fdb\\output\\content-memory-fdb-20261011.exe",
+  "database": "C:\\Users\\Serkan\\Documents\\ChatGPT\\fdb\\data\\content-memory-20261011-fdb"
+}

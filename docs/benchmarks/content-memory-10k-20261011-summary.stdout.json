@@ -1,0 +1,71 @@
+{
+  "fdb": {
+    "10000": {
+      "idle_private_bytes": 22446080,
+      "idle_working_set_bytes": 24788992,
+      "idle_private_samples": [
+        22568960,
+        22446080,
+        22446080
+      ],
+      "open_ms": 1048.8943,
+      "indexing_peak_private_bytes": 193720320,
+      "increment_indexing_peak_private_bytes": 193720320,
+      "increment_indexing_peak_working_set_bytes": 188219392,
+      "indexing_peak_private_bytes_without_final_maintenance": 193720320,
+      "maintenance_peak_private_bytes": 159088640,
+      "increment_ingest_ms": 74453.8991,
+      "increment_maintenance_ms": 17065.8167,
+      "total_ingest_ms": 74453.8991,
+      "total_maintenance_ms": 17065.8167,
+      "write_plus_maintenance_ms": 91519.71579999999,
+      "text_bytes": 264842858,
+      "retained_disk_bytes": 1513745887.0,
+      "live_disk_bytes": 621143804,
+      "disk_over_text_ratio": 5.715637938781041,
+      "gates": {
+        "idle_private_15MiB": false,
+        "indexing_private_60MiB": false,
+        "open_500ms": false,
+        "disk_text40percent": false,
+        "disk_sqlite120percent": true,
+        "retained_disk_sqlite120percent": false,
+        "maintenance_sqlite2x": false,
+        "rare_query_p95": "unmeasured",
+        "update_visible20ms": "unmeasured"
+      }
+    }
+  },
+  "sqlite": {
+    "10000": {
+      "idle_private_bytes": 1376256,
+      "idle_working_set_bytes": 6311936,
+      "idle_private_samples": [
+        1376256,
+        1384448,
+        1372160
+      ],
+      "open_ms": 9.4885,
+      "indexing_peak_private_bytes": 8876032,
+      "increment_indexing_peak_private_bytes": 8876032,
+      "increment_indexing_peak_working_set_bytes": 14671872,
+      "indexing_peak_private_bytes_without_final_maintenance": 8876032,
+      "maintenance_peak_private_bytes": 8790016,
+      "increment_ingest_ms": 49367.4075,
+      "increment_maintenance_ms": 1684.3356,
+      "total_ingest_ms": 49367.4075,
+      "total_maintenance_ms": 1684.3356,
+      "write_plus_maintenance_ms": 51051.7431,
+      "text_bytes": 264842858,
+      "retained_disk_bytes": 583860224.0,
+      "live_disk_bytes": 583860224,
+      "disk_over_text_ratio": 2.2045534035129615,
+      "gates": {
+        "idle_private_15MiB": true,
+        "indexing_private_60MiB": true,
+        "open_500ms": true,
+        "disk_text40percent": false
+      }
+    }
+  }
+}

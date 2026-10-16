@@ -1,0 +1,3222 @@
+{
+  "processes": 12,
+  "total_search_calls": 978,
+  "long_get_calls": 2400,
+  "all_processes_and_oracles_passed": true,
+  "open_contract_equal": false,
+  "cache": "OS cache, no forced eviction; per-query warmup; alternating paired serial processes",
+  "scope": "default native OFF1 FDB vs isolated SQLite WAL/FULL/2MiB cache/mmap0/tempFILE; exact total + sorted full pages",
+  "unmeasured": [
+    "long ingestion",
+    "cold cache",
+    "concurrency",
+    "source-offset layout",
+    "power loss",
+    "temporary disk peak"
+  ],
+  "short": {
+    "peak_working_set_bytes": {
+      "fdb_median": 103731200,
+      "sqlite_median": 10235904,
+      "paired_sqlite_over_fdb": [
+        0.09755242029776288,
+        0.09920177911917716,
+        0.0986771964461994
+      ],
+      "ratio_range": [
+        0.09755242029776288,
+        0.09920177911917716
+      ],
+      "fdb_faster_every_pair": false,
+      "sqlite_faster_every_pair": true
+    },
+    "sampled_peak_private_bytes": {
+      "fdb_median": 99778560,
+      "sqlite_median": 4993024,
+      "paired_sqlite_over_fdb": [
+        0.048586077064808136,
+        0.05057623745958047,
+        0.05004105090311987
+      ],
+      "ratio_range": [
+        0.048586077064808136,
+        0.05057623745958047
+      ],
+      "fdb_faster_every_pair": false,
+      "sqlite_faster_every_pair": true
+    },
+    "retained_engine_disk_bytes": {
+      "fdb_median": 418320443.0,
+      "sqlite_median": 107192320.0,
+      "paired_sqlite_over_fdb": [
+        0.2562445173161188,
+        0.2562445173161188,
+        0.2562445173161188
+      ],
+      "ratio_range": [
+        0.2562445173161188,
+        0.2562445173161188
+      ],
+      "fdb_faster_every_pair": false,
+      "sqlite_faster_every_pair": true
+    },
+    "elapsed_s": {
+      "fdb_median": 18.4540668,
+      "sqlite_median": 13.0176141,
+      "paired_sqlite_over_fdb": [
+        0.6697087287735576,
+        0.7390891529665429,
+        0.681404975424078
+      ],
+      "ratio_range": [
+        0.6697087287735576,
+        0.7390891529665429
+      ],
+      "fdb_faster_every_pair": false,
+      "sqlite_faster_every_pair": true
+    },
+    "cpu_ms": {
+      "fdb_median": 22062.5,
+      "sqlite_median": 12078.125,
+      "paired_sqlite_over_fdb": [
+        0.5327360441075121,
+        0.5573654390934845,
+        0.5134545454545455
+      ],
+      "ratio_range": [
+        0.5134545454545455,
+        0.5573654390934845
+      ],
+      "fdb_faster_every_pair": false,
+      "sqlite_faster_every_pair": true
+    },
+    "ingest_ms": {
+      "fdb_median": 9345.0782,
+      "sqlite_median": 8092.7832,
+      "paired_sqlite_over_fdb": [
+        0.8145026130654369,
+        0.9956107804426932,
+        0.9041818220933149
+      ],
+      "ratio_range": [
+        0.8145026130654369,
+        0.9956107804426932
+      ],
+      "fdb_faster_every_pair": false,
+      "sqlite_faster_every_pair": true
+    },
+    "maintenance_ms": {
+      "fdb_median": 6129.5611,
+      "sqlite_median": 310.2483,
+      "paired_sqlite_over_fdb": [
+        0.05678786218317042,
+        0.05061509216377662,
+        0.04707875338692859
+      ],
+      "ratio_range": [
+        0.04707875338692859,
+        0.05678786218317042
+      ],
+      "fdb_faster_every_pair": false,
+      "sqlite_faster_every_pair": true
+    },
+    "reopen_ms": {
+      "fdb_median": 491.72860000000003,
+      "sqlite_median": 3.1357,
+      "paired_sqlite_over_fdb": [
+        0.006376891643073028,
+        0.006512199453473649,
+        0.005735576503668506
+      ],
+      "ratio_range": [
+        0.005735576503668506,
+        0.006512199453473649
+      ],
+      "fdb_faster_every_pair": false,
+      "sqlite_faster_every_pair": true
+    },
+    "changed_reopen_ms": {
+      "fdb_median": 507.4893,
+      "sqlite_median": 10.600399999999999,
+      "paired_sqlite_over_fdb": [
+        0.020887928080454105,
+        0.022094368767135705,
+        0.01920845605098617
+      ],
+      "ratio_range": [
+        0.01920845605098617,
+        0.022094368767135705
+      ],
+      "fdb_faster_every_pair": false,
+      "sqlite_faster_every_pair": true
+    },
+    "narrow_p50_ms": {
+      "fdb_median": 4.3886,
+      "sqlite_median": 19.811700000000002,
+      "paired_sqlite_over_fdb": [
+        5.368203983046985,
+        4.491023257922655,
+        4.742318741783123
+      ],
+      "ratio_range": [
+        4.491023257922655,
+        5.368203983046985
+      ],
+      "fdb_faster_every_pair": true,
+      "sqlite_faster_every_pair": false
+    },
+    "broad_p50_ms": {
+      "fdb_median": 0.25070000000000003,
+      "sqlite_median": 16.6801,
+      "paired_sqlite_over_fdb": [
+        84.17740549828179,
+        66.53410450737933,
+        60.5914924825816
+      ],
+      "ratio_range": [
+        60.5914924825816,
+        84.17740549828179
+      ],
+      "fdb_faster_every_pair": true,
+      "sqlite_faster_every_pair": false
+    },
+    "range_p50_ms": {
+      "fdb_median": 0.6414,
+      "sqlite_median": 3.5008,
+      "paired_sqlite_over_fdb": [
+        6.140473963205489,
+        6.21590909090909,
+        4.047226173541963
+      ],
+      "ratio_range": [
+        4.047226173541963,
+        6.21590909090909
+      ],
+      "fdb_faster_every_pair": true,
+      "sqlite_faster_every_pair": false
+    },
+    "broad_text_p50_ms": {
+      "fdb_median": 395.9585,
+      "sqlite_median": 470.6921,
+      "paired_sqlite_over_fdb": [
+        1.310827776143207,
+        1.1875323410573428,
+        1.2223112215272367
+      ],
+      "ratio_range": [
+        1.1875323410573428,
+        1.310827776143207
+      ],
+      "fdb_faster_every_pair": true,
+      "sqlite_faster_every_pair": false
+    },
+    "last_page_p50_ms": {
+      "fdb_median": 21.023799999999998,
+      "sqlite_median": 32.163700000000006,
+      "paired_sqlite_over_fdb": [
+        1.5953187542469982,
+        1.6108458033276576,
+        1.2129886966394956
+      ],
+      "ratio_range": [
+        1.2129886966394956,
+        1.6108458033276576
+      ],
+      "fdb_faster_every_pair": true,
+      "sqlite_faster_every_pair": false
+    },
+    "second_page_p50_ms": {
+      "fdb_median": 0.266,
+      "sqlite_median": 17.0253,
+      "paired_sqlite_over_fdb": [
+        65.24851411589897,
+        64.00488721804511,
+        63.117764471057875
+      ],
+      "ratio_range": [
+        63.117764471057875,
+        65.24851411589897
+      ],
+      "fdb_faster_every_pair": true,
+      "sqlite_faster_every_pair": false
+    },
+    "get_100_p50_ms": {
+      "fdb_median": 1.0782,
+      "sqlite_median": 1.6311,
+      "paired_sqlite_over_fdb": [
+        2.100114927850849,
+        1.5127991096271562,
+        0.8695791071000719
+      ],
+      "ratio_range": [
+        0.8695791071000719,
+        2.100114927850849
+      ],
+      "fdb_faster_every_pair": false,
+      "sqlite_faster_every_pair": false
+    },
+    "write_plus_maintenance_ms": {
+      "fdb_median": 15474.639299999999,
+      "sqlite_median": 8457.7682,
+      "paired_sqlite_over_fdb": [
+        0.5168829298602543,
+        0.6212945396407398,
+        0.5572006024323974
+      ],
+      "ratio_range": [
+        0.5168829298602543,
+        0.6212945396407398
+      ],
+      "fdb_faster_every_pair": false,
+      "sqlite_faster_every_pair": true
+    }
+  },
+  "long": {
+    "peak_working_set_bytes": {
+      "fdb_median": 136564736,
+      "sqlite_median": 33148928,
+      "paired_sqlite_over_fdb": [
+        0.2427705783537317,
+        0.24314678183672245,
+        0.24273417114063767
+      ],
+      "ratio_range": [
+        0.24273417114063767,
+        0.24314678183672245
+      ],
+      "fdb_faster_every_pair": false,
+      "sqlite_faster_every_pair": true
+    },
+    "sampled_peak_private_bytes": {
+      "fdb_median": 138809344,
+      "sqlite_median": 28991488,
+      "paired_sqlite_over_fdb": [
+        0.2093711175530971,
+        0.2060550889763317,
+        0.2092714450116557
+      ],
+      "ratio_range": [
+        0.2060550889763317,
+        0.2093711175530971
+      ],
+      "fdb_faster_every_pair": false,
+      "sqlite_faster_every_pair": true
+    },
+    "retained_engine_disk_bytes": {
+      "fdb_median": 6182926010.0,
+      "sqlite_median": 5807165440.0,
+      "paired_sqlite_over_fdb": [
+        0.9392260930516941,
+        0.9392260930516941,
+        0.9392260930516941
+      ],
+      "ratio_range": [
+        0.9392260930516941,
+        0.9392260930516941
+      ],
+      "fdb_faster_every_pair": false,
+      "sqlite_faster_every_pair": true
+    },
+    "elapsed_s": {
+      "fdb_median": 88.6399336,
+      "sqlite_median": 425.2085265,
+      "paired_sqlite_over_fdb": [
+        3.704519884509117,
+        4.511298877512684,
+        5.032521670345655
+      ],
+      "ratio_range": [
+        3.704519884509117,
+        5.032521670345655
+      ],
+      "fdb_faster_every_pair": true,
+      "sqlite_faster_every_pair": false
+    },
+    "cpu_ms": {
+      "fdb_median": 85828.125,
+      "sqlite_median": 199015.625,
+      "paired_sqlite_over_fdb": [
+        1.829765838241632,
+        2.1658135283363804,
+        2.496996176952485
+      ],
+      "ratio_range": [
+        1.829765838241632,
+        2.496996176952485
+      ],
+      "fdb_faster_every_pair": true,
+      "sqlite_faster_every_pair": false
+    },
+    "open_ms": {
+      "fdb_median": 15374.7371,
+      "sqlite_median": 12.7691,
+      "paired_sqlite_over_fdb": [
+        0.0006943383046384828,
+        0.0006964086559893112,
+        0.0009938709178686355
+      ],
+      "ratio_range": [
+        0.0006943383046384828,
+        0.0009938709178686355
+      ],
+      "fdb_faster_every_pair": false,
+      "sqlite_faster_every_pair": true
+    },
+    "get_100_p50_ms": {
+      "fdb_median": 2.8706,
+      "sqlite_median": 7.2376000000000005,
+      "paired_sqlite_over_fdb": [
+        1.73789180804176,
+        2.5604415042275446,
+        4.174005434403957
+      ],
+      "ratio_range": [
+        1.73789180804176,
+        4.174005434403957
+      ],
+      "fdb_faster_every_pair": true,
+      "sqlite_faster_every_pair": false
+    },
+    "queries": {
+      "common:0": {
+        "fdb_median": 5746.1193,
+        "sqlite_median": 44634.471900000004,
+        "paired_sqlite_over_fdb": [
+          5.865289968859654,
+          6.975907838307379,
+          7.8532941702063175
+        ],
+        "ratio_range": [
+          5.865289968859654,
+          7.8532941702063175
+        ],
+        "fdb_faster_every_pair": true,
+        "sqlite_faster_every_pair": false
+      },
+      "common:50": {
+        "fdb_median": 5688.526,
+        "sqlite_median": 40127.139800000004,
+        "paired_sqlite_over_fdb": [
+          5.513740622226478,
+          6.88297817154801,
+          7.054048764126244
+        ],
+        "ratio_range": [
+          5.513740622226478,
+          7.054048764126244
+        ],
+        "fdb_faster_every_pair": true,
+        "sqlite_faster_every_pair": false
+      },
+      "common:99950": {
+        "fdb_median": 5690.7367,
+        "sqlite_median": 42452.2262,
+        "paired_sqlite_over_fdb": [
+          6.027213670797983,
+          6.842225313288523,
+          7.536538614009316
+        ],
+        "ratio_range": [
+          6.027213670797983,
+          7.536538614009316
+        ],
+        "fdb_faster_every_pair": true,
+        "sqlite_faster_every_pair": false
+      },
+      "rare:0": {
+        "fdb_median": 175.51919999999998,
+        "sqlite_median": 174.6415,
+        "paired_sqlite_over_fdb": [
+          0.8957986061200593,
+          0.7317267854456948,
+          1.0344405811866586
+        ],
+        "ratio_range": [
+          0.7317267854456948,
+          1.0344405811866586
+        ],
+        "fdb_faster_every_pair": false,
+        "sqlite_faster_every_pair": false
+      },
+      "rare:50": {
+        "fdb_median": 174.30180000000001,
+        "sqlite_median": 176.1762,
+        "paired_sqlite_over_fdb": [
+          0.8612086184933455,
+          0.781387491005329,
+          1.010753761579054
+        ],
+        "ratio_range": [
+          0.781387491005329,
+          1.010753761579054
+        ],
+        "fdb_faster_every_pair": false,
+        "sqlite_faster_every_pair": false
+      },
+      "short:0": {
+        "fdb_median": 5926.6919,
+        "sqlite_median": 38695.579000000005,
+        "paired_sqlite_over_fdb": [
+          5.164496736299111,
+          6.520008540742309,
+          6.828855402454782
+        ],
+        "ratio_range": [
+          5.164496736299111,
+          6.828855402454782
+        ],
+        "fdb_faster_every_pair": true,
+        "sqlite_faster_every_pair": false
+      },
+      "short:50": {
+        "fdb_median": 6064.9546,
+        "sqlite_median": 38743.9436,
+        "paired_sqlite_over_fdb": [
+          5.103021559783801,
+          6.337012828292333,
+          6.917747826174989
+        ],
+        "ratio_range": [
+          5.103021559783801,
+          6.917747826174989
+        ],
+        "fdb_faster_every_pair": true,
+        "sqlite_faster_every_pair": false
+      },
+      "and:0": {
+        "fdb_median": 9355.1142,
+        "sqlite_median": 41927.264,
+        "paired_sqlite_over_fdb": [
+          3.3154329915412593,
+          4.320786003873689,
+          5.215481927285146
+        ],
+        "ratio_range": [
+          3.3154329915412593,
+          5.215481927285146
+        ],
+        "fdb_faster_every_pair": true,
+        "sqlite_faster_every_pair": false
+      },
+      "and:50": {
+        "fdb_median": 9855.5103,
+        "sqlite_median": 41561.2768,
+        "paired_sqlite_over_fdb": [
+          3.307108208598338,
+          4.362454851113211,
+          4.921820831540301
+        ],
+        "ratio_range": [
+          3.307108208598338,
+          4.921820831540301
+        ],
+        "fdb_faster_every_pair": true,
+        "sqlite_faster_every_pair": false
+      }
+    }
+  },
+  "runs": {
+    "short-fdb": [
+      {
+        "result": {
+          "broad": {
+            "max_ms": 0.5341,
+            "p50_ms": 0.2328,
+            "p95_ms": 0.34650000000000003
+          },
+          "broad_text": {
+            "max_ms": 417.7618,
+            "p50_ms": 395.9585,
+            "p95_ms": 417.7618
+          },
+          "changed_reopen_ms": 507.4893,
+          "count": 100000,
+          "delta_bytes_watermark": 16777216,
+          "delta_keys_watermark": 10000,
+          "get_100": {
+            "max_ms": 0.8243,
+            "p50_ms": 0.7831,
+            "p95_ms": 0.8243
+          },
+          "ingest_ms": 9935.8591,
+          "last_page": {
+            "max_ms": 21.927,
+            "p50_ms": 20.1613,
+            "p95_ms": 21.927
+          },
+          "logical_text_bytes": 25600000,
+          "maintenance_ms": 6427.1657,
+          "narrow": {
+            "max_ms": 5.2225,
+            "p50_ms": 4.3886,
+            "p95_ms": 4.9121
+          },
+          "phase": "result",
+          "query_verification": "full StoredDocument oracle; untimed warmup; checks outside timing",
+          "range": {
+            "max_ms": 0.8406,
+            "p50_ms": 0.6414,
+            "p95_ms": 0.7668
+          },
+          "reopen_ms": 491.72860000000003,
+          "second_page": {
+            "max_ms": 0.7699999999999999,
+            "p50_ms": 0.2692,
+            "p95_ms": 0.4734
+          },
+          "stats": {
+            "compaction_running": false,
+            "delta_keys": 0,
+            "disk_index_bytes": 72045192,
+            "disk_posting_entries": 4589406,
+            "documents": 99950,
+            "generation": 31,
+            "log_bytes": 45,
+            "resident_documents": 0,
+            "resident_text_bytes": 0,
+            "segments": 2,
+            "sequence": 201,
+            "source_bytes": 39309983
+          },
+          "text_bytes": 256,
+          "verified_deletes": 50,
+          "verified_updates": 50
+        },
+        "memory": {
+          "engine": "fdb",
+          "run": 0,
+          "phase": "short",
+          "order": [
+            "fdb",
+            "sqlite"
+          ],
+          "exit_code": 0,
+          "executable": "C:\\Users\\Serkan\\Documents\\ChatGPT\\fdb\\output\\fdb-native-general-binary-scale-20261011.exe",
+          "database": "C:\\Users\\Serkan\\Documents\\ChatGPT\\fdb\\data\\native-sqlite-general-20261011-short-fdb-0",
+          "peak_working_set_bytes": 105095168,
+          "sampled_peak_private_bytes": 102260736,
+          "sample_interval_ms": 20,
+          "samples": 475,
+          "elapsed_s": 19.437725,
+          "cpu_ms": 22671.875,
+          "retained_engine_disk_bytes": 418320443.0,
+          "files": [
+            {
+              "name": "generation-0000000000000001.fdb",
+              "bytes": 3930785
+            },
+            {
+              "name": "generation-0000000000000001.ready",
+              "bytes": 87
+            },
+            {
+              "name": "generation-0000000000000003.fdb",
+              "bytes": 3930785
+            },
+            {
+              "name": "generation-0000000000000003.ready",
+              "bytes": 172
+            },
+            {
+              "name": "generation-0000000000000005.fdb",
+              "bytes": 3930785
+            },
+            {
+              "name": "generation-0000000000000005.ready",
+              "bytes": 257
+            },
+            {
+              "name": "generation-0000000000000007.fdb",
+              "bytes": 3930785
+            },
+            {
+              "name": "generation-0000000000000007.ready",
+              "bytes": 342
+            },
+            {
+              "name": "generation-0000000000000009.fdb",
+              "bytes": 3930785
+            },
+            {
+              "name": "generation-0000000000000009.ready",
+              "bytes": 427
+            },
+            {
+              "name": "generation-000000000000000c.fdb",
+              "bytes": 3930785
+            },
+            {
+              "name": "generation-000000000000000c.ready",
+              "bytes": 516
+            },
+            {
+              "name": "generation-000000000000000e.fdb",
+              "bytes": 3930785
+            },
+            {
+              "name": "generation-000000000000000e.ready",
+              "bytes": 602
+            },
+            {
+              "name": "generation-000000000000000f.ready",
+              "bytes": 349
+            },
+            {
+              "name": "generation-0000000000000011.fdb",
+              "bytes": 3930785
+            },
+            {
+              "name": "generation-0000000000000011.ready",
+              "bytes": 436
+            },
+            {
+              "name": "generation-0000000000000014.fdb",
+              "bytes": 3930785
+            },
+            {
+              "name": "generation-0000000000000014.ready",
+              "bytes": 523
+            },
+            {
+              "name": "generation-0000000000000016.fdb",
+              "bytes": 3930785
+            },
+            {
+              "name": "generation-0000000000000016.ready",
+              "bytes": 610
+            },
+            {
+              "name": "generation-0000000000000018.fdb",
+              "bytes": 9782
+            },
+            {
+              "name": "generation-0000000000000018.ready",
+              "bytes": 697
+            },
+            {
+              "name": "generation-0000000000000019.ready",
+              "bytes": 437
+            },
+            {
+              "name": "generation-000000000000001b.ready",
+              "bytes": 263
+            },
+            {
+              "name": "generation-000000000000001d.ready",
+              "bytes": 177
+            },
+            {
+              "name": "generation-000000000000001f.fdb",
+              "bytes": 45
+            },
+            {
+              "name": "generation-000000000000001f.ready",
+              "bytes": 259
+            },
+            {
+              "name": "run-0000000000000002.fdb",
+              "bytes": 3930045
+            },
+            {
+              "name": "run-0000000000000002.idx",
+              "bytes": 7200506
+            },
+            {
+              "name": "run-0000000000000004.fdb",
+              "bytes": 3930045
+            },
+            {
+              "name": "run-0000000000000004.idx",
+              "bytes": 7249350
+            },
+            {
+              "name": "run-0000000000000006.fdb",
+              "bytes": 3930045
+            },
+            {
+              "name": "run-0000000000000006.idx",
+              "bytes": 7249245
+            },
+            {
+              "name": "run-0000000000000008.fdb",
+              "bytes": 3930045
+            },
+            {
+              "name": "run-0000000000000008.idx",
+              "bytes": 7249235
+            },
+            {
+              "name": "run-000000000000000a.fdb",
+              "bytes": 15720082
+            },
+            {
+              "name": "run-000000000000000a.idx",
+              "bytes": 28777336
+            },
+            {
+              "name": "run-000000000000000b.fdb",
+              "bytes": 3930045
+            },
+            {
+              "name": "run-000000000000000b.idx",
+              "bytes": 7249751
+            },
+            {
+              "name": "run-000000000000000d.fdb",
+              "bytes": 3930045
+            },
+            {
+              "name": "run-000000000000000d.idx",
+              "bytes": 7259370
+            },
+            {
+              "name": "run-0000000000000010.fdb",
+              "bytes": 3930045
+            },
+            {
+              "name": "run-0000000000000010.idx",
+              "bytes": 7259278
+            },
+            {
+              "name": "run-0000000000000012.fdb",
+              "bytes": 27510156
+            },
+            {
+              "name": "run-0000000000000012.idx",
+              "bytes": 50389651
+            },
+            {
+              "name": "run-0000000000000013.fdb",
+              "bytes": 3930045
+            },
+            {
+              "name": "run-0000000000000013.idx",
+              "bytes": 7259319
+            },
+            {
+              "name": "run-0000000000000015.fdb",
+              "bytes": 3930045
+            },
+            {
+              "name": "run-0000000000000015.idx",
+              "bytes": 7259351
+            },
+            {
+              "name": "run-0000000000000017.fdb",
+              "bytes": 3930045
+            },
+            {
+              "name": "run-0000000000000017.idx",
+              "bytes": 7259249
+            },
+            {
+              "name": "run-000000000000001a.fdb",
+              "bytes": 11790082
+            },
+            {
+              "name": "run-000000000000001a.idx",
+              "bytes": 21659071
+            },
+            {
+              "name": "run-000000000000001c.fdb",
+              "bytes": 39300193
+            },
+            {
+              "name": "run-000000000000001c.idx",
+              "bytes": 72010925
+            },
+            {
+              "name": "run-000000000000001e.fdb",
+              "bytes": 9745
+            },
+            {
+              "name": "run-000000000000001e.idx",
+              "bytes": 34267
+            }
+          ],
+          "features": "default only",
+          "wal_sync": "on",
+          "includes_os_file_cache": false,
+          "window": "whole native process: ordinary benchmark phases and oracle; separate SQLite integrity excluded"
+        }
+      },
+      {
+        "result": {
+          "broad": {
+            "max_ms": 1.0534999999999999,
+            "p50_ms": 0.25070000000000003,
+            "p95_ms": 0.6581
+          },
+          "broad_text": {
+            "max_ms": 398.30060000000003,
+            "p50_ms": 396.3615,
+            "p95_ms": 398.30060000000003
+          },
+          "changed_reopen_ms": 498.55690000000004,
+          "count": 100000,
+          "delta_bytes_watermark": 16777216,
+          "delta_keys_watermark": 10000,
+          "get_100": {
+            "max_ms": 1.4746,
+            "p50_ms": 1.0782,
+            "p95_ms": 1.4746
+          },
+          "ingest_ms": 9345.0782,
+          "last_page": {
+            "max_ms": 21.3445,
+            "p50_ms": 21.023799999999998,
+            "p95_ms": 21.3445
+          },
+          "logical_text_bytes": 25600000,
+          "maintenance_ms": 6129.5611,
+          "narrow": {
+            "max_ms": 6.009600000000001,
+            "p50_ms": 4.4114,
+            "p95_ms": 5.894500000000001
+          },
+          "phase": "result",
+          "query_verification": "full StoredDocument oracle; untimed warmup; checks outside timing",
+          "range": {
+            "max_ms": 1.0545,
+            "p50_ms": 0.5632,
+            "p95_ms": 0.9432
+          },
+          "reopen_ms": 488.75960000000003,
+          "second_page": {
+            "max_ms": 0.38670000000000004,
+            "p50_ms": 0.266,
+            "p95_ms": 0.3785
+          },
+          "stats": {
+            "compaction_running": false,
+            "delta_keys": 0,
+            "disk_index_bytes": 72045192,
+            "disk_posting_entries": 4589406,
+            "documents": 99950,
+            "generation": 31,
+            "log_bytes": 45,
+            "resident_documents": 0,
+            "resident_text_bytes": 0,
+            "segments": 2,
+            "sequence": 201,
+            "source_bytes": 39309983
+          },
+          "text_bytes": 256,
+          "verified_deletes": 50,
+          "verified_updates": 50
+        },
+        "memory": {
+          "engine": "fdb",
+          "run": 1,
+          "phase": "short",
+          "order": [
+            "sqlite",
+            "fdb"
+          ],
+          "exit_code": 0,
+          "executable": "C:\\Users\\Serkan\\Documents\\ChatGPT\\fdb\\output\\fdb-native-general-binary-scale-20261011.exe",
+          "database": "C:\\Users\\Serkan\\Documents\\ChatGPT\\fdb\\data\\native-sqlite-general-20261011-short-fdb-1",
+          "peak_working_set_bytes": 103141376,
+          "sampled_peak_private_bytes": 98803712,
+          "sample_interval_ms": 20,
+          "samples": 457,
+          "elapsed_s": 18.4540668,
+          "cpu_ms": 22062.5,
+          "retained_engine_disk_bytes": 418320443.0,
+          "files": [
+            {
+              "name": "generation-0000000000000001.fdb",
+              "bytes": 3930785
+            },
+            {
+              "name": "generation-0000000000000001.ready",
+              "bytes": 87
+            },
+            {
+              "name": "generation-0000000000000003.fdb",
+              "bytes": 3930785
+            },
+            {
+              "name": "generation-0000000000000003.ready",
+              "bytes": 172
+            },
+            {
+              "name": "generation-0000000000000005.fdb",
+              "bytes": 3930785
+            },
+            {
+              "name": "generation-0000000000000005.ready",
+              "bytes": 257
+            },
+            {
+              "name": "generation-0000000000000007.fdb",
+              "bytes": 3930785
+            },
+            {
+              "name": "generation-0000000000000007.ready",
+              "bytes": 342
+            },
+            {
+              "name": "generation-0000000000000009.fdb",
+              "bytes": 3930785
+            },
+            {
+              "name": "generation-0000000000000009.ready",
+              "bytes": 427
+            },
+            {
+              "name": "generation-000000000000000c.fdb",
+              "bytes": 3930785
+            },
+            {
+              "name": "generation-000000000000000c.ready",
+              "bytes": 516
+            },
+            {
+              "name": "generation-000000000000000e.fdb",
+              "bytes": 3930785
+            },
+            {
+              "name": "generation-000000000000000e.ready",
+              "bytes": 602
+            },
+            {
+              "name": "generation-000000000000000f.ready",
+              "bytes": 349
+            },
+            {
+              "name": "generation-0000000000000011.fdb",
+              "bytes": 3930785
+            },
+            {
+              "name": "generation-0000000000000011.ready",
+              "bytes": 436
+            },
+            {
+              "name": "generation-0000000000000014.fdb",
+              "bytes": 3930785
+            },
+            {
+              "name": "generation-0000000000000014.ready",
+              "bytes": 523
+            },
+            {
+              "name": "generation-0000000000000016.fdb",
+              "bytes": 3930785
+            },
+            {
+              "name": "generation-0000000000000016.ready",
+              "bytes": 610
+            },
+            {
+              "name": "generation-0000000000000018.fdb",
+              "bytes": 9782
+            },
+            {
+              "name": "generation-0000000000000018.ready",
+              "bytes": 697
+            },
+            {
+              "name": "generation-0000000000000019.ready",
+              "bytes": 437
+            },
+            {
+              "name": "generation-000000000000001b.ready",
+              "bytes": 263
+            },
+            {
+              "name": "generation-000000000000001d.ready",
+              "bytes": 177
+            },
+            {
+              "name": "generation-000000000000001f.fdb",
+              "bytes": 45
+            },
+            {
+              "name": "generation-000000000000001f.ready",
+              "bytes": 259
+            },
+            {
+              "name": "run-0000000000000002.fdb",
+              "bytes": 3930045
+            },
+            {
+              "name": "run-0000000000000002.idx",
+              "bytes": 7200506
+            },
+            {
+              "name": "run-0000000000000004.fdb",
+              "bytes": 3930045
+            },
+            {
+              "name": "run-0000000000000004.idx",
+              "bytes": 7249350
+            },
+            {
+              "name": "run-0000000000000006.fdb",
+              "bytes": 3930045
+            },
+            {
+              "name": "run-0000000000000006.idx",
+              "bytes": 7249245
+            },
+            {
+              "name": "run-0000000000000008.fdb",
+              "bytes": 3930045
+            },
+            {
+              "name": "run-0000000000000008.idx",
+              "bytes": 7249235
+            },
+            {
+              "name": "run-000000000000000a.fdb",
+              "bytes": 15720082
+            },
+            {
+              "name": "run-000000000000000a.idx",
+              "bytes": 28777336
+            },
+            {
+              "name": "run-000000000000000b.fdb",
+              "bytes": 3930045
+            },
+            {
+              "name": "run-000000000000000b.idx",
+              "bytes": 7249751
+            },
+            {
+              "name": "run-000000000000000d.fdb",
+              "bytes": 3930045
+            },
+            {
+              "name": "run-000000000000000d.idx",
+              "bytes": 7259370
+            },
+            {
+              "name": "run-0000000000000010.fdb",
+              "bytes": 3930045
+            },
+            {
+              "name": "run-0000000000000010.idx",
+              "bytes": 7259278
+            },
+            {
+              "name": "run-0000000000000012.fdb",
+              "bytes": 27510156
+            },
+            {
+              "name": "run-0000000000000012.idx",
+              "bytes": 50389651
+            },
+            {
+              "name": "run-0000000000000013.fdb",
+              "bytes": 3930045
+            },
+            {
+              "name": "run-0000000000000013.idx",
+              "bytes": 7259319
+            },
+            {
+              "name": "run-0000000000000015.fdb",
+              "bytes": 3930045
+            },
+            {
+              "name": "run-0000000000000015.idx",
+              "bytes": 7259351
+            },
+            {
+              "name": "run-0000000000000017.fdb",
+              "bytes": 3930045
+            },
+            {
+              "name": "run-0000000000000017.idx",
+              "bytes": 7259249
+            },
+            {
+              "name": "run-000000000000001a.fdb",
+              "bytes": 11790082
+            },
+            {
+              "name": "run-000000000000001a.idx",
+              "bytes": 21659071
+            },
+            {
+              "name": "run-000000000000001c.fdb",
+              "bytes": 39300193
+            },
+            {
+              "name": "run-000000000000001c.idx",
+              "bytes": 72010925
+            },
+            {
+              "name": "run-000000000000001e.fdb",
+              "bytes": 9745
+            },
+            {
+              "name": "run-000000000000001e.idx",
+              "bytes": 34267
+            }
+          ],
+          "features": "default only",
+          "wal_sync": "on",
+          "includes_os_file_cache": false,
+          "window": "whole native process: ordinary benchmark phases and oracle; separate SQLite integrity excluded"
+        }
+      },
+      {
+        "result": {
+          "broad": {
+            "max_ms": 0.7291,
+            "p50_ms": 0.2727,
+            "p95_ms": 0.5494
+          },
+          "broad_text": {
+            "max_ms": 383.5475,
+            "p50_ms": 382.1503,
+            "p95_ms": 383.5475
+          },
+          "changed_reopen_ms": 530.2144,
+          "count": 100000,
+          "delta_bytes_watermark": 16777216,
+          "delta_keys_watermark": 10000,
+          "get_100": {
+            "max_ms": 1.2832,
+            "p50_ms": 1.2521,
+            "p95_ms": 1.2832
+          },
+          "ingest_ms": 8938.6849,
+          "last_page": {
+            "max_ms": 24.1582,
+            "p50_ms": 23.6036,
+            "p95_ms": 24.1582
+          },
+          "logical_text_bytes": 25600000,
+          "maintenance_ms": 6080.029299999999,
+          "narrow": {
+            "max_ms": 4.825399999999999,
+            "p50_ms": 4.1074,
+            "p95_ms": 4.8005
+          },
+          "phase": "result",
+          "query_verification": "full StoredDocument oracle; untimed warmup; checks outside timing",
+          "range": {
+            "max_ms": 0.8214,
+            "p50_ms": 0.703,
+            "p95_ms": 0.8105
+          },
+          "reopen_ms": 494.05670000000003,
+          "second_page": {
+            "max_ms": 0.8478,
+            "p50_ms": 0.2505,
+            "p95_ms": 0.8408
+          },
+          "stats": {
+            "compaction_running": false,
+            "delta_keys": 0,
+            "disk_index_bytes": 72045192,
+            "disk_posting_entries": 4589406,
+            "documents": 99950,
+            "generation": 31,
+            "log_bytes": 45,
+            "resident_documents": 0,
+            "resident_text_bytes": 0,
+            "segments": 2,
+            "sequence": 201,
+            "source_bytes": 39309983
+          },
+          "text_bytes": 256,
+          "verified_deletes": 50,
+          "verified_updates": 50
+        },
+        "memory": {
+          "engine": "fdb",
+          "run": 2,
+          "phase": "short",
+          "order": [
+            "fdb",
+            "sqlite"
+          ],
+          "exit_code": 0,
+          "executable": "C:\\Users\\Serkan\\Documents\\ChatGPT\\fdb\\output\\fdb-native-general-binary-scale-20261011.exe",
+          "database": "C:\\Users\\Serkan\\Documents\\ChatGPT\\fdb\\data\\native-sqlite-general-20261011-short-fdb-2",
+          "peak_working_set_bytes": 103731200,
+          "sampled_peak_private_bytes": 99778560,
+          "sample_interval_ms": 20,
+          "samples": 447,
+          "elapsed_s": 17.9908001,
+          "cpu_ms": 21484.375,
+          "retained_engine_disk_bytes": 418320443.0,
+          "files": [
+            {
+              "name": "generation-0000000000000001.fdb",
+              "bytes": 3930785
+            },
+            {
+              "name": "generation-0000000000000001.ready",
+              "bytes": 87
+            },
+            {
+              "name": "generation-0000000000000003.fdb",
+              "bytes": 3930785
+            },
+            {
+              "name": "generation-0000000000000003.ready",
+              "bytes": 172
+            },
+            {
+              "name": "generation-0000000000000005.fdb",
+              "bytes": 3930785
+            },
+            {
+              "name": "generation-0000000000000005.ready",
+              "bytes": 257
+            },
+            {
+              "name": "generation-0000000000000007.fdb",
+              "bytes": 3930785
+            },
+            {
+              "name": "generation-0000000000000007.ready",
+              "bytes": 342
+            },
+            {
+              "name": "generation-0000000000000009.fdb",
+              "bytes": 3930785
+            },
+            {
+              "name": "generation-0000000000000009.ready",
+              "bytes": 427
+            },
+            {
+              "name": "generation-000000000000000c.fdb",
+              "bytes": 3930785
+            },
+            {
+              "name": "generation-000000000000000c.ready",
+              "bytes": 516
+            },
+            {
+              "name": "generation-000000000000000e.fdb",
+              "bytes": 3930785
+            },
+            {
+              "name": "generation-000000000000000e.ready",
+              "bytes": 602
+            },
+            {
+              "name": "generation-000000000000000f.ready",
+              "bytes": 349
+            },
+            {
+              "name": "generation-0000000000000011.fdb",
+              "bytes": 3930785
+            },
+            {
+              "name": "generation-0000000000000011.ready",
+              "bytes": 436
+            },
+            {
+              "name": "generation-0000000000000014.fdb",
+              "bytes": 3930785
+            },
+            {
+              "name": "generation-0000000000000014.ready",
+              "bytes": 523
+            },
+            {
+              "name": "generation-0000000000000016.fdb",
+              "bytes": 3930785
+            },
+            {
+              "name": "generation-0000000000000016.ready",
+              "bytes": 610
+            },
+            {
+              "name": "generation-0000000000000018.fdb",
+              "bytes": 9782
+            },
+            {
+              "name": "generation-0000000000000018.ready",
+              "bytes": 697
+            },
+            {
+              "name": "generation-0000000000000019.ready",
+              "bytes": 437
+            },
+            {
+              "name": "generation-000000000000001b.ready",
+              "bytes": 263
+            },
+            {
+              "name": "generation-000000000000001d.ready",
+              "bytes": 177
+            },
+            {
+              "name": "generation-000000000000001f.fdb",
+              "bytes": 45
+            },
+            {
+              "name": "generation-000000000000001f.ready",
+              "bytes": 259
+            },
+            {
+              "name": "run-0000000000000002.fdb",
+              "bytes": 3930045
+            },
+            {
+              "name": "run-0000000000000002.idx",
+              "bytes": 7200506
+            },
+            {
+              "name": "run-0000000000000004.fdb",
+              "bytes": 3930045
+            },
+            {
+              "name": "run-0000000000000004.idx",
+              "bytes": 7249350
+            },
+            {
+              "name": "run-0000000000000006.fdb",
+              "bytes": 3930045
+            },
+            {
+              "name": "run-0000000000000006.idx",
+              "bytes": 7249245
+            },
+            {
+              "name": "run-0000000000000008.fdb",
+              "bytes": 3930045
+            },
+            {
+              "name": "run-0000000000000008.idx",
+              "bytes": 7249235
+            },
+            {
+              "name": "run-000000000000000a.fdb",
+              "bytes": 15720082
+            },
+            {
+              "name": "run-000000000000000a.idx",
+              "bytes": 28777336
+            },
+            {
+              "name": "run-000000000000000b.fdb",
+              "bytes": 3930045
+            },
+            {
+              "name": "run-000000000000000b.idx",
+              "bytes": 7249751
+            },
+            {
+              "name": "run-000000000000000d.fdb",
+              "bytes": 3930045
+            },
+            {
+              "name": "run-000000000000000d.idx",
+              "bytes": 7259370
+            },
+            {
+              "name": "run-0000000000000010.fdb",
+              "bytes": 3930045
+            },
+            {
+              "name": "run-0000000000000010.idx",
+              "bytes": 7259278
+            },
+            {
+              "name": "run-0000000000000012.fdb",
+              "bytes": 27510156
+            },
+            {
+              "name": "run-0000000000000012.idx",
+              "bytes": 50389651
+            },
+            {
+              "name": "run-0000000000000013.fdb",
+              "bytes": 3930045
+            },
+            {
+              "name": "run-0000000000000013.idx",
+              "bytes": 7259319
+            },
+            {
+              "name": "run-0000000000000015.fdb",
+              "bytes": 3930045
+            },
+            {
+              "name": "run-0000000000000015.idx",
+              "bytes": 7259351
+            },
+            {
+              "name": "run-0000000000000017.fdb",
+              "bytes": 3930045
+            },
+            {
+              "name": "run-0000000000000017.idx",
+              "bytes": 7259249
+            },
+            {
+              "name": "run-000000000000001a.fdb",
+              "bytes": 11790082
+            },
+            {
+              "name": "run-000000000000001a.idx",
+              "bytes": 21659071
+            },
+            {
+              "name": "run-000000000000001c.fdb",
+              "bytes": 39300193
+            },
+            {
+              "name": "run-000000000000001c.idx",
+              "bytes": 72010925
+            },
+            {
+              "name": "run-000000000000001e.fdb",
+              "bytes": 9745
+            },
+            {
+              "name": "run-000000000000001e.idx",
+              "bytes": 34267
+            }
+          ],
+          "features": "default only",
+          "wal_sync": "on",
+          "includes_os_file_cache": false,
+          "window": "whole native process: ordinary benchmark phases and oracle; separate SQLite integrity excluded"
+        }
+      }
+    ],
+    "short-sqlite": [
+      {
+        "result": {
+          "batches": {
+            "max_ms": 294.361,
+            "p50_ms": 34.475100000000005,
+            "p95_ms": 70.98129999999999
+          },
+          "broad": {
+            "max_ms": 30.4208,
+            "p50_ms": 19.5965,
+            "p95_ms": 26.6658
+          },
+          "broad_text": {
+            "max_ms": 523.2627,
+            "p50_ms": 519.0334,
+            "p95_ms": 523.2627
+          },
+          "changed_reopen_ms": 10.600399999999999,
+          "count": 100000,
+          "documents": 99950,
+          "get_100": {
+            "max_ms": 2.2218,
+            "p50_ms": 1.6446,
+            "p95_ms": 2.2218
+          },
+          "ingest_ms": 8092.7832,
+          "integrity_ms": null,
+          "last_page": {
+            "max_ms": 34.2412,
+            "p50_ms": 32.163700000000006,
+            "p95_ms": 34.2412
+          },
+          "maintenance_ms": 364.985,
+          "narrow": {
+            "max_ms": 27.7348,
+            "p50_ms": 23.5589,
+            "p95_ms": 26.5759
+          },
+          "phase": "result",
+          "query_verification": "full StoredDocument oracle; untimed warmup; checks outside timing",
+          "range": {
+            "max_ms": 5.0354,
+            "p50_ms": 3.9385000000000003,
+            "p95_ms": 4.9167000000000005
+          },
+          "reopen_ms": 3.1357,
+          "second_page": {
+            "max_ms": 21.1798,
+            "p50_ms": 17.5649,
+            "p95_ms": 19.5078
+          },
+          "text_bytes": 256,
+          "verified_deletes": 50,
+          "verified_updates": 50
+        },
+        "memory": {
+          "engine": "sqlite",
+          "run": 0,
+          "phase": "short",
+          "order": [
+            "fdb",
+            "sqlite"
+          ],
+          "exit_code": 0,
+          "executable": "C:\\Users\\Serkan\\Documents\\ChatGPT\\fdb\\output\\sqlite-native-general-scale-20261011.exe",
+          "database": "C:\\Users\\Serkan\\Documents\\ChatGPT\\fdb\\data\\native-sqlite-general-20261011-short-sqlite-0",
+          "peak_working_set_bytes": 10252288,
+          "sampled_peak_private_bytes": 4968448,
+          "sample_interval_ms": 20,
+          "samples": 316,
+          "elapsed_s": 13.0176141,
+          "cpu_ms": 12078.125,
+          "retained_engine_disk_bytes": 107192320.0,
+          "files": [
+            {
+              "name": "sqlite.db",
+              "bytes": 107192320
+            }
+          ],
+          "features": "default only",
+          "wal_sync": "on",
+          "includes_os_file_cache": false,
+          "window": "whole native process: ordinary benchmark phases and oracle; separate SQLite integrity excluded"
+        }
+      },
+      {
+        "result": {
+          "batches": {
+            "max_ms": 279.3092,
+            "p50_ms": 38.3847,
+            "p95_ms": 75.942
+          },
+          "broad": {
+            "max_ms": 19.3545,
+            "p50_ms": 16.6801,
+            "p95_ms": 18.8412
+          },
+          "broad_text": {
+            "max_ms": 472.9448,
+            "p50_ms": 470.6921,
+            "p95_ms": 472.9448
+          },
+          "changed_reopen_ms": 11.0153,
+          "count": 100000,
+          "documents": 99950,
+          "get_100": {
+            "max_ms": 2.7967,
+            "p50_ms": 1.6311,
+            "p95_ms": 2.7967
+          },
+          "ingest_ms": 9304.060599999999,
+          "integrity_ms": null,
+          "last_page": {
+            "max_ms": 34.7019,
+            "p50_ms": 33.8661,
+            "p95_ms": 34.7019
+          },
+          "maintenance_ms": 310.2483,
+          "narrow": {
+            "max_ms": 23.769,
+            "p50_ms": 19.811700000000002,
+            "p95_ms": 22.458599999999997
+          },
+          "phase": "result",
+          "query_verification": "full StoredDocument oracle; untimed warmup; checks outside timing",
+          "range": {
+            "max_ms": 4.55,
+            "p50_ms": 3.5008,
+            "p95_ms": 4.3895
+          },
+          "reopen_ms": 3.1828999999999996,
+          "second_page": {
+            "max_ms": 20.997,
+            "p50_ms": 17.0253,
+            "p95_ms": 19.748600000000003
+          },
+          "text_bytes": 256,
+          "verified_deletes": 50,
+          "verified_updates": 50
+        },
+        "memory": {
+          "engine": "sqlite",
+          "run": 1,
+          "phase": "short",
+          "order": [
+            "sqlite",
+            "fdb"
+          ],
+          "exit_code": 0,
+          "executable": "C:\\Users\\Serkan\\Documents\\ChatGPT\\fdb\\output\\sqlite-native-general-scale-20261011.exe",
+          "database": "C:\\Users\\Serkan\\Documents\\ChatGPT\\fdb\\data\\native-sqlite-general-20261011-short-sqlite-1",
+          "peak_working_set_bytes": 10231808,
+          "sampled_peak_private_bytes": 4997120,
+          "sample_interval_ms": 20,
+          "samples": 341,
+          "elapsed_s": 13.6392006,
+          "cpu_ms": 12296.875,
+          "retained_engine_disk_bytes": 107192320.0,
+          "files": [
+            {
+              "name": "sqlite.db",
+              "bytes": 107192320
+            }
+          ],
+          "features": "default only",
+          "wal_sync": "on",
+          "includes_os_file_cache": false,
+          "window": "whole native process: ordinary benchmark phases and oracle; separate SQLite integrity excluded"
+        }
+      },
+      {
+        "result": {
+          "batches": {
+            "max_ms": 242.9992,
+            "p50_ms": 33.8402,
+            "p95_ms": 69.1272
+          },
+          "broad": {
+            "max_ms": 18.0883,
+            "p50_ms": 16.523300000000003,
+            "p95_ms": 18.0567
+          },
+          "broad_text": {
+            "max_ms": 479.3665,
+            "p50_ms": 467.10659999999996,
+            "p95_ms": 479.3665
+          },
+          "changed_reopen_ms": 10.1846,
+          "count": 100000,
+          "documents": 99950,
+          "get_100": {
+            "max_ms": 1.4636,
+            "p50_ms": 1.0888,
+            "p95_ms": 1.4636
+          },
+          "ingest_ms": 8082.196400000001,
+          "integrity_ms": null,
+          "last_page": {
+            "max_ms": 30.8351,
+            "p50_ms": 28.6309,
+            "p95_ms": 30.8351
+          },
+          "maintenance_ms": 286.2402,
+          "narrow": {
+            "max_ms": 21.471,
+            "p50_ms": 19.4786,
+            "p95_ms": 20.9068
+          },
+          "phase": "result",
+          "query_verification": "full StoredDocument oracle; untimed warmup; checks outside timing",
+          "range": {
+            "max_ms": 3.5531,
+            "p50_ms": 2.8452,
+            "p95_ms": 3.4331
+          },
+          "reopen_ms": 2.8337000000000003,
+          "second_page": {
+            "max_ms": 18.996,
+            "p50_ms": 15.810999999999998,
+            "p95_ms": 18.932199999999998
+          },
+          "text_bytes": 256,
+          "verified_deletes": 50,
+          "verified_updates": 50
+        },
+        "memory": {
+          "engine": "sqlite",
+          "run": 2,
+          "phase": "short",
+          "order": [
+            "fdb",
+            "sqlite"
+          ],
+          "exit_code": 0,
+          "executable": "C:\\Users\\Serkan\\Documents\\ChatGPT\\fdb\\output\\sqlite-native-general-scale-20261011.exe",
+          "database": "C:\\Users\\Serkan\\Documents\\ChatGPT\\fdb\\data\\native-sqlite-general-20261011-short-sqlite-2",
+          "peak_working_set_bytes": 10235904,
+          "sampled_peak_private_bytes": 4993024,
+          "sample_interval_ms": 20,
+          "samples": 320,
+          "elapsed_s": 12.2590207,
+          "cpu_ms": 11031.25,
+          "retained_engine_disk_bytes": 107192320.0,
+          "files": [
+            {
+              "name": "sqlite.db",
+              "bytes": 107192320
+            }
+          ],
+          "features": "default only",
+          "wal_sync": "on",
+          "includes_os_file_cache": false,
+          "window": "whole native process: ordinary benchmark phases and oracle; separate SQLite integrity excluded"
+        }
+      }
+    ],
+    "long-fdb": [
+      {
+        "result": {
+          "open_ms": 18390.3148,
+          "get_100": {
+            "cache": "one untimed 100-get warmup; no forced OS eviction",
+            "full_document_oracle_verified": true,
+            "p50_ms": 4.0613,
+            "phase": "get",
+            "requests": 100,
+            "samples_ms": [
+              4.0017000000000005,
+              4.0613,
+              4.4291
+            ]
+          },
+          "queries": {
+            "common:0": {
+              "api": "Database::search",
+              "cache": "warm OS cache; first page has one untimed query; later pages follow; no forced eviction",
+              "full_page_oracle_verified": true,
+              "offset": 0,
+              "p50_ms": 7609.9344,
+              "phase": "query",
+              "profiled": false,
+              "query": "common",
+              "samples_ms": [
+                7609.9344
+              ],
+              "text": "the",
+              "total": 100000
+            },
+            "common:50": {
+              "api": "Database::search",
+              "cache": "warm OS cache; first page has one untimed query; later pages follow; no forced eviction",
+              "full_page_oracle_verified": true,
+              "offset": 50,
+              "p50_ms": 7667.9315,
+              "phase": "query",
+              "profiled": false,
+              "query": "common",
+              "samples_ms": [
+                7667.9315
+              ],
+              "text": "the",
+              "total": 100000
+            },
+            "common:99950": {
+              "api": "Database::search",
+              "cache": "warm OS cache; first page has one untimed query; later pages follow; no forced eviction",
+              "full_page_oracle_verified": true,
+              "offset": 99950,
+              "p50_ms": 7618.5165,
+              "phase": "query",
+              "profiled": false,
+              "query": "common",
+              "samples_ms": [
+                7618.5165
+              ],
+              "text": "the",
+              "total": 100000
+            },
+            "rare:0": {
+              "api": "Database::search",
+              "cache": "warm OS cache; first page has one untimed query; later pages follow; no forced eviction",
+              "full_page_oracle_verified": true,
+              "offset": 0,
+              "p50_ms": 237.92579999999998,
+              "phase": "query",
+              "profiled": false,
+              "query": "rare",
+              "samples_ms": [
+                232.32420000000002,
+                234.05010000000001,
+                234.8249,
+                236.493,
+                236.632,
+                237.92579999999998,
+                240.45669999999998,
+                241.72209999999998,
+                252.64350000000002,
+                253.9939
+              ],
+              "text": "abbreviation",
+              "total": 264
+            },
+            "rare:50": {
+              "api": "Database::search",
+              "cache": "warm OS cache; first page has one untimed query; later pages follow; no forced eviction",
+              "full_page_oracle_verified": true,
+              "offset": 50,
+              "p50_ms": 237.7028,
+              "phase": "query",
+              "profiled": false,
+              "query": "rare",
+              "samples_ms": [
+                226.0328,
+                233.6008,
+                234.0566,
+                234.59959999999998,
+                237.4671,
+                237.7028,
+                238.1574,
+                238.4426,
+                240.8201,
+                241.6148
+              ],
+              "text": "abbreviation",
+              "total": 264
+            },
+            "short:0": {
+              "api": "Database::search",
+              "cache": "warm OS cache; first page has one untimed query; later pages follow; no forced eviction",
+              "full_page_oracle_verified": true,
+              "offset": 0,
+              "p50_ms": 7492.6137,
+              "phase": "query",
+              "profiled": false,
+              "query": "short",
+              "samples_ms": [
+                7492.6137
+              ],
+              "text": "of",
+              "total": 100000
+            },
+            "short:50": {
+              "api": "Database::search",
+              "cache": "warm OS cache; first page has one untimed query; later pages follow; no forced eviction",
+              "full_page_oracle_verified": true,
+              "offset": 50,
+              "p50_ms": 7592.3535,
+              "phase": "query",
+              "profiled": false,
+              "query": "short",
+              "samples_ms": [
+                7592.3535
+              ],
+              "text": "of",
+              "total": 100000
+            },
+            "and:0": {
+              "api": "Database::search",
+              "cache": "warm OS cache; first page has one untimed query; later pages follow; no forced eviction",
+              "full_page_oracle_verified": true,
+              "offset": 0,
+              "p50_ms": 12646.09,
+              "phase": "query",
+              "profiled": false,
+              "query": "and",
+              "samples_ms": [
+                12646.09
+              ],
+              "text": "the whale",
+              "total": 16537
+            },
+            "and:50": {
+              "api": "Database::search",
+              "cache": "warm OS cache; first page has one untimed query; later pages follow; no forced eviction",
+              "full_page_oracle_verified": true,
+              "offset": 50,
+              "p50_ms": 12567.2564,
+              "phase": "query",
+              "profiled": false,
+              "query": "and",
+              "samples_ms": [
+                12567.2564
+              ],
+              "text": "the whale",
+              "total": 16537
+            }
+          }
+        },
+        "memory": {
+          "engine": "fdb",
+          "run": 0,
+          "phase": "long",
+          "order": [
+            "fdb",
+            "sqlite"
+          ],
+          "exit_code": 0,
+          "executable": "C:\\Users\\Serkan\\Documents\\ChatGPT\\fdb\\output\\fdb-native-general-binary-long-20261011.exe",
+          "database": "C:\\Users\\Serkan\\Documents\\ChatGPT\\fdb\\data\\native-general-long-binary-20261011",
+          "peak_working_set_bytes": 136544256,
+          "sampled_peak_private_bytes": 138469376,
+          "sample_interval_ms": 20,
+          "samples": 2926,
+          "elapsed_s": 114.781008,
+          "cpu_ms": 108765.625,
+          "retained_engine_disk_bytes": 6182926010.0,
+          "files": [
+            {
+              "name": "generation-0000000000000001.fdb",
+              "bytes": 2685730889
+            },
+            {
+              "name": "generation-0000000000000001.idx",
+              "bytes": 3497195093
+            },
+            {
+              "name": "generation-0000000000000001.ready",
+              "bytes": 28
+            }
+          ],
+          "features": "default only",
+          "wal_sync": "on",
+          "includes_os_file_cache": false,
+          "window": "whole native process: ordinary benchmark phases and oracle; separate SQLite integrity excluded"
+        }
+      },
+      {
+        "result": {
+          "open_ms": 15374.7371,
+          "get_100": {
+            "cache": "one untimed 100-get warmup; no forced OS eviction",
+            "full_document_oracle_verified": true,
+            "p50_ms": 2.8267,
+            "phase": "get",
+            "requests": 100,
+            "samples_ms": [
+              2.8111,
+              2.8267,
+              2.9434
+            ]
+          },
+          "queries": {
+            "common:0": {
+              "api": "Database::search",
+              "cache": "warm OS cache; first page has one untimed query; later pages follow; no forced eviction",
+              "full_page_oracle_verified": true,
+              "offset": 0,
+              "p50_ms": 5675.46,
+              "phase": "query",
+              "profiled": false,
+              "query": "common",
+              "samples_ms": [
+                5675.46
+              ],
+              "text": "the",
+              "total": 100000
+            },
+            "common:50": {
+              "api": "Database::search",
+              "cache": "warm OS cache; first page has one untimed query; later pages follow; no forced eviction",
+              "full_page_oracle_verified": true,
+              "offset": 50,
+              "p50_ms": 5659.815,
+              "phase": "query",
+              "profiled": false,
+              "query": "common",
+              "samples_ms": [
+                5659.815
+              ],
+              "text": "the",
+              "total": 100000
+            },
+            "common:99950": {
+              "api": "Database::search",
+              "cache": "warm OS cache; first page has one untimed query; later pages follow; no forced eviction",
+              "full_page_oracle_verified": true,
+              "offset": 99950,
+              "p50_ms": 5690.7367,
+              "phase": "query",
+              "profiled": false,
+              "query": "common",
+              "samples_ms": [
+                5690.7367
+              ],
+              "text": "the",
+              "total": 100000
+            },
+            "rare:0": {
+              "api": "Database::search",
+              "cache": "warm OS cache; first page has one untimed query; later pages follow; no forced eviction",
+              "full_page_oracle_verified": true,
+              "offset": 0,
+              "p50_ms": 175.51919999999998,
+              "phase": "query",
+              "profiled": false,
+              "query": "rare",
+              "samples_ms": [
+                171.8869,
+                173.67940000000002,
+                174.3722,
+                174.3845,
+                174.5272,
+                175.51919999999998,
+                186.01790000000003,
+                194.5152,
+                195.1625,
+                199.004
+              ],
+              "text": "abbreviation",
+              "total": 264
+            },
+            "rare:50": {
+              "api": "Database::search",
+              "cache": "warm OS cache; first page has one untimed query; later pages follow; no forced eviction",
+              "full_page_oracle_verified": true,
+              "offset": 50,
+              "p50_ms": 172.6022,
+              "phase": "query",
+              "profiled": false,
+              "query": "rare",
+              "samples_ms": [
+                168.01930000000002,
+                168.3818,
+                169.67960000000002,
+                169.9838,
+                171.4238,
+                172.6022,
+                173.623,
+                177.14579999999998,
+                177.35739999999998,
+                178.8449
+              ],
+              "text": "abbreviation",
+              "total": 264
+            },
+            "short:0": {
+              "api": "Database::search",
+              "cache": "warm OS cache; first page has one untimed query; later pages follow; no forced eviction",
+              "full_page_oracle_verified": true,
+              "offset": 0,
+              "p50_ms": 5799.4959,
+              "phase": "query",
+              "profiled": false,
+              "query": "short",
+              "samples_ms": [
+                5799.4959
+              ],
+              "text": "of",
+              "total": 100000
+            },
+            "short:50": {
+              "api": "Database::search",
+              "cache": "warm OS cache; first page has one untimed query; later pages follow; no forced eviction",
+              "full_page_oracle_verified": true,
+              "offset": 50,
+              "p50_ms": 5863.0329,
+              "phase": "query",
+              "profiled": false,
+              "query": "short",
+              "samples_ms": [
+                5863.0329
+              ],
+              "text": "of",
+              "total": 100000
+            },
+            "and:0": {
+              "api": "Database::search",
+              "cache": "warm OS cache; first page has one untimed query; later pages follow; no forced eviction",
+              "full_page_oracle_verified": true,
+              "offset": 0,
+              "p50_ms": 9355.1142,
+              "phase": "query",
+              "profiled": false,
+              "query": "and",
+              "samples_ms": [
+                9355.1142
+              ],
+              "text": "the whale",
+              "total": 16537
+            },
+            "and:50": {
+              "api": "Database::search",
+              "cache": "warm OS cache; first page has one untimed query; later pages follow; no forced eviction",
+              "full_page_oracle_verified": true,
+              "offset": 50,
+              "p50_ms": 9404.5785,
+              "phase": "query",
+              "profiled": false,
+              "query": "and",
+              "samples_ms": [
+                9404.5785
+              ],
+              "text": "the whale",
+              "total": 16537
+            }
+          }
+        },
+        "memory": {
+          "engine": "fdb",
+          "run": 1,
+          "phase": "long",
+          "order": [
+            "sqlite",
+            "fdb"
+          ],
+          "exit_code": 0,
+          "executable": "C:\\Users\\Serkan\\Documents\\ChatGPT\\fdb\\output\\fdb-native-general-binary-long-20261011.exe",
+          "database": "C:\\Users\\Serkan\\Documents\\ChatGPT\\fdb\\data\\native-general-long-binary-20261011",
+          "peak_working_set_bytes": 136568832,
+          "sampled_peak_private_bytes": 139485184,
+          "sample_interval_ms": 20,
+          "samples": 2316,
+          "elapsed_s": 87.7049821,
+          "cpu_ms": 85468.75,
+          "retained_engine_disk_bytes": 6182926010.0,
+          "files": [
+            {
+              "name": "generation-0000000000000001.fdb",
+              "bytes": 2685730889
+            },
+            {
+              "name": "generation-0000000000000001.idx",
+              "bytes": 3497195093
+            },
+            {
+              "name": "generation-0000000000000001.ready",
+              "bytes": 28
+            }
+          ],
+          "features": "default only",
+          "wal_sync": "on",
+          "includes_os_file_cache": false,
+          "window": "whole native process: ordinary benchmark phases and oracle; separate SQLite integrity excluded"
+        }
+      },
+      {
+        "result": {
+          "open_ms": 15289.7119,
+          "get_100": {
+            "cache": "one untimed 100-get warmup; no forced OS eviction",
+            "full_document_oracle_verified": true,
+            "p50_ms": 2.8706,
+            "phase": "get",
+            "requests": 100,
+            "samples_ms": [
+              2.7639,
+              2.8706,
+              3.2539000000000002
+            ]
+          },
+          "queries": {
+            "common:0": {
+              "api": "Database::search",
+              "cache": "warm OS cache; first page has one untimed query; later pages follow; no forced eviction",
+              "full_page_oracle_verified": true,
+              "offset": 0,
+              "p50_ms": 5746.1193,
+              "phase": "query",
+              "profiled": false,
+              "query": "common",
+              "samples_ms": [
+                5746.1193
+              ],
+              "text": "the",
+              "total": 100000
+            },
+            "common:50": {
+              "api": "Database::search",
+              "cache": "warm OS cache; first page has one untimed query; later pages follow; no forced eviction",
+              "full_page_oracle_verified": true,
+              "offset": 50,
+              "p50_ms": 5688.526,
+              "phase": "query",
+              "profiled": false,
+              "query": "common",
+              "samples_ms": [
+                5688.526
+              ],
+              "text": "the",
+              "total": 100000
+            },
+            "common:99950": {
+              "api": "Database::search",
+              "cache": "warm OS cache; first page has one untimed query; later pages follow; no forced eviction",
+              "full_page_oracle_verified": true,
+              "offset": 99950,
+              "p50_ms": 5632.8546,
+              "phase": "query",
+              "profiled": false,
+              "query": "common",
+              "samples_ms": [
+                5632.8546
+              ],
+              "text": "the",
+              "total": 100000
+            },
+            "rare:0": {
+              "api": "Database::search",
+              "cache": "warm OS cache; first page has one untimed query; later pages follow; no forced eviction",
+              "full_page_oracle_verified": true,
+              "offset": 0,
+              "p50_ms": 168.827,
+              "phase": "query",
+              "profiled": false,
+              "query": "rare",
+              "samples_ms": [
+                165.2873,
+                167.31470000000002,
+                168.0729,
+                168.2623,
+                168.74900000000002,
+                168.827,
+                168.94799999999998,
+                171.0167,
+                172.72809999999998,
+                175.6684
+              ],
+              "text": "abbreviation",
+              "total": 264
+            },
+            "rare:50": {
+              "api": "Database::search",
+              "cache": "warm OS cache; first page has one untimed query; later pages follow; no forced eviction",
+              "full_page_oracle_verified": true,
+              "offset": 50,
+              "p50_ms": 174.30180000000001,
+              "phase": "query",
+              "profiled": false,
+              "query": "rare",
+              "samples_ms": [
+                168.1258,
+                170.31089999999998,
+                170.4985,
+                171.7552,
+                172.3887,
+                174.30180000000001,
+                174.8392,
+                180.01600000000002,
+                189.44549999999998,
+                191.696
+              ],
+              "text": "abbreviation",
+              "total": 264
+            },
+            "short:0": {
+              "api": "Database::search",
+              "cache": "warm OS cache; first page has one untimed query; later pages follow; no forced eviction",
+              "full_page_oracle_verified": true,
+              "offset": 0,
+              "p50_ms": 5926.6919,
+              "phase": "query",
+              "profiled": false,
+              "query": "short",
+              "samples_ms": [
+                5926.6919
+              ],
+              "text": "of",
+              "total": 100000
+            },
+            "short:50": {
+              "api": "Database::search",
+              "cache": "warm OS cache; first page has one untimed query; later pages follow; no forced eviction",
+              "full_page_oracle_verified": true,
+              "offset": 50,
+              "p50_ms": 6064.9546,
+              "phase": "query",
+              "profiled": false,
+              "query": "short",
+              "samples_ms": [
+                6064.9546
+              ],
+              "text": "of",
+              "total": 100000
+            },
+            "and:0": {
+              "api": "Database::search",
+              "cache": "warm OS cache; first page has one untimed query; later pages follow; no forced eviction",
+              "full_page_oracle_verified": true,
+              "offset": 0,
+              "p50_ms": 9212.3763,
+              "phase": "query",
+              "profiled": false,
+              "query": "and",
+              "samples_ms": [
+                9212.3763
+              ],
+              "text": "the whale",
+              "total": 16537
+            },
+            "and:50": {
+              "api": "Database::search",
+              "cache": "warm OS cache; first page has one untimed query; later pages follow; no forced eviction",
+              "full_page_oracle_verified": true,
+              "offset": 50,
+              "p50_ms": 9855.5103,
+              "phase": "query",
+              "profiled": false,
+              "query": "and",
+              "samples_ms": [
+                9855.5103
+              ],
+              "text": "the whale",
+              "total": 16537
+            }
+          }
+        },
+        "memory": {
+          "engine": "fdb",
+          "run": 2,
+          "phase": "long",
+          "order": [
+            "fdb",
+            "sqlite"
+          ],
+          "exit_code": 0,
+          "executable": "C:\\Users\\Serkan\\Documents\\ChatGPT\\fdb\\output\\fdb-native-general-binary-long-20261011.exe",
+          "database": "C:\\Users\\Serkan\\Documents\\ChatGPT\\fdb\\data\\native-general-long-binary-20261011",
+          "peak_working_set_bytes": 136564736,
+          "sampled_peak_private_bytes": 138809344,
+          "sample_interval_ms": 20,
+          "samples": 2328,
+          "elapsed_s": 88.6399336,
+          "cpu_ms": 85828.125,
+          "retained_engine_disk_bytes": 6182926010.0,
+          "files": [
+            {
+              "name": "generation-0000000000000001.fdb",
+              "bytes": 2685730889
+            },
+            {
+              "name": "generation-0000000000000001.idx",
+              "bytes": 3497195093
+            },
+            {
+              "name": "generation-0000000000000001.ready",
+              "bytes": 28
+            }
+          ],
+          "features": "default only",
+          "wal_sync": "on",
+          "includes_os_file_cache": false,
+          "window": "whole native process: ordinary benchmark phases and oracle; separate SQLite integrity excluded"
+        }
+      }
+    ],
+    "long-sqlite": [
+      {
+        "result": {
+          "open_ms": 12.7691,
+          "get_100": {
+            "cache": "one untimed 100-get warmup; no forced OS eviction",
+            "full_document_oracle_verified": true,
+            "p50_ms": 7.0581000000000005,
+            "phase": "get",
+            "requests": 100,
+            "samples_ms": [
+              6.7403,
+              7.0581000000000005,
+              7.419099999999999
+            ]
+          },
+          "queries": {
+            "common:0": {
+              "api": "SQLite transaction count + key page + full JSON decode",
+              "cache": "warm protocol: one untimed first page; subsequent pages follow; no forced eviction",
+              "full_page_oracle_verified": true,
+              "offset": 0,
+              "p50_ms": 44634.471900000004,
+              "phase": "query",
+              "plan": [
+                "MATERIALIZE selected",
+                "SCAN search VIRTUAL TABLE INDEX 0:L0",
+                "SEARCH d USING INTEGER PRIMARY KEY (rowid=?)",
+                "USE TEMP B-TREE FOR ORDER BY",
+                "SCAN s",
+                "SEARCH d USING INTEGER PRIMARY KEY (rowid=?)"
+              ],
+              "profiled": false,
+              "query": "common",
+              "samples_ms": [
+                44634.471900000004
+              ],
+              "text": "the",
+              "total": 100000
+            },
+            "common:50": {
+              "api": "SQLite transaction count + key page + full JSON decode",
+              "cache": "warm protocol: one untimed first page; subsequent pages follow; no forced eviction",
+              "full_page_oracle_verified": true,
+              "offset": 50,
+              "p50_ms": 42278.985400000005,
+              "phase": "query",
+              "plan": [
+                "MATERIALIZE selected",
+                "SCAN search VIRTUAL TABLE INDEX 0:L0",
+                "SEARCH d USING INTEGER PRIMARY KEY (rowid=?)",
+                "USE TEMP B-TREE FOR ORDER BY",
+                "SCAN s",
+                "SEARCH d USING INTEGER PRIMARY KEY (rowid=?)"
+              ],
+              "profiled": false,
+              "query": "common",
+              "samples_ms": [
+                42278.985400000005
+              ],
+              "text": "the",
+              "total": 100000
+            },
+            "common:99950": {
+              "api": "SQLite transaction count + key page + full JSON decode",
+              "cache": "warm protocol: one untimed first page; subsequent pages follow; no forced eviction",
+              "full_page_oracle_verified": true,
+              "offset": 99950,
+              "p50_ms": 45918.4268,
+              "phase": "query",
+              "plan": [
+                "MATERIALIZE selected",
+                "SCAN search VIRTUAL TABLE INDEX 0:L0",
+                "SEARCH d USING INTEGER PRIMARY KEY (rowid=?)",
+                "USE TEMP B-TREE FOR ORDER BY",
+                "SCAN s",
+                "SEARCH d USING INTEGER PRIMARY KEY (rowid=?)"
+              ],
+              "profiled": false,
+              "query": "common",
+              "samples_ms": [
+                45918.4268
+              ],
+              "text": "the",
+              "total": 100000
+            },
+            "rare:0": {
+              "api": "SQLite transaction count + key page + full JSON decode",
+              "cache": "warm protocol: one untimed first page; subsequent pages follow; no forced eviction",
+              "full_page_oracle_verified": true,
+              "offset": 0,
+              "p50_ms": 213.1336,
+              "phase": "query",
+              "plan": [
+                "MATERIALIZE selected",
+                "SCAN search VIRTUAL TABLE INDEX 0:L0",
+                "SEARCH d USING INTEGER PRIMARY KEY (rowid=?)",
+                "USE TEMP B-TREE FOR ORDER BY",
+                "SCAN s",
+                "SEARCH d USING INTEGER PRIMARY KEY (rowid=?)"
+              ],
+              "profiled": false,
+              "query": "rare",
+              "samples_ms": [
+                191.8948,
+                207.75469999999999,
+                209.20600000000002,
+                209.3287,
+                212.184,
+                213.1336,
+                218.0418,
+                219.2075,
+                228.3559,
+                241.3132
+              ],
+              "text": "abbreviation",
+              "total": 264
+            },
+            "rare:50": {
+              "api": "SQLite transaction count + key page + full JSON decode",
+              "cache": "warm protocol: one untimed first page; subsequent pages follow; no forced eviction",
+              "full_page_oracle_verified": true,
+              "offset": 50,
+              "p50_ms": 204.7117,
+              "phase": "query",
+              "plan": [
+                "MATERIALIZE selected",
+                "SCAN search VIRTUAL TABLE INDEX 0:L0",
+                "SEARCH d USING INTEGER PRIMARY KEY (rowid=?)",
+                "USE TEMP B-TREE FOR ORDER BY",
+                "SCAN s",
+                "SEARCH d USING INTEGER PRIMARY KEY (rowid=?)"
+              ],
+              "profiled": false,
+              "query": "rare",
+              "samples_ms": [
+                185.7851,
+                193.2698,
+                193.6553,
+                194.792,
+                197.9774,
+                204.7117,
+                205.28979999999999,
+                205.999,
+                213.4581,
+                214.0572
+              ],
+              "text": "abbreviation",
+              "total": 264
+            },
+            "short:0": {
+              "api": "SQLite transaction count + key page + full JSON decode",
+              "cache": "warm protocol: one untimed first page; subsequent pages follow; no forced eviction",
+              "full_page_oracle_verified": true,
+              "offset": 0,
+              "p50_ms": 38695.579000000005,
+              "phase": "query",
+              "plan": [
+                "MATERIALIZE selected",
+                "SCAN search VIRTUAL TABLE INDEX 0:L0",
+                "SEARCH d USING INTEGER PRIMARY KEY (rowid=?)",
+                "USE TEMP B-TREE FOR ORDER BY",
+                "SCAN s",
+                "SEARCH d USING INTEGER PRIMARY KEY (rowid=?)"
+              ],
+              "profiled": false,
+              "query": "short",
+              "samples_ms": [
+                38695.579000000005
+              ],
+              "text": "of",
+              "total": 100000
+            },
+            "short:50": {
+              "api": "SQLite transaction count + key page + full JSON decode",
+              "cache": "warm protocol: one untimed first page; subsequent pages follow; no forced eviction",
+              "full_page_oracle_verified": true,
+              "offset": 50,
+              "p50_ms": 38743.9436,
+              "phase": "query",
+              "plan": [
+                "MATERIALIZE selected",
+                "SCAN search VIRTUAL TABLE INDEX 0:L0",
+                "SEARCH d USING INTEGER PRIMARY KEY (rowid=?)",
+                "USE TEMP B-TREE FOR ORDER BY",
+                "SCAN s",
+                "SEARCH d USING INTEGER PRIMARY KEY (rowid=?)"
+              ],
+              "profiled": false,
+              "query": "short",
+              "samples_ms": [
+                38743.9436
+              ],
+              "text": "of",
+              "total": 100000
+            },
+            "and:0": {
+              "api": "SQLite transaction count + key page + full JSON decode",
+              "cache": "warm protocol: one untimed first page; subsequent pages follow; no forced eviction",
+              "full_page_oracle_verified": true,
+              "offset": 0,
+              "p50_ms": 41927.264,
+              "phase": "query",
+              "plan": [
+                "MATERIALIZE selected",
+                "SCAN search VIRTUAL TABLE INDEX 0:L0L0",
+                "SEARCH d USING INTEGER PRIMARY KEY (rowid=?)",
+                "USE TEMP B-TREE FOR ORDER BY",
+                "SCAN s",
+                "SEARCH d USING INTEGER PRIMARY KEY (rowid=?)"
+              ],
+              "profiled": false,
+              "query": "and",
+              "samples_ms": [
+                41927.264
+              ],
+              "text": "the whale",
+              "total": 16537
+            },
+            "and:50": {
+              "api": "SQLite transaction count + key page + full JSON decode",
+              "cache": "warm protocol: one untimed first page; subsequent pages follow; no forced eviction",
+              "full_page_oracle_verified": true,
+              "offset": 50,
+              "p50_ms": 41561.2768,
+              "phase": "query",
+              "plan": [
+                "MATERIALIZE selected",
+                "SCAN search VIRTUAL TABLE INDEX 0:L0L0",
+                "SEARCH d USING INTEGER PRIMARY KEY (rowid=?)",
+                "USE TEMP B-TREE FOR ORDER BY",
+                "SCAN s",
+                "SEARCH d USING INTEGER PRIMARY KEY (rowid=?)"
+              ],
+              "profiled": false,
+              "query": "and",
+              "samples_ms": [
+                41561.2768
+              ],
+              "text": "the whale",
+              "total": 16537
+            }
+          }
+        },
+        "memory": {
+          "engine": "sqlite",
+          "run": 0,
+          "phase": "long",
+          "order": [
+            "fdb",
+            "sqlite"
+          ],
+          "exit_code": 0,
+          "executable": "C:\\Users\\Serkan\\Documents\\ChatGPT\\fdb\\output\\sqlite-native-general-long-20261011.exe",
+          "database": "C:\\Users\\Serkan\\Documents\\ChatGPT\\fdb\\data\\sqlite-passages-20261011",
+          "peak_working_set_bytes": 33148928,
+          "sampled_peak_private_bytes": 28991488,
+          "sample_interval_ms": 20,
+          "samples": 10967,
+          "elapsed_s": 425.2085265,
+          "cpu_ms": 199015.625,
+          "retained_engine_disk_bytes": 5807165440.0,
+          "files": [
+            {
+              "name": "sqlite.db",
+              "bytes": 5807132672
+            },
+            {
+              "name": "sqlite.db-shm",
+              "bytes": 32768
+            },
+            {
+              "name": "sqlite.db-wal",
+              "bytes": 0
+            }
+          ],
+          "features": "default only",
+          "wal_sync": "on",
+          "includes_os_file_cache": false,
+          "window": "whole native process: ordinary benchmark phases and oracle; separate SQLite integrity excluded"
+        }
+      },
+      {
+        "result": {
+          "open_ms": 10.7071,
+          "get_100": {
+            "cache": "one untimed 100-get warmup; no forced OS eviction",
+            "full_document_oracle_verified": true,
+            "p50_ms": 7.2376000000000005,
+            "phase": "get",
+            "requests": 100,
+            "samples_ms": [
+              7.0697,
+              7.2376000000000005,
+              8.2048
+            ]
+          },
+          "queries": {
+            "common:0": {
+              "api": "SQLite transaction count + key page + full JSON decode",
+              "cache": "warm protocol: one untimed first page; subsequent pages follow; no forced eviction",
+              "full_page_oracle_verified": true,
+              "offset": 0,
+              "p50_ms": 39591.4859,
+              "phase": "query",
+              "plan": [
+                "MATERIALIZE selected",
+                "SCAN search VIRTUAL TABLE INDEX 0:L0",
+                "SEARCH d USING INTEGER PRIMARY KEY (rowid=?)",
+                "USE TEMP B-TREE FOR ORDER BY",
+                "SCAN s",
+                "SEARCH d USING INTEGER PRIMARY KEY (rowid=?)"
+              ],
+              "profiled": false,
+              "query": "common",
+              "samples_ms": [
+                39591.4859
+              ],
+              "text": "the",
+              "total": 100000
+            },
+            "common:50": {
+              "api": "SQLite transaction count + key page + full JSON decode",
+              "cache": "warm protocol: one untimed first page; subsequent pages follow; no forced eviction",
+              "full_page_oracle_verified": true,
+              "offset": 50,
+              "p50_ms": 38956.3831,
+              "phase": "query",
+              "plan": [
+                "MATERIALIZE selected",
+                "SCAN search VIRTUAL TABLE INDEX 0:L0",
+                "SEARCH d USING INTEGER PRIMARY KEY (rowid=?)",
+                "USE TEMP B-TREE FOR ORDER BY",
+                "SCAN s",
+                "SEARCH d USING INTEGER PRIMARY KEY (rowid=?)"
+              ],
+              "profiled": false,
+              "query": "common",
+              "samples_ms": [
+                38956.3831
+              ],
+              "text": "the",
+              "total": 100000
+            },
+            "common:99950": {
+              "api": "SQLite transaction count + key page + full JSON decode",
+              "cache": "warm protocol: one untimed first page; subsequent pages follow; no forced eviction",
+              "full_page_oracle_verified": true,
+              "offset": 99950,
+              "p50_ms": 38937.3027,
+              "phase": "query",
+              "plan": [
+                "MATERIALIZE selected",
+                "SCAN search VIRTUAL TABLE INDEX 0:L0",
+                "SEARCH d USING INTEGER PRIMARY KEY (rowid=?)",
+                "USE TEMP B-TREE FOR ORDER BY",
+                "SCAN s",
+                "SEARCH d USING INTEGER PRIMARY KEY (rowid=?)"
+              ],
+              "profiled": false,
+              "query": "common",
+              "samples_ms": [
+                38937.3027
+              ],
+              "text": "the",
+              "total": 100000
+            },
+            "rare:0": {
+              "api": "SQLite transaction count + key page + full JSON decode",
+              "cache": "warm protocol: one untimed first page; subsequent pages follow; no forced eviction",
+              "full_page_oracle_verified": true,
+              "offset": 0,
+              "p50_ms": 128.4321,
+              "phase": "query",
+              "plan": [
+                "MATERIALIZE selected",
+                "SCAN search VIRTUAL TABLE INDEX 0:L0",
+                "SEARCH d USING INTEGER PRIMARY KEY (rowid=?)",
+                "USE TEMP B-TREE FOR ORDER BY",
+                "SCAN s",
+                "SEARCH d USING INTEGER PRIMARY KEY (rowid=?)"
+              ],
+              "profiled": false,
+              "query": "rare",
+              "samples_ms": [
+                126.7078,
+                127.22130000000001,
+                127.46830000000001,
+                127.9046,
+                128.0905,
+                128.4321,
+                128.528,
+                129.2091,
+                129.5538,
+                133.15540000000001
+              ],
+              "text": "abbreviation",
+              "total": 264
+            },
+            "rare:50": {
+              "api": "SQLite transaction count + key page + full JSON decode",
+              "cache": "warm protocol: one untimed first page; subsequent pages follow; no forced eviction",
+              "full_page_oracle_verified": true,
+              "offset": 50,
+              "p50_ms": 134.8692,
+              "phase": "query",
+              "plan": [
+                "MATERIALIZE selected",
+                "SCAN search VIRTUAL TABLE INDEX 0:L0",
+                "SEARCH d USING INTEGER PRIMARY KEY (rowid=?)",
+                "USE TEMP B-TREE FOR ORDER BY",
+                "SCAN s",
+                "SEARCH d USING INTEGER PRIMARY KEY (rowid=?)"
+              ],
+              "profiled": false,
+              "query": "rare",
+              "samples_ms": [
+                127.19669999999999,
+                128.8281,
+                129.6394,
+                130.327,
+                130.6077,
+                134.8692,
+                139.5173,
+                141.0055,
+                146.9134,
+                154.69140000000002
+              ],
+              "text": "abbreviation",
+              "total": 264
+            },
+            "short:0": {
+              "api": "SQLite transaction count + key page + full JSON decode",
+              "cache": "warm protocol: one untimed first page; subsequent pages follow; no forced eviction",
+              "full_page_oracle_verified": true,
+              "offset": 0,
+              "p50_ms": 37812.762800000004,
+              "phase": "query",
+              "plan": [
+                "MATERIALIZE selected",
+                "SCAN search VIRTUAL TABLE INDEX 0:L0",
+                "SEARCH d USING INTEGER PRIMARY KEY (rowid=?)",
+                "USE TEMP B-TREE FOR ORDER BY",
+                "SCAN s",
+                "SEARCH d USING INTEGER PRIMARY KEY (rowid=?)"
+              ],
+              "profiled": false,
+              "query": "short",
+              "samples_ms": [
+                37812.762800000004
+              ],
+              "text": "of",
+              "total": 100000
+            },
+            "short:50": {
+              "api": "SQLite transaction count + key page + full JSON decode",
+              "cache": "warm protocol: one untimed first page; subsequent pages follow; no forced eviction",
+              "full_page_oracle_verified": true,
+              "offset": 50,
+              "p50_ms": 37154.1147,
+              "phase": "query",
+              "plan": [
+                "MATERIALIZE selected",
+                "SCAN search VIRTUAL TABLE INDEX 0:L0",
+                "SEARCH d USING INTEGER PRIMARY KEY (rowid=?)",
+                "USE TEMP B-TREE FOR ORDER BY",
+                "SCAN s",
+                "SEARCH d USING INTEGER PRIMARY KEY (rowid=?)"
+              ],
+              "profiled": false,
+              "query": "short",
+              "samples_ms": [
+                37154.1147
+              ],
+              "text": "of",
+              "total": 100000
+            },
+            "and:0": {
+              "api": "SQLite transaction count + key page + full JSON decode",
+              "cache": "warm protocol: one untimed first page; subsequent pages follow; no forced eviction",
+              "full_page_oracle_verified": true,
+              "offset": 0,
+              "p50_ms": 40421.446500000005,
+              "phase": "query",
+              "plan": [
+                "MATERIALIZE selected",
+                "SCAN search VIRTUAL TABLE INDEX 0:L0L0",
+                "SEARCH d USING INTEGER PRIMARY KEY (rowid=?)",
+                "USE TEMP B-TREE FOR ORDER BY",
+                "SCAN s",
+                "SEARCH d USING INTEGER PRIMARY KEY (rowid=?)"
+              ],
+              "profiled": false,
+              "query": "and",
+              "samples_ms": [
+                40421.446500000005
+              ],
+              "text": "the whale",
+              "total": 16537
+            },
+            "and:50": {
+              "api": "SQLite transaction count + key page + full JSON decode",
+              "cache": "warm protocol: one untimed first page; subsequent pages follow; no forced eviction",
+              "full_page_oracle_verified": true,
+              "offset": 50,
+              "p50_ms": 41027.0491,
+              "phase": "query",
+              "plan": [
+                "MATERIALIZE selected",
+                "SCAN search VIRTUAL TABLE INDEX 0:L0L0",
+                "SEARCH d USING INTEGER PRIMARY KEY (rowid=?)",
+                "USE TEMP B-TREE FOR ORDER BY",
+                "SCAN s",
+                "SEARCH d USING INTEGER PRIMARY KEY (rowid=?)"
+              ],
+              "profiled": false,
+              "query": "and",
+              "samples_ms": [
+                41027.0491
+              ],
+              "text": "the whale",
+              "total": 16537
+            }
+          }
+        },
+        "memory": {
+          "engine": "sqlite",
+          "run": 1,
+          "phase": "long",
+          "order": [
+            "sqlite",
+            "fdb"
+          ],
+          "exit_code": 0,
+          "executable": "C:\\Users\\Serkan\\Documents\\ChatGPT\\fdb\\output\\sqlite-native-general-long-20261011.exe",
+          "database": "C:\\Users\\Serkan\\Documents\\ChatGPT\\fdb\\data\\sqlite-passages-20261011",
+          "peak_working_set_bytes": 33206272,
+          "sampled_peak_private_bytes": 28741632,
+          "sample_interval_ms": 20,
+          "samples": 10492,
+          "elapsed_s": 395.6633873,
+          "cpu_ms": 185109.375,
+          "retained_engine_disk_bytes": 5807165440.0,
+          "files": [
+            {
+              "name": "sqlite.db",
+              "bytes": 5807132672
+            },
+            {
+              "name": "sqlite.db-shm",
+              "bytes": 32768
+            },
+            {
+              "name": "sqlite.db-wal",
+              "bytes": 0
+            }
+          ],
+          "features": "default only",
+          "wal_sync": "on",
+          "includes_os_file_cache": false,
+          "window": "whole native process: ordinary benchmark phases and oracle; separate SQLite integrity excluded"
+        }
+      },
+      {
+        "result": {
+          "open_ms": 15.196,
+          "get_100": {
+            "cache": "one untimed 100-get warmup; no forced OS eviction",
+            "full_document_oracle_verified": true,
+            "p50_ms": 11.9819,
+            "phase": "get",
+            "requests": 100,
+            "samples_ms": [
+              9.4408,
+              11.9819,
+              14.0623
+            ]
+          },
+          "queries": {
+            "common:0": {
+              "api": "SQLite transaction count + key page + full JSON decode",
+              "cache": "warm protocol: one untimed first page; subsequent pages follow; no forced eviction",
+              "full_page_oracle_verified": true,
+              "offset": 0,
+              "p50_ms": 45125.965200000006,
+              "phase": "query",
+              "plan": [
+                "MATERIALIZE selected",
+                "SCAN search VIRTUAL TABLE INDEX 0:L0",
+                "SEARCH d USING INTEGER PRIMARY KEY (rowid=?)",
+                "USE TEMP B-TREE FOR ORDER BY",
+                "SCAN s",
+                "SEARCH d USING INTEGER PRIMARY KEY (rowid=?)"
+              ],
+              "profiled": false,
+              "query": "common",
+              "samples_ms": [
+                45125.965200000006
+              ],
+              "text": "the",
+              "total": 100000
+            },
+            "common:50": {
+              "api": "SQLite transaction count + key page + full JSON decode",
+              "cache": "warm protocol: one untimed first page; subsequent pages follow; no forced eviction",
+              "full_page_oracle_verified": true,
+              "offset": 50,
+              "p50_ms": 40127.139800000004,
+              "phase": "query",
+              "plan": [
+                "MATERIALIZE selected",
+                "SCAN search VIRTUAL TABLE INDEX 0:L0",
+                "SEARCH d USING INTEGER PRIMARY KEY (rowid=?)",
+                "USE TEMP B-TREE FOR ORDER BY",
+                "SCAN s",
+                "SEARCH d USING INTEGER PRIMARY KEY (rowid=?)"
+              ],
+              "profiled": false,
+              "query": "common",
+              "samples_ms": [
+                40127.139800000004
+              ],
+              "text": "the",
+              "total": 100000
+            },
+            "common:99950": {
+              "api": "SQLite transaction count + key page + full JSON decode",
+              "cache": "warm protocol: one untimed first page; subsequent pages follow; no forced eviction",
+              "full_page_oracle_verified": true,
+              "offset": 99950,
+              "p50_ms": 42452.2262,
+              "phase": "query",
+              "plan": [
+                "MATERIALIZE selected",
+                "SCAN search VIRTUAL TABLE INDEX 0:L0",
+                "SEARCH d USING INTEGER PRIMARY KEY (rowid=?)",
+                "USE TEMP B-TREE FOR ORDER BY",
+                "SCAN s",
+                "SEARCH d USING INTEGER PRIMARY KEY (rowid=?)"
+              ],
+              "profiled": false,
+              "query": "common",
+              "samples_ms": [
+                42452.2262
+              ],
+              "text": "the",
+              "total": 100000
+            },
+            "rare:0": {
+              "api": "SQLite transaction count + key page + full JSON decode",
+              "cache": "warm protocol: one untimed first page; subsequent pages follow; no forced eviction",
+              "full_page_oracle_verified": true,
+              "offset": 0,
+              "p50_ms": 174.6415,
+              "phase": "query",
+              "plan": [
+                "MATERIALIZE selected",
+                "SCAN search VIRTUAL TABLE INDEX 0:L0",
+                "SEARCH d USING INTEGER PRIMARY KEY (rowid=?)",
+                "USE TEMP B-TREE FOR ORDER BY",
+                "SCAN s",
+                "SEARCH d USING INTEGER PRIMARY KEY (rowid=?)"
+              ],
+              "profiled": false,
+              "query": "rare",
+              "samples_ms": [
+                167.0519,
+                168.3966,
+                169.053,
+                169.102,
+                171.76579999999998,
+                174.6415,
+                176.4038,
+                179.107,
+                179.308,
+                192.3329
+              ],
+              "text": "abbreviation",
+              "total": 264
+            },
+            "rare:50": {
+              "api": "SQLite transaction count + key page + full JSON decode",
+              "cache": "warm protocol: one untimed first page; subsequent pages follow; no forced eviction",
+              "full_page_oracle_verified": true,
+              "offset": 50,
+              "p50_ms": 176.1762,
+              "phase": "query",
+              "plan": [
+                "MATERIALIZE selected",
+                "SCAN search VIRTUAL TABLE INDEX 0:L0",
+                "SEARCH d USING INTEGER PRIMARY KEY (rowid=?)",
+                "USE TEMP B-TREE FOR ORDER BY",
+                "SCAN s",
+                "SEARCH d USING INTEGER PRIMARY KEY (rowid=?)"
+              ],
+              "profiled": false,
+              "query": "rare",
+              "samples_ms": [
+                169.5725,
+                170.95420000000001,
+                172.1692,
+                173.8811,
+                175.8324,
+                176.1762,
+                177.19770000000003,
+                177.5119,
+                180.44379999999998,
+                193.024
+              ],
+              "text": "abbreviation",
+              "total": 264
+            },
+            "short:0": {
+              "api": "SQLite transaction count + key page + full JSON decode",
+              "cache": "warm protocol: one untimed first page; subsequent pages follow; no forced eviction",
+              "full_page_oracle_verified": true,
+              "offset": 0,
+              "p50_ms": 40472.522,
+              "phase": "query",
+              "plan": [
+                "MATERIALIZE selected",
+                "SCAN search VIRTUAL TABLE INDEX 0:L0",
+                "SEARCH d USING INTEGER PRIMARY KEY (rowid=?)",
+                "USE TEMP B-TREE FOR ORDER BY",
+                "SCAN s",
+                "SEARCH d USING INTEGER PRIMARY KEY (rowid=?)"
+              ],
+              "profiled": false,
+              "query": "short",
+              "samples_ms": [
+                40472.522
+              ],
+              "text": "of",
+              "total": 100000
+            },
+            "short:50": {
+              "api": "SQLite transaction count + key page + full JSON decode",
+              "cache": "warm protocol: one untimed first page; subsequent pages follow; no forced eviction",
+              "full_page_oracle_verified": true,
+              "offset": 50,
+              "p50_ms": 41955.8265,
+              "phase": "query",
+              "plan": [
+                "MATERIALIZE selected",
+                "SCAN search VIRTUAL TABLE INDEX 0:L0",
+                "SEARCH d USING INTEGER PRIMARY KEY (rowid=?)",
+                "USE TEMP B-TREE FOR ORDER BY",
+                "SCAN s",
+                "SEARCH d USING INTEGER PRIMARY KEY (rowid=?)"
+              ],
+              "profiled": false,
+              "query": "short",
+              "samples_ms": [
+                41955.8265
+              ],
+              "text": "of",
+              "total": 100000
+            },
+            "and:0": {
+              "api": "SQLite transaction count + key page + full JSON decode",
+              "cache": "warm protocol: one untimed first page; subsequent pages follow; no forced eviction",
+              "full_page_oracle_verified": true,
+              "offset": 0,
+              "p50_ms": 48046.9821,
+              "phase": "query",
+              "plan": [
+                "MATERIALIZE selected",
+                "SCAN search VIRTUAL TABLE INDEX 0:L0L0",
+                "SEARCH d USING INTEGER PRIMARY KEY (rowid=?)",
+                "USE TEMP B-TREE FOR ORDER BY",
+                "SCAN s",
+                "SEARCH d USING INTEGER PRIMARY KEY (rowid=?)"
+              ],
+              "profiled": false,
+              "query": "and",
+              "samples_ms": [
+                48046.9821
+              ],
+              "text": "the whale",
+              "total": 16537
+            },
+            "and:50": {
+              "api": "SQLite transaction count + key page + full JSON decode",
+              "cache": "warm protocol: one untimed first page; subsequent pages follow; no forced eviction",
+              "full_page_oracle_verified": true,
+              "offset": 50,
+              "p50_ms": 48507.0559,
+              "phase": "query",
+              "plan": [
+                "MATERIALIZE selected",
+                "SCAN search VIRTUAL TABLE INDEX 0:L0L0",
+                "SEARCH d USING INTEGER PRIMARY KEY (rowid=?)",
+                "USE TEMP B-TREE FOR ORDER BY",
+                "SCAN s",
+                "SEARCH d USING INTEGER PRIMARY KEY (rowid=?)"
+              ],
+              "profiled": false,
+              "query": "and",
+              "samples_ms": [
+                48507.0559
+              ],
+              "text": "the whale",
+              "total": 16537
+            }
+          }
+        },
+        "memory": {
+          "engine": "sqlite",
+          "run": 2,
+          "phase": "long",
+          "order": [
+            "fdb",
+            "sqlite"
+          ],
+          "exit_code": 0,
+          "executable": "C:\\Users\\Serkan\\Documents\\ChatGPT\\fdb\\output\\sqlite-native-general-long-20261011.exe",
+          "database": "C:\\Users\\Serkan\\Documents\\ChatGPT\\fdb\\data\\sqlite-passages-20261011",
+          "peak_working_set_bytes": 33148928,
+          "sampled_peak_private_bytes": 29048832,
+          "sample_interval_ms": 20,
+          "samples": 11389,
+          "elapsed_s": 446.0823867,
+          "cpu_ms": 214312.5,
+          "retained_engine_disk_bytes": 5807165440.0,
+          "files": [
+            {
+              "name": "sqlite.db",
+              "bytes": 5807132672
+            },
+            {
+              "name": "sqlite.db-shm",
+              "bytes": 32768
+            },
+            {
+              "name": "sqlite.db-wal",
+              "bytes": 0
+            }
+          ],
+          "features": "default only",
+          "wal_sync": "on",
+          "includes_os_file_cache": false,
+          "window": "whole native process: ordinary benchmark phases and oracle; separate SQLite integrity excluded"
+        }
+      }
+    ]
+  }
+}

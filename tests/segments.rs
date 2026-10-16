@@ -21,6 +21,22 @@ fn merge_reuse_rejects_runtime_source_or_index_corruption_before_publication() {
         let path = temp.source(0, extension);
         let mut bytes = fs::read(&path).unwrap();
         bytes[32] ^= 0x40;
+        #[cfg(all(windows, feature = "experimental-builder-budget"))]
+        if extension == "fdb" {
+            assert!(fs::write(&path, &bytes).is_err());
+            // Existing source handles also remain valid for the merge worker.
+            assert!(db.start_compaction().unwrap());
+            db.wait_for_compaction().unwrap();
+            assert_eq!(db.stats().unwrap().documents, 2);
+            drop(db);
+            // Corrupt the newly published live source after owners close.
+            let live = temp.source(0, extension);
+            let mut bytes = fs::read(&live).unwrap();
+            bytes[32] ^= 0x40;
+            fs::write(live, bytes).unwrap();
+            assert!(matches!(Database::open(&temp.0), Err(Error::Corrupt(_))));
+            continue;
+        }
         fs::write(&path, &bytes).unwrap();
         assert!(db.start_compaction().unwrap());
         assert!(matches!(db.wait_for_compaction(), Err(Error::Corrupt(_))));
@@ -265,6 +281,91 @@ fn bounded_first_page_merges_numeric_unions_and_newer_visibility_in_key_order() 
             assert_eq!(actual, wanted[offset.min(wanted.len())..end]);
         }
     }
+}
+
+#[test]
+fn full_filter_prefix_preserves_complete_hits_and_falls_back_for_hidden_slots() {
+    let temp = Temp::new();
+    let mut db = Database::open(&temp.0).unwrap();
+    let mut expected = (0..12)
+        .map(|id| {
+            let mut value = doc(&format!("{id:04}"), "the man 東京🦀", 2);
+            value.title = "THE".into();
+            fdb::StoredDocument {
+                document: value,
+                version: 1,
+            }
+        })
+        .collect::<Vec<_>>();
+    db.commit(
+        expected
+            .iter()
+            .rev()
+            .map(|stored| put(stored.document.clone()))
+            .collect(),
+    )
+    .unwrap();
+    db.flush().unwrap();
+    fn check(db: &Database, rows: &[fdb::StoredDocument]) {
+        let mut query = Query::new("shared");
+        query.collection = Some("reports".into());
+        query.exact.insert("tag".into(), json!("even"));
+        query.ranges.push(Range {
+            field: "day".into(),
+            min: 1,
+            max: 3,
+        });
+        query.linked_to = Some(Key::new("shared", "funds", "ABC"));
+        let wanted = rows
+            .iter()
+            .filter(|stored| stored.document.fields["day"] == json!(2))
+            .cloned()
+            .collect::<Vec<_>>();
+        for text in ["", "THE", "he", "the man", "東京🦀"] {
+            query.text = text.into();
+            for limit in [1, 3] {
+                query.limit = limit;
+                for offset in [0, 1, 10, 12, 5000] {
+                    query.offset = offset;
+                    let page = db.search(&query).unwrap();
+                    assert_eq!(page.total, wanted.len(), "{text}/{offset}/{limit}");
+                    assert_eq!(
+                        page.hits,
+                        wanted
+                            .iter()
+                            .skip(offset)
+                            .take(limit)
+                            .cloned()
+                            .collect::<Vec<_>>()
+                    );
+                }
+            }
+        }
+        query.offset = 0;
+        for collection in ["missing", "reports"] {
+            query.collection = Some(collection.into());
+            query.text = "absent".into();
+            let page = db.search(&query).unwrap();
+            assert_eq!(page.total, 0);
+            assert!(page.hits.is_empty());
+        }
+    }
+    check(&db, &expected);
+    db.commit(vec![
+        Mutation::Delete {
+            key: expected[0].document.key.clone(),
+            guard: Guard::Version { version: 1 },
+        },
+        put(doc("0001", "replacement", 3)),
+    ])
+    .unwrap();
+    expected.remove(0);
+    expected[0] = db.get(&expected[0].document.key).unwrap().unwrap();
+    check(&db, &expected);
+    db.flush().unwrap();
+    check(&db, &expected);
+    drop(db);
+    check(&Database::open(&temp.0).unwrap(), &expected);
 }
 
 #[test]
@@ -746,6 +847,16 @@ fn process_kill_after_scheduling_merge_recovers_acknowledged_sources() {
     child.kill().unwrap();
     child.wait().unwrap();
     assert_eq!(t.ready(), before);
+    #[cfg(all(windows, feature = "experimental-builder-budget"))]
+    for position in 0..2 {
+        // A killed process releases the source lease without cleanup code.
+        assert!(
+            fs::OpenOptions::new()
+                .write(true)
+                .open(t.source(position, "fdb"))
+                .is_ok()
+        );
+    }
     let db = Database::open(&t.0).unwrap();
     assert_eq!(db.stats().unwrap().documents, 2);
     assert_eq!(db.stats().unwrap().sequence, 2);

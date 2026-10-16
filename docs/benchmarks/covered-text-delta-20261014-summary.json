@@ -1,0 +1,467 @@
+{
+  "queries": [
+    {
+      "state": "delta",
+      "text": "the",
+      "total": 1000,
+      "control": {
+        "n": 30,
+        "p95_ms": 13.7879,
+        "run_p95_ms": [
+          10.7743,
+          14.9263,
+          10.733400000000001
+        ]
+      },
+      "candidate": {
+        "n": 30,
+        "p95_ms": 1.0723,
+        "run_p95_ms": [
+          0.7217,
+          1.0791,
+          0.7754
+        ]
+      },
+      "change_p95_percent": -92.22289108566206,
+      "faster_pairs": 3
+    },
+    {
+      "state": "delta",
+      "text": "quixote",
+      "total": 7,
+      "control": {
+        "n": 30,
+        "p95_ms": 0.3296,
+        "run_p95_ms": [
+          0.3157,
+          0.3736,
+          0.3296
+        ]
+      },
+      "candidate": {
+        "n": 30,
+        "p95_ms": 0.36729999999999996,
+        "run_p95_ms": [
+          0.2997,
+          0.4059,
+          0.3103
+        ]
+      },
+      "change_p95_percent": 11.438106796116498,
+      "faster_pairs": 2
+    },
+    {
+      "state": "delta",
+      "text": "he",
+      "total": 1000,
+      "control": {
+        "n": 30,
+        "p95_ms": 10.641599999999999,
+        "run_p95_ms": [
+          10.405299999999999,
+          10.704500000000001,
+          10.615400000000001
+        ]
+      },
+      "candidate": {
+        "n": 30,
+        "p95_ms": 12.9864,
+        "run_p95_ms": [
+          10.7502,
+          12.9864,
+          13.0049
+        ]
+      },
+      "change_p95_percent": 22.0342805593144,
+      "faster_pairs": 0
+    },
+    {
+      "state": "delta",
+      "text": "the man",
+      "total": 993,
+      "control": {
+        "n": 30,
+        "p95_ms": 11.7255,
+        "run_p95_ms": [
+          11.6617,
+          11.7206,
+          11.774
+        ]
+      },
+      "candidate": {
+        "n": 30,
+        "p95_ms": 0.9869,
+        "run_p95_ms": [
+          0.9869,
+          0.9923,
+          0.8635
+        ]
+      },
+      "change_p95_percent": -91.58330135175473,
+      "faster_pairs": 3
+    },
+    {
+      "state": "delta",
+      "text": "istanbul",
+      "total": 0,
+      "control": {
+        "n": 30,
+        "p95_ms": 0.0037,
+        "run_p95_ms": [
+          0.0040999999999999995,
+          0.0037,
+          0.0031999999999999997
+        ]
+      },
+      "candidate": {
+        "n": 30,
+        "p95_ms": 0.0038,
+        "run_p95_ms": [
+          0.0031999999999999997,
+          0.0039,
+          0.0038
+        ]
+      },
+      "change_p95_percent": 2.7027027027026973,
+      "faster_pairs": 1
+    },
+    {
+      "state": "delta",
+      "text": "updatedunique",
+      "total": 0,
+      "control": {
+        "n": 30,
+        "p95_ms": 0.0063,
+        "run_p95_ms": [
+          0.0168,
+          0.006,
+          0.0063
+        ]
+      },
+      "candidate": {
+        "n": 30,
+        "p95_ms": 0.0067,
+        "run_p95_ms": [
+          0.0068000000000000005,
+          0.0065,
+          0.0067
+        ]
+      },
+      "change_p95_percent": 6.349206349206349,
+      "faster_pairs": 1
+    },
+    {
+      "state": "reused_slots",
+      "text": "the",
+      "total": 960,
+      "control": {
+        "n": 30,
+        "p95_ms": 10.843399999999999,
+        "run_p95_ms": [
+          10.7418,
+          12.4878,
+          10.2795
+        ]
+      },
+      "candidate": {
+        "n": 30,
+        "p95_ms": 0.9721000000000001,
+        "run_p95_ms": [
+          0.7697,
+          1.5815,
+          0.8857
+        ]
+      },
+      "change_p95_percent": -91.03509969197853,
+      "faster_pairs": 3
+    },
+    {
+      "state": "reused_slots",
+      "text": "quixote",
+      "total": 7,
+      "control": {
+        "n": 30,
+        "p95_ms": 0.2938,
+        "run_p95_ms": [
+          0.3005,
+          0.28850000000000003,
+          0.2938
+        ]
+      },
+      "candidate": {
+        "n": 30,
+        "p95_ms": 0.392,
+        "run_p95_ms": [
+          0.3054,
+          0.3373,
+          0.5231
+        ]
+      },
+      "change_p95_percent": 33.42409802586794,
+      "faster_pairs": 0
+    },
+    {
+      "state": "reused_slots",
+      "text": "he",
+      "total": 960,
+      "control": {
+        "n": 30,
+        "p95_ms": 15.9871,
+        "run_p95_ms": [
+          16.0399,
+          12.839500000000001,
+          12.9505
+        ]
+      },
+      "candidate": {
+        "n": 30,
+        "p95_ms": 12.145,
+        "run_p95_ms": [
+          12.834,
+          11.1248,
+          10.4164
+        ]
+      },
+      "change_p95_percent": -24.0325012040958,
+      "faster_pairs": 3
+    },
+    {
+      "state": "reused_slots",
+      "text": "the man",
+      "total": 953,
+      "control": {
+        "n": 30,
+        "p95_ms": 17.991,
+        "run_p95_ms": [
+          17.435,
+          16.504499999999997,
+          18.0834
+        ]
+      },
+      "candidate": {
+        "n": 30,
+        "p95_ms": 1.4937,
+        "run_p95_ms": [
+          1.4937,
+          1.5827,
+          1.0495999999999999
+        ]
+      },
+      "change_p95_percent": -91.69751542437885,
+      "faster_pairs": 3
+    },
+    {
+      "state": "reused_slots",
+      "text": "istanbul",
+      "total": 40,
+      "control": {
+        "n": 30,
+        "p95_ms": 0.5318,
+        "run_p95_ms": [
+          0.6177,
+          0.5069,
+          0.5318
+        ]
+      },
+      "candidate": {
+        "n": 30,
+        "p95_ms": 0.3563,
+        "run_p95_ms": [
+          0.3927,
+          0.3484,
+          0.2908
+        ]
+      },
+      "change_p95_percent": -33.00112824370064,
+      "faster_pairs": 3
+    },
+    {
+      "state": "reused_slots",
+      "text": "updatedunique",
+      "total": 40,
+      "control": {
+        "n": 30,
+        "p95_ms": 0.6395,
+        "run_p95_ms": [
+          0.7517,
+          0.6005,
+          0.5202
+        ]
+      },
+      "candidate": {
+        "n": 30,
+        "p95_ms": 0.3694,
+        "run_p95_ms": [
+          0.5485000000000001,
+          0.29619999999999996,
+          0.2947
+        ]
+      },
+      "change_p95_percent": -42.23612197028929,
+      "faster_pairs": 3
+    },
+    {
+      "state": "reopened_delta",
+      "text": "the",
+      "total": 960,
+      "control": {
+        "n": 30,
+        "p95_ms": 17.556800000000003,
+        "run_p95_ms": [
+          18.522199999999998,
+          13.4404,
+          16.6023
+        ]
+      },
+      "candidate": {
+        "n": 30,
+        "p95_ms": 1.4293,
+        "run_p95_ms": [
+          1.5364,
+          0.8865999999999999,
+          0.8772
+        ]
+      },
+      "change_p95_percent": -91.85899480543152,
+      "faster_pairs": 3
+    },
+    {
+      "state": "reopened_delta",
+      "text": "quixote",
+      "total": 7,
+      "control": {
+        "n": 30,
+        "p95_ms": 0.731,
+        "run_p95_ms": [
+          0.731,
+          0.9782000000000001,
+          0.6305
+        ]
+      },
+      "candidate": {
+        "n": 30,
+        "p95_ms": 0.44670000000000004,
+        "run_p95_ms": [
+          0.45489999999999997,
+          0.3145,
+          0.29569999999999996
+        ]
+      },
+      "change_p95_percent": -38.89192886456908,
+      "faster_pairs": 3
+    },
+    {
+      "state": "reopened_delta",
+      "text": "he",
+      "total": 960,
+      "control": {
+        "n": 30,
+        "p95_ms": 17.471400000000003,
+        "run_p95_ms": [
+          18.3074,
+          14.4963,
+          13.023399999999999
+        ]
+      },
+      "candidate": {
+        "n": 30,
+        "p95_ms": 15.657,
+        "run_p95_ms": [
+          15.657,
+          16.0143,
+          13.0231
+        ]
+      },
+      "change_p95_percent": -10.384972011401505,
+      "faster_pairs": 2
+    },
+    {
+      "state": "reopened_delta",
+      "text": "the man",
+      "total": 953,
+      "control": {
+        "n": 30,
+        "p95_ms": 17.8001,
+        "run_p95_ms": [
+          17.8001,
+          15.5819,
+          19.025199999999998
+        ]
+      },
+      "candidate": {
+        "n": 30,
+        "p95_ms": 1.6003,
+        "run_p95_ms": [
+          1.2992,
+          1.8227,
+          1.1666
+        ]
+      },
+      "change_p95_percent": -91.00960106965691,
+      "faster_pairs": 3
+    },
+    {
+      "state": "reopened_delta",
+      "text": "istanbul",
+      "total": 40,
+      "control": {
+        "n": 30,
+        "p95_ms": 0.5691,
+        "run_p95_ms": [
+          0.5057,
+          0.3751,
+          0.5855
+        ]
+      },
+      "candidate": {
+        "n": 30,
+        "p95_ms": 0.6059,
+        "run_p95_ms": [
+          0.36519999999999997,
+          0.6264000000000001,
+          0.4456
+        ]
+      },
+      "change_p95_percent": 6.466350377789487,
+      "faster_pairs": 2
+    },
+    {
+      "state": "reopened_delta",
+      "text": "updatedunique",
+      "total": 40,
+      "control": {
+        "n": 30,
+        "p95_ms": 0.434,
+        "run_p95_ms": [
+          0.4817,
+          0.3918,
+          0.434
+        ]
+      },
+      "candidate": {
+        "n": 30,
+        "p95_ms": 0.6239,
+        "run_p95_ms": [
+          0.3987,
+          0.7281,
+          0.49529999999999996
+        ]
+      },
+      "change_p95_percent": 43.7557603686636,
+      "faster_pairs": 1
+    }
+  ],
+  "lower_p95_cases": 11,
+  "higher_p95_cases": 7,
+  "physical_layouts": {
+    "control": {
+      "streamed_input": true,
+      "delta_keys": 0
+    },
+    "candidate": {
+      "streamed_input": true,
+      "delta_keys": 0
+    }
+  },
+  "scope": "first 1000 of existing 10k corpus; 40 delete/reinsert mutations, reopen; logical state names do not identify physical layout; warm query, no cache eviction; no SQLite comparison or process RAM measurement"
+}

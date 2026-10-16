@@ -1,0 +1,79 @@
+{
+  "query_grams_function_identical_to_original": true,
+  "core_file_count": 122,
+  "all_eight_fdb_core_byte_hashes_equal": true,
+  "final_core_matches_write_control": true,
+  "all_read_matrix_files_unchanged": true,
+  "all_dense_page_files_unchanged": true,
+  "corpus_bytes": 2740862279,
+  "corpus_sha256": "11F826FCE3F4AE790FEB9FC6DF9B1169F52C2FD699E89FC4A8A4B77AAA41731B",
+  "fixture_git_status": "",
+  "tests": {
+    "feature": {
+      "passed": 147,
+      "failed": 0,
+      "ignored": 4
+    },
+    "default": {
+      "passed": 88,
+      "failed": 0,
+      "ignored": 2
+    },
+    "all": {
+      "passed": 166,
+      "failed": 0,
+      "ignored": 6
+    }
+  },
+  "unchanged_sources": [
+    {
+      "path": "src/engine.rs",
+      "sha256": "BDDC0F022EA877FEF69ACA8A6AB842F3DE41EC3519F49F10A5451B0CBF96BF75"
+    },
+    {
+      "path": "src/segment/covering.rs",
+      "sha256": "FAF9B8A30580D90BD15AC282211CFBEA401F00674AD36A8376BC02DC692EBE8B"
+    },
+    {
+      "path": "Cargo.toml",
+      "sha256": "56BA21D2D0BA7D59FEAE71FA0EE4497950337A5C43D1FA306D78EE28E2C79F8A"
+    },
+    {
+      "path": "Cargo.lock",
+      "sha256": "57F2192106DC532AFC442099A68F285CC6475427E30716505DF143CB5ADEA55C"
+    }
+  ],
+  "segment_search_source_unchanged": true,
+  "changed_runtime_sources": [
+    {
+      "path": "src/index.rs",
+      "sha256": "0DEBF56586F06E2180361562AADADBE2EE62290FCDC89B67BF3F0B25E8BDFA6C"
+    },
+    {
+      "path": "src/index/packed_grams.rs",
+      "sha256": "D2D089B8BF80C9D8544D89035053F0F7ABE91971CD471437AC2FBE88046E3D6B"
+    },
+    {
+      "path": "src/timing.rs",
+      "sha256": "29773E9BAADE1BEACC5ABEDB89FD3FB0C0EF658D4C8955B72F43FCA4B475E63A"
+    }
+  ],
+  "no_new_persistent_format_or_dependency_or_feature": true,
+  "default_still_off": true,
+  "no_new_corpus_or_database_copies": true,
+  "only_fixed_slots_reset_for_write_measurements": true,
+  "final_binaries": [
+    {
+      "kind": "memory",
+      "normal_text_equals_measured_candidate": true,
+      "candidate_sha256": "A6F85EFD7F0850014E07F0252FF926848D6A0738E74B1F7CE9EEC102B3EA4D16",
+      "final_sha256": "A6F85EFD7F0850014E07F0252FF926848D6A0738E74B1F7CE9EEC102B3EA4D16"
+    },
+    {
+      "kind": "reads",
+      "normal_text_equals_measured_candidate": true,
+      "candidate_sha256": "FFEB6241EDF0350AAF19823262DAAE7423B6B2AAE70D8BFC8CC88DDABC4FAFBE",
+      "final_sha256": "FFEB6241EDF0350AAF19823262DAAE7423B6B2AAE70D8BFC8CC88DDABC4FAFBE"
+    }
+  ]
+}

@@ -1,0 +1,134 @@
+{
+  "rows": [
+    {
+      "variant": "control",
+      "run": 0,
+      "ingest_s": 47.4767982,
+      "maintenance_s": 2.5058962,
+      "combined_s": 49.9826944,
+      "indexing_private_bytes": 128258048,
+      "maintenance_private_bytes": 105611264,
+      "os_peak_ws_bytes": 134647808,
+      "idle_private_bytes": 22130688,
+      "disk_bytes": 1513744522.0
+    },
+    {
+      "variant": "candidate",
+      "run": 0,
+      "ingest_s": 39.5723759,
+      "maintenance_s": 2.2422249,
+      "combined_s": 41.8146008,
+      "indexing_private_bytes": 126509056,
+      "maintenance_private_bytes": 107229184,
+      "os_peak_ws_bytes": 134746112,
+      "idle_private_bytes": 22597632,
+      "disk_bytes": 1513744553.0
+    },
+    {
+      "variant": "control",
+      "run": 1,
+      "ingest_s": 33.4067752,
+      "maintenance_s": 2.2108879,
+      "combined_s": 35.6176631,
+      "indexing_private_bytes": 130867200,
+      "maintenance_private_bytes": 106713088,
+      "os_peak_ws_bytes": 134348800,
+      "idle_private_bytes": 22953984,
+      "disk_bytes": 1513744522.0
+    },
+    {
+      "variant": "candidate",
+      "run": 1,
+      "ingest_s": 40.0544555,
+      "maintenance_s": 2.1894309000000005,
+      "combined_s": 42.2438864,
+      "indexing_private_bytes": 128077824,
+      "maintenance_private_bytes": 99807232,
+      "os_peak_ws_bytes": 134795264,
+      "idle_private_bytes": 22597632,
+      "disk_bytes": 1513744553.0
+    },
+    {
+      "variant": "control",
+      "run": 2,
+      "ingest_s": 37.42489640000001,
+      "maintenance_s": 2.1142914,
+      "combined_s": 39.53918780000001,
+      "indexing_private_bytes": 130514944,
+      "maintenance_private_bytes": 105201664,
+      "os_peak_ws_bytes": 134471680,
+      "idle_private_bytes": 22138880,
+      "disk_bytes": 1513744522.0
+    },
+    {
+      "variant": "candidate",
+      "run": 2,
+      "ingest_s": 37.3311191,
+      "maintenance_s": 2.0930013,
+      "combined_s": 39.4241204,
+      "indexing_private_bytes": 130641920,
+      "maintenance_private_bytes": 101322752,
+      "os_peak_ws_bytes": 134033408,
+      "idle_private_bytes": 22597632,
+      "disk_bytes": 1513744553.0
+    }
+  ],
+  "median": {
+    "control": {
+      "ingest_s": 37.42489640000001,
+      "maintenance_s": 2.2108879,
+      "combined_s": 39.53918780000001,
+      "indexing_private_bytes": 130514944,
+      "maintenance_private_bytes": 105611264,
+      "os_peak_ws_bytes": 134471680,
+      "idle_private_bytes": 22138880,
+      "disk_bytes": 1513744522.0
+    },
+    "candidate": {
+      "ingest_s": 39.5723759,
+      "maintenance_s": 2.1894309000000005,
+      "combined_s": 41.8146008,
+      "indexing_private_bytes": 128077824,
+      "maintenance_private_bytes": 101322752,
+      "os_peak_ws_bytes": 134746112,
+      "idle_private_bytes": 22597632,
+      "disk_bytes": 1513744553.0
+    }
+  },
+  "paired_change_percent": [
+    {
+      "run": 0,
+      "ingest_s": -16.649021416107203,
+      "maintenance_s": -10.522035988561695,
+      "combined_s": -16.341843308071034,
+      "indexing_private_bytes": -1.3636508798262725,
+      "maintenance_private_bytes": 1.5319578032888526,
+      "os_peak_ws_bytes": 0.07300824384752769,
+      "idle_private_bytes": 2.1099389228206533,
+      "disk_bytes": 2.047901714874456e-06
+    },
+    {
+      "run": 1,
+      "ingest_s": 19.899197872891385,
+      "maintenance_s": -0.9705150586784339,
+      "combined_s": 18.6037564603726,
+      "indexing_private_bytes": -2.131455399061033,
+      "maintenance_private_bytes": -6.4714236364334266,
+      "os_peak_ws_bytes": 0.33231707317074033,
+      "idle_private_bytes": -1.552462526766596,
+      "disk_bytes": 2.047901714874456e-06
+    },
+    {
+      "run": 2,
+      "ingest_s": -0.25057464153730447,
+      "maintenance_s": -1.006961481279256,
+      "combined_s": -0.2910211524375539,
+      "indexing_private_bytes": 0.0972884760231052,
+      "maintenance_private_bytes": -3.6871203862326785,
+      "os_peak_ws_bytes": -0.32592141334145674,
+      "idle_private_bytes": 2.072155411655885,
+      "disk_bytes": 2.047901714874456e-06
+    }
+  ],
+  "scope": "same 10k corpus, paired release merge+bitmap, synced WAL, warm OS cache without eviction; sampled whole-process memory"
+}

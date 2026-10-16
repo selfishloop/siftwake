@@ -10,11 +10,430 @@ use std::io::{BufWriter, Seek, SeekFrom, Write};
 use std::path::{Path, PathBuf};
 use std::sync::atomic::{AtomicU64, Ordering};
 
-const MAGIC: &[u8; 8] = b"FDBSEG03";
-const FOOTER: &[u8; 8] = b"FDBEND03";
+#[cfg(feature = "experimental-rkyv-payload")]
+mod payload_bench;
+
+pub(crate) mod block_check;
+#[cfg(feature = "experimental-builder-budget")]
+mod covering;
+#[cfg(feature = "experimental-builder-budget")]
+pub(crate) use covering::SourceLease;
+#[cfg(feature = "experimental-builder-budget")]
+mod posting_spool;
+#[cfg(feature = "experimental-streaming-open")]
+mod term_pages;
+#[cfg(feature = "experimental-builder-budget")]
+type PostingOutput = posting_spool::Postings;
+#[cfg(not(feature = "experimental-builder-budget"))]
+type PostingOutput = Vec<(Term, Posting)>;
+#[cfg(feature = "experimental-merge-postings")]
+fn posting_output(stem: &Path) -> Result<PostingOutput> {
+    #[cfg(feature = "experimental-builder-budget")]
+    {
+        PostingOutput::new(stem)
+    }
+    #[cfg(not(feature = "experimental-builder-budget"))]
+    {
+        let _ = stem;
+        Ok(Vec::new())
+    }
+}
+#[cfg(feature = "experimental-merge-postings")]
+fn push_posting(output: &mut PostingOutput, term: Term, posting: Posting) -> Result<()> {
+    #[cfg(feature = "experimental-builder-budget")]
+    {
+        output.push(term, posting)
+    }
+    #[cfg(not(feature = "experimental-builder-budget"))]
+    {
+        output.push((term, posting));
+        Ok(())
+    }
+}
+
+const MAGIC: &[u8; 8] = b"FDBSEG04";
+const LEGACY_MAGIC: &[u8; 8] = b"FDBSEG03";
+const FOOTER: &[u8; 8] = b"FDBEND04";
+const LEGACY_FOOTER: &[u8; 8] = b"FDBEND03";
 const HEADER_SIZE: u64 = 28;
 const FOOTER_SIZE: u64 = 32;
 const MAX_DIRECTORY: u64 = 256 * 1024 * 1024;
+#[derive(Default)]
+struct QueryTextScratch {
+    payload: Vec<u8>,
+    #[cfg(feature = "experimental-paged-metadata")]
+    record_cursor: paged::TextCursor,
+    #[cfg(feature = "experimental-grouped-read")]
+    read_window_enabled: bool,
+    #[cfg(feature = "experimental-grouped-read")]
+    read_base: u64,
+    #[cfg(feature = "experimental-grouped-read")]
+    read_len: usize,
+    #[cfg(feature = "experimental-grouped-read")]
+    window_used: usize,
+    #[cfg(feature = "experimental-grouped-read")]
+    window_prefetched: bool,
+    #[cfg(feature = "experimental-grouped-read")]
+    read_limit: Option<u64>,
+    #[cfg(feature = "experimental-grouped-read")]
+    previous_end: Option<u64>,
+    #[cfg(feature = "experimental-grouped-read")]
+    adjacent: u8,
+    #[cfg(feature = "diagnostic-timing")]
+    reads: crate::timing::PayloadReads,
+    title: String,
+    text: String,
+    window: String,
+    found: Vec<bool>,
+    #[cfg(feature = "experimental-builder-budget")]
+    raw_probes: u8,
+    #[cfg(feature = "experimental-builder-budget")]
+    raw_hits: u8,
+}
+impl QueryTextScratch {
+    fn matches(
+        &mut self,
+        document: &crate::Document,
+        terms: &[String],
+        cache: &mut BTreeMap<String, String>,
+        cached_bytes: &mut usize,
+    ) -> bool {
+        self.matches_text(&document.title, &document.text, terms, cache, cached_bytes)
+    }
+    fn matches_text(
+        &mut self,
+        title: &str,
+        text: &str,
+        terms: &[String],
+        cache: &mut BTreeMap<String, String>,
+        cached_bytes: &mut usize,
+    ) -> bool {
+        #[cfg(feature = "diagnostic-timing")]
+        let _verify = crate::timing::span("query.verify_text");
+        // Keep at most 128 KiB per scratch buffer between candidates. Large
+        // documents may need larger temporary outputs, released on the next use.
+        for buffer in [&mut self.title, &mut self.text] {
+            if buffer.capacity() > 128 * 1024 {
+                *buffer = String::new();
+            }
+        }
+        {
+            #[cfg(feature = "diagnostic-timing")]
+            let _fold = crate::timing::span("query.fold.title");
+            crate::index::fold_into(title, &mut self.title);
+        }
+        if terms.iter().all(|term| self.title.contains(term)) {
+            return true;
+        }
+        #[cfg(feature = "experimental-builder-budget")]
+        if self.raw_probes < 8
+            && text.len() > 1024
+            && terms.iter().all(|term| {
+                self.title.contains(term)
+                    || (term.len() >= 3
+                        && term
+                            .bytes()
+                            .all(|b| b.is_ascii() && !b.is_ascii_uppercase()))
+            })
+        {
+            // These ASCII spellings fold exactly to the lowercase query bytes.
+            // This proves only positive matches; absence still takes the normal
+            // Unicode/Turkish verifier. Short terms avoid a second broad scan.
+            // The caller has already checked payload CRC, schema and identity.
+            let proven = {
+                #[cfg(feature = "diagnostic-timing")]
+                let _probe = crate::timing::span("query.raw_ascii_probe");
+                terms
+                    .iter()
+                    .all(|term| self.title.contains(term) || ascii_case_proven(text, term))
+            };
+            // Speculation pays only when it proves most candidates. A low
+            // success rate stops extra scans for the remainder of this run's
+            // query; later changes in spelling/precision also stop it.
+            self.raw_probes += 1;
+            self.raw_hits += u8::from(proven);
+            if self.raw_probes == 8 && self.raw_hits >= 6 {
+                self.raw_probes = 0;
+                self.raw_hits = 0;
+            }
+            if proven {
+                #[cfg(feature = "diagnostic-timing")]
+                let _proof = crate::timing::span("query.raw_ascii_proven");
+                return true;
+            }
+        }
+        if let Some(text) = cache.get(text) {
+            return terms
+                .iter()
+                .all(|term| self.title.contains(term) || text.contains(term));
+        }
+        if text.len() > 1024 {
+            return self.matches_chunks(text, terms);
+        }
+        {
+            #[cfg(feature = "diagnostic-timing")]
+            let _fold = crate::timing::span("query.fold.body");
+            crate::index::fold_into(text, &mut self.text);
+        }
+        if text.len() + self.text.len() <= 256 * 1024 - *cached_bytes {
+            *cached_bytes += text.len() + self.text.len();
+            cache.insert(text.to_owned(), self.text.clone());
+        }
+        terms
+            .iter()
+            .all(|term| self.title.contains(term) || self.text.contains(term))
+    }
+
+    fn matches_chunks(&mut self, text: &str, terms: &[String]) -> bool {
+        self.found.clear();
+        self.found
+            .extend(terms.iter().map(|term| self.title.contains(term)));
+        self.window.clear();
+        let overlap = terms
+            .iter()
+            .map(String::len)
+            .max()
+            .unwrap_or(0)
+            .saturating_sub(1);
+        let mut first = 0;
+        while first < text.len() {
+            let mut end = (first + 1024).min(text.len());
+            while !text.is_char_boundary(end) {
+                end += 1;
+            }
+            {
+                #[cfg(feature = "diagnostic-timing")]
+                let _fold = crate::timing::span("query.fold.body");
+                crate::index::fold_into(&text[first..end], &mut self.text);
+            }
+            self.window.push_str(&self.text);
+            {
+                #[cfg(feature = "diagnostic-timing")]
+                let _scan = crate::timing::span("query.scan.body");
+                for (found, term) in self.found.iter_mut().zip(terms) {
+                    if !*found {
+                        *found = self.window.contains(term);
+                    }
+                }
+            }
+            if self.found.iter().all(|found| *found) {
+                return true;
+            }
+            // Preserve enough normalized bytes to detect a term spanning blocks.
+            // Round backwards to a UTF-8 boundary (Unicode lowercasing can expand).
+            let mut discard = self.window.len().saturating_sub(overlap);
+            while !self.window.is_char_boundary(discard) {
+                discard -= 1;
+            }
+            self.window.drain(..discard);
+            first = end;
+        }
+        false
+    }
+}
+// Positive-only, allocation-free ASCII spellings. General mixed-case and
+// Unicode spellings still use the canonical fold verifier. Cap only the
+// speculative stack buffer, never the accepted query/document size.
+#[cfg(feature = "experimental-builder-budget")]
+fn ascii_case_proven(text: &str, term: &str) -> bool {
+    let mut end = text.len().min(64 * 1024);
+    while !text.is_char_boundary(end) {
+        end -= 1;
+    }
+    let text = &text[..end];
+    if text.contains(term) {
+        return true;
+    }
+    if term.len() > 128 || term.is_empty() {
+        return false;
+    }
+    let mut spelling = [0u8; 128];
+    let spelling = &mut spelling[..term.len()];
+    spelling.copy_from_slice(term.as_bytes());
+    spelling[0].make_ascii_uppercase();
+    if text.contains(std::str::from_utf8(spelling).unwrap()) {
+        return true;
+    }
+    spelling.make_ascii_uppercase();
+    text.contains(std::str::from_utf8(spelling).unwrap())
+}
+#[cfg(test)]
+mod query_scratch_tests {
+    use super::*;
+    #[cfg(feature = "experimental-builder-budget")]
+    #[test]
+    fn speculative_scan_budget_never_limits_match_semantics() {
+        let mut scratch = QueryTextScratch::default();
+        let mut cache = BTreeMap::new();
+        let mut bytes = 0;
+        // A failed probe budget must still allow later positives and Unicode
+        // matches through the normal verifier, including a cross-budget token.
+        for _ in 0..16 {
+            assert!(!scratch.matches_text(
+                "",
+                &"x".repeat(4096),
+                &["absent".into()],
+                &mut cache,
+                &mut bytes
+            ));
+        }
+        for text in [
+            format!("{}NeEdLe ŞİRKET", "x".repeat(65535)),
+            format!("{}東京 Needle", "x".repeat(65535)),
+            format!("{}Needle", "x".repeat(65533)),
+        ] {
+            for query in ["needle", "sirket", "東京 needle", "needle absent"] {
+                let terms: Vec<_> = query.split_whitespace().map(fold).collect();
+                let expected = terms.iter().all(|term| fold(&text).contains(term));
+                assert_eq!(
+                    scratch.matches_text("", &text, &terms, &mut cache, &mut bytes),
+                    expected
+                );
+                let mut fresh = QueryTextScratch::default();
+                assert_eq!(
+                    fresh.matches_text("", &text, &terms, &mut cache, &mut bytes),
+                    expected
+                );
+            }
+        }
+    }
+    #[cfg(feature = "experimental-builder-budget")]
+    #[test]
+    fn ascii_proof_and_unicode_fallback_match_folded_contains() {
+        let mut scratch = QueryTextScratch::default();
+        let mut cache = BTreeMap::new();
+        let mut cached_bytes = 0;
+        for first in [0, 1000, 1022, 1023, 1024, 2047] {
+            for body in [
+                "needle whale",
+                "NEEDLE WHALE",
+                "needLE WHale",
+                "İĞNE ŞİRKET",
+                "İneedleı WHALE",
+                "東京🦀 needle\nwhale",
+                "needlexxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxwhale",
+                "missing",
+            ] {
+                let text = format!("{}{}{}", "x".repeat(first), body, "z".repeat(2200));
+                for title in ["", "BAŞLIK NEEDLE", "ŞİRKET"] {
+                    for query in [
+                        "needle",
+                        "needle whale",
+                        "igne sirket",
+                        "sirket whale",
+                        "needle zx",
+                        "whale needle whale",
+                        "東京 needle",
+                        "🦀 needle",
+                        "ed",
+                        "",
+                        "i",
+                        "xxxxx",
+                        "needlex",
+                        "needleı",
+                    ] {
+                        let terms: Vec<_> = query.split_whitespace().map(fold).collect();
+                        let expected = terms
+                            .iter()
+                            .all(|term| fold(title).contains(term) || fold(&text).contains(term));
+                        assert_eq!(
+                            QueryTextScratch::default().matches_text(
+                                title,
+                                &text,
+                                &terms,
+                                &mut cache,
+                                &mut cached_bytes
+                            ),
+                            expected,
+                            "first={first} title={title:?} body={body:?} query={query:?}"
+                        );
+                    }
+                }
+            }
+        }
+        // A caller supplying an unnormalized uppercase needle cannot obtain a
+        // false proof merely because the original body contains that spelling.
+        assert!(!scratch.matches_text(
+            "",
+            &format!("{}UPPER", "x".repeat(2000)),
+            &["UPPER".into()],
+            &mut cache,
+            &mut cached_bytes,
+        ));
+    }
+    #[test]
+    fn chunked_scan_matches_full_fold_at_utf8_and_term_boundaries() {
+        let mut scratch = QueryTextScratch::default();
+        for prefix in 1000..1040 {
+            let body = format!(
+                "{}İŞIK ȺΣ 🦀 QUİXOTE{}last",
+                "x".repeat(prefix),
+                "z".repeat(2200)
+            );
+            let title = "ŞARTNAME";
+            for query in [
+                "sartname isik",
+                "ⱥσ 🦀",
+                "quixote last",
+                "isik missing",
+                "last",
+                "xisi",
+                "🦀 quixote",
+                "",
+            ] {
+                let terms: Vec<_> = query.split_whitespace().map(fold).collect();
+                let expected = terms
+                    .iter()
+                    .all(|term| fold(title).contains(term) || fold(&body).contains(term));
+                assert_eq!(
+                    scratch.matches_text(title, &body, &terms, &mut BTreeMap::new(), &mut 0),
+                    expected,
+                    "prefix={prefix} query={query}"
+                );
+            }
+        }
+        let term = format!("{}a", "q".repeat(3000));
+        for body in [format!("xx{term}zz"), format!("{}b", "q".repeat(3000))] {
+            assert_eq!(
+                scratch.matches_text(
+                    "",
+                    &body,
+                    std::slice::from_ref(&term),
+                    &mut BTreeMap::new(),
+                    &mut 0
+                ),
+                body.contains(&term)
+            );
+        }
+        assert!(scratch.window.capacity() <= 8192);
+    }
+    #[test]
+    fn cached_body_never_reuses_title_and_oversize_text_does_not_escape_budget() {
+        let mut scratch = QueryTextScratch::default();
+        let mut cache = BTreeMap::new();
+        let mut bytes = 0;
+        let mut doc = crate::Document {
+            key: Key::new("shared", "docs", "1"),
+            title: "İLK".into(),
+            text: "ŞİRKET 🦀".into(),
+            fields: BTreeMap::new(),
+            links: vec![],
+        };
+        let terms = vec!["ilk".into(), "sirket".into()];
+        assert!(scratch.matches(&doc, &terms, &mut cache, &mut bytes));
+        assert_eq!(cache.len(), 1);
+        doc.title = "SON".into();
+        assert!(!scratch.matches(&doc, &terms, &mut cache, &mut bytes));
+        doc.text = "ABC".repeat(100000);
+        assert!(scratch.matches(&doc, &["abc".into()], &mut cache, &mut bytes));
+        assert_eq!(cache.len(), 1);
+        assert!(bytes <= 256 * 1024);
+        doc.text = "tiny".into();
+        assert!(!scratch.matches(&doc, &["abc".into()], &mut cache, &mut bytes));
+        assert!(scratch.text.capacity() <= 128 * 1024);
+        assert!(scratch.matches(&doc, &[], &mut cache, &mut bytes));
+    }
+}
 #[cfg(all(test, feature = "experimental-grouped-read"))]
 mod grouped_tests;
 #[cfg(feature = "experimental-paged-metadata")]
@@ -25,6 +444,8 @@ mod record_spool;
 mod reuse;
 #[cfg(feature = "experimental-streaming-open")]
 mod streaming;
+#[cfg(all(test, feature = "experimental-grouped-read"))]
+mod window_tests;
 static TEMP: AtomicU64 = AtomicU64::new(0);
 
 #[cfg(feature = "experimental-grouped-read")]
@@ -40,7 +461,7 @@ pub(crate) struct BatchReadStats {
     pub oversized_documents: usize,
 }
 
-#[derive(Debug, Clone, Serialize, Deserialize, PartialEq, Eq, PartialOrd, Ord)]
+#[derive(Debug, Clone, Serialize, Deserialize, PartialEq, Eq, PartialOrd, Ord, Hash)]
 pub(crate) enum Term {
     Scope(String),
     Collection(String, String),
@@ -97,7 +518,7 @@ struct Record {
     deleted: bool,
 }
 
-#[derive(Clone, Copy, Serialize, Deserialize)]
+#[derive(Debug, Clone, Copy, PartialEq, Eq, Serialize, Deserialize)]
 #[serde(deny_unknown_fields)]
 struct Posting {
     offset: u64,
@@ -129,6 +550,8 @@ pub(crate) struct Builder {
     _write_lease: crate::write_budget::Lease<'static>,
     #[cfg(feature = "experimental-builder-budget")]
     _posting_lease: crate::write_budget::Lease<'static>,
+    #[cfg(feature = "experimental-builder-budget")]
+    _working_lease: Option<crate::write_budget::Lease<'static>>,
 }
 
 impl Builder {
@@ -140,6 +563,8 @@ impl Builder {
     ) -> Result<Self> {
         // Acquire posting quota before I/O quota: waiters must not hold all I/O
         // reservations while active builders need I/O to finish and release.
+        #[cfg(feature = "experimental-builder-budget")]
+        let working_lease = crate::write_budget::builder_working()?;
         #[cfg(feature = "experimental-builder-budget")]
         let posting_lease = crate::write_budget::reserve_postings()?;
         #[cfg(feature = "experimental-write-buffer-budget")]
@@ -172,6 +597,8 @@ impl Builder {
             postings: crate::spill::Spills::new(temporary.clone(), 4 * 1024 * 1024),
             #[cfg(feature = "experimental-builder-budget")]
             _posting_lease: posting_lease,
+            #[cfg(feature = "experimental-builder-budget")]
+            _working_lease: working_lease,
             #[cfg(feature = "experimental-write-record-spool")]
             records: record_spool::Records::new(&temporary)?,
             temporary,
@@ -244,7 +671,7 @@ impl Builder {
         }
         let id = u32::try_from(self.record_count())
             .map_err(|_| Error::Invalid("segment exceeds u32 record capacity".into()))?;
-        let bytes = serde_json::to_vec(stored)?;
+        let bytes = crate::payload::encode(stored)?;
         self.writer.as_mut().unwrap().write_all(&bytes)?;
         self.push_record(Record {
             key: stored.document.key.clone(),
@@ -256,8 +683,15 @@ impl Builder {
         })?;
         self.offset += bytes.len() as u64;
         if index_terms {
-            let body = self.body_cache.get(&stored.document.text);
-            for term in terms(stored, &body) {
+            let extracted = {
+                #[cfg(feature = "diagnostic-timing")]
+                let _span = crate::timing::span("builder.extract_terms");
+                let body = self.body_cache.get(&stored.document.text);
+                terms(stored, &body)
+            };
+            #[cfg(feature = "diagnostic-timing")]
+            let _span = crate::timing::span("builder.insert_postings");
+            for term in extracted {
                 self.postings.add(term, id)?;
             }
         }
@@ -286,22 +720,109 @@ impl Builder {
         #[cfg(feature = "diagnostic-timing")]
         let _span = crate::timing::span("builder.finish");
         let writer = self.writer.as_mut().unwrap();
+        #[cfg(not(feature = "experimental-builder-budget"))]
         let postings: Vec<_> = self
             .postings
             .merge(writer, &mut self.offset)?
             .into_iter()
             .map(|(term, offset, count)| (term, Posting { offset, count }))
             .collect();
+        #[cfg(feature = "experimental-builder-budget")]
+        let postings = {
+            let mut postings = posting_output(&self.temporary)?;
+            self.postings
+                .merge_with(writer, &mut self.offset, |t, start, count| {
+                    push_posting(
+                        &mut postings,
+                        t,
+                        Posting {
+                            offset: start,
+                            count,
+                        },
+                    )
+                })?;
+            postings
+        };
         self.finish_directory(postings)
     }
 
     #[cfg(feature = "experimental-merge-postings")]
     pub(crate) fn finish_reused(mut self, inputs: &[(&DiskIndex, &[u32])]) -> Result<DiskIndex> {
+        #[cfg(feature = "diagnostic-timing")]
+        let _span = crate::timing::span("builder.finish_reused");
+        #[cfg(not(feature = "experimental-builder-budget"))]
         let postings = reuse::merge(inputs, self.writer.as_mut().unwrap(), &mut self.offset)?;
+        #[cfg(feature = "experimental-builder-budget")]
+        let postings = {
+            let mut postings = posting_output(&self.temporary)?;
+            reuse::merge_with(
+                inputs,
+                self.writer.as_mut().unwrap(),
+                &mut self.offset,
+                |t, p| push_posting(&mut postings, t, p),
+            )?;
+            postings
+        };
         self.finish_directory(postings)
     }
 
-    fn finish_directory(mut self, postings: Vec<(Term, Posting)>) -> Result<DiskIndex> {
+    #[cfg(feature = "experimental-merge-postings")]
+    pub(crate) fn finish_delta(
+        mut self,
+        index: &crate::index::Index,
+        records: &BTreeMap<Key, u32>,
+    ) -> Result<DiskIndex> {
+        #[cfg(feature = "diagnostic-timing")]
+        let _span = crate::timing::span("builder.finish_delta");
+        if records.len() != self.record_count() {
+            return Err(Error::Corrupt("delta checkpoint record count".into()));
+        }
+        let mut postings = posting_output(&self.temporary)?;
+        let mut previous: Option<Term> = None;
+        index.visit_terms(|term, posting| {
+            let ids = index.disk_ids(posting, records)?;
+            let count = u32::try_from(ids.len())
+                .map_err(|_| Error::Invalid("delta posting too large".into()))?;
+            if count == 0 {
+                return Ok(());
+            }
+            if ids
+                .last()
+                .is_some_and(|id| *id as usize >= self.record_count())
+            {
+                return Err(Error::Corrupt("delta checkpoint posting bounds".into()));
+            }
+            if previous.as_ref().is_some_and(|previous| previous >= &term) {
+                return Err(Error::Corrupt("delta checkpoint dictionary order".into()));
+            }
+            let start = self.offset;
+            // Bounded I/O scratch; one term's remapped IDs, no global posting copy.
+            for chunk in ids.chunks(2048) {
+                let mut bytes = [0u8; 8192];
+                for (slot, id) in chunk.iter().enumerate() {
+                    bytes[slot * 4..slot * 4 + 4].copy_from_slice(&id.to_le_bytes());
+                }
+                let length = chunk.len() * 4;
+                self.writer.as_mut().unwrap().write_all(&bytes[..length])?;
+                self.offset += length as u64;
+            }
+            previous = Some(term.clone());
+            push_posting(
+                &mut postings,
+                term,
+                Posting {
+                    offset: start,
+                    count,
+                },
+            )?;
+            Ok(())
+        })?;
+        self.finish_directory(postings)
+    }
+
+    fn finish_directory(mut self, postings: PostingOutput) -> Result<DiskIndex> {
+        #[cfg(feature = "experimental-builder-budget")]
+        let mut postings = postings;
         let writer = self.writer.as_mut().unwrap();
         let directory_offset = self.offset;
         #[cfg(not(feature = "experimental-write-record-spool"))]
@@ -317,7 +838,10 @@ impl Builder {
             sink.write_all(b"{\"records\":")?;
             self.records.write_json(&mut sink)?;
             sink.write_all(b",\"postings\":")?;
+            #[cfg(not(feature = "experimental-builder-budget"))]
             serde_json::to_writer(&mut sink, &postings)?;
+            #[cfg(feature = "experimental-builder-budget")]
+            postings.write_json(&mut sink)?;
             sink.write_all(b"}")?;
             Ok(())
         })();
@@ -376,13 +900,21 @@ struct PackedRecord {
 }
 
 pub(crate) struct DiskIndex {
+    #[cfg(feature = "experimental-builder-budget")]
+    covering: covering::Covering,
     file: File,
+    verification: Option<block_check::Checks>,
+    binary_payload: bool,
+    #[cfg(feature = "experimental-rkyv-payload")]
+    payload_benchmark: Option<payload_bench::Overlay>,
     #[cfg(feature = "experimental-paged-metadata")]
     paged: Option<paged::PagedRecords>,
     records: Vec<PackedRecord>,
     groups: Vec<(String, String)>,
     ids: String,
     postings: BTreeMap<Term, Posting>,
+    #[cfg(feature = "experimental-streaming-open")]
+    term_pages: Option<term_pages::Pages>,
     pub sequence: u64,
     pub bytes: u64,
     pub posting_entries: u64,
@@ -416,6 +948,14 @@ pub(crate) fn read_at(file: &File, mut offset: u64, mut buffer: &mut [u8]) -> Re
 type KeyParts<'a> = (&'a str, &'a str, &'a str);
 
 impl DiskIndex {
+    #[cfg(feature = "experimental-merge-postings")]
+    fn term_cursor(&self) -> TermCursor<'_> {
+        #[cfg(feature = "experimental-streaming-open")]
+        if let Some(pages) = &self.term_pages {
+            return TermCursor::Pages(pages.cursor());
+        }
+        TermCursor::Memory(self.postings.iter())
+    }
     pub(crate) fn memory_layout(&self, source_id: u64) -> crate::IndexMemoryLayout {
         let key_bytes =
             |key: &Key| key.scope.capacity() + key.collection.capacity() + key.id.capacity();
@@ -447,7 +987,30 @@ impl DiskIndex {
             paged_root_capacity_bytes: self.paged.as_ref().map_or(0, |p| p.capacities().0),
             #[cfg(feature = "experimental-paged-metadata")]
             paged_deletion_capacity_bytes: self.paged.as_ref().map_or(0, |p| p.capacities().1),
-            terms: self.postings.len(),
+            terms: {
+                #[cfg(feature = "experimental-streaming-open")]
+                {
+                    self.term_pages
+                        .as_ref()
+                        .map_or(self.postings.len(), |p| p.count)
+                }
+                #[cfg(not(feature = "experimental-streaming-open"))]
+                {
+                    self.postings.len()
+                }
+            },
+            #[cfg(feature = "experimental-streaming-open")]
+            term_page_root_capacity_bytes: self.term_pages.as_ref().map_or(0, |p| p.root_bytes())
+                + {
+                    #[cfg(feature = "experimental-builder-budget")]
+                    {
+                        self.covering.root_bytes()
+                    }
+                    #[cfg(not(feature = "experimental-builder-budget"))]
+                    {
+                        0
+                    }
+                },
             term_string_capacity_bytes,
         }
     }
@@ -464,20 +1027,47 @@ impl DiskIndex {
         binding: Option<(u64, u32)>,
         #[cfg(feature = "experimental-streaming-metadata")] streamed: bool,
     ) -> Result<Self> {
+        Self::open_checked(
+            path,
+            binding,
+            false,
+            #[cfg(feature = "experimental-streaming-metadata")]
+            streamed,
+        )
+    }
+    pub(crate) fn open_deferred(path: &Path, binding: Option<(u64, u32)>) -> Result<Self> {
+        Self::open_checked(
+            path,
+            binding,
+            true,
+            #[cfg(feature = "experimental-streaming-metadata")]
+            false,
+        )
+    }
+    fn open_checked(
+        path: &Path,
+        binding: Option<(u64, u32)>,
+        blocks: bool,
+        #[cfg(feature = "experimental-streaming-metadata")] streamed: bool,
+    ) -> Result<Self> {
         #[cfg(feature = "diagnostic-memory")]
         let _origin = crate::memory::Scope::new(7);
         #[cfg(feature = "diagnostic-timing")]
         let _span = crate::timing::span("segment.open");
         let mut file = File::open(path)?;
-        let size = file.metadata()?.len();
+        let metadata = file.metadata()?;
+        let size = metadata.len();
+        #[cfg(feature = "experimental-builder-budget")]
+        let covering = covering::Covering::new(&metadata);
         if size < HEADER_SIZE + FOOTER_SIZE {
             return Err(Error::Corrupt("truncated segment".into()));
         }
         let mut header = [0; HEADER_SIZE as usize];
         read_at(&file, 0, &mut header)?;
-        if &header[..8] != MAGIC {
+        if &header[..8] != MAGIC && &header[..8] != LEGACY_MAGIC {
             return Err(Error::Corrupt("unsupported segment format".into()));
         }
+        let binary_payload = &header[..8] == MAGIC;
         let sequence = u64::from_le_bytes(header[8..16].try_into().unwrap());
         let end = u64::from_le_bytes(header[16..24].try_into().unwrap());
         let log_crc = u32::from_le_bytes(header[24..28].try_into().unwrap());
@@ -486,7 +1076,12 @@ impl DiskIndex {
         }
         let mut footer = [0; FOOTER_SIZE as usize];
         read_at(&file, size - FOOTER_SIZE, &mut footer)?;
-        if &footer[..8] != FOOTER
+        if &footer[..8]
+            != (if binary_payload {
+                FOOTER
+            } else {
+                LEGACY_FOOTER
+            })
             || crc(&footer[..28]) != u32::from_le_bytes(footer[28..32].try_into().unwrap())
         {
             return Err(Error::Corrupt("invalid segment footer".into()));
@@ -499,10 +1094,21 @@ impl DiskIndex {
         {
             return Err(Error::Corrupt("invalid segment directory bounds".into()));
         }
-        if prefix_crc(&mut file, size - FOOTER_SIZE)?
-            != u32::from_le_bytes(footer[24..28].try_into().unwrap())
-        {
-            return Err(Error::Corrupt("segment checksum mismatch".into()));
+        let expected = u32::from_le_bytes(footer[24..28].try_into().unwrap());
+        let verification = if blocks {
+            block_check::Checks::load(path, size - FOOTER_SIZE, expected).ok()
+        } else {
+            None
+        };
+        if let Some(checks) = &verification {
+            checks.verify(&file, 0, HEADER_SIZE as usize)?;
+            checks.verify(&file, offset, len as usize)?;
+        } else {
+            #[cfg(feature = "diagnostic-timing")]
+            let _span = crate::timing::span("open.index_crc");
+            if prefix_crc(&mut file, size - FOOTER_SIZE)? != expected {
+                return Err(Error::Corrupt("segment checksum mismatch".into()));
+            }
         }
         #[cfg(feature = "experimental-streaming-metadata")]
         if streamed {
@@ -511,12 +1117,25 @@ impl DiskIndex {
             let bytes = size
                 .checked_add(paged.bytes)
                 .ok_or_else(|| Error::Corrupt("index byte count overflow".into()))?;
+            let term_pages = Some(term_pages::Pages::new(
+                &file,
+                parsed.pages,
+                parsed.collections,
+                parsed.bloom,
+            )?);
             return Ok(Self {
+                #[cfg(feature = "experimental-builder-budget")]
+                covering: covering.with_grams(parsed.universal),
                 file,
+                verification,
+                binary_payload,
+                #[cfg(feature = "experimental-rkyv-payload")]
+                payload_benchmark: None,
                 paged: Some(paged),
                 records: Vec::new(),
                 groups: Vec::new(),
                 ids: String::new(),
+                term_pages,
                 postings: parsed.postings,
                 sequence,
                 bytes,
@@ -527,12 +1146,25 @@ impl DiskIndex {
         #[cfg(feature = "experimental-streaming-open")]
         {
             let parsed = streaming::read(&mut file, offset, len, sequence)?;
+            let term_pages = Some(term_pages::Pages::new(
+                &file,
+                parsed.pages,
+                parsed.collections,
+                parsed.bloom,
+            )?);
             Ok(Self {
+                #[cfg(feature = "experimental-builder-budget")]
+                covering: covering.with_grams(parsed.universal),
                 file,
+                verification,
+                binary_payload,
+                #[cfg(feature = "experimental-rkyv-payload")]
+                payload_benchmark: None,
                 paged: None,
                 records: parsed.records,
                 groups: parsed.groups,
                 ids: parsed.ids,
+                term_pages,
                 postings: parsed.postings,
                 sequence,
                 bytes: size,
@@ -620,6 +1252,10 @@ impl DiskIndex {
             }
             Ok(Self {
                 file,
+                verification,
+                binary_payload,
+                #[cfg(feature = "experimental-rkyv-payload")]
+                payload_benchmark: None,
                 #[cfg(feature = "experimental-paged-metadata")]
                 paged: None,
                 records,
@@ -650,6 +1286,26 @@ impl DiskIndex {
         self.groups = Vec::new();
         Ok(())
     }
+    fn read_at(&self, offset: u64, buffer: &mut [u8]) -> Result<()> {
+        if let Some(checks) = &self.verification {
+            checks.verify(&self.file, offset, buffer.len())?;
+        }
+        read_at(&self.file, offset, buffer)
+    }
+    pub(crate) fn prepare_open_checks(&self, path: &Path) -> Result<()> {
+        let size = self.file.metadata()?.len();
+        let mut footer = [0; FOOTER_SIZE as usize];
+        read_at(&self.file, size - FOOTER_SIZE, &mut footer)?;
+        if crc(&footer[..28]) != u32::from_le_bytes(footer[28..].try_into().unwrap()) {
+            return Err(Error::Corrupt("invalid segment footer".into()));
+        }
+        block_check::Checks::prepare(
+            path,
+            &self.file,
+            size - FOOTER_SIZE,
+            u32::from_le_bytes(footer[24..28].try_into().unwrap()),
+        )
+    }
     pub fn len(&self) -> usize {
         #[cfg(feature = "experimental-paged-metadata")]
         if let Some(paged) = &self.paged {
@@ -667,6 +1323,8 @@ impl DiskIndex {
         )
     }
     fn metadata(&self, id: u32) -> Result<PackedRecord> {
+        #[cfg(feature = "diagnostic-timing")]
+        let _span = crate::timing::span("query.record_metadata");
         #[cfg(feature = "experimental-paged-metadata")]
         if let Some(paged) = &self.paged {
             let r = paged.record(id)?;
@@ -685,6 +1343,20 @@ impl DiskIndex {
             .get(id as usize)
             .copied()
             .ok_or_else(|| Error::Corrupt("invalid metadata slot".into()))
+    }
+
+    pub(crate) fn payload_binding(&self, id: u32) -> Result<(u32, u32, u64, bool)> {
+        let row = self.metadata(id)?;
+        Ok((row.len, row.checksum, row.version, row.deleted))
+    }
+    pub(crate) fn checksum_binding(&self) -> Result<u32> {
+        let size = self.file.metadata()?.len();
+        let mut footer = [0; FOOTER_SIZE as usize];
+        read_at(&self.file, size - FOOTER_SIZE, &mut footer)?;
+        if crc(&footer[..28]) != u32::from_le_bytes(footer[28..].try_into().unwrap()) {
+            return Err(Error::Corrupt("invalid segment footer".into()));
+        }
+        Ok(u32::from_le_bytes(footer[24..28].try_into().unwrap()))
     }
     #[cfg(feature = "experimental-paged-metadata")]
     fn record(&self, id: u32) -> Result<Record> {
@@ -824,16 +1496,19 @@ impl DiskIndex {
     fn read_document(&self, id: u32) -> Result<StoredDocument> {
         #[cfg(feature = "diagnostic-timing")]
         let _span = crate::timing::span("payload.read_document");
+        #[cfg(feature = "experimental-rkyv-payload")]
+        if let Some(d) = self.benchmark_document(id)? {
+            return Ok(d);
+        }
         #[cfg(feature = "experimental-paged-metadata")]
         if let Some(paged) = &self.paged {
             let record = paged.record(id)?;
             let mut bytes = vec![0; record.len as usize];
-            read_at(&self.file, record.offset, &mut bytes)?;
+            self.read_at(record.offset, &mut bytes)?;
             if crc(&bytes) != record.checksum {
                 return Err(Error::Corrupt("segment document checksum mismatch".into()));
             }
-            let stored: StoredDocument =
-                serde_json::from_slice(&bytes).map_err(|e| Error::Corrupt(e.to_string()))?;
+            let stored = self.decode_payload(&bytes)?;
             if stored.document.key != record.key || stored.version != record.version {
                 return Err(Error::Corrupt("segment document identity mismatch".into()));
             }
@@ -841,8 +1516,231 @@ impl DiskIndex {
         }
         let r = self.metadata(id)?;
         let mut bytes = vec![0; r.len as usize];
-        read_at(&self.file, r.offset, &mut bytes)?;
+        self.read_at(r.offset, &mut bytes)?;
         self.decode_document(id, &bytes)
+    }
+
+    fn decode_payload(&self, bytes: &[u8]) -> Result<StoredDocument> {
+        if self.binary_payload {
+            crate::payload::checked(bytes)?.to_document()
+        } else {
+            crate::payload::decode(bytes)
+        }
+    }
+
+    fn binary_matches(
+        &self,
+        id: u32,
+        scratch: &mut QueryTextScratch,
+        terms: &[String],
+        cache: &mut BTreeMap<String, String>,
+        cached_bytes: &mut usize,
+    ) -> Result<bool> {
+        #[cfg(feature = "experimental-grouped-read")]
+        if scratch.read_window_enabled {
+            return self.binary_window_matches(id, scratch, terms, cache, cached_bytes);
+        }
+        self.binary_exact_matches(id, scratch, terms, cache, cached_bytes)
+    }
+
+    fn query_metadata(&self, id: u32, scratch: &mut QueryTextScratch) -> Result<PackedRecord> {
+        #[cfg(feature = "experimental-paged-metadata")]
+        if let Some(paged) = &self.paged {
+            #[cfg(feature = "diagnostic-timing")]
+            let _span = crate::timing::span("query.record_metadata");
+            return paged.query_metadata(id, &mut scratch.record_cursor);
+        }
+        #[cfg(not(feature = "experimental-paged-metadata"))]
+        let _ = scratch;
+        self.metadata(id)
+    }
+
+    fn query_identity(
+        &self,
+        id: u32,
+        scratch: &mut QueryTextScratch,
+        parts: (&str, &str, &str),
+    ) -> Result<bool> {
+        #[cfg(feature = "diagnostic-timing")]
+        let _span = crate::timing::span("query.record_identity");
+        #[cfg(feature = "experimental-paged-metadata")]
+        if let Some(paged) = &self.paged {
+            return paged.query_identity(id, &mut scratch.record_cursor, parts);
+        }
+        #[cfg(not(feature = "experimental-paged-metadata"))]
+        let _ = scratch;
+        Ok(self.key_parts(id) == parts)
+    }
+
+    // Keep sparse/narrow verification on the original individual-read loop.
+    #[inline(always)]
+    fn binary_exact_matches(
+        &self,
+        id: u32,
+        scratch: &mut QueryTextScratch,
+        terms: &[String],
+        cache: &mut BTreeMap<String, String>,
+        cached_bytes: &mut usize,
+    ) -> Result<bool> {
+        let r = self.query_metadata(id, scratch)?;
+        scratch.payload.resize(r.len as usize, 0);
+        {
+            #[cfg(feature = "diagnostic-timing")]
+            let _read = crate::timing::span("query.payload_read");
+            self.read_at(r.offset, &mut scratch.payload)?;
+        }
+        #[cfg(feature = "diagnostic-timing")]
+        {
+            scratch.reads.requests += 1;
+            scratch.reads.read_bytes += r.len as u64;
+            scratch.reads.requested_bytes += r.len as u64;
+        }
+        {
+            #[cfg(feature = "diagnostic-timing")]
+            let _crc = crate::timing::span("query.payload_crc");
+            if crc(&scratch.payload) != r.checksum {
+                return Err(Error::Corrupt("segment document checksum mismatch".into()));
+            }
+        }
+        let bytes = std::mem::take(&mut scratch.payload);
+        let result = (|| {
+            let view = {
+                #[cfg(feature = "diagnostic-timing")]
+                let _validation = crate::timing::span("query.payload_validation");
+                crate::payload::checked(&bytes)?
+            };
+            if !self.query_identity(id, scratch, view.key_parts())? || view.version() != r.version {
+                return Err(Error::Corrupt("segment document identity mismatch".into()));
+            }
+            Ok(scratch.matches_text(view.title(), view.text(), terms, cache, cached_bytes))
+        })();
+        scratch.payload = bytes;
+        result
+    }
+
+    #[cfg(feature = "experimental-grouped-read")]
+    #[inline(never)]
+    fn binary_window_matches(
+        &self,
+        id: u32,
+        scratch: &mut QueryTextScratch,
+        terms: &[String],
+        cache: &mut BTreeMap<String, String>,
+        cached_bytes: &mut usize,
+    ) -> Result<bool> {
+        let r = self.query_metadata(id, scratch)?;
+        const WINDOW: usize = 256 * 1024;
+        let read_limit = if let Some(limit) = scratch.read_limit {
+            limit
+        } else {
+            let limit = self
+                .file
+                .metadata()?
+                .len()
+                .checked_sub(FOOTER_SIZE)
+                .ok_or_else(|| Error::Corrupt("segment payload read bounds".into()))?;
+            scratch.read_limit = Some(limit);
+            limit
+        };
+        let end = r
+            .offset
+            .checked_add(r.len as u64)
+            .filter(|end| *end <= read_limit)
+            .ok_or_else(|| Error::Corrupt("segment payload read bounds".into()))?;
+        scratch.adjacent = if scratch.previous_end == Some(r.offset) {
+            scratch.adjacent.saturating_add(1)
+        } else {
+            0
+        };
+        scratch.previous_end = Some(end);
+        let covered = scratch.read_len != 0
+            && r.offset >= scratch.read_base
+            && end <= scratch.read_base + scratch.read_len as u64;
+        // Judge a completed window, not the freshly prefetched bytes. If less
+        // than three quarters was useful, keep the rest of this query exact.
+        // This bounds wasted read-ahead without penalizing every dense seed.
+        if !covered && scratch.window_prefetched && scratch.window_used * 4 < scratch.read_len * 3 {
+            scratch.read_window_enabled = false;
+            scratch.read_len = 0;
+            return self.binary_exact_matches(id, scratch, terms, cache, cached_bytes);
+        }
+        #[cfg(feature = "diagnostic-timing")]
+        {
+            scratch.reads.requested_bytes += r.len as u64;
+        }
+        {
+            #[cfg(feature = "diagnostic-timing")]
+            let _read = crate::timing::span("query.payload_read");
+            if !covered {
+                // A broad seed alone is insufficient: require three physically
+                // adjacent requested records before reading ahead. Sparse and
+                // narrow queries keep exact individual reads.
+                let length = if scratch.read_window_enabled
+                    && scratch.adjacent >= 2
+                    && r.len as usize <= WINDOW
+                {
+                    (read_limit - r.offset).min(WINDOW as u64) as usize
+                } else {
+                    r.len as usize
+                };
+                scratch.payload.resize(length, 0);
+                scratch.read_len = 0;
+                self.read_at(r.offset, &mut scratch.payload)?;
+                scratch.read_base = r.offset;
+                scratch.read_len = length;
+                scratch.window_used = 0;
+                scratch.window_prefetched = length > r.len as usize;
+                #[cfg(feature = "diagnostic-timing")]
+                {
+                    scratch.reads.requests += 1;
+                    scratch.reads.read_bytes += length as u64;
+                }
+            } else {
+                #[cfg(feature = "diagnostic-timing")]
+                {
+                    scratch.reads.hits += 1;
+                }
+            }
+        }
+        scratch.window_used = scratch
+            .window_used
+            .saturating_add(r.len as usize)
+            .min(scratch.read_len);
+        let start = (r.offset - scratch.read_base) as usize;
+        let payload_range = start..start + r.len as usize;
+        {
+            #[cfg(feature = "diagnostic-timing")]
+            let _crc = crate::timing::span("query.payload_crc");
+            if crc(&scratch.payload[payload_range.clone()]) != r.checksum {
+                return Err(Error::Corrupt("segment document checksum mismatch".into()));
+            }
+        }
+        // Take the reusable buffer so title/text can be borrowed while mutating fold scratch.
+        let bytes = std::mem::take(&mut scratch.payload);
+        let result = (|| {
+            let view = {
+                #[cfg(feature = "diagnostic-timing")]
+                let _validation = crate::timing::span("query.payload_validation");
+                crate::payload::checked(&bytes[payload_range])?
+            };
+            if !self.query_identity(id, scratch, view.key_parts())? || view.version() != r.version {
+                return Err(Error::Corrupt("segment document identity mismatch".into()));
+            }
+            Ok(scratch.matches_text(view.title(), view.text(), terms, cache, cached_bytes))
+        })();
+        scratch.payload = bytes;
+        result
+    }
+
+    #[cfg(feature = "experimental-grouped-read")]
+    fn broad_payload_seed(&self, group: &[Posting]) -> bool {
+        #[cfg(feature = "experimental-rkyv-payload")]
+        if self.payload_benchmark.is_some() {
+            return false;
+        }
+        self.live_records >= 64
+            && group.iter().map(|p| p.count as u64).sum::<u64>()
+                >= self.live_records.div_ceil(2) as u64
     }
 
     fn decode_document(&self, id: u32, bytes: &[u8]) -> Result<StoredDocument> {
@@ -852,8 +1750,7 @@ impl DiskIndex {
         if bytes.len() != r.len as usize || crc(bytes) != r.checksum {
             return Err(Error::Corrupt("segment document checksum mismatch".into()));
         }
-        let stored: StoredDocument =
-            serde_json::from_slice(bytes).map_err(|e| Error::Corrupt(e.to_string()))?;
+        let stored = self.decode_payload(bytes)?;
         let key = &stored.document.key;
         #[cfg(feature = "experimental-paged-metadata")]
         let identity = if let Some(paged) = &self.paged {
@@ -925,7 +1822,7 @@ impl DiskIndex {
                 scratch.reserve_exact(len.saturating_sub(scratch.len()));
             }
             scratch.resize(len, 0);
-            read_at(&self.file, offset, scratch)?;
+            self.read_at(offset, scratch)?;
             stats.requests += 1;
             stats.requested_bytes += len as u64;
             for &(id, position) in &slots[start..next] {
@@ -941,12 +1838,51 @@ impl DiskIndex {
         Ok(stats)
     }
 
-    fn one(&self, term: Term) -> Vec<Posting> {
-        self.postings.get(&term).copied().into_iter().collect()
+    fn one(&self, term: Term) -> Result<Vec<Posting>> {
+        #[cfg(feature = "experimental-streaming-open")]
+        if let Some(pages) = &self.term_pages {
+            return Ok(pages.get(&term)?.into_iter().collect());
+        }
+        Ok(self.postings.get(&term).copied().into_iter().collect())
+    }
+    fn posting_range(&self, min: Term, max: Term) -> Result<Vec<Posting>> {
+        #[cfg(feature = "experimental-streaming-open")]
+        if let Some(pages) = &self.term_pages {
+            return pages.range(&min, &max);
+        }
+        Ok(self.postings.range(min..=max).map(|(_, p)| *p).collect())
+    }
+    fn collections(&self, q: &Query) -> BTreeSet<&str> {
+        // Returned references belong to this index; query collections are handled
+        // by the caller via a separate owned set below.
+        #[cfg(feature = "experimental-streaming-open")]
+        if let Some(pages) = &self.term_pages {
+            return pages
+                .collections
+                .iter()
+                .filter(|(s, c)| {
+                    s == &q.scope && q.collection.as_ref().is_none_or(|wanted| wanted == c)
+                })
+                .map(|(_, c)| c.as_str())
+                .collect();
+        }
+        self.postings
+            .keys()
+            .filter_map(|t| match t {
+                Term::Collection(s, c)
+                    if s == &q.scope && q.collection.as_ref().is_none_or(|wanted| wanted == c) =>
+                {
+                    Some(c.as_str())
+                }
+                _ => None,
+            })
+            .collect()
     }
     fn id_at(&self, p: Posting, slot: u32) -> Result<u32> {
+        #[cfg(feature = "diagnostic-timing")]
+        let _probe = crate::timing::span("query.posting_probe");
         let mut bytes = [0; 4];
-        read_at(&self.file, p.offset + slot as u64 * 4, &mut bytes)?;
+        self.read_at(p.offset + slot as u64 * 4, &mut bytes)?;
         let id = u32::from_le_bytes(bytes);
         if id as usize >= self.len() {
             return Err(Error::Corrupt("posting record id out of range".into()));
@@ -979,10 +1915,12 @@ impl DiskIndex {
     }
 
     fn read_small_group(&self, group: &[Posting]) -> Result<Vec<u32>> {
+        #[cfg(feature = "diagnostic-timing")]
+        let _read = crate::timing::span("query.posting_cache_read");
         let mut ids = vec![];
         for &p in group {
             let mut bytes = vec![0; p.count as usize * 4];
-            read_at(&self.file, p.offset, &mut bytes)?;
+            self.read_at(p.offset, &mut bytes)?;
             let mut previous = None;
             for chunk in bytes.as_chunks::<4>().0 {
                 let id = u32::from_le_bytes(*chunk);
@@ -1000,22 +1938,80 @@ impl DiskIndex {
 
     // Preserve the original local Vec/block loop for offset pages. Keeping
     // this path separate avoids collector overhead on the legacy fallback.
+    fn query_terms(q: &Query) -> Vec<String> {
+        q.text
+            .split_whitespace()
+            .map(|term| {
+                let mut normalized = String::new();
+                crate::index::fold_into(term, &mut normalized);
+                normalized
+            })
+            .collect()
+    }
+    #[cfg(feature = "experimental-builder-budget")]
+    pub(crate) fn authorize_text_covering(&self) {
+        self.covering.authorize();
+    }
+    #[cfg(feature = "experimental-builder-budget")]
+    pub(crate) fn bind_text_source(&mut self, path: PathBuf, lease: SourceLease) -> Result<()> {
+        self.covering.bind_source(path, lease)
+    }
+    fn verification_terms<'a>(
+        &self,
+        q: &Query,
+        terms: &'a [String],
+    ) -> Result<std::borrow::Cow<'a, [String]>> {
+        #[cfg(not(feature = "experimental-builder-budget"))]
+        let _ = q;
+        #[cfg(feature = "experimental-builder-budget")]
+        if self.binary_payload
+            && terms
+                .iter()
+                .any(|t| covering::exact_gram(t) || self.covering.short_covered(&q.scope, t))
+            && self.covering.usable(&self.file)?
+        {
+            #[cfg(feature = "experimental-rkyv-payload")]
+            if self.payload_benchmark.is_some() {
+                return Ok(std::borrow::Cow::Borrowed(terms));
+            }
+            return Ok(std::borrow::Cow::Owned(
+                terms
+                    .iter()
+                    .filter(|t| {
+                        !covering::exact_gram(t) && !self.covering.short_covered(&q.scope, t)
+                    })
+                    .cloned()
+                    .collect(),
+            ));
+        }
+        Ok(std::borrow::Cow::Borrowed(terms))
+    }
+    #[cfg(feature = "experimental-streaming-open")]
+    fn required_gram_absent(&self, q: &Query, terms: &[String]) -> bool {
+        self.term_pages.as_ref().is_some_and(|pages| {
+            terms.iter().any(|term| {
+                grams(term)
+                    .into_iter()
+                    .any(|gram| !pages.may_contain(&Term::Gram(q.scope.clone(), gram)))
+            })
+        })
+    }
     pub fn matches(&self, q: &Query, hidden: impl Fn(u32) -> bool) -> Result<Vec<u32>> {
+        let terms = Self::query_terms(q);
+        let verification_terms = self.verification_terms(q, &terms)?;
+        #[cfg(feature = "experimental-streaming-open")]
+        if self.required_gram_absent(q, &terms) {
+            return Ok(Vec::new());
+        }
         let mut groups = vec![match &q.collection {
-            Some(c) => self.one(Term::Collection(q.scope.clone(), c.clone())),
-            None => self.one(Term::Scope(q.scope.clone())),
+            Some(c) => self.one(Term::Collection(q.scope.clone(), c.clone()))?,
+            None => self.one(Term::Scope(q.scope.clone()))?,
         }];
-        let collections: BTreeSet<&str> = if let Some(c) = &q.collection {
-            BTreeSet::from([c.as_str()])
-        } else {
-            self.postings
-                .keys()
-                .filter_map(|t| match t {
-                    Term::Collection(s, c) if s == &q.scope => Some(c.as_str()),
-                    _ => None,
-                })
-                .collect()
-        };
+        #[cfg(feature = "experimental-streaming-open")]
+        if self.term_pages.is_some() && groups[0].is_empty() {
+            return Ok(Vec::new());
+        }
+        let collections = self.collections(q);
         for (field, value) in &q.exact {
             let mut group = vec![];
             for c in &collections {
@@ -1024,7 +2020,7 @@ impl DiskIndex {
                     c.to_string(),
                     field.clone(),
                     value.to_string(),
-                )));
+                ))?);
             }
             groups.push(group);
         }
@@ -1033,17 +2029,21 @@ impl DiskIndex {
             for c in &collections {
                 let min = Term::Numeric(q.scope.clone(), c.to_string(), r.field.clone(), r.min);
                 let max = Term::Numeric(q.scope.clone(), c.to_string(), r.field.clone(), r.max);
-                group.extend(self.postings.range(min..=max).map(|(_, p)| *p));
+                group.extend(self.posting_range(min, max)?);
             }
             groups.push(group);
         }
         if let Some(key) = &q.linked_to {
-            groups.push(self.one(Term::Link(key.clone())));
+            groups.push(self.one(Term::Link(key.clone()))?);
         }
-        let terms: Vec<String> = q.text.split_whitespace().map(fold).collect();
         for term in &terms {
             for gram in grams(term) {
-                groups.push(self.one(Term::Gram(q.scope.clone(), gram)));
+                let posting = self.one(Term::Gram(q.scope.clone(), gram))?;
+                #[cfg(feature = "experimental-streaming-open")]
+                if self.term_pages.is_some() && posting.is_empty() {
+                    return Ok(Vec::new());
+                }
+                groups.push(posting);
             }
         }
         groups.sort_by_key(|g| g.iter().map(|p| p.count as u64).sum::<u64>());
@@ -1052,6 +2052,8 @@ impl DiskIndex {
         }
         // Query-local cache avoids repeated positional probes for small lists.
         // It is capped at 256 KiB and is released when this search returns.
+        #[cfg(feature = "diagnostic-timing")]
+        let mut work = crate::timing::QueryWork::default();
         let mut cache_budget = 256 * 1024usize;
         let mut cached = Vec::with_capacity(groups.len() - 1);
         for group in &groups[1..] {
@@ -1067,6 +2069,13 @@ impl DiskIndex {
         // remain independently verified so cross-record text cannot leak.
         let mut folded_content = BTreeMap::<String, String>::new();
         let mut folded_bytes = 0usize;
+        #[cfg(feature = "experimental-grouped-read")]
+        let mut text_scratch = QueryTextScratch {
+            read_window_enabled: self.broad_payload_seed(&groups[0]),
+            ..Default::default()
+        };
+        #[cfg(not(feature = "experimental-grouped-read"))]
+        let mut text_scratch = QueryTextScratch::default();
         #[cfg(feature = "experimental-paged-metadata")]
         let mut text_cursor = paged::TextCursor::default();
         // Stream the smallest posting group in blocks; no full list hydration.
@@ -1077,8 +2086,7 @@ impl DiskIndex {
             let mut previous = None;
             while slot < p.count {
                 let count = (p.count - slot).min((buffer.len() / 4) as u32);
-                read_at(
-                    &self.file,
+                self.read_at(
                     p.offset + slot as u64 * 4,
                     &mut buffer[..count as usize * 4],
                 )?;
@@ -1091,6 +2099,8 @@ impl DiskIndex {
                     if hidden(id) || self.deleted(id) {
                         continue;
                     }
+                    #[cfg(feature = "diagnostic-timing")]
+                    let intersection_start = std::time::Instant::now();
                     let mut include = true;
                     for (group, cached) in groups[1..].iter().zip(&cached) {
                         let found = if let Some(ids) = cached {
@@ -1103,37 +2113,60 @@ impl DiskIndex {
                             break;
                         }
                     }
-                    if include && !terms.is_empty() {
-                        #[cfg(feature = "experimental-paged-metadata")]
-                        let d = self.read_text_document(id, &mut text_cursor)?.document;
-                        #[cfg(not(feature = "experimental-paged-metadata"))]
-                        let d = self.read_document(id)?.document;
-                        let title = fold(&d.title);
-                        if !terms.iter().all(|term| title.contains(term)) {
-                            let text = if let Some(text) = folded_content.get(&d.text) {
-                                text.as_str()
-                            } else {
-                                let text = fold(&d.text);
-                                if d.text.len() + text.len() <= 256 * 1024 - folded_bytes {
-                                    folded_bytes += d.text.len() + text.len();
-                                    folded_content.insert(d.text.clone(), text);
-                                    folded_content.get(&d.text).unwrap().as_str()
-                                } else {
-                                    include = terms
-                                        .iter()
-                                        .all(|term| title.contains(term) || text.contains(term));
-                                    if include {
-                                        matched.push(id);
-                                    }
-                                    continue;
-                                }
-                            };
-                            include = terms
-                                .iter()
-                                .all(|term| title.contains(term) || text.contains(term));
+                    #[cfg(feature = "diagnostic-timing")]
+                    {
+                        work.visible += 1;
+                        work.intersection_ns += intersection_start.elapsed().as_nanos() as u64;
+                    }
+                    if include && verification_terms.len() != terms.len() {
+                        #[cfg(feature = "diagnostic-timing")]
+                        {
+                            work.covered += 1;
+                        }
+                    }
+                    if include && !verification_terms.is_empty() {
+                        #[cfg(feature = "diagnostic-timing")]
+                        {
+                            work.candidates += 1;
+                        }
+                        #[cfg(feature = "experimental-rkyv-payload")]
+                        let overlay_match = self.benchmark_matches(
+                            id,
+                            &mut text_scratch,
+                            &verification_terms,
+                            &mut folded_content,
+                            &mut folded_bytes,
+                        )?;
+                        #[cfg(not(feature = "experimental-rkyv-payload"))]
+                        let overlay_match: Option<bool> = None;
+                        if let Some(result) = overlay_match {
+                            include = result;
+                        } else if self.binary_payload {
+                            include = self.binary_matches(
+                                id,
+                                &mut text_scratch,
+                                &verification_terms,
+                                &mut folded_content,
+                                &mut folded_bytes,
+                            )?;
+                        } else {
+                            #[cfg(feature = "experimental-paged-metadata")]
+                            let d = self.read_text_document(id, &mut text_cursor)?.document;
+                            #[cfg(not(feature = "experimental-paged-metadata"))]
+                            let d = self.read_document(id)?.document;
+                            include = text_scratch.matches(
+                                &d,
+                                &verification_terms,
+                                &mut folded_content,
+                                &mut folded_bytes,
+                            );
                         }
                     }
                     if include {
+                        #[cfg(feature = "diagnostic-timing")]
+                        {
+                            work.accepted += 1;
+                        }
                         matched.push(id);
                     }
                 }
@@ -1205,21 +2238,21 @@ impl DiskIndex {
         capture_limit: usize,
         mut emit: impl FnMut(u32, usize),
     ) -> Result<usize> {
+        let terms = Self::query_terms(q);
+        let verification_terms = self.verification_terms(q, &terms)?;
+        #[cfg(feature = "experimental-streaming-open")]
+        if self.required_gram_absent(q, &terms) {
+            return Ok(0);
+        }
         let mut groups = vec![match &q.collection {
-            Some(c) => self.one(Term::Collection(q.scope.clone(), c.clone())),
-            None => self.one(Term::Scope(q.scope.clone())),
+            Some(c) => self.one(Term::Collection(q.scope.clone(), c.clone()))?,
+            None => self.one(Term::Scope(q.scope.clone()))?,
         }];
-        let collections: BTreeSet<&str> = if let Some(c) = &q.collection {
-            BTreeSet::from([c.as_str()])
-        } else {
-            self.postings
-                .keys()
-                .filter_map(|t| match t {
-                    Term::Collection(s, c) if s == &q.scope => Some(c.as_str()),
-                    _ => None,
-                })
-                .collect()
-        };
+        #[cfg(feature = "experimental-streaming-open")]
+        if self.term_pages.is_some() && groups[0].is_empty() {
+            return Ok(0);
+        }
+        let collections = self.collections(q);
         for (field, value) in &q.exact {
             let mut group = vec![];
             for c in &collections {
@@ -1228,7 +2261,7 @@ impl DiskIndex {
                     c.to_string(),
                     field.clone(),
                     value.to_string(),
-                )));
+                ))?);
             }
             groups.push(group);
         }
@@ -1237,17 +2270,21 @@ impl DiskIndex {
             for c in &collections {
                 let min = Term::Numeric(q.scope.clone(), c.to_string(), r.field.clone(), r.min);
                 let max = Term::Numeric(q.scope.clone(), c.to_string(), r.field.clone(), r.max);
-                group.extend(self.postings.range(min..=max).map(|(_, p)| *p));
+                group.extend(self.posting_range(min, max)?);
             }
             groups.push(group);
         }
         if let Some(key) = &q.linked_to {
-            groups.push(self.one(Term::Link(key.clone())));
+            groups.push(self.one(Term::Link(key.clone()))?);
         }
-        let terms: Vec<String> = q.text.split_whitespace().map(fold).collect();
         for term in &terms {
             for gram in grams(term) {
-                groups.push(self.one(Term::Gram(q.scope.clone(), gram)));
+                let posting = self.one(Term::Gram(q.scope.clone(), gram))?;
+                #[cfg(feature = "experimental-streaming-open")]
+                if self.term_pages.is_some() && posting.is_empty() {
+                    return Ok(0);
+                }
+                groups.push(posting);
             }
         }
         groups.sort_by_key(|g| g.iter().map(|p| p.count as u64).sum::<u64>());
@@ -1257,9 +2294,10 @@ impl DiskIndex {
         // As with contains(), a posting covering every live record is a proven
         // full filter for a valid derived index. Visibility is counted from the
         // mask, excluding tombstones, so no stale or deleted row enters total.
-        // Text still requires candidate verification and cannot use this path.
+        // Complete trigrams may use this only after source authorization;
+        // other text still requires candidate verification.
         let fast_total = visible_total.filter(|_| {
-            terms.is_empty()
+            verification_terms.is_empty()
                 && groups
                     .iter()
                     .all(|g| g.iter().any(|p| p.count as usize == self.live_records))
@@ -1269,6 +2307,8 @@ impl DiskIndex {
         }
         // Query-local cache avoids repeated positional probes for small lists.
         // It is capped at 256 KiB and is released when this search returns.
+        #[cfg(feature = "diagnostic-timing")]
+        let mut work = crate::timing::QueryWork::default();
         let mut cache_budget = 256 * 1024usize;
         let mut cached = Vec::with_capacity(groups.len() - 1);
         for group in &groups[1..] {
@@ -1284,6 +2324,13 @@ impl DiskIndex {
         // remain independently verified so cross-record text cannot leak.
         let mut folded_content = BTreeMap::<String, String>::new();
         let mut folded_bytes = 0usize;
+        #[cfg(feature = "experimental-grouped-read")]
+        let mut text_scratch = QueryTextScratch {
+            read_window_enabled: self.broad_payload_seed(&groups[0]),
+            ..Default::default()
+        };
+        #[cfg(not(feature = "experimental-grouped-read"))]
+        let mut text_scratch = QueryTextScratch::default();
         #[cfg(feature = "experimental-paged-metadata")]
         let mut text_cursor = paged::TextCursor::default();
         // Stream the smallest posting group in blocks; no full list hydration.
@@ -1294,8 +2341,7 @@ impl DiskIndex {
             let mut previous = None;
             while slot < p.count {
                 let count = (p.count - slot).min((buffer.len() / 4) as u32);
-                read_at(
-                    &self.file,
+                self.read_at(
                     p.offset + slot as u64 * 4,
                     &mut buffer[..count as usize * 4],
                 )?;
@@ -1308,6 +2354,8 @@ impl DiskIndex {
                     if hidden(id) || self.deleted(id) {
                         continue;
                     }
+                    #[cfg(feature = "diagnostic-timing")]
+                    let intersection_start = std::time::Instant::now();
                     let mut include = true;
                     for (group, cached) in groups[1..].iter().zip(&cached) {
                         let found = if let Some(ids) = cached {
@@ -1320,40 +2368,60 @@ impl DiskIndex {
                             break;
                         }
                     }
-                    if include && !terms.is_empty() {
-                        #[cfg(feature = "experimental-paged-metadata")]
-                        let d = self.read_text_document(id, &mut text_cursor)?.document;
-                        #[cfg(not(feature = "experimental-paged-metadata"))]
-                        let d = self.read_document(id)?.document;
-                        let title = fold(&d.title);
-                        if !terms.iter().all(|term| title.contains(term)) {
-                            let text = if let Some(text) = folded_content.get(&d.text) {
-                                text.as_str()
-                            } else {
-                                let text = fold(&d.text);
-                                if d.text.len() + text.len() <= 256 * 1024 - folded_bytes {
-                                    folded_bytes += d.text.len() + text.len();
-                                    folded_content.insert(d.text.clone(), text);
-                                    folded_content.get(&d.text).unwrap().as_str()
-                                } else {
-                                    include = terms
-                                        .iter()
-                                        .all(|term| title.contains(term) || text.contains(term));
-                                    if include {
-                                        if COUNT {
-                                            total += 1;
-                                        }
-                                        emit(id, n);
-                                    }
-                                    continue;
-                                }
-                            };
-                            include = terms
-                                .iter()
-                                .all(|term| title.contains(term) || text.contains(term));
+                    #[cfg(feature = "diagnostic-timing")]
+                    {
+                        work.visible += 1;
+                        work.intersection_ns += intersection_start.elapsed().as_nanos() as u64;
+                    }
+                    if include && verification_terms.len() != terms.len() {
+                        #[cfg(feature = "diagnostic-timing")]
+                        {
+                            work.covered += 1;
+                        }
+                    }
+                    if include && !verification_terms.is_empty() {
+                        #[cfg(feature = "diagnostic-timing")]
+                        {
+                            work.candidates += 1;
+                        }
+                        #[cfg(feature = "experimental-rkyv-payload")]
+                        let overlay_match = self.benchmark_matches(
+                            id,
+                            &mut text_scratch,
+                            &verification_terms,
+                            &mut folded_content,
+                            &mut folded_bytes,
+                        )?;
+                        #[cfg(not(feature = "experimental-rkyv-payload"))]
+                        let overlay_match: Option<bool> = None;
+                        if let Some(result) = overlay_match {
+                            include = result;
+                        } else if self.binary_payload {
+                            include = self.binary_matches(
+                                id,
+                                &mut text_scratch,
+                                &verification_terms,
+                                &mut folded_content,
+                                &mut folded_bytes,
+                            )?;
+                        } else {
+                            #[cfg(feature = "experimental-paged-metadata")]
+                            let d = self.read_text_document(id, &mut text_cursor)?.document;
+                            #[cfg(not(feature = "experimental-paged-metadata"))]
+                            let d = self.read_document(id)?.document;
+                            include = text_scratch.matches(
+                                &d,
+                                &verification_terms,
+                                &mut folded_content,
+                                &mut folded_bytes,
+                            );
                         }
                     }
                     if include {
+                        #[cfg(feature = "diagnostic-timing")]
+                        {
+                            work.accepted += 1;
+                        }
                         if COUNT {
                             total += 1;
                         }
@@ -1369,5 +2437,22 @@ impl DiskIndex {
             }
         }
         Ok(fast_total.unwrap_or(total))
+    }
+}
+
+#[cfg(feature = "experimental-merge-postings")]
+enum TermCursor<'a> {
+    Memory(std::collections::btree_map::Iter<'a, Term, Posting>),
+    #[cfg(feature = "experimental-streaming-open")]
+    Pages(term_pages::Cursor<'a>),
+}
+#[cfg(feature = "experimental-merge-postings")]
+impl TermCursor<'_> {
+    fn next(&mut self) -> Result<Option<(Term, Posting)>> {
+        match self {
+            Self::Memory(values) => Ok(values.next().map(|(t, p)| (t.clone(), *p))),
+            #[cfg(feature = "experimental-streaming-open")]
+            Self::Pages(values) => values.next(),
+        }
     }
 }

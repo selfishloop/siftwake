@@ -1,4 +1,4 @@
-use crate::format::{Batch, MAGIC_V3, append, crc, encode};
+use crate::format::{Batch, MAGIC_V4, append, crc, encode};
 use crate::{Error, Result};
 use serde::{Deserialize, Serialize};
 use std::fs::{File, OpenOptions};
@@ -162,7 +162,7 @@ pub(crate) fn new_active(dir: &Path, id: u64, sequence: u64) -> Result<(File, Ac
         .write(true)
         .create_new(true)
         .open(path(dir, id, "fdb"))?;
-    log.write_all(MAGIC_V3)?;
+    log.write_all(MAGIC_V4)?;
     append(
         &mut log,
         &encode(

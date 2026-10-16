@@ -1,0 +1,25 @@
+     Locking 2 packages to highest Rust 1.89 compatible versions
+      Adding windows-link v0.2.1
+      Adding windows-sys v0.61.2
+   Compiling windows-link v0.2.1
+   Compiling windows-sys v0.61.2
+   Compiling fdb v0.3.1 (C:\Users\Serkan\Documents\ChatGPT\fdb)
+    Finished `test` profile [unoptimized + debuginfo] target(s) in 12.14s
+     Running unittests src\lib.rs (target\debug\deps\fdb-3c49fea4a258a107.exe)
+
+running 2 tests
+
+thread 'segment::covering::windows::tests::symbolic_links_require_the_existing_following_metadata_path' (41008) panicked at src\segment\covering\windows.rs:112:27:
+symlink setup failed: A required privilege is not held by the client. (os error 1314)
+note: run with `RUST_BACKTRACE=1` environment variable to display a backtrace
+test segment::covering::windows::tests::native_stamp_matches_std_for_unicode_resize_same_size_changes_and_missing_paths ... ok
+test segment::covering::windows::tests::symbolic_links_require_the_existing_following_metadata_path ... FAILED
+
+failures:
+
+failures:
+    segment::covering::windows::tests::symbolic_links_require_the_existing_following_metadata_path
+
+test result: FAILED. 1 passed; 1 failed; 0 ignored; 0 measured; 66 filtered out; finished in 0.00s
+
+error: test failed, to rerun pass `--lib`

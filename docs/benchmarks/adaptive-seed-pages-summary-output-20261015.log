@@ -1,0 +1,251 @@
+{
+  "lower_p95_cases": 3,
+  "higher_p95_cases": 5,
+  "increases": [
+    {
+      "text": "the",
+      "kind": "page",
+      "offset": 0,
+      "limit": 1,
+      "total": 10000,
+      "late_matches": 0,
+      "control": {
+        "n": 600,
+        "per_process_n": [
+          200,
+          200,
+          200
+        ],
+        "p50_ms": 0.1275,
+        "p95_ms": 0.2268,
+        "p99_ms": 0.2808,
+        "run_p95": [
+          0.2226,
+          0.2369,
+          0.23450000000000001
+        ]
+      },
+      "fdb": {
+        "n": 600,
+        "per_process_n": [
+          200,
+          200,
+          200
+        ],
+        "p50_ms": 0.12469999999999999,
+        "p95_ms": 0.2379,
+        "p99_ms": 0.3072,
+        "run_p95": [
+          0.214,
+          0.2532,
+          0.22039999999999998
+        ]
+      },
+      "change_p95_percent": 4.894179894179884,
+      "faster_pairs": 2,
+      "paired_p95_change_percent": [
+        -3.8634321653189585,
+        6.880540312368089,
+        -6.0127931769722975
+      ],
+      "median_paired_p95_change_percent": -3.8634321653189585,
+      "tail_samples_per_process_below_20": false
+    },
+    {
+      "text": "the",
+      "kind": "page",
+      "offset": 5000,
+      "limit": 50,
+      "total": 10000,
+      "late_matches": 0,
+      "control": {
+        "n": 600,
+        "per_process_n": [
+          200,
+          200,
+          200
+        ],
+        "p50_ms": 1.1923000000000001,
+        "p95_ms": 1.7788000000000002,
+        "p99_ms": 2.2115,
+        "run_p95": [
+          1.8064,
+          1.7775,
+          1.7336
+        ]
+      },
+      "fdb": {
+        "n": 600,
+        "per_process_n": [
+          200,
+          200,
+          200
+        ],
+        "p50_ms": 1.3311,
+        "p95_ms": 1.8521,
+        "p99_ms": 2.1925999999999997,
+        "run_p95": [
+          1.8127,
+          1.8026,
+          1.9359
+        ]
+      },
+      "change_p95_percent": 4.120755565549805,
+      "faster_pairs": 0,
+      "paired_p95_change_percent": [
+        0.348759964570422,
+        1.4120956399437334,
+        11.66935856022151
+      ],
+      "median_paired_p95_change_percent": 1.4120956399437334,
+      "tail_samples_per_process_below_20": false
+    },
+    {
+      "text": "the",
+      "kind": "page",
+      "offset": 9950,
+      "limit": 50,
+      "total": 10000,
+      "late_matches": 0,
+      "control": {
+        "n": 600,
+        "per_process_n": [
+          200,
+          200,
+          200
+        ],
+        "p50_ms": 1.1183,
+        "p95_ms": 1.6803000000000001,
+        "p99_ms": 2.1243999999999996,
+        "run_p95": [
+          1.6128,
+          1.8194000000000001,
+          1.6649
+        ]
+      },
+      "fdb": {
+        "n": 600,
+        "per_process_n": [
+          200,
+          200,
+          200
+        ],
+        "p50_ms": 1.1856,
+        "p95_ms": 1.7174,
+        "p99_ms": 2.2020999999999997,
+        "run_p95": [
+          1.6194,
+          1.648,
+          1.7929
+        ]
+      },
+      "change_p95_percent": 2.2079390585014513,
+      "faster_pairs": 1,
+      "paired_p95_change_percent": [
+        0.40922619047618625,
+        -9.42068813894692,
+        7.688149438404701
+      ],
+      "median_paired_p95_change_percent": 0.40922619047618625,
+      "tail_samples_per_process_below_20": false
+    },
+    {
+      "text": "ishmael",
+      "kind": "page",
+      "offset": 60,
+      "limit": 200,
+      "total": 260,
+      "late_matches": 39,
+      "control": {
+        "n": 600,
+        "per_process_n": [
+          200,
+          200,
+          200
+        ],
+        "p50_ms": 10.0975,
+        "p95_ms": 12.384300000000001,
+        "p99_ms": 14.0546,
+        "run_p95": [
+          11.642700000000001,
+          13.3741,
+          13.0851
+        ]
+      },
+      "fdb": {
+        "n": 600,
+        "per_process_n": [
+          200,
+          200,
+          200
+        ],
+        "p50_ms": 10.1503,
+        "p95_ms": 12.6229,
+        "p99_ms": 14.605699999999999,
+        "run_p95": [
+          11.7491,
+          12.7811,
+          12.9983
+        ]
+      },
+      "change_p95_percent": 1.9266329142543226,
+      "faster_pairs": 2,
+      "paired_p95_change_percent": [
+        0.9138773652159538,
+        -4.433943218609104,
+        -0.6633499170812573
+      ],
+      "median_paired_p95_change_percent": -0.6633499170812573,
+      "tail_samples_per_process_below_20": false
+    },
+    {
+      "text": "quixote",
+      "kind": "page",
+      "offset": 57,
+      "limit": 50,
+      "total": 56,
+      "late_matches": 8,
+      "control": {
+        "n": 600,
+        "per_process_n": [
+          200,
+          200,
+          200
+        ],
+        "p50_ms": 1.4478,
+        "p95_ms": 1.8619999999999999,
+        "p99_ms": 2.3074,
+        "run_p95": [
+          1.8472,
+          2.0022,
+          1.7565
+        ]
+      },
+      "fdb": {
+        "n": 600,
+        "per_process_n": [
+          200,
+          200,
+          200
+        ],
+        "p50_ms": 1.4555,
+        "p95_ms": 1.921,
+        "p99_ms": 2.2046,
+        "run_p95": [
+          1.845,
+          1.921,
+          1.9654999999999998
+        ]
+      },
+      "change_p95_percent": 3.168635875402792,
+      "faster_pairs": 2,
+      "paired_p95_change_percent": [
+        -0.11909917713295304,
+        -4.055538907202083,
+        11.898662112154845
+      ],
+      "median_paired_p95_change_percent": -0.11909917713295304,
+      "tail_samples_per_process_below_20": false
+    }
+  ]
+}

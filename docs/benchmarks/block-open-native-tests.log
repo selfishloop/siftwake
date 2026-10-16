@@ -1,0 +1,15 @@
+   Compiling fdb v0.3.1 (C:\Users\Serkan\Documents\ChatGPT\fdb)
+    Finished `test` profile [unoptimized + debuginfo] target(s) in 1.53s
+     Running tests\native_binary.rs (target\debug\deps\native_binary-332cd428c07a756d.exe)
+
+running 7 tests
+test explicit_log_check_rejects_partial_tail_without_repairing_it ... ok
+test binary_size_limit_and_depth_fail_before_append ... ok
+test block_cache_is_optional_and_does_not_hide_bad_sources_or_change_seg04 ... ok
+test deferred_open_checks_source_before_reads_searches_and_writes ... ok
+test intact_binary_cache_never_hides_cut_or_corrupt_published_source ... ok
+test native_binary_roundtrip_versions_queries_and_cache_rebuild ... ok
+test deferred_index_rejects_an_unopened_payload_block_before_returning_document ... ok
+
+test result: ok. 7 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 1.72s
+

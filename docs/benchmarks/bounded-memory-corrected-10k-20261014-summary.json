@@ -1,0 +1,134 @@
+{
+  "rows": [
+    {
+      "variant": "control",
+      "run": 0,
+      "ingest_s": 24.9748312,
+      "maintenance_s": 1.6130327,
+      "combined_s": 26.5878639,
+      "indexing_private_bytes": 116527104,
+      "maintenance_private_bytes": 105947136,
+      "os_peak_ws_bytes": 120303616,
+      "idle_private_bytes": 22528000,
+      "disk_bytes": 1513744522.0
+    },
+    {
+      "variant": "candidate",
+      "run": 0,
+      "ingest_s": 31.0637679,
+      "maintenance_s": 1.0000066,
+      "combined_s": 32.0637745,
+      "indexing_private_bytes": 9707520,
+      "maintenance_private_bytes": 8507392,
+      "os_peak_ws_bytes": 13885440,
+      "idle_private_bytes": 1822720,
+      "disk_bytes": 1521041630.0
+    },
+    {
+      "variant": "control",
+      "run": 1,
+      "ingest_s": 25.7547194,
+      "maintenance_s": 1.5785288,
+      "combined_s": 27.3332482,
+      "indexing_private_bytes": 117080064,
+      "maintenance_private_bytes": 102129664,
+      "os_peak_ws_bytes": 120651776,
+      "idle_private_bytes": 22536192,
+      "disk_bytes": 1513744522.0
+    },
+    {
+      "variant": "candidate",
+      "run": 1,
+      "ingest_s": 30.5901109,
+      "maintenance_s": 0.9481416,
+      "combined_s": 31.5382525,
+      "indexing_private_bytes": 9576448,
+      "maintenance_private_bytes": 8175616,
+      "os_peak_ws_bytes": 13545472,
+      "idle_private_bytes": 1822720,
+      "disk_bytes": 1521041630.0
+    },
+    {
+      "variant": "control",
+      "run": 2,
+      "ingest_s": 25.5911682,
+      "maintenance_s": 1.652965,
+      "combined_s": 27.2441332,
+      "indexing_private_bytes": 115867648,
+      "maintenance_private_bytes": 104968192,
+      "os_peak_ws_bytes": 119869440,
+      "idle_private_bytes": 22523904,
+      "disk_bytes": 1513744522.0
+    },
+    {
+      "variant": "candidate",
+      "run": 2,
+      "ingest_s": 30.2730727,
+      "maintenance_s": 0.9873155999999998,
+      "combined_s": 31.2603883,
+      "indexing_private_bytes": 9576448,
+      "maintenance_private_bytes": 8327168,
+      "os_peak_ws_bytes": 13455360,
+      "idle_private_bytes": 1761280,
+      "disk_bytes": 1521041630.0
+    }
+  ],
+  "median": {
+    "control": {
+      "ingest_s": 25.5911682,
+      "maintenance_s": 1.6130327,
+      "combined_s": 27.2441332,
+      "indexing_private_bytes": 116527104,
+      "maintenance_private_bytes": 104968192,
+      "os_peak_ws_bytes": 120303616,
+      "idle_private_bytes": 22528000,
+      "disk_bytes": 1513744522.0
+    },
+    "candidate": {
+      "ingest_s": 30.5901109,
+      "maintenance_s": 0.9873155999999998,
+      "combined_s": 31.5382525,
+      "indexing_private_bytes": 9576448,
+      "maintenance_private_bytes": 8327168,
+      "os_peak_ws_bytes": 13545472,
+      "idle_private_bytes": 1822720,
+      "disk_bytes": 1521041630.0
+    }
+  },
+  "paired_change_percent": [
+    {
+      "run": 0,
+      "ingest_s": 24.38029170743703,
+      "maintenance_s": -38.00456742135482,
+      "combined_s": 20.595526668090102,
+      "indexing_private_bytes": -91.6693029631973,
+      "maintenance_private_bytes": -91.97015386994511,
+      "os_peak_ws_bytes": -88.45800279186953,
+      "idle_private_bytes": -91.9090909090909,
+      "disk_bytes": 0.48205677338200026
+    },
+    {
+      "run": 1,
+      "ingest_s": 18.774778419833993,
+      "maintenance_s": -39.935109197880955,
+      "combined_s": 15.384209989356478,
+      "indexing_private_bytes": -91.82059893646796,
+      "maintenance_private_bytes": -91.99486644742119,
+      "os_peak_ws_bytes": -88.77308527973928,
+      "idle_private_bytes": -91.91203198836787,
+      "disk_bytes": 0.48205677338200026
+    },
+    {
+      "run": 2,
+      "ingest_s": 18.29500108556983,
+      "maintenance_s": -40.27002386620408,
+      "combined_s": 14.741724651382926,
+      "indexing_private_bytes": -91.7350113122172,
+      "maintenance_private_bytes": -92.06696062746322,
+      "os_peak_ws_bytes": -88.77498718605842,
+      "idle_private_bytes": -92.18039643571558,
+      "disk_bytes": 0.48205677338200026
+    }
+  ],
+  "scope": "same 10k corpus, paired release merge+bitmap, synced WAL, warm OS cache without eviction; sampled whole-process memory"
+}

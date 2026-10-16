@@ -1,0 +1,19 @@
+   Compiling fdb v0.3.1 (C:\Users\Serkan\Documents\ChatGPT\fdb)
+    Finished `test` profile [unoptimized + debuginfo] target(s) in 3.42s
+     Running tests\disk.rs (target\debug\deps\disk-ca788e7896fc69ed.exe)
+
+running 11 tests
+test delta_byte_watermark_bounds_resident_long_content_after_next_write ... ok
+test deleted_disk_fields_and_links_never_leak_through_old_postings ... ok
+test numeric_groups_unicode_and_exact_filters_work_across_collections ... ok
+test runtime_document_corruption_is_reported_before_returning_payload ... ok
+test postings_cross_block_boundaries_without_losing_page_entries ... ok
+test automatic_maintenance_preserves_guards_and_does_not_run_for_rejected_batch ... ok
+test disk_delta_merge_masks_stale_results_and_preserves_page_order ... ok
+test checkpoint_evicts_content_and_postings_from_resident_state ... ok
+test v01_checkpoint_fixture_opens_without_rewriting_authoritative_bytes ... ok
+test missing_corrupt_and_wrong_generation_segments_rebuild_from_log ... ok
+test killing_compaction_before_publication_preserves_acknowledged_data ... ok
+
+test result: ok. 11 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 1.84s
+

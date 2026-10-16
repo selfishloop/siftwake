@@ -6,6 +6,8 @@ use crate::{
     Error, Guard, Key, Mutation, Options, Query, Result, SearchPage, Stats, StoredDocument,
     validate_doc, validate_key,
 };
+#[cfg(feature = "experimental-builder-budget")]
+mod streamed;
 use std::cmp::Reverse;
 #[cfg(any(
     feature = "experimental-grouped-read",
@@ -77,6 +79,8 @@ fn own_delta_key(key: &DeltaKey) -> Key {
 struct Run {
     source: Source,
     index: Arc<DiskIndex>,
+    deferred: Option<Arc<std::sync::Mutex<bool>>>,
+    source_records: Option<Arc<crate::source_records::Records>>,
 }
 struct Job {
     inputs: Vec<Source>,
@@ -248,25 +252,43 @@ pub struct Database {
 }
 
 fn open_source(dir: &Path, mut source: Source, legacy_unknown: bool) -> Result<Run> {
+    #[cfg(feature = "experimental-builder-budget")]
+    let mut file =
+        crate::segment::SourceLease::open(&source.path(dir, "fdb"), source.kind == Kind::Run)?;
+    #[cfg(not(feature = "experimental-builder-budget"))]
     let mut file = File::open(source.path(dir, "fdb"))?;
     if source.kind == Kind::Run && file.metadata()?.len() != source.end {
         return Err(Error::Corrupt("immutable source length mismatch".into()));
     }
-    let checksum = format::prefix_crc(&mut file, source.end)?;
-    if !legacy_unknown && checksum != source.checksum {
-        return Err(Error::Corrupt("source checkpoint checksum mismatch".into()));
-    }
+    let checksum = if legacy_unknown || cfg!(feature = "experimental-streaming-open") {
+        #[cfg(feature = "diagnostic-timing")]
+        let _span = crate::timing::span("open.source_crc");
+        let checksum = format::prefix_crc(&mut file, source.end)?;
+        if !legacy_unknown && checksum != source.checksum {
+            return Err(Error::Corrupt("source checkpoint checksum mismatch".into()));
+        }
+        checksum
+    } else {
+        source.checksum
+    };
     source.checksum = checksum;
     let target = source.path(dir, "idx");
-    let mut index = match DiskIndex::open(&target, Some((source.end, checksum))) {
+    let opened_index = {
+        #[cfg(feature = "diagnostic-timing")]
+        let _span = crate::timing::span("open.index");
+        DiskIndex::open(&target, Some((source.end, checksum)))
+    };
+    let mut index = match opened_index {
         Ok(index) => Some(index),
         Err(Error::Corrupt(_)) => None,
         Err(Error::Io(e)) if e.kind() == std::io::ErrorKind::NotFound => None,
         Err(e) => return Err(e),
     };
     let mut builder = None;
+    #[cfg(feature = "diagnostic-timing")]
+    let replay_start = crate::timing::span("open.source_replay");
     #[cfg(not(feature = "experimental-streaming-open"))]
-    let sequence = format::replay_prefix(&mut file, source.end, |seq, batch| {
+    let sequence = format::replay_prefix_checked(&mut file, source.end, checksum, |seq, batch| {
         if !batch.checkpoint {
             return Err(Error::Corrupt(
                 "normal transaction inside immutable source".into(),
@@ -334,6 +356,8 @@ fn open_source(dir: &Path, mut source: Source, legacy_unknown: bool) -> Result<R
         }
         Ok(())
     })?;
+    #[cfg(feature = "diagnostic-timing")]
+    drop(replay_start);
     if let Some(b) = builder {
         index = Some(b.finish()?);
     }
@@ -349,12 +373,221 @@ fn open_source(dir: &Path, mut source: Source, legacy_unknown: bool) -> Result<R
     };
     source.sequence = sequence;
     source.keys = index.len();
+    #[cfg(feature = "experimental-builder-budget")]
+    let index = {
+        let mut index = index;
+        index.bind_text_source(source.path(dir, "fdb"), file)?;
+        index
+    };
     Ok(Run {
         source,
         index: Arc::new(index),
+        deferred: None,
+        source_records: None,
     })
 }
 
+#[cfg(all(test, not(feature = "experimental-streaming-open")))]
+mod deferred_validation_tests {
+    use super::*;
+
+    #[test]
+    fn borrowed_check_rejects_crc_valid_invalid_documents_and_manifest_identity() {
+        let dir = std::env::temp_dir().join(format!("fdb-borrowed-limits-{}", std::process::id()));
+        std::fs::create_dir(&dir).unwrap();
+        let valid = StoredDocument {
+            document: crate::Document {
+                key: Key::new("shared", "texts", "a"),
+                title: "title".into(),
+                text: "text".into(),
+                fields: Default::default(),
+                links: vec![],
+            },
+            version: 7,
+        };
+        let mut cases = vec![(valid.clone(), true)];
+        for version in [0, 8] {
+            let mut stored = valid.clone();
+            stored.version = version;
+            cases.push((stored, false));
+        }
+        let mut stored = valid.clone();
+        stored.document.key.id = "bad\n".into();
+        cases.push((stored, false));
+        let mut stored = valid.clone();
+        stored
+            .document
+            .fields
+            .insert("".into(), serde_json::Value::Null);
+        cases.push((stored, false));
+        let mut stored = valid;
+        stored.document.links.push(Key::new("other", "texts", "b"));
+        cases.push((stored, false));
+        for (stored, expected) in cases {
+            let batch = Batch {
+                checkpoint: true,
+                changes: vec![Change::Put { stored }],
+            };
+            let mut bytes = format::MAGIC_V4.to_vec();
+            bytes.extend(format::encode(7, &batch).unwrap());
+            let source = Source {
+                kind: Kind::Run,
+                id: 1,
+                end: bytes.len() as u64,
+                checksum: format::crc(&bytes),
+                sequence: 7,
+                keys: 1,
+            };
+            std::fs::write(source.path(&dir, "fdb"), bytes).unwrap();
+            let mut file = File::open(source.path(&dir, "fdb")).unwrap();
+            let owned = format::replay_prefix_checked(
+                &mut file,
+                source.end,
+                source.checksum,
+                |seq, batch| {
+                    for change in batch.changes {
+                        if let Change::Put { stored } = change {
+                            validate_doc(&stored.document)?;
+                            if stored.version == 0 || stored.version > seq {
+                                return Err(Error::Corrupt("version".into()));
+                            }
+                        }
+                    }
+                    Ok(())
+                },
+            );
+            assert_eq!(owned.is_ok(), expected);
+            assert_eq!(verify_deferred_source(&dir, &source).is_ok(), expected);
+            let mut wrong = source.clone();
+            wrong.keys += 1;
+            assert!(verify_deferred_source(&dir, &wrong).is_err());
+            wrong = source;
+            wrong.sequence += 1;
+            assert!(verify_deferred_source(&dir, &wrong).is_err());
+        }
+        std::fs::remove_file(dir.join("run-0000000000000001.fdb")).unwrap();
+        std::fs::remove_dir(dir).unwrap();
+    }
+}
+
+fn verify_deferred_source(dir: &Path, source: &Source) -> Result<()> {
+    #[cfg(feature = "diagnostic-timing")]
+    let _verify = crate::timing::span("source.verify_total");
+    let mut file = File::open(source.path(dir, "fdb"))?;
+    if file.metadata()?.len() != source.end {
+        return Err(Error::Corrupt("immutable source length mismatch".into()));
+    }
+    let mut count = 0usize;
+    #[cfg(feature = "experimental-streaming-open")]
+    let mut check_change = |seq: u64, change: Change| -> Result<()> {
+        #[cfg(feature = "diagnostic-timing")]
+        let _validate = crate::timing::span("source.validate_document");
+        count = count
+            .checked_add(1)
+            .ok_or_else(|| Error::Corrupt("source record count overflow".into()))?;
+        match change {
+            Change::Put { stored } => {
+                validate_doc(&stored.document).map_err(|e| Error::Corrupt(e.to_string()))?;
+                if stored.version == 0 || stored.version > seq {
+                    return Err(Error::Corrupt("invalid checkpoint version".into()));
+                }
+            }
+            Change::Delete { key } => {
+                validate_key(&key).map_err(|e| Error::Corrupt(e.to_string()))?
+            }
+        }
+        Ok(())
+    };
+    #[cfg(not(feature = "experimental-streaming-open"))]
+    let sequence =
+        format::validate_native_prefix(&mut file, source.end, source.checksum, |seq, bytes| {
+            #[cfg(feature = "diagnostic-timing")]
+            let _validate = crate::timing::span("source.validate_borrowed_batch");
+            let (_, entries) = crate::binary_batch::entries(bytes)?;
+            for (tag, _, bytes) in entries {
+                count = count
+                    .checked_add(1)
+                    .ok_or_else(|| Error::Corrupt("source record count overflow".into()))?;
+                if tag == 0 {
+                    let view = crate::payload::checked(bytes)?;
+                    view.validate_document(bytes.len())
+                        .map_err(|e| Error::Corrupt(e.to_string()))?;
+                    if view.version() == 0 || view.version() > seq {
+                        return Err(Error::Corrupt("invalid checkpoint version".into()));
+                    }
+                } else if let Change::Delete { key } =
+                    crate::binary_batch::decode_entry(tag, bytes)?
+                {
+                    validate_key(&key).map_err(|e| Error::Corrupt(e.to_string()))?;
+                }
+            }
+            Ok(())
+        })?;
+    #[cfg(feature = "experimental-streaming-open")]
+    let sequence = {
+        if format::prefix_crc(&mut file, source.end)? != source.checksum {
+            return Err(Error::Corrupt("source checkpoint checksum mismatch".into()));
+        }
+        format::replay_prefix_changes(&mut file, source.end, |seq, change| {
+            if let Some(change) = change {
+                check_change(seq, change)?;
+            }
+            Ok(())
+        })?
+    };
+    if count != source.keys || sequence != source.sequence {
+        return Err(Error::Corrupt("manifest/source identity mismatch".into()));
+    }
+    Ok(())
+}
+
+// Existing cache CRC/grammar is checked eagerly. Authoritative source validation
+// is deferred only for current immutable runs; unsupported/missing cache falls back.
+fn open_source_deferred(dir: &Path, source: Source) -> Result<Run> {
+    if source.kind != Kind::Run {
+        return open_source(dir, source, false);
+    }
+    #[cfg(feature = "experimental-builder-budget")]
+    let file = crate::segment::SourceLease::open(&source.path(dir, "fdb"), true)?;
+    #[cfg(not(feature = "experimental-builder-budget"))]
+    let file = File::open(source.path(dir, "fdb"))?;
+    if file.metadata()?.len() != source.end {
+        return Err(Error::Corrupt("immutable source length mismatch".into()));
+    }
+    let mut magic = [0; 8];
+    crate::segment::read_at(&file, 0, &mut magic)?;
+    if &magic != format::MAGIC_V4 {
+        return open_source(dir, source, false);
+    }
+    let index = match DiskIndex::open_deferred(
+        &source.path(dir, "idx"),
+        Some((source.end, source.checksum)),
+    ) {
+        Ok(index) => index,
+        Err(Error::Corrupt(_)) => return open_source(dir, source, false),
+        Err(Error::Io(e)) if e.kind() == std::io::ErrorKind::NotFound => {
+            return open_source(dir, source, false);
+        }
+        Err(e) => return Err(e),
+    };
+    if index.len() != source.keys || index.sequence != source.sequence {
+        return Err(Error::Corrupt("manifest/index identity mismatch".into()));
+    }
+    #[cfg(feature = "experimental-builder-budget")]
+    let index = {
+        let mut index = index;
+        index.bind_text_source(source.path(dir, "fdb"), file)?;
+        index
+    };
+    Ok(Run {
+        source,
+        index: Arc::new(index),
+        deferred: Some(Arc::new(std::sync::Mutex::new(false))),
+        source_records: None,
+    })
+}
+
+#[cfg(not(feature = "experimental-merge-postings"))]
 fn write_run(
     dir: &Path,
     id: u64,
@@ -362,6 +595,46 @@ fn write_run(
     changes: impl Iterator<Item = Result<Change>>,
 ) -> Result<Run> {
     write_run_prepared(dir, id, sequence, changes, |_| Ok(()))
+}
+
+#[cfg(feature = "experimental-merge-postings")]
+fn reused_builder(dir: &Path, source: &Source) -> Result<Builder> {
+    let mut builder = Builder::new(
+        &source.path(dir, "idx"),
+        source.sequence,
+        source.end,
+        source.checksum,
+    )?;
+    let mut file = File::open(source.path(dir, "fdb"))?;
+    #[cfg(feature = "experimental-streaming-open")]
+    let found = format::replay_prefix_changes(&mut file, source.end, |seq, change| {
+        if seq != source.sequence {
+            return Err(Error::Corrupt("reused source sequence".into()));
+        }
+        match change {
+            Some(Change::Put { stored }) => builder.add_reused(&stored)?,
+            Some(Change::Delete { key }) => builder.add_delete(&key)?,
+            None => {}
+        }
+        Ok(())
+    })?;
+    #[cfg(not(feature = "experimental-streaming-open"))]
+    let found = format::replay_prefix(&mut file, source.end, |seq, batch| {
+        if seq != source.sequence || !batch.checkpoint {
+            return Err(Error::Corrupt("reused source sequence/checkpoint".into()));
+        }
+        for change in batch.changes {
+            match change {
+                Change::Put { stored } => builder.add_reused(&stored)?,
+                Change::Delete { key } => builder.add_delete(&key)?,
+            }
+        }
+        Ok(())
+    })?;
+    if found != source.sequence {
+        return Err(Error::Corrupt("reused source sequence".into()));
+    }
+    Ok(builder)
 }
 
 fn write_run_prepared(
@@ -388,7 +661,7 @@ fn write_run_prepared(
         .write(true)
         .create_new(true)
         .open(source.path(dir, "fdb"))?;
-    file.write_all(format::MAGIC_V3)?;
+    file.write_all(format::MAGIC_V4)?;
     #[cfg(feature = "diagnostic-memory")]
     let _origin = crate::memory::Scope::new(4);
     #[cfg(feature = "experimental-write-buffer-budget")]
@@ -399,7 +672,7 @@ fn write_run_prepared(
         let mut size = 0;
         for change in changes {
             let change = change?;
-            size += serde_json::to_vec(&change)?.len();
+            size += crate::binary_batch::entry_len(&change)?;
             batch.push(change);
             if size >= 8 * 1024 * 1024 {
                 format::append(
@@ -428,10 +701,15 @@ fn write_run_prepared(
     }
     source.end = file.metadata()?.len();
     source.checksum = format::prefix_crc(&mut file, source.end)?;
+    // Finish the writer lifetime before binding the immutable source fingerprint.
+    #[cfg(feature = "experimental-builder-budget")]
+    drop(file);
     #[cfg(feature = "experimental-write-maintenance-slots")]
     drop(_workspace);
     // The large source Batch/encode buffers have been dropped before waiting.
     // A single source writer and a single builder may overlap, never two of either.
+    #[cfg(feature = "experimental-builder-budget")]
+    let _builder_working = crate::write_budget::WorkingScope::builder()?;
     #[cfg(feature = "experimental-write-maintenance-slots")]
     let _builder_workspace = builder_workspace()?;
     // Authoritative source is complete before its derived index is constructed.
@@ -495,10 +773,51 @@ impl Database {
             .map(|run| run.index.memory_layout(run.source.id))
             .collect())
     }
+    /// Explicit, disposable single-segment benchmark overlay; never enabled by open.
+    #[cfg(feature = "experimental-rkyv-payload")]
+    pub fn attach_payload_benchmark(
+        &mut self,
+        path: impl AsRef<Path>,
+        codec: crate::rkyv_payload::bench::Codec,
+    ) -> Result<u64> {
+        self.healthy()?;
+        if self.runs.len() != 1
+            || !self.docs.is_empty()
+            || !self.shadow.is_empty()
+            || self.job.is_some()
+        {
+            return Err(Error::Invalid(
+                "payload benchmark requires one immutable segment and empty delta".into(),
+            ));
+        }
+        let index = Arc::get_mut(&mut self.runs[0].index).ok_or_else(|| {
+            Error::Invalid("payload benchmark requires exclusive segment ownership".into())
+        })?;
+        index.attach_payload_benchmark(path.as_ref(), codec)
+    }
     pub fn open(dir: impl AsRef<Path>) -> Result<Self> {
         Self::open_with_options(dir, Options::default())
     }
+    /// Opt-in segment-level deferred source validation. Indexes and active WAL
+    /// are checked at open; immutable sources are checked before their first use.
+    /// Opening successfully does not imply a full integrity check has completed.
+    pub fn open_deferred(dir: impl AsRef<Path>) -> Result<Self> {
+        Self::open_mode(dir, Options::default(), true, false)
+    }
     pub fn open_with_options(dir: impl AsRef<Path>, options: Options) -> Result<Self> {
+        Self::open_mode(dir, options, false, false)
+    }
+    /// Opt-in checked source-record reads. Search, negative lookups and writes
+    /// retain complete source verification. Missing/stale address caches fall back.
+    pub fn open_record_reads(dir: impl AsRef<Path>) -> Result<Self> {
+        Self::open_mode(dir, Options::default(), true, true)
+    }
+    fn open_mode(
+        dir: impl AsRef<Path>,
+        options: Options,
+        deferred: bool,
+        record_reads: bool,
+    ) -> Result<Self> {
         #[cfg(feature = "diagnostic-timing")]
         let _open = crate::timing::span("open.total");
         if options.max_delta_keys == 0 || options.max_delta_bytes == 0 {
@@ -564,7 +883,23 @@ impl Database {
                 let runs = m
                     .runs
                     .into_iter()
-                    .map(|s| open_source(&dir, s, false))
+                    .map(|s| {
+                        if deferred {
+                            let mut run = open_source_deferred(&dir, s)?;
+                            if record_reads && run.deferred.is_some() {
+                                run.source_records = crate::source_records::Records::load(
+                                    &dir,
+                                    &run.source,
+                                    &run.index,
+                                )
+                                .ok()
+                                .map(Arc::new);
+                            }
+                            Ok(run)
+                        } else {
+                            open_source(&dir, s, false)
+                        }
+                    })
                     .collect::<Result<Vec<_>>>()?;
                 (runs, m.active, false)
             }
@@ -616,7 +951,7 @@ impl Database {
                             not(feature = "experimental-wal-delta")
                         ))]
                         {
-                            let size = serde_json::to_vec(&stored)?.len();
+                            let size = crate::payload::encoded_len(&stored.document)?;
                             let (_, row) = doc_cache.store(stored, size)?;
                             docs.insert(shared_key, row);
                         }
@@ -700,7 +1035,7 @@ impl Database {
         )))]
         for stored in docs.values() {
             index.change(stored, true)?;
-            delta_bytes += serde_json::to_vec(stored)?.len();
+            delta_bytes += crate::payload::encoded_len(&stored.document)?;
         }
         #[cfg(feature = "experimental-wal-delta")]
         for (key, row) in &docs {
@@ -749,6 +1084,95 @@ impl Database {
         }
         Ok(db)
     }
+    fn ensure_run(&self, run: &Run) -> Result<()> {
+        if let Some(state) = &run.deferred {
+            let mut checked = state
+                .lock()
+                .map_err(|_| Error::Corrupt("source verification mutex poisoned".into()))?;
+            if !*checked {
+                verify_deferred_source(&self.dir, &run.source)?;
+                *checked = true;
+            }
+        }
+        #[cfg(feature = "experimental-builder-budget")]
+        run.index.authorize_text_covering();
+        Ok(())
+    }
+    fn ensure_sources(&self) -> Result<()> {
+        for run in &self.runs {
+            self.ensure_run(run)?;
+        }
+        Ok(())
+    }
+    /// Explicitly prepare disposable VFY01 index block checks after full integrity verification.
+    /// No source/index payloads or publication markers are changed.
+    pub fn prepare_open_checks(&self) -> Result<()> {
+        self.check_integrity()?;
+        for run in &self.runs {
+            run.index
+                .prepare_open_checks(&run.source.path(&self.dir, "idx"))?;
+        }
+        Ok(())
+    }
+    /// Explicitly prepare REF01 address maps and VFY01 source block checks.
+    pub fn prepare_record_reads(&self) -> Result<()> {
+        self.check_integrity()?;
+        for run in &self.runs {
+            crate::source_records::Records::prepare(&self.dir, &run.source, &run.index)?;
+        }
+        Ok(())
+    }
+    /// Number of immutable sources still awaiting their first full verification.
+    /// Stats/count are provisional until these sources have been verified.
+    pub fn pending_source_checks(&self) -> Result<usize> {
+        self.healthy()?;
+        let mut count = 0;
+        for run in &self.runs {
+            if let Some(state) = &run.deferred {
+                count +=
+                    usize::from(!*state.lock().map_err(|_| {
+                        Error::Corrupt("source verification mutex poisoned".into())
+                    })?);
+            }
+        }
+        Ok(count)
+    }
+    /// Explicit full integrity pass, including sources verified earlier this session.
+    /// Corrupt/missing derived indexes may be rebuilt; source bytes are never repaired.
+    pub fn check_integrity(&self) -> Result<()> {
+        self.healthy()?;
+        for run in &self.runs {
+            let _verified = open_source(&self.dir, run.source.clone(), false)?;
+            if let Some(state) = &run.deferred {
+                *state
+                    .lock()
+                    .map_err(|_| Error::Corrupt("source verification mutex poisoned".into()))? =
+                    true;
+            }
+        }
+        let mut log = self.log.try_clone()?;
+        let sequence = format::check_log(&mut log, self.active.end, |seq, batch| {
+            for change in batch.changes {
+                match change {
+                    Change::Put { stored } => {
+                        validate_doc(&stored.document)
+                            .map_err(|e| Error::Corrupt(e.to_string()))?;
+                        if stored.version == 0 || stored.version > seq {
+                            return Err(Error::Corrupt("invalid WAL version".into()));
+                        }
+                    }
+                    Change::Delete { key } => {
+                        validate_key(&key).map_err(|e| Error::Corrupt(e.to_string()))?
+                    }
+                }
+            }
+            Ok(())
+        })?;
+        if sequence != self.sequence {
+            return Err(Error::Corrupt("WAL sequence mismatch".into()));
+        }
+        Ok(())
+    }
     fn healthy(&self) -> Result<()> {
         if self.poisoned {
             Err(Error::Poisoned)
@@ -788,6 +1212,7 @@ impl Database {
             return Ok(None);
         }
         for run in self.runs.iter().rev() {
+            self.ensure_run(run)?;
             if run.index.contains_key(key)? {
                 return run.index.version(key);
             }
@@ -815,6 +1240,15 @@ impl Database {
             return Ok(None);
         }
         for run in self.runs.iter().rev() {
+            if let Some(records) = &run.source_records
+                && let Some(slot) = run.index.find(key)?
+            {
+                let (_, _, version, deleted) = run.index.payload_binding(slot)?;
+                if !deleted {
+                    return records.read(slot, key, version).map(Some);
+                }
+            }
+            self.ensure_run(run)?;
             if run.index.contains_key(key)? {
                 return run.index.get(key);
             }
@@ -831,6 +1265,7 @@ impl Database {
         #[cfg(feature = "diagnostic-timing")]
         let validation = crate::timing::span("commit.validate_guard");
         self.healthy()?;
+        self.ensure_sources()?;
         if mutations.is_empty() || mutations.len() > 10_000 {
             return Err(Error::Invalid(
                 "batch must contain 1..10000 mutations".into(),
@@ -887,15 +1322,37 @@ impl Database {
         #[cfg(feature = "diagnostic-timing")]
         drop(validation);
         #[cfg(not(feature = "experimental-wal-delta"))]
-        let bytes = format::encode(seq, &batch)?;
+        let bytes = if self.needs_flush() {
+            // Validate the frame limit before maintenance, but do not keep a
+            // full new WAL frame alive while flushing the previous delta.
+            crate::binary_batch::encoded_len(&batch)?;
+            None
+        } else {
+            Some(format::encode(seq, &batch)?)
+        };
         #[cfg(feature = "experimental-wal-delta")]
-        let (bytes, mut locations) = format::encode_located(seq, &batch)?;
+        let encoded = if self.needs_flush() {
+            crate::binary_batch::encoded_len(&batch)?;
+            None
+        } else {
+            Some(format::encode_located(seq, &batch)?)
+        };
         #[cfg(feature = "diagnostic-timing")]
         let maintenance = crate::timing::span("commit.foreground_maintenance");
         self.poll_compaction()?;
         if self.needs_flush() {
             self.flush()?;
         }
+        #[cfg(not(feature = "experimental-wal-delta"))]
+        let bytes = match bytes {
+            Some(bytes) => bytes,
+            None => format::encode(seq, &batch)?,
+        };
+        #[cfg(feature = "experimental-wal-delta")]
+        let (bytes, mut locations) = match encoded {
+            Some(encoded) => encoded,
+            None => format::encode_located(seq, &batch)?,
+        };
         #[cfg(feature = "diagnostic-timing")]
         drop(maintenance);
         #[cfg(feature = "diagnostic-timing")]
@@ -915,7 +1372,7 @@ impl Database {
             ))]
             let row_size = {
                 let size = match change {
-                    Change::Put { stored } => serde_json::to_vec(stored)?.len(),
+                    Change::Put { stored } => crate::payload::encoded_len(&stored.document)?,
                     Change::Delete { .. } => 0,
                 };
                 row_sizes.push(size);
@@ -935,7 +1392,7 @@ impl Database {
                     feature = "experimental-shared-documents"
                 )))]
                 {
-                    delta_bytes -= serde_json::to_vec(old)?.len();
+                    delta_bytes -= crate::payload::encoded_len(&old.document)?;
                 }
                 #[cfg(all(
                     feature = "experimental-shared-documents",
@@ -955,7 +1412,7 @@ impl Database {
                     feature = "experimental-shared-documents"
                 )))]
                 {
-                    delta_bytes += serde_json::to_vec(stored)?.len();
+                    delta_bytes += crate::payload::encoded_len(&stored.document)?;
                 }
                 #[cfg(all(
                     feature = "experimental-shared-documents",
@@ -994,6 +1451,9 @@ impl Database {
             self.poisoned = true;
             return Err(e);
         }
+        // Durability has completed. The owned changes/locations remain; the
+        // encoded frame is no longer needed during delta indexing.
+        drop(bytes);
         #[cfg(feature = "diagnostic-timing")]
         let _apply = crate::timing::span("commit.apply_delta_index");
         #[cfg(feature = "experimental-wal-delta")]
@@ -1140,6 +1600,7 @@ impl Database {
         #[cfg(feature = "diagnostic-timing")]
         let candidates = crate::timing::span("search.filter_visibility_text");
         self.healthy()?;
+        self.ensure_sources()?;
         validate_key(&Key::new(
             &query.scope,
             query.collection.as_deref().unwrap_or("_"),
@@ -1364,6 +1825,7 @@ impl Database {
         #[cfg(feature = "diagnostic-timing")]
         let _flush = crate::timing::span("flush.total");
         self.healthy()?;
+        self.ensure_sources()?;
         self.poll_compaction()?;
         if self.shadow.is_empty() {
             return self.stats();
@@ -1377,7 +1839,23 @@ impl Database {
                 },
             })
         });
+        #[cfg(not(feature = "experimental-merge-postings"))]
         let run = write_run(&self.dir, id, self.sequence, changes)?;
+        #[cfg(feature = "experimental-merge-postings")]
+        let run = write_run_prepared(&self.dir, id, self.sequence, changes, |source| {
+            let records = self
+                .shadow
+                .iter()
+                .enumerate()
+                .map(|(slot, key)| {
+                    let id = u32::try_from(slot)
+                        .map_err(|_| Error::Invalid("delta checkpoint exceeds u32".into()))?;
+                    Ok((own_delta_key(key), id))
+                })
+                .collect::<Result<std::collections::BTreeMap<_, _>>>()?;
+            reused_builder(&self.dir, source)?.finish_delta(&self.index, &records)?;
+            Ok(())
+        })?;
         let id = self.allocate()?;
         let (log, active) = manifest::new_active(&self.dir, id, self.sequence)?;
         let mut runs = self.descriptors();
@@ -1440,6 +1918,7 @@ impl Database {
     }
     fn start_compaction_mode(&mut self, _automatic: bool) -> Result<bool> {
         self.healthy()?;
+        self.ensure_sources()?;
         if self.job.is_some() {
             return Ok(false);
         }
@@ -1479,6 +1958,8 @@ impl Database {
         let dir = self.dir.clone();
         let id = self.allocate()?;
         let handle = std::thread::spawn(move || {
+            #[cfg(feature = "diagnostic-timing")]
+            let _span = crate::timing::span("merge.worker");
             let sequence = inputs.last().unwrap().source.sequence;
             #[cfg(feature = "experimental-merge-postings")]
             let maps = {
@@ -1536,6 +2017,7 @@ impl Database {
                     let target = source.path(&dir, "idx");
                     let mut builder = Builder::new(&target, sequence, source.end, source.checksum)?;
                     let mut file = File::open(source.path(&dir, "fdb"))?;
+                    #[cfg(feature = "experimental-streaming-open")]
                     let found =
                         format::replay_prefix_changes(&mut file, source.end, |seq, change| {
                             if seq != sequence {
@@ -1548,6 +2030,19 @@ impl Database {
                             }
                             Ok(())
                         })?;
+                    #[cfg(not(feature = "experimental-streaming-open"))]
+                    let found = format::replay_prefix(&mut file, source.end, |seq, batch| {
+                        if seq != sequence || !batch.checkpoint {
+                            return Err(Error::Corrupt("reused source sequence/checkpoint".into()));
+                        }
+                        for change in batch.changes {
+                            match change {
+                                Change::Put { stored } => builder.add_reused(&stored)?,
+                                Change::Delete { key } => builder.add_delete(&key)?,
+                            }
+                        }
+                        Ok(())
+                    })?;
                     if found != sequence {
                         return Err(Error::Corrupt("reused source sequence".into()));
                     }
@@ -1603,6 +2098,7 @@ impl Database {
     }
     pub fn poll_compaction(&mut self) -> Result<bool> {
         self.healthy()?;
+        self.ensure_sources()?;
         if self.job.as_ref().is_some_and(|j| j.handle.is_finished()) {
             let job = self.job.take().unwrap();
             return self.install(job);

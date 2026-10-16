@@ -1,0 +1,16 @@
+{
+  "pairs": 4,
+  "balanced_first_position": true,
+  "processor_affinity_mask": 4,
+  "orders": [
+    "control/fdb",
+    "fdb/control",
+    "control/fdb",
+    "fdb/control"
+  ],
+  "cache": "warm OS cache, no eviction; untimed per-case warmup",
+  "instrumented": true,
+  "iterations_per_page_per_process": 30,
+  "input": "same existing first10000; no database reset or corpus generation",
+  "scope": "nested wall spans and exact work counts; not CPU attribution or normal-release performance gate"
+}

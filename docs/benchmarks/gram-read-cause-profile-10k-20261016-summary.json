@@ -1,0 +1,3380 @@
+{
+  "design": {
+    "pairs": 4,
+    "balanced_first_position": true,
+    "processor_affinity_mask": 4,
+    "orders": [
+      "control/fdb",
+      "fdb/control",
+      "control/fdb",
+      "fdb/control"
+    ],
+    "cache": "warm OS cache, no eviction; untimed per-case warmup",
+    "instrumented": true,
+    "iterations_per_page_per_process": 30,
+    "input": "same existing first10000; no database reset or corpus generation",
+    "scope": "nested wall spans and exact work counts; not CPU attribution or normal-release performance gate"
+  },
+  "queries": [
+    {
+      "text": "the",
+      "offset": 0,
+      "limit": 1,
+      "total": 10000,
+      "all_work_counts_identical": true,
+      "diagnostics": {
+        "control": {
+          "elapsed_ms": {
+            "median": 0.1135,
+            "p95": 0.2362,
+            "per_process_medians": [
+              0.088,
+              0.0927,
+              0.17295,
+              0.1135
+            ]
+          },
+          "thread_cycles": {
+            "median": 434109.0,
+            "p95": 901975,
+            "per_process_medians": [
+              336439.0,
+              355214.5,
+              654292.5,
+              434109.0
+            ]
+          }
+        },
+        "fdb": {
+          "elapsed_ms": {
+            "median": 0.10070000000000001,
+            "p95": 0.18939999999999999,
+            "per_process_medians": [
+              0.09340000000000001,
+              0.10949999999999999,
+              0.09075,
+              0.11135
+            ]
+          },
+          "thread_cycles": {
+            "median": 382903.5,
+            "p95": 689188,
+            "per_process_medians": [
+              357300.5,
+              419885.5,
+              347439.0,
+              425954.0
+            ]
+          }
+        },
+        "elapsed_ms_median_change_percent": -11.277533039647569,
+        "elapsed_ms_paired_median_change_percent": [
+          6.136363636363651,
+          18.1229773462783,
+          -47.52818733738074,
+          -1.8942731277532987
+        ],
+        "thread_cycles_median_change_percent": -11.795539829858404,
+        "thread_cycles_paired_median_change_percent": [
+          6.200678280460936,
+          18.206182461583076,
+          -46.89852015726911,
+          -1.8785604537109313
+        ]
+      },
+      "stages": {
+        "disk.read_at": {
+          "control": {
+            "call_values": [
+              6
+            ],
+            "median_ms": 0.02515,
+            "samples": 120
+          },
+          "fdb": {
+            "call_values": [
+              6
+            ],
+            "median_ms": 0.02255,
+            "samples": 120
+          },
+          "all_call_counts_identical": true
+        },
+        "payload.decode_crc_identity": {
+          "control": {
+            "call_values": [
+              1
+            ],
+            "median_ms": 0.011300000000000001,
+            "samples": 120
+          },
+          "fdb": {
+            "call_values": [
+              1
+            ],
+            "median_ms": 0.00995,
+            "samples": 120
+          },
+          "all_call_counts_identical": true
+        },
+        "query.accepted_ids": {
+          "control": {
+            "call_values": [
+              5
+            ],
+            "median_ms": 0.0,
+            "samples": 120
+          },
+          "fdb": {
+            "call_values": [
+              5
+            ],
+            "median_ms": 0.0,
+            "samples": 120
+          },
+          "all_call_counts_identical": true
+        },
+        "query.covered_candidates": {
+          "control": {
+            "call_values": [
+              5
+            ],
+            "median_ms": 0.0,
+            "samples": 120
+          },
+          "fdb": {
+            "call_values": [
+              5
+            ],
+            "median_ms": 0.0,
+            "samples": 120
+          },
+          "all_call_counts_identical": true
+        },
+        "query.covering_guard": {
+          "control": {
+            "call_values": [
+              5
+            ],
+            "median_ms": 0.03615,
+            "samples": 120
+          },
+          "fdb": {
+            "call_values": [
+              5
+            ],
+            "median_ms": 0.03405,
+            "samples": 120
+          },
+          "all_call_counts_identical": true
+        },
+        "query.covering_index_metadata": {
+          "control": {
+            "call_values": [
+              5
+            ],
+            "median_ms": 0.03475,
+            "samples": 120
+          },
+          "fdb": {
+            "call_values": [
+              5
+            ],
+            "median_ms": 0.03285,
+            "samples": 120
+          },
+          "all_call_counts_identical": true
+        },
+        "query.payload_candidates": {
+          "control": {
+            "call_values": [
+              0
+            ],
+            "median_ms": 0.0,
+            "samples": 120
+          },
+          "fdb": {
+            "call_values": [
+              0
+            ],
+            "median_ms": 0.0,
+            "samples": 120
+          },
+          "all_call_counts_identical": true
+        },
+        "query.payload_read_bytes": {
+          "control": {
+            "call_values": [
+              0
+            ],
+            "median_ms": 0.0,
+            "samples": 120
+          },
+          "fdb": {
+            "call_values": [
+              0
+            ],
+            "median_ms": 0.0,
+            "samples": 120
+          },
+          "all_call_counts_identical": true
+        },
+        "query.payload_read_requests": {
+          "control": {
+            "call_values": [
+              0
+            ],
+            "median_ms": 0.0,
+            "samples": 120
+          },
+          "fdb": {
+            "call_values": [
+              0
+            ],
+            "median_ms": 0.0,
+            "samples": 120
+          },
+          "all_call_counts_identical": true
+        },
+        "query.payload_requested_bytes": {
+          "control": {
+            "call_values": [
+              0
+            ],
+            "median_ms": 0.0,
+            "samples": 120
+          },
+          "fdb": {
+            "call_values": [
+              0
+            ],
+            "median_ms": 0.0,
+            "samples": 120
+          },
+          "all_call_counts_identical": true
+        },
+        "query.payload_window_hits": {
+          "control": {
+            "call_values": [
+              0
+            ],
+            "median_ms": 0.0,
+            "samples": 120
+          },
+          "fdb": {
+            "call_values": [
+              0
+            ],
+            "median_ms": 0.0,
+            "samples": 120
+          },
+          "all_call_counts_identical": true
+        },
+        "query.posting_intersection": {
+          "control": {
+            "call_values": [
+              5
+            ],
+            "median_ms": 0.0003,
+            "samples": 120
+          },
+          "fdb": {
+            "call_values": [
+              5
+            ],
+            "median_ms": 0.0003,
+            "samples": 120
+          },
+          "all_call_counts_identical": true
+        },
+        "query.record_metadata": {
+          "control": {
+            "call_values": [
+              3
+            ],
+            "median_ms": 0.0001,
+            "samples": 120
+          },
+          "fdb": {
+            "call_values": [
+              3
+            ],
+            "median_ms": 0.0001,
+            "samples": 120
+          },
+          "all_call_counts_identical": true
+        },
+        "query.visible_seed_ids": {
+          "control": {
+            "call_values": [
+              5
+            ],
+            "median_ms": 0.0,
+            "samples": 120
+          },
+          "fdb": {
+            "call_values": [
+              5
+            ],
+            "median_ms": 0.0,
+            "samples": 120
+          },
+          "all_call_counts_identical": true
+        },
+        "search.filter_visibility_text": {
+          "control": {
+            "call_values": [
+              1
+            ],
+            "median_ms": 0.08865,
+            "samples": 120
+          },
+          "fdb": {
+            "call_values": [
+              1
+            ],
+            "median_ms": 0.079,
+            "samples": 120
+          },
+          "all_call_counts_identical": true
+        },
+        "search.merge_page_hydration": {
+          "control": {
+            "call_values": [
+              1
+            ],
+            "median_ms": 0.023350000000000003,
+            "samples": 120
+          },
+          "fdb": {
+            "call_values": [
+              1
+            ],
+            "median_ms": 0.0209,
+            "samples": 120
+          },
+          "all_call_counts_identical": true
+        },
+        "search.total": {
+          "control": {
+            "call_values": [
+              1
+            ],
+            "median_ms": 0.1133,
+            "samples": 120
+          },
+          "fdb": {
+            "call_values": [
+              1
+            ],
+            "median_ms": 0.10045,
+            "samples": 120
+          },
+          "all_call_counts_identical": true
+        }
+      }
+    },
+    {
+      "text": "the",
+      "offset": 0,
+      "limit": 200,
+      "total": 10000,
+      "all_work_counts_identical": true,
+      "diagnostics": {
+        "control": {
+          "elapsed_ms": {
+            "median": 6.5786,
+            "p95": 9.347,
+            "per_process_medians": [
+              6.56605,
+              6.9389,
+              6.9091000000000005,
+              6.30065
+            ]
+          },
+          "thread_cycles": {
+            "median": 24368128.5,
+            "p95": 29588813,
+            "per_process_medians": [
+              24479832.5,
+              25442876.0,
+              24786876.0,
+              23678371.5
+            ]
+          }
+        },
+        "fdb": {
+          "elapsed_ms": {
+            "median": 7.0304,
+            "p95": 8.9505,
+            "per_process_medians": [
+              7.8878,
+              5.9308,
+              7.0482,
+              7.127649999999999
+            ]
+          },
+          "thread_cycles": {
+            "median": 26080287.5,
+            "p95": 32048195,
+            "per_process_medians": [
+              29672069.5,
+              22411699.0,
+              26049754.5,
+              25966878.0
+            ]
+          }
+        },
+        "elapsed_ms_median_change_percent": 6.867722615754124,
+        "elapsed_ms_paired_median_change_percent": [
+          20.130062975457097,
+          -14.528239346294091,
+          2.0132868246225843,
+          13.125629895328238
+        ],
+        "thread_cycles_median_change_percent": 7.026222797536552,
+        "thread_cycles_paired_median_change_percent": [
+          21.210263591468603,
+          -11.913657088137363,
+          5.094948229861651,
+          9.664965768444
+        ]
+      },
+      "stages": {
+        "disk.read_at": {
+          "control": {
+            "call_values": [
+              120
+            ],
+            "median_ms": 1.7610999999999999,
+            "samples": 120
+          },
+          "fdb": {
+            "call_values": [
+              120
+            ],
+            "median_ms": 1.94235,
+            "samples": 120
+          },
+          "all_call_counts_identical": true
+        },
+        "payload.decode_crc_identity": {
+          "control": {
+            "call_values": [
+              200
+            ],
+            "median_ms": 4.276249999999999,
+            "samples": 120
+          },
+          "fdb": {
+            "call_values": [
+              200
+            ],
+            "median_ms": 4.4422,
+            "samples": 120
+          },
+          "all_call_counts_identical": true
+        },
+        "query.accepted_ids": {
+          "control": {
+            "call_values": [
+              1000
+            ],
+            "median_ms": 0.0,
+            "samples": 120
+          },
+          "fdb": {
+            "call_values": [
+              1000
+            ],
+            "median_ms": 0.0,
+            "samples": 120
+          },
+          "all_call_counts_identical": true
+        },
+        "query.covered_candidates": {
+          "control": {
+            "call_values": [
+              1000
+            ],
+            "median_ms": 0.0,
+            "samples": 120
+          },
+          "fdb": {
+            "call_values": [
+              1000
+            ],
+            "median_ms": 0.0,
+            "samples": 120
+          },
+          "all_call_counts_identical": true
+        },
+        "query.covering_guard": {
+          "control": {
+            "call_values": [
+              5
+            ],
+            "median_ms": 0.06935,
+            "samples": 120
+          },
+          "fdb": {
+            "call_values": [
+              5
+            ],
+            "median_ms": 0.0758,
+            "samples": 120
+          },
+          "all_call_counts_identical": true
+        },
+        "query.covering_index_metadata": {
+          "control": {
+            "call_values": [
+              5
+            ],
+            "median_ms": 0.06720000000000001,
+            "samples": 120
+          },
+          "fdb": {
+            "call_values": [
+              5
+            ],
+            "median_ms": 0.07335,
+            "samples": 120
+          },
+          "all_call_counts_identical": true
+        },
+        "query.payload_candidates": {
+          "control": {
+            "call_values": [
+              0
+            ],
+            "median_ms": 0.0,
+            "samples": 120
+          },
+          "fdb": {
+            "call_values": [
+              0
+            ],
+            "median_ms": 0.0,
+            "samples": 120
+          },
+          "all_call_counts_identical": true
+        },
+        "query.payload_read_bytes": {
+          "control": {
+            "call_values": [
+              0
+            ],
+            "median_ms": 0.0,
+            "samples": 120
+          },
+          "fdb": {
+            "call_values": [
+              0
+            ],
+            "median_ms": 0.0,
+            "samples": 120
+          },
+          "all_call_counts_identical": true
+        },
+        "query.payload_read_requests": {
+          "control": {
+            "call_values": [
+              0
+            ],
+            "median_ms": 0.0,
+            "samples": 120
+          },
+          "fdb": {
+            "call_values": [
+              0
+            ],
+            "median_ms": 0.0,
+            "samples": 120
+          },
+          "all_call_counts_identical": true
+        },
+        "query.payload_requested_bytes": {
+          "control": {
+            "call_values": [
+              0
+            ],
+            "median_ms": 0.0,
+            "samples": 120
+          },
+          "fdb": {
+            "call_values": [
+              0
+            ],
+            "median_ms": 0.0,
+            "samples": 120
+          },
+          "all_call_counts_identical": true
+        },
+        "query.payload_window_hits": {
+          "control": {
+            "call_values": [
+              0
+            ],
+            "median_ms": 0.0,
+            "samples": 120
+          },
+          "fdb": {
+            "call_values": [
+              0
+            ],
+            "median_ms": 0.0,
+            "samples": 120
+          },
+          "all_call_counts_identical": true
+        },
+        "query.posting_intersection": {
+          "control": {
+            "call_values": [
+              1000
+            ],
+            "median_ms": 0.0406,
+            "samples": 120
+          },
+          "fdb": {
+            "call_values": [
+              1000
+            ],
+            "median_ms": 0.039,
+            "samples": 120
+          },
+          "all_call_counts_identical": true
+        },
+        "query.record_metadata": {
+          "control": {
+            "call_values": [
+              714
+            ],
+            "median_ms": 0.0367,
+            "samples": 120
+          },
+          "fdb": {
+            "call_values": [
+              714
+            ],
+            "median_ms": 0.038400000000000004,
+            "samples": 120
+          },
+          "all_call_counts_identical": true
+        },
+        "query.visible_seed_ids": {
+          "control": {
+            "call_values": [
+              1000
+            ],
+            "median_ms": 0.0,
+            "samples": 120
+          },
+          "fdb": {
+            "call_values": [
+              1000
+            ],
+            "median_ms": 0.0,
+            "samples": 120
+          },
+          "all_call_counts_identical": true
+        },
+        "search.filter_visibility_text": {
+          "control": {
+            "call_values": [
+              1
+            ],
+            "median_ms": 0.27215,
+            "samples": 120
+          },
+          "fdb": {
+            "call_values": [
+              1
+            ],
+            "median_ms": 0.28975,
+            "samples": 120
+          },
+          "all_call_counts_identical": true
+        },
+        "search.merge_page_hydration": {
+          "control": {
+            "call_values": [
+              1
+            ],
+            "median_ms": 6.3086,
+            "samples": 120
+          },
+          "fdb": {
+            "call_values": [
+              1
+            ],
+            "median_ms": 6.69525,
+            "samples": 120
+          },
+          "all_call_counts_identical": true
+        },
+        "search.total": {
+          "control": {
+            "call_values": [
+              1
+            ],
+            "median_ms": 6.5779,
+            "samples": 120
+          },
+          "fdb": {
+            "call_values": [
+              1
+            ],
+            "median_ms": 7.0296,
+            "samples": 120
+          },
+          "all_call_counts_identical": true
+        }
+      }
+    },
+    {
+      "text": "the",
+      "offset": 5000,
+      "limit": 50,
+      "total": 10000,
+      "all_work_counts_identical": true,
+      "diagnostics": {
+        "control": {
+          "elapsed_ms": {
+            "median": 2.2569,
+            "p95": 2.9117,
+            "per_process_medians": [
+              2.1012,
+              2.3122499999999997,
+              2.1529,
+              2.4679
+            ]
+          },
+          "thread_cycles": {
+            "median": 8260964.5,
+            "p95": 10507749,
+            "per_process_medians": [
+              7943870.0,
+              8716693.5,
+              8058797.0,
+              9021271.5
+            ]
+          }
+        },
+        "fdb": {
+          "elapsed_ms": {
+            "median": 2.44125,
+            "p95": 3.2289,
+            "per_process_medians": [
+              2.8718,
+              2.00425,
+              2.5532000000000004,
+              2.3556
+            ]
+          },
+          "thread_cycles": {
+            "median": 9064701.0,
+            "p95": 11817472,
+            "per_process_medians": [
+              10729259.5,
+              7597569.0,
+              9456517.0,
+              8723140.5
+            ]
+          }
+        },
+        "elapsed_ms_median_change_percent": 8.168283929283549,
+        "elapsed_ms_paired_median_change_percent": [
+          36.67428136303066,
+          -13.320358957725153,
+          18.593525012773494,
+          -4.550427488958231
+        ],
+        "thread_cycles_median_change_percent": 9.729330031620398,
+        "thread_cycles_paired_median_change_percent": [
+          35.06338220539862,
+          -12.83886487462247,
+          17.34402789895315,
+          -3.3047558761533757
+        ]
+      },
+      "stages": {
+        "disk.read_at": {
+          "control": {
+            "call_values": [
+              60
+            ],
+            "median_ms": 0.53125,
+            "samples": 120
+          },
+          "fdb": {
+            "call_values": [
+              60
+            ],
+            "median_ms": 0.6382,
+            "samples": 120
+          },
+          "all_call_counts_identical": true
+        },
+        "payload.decode_crc_identity": {
+          "control": {
+            "call_values": [
+              50
+            ],
+            "median_ms": 0.5158,
+            "samples": 120
+          },
+          "fdb": {
+            "call_values": [
+              50
+            ],
+            "median_ms": 0.6137999999999999,
+            "samples": 120
+          },
+          "all_call_counts_identical": true
+        },
+        "payload.read_document": {
+          "control": {
+            "call_values": [
+              50
+            ],
+            "median_ms": 1.09395,
+            "samples": 120
+          },
+          "fdb": {
+            "call_values": [
+              50
+            ],
+            "median_ms": 1.3379500000000002,
+            "samples": 120
+          },
+          "all_call_counts_identical": true
+        },
+        "query.accepted_ids": {
+          "control": {
+            "call_values": [
+              10000
+            ],
+            "median_ms": 0.0,
+            "samples": 120
+          },
+          "fdb": {
+            "call_values": [
+              10000
+            ],
+            "median_ms": 0.0,
+            "samples": 120
+          },
+          "all_call_counts_identical": true
+        },
+        "query.covered_candidates": {
+          "control": {
+            "call_values": [
+              10000
+            ],
+            "median_ms": 0.0,
+            "samples": 120
+          },
+          "fdb": {
+            "call_values": [
+              10000
+            ],
+            "median_ms": 0.0,
+            "samples": 120
+          },
+          "all_call_counts_identical": true
+        },
+        "query.covering_guard": {
+          "control": {
+            "call_values": [
+              5
+            ],
+            "median_ms": 0.07064999999999999,
+            "samples": 120
+          },
+          "fdb": {
+            "call_values": [
+              5
+            ],
+            "median_ms": 0.07595,
+            "samples": 120
+          },
+          "all_call_counts_identical": true
+        },
+        "query.covering_index_metadata": {
+          "control": {
+            "call_values": [
+              5
+            ],
+            "median_ms": 0.0686,
+            "samples": 120
+          },
+          "fdb": {
+            "call_values": [
+              5
+            ],
+            "median_ms": 0.07375000000000001,
+            "samples": 120
+          },
+          "all_call_counts_identical": true
+        },
+        "query.payload_candidates": {
+          "control": {
+            "call_values": [
+              0
+            ],
+            "median_ms": 0.0,
+            "samples": 120
+          },
+          "fdb": {
+            "call_values": [
+              0
+            ],
+            "median_ms": 0.0,
+            "samples": 120
+          },
+          "all_call_counts_identical": true
+        },
+        "query.payload_read_bytes": {
+          "control": {
+            "call_values": [
+              0
+            ],
+            "median_ms": 0.0,
+            "samples": 120
+          },
+          "fdb": {
+            "call_values": [
+              0
+            ],
+            "median_ms": 0.0,
+            "samples": 120
+          },
+          "all_call_counts_identical": true
+        },
+        "query.payload_read_requests": {
+          "control": {
+            "call_values": [
+              0
+            ],
+            "median_ms": 0.0,
+            "samples": 120
+          },
+          "fdb": {
+            "call_values": [
+              0
+            ],
+            "median_ms": 0.0,
+            "samples": 120
+          },
+          "all_call_counts_identical": true
+        },
+        "query.payload_requested_bytes": {
+          "control": {
+            "call_values": [
+              0
+            ],
+            "median_ms": 0.0,
+            "samples": 120
+          },
+          "fdb": {
+            "call_values": [
+              0
+            ],
+            "median_ms": 0.0,
+            "samples": 120
+          },
+          "all_call_counts_identical": true
+        },
+        "query.payload_window_hits": {
+          "control": {
+            "call_values": [
+              0
+            ],
+            "median_ms": 0.0,
+            "samples": 120
+          },
+          "fdb": {
+            "call_values": [
+              0
+            ],
+            "median_ms": 0.0,
+            "samples": 120
+          },
+          "all_call_counts_identical": true
+        },
+        "query.posting_intersection": {
+          "control": {
+            "call_values": [
+              10000
+            ],
+            "median_ms": 0.3954,
+            "samples": 120
+          },
+          "fdb": {
+            "call_values": [
+              10000
+            ],
+            "median_ms": 0.3697,
+            "samples": 120
+          },
+          "all_call_counts_identical": true
+        },
+        "query.record_metadata": {
+          "control": {
+            "call_values": [
+              100
+            ],
+            "median_ms": 0.0041,
+            "samples": 120
+          },
+          "fdb": {
+            "call_values": [
+              100
+            ],
+            "median_ms": 0.0043,
+            "samples": 120
+          },
+          "all_call_counts_identical": true
+        },
+        "query.visible_seed_ids": {
+          "control": {
+            "call_values": [
+              10000
+            ],
+            "median_ms": 0.0,
+            "samples": 120
+          },
+          "fdb": {
+            "call_values": [
+              10000
+            ],
+            "median_ms": 0.0,
+            "samples": 120
+          },
+          "all_call_counts_identical": true
+        },
+        "search.filter_visibility_text": {
+          "control": {
+            "call_values": [
+              1
+            ],
+            "median_ms": 1.06105,
+            "samples": 120
+          },
+          "fdb": {
+            "call_values": [
+              1
+            ],
+            "median_ms": 1.04275,
+            "samples": 120
+          },
+          "all_call_counts_identical": true
+        },
+        "search.merge_page_hydration": {
+          "control": {
+            "call_values": [
+              1
+            ],
+            "median_ms": 1.1398,
+            "samples": 120
+          },
+          "fdb": {
+            "call_values": [
+              1
+            ],
+            "median_ms": 1.39235,
+            "samples": 120
+          },
+          "all_call_counts_identical": true
+        },
+        "search.total": {
+          "control": {
+            "call_values": [
+              1
+            ],
+            "median_ms": 2.25625,
+            "samples": 120
+          },
+          "fdb": {
+            "call_values": [
+              1
+            ],
+            "median_ms": 2.4407,
+            "samples": 120
+          },
+          "all_call_counts_identical": true
+        }
+      }
+    },
+    {
+      "text": "the",
+      "offset": 9950,
+      "limit": 50,
+      "total": 10000,
+      "all_work_counts_identical": true,
+      "diagnostics": {
+        "control": {
+          "elapsed_ms": {
+            "median": 1.9510999999999998,
+            "p95": 2.5599,
+            "per_process_medians": [
+              2.0947500000000003,
+              2.07245,
+              1.81785,
+              1.68025
+            ]
+          },
+          "thread_cycles": {
+            "median": 7287871.5,
+            "p95": 9325471,
+            "per_process_medians": [
+              7824390.0,
+              7773185.0,
+              6796108.0,
+              6322931.5
+            ]
+          }
+        },
+        "fdb": {
+          "elapsed_ms": {
+            "median": 2.0161999999999995,
+            "p95": 2.6226000000000003,
+            "per_process_medians": [
+              2.362,
+              1.62805,
+              2.04645,
+              2.03235
+            ]
+          },
+          "thread_cycles": {
+            "median": 7390471.0,
+            "p95": 9739286,
+            "per_process_medians": [
+              8929861.0,
+              6130247.0,
+              7373970.5,
+              7604774.5
+            ]
+          }
+        },
+        "elapsed_ms_median_change_percent": 3.3365793654861253,
+        "elapsed_ms_paired_median_change_percent": [
+          12.758085690416499,
+          -21.443219378030832,
+          12.575294991335916,
+          20.955214997768202
+        ],
+        "thread_cycles_median_change_percent": 1.4078115949217818,
+        "thread_cycles_paired_median_change_percent": [
+          14.128526313233358,
+          -21.135969361336436,
+          8.50284456927406,
+          20.272922456933152
+        ]
+      },
+      "stages": {
+        "disk.read_at": {
+          "control": {
+            "call_values": [
+              60
+            ],
+            "median_ms": 0.3261,
+            "samples": 120
+          },
+          "fdb": {
+            "call_values": [
+              60
+            ],
+            "median_ms": 0.34714999999999996,
+            "samples": 120
+          },
+          "all_call_counts_identical": true
+        },
+        "payload.decode_crc_identity": {
+          "control": {
+            "call_values": [
+              50
+            ],
+            "median_ms": 0.47165,
+            "samples": 120
+          },
+          "fdb": {
+            "call_values": [
+              50
+            ],
+            "median_ms": 0.5011,
+            "samples": 120
+          },
+          "all_call_counts_identical": true
+        },
+        "payload.read_document": {
+          "control": {
+            "call_values": [
+              50
+            ],
+            "median_ms": 0.83675,
+            "samples": 120
+          },
+          "fdb": {
+            "call_values": [
+              50
+            ],
+            "median_ms": 0.9247000000000001,
+            "samples": 120
+          },
+          "all_call_counts_identical": true
+        },
+        "query.accepted_ids": {
+          "control": {
+            "call_values": [
+              10000
+            ],
+            "median_ms": 0.0,
+            "samples": 120
+          },
+          "fdb": {
+            "call_values": [
+              10000
+            ],
+            "median_ms": 0.0,
+            "samples": 120
+          },
+          "all_call_counts_identical": true
+        },
+        "query.covered_candidates": {
+          "control": {
+            "call_values": [
+              10000
+            ],
+            "median_ms": 0.0,
+            "samples": 120
+          },
+          "fdb": {
+            "call_values": [
+              10000
+            ],
+            "median_ms": 0.0,
+            "samples": 120
+          },
+          "all_call_counts_identical": true
+        },
+        "query.covering_guard": {
+          "control": {
+            "call_values": [
+              5
+            ],
+            "median_ms": 0.06715,
+            "samples": 120
+          },
+          "fdb": {
+            "call_values": [
+              5
+            ],
+            "median_ms": 0.07435,
+            "samples": 120
+          },
+          "all_call_counts_identical": true
+        },
+        "query.covering_index_metadata": {
+          "control": {
+            "call_values": [
+              5
+            ],
+            "median_ms": 0.06534999999999999,
+            "samples": 120
+          },
+          "fdb": {
+            "call_values": [
+              5
+            ],
+            "median_ms": 0.07275000000000001,
+            "samples": 120
+          },
+          "all_call_counts_identical": true
+        },
+        "query.payload_candidates": {
+          "control": {
+            "call_values": [
+              0
+            ],
+            "median_ms": 0.0,
+            "samples": 120
+          },
+          "fdb": {
+            "call_values": [
+              0
+            ],
+            "median_ms": 0.0,
+            "samples": 120
+          },
+          "all_call_counts_identical": true
+        },
+        "query.payload_read_bytes": {
+          "control": {
+            "call_values": [
+              0
+            ],
+            "median_ms": 0.0,
+            "samples": 120
+          },
+          "fdb": {
+            "call_values": [
+              0
+            ],
+            "median_ms": 0.0,
+            "samples": 120
+          },
+          "all_call_counts_identical": true
+        },
+        "query.payload_read_requests": {
+          "control": {
+            "call_values": [
+              0
+            ],
+            "median_ms": 0.0,
+            "samples": 120
+          },
+          "fdb": {
+            "call_values": [
+              0
+            ],
+            "median_ms": 0.0,
+            "samples": 120
+          },
+          "all_call_counts_identical": true
+        },
+        "query.payload_requested_bytes": {
+          "control": {
+            "call_values": [
+              0
+            ],
+            "median_ms": 0.0,
+            "samples": 120
+          },
+          "fdb": {
+            "call_values": [
+              0
+            ],
+            "median_ms": 0.0,
+            "samples": 120
+          },
+          "all_call_counts_identical": true
+        },
+        "query.payload_window_hits": {
+          "control": {
+            "call_values": [
+              0
+            ],
+            "median_ms": 0.0,
+            "samples": 120
+          },
+          "fdb": {
+            "call_values": [
+              0
+            ],
+            "median_ms": 0.0,
+            "samples": 120
+          },
+          "all_call_counts_identical": true
+        },
+        "query.posting_intersection": {
+          "control": {
+            "call_values": [
+              10000
+            ],
+            "median_ms": 0.3936,
+            "samples": 120
+          },
+          "fdb": {
+            "call_values": [
+              10000
+            ],
+            "median_ms": 0.36350000000000005,
+            "samples": 120
+          },
+          "all_call_counts_identical": true
+        },
+        "query.record_metadata": {
+          "control": {
+            "call_values": [
+              100
+            ],
+            "median_ms": 0.0041,
+            "samples": 120
+          },
+          "fdb": {
+            "call_values": [
+              100
+            ],
+            "median_ms": 0.0039,
+            "samples": 120
+          },
+          "all_call_counts_identical": true
+        },
+        "query.visible_seed_ids": {
+          "control": {
+            "call_values": [
+              10000
+            ],
+            "median_ms": 0.0,
+            "samples": 120
+          },
+          "fdb": {
+            "call_values": [
+              10000
+            ],
+            "median_ms": 0.0,
+            "samples": 120
+          },
+          "all_call_counts_identical": true
+        },
+        "search.filter_visibility_text": {
+          "control": {
+            "call_values": [
+              1
+            ],
+            "median_ms": 1.04965,
+            "samples": 120
+          },
+          "fdb": {
+            "call_values": [
+              1
+            ],
+            "median_ms": 1.01145,
+            "samples": 120
+          },
+          "all_call_counts_identical": true
+        },
+        "search.merge_page_hydration": {
+          "control": {
+            "call_values": [
+              1
+            ],
+            "median_ms": 0.8852,
+            "samples": 120
+          },
+          "fdb": {
+            "call_values": [
+              1
+            ],
+            "median_ms": 0.9748,
+            "samples": 120
+          },
+          "all_call_counts_identical": true
+        },
+        "search.total": {
+          "control": {
+            "call_values": [
+              1
+            ],
+            "median_ms": 1.95055,
+            "samples": 120
+          },
+          "fdb": {
+            "call_values": [
+              1
+            ],
+            "median_ms": 2.0156,
+            "samples": 120
+          },
+          "all_call_counts_identical": true
+        }
+      }
+    },
+    {
+      "text": "ishmael",
+      "offset": 130,
+      "limit": 1,
+      "total": 260,
+      "all_work_counts_identical": true,
+      "diagnostics": {
+        "control": {
+          "elapsed_ms": {
+            "median": 7.39995,
+            "p95": 9.85,
+            "per_process_medians": [
+              7.6027499999999995,
+              7.39995,
+              7.15895,
+              6.5808
+            ]
+          },
+          "thread_cycles": {
+            "median": 27181586.5,
+            "p95": 31088945,
+            "per_process_medians": [
+              28453568.5,
+              27420354.5,
+              26470967.5,
+              24295114.0
+            ]
+          }
+        },
+        "fdb": {
+          "elapsed_ms": {
+            "median": 6.623799999999999,
+            "p95": 8.9577,
+            "per_process_medians": [
+              7.7195,
+              5.0188500000000005,
+              8.064599999999999,
+              6.222199999999999
+            ]
+          },
+          "thread_cycles": {
+            "median": 24482298.0,
+            "p95": 32575423,
+            "per_process_medians": [
+              28478222.0,
+              18948121.0,
+              28867764.5,
+              23026353.5
+            ]
+          }
+        },
+        "elapsed_ms_median_change_percent": -10.488584382326916,
+        "elapsed_ms_paired_median_change_percent": [
+          1.535628555456925,
+          -32.1772444408408,
+          12.650598202250318,
+          -5.449185509360577
+        ],
+        "thread_cycles_median_change_percent": -9.930577451761325,
+        "thread_cycles_paired_median_change_percent": [
+          0.086644668137148,
+          -30.89760746893334,
+          9.054436714487291,
+          -5.222286670480325
+        ]
+      },
+      "stages": {
+        "disk.read_at": {
+          "control": {
+            "call_values": [
+              286
+            ],
+            "median_ms": 3.8504,
+            "samples": 120
+          },
+          "fdb": {
+            "call_values": [
+              286
+            ],
+            "median_ms": 3.39845,
+            "samples": 120
+          },
+          "all_call_counts_identical": true
+        },
+        "payload.decode_crc_identity": {
+          "control": {
+            "call_values": [
+              1
+            ],
+            "median_ms": 0.0197,
+            "samples": 120
+          },
+          "fdb": {
+            "call_values": [
+              1
+            ],
+            "median_ms": 0.0166,
+            "samples": 120
+          },
+          "all_call_counts_identical": true
+        },
+        "query.accepted_ids": {
+          "control": {
+            "call_values": [
+              260
+            ],
+            "median_ms": 0.0,
+            "samples": 120
+          },
+          "fdb": {
+            "call_values": [
+              260
+            ],
+            "median_ms": 0.0,
+            "samples": 120
+          },
+          "all_call_counts_identical": true
+        },
+        "query.covered_candidates": {
+          "control": {
+            "call_values": [
+              0
+            ],
+            "median_ms": 0.0,
+            "samples": 120
+          },
+          "fdb": {
+            "call_values": [
+              0
+            ],
+            "median_ms": 0.0,
+            "samples": 120
+          },
+          "all_call_counts_identical": true
+        },
+        "query.fold.title": {
+          "control": {
+            "call_values": [
+              260
+            ],
+            "median_ms": 0.0208,
+            "samples": 120
+          },
+          "fdb": {
+            "call_values": [
+              260
+            ],
+            "median_ms": 0.0188,
+            "samples": 120
+          },
+          "all_call_counts_identical": true
+        },
+        "query.payload_candidates": {
+          "control": {
+            "call_values": [
+              260
+            ],
+            "median_ms": 0.0,
+            "samples": 120
+          },
+          "fdb": {
+            "call_values": [
+              260
+            ],
+            "median_ms": 0.0,
+            "samples": 120
+          },
+          "all_call_counts_identical": true
+        },
+        "query.payload_crc": {
+          "control": {
+            "call_values": [
+              260
+            ],
+            "median_ms": 0.882,
+            "samples": 120
+          },
+          "fdb": {
+            "call_values": [
+              260
+            ],
+            "median_ms": 0.8409,
+            "samples": 120
+          },
+          "all_call_counts_identical": true
+        },
+        "query.payload_read": {
+          "control": {
+            "call_values": [
+              260
+            ],
+            "median_ms": 3.6277,
+            "samples": 120
+          },
+          "fdb": {
+            "call_values": [
+              260
+            ],
+            "median_ms": 3.22715,
+            "samples": 120
+          },
+          "all_call_counts_identical": true
+        },
+        "query.payload_read_bytes": {
+          "control": {
+            "call_values": [
+              8285621
+            ],
+            "median_ms": 0.0,
+            "samples": 120
+          },
+          "fdb": {
+            "call_values": [
+              8285621
+            ],
+            "median_ms": 0.0,
+            "samples": 120
+          },
+          "all_call_counts_identical": true
+        },
+        "query.payload_read_requests": {
+          "control": {
+            "call_values": [
+              260
+            ],
+            "median_ms": 0.0,
+            "samples": 120
+          },
+          "fdb": {
+            "call_values": [
+              260
+            ],
+            "median_ms": 0.0,
+            "samples": 120
+          },
+          "all_call_counts_identical": true
+        },
+        "query.payload_requested_bytes": {
+          "control": {
+            "call_values": [
+              8285621
+            ],
+            "median_ms": 0.0,
+            "samples": 120
+          },
+          "fdb": {
+            "call_values": [
+              8285621
+            ],
+            "median_ms": 0.0,
+            "samples": 120
+          },
+          "all_call_counts_identical": true
+        },
+        "query.payload_validation": {
+          "control": {
+            "call_values": [
+              260
+            ],
+            "median_ms": 0.7643,
+            "samples": 120
+          },
+          "fdb": {
+            "call_values": [
+              260
+            ],
+            "median_ms": 0.7294,
+            "samples": 120
+          },
+          "all_call_counts_identical": true
+        },
+        "query.payload_window_hits": {
+          "control": {
+            "call_values": [
+              0
+            ],
+            "median_ms": 0.0,
+            "samples": 120
+          },
+          "fdb": {
+            "call_values": [
+              0
+            ],
+            "median_ms": 0.0,
+            "samples": 120
+          },
+          "all_call_counts_identical": true
+        },
+        "query.posting_cache_read": {
+          "control": {
+            "call_values": [
+              20
+            ],
+            "median_ms": 0.32989999999999997,
+            "samples": 120
+          },
+          "fdb": {
+            "call_values": [
+              20
+            ],
+            "median_ms": 0.2945,
+            "samples": 120
+          },
+          "all_call_counts_identical": true
+        },
+        "query.posting_intersection": {
+          "control": {
+            "call_values": [
+              361
+            ],
+            "median_ms": 0.06505,
+            "samples": 120
+          },
+          "fdb": {
+            "call_values": [
+              361
+            ],
+            "median_ms": 0.059399999999999994,
+            "samples": 120
+          },
+          "all_call_counts_identical": true
+        },
+        "query.raw_ascii_probe": {
+          "control": {
+            "call_values": [
+              260
+            ],
+            "median_ms": 0.7919499999999999,
+            "samples": 120
+          },
+          "fdb": {
+            "call_values": [
+              260
+            ],
+            "median_ms": 0.727,
+            "samples": 120
+          },
+          "all_call_counts_identical": true
+        },
+        "query.raw_ascii_proven": {
+          "control": {
+            "call_values": [
+              260
+            ],
+            "median_ms": 0.0105,
+            "samples": 120
+          },
+          "fdb": {
+            "call_values": [
+              260
+            ],
+            "median_ms": 0.01025,
+            "samples": 120
+          },
+          "all_call_counts_identical": true
+        },
+        "query.record_identity": {
+          "control": {
+            "call_values": [
+              260
+            ],
+            "median_ms": 0.04,
+            "samples": 120
+          },
+          "fdb": {
+            "call_values": [
+              260
+            ],
+            "median_ms": 0.0406,
+            "samples": 120
+          },
+          "all_call_counts_identical": true
+        },
+        "query.record_metadata": {
+          "control": {
+            "call_values": [
+              263
+            ],
+            "median_ms": 0.0222,
+            "samples": 120
+          },
+          "fdb": {
+            "call_values": [
+              263
+            ],
+            "median_ms": 0.0173,
+            "samples": 120
+          },
+          "all_call_counts_identical": true
+        },
+        "query.verify_text": {
+          "control": {
+            "call_values": [
+              260
+            ],
+            "median_ms": 0.9359,
+            "samples": 120
+          },
+          "fdb": {
+            "call_values": [
+              260
+            ],
+            "median_ms": 0.8632,
+            "samples": 120
+          },
+          "all_call_counts_identical": true
+        },
+        "query.visible_seed_ids": {
+          "control": {
+            "call_values": [
+              361
+            ],
+            "median_ms": 0.0,
+            "samples": 120
+          },
+          "fdb": {
+            "call_values": [
+              361
+            ],
+            "median_ms": 0.0,
+            "samples": 120
+          },
+          "all_call_counts_identical": true
+        },
+        "search.filter_visibility_text": {
+          "control": {
+            "call_values": [
+              1
+            ],
+            "median_ms": 7.32735,
+            "samples": 120
+          },
+          "fdb": {
+            "call_values": [
+              1
+            ],
+            "median_ms": 6.5547,
+            "samples": 120
+          },
+          "all_call_counts_identical": true
+        },
+        "search.merge_page_hydration": {
+          "control": {
+            "call_values": [
+              1
+            ],
+            "median_ms": 0.06455,
+            "samples": 120
+          },
+          "fdb": {
+            "call_values": [
+              1
+            ],
+            "median_ms": 0.0547,
+            "samples": 120
+          },
+          "all_call_counts_identical": true
+        },
+        "search.total": {
+          "control": {
+            "call_values": [
+              1
+            ],
+            "median_ms": 7.3988,
+            "samples": 120
+          },
+          "fdb": {
+            "call_values": [
+              1
+            ],
+            "median_ms": 6.62275,
+            "samples": 120
+          },
+          "all_call_counts_identical": true
+        }
+      }
+    },
+    {
+      "text": "ishmael",
+      "offset": 60,
+      "limit": 200,
+      "total": 260,
+      "all_work_counts_identical": true,
+      "diagnostics": {
+        "control": {
+          "elapsed_ms": {
+            "median": 15.4159,
+            "p95": 19.5237,
+            "per_process_medians": [
+              15.757,
+              14.252749999999999,
+              17.242400000000004,
+              14.03245
+            ]
+          },
+          "thread_cycles": {
+            "median": 56910933.0,
+            "p95": 66655526,
+            "per_process_medians": [
+              59242488.0,
+              52954260.5,
+              61124761.5,
+              52919177.5
+            ]
+          }
+        },
+        "fdb": {
+          "elapsed_ms": {
+            "median": 14.210249999999998,
+            "p95": 28.038899999999998,
+            "per_process_medians": [
+              17.7458,
+              11.88475,
+              15.711500000000001,
+              13.41835
+            ]
+          },
+          "thread_cycles": {
+            "median": 52822456.5,
+            "p95": 66669937,
+            "per_process_medians": [
+              61169901.0,
+              44778640.5,
+              57523502.0,
+              50230699.5
+            ]
+          }
+        },
+        "elapsed_ms_median_change_percent": -7.820821359764929,
+        "elapsed_ms_paired_median_change_percent": [
+          12.621691946436497,
+          -16.614337583975015,
+          -8.87869438129264,
+          -4.376284968056188
+        ],
+        "thread_cycles_median_change_percent": -7.183991343104501,
+        "thread_cycles_paired_median_change_percent": [
+          3.2534302070500454,
+          -15.439022134961167,
+          -5.891654072138996,
+          -5.080347289978193
+        ]
+      },
+      "stages": {
+        "disk.read_at": {
+          "control": {
+            "call_values": [
+              482
+            ],
+            "median_ms": 6.5106,
+            "samples": 120
+          },
+          "fdb": {
+            "call_values": [
+              482
+            ],
+            "median_ms": 6.19675,
+            "samples": 120
+          },
+          "all_call_counts_identical": true
+        },
+        "payload.decode_crc_identity": {
+          "control": {
+            "call_values": [
+              200
+            ],
+            "median_ms": 4.86965,
+            "samples": 120
+          },
+          "fdb": {
+            "call_values": [
+              200
+            ],
+            "median_ms": 4.4402,
+            "samples": 120
+          },
+          "all_call_counts_identical": true
+        },
+        "query.accepted_ids": {
+          "control": {
+            "call_values": [
+              260
+            ],
+            "median_ms": 0.0,
+            "samples": 120
+          },
+          "fdb": {
+            "call_values": [
+              260
+            ],
+            "median_ms": 0.0,
+            "samples": 120
+          },
+          "all_call_counts_identical": true
+        },
+        "query.covered_candidates": {
+          "control": {
+            "call_values": [
+              0
+            ],
+            "median_ms": 0.0,
+            "samples": 120
+          },
+          "fdb": {
+            "call_values": [
+              0
+            ],
+            "median_ms": 0.0,
+            "samples": 120
+          },
+          "all_call_counts_identical": true
+        },
+        "query.fold.title": {
+          "control": {
+            "call_values": [
+              260
+            ],
+            "median_ms": 0.0199,
+            "samples": 120
+          },
+          "fdb": {
+            "call_values": [
+              260
+            ],
+            "median_ms": 0.0191,
+            "samples": 120
+          },
+          "all_call_counts_identical": true
+        },
+        "query.payload_candidates": {
+          "control": {
+            "call_values": [
+              260
+            ],
+            "median_ms": 0.0,
+            "samples": 120
+          },
+          "fdb": {
+            "call_values": [
+              260
+            ],
+            "median_ms": 0.0,
+            "samples": 120
+          },
+          "all_call_counts_identical": true
+        },
+        "query.payload_crc": {
+          "control": {
+            "call_values": [
+              260
+            ],
+            "median_ms": 0.8785000000000001,
+            "samples": 120
+          },
+          "fdb": {
+            "call_values": [
+              260
+            ],
+            "median_ms": 0.81955,
+            "samples": 120
+          },
+          "all_call_counts_identical": true
+        },
+        "query.payload_read": {
+          "control": {
+            "call_values": [
+              260
+            ],
+            "median_ms": 3.50755,
+            "samples": 120
+          },
+          "fdb": {
+            "call_values": [
+              260
+            ],
+            "median_ms": 3.2772,
+            "samples": 120
+          },
+          "all_call_counts_identical": true
+        },
+        "query.payload_read_bytes": {
+          "control": {
+            "call_values": [
+              8285621
+            ],
+            "median_ms": 0.0,
+            "samples": 120
+          },
+          "fdb": {
+            "call_values": [
+              8285621
+            ],
+            "median_ms": 0.0,
+            "samples": 120
+          },
+          "all_call_counts_identical": true
+        },
+        "query.payload_read_requests": {
+          "control": {
+            "call_values": [
+              260
+            ],
+            "median_ms": 0.0,
+            "samples": 120
+          },
+          "fdb": {
+            "call_values": [
+              260
+            ],
+            "median_ms": 0.0,
+            "samples": 120
+          },
+          "all_call_counts_identical": true
+        },
+        "query.payload_requested_bytes": {
+          "control": {
+            "call_values": [
+              8285621
+            ],
+            "median_ms": 0.0,
+            "samples": 120
+          },
+          "fdb": {
+            "call_values": [
+              8285621
+            ],
+            "median_ms": 0.0,
+            "samples": 120
+          },
+          "all_call_counts_identical": true
+        },
+        "query.payload_validation": {
+          "control": {
+            "call_values": [
+              260
+            ],
+            "median_ms": 0.77845,
+            "samples": 120
+          },
+          "fdb": {
+            "call_values": [
+              260
+            ],
+            "median_ms": 0.7281,
+            "samples": 120
+          },
+          "all_call_counts_identical": true
+        },
+        "query.payload_window_hits": {
+          "control": {
+            "call_values": [
+              0
+            ],
+            "median_ms": 0.0,
+            "samples": 120
+          },
+          "fdb": {
+            "call_values": [
+              0
+            ],
+            "median_ms": 0.0,
+            "samples": 120
+          },
+          "all_call_counts_identical": true
+        },
+        "query.posting_cache_read": {
+          "control": {
+            "call_values": [
+              20
+            ],
+            "median_ms": 0.34609999999999996,
+            "samples": 120
+          },
+          "fdb": {
+            "call_values": [
+              20
+            ],
+            "median_ms": 0.32330000000000003,
+            "samples": 120
+          },
+          "all_call_counts_identical": true
+        },
+        "query.posting_intersection": {
+          "control": {
+            "call_values": [
+              361
+            ],
+            "median_ms": 0.0644,
+            "samples": 120
+          },
+          "fdb": {
+            "call_values": [
+              361
+            ],
+            "median_ms": 0.0596,
+            "samples": 120
+          },
+          "all_call_counts_identical": true
+        },
+        "query.raw_ascii_probe": {
+          "control": {
+            "call_values": [
+              260
+            ],
+            "median_ms": 0.79465,
+            "samples": 120
+          },
+          "fdb": {
+            "call_values": [
+              260
+            ],
+            "median_ms": 0.72885,
+            "samples": 120
+          },
+          "all_call_counts_identical": true
+        },
+        "query.raw_ascii_proven": {
+          "control": {
+            "call_values": [
+              260
+            ],
+            "median_ms": 0.0105,
+            "samples": 120
+          },
+          "fdb": {
+            "call_values": [
+              260
+            ],
+            "median_ms": 0.00975,
+            "samples": 120
+          },
+          "all_call_counts_identical": true
+        },
+        "query.record_identity": {
+          "control": {
+            "call_values": [
+              260
+            ],
+            "median_ms": 0.0402,
+            "samples": 120
+          },
+          "fdb": {
+            "call_values": [
+              260
+            ],
+            "median_ms": 0.04045,
+            "samples": 120
+          },
+          "all_call_counts_identical": true
+        },
+        "query.record_metadata": {
+          "control": {
+            "call_values": [
+              1052
+            ],
+            "median_ms": 0.07300000000000001,
+            "samples": 120
+          },
+          "fdb": {
+            "call_values": [
+              1052
+            ],
+            "median_ms": 0.0659,
+            "samples": 120
+          },
+          "all_call_counts_identical": true
+        },
+        "query.verify_text": {
+          "control": {
+            "call_values": [
+              260
+            ],
+            "median_ms": 0.94345,
+            "samples": 120
+          },
+          "fdb": {
+            "call_values": [
+              260
+            ],
+            "median_ms": 0.8613,
+            "samples": 120
+          },
+          "all_call_counts_identical": true
+        },
+        "query.visible_seed_ids": {
+          "control": {
+            "call_values": [
+              361
+            ],
+            "median_ms": 0.0,
+            "samples": 120
+          },
+          "fdb": {
+            "call_values": [
+              361
+            ],
+            "median_ms": 0.0,
+            "samples": 120
+          },
+          "all_call_counts_identical": true
+        },
+        "search.filter_visibility_text": {
+          "control": {
+            "call_values": [
+              1
+            ],
+            "median_ms": 7.25045,
+            "samples": 120
+          },
+          "fdb": {
+            "call_values": [
+              1
+            ],
+            "median_ms": 6.71945,
+            "samples": 120
+          },
+          "all_call_counts_identical": true
+        },
+        "search.merge_page_hydration": {
+          "control": {
+            "call_values": [
+              1
+            ],
+            "median_ms": 7.82605,
+            "samples": 120
+          },
+          "fdb": {
+            "call_values": [
+              1
+            ],
+            "median_ms": 7.44265,
+            "samples": 120
+          },
+          "all_call_counts_identical": true
+        },
+        "search.total": {
+          "control": {
+            "call_values": [
+              1
+            ],
+            "median_ms": 15.4143,
+            "samples": 120
+          },
+          "fdb": {
+            "call_values": [
+              1
+            ],
+            "median_ms": 14.2086,
+            "samples": 120
+          },
+          "all_call_counts_identical": true
+        }
+      }
+    },
+    {
+      "text": "quixote",
+      "offset": 28,
+      "limit": 10,
+      "total": 56,
+      "all_work_counts_identical": true,
+      "diagnostics": {
+        "control": {
+          "elapsed_ms": {
+            "median": 1.6365500000000002,
+            "p95": 2.1863,
+            "per_process_medians": [
+              1.47775,
+              1.8537,
+              1.77855,
+              1.4889000000000001
+            ]
+          },
+          "thread_cycles": {
+            "median": 6118298.0,
+            "p95": 8062780,
+            "per_process_medians": [
+              5596950.5,
+              6914828.5,
+              6555252.0,
+              5647018.5
+            ]
+          }
+        },
+        "fdb": {
+          "elapsed_ms": {
+            "median": 1.54195,
+            "p95": 2.4787,
+            "per_process_medians": [
+              2.2735,
+              1.18785,
+              1.50015,
+              1.54195
+            ]
+          },
+          "thread_cycles": {
+            "median": 5666363.5,
+            "p95": 9301954,
+            "per_process_medians": [
+              8285998.5,
+              4492809.0,
+              5564901.0,
+              5510659.5
+            ]
+          }
+        },
+        "elapsed_ms_median_change_percent": -5.780452781766532,
+        "elapsed_ms_paired_median_change_percent": [
+          53.848756555574354,
+          -35.920051788315256,
+          -15.653200640971576,
+          3.5630331116931924
+        ],
+        "thread_cycles_median_change_percent": -7.386604902213001,
+        "thread_cycles_paired_median_change_percent": [
+          48.04487729523426,
+          -35.02645799530675,
+          -15.107748718127079,
+          -2.414707867523369
+        ]
+      },
+      "stages": {
+        "disk.read_at": {
+          "control": {
+            "call_values": [
+              91
+            ],
+            "median_ms": 0.68135,
+            "samples": 120
+          },
+          "fdb": {
+            "call_values": [
+              91
+            ],
+            "median_ms": 0.6442000000000001,
+            "samples": 120
+          },
+          "all_call_counts_identical": true
+        },
+        "payload.decode_crc_identity": {
+          "control": {
+            "call_values": [
+              10
+            ],
+            "median_ms": 0.10919999999999999,
+            "samples": 120
+          },
+          "fdb": {
+            "call_values": [
+              10
+            ],
+            "median_ms": 0.106,
+            "samples": 120
+          },
+          "all_call_counts_identical": true
+        },
+        "query.accepted_ids": {
+          "control": {
+            "call_values": [
+              56
+            ],
+            "median_ms": 0.0,
+            "samples": 120
+          },
+          "fdb": {
+            "call_values": [
+              56
+            ],
+            "median_ms": 0.0,
+            "samples": 120
+          },
+          "all_call_counts_identical": true
+        },
+        "query.covered_candidates": {
+          "control": {
+            "call_values": [
+              0
+            ],
+            "median_ms": 0.0,
+            "samples": 120
+          },
+          "fdb": {
+            "call_values": [
+              0
+            ],
+            "median_ms": 0.0,
+            "samples": 120
+          },
+          "all_call_counts_identical": true
+        },
+        "query.fold.title": {
+          "control": {
+            "call_values": [
+              56
+            ],
+            "median_ms": 0.0045,
+            "samples": 120
+          },
+          "fdb": {
+            "call_values": [
+              56
+            ],
+            "median_ms": 0.0044,
+            "samples": 120
+          },
+          "all_call_counts_identical": true
+        },
+        "query.payload_candidates": {
+          "control": {
+            "call_values": [
+              56
+            ],
+            "median_ms": 0.0,
+            "samples": 120
+          },
+          "fdb": {
+            "call_values": [
+              56
+            ],
+            "median_ms": 0.0,
+            "samples": 120
+          },
+          "all_call_counts_identical": true
+        },
+        "query.payload_crc": {
+          "control": {
+            "call_values": [
+              56
+            ],
+            "median_ms": 0.1872,
+            "samples": 120
+          },
+          "fdb": {
+            "call_values": [
+              56
+            ],
+            "median_ms": 0.1795,
+            "samples": 120
+          },
+          "all_call_counts_identical": true
+        },
+        "query.payload_read": {
+          "control": {
+            "call_values": [
+              56
+            ],
+            "median_ms": 0.47204999999999997,
+            "samples": 120
+          },
+          "fdb": {
+            "call_values": [
+              56
+            ],
+            "median_ms": 0.46030000000000004,
+            "samples": 120
+          },
+          "all_call_counts_identical": true
+        },
+        "query.payload_read_bytes": {
+          "control": {
+            "call_values": [
+              1945325
+            ],
+            "median_ms": 0.0,
+            "samples": 120
+          },
+          "fdb": {
+            "call_values": [
+              1945325
+            ],
+            "median_ms": 0.0,
+            "samples": 120
+          },
+          "all_call_counts_identical": true
+        },
+        "query.payload_read_requests": {
+          "control": {
+            "call_values": [
+              56
+            ],
+            "median_ms": 0.0,
+            "samples": 120
+          },
+          "fdb": {
+            "call_values": [
+              56
+            ],
+            "median_ms": 0.0,
+            "samples": 120
+          },
+          "all_call_counts_identical": true
+        },
+        "query.payload_requested_bytes": {
+          "control": {
+            "call_values": [
+              1945325
+            ],
+            "median_ms": 0.0,
+            "samples": 120
+          },
+          "fdb": {
+            "call_values": [
+              1945325
+            ],
+            "median_ms": 0.0,
+            "samples": 120
+          },
+          "all_call_counts_identical": true
+        },
+        "query.payload_validation": {
+          "control": {
+            "call_values": [
+              56
+            ],
+            "median_ms": 0.14984999999999998,
+            "samples": 120
+          },
+          "fdb": {
+            "call_values": [
+              56
+            ],
+            "median_ms": 0.1391,
+            "samples": 120
+          },
+          "all_call_counts_identical": true
+        },
+        "query.payload_window_hits": {
+          "control": {
+            "call_values": [
+              0
+            ],
+            "median_ms": 0.0,
+            "samples": 120
+          },
+          "fdb": {
+            "call_values": [
+              0
+            ],
+            "median_ms": 0.0,
+            "samples": 120
+          },
+          "all_call_counts_identical": true
+        },
+        "query.posting_cache_read": {
+          "control": {
+            "call_values": [
+              20
+            ],
+            "median_ms": 0.20185,
+            "samples": 120
+          },
+          "fdb": {
+            "call_values": [
+              20
+            ],
+            "median_ms": 0.18575,
+            "samples": 120
+          },
+          "all_call_counts_identical": true
+        },
+        "query.posting_intersection": {
+          "control": {
+            "call_values": [
+              56
+            ],
+            "median_ms": 0.0082,
+            "samples": 120
+          },
+          "fdb": {
+            "call_values": [
+              56
+            ],
+            "median_ms": 0.0083,
+            "samples": 120
+          },
+          "all_call_counts_identical": true
+        },
+        "query.raw_ascii_probe": {
+          "control": {
+            "call_values": [
+              56
+            ],
+            "median_ms": 0.10719999999999999,
+            "samples": 120
+          },
+          "fdb": {
+            "call_values": [
+              56
+            ],
+            "median_ms": 0.10395,
+            "samples": 120
+          },
+          "all_call_counts_identical": true
+        },
+        "query.raw_ascii_proven": {
+          "control": {
+            "call_values": [
+              56
+            ],
+            "median_ms": 0.0022,
+            "samples": 120
+          },
+          "fdb": {
+            "call_values": [
+              56
+            ],
+            "median_ms": 0.0021,
+            "samples": 120
+          },
+          "all_call_counts_identical": true
+        },
+        "query.record_identity": {
+          "control": {
+            "call_values": [
+              56
+            ],
+            "median_ms": 0.008,
+            "samples": 120
+          },
+          "fdb": {
+            "call_values": [
+              56
+            ],
+            "median_ms": 0.0081,
+            "samples": 120
+          },
+          "all_call_counts_identical": true
+        },
+        "query.record_metadata": {
+          "control": {
+            "call_values": [
+              94
+            ],
+            "median_ms": 0.0063,
+            "samples": 120
+          },
+          "fdb": {
+            "call_values": [
+              94
+            ],
+            "median_ms": 0.005,
+            "samples": 120
+          },
+          "all_call_counts_identical": true
+        },
+        "query.verify_text": {
+          "control": {
+            "call_values": [
+              56
+            ],
+            "median_ms": 0.139,
+            "samples": 120
+          },
+          "fdb": {
+            "call_values": [
+              56
+            ],
+            "median_ms": 0.13195,
+            "samples": 120
+          },
+          "all_call_counts_identical": true
+        },
+        "query.visible_seed_ids": {
+          "control": {
+            "call_values": [
+              56
+            ],
+            "median_ms": 0.0,
+            "samples": 120
+          },
+          "fdb": {
+            "call_values": [
+              56
+            ],
+            "median_ms": 0.0,
+            "samples": 120
+          },
+          "all_call_counts_identical": true
+        },
+        "search.filter_visibility_text": {
+          "control": {
+            "call_values": [
+              1
+            ],
+            "median_ms": 1.37765,
+            "samples": 120
+          },
+          "fdb": {
+            "call_values": [
+              1
+            ],
+            "median_ms": 1.3525,
+            "samples": 120
+          },
+          "all_call_counts_identical": true
+        },
+        "search.merge_page_hydration": {
+          "control": {
+            "call_values": [
+              1
+            ],
+            "median_ms": 0.2031,
+            "samples": 120
+          },
+          "fdb": {
+            "call_values": [
+              1
+            ],
+            "median_ms": 0.19725,
+            "samples": 120
+          },
+          "all_call_counts_identical": true
+        },
+        "search.total": {
+          "control": {
+            "call_values": [
+              1
+            ],
+            "median_ms": 1.6357,
+            "samples": 120
+          },
+          "fdb": {
+            "call_values": [
+              1
+            ],
+            "median_ms": 1.54095,
+            "samples": 120
+          },
+          "all_call_counts_identical": true
+        }
+      }
+    },
+    {
+      "text": "quixote",
+      "offset": 57,
+      "limit": 50,
+      "total": 56,
+      "all_work_counts_identical": true,
+      "diagnostics": {
+        "control": {
+          "elapsed_ms": {
+            "median": 1.44135,
+            "p95": 1.9011,
+            "per_process_medians": [
+              1.44135,
+              1.69115,
+              1.4226,
+              1.32945
+            ]
+          },
+          "thread_cycles": {
+            "median": 5380180.0,
+            "p95": 6895296,
+            "per_process_medians": [
+              5446937.0,
+              6101040.5,
+              5298062.0,
+              5006949.5
+            ]
+          }
+        },
+        "fdb": {
+          "elapsed_ms": {
+            "median": 1.4036999999999997,
+            "p95": 3.0021,
+            "per_process_medians": [
+              2.1242,
+              1.16955,
+              1.4783,
+              1.1448
+            ]
+          },
+          "thread_cycles": {
+            "median": 5233770.5,
+            "p95": 8219431,
+            "per_process_medians": [
+              7611223.5,
+              4407466.0,
+              5550295.5,
+              4316814.0
+            ]
+          }
+        },
+        "elapsed_ms_median_change_percent": -2.6121344572796468,
+        "elapsed_ms_paired_median_change_percent": [
+          47.37572414750062,
+          -30.842917541318027,
+          3.915366230844919,
+          -13.889202301703707
+        ],
+        "thread_cycles_median_change_percent": -2.7212751246240785,
+        "thread_cycles_paired_median_change_percent": [
+          39.734010141846696,
+          -27.758781473422445,
+          4.760863500653634,
+          -13.783552240740594
+        ]
+      },
+      "stages": {
+        "disk.read_at": {
+          "control": {
+            "call_values": [
+              81
+            ],
+            "median_ms": 0.6313,
+            "samples": 120
+          },
+          "fdb": {
+            "call_values": [
+              81
+            ],
+            "median_ms": 0.6433,
+            "samples": 120
+          },
+          "all_call_counts_identical": true
+        },
+        "query.accepted_ids": {
+          "control": {
+            "call_values": [
+              56
+            ],
+            "median_ms": 0.0,
+            "samples": 120
+          },
+          "fdb": {
+            "call_values": [
+              56
+            ],
+            "median_ms": 0.0,
+            "samples": 120
+          },
+          "all_call_counts_identical": true
+        },
+        "query.covered_candidates": {
+          "control": {
+            "call_values": [
+              0
+            ],
+            "median_ms": 0.0,
+            "samples": 120
+          },
+          "fdb": {
+            "call_values": [
+              0
+            ],
+            "median_ms": 0.0,
+            "samples": 120
+          },
+          "all_call_counts_identical": true
+        },
+        "query.fold.title": {
+          "control": {
+            "call_values": [
+              56
+            ],
+            "median_ms": 0.0045,
+            "samples": 120
+          },
+          "fdb": {
+            "call_values": [
+              56
+            ],
+            "median_ms": 0.00435,
+            "samples": 120
+          },
+          "all_call_counts_identical": true
+        },
+        "query.payload_candidates": {
+          "control": {
+            "call_values": [
+              56
+            ],
+            "median_ms": 0.0,
+            "samples": 120
+          },
+          "fdb": {
+            "call_values": [
+              56
+            ],
+            "median_ms": 0.0,
+            "samples": 120
+          },
+          "all_call_counts_identical": true
+        },
+        "query.payload_crc": {
+          "control": {
+            "call_values": [
+              56
+            ],
+            "median_ms": 0.1871,
+            "samples": 120
+          },
+          "fdb": {
+            "call_values": [
+              56
+            ],
+            "median_ms": 0.1819,
+            "samples": 120
+          },
+          "all_call_counts_identical": true
+        },
+        "query.payload_read": {
+          "control": {
+            "call_values": [
+              56
+            ],
+            "median_ms": 0.47965,
+            "samples": 120
+          },
+          "fdb": {
+            "call_values": [
+              56
+            ],
+            "median_ms": 0.48585,
+            "samples": 120
+          },
+          "all_call_counts_identical": true
+        },
+        "query.payload_read_bytes": {
+          "control": {
+            "call_values": [
+              1945325
+            ],
+            "median_ms": 0.0,
+            "samples": 120
+          },
+          "fdb": {
+            "call_values": [
+              1945325
+            ],
+            "median_ms": 0.0,
+            "samples": 120
+          },
+          "all_call_counts_identical": true
+        },
+        "query.payload_read_requests": {
+          "control": {
+            "call_values": [
+              56
+            ],
+            "median_ms": 0.0,
+            "samples": 120
+          },
+          "fdb": {
+            "call_values": [
+              56
+            ],
+            "median_ms": 0.0,
+            "samples": 120
+          },
+          "all_call_counts_identical": true
+        },
+        "query.payload_requested_bytes": {
+          "control": {
+            "call_values": [
+              1945325
+            ],
+            "median_ms": 0.0,
+            "samples": 120
+          },
+          "fdb": {
+            "call_values": [
+              1945325
+            ],
+            "median_ms": 0.0,
+            "samples": 120
+          },
+          "all_call_counts_identical": true
+        },
+        "query.payload_validation": {
+          "control": {
+            "call_values": [
+              56
+            ],
+            "median_ms": 0.1488,
+            "samples": 120
+          },
+          "fdb": {
+            "call_values": [
+              56
+            ],
+            "median_ms": 0.13495000000000001,
+            "samples": 120
+          },
+          "all_call_counts_identical": true
+        },
+        "query.payload_window_hits": {
+          "control": {
+            "call_values": [
+              0
+            ],
+            "median_ms": 0.0,
+            "samples": 120
+          },
+          "fdb": {
+            "call_values": [
+              0
+            ],
+            "median_ms": 0.0,
+            "samples": 120
+          },
+          "all_call_counts_identical": true
+        },
+        "query.posting_cache_read": {
+          "control": {
+            "call_values": [
+              20
+            ],
+            "median_ms": 0.1965,
+            "samples": 120
+          },
+          "fdb": {
+            "call_values": [
+              20
+            ],
+            "median_ms": 0.1996,
+            "samples": 120
+          },
+          "all_call_counts_identical": true
+        },
+        "query.posting_intersection": {
+          "control": {
+            "call_values": [
+              56
+            ],
+            "median_ms": 0.0086,
+            "samples": 120
+          },
+          "fdb": {
+            "call_values": [
+              56
+            ],
+            "median_ms": 0.0083,
+            "samples": 120
+          },
+          "all_call_counts_identical": true
+        },
+        "query.raw_ascii_probe": {
+          "control": {
+            "call_values": [
+              56
+            ],
+            "median_ms": 0.1066,
+            "samples": 120
+          },
+          "fdb": {
+            "call_values": [
+              56
+            ],
+            "median_ms": 0.10139999999999999,
+            "samples": 120
+          },
+          "all_call_counts_identical": true
+        },
+        "query.raw_ascii_proven": {
+          "control": {
+            "call_values": [
+              56
+            ],
+            "median_ms": 0.0021,
+            "samples": 120
+          },
+          "fdb": {
+            "call_values": [
+              56
+            ],
+            "median_ms": 0.002,
+            "samples": 120
+          },
+          "all_call_counts_identical": true
+        },
+        "query.record_identity": {
+          "control": {
+            "call_values": [
+              56
+            ],
+            "median_ms": 0.0077,
+            "samples": 120
+          },
+          "fdb": {
+            "call_values": [
+              56
+            ],
+            "median_ms": 0.0083,
+            "samples": 120
+          },
+          "all_call_counts_identical": true
+        },
+        "query.record_metadata": {
+          "control": {
+            "call_values": [
+              56
+            ],
+            "median_ms": 0.0043,
+            "samples": 120
+          },
+          "fdb": {
+            "call_values": [
+              56
+            ],
+            "median_ms": 0.0032,
+            "samples": 120
+          },
+          "all_call_counts_identical": true
+        },
+        "query.verify_text": {
+          "control": {
+            "call_values": [
+              56
+            ],
+            "median_ms": 0.1351,
+            "samples": 120
+          },
+          "fdb": {
+            "call_values": [
+              56
+            ],
+            "median_ms": 0.1281,
+            "samples": 120
+          },
+          "all_call_counts_identical": true
+        },
+        "query.visible_seed_ids": {
+          "control": {
+            "call_values": [
+              56
+            ],
+            "median_ms": 0.0,
+            "samples": 120
+          },
+          "fdb": {
+            "call_values": [
+              56
+            ],
+            "median_ms": 0.0,
+            "samples": 120
+          },
+          "all_call_counts_identical": true
+        },
+        "search.filter_visibility_text": {
+          "control": {
+            "call_values": [
+              1
+            ],
+            "median_ms": 1.4301,
+            "samples": 120
+          },
+          "fdb": {
+            "call_values": [
+              1
+            ],
+            "median_ms": 1.3929,
+            "samples": 120
+          },
+          "all_call_counts_identical": true
+        },
+        "search.merge_page_hydration": {
+          "control": {
+            "call_values": [
+              1
+            ],
+            "median_ms": 0.00885,
+            "samples": 120
+          },
+          "fdb": {
+            "call_values": [
+              1
+            ],
+            "median_ms": 0.00975,
+            "samples": 120
+          },
+          "all_call_counts_identical": true
+        },
+        "search.total": {
+          "control": {
+            "call_values": [
+              1
+            ],
+            "median_ms": 1.4407,
+            "samples": 120
+          },
+          "fdb": {
+            "call_values": [
+              1
+            ],
+            "median_ms": 1.40255,
+            "samples": 120
+          },
+          "all_call_counts_identical": true
+        }
+      }
+    }
+  ],
+  "all_query_work_counts_identical": true,
+  "body_index_extraction_calls": 0,
+  "interpretation": "Diagnostic nested wall spans overlap and include instrumentation. Thread cycles describe only the calling benchmark thread, not the whole process. Do not add nested spans, call them CPU shares, or substitute instrumented results for normal-release p95 comparisons."
+}

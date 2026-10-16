@@ -1,0 +1,65 @@
+{
+  "engine": "sqlite",
+  "mode": "idle",
+  "from": 0,
+  "to": 50000,
+  "run": 1,
+  "exit_code": 0,
+  "low_disk_stop": false,
+  "phases": {
+    "runtime_baseline": {
+      "sampled_peak_private_bytes": 741376,
+      "sampled_peak_working_set_bytes": 4706304,
+      "samples": 24
+    },
+    "idle_ready": {
+      "sampled_peak_private_bytes": 3166208,
+      "sampled_peak_working_set_bytes": 8048640,
+      "samples": 50
+    },
+    "startup": {
+      "sampled_peak_private_bytes": 532480,
+      "sampled_peak_working_set_bytes": 3584000,
+      "samples": 2
+    },
+    "idle_wait": {
+      "sampled_peak_private_bytes": 3166208,
+      "sampled_peak_working_set_bytes": 8048640,
+      "samples": 126
+    }
+  },
+  "idle": {
+    "private_bytes": 3166208,
+    "working_set_bytes": 8048640,
+    "elapsed_process_s": 6.1151553,
+    "after_open_wait_s": 5,
+    "search_calls": 0
+  },
+  "os_peak_working_set_bytes": 8048640,
+  "samples": 202,
+  "sample_interval_ms": 20,
+  "phase_poll_ms": 100,
+  "elapsed_s": 8.1175034,
+  "cpu_ms": 31.25,
+  "retained_disk_bytes": 2902978560.0,
+  "files": [
+    {
+      "name": "sqlite.db",
+      "bytes": 2902945792
+    },
+    {
+      "name": "sqlite.db-shm",
+      "bytes": 32768
+    },
+    {
+      "name": "sqlite.db-wal",
+      "bytes": 0
+    }
+  ],
+  "features": "default only",
+  "cache": "OS cache, no eviction, no search warmup",
+  "includes_os_file_cache": false,
+  "input": "streamed CRC-checked JSON corpus, batch500; no books/oracle resident",
+  "executable": "C:\\Users\\Serkan\\Documents\\ChatGPT\\fdb\\output\\content-memory-sqlite-20261011.exe",
+  "database": "C:\\Users\\Serkan\\Documents\\ChatGPT\\fdb\\data\\content-memory-20261011-sqlite"
+}

@@ -1,0 +1,17 @@
+   Compiling fdb v0.3.1 (C:\Users\Serkan\Documents\ChatGPT\fdb)
+    Finished `test` profile [unoptimized + debuginfo] target(s) in 6.24s
+     Running tests\rkyv_payload.rs (target\debug\deps\rkyv_payload-d6f45c37732ca21f.exe)
+
+running 9 tests
+test export_child ... ignored, child helper invoked by export_process_kill
+test overlay_engine_child ... ignored, child helper invoked by overlay_engine_process_kill
+test archive_cuts_misalignment_and_turkish_contains_keep_safe_access ... ok
+test binary_roundtrip_borrowed_views_and_malformed_offsets ... ok
+test old_json_fixture_still_opens_with_rkyv_feature_enabled ... ok
+test overlay_engine_process_kill ... ok
+test real_engine_overlay_pages_filters_and_mismatched_cache_fail_closed ... ok
+test export_process_kill ... ok
+test every_export_cut_byte_corruption_and_runtime_payload_error_fail_closed ... ok
+
+test result: ok. 7 passed; 0 failed; 2 ignored; 0 measured; 0 filtered out; finished in 25.95s
+

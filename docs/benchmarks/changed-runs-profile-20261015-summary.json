@@ -1,0 +1,521 @@
+{
+  "scope": "same first 10000, existing fixed DB, record reads, release builder-budget + diagnostic-timing, warm OS cache without eviction, 3 paired processes reversed on pair 1, nested wall spans include instrumentation and must not be summed or treated as CPU attribution; not normal API p95",
+  "queries": [
+    {
+      "text": "the zx",
+      "offset": 0,
+      "warm_iterations_per_process": 3,
+      "control": {
+        "per_process_median_ms": {
+          "query.fold.body": [
+            136.9376,
+            129.2975,
+            130.9496
+          ],
+          "query.scan.body": [
+            21.1554,
+            20.3385,
+            20.8658
+          ],
+          "query.payload_read": [
+            51.7304,
+            50.0567,
+            51.4376
+          ],
+          "query.payload_crc": [
+            28.4226,
+            26.5595,
+            27.3053
+          ],
+          "query.payload_validation": [
+            27.6564,
+            27.4883,
+            27.2917
+          ],
+          "query.verify_text": [
+            202.7386,
+            191.9634,
+            193.8878
+          ],
+          "search.filter_visibility_text": [
+            318.6583,
+            305.3368,
+            308.6799
+          ],
+          "search.total": [
+            318.6608,
+            305.3392,
+            308.6826
+          ]
+        },
+        "counts": {
+          "query.payload_candidates": [
+            10000
+          ],
+          "query.covered_candidates": [
+            10000
+          ],
+          "query.payload_requested_bytes": [
+            267849329
+          ],
+          "query.payload_read_bytes": [
+            287040309
+          ],
+          "query.payload_read_requests": [
+            1104
+          ],
+          "query.fold.body": [
+            263627
+          ],
+          "query.scan.body": [
+            263627
+          ]
+        },
+        "median_ms": {
+          "query.fold.body": 130.9496,
+          "query.scan.body": 20.8658,
+          "query.payload_read": 51.4376,
+          "query.payload_crc": 27.3053,
+          "query.payload_validation": 27.4883,
+          "query.verify_text": 193.8878,
+          "search.filter_visibility_text": 308.6799,
+          "search.total": 308.6826
+        }
+      },
+      "candidate": {
+        "per_process_median_ms": {
+          "query.fold.body": [
+            88.5092,
+            89.4293,
+            92.632
+          ],
+          "query.scan.body": [
+            20.09,
+            20.57,
+            20.8771
+          ],
+          "query.payload_read": [
+            49.1149,
+            49.3209,
+            51.9521
+          ],
+          "query.payload_crc": [
+            26.3648,
+            27.7153,
+            27.8833
+          ],
+          "query.payload_validation": [
+            26.5353,
+            26.8559,
+            28.4863
+          ],
+          "query.verify_text": [
+            149.654,
+            155.0155,
+            157.1105
+          ],
+          "search.filter_visibility_text": [
+            259.56,
+            268.8559,
+            274.6
+          ],
+          "search.total": [
+            259.5625,
+            268.8585,
+            274.6022
+          ]
+        },
+        "counts": {
+          "query.payload_candidates": [
+            10000
+          ],
+          "query.covered_candidates": [
+            10000
+          ],
+          "query.payload_requested_bytes": [
+            267849329
+          ],
+          "query.payload_read_bytes": [
+            287040309
+          ],
+          "query.payload_read_requests": [
+            1104
+          ],
+          "query.fold.body": [
+            263627
+          ],
+          "query.scan.body": [
+            263627
+          ]
+        },
+        "median_ms": {
+          "query.fold.body": 89.4293,
+          "query.scan.body": 20.57,
+          "query.payload_read": 49.3209,
+          "query.payload_crc": 27.7153,
+          "query.payload_validation": 26.8559,
+          "query.verify_text": 155.0155,
+          "search.filter_visibility_text": 268.8559,
+          "search.total": 268.8585
+        }
+      },
+      "lower_fold_pairs": 3
+    },
+    {
+      "text": "quixote",
+      "offset": 0,
+      "warm_iterations_per_process": 3,
+      "control": {
+        "per_process_median_ms": {
+          "query.fold.body": [
+            0.5285,
+            0.5618,
+            0.5365
+          ],
+          "query.scan.body": [
+            0.0632,
+            0.0645,
+            0.0652
+          ],
+          "query.payload_read": [
+            0.331,
+            0.5186,
+            0.3611
+          ],
+          "query.payload_crc": [
+            0.1933,
+            0.1913,
+            0.1792
+          ],
+          "query.payload_validation": [
+            0.1448,
+            0.1679,
+            0.1788
+          ],
+          "query.verify_text": [
+            0.7334,
+            0.7749,
+            0.7357
+          ],
+          "search.filter_visibility_text": [
+            1.7561,
+            1.9576,
+            1.7905
+          ],
+          "search.total": [
+            2.9397,
+            2.8489,
+            2.5923
+          ]
+        },
+        "counts": {
+          "query.payload_candidates": [
+            56
+          ],
+          "query.covered_candidates": [
+            0
+          ],
+          "query.payload_requested_bytes": [
+            1945325
+          ],
+          "query.payload_read_bytes": [
+            1945325
+          ],
+          "query.payload_read_requests": [
+            56
+          ],
+          "query.fold.body": [
+            815
+          ],
+          "query.scan.body": [
+            815
+          ]
+        },
+        "median_ms": {
+          "query.fold.body": 0.5365,
+          "query.scan.body": 0.0645,
+          "query.payload_read": 0.3611,
+          "query.payload_crc": 0.1913,
+          "query.payload_validation": 0.1679,
+          "query.verify_text": 0.7357,
+          "search.filter_visibility_text": 1.7905,
+          "search.total": 2.8489
+        }
+      },
+      "candidate": {
+        "per_process_median_ms": {
+          "query.fold.body": [
+            0.414,
+            0.3514,
+            0.3425
+          ],
+          "query.scan.body": [
+            0.0766,
+            0.0655,
+            0.0657
+          ],
+          "query.payload_read": [
+            0.5276,
+            0.3149,
+            0.3158
+          ],
+          "query.payload_crc": [
+            0.2241,
+            0.1805,
+            0.1819
+          ],
+          "query.payload_validation": [
+            0.1999,
+            0.1353,
+            0.1313
+          ],
+          "query.verify_text": [
+            0.6729,
+            0.5567,
+            0.5447
+          ],
+          "search.filter_visibility_text": [
+            2.0575,
+            1.5017,
+            1.4892
+          ],
+          "search.total": [
+            4.0121,
+            2.3018,
+            2.2221
+          ]
+        },
+        "counts": {
+          "query.payload_candidates": [
+            56
+          ],
+          "query.covered_candidates": [
+            0
+          ],
+          "query.payload_requested_bytes": [
+            1945325
+          ],
+          "query.payload_read_bytes": [
+            1945325
+          ],
+          "query.payload_read_requests": [
+            56
+          ],
+          "query.fold.body": [
+            815
+          ],
+          "query.scan.body": [
+            815
+          ]
+        },
+        "median_ms": {
+          "query.fold.body": 0.3514,
+          "query.scan.body": 0.0657,
+          "query.payload_read": 0.3158,
+          "query.payload_crc": 0.1819,
+          "query.payload_validation": 0.1353,
+          "query.verify_text": 0.5567,
+          "search.filter_visibility_text": 1.5017,
+          "search.total": 2.3018
+        }
+      },
+      "lower_fold_pairs": 3
+    },
+    {
+      "text": "he",
+      "offset": 0,
+      "warm_iterations_per_process": 3,
+      "control": {
+        "per_process_median_ms": {
+          "query.fold.body": [
+            0.0,
+            0.0,
+            0.0
+          ],
+          "query.scan.body": [
+            0.0,
+            0.0,
+            0.0
+          ],
+          "query.payload_read": [
+            0.0,
+            0.0,
+            0.0
+          ],
+          "query.payload_crc": [
+            0.0,
+            0.0,
+            0.0
+          ],
+          "query.payload_validation": [
+            0.0,
+            0.0,
+            0.0
+          ],
+          "query.verify_text": [
+            0.0,
+            0.0,
+            0.0
+          ],
+          "search.filter_visibility_text": [
+            0.4063,
+            0.4063,
+            0.3919
+          ],
+          "search.total": [
+            1.2889,
+            0.9944,
+            0.9947
+          ]
+        },
+        "counts": {
+          "query.payload_candidates": [
+            0
+          ],
+          "query.covered_candidates": [
+            250
+          ],
+          "query.payload_requested_bytes": [
+            0
+          ],
+          "query.payload_read_bytes": [
+            0
+          ],
+          "query.payload_read_requests": [
+            0
+          ],
+          "query.fold.body": [
+            0
+          ],
+          "query.scan.body": [
+            0
+          ]
+        },
+        "median_ms": {
+          "query.fold.body": 0.0,
+          "query.scan.body": 0.0,
+          "query.payload_read": 0.0,
+          "query.payload_crc": 0.0,
+          "query.payload_validation": 0.0,
+          "query.verify_text": 0.0,
+          "search.filter_visibility_text": 0.4063,
+          "search.total": 0.9947
+        }
+      },
+      "candidate": {
+        "per_process_median_ms": {
+          "query.fold.body": [
+            0.0,
+            0.0,
+            0.0
+          ],
+          "query.scan.body": [
+            0.0,
+            0.0,
+            0.0
+          ],
+          "query.payload_read": [
+            0.0,
+            0.0,
+            0.0
+          ],
+          "query.payload_crc": [
+            0.0,
+            0.0,
+            0.0
+          ],
+          "query.payload_validation": [
+            0.0,
+            0.0,
+            0.0
+          ],
+          "query.verify_text": [
+            0.0,
+            0.0,
+            0.0
+          ],
+          "search.filter_visibility_text": [
+            0.4592,
+            0.3479,
+            0.3944
+          ],
+          "search.total": [
+            1.3569,
+            0.9402,
+            1.0017
+          ]
+        },
+        "counts": {
+          "query.payload_candidates": [
+            0
+          ],
+          "query.covered_candidates": [
+            250
+          ],
+          "query.payload_requested_bytes": [
+            0
+          ],
+          "query.payload_read_bytes": [
+            0
+          ],
+          "query.payload_read_requests": [
+            0
+          ],
+          "query.fold.body": [
+            0
+          ],
+          "query.scan.body": [
+            0
+          ]
+        },
+        "median_ms": {
+          "query.fold.body": 0.0,
+          "query.scan.body": 0.0,
+          "query.payload_read": 0.0,
+          "query.payload_crc": 0.0,
+          "query.payload_validation": 0.0,
+          "query.verify_text": 0.0,
+          "search.filter_visibility_text": 0.3944,
+          "search.total": 1.0017
+        }
+      },
+      "lower_fold_pairs": 0
+    }
+  ],
+  "source_first_use_checks": {
+    "control": [
+      {
+        "pending_before": 5,
+        "pending_after": 0,
+        "documents": 10000
+      },
+      {
+        "pending_before": 5,
+        "pending_after": 0,
+        "documents": 10000
+      },
+      {
+        "pending_before": 5,
+        "pending_after": 0,
+        "documents": 10000
+      }
+    ],
+    "candidate": [
+      {
+        "pending_before": 5,
+        "pending_after": 0,
+        "documents": 10000
+      },
+      {
+        "pending_before": 5,
+        "pending_after": 0,
+        "documents": 10000
+      },
+      {
+        "pending_before": 5,
+        "pending_after": 0,
+        "documents": 10000
+      }
+    ]
+  }
+}

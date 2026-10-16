@@ -1,0 +1,83 @@
+{
+  "all_124_fixed_db_cache_sqlite_hashes_unchanged": true,
+  "matches_prior_source_lease_files": true,
+  "file_count": 124,
+  "corpus_sha256": "11F826FCE3F4AE790FEB9FC6DF9B1169F52C2FD699E89FC4A8A4B77AAA41731B",
+  "corpus_bytes": 2740862279,
+  "fixtures_git_status": "",
+  "unchanged_sources_and_dependencies": [
+    {
+      "path": "src/engine.rs",
+      "sha256": "BDDC0F022EA877FEF69ACA8A6AB842F3DE41EC3519F49F10A5451B0CBF96BF75"
+    },
+    {
+      "path": "src/index.rs",
+      "sha256": "39A78C6C9123AAA4B877072F2B801228860F52659895FD9C87C966475108C899"
+    },
+    {
+      "path": "src/segment/covering.rs",
+      "sha256": "FAF9B8A30580D90BD15AC282211CFBEA401F00674AD36A8376BC02DC692EBE8B"
+    },
+    {
+      "path": "Cargo.toml",
+      "sha256": "56BA21D2D0BA7D59FEAE71FA0EE4497950337A5C43D1FA306D78EE28E2C79F8A"
+    },
+    {
+      "path": "Cargo.lock",
+      "sha256": "57F2192106DC532AFC442099A68F285CC6475427E30716505DF143CB5ADEA55C"
+    }
+  ],
+  "changed_runtime": [
+    "src/segment.rs"
+  ],
+  "changed_tests": [
+    "src/segment/window_tests.rs"
+  ],
+  "segment_sha256": "35A2197AB95F7B96BF416BF04E62C10939EA6BF4973D5C4BF8520A94FF011A1C",
+  "window_tests_sha256": "051EE7A029A310B412695A4CFE8BF61F4AEF3ADC6DC6752F78E5F8AD3D3F9E6D",
+  "new_feature_or_format": false,
+  "default_changed": false,
+  "no_corpus_created": true,
+  "no_db_reset_or_copy": true,
+  "normal_release_text_matches_measured_candidate": true,
+  "normal_release_sha256": "CF362C7411AE51BDDD875C90077824452D7A18755461EAF0F5D25AF5A907B87A",
+  "measured_candidate_sha256": "F8BB9E953BA9E4F19C65F73E2B2256C1574DB51A323C6B77050DCF4837E83243",
+  "tests": {
+    "feature": {
+      "passed": 145,
+      "failed": 0,
+      "ignored": 4
+    },
+    "default": {
+      "passed": 88,
+      "failed": 0,
+      "ignored": 2
+    },
+    "all": {
+      "passed": 164,
+      "failed": 0,
+      "ignored": 6
+    }
+  },
+  "first_use_os_memory": {
+    "control": {
+      "os_peak_private_commit_bytes": 7256064.0,
+      "os_peak_working_set_bytes": 11155456.0
+    },
+    "fdb": {
+      "os_peak_private_commit_bytes": 7376896.0,
+      "os_peak_working_set_bytes": 11137024.0
+    },
+    "scope": "whole process open/get/first-search/repeat; includes first source validation; no corpus/oracle resident"
+  },
+  "profile_executables": [
+    {
+      "path": "output/source-lease-profile-candidate-20261015.exe",
+      "sha256": "BD7016A2AECE80734E1C2FF8A0B4CF7A89A08953D18CAD5A44C3C0516DE41607"
+    },
+    {
+      "path": "output/bounded-raw-proof-profile-20261016.exe",
+      "sha256": "7C8DAFB52C7DDEAA1D39193620AC93BA343967D9BCD7E6D797777B76396F7E58"
+    }
+  ]
+}

@@ -1,5 +1,5 @@
 //! Volatile references to validated documents in the active transaction log.
-//! No new persistent representation; every read checks the original JSON bytes.
+//! Native OFF1 locations in TXN2; legacy JSON locations remain readable.
 use crate::{Error, Key, Result, StoredDocument, format};
 use std::fs::File;
 
@@ -24,8 +24,7 @@ impl Row {
         if format::crc(&bytes) != self.location.checksum {
             return Err(Error::Corrupt("delta document checksum mismatch".into()));
         }
-        let stored: StoredDocument =
-            serde_json::from_slice(&bytes).map_err(|error| Error::Corrupt(error.to_string()))?;
+        let stored = crate::payload::decode(&bytes)?;
         if &stored.document.key != key || stored.version != self.version {
             return Err(Error::Corrupt("delta document identity mismatch".into()));
         }
@@ -39,6 +38,31 @@ pub(crate) fn locations(
     start: u64,
     batch: &format::Batch,
 ) -> Result<Vec<Option<Location>>> {
+    if payload.first().is_some_and(|b| *b <= 1) {
+        let (_, entries) = crate::binary_batch::entries(payload)?;
+        if entries.len() != batch.changes.len() {
+            return Err(Error::Corrupt("delta change count mismatch".into()));
+        }
+        return entries
+            .into_iter()
+            .zip(&batch.changes)
+            .map(|((tag, offset, bytes), change)| {
+                if tag == 1 && matches!(change, format::Change::Delete { .. }) {
+                    return Ok(None);
+                }
+                if tag != 0 || !matches!(change, format::Change::Put { .. }) {
+                    return Err(Error::Corrupt("delta change tag mismatch".into()));
+                }
+                Ok(Some(Location {
+                    offset: start
+                        .checked_add(offset as u64)
+                        .ok_or_else(|| Error::Corrupt("delta location overflow".into()))?,
+                    len: bytes.len() as u32,
+                    checksum: format::crc(bytes),
+                }))
+            })
+            .collect();
+    }
     use serde::Deserialize;
     use serde_json::value::RawValue;
     #[derive(Deserialize)]

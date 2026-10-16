@@ -1,0 +1,51 @@
+{
+  "engine": "sqlite",
+  "mode": "ingest",
+  "from": 0,
+  "to": 10000,
+  "run": 0,
+  "exit_code": 0,
+  "low_disk_stop": false,
+  "phases": {
+    "startup": {
+      "sampled_peak_private_bytes": 745472,
+      "sampled_peak_working_set_bytes": 4677632,
+      "samples": 3
+    },
+    "indexing": {
+      "sampled_peak_private_bytes": 8937472,
+      "sampled_peak_working_set_bytes": 14045184,
+      "samples": 874
+    },
+    "maintenance": {
+      "sampled_peak_private_bytes": 7266304,
+      "sampled_peak_working_set_bytes": 12087296,
+      "samples": 25
+    },
+    "runtime_baseline": {
+      "sampled_peak_private_bytes": 1888256,
+      "sampled_peak_working_set_bytes": 6930432,
+      "samples": 27
+    }
+  },
+  "idle": null,
+  "os_peak_working_set_bytes": 14086144,
+  "samples": 929,
+  "sample_interval_ms": 20,
+  "phase_poll_ms": 100,
+  "elapsed_s": 35.5775452,
+  "cpu_ms": 33625.0,
+  "retained_disk_bytes": 583860224.0,
+  "files": [
+    {
+      "name": "sqlite.db",
+      "bytes": 583860224
+    }
+  ],
+  "features": "default only",
+  "cache": "OS cache, no eviction, no search warmup",
+  "includes_os_file_cache": false,
+  "input": "streamed CRC-checked JSON corpus, batch500; no books/oracle resident",
+  "executable": "C:\\Users\\Serkan\\Documents\\ChatGPT\\fdb\\output\\content-memory-sqlite-10k-20261011.exe",
+  "database": "C:\\Users\\Serkan\\Documents\\ChatGPT\\fdb\\data\\benchmark-work\\sqlite"
+}

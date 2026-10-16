@@ -1,5 +1,20 @@
 # Native SQLite comparator
 
+The current native OFF1 FDB comparison covers both synthetic writes/reads
+and long-passage searches plus 100 dispersed full-document lookups:
+[native general comparison](../../docs/NATIVE-SQLITE-GENERAL-20261011.md).
+`tools/measure-native-sqlite-general.ps1` runs three alternating pairs for
+each corpus with frozen executables. It sets `SQLITE_BENCH_SKIP_INTEGRITY=1`
+only for the synthetic timed process, then integrity is checked separately
+with the `passages integrity` command. Standalone synthetic integrity remains
+enabled by default. The long query process never includes full integrity.
+
+The separate `passages` binary measures the existing 100k diverse 2–50 KiB
+book corpus against the frozen default FDB engine. It verifies all input JSON
+payload bytes and every count/full-document page. Run instructions and limits:
+[long-passage comparison](../../docs/LONG-SQLITE-COMPARISON-20261011.md).
+The older synthetic comparator below is unchanged.
+
 This is a separate benchmark package, not an FDB engine dependency. Its own
 Cargo.lock pins the bundled SQLite build. Build and execute from the FDB root:
 

@@ -1,0 +1,275 @@
+{
+  "engine": "fdb",
+  "mode": "ingest",
+  "from": 0,
+  "to": 10000,
+  "run": 0,
+  "exit_code": 0,
+  "low_disk_stop": false,
+  "phases": {
+    "runtime_baseline": {
+      "sampled_peak_private_bytes": 32600064,
+      "sampled_peak_working_set_bytes": 36139008,
+      "samples": 27
+    },
+    "maintenance": {
+      "sampled_peak_private_bytes": 162082816,
+      "sampled_peak_working_set_bytes": 157089792,
+      "samples": 376
+    },
+    "startup": {
+      "sampled_peak_private_bytes": 532480,
+      "sampled_peak_working_set_bytes": 3674112,
+      "samples": 2
+    },
+    "indexing": {
+      "sampled_peak_private_bytes": 187166720,
+      "sampled_peak_working_set_bytes": 187215872,
+      "samples": 1600
+    }
+  },
+  "idle": null,
+  "os_peak_working_set_bytes": 190713856,
+  "samples": 2005,
+  "sample_interval_ms": 20,
+  "phase_poll_ms": 100,
+  "elapsed_s": 76.0853335,
+  "cpu_ms": 89812.5,
+  "retained_disk_bytes": 1513745887.0,
+  "files": [
+    {
+      "name": "generation-0000000000000001.fdb",
+      "bytes": 27049019
+    },
+    {
+      "name": "generation-0000000000000001.ready",
+      "bytes": 87
+    },
+    {
+      "name": "generation-0000000000000003.fdb",
+      "bytes": 26697359
+    },
+    {
+      "name": "generation-0000000000000003.ready",
+      "bytes": 170
+    },
+    {
+      "name": "generation-0000000000000005.fdb",
+      "bytes": 26037578
+    },
+    {
+      "name": "generation-0000000000000005.ready",
+      "bytes": 253
+    },
+    {
+      "name": "generation-0000000000000007.fdb",
+      "bytes": 26933085
+    },
+    {
+      "name": "generation-0000000000000007.ready",
+      "bytes": 335
+    },
+    {
+      "name": "generation-0000000000000009.fdb",
+      "bytes": 25953796
+    },
+    {
+      "name": "generation-0000000000000009.ready",
+      "bytes": 419
+    },
+    {
+      "name": "generation-000000000000000c.fdb",
+      "bytes": 26961152
+    },
+    {
+      "name": "generation-000000000000000c.ready",
+      "bytes": 507
+    },
+    {
+      "name": "generation-000000000000000d.ready",
+      "bytes": 424
+    },
+    {
+      "name": "generation-000000000000000f.fdb",
+      "bytes": 26870441
+    },
+    {
+      "name": "generation-000000000000000f.ready",
+      "bytes": 510
+    },
+    {
+      "name": "generation-0000000000000012.fdb",
+      "bytes": 27216777
+    },
+    {
+      "name": "generation-0000000000000012.ready",
+      "bytes": 596
+    },
+    {
+      "name": "generation-0000000000000013.ready",
+      "bytes": 514
+    },
+    {
+      "name": "generation-0000000000000015.fdb",
+      "bytes": 26902655
+    },
+    {
+      "name": "generation-0000000000000015.ready",
+      "bytes": 600
+    },
+    {
+      "name": "generation-0000000000000018.fdb",
+      "bytes": 27278657
+    },
+    {
+      "name": "generation-0000000000000018.ready",
+      "bytes": 685
+    },
+    {
+      "name": "generation-0000000000000019.ready",
+      "bytes": 599
+    },
+    {
+      "name": "generation-000000000000001b.fdb",
+      "bytes": 45
+    },
+    {
+      "name": "generation-000000000000001b.ready",
+      "bytes": 685
+    },
+    {
+      "name": "generation-000000000000001d.ready",
+      "bytes": 599
+    },
+    {
+      "name": "generation-000000000000001f.ready",
+      "bytes": 514
+    },
+    {
+      "name": "run-0000000000000002.fdb",
+      "bytes": 27049056
+    },
+    {
+      "name": "run-0000000000000002.idx",
+      "bytes": 35983031
+    },
+    {
+      "name": "run-0000000000000004.fdb",
+      "bytes": 26697396
+    },
+    {
+      "name": "run-0000000000000004.idx",
+      "bytes": 35599354
+    },
+    {
+      "name": "run-0000000000000006.fdb",
+      "bytes": 26037615
+    },
+    {
+      "name": "run-0000000000000006.idx",
+      "bytes": 34825719
+    },
+    {
+      "name": "run-0000000000000008.fdb",
+      "bytes": 26933122
+    },
+    {
+      "name": "run-0000000000000008.idx",
+      "bytes": 35834141
+    },
+    {
+      "name": "run-000000000000000a.fdb",
+      "bytes": 53746407
+    },
+    {
+      "name": "run-000000000000000a.idx",
+      "bytes": 70872210
+    },
+    {
+      "name": "run-000000000000000b.fdb",
+      "bytes": 25953833
+    },
+    {
+      "name": "run-000000000000000b.idx",
+      "bytes": 34721544
+    },
+    {
+      "name": "run-000000000000000e.fdb",
+      "bytes": 26961189
+    },
+    {
+      "name": "run-000000000000000e.idx",
+      "bytes": 35883951
+    },
+    {
+      "name": "run-0000000000000010.fdb",
+      "bytes": 52970692
+    },
+    {
+      "name": "run-0000000000000010.idx",
+      "bytes": 69949707
+    },
+    {
+      "name": "run-0000000000000011.fdb",
+      "bytes": 26870478
+    },
+    {
+      "name": "run-0000000000000011.idx",
+      "bytes": 35753399
+    },
+    {
+      "name": "run-0000000000000014.fdb",
+      "bytes": 27216814
+    },
+    {
+      "name": "run-0000000000000014.idx",
+      "bytes": 36134902
+    },
+    {
+      "name": "run-0000000000000016.fdb",
+      "bytes": 52914977
+    },
+    {
+      "name": "run-0000000000000016.idx",
+      "bytes": 69894154
+    },
+    {
+      "name": "run-0000000000000017.fdb",
+      "bytes": 26902692
+    },
+    {
+      "name": "run-0000000000000017.idx",
+      "bytes": 35790010
+    },
+    {
+      "name": "run-000000000000001a.fdb",
+      "bytes": 27278694
+    },
+    {
+      "name": "run-000000000000001a.idx",
+      "bytes": 36267641
+    },
+    {
+      "name": "run-000000000000001c.fdb",
+      "bytes": 54087247
+    },
+    {
+      "name": "run-000000000000001c.idx",
+      "bytes": 71177214
+    },
+    {
+      "name": "run-000000000000001e.fdb",
+      "bytes": 54181341
+    },
+    {
+      "name": "run-000000000000001e.idx",
+      "bytes": 71349296
+    }
+  ],
+  "features": "default only",
+  "cache": "OS cache, no eviction, no search warmup",
+  "includes_os_file_cache": false,
+  "input": "streamed CRC-checked JSON corpus, batch500; no books/oracle resident",
+  "executable": "C:\\Users\\Serkan\\Documents\\ChatGPT\\fdb\\output\\content-memory-reserve-10k-20261012.exe",
+  "database": "C:\\Users\\Serkan\\Documents\\ChatGPT\\fdb\\data\\content-memory-reserve-10k-20261012-1-fdb"
+}

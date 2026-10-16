@@ -1,0 +1,14 @@
+    Checking fdb v0.3.1 (C:\Users\Serkan\Documents\ChatGPT\fdb)
+error: calling `as_bytes` after slicing a string
+   --> src\index.rs:115:32
+    |
+115 |         offset += ascii_prefix(text[offset..].as_bytes());
+    |                                ^^^^^^^^^^^^^^^^^^^^^^^^^ help: try: `&text.as_bytes()[offset..]`
+    |
+    = help: for further information visit https://rust-lang.github.io/rust-clippy/rust-1.99.0/index.html#sliced_string_as_bytes
+    = note: `-D clippy::sliced-string-as-bytes` implied by `-D warnings`
+    = help: to override `-D warnings` add `#[allow(clippy::sliced_string_as_bytes)]`
+
+error: could not compile `fdb` (lib) due to 1 previous error
+warning: build failed, waiting for other jobs to finish...
+error: could not compile `fdb` (lib test) due to 1 previous error

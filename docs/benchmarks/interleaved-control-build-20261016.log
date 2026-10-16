@@ -1,0 +1,55 @@
+   Compiling fdb v0.3.1 (C:\Users\Serkan\Documents\ChatGPT\fdb)
+warning: method `skip` is never used
+  --> examples\..\tools\bench_support\memory_corpus.rs:69:12
+   |
+33 | impl Input {
+   | ---------- method in this implementation
+...
+69 |     pub fn skip(&mut self, count: usize) -> Result<()> {
+   |            ^^^^
+   |
+   = note: `#[warn(dead_code)]` (part of `#[warn(unused)]`) on by default
+
+warning: constant `REPEATS` is never used
+ --> examples\..\tools\bench_support\read_matrix.rs:8:7
+  |
+8 | const REPEATS: usize = 20;
+  |       ^^^^^^^
+
+warning: method `measure` is never used
+   --> examples\..\tools\bench_support\read_matrix.rs:205:12
+    |
+ 42 | impl Matrix {
+    | ----------- method in this implementation
+...
+205 |     pub fn measure<G, S>(&self, seed: u64, mut get: G, mut search: S) -> input::Result<()>
+    |            ^^^^^^^
+
+warning: constant `QUERIES` is never used
+ --> examples\..\tools\bench_support\content_reads.rs:7:11
+  |
+7 | pub const QUERIES: [&str; 4] = ["the", "quixote", "he", "the man"];
+  |           ^^^^^^^
+
+warning: struct `Oracle` is never constructed
+  --> examples\..\tools\bench_support\content_reads.rs:25:12
+   |
+25 | pub struct Oracle {
+   |            ^^^^^^
+
+warning: associated function `load` is never used
+  --> examples\..\tools\bench_support\content_reads.rs:31:12
+   |
+30 | impl Oracle {
+   | ----------- associated function in this implementation
+31 |     pub fn load() -> input::Result<Self> {
+   |            ^^^^
+
+warning: function `measure` is never used
+  --> examples\..\tools\bench_support\content_reads.rs:78:8
+   |
+78 | pub fn measure<G, S>(oracle: &Oracle, mut get: G, mut search: S) -> input::Result<()>
+   |        ^^^^^^^
+
+warning: `fdb` (example "measure_interleaved_reads") generated 7 warnings
+    Finished `release` profile [optimized] target(s) in 52.68s

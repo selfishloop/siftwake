@@ -1,0 +1,94 @@
+{
+  "pairs": 4,
+  "balanced_first_position": true,
+  "scope": "whole process open/get/first-search/repeat; includes first source validation; no corpus/oracle resident",
+  "measurement": "GetProcessMemoryInfo after exit with retained process handle; OS lifetime high-water marks, no polling gaps",
+  "private_counter": "PeakPagefileUsage (private committed bytes, not physical RAM)",
+  "working_set_counter": "PeakWorkingSetSize (resident pages incl shared image pages, not private heap)",
+  "warm_query_only_peak_not_isolated": true,
+  "cache": "warm OS cache, no eviction",
+  "executables": [
+    {
+      "engine": "control",
+      "sha256": "41BC98442A0D66D8430AC5E95EEFDA385832AA4C28CCA10791A3483B011D8D43"
+    },
+    {
+      "engine": "fdb",
+      "sha256": "F8BB9E953BA9E4F19C65F73E2B2256C1574DB51A323C6B77050DCF4837E83243"
+    }
+  ],
+  "results": [
+    {
+      "engine": "control",
+      "pair": 0,
+      "os_peak_working_set_bytes": 11161600,
+      "os_peak_private_commit_bytes": 7262208,
+      "after_exit_current_private_bytes": 77824,
+      "page_faults": 4807,
+      "read_after_exit": true
+    },
+    {
+      "engine": "fdb",
+      "pair": 0,
+      "os_peak_working_set_bytes": 11128832,
+      "os_peak_private_commit_bytes": 7376896,
+      "after_exit_current_private_bytes": 77824,
+      "page_faults": 4627,
+      "read_after_exit": true
+    },
+    {
+      "engine": "fdb",
+      "pair": 1,
+      "os_peak_working_set_bytes": 11198464,
+      "os_peak_private_commit_bytes": 7442432,
+      "after_exit_current_private_bytes": 77824,
+      "page_faults": 4902,
+      "read_after_exit": true
+    },
+    {
+      "engine": "control",
+      "pair": 1,
+      "os_peak_working_set_bytes": 11165696,
+      "os_peak_private_commit_bytes": 7266304,
+      "after_exit_current_private_bytes": 77824,
+      "page_faults": 4810,
+      "read_after_exit": true
+    },
+    {
+      "engine": "control",
+      "pair": 2,
+      "os_peak_working_set_bytes": 10981376,
+      "os_peak_private_commit_bytes": 7061504,
+      "after_exit_current_private_bytes": 77824,
+      "page_faults": 4688,
+      "read_after_exit": true
+    },
+    {
+      "engine": "fdb",
+      "pair": 2,
+      "os_peak_working_set_bytes": 11145216,
+      "os_peak_private_commit_bytes": 7376896,
+      "after_exit_current_private_bytes": 77824,
+      "page_faults": 4631,
+      "read_after_exit": true
+    },
+    {
+      "engine": "fdb",
+      "pair": 3,
+      "os_peak_working_set_bytes": 11075584,
+      "os_peak_private_commit_bytes": 7196672,
+      "after_exit_current_private_bytes": 77824,
+      "page_faults": 4681,
+      "read_after_exit": true
+    },
+    {
+      "engine": "control",
+      "pair": 3,
+      "os_peak_working_set_bytes": 11149312,
+      "os_peak_private_commit_bytes": 7249920,
+      "after_exit_current_private_bytes": 73728,
+      "page_faults": 4805,
+      "read_after_exit": true
+    }
+  ]
+}

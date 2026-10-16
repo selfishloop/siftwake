@@ -1,0 +1,1462 @@
+{
+  "engines": {
+    "fdb": {
+      "runs": [
+        {
+          "opening": {
+            "api": "Database::search",
+            "open_ms": 25281.727199999998,
+            "phase": "open",
+            "stats": {
+              "compaction_running": false,
+              "delta_keys": 0,
+              "disk_index_bytes": 3551235145,
+              "disk_posting_entries": 192782228,
+              "documents": 100000,
+              "generation": 1,
+              "log_bytes": 2741774867,
+              "resident_documents": 0,
+              "resident_text_bytes": 0,
+              "segments": 1,
+              "sequence": 200,
+              "source_bytes": 5483549734
+            }
+          },
+          "queries": {
+            "common:0": {
+              "api": "Database::search",
+              "cache": "warm OS cache; first page has one untimed query; later pages follow; no forced eviction",
+              "full_page_oracle_verified": true,
+              "offset": 0,
+              "p50_ms": 10807.878999999999,
+              "phase": "query",
+              "profiled": false,
+              "query": "common",
+              "samples_ms": [
+                10807.878999999999
+              ],
+              "text": "the",
+              "total": 100000
+            },
+            "common:50": {
+              "api": "Database::search",
+              "cache": "warm OS cache; first page has one untimed query; later pages follow; no forced eviction",
+              "full_page_oracle_verified": true,
+              "offset": 50,
+              "p50_ms": 10558.607800000002,
+              "phase": "query",
+              "profiled": false,
+              "query": "common",
+              "samples_ms": [
+                10558.607800000002
+              ],
+              "text": "the",
+              "total": 100000
+            },
+            "common:99950": {
+              "api": "Database::search",
+              "cache": "warm OS cache; first page has one untimed query; later pages follow; no forced eviction",
+              "full_page_oracle_verified": true,
+              "offset": 99950,
+              "p50_ms": 10567.4957,
+              "phase": "query",
+              "profiled": false,
+              "query": "common",
+              "samples_ms": [
+                10567.4957
+              ],
+              "text": "the",
+              "total": 100000
+            },
+            "rare:0": {
+              "api": "Database::search",
+              "cache": "warm OS cache; first page has one untimed query; later pages follow; no forced eviction",
+              "full_page_oracle_verified": true,
+              "offset": 0,
+              "p50_ms": 263.7302,
+              "phase": "query",
+              "profiled": false,
+              "query": "rare",
+              "samples_ms": [
+                254.79309999999998,
+                258.6967,
+                260.7944,
+                262.6946,
+                263.5028,
+                263.7302,
+                263.84639999999996,
+                270.6614,
+                273.2043,
+                292.7514
+              ],
+              "text": "abbreviation",
+              "total": 264
+            },
+            "rare:50": {
+              "api": "Database::search",
+              "cache": "warm OS cache; first page has one untimed query; later pages follow; no forced eviction",
+              "full_page_oracle_verified": true,
+              "offset": 50,
+              "p50_ms": 280.3295,
+              "phase": "query",
+              "profiled": false,
+              "query": "rare",
+              "samples_ms": [
+                264.1941,
+                264.2865,
+                269.3913,
+                271.9508,
+                272.257,
+                280.3295,
+                281.2287,
+                282.16999999999996,
+                282.9664,
+                287.08889999999997
+              ],
+              "text": "abbreviation",
+              "total": 264
+            },
+            "short:0": {
+              "api": "Database::search",
+              "cache": "warm OS cache; first page has one untimed query; later pages follow; no forced eviction",
+              "full_page_oracle_verified": true,
+              "offset": 0,
+              "p50_ms": 11088.0032,
+              "phase": "query",
+              "profiled": false,
+              "query": "short",
+              "samples_ms": [
+                11088.0032
+              ],
+              "text": "of",
+              "total": 100000
+            },
+            "short:50": {
+              "api": "Database::search",
+              "cache": "warm OS cache; first page has one untimed query; later pages follow; no forced eviction",
+              "full_page_oracle_verified": true,
+              "offset": 50,
+              "p50_ms": 11528.034800000001,
+              "phase": "query",
+              "profiled": false,
+              "query": "short",
+              "samples_ms": [
+                11528.034800000001
+              ],
+              "text": "of",
+              "total": 100000
+            },
+            "and:0": {
+              "api": "Database::search",
+              "cache": "warm OS cache; first page has one untimed query; later pages follow; no forced eviction",
+              "full_page_oracle_verified": true,
+              "offset": 0,
+              "p50_ms": 16015.806999999999,
+              "phase": "query",
+              "profiled": false,
+              "query": "and",
+              "samples_ms": [
+                16015.806999999999
+              ],
+              "text": "the whale",
+              "total": 16537
+            },
+            "and:50": {
+              "api": "Database::search",
+              "cache": "warm OS cache; first page has one untimed query; later pages follow; no forced eviction",
+              "full_page_oracle_verified": true,
+              "offset": 50,
+              "p50_ms": 15488.067,
+              "phase": "query",
+              "profiled": false,
+              "query": "and",
+              "samples_ms": [
+                15488.067
+              ],
+              "text": "the whale",
+              "total": 16537
+            }
+          },
+          "memory": {
+            "engine": "fdb",
+            "run": 0,
+            "exit_code": 0,
+            "executable": "C:\\Users\\Serkan\\Documents\\ChatGPT\\fdb\\output\\fdb-engine-fold-candidate-20261011.exe",
+            "fdb_database": "C:\\Users\\Serkan\\Documents\\ChatGPT\\fdb\\data\\engine-fold-v2-20261011",
+            "sqlite_database": "C:\\Users\\Serkan\\Documents\\ChatGPT\\fdb\\data\\sqlite-passages-20261011",
+            "peak_working_set_bytes": 135950336,
+            "sampled_peak_private_bytes": 141213696,
+            "sample_interval_ms": 20,
+            "samples": 3876,
+            "elapsed_s": 154.5268487,
+            "cpu_ms": 145796.875,
+            "window": "whole native process: open + corpus plan/books/oracle + queries; no integrity command",
+            "includes_os_file_cache": false
+          }
+        },
+        {
+          "opening": {
+            "api": "Database::search",
+            "open_ms": 19973.3929,
+            "phase": "open",
+            "stats": {
+              "compaction_running": false,
+              "delta_keys": 0,
+              "disk_index_bytes": 3551235145,
+              "disk_posting_entries": 192782228,
+              "documents": 100000,
+              "generation": 1,
+              "log_bytes": 2741774867,
+              "resident_documents": 0,
+              "resident_text_bytes": 0,
+              "segments": 1,
+              "sequence": 200,
+              "source_bytes": 5483549734
+            }
+          },
+          "queries": {
+            "common:0": {
+              "api": "Database::search",
+              "cache": "warm OS cache; first page has one untimed query; later pages follow; no forced eviction",
+              "full_page_oracle_verified": true,
+              "offset": 0,
+              "p50_ms": 7449.6901,
+              "phase": "query",
+              "profiled": false,
+              "query": "common",
+              "samples_ms": [
+                7449.6901
+              ],
+              "text": "the",
+              "total": 100000
+            },
+            "common:50": {
+              "api": "Database::search",
+              "cache": "warm OS cache; first page has one untimed query; later pages follow; no forced eviction",
+              "full_page_oracle_verified": true,
+              "offset": 50,
+              "p50_ms": 7383.9984,
+              "phase": "query",
+              "profiled": false,
+              "query": "common",
+              "samples_ms": [
+                7383.9984
+              ],
+              "text": "the",
+              "total": 100000
+            },
+            "common:99950": {
+              "api": "Database::search",
+              "cache": "warm OS cache; first page has one untimed query; later pages follow; no forced eviction",
+              "full_page_oracle_verified": true,
+              "offset": 99950,
+              "p50_ms": 7427.1719,
+              "phase": "query",
+              "profiled": false,
+              "query": "common",
+              "samples_ms": [
+                7427.1719
+              ],
+              "text": "the",
+              "total": 100000
+            },
+            "rare:0": {
+              "api": "Database::search",
+              "cache": "warm OS cache; first page has one untimed query; later pages follow; no forced eviction",
+              "full_page_oracle_verified": true,
+              "offset": 0,
+              "p50_ms": 182.9618,
+              "phase": "query",
+              "profiled": false,
+              "query": "rare",
+              "samples_ms": [
+                174.41660000000002,
+                174.55870000000002,
+                175.1858,
+                175.79610000000002,
+                180.5686,
+                182.9618,
+                184.3396,
+                184.7027,
+                184.8825,
+                187.06449999999998
+              ],
+              "text": "abbreviation",
+              "total": 264
+            },
+            "rare:50": {
+              "api": "Database::search",
+              "cache": "warm OS cache; first page has one untimed query; later pages follow; no forced eviction",
+              "full_page_oracle_verified": true,
+              "offset": 50,
+              "p50_ms": 176.655,
+              "phase": "query",
+              "profiled": false,
+              "query": "rare",
+              "samples_ms": [
+                174.539,
+                174.9976,
+                175.49339999999998,
+                175.7929,
+                176.121,
+                176.655,
+                180.37619999999998,
+                182.6886,
+                184.88060000000002,
+                226.28
+              ],
+              "text": "abbreviation",
+              "total": 264
+            },
+            "short:0": {
+              "api": "Database::search",
+              "cache": "warm OS cache; first page has one untimed query; later pages follow; no forced eviction",
+              "full_page_oracle_verified": true,
+              "offset": 0,
+              "p50_ms": 10917.7616,
+              "phase": "query",
+              "profiled": false,
+              "query": "short",
+              "samples_ms": [
+                10917.7616
+              ],
+              "text": "of",
+              "total": 100000
+            },
+            "short:50": {
+              "api": "Database::search",
+              "cache": "warm OS cache; first page has one untimed query; later pages follow; no forced eviction",
+              "full_page_oracle_verified": true,
+              "offset": 50,
+              "p50_ms": 10450.184500000001,
+              "phase": "query",
+              "profiled": false,
+              "query": "short",
+              "samples_ms": [
+                10450.184500000001
+              ],
+              "text": "of",
+              "total": 100000
+            },
+            "and:0": {
+              "api": "Database::search",
+              "cache": "warm OS cache; first page has one untimed query; later pages follow; no forced eviction",
+              "full_page_oracle_verified": true,
+              "offset": 0,
+              "p50_ms": 12890.069000000001,
+              "phase": "query",
+              "profiled": false,
+              "query": "and",
+              "samples_ms": [
+                12890.069000000001
+              ],
+              "text": "the whale",
+              "total": 16537
+            },
+            "and:50": {
+              "api": "Database::search",
+              "cache": "warm OS cache; first page has one untimed query; later pages follow; no forced eviction",
+              "full_page_oracle_verified": true,
+              "offset": 50,
+              "p50_ms": 10602.2014,
+              "phase": "query",
+              "profiled": false,
+              "query": "and",
+              "samples_ms": [
+                10602.2014
+              ],
+              "text": "the whale",
+              "total": 16537
+            }
+          },
+          "memory": {
+            "engine": "fdb",
+            "run": 1,
+            "exit_code": 0,
+            "executable": "C:\\Users\\Serkan\\Documents\\ChatGPT\\fdb\\output\\fdb-engine-fold-candidate-20261011.exe",
+            "fdb_database": "C:\\Users\\Serkan\\Documents\\ChatGPT\\fdb\\data\\engine-fold-v2-20261011",
+            "sqlite_database": "C:\\Users\\Serkan\\Documents\\ChatGPT\\fdb\\data\\sqlite-passages-20261011",
+            "peak_working_set_bytes": 136585216,
+            "sampled_peak_private_bytes": 139415552,
+            "sample_interval_ms": 20,
+            "samples": 3238,
+            "elapsed_s": 123.9322233,
+            "cpu_ms": 119593.75,
+            "window": "whole native process: open + corpus plan/books/oracle + queries; no integrity command",
+            "includes_os_file_cache": false
+          }
+        },
+        {
+          "opening": {
+            "api": "Database::search",
+            "open_ms": 20169.7233,
+            "phase": "open",
+            "stats": {
+              "compaction_running": false,
+              "delta_keys": 0,
+              "disk_index_bytes": 3551235145,
+              "disk_posting_entries": 192782228,
+              "documents": 100000,
+              "generation": 1,
+              "log_bytes": 2741774867,
+              "resident_documents": 0,
+              "resident_text_bytes": 0,
+              "segments": 1,
+              "sequence": 200,
+              "source_bytes": 5483549734
+            }
+          },
+          "queries": {
+            "common:0": {
+              "api": "Database::search",
+              "cache": "warm OS cache; first page has one untimed query; later pages follow; no forced eviction",
+              "full_page_oracle_verified": true,
+              "offset": 0,
+              "p50_ms": 7463.9647,
+              "phase": "query",
+              "profiled": false,
+              "query": "common",
+              "samples_ms": [
+                7463.9647
+              ],
+              "text": "the",
+              "total": 100000
+            },
+            "common:50": {
+              "api": "Database::search",
+              "cache": "warm OS cache; first page has one untimed query; later pages follow; no forced eviction",
+              "full_page_oracle_verified": true,
+              "offset": 50,
+              "p50_ms": 7468.843800000001,
+              "phase": "query",
+              "profiled": false,
+              "query": "common",
+              "samples_ms": [
+                7468.843800000001
+              ],
+              "text": "the",
+              "total": 100000
+            },
+            "common:99950": {
+              "api": "Database::search",
+              "cache": "warm OS cache; first page has one untimed query; later pages follow; no forced eviction",
+              "full_page_oracle_verified": true,
+              "offset": 99950,
+              "p50_ms": 7540.5267,
+              "phase": "query",
+              "profiled": false,
+              "query": "common",
+              "samples_ms": [
+                7540.5267
+              ],
+              "text": "the",
+              "total": 100000
+            },
+            "rare:0": {
+              "api": "Database::search",
+              "cache": "warm OS cache; first page has one untimed query; later pages follow; no forced eviction",
+              "full_page_oracle_verified": true,
+              "offset": 0,
+              "p50_ms": 179.8587,
+              "phase": "query",
+              "profiled": false,
+              "query": "rare",
+              "samples_ms": [
+                174.3988,
+                176.0669,
+                177.97760000000002,
+                178.9404,
+                179.6062,
+                179.8587,
+                184.7308,
+                191.199,
+                196.101,
+                198.2092
+              ],
+              "text": "abbreviation",
+              "total": 264
+            },
+            "rare:50": {
+              "api": "Database::search",
+              "cache": "warm OS cache; first page has one untimed query; later pages follow; no forced eviction",
+              "full_page_oracle_verified": true,
+              "offset": 50,
+              "p50_ms": 176.3876,
+              "phase": "query",
+              "profiled": false,
+              "query": "rare",
+              "samples_ms": [
+                174.4831,
+                174.5703,
+                175.687,
+                176.13590000000002,
+                176.3339,
+                176.3876,
+                176.431,
+                177.2033,
+                178.05450000000002,
+                179.6019
+              ],
+              "text": "abbreviation",
+              "total": 264
+            },
+            "short:0": {
+              "api": "Database::search",
+              "cache": "warm OS cache; first page has one untimed query; later pages follow; no forced eviction",
+              "full_page_oracle_verified": true,
+              "offset": 0,
+              "p50_ms": 7612.3772,
+              "phase": "query",
+              "profiled": false,
+              "query": "short",
+              "samples_ms": [
+                7612.3772
+              ],
+              "text": "of",
+              "total": 100000
+            },
+            "short:50": {
+              "api": "Database::search",
+              "cache": "warm OS cache; first page has one untimed query; later pages follow; no forced eviction",
+              "full_page_oracle_verified": true,
+              "offset": 50,
+              "p50_ms": 7515.1385,
+              "phase": "query",
+              "profiled": false,
+              "query": "short",
+              "samples_ms": [
+                7515.1385
+              ],
+              "text": "of",
+              "total": 100000
+            },
+            "and:0": {
+              "api": "Database::search",
+              "cache": "warm OS cache; first page has one untimed query; later pages follow; no forced eviction",
+              "full_page_oracle_verified": true,
+              "offset": 0,
+              "p50_ms": 10679.3651,
+              "phase": "query",
+              "profiled": false,
+              "query": "and",
+              "samples_ms": [
+                10679.3651
+              ],
+              "text": "the whale",
+              "total": 16537
+            },
+            "and:50": {
+              "api": "Database::search",
+              "cache": "warm OS cache; first page has one untimed query; later pages follow; no forced eviction",
+              "full_page_oracle_verified": true,
+              "offset": 50,
+              "p50_ms": 10701.717200000001,
+              "phase": "query",
+              "profiled": false,
+              "query": "and",
+              "samples_ms": [
+                10701.717200000001
+              ],
+              "text": "the whale",
+              "total": 16537
+            }
+          },
+          "memory": {
+            "engine": "fdb",
+            "run": 2,
+            "exit_code": 0,
+            "executable": "C:\\Users\\Serkan\\Documents\\ChatGPT\\fdb\\output\\fdb-engine-fold-candidate-20261011.exe",
+            "fdb_database": "C:\\Users\\Serkan\\Documents\\ChatGPT\\fdb\\data\\engine-fold-v2-20261011",
+            "sqlite_database": "C:\\Users\\Serkan\\Documents\\ChatGPT\\fdb\\data\\sqlite-passages-20261011",
+            "peak_working_set_bytes": 136548352,
+            "sampled_peak_private_bytes": 167444480,
+            "sample_interval_ms": 20,
+            "samples": 2916,
+            "elapsed_s": 109.2844592,
+            "cpu_ms": 105968.75,
+            "window": "whole native process: open + corpus plan/books/oracle + queries; no integrity command",
+            "includes_os_file_cache": false
+          }
+        }
+      ],
+      "median": {
+        "open_ms": 20169.7233,
+        "peak_working_set_bytes": 136548352,
+        "sampled_peak_private_bytes": 141213696,
+        "process_elapsed_s": 123.9322233,
+        "process_cpu_ms": 119593.75,
+        "queries_ms": {
+          "common:0": 7463.9647,
+          "common:50": 7468.843800000001,
+          "common:99950": 7540.5267,
+          "rare:0": 182.9618,
+          "rare:50": 176.655,
+          "short:0": 10917.7616,
+          "short:50": 10450.184500000001,
+          "and:0": 12890.069000000001,
+          "and:50": 10701.717200000001
+        }
+      }
+    },
+    "sqlite": {
+      "runs": [
+        {
+          "opening": {
+            "api": "SQLite transaction count + key page + full JSON decode",
+            "full_integrity_on_open": false,
+            "open_ms": 1.7946,
+            "phase": "open",
+            "sqlite_version": "3.53.2"
+          },
+          "queries": {
+            "common:0": {
+              "api": "SQLite transaction count + key page + full JSON decode",
+              "cache": "warm protocol: one untimed first page; subsequent pages follow; no forced eviction",
+              "full_page_oracle_verified": true,
+              "offset": 0,
+              "p50_ms": 46678.7626,
+              "phase": "query",
+              "plan": [
+                "MATERIALIZE selected",
+                "SCAN search VIRTUAL TABLE INDEX 0:L0",
+                "SEARCH d USING INTEGER PRIMARY KEY (rowid=?)",
+                "USE TEMP B-TREE FOR ORDER BY",
+                "SCAN s",
+                "SEARCH d USING INTEGER PRIMARY KEY (rowid=?)"
+              ],
+              "profiled": false,
+              "query": "common",
+              "samples_ms": [
+                46678.7626
+              ],
+              "text": "the",
+              "total": 100000
+            },
+            "common:50": {
+              "api": "SQLite transaction count + key page + full JSON decode",
+              "cache": "warm protocol: one untimed first page; subsequent pages follow; no forced eviction",
+              "full_page_oracle_verified": true,
+              "offset": 50,
+              "p50_ms": 47999.024,
+              "phase": "query",
+              "plan": [
+                "MATERIALIZE selected",
+                "SCAN search VIRTUAL TABLE INDEX 0:L0",
+                "SEARCH d USING INTEGER PRIMARY KEY (rowid=?)",
+                "USE TEMP B-TREE FOR ORDER BY",
+                "SCAN s",
+                "SEARCH d USING INTEGER PRIMARY KEY (rowid=?)"
+              ],
+              "profiled": false,
+              "query": "common",
+              "samples_ms": [
+                47999.024
+              ],
+              "text": "the",
+              "total": 100000
+            },
+            "common:99950": {
+              "api": "SQLite transaction count + key page + full JSON decode",
+              "cache": "warm protocol: one untimed first page; subsequent pages follow; no forced eviction",
+              "full_page_oracle_verified": true,
+              "offset": 99950,
+              "p50_ms": 48237.9448,
+              "phase": "query",
+              "plan": [
+                "MATERIALIZE selected",
+                "SCAN search VIRTUAL TABLE INDEX 0:L0",
+                "SEARCH d USING INTEGER PRIMARY KEY (rowid=?)",
+                "USE TEMP B-TREE FOR ORDER BY",
+                "SCAN s",
+                "SEARCH d USING INTEGER PRIMARY KEY (rowid=?)"
+              ],
+              "profiled": false,
+              "query": "common",
+              "samples_ms": [
+                48237.9448
+              ],
+              "text": "the",
+              "total": 100000
+            },
+            "rare:0": {
+              "api": "SQLite transaction count + key page + full JSON decode",
+              "cache": "warm protocol: one untimed first page; subsequent pages follow; no forced eviction",
+              "full_page_oracle_verified": true,
+              "offset": 0,
+              "p50_ms": 178.4985,
+              "phase": "query",
+              "plan": [
+                "MATERIALIZE selected",
+                "SCAN search VIRTUAL TABLE INDEX 0:L0",
+                "SEARCH d USING INTEGER PRIMARY KEY (rowid=?)",
+                "USE TEMP B-TREE FOR ORDER BY",
+                "SCAN s",
+                "SEARCH d USING INTEGER PRIMARY KEY (rowid=?)"
+              ],
+              "profiled": false,
+              "query": "rare",
+              "samples_ms": [
+                168.08880000000002,
+                173.4853,
+                174.25,
+                175.67,
+                175.9229,
+                178.4985,
+                185.068,
+                186.8986,
+                188.39030000000002,
+                200.8547
+              ],
+              "text": "abbreviation",
+              "total": 264
+            },
+            "rare:50": {
+              "api": "SQLite transaction count + key page + full JSON decode",
+              "cache": "warm protocol: one untimed first page; subsequent pages follow; no forced eviction",
+              "full_page_oracle_verified": true,
+              "offset": 50,
+              "p50_ms": 182.3495,
+              "phase": "query",
+              "plan": [
+                "MATERIALIZE selected",
+                "SCAN search VIRTUAL TABLE INDEX 0:L0",
+                "SEARCH d USING INTEGER PRIMARY KEY (rowid=?)",
+                "USE TEMP B-TREE FOR ORDER BY",
+                "SCAN s",
+                "SEARCH d USING INTEGER PRIMARY KEY (rowid=?)"
+              ],
+              "profiled": false,
+              "query": "rare",
+              "samples_ms": [
+                175.7693,
+                177.56900000000002,
+                178.5446,
+                178.82219999999998,
+                182.2742,
+                182.3495,
+                184.0294,
+                188.0689,
+                193.4184,
+                193.828
+              ],
+              "text": "abbreviation",
+              "total": 264
+            },
+            "short:0": {
+              "api": "SQLite transaction count + key page + full JSON decode",
+              "cache": "warm protocol: one untimed first page; subsequent pages follow; no forced eviction",
+              "full_page_oracle_verified": true,
+              "offset": 0,
+              "p50_ms": 45803.580799999996,
+              "phase": "query",
+              "plan": [
+                "MATERIALIZE selected",
+                "SCAN search VIRTUAL TABLE INDEX 0:L0",
+                "SEARCH d USING INTEGER PRIMARY KEY (rowid=?)",
+                "USE TEMP B-TREE FOR ORDER BY",
+                "SCAN s",
+                "SEARCH d USING INTEGER PRIMARY KEY (rowid=?)"
+              ],
+              "profiled": false,
+              "query": "short",
+              "samples_ms": [
+                45803.580799999996
+              ],
+              "text": "of",
+              "total": 100000
+            },
+            "short:50": {
+              "api": "SQLite transaction count + key page + full JSON decode",
+              "cache": "warm protocol: one untimed first page; subsequent pages follow; no forced eviction",
+              "full_page_oracle_verified": true,
+              "offset": 50,
+              "p50_ms": 44878.996999999996,
+              "phase": "query",
+              "plan": [
+                "MATERIALIZE selected",
+                "SCAN search VIRTUAL TABLE INDEX 0:L0",
+                "SEARCH d USING INTEGER PRIMARY KEY (rowid=?)",
+                "USE TEMP B-TREE FOR ORDER BY",
+                "SCAN s",
+                "SEARCH d USING INTEGER PRIMARY KEY (rowid=?)"
+              ],
+              "profiled": false,
+              "query": "short",
+              "samples_ms": [
+                44878.996999999996
+              ],
+              "text": "of",
+              "total": 100000
+            },
+            "and:0": {
+              "api": "SQLite transaction count + key page + full JSON decode",
+              "cache": "warm protocol: one untimed first page; subsequent pages follow; no forced eviction",
+              "full_page_oracle_verified": true,
+              "offset": 0,
+              "p50_ms": 52158.9111,
+              "phase": "query",
+              "plan": [
+                "MATERIALIZE selected",
+                "SCAN search VIRTUAL TABLE INDEX 0:L0L0",
+                "SEARCH d USING INTEGER PRIMARY KEY (rowid=?)",
+                "USE TEMP B-TREE FOR ORDER BY",
+                "SCAN s",
+                "SEARCH d USING INTEGER PRIMARY KEY (rowid=?)"
+              ],
+              "profiled": false,
+              "query": "and",
+              "samples_ms": [
+                52158.9111
+              ],
+              "text": "the whale",
+              "total": 16537
+            },
+            "and:50": {
+              "api": "SQLite transaction count + key page + full JSON decode",
+              "cache": "warm protocol: one untimed first page; subsequent pages follow; no forced eviction",
+              "full_page_oracle_verified": true,
+              "offset": 50,
+              "p50_ms": 49568.3098,
+              "phase": "query",
+              "plan": [
+                "MATERIALIZE selected",
+                "SCAN search VIRTUAL TABLE INDEX 0:L0L0",
+                "SEARCH d USING INTEGER PRIMARY KEY (rowid=?)",
+                "USE TEMP B-TREE FOR ORDER BY",
+                "SCAN s",
+                "SEARCH d USING INTEGER PRIMARY KEY (rowid=?)"
+              ],
+              "profiled": false,
+              "query": "and",
+              "samples_ms": [
+                49568.3098
+              ],
+              "text": "the whale",
+              "total": 16537
+            }
+          },
+          "memory": {
+            "engine": "sqlite",
+            "run": 0,
+            "exit_code": 0,
+            "executable": "C:\\Users\\Serkan\\Documents\\ChatGPT\\fdb\\output\\sqlite-passages-20261011.exe",
+            "fdb_database": "C:\\Users\\Serkan\\Documents\\ChatGPT\\fdb\\data\\engine-fold-v2-20261011",
+            "sqlite_database": "C:\\Users\\Serkan\\Documents\\ChatGPT\\fdb\\data\\sqlite-passages-20261011",
+            "peak_working_set_bytes": 30031872,
+            "sampled_peak_private_bytes": 25501696,
+            "sample_interval_ms": 20,
+            "samples": 12143,
+            "elapsed_s": 484.9379195,
+            "cpu_ms": 229187.5,
+            "window": "whole native process: open + corpus plan/books/oracle + queries; no integrity command",
+            "includes_os_file_cache": false
+          }
+        },
+        {
+          "opening": {
+            "api": "SQLite transaction count + key page + full JSON decode",
+            "full_integrity_on_open": false,
+            "open_ms": 14.8187,
+            "phase": "open",
+            "sqlite_version": "3.53.2"
+          },
+          "queries": {
+            "common:0": {
+              "api": "SQLite transaction count + key page + full JSON decode",
+              "cache": "warm protocol: one untimed first page; subsequent pages follow; no forced eviction",
+              "full_page_oracle_verified": true,
+              "offset": 0,
+              "p50_ms": 45329.0594,
+              "phase": "query",
+              "plan": [
+                "MATERIALIZE selected",
+                "SCAN search VIRTUAL TABLE INDEX 0:L0",
+                "SEARCH d USING INTEGER PRIMARY KEY (rowid=?)",
+                "USE TEMP B-TREE FOR ORDER BY",
+                "SCAN s",
+                "SEARCH d USING INTEGER PRIMARY KEY (rowid=?)"
+              ],
+              "profiled": false,
+              "query": "common",
+              "samples_ms": [
+                45329.0594
+              ],
+              "text": "the",
+              "total": 100000
+            },
+            "common:50": {
+              "api": "SQLite transaction count + key page + full JSON decode",
+              "cache": "warm protocol: one untimed first page; subsequent pages follow; no forced eviction",
+              "full_page_oracle_verified": true,
+              "offset": 50,
+              "p50_ms": 45689.886,
+              "phase": "query",
+              "plan": [
+                "MATERIALIZE selected",
+                "SCAN search VIRTUAL TABLE INDEX 0:L0",
+                "SEARCH d USING INTEGER PRIMARY KEY (rowid=?)",
+                "USE TEMP B-TREE FOR ORDER BY",
+                "SCAN s",
+                "SEARCH d USING INTEGER PRIMARY KEY (rowid=?)"
+              ],
+              "profiled": false,
+              "query": "common",
+              "samples_ms": [
+                45689.886
+              ],
+              "text": "the",
+              "total": 100000
+            },
+            "common:99950": {
+              "api": "SQLite transaction count + key page + full JSON decode",
+              "cache": "warm protocol: one untimed first page; subsequent pages follow; no forced eviction",
+              "full_page_oracle_verified": true,
+              "offset": 99950,
+              "p50_ms": 45684.0495,
+              "phase": "query",
+              "plan": [
+                "MATERIALIZE selected",
+                "SCAN search VIRTUAL TABLE INDEX 0:L0",
+                "SEARCH d USING INTEGER PRIMARY KEY (rowid=?)",
+                "USE TEMP B-TREE FOR ORDER BY",
+                "SCAN s",
+                "SEARCH d USING INTEGER PRIMARY KEY (rowid=?)"
+              ],
+              "profiled": false,
+              "query": "common",
+              "samples_ms": [
+                45684.0495
+              ],
+              "text": "the",
+              "total": 100000
+            },
+            "rare:0": {
+              "api": "SQLite transaction count + key page + full JSON decode",
+              "cache": "warm protocol: one untimed first page; subsequent pages follow; no forced eviction",
+              "full_page_oracle_verified": true,
+              "offset": 0,
+              "p50_ms": 198.3655,
+              "phase": "query",
+              "plan": [
+                "MATERIALIZE selected",
+                "SCAN search VIRTUAL TABLE INDEX 0:L0",
+                "SEARCH d USING INTEGER PRIMARY KEY (rowid=?)",
+                "USE TEMP B-TREE FOR ORDER BY",
+                "SCAN s",
+                "SEARCH d USING INTEGER PRIMARY KEY (rowid=?)"
+              ],
+              "profiled": false,
+              "query": "rare",
+              "samples_ms": [
+                183.621,
+                185.4818,
+                187.36720000000003,
+                192.9025,
+                193.7598,
+                198.3655,
+                200.7466,
+                201.3371,
+                203.46529999999998,
+                204.51639999999998
+              ],
+              "text": "abbreviation",
+              "total": 264
+            },
+            "rare:50": {
+              "api": "SQLite transaction count + key page + full JSON decode",
+              "cache": "warm protocol: one untimed first page; subsequent pages follow; no forced eviction",
+              "full_page_oracle_verified": true,
+              "offset": 50,
+              "p50_ms": 186.0856,
+              "phase": "query",
+              "plan": [
+                "MATERIALIZE selected",
+                "SCAN search VIRTUAL TABLE INDEX 0:L0",
+                "SEARCH d USING INTEGER PRIMARY KEY (rowid=?)",
+                "USE TEMP B-TREE FOR ORDER BY",
+                "SCAN s",
+                "SEARCH d USING INTEGER PRIMARY KEY (rowid=?)"
+              ],
+              "profiled": false,
+              "query": "rare",
+              "samples_ms": [
+                171.1786,
+                176.5635,
+                178.9636,
+                180.4372,
+                184.9904,
+                186.0856,
+                188.1655,
+                188.9703,
+                191.3313,
+                192.282
+              ],
+              "text": "abbreviation",
+              "total": 264
+            },
+            "short:0": {
+              "api": "SQLite transaction count + key page + full JSON decode",
+              "cache": "warm protocol: one untimed first page; subsequent pages follow; no forced eviction",
+              "full_page_oracle_verified": true,
+              "offset": 0,
+              "p50_ms": 44251.3833,
+              "phase": "query",
+              "plan": [
+                "MATERIALIZE selected",
+                "SCAN search VIRTUAL TABLE INDEX 0:L0",
+                "SEARCH d USING INTEGER PRIMARY KEY (rowid=?)",
+                "USE TEMP B-TREE FOR ORDER BY",
+                "SCAN s",
+                "SEARCH d USING INTEGER PRIMARY KEY (rowid=?)"
+              ],
+              "profiled": false,
+              "query": "short",
+              "samples_ms": [
+                44251.3833
+              ],
+              "text": "of",
+              "total": 100000
+            },
+            "short:50": {
+              "api": "SQLite transaction count + key page + full JSON decode",
+              "cache": "warm protocol: one untimed first page; subsequent pages follow; no forced eviction",
+              "full_page_oracle_verified": true,
+              "offset": 50,
+              "p50_ms": 45045.9963,
+              "phase": "query",
+              "plan": [
+                "MATERIALIZE selected",
+                "SCAN search VIRTUAL TABLE INDEX 0:L0",
+                "SEARCH d USING INTEGER PRIMARY KEY (rowid=?)",
+                "USE TEMP B-TREE FOR ORDER BY",
+                "SCAN s",
+                "SEARCH d USING INTEGER PRIMARY KEY (rowid=?)"
+              ],
+              "profiled": false,
+              "query": "short",
+              "samples_ms": [
+                45045.9963
+              ],
+              "text": "of",
+              "total": 100000
+            },
+            "and:0": {
+              "api": "SQLite transaction count + key page + full JSON decode",
+              "cache": "warm protocol: one untimed first page; subsequent pages follow; no forced eviction",
+              "full_page_oracle_verified": true,
+              "offset": 0,
+              "p50_ms": 42336.7589,
+              "phase": "query",
+              "plan": [
+                "MATERIALIZE selected",
+                "SCAN search VIRTUAL TABLE INDEX 0:L0L0",
+                "SEARCH d USING INTEGER PRIMARY KEY (rowid=?)",
+                "USE TEMP B-TREE FOR ORDER BY",
+                "SCAN s",
+                "SEARCH d USING INTEGER PRIMARY KEY (rowid=?)"
+              ],
+              "profiled": false,
+              "query": "and",
+              "samples_ms": [
+                42336.7589
+              ],
+              "text": "the whale",
+              "total": 16537
+            },
+            "and:50": {
+              "api": "SQLite transaction count + key page + full JSON decode",
+              "cache": "warm protocol: one untimed first page; subsequent pages follow; no forced eviction",
+              "full_page_oracle_verified": true,
+              "offset": 50,
+              "p50_ms": 41345.151,
+              "phase": "query",
+              "plan": [
+                "MATERIALIZE selected",
+                "SCAN search VIRTUAL TABLE INDEX 0:L0L0",
+                "SEARCH d USING INTEGER PRIMARY KEY (rowid=?)",
+                "USE TEMP B-TREE FOR ORDER BY",
+                "SCAN s",
+                "SEARCH d USING INTEGER PRIMARY KEY (rowid=?)"
+              ],
+              "profiled": false,
+              "query": "and",
+              "samples_ms": [
+                41345.151
+              ],
+              "text": "the whale",
+              "total": 16537
+            }
+          },
+          "memory": {
+            "engine": "sqlite",
+            "run": 1,
+            "exit_code": 0,
+            "executable": "C:\\Users\\Serkan\\Documents\\ChatGPT\\fdb\\output\\sqlite-passages-20261011.exe",
+            "fdb_database": "C:\\Users\\Serkan\\Documents\\ChatGPT\\fdb\\data\\engine-fold-v2-20261011",
+            "sqlite_database": "C:\\Users\\Serkan\\Documents\\ChatGPT\\fdb\\data\\sqlite-passages-20261011",
+            "peak_working_set_bytes": 29753344,
+            "sampled_peak_private_bytes": 25948160,
+            "sample_interval_ms": 20,
+            "samples": 11405,
+            "elapsed_s": 444.358575,
+            "cpu_ms": 209875.0,
+            "window": "whole native process: open + corpus plan/books/oracle + queries; no integrity command",
+            "includes_os_file_cache": false
+          }
+        },
+        {
+          "opening": {
+            "api": "SQLite transaction count + key page + full JSON decode",
+            "full_integrity_on_open": false,
+            "open_ms": 9.5852,
+            "phase": "open",
+            "sqlite_version": "3.53.2"
+          },
+          "queries": {
+            "common:0": {
+              "api": "SQLite transaction count + key page + full JSON decode",
+              "cache": "warm protocol: one untimed first page; subsequent pages follow; no forced eviction",
+              "full_page_oracle_verified": true,
+              "offset": 0,
+              "p50_ms": 38325.7471,
+              "phase": "query",
+              "plan": [
+                "MATERIALIZE selected",
+                "SCAN search VIRTUAL TABLE INDEX 0:L0",
+                "SEARCH d USING INTEGER PRIMARY KEY (rowid=?)",
+                "USE TEMP B-TREE FOR ORDER BY",
+                "SCAN s",
+                "SEARCH d USING INTEGER PRIMARY KEY (rowid=?)"
+              ],
+              "profiled": false,
+              "query": "common",
+              "samples_ms": [
+                38325.7471
+              ],
+              "text": "the",
+              "total": 100000
+            },
+            "common:50": {
+              "api": "SQLite transaction count + key page + full JSON decode",
+              "cache": "warm protocol: one untimed first page; subsequent pages follow; no forced eviction",
+              "full_page_oracle_verified": true,
+              "offset": 50,
+              "p50_ms": 38039.763399999996,
+              "phase": "query",
+              "plan": [
+                "MATERIALIZE selected",
+                "SCAN search VIRTUAL TABLE INDEX 0:L0",
+                "SEARCH d USING INTEGER PRIMARY KEY (rowid=?)",
+                "USE TEMP B-TREE FOR ORDER BY",
+                "SCAN s",
+                "SEARCH d USING INTEGER PRIMARY KEY (rowid=?)"
+              ],
+              "profiled": false,
+              "query": "common",
+              "samples_ms": [
+                38039.763399999996
+              ],
+              "text": "the",
+              "total": 100000
+            },
+            "common:99950": {
+              "api": "SQLite transaction count + key page + full JSON decode",
+              "cache": "warm protocol: one untimed first page; subsequent pages follow; no forced eviction",
+              "full_page_oracle_verified": true,
+              "offset": 99950,
+              "p50_ms": 38616.5429,
+              "phase": "query",
+              "plan": [
+                "MATERIALIZE selected",
+                "SCAN search VIRTUAL TABLE INDEX 0:L0",
+                "SEARCH d USING INTEGER PRIMARY KEY (rowid=?)",
+                "USE TEMP B-TREE FOR ORDER BY",
+                "SCAN s",
+                "SEARCH d USING INTEGER PRIMARY KEY (rowid=?)"
+              ],
+              "profiled": false,
+              "query": "common",
+              "samples_ms": [
+                38616.5429
+              ],
+              "text": "the",
+              "total": 100000
+            },
+            "rare:0": {
+              "api": "SQLite transaction count + key page + full JSON decode",
+              "cache": "warm protocol: one untimed first page; subsequent pages follow; no forced eviction",
+              "full_page_oracle_verified": true,
+              "offset": 0,
+              "p50_ms": 130.21759999999998,
+              "phase": "query",
+              "plan": [
+                "MATERIALIZE selected",
+                "SCAN search VIRTUAL TABLE INDEX 0:L0",
+                "SEARCH d USING INTEGER PRIMARY KEY (rowid=?)",
+                "USE TEMP B-TREE FOR ORDER BY",
+                "SCAN s",
+                "SEARCH d USING INTEGER PRIMARY KEY (rowid=?)"
+              ],
+              "profiled": false,
+              "query": "rare",
+              "samples_ms": [
+                126.17329999999998,
+                128.0282,
+                128.7261,
+                129.9257,
+                129.9411,
+                130.21759999999998,
+                130.5544,
+                130.86939999999998,
+                131.9641,
+                132.3529
+              ],
+              "text": "abbreviation",
+              "total": 264
+            },
+            "rare:50": {
+              "api": "SQLite transaction count + key page + full JSON decode",
+              "cache": "warm protocol: one untimed first page; subsequent pages follow; no forced eviction",
+              "full_page_oracle_verified": true,
+              "offset": 50,
+              "p50_ms": 134.20960000000002,
+              "phase": "query",
+              "plan": [
+                "MATERIALIZE selected",
+                "SCAN search VIRTUAL TABLE INDEX 0:L0",
+                "SEARCH d USING INTEGER PRIMARY KEY (rowid=?)",
+                "USE TEMP B-TREE FOR ORDER BY",
+                "SCAN s",
+                "SEARCH d USING INTEGER PRIMARY KEY (rowid=?)"
+              ],
+              "profiled": false,
+              "query": "rare",
+              "samples_ms": [
+                127.2258,
+                127.59819999999999,
+                128.5304,
+                130.5874,
+                131.7906,
+                134.20960000000002,
+                134.9244,
+                135.62019999999998,
+                136.4056,
+                142.28089999999997
+              ],
+              "text": "abbreviation",
+              "total": 264
+            },
+            "short:0": {
+              "api": "SQLite transaction count + key page + full JSON decode",
+              "cache": "warm protocol: one untimed first page; subsequent pages follow; no forced eviction",
+              "full_page_oracle_verified": true,
+              "offset": 0,
+              "p50_ms": 38631.4542,
+              "phase": "query",
+              "plan": [
+                "MATERIALIZE selected",
+                "SCAN search VIRTUAL TABLE INDEX 0:L0",
+                "SEARCH d USING INTEGER PRIMARY KEY (rowid=?)",
+                "USE TEMP B-TREE FOR ORDER BY",
+                "SCAN s",
+                "SEARCH d USING INTEGER PRIMARY KEY (rowid=?)"
+              ],
+              "profiled": false,
+              "query": "short",
+              "samples_ms": [
+                38631.4542
+              ],
+              "text": "of",
+              "total": 100000
+            },
+            "short:50": {
+              "api": "SQLite transaction count + key page + full JSON decode",
+              "cache": "warm protocol: one untimed first page; subsequent pages follow; no forced eviction",
+              "full_page_oracle_verified": true,
+              "offset": 50,
+              "p50_ms": 38210.5616,
+              "phase": "query",
+              "plan": [
+                "MATERIALIZE selected",
+                "SCAN search VIRTUAL TABLE INDEX 0:L0",
+                "SEARCH d USING INTEGER PRIMARY KEY (rowid=?)",
+                "USE TEMP B-TREE FOR ORDER BY",
+                "SCAN s",
+                "SEARCH d USING INTEGER PRIMARY KEY (rowid=?)"
+              ],
+              "profiled": false,
+              "query": "short",
+              "samples_ms": [
+                38210.5616
+              ],
+              "text": "of",
+              "total": 100000
+            },
+            "and:0": {
+              "api": "SQLite transaction count + key page + full JSON decode",
+              "cache": "warm protocol: one untimed first page; subsequent pages follow; no forced eviction",
+              "full_page_oracle_verified": true,
+              "offset": 0,
+              "p50_ms": 41595.532,
+              "phase": "query",
+              "plan": [
+                "MATERIALIZE selected",
+                "SCAN search VIRTUAL TABLE INDEX 0:L0L0",
+                "SEARCH d USING INTEGER PRIMARY KEY (rowid=?)",
+                "USE TEMP B-TREE FOR ORDER BY",
+                "SCAN s",
+                "SEARCH d USING INTEGER PRIMARY KEY (rowid=?)"
+              ],
+              "profiled": false,
+              "query": "and",
+              "samples_ms": [
+                41595.532
+              ],
+              "text": "the whale",
+              "total": 16537
+            },
+            "and:50": {
+              "api": "SQLite transaction count + key page + full JSON decode",
+              "cache": "warm protocol: one untimed first page; subsequent pages follow; no forced eviction",
+              "full_page_oracle_verified": true,
+              "offset": 50,
+              "p50_ms": 41058.9178,
+              "phase": "query",
+              "plan": [
+                "MATERIALIZE selected",
+                "SCAN search VIRTUAL TABLE INDEX 0:L0L0",
+                "SEARCH d USING INTEGER PRIMARY KEY (rowid=?)",
+                "USE TEMP B-TREE FOR ORDER BY",
+                "SCAN s",
+                "SEARCH d USING INTEGER PRIMARY KEY (rowid=?)"
+              ],
+              "profiled": false,
+              "query": "and",
+              "samples_ms": [
+                41058.9178
+              ],
+              "text": "the whale",
+              "total": 16537
+            }
+          },
+          "memory": {
+            "engine": "sqlite",
+            "run": 2,
+            "exit_code": 0,
+            "executable": "C:\\Users\\Serkan\\Documents\\ChatGPT\\fdb\\output\\sqlite-passages-20261011.exe",
+            "fdb_database": "C:\\Users\\Serkan\\Documents\\ChatGPT\\fdb\\data\\engine-fold-v2-20261011",
+            "sqlite_database": "C:\\Users\\Serkan\\Documents\\ChatGPT\\fdb\\data\\sqlite-passages-20261011",
+            "peak_working_set_bytes": 29712384,
+            "sampled_peak_private_bytes": 25944064,
+            "sample_interval_ms": 20,
+            "samples": 10579,
+            "elapsed_s": 396.6689339,
+            "cpu_ms": 185140.625,
+            "window": "whole native process: open + corpus plan/books/oracle + queries; no integrity command",
+            "includes_os_file_cache": false
+          }
+        }
+      ],
+      "median": {
+        "open_ms": 9.5852,
+        "peak_working_set_bytes": 29753344,
+        "sampled_peak_private_bytes": 25944064,
+        "process_elapsed_s": 444.358575,
+        "process_cpu_ms": 209875.0,
+        "queries_ms": {
+          "common:0": 45329.0594,
+          "common:50": 45689.886,
+          "common:99950": 45684.0495,
+          "rare:0": 178.4985,
+          "rare:50": 182.3495,
+          "short:0": 44251.3833,
+          "short:50": 44878.996999999996,
+          "and:0": 42336.7589,
+          "and:50": 41345.151
+        }
+      }
+    }
+  },
+  "fdb_over_sqlite_time_ratio": {
+    "common:0": 0.16466180412294196,
+    "common:50": 0.16346820825948222,
+    "common:99950": 0.16505819388887583,
+    "rare:0": 1.0250046919161786,
+    "rare:50": 0.9687715074623182,
+    "short:0": 0.24672136294550592,
+    "short:50": 0.23285245211696692,
+    "and:0": 0.3044651819107485,
+    "and:50": 0.2588385080514037
+  },
+  "fdb_faster_every_pair": {
+    "common:0": true,
+    "common:50": true,
+    "common:99950": true,
+    "rare:0": false,
+    "rare:50": false,
+    "short:0": true,
+    "short:50": true,
+    "and:0": true,
+    "and:50": true
+  },
+  "sqlite_faster_every_pair": {
+    "common:0": false,
+    "common:50": false,
+    "common:99950": false,
+    "rare:0": false,
+    "rare:50": false,
+    "short:0": false,
+    "short:50": false,
+    "and:0": false,
+    "and:50": false
+  },
+  "paired_time_ratios": {
+    "common:0": [
+      0.23153739298136405,
+      0.16434689355146867,
+      0.1947506641038186
+    ],
+    "common:50": [
+      0.21997546866786297,
+      0.16161122398072958,
+      0.1963430666343209
+    ],
+    "common:99950": [
+      0.21907018932531305,
+      0.1625769164793502,
+      0.1952667466771087
+    ],
+    "rare:0": [
+      1.4774925279484141,
+      0.9223468798757849,
+      1.381216517582877
+    ],
+    "rare:50": [
+      1.5373198171642917,
+      0.9493211726216322,
+      1.3142696200569852
+    ],
+    "short:0": [
+      0.24207721331691168,
+      0.24672136294550592,
+      0.19705127227646532
+    ],
+    "short:50": [
+      0.2568692611378994,
+      0.23198919678462082,
+      0.19667699675997433
+    ],
+    "and:0": [
+      0.30705792475794225,
+      0.3044651819107485,
+      0.2567430824060623
+    ],
+    "and:50": [
+      0.31245905019743075,
+      0.2564315559036173,
+      0.2606429436871325
+    ]
+  },
+  "scope": "same 100k long passages, exact total + sorted 50 full StoredDocuments, warm protocol; query-only; native serial paired processes",
+  "open_contract_equal": false
+}

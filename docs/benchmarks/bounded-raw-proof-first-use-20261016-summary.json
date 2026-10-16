@@ -1,0 +1,319 @@
+{
+  "pairs": 4,
+  "balanced_first_position": true,
+  "cache": "warm OS cache, no eviction",
+  "scope": "whole process open/get/first-search/repeat; includes first full source validation; no corpus/oracle resident",
+  "sample_interval_ms": 10,
+  "short_private_peaks_may_be_missed": true,
+  "warm_query_only_peak_not_isolated": true,
+  "executables": [
+    {
+      "engine": "fdb",
+      "path": "output/bounded-raw-proof-candidate-20261016.exe",
+      "sha256": "F8BB9E953BA9E4F19C65F73E2B2256C1574DB51A323C6B77050DCF4837E83243"
+    },
+    {
+      "engine": "control",
+      "path": "output/raw-proof-control-20261016.exe",
+      "sha256": "41BC98442A0D66D8430AC5E95EEFDA385832AA4C28CCA10791A3483B011D8D43"
+    }
+  ],
+  "results": [
+    {
+      "engine": "control",
+      "pair": 0,
+      "observed_private_peak_bytes": 3031040,
+      "observed_os_peak_working_set_bytes": 6758400,
+      "samples": 16,
+      "opened": {
+        "engine": "fdb",
+        "open_ms": 179.90900000000002,
+        "pending_source_checks": 5,
+        "phase": "opened",
+        "source_validation_on_open": false,
+        "stats": {
+          "compaction_running": false,
+          "delta_keys": 0,
+          "disk_index_bytes": 353242581,
+          "disk_posting_entries": 19221340,
+          "documents": 10000,
+          "generation": 51,
+          "log_bytes": 45,
+          "resident_documents": 0,
+          "resident_text_bytes": 0,
+          "segments": 5,
+          "sequence": 20,
+          "source_bytes": 267900709
+        }
+      },
+      "first_use": {
+        "first_get_ms": 54.442499999999995,
+        "first_search_ms": 221.90019999999998,
+        "first_use_includes_segment_verification": true,
+        "pending_after_get": 4,
+        "pending_on_open": 5,
+        "phase": "deferred_first_use",
+        "warm_search_ms": 2.7533000000000003
+      }
+    },
+    {
+      "engine": "fdb",
+      "pair": 0,
+      "observed_private_peak_bytes": 3117056,
+      "observed_os_peak_working_set_bytes": 6803456,
+      "samples": 17,
+      "opened": {
+        "engine": "fdb",
+        "open_ms": 187.7158,
+        "pending_source_checks": 5,
+        "phase": "opened",
+        "source_validation_on_open": false,
+        "stats": {
+          "compaction_running": false,
+          "delta_keys": 0,
+          "disk_index_bytes": 353242581,
+          "disk_posting_entries": 19221340,
+          "documents": 10000,
+          "generation": 51,
+          "log_bytes": 45,
+          "resident_documents": 0,
+          "resident_text_bytes": 0,
+          "segments": 5,
+          "sequence": 20,
+          "source_bytes": 267900709
+        }
+      },
+      "first_use": {
+        "first_get_ms": 55.6507,
+        "first_search_ms": 244.3141,
+        "first_use_includes_segment_verification": true,
+        "pending_after_get": 4,
+        "pending_on_open": 5,
+        "phase": "deferred_first_use",
+        "warm_search_ms": 3.1139
+      }
+    },
+    {
+      "engine": "fdb",
+      "pair": 1,
+      "observed_private_peak_bytes": 3022848,
+      "observed_os_peak_working_set_bytes": 11071488,
+      "samples": 17,
+      "opened": {
+        "engine": "fdb",
+        "open_ms": 189.14700000000002,
+        "pending_source_checks": 5,
+        "phase": "opened",
+        "source_validation_on_open": false,
+        "stats": {
+          "compaction_running": false,
+          "delta_keys": 0,
+          "disk_index_bytes": 353242581,
+          "disk_posting_entries": 19221340,
+          "documents": 10000,
+          "generation": 51,
+          "log_bytes": 45,
+          "resident_documents": 0,
+          "resident_text_bytes": 0,
+          "segments": 5,
+          "sequence": 20,
+          "source_bytes": 267900709
+        }
+      },
+      "first_use": {
+        "first_get_ms": 53.4783,
+        "first_search_ms": 219.4648,
+        "first_use_includes_segment_verification": true,
+        "pending_after_get": 4,
+        "pending_on_open": 5,
+        "phase": "deferred_first_use",
+        "warm_search_ms": 2.5565
+      }
+    },
+    {
+      "engine": "control",
+      "pair": 1,
+      "observed_private_peak_bytes": 3321856,
+      "observed_os_peak_working_set_bytes": 7073792,
+      "samples": 16,
+      "opened": {
+        "engine": "fdb",
+        "open_ms": 181.9046,
+        "pending_source_checks": 5,
+        "phase": "opened",
+        "source_validation_on_open": false,
+        "stats": {
+          "compaction_running": false,
+          "delta_keys": 0,
+          "disk_index_bytes": 353242581,
+          "disk_posting_entries": 19221340,
+          "documents": 10000,
+          "generation": 51,
+          "log_bytes": 45,
+          "resident_documents": 0,
+          "resident_text_bytes": 0,
+          "segments": 5,
+          "sequence": 20,
+          "source_bytes": 267900709
+        }
+      },
+      "first_use": {
+        "first_get_ms": 53.267,
+        "first_search_ms": 217.1777,
+        "first_use_includes_segment_verification": true,
+        "pending_after_get": 4,
+        "pending_on_open": 5,
+        "phase": "deferred_first_use",
+        "warm_search_ms": 2.8019
+      }
+    },
+    {
+      "engine": "control",
+      "pair": 2,
+      "observed_private_peak_bytes": 3043328,
+      "observed_os_peak_working_set_bytes": 10981376,
+      "samples": 17,
+      "opened": {
+        "engine": "fdb",
+        "open_ms": 183.12619999999998,
+        "pending_source_checks": 5,
+        "phase": "opened",
+        "source_validation_on_open": false,
+        "stats": {
+          "compaction_running": false,
+          "delta_keys": 0,
+          "disk_index_bytes": 353242581,
+          "disk_posting_entries": 19221340,
+          "documents": 10000,
+          "generation": 51,
+          "log_bytes": 45,
+          "resident_documents": 0,
+          "resident_text_bytes": 0,
+          "segments": 5,
+          "sequence": 20,
+          "source_bytes": 267900709
+        }
+      },
+      "first_use": {
+        "first_get_ms": 58.7811,
+        "first_search_ms": 220.6973,
+        "first_use_includes_segment_verification": true,
+        "pending_after_get": 4,
+        "pending_on_open": 5,
+        "phase": "deferred_first_use",
+        "warm_search_ms": 2.6641
+      }
+    },
+    {
+      "engine": "fdb",
+      "pair": 2,
+      "observed_private_peak_bytes": 7196672,
+      "observed_os_peak_working_set_bytes": 11071488,
+      "samples": 18,
+      "opened": {
+        "engine": "fdb",
+        "open_ms": 191.5608,
+        "pending_source_checks": 5,
+        "phase": "opened",
+        "source_validation_on_open": false,
+        "stats": {
+          "compaction_running": false,
+          "delta_keys": 0,
+          "disk_index_bytes": 353242581,
+          "disk_posting_entries": 19221340,
+          "documents": 10000,
+          "generation": 51,
+          "log_bytes": 45,
+          "resident_documents": 0,
+          "resident_text_bytes": 0,
+          "segments": 5,
+          "sequence": 20,
+          "source_bytes": 267900709
+        }
+      },
+      "first_use": {
+        "first_get_ms": 56.4093,
+        "first_search_ms": 226.12699999999998,
+        "first_use_includes_segment_verification": true,
+        "pending_after_get": 4,
+        "pending_on_open": 5,
+        "phase": "deferred_first_use",
+        "warm_search_ms": 2.7585
+      }
+    },
+    {
+      "engine": "fdb",
+      "pair": 3,
+      "observed_private_peak_bytes": 3112960,
+      "observed_os_peak_working_set_bytes": 11071488,
+      "samples": 17,
+      "opened": {
+        "engine": "fdb",
+        "open_ms": 194.2365,
+        "pending_source_checks": 5,
+        "phase": "opened",
+        "source_validation_on_open": false,
+        "stats": {
+          "compaction_running": false,
+          "delta_keys": 0,
+          "disk_index_bytes": 353242581,
+          "disk_posting_entries": 19221340,
+          "documents": 10000,
+          "generation": 51,
+          "log_bytes": 45,
+          "resident_documents": 0,
+          "resident_text_bytes": 0,
+          "segments": 5,
+          "sequence": 20,
+          "source_bytes": 267900709
+        }
+      },
+      "first_use": {
+        "first_get_ms": 53.3056,
+        "first_search_ms": 220.1907,
+        "first_use_includes_segment_verification": true,
+        "pending_after_get": 4,
+        "pending_on_open": 5,
+        "phase": "deferred_first_use",
+        "warm_search_ms": 2.6481
+      }
+    },
+    {
+      "engine": "control",
+      "pair": 3,
+      "observed_private_peak_bytes": 3125248,
+      "observed_os_peak_working_set_bytes": 6807552,
+      "samples": 16,
+      "opened": {
+        "engine": "fdb",
+        "open_ms": 176.8419,
+        "pending_source_checks": 5,
+        "phase": "opened",
+        "source_validation_on_open": false,
+        "stats": {
+          "compaction_running": false,
+          "delta_keys": 0,
+          "disk_index_bytes": 353242581,
+          "disk_posting_entries": 19221340,
+          "documents": 10000,
+          "generation": 51,
+          "log_bytes": 45,
+          "resident_documents": 0,
+          "resident_text_bytes": 0,
+          "segments": 5,
+          "sequence": 20,
+          "source_bytes": 267900709
+        }
+      },
+      "first_use": {
+        "first_get_ms": 53.018299999999996,
+        "first_search_ms": 211.9601,
+        "first_use_includes_segment_verification": true,
+        "pending_after_get": 4,
+        "pending_on_open": 5,
+        "phase": "deferred_first_use",
+        "warm_search_ms": 2.6009
+      }
+    }
+  ]
+}

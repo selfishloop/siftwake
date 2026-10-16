@@ -1,0 +1,1835 @@
+{
+  "scope": "two fresh 10k long pairs, control/candidate and candidate/control; old merge-only versus delta flush reuse plus existing bitmap; no streaming/pipeline features; OS cache not evicted",
+  "variants": {
+    "control": {
+      "median": {
+        "ingest_ms": 58981.04625,
+        "maintenance_ms": 3886.5780000000004,
+        "total_ms": 62867.62425000001,
+        "peak_private_bytes": 173172736.0,
+        "peak_working_set_bytes": 175314944.0,
+        "maintenance_private_bytes": 145907712.0,
+        "retained_disk_bytes": 1513744522.0,
+        "idle_private_bytes": 21524480,
+        "open_ms": 982.5682999999999
+      },
+      "runs": [
+        {
+          "ingest_ms": 49716.7231,
+          "maintenance_ms": 3365.9175,
+          "total_ms": 53082.640600000006,
+          "peak_private_bytes": 172146688,
+          "peak_working_set_bytes": 174317568,
+          "maintenance_private_bytes": 148520960,
+          "retained_disk_bytes": 1513744522.0,
+          "text_bytes": 264842858,
+          "stats": {
+            "compaction_running": false,
+            "delta_keys": 0,
+            "disk_index_bytes": 353242581,
+            "disk_posting_entries": 19221340,
+            "documents": 10000,
+            "generation": 31,
+            "log_bytes": 45,
+            "resident_documents": 0,
+            "resident_text_bytes": 0,
+            "segments": 5,
+            "sequence": 20,
+            "source_bytes": 267900709
+          },
+          "memory": {
+            "engine": "fdb",
+            "mode": "ingest",
+            "from": 0,
+            "to": 10000,
+            "run": 0,
+            "exit_code": 0,
+            "low_disk_stop": false,
+            "phases": {
+              "startup": {
+                "sampled_peak_private_bytes": 716800,
+                "sampled_peak_working_set_bytes": 4567040,
+                "samples": 2
+              },
+              "indexing": {
+                "sampled_peak_private_bytes": 172146688,
+                "sampled_peak_working_set_bytes": 174317568,
+                "samples": 1277
+              },
+              "maintenance": {
+                "sampled_peak_private_bytes": 148520960,
+                "sampled_peak_working_set_bytes": 150593536,
+                "samples": 81
+              },
+              "runtime_baseline": {
+                "sampled_peak_private_bytes": 11489280,
+                "sampled_peak_working_set_bytes": 14856192,
+                "samples": 25
+              }
+            },
+            "idle": null,
+            "os_peak_working_set_bytes": 177590272,
+            "samples": 1385,
+            "sample_interval_ms": 20,
+            "phase_poll_ms": 100,
+            "elapsed_s": 54.2130404,
+            "cpu_ms": 55828.125,
+            "retained_disk_bytes": 1513744522.0,
+            "files": [
+              {
+                "name": "generation-0000000000000001.fdb",
+                "bytes": 27049019
+              },
+              {
+                "name": "generation-0000000000000001.ready",
+                "bytes": 87
+              },
+              {
+                "name": "generation-0000000000000003.fdb",
+                "bytes": 26697359
+              },
+              {
+                "name": "generation-0000000000000003.ready",
+                "bytes": 170
+              },
+              {
+                "name": "generation-0000000000000005.fdb",
+                "bytes": 26037578
+              },
+              {
+                "name": "generation-0000000000000005.ready",
+                "bytes": 253
+              },
+              {
+                "name": "generation-0000000000000007.fdb",
+                "bytes": 26933085
+              },
+              {
+                "name": "generation-0000000000000007.ready",
+                "bytes": 335
+              },
+              {
+                "name": "generation-0000000000000009.fdb",
+                "bytes": 25953796
+              },
+              {
+                "name": "generation-0000000000000009.ready",
+                "bytes": 419
+              },
+              {
+                "name": "generation-000000000000000b.ready",
+                "bytes": 336
+              },
+              {
+                "name": "generation-000000000000000d.fdb",
+                "bytes": 26961152
+              },
+              {
+                "name": "generation-000000000000000d.ready",
+                "bytes": 424
+              },
+              {
+                "name": "generation-000000000000000f.ready",
+                "bytes": 342
+              },
+              {
+                "name": "generation-0000000000000011.fdb",
+                "bytes": 26870441
+              },
+              {
+                "name": "generation-0000000000000011.ready",
+                "bytes": 428
+              },
+              {
+                "name": "generation-0000000000000013.ready",
+                "bytes": 342
+              },
+              {
+                "name": "generation-0000000000000015.fdb",
+                "bytes": 27216777
+              },
+              {
+                "name": "generation-0000000000000015.ready",
+                "bytes": 428
+              },
+              {
+                "name": "generation-0000000000000017.fdb",
+                "bytes": 26902655
+              },
+              {
+                "name": "generation-0000000000000017.ready",
+                "bytes": 514
+              },
+              {
+                "name": "generation-0000000000000019.ready",
+                "bytes": 428
+              },
+              {
+                "name": "generation-000000000000001b.fdb",
+                "bytes": 27278657
+              },
+              {
+                "name": "generation-000000000000001b.ready",
+                "bytes": 513
+              },
+              {
+                "name": "generation-000000000000001d.fdb",
+                "bytes": 45
+              },
+              {
+                "name": "generation-000000000000001d.ready",
+                "bytes": 599
+              },
+              {
+                "name": "generation-000000000000001f.ready",
+                "bytes": 514
+              },
+              {
+                "name": "run-0000000000000002.fdb",
+                "bytes": 27049056
+              },
+              {
+                "name": "run-0000000000000002.idx",
+                "bytes": 35983031
+              },
+              {
+                "name": "run-0000000000000004.fdb",
+                "bytes": 26697396
+              },
+              {
+                "name": "run-0000000000000004.idx",
+                "bytes": 35599354
+              },
+              {
+                "name": "run-0000000000000006.fdb",
+                "bytes": 26037615
+              },
+              {
+                "name": "run-0000000000000006.idx",
+                "bytes": 34825719
+              },
+              {
+                "name": "run-0000000000000008.fdb",
+                "bytes": 26933122
+              },
+              {
+                "name": "run-0000000000000008.idx",
+                "bytes": 35834141
+              },
+              {
+                "name": "run-000000000000000a.fdb",
+                "bytes": 53746407
+              },
+              {
+                "name": "run-000000000000000a.idx",
+                "bytes": 70872210
+              },
+              {
+                "name": "run-000000000000000c.fdb",
+                "bytes": 25953833
+              },
+              {
+                "name": "run-000000000000000c.idx",
+                "bytes": 34721544
+              },
+              {
+                "name": "run-000000000000000e.fdb",
+                "bytes": 52970692
+              },
+              {
+                "name": "run-000000000000000e.idx",
+                "bytes": 69949707
+              },
+              {
+                "name": "run-0000000000000010.fdb",
+                "bytes": 26961189
+              },
+              {
+                "name": "run-0000000000000010.idx",
+                "bytes": 35883951
+              },
+              {
+                "name": "run-0000000000000012.fdb",
+                "bytes": 52914977
+              },
+              {
+                "name": "run-0000000000000012.idx",
+                "bytes": 69894154
+              },
+              {
+                "name": "run-0000000000000014.fdb",
+                "bytes": 26870478
+              },
+              {
+                "name": "run-0000000000000014.idx",
+                "bytes": 35753399
+              },
+              {
+                "name": "run-0000000000000016.fdb",
+                "bytes": 27216814
+              },
+              {
+                "name": "run-0000000000000016.idx",
+                "bytes": 36134902
+              },
+              {
+                "name": "run-0000000000000018.fdb",
+                "bytes": 54087247
+              },
+              {
+                "name": "run-0000000000000018.idx",
+                "bytes": 71177214
+              },
+              {
+                "name": "run-000000000000001a.fdb",
+                "bytes": 26902692
+              },
+              {
+                "name": "run-000000000000001a.idx",
+                "bytes": 35790010
+              },
+              {
+                "name": "run-000000000000001c.fdb",
+                "bytes": 27278694
+              },
+              {
+                "name": "run-000000000000001c.idx",
+                "bytes": 36267641
+              },
+              {
+                "name": "run-000000000000001e.fdb",
+                "bytes": 54181341
+              },
+              {
+                "name": "run-000000000000001e.idx",
+                "bytes": 71349296
+              }
+            ],
+            "features": "experimental-merge-postings",
+            "cache": "OS cache, no eviction, no search warmup",
+            "includes_os_file_cache": false,
+            "input": "streamed CRC-checked JSON corpus, batch500; no books/oracle resident",
+            "executable": "C:\\Users\\Serkan\\Documents\\ChatGPT\\fdb\\output\\content-memory-merge-isolated-10k-20261012.exe",
+            "database": "C:\\Users\\Serkan\\Documents\\ChatGPT\\fdb\\data\\benchmark-work\\fdb"
+          }
+        },
+        {
+          "ingest_ms": 68245.3694,
+          "maintenance_ms": 4407.2385,
+          "total_ms": 72652.6079,
+          "peak_private_bytes": 174198784,
+          "peak_working_set_bytes": 176312320,
+          "maintenance_private_bytes": 143294464,
+          "retained_disk_bytes": 1513744522.0,
+          "text_bytes": 264842858,
+          "stats": {
+            "compaction_running": false,
+            "delta_keys": 0,
+            "disk_index_bytes": 353242581,
+            "disk_posting_entries": 19221340,
+            "documents": 10000,
+            "generation": 31,
+            "log_bytes": 45,
+            "resident_documents": 0,
+            "resident_text_bytes": 0,
+            "segments": 5,
+            "sequence": 20,
+            "source_bytes": 267900709
+          },
+          "memory": {
+            "engine": "fdb",
+            "mode": "ingest",
+            "from": 0,
+            "to": 10000,
+            "run": 0,
+            "exit_code": 0,
+            "low_disk_stop": false,
+            "phases": {
+              "result": {
+                "sampled_peak_private_bytes": 0,
+                "sampled_peak_working_set_bytes": 0,
+                "samples": 1
+              },
+              "startup": {
+                "sampled_peak_private_bytes": 712704,
+                "sampled_peak_working_set_bytes": 4567040,
+                "samples": 2
+              },
+              "indexing": {
+                "sampled_peak_private_bytes": 174198784,
+                "sampled_peak_working_set_bytes": 176312320,
+                "samples": 1699
+              },
+              "maintenance": {
+                "sampled_peak_private_bytes": 143294464,
+                "sampled_peak_working_set_bytes": 145321984,
+                "samples": 109
+              },
+              "runtime_baseline": {
+                "sampled_peak_private_bytes": 712704,
+                "sampled_peak_working_set_bytes": 4567040,
+                "samples": 27
+              }
+            },
+            "idle": null,
+            "os_peak_working_set_bytes": 176496640,
+            "samples": 1838,
+            "sample_interval_ms": 20,
+            "phase_poll_ms": 100,
+            "elapsed_s": 73.8166087,
+            "cpu_ms": 74109.375,
+            "retained_disk_bytes": 1513744522.0,
+            "files": [
+              {
+                "name": "generation-0000000000000001.fdb",
+                "bytes": 27049019
+              },
+              {
+                "name": "generation-0000000000000001.ready",
+                "bytes": 87
+              },
+              {
+                "name": "generation-0000000000000003.fdb",
+                "bytes": 26697359
+              },
+              {
+                "name": "generation-0000000000000003.ready",
+                "bytes": 170
+              },
+              {
+                "name": "generation-0000000000000005.fdb",
+                "bytes": 26037578
+              },
+              {
+                "name": "generation-0000000000000005.ready",
+                "bytes": 253
+              },
+              {
+                "name": "generation-0000000000000007.fdb",
+                "bytes": 26933085
+              },
+              {
+                "name": "generation-0000000000000007.ready",
+                "bytes": 335
+              },
+              {
+                "name": "generation-0000000000000009.fdb",
+                "bytes": 25953796
+              },
+              {
+                "name": "generation-0000000000000009.ready",
+                "bytes": 419
+              },
+              {
+                "name": "generation-000000000000000b.ready",
+                "bytes": 336
+              },
+              {
+                "name": "generation-000000000000000d.fdb",
+                "bytes": 26961152
+              },
+              {
+                "name": "generation-000000000000000d.ready",
+                "bytes": 424
+              },
+              {
+                "name": "generation-000000000000000f.ready",
+                "bytes": 342
+              },
+              {
+                "name": "generation-0000000000000011.fdb",
+                "bytes": 26870441
+              },
+              {
+                "name": "generation-0000000000000011.ready",
+                "bytes": 428
+              },
+              {
+                "name": "generation-0000000000000013.ready",
+                "bytes": 342
+              },
+              {
+                "name": "generation-0000000000000015.fdb",
+                "bytes": 27216777
+              },
+              {
+                "name": "generation-0000000000000015.ready",
+                "bytes": 428
+              },
+              {
+                "name": "generation-0000000000000017.fdb",
+                "bytes": 26902655
+              },
+              {
+                "name": "generation-0000000000000017.ready",
+                "bytes": 514
+              },
+              {
+                "name": "generation-0000000000000019.ready",
+                "bytes": 428
+              },
+              {
+                "name": "generation-000000000000001b.fdb",
+                "bytes": 27278657
+              },
+              {
+                "name": "generation-000000000000001b.ready",
+                "bytes": 513
+              },
+              {
+                "name": "generation-000000000000001d.fdb",
+                "bytes": 45
+              },
+              {
+                "name": "generation-000000000000001d.ready",
+                "bytes": 599
+              },
+              {
+                "name": "generation-000000000000001f.ready",
+                "bytes": 514
+              },
+              {
+                "name": "run-0000000000000002.fdb",
+                "bytes": 27049056
+              },
+              {
+                "name": "run-0000000000000002.idx",
+                "bytes": 35983031
+              },
+              {
+                "name": "run-0000000000000004.fdb",
+                "bytes": 26697396
+              },
+              {
+                "name": "run-0000000000000004.idx",
+                "bytes": 35599354
+              },
+              {
+                "name": "run-0000000000000006.fdb",
+                "bytes": 26037615
+              },
+              {
+                "name": "run-0000000000000006.idx",
+                "bytes": 34825719
+              },
+              {
+                "name": "run-0000000000000008.fdb",
+                "bytes": 26933122
+              },
+              {
+                "name": "run-0000000000000008.idx",
+                "bytes": 35834141
+              },
+              {
+                "name": "run-000000000000000a.fdb",
+                "bytes": 53746407
+              },
+              {
+                "name": "run-000000000000000a.idx",
+                "bytes": 70872210
+              },
+              {
+                "name": "run-000000000000000c.fdb",
+                "bytes": 25953833
+              },
+              {
+                "name": "run-000000000000000c.idx",
+                "bytes": 34721544
+              },
+              {
+                "name": "run-000000000000000e.fdb",
+                "bytes": 52970692
+              },
+              {
+                "name": "run-000000000000000e.idx",
+                "bytes": 69949707
+              },
+              {
+                "name": "run-0000000000000010.fdb",
+                "bytes": 26961189
+              },
+              {
+                "name": "run-0000000000000010.idx",
+                "bytes": 35883951
+              },
+              {
+                "name": "run-0000000000000012.fdb",
+                "bytes": 52914977
+              },
+              {
+                "name": "run-0000000000000012.idx",
+                "bytes": 69894154
+              },
+              {
+                "name": "run-0000000000000014.fdb",
+                "bytes": 26870478
+              },
+              {
+                "name": "run-0000000000000014.idx",
+                "bytes": 35753399
+              },
+              {
+                "name": "run-0000000000000016.fdb",
+                "bytes": 27216814
+              },
+              {
+                "name": "run-0000000000000016.idx",
+                "bytes": 36134902
+              },
+              {
+                "name": "run-0000000000000018.fdb",
+                "bytes": 54087247
+              },
+              {
+                "name": "run-0000000000000018.idx",
+                "bytes": 71177214
+              },
+              {
+                "name": "run-000000000000001a.fdb",
+                "bytes": 26902692
+              },
+              {
+                "name": "run-000000000000001a.idx",
+                "bytes": 35790010
+              },
+              {
+                "name": "run-000000000000001c.fdb",
+                "bytes": 27278694
+              },
+              {
+                "name": "run-000000000000001c.idx",
+                "bytes": 36267641
+              },
+              {
+                "name": "run-000000000000001e.fdb",
+                "bytes": 54181341
+              },
+              {
+                "name": "run-000000000000001e.idx",
+                "bytes": 71349296
+              }
+            ],
+            "features": "experimental-merge-postings",
+            "cache": "OS cache, no eviction, no search warmup",
+            "includes_os_file_cache": false,
+            "input": "streamed CRC-checked JSON corpus, batch500; no books/oracle resident",
+            "executable": "C:\\Users\\Serkan\\Documents\\ChatGPT\\fdb\\output\\content-memory-merge-isolated-10k-20261012.exe",
+            "database": "C:\\Users\\Serkan\\Documents\\ChatGPT\\fdb\\data\\benchmark-work\\fdb"
+          }
+        }
+      ],
+      "oracle_queries": [
+        "the",
+        "quixote",
+        "he",
+        "the man"
+      ],
+      "oracle_totals": [
+        10000,
+        56,
+        10000,
+        9932
+      ]
+    },
+    "candidate": {
+      "median": {
+        "ingest_ms": 27597.27375,
+        "maintenance_ms": 2151.94405,
+        "total_ms": 29749.217800000002,
+        "peak_private_bytes": 130902016.0,
+        "peak_working_set_bytes": 134135808.0,
+        "maintenance_private_bytes": 106905600.0,
+        "retained_disk_bytes": 1513744522.0,
+        "idle_private_bytes": 22036480,
+        "open_ms": 980.5038000000001
+      },
+      "runs": [
+        {
+          "ingest_ms": 26605.444,
+          "maintenance_ms": 1770.3745,
+          "total_ms": 28375.8185,
+          "peak_private_bytes": 130904064,
+          "peak_working_set_bytes": 133890048,
+          "maintenance_private_bytes": 106127360,
+          "retained_disk_bytes": 1513744522.0,
+          "text_bytes": 264842858,
+          "stats": {
+            "compaction_running": false,
+            "delta_keys": 0,
+            "disk_index_bytes": 353242581,
+            "disk_posting_entries": 19221340,
+            "documents": 10000,
+            "generation": 31,
+            "log_bytes": 45,
+            "resident_documents": 0,
+            "resident_text_bytes": 0,
+            "segments": 5,
+            "sequence": 20,
+            "source_bytes": 267900709
+          },
+          "memory": {
+            "engine": "fdb",
+            "mode": "ingest",
+            "from": 0,
+            "to": 10000,
+            "run": 0,
+            "exit_code": 0,
+            "low_disk_stop": false,
+            "phases": {
+              "startup": {
+                "sampled_peak_private_bytes": 724992,
+                "sampled_peak_working_set_bytes": 4579328,
+                "samples": 4
+              },
+              "indexing": {
+                "sampled_peak_private_bytes": 130904064,
+                "sampled_peak_working_set_bytes": 133890048,
+                "samples": 693
+              },
+              "maintenance": {
+                "sampled_peak_private_bytes": 106127360,
+                "sampled_peak_working_set_bytes": 109137920,
+                "samples": 45
+              },
+              "runtime_baseline": {
+                "sampled_peak_private_bytes": 724992,
+                "sampled_peak_working_set_bytes": 4599808,
+                "samples": 23
+              }
+            },
+            "idle": null,
+            "os_peak_working_set_bytes": 135258112,
+            "samples": 765,
+            "sample_interval_ms": 20,
+            "phase_poll_ms": 100,
+            "elapsed_s": 29.5414477,
+            "cpu_ms": 31046.875,
+            "retained_disk_bytes": 1513744522.0,
+            "files": [
+              {
+                "name": "generation-0000000000000001.fdb",
+                "bytes": 27049019
+              },
+              {
+                "name": "generation-0000000000000001.ready",
+                "bytes": 87
+              },
+              {
+                "name": "generation-0000000000000003.fdb",
+                "bytes": 26697359
+              },
+              {
+                "name": "generation-0000000000000003.ready",
+                "bytes": 170
+              },
+              {
+                "name": "generation-0000000000000005.fdb",
+                "bytes": 26037578
+              },
+              {
+                "name": "generation-0000000000000005.ready",
+                "bytes": 253
+              },
+              {
+                "name": "generation-0000000000000007.fdb",
+                "bytes": 26933085
+              },
+              {
+                "name": "generation-0000000000000007.ready",
+                "bytes": 335
+              },
+              {
+                "name": "generation-0000000000000009.fdb",
+                "bytes": 25953796
+              },
+              {
+                "name": "generation-0000000000000009.ready",
+                "bytes": 419
+              },
+              {
+                "name": "generation-000000000000000b.ready",
+                "bytes": 336
+              },
+              {
+                "name": "generation-000000000000000d.fdb",
+                "bytes": 26961152
+              },
+              {
+                "name": "generation-000000000000000d.ready",
+                "bytes": 424
+              },
+              {
+                "name": "generation-000000000000000f.ready",
+                "bytes": 342
+              },
+              {
+                "name": "generation-0000000000000011.fdb",
+                "bytes": 26870441
+              },
+              {
+                "name": "generation-0000000000000011.ready",
+                "bytes": 428
+              },
+              {
+                "name": "generation-0000000000000013.ready",
+                "bytes": 342
+              },
+              {
+                "name": "generation-0000000000000015.fdb",
+                "bytes": 27216777
+              },
+              {
+                "name": "generation-0000000000000015.ready",
+                "bytes": 428
+              },
+              {
+                "name": "generation-0000000000000017.fdb",
+                "bytes": 26902655
+              },
+              {
+                "name": "generation-0000000000000017.ready",
+                "bytes": 514
+              },
+              {
+                "name": "generation-0000000000000019.ready",
+                "bytes": 428
+              },
+              {
+                "name": "generation-000000000000001b.fdb",
+                "bytes": 27278657
+              },
+              {
+                "name": "generation-000000000000001b.ready",
+                "bytes": 513
+              },
+              {
+                "name": "generation-000000000000001d.fdb",
+                "bytes": 45
+              },
+              {
+                "name": "generation-000000000000001d.ready",
+                "bytes": 599
+              },
+              {
+                "name": "generation-000000000000001f.ready",
+                "bytes": 514
+              },
+              {
+                "name": "run-0000000000000002.fdb",
+                "bytes": 27049056
+              },
+              {
+                "name": "run-0000000000000002.idx",
+                "bytes": 35983031
+              },
+              {
+                "name": "run-0000000000000004.fdb",
+                "bytes": 26697396
+              },
+              {
+                "name": "run-0000000000000004.idx",
+                "bytes": 35599354
+              },
+              {
+                "name": "run-0000000000000006.fdb",
+                "bytes": 26037615
+              },
+              {
+                "name": "run-0000000000000006.idx",
+                "bytes": 34825719
+              },
+              {
+                "name": "run-0000000000000008.fdb",
+                "bytes": 26933122
+              },
+              {
+                "name": "run-0000000000000008.idx",
+                "bytes": 35834141
+              },
+              {
+                "name": "run-000000000000000a.fdb",
+                "bytes": 53746407
+              },
+              {
+                "name": "run-000000000000000a.idx",
+                "bytes": 70872210
+              },
+              {
+                "name": "run-000000000000000c.fdb",
+                "bytes": 25953833
+              },
+              {
+                "name": "run-000000000000000c.idx",
+                "bytes": 34721544
+              },
+              {
+                "name": "run-000000000000000e.fdb",
+                "bytes": 52970692
+              },
+              {
+                "name": "run-000000000000000e.idx",
+                "bytes": 69949707
+              },
+              {
+                "name": "run-0000000000000010.fdb",
+                "bytes": 26961189
+              },
+              {
+                "name": "run-0000000000000010.idx",
+                "bytes": 35883951
+              },
+              {
+                "name": "run-0000000000000012.fdb",
+                "bytes": 52914977
+              },
+              {
+                "name": "run-0000000000000012.idx",
+                "bytes": 69894154
+              },
+              {
+                "name": "run-0000000000000014.fdb",
+                "bytes": 26870478
+              },
+              {
+                "name": "run-0000000000000014.idx",
+                "bytes": 35753399
+              },
+              {
+                "name": "run-0000000000000016.fdb",
+                "bytes": 27216814
+              },
+              {
+                "name": "run-0000000000000016.idx",
+                "bytes": 36134902
+              },
+              {
+                "name": "run-0000000000000018.fdb",
+                "bytes": 54087247
+              },
+              {
+                "name": "run-0000000000000018.idx",
+                "bytes": 71177214
+              },
+              {
+                "name": "run-000000000000001a.fdb",
+                "bytes": 26902692
+              },
+              {
+                "name": "run-000000000000001a.idx",
+                "bytes": 35790010
+              },
+              {
+                "name": "run-000000000000001c.fdb",
+                "bytes": 27278694
+              },
+              {
+                "name": "run-000000000000001c.idx",
+                "bytes": 36267641
+              },
+              {
+                "name": "run-000000000000001e.fdb",
+                "bytes": 54181341
+              },
+              {
+                "name": "run-000000000000001e.idx",
+                "bytes": 71349296
+              }
+            ],
+            "features": "experimental-merge-postings experimental-delta-bitmaps",
+            "cache": "OS cache, no eviction, no search warmup",
+            "includes_os_file_cache": false,
+            "input": "streamed CRC-checked JSON corpus, batch500; no books/oracle resident",
+            "executable": "C:\\Users\\Serkan\\Documents\\ChatGPT\\fdb\\output\\content-memory-delta-flush-10k-20261012.exe",
+            "database": "C:\\Users\\Serkan\\Documents\\ChatGPT\\fdb\\data\\benchmark-work\\fdb"
+          }
+        },
+        {
+          "ingest_ms": 28589.1035,
+          "maintenance_ms": 2533.5136,
+          "total_ms": 31122.617100000003,
+          "peak_private_bytes": 130899968,
+          "peak_working_set_bytes": 134381568,
+          "maintenance_private_bytes": 107683840,
+          "retained_disk_bytes": 1513744522.0,
+          "text_bytes": 264842858,
+          "stats": {
+            "compaction_running": false,
+            "delta_keys": 0,
+            "disk_index_bytes": 353242581,
+            "disk_posting_entries": 19221340,
+            "documents": 10000,
+            "generation": 31,
+            "log_bytes": 45,
+            "resident_documents": 0,
+            "resident_text_bytes": 0,
+            "segments": 5,
+            "sequence": 20,
+            "source_bytes": 267900709
+          },
+          "memory": {
+            "engine": "fdb",
+            "mode": "ingest",
+            "from": 0,
+            "to": 10000,
+            "run": 0,
+            "exit_code": 0,
+            "low_disk_stop": false,
+            "phases": {
+              "result": {
+                "sampled_peak_private_bytes": 0,
+                "sampled_peak_working_set_bytes": 0,
+                "samples": 1
+              },
+              "startup": {
+                "sampled_peak_private_bytes": 458752,
+                "sampled_peak_working_set_bytes": 2584576,
+                "samples": 2
+              },
+              "indexing": {
+                "sampled_peak_private_bytes": 130899968,
+                "sampled_peak_working_set_bytes": 134381568,
+                "samples": 724
+              },
+              "maintenance": {
+                "sampled_peak_private_bytes": 107683840,
+                "sampled_peak_working_set_bytes": 110436352,
+                "samples": 61
+              },
+              "runtime_baseline": {
+                "sampled_peak_private_bytes": 712704,
+                "sampled_peak_working_set_bytes": 4571136,
+                "samples": 26
+              }
+            },
+            "idle": null,
+            "os_peak_working_set_bytes": 135045120,
+            "samples": 814,
+            "sample_interval_ms": 20,
+            "phase_poll_ms": 100,
+            "elapsed_s": 32.3103187,
+            "cpu_ms": 33890.625,
+            "retained_disk_bytes": 1513744522.0,
+            "files": [
+              {
+                "name": "generation-0000000000000001.fdb",
+                "bytes": 27049019
+              },
+              {
+                "name": "generation-0000000000000001.ready",
+                "bytes": 87
+              },
+              {
+                "name": "generation-0000000000000003.fdb",
+                "bytes": 26697359
+              },
+              {
+                "name": "generation-0000000000000003.ready",
+                "bytes": 170
+              },
+              {
+                "name": "generation-0000000000000005.fdb",
+                "bytes": 26037578
+              },
+              {
+                "name": "generation-0000000000000005.ready",
+                "bytes": 253
+              },
+              {
+                "name": "generation-0000000000000007.fdb",
+                "bytes": 26933085
+              },
+              {
+                "name": "generation-0000000000000007.ready",
+                "bytes": 335
+              },
+              {
+                "name": "generation-0000000000000009.fdb",
+                "bytes": 25953796
+              },
+              {
+                "name": "generation-0000000000000009.ready",
+                "bytes": 419
+              },
+              {
+                "name": "generation-000000000000000b.ready",
+                "bytes": 336
+              },
+              {
+                "name": "generation-000000000000000d.fdb",
+                "bytes": 26961152
+              },
+              {
+                "name": "generation-000000000000000d.ready",
+                "bytes": 424
+              },
+              {
+                "name": "generation-000000000000000f.ready",
+                "bytes": 342
+              },
+              {
+                "name": "generation-0000000000000011.fdb",
+                "bytes": 26870441
+              },
+              {
+                "name": "generation-0000000000000011.ready",
+                "bytes": 428
+              },
+              {
+                "name": "generation-0000000000000013.ready",
+                "bytes": 342
+              },
+              {
+                "name": "generation-0000000000000015.fdb",
+                "bytes": 27216777
+              },
+              {
+                "name": "generation-0000000000000015.ready",
+                "bytes": 428
+              },
+              {
+                "name": "generation-0000000000000017.fdb",
+                "bytes": 26902655
+              },
+              {
+                "name": "generation-0000000000000017.ready",
+                "bytes": 514
+              },
+              {
+                "name": "generation-0000000000000019.ready",
+                "bytes": 428
+              },
+              {
+                "name": "generation-000000000000001b.fdb",
+                "bytes": 27278657
+              },
+              {
+                "name": "generation-000000000000001b.ready",
+                "bytes": 513
+              },
+              {
+                "name": "generation-000000000000001d.fdb",
+                "bytes": 45
+              },
+              {
+                "name": "generation-000000000000001d.ready",
+                "bytes": 599
+              },
+              {
+                "name": "generation-000000000000001f.ready",
+                "bytes": 514
+              },
+              {
+                "name": "run-0000000000000002.fdb",
+                "bytes": 27049056
+              },
+              {
+                "name": "run-0000000000000002.idx",
+                "bytes": 35983031
+              },
+              {
+                "name": "run-0000000000000004.fdb",
+                "bytes": 26697396
+              },
+              {
+                "name": "run-0000000000000004.idx",
+                "bytes": 35599354
+              },
+              {
+                "name": "run-0000000000000006.fdb",
+                "bytes": 26037615
+              },
+              {
+                "name": "run-0000000000000006.idx",
+                "bytes": 34825719
+              },
+              {
+                "name": "run-0000000000000008.fdb",
+                "bytes": 26933122
+              },
+              {
+                "name": "run-0000000000000008.idx",
+                "bytes": 35834141
+              },
+              {
+                "name": "run-000000000000000a.fdb",
+                "bytes": 53746407
+              },
+              {
+                "name": "run-000000000000000a.idx",
+                "bytes": 70872210
+              },
+              {
+                "name": "run-000000000000000c.fdb",
+                "bytes": 25953833
+              },
+              {
+                "name": "run-000000000000000c.idx",
+                "bytes": 34721544
+              },
+              {
+                "name": "run-000000000000000e.fdb",
+                "bytes": 52970692
+              },
+              {
+                "name": "run-000000000000000e.idx",
+                "bytes": 69949707
+              },
+              {
+                "name": "run-0000000000000010.fdb",
+                "bytes": 26961189
+              },
+              {
+                "name": "run-0000000000000010.idx",
+                "bytes": 35883951
+              },
+              {
+                "name": "run-0000000000000012.fdb",
+                "bytes": 52914977
+              },
+              {
+                "name": "run-0000000000000012.idx",
+                "bytes": 69894154
+              },
+              {
+                "name": "run-0000000000000014.fdb",
+                "bytes": 26870478
+              },
+              {
+                "name": "run-0000000000000014.idx",
+                "bytes": 35753399
+              },
+              {
+                "name": "run-0000000000000016.fdb",
+                "bytes": 27216814
+              },
+              {
+                "name": "run-0000000000000016.idx",
+                "bytes": 36134902
+              },
+              {
+                "name": "run-0000000000000018.fdb",
+                "bytes": 54087247
+              },
+              {
+                "name": "run-0000000000000018.idx",
+                "bytes": 71177214
+              },
+              {
+                "name": "run-000000000000001a.fdb",
+                "bytes": 26902692
+              },
+              {
+                "name": "run-000000000000001a.idx",
+                "bytes": 35790010
+              },
+              {
+                "name": "run-000000000000001c.fdb",
+                "bytes": 27278694
+              },
+              {
+                "name": "run-000000000000001c.idx",
+                "bytes": 36267641
+              },
+              {
+                "name": "run-000000000000001e.fdb",
+                "bytes": 54181341
+              },
+              {
+                "name": "run-000000000000001e.idx",
+                "bytes": 71349296
+              }
+            ],
+            "features": "experimental-merge-postings experimental-delta-bitmaps",
+            "cache": "OS cache, no eviction, no search warmup",
+            "includes_os_file_cache": false,
+            "input": "streamed CRC-checked JSON corpus, batch500; no books/oracle resident",
+            "executable": "C:\\Users\\Serkan\\Documents\\ChatGPT\\fdb\\output\\content-memory-delta-flush-10k-20261012.exe",
+            "database": "C:\\Users\\Serkan\\Documents\\ChatGPT\\fdb\\data\\benchmark-work\\fdb"
+          }
+        }
+      ],
+      "oracle_queries": [
+        "the",
+        "quixote",
+        "he",
+        "the man"
+      ],
+      "oracle_totals": [
+        10000,
+        56,
+        10000,
+        9932
+      ]
+    }
+  },
+  "sqlite": {
+    "runs": [
+      {
+        "ingest_ms": 33382.971,
+        "maintenance_ms": 1080.7202,
+        "total_ms": 34463.6912,
+        "peak_private_bytes": 8937472,
+        "peak_working_set_bytes": 14045184,
+        "maintenance_private_bytes": 7266304,
+        "retained_disk_bytes": 583860224.0,
+        "text_bytes": 264842858,
+        "stats": null,
+        "memory": {
+          "engine": "sqlite",
+          "mode": "ingest",
+          "from": 0,
+          "to": 10000,
+          "run": 0,
+          "exit_code": 0,
+          "low_disk_stop": false,
+          "phases": {
+            "startup": {
+              "sampled_peak_private_bytes": 745472,
+              "sampled_peak_working_set_bytes": 4677632,
+              "samples": 3
+            },
+            "indexing": {
+              "sampled_peak_private_bytes": 8937472,
+              "sampled_peak_working_set_bytes": 14045184,
+              "samples": 874
+            },
+            "maintenance": {
+              "sampled_peak_private_bytes": 7266304,
+              "sampled_peak_working_set_bytes": 12087296,
+              "samples": 25
+            },
+            "runtime_baseline": {
+              "sampled_peak_private_bytes": 1888256,
+              "sampled_peak_working_set_bytes": 6930432,
+              "samples": 27
+            }
+          },
+          "idle": null,
+          "os_peak_working_set_bytes": 14086144,
+          "samples": 929,
+          "sample_interval_ms": 20,
+          "phase_poll_ms": 100,
+          "elapsed_s": 35.5775452,
+          "cpu_ms": 33625.0,
+          "retained_disk_bytes": 583860224.0,
+          "files": [
+            {
+              "name": "sqlite.db",
+              "bytes": 583860224
+            }
+          ],
+          "features": "default only",
+          "cache": "OS cache, no eviction, no search warmup",
+          "includes_os_file_cache": false,
+          "input": "streamed CRC-checked JSON corpus, batch500; no books/oracle resident",
+          "executable": "C:\\Users\\Serkan\\Documents\\ChatGPT\\fdb\\output\\content-memory-sqlite-10k-20261011.exe",
+          "database": "C:\\Users\\Serkan\\Documents\\ChatGPT\\fdb\\data\\benchmark-work\\sqlite"
+        }
+      },
+      {
+        "ingest_ms": 33330.051400000004,
+        "maintenance_ms": 1083.2869,
+        "total_ms": 34413.3383,
+        "peak_private_bytes": 9003008,
+        "peak_working_set_bytes": 14041088,
+        "maintenance_private_bytes": 7536640,
+        "retained_disk_bytes": 583860224.0,
+        "text_bytes": 264842858,
+        "stats": null,
+        "memory": {
+          "engine": "sqlite",
+          "mode": "ingest",
+          "from": 0,
+          "to": 10000,
+          "run": 0,
+          "exit_code": 0,
+          "low_disk_stop": false,
+          "phases": {
+            "startup": {
+              "sampled_peak_private_bytes": 606208,
+              "sampled_peak_working_set_bytes": 3665920,
+              "samples": 2
+            },
+            "indexing": {
+              "sampled_peak_private_bytes": 9003008,
+              "sampled_peak_working_set_bytes": 14041088,
+              "samples": 873
+            },
+            "maintenance": {
+              "sampled_peak_private_bytes": 7536640,
+              "sampled_peak_working_set_bytes": 12079104,
+              "samples": 29
+            },
+            "runtime_baseline": {
+              "sampled_peak_private_bytes": 2195456,
+              "sampled_peak_working_set_bytes": 7303168,
+              "samples": 26
+            }
+          },
+          "idle": null,
+          "os_peak_working_set_bytes": 14041088,
+          "samples": 930,
+          "sample_interval_ms": 20,
+          "phase_poll_ms": 100,
+          "elapsed_s": 35.5140399,
+          "cpu_ms": 33421.875,
+          "retained_disk_bytes": 583860224.0,
+          "files": [
+            {
+              "name": "sqlite.db",
+              "bytes": 583860224
+            }
+          ],
+          "features": "default only",
+          "cache": "OS cache, no eviction, no search warmup",
+          "includes_os_file_cache": false,
+          "input": "streamed CRC-checked JSON corpus, batch500; no books/oracle resident",
+          "executable": "C:\\Users\\Serkan\\Documents\\ChatGPT\\fdb\\output\\content-memory-sqlite-10k-20261011.exe",
+          "database": "C:\\Users\\Serkan\\Documents\\ChatGPT\\fdb\\data\\benchmark-work\\sqlite"
+        }
+      }
+    ],
+    "median": {
+      "ingest_ms": 33356.5112,
+      "maintenance_ms": 1082.00355,
+      "total_ms": 34438.51475,
+      "peak_private_bytes": 8970240.0,
+      "peak_working_set_bytes": 14043136.0,
+      "retained_disk_bytes": 583860224.0
+    },
+    "text_bytes": 264842858
+  },
+  "profiles": {
+    "control": {
+      "calls": {
+        "batch.decode_binary": 111,
+        "body.fold": 20000,
+        "body.grams": 20000,
+        "builder.add": 20000,
+        "builder.extract_terms": 10000,
+        "builder.finish": 10,
+        "builder.finish_reused": 5,
+        "builder.insert_postings": 10000,
+        "commit.apply_delta_index": 20,
+        "commit.delta_size_json": 20,
+        "commit.foreground_maintenance": 20,
+        "commit.total": 20,
+        "commit.validate_guard": 20,
+        "disk.read_at": 217297,
+        "flush.total": 10,
+        "frame.encode_binary_crc": 106,
+        "merge.worker": 5,
+        "open.total": 1,
+        "payload.decode_crc_identity": 10000,
+        "payload.read_document": 10000,
+        "run.write_source_rebuild": 15,
+        "segment.open": 30,
+        "wal.sync": 106,
+        "wal.write": 106
+      },
+      "phases": [
+        {
+          "counters": {
+            "batch.decode_binary": {
+              "calls": 93,
+              "elapsed_ns": 423044100
+            },
+            "body.fold": {
+              "calls": 19000,
+              "elapsed_ns": 2157734600
+            },
+            "body.grams": {
+              "calls": 19000,
+              "elapsed_ns": 19638779100
+            },
+            "builder.add": {
+              "calls": 17000,
+              "elapsed_ns": 22572736600
+            },
+            "builder.extract_terms": {
+              "calls": 9000,
+              "elapsed_ns": 12558231800
+            },
+            "builder.finish": {
+              "calls": 9,
+              "elapsed_ns": 1931068400
+            },
+            "builder.finish_reused": {
+              "calls": 4,
+              "elapsed_ns": 1685270800
+            },
+            "builder.insert_postings": {
+              "calls": 9000,
+              "elapsed_ns": 8949246700
+            },
+            "commit.apply_delta_index": {
+              "calls": 20,
+              "elapsed_ns": 36328748100
+            },
+            "commit.delta_size_json": {
+              "calls": 20,
+              "elapsed_ns": 6014100
+            },
+            "commit.foreground_maintenance": {
+              "calls": 20,
+              "elapsed_ns": 26544175500
+            },
+            "commit.total": {
+              "calls": 20,
+              "elapsed_ns": 63393123300
+            },
+            "commit.validate_guard": {
+              "calls": 20,
+              "elapsed_ns": 21902600
+            },
+            "disk.read_at": {
+              "calls": 173792,
+              "elapsed_ns": 660347200
+            },
+            "flush.total": {
+              "calls": 9,
+              "elapsed_ns": 26512410200
+            },
+            "frame.encode_binary_crc": {
+              "calls": 94,
+              "elapsed_ns": 662873900
+            },
+            "merge.worker": {
+              "calls": 4,
+              "elapsed_ns": 5069309300
+            },
+            "open.total": {
+              "calls": 1,
+              "elapsed_ns": 5035400
+            },
+            "payload.decode_crc_identity": {
+              "calls": 8000,
+              "elapsed_ns": 277598700
+            },
+            "payload.read_document": {
+              "calls": 8000,
+              "elapsed_ns": 394820800
+            },
+            "run.write_source_rebuild": {
+              "calls": 13,
+              "elapsed_ns": 30315772600
+            },
+            "segment.open": {
+              "calls": 26,
+              "elapsed_ns": 1187839200
+            },
+            "wal.sync": {
+              "calls": 94,
+              "elapsed_ns": 443554700
+            },
+            "wal.write": {
+              "calls": 94,
+              "elapsed_ns": 306610500
+            }
+          },
+          "instrumented": true,
+          "overlapping_spans_do_not_sum": true,
+          "phase": "profile_ingest"
+        },
+        {
+          "counters": {
+            "batch.decode_binary": {
+              "calls": 18,
+              "elapsed_ns": 65774200
+            },
+            "body.fold": {
+              "calls": 1000,
+              "elapsed_ns": 114964100
+            },
+            "body.grams": {
+              "calls": 1000,
+              "elapsed_ns": 1052305000
+            },
+            "builder.add": {
+              "calls": 3000,
+              "elapsed_ns": 2696994400
+            },
+            "builder.extract_terms": {
+              "calls": 1000,
+              "elapsed_ns": 1419300000
+            },
+            "builder.finish": {
+              "calls": 1,
+              "elapsed_ns": 215738100
+            },
+            "builder.finish_reused": {
+              "calls": 1,
+              "elapsed_ns": 428376500
+            },
+            "builder.insert_postings": {
+              "calls": 1000,
+              "elapsed_ns": 1115664300
+            },
+            "disk.read_at": {
+              "calls": 43505,
+              "elapsed_ns": 166234500
+            },
+            "flush.total": {
+              "calls": 1,
+              "elapsed_ns": 3069336800
+            },
+            "frame.encode_binary_crc": {
+              "calls": 12,
+              "elapsed_ns": 74184400
+            },
+            "merge.worker": {
+              "calls": 1,
+              "elapsed_ns": 1222378500
+            },
+            "payload.decode_crc_identity": {
+              "calls": 2000,
+              "elapsed_ns": 62980100
+            },
+            "payload.read_document": {
+              "calls": 2000,
+              "elapsed_ns": 88825400
+            },
+            "run.write_source_rebuild": {
+              "calls": 2,
+              "elapsed_ns": 4076517100
+            },
+            "segment.open": {
+              "calls": 4,
+              "elapsed_ns": 229448600
+            },
+            "wal.sync": {
+              "calls": 12,
+              "elapsed_ns": 42077700
+            },
+            "wal.write": {
+              "calls": 12,
+              "elapsed_ns": 35280800
+            }
+          },
+          "instrumented": true,
+          "overlapping_spans_do_not_sum": true,
+          "phase": "profile_maintenance"
+        }
+      ],
+      "metadata": {
+        "executable": "output/content-memory-merge-profile-isolated-10k-20261012.exe",
+        "database": "C:\\Users\\Serkan\\Documents\\ChatGPT\\fdb\\data\\benchmark-work\\fdb",
+        "instrumented": true,
+        "normal_timing_comparison": false,
+        "documents": 10000,
+        "corpus_reused": true
+      },
+      "note": "Same volume and reusable DB slot; diagnostic spans overlap, never sum as CPU attribution or compare with uninstrumented times"
+    },
+    "isolated": {
+      "calls": {
+        "batch.decode_binary": 151,
+        "body.fold": 10000,
+        "body.grams": 10000,
+        "builder.add": 20000,
+        "builder.finish_delta": 10,
+        "builder.finish_reused": 5,
+        "commit.apply_delta_index": 20,
+        "commit.delta_size_json": 20,
+        "commit.foreground_maintenance": 20,
+        "commit.total": 20,
+        "commit.validate_guard": 20,
+        "disk.read_at": 217327,
+        "flush.total": 10,
+        "frame.encode_binary_crc": 106,
+        "merge.worker": 5,
+        "open.total": 1,
+        "payload.decode_crc_identity": 10000,
+        "payload.read_document": 10000,
+        "run.write_source_rebuild": 15,
+        "segment.open": 30,
+        "wal.sync": 106,
+        "wal.write": 106
+      },
+      "phases": [
+        {
+          "counters": {
+            "batch.decode_binary": {
+              "calls": 129,
+              "elapsed_ns": 493964200
+            },
+            "body.fold": {
+              "calls": 10000,
+              "elapsed_ns": 761153800
+            },
+            "body.grams": {
+              "calls": 10000,
+              "elapsed_ns": 7302411300
+            },
+            "builder.add": {
+              "calls": 17000,
+              "elapsed_ns": 565272900
+            },
+            "builder.finish_delta": {
+              "calls": 9,
+              "elapsed_ns": 5040581200
+            },
+            "builder.finish_reused": {
+              "calls": 4,
+              "elapsed_ns": 1230911700
+            },
+            "commit.apply_delta_index": {
+              "calls": 20,
+              "elapsed_ns": 16174954100
+            },
+            "commit.delta_size_json": {
+              "calls": 20,
+              "elapsed_ns": 4702000
+            },
+            "commit.foreground_maintenance": {
+              "calls": 20,
+              "elapsed_ns": 7546016600
+            },
+            "commit.total": {
+              "calls": 20,
+              "elapsed_ns": 24200488500
+            },
+            "commit.validate_guard": {
+              "calls": 20,
+              "elapsed_ns": 17909500
+            },
+            "disk.read_at": {
+              "calls": 173819,
+              "elapsed_ns": 471380900
+            },
+            "flush.total": {
+              "calls": 9,
+              "elapsed_ns": 7505006400
+            },
+            "frame.encode_binary_crc": {
+              "calls": 94,
+              "elapsed_ns": 531248800
+            },
+            "merge.worker": {
+              "calls": 4,
+              "elapsed_ns": 3884180900
+            },
+            "open.total": {
+              "calls": 1,
+              "elapsed_ns": 5330500
+            },
+            "payload.decode_crc_identity": {
+              "calls": 8000,
+              "elapsed_ns": 213608100
+            },
+            "payload.read_document": {
+              "calls": 8000,
+              "elapsed_ns": 306674600
+            },
+            "run.write_source_rebuild": {
+              "calls": 13,
+              "elapsed_ns": 10783298600
+            },
+            "segment.open": {
+              "calls": 26,
+              "elapsed_ns": 1209713100
+            },
+            "wal.sync": {
+              "calls": 94,
+              "elapsed_ns": 438321800
+            },
+            "wal.write": {
+              "calls": 94,
+              "elapsed_ns": 227786700
+            }
+          },
+          "instrumented": true,
+          "overlapping_spans_do_not_sum": true,
+          "phase": "profile_ingest"
+        },
+        {
+          "counters": {
+            "batch.decode_binary": {
+              "calls": 22,
+              "elapsed_ns": 63549300
+            },
+            "builder.add": {
+              "calls": 3000,
+              "elapsed_ns": 100907300
+            },
+            "builder.finish_delta": {
+              "calls": 1,
+              "elapsed_ns": 565304300
+            },
+            "builder.finish_reused": {
+              "calls": 1,
+              "elapsed_ns": 295992300
+            },
+            "disk.read_at": {
+              "calls": 43508,
+              "elapsed_ns": 116017200
+            },
+            "flush.total": {
+              "calls": 1,
+              "elapsed_ns": 832414600
+            },
+            "frame.encode_binary_crc": {
+              "calls": 12,
+              "elapsed_ns": 59798300
+            },
+            "merge.worker": {
+              "calls": 1,
+              "elapsed_ns": 928420800
+            },
+            "payload.decode_crc_identity": {
+              "calls": 2000,
+              "elapsed_ns": 49398100
+            },
+            "payload.read_document": {
+              "calls": 2000,
+              "elapsed_ns": 70680600
+            },
+            "run.write_source_rebuild": {
+              "calls": 2,
+              "elapsed_ns": 1631821500
+            },
+            "segment.open": {
+              "calls": 4,
+              "elapsed_ns": 208824600
+            },
+            "wal.sync": {
+              "calls": 12,
+              "elapsed_ns": 46013000
+            },
+            "wal.write": {
+              "calls": 12,
+              "elapsed_ns": 24055900
+            }
+          },
+          "instrumented": true,
+          "overlapping_spans_do_not_sum": true,
+          "phase": "profile_maintenance"
+        }
+      ],
+      "metadata": {
+        "executable": "output/content-memory-delta-flush-profile-10k-20261012.exe",
+        "database": "C:\\Users\\Serkan\\Documents\\ChatGPT\\fdb\\data\\benchmark-work\\fdb",
+        "instrumented": true,
+        "normal_timing_comparison": false,
+        "documents": 10000,
+        "corpus_reused": true
+      },
+      "note": "Same volume and reusable DB slot; diagnostic spans overlap, never sum as CPU attribution or compare with uninstrumented times"
+    }
+  },
+  "tests": {
+    "default": 63,
+    "isolated": 67,
+    "combined": 71,
+    "all": 117
+  },
+  "unmeasured": [
+    "cold cache",
+    "30-query p95 benchmark",
+    "concurrent API readers/writer",
+    "temporary disk peak",
+    "DLL",
+    "derived profile"
+  ],
+  "storage_policy": "same existing corpus; fixed FDB/SQLite slots; verification before reuse; no per-run DB archives"
+}

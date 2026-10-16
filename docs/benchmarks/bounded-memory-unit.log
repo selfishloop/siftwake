@@ -1,0 +1,66 @@
+   Compiling fdb v0.3.1 (C:\Users\Serkan\Documents\ChatGPT\fdb)
+    Finished `test` profile [unoptimized + debuginfo] target(s) in 7.61s
+     Running unittests src\lib.rs (target\debug\deps\fdb-25bc736268a4b19a.exe)
+
+running 58 tests
+test bounded::tests::serialization_preserves_original_destination_error ... ok
+test bounded::tests::short_writes_count_exactly_and_limits_stop_before_forwarding ... ok
+test engine::merge_selection_tests::automatic_merge_avoids_rewriting_large_run_and_explicit_merge_drains ... ok
+test format::crc_tests::binary_frame_has_versioned_header_and_expected_crc ... ok
+test binary_batch_tests::binary_batch_prefix_offsets_sizes_and_every_cut ... ok
+test segment::block_check::tests::prepare_child ... ignored, process helper
+test index::compact_tests::capacity_and_duplicate_checks_leave_index_unchanged ... ok
+test format::crc_tests::streaming_checkpoint_checks_crc_before_emitting_and_rejects_schema_errors ... ok
+test format::crc_tests::ieee_crc_and_streaming_boundaries_remain_compatible ... ok
+test index::posting::tests::representations_and_distant_ids_match_ordered_set ... ok
+test index::posting::tests::randomized_reuse_union_and_deletion_match_set ... ok
+test format::crc_tests::streamed_checkpoint_is_byte_compatible_and_every_cut_is_rejected ... ok
+test segment::grouped_tests::adjacent_and_gapped_slots_share_one_window_with_independent_payload_checks ... ok
+test payload::document_limit_tests::borrowed_limits_match_owned_validation ... ok
+test segment::block_check::tests::process_kill_before_publication_keeps_previous_checksum_cache ... ok
+test segment::grouped_tests::invalid_slots_tombstone_short_read_and_empty_batch ... ok
+test segment::paged::streaming::tests::intact_sidecar_cannot_hide_invalid_seg03_record_directory ... ok
+test segment::grouped_tests::window_budget_gaps_and_oversized_payload_fallback ... ok
+test segment::query_scratch_tests::cached_body_never_reuses_title_and_oversize_text_does_not_escape_budget ... ok
+test segment::paged::tests::text_windows_check_selected_crc_and_identity_and_handle_oversized_payloads ... ok
+test segment::record_spool::tests::every_torn_spool_and_payload_corruption_fails_without_source_mutation ... ok
+test index::compact_tests::slots_recycle_without_stale_terms_or_growth_across_updates ... ok
+test segment::record_spool::tests::streamed_directory_is_byte_compatible_and_spool_is_removed ... ok
+test segment::query_scratch_tests::chunked_scan_matches_full_fold_at_utf8_and_term_boundaries ... ok
+test segment::paged::tests::corruption_truncation_binding_rebuild_and_runtime_error ... ok
+test segment::streaming::tests::entry_budget_and_order_are_rejected_without_unbounded_scratch ... ok
+test segment::streaming::tests::framing_handles_escapes_boundaries_and_strict_schema ... ok
+test segment::paged::tests::two_level_slots_lookup_eviction_and_shared_budget ... ok
+test segment::streaming::tests::large_exact_values_remain_compatible_with_existing_seg03 ... ok
+test segment::paged::tests::maximal_keys_unicode_prefixes_empty_and_malformed_leaf ... ok
+test index::scratch_fold_tests::query_scratch_fold_matches_every_unicode_scalar_and_reuse ... ok
+test segment::term_pages::tests::sparse_lookup_ranges_cursor_cache_and_uncached_corruption ... ok
+test segment::grouped_tests::valid_crc_still_requires_matching_key_and_version ... ok
+test segment::window_tests::large_document_keeps_exact_read_and_record_validation ... ok
+test segment::window_tests::prefetched_corrupt_record_is_checked_before_it_matches ... ok
+test source_records::tests::prepare_child ... ignored, process helper
+test spill::tests::chunk_boundaries_preserve_bytes_and_reject_duplicate_ids ... ok
+test spill::tests::corrupt_spill_header_term_and_postings_fail_closed ... ok
+test spill::tests::empty_and_complete_term_boundary_truncation_are_rejected ... ok
+test segment::block_check::tests::lazy_blocks_check_boundaries_corruption_cuts_and_table_root ... ok
+test segment::reuse::tests::legacy_footer_is_verified_with_its_own_codec_and_rejects_corruption ... ok
+test segment::window_tests::sparse_window_stops_read_ahead_but_dense_window_keeps_it ... ok
+test write_budget::tests::reservations_shrink_wait_and_release_on_error ... ok
+test segment::window_tests::window_matches_exact_reads_across_boundaries_and_sparse_order ... ok
+test spill::tests::spilled_groups_merge_in_term_and_id_order_and_are_removed ... ok
+test source_records::tests::interrupted_address_publication_preserves_prior_map_and_source ... ok
+test segment::reuse::tests::reused_postings_are_byte_equal_to_independent_reindex_and_reject_bad_maps_and_crc ... ok
+test segment::reuse::tests::delta_export_matches_reindex_after_slot_reuse_updates_and_tombstones ... ok
+test format::crc_tests::large_fields_start_another_frame_before_crossing_existing_limit ... ok
+test segment::window_tests::read_window_never_uses_a_valid_vfy_to_hide_corrupt_index_blocks_or_cuts ... ok
+test index::scratch_fold_tests::ascii_prefix_matches_byte_scan_at_every_alignment_and_boundary ... ok
+test segment::paged::streaming::tests::streamed_pages_are_byte_compatible_and_have_no_resident_record_table ... ok
+test engine::streamed::tests::staged_frame_matches_existing_codec_torn_frames_are_atomic_and_entry_crc_is_checked ... ok
+test spill::tests::every_staged_cut_and_crc_corruption_fail_closed_and_cleanup ... ok
+test spill::tests::multiple_stages_preserve_all_ids_and_release_every_owned_file ... ok
+test segment::paged::streaming::tests::every_torn_sidecar_and_crc_valid_wrong_record_rebuild_from_seg03 ... ok
+test format::crc_tests::accelerated_ieee_matches_tables_for_offsets_lengths_states_and_chaining ... ok
+test payload::document_limit_tests::utf8_validation_matches_std_including_boundaries_and_invalid_bytes ... ok
+
+test result: ok. 56 passed; 0 failed; 2 ignored; 0 measured; 0 filtered out; finished in 30.67s
+

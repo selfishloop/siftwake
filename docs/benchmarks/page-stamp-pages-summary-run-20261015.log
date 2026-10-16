@@ -1,0 +1,38 @@
+{
+  "lower_p95_cases": 7,
+  "higher_p95_cases": 1,
+  "increases": [
+    {
+      "text": "the",
+      "kind": "page",
+      "offset": 0,
+      "limit": 1,
+      "total": 10000,
+      "late_matches": 0,
+      "control": {
+        "n": 600,
+        "p50_ms": 0.5199999999999999,
+        "p95_ms": 0.8196,
+        "p99_ms": 0.9491,
+        "run_p95": [
+          0.7766,
+          0.7911,
+          0.8761
+        ]
+      },
+      "fdb": {
+        "n": 600,
+        "p50_ms": 0.5213,
+        "p95_ms": 0.8363,
+        "p99_ms": 1.0436,
+        "run_p95": [
+          0.7378,
+          0.8363,
+          0.9312
+        ]
+      },
+      "change_p95_percent": 2.0375793069790094,
+      "faster_pairs": 1
+    }
+  ]
+}

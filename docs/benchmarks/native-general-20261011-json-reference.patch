@@ -1,0 +1,156 @@
+--- native/src/format.rs
++++ json-control/src/format.rs
+@@ -105,13 +105,22 @@
+ }
+ 
+ pub(crate) fn encode(sequence: u64, batch: &Batch) -> Result<Vec<u8>> {
+-    #[cfg(feature = "diagnostic-memory")]
+-    let _origin = crate::memory::Scope::new(5);
+-    #[cfg(feature = "diagnostic-timing")]
+-    let _encode = crate::timing::span("frame.encode_binary_crc");
+     let mut bytes = vec![0; HEADER];
+-    crate::binary_batch::encode_into(batch, &mut bytes)?;
+-    finish_frame(sequence, bytes)
++    let mut sink = crate::bounded::Sink::new(&mut bytes, MAX_FRAME);
++    let encoded = serde_json::to_writer(&mut sink, batch);
++    if sink.exceeded { return Err(Error::Invalid("transaction exceeds 64 MiB".into())); }
++    if let Some(error) = sink.failure.take() { return Err(Error::Io(error)); }
++    encoded?;
++    let len = sink.written;
++    bytes[..4].copy_from_slice(b"TXN1");
++    bytes[4..8].copy_from_slice(&(len as u32).to_le_bytes());
++    bytes[8..16].copy_from_slice(&sequence.to_le_bytes());
++    let checksum = crc(&bytes[HEADER..]);
++    bytes[16..20].copy_from_slice(&checksum.to_le_bytes());
++    let checksum = crc(&bytes[..20]);
++    bytes[20..24].copy_from_slice(&checksum.to_le_bytes());
++    bytes.extend_from_slice(FOOTER);
++    Ok(bytes)
+ }
+ 
+ #[cfg(feature = "experimental-wal-delta")]
+--- native/src/manifest.rs
++++ json-control/src/manifest.rs
+@@ -1,4 +1,4 @@
+-use crate::format::{Batch, MAGIC_V4, append, crc, encode};
++use crate::format::{Batch, MAGIC_V3, append, crc, encode};
+ use crate::{Error, Result};
+ use serde::{Deserialize, Serialize};
+ use std::fs::{File, OpenOptions};
+@@ -162,7 +162,7 @@
+         .write(true)
+         .create_new(true)
+         .open(path(dir, id, "fdb"))?;
+-    log.write_all(MAGIC_V4)?;
++    log.write_all(MAGIC_V3)?;
+     append(
+         &mut log,
+         &encode(
+--- native/src/engine.rs
++++ json-control/src/engine.rs
+@@ -388,7 +388,7 @@
+         .write(true)
+         .create_new(true)
+         .open(source.path(dir, "fdb"))?;
+-    file.write_all(format::MAGIC_V4)?;
++    file.write_all(format::MAGIC_V3)?;
+     #[cfg(feature = "diagnostic-memory")]
+     let _origin = crate::memory::Scope::new(4);
+     #[cfg(feature = "experimental-write-buffer-budget")]
+@@ -399,7 +399,7 @@
+         let mut size = 0;
+         for change in changes {
+             let change = change?;
+-            size += crate::binary_batch::entry_len(&change)?;
++            size += serde_json::to_vec(&change)?.len();
+             batch.push(change);
+             if size >= 8 * 1024 * 1024 {
+                 format::append(
+@@ -638,7 +638,7 @@
+                             not(feature = "experimental-wal-delta")
+                         ))]
+                         {
+-                            let size = crate::payload::encoded_len(&stored.document)?;
++                            let size = serde_json::to_vec(&stored)?.len();
+                             let (_, row) = doc_cache.store(stored, size)?;
+                             docs.insert(shared_key, row);
+                         }
+@@ -722,7 +722,7 @@
+         )))]
+         for stored in docs.values() {
+             index.change(stored, true)?;
+-            delta_bytes += crate::payload::encoded_len(&stored.document)?;
++            delta_bytes += serde_json::to_vec(&stored)?.len();
+         }
+         #[cfg(feature = "experimental-wal-delta")]
+         for (key, row) in &docs {
+@@ -937,7 +937,7 @@
+             ))]
+             let row_size = {
+                 let size = match change {
+-                    Change::Put { stored } => crate::payload::encoded_len(&stored.document)?,
++                    Change::Put { stored } => serde_json::to_vec(&stored)?.len(),
+                     Change::Delete { .. } => 0,
+                 };
+                 row_sizes.push(size);
+@@ -957,7 +957,7 @@
+                     feature = "experimental-shared-documents"
+                 )))]
+                 {
+-                    delta_bytes -= crate::payload::encoded_len(&old.document)?;
++                    delta_bytes -= serde_json::to_vec(old)?.len();
+                 }
+                 #[cfg(all(
+                     feature = "experimental-shared-documents",
+@@ -977,7 +977,7 @@
+                     feature = "experimental-shared-documents"
+                 )))]
+                 {
+-                    delta_bytes += crate::payload::encoded_len(&stored.document)?;
++                    delta_bytes += serde_json::to_vec(&stored)?.len();
+                 }
+                 #[cfg(all(
+                     feature = "experimental-shared-documents",
+--- native/src/lib.rs
++++ json-control/src/lib.rs
+@@ -155,7 +155,7 @@
+             ));
+         }
+     }
+-    if payload::encoded_len(doc)? > 4 * 1024 * 1024 {
++    if serde_json::to_vec(doc)?.len() > 4 * 1024 * 1024 {
+         return Err(Error::Invalid("binary document exceeds 4 MiB".into()));
+     }
+     Ok(())
+--- native/src/segment.rs
++++ json-control/src/segment.rs
+@@ -13,9 +13,9 @@
+ #[cfg(feature = "experimental-rkyv-payload")]
+ mod payload_bench;
+ 
+-const MAGIC: &[u8; 8] = b"FDBSEG04";
++const MAGIC: &[u8; 8] = b"FDBSEG03";
+ const LEGACY_MAGIC: &[u8; 8] = b"FDBSEG03";
+-const FOOTER: &[u8; 8] = b"FDBEND04";
++const FOOTER: &[u8; 8] = b"FDBEND03";
+ const LEGACY_FOOTER: &[u8; 8] = b"FDBEND03";
+ const HEADER_SIZE: u64 = 28;
+ const FOOTER_SIZE: u64 = 32;
+@@ -337,7 +337,7 @@
+         }
+         let id = u32::try_from(self.record_count())
+             .map_err(|_| Error::Invalid("segment exceeds u32 record capacity".into()))?;
+-        let bytes = crate::payload::encode(stored)?;
++        let bytes = serde_json::to_vec(stored)?;
+         self.writer.as_mut().unwrap().write_all(&bytes)?;
+         self.push_record(Record {
+             key: stored.document.key.clone(),
+@@ -574,7 +574,7 @@
+         if &header[..8] != MAGIC && &header[..8] != LEGACY_MAGIC {
+             return Err(Error::Corrupt("unsupported segment format".into()));
+         }
+-        let binary_payload = &header[..8] == MAGIC;
++        let binary_payload = false;
+         let sequence = u64::from_le_bytes(header[8..16].try_into().unwrap());
+         let end = u64::from_le_bytes(header[16..24].try_into().unwrap());
+         let log_crc = u32::from_le_bytes(header[24..28].try_into().unwrap());

@@ -1,0 +1,30 @@
+   Compiling fdb v0.3.1 (C:\Users\Serkan\Documents\ChatGPT\fdb)
+warning: function `replay_prefix` is never used
+   --> src\format.rs:331:15
+    |
+331 | pub(crate) fn replay_prefix(
+    |               ^^^^^^^^^^^^^
+    |
+    = note: `#[warn(dead_code)]` (part of `#[warn(unused)]`) on by default
+
+warning: `fdb` (lib test) generated 1 warning
+    Finished `test` profile [unoptimized + debuginfo] target(s) in 2.79s
+     Running unittests src\lib.rs (target\debug\deps\fdb-4f8037ff3363174d.exe)
+
+running 13 tests
+test bounded::tests::serialization_preserves_original_destination_error ... ok
+test bounded::tests::short_writes_count_exactly_and_limits_stop_before_forwarding ... ok
+test segment::query_scratch_tests::cached_body_never_reuses_title_and_oversize_text_does_not_escape_budget ... ok
+test binary_batch_tests::binary_batch_prefix_offsets_sizes_and_every_cut ... ok
+test format::crc_tests::binary_frame_has_versioned_header_and_expected_crc ... ok
+test spill::tests::empty_and_complete_term_boundary_truncation_are_rejected ... ok
+test format::crc_tests::whole_source_crc_is_checked_even_when_each_frame_is_valid ... ok
+test spill::tests::corrupt_spill_header_term_and_postings_fail_closed ... ok
+test spill::tests::chunk_boundaries_preserve_bytes_and_reject_duplicate_ids ... ok
+test spill::tests::spilled_groups_merge_in_term_and_id_order_and_are_removed ... ok
+test segment::query_scratch_tests::chunked_scan_matches_full_fold_at_utf8_and_term_boundaries ... ok
+test index::scratch_fold_tests::query_scratch_fold_matches_every_unicode_scalar_and_reuse ... ok
+test format::crc_tests::ieee_crc_and_streaming_boundaries_remain_compatible ... ok
+
+test result: ok. 13 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.49s
+

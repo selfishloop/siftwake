@@ -1,0 +1,48 @@
+{
+  "rows": [
+    {
+      "run": 0,
+      "ingest_s": 45.3132743,
+      "maintenance_s": 1.6523027,
+      "combined_s": 46.965577,
+      "indexing_private_bytes": 8810496,
+      "maintenance_private_bytes": 7610368,
+      "os_peak_ws_bytes": 13885440,
+      "idle_private_bytes": 1298432,
+      "disk_bytes": 583860224.0
+    },
+    {
+      "run": 1,
+      "ingest_s": 45.3862175,
+      "maintenance_s": 1.0749445,
+      "combined_s": 46.461161999999995,
+      "indexing_private_bytes": 8818688,
+      "maintenance_private_bytes": 7614464,
+      "os_peak_ws_bytes": 13197312,
+      "idle_private_bytes": 1290240,
+      "disk_bytes": 583860224.0
+    },
+    {
+      "run": 2,
+      "ingest_s": 45.3215462,
+      "maintenance_s": 1.8581982,
+      "combined_s": 47.1797444,
+      "indexing_private_bytes": 8806400,
+      "maintenance_private_bytes": 7610368,
+      "os_peak_ws_bytes": 13201408,
+      "idle_private_bytes": 1290240,
+      "disk_bytes": 583860224.0
+    }
+  ],
+  "median": {
+    "ingest_s": 45.3215462,
+    "maintenance_s": 1.6523027,
+    "combined_s": 46.965577,
+    "indexing_private_bytes": 8810496,
+    "maintenance_private_bytes": 7610368,
+    "os_peak_ws_bytes": 13201408,
+    "idle_private_bytes": 1290240,
+    "disk_bytes": 583860224.0
+  },
+  "scope": "three separate SQLite reference processes after FDB pairs; same first10k, transaction500, synced WAL/FULL, cache2MiB mmap0 tempFILE; sequential groups, not interleaved FDB/SQLite pairs"
+}

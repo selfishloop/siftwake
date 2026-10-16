@@ -1,0 +1,198 @@
+{
+  "lower_p95_cases": 32,
+  "higher_p95_cases": 6,
+  "increases": [
+    {
+      "text": "zeuglodon",
+      "kind": "word",
+      "offset": 0,
+      "limit": 50,
+      "total": 32,
+      "late_matches": 6,
+      "control": {
+        "n": 60,
+        "p50_ms": 4.5459000000000005,
+        "p95_ms": 5.745100000000001,
+        "p99_ms": 8.3017,
+        "run_p95": [
+          5.2042,
+          5.5347,
+          5.745100000000001
+        ]
+      },
+      "fdb": {
+        "n": 60,
+        "p50_ms": 4.0967,
+        "p95_ms": 5.8637999999999995,
+        "p99_ms": 6.815200000000001,
+        "run_p95": [
+          5.8317000000000005,
+          5.8637999999999995,
+          5.4249
+        ]
+      },
+      "change_p95_percent": 2.0661085098605536,
+      "faster_pairs": 1
+    },
+    {
+      "text": "man",
+      "kind": "common",
+      "offset": 0,
+      "limit": 50,
+      "total": 9932,
+      "late_matches": 61,
+      "control": {
+        "n": 60,
+        "p50_ms": 2.2354,
+        "p95_ms": 3.0598,
+        "p99_ms": 3.4681,
+        "run_p95": [
+          2.8739,
+          2.8240000000000003,
+          3.4284
+        ]
+      },
+      "fdb": {
+        "n": 60,
+        "p50_ms": 2.4198,
+        "p95_ms": 3.2335,
+        "p99_ms": 3.7404,
+        "run_p95": [
+          3.4703,
+          2.9112,
+          3.0263
+        ]
+      },
+      "change_p95_percent": 5.676841623635531,
+      "faster_pairs": 1
+    },
+    {
+      "text": "quixote whale",
+      "kind": "and",
+      "offset": 0,
+      "limit": 50,
+      "total": 44,
+      "late_matches": 8,
+      "control": {
+        "n": 60,
+        "p50_ms": 4.7772,
+        "p95_ms": 7.093699999999999,
+        "p99_ms": 8.1065,
+        "run_p95": [
+          5.6379,
+          6.114299999999999,
+          7.1117
+        ]
+      },
+      "fdb": {
+        "n": 60,
+        "p50_ms": 4.4225,
+        "p95_ms": 7.5293,
+        "p99_ms": 10.0885,
+        "run_p95": [
+          7.0221,
+          7.4503,
+          7.7203
+        ]
+      },
+      "change_p95_percent": 6.140660022273292,
+      "faster_pairs": 0
+    },
+    {
+      "text": "QUİXOTE",
+      "kind": "fold",
+      "offset": 0,
+      "limit": 50,
+      "total": 56,
+      "late_matches": 8,
+      "control": {
+        "n": 60,
+        "p50_ms": 4.1788,
+        "p95_ms": 6.4752,
+        "p99_ms": 14.0413,
+        "run_p95": [
+          5.9963999999999995,
+          6.4752,
+          7.3943
+        ]
+      },
+      "fdb": {
+        "n": 60,
+        "p50_ms": 4.045100000000001,
+        "p95_ms": 6.479699999999999,
+        "p99_ms": 7.5172,
+        "run_p95": [
+          6.0638000000000005,
+          6.1205,
+          6.479699999999999
+        ]
+      },
+      "change_p95_percent": 0.06949592290583784,
+      "faster_pairs": 2
+    },
+    {
+      "text": "zxzxzxzxzxzxzxzxzxzxzxzxzxzxzxzxzxzxzxzxzxzxzxzxzxzxzxzxzxzxzxzxzxzxzxzxzxzxzxzxzxzxzxzxzxzxzxzxzxzxzxzxzxzxzxzxzxzxzxzxzxzxzxzxzxzxzxzxzxzxzxzxzxzxzxzxzxzxzxzxzxzxzxzxzxzxzxzxzxzxzxzxzxzxzxzxzxzxzxzxzxzxzxzxzxzxzxzxzxzxzxzxzxzxzxzxzxzxzxzxzxzxzxzxzxzxzxzxzxzxzxzxzxzxzxzxzxzxzxzxzxzxzxzxzxzxzxzxzxzx",
+      "kind": "long-negative",
+      "offset": 0,
+      "limit": 50,
+      "total": 0,
+      "late_matches": 0,
+      "control": {
+        "n": 60,
+        "p50_ms": 0.0365,
+        "p95_ms": 0.0592,
+        "p99_ms": 0.06499999999999999,
+        "run_p95": [
+          0.051,
+          0.056100000000000004,
+          0.062
+        ]
+      },
+      "fdb": {
+        "n": 60,
+        "p50_ms": 0.0337,
+        "p95_ms": 0.09380000000000001,
+        "p99_ms": 0.2727,
+        "run_p95": [
+          0.0988,
+          0.0846,
+          0.0569
+        ]
+      },
+      "change_p95_percent": 58.445945945945944,
+      "faster_pairs": 1
+    },
+    {
+      "text": "quixote",
+      "kind": "page",
+      "offset": 57,
+      "limit": 50,
+      "total": 56,
+      "late_matches": 8,
+      "control": {
+        "n": 15,
+        "p50_ms": 2.7791,
+        "p95_ms": 4.415,
+        "p99_ms": 4.415,
+        "run_p95": [
+          2.7791,
+          4.415,
+          4.3453
+        ]
+      },
+      "fdb": {
+        "n": 15,
+        "p50_ms": 2.2873,
+        "p95_ms": 5.7162999999999995,
+        "p99_ms": 5.7162999999999995,
+        "run_p95": [
+          2.3933999999999997,
+          4.4181,
+          5.7162999999999995
+        ]
+      },
+      "change_p95_percent": 29.47451868629671,
+      "faster_pairs": 1
+    }
+  ]
+}

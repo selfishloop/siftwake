@@ -1,0 +1,1207 @@
+{
+  "variants": {
+    "baseline": {
+      "runs": [
+        {
+          "opening": {
+            "api": "Database::search",
+            "open_ms": 26250.336199999998,
+            "phase": "open",
+            "stats": {
+              "compaction_running": false,
+              "delta_keys": 0,
+              "disk_index_bytes": 3551235145,
+              "disk_posting_entries": 192782228,
+              "documents": 100000,
+              "generation": 1,
+              "log_bytes": 2741774867,
+              "resident_documents": 0,
+              "resident_text_bytes": 0,
+              "segments": 1,
+              "sequence": 200,
+              "source_bytes": 5483549734
+            }
+          },
+          "queries": {
+            "common:0": {
+              "api": "Database::search",
+              "cache": "warm OS cache; first page has one untimed query; later pages follow; no forced eviction",
+              "full_page_oracle_verified": true,
+              "offset": 0,
+              "p50_ms": 16968.9584,
+              "phase": "query",
+              "profiled": false,
+              "query": "common",
+              "samples_ms": [
+                16968.9584
+              ],
+              "text": "the",
+              "total": 100000
+            },
+            "common:50": {
+              "api": "Database::search",
+              "cache": "warm OS cache; first page has one untimed query; later pages follow; no forced eviction",
+              "full_page_oracle_verified": true,
+              "offset": 50,
+              "p50_ms": 17206.6725,
+              "phase": "query",
+              "profiled": false,
+              "query": "common",
+              "samples_ms": [
+                17206.6725
+              ],
+              "text": "the",
+              "total": 100000
+            },
+            "common:99950": {
+              "api": "Database::search",
+              "cache": "warm OS cache; first page has one untimed query; later pages follow; no forced eviction",
+              "full_page_oracle_verified": true,
+              "offset": 99950,
+              "p50_ms": 17707.7275,
+              "phase": "query",
+              "profiled": false,
+              "query": "common",
+              "samples_ms": [
+                17707.7275
+              ],
+              "text": "the",
+              "total": 100000
+            },
+            "rare:0": {
+              "api": "Database::search",
+              "cache": "warm OS cache; first page has one untimed query; later pages follow; no forced eviction",
+              "full_page_oracle_verified": true,
+              "offset": 0,
+              "p50_ms": 305.1336,
+              "phase": "query",
+              "profiled": false,
+              "query": "rare",
+              "samples_ms": [
+                296.3546,
+                299.1971,
+                299.3232,
+                300.29200000000003,
+                302.91970000000003,
+                305.1336,
+                306.4269,
+                307.3061,
+                311.179,
+                314.71880000000004
+              ],
+              "text": "abbreviation",
+              "total": 264
+            },
+            "rare:50": {
+              "api": "Database::search",
+              "cache": "warm OS cache; first page has one untimed query; later pages follow; no forced eviction",
+              "full_page_oracle_verified": true,
+              "offset": 50,
+              "p50_ms": 297.3235,
+              "phase": "query",
+              "profiled": false,
+              "query": "rare",
+              "samples_ms": [
+                275.11269999999996,
+                280.5215,
+                285.1743,
+                289.8594,
+                290.8204,
+                297.3235,
+                299.3263,
+                300.3594,
+                301.1301,
+                306.11539999999997
+              ],
+              "text": "abbreviation",
+              "total": 264
+            },
+            "short:0": {
+              "api": "Database::search",
+              "cache": "warm OS cache; first page has one untimed query; later pages follow; no forced eviction",
+              "full_page_oracle_verified": true,
+              "offset": 0,
+              "p50_ms": 13464.2759,
+              "phase": "query",
+              "profiled": false,
+              "query": "short",
+              "samples_ms": [
+                13464.2759
+              ],
+              "text": "of",
+              "total": 100000
+            },
+            "short:50": {
+              "api": "Database::search",
+              "cache": "warm OS cache; first page has one untimed query; later pages follow; no forced eviction",
+              "full_page_oracle_verified": true,
+              "offset": 50,
+              "p50_ms": 16035.9874,
+              "phase": "query",
+              "profiled": false,
+              "query": "short",
+              "samples_ms": [
+                16035.9874
+              ],
+              "text": "of",
+              "total": 100000
+            },
+            "and:0": {
+              "api": "Database::search",
+              "cache": "warm OS cache; first page has one untimed query; later pages follow; no forced eviction",
+              "full_page_oracle_verified": true,
+              "offset": 0,
+              "p50_ms": 39186.6111,
+              "phase": "query",
+              "profiled": false,
+              "query": "and",
+              "samples_ms": [
+                39186.6111
+              ],
+              "text": "the whale",
+              "total": 16537
+            },
+            "and:50": {
+              "api": "Database::search",
+              "cache": "warm OS cache; first page has one untimed query; later pages follow; no forced eviction",
+              "full_page_oracle_verified": true,
+              "offset": 50,
+              "p50_ms": 37520.4223,
+              "phase": "query",
+              "profiled": false,
+              "query": "and",
+              "samples_ms": [
+                37520.4223
+              ],
+              "text": "the whale",
+              "total": 16537
+            }
+          },
+          "memory": {
+            "variant": "baseline",
+            "run": 0,
+            "exit_code": 0,
+            "executable": "C:\\Users\\Serkan\\Documents\\ChatGPT\\fdb\\output\\fdb-engine-fold-baseline-20261011.exe",
+            "database": "C:\\Users\\Serkan\\Documents\\ChatGPT\\fdb\\data\\engine-fold-v2-20261011",
+            "peak_working_set_bytes": 135872512,
+            "sampled_peak_private_bytes": 138477568,
+            "sample_interval_ms": 20,
+            "samples": 6702,
+            "elapsed_s": 265.5237669,
+            "cpu_ms": 221828.125,
+            "window": "whole process including validated open, corpus plan/books/oracle, queries",
+            "includes_os_file_cache": false
+          }
+        },
+        {
+          "opening": {
+            "api": "Database::search",
+            "open_ms": 21094.226,
+            "phase": "open",
+            "stats": {
+              "compaction_running": false,
+              "delta_keys": 0,
+              "disk_index_bytes": 3551235145,
+              "disk_posting_entries": 192782228,
+              "documents": 100000,
+              "generation": 1,
+              "log_bytes": 2741774867,
+              "resident_documents": 0,
+              "resident_text_bytes": 0,
+              "segments": 1,
+              "sequence": 200,
+              "source_bytes": 5483549734
+            }
+          },
+          "queries": {
+            "common:0": {
+              "api": "Database::search",
+              "cache": "warm OS cache; first page has one untimed query; later pages follow; no forced eviction",
+              "full_page_oracle_verified": true,
+              "offset": 0,
+              "p50_ms": 12317.5018,
+              "phase": "query",
+              "profiled": false,
+              "query": "common",
+              "samples_ms": [
+                12317.5018
+              ],
+              "text": "the",
+              "total": 100000
+            },
+            "common:50": {
+              "api": "Database::search",
+              "cache": "warm OS cache; first page has one untimed query; later pages follow; no forced eviction",
+              "full_page_oracle_verified": true,
+              "offset": 50,
+              "p50_ms": 12352.323,
+              "phase": "query",
+              "profiled": false,
+              "query": "common",
+              "samples_ms": [
+                12352.323
+              ],
+              "text": "the",
+              "total": 100000
+            },
+            "common:99950": {
+              "api": "Database::search",
+              "cache": "warm OS cache; first page has one untimed query; later pages follow; no forced eviction",
+              "full_page_oracle_verified": true,
+              "offset": 99950,
+              "p50_ms": 12411.8104,
+              "phase": "query",
+              "profiled": false,
+              "query": "common",
+              "samples_ms": [
+                12411.8104
+              ],
+              "text": "the",
+              "total": 100000
+            },
+            "rare:0": {
+              "api": "Database::search",
+              "cache": "warm OS cache; first page has one untimed query; later pages follow; no forced eviction",
+              "full_page_oracle_verified": true,
+              "offset": 0,
+              "p50_ms": 228.57150000000001,
+              "phase": "query",
+              "profiled": false,
+              "query": "rare",
+              "samples_ms": [
+                213.2847,
+                213.33669999999998,
+                213.7975,
+                220.2579,
+                226.6302,
+                228.57150000000001,
+                239.44,
+                241.2532,
+                243.0061,
+                248.81130000000002
+              ],
+              "text": "abbreviation",
+              "total": 264
+            },
+            "rare:50": {
+              "api": "Database::search",
+              "cache": "warm OS cache; first page has one untimed query; later pages follow; no forced eviction",
+              "full_page_oracle_verified": true,
+              "offset": 50,
+              "p50_ms": 243.8151,
+              "phase": "query",
+              "profiled": false,
+              "query": "rare",
+              "samples_ms": [
+                226.7005,
+                236.7939,
+                239.6333,
+                241.3476,
+                243.5795,
+                243.8151,
+                246.81980000000001,
+                252.894,
+                270.9258,
+                276.95300000000003
+              ],
+              "text": "abbreviation",
+              "total": 264
+            },
+            "short:0": {
+              "api": "Database::search",
+              "cache": "warm OS cache; first page has one untimed query; later pages follow; no forced eviction",
+              "full_page_oracle_verified": true,
+              "offset": 0,
+              "p50_ms": 12776.221,
+              "phase": "query",
+              "profiled": false,
+              "query": "short",
+              "samples_ms": [
+                12776.221
+              ],
+              "text": "of",
+              "total": 100000
+            },
+            "short:50": {
+              "api": "Database::search",
+              "cache": "warm OS cache; first page has one untimed query; later pages follow; no forced eviction",
+              "full_page_oracle_verified": true,
+              "offset": 50,
+              "p50_ms": 13828.845299999999,
+              "phase": "query",
+              "profiled": false,
+              "query": "short",
+              "samples_ms": [
+                13828.845299999999
+              ],
+              "text": "of",
+              "total": 100000
+            },
+            "and:0": {
+              "api": "Database::search",
+              "cache": "warm OS cache; first page has one untimed query; later pages follow; no forced eviction",
+              "full_page_oracle_verified": true,
+              "offset": 0,
+              "p50_ms": 14644.152,
+              "phase": "query",
+              "profiled": false,
+              "query": "and",
+              "samples_ms": [
+                14644.152
+              ],
+              "text": "the whale",
+              "total": 16537
+            },
+            "and:50": {
+              "api": "Database::search",
+              "cache": "warm OS cache; first page has one untimed query; later pages follow; no forced eviction",
+              "full_page_oracle_verified": true,
+              "offset": 50,
+              "p50_ms": 14644.6562,
+              "phase": "query",
+              "profiled": false,
+              "query": "and",
+              "samples_ms": [
+                14644.6562
+              ],
+              "text": "the whale",
+              "total": 16537
+            }
+          },
+          "memory": {
+            "variant": "baseline",
+            "run": 1,
+            "exit_code": 0,
+            "executable": "C:\\Users\\Serkan\\Documents\\ChatGPT\\fdb\\output\\fdb-engine-fold-baseline-20261011.exe",
+            "database": "C:\\Users\\Serkan\\Documents\\ChatGPT\\fdb\\data\\engine-fold-v2-20261011",
+            "peak_working_set_bytes": 136663040,
+            "sampled_peak_private_bytes": 139988992,
+            "sample_interval_ms": 20,
+            "samples": 4254,
+            "elapsed_s": 161.3845199,
+            "cpu_ms": 156218.75,
+            "window": "whole process including validated open, corpus plan/books/oracle, queries",
+            "includes_os_file_cache": false
+          }
+        },
+        {
+          "opening": {
+            "api": "Database::search",
+            "open_ms": 22442.832599999998,
+            "phase": "open",
+            "stats": {
+              "compaction_running": false,
+              "delta_keys": 0,
+              "disk_index_bytes": 3551235145,
+              "disk_posting_entries": 192782228,
+              "documents": 100000,
+              "generation": 1,
+              "log_bytes": 2741774867,
+              "resident_documents": 0,
+              "resident_text_bytes": 0,
+              "segments": 1,
+              "sequence": 200,
+              "source_bytes": 5483549734
+            }
+          },
+          "queries": {
+            "common:0": {
+              "api": "Database::search",
+              "cache": "warm OS cache; first page has one untimed query; later pages follow; no forced eviction",
+              "full_page_oracle_verified": true,
+              "offset": 0,
+              "p50_ms": 12233.1984,
+              "phase": "query",
+              "profiled": false,
+              "query": "common",
+              "samples_ms": [
+                12233.1984
+              ],
+              "text": "the",
+              "total": 100000
+            },
+            "common:50": {
+              "api": "Database::search",
+              "cache": "warm OS cache; first page has one untimed query; later pages follow; no forced eviction",
+              "full_page_oracle_verified": true,
+              "offset": 50,
+              "p50_ms": 12600.1869,
+              "phase": "query",
+              "profiled": false,
+              "query": "common",
+              "samples_ms": [
+                12600.1869
+              ],
+              "text": "the",
+              "total": 100000
+            },
+            "common:99950": {
+              "api": "Database::search",
+              "cache": "warm OS cache; first page has one untimed query; later pages follow; no forced eviction",
+              "full_page_oracle_verified": true,
+              "offset": 99950,
+              "p50_ms": 12513.8399,
+              "phase": "query",
+              "profiled": false,
+              "query": "common",
+              "samples_ms": [
+                12513.8399
+              ],
+              "text": "the",
+              "total": 100000
+            },
+            "rare:0": {
+              "api": "Database::search",
+              "cache": "warm OS cache; first page has one untimed query; later pages follow; no forced eviction",
+              "full_page_oracle_verified": true,
+              "offset": 0,
+              "p50_ms": 351.1312,
+              "phase": "query",
+              "profiled": false,
+              "query": "rare",
+              "samples_ms": [
+                229.526,
+                230.2523,
+                324.70939999999996,
+                347.3512,
+                350.2152,
+                351.1312,
+                355.05989999999997,
+                358.1449,
+                374.8616,
+                378.83480000000003
+              ],
+              "text": "abbreviation",
+              "total": 264
+            },
+            "rare:50": {
+              "api": "Database::search",
+              "cache": "warm OS cache; first page has one untimed query; later pages follow; no forced eviction",
+              "full_page_oracle_verified": true,
+              "offset": 50,
+              "p50_ms": 316.8858,
+              "phase": "query",
+              "profiled": false,
+              "query": "rare",
+              "samples_ms": [
+                306.5707,
+                306.7061,
+                307.11080000000004,
+                312.2387,
+                315.36350000000004,
+                316.8858,
+                325.58009999999996,
+                326.3368,
+                329.8311,
+                343.9377
+              ],
+              "text": "abbreviation",
+              "total": 264
+            },
+            "short:0": {
+              "api": "Database::search",
+              "cache": "warm OS cache; first page has one untimed query; later pages follow; no forced eviction",
+              "full_page_oracle_verified": true,
+              "offset": 0,
+              "p50_ms": 18630.7083,
+              "phase": "query",
+              "profiled": false,
+              "query": "short",
+              "samples_ms": [
+                18630.7083
+              ],
+              "text": "of",
+              "total": 100000
+            },
+            "short:50": {
+              "api": "Database::search",
+              "cache": "warm OS cache; first page has one untimed query; later pages follow; no forced eviction",
+              "full_page_oracle_verified": true,
+              "offset": 50,
+              "p50_ms": 18622.491700000002,
+              "phase": "query",
+              "profiled": false,
+              "query": "short",
+              "samples_ms": [
+                18622.491700000002
+              ],
+              "text": "of",
+              "total": 100000
+            },
+            "and:0": {
+              "api": "Database::search",
+              "cache": "warm OS cache; first page has one untimed query; later pages follow; no forced eviction",
+              "full_page_oracle_verified": true,
+              "offset": 0,
+              "p50_ms": 21557.341999999997,
+              "phase": "query",
+              "profiled": false,
+              "query": "and",
+              "samples_ms": [
+                21557.341999999997
+              ],
+              "text": "the whale",
+              "total": 16537
+            },
+            "and:50": {
+              "api": "Database::search",
+              "cache": "warm OS cache; first page has one untimed query; later pages follow; no forced eviction",
+              "full_page_oracle_verified": true,
+              "offset": 50,
+              "p50_ms": 21213.786500000002,
+              "phase": "query",
+              "profiled": false,
+              "query": "and",
+              "samples_ms": [
+                21213.786500000002
+              ],
+              "text": "the whale",
+              "total": 16537
+            }
+          },
+          "memory": {
+            "variant": "baseline",
+            "run": 2,
+            "exit_code": 0,
+            "executable": "C:\\Users\\Serkan\\Documents\\ChatGPT\\fdb\\output\\fdb-engine-fold-baseline-20261011.exe",
+            "database": "C:\\Users\\Serkan\\Documents\\ChatGPT\\fdb\\data\\engine-fold-v2-20261011",
+            "peak_working_set_bytes": 136577024,
+            "sampled_peak_private_bytes": 138752000,
+            "sample_interval_ms": 20,
+            "samples": 5166,
+            "elapsed_s": 200.7970943,
+            "cpu_ms": 191312.5,
+            "window": "whole process including validated open, corpus plan/books/oracle, queries",
+            "includes_os_file_cache": false
+          }
+        }
+      ],
+      "median": {
+        "open_ms": 22442.832599999998,
+        "peak_working_set_bytes": 136577024,
+        "sampled_peak_private_bytes": 138752000,
+        "queries_ms": {
+          "common:0": 12317.5018,
+          "common:50": 12600.1869,
+          "common:99950": 12513.8399,
+          "rare:0": 305.1336,
+          "rare:50": 297.3235,
+          "short:0": 13464.2759,
+          "short:50": 16035.9874,
+          "and:0": 21557.341999999997,
+          "and:50": 21213.786500000002
+        }
+      }
+    },
+    "candidate": {
+      "runs": [
+        {
+          "opening": {
+            "api": "Database::search",
+            "open_ms": 27870.2902,
+            "phase": "open",
+            "stats": {
+              "compaction_running": false,
+              "delta_keys": 0,
+              "disk_index_bytes": 3551235145,
+              "disk_posting_entries": 192782228,
+              "documents": 100000,
+              "generation": 1,
+              "log_bytes": 2741774867,
+              "resident_documents": 0,
+              "resident_text_bytes": 0,
+              "segments": 1,
+              "sequence": 200,
+              "source_bytes": 5483549734
+            }
+          },
+          "queries": {
+            "common:0": {
+              "api": "Database::search",
+              "cache": "warm OS cache; first page has one untimed query; later pages follow; no forced eviction",
+              "full_page_oracle_verified": true,
+              "offset": 0,
+              "p50_ms": 12525.2457,
+              "phase": "query",
+              "profiled": false,
+              "query": "common",
+              "samples_ms": [
+                12525.2457
+              ],
+              "text": "the",
+              "total": 100000
+            },
+            "common:50": {
+              "api": "Database::search",
+              "cache": "warm OS cache; first page has one untimed query; later pages follow; no forced eviction",
+              "full_page_oracle_verified": true,
+              "offset": 50,
+              "p50_ms": 11554.503999999999,
+              "phase": "query",
+              "profiled": false,
+              "query": "common",
+              "samples_ms": [
+                11554.503999999999
+              ],
+              "text": "the",
+              "total": 100000
+            },
+            "common:99950": {
+              "api": "Database::search",
+              "cache": "warm OS cache; first page has one untimed query; later pages follow; no forced eviction",
+              "full_page_oracle_verified": true,
+              "offset": 99950,
+              "p50_ms": 10322.3097,
+              "phase": "query",
+              "profiled": false,
+              "query": "common",
+              "samples_ms": [
+                10322.3097
+              ],
+              "text": "the",
+              "total": 100000
+            },
+            "rare:0": {
+              "api": "Database::search",
+              "cache": "warm OS cache; first page has one untimed query; later pages follow; no forced eviction",
+              "full_page_oracle_verified": true,
+              "offset": 0,
+              "p50_ms": 267.1331,
+              "phase": "query",
+              "profiled": false,
+              "query": "rare",
+              "samples_ms": [
+                252.47029999999998,
+                258.80350000000004,
+                259.5229,
+                265.1369,
+                265.1535,
+                267.1331,
+                271.2476,
+                272.0671,
+                272.95180000000005,
+                277.4834
+              ],
+              "text": "abbreviation",
+              "total": 264
+            },
+            "rare:50": {
+              "api": "Database::search",
+              "cache": "warm OS cache; first page has one untimed query; later pages follow; no forced eviction",
+              "full_page_oracle_verified": true,
+              "offset": 50,
+              "p50_ms": 264.884,
+              "phase": "query",
+              "profiled": false,
+              "query": "rare",
+              "samples_ms": [
+                258.4939,
+                260.5147,
+                260.7486,
+                262.0017,
+                264.4198,
+                264.884,
+                265.279,
+                265.32329999999996,
+                272.8846,
+                290.8562
+              ],
+              "text": "abbreviation",
+              "total": 264
+            },
+            "short:0": {
+              "api": "Database::search",
+              "cache": "warm OS cache; first page has one untimed query; later pages follow; no forced eviction",
+              "full_page_oracle_verified": true,
+              "offset": 0,
+              "p50_ms": 11799.6409,
+              "phase": "query",
+              "profiled": false,
+              "query": "short",
+              "samples_ms": [
+                11799.6409
+              ],
+              "text": "of",
+              "total": 100000
+            },
+            "short:50": {
+              "api": "Database::search",
+              "cache": "warm OS cache; first page has one untimed query; later pages follow; no forced eviction",
+              "full_page_oracle_verified": true,
+              "offset": 50,
+              "p50_ms": 12099.7586,
+              "phase": "query",
+              "profiled": false,
+              "query": "short",
+              "samples_ms": [
+                12099.7586
+              ],
+              "text": "of",
+              "total": 100000
+            },
+            "and:0": {
+              "api": "Database::search",
+              "cache": "warm OS cache; first page has one untimed query; later pages follow; no forced eviction",
+              "full_page_oracle_verified": true,
+              "offset": 0,
+              "p50_ms": 34904.8789,
+              "phase": "query",
+              "profiled": false,
+              "query": "and",
+              "samples_ms": [
+                34904.8789
+              ],
+              "text": "the whale",
+              "total": 16537
+            },
+            "and:50": {
+              "api": "Database::search",
+              "cache": "warm OS cache; first page has one untimed query; later pages follow; no forced eviction",
+              "full_page_oracle_verified": true,
+              "offset": 50,
+              "p50_ms": 23302.5497,
+              "phase": "query",
+              "profiled": false,
+              "query": "and",
+              "samples_ms": [
+                23302.5497
+              ],
+              "text": "the whale",
+              "total": 16537
+            }
+          },
+          "memory": {
+            "variant": "candidate",
+            "run": 0,
+            "exit_code": 0,
+            "executable": "C:\\Users\\Serkan\\Documents\\ChatGPT\\fdb\\output\\fdb-engine-fold-candidate-20261011.exe",
+            "database": "C:\\Users\\Serkan\\Documents\\ChatGPT\\fdb\\data\\engine-fold-v2-20261011",
+            "peak_working_set_bytes": 135901184,
+            "sampled_peak_private_bytes": 138260480,
+            "sample_interval_ms": 20,
+            "samples": 5210,
+            "elapsed_s": 209.9352786,
+            "cpu_ms": 161203.125,
+            "window": "whole process including validated open, corpus plan/books/oracle, queries",
+            "includes_os_file_cache": false
+          }
+        },
+        {
+          "opening": {
+            "api": "Database::search",
+            "open_ms": 24104.8217,
+            "phase": "open",
+            "stats": {
+              "compaction_running": false,
+              "delta_keys": 0,
+              "disk_index_bytes": 3551235145,
+              "disk_posting_entries": 192782228,
+              "documents": 100000,
+              "generation": 1,
+              "log_bytes": 2741774867,
+              "resident_documents": 0,
+              "resident_text_bytes": 0,
+              "segments": 1,
+              "sequence": 200,
+              "source_bytes": 5483549734
+            }
+          },
+          "queries": {
+            "common:0": {
+              "api": "Database::search",
+              "cache": "warm OS cache; first page has one untimed query; later pages follow; no forced eviction",
+              "full_page_oracle_verified": true,
+              "offset": 0,
+              "p50_ms": 10593.300799999999,
+              "phase": "query",
+              "profiled": false,
+              "query": "common",
+              "samples_ms": [
+                10593.300799999999
+              ],
+              "text": "the",
+              "total": 100000
+            },
+            "common:50": {
+              "api": "Database::search",
+              "cache": "warm OS cache; first page has one untimed query; later pages follow; no forced eviction",
+              "full_page_oracle_verified": true,
+              "offset": 50,
+              "p50_ms": 11313.9884,
+              "phase": "query",
+              "profiled": false,
+              "query": "common",
+              "samples_ms": [
+                11313.9884
+              ],
+              "text": "the",
+              "total": 100000
+            },
+            "common:99950": {
+              "api": "Database::search",
+              "cache": "warm OS cache; first page has one untimed query; later pages follow; no forced eviction",
+              "full_page_oracle_verified": true,
+              "offset": 99950,
+              "p50_ms": 8748.465400000001,
+              "phase": "query",
+              "profiled": false,
+              "query": "common",
+              "samples_ms": [
+                8748.465400000001
+              ],
+              "text": "the",
+              "total": 100000
+            },
+            "rare:0": {
+              "api": "Database::search",
+              "cache": "warm OS cache; first page has one untimed query; later pages follow; no forced eviction",
+              "full_page_oracle_verified": true,
+              "offset": 0,
+              "p50_ms": 195.80810000000002,
+              "phase": "query",
+              "profiled": false,
+              "query": "rare",
+              "samples_ms": [
+                177.3534,
+                178.90439999999998,
+                180.0424,
+                184.9626,
+                190.8159,
+                195.80810000000002,
+                199.3606,
+                201.9338,
+                207.14569999999998,
+                211.22140000000002
+              ],
+              "text": "abbreviation",
+              "total": 264
+            },
+            "rare:50": {
+              "api": "Database::search",
+              "cache": "warm OS cache; first page has one untimed query; later pages follow; no forced eviction",
+              "full_page_oracle_verified": true,
+              "offset": 50,
+              "p50_ms": 215.23590000000002,
+              "phase": "query",
+              "profiled": false,
+              "query": "rare",
+              "samples_ms": [
+                192.6223,
+                195.5247,
+                197.2855,
+                200.7482,
+                208.8669,
+                215.23590000000002,
+                219.4688,
+                229.1326,
+                290.4836,
+                343.04699999999997
+              ],
+              "text": "abbreviation",
+              "total": 264
+            },
+            "short:0": {
+              "api": "Database::search",
+              "cache": "warm OS cache; first page has one untimed query; later pages follow; no forced eviction",
+              "full_page_oracle_verified": true,
+              "offset": 0,
+              "p50_ms": 7522.7873,
+              "phase": "query",
+              "profiled": false,
+              "query": "short",
+              "samples_ms": [
+                7522.7873
+              ],
+              "text": "of",
+              "total": 100000
+            },
+            "short:50": {
+              "api": "Database::search",
+              "cache": "warm OS cache; first page has one untimed query; later pages follow; no forced eviction",
+              "full_page_oracle_verified": true,
+              "offset": 50,
+              "p50_ms": 7767.7086,
+              "phase": "query",
+              "profiled": false,
+              "query": "short",
+              "samples_ms": [
+                7767.7086
+              ],
+              "text": "of",
+              "total": 100000
+            },
+            "and:0": {
+              "api": "Database::search",
+              "cache": "warm OS cache; first page has one untimed query; later pages follow; no forced eviction",
+              "full_page_oracle_verified": true,
+              "offset": 0,
+              "p50_ms": 10964.9085,
+              "phase": "query",
+              "profiled": false,
+              "query": "and",
+              "samples_ms": [
+                10964.9085
+              ],
+              "text": "the whale",
+              "total": 16537
+            },
+            "and:50": {
+              "api": "Database::search",
+              "cache": "warm OS cache; first page has one untimed query; later pages follow; no forced eviction",
+              "full_page_oracle_verified": true,
+              "offset": 50,
+              "p50_ms": 12321.3382,
+              "phase": "query",
+              "profiled": false,
+              "query": "and",
+              "samples_ms": [
+                12321.3382
+              ],
+              "text": "the whale",
+              "total": 16537
+            }
+          },
+          "memory": {
+            "variant": "candidate",
+            "run": 1,
+            "exit_code": 0,
+            "executable": "C:\\Users\\Serkan\\Documents\\ChatGPT\\fdb\\output\\fdb-engine-fold-candidate-20261011.exe",
+            "database": "C:\\Users\\Serkan\\Documents\\ChatGPT\\fdb\\data\\engine-fold-v2-20261011",
+            "peak_working_set_bytes": 135884800,
+            "sampled_peak_private_bytes": 141369344,
+            "sample_interval_ms": 20,
+            "samples": 3379,
+            "elapsed_s": 131.2402724,
+            "cpu_ms": 122609.375,
+            "window": "whole process including validated open, corpus plan/books/oracle, queries",
+            "includes_os_file_cache": false
+          }
+        },
+        {
+          "opening": {
+            "api": "Database::search",
+            "open_ms": 24092.3306,
+            "phase": "open",
+            "stats": {
+              "compaction_running": false,
+              "delta_keys": 0,
+              "disk_index_bytes": 3551235145,
+              "disk_posting_entries": 192782228,
+              "documents": 100000,
+              "generation": 1,
+              "log_bytes": 2741774867,
+              "resident_documents": 0,
+              "resident_text_bytes": 0,
+              "segments": 1,
+              "sequence": 200,
+              "source_bytes": 5483549734
+            }
+          },
+          "queries": {
+            "common:0": {
+              "api": "Database::search",
+              "cache": "warm OS cache; first page has one untimed query; later pages follow; no forced eviction",
+              "full_page_oracle_verified": true,
+              "offset": 0,
+              "p50_ms": 10953.431999999999,
+              "phase": "query",
+              "profiled": false,
+              "query": "common",
+              "samples_ms": [
+                10953.431999999999
+              ],
+              "text": "the",
+              "total": 100000
+            },
+            "common:50": {
+              "api": "Database::search",
+              "cache": "warm OS cache; first page has one untimed query; later pages follow; no forced eviction",
+              "full_page_oracle_verified": true,
+              "offset": 50,
+              "p50_ms": 11239.2471,
+              "phase": "query",
+              "profiled": false,
+              "query": "common",
+              "samples_ms": [
+                11239.2471
+              ],
+              "text": "the",
+              "total": 100000
+            },
+            "common:99950": {
+              "api": "Database::search",
+              "cache": "warm OS cache; first page has one untimed query; later pages follow; no forced eviction",
+              "full_page_oracle_verified": true,
+              "offset": 99950,
+              "p50_ms": 10449.0332,
+              "phase": "query",
+              "profiled": false,
+              "query": "common",
+              "samples_ms": [
+                10449.0332
+              ],
+              "text": "the",
+              "total": 100000
+            },
+            "rare:0": {
+              "api": "Database::search",
+              "cache": "warm OS cache; first page has one untimed query; later pages follow; no forced eviction",
+              "full_page_oracle_verified": true,
+              "offset": 0,
+              "p50_ms": 257.7493,
+              "phase": "query",
+              "profiled": false,
+              "query": "rare",
+              "samples_ms": [
+                246.64839999999998,
+                247.7807,
+                248.8873,
+                253.52390000000003,
+                254.26870000000002,
+                257.7493,
+                258.4396,
+                258.6528,
+                258.9871,
+                274.9751
+              ],
+              "text": "abbreviation",
+              "total": 264
+            },
+            "rare:50": {
+              "api": "Database::search",
+              "cache": "warm OS cache; first page has one untimed query; later pages follow; no forced eviction",
+              "full_page_oracle_verified": true,
+              "offset": 50,
+              "p50_ms": 267.6849,
+              "phase": "query",
+              "profiled": false,
+              "query": "rare",
+              "samples_ms": [
+                255.78450000000004,
+                257.0413,
+                258.4303,
+                260.2123,
+                262.1409,
+                267.6849,
+                267.7765,
+                270.4893,
+                275.1327,
+                280.4278
+              ],
+              "text": "abbreviation",
+              "total": 264
+            },
+            "short:0": {
+              "api": "Database::search",
+              "cache": "warm OS cache; first page has one untimed query; later pages follow; no forced eviction",
+              "full_page_oracle_verified": true,
+              "offset": 0,
+              "p50_ms": 9874.734699999999,
+              "phase": "query",
+              "profiled": false,
+              "query": "short",
+              "samples_ms": [
+                9874.734699999999
+              ],
+              "text": "of",
+              "total": 100000
+            },
+            "short:50": {
+              "api": "Database::search",
+              "cache": "warm OS cache; first page has one untimed query; later pages follow; no forced eviction",
+              "full_page_oracle_verified": true,
+              "offset": 50,
+              "p50_ms": 10683.2593,
+              "phase": "query",
+              "profiled": false,
+              "query": "short",
+              "samples_ms": [
+                10683.2593
+              ],
+              "text": "of",
+              "total": 100000
+            },
+            "and:0": {
+              "api": "Database::search",
+              "cache": "warm OS cache; first page has one untimed query; later pages follow; no forced eviction",
+              "full_page_oracle_verified": true,
+              "offset": 0,
+              "p50_ms": 13368.395700000001,
+              "phase": "query",
+              "profiled": false,
+              "query": "and",
+              "samples_ms": [
+                13368.395700000001
+              ],
+              "text": "the whale",
+              "total": 16537
+            },
+            "and:50": {
+              "api": "Database::search",
+              "cache": "warm OS cache; first page has one untimed query; later pages follow; no forced eviction",
+              "full_page_oracle_verified": true,
+              "offset": 50,
+              "p50_ms": 15625.1562,
+              "phase": "query",
+              "profiled": false,
+              "query": "and",
+              "samples_ms": [
+                15625.1562
+              ],
+              "text": "the whale",
+              "total": 16537
+            }
+          },
+          "memory": {
+            "variant": "candidate",
+            "run": 2,
+            "exit_code": 0,
+            "executable": "C:\\Users\\Serkan\\Documents\\ChatGPT\\fdb\\output\\fdb-engine-fold-candidate-20261011.exe",
+            "database": "C:\\Users\\Serkan\\Documents\\ChatGPT\\fdb\\data\\engine-fold-v2-20261011",
+            "peak_working_set_bytes": 136593408,
+            "sampled_peak_private_bytes": 138395648,
+            "sample_interval_ms": 20,
+            "samples": 3782,
+            "elapsed_s": 149.1376103,
+            "cpu_ms": 141656.25,
+            "window": "whole process including validated open, corpus plan/books/oracle, queries",
+            "includes_os_file_cache": false
+          }
+        }
+      ],
+      "median": {
+        "open_ms": 24104.8217,
+        "peak_working_set_bytes": 135901184,
+        "sampled_peak_private_bytes": 138395648,
+        "queries_ms": {
+          "common:0": 10953.431999999999,
+          "common:50": 11313.9884,
+          "common:99950": 10322.3097,
+          "rare:0": 257.7493,
+          "rare:50": 264.884,
+          "short:0": 9874.734699999999,
+          "short:50": 10683.2593,
+          "and:0": 13368.395700000001,
+          "and:50": 15625.1562
+        }
+      }
+    }
+  },
+  "gates": {
+    "all_pages_repeatably_faster": true,
+    "working_set_no_regression": true
+  },
+  "query_change_percent": {
+    "common:0": -11.074240719818695,
+    "common:50": -10.207773187872316,
+    "common:99950": -17.512851510909943,
+    "rare:0": -15.529033839603368,
+    "rare:50": -10.910506569443722,
+    "short:0": -26.659741872936525,
+    "short:50": -33.379473096867116,
+    "and:0": -37.98680885611964,
+    "and:50": -26.344331786312647
+  },
+  "scope": "actual Database::search; one legacy-backed SEG03 disk segment; warm cache",
+  "decision": "passed_measured_query_gate"
+}

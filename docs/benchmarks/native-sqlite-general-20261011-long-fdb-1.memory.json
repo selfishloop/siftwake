@@ -1,0 +1,37 @@
+{
+  "engine": "fdb",
+  "run": 1,
+  "phase": "long",
+  "order": [
+    "sqlite",
+    "fdb"
+  ],
+  "exit_code": 0,
+  "executable": "C:\\Users\\Serkan\\Documents\\ChatGPT\\fdb\\output\\fdb-native-general-binary-long-20261011.exe",
+  "database": "C:\\Users\\Serkan\\Documents\\ChatGPT\\fdb\\data\\native-general-long-binary-20261011",
+  "peak_working_set_bytes": 136568832,
+  "sampled_peak_private_bytes": 139485184,
+  "sample_interval_ms": 20,
+  "samples": 2316,
+  "elapsed_s": 87.7049821,
+  "cpu_ms": 85468.75,
+  "retained_engine_disk_bytes": 6182926010.0,
+  "files": [
+    {
+      "name": "generation-0000000000000001.fdb",
+      "bytes": 2685730889
+    },
+    {
+      "name": "generation-0000000000000001.idx",
+      "bytes": 3497195093
+    },
+    {
+      "name": "generation-0000000000000001.ready",
+      "bytes": 28
+    }
+  ],
+  "features": "default only",
+  "wal_sync": "on",
+  "includes_os_file_cache": false,
+  "window": "whole native process: ordinary benchmark phases and oracle; separate SQLite integrity excluded"
+}

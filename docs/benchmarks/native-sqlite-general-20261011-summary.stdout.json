@@ -1,0 +1,518 @@
+{
+  "processes": 12,
+  "total_search_calls": 978,
+  "long_get_calls": 2400,
+  "all_processes_and_oracles_passed": true,
+  "open_contract_equal": false,
+  "cache": "OS cache, no forced eviction; per-query warmup; alternating paired serial processes",
+  "scope": "default native OFF1 FDB vs isolated SQLite WAL/FULL/2MiB cache/mmap0/tempFILE; exact total + sorted full pages",
+  "unmeasured": [
+    "long ingestion",
+    "cold cache",
+    "concurrency",
+    "source-offset layout",
+    "power loss",
+    "temporary disk peak"
+  ],
+  "short": {
+    "peak_working_set_bytes": {
+      "fdb_median": 103731200,
+      "sqlite_median": 10235904,
+      "paired_sqlite_over_fdb": [
+        0.09755242029776288,
+        0.09920177911917716,
+        0.0986771964461994
+      ],
+      "ratio_range": [
+        0.09755242029776288,
+        0.09920177911917716
+      ],
+      "fdb_faster_every_pair": false,
+      "sqlite_faster_every_pair": true
+    },
+    "sampled_peak_private_bytes": {
+      "fdb_median": 99778560,
+      "sqlite_median": 4993024,
+      "paired_sqlite_over_fdb": [
+        0.048586077064808136,
+        0.05057623745958047,
+        0.05004105090311987
+      ],
+      "ratio_range": [
+        0.048586077064808136,
+        0.05057623745958047
+      ],
+      "fdb_faster_every_pair": false,
+      "sqlite_faster_every_pair": true
+    },
+    "retained_engine_disk_bytes": {
+      "fdb_median": 418320443.0,
+      "sqlite_median": 107192320.0,
+      "paired_sqlite_over_fdb": [
+        0.2562445173161188,
+        0.2562445173161188,
+        0.2562445173161188
+      ],
+      "ratio_range": [
+        0.2562445173161188,
+        0.2562445173161188
+      ],
+      "fdb_faster_every_pair": false,
+      "sqlite_faster_every_pair": true
+    },
+    "elapsed_s": {
+      "fdb_median": 18.4540668,
+      "sqlite_median": 13.0176141,
+      "paired_sqlite_over_fdb": [
+        0.6697087287735576,
+        0.7390891529665429,
+        0.681404975424078
+      ],
+      "ratio_range": [
+        0.6697087287735576,
+        0.7390891529665429
+      ],
+      "fdb_faster_every_pair": false,
+      "sqlite_faster_every_pair": true
+    },
+    "cpu_ms": {
+      "fdb_median": 22062.5,
+      "sqlite_median": 12078.125,
+      "paired_sqlite_over_fdb": [
+        0.5327360441075121,
+        0.5573654390934845,
+        0.5134545454545455
+      ],
+      "ratio_range": [
+        0.5134545454545455,
+        0.5573654390934845
+      ],
+      "fdb_faster_every_pair": false,
+      "sqlite_faster_every_pair": true
+    },
+    "ingest_ms": {
+      "fdb_median": 9345.0782,
+      "sqlite_median": 8092.7832,
+      "paired_sqlite_over_fdb": [
+        0.8145026130654369,
+        0.9956107804426932,
+        0.9041818220933149
+      ],
+      "ratio_range": [
+        0.8145026130654369,
+        0.9956107804426932
+      ],
+      "fdb_faster_every_pair": false,
+      "sqlite_faster_every_pair": true
+    },
+    "maintenance_ms": {
+      "fdb_median": 6129.5611,
+      "sqlite_median": 310.2483,
+      "paired_sqlite_over_fdb": [
+        0.05678786218317042,
+        0.05061509216377662,
+        0.04707875338692859
+      ],
+      "ratio_range": [
+        0.04707875338692859,
+        0.05678786218317042
+      ],
+      "fdb_faster_every_pair": false,
+      "sqlite_faster_every_pair": true
+    },
+    "reopen_ms": {
+      "fdb_median": 491.72860000000003,
+      "sqlite_median": 3.1357,
+      "paired_sqlite_over_fdb": [
+        0.006376891643073028,
+        0.006512199453473649,
+        0.005735576503668506
+      ],
+      "ratio_range": [
+        0.005735576503668506,
+        0.006512199453473649
+      ],
+      "fdb_faster_every_pair": false,
+      "sqlite_faster_every_pair": true
+    },
+    "changed_reopen_ms": {
+      "fdb_median": 507.4893,
+      "sqlite_median": 10.600399999999999,
+      "paired_sqlite_over_fdb": [
+        0.020887928080454105,
+        0.022094368767135705,
+        0.01920845605098617
+      ],
+      "ratio_range": [
+        0.01920845605098617,
+        0.022094368767135705
+      ],
+      "fdb_faster_every_pair": false,
+      "sqlite_faster_every_pair": true
+    },
+    "narrow_p50_ms": {
+      "fdb_median": 4.3886,
+      "sqlite_median": 19.811700000000002,
+      "paired_sqlite_over_fdb": [
+        5.368203983046985,
+        4.491023257922655,
+        4.742318741783123
+      ],
+      "ratio_range": [
+        4.491023257922655,
+        5.368203983046985
+      ],
+      "fdb_faster_every_pair": true,
+      "sqlite_faster_every_pair": false
+    },
+    "broad_p50_ms": {
+      "fdb_median": 0.25070000000000003,
+      "sqlite_median": 16.6801,
+      "paired_sqlite_over_fdb": [
+        84.17740549828179,
+        66.53410450737933,
+        60.5914924825816
+      ],
+      "ratio_range": [
+        60.5914924825816,
+        84.17740549828179
+      ],
+      "fdb_faster_every_pair": true,
+      "sqlite_faster_every_pair": false
+    },
+    "range_p50_ms": {
+      "fdb_median": 0.6414,
+      "sqlite_median": 3.5008,
+      "paired_sqlite_over_fdb": [
+        6.140473963205489,
+        6.21590909090909,
+        4.047226173541963
+      ],
+      "ratio_range": [
+        4.047226173541963,
+        6.21590909090909
+      ],
+      "fdb_faster_every_pair": true,
+      "sqlite_faster_every_pair": false
+    },
+    "broad_text_p50_ms": {
+      "fdb_median": 395.9585,
+      "sqlite_median": 470.6921,
+      "paired_sqlite_over_fdb": [
+        1.310827776143207,
+        1.1875323410573428,
+        1.2223112215272367
+      ],
+      "ratio_range": [
+        1.1875323410573428,
+        1.310827776143207
+      ],
+      "fdb_faster_every_pair": true,
+      "sqlite_faster_every_pair": false
+    },
+    "last_page_p50_ms": {
+      "fdb_median": 21.023799999999998,
+      "sqlite_median": 32.163700000000006,
+      "paired_sqlite_over_fdb": [
+        1.5953187542469982,
+        1.6108458033276576,
+        1.2129886966394956
+      ],
+      "ratio_range": [
+        1.2129886966394956,
+        1.6108458033276576
+      ],
+      "fdb_faster_every_pair": true,
+      "sqlite_faster_every_pair": false
+    },
+    "second_page_p50_ms": {
+      "fdb_median": 0.266,
+      "sqlite_median": 17.0253,
+      "paired_sqlite_over_fdb": [
+        65.24851411589897,
+        64.00488721804511,
+        63.117764471057875
+      ],
+      "ratio_range": [
+        63.117764471057875,
+        65.24851411589897
+      ],
+      "fdb_faster_every_pair": true,
+      "sqlite_faster_every_pair": false
+    },
+    "get_100_p50_ms": {
+      "fdb_median": 1.0782,
+      "sqlite_median": 1.6311,
+      "paired_sqlite_over_fdb": [
+        2.100114927850849,
+        1.5127991096271562,
+        0.8695791071000719
+      ],
+      "ratio_range": [
+        0.8695791071000719,
+        2.100114927850849
+      ],
+      "fdb_faster_every_pair": false,
+      "sqlite_faster_every_pair": false
+    },
+    "write_plus_maintenance_ms": {
+      "fdb_median": 15474.639299999999,
+      "sqlite_median": 8457.7682,
+      "paired_sqlite_over_fdb": [
+        0.5168829298602543,
+        0.6212945396407398,
+        0.5572006024323974
+      ],
+      "ratio_range": [
+        0.5168829298602543,
+        0.6212945396407398
+      ],
+      "fdb_faster_every_pair": false,
+      "sqlite_faster_every_pair": true
+    }
+  },
+  "long": {
+    "peak_working_set_bytes": {
+      "fdb_median": 136564736,
+      "sqlite_median": 33148928,
+      "paired_sqlite_over_fdb": [
+        0.2427705783537317,
+        0.24314678183672245,
+        0.24273417114063767
+      ],
+      "ratio_range": [
+        0.24273417114063767,
+        0.24314678183672245
+      ],
+      "fdb_faster_every_pair": false,
+      "sqlite_faster_every_pair": true
+    },
+    "sampled_peak_private_bytes": {
+      "fdb_median": 138809344,
+      "sqlite_median": 28991488,
+      "paired_sqlite_over_fdb": [
+        0.2093711175530971,
+        0.2060550889763317,
+        0.2092714450116557
+      ],
+      "ratio_range": [
+        0.2060550889763317,
+        0.2093711175530971
+      ],
+      "fdb_faster_every_pair": false,
+      "sqlite_faster_every_pair": true
+    },
+    "retained_engine_disk_bytes": {
+      "fdb_median": 6182926010.0,
+      "sqlite_median": 5807165440.0,
+      "paired_sqlite_over_fdb": [
+        0.9392260930516941,
+        0.9392260930516941,
+        0.9392260930516941
+      ],
+      "ratio_range": [
+        0.9392260930516941,
+        0.9392260930516941
+      ],
+      "fdb_faster_every_pair": false,
+      "sqlite_faster_every_pair": true
+    },
+    "elapsed_s": {
+      "fdb_median": 88.6399336,
+      "sqlite_median": 425.2085265,
+      "paired_sqlite_over_fdb": [
+        3.704519884509117,
+        4.511298877512684,
+        5.032521670345655
+      ],
+      "ratio_range": [
+        3.704519884509117,
+        5.032521670345655
+      ],
+      "fdb_faster_every_pair": true,
+      "sqlite_faster_every_pair": false
+    },
+    "cpu_ms": {
+      "fdb_median": 85828.125,
+      "sqlite_median": 199015.625,
+      "paired_sqlite_over_fdb": [
+        1.829765838241632,
+        2.1658135283363804,
+        2.496996176952485
+      ],
+      "ratio_range": [
+        1.829765838241632,
+        2.496996176952485
+      ],
+      "fdb_faster_every_pair": true,
+      "sqlite_faster_every_pair": false
+    },
+    "open_ms": {
+      "fdb_median": 15374.7371,
+      "sqlite_median": 12.7691,
+      "paired_sqlite_over_fdb": [
+        0.0006943383046384828,
+        0.0006964086559893112,
+        0.0009938709178686355
+      ],
+      "ratio_range": [
+        0.0006943383046384828,
+        0.0009938709178686355
+      ],
+      "fdb_faster_every_pair": false,
+      "sqlite_faster_every_pair": true
+    },
+    "get_100_p50_ms": {
+      "fdb_median": 2.8706,
+      "sqlite_median": 7.2376000000000005,
+      "paired_sqlite_over_fdb": [
+        1.73789180804176,
+        2.5604415042275446,
+        4.174005434403957
+      ],
+      "ratio_range": [
+        1.73789180804176,
+        4.174005434403957
+      ],
+      "fdb_faster_every_pair": true,
+      "sqlite_faster_every_pair": false
+    },
+    "queries": {
+      "common:0": {
+        "fdb_median": 5746.1193,
+        "sqlite_median": 44634.471900000004,
+        "paired_sqlite_over_fdb": [
+          5.865289968859654,
+          6.975907838307379,
+          7.8532941702063175
+        ],
+        "ratio_range": [
+          5.865289968859654,
+          7.8532941702063175
+        ],
+        "fdb_faster_every_pair": true,
+        "sqlite_faster_every_pair": false
+      },
+      "common:50": {
+        "fdb_median": 5688.526,
+        "sqlite_median": 40127.139800000004,
+        "paired_sqlite_over_fdb": [
+          5.513740622226478,
+          6.88297817154801,
+          7.054048764126244
+        ],
+        "ratio_range": [
+          5.513740622226478,
+          7.054048764126244
+        ],
+        "fdb_faster_every_pair": true,
+        "sqlite_faster_every_pair": false
+      },
+      "common:99950": {
+        "fdb_median": 5690.7367,
+        "sqlite_median": 42452.2262,
+        "paired_sqlite_over_fdb": [
+          6.027213670797983,
+          6.842225313288523,
+          7.536538614009316
+        ],
+        "ratio_range": [
+          6.027213670797983,
+          7.536538614009316
+        ],
+        "fdb_faster_every_pair": true,
+        "sqlite_faster_every_pair": false
+      },
+      "rare:0": {
+        "fdb_median": 175.51919999999998,
+        "sqlite_median": 174.6415,
+        "paired_sqlite_over_fdb": [
+          0.8957986061200593,
+          0.7317267854456948,
+          1.0344405811866586
+        ],
+        "ratio_range": [
+          0.7317267854456948,
+          1.0344405811866586
+        ],
+        "fdb_faster_every_pair": false,
+        "sqlite_faster_every_pair": false
+      },
+      "rare:50": {
+        "fdb_median": 174.30180000000001,
+        "sqlite_median": 176.1762,
+        "paired_sqlite_over_fdb": [
+          0.8612086184933455,
+          0.781387491005329,
+          1.010753761579054
+        ],
+        "ratio_range": [
+          0.781387491005329,
+          1.010753761579054
+        ],
+        "fdb_faster_every_pair": false,
+        "sqlite_faster_every_pair": false
+      },
+      "short:0": {
+        "fdb_median": 5926.6919,
+        "sqlite_median": 38695.579000000005,
+        "paired_sqlite_over_fdb": [
+          5.164496736299111,
+          6.520008540742309,
+          6.828855402454782
+        ],
+        "ratio_range": [
+          5.164496736299111,
+          6.828855402454782
+        ],
+        "fdb_faster_every_pair": true,
+        "sqlite_faster_every_pair": false
+      },
+      "short:50": {
+        "fdb_median": 6064.9546,
+        "sqlite_median": 38743.9436,
+        "paired_sqlite_over_fdb": [
+          5.103021559783801,
+          6.337012828292333,
+          6.917747826174989
+        ],
+        "ratio_range": [
+          5.103021559783801,
+          6.917747826174989
+        ],
+        "fdb_faster_every_pair": true,
+        "sqlite_faster_every_pair": false
+      },
+      "and:0": {
+        "fdb_median": 9355.1142,
+        "sqlite_median": 41927.264,
+        "paired_sqlite_over_fdb": [
+          3.3154329915412593,
+          4.320786003873689,
+          5.215481927285146
+        ],
+        "ratio_range": [
+          3.3154329915412593,
+          5.215481927285146
+        ],
+        "fdb_faster_every_pair": true,
+        "sqlite_faster_every_pair": false
+      },
+      "and:50": {
+        "fdb_median": 9855.5103,
+        "sqlite_median": 41561.2768,
+        "paired_sqlite_over_fdb": [
+          3.307108208598338,
+          4.362454851113211,
+          4.921820831540301
+        ],
+        "ratio_range": [
+          3.307108208598338,
+          4.921820831540301
+        ],
+        "fdb_faster_every_pair": true,
+        "sqlite_faster_every_pair": false
+      }
+    }
+  }
+}

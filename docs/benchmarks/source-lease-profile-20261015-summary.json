@@ -1,0 +1,1280 @@
+{
+  "scope": "same first10k fixed DB, paired release builder-budget diagnostic-timing record reads, 3 processes x3 warm iterations; warm OS cache no eviction; nested instrumented wall spans are not additive or normal p95",
+  "queries": [
+    {
+      "text": "he",
+      "offset": 0,
+      "limit": 50,
+      "control": {
+        "median_ms": {
+          "search.total": 1.8344,
+          "search.filter_visibility_text": 0.6871,
+          "query.covering_guard": 0.5677,
+          "query.covering_source_metadata": 0.5149,
+          "query.covering_index_metadata": 0.0475,
+          "query.fold.body": 0.0,
+          "query.scan.body": 0.0,
+          "search.merge_page_hydration": 1.1396
+        },
+        "per_process_median_ms": [
+          {
+            "search.total": 1.8344,
+            "search.filter_visibility_text": 0.6871,
+            "query.covering_guard": 0.5677,
+            "query.covering_source_metadata": 0.5149,
+            "query.covering_index_metadata": 0.0475,
+            "query.fold.body": 0.0,
+            "query.scan.body": 0.0,
+            "search.merge_page_hydration": 1.146
+          },
+          {
+            "search.total": 2.307,
+            "search.filter_visibility_text": 1.2149,
+            "query.covering_guard": 0.9237,
+            "query.covering_source_metadata": 0.8516,
+            "query.covering_index_metadata": 0.0625,
+            "query.fold.body": 0.0,
+            "query.scan.body": 0.0,
+            "search.merge_page_hydration": 1.1396
+          },
+          {
+            "search.total": 1.163,
+            "search.filter_visibility_text": 0.4827,
+            "query.covering_guard": 0.3877,
+            "query.covering_source_metadata": 0.3376,
+            "query.covering_index_metadata": 0.0354,
+            "query.fold.body": 0.0,
+            "query.scan.body": 0.0,
+            "search.merge_page_hydration": 0.6657
+          }
+        ],
+        "median_calls": {
+          "search.total": 1,
+          "search.filter_visibility_text": 1,
+          "query.covering_guard": 5,
+          "query.covering_source_metadata": 5,
+          "query.covering_index_metadata": 5,
+          "query.fold.body": 0,
+          "query.scan.body": 0,
+          "search.merge_page_hydration": 1
+        }
+      },
+      "fdb": {
+        "median_ms": {
+          "search.total": 1.0418,
+          "search.filter_visibility_text": 0.1485,
+          "query.covering_guard": 0.0542,
+          "query.covering_source_metadata": 0.0,
+          "query.covering_index_metadata": 0.0529,
+          "query.fold.body": 0.0,
+          "query.scan.body": 0.0,
+          "search.merge_page_hydration": 0.8804
+        },
+        "per_process_median_ms": [
+          {
+            "search.total": 0.9497,
+            "search.filter_visibility_text": 0.1485,
+            "query.covering_guard": 0.0542,
+            "query.covering_source_metadata": 0.0,
+            "query.covering_index_metadata": 0.0529,
+            "query.fold.body": 0.0,
+            "query.scan.body": 0.0,
+            "search.merge_page_hydration": 0.8
+          },
+          {
+            "search.total": 1.0418,
+            "search.filter_visibility_text": 0.1404,
+            "query.covering_guard": 0.0505,
+            "query.covering_source_metadata": 0.0,
+            "query.covering_index_metadata": 0.0493,
+            "query.fold.body": 0.0,
+            "query.scan.body": 0.0,
+            "search.merge_page_hydration": 0.8804
+          },
+          {
+            "search.total": 1.1049,
+            "search.filter_visibility_text": 0.1949,
+            "query.covering_guard": 0.0668,
+            "query.covering_source_metadata": 0.0,
+            "query.covering_index_metadata": 0.0644,
+            "query.fold.body": 0.0,
+            "query.scan.body": 0.0,
+            "search.merge_page_hydration": 0.9589
+          }
+        ],
+        "median_calls": {
+          "search.total": 1,
+          "search.filter_visibility_text": 1,
+          "query.covering_guard": 5,
+          "query.covering_source_metadata": 0,
+          "query.covering_index_metadata": 5,
+          "query.fold.body": 0,
+          "query.scan.body": 0,
+          "search.merge_page_hydration": 1
+        }
+      }
+    },
+    {
+      "text": "man",
+      "offset": 0,
+      "limit": 50,
+      "control": {
+        "median_ms": {
+          "search.total": 2.9719,
+          "search.filter_visibility_text": 1.7305,
+          "query.covering_guard": 0.6272,
+          "query.covering_source_metadata": 0.5685,
+          "query.covering_index_metadata": 0.0571,
+          "query.fold.body": 0.0,
+          "query.scan.body": 0.0,
+          "search.merge_page_hydration": 1.2269
+        },
+        "per_process_median_ms": [
+          {
+            "search.total": 2.9728,
+            "search.filter_visibility_text": 1.7442,
+            "query.covering_guard": 0.7252,
+            "query.covering_source_metadata": 0.6559,
+            "query.covering_index_metadata": 0.0641,
+            "query.fold.body": 0.0,
+            "query.scan.body": 0.0,
+            "search.merge_page_hydration": 1.2269
+          },
+          {
+            "search.total": 2.9719,
+            "search.filter_visibility_text": 1.7305,
+            "query.covering_guard": 0.6272,
+            "query.covering_source_metadata": 0.5685,
+            "query.covering_index_metadata": 0.0571,
+            "query.fold.body": 0.0,
+            "query.scan.body": 0.0,
+            "search.merge_page_hydration": 1.2392
+          },
+          {
+            "search.total": 2.3176,
+            "search.filter_visibility_text": 1.3327,
+            "query.covering_guard": 0.3685,
+            "query.covering_source_metadata": 0.3342,
+            "query.covering_index_metadata": 0.0345,
+            "query.fold.body": 0.0,
+            "query.scan.body": 0.0,
+            "search.merge_page_hydration": 0.9667
+          }
+        ],
+        "median_calls": {
+          "search.total": 1,
+          "search.filter_visibility_text": 1,
+          "query.covering_guard": 5,
+          "query.covering_source_metadata": 5,
+          "query.covering_index_metadata": 5,
+          "query.fold.body": 0,
+          "query.scan.body": 0,
+          "search.merge_page_hydration": 1
+        }
+      },
+      "fdb": {
+        "median_ms": {
+          "search.total": 2.1782,
+          "search.filter_visibility_text": 1.1224,
+          "query.covering_guard": 0.0618,
+          "query.covering_source_metadata": 0.0,
+          "query.covering_index_metadata": 0.0602,
+          "query.fold.body": 0.0,
+          "query.scan.body": 0.0,
+          "search.merge_page_hydration": 0.9125
+        },
+        "per_process_median_ms": [
+          {
+            "search.total": 2.1782,
+            "search.filter_visibility_text": 1.2284,
+            "query.covering_guard": 0.0764,
+            "query.covering_source_metadata": 0.0,
+            "query.covering_index_metadata": 0.0742,
+            "query.fold.body": 0.0,
+            "query.scan.body": 0.0,
+            "search.merge_page_hydration": 0.9125
+          },
+          {
+            "search.total": 2.2381,
+            "search.filter_visibility_text": 1.1224,
+            "query.covering_guard": 0.0618,
+            "query.covering_source_metadata": 0.0,
+            "query.covering_index_metadata": 0.0602,
+            "query.fold.body": 0.0,
+            "query.scan.body": 0.0,
+            "search.merge_page_hydration": 1.0821
+          },
+          {
+            "search.total": 1.8635,
+            "search.filter_visibility_text": 1.056,
+            "query.covering_guard": 0.0557,
+            "query.covering_source_metadata": 0.0,
+            "query.covering_index_metadata": 0.054,
+            "query.fold.body": 0.0,
+            "query.scan.body": 0.0,
+            "search.merge_page_hydration": 0.8064
+          }
+        ],
+        "median_calls": {
+          "search.total": 1,
+          "search.filter_visibility_text": 1,
+          "query.covering_guard": 5,
+          "query.covering_source_metadata": 0,
+          "query.covering_index_metadata": 5,
+          "query.fold.body": 0,
+          "query.scan.body": 0,
+          "search.merge_page_hydration": 1
+        }
+      }
+    },
+    {
+      "text": "quixote",
+      "offset": 0,
+      "limit": 50,
+      "control": {
+        "median_ms": {
+          "search.total": 4.1545,
+          "search.filter_visibility_text": 2.5096,
+          "query.covering_guard": 0.0,
+          "query.covering_source_metadata": 0.0,
+          "query.covering_index_metadata": 0.0,
+          "query.fold.body": 0.4405,
+          "query.scan.body": 0.0757,
+          "search.merge_page_hydration": 1.5689
+        },
+        "per_process_median_ms": [
+          {
+            "search.total": 4.3775,
+            "search.filter_visibility_text": 2.688,
+            "query.covering_guard": 0.0,
+            "query.covering_source_metadata": 0.0,
+            "query.covering_index_metadata": 0.0,
+            "query.fold.body": 0.5069,
+            "query.scan.body": 0.0888,
+            "search.merge_page_hydration": 1.5689
+          },
+          {
+            "search.total": 4.1545,
+            "search.filter_visibility_text": 2.5096,
+            "query.covering_guard": 0.0,
+            "query.covering_source_metadata": 0.0,
+            "query.covering_index_metadata": 0.0,
+            "query.fold.body": 0.4405,
+            "query.scan.body": 0.0757,
+            "search.merge_page_hydration": 1.643
+          },
+          {
+            "search.total": 2.9156,
+            "search.filter_visibility_text": 1.7992,
+            "query.covering_guard": 0.0,
+            "query.covering_source_metadata": 0.0,
+            "query.covering_index_metadata": 0.0,
+            "query.fold.body": 0.3498,
+            "query.scan.body": 0.0611,
+            "search.merge_page_hydration": 1.1157
+          }
+        ],
+        "median_calls": {
+          "search.total": 1,
+          "search.filter_visibility_text": 1,
+          "query.covering_guard": 0,
+          "query.covering_source_metadata": 0,
+          "query.covering_index_metadata": 0,
+          "query.fold.body": 815,
+          "query.scan.body": 815,
+          "search.merge_page_hydration": 1
+        }
+      },
+      "fdb": {
+        "median_ms": {
+          "search.total": 3.6445,
+          "search.filter_visibility_text": 2.3238,
+          "query.covering_guard": 0.0,
+          "query.covering_source_metadata": 0.0,
+          "query.covering_index_metadata": 0.0,
+          "query.fold.body": 0.4609,
+          "query.scan.body": 0.0852,
+          "search.merge_page_hydration": 1.266
+        },
+        "per_process_median_ms": [
+          {
+            "search.total": 3.9168,
+            "search.filter_visibility_text": 2.4214,
+            "query.covering_guard": 0.0,
+            "query.covering_source_metadata": 0.0,
+            "query.covering_index_metadata": 0.0,
+            "query.fold.body": 0.4609,
+            "query.scan.body": 0.0852,
+            "search.merge_page_hydration": 1.4257
+          },
+          {
+            "search.total": 3.6445,
+            "search.filter_visibility_text": 2.1413,
+            "query.covering_guard": 0.0,
+            "query.covering_source_metadata": 0.0,
+            "query.covering_index_metadata": 0.0,
+            "query.fold.body": 0.4164,
+            "query.scan.body": 0.0729,
+            "search.merge_page_hydration": 1.2363
+          },
+          {
+            "search.total": 3.5909,
+            "search.filter_visibility_text": 2.3238,
+            "query.covering_guard": 0.0,
+            "query.covering_source_metadata": 0.0,
+            "query.covering_index_metadata": 0.0,
+            "query.fold.body": 0.4671,
+            "query.scan.body": 0.088,
+            "search.merge_page_hydration": 1.266
+          }
+        ],
+        "median_calls": {
+          "search.total": 1,
+          "search.filter_visibility_text": 1,
+          "query.covering_guard": 0,
+          "query.covering_source_metadata": 0,
+          "query.covering_index_metadata": 0,
+          "query.fold.body": 815,
+          "query.scan.body": 815,
+          "search.merge_page_hydration": 1
+        }
+      }
+    },
+    {
+      "text": "quixote",
+      "offset": 28,
+      "limit": 10,
+      "control": {
+        "median_ms": {
+          "search.total": 2.4989,
+          "search.filter_visibility_text": 2.2608,
+          "query.covering_guard": 0.0,
+          "query.covering_source_metadata": 0.0,
+          "query.covering_index_metadata": 0.0,
+          "query.fold.body": 0.4375,
+          "query.scan.body": 0.077,
+          "search.merge_page_hydration": 0.2442
+        },
+        "per_process_median_ms": [
+          {
+            "search.total": 2.6455,
+            "search.filter_visibility_text": 2.3742,
+            "query.covering_guard": 0.0,
+            "query.covering_source_metadata": 0.0,
+            "query.covering_index_metadata": 0.0,
+            "query.fold.body": 0.4936,
+            "query.scan.body": 0.0864,
+            "search.merge_page_hydration": 0.2957
+          },
+          {
+            "search.total": 2.4989,
+            "search.filter_visibility_text": 2.2608,
+            "query.covering_guard": 0.0,
+            "query.covering_source_metadata": 0.0,
+            "query.covering_index_metadata": 0.0,
+            "query.fold.body": 0.4375,
+            "query.scan.body": 0.077,
+            "search.merge_page_hydration": 0.2442
+          },
+          {
+            "search.total": 1.7603,
+            "search.filter_visibility_text": 1.6053,
+            "query.covering_guard": 0.0,
+            "query.covering_source_metadata": 0.0,
+            "query.covering_index_metadata": 0.0,
+            "query.fold.body": 0.3532,
+            "query.scan.body": 0.0653,
+            "search.merge_page_hydration": 0.1543
+          }
+        ],
+        "median_calls": {
+          "search.total": 1,
+          "search.filter_visibility_text": 1,
+          "query.covering_guard": 0,
+          "query.covering_source_metadata": 0,
+          "query.covering_index_metadata": 0,
+          "query.fold.body": 815,
+          "query.scan.body": 815,
+          "search.merge_page_hydration": 1
+        }
+      },
+      "fdb": {
+        "median_ms": {
+          "search.total": 2.8608,
+          "search.filter_visibility_text": 2.5693,
+          "query.covering_guard": 0.0,
+          "query.covering_source_metadata": 0.0,
+          "query.covering_index_metadata": 0.0,
+          "query.fold.body": 0.5029,
+          "query.scan.body": 0.0885,
+          "search.merge_page_hydration": 0.2721
+        },
+        "per_process_median_ms": [
+          {
+            "search.total": 2.8608,
+            "search.filter_visibility_text": 2.5693,
+            "query.covering_guard": 0.0,
+            "query.covering_source_metadata": 0.0,
+            "query.covering_index_metadata": 0.0,
+            "query.fold.body": 0.5029,
+            "query.scan.body": 0.0885,
+            "search.merge_page_hydration": 0.2894
+          },
+          {
+            "search.total": 2.9402,
+            "search.filter_visibility_text": 2.6669,
+            "query.covering_guard": 0.0,
+            "query.covering_source_metadata": 0.0,
+            "query.covering_index_metadata": 0.0,
+            "query.fold.body": 0.5189,
+            "query.scan.body": 0.09,
+            "search.merge_page_hydration": 0.2721
+          },
+          {
+            "search.total": 2.4729,
+            "search.filter_visibility_text": 2.1991,
+            "query.covering_guard": 0.0,
+            "query.covering_source_metadata": 0.0,
+            "query.covering_index_metadata": 0.0,
+            "query.fold.body": 0.3608,
+            "query.scan.body": 0.0634,
+            "search.merge_page_hydration": 0.2718
+          }
+        ],
+        "median_calls": {
+          "search.total": 1,
+          "search.filter_visibility_text": 1,
+          "query.covering_guard": 0,
+          "query.covering_source_metadata": 0,
+          "query.covering_index_metadata": 0,
+          "query.fold.body": 815,
+          "query.scan.body": 815,
+          "search.merge_page_hydration": 1
+        }
+      }
+    },
+    {
+      "text": "quixote",
+      "offset": 57,
+      "limit": 50,
+      "control": {
+        "median_ms": {
+          "search.total": 2.2774,
+          "search.filter_visibility_text": 2.2652,
+          "query.covering_guard": 0.0,
+          "query.covering_source_metadata": 0.0,
+          "query.covering_index_metadata": 0.0,
+          "query.fold.body": 0.462,
+          "query.scan.body": 0.078,
+          "search.merge_page_hydration": 0.0083
+        },
+        "per_process_median_ms": [
+          {
+            "search.total": 2.3103,
+            "search.filter_visibility_text": 2.3,
+            "query.covering_guard": 0.0,
+            "query.covering_source_metadata": 0.0,
+            "query.covering_index_metadata": 0.0,
+            "query.fold.body": 0.462,
+            "query.scan.body": 0.078,
+            "search.merge_page_hydration": 0.0083
+          },
+          {
+            "search.total": 2.2774,
+            "search.filter_visibility_text": 2.2652,
+            "query.covering_guard": 0.0,
+            "query.covering_source_metadata": 0.0,
+            "query.covering_index_metadata": 0.0,
+            "query.fold.body": 0.4631,
+            "query.scan.body": 0.0785,
+            "search.merge_page_hydration": 0.0111
+          },
+          {
+            "search.total": 1.5062,
+            "search.filter_visibility_text": 1.5003,
+            "query.covering_guard": 0.0,
+            "query.covering_source_metadata": 0.0,
+            "query.covering_index_metadata": 0.0,
+            "query.fold.body": 0.3295,
+            "query.scan.body": 0.0606,
+            "search.merge_page_hydration": 0.0056
+          }
+        ],
+        "median_calls": {
+          "search.total": 1,
+          "search.filter_visibility_text": 1,
+          "query.covering_guard": 0,
+          "query.covering_source_metadata": 0,
+          "query.covering_index_metadata": 0,
+          "query.fold.body": 815,
+          "query.scan.body": 815,
+          "search.merge_page_hydration": 1
+        }
+      },
+      "fdb": {
+        "median_ms": {
+          "search.total": 2.3872,
+          "search.filter_visibility_text": 2.3769,
+          "query.covering_guard": 0.0,
+          "query.covering_source_metadata": 0.0,
+          "query.covering_index_metadata": 0.0,
+          "query.fold.body": 0.4683,
+          "query.scan.body": 0.0841,
+          "search.merge_page_hydration": 0.0125
+        },
+        "per_process_median_ms": [
+          {
+            "search.total": 2.3872,
+            "search.filter_visibility_text": 2.3769,
+            "query.covering_guard": 0.0,
+            "query.covering_source_metadata": 0.0,
+            "query.covering_index_metadata": 0.0,
+            "query.fold.body": 0.4683,
+            "query.scan.body": 0.0789,
+            "search.merge_page_hydration": 0.0107
+          },
+          {
+            "search.total": 2.2938,
+            "search.filter_visibility_text": 2.2803,
+            "query.covering_guard": 0.0,
+            "query.covering_source_metadata": 0.0,
+            "query.covering_index_metadata": 0.0,
+            "query.fold.body": 0.4507,
+            "query.scan.body": 0.0841,
+            "search.merge_page_hydration": 0.0125
+          },
+          {
+            "search.total": 2.6817,
+            "search.filter_visibility_text": 2.6669,
+            "query.covering_guard": 0.0,
+            "query.covering_source_metadata": 0.0,
+            "query.covering_index_metadata": 0.0,
+            "query.fold.body": 0.482,
+            "query.scan.body": 0.0851,
+            "search.merge_page_hydration": 0.0136
+          }
+        ],
+        "median_calls": {
+          "search.total": 1,
+          "search.filter_visibility_text": 1,
+          "query.covering_guard": 0,
+          "query.covering_source_metadata": 0,
+          "query.covering_index_metadata": 0,
+          "query.fold.body": 815,
+          "query.scan.body": 815,
+          "search.merge_page_hydration": 1
+        }
+      }
+    },
+    {
+      "text": "the",
+      "offset": 0,
+      "limit": 1,
+      "control": {
+        "median_ms": {
+          "search.total": 0.465,
+          "search.filter_visibility_text": 0.4392,
+          "query.covering_guard": 0.3663,
+          "query.covering_source_metadata": 0.3336,
+          "query.covering_index_metadata": 0.0313,
+          "query.fold.body": 0.0,
+          "query.scan.body": 0.0,
+          "search.merge_page_hydration": 0.0254
+        },
+        "per_process_median_ms": [
+          {
+            "search.total": 0.7531,
+            "search.filter_visibility_text": 0.7109,
+            "query.covering_guard": 0.5835,
+            "query.covering_source_metadata": 0.5169,
+            "query.covering_index_metadata": 0.0622,
+            "query.fold.body": 0.0,
+            "query.scan.body": 0.0,
+            "search.merge_page_hydration": 0.0416
+          },
+          {
+            "search.total": 0.465,
+            "search.filter_visibility_text": 0.4392,
+            "query.covering_guard": 0.3663,
+            "query.covering_source_metadata": 0.3336,
+            "query.covering_index_metadata": 0.0313,
+            "query.fold.body": 0.0,
+            "query.scan.body": 0.0,
+            "search.merge_page_hydration": 0.0254
+          },
+          {
+            "search.total": 0.3215,
+            "search.filter_visibility_text": 0.3001,
+            "query.covering_guard": 0.2538,
+            "query.covering_source_metadata": 0.2276,
+            "query.covering_index_metadata": 0.0249,
+            "query.fold.body": 0.0,
+            "query.scan.body": 0.0,
+            "search.merge_page_hydration": 0.021
+          }
+        ],
+        "median_calls": {
+          "search.total": 1,
+          "search.filter_visibility_text": 1,
+          "query.covering_guard": 5,
+          "query.covering_source_metadata": 5,
+          "query.covering_index_metadata": 5,
+          "query.fold.body": 0,
+          "query.scan.body": 0,
+          "search.merge_page_hydration": 1
+        }
+      },
+      "fdb": {
+        "median_ms": {
+          "search.total": 0.107,
+          "search.filter_visibility_text": 0.0826,
+          "query.covering_guard": 0.0357,
+          "query.covering_source_metadata": 0.0,
+          "query.covering_index_metadata": 0.0345,
+          "query.fold.body": 0.0,
+          "query.scan.body": 0.0,
+          "search.merge_page_hydration": 0.0232
+        },
+        "per_process_median_ms": [
+          {
+            "search.total": 0.1195,
+            "search.filter_visibility_text": 0.0929,
+            "query.covering_guard": 0.0401,
+            "query.covering_source_metadata": 0.0,
+            "query.covering_index_metadata": 0.039,
+            "query.fold.body": 0.0,
+            "query.scan.body": 0.0,
+            "search.merge_page_hydration": 0.0261
+          },
+          {
+            "search.total": 0.107,
+            "search.filter_visibility_text": 0.0826,
+            "query.covering_guard": 0.0357,
+            "query.covering_source_metadata": 0.0,
+            "query.covering_index_metadata": 0.0345,
+            "query.fold.body": 0.0,
+            "query.scan.body": 0.0,
+            "search.merge_page_hydration": 0.0232
+          },
+          {
+            "search.total": 0.095,
+            "search.filter_visibility_text": 0.0782,
+            "query.covering_guard": 0.0345,
+            "query.covering_source_metadata": 0.0,
+            "query.covering_index_metadata": 0.0333,
+            "query.fold.body": 0.0,
+            "query.scan.body": 0.0,
+            "search.merge_page_hydration": 0.0165
+          }
+        ],
+        "median_calls": {
+          "search.total": 1,
+          "search.filter_visibility_text": 1,
+          "query.covering_guard": 5,
+          "query.covering_source_metadata": 0,
+          "query.covering_index_metadata": 5,
+          "query.fold.body": 0,
+          "query.scan.body": 0,
+          "search.merge_page_hydration": 1
+        }
+      }
+    },
+    {
+      "text": "the",
+      "offset": 0,
+      "limit": 50,
+      "control": {
+        "median_ms": {
+          "search.total": 1.9984,
+          "search.filter_visibility_text": 0.7971,
+          "query.covering_guard": 0.6291,
+          "query.covering_source_metadata": 0.5713,
+          "query.covering_index_metadata": 0.0518,
+          "query.fold.body": 0.0,
+          "query.scan.body": 0.0,
+          "search.merge_page_hydration": 1.1086
+        },
+        "per_process_median_ms": [
+          {
+            "search.total": 1.9984,
+            "search.filter_visibility_text": 0.7971,
+            "query.covering_guard": 0.6291,
+            "query.covering_source_metadata": 0.5713,
+            "query.covering_index_metadata": 0.0518,
+            "query.fold.body": 0.0,
+            "query.scan.body": 0.0,
+            "search.merge_page_hydration": 1.1086
+          },
+          {
+            "search.total": 2.1378,
+            "search.filter_visibility_text": 0.9013,
+            "query.covering_guard": 0.7197,
+            "query.covering_source_metadata": 0.6588,
+            "query.covering_index_metadata": 0.0606,
+            "query.fold.body": 0.0,
+            "query.scan.body": 0.0,
+            "search.merge_page_hydration": 1.1445
+          },
+          {
+            "search.total": 1.0777,
+            "search.filter_visibility_text": 0.4084,
+            "query.covering_guard": 0.3146,
+            "query.covering_source_metadata": 0.2798,
+            "query.covering_index_metadata": 0.0324,
+            "query.fold.body": 0.0,
+            "query.scan.body": 0.0,
+            "search.merge_page_hydration": 0.6322
+          }
+        ],
+        "median_calls": {
+          "search.total": 1,
+          "search.filter_visibility_text": 1,
+          "query.covering_guard": 5,
+          "query.covering_source_metadata": 5,
+          "query.covering_index_metadata": 5,
+          "query.fold.body": 0,
+          "query.scan.body": 0,
+          "search.merge_page_hydration": 1
+        }
+      },
+      "fdb": {
+        "median_ms": {
+          "search.total": 1.1152,
+          "search.filter_visibility_text": 0.1822,
+          "query.covering_guard": 0.0595,
+          "query.covering_source_metadata": 0.0,
+          "query.covering_index_metadata": 0.058,
+          "query.fold.body": 0.0,
+          "query.scan.body": 0.0,
+          "search.merge_page_hydration": 0.925
+        },
+        "per_process_median_ms": [
+          {
+            "search.total": 1.1152,
+            "search.filter_visibility_text": 0.1874,
+            "query.covering_guard": 0.057,
+            "query.covering_source_metadata": 0.0,
+            "query.covering_index_metadata": 0.0553,
+            "query.fold.body": 0.0,
+            "query.scan.body": 0.0,
+            "search.merge_page_hydration": 0.925
+          },
+          {
+            "search.total": 1.1631,
+            "search.filter_visibility_text": 0.1729,
+            "query.covering_guard": 0.0599,
+            "query.covering_source_metadata": 0.0,
+            "query.covering_index_metadata": 0.0585,
+            "query.fold.body": 0.0,
+            "query.scan.body": 0.0,
+            "search.merge_page_hydration": 0.953
+          },
+          {
+            "search.total": 0.9925,
+            "search.filter_visibility_text": 0.1822,
+            "query.covering_guard": 0.0595,
+            "query.covering_source_metadata": 0.0,
+            "query.covering_index_metadata": 0.058,
+            "query.fold.body": 0.0,
+            "query.scan.body": 0.0,
+            "search.merge_page_hydration": 0.7943
+          }
+        ],
+        "median_calls": {
+          "search.total": 1,
+          "search.filter_visibility_text": 1,
+          "query.covering_guard": 5,
+          "query.covering_source_metadata": 0,
+          "query.covering_index_metadata": 5,
+          "query.fold.body": 0,
+          "query.scan.body": 0,
+          "search.merge_page_hydration": 1
+        }
+      }
+    },
+    {
+      "text": "the",
+      "offset": 0,
+      "limit": 200,
+      "control": {
+        "median_ms": {
+          "search.total": 9.068,
+          "search.filter_visibility_text": 0.9617,
+          "query.covering_guard": 0.6765,
+          "query.covering_source_metadata": 0.6156,
+          "query.covering_index_metadata": 0.0543,
+          "query.fold.body": 0.0,
+          "query.scan.body": 0.0,
+          "search.merge_page_hydration": 8.1034
+        },
+        "per_process_median_ms": [
+          {
+            "search.total": 9.4709,
+            "search.filter_visibility_text": 0.9699,
+            "query.covering_guard": 0.6765,
+            "query.covering_source_metadata": 0.6156,
+            "query.covering_index_metadata": 0.0543,
+            "query.fold.body": 0.0,
+            "query.scan.body": 0.0,
+            "search.merge_page_hydration": 8.4061
+          },
+          {
+            "search.total": 9.068,
+            "search.filter_visibility_text": 0.9617,
+            "query.covering_guard": 0.7017,
+            "query.covering_source_metadata": 0.6427,
+            "query.covering_index_metadata": 0.0543,
+            "query.fold.body": 0.0,
+            "query.scan.body": 0.0,
+            "search.merge_page_hydration": 8.1034
+          },
+          {
+            "search.total": 6.4519,
+            "search.filter_visibility_text": 0.6164,
+            "query.covering_guard": 0.4296,
+            "query.covering_source_metadata": 0.3836,
+            "query.covering_index_metadata": 0.0441,
+            "query.fold.body": 0.0,
+            "query.scan.body": 0.0,
+            "search.merge_page_hydration": 5.7613
+          }
+        ],
+        "median_calls": {
+          "search.total": 1,
+          "search.filter_visibility_text": 1,
+          "query.covering_guard": 5,
+          "query.covering_source_metadata": 5,
+          "query.covering_index_metadata": 5,
+          "query.fold.body": 0,
+          "query.scan.body": 0,
+          "search.merge_page_hydration": 1
+        }
+      },
+      "fdb": {
+        "median_ms": {
+          "search.total": 7.9454,
+          "search.filter_visibility_text": 0.304,
+          "query.covering_guard": 0.072,
+          "query.covering_source_metadata": 0.0,
+          "query.covering_index_metadata": 0.0699,
+          "query.fold.body": 0.0,
+          "query.scan.body": 0.0,
+          "search.merge_page_hydration": 7.6361
+        },
+        "per_process_median_ms": [
+          {
+            "search.total": 7.9454,
+            "search.filter_visibility_text": 0.3058,
+            "query.covering_guard": 0.072,
+            "query.covering_source_metadata": 0.0,
+            "query.covering_index_metadata": 0.0699,
+            "query.fold.body": 0.0,
+            "query.scan.body": 0.0,
+            "search.merge_page_hydration": 7.6361
+          },
+          {
+            "search.total": 8.0029,
+            "search.filter_visibility_text": 0.304,
+            "query.covering_guard": 0.0802,
+            "query.covering_source_metadata": 0.0,
+            "query.covering_index_metadata": 0.0774,
+            "query.fold.body": 0.0,
+            "query.scan.body": 0.0,
+            "search.merge_page_hydration": 7.6968
+          },
+          {
+            "search.total": 7.6106,
+            "search.filter_visibility_text": 0.2614,
+            "query.covering_guard": 0.0605,
+            "query.covering_source_metadata": 0.0,
+            "query.covering_index_metadata": 0.0585,
+            "query.fold.body": 0.0,
+            "query.scan.body": 0.0,
+            "search.merge_page_hydration": 7.3244
+          }
+        ],
+        "median_calls": {
+          "search.total": 1,
+          "search.filter_visibility_text": 1,
+          "query.covering_guard": 5,
+          "query.covering_source_metadata": 0,
+          "query.covering_index_metadata": 5,
+          "query.fold.body": 0,
+          "query.scan.body": 0,
+          "search.merge_page_hydration": 1
+        }
+      }
+    },
+    {
+      "text": "the",
+      "offset": 5000,
+      "limit": 50,
+      "control": {
+        "median_ms": {
+          "search.total": 3.0619,
+          "search.filter_visibility_text": 1.7226,
+          "query.covering_guard": 0.6682,
+          "query.covering_source_metadata": 0.6053,
+          "query.covering_index_metadata": 0.0512,
+          "query.fold.body": 0.0,
+          "query.scan.body": 0.0,
+          "search.merge_page_hydration": 1.3771
+        },
+        "per_process_median_ms": [
+          {
+            "search.total": 3.3241,
+            "search.filter_visibility_text": 1.9232,
+            "query.covering_guard": 0.7563,
+            "query.covering_source_metadata": 0.6664,
+            "query.covering_index_metadata": 0.0685,
+            "query.fold.body": 0.0,
+            "query.scan.body": 0.0,
+            "search.merge_page_hydration": 1.4676
+          },
+          {
+            "search.total": 3.0619,
+            "search.filter_visibility_text": 1.7226,
+            "query.covering_guard": 0.6682,
+            "query.covering_source_metadata": 0.6053,
+            "query.covering_index_metadata": 0.0512,
+            "query.fold.body": 0.0,
+            "query.scan.body": 0.0,
+            "search.merge_page_hydration": 1.3771
+          },
+          {
+            "search.total": 2.5101,
+            "search.filter_visibility_text": 1.4738,
+            "query.covering_guard": 0.4411,
+            "query.covering_source_metadata": 0.4012,
+            "query.covering_index_metadata": 0.0372,
+            "query.fold.body": 0.0,
+            "query.scan.body": 0.0,
+            "search.merge_page_hydration": 1.035
+          }
+        ],
+        "median_calls": {
+          "search.total": 1,
+          "search.filter_visibility_text": 1,
+          "query.covering_guard": 5,
+          "query.covering_source_metadata": 5,
+          "query.covering_index_metadata": 5,
+          "query.fold.body": 0,
+          "query.scan.body": 0,
+          "search.merge_page_hydration": 1
+        }
+      },
+      "fdb": {
+        "median_ms": {
+          "search.total": 2.8058,
+          "search.filter_visibility_text": 1.2419,
+          "query.covering_guard": 0.0972,
+          "query.covering_source_metadata": 0.0,
+          "query.covering_index_metadata": 0.0948,
+          "query.fold.body": 0.0,
+          "query.scan.body": 0.0,
+          "search.merge_page_hydration": 1.5736
+        },
+        "per_process_median_ms": [
+          {
+            "search.total": 2.8058,
+            "search.filter_visibility_text": 1.2874,
+            "query.covering_guard": 0.1072,
+            "query.covering_source_metadata": 0.0,
+            "query.covering_index_metadata": 0.1045,
+            "query.fold.body": 0.0,
+            "query.scan.body": 0.0,
+            "search.merge_page_hydration": 1.5997
+          },
+          {
+            "search.total": 2.9351,
+            "search.filter_visibility_text": 1.2419,
+            "query.covering_guard": 0.0972,
+            "query.covering_source_metadata": 0.0,
+            "query.covering_index_metadata": 0.0948,
+            "query.fold.body": 0.0,
+            "query.scan.body": 0.0,
+            "search.merge_page_hydration": 1.5736
+          },
+          {
+            "search.total": 2.2115,
+            "search.filter_visibility_text": 1.0873,
+            "query.covering_guard": 0.0792,
+            "query.covering_source_metadata": 0.0,
+            "query.covering_index_metadata": 0.0769,
+            "query.fold.body": 0.0,
+            "query.scan.body": 0.0,
+            "search.merge_page_hydration": 1.124
+          }
+        ],
+        "median_calls": {
+          "search.total": 1,
+          "search.filter_visibility_text": 1,
+          "query.covering_guard": 5,
+          "query.covering_source_metadata": 0,
+          "query.covering_index_metadata": 5,
+          "query.fold.body": 0,
+          "query.scan.body": 0,
+          "search.merge_page_hydration": 1
+        }
+      }
+    },
+    {
+      "text": "the",
+      "offset": 9950,
+      "limit": 50,
+      "control": {
+        "median_ms": {
+          "search.total": 2.9485,
+          "search.filter_visibility_text": 1.7889,
+          "query.covering_guard": 0.6244,
+          "query.covering_source_metadata": 0.5689,
+          "query.covering_index_metadata": 0.055,
+          "query.fold.body": 0.0,
+          "query.scan.body": 0.0,
+          "search.merge_page_hydration": 1.1922
+        },
+        "per_process_median_ms": [
+          {
+            "search.total": 2.9485,
+            "search.filter_visibility_text": 1.9039,
+            "query.covering_guard": 0.8053,
+            "query.covering_source_metadata": 0.7384,
+            "query.covering_index_metadata": 0.061,
+            "query.fold.body": 0.0,
+            "query.scan.body": 0.0,
+            "search.merge_page_hydration": 1.3529
+          },
+          {
+            "search.total": 2.9824,
+            "search.filter_visibility_text": 1.7889,
+            "query.covering_guard": 0.6244,
+            "query.covering_source_metadata": 0.5689,
+            "query.covering_index_metadata": 0.055,
+            "query.fold.body": 0.0,
+            "query.scan.body": 0.0,
+            "search.merge_page_hydration": 1.1922
+          },
+          {
+            "search.total": 1.9193,
+            "search.filter_visibility_text": 1.2932,
+            "query.covering_guard": 0.3147,
+            "query.covering_source_metadata": 0.2822,
+            "query.covering_index_metadata": 0.0303,
+            "query.fold.body": 0.0,
+            "query.scan.body": 0.0,
+            "search.merge_page_hydration": 0.6546
+          }
+        ],
+        "median_calls": {
+          "search.total": 1,
+          "search.filter_visibility_text": 1,
+          "query.covering_guard": 5,
+          "query.covering_source_metadata": 5,
+          "query.covering_index_metadata": 5,
+          "query.fold.body": 0,
+          "query.scan.body": 0,
+          "search.merge_page_hydration": 1
+        }
+      },
+      "fdb": {
+        "median_ms": {
+          "search.total": 2.2479,
+          "search.filter_visibility_text": 1.1407,
+          "query.covering_guard": 0.0754,
+          "query.covering_source_metadata": 0.0,
+          "query.covering_index_metadata": 0.0733,
+          "query.fold.body": 0.0,
+          "query.scan.body": 0.0,
+          "search.merge_page_hydration": 1.1203
+        },
+        "per_process_median_ms": [
+          {
+            "search.total": 2.2479,
+            "search.filter_visibility_text": 1.157,
+            "query.covering_guard": 0.0754,
+            "query.covering_source_metadata": 0.0,
+            "query.covering_index_metadata": 0.0733,
+            "query.fold.body": 0.0,
+            "query.scan.body": 0.0,
+            "search.merge_page_hydration": 1.1203
+          },
+          {
+            "search.total": 2.3023,
+            "search.filter_visibility_text": 1.1407,
+            "query.covering_guard": 0.0857,
+            "query.covering_source_metadata": 0.0,
+            "query.covering_index_metadata": 0.083,
+            "query.fold.body": 0.0,
+            "query.scan.body": 0.0,
+            "search.merge_page_hydration": 1.1212
+          },
+          {
+            "search.total": 2.2102,
+            "search.filter_visibility_text": 1.1257,
+            "query.covering_guard": 0.0656,
+            "query.covering_source_metadata": 0.0,
+            "query.covering_index_metadata": 0.0639,
+            "query.fold.body": 0.0,
+            "query.scan.body": 0.0,
+            "search.merge_page_hydration": 0.9901
+          }
+        ],
+        "median_calls": {
+          "search.total": 1,
+          "search.filter_visibility_text": 1,
+          "query.covering_guard": 5,
+          "query.covering_source_metadata": 0,
+          "query.covering_index_metadata": 5,
+          "query.fold.body": 0,
+          "query.scan.body": 0,
+          "search.merge_page_hydration": 1
+        }
+      }
+    },
+    {
+      "text": "the zx",
+      "offset": 0,
+      "limit": 50,
+      "control": {
+        "median_ms": {
+          "search.total": 362.7483,
+          "search.filter_visibility_text": 362.745,
+          "query.covering_guard": 1.22,
+          "query.covering_source_metadata": 1.1592,
+          "query.covering_index_metadata": 0.0529,
+          "query.fold.body": 113.5167,
+          "query.scan.body": 24.8181,
+          "search.merge_page_hydration": 0.0024
+        },
+        "per_process_median_ms": [
+          {
+            "search.total": 380.5679,
+            "search.filter_visibility_text": 380.5639,
+            "query.covering_guard": 1.2615,
+            "query.covering_source_metadata": 1.1748,
+            "query.covering_index_metadata": 0.0682,
+            "query.fold.body": 114.6707,
+            "query.scan.body": 25.2936,
+            "search.merge_page_hydration": 0.003
+          },
+          {
+            "search.total": 362.7483,
+            "search.filter_visibility_text": 362.745,
+            "query.covering_guard": 1.22,
+            "query.covering_source_metadata": 1.1592,
+            "query.covering_index_metadata": 0.0529,
+            "query.fold.body": 113.5167,
+            "query.scan.body": 24.8181,
+            "search.merge_page_hydration": 0.0024
+          },
+          {
+            "search.total": 274.8463,
+            "search.filter_visibility_text": 274.8432,
+            "query.covering_guard": 0.9105,
+            "query.covering_source_metadata": 0.8605,
+            "query.covering_index_metadata": 0.0503,
+            "query.fold.body": 89.015,
+            "query.scan.body": 20.1469,
+            "search.merge_page_hydration": 0.0019
+          }
+        ],
+        "median_calls": {
+          "search.total": 1,
+          "search.filter_visibility_text": 1,
+          "query.covering_guard": 5,
+          "query.covering_source_metadata": 5,
+          "query.covering_index_metadata": 5,
+          "query.fold.body": 263627,
+          "query.scan.body": 263627,
+          "search.merge_page_hydration": 1
+        }
+      },
+      "fdb": {
+        "median_ms": {
+          "search.total": 357.378,
+          "search.filter_visibility_text": 357.3736,
+          "query.covering_guard": 0.1359,
+          "query.covering_source_metadata": 0.0,
+          "query.covering_index_metadata": 0.1342,
+          "query.fold.body": 111.8304,
+          "query.scan.body": 25.0223,
+          "search.merge_page_hydration": 0.0021
+        },
+        "per_process_median_ms": [
+          {
+            "search.total": 357.378,
+            "search.filter_visibility_text": 357.3736,
+            "query.covering_guard": 0.15,
+            "query.covering_source_metadata": 0.0,
+            "query.covering_index_metadata": 0.1473,
+            "query.fold.body": 111.8304,
+            "query.scan.body": 25.1685,
+            "search.merge_page_hydration": 0.0021
+          },
+          {
+            "search.total": 384.73,
+            "search.filter_visibility_text": 384.7251,
+            "query.covering_guard": 0.1359,
+            "query.covering_source_metadata": 0.0,
+            "query.covering_index_metadata": 0.1342,
+            "query.fold.body": 114.2879,
+            "query.scan.body": 25.0223,
+            "search.merge_page_hydration": 0.0022
+          },
+          {
+            "search.total": 321.2632,
+            "search.filter_visibility_text": 321.2594,
+            "query.covering_guard": 0.1111,
+            "query.covering_source_metadata": 0.0,
+            "query.covering_index_metadata": 0.1097,
+            "query.fold.body": 95.0475,
+            "query.scan.body": 21.3088,
+            "search.merge_page_hydration": 0.0019
+          }
+        ],
+        "median_calls": {
+          "search.total": 1,
+          "search.filter_visibility_text": 1,
+          "query.covering_guard": 5,
+          "query.covering_source_metadata": 0,
+          "query.covering_index_metadata": 5,
+          "query.fold.body": 263627,
+          "query.scan.body": 263627,
+          "search.merge_page_hydration": 1
+        }
+      }
+    }
+  ],
+  "first_use": {
+    "control": {
+      "open_ms": [
+        567.8289,
+        314.8721,
+        294.4377
+      ],
+      "first_search_ms": [
+        756.5591000000001,
+        700.2672,
+        598.6031
+      ],
+      "source_documents_validated_per_process": 10000,
+      "pending_before": 5,
+      "pending_after": 0
+    },
+    "fdb": {
+      "open_ms": [
+        312.89270000000005,
+        277.5662,
+        413.78720000000004
+      ],
+      "first_search_ms": [
+        464.551,
+        615.7802,
+        550.6940999999999
+      ],
+      "source_documents_validated_per_process": 10000,
+      "pending_before": 5,
+      "pending_after": 0
+    }
+  }
+}

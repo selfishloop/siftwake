@@ -1,0 +1,57 @@
+{
+  "scope": "single paired ingest/idle confirmation; warm OS cache, no eviction; first 10000 existing records; not a three-pair performance or RAM gate",
+  "variants": {
+    "control": {
+      "indexing_private_bytes": 9560064,
+      "maintenance_private_bytes": 7938048,
+      "os_peak_ws_bytes": 13381632,
+      "idle_private_bytes": 1667072,
+      "retained_disk_bytes": 1521041630.0,
+      "ingest_s": 31.3800574,
+      "maintenance_s": 0.9823292,
+      "combined_s": 32.3623866,
+      "stats": {
+        "compaction_running": false,
+        "delta_keys": 0,
+        "disk_index_bytes": 353688186,
+        "disk_posting_entries": 19221340,
+        "documents": 10000,
+        "generation": 51,
+        "log_bytes": 45,
+        "resident_documents": 0,
+        "resident_text_bytes": 0,
+        "segments": 5,
+        "sequence": 20,
+        "source_bytes": 267900709
+      },
+      "executable": "C:\\Users\\Serkan\\Documents\\ChatGPT\\fdb\\output\\short-proof-memory-candidate-20261014.exe",
+      "sha256": "0e9613b973917f3b1b052696fb8a75e8073b3dc6e174d1f66bc9370d08b9d7e4"
+    },
+    "candidate": {
+      "indexing_private_bytes": 9588736,
+      "maintenance_private_bytes": 8630272,
+      "os_peak_ws_bytes": 13983744,
+      "idle_private_bytes": 1724416,
+      "retained_disk_bytes": 1521041630.0,
+      "ingest_s": 32.4705865,
+      "maintenance_s": 0.9968217,
+      "combined_s": 33.46740820000001,
+      "stats": {
+        "compaction_running": false,
+        "delta_keys": 0,
+        "disk_index_bytes": 353688186,
+        "disk_posting_entries": 19221340,
+        "documents": 10000,
+        "generation": 51,
+        "log_bytes": 45,
+        "resident_documents": 0,
+        "resident_text_bytes": 0,
+        "segments": 5,
+        "sequence": 20,
+        "source_bytes": 267900709
+      },
+      "executable": "C:\\Users\\Serkan\\Documents\\ChatGPT\\fdb\\output\\wide-fold-memory-candidate-20261014.exe",
+      "sha256": "f229744c64ae48b60009df83baa1fb12eb434a34ecb32ca7bd79bab38e5818b7"
+    }
+  }
+}

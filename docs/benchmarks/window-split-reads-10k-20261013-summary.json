@@ -1,0 +1,349 @@
+{
+  "cache": "warm OS cache, no eviction",
+  "open_ms": {
+    "control": [
+      63.791000000000004,
+      69.68299999999999,
+      66.5554,
+      65.8231,
+      70.8004
+    ],
+    "fdb": [
+      65.531,
+      68.9849,
+      69.2662,
+      67.1411,
+      71.0803
+    ]
+  },
+  "median_open_ms": {
+    "control": 66.5554,
+    "fdb": 68.9849
+  },
+  "paired_open_change_percent": [
+    2.7276575065448228,
+    -1.001822539213293,
+    4.072997833383907,
+    2.0023365657345193,
+    0.3953367495098892
+  ],
+  "first_use": {
+    "control": {
+      "first_get_ms": 0.1143,
+      "first_search_ms": 170.8778,
+      "warm_search_ms": 3.4354,
+      "pending_on_open": 5,
+      "pending_after_get": 5,
+      "open_plus_get_ms": 66.6452,
+      "open_plus_get_plus_search_ms": 237.5453
+    },
+    "fdb": {
+      "first_get_ms": 0.1192,
+      "first_search_ms": 177.27870000000001,
+      "warm_search_ms": 3.402,
+      "pending_on_open": 5,
+      "pending_after_get": 5,
+      "open_plus_get_ms": 69.0749,
+      "open_plus_get_plus_search_ms": 245.3218
+    }
+  },
+  "warm_reads": {
+    "control": {
+      "get": {
+        "n": 9000,
+        "p50_ms": 0.0224,
+        "p95_ms": 0.0472,
+        "p99_ms": 0.0732,
+        "run_p95": [
+          0.0379,
+          0.0547,
+          0.0479
+        ]
+      },
+      "queries": [
+        {
+          "text": "the",
+          "offset": 0,
+          "limit": 50,
+          "total": 10000,
+          "timing": {
+            "n": 90,
+            "p50_ms": 164.09789999999998,
+            "p95_ms": 188.4897,
+            "p99_ms": 201.654,
+            "run_p95": [
+              131.2621,
+              201.56730000000002,
+              180.1342
+            ]
+          }
+        },
+        {
+          "text": "quixote",
+          "offset": 0,
+          "limit": 50,
+          "total": 56,
+          "timing": {
+            "n": 90,
+            "p50_ms": 4.0257000000000005,
+            "p95_ms": 5.7965,
+            "p99_ms": 6.3548,
+            "run_p95": [
+              4.077,
+              6.306800000000001,
+              5.7965
+            ]
+          }
+        },
+        {
+          "text": "he",
+          "offset": 0,
+          "limit": 50,
+          "total": 10000,
+          "timing": {
+            "n": 90,
+            "p50_ms": 161.0257,
+            "p95_ms": 184.00549999999998,
+            "p99_ms": 198.6338,
+            "run_p95": [
+              135.0948,
+              193.16559999999998,
+              179.2572
+            ]
+          }
+        },
+        {
+          "text": "the man",
+          "offset": 0,
+          "limit": 50,
+          "total": 9932,
+          "timing": {
+            "n": 90,
+            "p50_ms": 172.97119999999998,
+            "p95_ms": 203.0641,
+            "p99_ms": 213.8049,
+            "run_p95": [
+              136.2841,
+              206.5256,
+              201.6259
+            ]
+          }
+        }
+      ]
+    },
+    "fdb": {
+      "get": {
+        "n": 9000,
+        "p50_ms": 0.019899999999999998,
+        "p95_ms": 0.0409,
+        "p99_ms": 0.0591,
+        "run_p95": [
+          0.037200000000000004,
+          0.036000000000000004,
+          0.0477
+        ]
+      },
+      "queries": [
+        {
+          "text": "the",
+          "offset": 0,
+          "limit": 50,
+          "total": 10000,
+          "timing": {
+            "n": 90,
+            "p50_ms": 106.92699999999999,
+            "p95_ms": 146.5813,
+            "p99_ms": 150.3755,
+            "run_p95": [
+              108.9361,
+              112.3245,
+              149.7854
+            ]
+          }
+        },
+        {
+          "text": "quixote",
+          "offset": 0,
+          "limit": 50,
+          "total": 56,
+          "timing": {
+            "n": 90,
+            "p50_ms": 3.4773,
+            "p95_ms": 5.358199999999999,
+            "p99_ms": 5.624,
+            "run_p95": [
+              4.222499999999999,
+              4.2251,
+              5.6138
+            ]
+          }
+        },
+        {
+          "text": "he",
+          "offset": 0,
+          "limit": 50,
+          "total": 10000,
+          "timing": {
+            "n": 90,
+            "p50_ms": 107.795,
+            "p95_ms": 146.3527,
+            "p99_ms": 151.356,
+            "run_p95": [
+              110.8409,
+              115.8305,
+              150.0431
+            ]
+          }
+        },
+        {
+          "text": "the man",
+          "offset": 0,
+          "limit": 50,
+          "total": 9932,
+          "timing": {
+            "n": 90,
+            "p50_ms": 114.8541,
+            "p95_ms": 157.468,
+            "p99_ms": 164.4349,
+            "run_p95": [
+              129.4806,
+              131.83030000000002,
+              160.07479999999998
+            ]
+          }
+        }
+      ]
+    }
+  },
+  "full_integrity": {
+    "elapsed_ms": 456.7747,
+    "pending_source_checks": 0,
+    "phase": "integrity_checked"
+  },
+  "matrix_check": {
+    "cases": 38,
+    "full_pages_and_versions_verified": true,
+    "performance_not_measured": true,
+    "phase": "matrix_checked"
+  },
+  "first_use_process_memory": {
+    "control": {
+      "sample_interval_ms": 10,
+      "samples": [
+        10,
+        10,
+        10,
+        9,
+        10
+      ],
+      "scope": "whole process open/get/first-search/repeat; sampled, not engine allocation counters",
+      "short_lived_peaks_may_be_missed": true,
+      "observed_private_peak_bytes": {
+        "runs_bytes": [
+          28340224,
+          28311552,
+          28303360,
+          28311552,
+          28336128
+        ],
+        "median_bytes": 28311552
+      },
+      "observed_os_peak_working_set_bytes": {
+        "runs_bytes": [
+          31547392,
+          31330304,
+          31330304,
+          31330304,
+          31334400
+        ],
+        "median_bytes": 31330304
+      }
+    },
+    "fdb": {
+      "sample_interval_ms": 10,
+      "samples": [
+        9,
+        9,
+        10,
+        10,
+        10
+      ],
+      "scope": "whole process open/get/first-search/repeat; sampled, not engine allocation counters",
+      "short_lived_peaks_may_be_missed": true,
+      "observed_private_peak_bytes": {
+        "runs_bytes": [
+          28336128,
+          28336128,
+          28315648,
+          28319744,
+          28315648
+        ],
+        "median_bytes": 28319744
+      },
+      "observed_os_peak_working_set_bytes": {
+        "runs_bytes": [
+          31363072,
+          31358976,
+          31350784,
+          31350784,
+          31363072
+        ],
+        "median_bytes": 31358976
+      }
+    }
+  },
+  "warm_process_memory": {
+    "control": {
+      "scope": "whole process including oracle preparation, full warmup, gets and four warm queries; sampled",
+      "samples": [
+        452,
+        602,
+        574
+      ],
+      "sample_interval_ms": 10,
+      "short_lived_peaks_may_be_missed": true,
+      "observed_private_peak_bytes": {
+        "runs_bytes": [
+          41627648,
+          41611264,
+          41361408
+        ],
+        "median_bytes": 41611264
+      },
+      "observed_os_peak_working_set_bytes": {
+        "runs_bytes": [
+          44761088,
+          44761088,
+          44769280
+        ],
+        "median_bytes": 44761088
+      }
+    },
+    "fdb": {
+      "scope": "whole process including oracle preparation, full warmup, gets and four warm queries; sampled",
+      "samples": [
+        395,
+        400,
+        493
+      ],
+      "sample_interval_ms": 10,
+      "short_lived_peaks_may_be_missed": true,
+      "observed_private_peak_bytes": {
+        "runs_bytes": [
+          41213952,
+          41299968,
+          41369600
+        ],
+        "median_bytes": 41299968
+      },
+      "observed_os_peak_working_set_bytes": {
+        "runs_bytes": [
+          44404736,
+          44728320,
+          44630016
+        ],
+        "median_bytes": 44630016
+      }
+    }
+  }
+}

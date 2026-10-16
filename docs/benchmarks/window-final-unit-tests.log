@@ -1,0 +1,14 @@
+   Compiling fdb v0.3.1 (C:\Users\Serkan\Documents\ChatGPT\fdb)
+    Finished `test` profile [unoptimized + debuginfo] target(s) in 7.49s
+     Running unittests src\lib.rs (target\debug\deps\fdb-b98f13c86de4cc99.exe)
+
+running 6 tests
+test segment::grouped_tests::adjacent_and_gapped_slots_share_one_window_with_independent_payload_checks ... ok
+test segment::grouped_tests::window_budget_gaps_and_oversized_payload_fallback ... ok
+test segment::window_tests::prefetched_corrupt_record_is_checked_before_it_matches ... ok
+test segment::window_tests::read_window_never_uses_a_valid_vfy_to_hide_corrupt_index_blocks_or_cuts ... ok
+test segment::window_tests::large_document_keeps_exact_read_and_record_validation ... ok
+test segment::window_tests::window_matches_exact_reads_across_boundaries_and_sparse_order ... ok
+
+test result: ok. 6 passed; 0 failed; 0 ignored; 0 measured; 26 filtered out; finished in 0.18s
+

@@ -7,6 +7,7 @@ pub(crate) struct Input<R> {
     pub reader: R,
     pub scratch: Vec<u8>,
     pub limit: usize,
+    pub position: u64,
 }
 impl<R: BufRead> Input<R> {
     pub fn peek(&mut self) -> Result<Option<u8>> {
@@ -15,6 +16,7 @@ impl<R: BufRead> Input<R> {
     pub fn byte(&mut self) -> Result<u8> {
         let byte = self.peek()?.ok_or_else(|| invalid("unexpected EOF"))?;
         self.reader.consume(1);
+        self.position += 1;
         Ok(byte)
     }
     pub fn whitespace(&mut self) -> Result<()> {
@@ -113,6 +115,7 @@ impl<R: BufRead> Input<R> {
                 }
                 self.scratch.extend_from_slice(&bytes[..consumed]);
                 self.reader.consume(consumed);
+                self.position += consumed as u64;
                 if !quoted && depth == 0 {
                     break;
                 }

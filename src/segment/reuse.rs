@@ -1,4 +1,4 @@
-//! Merge validated immutable posting streams, preserving the SEG03 layout.
+//! Merge validated immutable posting streams, preserving the input codecs.
 use super::*;
 use std::cmp::Reverse;
 
@@ -10,7 +10,12 @@ impl DiskIndex {
         }
         let mut footer = [0; FOOTER_SIZE as usize];
         read_at(&self.file, size - FOOTER_SIZE, &mut footer)?;
-        if &footer[..8] != FOOTER
+        let expected_footer = if self.binary_payload {
+            FOOTER
+        } else {
+            LEGACY_FOOTER
+        };
+        if &footer[..8] != expected_footer
             || crc(&footer[..28]) != u32::from_le_bytes(footer[28..].try_into().unwrap())
         {
             return Err(Error::Corrupt("reuse segment footer".into()));
@@ -83,22 +88,35 @@ impl Cursor<'_> {
     }
 }
 
+#[cfg(any(test, not(feature = "experimental-builder-budget")))]
 pub(super) fn merge(
     inputs: &[(&DiskIndex, &[u32])],
     writer: &mut impl Write,
     offset: &mut u64,
 ) -> Result<Vec<(Term, Posting)>> {
+    let mut result = Vec::new();
+    merge_with(inputs, writer, offset, |t, p| {
+        result.push((t, p));
+        Ok(())
+    })?;
+    Ok(result)
+}
+pub(super) fn merge_with(
+    inputs: &[(&DiskIndex, &[u32])],
+    writer: &mut impl Write,
+    offset: &mut u64,
+    mut emit: impl FnMut(Term, Posting) -> Result<()>,
+) -> Result<()> {
     let mut iterators: Vec<_> = inputs
         .iter()
-        .map(|(index, _)| index.postings.iter())
+        .map(|(index, _)| index.term_cursor())
         .collect();
     let mut terms = BinaryHeap::new();
     for (n, iterator) in iterators.iter_mut().enumerate() {
-        if let Some((term, posting)) = iterator.next() {
+        if let Some((term, posting)) = iterator.next()? {
             terms.push(Reverse((term, n, posting.offset, posting.count)));
         }
     }
-    let mut result = Vec::new();
     while let Some(Reverse((term, n, start, count))) = terms.pop() {
         let mut same = vec![(
             n,
@@ -158,21 +176,21 @@ pub(super) fn merge(
             }
         }
         if count != 0 {
-            result.push((
+            emit(
                 term.clone(),
                 Posting {
                     offset: start,
                     count,
                 },
-            ));
+            )?;
         }
         for (n, _) in same {
-            if let Some((next, posting)) = iterators[n].next() {
+            if let Some((next, posting)) = iterators[n].next()? {
                 terms.push(Reverse((next, n, posting.offset, posting.count)));
             }
         }
     }
-    Ok(result)
+    Ok(())
 }
 
 #[cfg(test)]
@@ -212,6 +230,45 @@ mod tests {
                     Key::new("shared", "hedef", "ü"),
                 ],
             },
+        }
+    }
+    #[test]
+    fn legacy_footer_is_verified_with_its_own_codec_and_rejects_corruption() {
+        let dir = Temp(std::env::temp_dir().join(format!(
+            "fdb-reuse-{}-{}",
+            std::process::id(),
+            TEMP.fetch_add(1, Ordering::Relaxed)
+        )));
+        std::fs::create_dir(&dir.0).unwrap();
+        let path = dir.0.join("legacy.idx");
+        let mut builder = Builder::new(&path, 1, 0, 0).unwrap();
+        builder
+            .add_delete(&Key::new("shared", "docs", "deleted"))
+            .unwrap();
+        drop(builder.finish().unwrap());
+        // A tombstone-only SEG03 has no JSON payloads; its directory is identical.
+        let mut bytes = std::fs::read(&path).unwrap();
+        let footer_start = bytes.len() - FOOTER_SIZE as usize;
+        bytes[..8].copy_from_slice(LEGACY_MAGIC);
+        bytes[footer_start..footer_start + 8].copy_from_slice(LEGACY_FOOTER);
+        let checksum = crc(&bytes[..footer_start]);
+        bytes[footer_start + 24..footer_start + 28].copy_from_slice(&checksum.to_le_bytes());
+        let checksum = crc(&bytes[footer_start..footer_start + 28]);
+        bytes[footer_start + 28..].copy_from_slice(&checksum.to_le_bytes());
+        std::fs::write(&path, &bytes).unwrap();
+        let index = DiskIndex::open(&path, None).unwrap();
+        assert!(!index.binary_payload);
+        index.verify_reuse().unwrap();
+        // Verify against an already-open index, including footer/global CRC cuts.
+        for cut in 0..bytes.len() {
+            std::fs::write(&path, &bytes[..cut]).unwrap();
+            assert!(index.verify_reuse().is_err(), "cut {cut}");
+        }
+        for position in [0, HEADER_SIZE as usize, footer_start, bytes.len() - 1] {
+            let mut corrupt = bytes.clone();
+            corrupt[position] ^= 1;
+            std::fs::write(&path, corrupt).unwrap();
+            assert!(index.verify_reuse().is_err(), "corruption {position}");
         }
     }
     #[test]
@@ -281,5 +338,104 @@ mod tests {
         file.write_all(b"!").unwrap();
         file.sync_all().unwrap();
         assert!(matches!(first.verify_reuse(), Err(Error::Corrupt(_))));
+    }
+
+    #[test]
+    fn delta_export_matches_reindex_after_slot_reuse_updates_and_tombstones() {
+        let dir = Temp(std::env::temp_dir().join(format!(
+            "fdb-reuse-{}-{}",
+            std::process::id(),
+            TEMP.fetch_add(1, Ordering::Relaxed)
+        )));
+        std::fs::create_dir(&dir.0).unwrap();
+        let mut index = crate::index::Index::default();
+        let mut live = BTreeMap::new();
+        for id in ["d", "b", "a", "c"] {
+            let mut stored = doc(id, 1);
+            stored.document.fields.extend([
+                ("negative".into(), serde_json::json!(-17)),
+                ("null".into(), serde_json::Value::Null),
+                ("float".into(), serde_json::json!(1.25)),
+                ("list".into(), serde_json::json!([1, "x"])),
+            ]);
+            index.change(&stored, true).unwrap();
+            live.insert(stored.document.key.clone(), stored);
+        }
+        // Dense posting representation, mixed scope/collection dictionaries.
+        for n in 0..130 {
+            let mut stored = doc(&format!("k{n:03}"), 1);
+            if n % 3 == 0 {
+                stored.document.key.collection = "başka".into();
+            }
+            if n % 5 == 0 {
+                stored.document.key.scope = "private".into();
+                for target in &mut stored.document.links {
+                    target.scope = "private".into();
+                }
+            }
+            index.change(&stored, true).unwrap();
+            live.insert(stored.document.key.clone(), stored);
+        }
+        for id in ["b", "a"] {
+            let old = live.remove(&doc(id, 1).document.key).unwrap();
+            index.change(&old, false).unwrap();
+        }
+        for id in ["z", "a"] {
+            let stored = doc(id, 2);
+            index.change(&stored, true).unwrap();
+            live.insert(stored.document.key.clone(), stored);
+        }
+        let keys: BTreeSet<_> = live
+            .keys()
+            .cloned()
+            .chain([doc("b", 2).document.key])
+            .collect();
+        let records: BTreeMap<_, _> = keys
+            .iter()
+            .enumerate()
+            .map(|(slot, key)| (key.clone(), slot as u32))
+            .collect();
+        for reused in [false, true] {
+            let name = if reused {
+                "delta.idx"
+            } else {
+                "reference-delta.idx"
+            };
+            let mut builder = Builder::new(&dir.0.join(name), 2, 0, 0).unwrap();
+            for key in &keys {
+                if let Some(stored) = live.get(key) {
+                    if reused {
+                        builder.add_reused(stored).unwrap();
+                    } else {
+                        builder.add(stored).unwrap();
+                    }
+                } else {
+                    builder.add_delete(key).unwrap();
+                }
+            }
+            if reused {
+                builder.finish_delta(&index, &records).unwrap();
+            } else {
+                builder.finish().unwrap();
+            }
+        }
+        assert_eq!(
+            std::fs::read(dir.0.join("delta.idx")).unwrap(),
+            std::fs::read(dir.0.join("reference-delta.idx")).unwrap()
+        );
+        // Missing/nonmatching shadow mapping is rejected, without publishing an index.
+        let mut bad = records.clone();
+        bad.remove(&doc("a", 2).document.key);
+        bad.insert(doc("wrong", 2).document.key, 0);
+        let mut builder = Builder::new(&dir.0.join("bad.idx"), 2, 0, 0).unwrap();
+        for key in &keys {
+            if let Some(stored) = live.get(key) {
+                builder.add_reused(stored).unwrap();
+            } else {
+                builder.add_delete(key).unwrap();
+            }
+        }
+        assert!(builder.finish_delta(&index, &bad).is_err());
+        assert!(!dir.0.join("bad.idx").exists());
     }
 }

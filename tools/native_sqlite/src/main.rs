@@ -308,15 +308,19 @@ fn main() -> Result<()> {
         }
     }
     let broad_text = checked_query(&mut db, "text", 3, "teknoloji", 0, (count, &body, true))?.0;
-    report(json!({"phase":"integrity"}));
-    let start = Instant::now();
-    let check: String = db.query_row("PRAGMA integrity_check", [], |r| r.get(0))?;
-    assert_eq!(check, "ok");
-    db.execute(
-        "INSERT INTO search(search,rank) VALUES('integrity-check',1)",
-        [],
-    )?;
-    let integrity_ms = start.elapsed().as_secs_f64() * 1000.0;
+    let integrity_ms = if std::env::var("SQLITE_BENCH_SKIP_INTEGRITY").as_deref() == Ok("1") {
+        None
+    } else {
+        report(json!({"phase":"integrity"}));
+        let start = Instant::now();
+        let check: String = db.query_row("PRAGMA integrity_check", [], |r| r.get(0))?;
+        assert_eq!(check, "ok");
+        db.execute(
+            "INSERT INTO search(search,rank) VALUES('integrity-check',1)",
+            [],
+        )?;
+        Some(start.elapsed().as_secs_f64() * 1000.0)
+    };
     report(
         json!({"phase":"result","count":count,"text_bytes":body.len(),"ingest_ms":ingest_ms,
         "maintenance_ms":maintenance_ms,"reopen_ms":reopen_ms,"changed_reopen_ms":changed_reopen_ms,

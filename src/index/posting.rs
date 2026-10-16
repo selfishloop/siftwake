@@ -14,6 +14,14 @@ impl Default for Posting {
     }
 }
 impl Posting {
+    #[cfg(feature = "experimental-builder-budget")]
+    pub fn heap_bytes(&self) -> usize {
+        match self {
+            Self::Tiny { .. } => 0,
+            Self::Sparse(v) => v.capacity() * 4,
+            Self::Dense { words, .. } => words.capacity() * 8,
+        }
+    }
     pub fn len(&self) -> usize {
         match self {
             Self::Tiny { len, .. } => *len as usize,

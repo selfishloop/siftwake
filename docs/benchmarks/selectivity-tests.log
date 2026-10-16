@@ -1,0 +1,246 @@
+   Compiling fdb v0.3.1 (C:\Users\Serkan\Documents\ChatGPT\fdb)
+    Finished `test` profile [unoptimized + debuginfo] target(s) in 9.73s
+     Running unittests src\lib.rs (target\debug\deps\fdb-332ed00557482137.exe)
+
+running 19 tests
+test bounded::tests::short_writes_count_exactly_and_limits_stop_before_forwarding ... ok
+test bounded::tests::serialization_preserves_original_destination_error ... ok
+test index::compact_tests::capacity_and_duplicate_checks_leave_index_unchanged ... ok
+test binary_batch_tests::binary_batch_prefix_offsets_sizes_and_every_cut ... ok
+test segment::query_scratch_tests::cached_body_never_reuses_title_and_oversize_text_does_not_escape_budget ... ok
+test format::crc_tests::binary_frame_has_versioned_header_and_expected_crc ... ok
+test spill::tests::empty_and_complete_term_boundary_truncation_are_rejected ... ok
+test index::posting::tests::randomized_reuse_union_and_deletion_match_set ... ok
+test index::posting::tests::representations_and_distant_ids_match_ordered_set ... ok
+test spill::tests::chunk_boundaries_preserve_bytes_and_reject_duplicate_ids ... ok
+test spill::tests::corrupt_spill_header_term_and_postings_fail_closed ... ok
+test spill::tests::spilled_groups_merge_in_term_and_id_order_and_are_removed ... ok
+test segment::reuse::tests::reused_postings_are_byte_equal_to_independent_reindex_and_reject_bad_maps_and_crc ... ok
+test segment::reuse::tests::delta_export_matches_reindex_after_slot_reuse_updates_and_tombstones ... ok
+test segment::query_scratch_tests::chunked_scan_matches_full_fold_at_utf8_and_term_boundaries ... ok
+test index::compact_tests::slots_recycle_without_stale_terms_or_growth_across_updates ... ok
+test format::crc_tests::ieee_crc_and_streaming_boundaries_remain_compatible ... ok
+test segment::reuse::tests::legacy_footer_is_verified_with_its_own_codec_and_rejects_corruption ... ok
+test index::scratch_fold_tests::query_scratch_fold_matches_every_unicode_scalar_and_reuse ... ok
+
+test result: ok. 19 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.50s
+
+     Running unittests src\main.rs (target\debug\deps\fdb-d24cb2f463457738.exe)
+
+running 0 tests
+
+test result: ok. 0 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.00s
+
+     Running unittests src\bin\fdb-import-sdb.rs (target\debug\deps\fdb_import_sdb-8bb7cb1f0700088e.exe)
+
+running 0 tests
+
+test result: ok. 0 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.00s
+
+     Running tests\disk.rs (target\debug\deps\disk-9937b37b8d6d7efa.exe)
+
+running 11 tests
+test deleted_disk_fields_and_links_never_leak_through_old_postings ... ok
+test runtime_document_corruption_is_reported_before_returning_payload ... ok
+test numeric_groups_unicode_and_exact_filters_work_across_collections ... ok
+test automatic_maintenance_preserves_guards_and_does_not_run_for_rejected_batch ... ok
+test delta_byte_watermark_bounds_resident_long_content_after_next_write ... ok
+test disk_delta_merge_masks_stale_results_and_preserves_page_order ... ok
+test v01_checkpoint_fixture_opens_without_rewriting_authoritative_bytes ... ok
+test missing_corrupt_and_wrong_generation_segments_rebuild_from_log ... ok
+test postings_cross_block_boundaries_without_losing_page_entries ... ok
+test checkpoint_evicts_content_and_postings_from_resident_state ... ok
+test killing_compaction_before_publication_preserves_acknowledged_data ... ok
+
+test result: ok. 11 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 3.64s
+
+     Running tests\engine.rs (target\debug\deps\engine-2ab7b549470e5e5b.exe)
+
+running 17 tests
+test adapters_preserve_volume_hardlinks_and_fund_identity ... ok
+test exclusive_lock_released_on_drop ... ok
+test invalid_batch_and_cross_scope_reference_do_not_write ... ok
+test guard_failure_is_atomic_and_does_not_write ... ok
+test complete_garbage_header_is_not_a_torn_write ... ok
+test truncated_published_checkpoint_and_missing_marker_are_errors ... ok
+test stale_postings_removed_and_short_unicode_terms_work ... ok
+test incomplete_unpublished_generation_is_ignored ... ok
+test empty_checkpoint_after_deleting_all_documents_reopens ... ok
+test corrupt_latest_checkpoint_never_falls_back_to_stale_generation ... ok
+test combined_indexes_turkish_pagination_and_scope ... ok
+test durable_batch_update_delete_compaction ... ok
+test acknowledged_commit_survives_process_kill ... ok
+test every_single_byte_corruption_in_committed_frame_is_rejected ... ok
+test randomized_operations_match_reference_across_reopens ... ok
+test every_partial_transaction_cut_recovers_previous_commit ... ok
+test multi_frame_checkpoint_preserves_versions_and_can_accept_writes ... ok
+
+test result: ok. 17 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 23.19s
+
+     Running tests\native_binary.rs (target\debug\deps\native_binary-61db8bf4147bcaaf.exe)
+
+running 3 tests
+test binary_size_limit_and_depth_fail_before_append ... ok
+test intact_binary_cache_never_hides_cut_or_corrupt_published_source ... ok
+test native_binary_roundtrip_versions_queries_and_cache_rebuild ... ok
+
+test result: ok. 3 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.09s
+
+     Running tests\rkyv_payload.rs (target\debug\deps\rkyv_payload-1a633ef31e2b1c01.exe)
+
+running 0 tests
+
+test result: ok. 0 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.00s
+
+     Running tests\segments.rs (target\debug\deps\segments-492e34226db103b8.exe)
+
+running 14 tests
+test manifest_copied_under_another_generation_is_rejected ... ok
+test whitespace_and_short_terms_preserve_substring_and_semantics ... ok
+test every_manifest_section_is_checksummed_and_no_fallback_occurs ... ok
+test older_referenced_source_corruption_is_rejected_even_with_valid_cache ... ok
+test full_filter_count_excludes_hidden_tombstones_and_unflushed_deletes ... ok
+test flush_writes_only_delta_and_does_not_rewrite_existing_sources ... ok
+test tombstone_survives_merge_and_does_not_resurrect_old_document ... ok
+test merge_reuse_rejects_runtime_source_or_index_corruption_before_publication ... ok
+test writes_during_background_merge_and_unflushed_wal_survive_publication ... ok
+test bounded_first_page_merges_numeric_unions_and_newer_visibility_in_key_order ... ok
+test process_kill_after_scheduling_merge_recovers_acknowledged_sources ... ok
+test repeated_content_cache_keeps_titles_and_large_uncached_text_independent ... ok
+test bounded_prefix_boundary_and_offset_overflow_preserve_exact_pages ... ok
+test random_multi_segment_operations_match_reference_with_fields_and_links ... ok
+
+test result: ok. 14 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 2.99s
+
+     Running tests\wal_delta.rs (target\debug\deps\wal_delta-2db25d2232969e5b.exe)
+
+running 0 tests
+
+test result: ok. 0 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.00s
+
+     Running tests\write_budget.rs (target\debug\deps\write_budget-f3535822c185e9ee.exe)
+
+running 0 tests
+
+test result: ok. 0 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.00s
+
+     Running unittests examples\compare_slot_hydration.rs (target\debug\examples\compare_slot_hydration-5b93695f09f86ba3.exe)
+
+running 0 tests
+
+test result: ok. 0 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.00s
+
+     Running unittests examples\linked_search.rs (target\debug\examples\linked_search-251ffe9ec1cd8f55.exe)
+
+running 0 tests
+
+test result: ok. 0 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.00s
+
+     Running unittests examples\measure.rs (target\debug\examples\measure-d3408522c19bd679.exe)
+
+running 0 tests
+
+test result: ok. 0 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.00s
+
+     Running unittests examples\measure_contains.rs (target\debug\examples\measure_contains-6f34a7a64d7469e1.exe)
+
+running 1 test
+test verify::tests::oracle_preserves_versions_pages_and_update_delete_semantics ... ok
+
+test result: ok. 1 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.00s
+
+     Running unittests examples\measure_content_memory.rs (target\debug\examples\measure_content_memory-0ab5e087055f3262.exe)
+
+running 1 test
+test input::tests::corpus_crc_uses_standard_ieee_vector ... ok
+
+test result: ok. 1 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.00s
+
+     Running unittests examples\measure_content_reads.rs (target\debug\examples\measure_content_reads-4d0910e100c69aea.exe)
+
+running 4 tests
+test input::tests::corpus_crc_uses_standard_ieee_vector ... ok
+test reads::tests::turkish_oracle_vectors ... ok
+test reads::tests::nearest_rank_percentiles ... ok
+test matrix::tests::shuffle_is_reproducible_permutation ... ok
+
+test result: ok. 4 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.00s
+
+     Running unittests examples\measure_delta_queries.rs (target\debug\examples\measure_delta_queries-d50695dc50ed3eeb.exe)
+
+running 1 test
+test input::tests::corpus_crc_uses_standard_ieee_vector ... ok
+
+test result: ok. 1 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.00s
+
+     Running unittests examples\measure_disk.rs (target\debug\examples\measure_disk-e03e4ba31c3d8294.exe)
+
+running 0 tests
+
+test result: ok. 0 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.00s
+
+     Running unittests examples\measure_engine_fold.rs (target\debug\examples\measure_engine_fold-79b1043ebbd6c307.exe)
+
+running 0 tests
+
+test result: ok. 0 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.00s
+
+     Running unittests examples\measure_ready_queries.rs (target\debug\examples\measure_ready_queries-f785a6715ab2d261.exe)
+
+running 1 test
+test verify::tests::oracle_preserves_versions_pages_and_update_delete_semantics ... ok
+
+test result: ok. 1 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.00s
+
+     Running unittests examples\measure_rkyv_payload.rs (target\debug\examples\measure_rkyv_payload-d600335cdefdcfe1.exe)
+
+running 0 tests
+
+test result: ok. 0 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.00s
+
+     Running unittests examples\measure_scale.rs (target\debug\examples\measure_scale-14d4e197a91ac6a6.exe)
+
+running 1 test
+test verify::tests::oracle_preserves_versions_pages_and_update_delete_semantics ... ok
+
+test result: ok. 1 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.00s
+
+     Running unittests examples\measure_wal_sync.rs (target\debug\examples\measure_wal_sync-650fd401d76f5078.exe)
+
+running 0 tests
+
+test result: ok. 0 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.00s
+
+     Running unittests examples\probe_paged_records.rs (target\debug\examples\probe_paged_records-18dcf62cf86f294f.exe)
+
+running 2 tests
+test tests::unicode_keys_metadata_and_malformed_pages ... ok
+test tests::page_boundaries_tombstones_shared_budget_and_io_failures ... ok
+
+test result: ok. 2 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.04s
+
+     Running unittests examples\profile_grouped_reads.rs (target\debug\examples\profile_grouped_reads-3db39d3e44b99eda.exe)
+
+running 0 tests
+
+test result: ok. 0 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.00s
+
+     Running unittests examples\profile_memory.rs (target\debug\examples\profile_memory-3f82ef062cd4bb3b.exe)
+
+running 0 tests
+
+test result: ok. 0 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.00s
+
+     Running unittests examples\profile_write_origins.rs (target\debug\examples\profile_write_origins-e9611d5699f88f3c.exe)
+
+running 1 test
+test allocation::tests::alignment_zeroing_reallocation_and_owner_survive_scope_change ... ok
+
+test result: ok. 1 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.00s
+
+     Running unittests examples\profile_writes.rs (target\debug\examples\profile_writes-0575a921827f54be.exe)
+
+running 0 tests
+
+test result: ok. 0 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.00s
+

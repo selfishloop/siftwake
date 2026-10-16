@@ -1,5 +1,14 @@
 # Merge posting yeniden kullanımı — 2026-10-09
 
+Güncel bağımsız feature ve 10k uzun belge karşılaştırması:
+[2026-10-12 sonucu](MERGE-REUSE-10K-20261012.md). İki eşleşmede toplam
+%20,52, son bakım %81,71 azaldı; SQLite toplamda hâlâ hızlıdır.
+
+2026-10-12 notu: aşağıdaki sonuçlar eski feature birleşimine aittir.
+`experimental-merge-postings` artık write-buffer-budget/streaming-metadata'yı
+otomatik açmaz; bu yollar ayrıca seçilir. Yeni karşılaştırma yalnız merge
+algoritmasını değiştirir ve 10k çeşitli uzun belgeyle sınırlıdır.
+
 ## Sonuç
 
 `experimental-merge-postings` uygulandı. Merge mevcut SEG03 posting listelerini

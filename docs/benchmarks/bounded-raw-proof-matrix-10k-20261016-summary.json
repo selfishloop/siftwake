@@ -1,0 +1,2098 @@
+{
+  "cache": "warm OS cache, no eviction",
+  "processes_per_fdb_variant": 4,
+  "design": {
+    "pairs": 4,
+    "orders": [
+      {
+        "pair": 0,
+        "engines": [
+          "control",
+          "fdb"
+        ]
+      },
+      {
+        "pair": 1,
+        "engines": [
+          "fdb",
+          "control"
+        ]
+      },
+      {
+        "pair": 2,
+        "engines": [
+          "control",
+          "fdb"
+        ]
+      },
+      {
+        "pair": 3,
+        "engines": [
+          "fdb",
+          "control"
+        ]
+      }
+    ],
+    "balanced_first_position": true,
+    "pages_only": false,
+    "cache": "warm OS cache, no eviction"
+  },
+  "queries": [
+    {
+      "text": "quixote",
+      "kind": "word",
+      "offset": 0,
+      "limit": 50,
+      "total": 56,
+      "late_matches": 8,
+      "control": {
+        "n": 80,
+        "per_process_n": [
+          20,
+          20,
+          20,
+          20
+        ],
+        "p50_ms": 2.6669,
+        "p95_ms": 4.4491000000000005,
+        "p99_ms": 5.8829,
+        "run_p95": [
+          5.0811,
+          4.2537,
+          3.1834,
+          4.1261
+        ]
+      },
+      "fdb": {
+        "n": 80,
+        "per_process_n": [
+          20,
+          20,
+          20,
+          20
+        ],
+        "p50_ms": 2.4053,
+        "p95_ms": 4.579899999999999,
+        "p99_ms": 5.0295000000000005,
+        "run_p95": [
+          4.442,
+          4.931,
+          2.7905,
+          3.3655999999999997
+        ]
+      },
+      "change_p95_percent": 2.939920433346055,
+      "faster_pairs": 3,
+      "paired_p95_change_percent": [
+        -12.577985081970445,
+        15.922608552554252,
+        -12.342149902619825,
+        -18.431448583408073
+      ],
+      "median_paired_p95_change_percent": -12.460067492295135,
+      "tail_samples_per_process_below_20": false
+    },
+    {
+      "text": "zeuglodon",
+      "kind": "word",
+      "offset": 0,
+      "limit": 50,
+      "total": 32,
+      "late_matches": 6,
+      "control": {
+        "n": 80,
+        "per_process_n": [
+          20,
+          20,
+          20,
+          20
+        ],
+        "p50_ms": 3.2899000000000003,
+        "p95_ms": 4.7334,
+        "p99_ms": 6.0520000000000005,
+        "run_p95": [
+          5.852600000000001,
+          4.4428,
+          4.2331,
+          3.7369
+        ]
+      },
+      "fdb": {
+        "n": 80,
+        "per_process_n": [
+          20,
+          20,
+          20,
+          20
+        ],
+        "p50_ms": 3.2212,
+        "p95_ms": 5.1578,
+        "p99_ms": 6.3024,
+        "run_p95": [
+          5.9625,
+          4.984,
+          3.2224,
+          3.4504
+        ]
+      },
+      "change_p95_percent": 8.96607090040986,
+      "faster_pairs": 2,
+      "paired_p95_change_percent": [
+        1.877797901787237,
+        12.18150715764832,
+        -23.87611915617397,
+        -7.666782627311397
+      ],
+      "median_paired_p95_change_percent": -2.89449236276208,
+      "tail_samples_per_process_below_20": false
+    },
+    {
+      "text": "beagle",
+      "kind": "word",
+      "offset": 0,
+      "limit": 50,
+      "total": 46,
+      "late_matches": 9,
+      "control": {
+        "n": 80,
+        "per_process_n": [
+          20,
+          20,
+          20,
+          20
+        ],
+        "p50_ms": 18.8708,
+        "p95_ms": 27.269000000000002,
+        "p99_ms": 32.381600000000006,
+        "run_p95": [
+          30.589399999999998,
+          26.9524,
+          19.2208,
+          20.7588
+        ]
+      },
+      "fdb": {
+        "n": 80,
+        "per_process_n": [
+          20,
+          20,
+          20,
+          20
+        ],
+        "p50_ms": 21.6394,
+        "p95_ms": 28.975399999999997,
+        "p99_ms": 31.7459,
+        "run_p95": [
+          29.4436,
+          29.100399999999997,
+          22.744699999999998,
+          20.0075
+        ]
+      },
+      "change_p95_percent": 6.257655212879065,
+      "faster_pairs": 2,
+      "paired_p95_change_percent": [
+        -3.745741989055029,
+        7.969605675190317,
+        18.333784233746762,
+        -3.619188007013896
+      ],
+      "median_paired_p95_change_percent": 2.1752088340882105,
+      "tail_samples_per_process_below_20": false
+    },
+    {
+      "text": "mesopotamia",
+      "kind": "word",
+      "offset": 0,
+      "limit": 50,
+      "total": 31,
+      "late_matches": 7,
+      "control": {
+        "n": 80,
+        "per_process_n": [
+          20,
+          20,
+          20,
+          20
+        ],
+        "p50_ms": 3.5500000000000003,
+        "p95_ms": 5.8265,
+        "p99_ms": 9.878599999999999,
+        "run_p95": [
+          5.92,
+          5.8265,
+          3.7510999999999997,
+          3.664
+        ]
+      },
+      "fdb": {
+        "n": 80,
+        "per_process_n": [
+          20,
+          20,
+          20,
+          20
+        ],
+        "p50_ms": 3.4807,
+        "p95_ms": 5.2044,
+        "p99_ms": 7.0211,
+        "run_p95": [
+          5.8516,
+          5.1924,
+          3.7025,
+          3.8355
+        ]
+      },
+      "change_p95_percent": -10.677078863811907,
+      "faster_pairs": 3,
+      "paired_p95_change_percent": [
+        -1.1554054054053964,
+        -10.883034411739468,
+        -1.2956199514808864,
+        4.680676855895194
+      ],
+      "median_paired_p95_change_percent": -1.2255126784431414,
+      "tail_samples_per_process_below_20": false
+    },
+    {
+      "text": "transubstantiation",
+      "kind": "word",
+      "offset": 0,
+      "limit": 50,
+      "total": 0,
+      "late_matches": 0,
+      "control": {
+        "n": 80,
+        "per_process_n": [
+          20,
+          20,
+          20,
+          20
+        ],
+        "p50_ms": 47.7094,
+        "p95_ms": 70.2804,
+        "p99_ms": 79.6933,
+        "run_p95": [
+          72.2668,
+          63.643699999999995,
+          50.163399999999996,
+          48.9879
+        ]
+      },
+      "fdb": {
+        "n": 80,
+        "per_process_n": [
+          20,
+          20,
+          20,
+          20
+        ],
+        "p50_ms": 52.1552,
+        "p95_ms": 71.06400000000001,
+        "p99_ms": 87.9762,
+        "run_p95": [
+          74.3867,
+          71.06400000000001,
+          52.0654,
+          49.6751
+        ]
+      },
+      "change_p95_percent": 1.1149623508118989,
+      "faster_pairs": 0,
+      "paired_p95_change_percent": [
+        2.933435547166896,
+        11.659127297752981,
+        3.791609021717024,
+        1.4027953841662777
+      ],
+      "median_paired_p95_change_percent": 3.36252228444196,
+      "tail_samples_per_process_below_20": false
+    },
+    {
+      "text": "harpoon",
+      "kind": "word",
+      "offset": 0,
+      "limit": 50,
+      "total": 1006,
+      "late_matches": 78,
+      "control": {
+        "n": 80,
+        "per_process_n": [
+          20,
+          20,
+          20,
+          20
+        ],
+        "p50_ms": 55.7227,
+        "p95_ms": 78.6432,
+        "p99_ms": 83.922,
+        "run_p95": [
+          83.09660000000001,
+          67.0796,
+          58.1355,
+          56.7026
+        ]
+      },
+      "fdb": {
+        "n": 80,
+        "per_process_n": [
+          20,
+          20,
+          20,
+          20
+        ],
+        "p50_ms": 61.258,
+        "p95_ms": 80.4488,
+        "p99_ms": 83.3252,
+        "run_p95": [
+          80.4488,
+          81.37079999999999,
+          57.8827,
+          58.117799999999995
+        ]
+      },
+      "change_p95_percent": 2.295939127604174,
+      "faster_pairs": 2,
+      "paired_p95_change_percent": [
+        -3.1864119590933937,
+        21.304837834453384,
+        -0.434846178324777,
+        2.4958291154197454
+      ],
+      "median_paired_p95_change_percent": 1.0304914685474842,
+      "tail_samples_per_process_below_20": false
+    },
+    {
+      "text": "ishmael",
+      "kind": "word",
+      "offset": 0,
+      "limit": 50,
+      "total": 260,
+      "late_matches": 39,
+      "control": {
+        "n": 80,
+        "per_process_n": [
+          20,
+          20,
+          20,
+          20
+        ],
+        "p50_ms": 7.7766,
+        "p95_ms": 11.1441,
+        "p99_ms": 13.8633,
+        "run_p95": [
+          11.9298,
+          10.9992,
+          8.0681,
+          8.0433
+        ]
+      },
+      "fdb": {
+        "n": 80,
+        "per_process_n": [
+          20,
+          20,
+          20,
+          20
+        ],
+        "p50_ms": 7.2679,
+        "p95_ms": 10.3546,
+        "p99_ms": 12.6235,
+        "run_p95": [
+          10.3546,
+          11.983600000000001,
+          7.1887,
+          7.7492
+        ]
+      },
+      "change_p95_percent": -7.084466219793439,
+      "faster_pairs": 3,
+      "paired_p95_change_percent": [
+        -13.203909537460811,
+        8.949741799403599,
+        -10.899716166135764,
+        -3.6564594134248396
+      ],
+      "median_paired_p95_change_percent": -7.278087789780302,
+      "tail_samples_per_process_below_20": false
+    },
+    {
+      "text": "invertebrata",
+      "kind": "word",
+      "offset": 0,
+      "limit": 50,
+      "total": 43,
+      "late_matches": 12,
+      "control": {
+        "n": 80,
+        "per_process_n": [
+          20,
+          20,
+          20,
+          20
+        ],
+        "p50_ms": 11.3349,
+        "p95_ms": 18.2931,
+        "p99_ms": 19.6534,
+        "run_p95": [
+          19.2738,
+          15.200099999999999,
+          11.6072,
+          14.491900000000001
+        ]
+      },
+      "fdb": {
+        "n": 80,
+        "per_process_n": [
+          20,
+          20,
+          20,
+          20
+        ],
+        "p50_ms": 12.050500000000001,
+        "p95_ms": 17.589000000000002,
+        "p99_ms": 19.260800000000003,
+        "run_p95": [
+          18.8063,
+          17.6834,
+          12.1783,
+          12.050500000000001
+        ]
+      },
+      "change_p95_percent": -3.8489922429768453,
+      "faster_pairs": 2,
+      "paired_p95_change_percent": [
+        -2.4255725388869886,
+        16.33739251715449,
+        4.920221931215107,
+        -16.846652267818573
+      ],
+      "median_paired_p95_change_percent": 1.2473246961640594,
+      "tail_samples_per_process_below_20": false
+    },
+    {
+      "text": "darcy",
+      "kind": "word",
+      "offset": 0,
+      "limit": 50,
+      "total": 1220,
+      "late_matches": 34,
+      "control": {
+        "n": 80,
+        "per_process_n": [
+          20,
+          20,
+          20,
+          20
+        ],
+        "p50_ms": 45.6246,
+        "p95_ms": 67.4743,
+        "p99_ms": 74.9591,
+        "run_p95": [
+          71.3808,
+          65.9114,
+          46.811699999999995,
+          45.7307
+        ]
+      },
+      "fdb": {
+        "n": 80,
+        "per_process_n": [
+          20,
+          20,
+          20,
+          20
+        ],
+        "p50_ms": 51.7417,
+        "p95_ms": 67.5545,
+        "p99_ms": 71.3705,
+        "run_p95": [
+          68.90490000000001,
+          68.5603,
+          48.5236,
+          48.7677
+        ]
+      },
+      "change_p95_percent": 0.11886006968579998,
+      "faster_pairs": 1,
+      "paired_p95_change_percent": [
+        -3.4685797861609635,
+        4.0188798902769385,
+        3.656991734972248,
+        6.641052946926251
+      ],
+      "median_paired_p95_change_percent": 3.8379358126245933,
+      "tail_samples_per_process_below_20": false
+    },
+    {
+      "text": "elizabeth",
+      "kind": "word",
+      "offset": 0,
+      "limit": 50,
+      "total": 2280,
+      "late_matches": 98,
+      "control": {
+        "n": 80,
+        "per_process_n": [
+          20,
+          20,
+          20,
+          20
+        ],
+        "p50_ms": 40.3182,
+        "p95_ms": 57.1542,
+        "p99_ms": 62.5386,
+        "run_p95": [
+          60.576100000000004,
+          57.1542,
+          41.7292,
+          40.842999999999996
+        ]
+      },
+      "fdb": {
+        "n": 80,
+        "per_process_n": [
+          20,
+          20,
+          20,
+          20
+        ],
+        "p50_ms": 46.2493,
+        "p95_ms": 60.8703,
+        "p99_ms": 65.23379999999999,
+        "run_p95": [
+          61.8996,
+          62.464600000000004,
+          45.9937,
+          43.7966
+        ]
+      },
+      "change_p95_percent": 6.501884375951361,
+      "faster_pairs": 0,
+      "paired_p95_change_percent": [
+        2.1848550831103264,
+        9.291355665900314,
+        10.219462630484166,
+        7.231594153220877
+      ],
+      "median_paired_p95_change_percent": 8.261474909560595,
+      "tail_samples_per_process_below_20": false
+    },
+    {
+      "text": "watson",
+      "kind": "word",
+      "offset": 0,
+      "limit": 50,
+      "total": 1707,
+      "late_matches": 191,
+      "control": {
+        "n": 80,
+        "per_process_n": [
+          20,
+          20,
+          20,
+          20
+        ],
+        "p50_ms": 41.99,
+        "p95_ms": 61.316700000000004,
+        "p99_ms": 69.9074,
+        "run_p95": [
+          65.3595,
+          55.035199999999996,
+          43.0962,
+          42.4932
+        ]
+      },
+      "fdb": {
+        "n": 80,
+        "per_process_n": [
+          20,
+          20,
+          20,
+          20
+        ],
+        "p50_ms": 44.3176,
+        "p95_ms": 58.2887,
+        "p99_ms": 63.576800000000006,
+        "run_p95": [
+          60.3519,
+          60.9085,
+          43.306,
+          41.0936
+        ]
+      },
+      "change_p95_percent": -4.9382957660800475,
+      "faster_pairs": 2,
+      "paired_p95_change_percent": [
+        -7.661625318431131,
+        10.671897258481856,
+        0.4868178632918774,
+        -3.293703463142339
+      ],
+      "median_paired_p95_change_percent": -1.4034427999252308,
+      "tail_samples_per_process_below_20": false
+    },
+    {
+      "text": "holmes",
+      "kind": "word",
+      "offset": 0,
+      "limit": 50,
+      "total": 1222,
+      "late_matches": 7,
+      "control": {
+        "n": 80,
+        "per_process_n": [
+          20,
+          20,
+          20,
+          20
+        ],
+        "p50_ms": 23.014300000000002,
+        "p95_ms": 33.571799999999996,
+        "p99_ms": 45.985699999999994,
+        "run_p95": [
+          34.3006,
+          31.8217,
+          24.185499999999998,
+          24.5159
+        ]
+      },
+      "fdb": {
+        "n": 80,
+        "per_process_n": [
+          20,
+          20,
+          20,
+          20
+        ],
+        "p50_ms": 25.0494,
+        "p95_ms": 36.3559,
+        "p99_ms": 37.279199999999996,
+        "run_p95": [
+          36.9293,
+          36.9013,
+          24.5637,
+          24.9766
+        ]
+      },
+      "change_p95_percent": 8.292972077755746,
+      "faster_pairs": 0,
+      "paired_p95_change_percent": [
+        7.663714337358507,
+        15.962692125185018,
+        1.5637468731264814,
+        1.87918860820937
+      ],
+      "median_paired_p95_change_percent": 4.771451472783939,
+      "tail_samples_per_process_below_20": false
+    },
+    {
+      "text": "frankenstein",
+      "kind": "word",
+      "offset": 0,
+      "limit": 50,
+      "total": 607,
+      "late_matches": 88,
+      "control": {
+        "n": 80,
+        "per_process_n": [
+          20,
+          20,
+          20,
+          20
+        ],
+        "p50_ms": 15.6432,
+        "p95_ms": 23.493,
+        "p99_ms": 25.3694,
+        "run_p95": [
+          24.1525,
+          23.5974,
+          16.222299999999997,
+          16.6329
+        ]
+      },
+      "fdb": {
+        "n": 80,
+        "per_process_n": [
+          20,
+          20,
+          20,
+          20
+        ],
+        "p50_ms": 16.1019,
+        "p95_ms": 21.2541,
+        "p99_ms": 23.7144,
+        "run_p95": [
+          21.8517,
+          22.5315,
+          16.2918,
+          15.318800000000001
+        ]
+      },
+      "change_p95_percent": -9.530072787638865,
+      "faster_pairs": 3,
+      "paired_p95_change_percent": [
+        -9.52613601076493,
+        -4.517023061862746,
+        0.4284226034532823,
+        -7.9006066290304044
+      ],
+      "median_paired_p95_change_percent": -6.208814845446575,
+      "tail_samples_per_process_below_20": false
+    },
+    {
+      "text": "galapagos",
+      "kind": "word",
+      "offset": 0,
+      "limit": 50,
+      "total": 179,
+      "late_matches": 34,
+      "control": {
+        "n": 80,
+        "per_process_n": [
+          20,
+          20,
+          20,
+          20
+        ],
+        "p50_ms": 9.9124,
+        "p95_ms": 14.447899999999999,
+        "p99_ms": 15.687799999999998,
+        "run_p95": [
+          15.344999999999999,
+          13.1387,
+          10.3584,
+          10.3056
+        ]
+      },
+      "fdb": {
+        "n": 80,
+        "per_process_n": [
+          20,
+          20,
+          20,
+          20
+        ],
+        "p50_ms": 10.604600000000001,
+        "p95_ms": 14.6963,
+        "p99_ms": 16.0323,
+        "run_p95": [
+          15.3476,
+          14.7463,
+          10.5635,
+          11.233
+        ]
+      },
+      "change_p95_percent": 1.7192810027754968,
+      "faster_pairs": 0,
+      "paired_p95_change_percent": [
+        0.016943629846855046,
+        12.235609306856832,
+        1.9800355267222791,
+        8.998990839931697
+      ],
+      "median_paired_p95_change_percent": 5.489513183326988,
+      "tail_samples_per_process_below_20": false
+    },
+    {
+      "text": "fossil",
+      "kind": "word",
+      "offset": 0,
+      "limit": 50,
+      "total": 595,
+      "late_matches": 85,
+      "control": {
+        "n": 80,
+        "per_process_n": [
+          20,
+          20,
+          20,
+          20
+        ],
+        "p50_ms": 26.0234,
+        "p95_ms": 41.433699999999995,
+        "p99_ms": 52.244699999999995,
+        "run_p95": [
+          41.480999999999995,
+          44.7826,
+          26.5668,
+          27.6245
+        ]
+      },
+      "fdb": {
+        "n": 80,
+        "per_process_n": [
+          20,
+          20,
+          20,
+          20
+        ],
+        "p50_ms": 29.024500000000003,
+        "p95_ms": 37.9275,
+        "p99_ms": 41.6443,
+        "run_p95": [
+          38.3893,
+          38.0387,
+          29.1757,
+          26.977999999999998
+        ]
+      },
+      "change_p95_percent": -8.462193818075603,
+      "faster_pairs": 3,
+      "paired_p95_change_percent": [
+        -7.453291868566325,
+        -15.059197098873234,
+        9.82015146724482,
+        -2.34031385183443
+      ],
+      "median_paired_p95_change_percent": -4.896802860200378,
+      "tail_samples_per_process_below_20": false
+    },
+    {
+      "text": "geologist",
+      "kind": "word",
+      "offset": 0,
+      "limit": 50,
+      "total": 306,
+      "late_matches": 62,
+      "control": {
+        "n": 80,
+        "per_process_n": [
+          20,
+          20,
+          20,
+          20
+        ],
+        "p50_ms": 15.9824,
+        "p95_ms": 24.142400000000002,
+        "p99_ms": 27.6365,
+        "run_p95": [
+          26.8611,
+          19.7576,
+          16.638900000000003,
+          16.1517
+        ]
+      },
+      "fdb": {
+        "n": 80,
+        "per_process_n": [
+          20,
+          20,
+          20,
+          20
+        ],
+        "p50_ms": 17.2302,
+        "p95_ms": 23.5139,
+        "p99_ms": 27.712899999999998,
+        "run_p95": [
+          23.6053,
+          23.570500000000003,
+          16.707,
+          18.418899999999997
+        ]
+      },
+      "change_p95_percent": -2.603303731194917,
+      "faster_pairs": 1,
+      "paired_p95_change_percent": [
+        -12.120873679782285,
+        19.29839656638459,
+        0.4092818635847095,
+        14.036912523139943
+      ],
+      "median_paired_p95_change_percent": 7.223097193362326,
+      "tail_samples_per_process_below_20": false
+    },
+    {
+      "text": "the",
+      "kind": "common",
+      "offset": 0,
+      "limit": 50,
+      "total": 10000,
+      "late_matches": 0,
+      "control": {
+        "n": 80,
+        "per_process_n": [
+          20,
+          20,
+          20,
+          20
+        ],
+        "p50_ms": 1.0473,
+        "p95_ms": 1.5068,
+        "p99_ms": 2.6784,
+        "run_p95": [
+          1.5264,
+          1.5738,
+          1.2007999999999999,
+          1.1345999999999998
+        ]
+      },
+      "fdb": {
+        "n": 80,
+        "per_process_n": [
+          20,
+          20,
+          20,
+          20
+        ],
+        "p50_ms": 1.0527,
+        "p95_ms": 1.5623,
+        "p99_ms": 1.9324,
+        "run_p95": [
+          1.59,
+          1.5623,
+          1.1971,
+          1.2608000000000001
+        ]
+      },
+      "change_p95_percent": 3.6833023626227757,
+      "faster_pairs": 2,
+      "paired_p95_change_percent": [
+        4.166666666666674,
+        -0.7307154657516857,
+        -0.30812791472349943,
+        11.122862682883872
+      ],
+      "median_paired_p95_change_percent": 1.9292693759715873,
+      "tail_samples_per_process_below_20": false
+    },
+    {
+      "text": "man",
+      "kind": "common",
+      "offset": 0,
+      "limit": 50,
+      "total": 9932,
+      "late_matches": 61,
+      "control": {
+        "n": 80,
+        "per_process_n": [
+          20,
+          20,
+          20,
+          20
+        ],
+        "p50_ms": 1.3334,
+        "p95_ms": 2.1860999999999997,
+        "p99_ms": 2.5699,
+        "run_p95": [
+          2.2885,
+          1.8362999999999998,
+          1.573,
+          1.4494
+        ]
+      },
+      "fdb": {
+        "n": 80,
+        "per_process_n": [
+          20,
+          20,
+          20,
+          20
+        ],
+        "p50_ms": 1.3342,
+        "p95_ms": 2.2915,
+        "p99_ms": 2.538,
+        "run_p95": [
+          2.3532,
+          1.8892,
+          1.5536,
+          1.4545000000000001
+        ]
+      },
+      "change_p95_percent": 4.821371391976603,
+      "faster_pairs": 1,
+      "paired_p95_change_percent": [
+        2.827179375136568,
+        2.8807928987638176,
+        -1.2333121424030424,
+        0.35186973920242615
+      ],
+      "median_paired_p95_change_percent": 1.5895245571694971,
+      "tail_samples_per_process_below_20": false
+    },
+    {
+      "text": "he",
+      "kind": "short",
+      "offset": 0,
+      "limit": 50,
+      "total": 10000,
+      "late_matches": 0,
+      "control": {
+        "n": 80,
+        "per_process_n": [
+          20,
+          20,
+          20,
+          20
+        ],
+        "p50_ms": 0.9388000000000001,
+        "p95_ms": 1.6019,
+        "p99_ms": 2.3267,
+        "run_p95": [
+          1.6019,
+          1.6778,
+          1.1242999999999999,
+          1.1463
+        ]
+      },
+      "fdb": {
+        "n": 80,
+        "per_process_n": [
+          20,
+          20,
+          20,
+          20
+        ],
+        "p50_ms": 0.9466,
+        "p95_ms": 1.4246,
+        "p99_ms": 1.6496,
+        "run_p95": [
+          1.6432,
+          1.4458,
+          1.2507,
+          1.1424
+        ]
+      },
+      "change_p95_percent": -11.068106623384733,
+      "faster_pairs": 2,
+      "paired_p95_change_percent": [
+        2.5781884012734846,
+        -13.827631422100373,
+        11.242550920572803,
+        -0.3402250719706901
+      ],
+      "median_paired_p95_change_percent": 1.1189816646513973,
+      "tail_samples_per_process_below_20": false
+    },
+    {
+      "text": "zzxqnever",
+      "kind": "absent",
+      "offset": 0,
+      "limit": 50,
+      "total": 0,
+      "late_matches": 0,
+      "control": {
+        "n": 80,
+        "per_process_n": [
+          20,
+          20,
+          20,
+          20
+        ],
+        "p50_ms": 0.038,
+        "p95_ms": 0.051199999999999996,
+        "p99_ms": 0.0659,
+        "run_p95": [
+          0.056799999999999996,
+          0.0564,
+          0.0429,
+          0.047
+        ]
+      },
+      "fdb": {
+        "n": 80,
+        "per_process_n": [
+          20,
+          20,
+          20,
+          20
+        ],
+        "p50_ms": 0.0384,
+        "p95_ms": 0.0517,
+        "p99_ms": 0.0654,
+        "run_p95": [
+          0.0517,
+          0.0559,
+          0.0479,
+          0.045200000000000004
+        ]
+      },
+      "change_p95_percent": 0.9765625000000222,
+      "faster_pairs": 3,
+      "paired_p95_change_percent": [
+        -8.978873239436613,
+        -0.886524822695034,
+        11.65501165501166,
+        -3.8297872340425476
+      ],
+      "median_paired_p95_change_percent": -2.358156028368791,
+      "tail_samples_per_process_below_20": false
+    },
+    {
+      "text": "zx",
+      "kind": "short-negative",
+      "offset": 0,
+      "limit": 50,
+      "total": 0,
+      "late_matches": 0,
+      "control": {
+        "n": 80,
+        "per_process_n": [
+          20,
+          20,
+          20,
+          20
+        ],
+        "p50_ms": 184.4156,
+        "p95_ms": 264.15860000000004,
+        "p99_ms": 300.1603,
+        "run_p95": [
+          270.2841,
+          245.2326,
+          192.9747,
+          186.8891
+        ]
+      },
+      "fdb": {
+        "n": 80,
+        "per_process_n": [
+          20,
+          20,
+          20,
+          20
+        ],
+        "p50_ms": 192.41479999999999,
+        "p95_ms": 269.0772,
+        "p99_ms": 276.51619999999997,
+        "run_p95": [
+          269.0772,
+          274.10639999999995,
+          190.4782,
+          187.33929999999998
+        ]
+      },
+      "change_p95_percent": 1.8619874575349638,
+      "faster_pairs": 2,
+      "paired_p95_change_percent": [
+        -0.4465301510521824,
+        11.77404635435908,
+        -1.2936929037848155,
+        0.24089152336865816
+      ],
+      "median_paired_p95_change_percent": -0.10281931384176213,
+      "tail_samples_per_process_below_20": false
+    },
+    {
+      "text": "the zx",
+      "kind": "negative-and",
+      "offset": 0,
+      "limit": 50,
+      "total": 0,
+      "late_matches": 0,
+      "control": {
+        "n": 80,
+        "per_process_n": [
+          20,
+          20,
+          20,
+          20
+        ],
+        "p50_ms": 184.9748,
+        "p95_ms": 263.3714,
+        "p99_ms": 326.7719,
+        "run_p95": [
+          274.40009999999995,
+          237.102,
+          193.8348,
+          194.1951
+        ]
+      },
+      "fdb": {
+        "n": 80,
+        "per_process_n": [
+          20,
+          20,
+          20,
+          20
+        ],
+        "p50_ms": 190.3344,
+        "p95_ms": 275.8567,
+        "p99_ms": 304.65340000000003,
+        "run_p95": [
+          297.767,
+          281.0621,
+          188.9993,
+          185.22459999999998
+        ]
+      },
+      "change_p95_percent": 4.740567882465596,
+      "faster_pairs": 2,
+      "paired_p95_change_percent": [
+        8.515631007423119,
+        18.540585908174535,
+        -2.4946500834731378,
+        -4.6193235565676005
+      ],
+      "median_paired_p95_change_percent": 3.0104904619749906,
+      "tail_samples_per_process_below_20": false
+    },
+    {
+      "text": "quixote whale",
+      "kind": "and",
+      "offset": 0,
+      "limit": 50,
+      "total": 44,
+      "late_matches": 8,
+      "control": {
+        "n": 80,
+        "per_process_n": [
+          20,
+          20,
+          20,
+          20
+        ],
+        "p50_ms": 3.5609,
+        "p95_ms": 6.552,
+        "p99_ms": 11.0516,
+        "run_p95": [
+          6.7848,
+          7.1521,
+          4.356999999999999,
+          4.565600000000001
+        ]
+      },
+      "fdb": {
+        "n": 80,
+        "per_process_n": [
+          20,
+          20,
+          20,
+          20
+        ],
+        "p50_ms": 3.1691000000000003,
+        "p95_ms": 5.0218,
+        "p99_ms": 6.8675999999999995,
+        "run_p95": [
+          5.444100000000001,
+          6.167,
+          4.1367,
+          4.38
+        ]
+      },
+      "change_p95_percent": -23.354700854700848,
+      "faster_pairs": 4,
+      "paired_p95_change_percent": [
+        -19.760346657233807,
+        -13.77357699137316,
+        -5.056231351847584,
+        -4.0651831084633105
+      ],
+      "median_paired_p95_change_percent": -9.414904171610372,
+      "tail_samples_per_process_below_20": false
+    },
+    {
+      "text": "holmes elementary",
+      "kind": "and",
+      "offset": 0,
+      "limit": 50,
+      "total": 65,
+      "late_matches": 17,
+      "control": {
+        "n": 80,
+        "per_process_n": [
+          20,
+          20,
+          20,
+          20
+        ],
+        "p50_ms": 33.8262,
+        "p95_ms": 51.8043,
+        "p99_ms": 54.1091,
+        "run_p95": [
+          53.739399999999996,
+          48.1886,
+          34.8392,
+          33.805
+        ]
+      },
+      "fdb": {
+        "n": 80,
+        "per_process_n": [
+          20,
+          20,
+          20,
+          20
+        ],
+        "p50_ms": 36.278400000000005,
+        "p95_ms": 49.2549,
+        "p99_ms": 52.0006,
+        "run_p95": [
+          48.0587,
+          51.4958,
+          35.406800000000004,
+          35.0981
+        ]
+      },
+      "change_p95_percent": -4.921213103931521,
+      "faster_pairs": 1,
+      "paired_p95_change_percent": [
+        -10.570828851829372,
+        6.863033995592316,
+        1.629199292750716,
+        3.8251737908593375
+      ],
+      "median_paired_p95_change_percent": 2.7271865418050267,
+      "tail_samples_per_process_below_20": false
+    },
+    {
+      "text": "fossil geologist",
+      "kind": "and",
+      "offset": 0,
+      "limit": 50,
+      "total": 293,
+      "late_matches": 64,
+      "control": {
+        "n": 80,
+        "per_process_n": [
+          20,
+          20,
+          20,
+          20
+        ],
+        "p50_ms": 11.8054,
+        "p95_ms": 17.070800000000002,
+        "p99_ms": 20.9149,
+        "run_p95": [
+          17.070800000000002,
+          18.8334,
+          12.639100000000001,
+          12.6728
+        ]
+      },
+      "fdb": {
+        "n": 80,
+        "per_process_n": [
+          20,
+          20,
+          20,
+          20
+        ],
+        "p50_ms": 12.5382,
+        "p95_ms": 17.0241,
+        "p99_ms": 18.7396,
+        "run_p95": [
+          17.0241,
+          18.6928,
+          12.1822,
+          12.5548
+        ]
+      },
+      "change_p95_percent": -0.27356655809921415,
+      "faster_pairs": 4,
+      "paired_p95_change_percent": [
+        -0.27356655809921415,
+        -0.7465460299255766,
+        -3.614972585073317,
+        -0.931128085348154
+      ],
+      "median_paired_p95_change_percent": -0.8388370576368653,
+      "tail_samples_per_process_below_20": false
+    },
+    {
+      "text": "whale harpoon",
+      "kind": "and",
+      "offset": 0,
+      "limit": 50,
+      "total": 995,
+      "late_matches": 81,
+      "control": {
+        "n": 80,
+        "per_process_n": [
+          20,
+          20,
+          20,
+          20
+        ],
+        "p50_ms": 54.3763,
+        "p95_ms": 79.3561,
+        "p99_ms": 87.7874,
+        "run_p95": [
+          81.79549999999999,
+          81.72319999999999,
+          57.537600000000005,
+          56.399699999999996
+        ]
+      },
+      "fdb": {
+        "n": 80,
+        "per_process_n": [
+          20,
+          20,
+          20,
+          20
+        ],
+        "p50_ms": 59.1958,
+        "p95_ms": 79.1665,
+        "p99_ms": 87.2629,
+        "run_p95": [
+          79.1665,
+          79.9267,
+          56.239999999999995,
+          57.9615
+        ]
+      },
+      "change_p95_percent": -0.23892303175181429,
+      "faster_pairs": 3,
+      "paired_p95_change_percent": [
+        -3.214113245838701,
+        -2.1982741742858747,
+        -2.2552209337894036,
+        2.769163665764185
+      ],
+      "median_paired_p95_change_percent": -2.2267475540376394,
+      "tail_samples_per_process_below_20": false
+    },
+    {
+      "text": "QUİXOTE",
+      "kind": "fold",
+      "offset": 0,
+      "limit": 50,
+      "total": 56,
+      "late_matches": 8,
+      "control": {
+        "n": 80,
+        "per_process_n": [
+          20,
+          20,
+          20,
+          20
+        ],
+        "p50_ms": 3.3321,
+        "p95_ms": 4.9924,
+        "p99_ms": 6.54,
+        "run_p95": [
+          5.812,
+          4.523499999999999,
+          3.6351,
+          3.9627999999999997
+        ]
+      },
+      "fdb": {
+        "n": 80,
+        "per_process_n": [
+          20,
+          20,
+          20,
+          20
+        ],
+        "p50_ms": 2.992,
+        "p95_ms": 5.1274,
+        "p99_ms": 5.7694,
+        "run_p95": [
+          5.5577,
+          5.1954,
+          3.7018,
+          3.4126
+        ]
+      },
+      "change_p95_percent": 2.704110247576308,
+      "faster_pairs": 2,
+      "paired_p95_change_percent": [
+        -4.375430144528569,
+        14.853542610810244,
+        1.834887623449144,
+        -13.88412233774099
+      ],
+      "median_paired_p95_change_percent": -1.2702712605397126,
+      "tail_samples_per_process_below_20": false
+    },
+    {
+      "text": "İSHMAEL",
+      "kind": "fold",
+      "offset": 0,
+      "limit": 50,
+      "total": 260,
+      "late_matches": 39,
+      "control": {
+        "n": 80,
+        "per_process_n": [
+          20,
+          20,
+          20,
+          20
+        ],
+        "p50_ms": 7.856800000000001,
+        "p95_ms": 11.1868,
+        "p99_ms": 13.385599999999998,
+        "run_p95": [
+          12.6155,
+          10.9292,
+          7.8077,
+          8.6199
+        ]
+      },
+      "fdb": {
+        "n": 80,
+        "per_process_n": [
+          20,
+          20,
+          20,
+          20
+        ],
+        "p50_ms": 7.4709,
+        "p95_ms": 10.1608,
+        "p99_ms": 11.482,
+        "run_p95": [
+          10.1608,
+          10.3291,
+          7.551699999999999,
+          7.797499999999999
+        ]
+      },
+      "change_p95_percent": -9.17152358136375,
+      "faster_pairs": 4,
+      "paired_p95_change_percent": [
+        -19.457809837105156,
+        -5.490795300662443,
+        -3.2788145036310334,
+        -9.540713929395938
+      ],
+      "median_paired_p95_change_percent": -7.5157546150291905,
+      "tail_samples_per_process_below_20": false
+    },
+    {
+      "text": "zxzxzxzxzxzxzxzxzxzxzxzxzxzxzxzxzxzxzxzxzxzxzxzxzxzxzxzxzxzxzxzxzxzxzxzxzxzxzxzxzxzxzxzxzxzxzxzxzxzxzxzxzxzxzxzxzxzxzxzxzxzxzxzxzxzxzxzxzxzxzxzxzxzxzxzxzxzxzxzxzxzxzxzxzxzxzxzxzxzxzxzxzxzxzxzxzxzxzxzxzxzxzxzxzxzxzxzxzxzxzxzxzxzxzxzxzxzxzxzxzxzxzxzxzxzxzxzxzxzxzxzxzxzxzxzxzxzxzxzxzxzxzxzxzxzxzxzxzxzx",
+      "kind": "long-negative",
+      "offset": 0,
+      "limit": 50,
+      "total": 0,
+      "late_matches": 0,
+      "control": {
+        "n": 80,
+        "per_process_n": [
+          20,
+          20,
+          20,
+          20
+        ],
+        "p50_ms": 0.0297,
+        "p95_ms": 0.0527,
+        "p99_ms": 0.28430000000000005,
+        "run_p95": [
+          0.054799999999999995,
+          0.0555,
+          0.0312,
+          0.036399999999999995
+        ]
+      },
+      "fdb": {
+        "n": 80,
+        "per_process_n": [
+          20,
+          20,
+          20,
+          20
+        ],
+        "p50_ms": 0.0301,
+        "p95_ms": 0.0514,
+        "p99_ms": 0.0648,
+        "run_p95": [
+          0.054400000000000004,
+          0.0514,
+          0.0334,
+          0.0337
+        ]
+      },
+      "change_p95_percent": -2.4667931688804434,
+      "faster_pairs": 3,
+      "paired_p95_change_percent": [
+        -0.7299270072992581,
+        -7.38738738738739,
+        7.051282051282048,
+        -7.417582417582402
+      ],
+      "median_paired_p95_change_percent": -4.058657197343324,
+      "tail_samples_per_process_below_20": false
+    },
+    {
+      "text": "presumption",
+      "kind": "tail-token",
+      "offset": 0,
+      "limit": 50,
+      "total": 883,
+      "late_matches": 196,
+      "control": {
+        "n": 80,
+        "per_process_n": [
+          20,
+          20,
+          20,
+          20
+        ],
+        "p50_ms": 71.1274,
+        "p95_ms": 104.1043,
+        "p99_ms": 142.2749,
+        "run_p95": [
+          104.3505,
+          107.1105,
+          75.26910000000001,
+          71.7557
+        ]
+      },
+      "fdb": {
+        "n": 80,
+        "per_process_n": [
+          20,
+          20,
+          20,
+          20
+        ],
+        "p50_ms": 82.0973,
+        "p95_ms": 102.9516,
+        "p99_ms": 109.70729999999999,
+        "run_p95": [
+          101.7708,
+          106.902,
+          75.1793,
+          73.18620000000001
+        ]
+      },
+      "change_p95_percent": -1.1072549356750838,
+      "faster_pairs": 3,
+      "paired_p95_change_percent": [
+        -2.4721491511780047,
+        -0.1946587869536609,
+        -0.11930526603880498,
+        1.9935698488064535
+      ],
+      "median_paired_p95_change_percent": -0.15698202649623294,
+      "tail_samples_per_process_below_20": false
+    },
+    {
+      "text": "the",
+      "kind": "page",
+      "offset": 0,
+      "limit": 1,
+      "total": 10000,
+      "late_matches": 0,
+      "control": {
+        "n": 20,
+        "per_process_n": [
+          5,
+          5,
+          5,
+          5
+        ],
+        "p50_ms": 0.1653,
+        "p95_ms": 0.3108,
+        "p99_ms": 0.6998,
+        "run_p95": [
+          0.6998,
+          0.3108,
+          0.2088,
+          0.2179
+        ]
+      },
+      "fdb": {
+        "n": 20,
+        "per_process_n": [
+          5,
+          5,
+          5,
+          5
+        ],
+        "p50_ms": 0.154,
+        "p95_ms": 0.46599999999999997,
+        "p99_ms": 0.6213,
+        "run_p95": [
+          0.6213,
+          0.3554,
+          0.154,
+          0.21589999999999998
+        ]
+      },
+      "change_p95_percent": 49.93564993564992,
+      "faster_pairs": 3,
+      "paired_p95_change_percent": [
+        -11.217490711631894,
+        14.35006435006434,
+        -26.245210727969358,
+        -0.9178522257916599
+      ],
+      "median_paired_p95_change_percent": -6.067671468711778,
+      "tail_samples_per_process_below_20": true
+    },
+    {
+      "text": "the",
+      "kind": "page",
+      "offset": 0,
+      "limit": 200,
+      "total": 10000,
+      "late_matches": 0,
+      "control": {
+        "n": 20,
+        "per_process_n": [
+          5,
+          5,
+          5,
+          5
+        ],
+        "p50_ms": 4.5348999999999995,
+        "p95_ms": 7.6507,
+        "p99_ms": 8.078999999999999,
+        "run_p95": [
+          8.078999999999999,
+          6.6659,
+          4.694699999999999,
+          5.4563
+        ]
+      },
+      "fdb": {
+        "n": 20,
+        "per_process_n": [
+          5,
+          5,
+          5,
+          5
+        ],
+        "p50_ms": 4.500299999999999,
+        "p95_ms": 6.479699999999999,
+        "p99_ms": 6.6063,
+        "run_p95": [
+          6.6063,
+          6.1928,
+          4.4925,
+          5.1166
+        ]
+      },
+      "change_p95_percent": -15.305789012770077,
+      "faster_pairs": 4,
+      "paired_p95_change_percent": [
+        -18.228741180839204,
+        -7.097316191362002,
+        -4.306984471851227,
+        -6.225830691127676
+      ],
+      "median_paired_p95_change_percent": -6.661573441244839,
+      "tail_samples_per_process_below_20": true
+    },
+    {
+      "text": "the",
+      "kind": "page",
+      "offset": 5000,
+      "limit": 50,
+      "total": 10000,
+      "late_matches": 0,
+      "control": {
+        "n": 20,
+        "per_process_n": [
+          5,
+          5,
+          5,
+          5
+        ],
+        "p50_ms": 1.3056999999999999,
+        "p95_ms": 1.8812,
+        "p99_ms": 3.1467,
+        "run_p95": [
+          3.1467,
+          1.8812,
+          1.5612,
+          1.2937
+        ]
+      },
+      "fdb": {
+        "n": 20,
+        "per_process_n": [
+          5,
+          5,
+          5,
+          5
+        ],
+        "p50_ms": 1.2199000000000002,
+        "p95_ms": 2.2243,
+        "p99_ms": 2.4462,
+        "run_p95": [
+          2.4462,
+          1.6011,
+          1.2635,
+          1.971
+        ]
+      },
+      "change_p95_percent": 18.238358494577934,
+      "faster_pairs": 3,
+      "paired_p95_change_percent": [
+        -22.26141672228048,
+        -14.889432277269831,
+        -19.06866512938764,
+        52.35371415320398
+      ],
+      "median_paired_p95_change_percent": -16.979048703328736,
+      "tail_samples_per_process_below_20": true
+    },
+    {
+      "text": "the",
+      "kind": "page",
+      "offset": 9950,
+      "limit": 50,
+      "total": 10000,
+      "late_matches": 0,
+      "control": {
+        "n": 20,
+        "per_process_n": [
+          5,
+          5,
+          5,
+          5
+        ],
+        "p50_ms": 1.0430000000000001,
+        "p95_ms": 1.6953,
+        "p99_ms": 2.1803,
+        "run_p95": [
+          1.6953,
+          2.1803,
+          1.2322,
+          1.0430000000000001
+        ]
+      },
+      "fdb": {
+        "n": 20,
+        "per_process_n": [
+          5,
+          5,
+          5,
+          5
+        ],
+        "p50_ms": 1.1887,
+        "p95_ms": 1.6694,
+        "p99_ms": 1.7815,
+        "run_p95": [
+          1.3443,
+          1.7815,
+          1.2666000000000002,
+          1.4909000000000001
+        ]
+      },
+      "change_p95_percent": -1.527753200023596,
+      "faster_pairs": 2,
+      "paired_p95_change_percent": [
+        -20.704300123871878,
+        -18.29106086318396,
+        2.7917545852946146,
+        42.943432406519655
+      ],
+      "median_paired_p95_change_percent": -7.749653138944673,
+      "tail_samples_per_process_below_20": true
+    },
+    {
+      "text": "ishmael",
+      "kind": "page",
+      "offset": 130,
+      "limit": 1,
+      "total": 260,
+      "late_matches": 39,
+      "control": {
+        "n": 20,
+        "per_process_n": [
+          5,
+          5,
+          5,
+          5
+        ],
+        "p50_ms": 6.4395,
+        "p95_ms": 8.6887,
+        "p99_ms": 11.1689,
+        "run_p95": [
+          11.1689,
+          8.6887,
+          8.131400000000001,
+          7.1598
+        ]
+      },
+      "fdb": {
+        "n": 20,
+        "per_process_n": [
+          5,
+          5,
+          5,
+          5
+        ],
+        "p50_ms": 5.9961,
+        "p95_ms": 7.865799999999999,
+        "p99_ms": 9.457099999999999,
+        "run_p95": [
+          9.457099999999999,
+          7.865799999999999,
+          6.1686,
+          5.9961
+        ]
+      },
+      "change_p95_percent": -9.470922002140725,
+      "faster_pairs": 4,
+      "paired_p95_change_percent": [
+        -15.326486941417706,
+        -9.470922002140725,
+        -24.1385247312886,
+        -16.25324729741053
+      ],
+      "median_paired_p95_change_percent": -15.789867119414119,
+      "tail_samples_per_process_below_20": true
+    },
+    {
+      "text": "ishmael",
+      "kind": "page",
+      "offset": 60,
+      "limit": 200,
+      "total": 260,
+      "late_matches": 39,
+      "control": {
+        "n": 20,
+        "per_process_n": [
+          5,
+          5,
+          5,
+          5
+        ],
+        "p50_ms": 11.7425,
+        "p95_ms": 18.6676,
+        "p99_ms": 20.7121,
+        "run_p95": [
+          20.7121,
+          18.6676,
+          11.899,
+          12.0529
+        ]
+      },
+      "fdb": {
+        "n": 20,
+        "per_process_n": [
+          5,
+          5,
+          5,
+          5
+        ],
+        "p50_ms": 11.3156,
+        "p95_ms": 15.8428,
+        "p99_ms": 16.279600000000002,
+        "run_p95": [
+          15.8428,
+          16.279600000000002,
+          12.0424,
+          11.3727
+        ]
+      },
+      "change_p95_percent": -15.13210053783025,
+      "faster_pairs": 3,
+      "paired_p95_change_percent": [
+        -23.509446169147495,
+        -12.792217531980532,
+        1.205143289352062,
+        -5.64345510209161
+      ],
+      "median_paired_p95_change_percent": -9.21783631703607,
+      "tail_samples_per_process_below_20": true
+    },
+    {
+      "text": "quixote",
+      "kind": "page",
+      "offset": 28,
+      "limit": 10,
+      "total": 56,
+      "late_matches": 8,
+      "control": {
+        "n": 20,
+        "per_process_n": [
+          5,
+          5,
+          5,
+          5
+        ],
+        "p50_ms": 1.8635,
+        "p95_ms": 3.5338000000000003,
+        "p99_ms": 4.6876,
+        "run_p95": [
+          4.6876,
+          3.0151000000000003,
+          3.3986,
+          2.7462
+        ]
+      },
+      "fdb": {
+        "n": 20,
+        "per_process_n": [
+          5,
+          5,
+          5,
+          5
+        ],
+        "p50_ms": 1.7440000000000002,
+        "p95_ms": 3.364,
+        "p99_ms": 3.3812,
+        "run_p95": [
+          3.364,
+          3.3812,
+          2.3085,
+          2.9254
+        ]
+      },
+      "change_p95_percent": -4.805025751315872,
+      "faster_pairs": 2,
+      "paired_p95_change_percent": [
+        -28.236197627783945,
+        12.142217505223707,
+        -32.0749720473136,
+        6.525380525817481
+      ],
+      "median_paired_p95_change_percent": -10.855408550983231,
+      "tail_samples_per_process_below_20": true
+    },
+    {
+      "text": "quixote",
+      "kind": "page",
+      "offset": 57,
+      "limit": 50,
+      "total": 56,
+      "late_matches": 8,
+      "control": {
+        "n": 20,
+        "per_process_n": [
+          5,
+          5,
+          5,
+          5
+        ],
+        "p50_ms": 2.0859,
+        "p95_ms": 2.948,
+        "p99_ms": 4.0881,
+        "run_p95": [
+          2.948,
+          4.0881,
+          2.6203,
+          2.0963000000000003
+        ]
+      },
+      "fdb": {
+        "n": 20,
+        "per_process_n": [
+          5,
+          5,
+          5,
+          5
+        ],
+        "p50_ms": 1.5659,
+        "p95_ms": 2.6793,
+        "p99_ms": 2.7268000000000003,
+        "run_p95": [
+          2.2623,
+          2.7268000000000003,
+          2.4354,
+          1.6002
+        ]
+      },
+      "change_p95_percent": -9.114654002713706,
+      "faster_pairs": 4,
+      "paired_p95_change_percent": [
+        -23.25983717774762,
+        -33.29908759570459,
+        -7.056443918635269,
+        -23.66550589133235
+      ],
+      "median_paired_p95_change_percent": -23.462671534539986,
+      "tail_samples_per_process_below_20": true
+    }
+  ],
+  "lower_p95_cases": 21,
+  "higher_p95_cases": 17,
+  "same_executable_control": false,
+  "interpretation": "Pooled p95 changes and paired process p95 changes describe different distributions; neither case count alone establishes engine regressions or statistical significance."
+}

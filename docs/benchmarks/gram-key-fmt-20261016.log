@@ -1,0 +1,12 @@
+Diff in \\?\C:\Users\Serkan\Documents\ChatGPT\fdb\src\index\packed_grams.rs:97:
+             let padded = format!("{}{text}", " ".repeat(1024));
+             assert_eq!(super::super::grams(&padded), reference(&padded));
+             let mut body_cache = super::super::BodyCache::default();
+-            assert_eq!(body_cache.get(&padded).grams, reference(&super::super::fold(&padded)));
++            assert_eq!(
++                body_cache.get(&padded).grams,
++                reference(&super::super::fold(&padded))
++            );
+         }
+         let mut state = 0x8742_35ab_18cd_6729u64;
+         let mut text = String::new();

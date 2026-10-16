@@ -1,0 +1,21 @@
+{
+  "fdb_pairs": 4,
+  "balanced_first_position": true,
+  "orders": [
+    "control/fdb",
+    "fdb/control",
+    "control/fdb",
+    "fdb/control"
+  ],
+  "sqlite_reference_processes": 2,
+  "sqlite_references_after_pairs": [
+    0,
+    3
+  ],
+  "sqlite_is_not_paired_performance_gate": true,
+  "input": "same first10000 existing records;500 records/transaction;20 transactions; synced WAL",
+  "cache": "OS cache, no eviction; no hardware/power isolation",
+  "query": "40 boundary full-document gets inside ingest; independent full verify outside timing",
+  "databases": "only fixed data/benchmark-work/fdb and sqlite slots; reset owned slot per ingest",
+  "normal_build": "experimental-builder-budget; diagnostic timing/allocation off"
+}

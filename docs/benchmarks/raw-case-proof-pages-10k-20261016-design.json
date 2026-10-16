@@ -1,0 +1,36 @@
+{
+  "pairs": 4,
+  "orders": [
+    {
+      "pair": 0,
+      "engines": [
+        "control",
+        "fdb"
+      ]
+    },
+    {
+      "pair": 1,
+      "engines": [
+        "fdb",
+        "control"
+      ]
+    },
+    {
+      "pair": 2,
+      "engines": [
+        "control",
+        "fdb"
+      ]
+    },
+    {
+      "pair": 3,
+      "engines": [
+        "fdb",
+        "control"
+      ]
+    }
+  ],
+  "balanced_first_position": true,
+  "pages_only": true,
+  "cache": "warm OS cache, no eviction"
+}

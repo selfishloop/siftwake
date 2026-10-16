@@ -1,0 +1,32 @@
+   Compiling fdb v0.3.1 (C:\Users\Serkan\Documents\ChatGPT\fdb)
+    Finished `test` profile [unoptimized + debuginfo] target(s) in 3.93s
+     Running unittests src\lib.rs (target\debug\deps\fdb-8f293fd6eea9cb91.exe)
+
+running 24 tests
+test segment::block_check::tests::prepare_child ... ignored, process helper
+test bounded::tests::short_writes_count_exactly_and_limits_stop_before_forwarding ... ok
+test bounded::tests::serialization_preserves_original_destination_error ... ok
+test format::crc_tests::binary_frame_has_versioned_header_and_expected_crc ... ok
+test segment::query_scratch_tests::cached_body_never_reuses_title_and_oversize_text_does_not_escape_budget ... ok
+test source_records::tests::prepare_child ... ignored, process helper
+test binary_batch_tests::binary_batch_prefix_offsets_sizes_and_every_cut ... ok
+test format::crc_tests::borrowed_native_validation_matches_replay_on_cuts_and_corruption ... ok
+test format::crc_tests::whole_source_crc_is_checked_even_when_each_frame_is_valid ... ok
+test format::crc_tests::native_validation_handles_large_small_growing_and_empty_frames ... ok
+test format::crc_tests::ieee_crc_and_streaming_boundaries_remain_compatible ... ok
+test spill::tests::empty_and_complete_term_boundary_truncation_are_rejected ... ok
+test spill::tests::chunk_boundaries_preserve_bytes_and_reject_duplicate_ids ... ok
+test payload::document_limit_tests::borrowed_limits_match_owned_validation ... ok
+test spill::tests::corrupt_spill_header_term_and_postings_fail_closed ... ok
+test engine::deferred_validation_tests::borrowed_check_rejects_crc_valid_invalid_documents_and_manifest_identity ... ok
+test spill::tests::spilled_groups_merge_in_term_and_id_order_and_are_removed ... ok
+test segment::block_check::tests::process_kill_before_publication_keeps_previous_checksum_cache ... ok
+test source_records::tests::interrupted_address_publication_preserves_prior_map_and_source ... ok
+test segment::query_scratch_tests::chunked_scan_matches_full_fold_at_utf8_and_term_boundaries ... ok
+test index::scratch_fold_tests::query_scratch_fold_matches_every_unicode_scalar_and_reuse ... ok
+test segment::block_check::tests::lazy_blocks_check_boundaries_corruption_cuts_and_table_root ... ok
+test format::crc_tests::accelerated_ieee_matches_tables_for_offsets_lengths_states_and_chaining ... ok
+test payload::document_limit_tests::utf8_validation_matches_std_including_boundaries_and_invalid_bytes ... ok
+
+test result: ok. 22 passed; 0 failed; 2 ignored; 0 measured; 0 filtered out; finished in 26.34s
+

@@ -1,0 +1,14 @@
+    Finished `test` profile [unoptimized + debuginfo] target(s) in 0.06s
+     Running unittests src\lib.rs (target\debug\deps\fdb-25bc736268a4b19a.exe)
+
+running 7 tests
+test segment::window_tests::large_document_keeps_exact_read_and_record_validation ... ok
+test segment::window_tests::sparse_window_stops_read_ahead_but_dense_window_keeps_it ... ok
+test segment::window_tests::read_window_never_uses_a_valid_vfy_to_hide_corrupt_index_blocks_or_cuts ... ok
+test segment::window_tests::covering_needs_source_authorization_and_rejects_modified_unselected_payload ... ok
+test segment::window_tests::prefetched_corrupt_record_is_checked_before_it_matches ... ok
+test segment::window_tests::window_matches_exact_reads_across_boundaries_and_sparse_order ... ok
+test segment::window_tests::raw_ascii_positive_still_rejects_payload_corruption_and_truncation ... ok
+
+test result: ok. 7 passed; 0 failed; 0 ignored; 0 measured; 63 filtered out; finished in 1.06s
+

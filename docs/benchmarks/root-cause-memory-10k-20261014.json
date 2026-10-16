@@ -1,0 +1,396 @@
+{
+  "kind": "read_only_root_cause_analysis_not_new_performance_measurement",
+  "corpus": {
+    "path": "data/rkyv-corpus-20261009/json.payload-bench",
+    "documents_read": 10000,
+    "record_crc_checks": 10000,
+    "text_bytes": 264842858,
+    "batches": [
+      {
+        "end": 500,
+        "payload_bytes": 13552423,
+        "original_title_text_bytes": 13411185,
+        "text_bytes": 13402185
+      },
+      {
+        "end": 1000,
+        "payload_bytes": 13491477,
+        "original_title_text_bytes": 13350018,
+        "text_bytes": 13341018
+      },
+      {
+        "end": 1500,
+        "payload_bytes": 13549624,
+        "original_title_text_bytes": 13408026,
+        "text_bytes": 13399026
+      },
+      {
+        "end": 2000,
+        "payload_bytes": 13142616,
+        "original_title_text_bytes": 13001693,
+        "text_bytes": 12992693
+      },
+      {
+        "end": 2500,
+        "payload_bytes": 12936342,
+        "original_title_text_bytes": 12795193,
+        "text_bytes": 12786193
+      },
+      {
+        "end": 3000,
+        "payload_bytes": 13096117,
+        "original_title_text_bytes": 12954934,
+        "text_bytes": 12945934
+      },
+      {
+        "end": 3500,
+        "payload_bytes": 13549790,
+        "original_title_text_bytes": 13408747,
+        "text_bytes": 13399747
+      },
+      {
+        "end": 4000,
+        "payload_bytes": 13378176,
+        "original_title_text_bytes": 13236517,
+        "text_bytes": 13227517
+      },
+      {
+        "end": 4500,
+        "payload_bytes": 12973931,
+        "original_title_text_bytes": 12832473,
+        "text_bytes": 12823473
+      },
+      {
+        "end": 5000,
+        "payload_bytes": 12974746,
+        "original_title_text_bytes": 12832989,
+        "text_bytes": 12823989
+      },
+      {
+        "end": 5500,
+        "payload_bytes": 13205925,
+        "original_title_text_bytes": 13064404,
+        "text_bytes": 13055404
+      },
+      {
+        "end": 6000,
+        "payload_bytes": 13750108,
+        "original_title_text_bytes": 13609153,
+        "text_bytes": 13600153
+      },
+      {
+        "end": 6500,
+        "payload_bytes": 13546229,
+        "original_title_text_bytes": 13404999,
+        "text_bytes": 13395999
+      },
+      {
+        "end": 7000,
+        "payload_bytes": 13319093,
+        "original_title_text_bytes": 13177435,
+        "text_bytes": 13168435
+      },
+      {
+        "end": 7500,
+        "payload_bytes": 13359817,
+        "original_title_text_bytes": 13218333,
+        "text_bytes": 13209333
+      },
+      {
+        "end": 8000,
+        "payload_bytes": 13851841,
+        "original_title_text_bytes": 13710425,
+        "text_bytes": 13701425
+      },
+      {
+        "end": 8500,
+        "payload_bytes": 13607873,
+        "original_title_text_bytes": 13467012,
+        "text_bytes": 13458012
+      },
+      {
+        "end": 9000,
+        "payload_bytes": 13289663,
+        "original_title_text_bytes": 13148227,
+        "text_bytes": 13139227
+      },
+      {
+        "end": 9500,
+        "payload_bytes": 13779300,
+        "original_title_text_bytes": 13637930,
+        "text_bytes": 13628930
+      },
+      {
+        "end": 10000,
+        "payload_bytes": 13494238,
+        "original_title_text_bytes": 13353165,
+        "text_bytes": 13344165
+      }
+    ]
+  },
+  "flush_model": {
+    "code": "src/engine.rs needs_flush before applying incoming batch; no updates/deletes here",
+    "serialized_threshold_bytes": 16777216,
+    "events": [
+      {
+        "before_batch": 3,
+        "resident_documents": 1000,
+        "payload_bytes": 27043900
+      },
+      {
+        "before_batch": 5,
+        "resident_documents": 1000,
+        "payload_bytes": 26692240
+      },
+      {
+        "before_batch": 7,
+        "resident_documents": 1000,
+        "payload_bytes": 26032459
+      },
+      {
+        "before_batch": 9,
+        "resident_documents": 1000,
+        "payload_bytes": 26927966
+      },
+      {
+        "before_batch": 11,
+        "resident_documents": 1000,
+        "payload_bytes": 25948677
+      },
+      {
+        "before_batch": 13,
+        "resident_documents": 1000,
+        "payload_bytes": 26956033
+      },
+      {
+        "before_batch": 15,
+        "resident_documents": 1000,
+        "payload_bytes": 26865322
+      },
+      {
+        "before_batch": 17,
+        "resident_documents": 1000,
+        "payload_bytes": 27211658
+      },
+      {
+        "before_batch": 19,
+        "resident_documents": 1000,
+        "payload_bytes": 26897536
+      }
+    ],
+    "final_delta_documents": 1000,
+    "final_delta_payload_bytes": 27273538
+  },
+  "allocation_evidence": {
+    "source": "docs\\benchmarks\\ram-lifetime-origins-20261013-fdb-ingest-10000-0.jsonl",
+    "source_sha256": "2f059ad49646cdbd7e0c2d738371837c566363d5e25af66215502391851db8c3",
+    "features": "experimental-merge-postings experimental-delta-bitmaps diagnostic-memory; prior to nested delta dictionary change",
+    "snapshot": {
+      "not_normal_timing": true,
+      "not_rss": true,
+      "origin_names": [
+        "other",
+        "caller_documents",
+        "delta_index",
+        "delta_tables",
+        "source_batch",
+        "frame_encode",
+        "builder",
+        "packed_metadata"
+      ],
+      "phase": "allocation",
+      "records": 10000,
+      "requested_live": [
+        67302,
+        28673356,
+        30913838,
+        639792,
+        1120,
+        0,
+        0,
+        13121769
+      ],
+      "requested_peak": [
+        244433,
+        43060207,
+        31061933,
+        639792,
+        17516789,
+        13854378,
+        381085,
+        20187652
+      ],
+      "total_live": 73417177,
+      "total_peak": 104711593
+    },
+    "final_snapshot": {
+      "not_normal_timing": true,
+      "not_rss": true,
+      "origin_names": [
+        "other",
+        "caller_documents",
+        "delta_index",
+        "delta_tables",
+        "source_batch",
+        "frame_encode",
+        "builder",
+        "packed_metadata"
+      ],
+      "phase": "allocation_final",
+      "requested_live": [
+        67302,
+        66634,
+        0,
+        0,
+        1120,
+        0,
+        0,
+        13758023
+      ],
+      "requested_peak": [
+        244433,
+        43060207,
+        31061933,
+        639792,
+        17516789,
+        13854378,
+        381085,
+        22935966
+      ],
+      "total_live": 13893079,
+      "total_peak": 104711593
+    },
+    "limits": [
+      "origin is allocation birthplace, not current owner",
+      "requested bytes are not process RAM",
+      "realloc creates replacement while old allocation is live",
+      "separate origin peaks must not be summed",
+      "not a current instrumented rerun"
+    ]
+  },
+  "current_disk_index": {
+    "manifest": "data\\benchmark-work\\fdb\\generation-000000000000001f.ready",
+    "manifest_sha256": "f11bb20a422afdf21648a9864be4fba403fec538ec5434160e1af863e6993919",
+    "generation": 31,
+    "runs": [
+      {
+        "run_id": 10,
+        "records": 2000,
+        "terms": 20719,
+        "index_bytes": 70872210,
+        "directory_bytes": 1699266,
+        "posting_bytes": 15436744,
+        "payload_bytes": 53736140
+      },
+      {
+        "run_id": 14,
+        "records": 2000,
+        "terms": 20725,
+        "index_bytes": 69949707,
+        "directory_bytes": 1699770,
+        "posting_bytes": 15289452,
+        "payload_bytes": 52960425
+      },
+      {
+        "run_id": 18,
+        "records": 2000,
+        "terms": 20744,
+        "index_bytes": 69894154,
+        "directory_bytes": 1702692,
+        "posting_bytes": 15286692,
+        "payload_bytes": 52904710
+      },
+      {
+        "run_id": 24,
+        "records": 2000,
+        "terms": 20749,
+        "index_bytes": 71177214,
+        "directory_bytes": 1703702,
+        "posting_bytes": 15396472,
+        "payload_bytes": 54076980
+      },
+      {
+        "run_id": 30,
+        "records": 2000,
+        "terms": 20730,
+        "index_bytes": 71349296,
+        "directory_bytes": 1702162,
+        "posting_bytes": 15476000,
+        "payload_bytes": 54171074
+      }
+    ],
+    "term_copies": {
+      "Scope": 5,
+      "Collection": 5,
+      "Exact": 19864,
+      "Numeric": 19824,
+      "Gram": 60635,
+      "Link": 3334
+    },
+    "unique_terms_by_kind": {
+      "Scope": 1,
+      "Collection": 1,
+      "Exact": 19012,
+      "Numeric": 19004,
+      "Gram": 12147,
+      "Link": 3334
+    },
+    "checks": "manifest and index footer CRC/bounds; no whole source/index integrity scan"
+  },
+  "sqlite_read_only_inspection": {
+    "inspection_runtime_version": "3.53.1",
+    "page_size": 4096,
+    "dbstat": [
+      {
+        "object": "docs",
+        "page_bytes": 546435072,
+        "payload_bytes": 538568592,
+        "pages": 133407
+      },
+      {
+        "object": "search_config",
+        "page_bytes": 4096,
+        "payload_bytes": 11,
+        "pages": 1
+      },
+      {
+        "object": "search_data",
+        "page_bytes": 31952896,
+        "payload_bytes": 31487427,
+        "pages": 7801
+      },
+      {
+        "object": "search_idx",
+        "page_bytes": 90112,
+        "payload_bytes": 56950,
+        "pages": 22
+      },
+      {
+        "object": "sqlite_autoindex_docs_1",
+        "page_bytes": 356352,
+        "payload_bytes": 279872,
+        "pages": 87
+      },
+      {
+        "object": "sqlite_schema",
+        "page_bytes": 4096,
+        "payload_bytes": 816,
+        "pages": 1
+      }
+    ]
+  },
+  "code_sha256": {
+    "src\\engine.rs": "d4c6ba3f1aa1d1fd846a3bdfd9530648a29b7cc32a0820eb561fc55a462a3cba",
+    "src\\index.rs": "aeddbe31f5557b0ce69bfda49a76b820526b4b7989c5345bd66bfa1ea0a397e0",
+    "src\\payload.rs": "9290cf992c60acb361ca234ddf76f7d6ee27c777a8eb83e5cc323fe33d8c9eb6",
+    "src\\segment.rs": "7f9b013f9bc32a9f853c41b01c4b9734df138a390e677048eb5028e38b8364b0",
+    "examples\\measure_content_memory.rs": "76e9205c338ea81c825aea7118098f71fe4f9cebb234fd533c578ab81db5f654",
+    "tools\\native_sqlite\\src\\bin\\content_memory.rs": "1d616c9f8b57479f2aa5459132deea57f99d4b199ff5e7892bc8c35ab103bc66"
+  },
+  "limits": [
+    "no new corpus/database/build/ingest",
+    "no cold-cache eviction or concurrent-load measurement",
+    "no exact attribution of sampled Windows private working set",
+    "SQLite comparator autoindexes differ from FDB scalar/numeric/link indexes"
+  ]
+}

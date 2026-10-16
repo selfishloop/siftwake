@@ -1,0 +1,1550 @@
+{
+  "codecs": {
+    "json": {
+      "strategies": {
+        "baseline": {
+          "runs": [
+            {
+              "opening": {
+                "codec": "json",
+                "count": 100000,
+                "disk_bytes": 2740862279,
+                "open_ms": 5423.625,
+                "phase": "open",
+                "profiled": false,
+                "scope": "payload-only; candidate/index construction excluded; no DB integration",
+                "validation": "CRC + full JSON/schema/key/version"
+              },
+              "queries": {
+                "common": {
+                  "cache": "OS cache warmed by full validation and untimed first query; no forced eviction; not cold I/O",
+                  "candidates": 100000,
+                  "codec": "json",
+                  "full_page_oracle_verified": true,
+                  "p50_ms": 13396.519,
+                  "p95_ms": 13396.519,
+                  "phase": "query",
+                  "profiled": false,
+                  "query": "common",
+                  "samples_ms": [
+                    13396.519
+                  ],
+                  "strategy": "baseline",
+                  "text": "the",
+                  "total": 100000,
+                  "warmup": 1
+                },
+                "rare": {
+                  "cache": "OS cache warmed by full validation and untimed first query; no forced eviction; not cold I/O",
+                  "candidates": 529,
+                  "codec": "json",
+                  "full_page_oracle_verified": true,
+                  "p50_ms": 191.4083,
+                  "p95_ms": 262.209,
+                  "phase": "query",
+                  "profiled": false,
+                  "query": "rare",
+                  "samples_ms": [
+                    180.51149999999998,
+                    180.63879999999997,
+                    181.4826,
+                    181.4845,
+                    181.5609,
+                    186.53220000000002,
+                    186.9992,
+                    188.20899999999997,
+                    188.3238,
+                    189.01999999999998,
+                    191.4083,
+                    195.5574,
+                    199.4769,
+                    201.31199999999998,
+                    201.5017,
+                    202.95469999999997,
+                    203.12169999999998,
+                    204.2461,
+                    240.49609999999998,
+                    262.209
+                  ],
+                  "strategy": "baseline",
+                  "text": "abbreviation",
+                  "total": 264,
+                  "warmup": 1
+                },
+                "short": {
+                  "cache": "OS cache warmed by full validation and untimed first query; no forced eviction; not cold I/O",
+                  "candidates": 100000,
+                  "codec": "json",
+                  "full_page_oracle_verified": true,
+                  "p50_ms": 13029.2515,
+                  "p95_ms": 13029.2515,
+                  "phase": "query",
+                  "profiled": false,
+                  "query": "short",
+                  "samples_ms": [
+                    13029.2515
+                  ],
+                  "strategy": "baseline",
+                  "text": "of",
+                  "total": 100000,
+                  "warmup": 1
+                },
+                "and": {
+                  "cache": "OS cache warmed by full validation and untimed first query; no forced eviction; not cold I/O",
+                  "candidates": 75664,
+                  "codec": "json",
+                  "full_page_oracle_verified": true,
+                  "p50_ms": 10344.7207,
+                  "p95_ms": 10344.7207,
+                  "phase": "query",
+                  "profiled": false,
+                  "query": "and",
+                  "samples_ms": [
+                    10344.7207
+                  ],
+                  "strategy": "baseline",
+                  "text": "the whale",
+                  "total": 16537,
+                  "warmup": 1
+                }
+              },
+              "memory": {
+                "exit_code": 0,
+                "codec": "json",
+                "strategy": "baseline",
+                "run": 0,
+                "executable": "C:\\Users\\Serkan\\Documents\\ChatGPT\\fdb\\output\\fdb-fold-20261011.exe",
+                "corpus": "C:\\Users\\Serkan\\Documents\\ChatGPT\\fdb\\data\\rkyv-corpus-20261009",
+                "peak_working_set_bytes": 17428480,
+                "sampled_peak_private_bytes": 14262272,
+                "sample_interval_ms": 20,
+                "samples": 2219,
+                "elapsed_s": 84.406403,
+                "total_cpu_ms": 83453.125,
+                "includes_os_file_cache": false,
+                "memory_window": "whole measured process: oracle, full open validation, queries and full-page oracle"
+              }
+            },
+            {
+              "opening": {
+                "codec": "json",
+                "count": 100000,
+                "disk_bytes": 2740862279,
+                "open_ms": 5441.5477,
+                "phase": "open",
+                "profiled": false,
+                "scope": "payload-only; candidate/index construction excluded; no DB integration",
+                "validation": "CRC + full JSON/schema/key/version"
+              },
+              "queries": {
+                "common": {
+                  "cache": "OS cache warmed by full validation and untimed first query; no forced eviction; not cold I/O",
+                  "candidates": 100000,
+                  "codec": "json",
+                  "full_page_oracle_verified": true,
+                  "p50_ms": 12292.4793,
+                  "p95_ms": 12292.4793,
+                  "phase": "query",
+                  "profiled": false,
+                  "query": "common",
+                  "samples_ms": [
+                    12292.4793
+                  ],
+                  "strategy": "baseline",
+                  "text": "the",
+                  "total": 100000,
+                  "warmup": 1
+                },
+                "rare": {
+                  "cache": "OS cache warmed by full validation and untimed first query; no forced eviction; not cold I/O",
+                  "candidates": 529,
+                  "codec": "json",
+                  "full_page_oracle_verified": true,
+                  "p50_ms": 170.65159999999997,
+                  "p95_ms": 178.8249,
+                  "phase": "query",
+                  "profiled": false,
+                  "query": "rare",
+                  "samples_ms": [
+                    165.50889999999998,
+                    167.4947,
+                    168.5114,
+                    169.0711,
+                    169.46800000000002,
+                    169.768,
+                    169.82500000000002,
+                    169.8635,
+                    170.3894,
+                    170.3957,
+                    170.65159999999997,
+                    170.6934,
+                    171.26420000000002,
+                    171.4656,
+                    173.0934,
+                    174.897,
+                    174.9753,
+                    175.196,
+                    176.04330000000002,
+                    178.8249
+                  ],
+                  "strategy": "baseline",
+                  "text": "abbreviation",
+                  "total": 264,
+                  "warmup": 1
+                },
+                "short": {
+                  "cache": "OS cache warmed by full validation and untimed first query; no forced eviction; not cold I/O",
+                  "candidates": 100000,
+                  "codec": "json",
+                  "full_page_oracle_verified": true,
+                  "p50_ms": 13489.153699999999,
+                  "p95_ms": 13489.153699999999,
+                  "phase": "query",
+                  "profiled": false,
+                  "query": "short",
+                  "samples_ms": [
+                    13489.153699999999
+                  ],
+                  "strategy": "baseline",
+                  "text": "of",
+                  "total": 100000,
+                  "warmup": 1
+                },
+                "and": {
+                  "cache": "OS cache warmed by full validation and untimed first query; no forced eviction; not cold I/O",
+                  "candidates": 75664,
+                  "codec": "json",
+                  "full_page_oracle_verified": true,
+                  "p50_ms": 10821.4872,
+                  "p95_ms": 10821.4872,
+                  "phase": "query",
+                  "profiled": false,
+                  "query": "and",
+                  "samples_ms": [
+                    10821.4872
+                  ],
+                  "strategy": "baseline",
+                  "text": "the whale",
+                  "total": 16537,
+                  "warmup": 1
+                }
+              },
+              "memory": {
+                "exit_code": 0,
+                "codec": "json",
+                "strategy": "baseline",
+                "run": 1,
+                "executable": "C:\\Users\\Serkan\\Documents\\ChatGPT\\fdb\\output\\fdb-fold-20261011.exe",
+                "corpus": "C:\\Users\\Serkan\\Documents\\ChatGPT\\fdb\\data\\rkyv-corpus-20261009",
+                "peak_working_set_bytes": 17104896,
+                "sampled_peak_private_bytes": 13955072,
+                "sample_interval_ms": 20,
+                "samples": 2173,
+                "elapsed_s": 82.2919404,
+                "total_cpu_ms": 81453.125,
+                "includes_os_file_cache": false,
+                "memory_window": "whole measured process: oracle, full open validation, queries and full-page oracle"
+              }
+            },
+            {
+              "opening": {
+                "codec": "json",
+                "count": 100000,
+                "disk_bytes": 2740862279,
+                "open_ms": 5094.4405,
+                "phase": "open",
+                "profiled": false,
+                "scope": "payload-only; candidate/index construction excluded; no DB integration",
+                "validation": "CRC + full JSON/schema/key/version"
+              },
+              "queries": {
+                "common": {
+                  "cache": "OS cache warmed by full validation and untimed first query; no forced eviction; not cold I/O",
+                  "candidates": 100000,
+                  "codec": "json",
+                  "full_page_oracle_verified": true,
+                  "p50_ms": 12176.2525,
+                  "p95_ms": 12176.2525,
+                  "phase": "query",
+                  "profiled": false,
+                  "query": "common",
+                  "samples_ms": [
+                    12176.2525
+                  ],
+                  "strategy": "baseline",
+                  "text": "the",
+                  "total": 100000,
+                  "warmup": 1
+                },
+                "rare": {
+                  "cache": "OS cache warmed by full validation and untimed first query; no forced eviction; not cold I/O",
+                  "candidates": 529,
+                  "codec": "json",
+                  "full_page_oracle_verified": true,
+                  "p50_ms": 176.1196,
+                  "p95_ms": 209.6165,
+                  "phase": "query",
+                  "profiled": false,
+                  "query": "rare",
+                  "samples_ms": [
+                    169.0728,
+                    170.7917,
+                    170.8358,
+                    174.0738,
+                    174.1704,
+                    174.3458,
+                    174.8674,
+                    175.2663,
+                    175.53730000000002,
+                    175.844,
+                    176.1196,
+                    177.0701,
+                    177.7566,
+                    178.273,
+                    180.4072,
+                    180.42749999999998,
+                    185.3526,
+                    194.7234,
+                    202.7854,
+                    209.6165
+                  ],
+                  "strategy": "baseline",
+                  "text": "abbreviation",
+                  "total": 264,
+                  "warmup": 1
+                },
+                "short": {
+                  "cache": "OS cache warmed by full validation and untimed first query; no forced eviction; not cold I/O",
+                  "candidates": 100000,
+                  "codec": "json",
+                  "full_page_oracle_verified": true,
+                  "p50_ms": 12473.6847,
+                  "p95_ms": 12473.6847,
+                  "phase": "query",
+                  "profiled": false,
+                  "query": "short",
+                  "samples_ms": [
+                    12473.6847
+                  ],
+                  "strategy": "baseline",
+                  "text": "of",
+                  "total": 100000,
+                  "warmup": 1
+                },
+                "and": {
+                  "cache": "OS cache warmed by full validation and untimed first query; no forced eviction; not cold I/O",
+                  "candidates": 75664,
+                  "codec": "json",
+                  "full_page_oracle_verified": true,
+                  "p50_ms": 11667.087800000001,
+                  "p95_ms": 11667.087800000001,
+                  "phase": "query",
+                  "profiled": false,
+                  "query": "and",
+                  "samples_ms": [
+                    11667.087800000001
+                  ],
+                  "strategy": "baseline",
+                  "text": "the whale",
+                  "total": 16537,
+                  "warmup": 1
+                }
+              },
+              "memory": {
+                "exit_code": 0,
+                "codec": "json",
+                "strategy": "baseline",
+                "run": 2,
+                "executable": "C:\\Users\\Serkan\\Documents\\ChatGPT\\fdb\\output\\fdb-fold-20261011.exe",
+                "corpus": "C:\\Users\\Serkan\\Documents\\ChatGPT\\fdb\\data\\rkyv-corpus-20261009",
+                "peak_working_set_bytes": 17338368,
+                "sampled_peak_private_bytes": 14114816,
+                "sample_interval_ms": 20,
+                "samples": 2155,
+                "elapsed_s": 80.8830806,
+                "total_cpu_ms": 80000.0,
+                "includes_os_file_cache": false,
+                "memory_window": "whole measured process: oracle, full open validation, queries and full-page oracle"
+              }
+            }
+          ],
+          "median": {
+            "disk_bytes": 2740862279,
+            "peak_working_set_bytes": 17338368,
+            "sampled_peak_private_bytes": 14114816,
+            "queries_ms": {
+              "common": 12292.4793,
+              "rare": 176.1196,
+              "short": 13029.2515,
+              "and": 10821.4872
+            }
+          }
+        },
+        "reuse": {
+          "runs": [
+            {
+              "opening": {
+                "codec": "json",
+                "count": 100000,
+                "disk_bytes": 2740862279,
+                "open_ms": 5110.6454,
+                "phase": "open",
+                "profiled": false,
+                "scope": "payload-only; candidate/index construction excluded; no DB integration",
+                "validation": "CRC + full JSON/schema/key/version"
+              },
+              "queries": {
+                "common": {
+                  "cache": "OS cache warmed by full validation and untimed first query; no forced eviction; not cold I/O",
+                  "candidates": 100000,
+                  "codec": "json",
+                  "full_page_oracle_verified": true,
+                  "p50_ms": 7464.9807,
+                  "p95_ms": 7464.9807,
+                  "phase": "query",
+                  "profiled": false,
+                  "query": "common",
+                  "samples_ms": [
+                    7464.9807
+                  ],
+                  "strategy": "reuse",
+                  "text": "the",
+                  "total": 100000,
+                  "warmup": 1
+                },
+                "rare": {
+                  "cache": "OS cache warmed by full validation and untimed first query; no forced eviction; not cold I/O",
+                  "candidates": 529,
+                  "codec": "json",
+                  "full_page_oracle_verified": true,
+                  "p50_ms": 138.0701,
+                  "p95_ms": 143.1864,
+                  "phase": "query",
+                  "profiled": false,
+                  "query": "rare",
+                  "samples_ms": [
+                    135.3108,
+                    135.4571,
+                    135.85739999999998,
+                    136.14100000000002,
+                    136.2309,
+                    136.8282,
+                    137.5401,
+                    137.5691,
+                    137.5781,
+                    137.7552,
+                    138.0701,
+                    138.84640000000002,
+                    139.0858,
+                    139.5422,
+                    139.64,
+                    140.907,
+                    140.92950000000002,
+                    141.25570000000002,
+                    142.41899999999998,
+                    143.1864
+                  ],
+                  "strategy": "reuse",
+                  "text": "abbreviation",
+                  "total": 264,
+                  "warmup": 1
+                },
+                "short": {
+                  "cache": "OS cache warmed by full validation and untimed first query; no forced eviction; not cold I/O",
+                  "candidates": 100000,
+                  "codec": "json",
+                  "full_page_oracle_verified": true,
+                  "p50_ms": 7481.806299999999,
+                  "p95_ms": 7481.806299999999,
+                  "phase": "query",
+                  "profiled": false,
+                  "query": "short",
+                  "samples_ms": [
+                    7481.806299999999
+                  ],
+                  "strategy": "reuse",
+                  "text": "of",
+                  "total": 100000,
+                  "warmup": 1
+                },
+                "and": {
+                  "cache": "OS cache warmed by full validation and untimed first query; no forced eviction; not cold I/O",
+                  "candidates": 75664,
+                  "codec": "json",
+                  "full_page_oracle_verified": true,
+                  "p50_ms": 6558.1479,
+                  "p95_ms": 6558.1479,
+                  "phase": "query",
+                  "profiled": false,
+                  "query": "and",
+                  "samples_ms": [
+                    6558.1479
+                  ],
+                  "strategy": "reuse",
+                  "text": "the whale",
+                  "total": 16537,
+                  "warmup": 1
+                }
+              },
+              "memory": {
+                "exit_code": 0,
+                "codec": "json",
+                "strategy": "reuse",
+                "run": 0,
+                "executable": "C:\\Users\\Serkan\\Documents\\ChatGPT\\fdb\\output\\fdb-fold-20261011.exe",
+                "corpus": "C:\\Users\\Serkan\\Documents\\ChatGPT\\fdb\\data\\rkyv-corpus-20261009",
+                "peak_working_set_bytes": 17199104,
+                "sampled_peak_private_bytes": 14229504,
+                "sample_interval_ms": 20,
+                "samples": 1355,
+                "elapsed_s": 51.2439018,
+                "total_cpu_ms": 50750.0,
+                "includes_os_file_cache": false,
+                "memory_window": "whole measured process: oracle, full open validation, queries and full-page oracle"
+              }
+            },
+            {
+              "opening": {
+                "codec": "json",
+                "count": 100000,
+                "disk_bytes": 2740862279,
+                "open_ms": 5485.607800000001,
+                "phase": "open",
+                "profiled": false,
+                "scope": "payload-only; candidate/index construction excluded; no DB integration",
+                "validation": "CRC + full JSON/schema/key/version"
+              },
+              "queries": {
+                "common": {
+                  "cache": "OS cache warmed by full validation and untimed first query; no forced eviction; not cold I/O",
+                  "candidates": 100000,
+                  "codec": "json",
+                  "full_page_oracle_verified": true,
+                  "p50_ms": 7671.3297,
+                  "p95_ms": 7671.3297,
+                  "phase": "query",
+                  "profiled": false,
+                  "query": "common",
+                  "samples_ms": [
+                    7671.3297
+                  ],
+                  "strategy": "reuse",
+                  "text": "the",
+                  "total": 100000,
+                  "warmup": 1
+                },
+                "rare": {
+                  "cache": "OS cache warmed by full validation and untimed first query; no forced eviction; not cold I/O",
+                  "candidates": 529,
+                  "codec": "json",
+                  "full_page_oracle_verified": true,
+                  "p50_ms": 142.3526,
+                  "p95_ms": 152.8867,
+                  "phase": "query",
+                  "profiled": false,
+                  "query": "rare",
+                  "samples_ms": [
+                    138.8806,
+                    139.1522,
+                    140.93259999999998,
+                    140.9811,
+                    140.99880000000002,
+                    141.10590000000002,
+                    141.88139999999999,
+                    142.0455,
+                    142.2359,
+                    142.2911,
+                    142.3526,
+                    143.28179999999998,
+                    143.3008,
+                    143.4414,
+                    143.651,
+                    144.0325,
+                    145.50969999999998,
+                    149.425,
+                    149.8024,
+                    152.8867
+                  ],
+                  "strategy": "reuse",
+                  "text": "abbreviation",
+                  "total": 264,
+                  "warmup": 1
+                },
+                "short": {
+                  "cache": "OS cache warmed by full validation and untimed first query; no forced eviction; not cold I/O",
+                  "candidates": 100000,
+                  "codec": "json",
+                  "full_page_oracle_verified": true,
+                  "p50_ms": 8369.8505,
+                  "p95_ms": 8369.8505,
+                  "phase": "query",
+                  "profiled": false,
+                  "query": "short",
+                  "samples_ms": [
+                    8369.8505
+                  ],
+                  "strategy": "reuse",
+                  "text": "of",
+                  "total": 100000,
+                  "warmup": 1
+                },
+                "and": {
+                  "cache": "OS cache warmed by full validation and untimed first query; no forced eviction; not cold I/O",
+                  "candidates": 75664,
+                  "codec": "json",
+                  "full_page_oracle_verified": true,
+                  "p50_ms": 7194.0545,
+                  "p95_ms": 7194.0545,
+                  "phase": "query",
+                  "profiled": false,
+                  "query": "and",
+                  "samples_ms": [
+                    7194.0545
+                  ],
+                  "strategy": "reuse",
+                  "text": "the whale",
+                  "total": 16537,
+                  "warmup": 1
+                }
+              },
+              "memory": {
+                "exit_code": 0,
+                "codec": "json",
+                "strategy": "reuse",
+                "run": 1,
+                "executable": "C:\\Users\\Serkan\\Documents\\ChatGPT\\fdb\\output\\fdb-fold-20261011.exe",
+                "corpus": "C:\\Users\\Serkan\\Documents\\ChatGPT\\fdb\\data\\rkyv-corpus-20261009",
+                "peak_working_set_bytes": 17272832,
+                "sampled_peak_private_bytes": 14139392,
+                "sample_interval_ms": 20,
+                "samples": 1460,
+                "elapsed_s": 55.5130576,
+                "total_cpu_ms": 55015.625,
+                "includes_os_file_cache": false,
+                "memory_window": "whole measured process: oracle, full open validation, queries and full-page oracle"
+              }
+            },
+            {
+              "opening": {
+                "codec": "json",
+                "count": 100000,
+                "disk_bytes": 2740862279,
+                "open_ms": 5328.572,
+                "phase": "open",
+                "profiled": false,
+                "scope": "payload-only; candidate/index construction excluded; no DB integration",
+                "validation": "CRC + full JSON/schema/key/version"
+              },
+              "queries": {
+                "common": {
+                  "cache": "OS cache warmed by full validation and untimed first query; no forced eviction; not cold I/O",
+                  "candidates": 100000,
+                  "codec": "json",
+                  "full_page_oracle_verified": true,
+                  "p50_ms": 7589.9462,
+                  "p95_ms": 7589.9462,
+                  "phase": "query",
+                  "profiled": false,
+                  "query": "common",
+                  "samples_ms": [
+                    7589.9462
+                  ],
+                  "strategy": "reuse",
+                  "text": "the",
+                  "total": 100000,
+                  "warmup": 1
+                },
+                "rare": {
+                  "cache": "OS cache warmed by full validation and untimed first query; no forced eviction; not cold I/O",
+                  "candidates": 529,
+                  "codec": "json",
+                  "full_page_oracle_verified": true,
+                  "p50_ms": 137.8826,
+                  "p95_ms": 145.5496,
+                  "phase": "query",
+                  "profiled": false,
+                  "query": "rare",
+                  "samples_ms": [
+                    132.188,
+                    133.3116,
+                    133.34779999999998,
+                    133.7674,
+                    134.8568,
+                    134.95850000000002,
+                    135.5162,
+                    136.2594,
+                    136.2843,
+                    136.3585,
+                    137.8826,
+                    138.7754,
+                    139.4743,
+                    139.8463,
+                    140.663,
+                    141.518,
+                    141.60829999999999,
+                    142.2717,
+                    144.7798,
+                    145.5496
+                  ],
+                  "strategy": "reuse",
+                  "text": "abbreviation",
+                  "total": 264,
+                  "warmup": 1
+                },
+                "short": {
+                  "cache": "OS cache warmed by full validation and untimed first query; no forced eviction; not cold I/O",
+                  "candidates": 100000,
+                  "codec": "json",
+                  "full_page_oracle_verified": true,
+                  "p50_ms": 7595.6684000000005,
+                  "p95_ms": 7595.6684000000005,
+                  "phase": "query",
+                  "profiled": false,
+                  "query": "short",
+                  "samples_ms": [
+                    7595.6684000000005
+                  ],
+                  "strategy": "reuse",
+                  "text": "of",
+                  "total": 100000,
+                  "warmup": 1
+                },
+                "and": {
+                  "cache": "OS cache warmed by full validation and untimed first query; no forced eviction; not cold I/O",
+                  "candidates": 75664,
+                  "codec": "json",
+                  "full_page_oracle_verified": true,
+                  "p50_ms": 6417.6422999999995,
+                  "p95_ms": 6417.6422999999995,
+                  "phase": "query",
+                  "profiled": false,
+                  "query": "and",
+                  "samples_ms": [
+                    6417.6422999999995
+                  ],
+                  "strategy": "reuse",
+                  "text": "the whale",
+                  "total": 16537,
+                  "warmup": 1
+                }
+              },
+              "memory": {
+                "exit_code": 0,
+                "codec": "json",
+                "strategy": "reuse",
+                "run": 2,
+                "executable": "C:\\Users\\Serkan\\Documents\\ChatGPT\\fdb\\output\\fdb-fold-20261011.exe",
+                "corpus": "C:\\Users\\Serkan\\Documents\\ChatGPT\\fdb\\data\\rkyv-corpus-20261009",
+                "peak_working_set_bytes": 17301504,
+                "sampled_peak_private_bytes": 14204928,
+                "sample_interval_ms": 20,
+                "samples": 1372,
+                "elapsed_s": 51.5214506,
+                "total_cpu_ms": 51093.75,
+                "includes_os_file_cache": false,
+                "memory_window": "whole measured process: oracle, full open validation, queries and full-page oracle"
+              }
+            }
+          ],
+          "median": {
+            "disk_bytes": 2740862279,
+            "peak_working_set_bytes": 17272832,
+            "sampled_peak_private_bytes": 14204928,
+            "queries_ms": {
+              "common": 7589.9462,
+              "rare": 138.0701,
+              "short": 7595.6684000000005,
+              "and": 6558.1479
+            }
+          }
+        }
+      },
+      "gates": {
+        "repeatable_query_gain": true,
+        "disk_unchanged": true,
+        "working_set_no_regression": true
+      },
+      "query_change_percent": {
+        "common": -38.25536724719154,
+        "rare": -21.6043529510628,
+        "short": -41.70295661266496,
+        "and": -39.39698140566114
+      },
+      "decision": "passed_payload_experiment"
+    },
+    "rkyv": {
+      "strategies": {
+        "baseline": {
+          "runs": [
+            {
+              "opening": {
+                "codec": "rkyv",
+                "count": 100000,
+                "disk_bytes": 2711444148,
+                "open_ms": 2802.7961999999998,
+                "phase": "open",
+                "profiled": false,
+                "scope": "payload-only; candidate/index construction excluded; no DB integration",
+                "validation": "CRC + bytecheck + graph/key/version"
+              },
+              "queries": {
+                "common": {
+                  "cache": "OS cache warmed by full validation and untimed first query; no forced eviction; not cold I/O",
+                  "candidates": 100000,
+                  "codec": "rkyv",
+                  "full_page_oracle_verified": true,
+                  "p50_ms": 11630.3484,
+                  "p95_ms": 11630.3484,
+                  "phase": "query",
+                  "profiled": false,
+                  "query": "common",
+                  "samples_ms": [
+                    11630.3484
+                  ],
+                  "strategy": "baseline",
+                  "text": "the",
+                  "total": 100000,
+                  "warmup": 1
+                },
+                "rare": {
+                  "cache": "OS cache warmed by full validation and untimed first query; no forced eviction; not cold I/O",
+                  "candidates": 529,
+                  "codec": "rkyv",
+                  "full_page_oracle_verified": true,
+                  "p50_ms": 164.1552,
+                  "p95_ms": 213.16989999999998,
+                  "phase": "query",
+                  "profiled": false,
+                  "query": "rare",
+                  "samples_ms": [
+                    160.8622,
+                    161.64419999999998,
+                    162.2892,
+                    162.3983,
+                    162.4913,
+                    162.55710000000002,
+                    162.7894,
+                    163.3671,
+                    163.3733,
+                    163.97990000000001,
+                    164.1552,
+                    164.7541,
+                    176.5155,
+                    177.05589999999998,
+                    178.567,
+                    179.4739,
+                    183.9764,
+                    190.9019,
+                    191.70499999999998,
+                    213.16989999999998
+                  ],
+                  "strategy": "baseline",
+                  "text": "abbreviation",
+                  "total": 264,
+                  "warmup": 1
+                },
+                "short": {
+                  "cache": "OS cache warmed by full validation and untimed first query; no forced eviction; not cold I/O",
+                  "candidates": 100000,
+                  "codec": "rkyv",
+                  "full_page_oracle_verified": true,
+                  "p50_ms": 11212.2441,
+                  "p95_ms": 11212.2441,
+                  "phase": "query",
+                  "profiled": false,
+                  "query": "short",
+                  "samples_ms": [
+                    11212.2441
+                  ],
+                  "strategy": "baseline",
+                  "text": "of",
+                  "total": 100000,
+                  "warmup": 1
+                },
+                "and": {
+                  "cache": "OS cache warmed by full validation and untimed first query; no forced eviction; not cold I/O",
+                  "candidates": 75664,
+                  "codec": "rkyv",
+                  "full_page_oracle_verified": true,
+                  "p50_ms": 9691.1423,
+                  "p95_ms": 9691.1423,
+                  "phase": "query",
+                  "profiled": false,
+                  "query": "and",
+                  "samples_ms": [
+                    9691.1423
+                  ],
+                  "strategy": "baseline",
+                  "text": "the whale",
+                  "total": 16537,
+                  "warmup": 1
+                }
+              },
+              "memory": {
+                "exit_code": 0,
+                "codec": "rkyv",
+                "strategy": "baseline",
+                "run": 0,
+                "executable": "C:\\Users\\Serkan\\Documents\\ChatGPT\\fdb\\output\\fdb-fold-20261011.exe",
+                "corpus": "C:\\Users\\Serkan\\Documents\\ChatGPT\\fdb\\data\\rkyv-corpus-20261009",
+                "peak_working_set_bytes": 13402112,
+                "sampled_peak_private_bytes": 10235904,
+                "sample_interval_ms": 20,
+                "samples": 1856,
+                "elapsed_s": 71.4448867,
+                "total_cpu_ms": 70812.5,
+                "includes_os_file_cache": false,
+                "memory_window": "whole measured process: oracle, full open validation, queries and full-page oracle"
+              }
+            },
+            {
+              "opening": {
+                "codec": "rkyv",
+                "count": 100000,
+                "disk_bytes": 2711444148,
+                "open_ms": 2832.7075,
+                "phase": "open",
+                "profiled": false,
+                "scope": "payload-only; candidate/index construction excluded; no DB integration",
+                "validation": "CRC + bytecheck + graph/key/version"
+              },
+              "queries": {
+                "common": {
+                  "cache": "OS cache warmed by full validation and untimed first query; no forced eviction; not cold I/O",
+                  "candidates": 100000,
+                  "codec": "rkyv",
+                  "full_page_oracle_verified": true,
+                  "p50_ms": 11398.6139,
+                  "p95_ms": 11398.6139,
+                  "phase": "query",
+                  "profiled": false,
+                  "query": "common",
+                  "samples_ms": [
+                    11398.6139
+                  ],
+                  "strategy": "baseline",
+                  "text": "the",
+                  "total": 100000,
+                  "warmup": 1
+                },
+                "rare": {
+                  "cache": "OS cache warmed by full validation and untimed first query; no forced eviction; not cold I/O",
+                  "candidates": 529,
+                  "codec": "rkyv",
+                  "full_page_oracle_verified": true,
+                  "p50_ms": 167.3212,
+                  "p95_ms": 189.8591,
+                  "phase": "query",
+                  "profiled": false,
+                  "query": "rare",
+                  "samples_ms": [
+                    159.3573,
+                    162.9728,
+                    162.9736,
+                    163.1913,
+                    163.9982,
+                    164.43789999999998,
+                    165.10639999999998,
+                    165.6987,
+                    166.5795,
+                    166.73080000000002,
+                    167.3212,
+                    169.4243,
+                    173.8895,
+                    175.0417,
+                    176.0616,
+                    176.5464,
+                    176.6764,
+                    181.24280000000002,
+                    187.9573,
+                    189.8591
+                  ],
+                  "strategy": "baseline",
+                  "text": "abbreviation",
+                  "total": 264,
+                  "warmup": 1
+                },
+                "short": {
+                  "cache": "OS cache warmed by full validation and untimed first query; no forced eviction; not cold I/O",
+                  "candidates": 100000,
+                  "codec": "rkyv",
+                  "full_page_oracle_verified": true,
+                  "p50_ms": 11558.1872,
+                  "p95_ms": 11558.1872,
+                  "phase": "query",
+                  "profiled": false,
+                  "query": "short",
+                  "samples_ms": [
+                    11558.1872
+                  ],
+                  "strategy": "baseline",
+                  "text": "of",
+                  "total": 100000,
+                  "warmup": 1
+                },
+                "and": {
+                  "cache": "OS cache warmed by full validation and untimed first query; no forced eviction; not cold I/O",
+                  "candidates": 75664,
+                  "codec": "rkyv",
+                  "full_page_oracle_verified": true,
+                  "p50_ms": 9672.5087,
+                  "p95_ms": 9672.5087,
+                  "phase": "query",
+                  "profiled": false,
+                  "query": "and",
+                  "samples_ms": [
+                    9672.5087
+                  ],
+                  "strategy": "baseline",
+                  "text": "the whale",
+                  "total": 16537,
+                  "warmup": 1
+                }
+              },
+              "memory": {
+                "exit_code": 0,
+                "codec": "rkyv",
+                "strategy": "baseline",
+                "run": 1,
+                "executable": "C:\\Users\\Serkan\\Documents\\ChatGPT\\fdb\\output\\fdb-fold-20261011.exe",
+                "corpus": "C:\\Users\\Serkan\\Documents\\ChatGPT\\fdb\\data\\rkyv-corpus-20261009",
+                "peak_working_set_bytes": 13430784,
+                "sampled_peak_private_bytes": 10227712,
+                "sample_interval_ms": 20,
+                "samples": 1847,
+                "elapsed_s": 71.2489104,
+                "total_cpu_ms": 70515.625,
+                "includes_os_file_cache": false,
+                "memory_window": "whole measured process: oracle, full open validation, queries and full-page oracle"
+              }
+            },
+            {
+              "opening": {
+                "codec": "rkyv",
+                "count": 100000,
+                "disk_bytes": 2711444148,
+                "open_ms": 2693.9966000000004,
+                "phase": "open",
+                "profiled": false,
+                "scope": "payload-only; candidate/index construction excluded; no DB integration",
+                "validation": "CRC + bytecheck + graph/key/version"
+              },
+              "queries": {
+                "common": {
+                  "cache": "OS cache warmed by full validation and untimed first query; no forced eviction; not cold I/O",
+                  "candidates": 100000,
+                  "codec": "rkyv",
+                  "full_page_oracle_verified": true,
+                  "p50_ms": 9872.110700000001,
+                  "p95_ms": 9872.110700000001,
+                  "phase": "query",
+                  "profiled": false,
+                  "query": "common",
+                  "samples_ms": [
+                    9872.110700000001
+                  ],
+                  "strategy": "baseline",
+                  "text": "the",
+                  "total": 100000,
+                  "warmup": 1
+                },
+                "rare": {
+                  "cache": "OS cache warmed by full validation and untimed first query; no forced eviction; not cold I/O",
+                  "candidates": 529,
+                  "codec": "rkyv",
+                  "full_page_oracle_verified": true,
+                  "p50_ms": 157.3681,
+                  "p95_ms": 184.3904,
+                  "phase": "query",
+                  "profiled": false,
+                  "query": "rare",
+                  "samples_ms": [
+                    153.5594,
+                    154.19910000000002,
+                    154.24689999999998,
+                    154.3088,
+                    155.3034,
+                    155.7837,
+                    155.9067,
+                    156.0317,
+                    156.3711,
+                    156.4615,
+                    157.3681,
+                    157.6233,
+                    158.58059999999998,
+                    159.4236,
+                    161.0827,
+                    163.4545,
+                    166.0198,
+                    170.84949999999998,
+                    183.7096,
+                    184.3904
+                  ],
+                  "strategy": "baseline",
+                  "text": "abbreviation",
+                  "total": 264,
+                  "warmup": 1
+                },
+                "short": {
+                  "cache": "OS cache warmed by full validation and untimed first query; no forced eviction; not cold I/O",
+                  "candidates": 100000,
+                  "codec": "rkyv",
+                  "full_page_oracle_verified": true,
+                  "p50_ms": 9985.334200000001,
+                  "p95_ms": 9985.334200000001,
+                  "phase": "query",
+                  "profiled": false,
+                  "query": "short",
+                  "samples_ms": [
+                    9985.334200000001
+                  ],
+                  "strategy": "baseline",
+                  "text": "of",
+                  "total": 100000,
+                  "warmup": 1
+                },
+                "and": {
+                  "cache": "OS cache warmed by full validation and untimed first query; no forced eviction; not cold I/O",
+                  "candidates": 75664,
+                  "codec": "rkyv",
+                  "full_page_oracle_verified": true,
+                  "p50_ms": 9815.2454,
+                  "p95_ms": 9815.2454,
+                  "phase": "query",
+                  "profiled": false,
+                  "query": "and",
+                  "samples_ms": [
+                    9815.2454
+                  ],
+                  "strategy": "baseline",
+                  "text": "the whale",
+                  "total": 16537,
+                  "warmup": 1
+                }
+              },
+              "memory": {
+                "exit_code": 0,
+                "codec": "rkyv",
+                "strategy": "baseline",
+                "run": 2,
+                "executable": "C:\\Users\\Serkan\\Documents\\ChatGPT\\fdb\\output\\fdb-fold-20261011.exe",
+                "corpus": "C:\\Users\\Serkan\\Documents\\ChatGPT\\fdb\\data\\rkyv-corpus-20261009",
+                "peak_working_set_bytes": 13402112,
+                "sampled_peak_private_bytes": 10231808,
+                "sample_interval_ms": 20,
+                "samples": 1757,
+                "elapsed_s": 65.6882028,
+                "total_cpu_ms": 65000.0,
+                "includes_os_file_cache": false,
+                "memory_window": "whole measured process: oracle, full open validation, queries and full-page oracle"
+              }
+            }
+          ],
+          "median": {
+            "disk_bytes": 2711444148,
+            "peak_working_set_bytes": 13402112,
+            "sampled_peak_private_bytes": 10231808,
+            "queries_ms": {
+              "common": 11398.6139,
+              "rare": 164.1552,
+              "short": 11212.2441,
+              "and": 9691.1423
+            }
+          }
+        },
+        "reuse": {
+          "runs": [
+            {
+              "opening": {
+                "codec": "rkyv",
+                "count": 100000,
+                "disk_bytes": 2711444148,
+                "open_ms": 2856.5199999999995,
+                "phase": "open",
+                "profiled": false,
+                "scope": "payload-only; candidate/index construction excluded; no DB integration",
+                "validation": "CRC + bytecheck + graph/key/version"
+              },
+              "queries": {
+                "common": {
+                  "cache": "OS cache warmed by full validation and untimed first query; no forced eviction; not cold I/O",
+                  "candidates": 100000,
+                  "codec": "rkyv",
+                  "full_page_oracle_verified": true,
+                  "p50_ms": 5823.3628,
+                  "p95_ms": 5823.3628,
+                  "phase": "query",
+                  "profiled": false,
+                  "query": "common",
+                  "samples_ms": [
+                    5823.3628
+                  ],
+                  "strategy": "reuse",
+                  "text": "the",
+                  "total": 100000,
+                  "warmup": 1
+                },
+                "rare": {
+                  "cache": "OS cache warmed by full validation and untimed first query; no forced eviction; not cold I/O",
+                  "candidates": 529,
+                  "codec": "rkyv",
+                  "full_page_oracle_verified": true,
+                  "p50_ms": 131.696,
+                  "p95_ms": 139.4216,
+                  "phase": "query",
+                  "profiled": false,
+                  "query": "rare",
+                  "samples_ms": [
+                    125.33630000000001,
+                    127.22339999999998,
+                    127.82479999999998,
+                    128.0051,
+                    128.1686,
+                    128.4966,
+                    128.62009999999998,
+                    128.68669999999997,
+                    130.3791,
+                    130.8184,
+                    131.696,
+                    132.52800000000002,
+                    132.9272,
+                    132.9408,
+                    133.33880000000002,
+                    134.6175,
+                    136.36339999999998,
+                    136.9667,
+                    137.5384,
+                    139.4216
+                  ],
+                  "strategy": "reuse",
+                  "text": "abbreviation",
+                  "total": 264,
+                  "warmup": 1
+                },
+                "short": {
+                  "cache": "OS cache warmed by full validation and untimed first query; no forced eviction; not cold I/O",
+                  "candidates": 100000,
+                  "codec": "rkyv",
+                  "full_page_oracle_verified": true,
+                  "p50_ms": 5858.9958,
+                  "p95_ms": 5858.9958,
+                  "phase": "query",
+                  "profiled": false,
+                  "query": "short",
+                  "samples_ms": [
+                    5858.9958
+                  ],
+                  "strategy": "reuse",
+                  "text": "of",
+                  "total": 100000,
+                  "warmup": 1
+                },
+                "and": {
+                  "cache": "OS cache warmed by full validation and untimed first query; no forced eviction; not cold I/O",
+                  "candidates": 75664,
+                  "codec": "rkyv",
+                  "full_page_oracle_verified": true,
+                  "p50_ms": 5583.1621000000005,
+                  "p95_ms": 5583.1621000000005,
+                  "phase": "query",
+                  "profiled": false,
+                  "query": "and",
+                  "samples_ms": [
+                    5583.1621000000005
+                  ],
+                  "strategy": "reuse",
+                  "text": "the whale",
+                  "total": 16537,
+                  "warmup": 1
+                }
+              },
+              "memory": {
+                "exit_code": 0,
+                "codec": "rkyv",
+                "strategy": "reuse",
+                "run": 0,
+                "executable": "C:\\Users\\Serkan\\Documents\\ChatGPT\\fdb\\output\\fdb-fold-20261011.exe",
+                "corpus": "C:\\Users\\Serkan\\Documents\\ChatGPT\\fdb\\data\\rkyv-corpus-20261009",
+                "peak_working_set_bytes": 13074432,
+                "sampled_peak_private_bytes": 9617408,
+                "sample_interval_ms": 20,
+                "samples": 1063,
+                "elapsed_s": 40.2685768,
+                "total_cpu_ms": 39515.625,
+                "includes_os_file_cache": false,
+                "memory_window": "whole measured process: oracle, full open validation, queries and full-page oracle"
+              }
+            },
+            {
+              "opening": {
+                "codec": "rkyv",
+                "count": 100000,
+                "disk_bytes": 2711444148,
+                "open_ms": 2746.3021,
+                "phase": "open",
+                "profiled": false,
+                "scope": "payload-only; candidate/index construction excluded; no DB integration",
+                "validation": "CRC + bytecheck + graph/key/version"
+              },
+              "queries": {
+                "common": {
+                  "cache": "OS cache warmed by full validation and untimed first query; no forced eviction; not cold I/O",
+                  "candidates": 100000,
+                  "codec": "rkyv",
+                  "full_page_oracle_verified": true,
+                  "p50_ms": 5846.965499999999,
+                  "p95_ms": 5846.965499999999,
+                  "phase": "query",
+                  "profiled": false,
+                  "query": "common",
+                  "samples_ms": [
+                    5846.965499999999
+                  ],
+                  "strategy": "reuse",
+                  "text": "the",
+                  "total": 100000,
+                  "warmup": 1
+                },
+                "rare": {
+                  "cache": "OS cache warmed by full validation and untimed first query; no forced eviction; not cold I/O",
+                  "candidates": 529,
+                  "codec": "rkyv",
+                  "full_page_oracle_verified": true,
+                  "p50_ms": 132.7166,
+                  "p95_ms": 154.9018,
+                  "phase": "query",
+                  "profiled": false,
+                  "query": "rare",
+                  "samples_ms": [
+                    126.09219999999999,
+                    126.661,
+                    127.5,
+                    127.82370000000002,
+                    128.05849999999998,
+                    128.55259999999998,
+                    128.9006,
+                    129.0091,
+                    131.7611,
+                    132.6156,
+                    132.7166,
+                    133.30339999999998,
+                    133.9081,
+                    134.67329999999998,
+                    135.0008,
+                    137.37199999999999,
+                    138.2742,
+                    139.3122,
+                    145.5036,
+                    154.9018
+                  ],
+                  "strategy": "reuse",
+                  "text": "abbreviation",
+                  "total": 264,
+                  "warmup": 1
+                },
+                "short": {
+                  "cache": "OS cache warmed by full validation and untimed first query; no forced eviction; not cold I/O",
+                  "candidates": 100000,
+                  "codec": "rkyv",
+                  "full_page_oracle_verified": true,
+                  "p50_ms": 5885.0574,
+                  "p95_ms": 5885.0574,
+                  "phase": "query",
+                  "profiled": false,
+                  "query": "short",
+                  "samples_ms": [
+                    5885.0574
+                  ],
+                  "strategy": "reuse",
+                  "text": "of",
+                  "total": 100000,
+                  "warmup": 1
+                },
+                "and": {
+                  "cache": "OS cache warmed by full validation and untimed first query; no forced eviction; not cold I/O",
+                  "candidates": 75664,
+                  "codec": "rkyv",
+                  "full_page_oracle_verified": true,
+                  "p50_ms": 5333.0666,
+                  "p95_ms": 5333.0666,
+                  "phase": "query",
+                  "profiled": false,
+                  "query": "and",
+                  "samples_ms": [
+                    5333.0666
+                  ],
+                  "strategy": "reuse",
+                  "text": "the whale",
+                  "total": 16537,
+                  "warmup": 1
+                }
+              },
+              "memory": {
+                "exit_code": 0,
+                "codec": "rkyv",
+                "strategy": "reuse",
+                "run": 1,
+                "executable": "C:\\Users\\Serkan\\Documents\\ChatGPT\\fdb\\output\\fdb-fold-20261011.exe",
+                "corpus": "C:\\Users\\Serkan\\Documents\\ChatGPT\\fdb\\data\\rkyv-corpus-20261009",
+                "peak_working_set_bytes": 12967936,
+                "sampled_peak_private_bytes": 9625600,
+                "sample_interval_ms": 20,
+                "samples": 1044,
+                "elapsed_s": 39.5952109,
+                "total_cpu_ms": 39125.0,
+                "includes_os_file_cache": false,
+                "memory_window": "whole measured process: oracle, full open validation, queries and full-page oracle"
+              }
+            },
+            {
+              "opening": {
+                "codec": "rkyv",
+                "count": 100000,
+                "disk_bytes": 2711444148,
+                "open_ms": 2729.6212,
+                "phase": "open",
+                "profiled": false,
+                "scope": "payload-only; candidate/index construction excluded; no DB integration",
+                "validation": "CRC + bytecheck + graph/key/version"
+              },
+              "queries": {
+                "common": {
+                  "cache": "OS cache warmed by full validation and untimed first query; no forced eviction; not cold I/O",
+                  "candidates": 100000,
+                  "codec": "rkyv",
+                  "full_page_oracle_verified": true,
+                  "p50_ms": 5888.038200000001,
+                  "p95_ms": 5888.038200000001,
+                  "phase": "query",
+                  "profiled": false,
+                  "query": "common",
+                  "samples_ms": [
+                    5888.038200000001
+                  ],
+                  "strategy": "reuse",
+                  "text": "the",
+                  "total": 100000,
+                  "warmup": 1
+                },
+                "rare": {
+                  "cache": "OS cache warmed by full validation and untimed first query; no forced eviction; not cold I/O",
+                  "candidates": 529,
+                  "codec": "rkyv",
+                  "full_page_oracle_verified": true,
+                  "p50_ms": 138.0963,
+                  "p95_ms": 153.7086,
+                  "phase": "query",
+                  "profiled": false,
+                  "query": "rare",
+                  "samples_ms": [
+                    126.09580000000001,
+                    129.61010000000002,
+                    130.9467,
+                    134.5283,
+                    134.7183,
+                    134.91819999999998,
+                    134.9899,
+                    135.0542,
+                    135.6091,
+                    137.99349999999998,
+                    138.0963,
+                    138.3038,
+                    139.0187,
+                    139.0835,
+                    140.69670000000002,
+                    141.8898,
+                    144.49110000000002,
+                    149.097,
+                    151.2484,
+                    153.7086
+                  ],
+                  "strategy": "reuse",
+                  "text": "abbreviation",
+                  "total": 264,
+                  "warmup": 1
+                },
+                "short": {
+                  "cache": "OS cache warmed by full validation and untimed first query; no forced eviction; not cold I/O",
+                  "candidates": 100000,
+                  "codec": "rkyv",
+                  "full_page_oracle_verified": true,
+                  "p50_ms": 5957.173,
+                  "p95_ms": 5957.173,
+                  "phase": "query",
+                  "profiled": false,
+                  "query": "short",
+                  "samples_ms": [
+                    5957.173
+                  ],
+                  "strategy": "reuse",
+                  "text": "of",
+                  "total": 100000,
+                  "warmup": 1
+                },
+                "and": {
+                  "cache": "OS cache warmed by full validation and untimed first query; no forced eviction; not cold I/O",
+                  "candidates": 75664,
+                  "codec": "rkyv",
+                  "full_page_oracle_verified": true,
+                  "p50_ms": 5183.1577,
+                  "p95_ms": 5183.1577,
+                  "phase": "query",
+                  "profiled": false,
+                  "query": "and",
+                  "samples_ms": [
+                    5183.1577
+                  ],
+                  "strategy": "reuse",
+                  "text": "the whale",
+                  "total": 16537,
+                  "warmup": 1
+                }
+              },
+              "memory": {
+                "exit_code": 0,
+                "codec": "rkyv",
+                "strategy": "reuse",
+                "run": 2,
+                "executable": "C:\\Users\\Serkan\\Documents\\ChatGPT\\fdb\\output\\fdb-fold-20261011.exe",
+                "corpus": "C:\\Users\\Serkan\\Documents\\ChatGPT\\fdb\\data\\rkyv-corpus-20261009",
+                "peak_working_set_bytes": 13045760,
+                "sampled_peak_private_bytes": 9605120,
+                "sample_interval_ms": 20,
+                "samples": 1049,
+                "elapsed_s": 39.6326859,
+                "total_cpu_ms": 39171.875,
+                "includes_os_file_cache": false,
+                "memory_window": "whole measured process: oracle, full open validation, queries and full-page oracle"
+              }
+            }
+          ],
+          "median": {
+            "disk_bytes": 2711444148,
+            "peak_working_set_bytes": 13045760,
+            "sampled_peak_private_bytes": 9617408,
+            "queries_ms": {
+              "common": 5846.965499999999,
+              "rare": 132.7166,
+              "short": 5885.0574,
+              "and": 5333.0666
+            }
+          }
+        }
+      },
+      "gates": {
+        "repeatable_query_gain": true,
+        "disk_unchanged": true,
+        "working_set_no_regression": true
+      },
+      "query_change_percent": {
+        "common": -48.70459205570601,
+        "rare": -19.15175394992057,
+        "short": -47.512225496410665,
+        "and": -44.96968019961898
+      },
+      "decision": "passed_payload_experiment"
+    }
+  },
+  "default_engine_changed": false,
+  "scope": "same-codec payload query; warm cache; candidates precomputed"
+}

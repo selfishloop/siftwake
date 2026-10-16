@@ -15,6 +15,11 @@ pub(super) struct Parsed {
     pub groups: Vec<(String, String)>,
     pub ids: String,
     pub postings: BTreeMap<Term, Posting>,
+    pub pages: Vec<super::term_pages::Fence>,
+    pub collections: Vec<(String, String)>,
+    pub bloom: super::term_pages::Bloom,
+    #[cfg(feature = "experimental-builder-budget")]
+    pub universal: super::covering::Universal,
     pub live: usize,
     pub entries: u64,
 }
@@ -22,36 +27,37 @@ pub(super) struct Parsed {
 pub(super) fn read(file: &mut File, offset: u64, len: u64, sequence: u64) -> Result<Parsed> {
     file.seek(SeekFrom::Start(offset))?;
     let reader = BufReader::with_capacity(64 * 1024, file.take(len));
-    parse(reader, offset, sequence)
+    parse_entries(reader, offset, sequence, true, pack)
 }
+#[cfg(test)]
 fn parse(reader: impl BufRead, data_end: u64, sequence: u64) -> Result<Parsed> {
-    parse_entries(reader, data_end, sequence, |r, parsed| {
-        let new_group = parsed
+    parse_entries(reader, data_end, sequence, false, pack)
+}
+fn pack(r: &Record, parsed: &mut Parsed) -> Result<()> {
+    let new_group = parsed
+        .groups
+        .last()
+        .is_none_or(|(s, c)| s != &r.key.scope || c != &r.key.collection);
+    if new_group {
+        parsed
             .groups
-            .last()
-            .is_none_or(|(s, c)| s != &r.key.scope || c != &r.key.collection);
-        if new_group {
-            parsed
-                .groups
-                .push((r.key.scope.clone(), r.key.collection.clone()));
-        }
-        let group =
-            u32::try_from(parsed.groups.len() - 1).map_err(|_| corrupt("group capacity"))?;
-        let id_offset = u32::try_from(parsed.ids.len()).map_err(|_| corrupt("ID pool capacity"))?;
-        let id_len = r.key.id.len() as u32;
-        parsed.ids.push_str(&r.key.id);
-        parsed.records.push(PackedRecord {
-            offset: r.offset,
-            version: r.version,
-            group,
-            id_offset,
-            id_len,
-            len: r.len,
-            checksum: r.checksum,
-            deleted: r.deleted,
-        });
-        Ok(())
-    })
+            .push((r.key.scope.clone(), r.key.collection.clone()));
+    }
+    let group = u32::try_from(parsed.groups.len() - 1).map_err(|_| corrupt("group capacity"))?;
+    let id_offset = u32::try_from(parsed.ids.len()).map_err(|_| corrupt("ID pool capacity"))?;
+    let id_len = r.key.id.len() as u32;
+    parsed.ids.push_str(&r.key.id);
+    parsed.records.push(PackedRecord {
+        offset: r.offset,
+        version: r.version,
+        group,
+        id_offset,
+        id_len,
+        len: r.len,
+        checksum: r.checksum,
+        deleted: r.deleted,
+    });
+    Ok(())
 }
 #[cfg(feature = "experimental-streaming-metadata")]
 pub(super) fn read_with(
@@ -63,24 +69,31 @@ pub(super) fn read_with(
 ) -> Result<Parsed> {
     file.seek(SeekFrom::Start(offset))?;
     let reader = BufReader::with_capacity(64 * 1024, file.take(len));
-    parse_entries(reader, offset, sequence, |record, _| accept(record))
+    parse_entries(reader, offset, sequence, true, |record, _| accept(record))
 }
 fn parse_entries(
     reader: impl BufRead,
     data_end: u64,
     sequence: u64,
+    paged_terms: bool,
     mut accept: impl FnMut(&Record, &mut Parsed) -> Result<()>,
 ) -> Result<Parsed> {
     let mut input = Input {
         reader,
         scratch: Vec::new(),
         limit: ENTRY_LIMIT,
+        position: 0,
     };
     let mut parsed = Parsed {
         records: Vec::new(),
         groups: Vec::new(),
         ids: String::new(),
         postings: BTreeMap::new(),
+        pages: Vec::new(),
+        collections: Vec::new(),
+        bloom: super::term_pages::Bloom::default(),
+        #[cfg(feature = "experimental-builder-budget")]
+        universal: super::covering::Universal::default(),
         live: 0,
         entries: 0,
     };
@@ -88,6 +101,9 @@ fn parse_entries(
     let mut record_count = 0usize;
     let mut previous = None;
     let mut postings = Vec::new();
+    let mut previous_term = None;
+    let mut previous_posting = None;
+    let mut posting_end = None;
     let mut records_seen = false;
     let mut postings_seen = false;
     input.expect(b'{')?;
@@ -127,16 +143,63 @@ fn parse_entries(
                 // Exact scalar values can exceed the metadata entry budget.
                 // Preserve SEG03 compatibility up to its existing directory limit.
                 input.limit = MAX_DIRECTORY as usize;
-                input.array(|(term, posting): (Term, Posting)| {
-                    if postings
-                        .last()
-                        .is_some_and(|(previous, _)| previous >= &term)
-                    {
-                        return Err(corrupt("posting order"));
+                input.expect(b'[')?;
+                input.whitespace()?;
+                if input.peek()? == Some(b']') {
+                    input.byte()?;
+                } else {
+                    loop {
+                        input.whitespace()?;
+                        let start = input.position;
+                        let (term, posting): (Term, Posting) = input.value()?;
+                        if previous_term
+                            .as_ref()
+                            .is_some_and(|previous| previous >= &term)
+                        {
+                            return Err(corrupt("posting order"));
+                        }
+                        if previous_posting.is_some_and(|end| end != posting.offset)
+                            || posting.count == 0
+                        {
+                            return Err(corrupt("posting bounds"));
+                        }
+                        let end = posting
+                            .offset
+                            .checked_add(posting.count as u64 * 4)
+                            .ok_or_else(|| corrupt("posting overflow"))?;
+                        posting_end.get_or_insert(posting.offset);
+                        previous_posting = Some(end);
+                        parsed.entries += posting.count as u64;
+                        // Reversed legacy field order keeps the ordinary scan:
+                        // its live count is not known yet, so no proof is made.
+                        #[cfg(feature = "experimental-builder-budget")]
+                        if records_seen {
+                            parsed.universal.observe(&term, posting.count, parsed.live);
+                        }
+                        if let Term::Collection(scope, collection) = &term {
+                            parsed.collections.push((scope.clone(), collection.clone()));
+                        }
+                        if paged_terms {
+                            parsed.bloom.add(&term);
+                            super::term_pages::push_fence(
+                                &mut parsed.pages,
+                                &term,
+                                data_end + start,
+                                data_end + input.position,
+                                posting.count,
+                            )?;
+                        } else {
+                            postings.push((term.clone(), posting));
+                        }
+                        previous_term = Some(term);
+                        input.whitespace()?;
+                        match input.byte()? {
+                            b']' => break,
+                            b',' => {}
+                            _ => return Err(corrupt("posting separator")),
+                        }
                     }
-                    postings.push((term, posting));
-                    Ok(())
-                })?;
+                }
                 input.limit = ENTRY_LIMIT;
             }
             _ => return Err(corrupt("unknown or duplicate directory field")),
@@ -152,16 +215,16 @@ fn parse_entries(
     if input.peek()?.is_some() || !records_seen || !postings_seen {
         return Err(corrupt("missing fields/trailing data"));
     }
-    for (_, posting) in &postings {
-        if posting.offset != cursor || posting.count == 0 || posting.count as usize > record_count {
-            return Err(corrupt("posting bounds"));
-        }
-        cursor = cursor
-            .checked_add(posting.count as u64 * 4)
-            .ok_or_else(|| corrupt("posting overflow"))?;
-        parsed.entries += posting.count as u64;
-    }
-    if cursor != data_end {
+    if posting_end.unwrap_or(cursor) != cursor
+        || previous_posting.unwrap_or(cursor) != data_end
+        || postings
+            .iter()
+            .any(|(_, p)| p.count as usize > record_count)
+        || parsed
+            .pages
+            .iter()
+            .any(|p| p.max_count as usize > record_count)
+    {
         return Err(corrupt("noncontiguous data"));
     }
     parsed.records.shrink_to_fit();
@@ -175,6 +238,54 @@ fn parse_entries(
 #[cfg(test)]
 mod tests {
     use super::*;
+    #[cfg(feature = "experimental-builder-budget")]
+    #[test]
+    fn universal_gram_uses_live_count_and_reversed_order_falls_back() {
+        let directory = Directory {
+            records: vec![
+                Record {
+                    key: Key::new("s", "c", "a"),
+                    offset: HEADER_SIZE,
+                    len: 5,
+                    checksum: 1,
+                    version: 1,
+                    deleted: false,
+                },
+                Record {
+                    key: Key::new("s", "c", "b"),
+                    offset: HEADER_SIZE + 5,
+                    len: 0,
+                    checksum: 0,
+                    version: 1,
+                    deleted: true,
+                },
+            ],
+            postings: vec![(
+                Term::Gram("s".into(), "the".into()),
+                Posting {
+                    offset: HEADER_SIZE + 5,
+                    count: 1,
+                },
+            )],
+        };
+        let bytes = serde_json::to_vec(&directory).unwrap();
+        let parsed = parse(bytes.as_slice(), HEADER_SIZE + 9, 1).unwrap();
+        assert_eq!(parsed.live, 1);
+        let proof =
+            super::super::covering::Covering::new(&std::fs::metadata("Cargo.toml").unwrap())
+                .with_grams(parsed.universal);
+        assert!(proof.short_covered("s", "he"));
+        let reversed = format!(
+            "{{\"postings\":{},\"records\":{}}}",
+            serde_json::to_string(&directory.postings).unwrap(),
+            serde_json::to_string(&directory.records).unwrap()
+        );
+        let parsed = parse(reversed.as_bytes(), HEADER_SIZE + 9, 1).unwrap();
+        let proof =
+            super::super::covering::Covering::new(&std::fs::metadata("Cargo.toml").unwrap())
+                .with_grams(parsed.universal);
+        assert!(!proof.short_covered("s", "he"));
+    }
     #[test]
     fn framing_handles_escapes_boundaries_and_strict_schema() {
         let record = Record {
@@ -225,6 +336,7 @@ mod tests {
     fn entry_budget_and_order_are_rejected_without_unbounded_scratch() {
         let large = format!("\"{}\"", "x".repeat(ENTRY_LIMIT));
         let mut input = Input {
+            position: 0,
             reader: large.as_bytes(),
             scratch: Vec::new(),
             limit: ENTRY_LIMIT,

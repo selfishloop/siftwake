@@ -1,0 +1,71 @@
+{
+  "runtime_sources_unchanged_from_measured_writer": true,
+  "unchanged_runtime_sources": [
+    {
+      "path": "src/engine.rs",
+      "sha256": "BDDC0F022EA877FEF69ACA8A6AB842F3DE41EC3519F49F10A5451B0CBF96BF75"
+    },
+    {
+      "path": "src/segment/covering.rs",
+      "sha256": "FAF9B8A30580D90BD15AC282211CFBEA401F00674AD36A8376BC02DC692EBE8B"
+    },
+    {
+      "path": "Cargo.toml",
+      "sha256": "56BA21D2D0BA7D59FEAE71FA0EE4497950337A5C43D1FA306D78EE28E2C79F8A"
+    },
+    {
+      "path": "Cargo.lock",
+      "sha256": "57F2192106DC532AFC442099A68F285CC6475427E30716505DF143CB5ADEA55C"
+    },
+    {
+      "path": "src/index.rs",
+      "sha256": "0DEBF56586F06E2180361562AADADBE2EE62290FCDC89B67BF3F0B25E8BDFA6C"
+    },
+    {
+      "path": "src/index/packed_grams.rs",
+      "sha256": "D2D089B8BF80C9D8544D89035053F0F7ABE91971CD471437AC2FBE88046E3D6B"
+    },
+    {
+      "path": "src/timing.rs",
+      "sha256": "29773E9BAADE1BEACC5ABEDB89FD3FB0C0EF658D4C8955B72F43FCA4B475E63A"
+    }
+  ],
+  "segment_unchanged": true,
+  "control_and_candidate_normal_rebuilds_match_frozen_code": true,
+  "final_normal_reader_text_matches_measured_candidate": true,
+  "all_read_batches_database_hashes_unchanged": true,
+  "final_file_count": 139,
+  "same_existing_corpus_sha256": "11F826FCE3F4AE790FEB9FC6DF9B1169F52C2FD699E89FC4A8A4B77AAA41731B",
+  "no_corpus_generation_or_database_reset_or_copies": true,
+  "fixture_git_status": "",
+  "all_query_work_counts_identical": true,
+  "body_index_extraction_calls": 0,
+  "diagnostic_full_page_checks": 1920,
+  "focused_example_tests_passed": 4,
+  "clippy_default_all_targets": true,
+  "clippy_all_features_all_targets": true,
+  "fmt_check": true,
+  "benchmark_sources": [
+    {
+      "path": "examples/measure_content_reads.rs",
+      "sha256": "0BF30114775687BF979AB22124EF80EAA37B569AC63C95FD004E08A924F30B77"
+    },
+    {
+      "path": "tools/bench_support/thread_cycles.rs",
+      "sha256": "82FAB8703F0995AE81F07D4A7F81EE1D8B5BBA5968BFC340A63379E8D1C18362"
+    },
+    {
+      "path": "tools/measure-window-matrix.ps1",
+      "sha256": "1D1328252628F27ADAA79F0934B9865FBD90FE425260BFD41934A76502378AB1"
+    },
+    {
+      "path": "tools/measure-search-attribution.ps1",
+      "sha256": "76424B391D2D4451CDA639487F57746E410873999C5932949B74FADC6A260832"
+    },
+    {
+      "path": "tools/summarize-search-attribution.py",
+      "sha256": "CFE037D59F8427C1EEAF25BD53E433B31D05722559666930002D3F3E7215FBFF"
+    }
+  ],
+  "limitation": "No new write/RAM/concurrent/cold performance claim. Work counts and negative controls do not fully attribute residual code-layout or platform timing effects."
+}

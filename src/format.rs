@@ -1,4 +1,5 @@
-//! FDB v1: file magic, then independently checksummed atomic transaction frames.
+//! FDBLOG04: binary payloads in TXN2 frames; legacy JSON replay retained for fixtures.
+//! file magic, then independently checksummed atomic transaction frames.
 use crate::model::StoredDocument;
 use crate::{Error, Result};
 use serde::{Deserialize, Serialize};
@@ -6,6 +7,7 @@ use std::fs::File;
 use std::io::{Read, Seek, SeekFrom, Write};
 
 pub(crate) const MAGIC: &[u8; 8] = b"FDBLOG01";
+pub(crate) const MAGIC_V4: &[u8; 8] = b"FDBLOG04";
 pub(crate) const MAGIC_V3: &[u8; 8] = b"FDBLOG03";
 pub(crate) const MAX_FRAME: usize = 64 * 1024 * 1024;
 const HEADER: usize = 24;
@@ -60,6 +62,18 @@ const fn crc_slices() -> [[u32; 256]; 8] {
 const CRC_SLICES: [[u32; 256]; 8] = crc_slices();
 
 pub(crate) fn crc_extend(state: u32, bytes: &[u8]) -> u32 {
+    // Preserve the raw (unfinalized) state contract. crc32fast accepts and
+    // returns finalized IEEE CRCs; complement on both sides, including for
+    // chained/nonzero initial states. Tiny frame headers stay on our tables.
+    if bytes.len() >= 128 {
+        let mut hasher = crc32fast::Hasher::new_with_initial(!state);
+        hasher.update(bytes);
+        return !hasher.finalize();
+    }
+    crc_extend_tables(state, bytes)
+}
+
+fn crc_extend_tables(state: u32, bytes: &[u8]) -> u32 {
     let (chunks, tail) = bytes.as_chunks::<8>();
     let mut state = state;
     for chunk in chunks {
@@ -80,6 +94,59 @@ pub(crate) fn crc_extend(state: u32, bytes: &[u8]) -> u32 {
 
 pub(crate) fn crc(bytes: &[u8]) -> u32 {
     !crc_extend(!0, bytes)
+}
+
+const fn crc_transform(matrix: &[u32; 32], mut value: u32) -> u32 {
+    let mut result = 0;
+    let mut bit = 0;
+    while value != 0 {
+        if value & 1 != 0 {
+            result ^= matrix[bit];
+        }
+        value >>= 1;
+        bit += 1;
+    }
+    result
+}
+
+// IEEE zero-byte shift operators, then powers of two bytes. No heap allocation.
+const fn crc_shift_powers() -> [[u32; 32]; 64] {
+    let mut powers = [[0; 32]; 64];
+    let mut bit = 0;
+    while bit < 32 {
+        let mut value = 1u32 << bit;
+        let mut step = 0;
+        while step < 8 {
+            value = (value >> 1) ^ (0xedb88320 & 0u32.wrapping_sub(value & 1));
+            step += 1;
+        }
+        powers[0][bit] = value;
+        bit += 1;
+    }
+    let mut power = 1;
+    while power < 64 {
+        let mut bit = 0;
+        while bit < 32 {
+            powers[power][bit] = crc_transform(&powers[power - 1], powers[power - 1][bit]);
+            bit += 1;
+        }
+        power += 1;
+    }
+    powers
+}
+static CRC_SHIFT_POWERS: [[u32; 32]; 64] = crc_shift_powers();
+
+/// CRC(A || B), using already computed, finalized IEEE CRCs and B's byte length.
+pub(crate) fn crc_combine(mut left: u32, right: u32, mut right_len: u64) -> u32 {
+    let mut bit = 0;
+    while right_len != 0 {
+        if right_len & 1 != 0 {
+            left = crc_transform(&CRC_SHIFT_POWERS[bit], left);
+        }
+        right_len >>= 1;
+        bit += 1;
+    }
+    left ^ right
 }
 
 pub(crate) fn prefix_crc(file: &mut File, end: u64) -> Result<u32> {
@@ -106,19 +173,18 @@ pub(crate) fn encode(sequence: u64, batch: &Batch) -> Result<Vec<u8>> {
     #[cfg(feature = "diagnostic-memory")]
     let _origin = crate::memory::Scope::new(5);
     #[cfg(feature = "diagnostic-timing")]
-    let _encode = crate::timing::span("frame.encode_json_crc");
-    let mut bytes = vec![0; HEADER];
-    let mut sink = crate::bounded::Sink::new(&mut bytes, MAX_FRAME);
-    let encoded = serde_json::to_writer(&mut sink, batch);
-    if sink.exceeded {
-        return Err(Error::Invalid("transaction exceeds 64 MiB".into()));
-    }
-    if let Some(error) = sink.failure.take() {
-        return Err(Error::Io(error));
-    }
-    encoded?;
-    let len = sink.written;
-    bytes[..4].copy_from_slice(b"TXN1");
+    let _encode = crate::timing::span("frame.encode_binary_crc");
+    // Include the footer so finalization cannot grow/copy the entire payload.
+    let payload_len = crate::binary_batch::encoded_len(batch)?;
+    let mut bytes = Vec::with_capacity(HEADER + payload_len + FOOTER.len());
+    bytes.resize(HEADER, 0);
+    crate::binary_batch::encode_into(batch, &mut bytes)?;
+    finish_frame(sequence, bytes)
+}
+
+fn finish_frame(sequence: u64, mut bytes: Vec<u8>) -> Result<Vec<u8>> {
+    let len = bytes.len() - HEADER;
+    bytes[..4].copy_from_slice(b"TXN2");
     bytes[4..8].copy_from_slice(&(len as u32).to_le_bytes());
     bytes[8..16].copy_from_slice(&sequence.to_le_bytes());
     let checksum = crc(&bytes[HEADER..]);
@@ -153,59 +219,12 @@ pub(crate) fn encode_located(
     sequence: u64,
     batch: &Batch,
 ) -> Result<(Vec<u8>, Vec<Option<crate::wal_delta::Location>>)> {
-    #[cfg(feature = "diagnostic-memory")]
-    let _origin = crate::memory::Scope::new(5);
-    let mut bytes = vec![0; HEADER];
-    let mut locations = Vec::with_capacity(batch.changes.len());
-    let mut sink = crate::bounded::Sink::new(&mut bytes, MAX_FRAME);
-    let encoded = (|| -> Result<()> {
-        sink.write_all(if batch.checkpoint {
-            b"{\"checkpoint\":true,\"changes\":["
-        } else {
-            b"{\"checkpoint\":false,\"changes\":["
-        })?;
-        for (n, change) in batch.changes.iter().enumerate() {
-            if n != 0 {
-                sink.write_all(b",")?;
-            }
-            if let Change::Put { stored } = change {
-                sink.write_all(b"{\"kind\":\"put\",\"stored\":")?;
-                let start = sink.written;
-                serde_json::to_writer(&mut sink, stored)?;
-                locations.push(Some(crate::wal_delta::Location {
-                    offset: (HEADER + start) as u64,
-                    len: (sink.written - start) as u32,
-                    checksum: 0,
-                }));
-                sink.write_all(b"}")?;
-            } else {
-                serde_json::to_writer(&mut sink, change)?;
-                locations.push(None);
-            }
-        }
-        sink.write_all(b"]}")?;
-        Ok(())
-    })();
-    if sink.exceeded {
-        return Err(Error::Invalid("transaction exceeds 64 MiB".into()));
-    }
-    if let Some(error) = sink.failure.take() {
-        return Err(Error::Io(error));
-    }
-    encoded?;
-    let len = sink.written;
-    for location in locations.iter_mut().flatten() {
-        let start = location.offset as usize;
-        location.checksum = crc(&bytes[start..start + location.len as usize]);
-    }
-    bytes[..4].copy_from_slice(b"TXN1");
-    bytes[4..8].copy_from_slice(&(len as u32).to_le_bytes());
-    bytes[8..16].copy_from_slice(&sequence.to_le_bytes());
-    let checksum = crc(&bytes[HEADER..]);
-    bytes[16..20].copy_from_slice(&checksum.to_le_bytes());
-    let checksum = crc(&bytes[..20]);
-    bytes[20..24].copy_from_slice(&checksum.to_le_bytes());
-    bytes.extend_from_slice(FOOTER);
+    let bytes = encode(sequence, batch)?;
+    let locations = crate::wal_delta::locations(
+        &bytes[HEADER..bytes.len() - FOOTER.len()],
+        HEADER as u64,
+        batch,
+    )?;
     Ok((bytes, locations))
 }
 
@@ -219,6 +238,8 @@ pub(crate) fn replay_located(
         file,
         checkpoint_end,
         None,
+        None,
+        false,
         &mut |seq, batch, payload, start| {
             let locations = crate::wal_delta::locations(payload, start, &batch)?;
             apply(seq, batch, locations)
@@ -234,105 +255,72 @@ pub(crate) fn append_checkpoint_changes(
     changes: impl Iterator<Item = Result<Change>>,
 ) -> Result<()> {
     use std::io::BufWriter;
-    struct Payload<'a> {
-        file: &'a mut File,
-        count: usize,
-        state: u32,
-    }
-    impl Write for Payload<'_> {
-        fn write(&mut self, bytes: &[u8]) -> std::io::Result<usize> {
-            if bytes.len() > MAX_FRAME - self.count {
-                return Err(std::io::Error::new(
-                    std::io::ErrorKind::InvalidInput,
-                    "checkpoint exceeds 64 MiB",
-                ));
-            }
-            let n = self.file.write(bytes)?;
-            self.state = crc_extend(self.state, &bytes[..n]);
-            self.count += n;
-            Ok(n)
-        }
-        fn flush(&mut self) -> std::io::Result<()> {
-            self.file.flush()
-        }
-    }
     let mut changes = changes.peekable();
     loop {
-        // Acquire once before allocating, release before any builder reservation.
         let lease = crate::write_budget::reserve(64 * 1024, 8 * 1024)?;
         let start = file.seek(SeekFrom::End(0))?;
         file.write_all(&[0; HEADER])?;
-        let (len, checksum) = {
-            let mut writer = BufWriter::with_capacity(
-                lease.bytes,
-                Payload {
-                    file,
-                    count: 0,
-                    state: !0,
-                },
-            );
-            writer.write_all(b"{\"checkpoint\":true,\"changes\":[")?;
-            let mut first = true;
+        let mut len = 5usize;
+        let mut count = 0u32;
+        {
+            let mut writer = BufWriter::with_capacity(lease.bytes, &mut *file);
+            writer.write_all(&[1, 0, 0, 0, 0])?;
             while let Some(next) = changes.peek() {
-                if !first && let Ok(Change::Put { stored }) = next {
-                    // Valid large JSON fields can exceed the 8 MiB target. Avoid
-                    // combining them into a frame larger than the existing cap.
-                    let fields = &stored.document.fields;
-                    let preflight = fields.values().any(|v| v.is_array() || v.is_object())
-                        || fields
-                            .values()
-                            .filter_map(serde_json::Value::as_str)
-                            .map(str::len)
-                            .sum::<usize>()
-                            > 4 * 1024 * 1024;
-                    if preflight {
-                        let mut counted = crate::bounded::Sink::new(std::io::sink(), MAX_FRAME);
-                        let encoded = serde_json::to_writer(&mut counted, next.as_ref().unwrap());
-                        if counted.exceeded {
-                            return Err(Error::Invalid("checkpoint exceeds 64 MiB".into()));
-                        }
-                        encoded?;
-                        if writer.get_ref().count + writer.buffer().len() + 1 + counted.written + 2
-                            > MAX_FRAME
-                        {
-                            break;
-                        }
+                let entry_len = match next {
+                    Ok(Change::Put { stored }) => {
+                        5 + crate::payload::encoded_len(&stored.document)?
                     }
+                    Ok(Change::Delete { key }) => {
+                        17 + key.scope.len() + key.collection.len() + key.id.len()
+                    }
+                    Err(_) => {
+                        changes.next().unwrap()?;
+                        unreachable!();
+                    }
+                };
+                if entry_len > MAX_FRAME - 5 {
+                    return Err(Error::Invalid("checkpoint exceeds 64 MiB".into()));
                 }
-                if !first {
-                    writer.write_all(b",")?;
-                }
-                first = false;
-                let change = changes.next().unwrap()?;
-                serde_json::to_writer(&mut writer, &change)?;
-                drop(change);
-                if writer.get_ref().count + writer.buffer().len() >= 8 * 1024 * 1024 {
+                if count != 0 && len + entry_len > 8 * 1024 * 1024 {
                     break;
                 }
+                let entry = crate::binary_batch::entry(&changes.next().unwrap()?)?;
+                writer.write_all(&entry)?;
+                len += entry.len();
+                count += 1;
             }
-            writer.write_all(b"]}")?;
             writer.flush()?;
-            (writer.get_ref().count, !writer.get_ref().state)
-        };
-        let end = file.stream_position()?;
+        }
+        // Count is known only after streaming. Patch it, then checksum in 64 KiB blocks.
+        file.seek(SeekFrom::Start(start + HEADER as u64 + 1))?;
+        file.write_all(&count.to_le_bytes())?;
+        file.seek(SeekFrom::Start(start + HEADER as u64))?;
+        let mut state = !0;
+        let mut remaining = len;
+        let mut buffer = [0; 64 * 1024];
+        while remaining != 0 {
+            let n = remaining.min(buffer.len());
+            file.read_exact(&mut buffer[..n])?;
+            state = crc_extend(state, &buffer[..n]);
+            remaining -= n;
+        }
         file.write_all(FOOTER)?;
-        let mut header = [0u8; HEADER];
-        header[..4].copy_from_slice(b"TXN1");
+        let mut header = [0; HEADER];
+        header[..4].copy_from_slice(b"TXN2");
         header[4..8].copy_from_slice(&(len as u32).to_le_bytes());
         header[8..16].copy_from_slice(&sequence.to_le_bytes());
-        header[16..20].copy_from_slice(&checksum.to_le_bytes());
-        let header_crc = crc(&header[..20]);
-        header[20..24].copy_from_slice(&header_crc.to_le_bytes());
+        header[16..20].copy_from_slice(&(!state).to_le_bytes());
+        let checksum = crc(&header[..20]);
+        header[20..24].copy_from_slice(&checksum.to_le_bytes());
         file.seek(SeekFrom::Start(start))?;
         file.write_all(&header)?;
-        file.seek(SeekFrom::Start(end + FOOTER.len() as u64))?;
+        file.seek(SeekFrom::Start(start + (HEADER + len + 8) as u64))?;
         file.sync_all()?;
         drop(lease);
         if changes.peek().is_none() {
-            break;
+            return Ok(());
         }
     }
-    Ok(())
 }
 
 #[cfg(any(not(feature = "experimental-wal-delta"), test))]
@@ -341,20 +329,71 @@ pub(crate) fn replay(
     checkpoint_end: u64,
     mut apply: impl FnMut(u64, Batch) -> Result<()>,
 ) -> Result<u64> {
-    replay_impl(file, checkpoint_end, None, &mut |seq, batch, _, _| {
-        apply(seq, batch)
-    })
+    replay_impl(
+        file,
+        checkpoint_end,
+        None,
+        None,
+        false,
+        &mut |seq, batch, _, _| apply(seq, batch),
+    )
 }
 
-#[cfg(not(feature = "experimental-streaming-open"))]
+#[cfg(all(
+    not(feature = "experimental-streaming-open"),
+    feature = "experimental-merge-postings"
+))]
 pub(crate) fn replay_prefix(
     file: &mut File,
     end: u64,
     mut apply: impl FnMut(u64, Batch) -> Result<()>,
 ) -> Result<u64> {
-    replay_impl(file, end, Some(end), &mut |seq, batch, _, _| {
-        apply(seq, batch)
-    })
+    replay_impl(
+        file,
+        end,
+        Some(end),
+        None,
+        false,
+        &mut |seq, batch, _, _| apply(seq, batch),
+    )
+}
+
+/// Verify the authoritative whole-source CRC while replaying complete frames.
+/// Callbacks are provisional: callers must not publish before this succeeds.
+#[cfg(not(feature = "experimental-streaming-open"))]
+pub(crate) fn replay_prefix_checked(
+    file: &mut File,
+    end: u64,
+    expected: u32,
+    mut apply: impl FnMut(u64, Batch) -> Result<()>,
+) -> Result<u64> {
+    replay_impl(
+        file,
+        end,
+        Some(end),
+        Some(expected),
+        false,
+        &mut |seq, batch, _, _| apply(seq, batch),
+    )
+}
+
+/// Full native checkpoint integrity without allocating decoded documents.
+/// Shares framing, sequence, truncation and whole-source CRC checks with replay.
+#[cfg(not(feature = "experimental-streaming-open"))]
+pub(crate) fn validate_native_prefix(
+    file: &mut File,
+    end: u64,
+    expected: u32,
+    mut validate: impl FnMut(u64, &[u8]) -> Result<()>,
+) -> Result<u64> {
+    replay_impl(
+        file,
+        end,
+        Some(end),
+        Some(expected),
+        true,
+        &mut |seq, _, payload, _| validate(seq, payload),
+    )
 }
 
 /// Immutable checkpoints only. CRC/footer are verified before emitting changes.
@@ -372,7 +411,7 @@ pub(crate) fn replay_prefix_changes(
     }
     let mut magic = [0; 8];
     file.read_exact(&mut magic)?;
-    if &magic != MAGIC && &magic != MAGIC_V3 {
+    if &magic != MAGIC && &magic != MAGIC_V3 && &magic != MAGIC_V4 {
         return Err(Error::Corrupt("unsupported file format".into()));
     }
     let mut cursor = 8u64;
@@ -384,7 +423,8 @@ pub(crate) fn replay_prefix_changes(
         }
         let mut header = [0; HEADER];
         file.read_exact(&mut header)?;
-        if &header[..4] != b"TXN1"
+        if ((&magic == MAGIC_V4 && &header[..4] != b"TXN2")
+            || (&header[..4] != b"TXN1" && &header[..4] != b"TXN2"))
             || crc(&header[..20]) != u32::from_le_bytes(header[20..24].try_into().unwrap())
         {
             return Err(Error::Corrupt("checkpoint header checksum".into()));
@@ -412,8 +452,54 @@ pub(crate) fn replay_prefix_changes(
             return Err(Error::Corrupt("checkpoint payload checksum/footer".into()));
         }
         file.seek(SeekFrom::Start(start))?;
+        if &header[..4] == b"TXN2" {
+            if len < 5 {
+                return Err(Error::Corrupt("short binary checkpoint batch".into()));
+            }
+            let mut reader = BufReader::with_capacity(64 * 1024, (&mut *file).take(len as u64));
+            let mut head = [0; 5];
+            reader.read_exact(&mut head)?;
+            let count = u32::from_le_bytes(head[1..5].try_into().unwrap()) as usize;
+            if head[0] != 1 || count > (len - 5) / 17 {
+                return Err(Error::Corrupt("binary checkpoint flag/count".into()));
+            }
+            emit(seq, None)?;
+            let mut remaining = len - 5;
+            let mut scratch = Vec::new();
+            for _ in 0..count {
+                if remaining < 5 {
+                    return Err(Error::Corrupt("binary checkpoint entry header".into()));
+                }
+                let mut entry = [0; 5];
+                reader.read_exact(&mut entry)?;
+                remaining -= 5;
+                let n = u32::from_le_bytes(entry[1..5].try_into().unwrap()) as usize;
+                if n > remaining {
+                    return Err(Error::Corrupt("binary checkpoint entry bounds".into()));
+                }
+                if scratch.capacity() > 256 * 1024 {
+                    scratch = Vec::new();
+                }
+                scratch.resize(n, 0);
+                reader.read_exact(&mut scratch)?;
+                emit(
+                    seq,
+                    Some(crate::binary_batch::decode_entry(entry[0], &scratch)?),
+                )?;
+                remaining -= n;
+            }
+            if remaining != 0 {
+                return Err(Error::Corrupt("binary checkpoint trailing bytes".into()));
+            }
+            drop(reader);
+            cursor += (HEADER + len + 8) as u64;
+            file.seek(SeekFrom::Start(cursor))?;
+            sequence = Some(seq);
+            continue;
+        }
         emit(seq, None)?;
         let mut input = crate::json_stream::Input {
+            position: 0,
             reader: BufReader::with_capacity(64 * 1024, (&mut *file).take(len as u64)),
             scratch: Vec::new(),
             limit: MAX_FRAME,
@@ -457,10 +543,29 @@ pub(crate) fn replay_prefix_changes(
     sequence.ok_or_else(|| Error::Corrupt("missing checkpoint".into()))
 }
 
+/// A full active-log check without truncating an incomplete trailing frame.
+pub(crate) fn check_log(
+    file: &mut File,
+    checkpoint_end: u64,
+    mut apply: impl FnMut(u64, Batch) -> Result<()>,
+) -> Result<u64> {
+    let end = file.metadata()?.len();
+    replay_impl(
+        file,
+        checkpoint_end,
+        Some(end),
+        None,
+        false,
+        &mut |seq, batch, _, _| apply(seq, batch),
+    )
+}
+
 fn replay_impl(
     file: &mut File,
     checkpoint_end: u64,
     prefix: Option<u64>,
+    expected_source_crc: Option<u32>,
+    native_validation: bool,
     apply: &mut impl FnMut(u64, Batch, &[u8], u64) -> Result<()>,
 ) -> Result<u64> {
     file.seek(SeekFrom::Start(0))?;
@@ -472,9 +577,13 @@ fn replay_impl(
     let mut magic = [0; 8];
     file.read_exact(&mut magic)
         .map_err(|_| Error::Corrupt("truncated file header".into()))?;
-    if &magic != MAGIC && &magic != MAGIC_V3 {
+    if &magic != MAGIC && &magic != MAGIC_V3 && &magic != MAGIC_V4 {
         return Err(Error::Corrupt("unsupported file format".into()));
     }
+    if native_validation && &magic != MAGIC_V4 {
+        return Err(Error::Corrupt("native validation requires FDBLOG04".into()));
+    }
+    let mut source_crc = crc(&magic);
     let mut valid_end = 8u64;
     let mut sequence = 0;
     let mut first = true;
@@ -484,7 +593,8 @@ fn replay_impl(
         }
         let mut header = [0; HEADER];
         file.read_exact(&mut header)?;
-        if &header[..4] != b"TXN1"
+        if ((&magic == MAGIC_V4 && &header[..4] != b"TXN2")
+            || (&header[..4] != b"TXN1" && &header[..4] != b"TXN2"))
             || crc(&header[..20]) != u32::from_le_bytes(header[20..24].try_into().unwrap())
         {
             return Err(Error::Corrupt(format!(
@@ -499,19 +609,48 @@ fn replay_impl(
             break;
         }
         let seq = u64::from_le_bytes(header[8..16].try_into().unwrap());
+        #[cfg(feature = "diagnostic-timing")]
+        let read = crate::timing::span("source.frame_read_allocate");
         let mut payload = vec![0; len];
         file.read_exact(&mut payload)?;
         let mut footer = [0; 8];
         file.read_exact(&mut footer)?;
+        #[cfg(feature = "diagnostic-timing")]
+        drop(read);
+        #[cfg(feature = "diagnostic-timing")]
+        let checksum = crate::timing::span("source.frame_crc");
+        let payload_crc = crc(&payload);
+        #[cfg(feature = "diagnostic-timing")]
+        drop(checksum);
         if &footer != FOOTER
-            || crc(&payload) != u32::from_le_bytes(header[16..20].try_into().unwrap())
+            || payload_crc != u32::from_le_bytes(header[16..20].try_into().unwrap())
         {
             return Err(Error::Corrupt(format!(
                 "transaction checksum/footer mismatch at {valid_end}"
             )));
         }
-        let batch: Batch =
-            serde_json::from_slice(&payload).map_err(|e| Error::Corrupt(e.to_string()))?;
+        if expected_source_crc.is_some() {
+            #[cfg(feature = "diagnostic-timing")]
+            let _combine = crate::timing::span("open.source_crc_combine");
+            source_crc = !crc_extend(!source_crc, &header);
+            source_crc = crc_combine(source_crc, payload_crc, len as u64);
+            source_crc = !crc_extend(!source_crc, &footer);
+        }
+        let batch: Batch = if native_validation {
+            if payload.len() < 5 || payload[0] > 1 {
+                return Err(Error::Corrupt("binary checkpoint header".into()));
+            }
+            // Changes are validated by the borrowed callback after framing and
+            // sequence checks. This mode never exposes an empty batch as data.
+            Batch {
+                checkpoint: payload[0] != 0,
+                changes: Vec::new(),
+            }
+        } else if &header[..4] == b"TXN2" {
+            crate::binary_batch::decode(&payload)?
+        } else {
+            serde_json::from_slice(&payload).map_err(|e| Error::Corrupt(e.to_string()))?
+        };
         if (batch.checkpoint && (valid_end >= checkpoint_end || (!first && seq != sequence)))
             || (!batch.checkpoint
                 && (valid_end < checkpoint_end
@@ -526,15 +665,19 @@ fn replay_impl(
             return Err(Error::Corrupt("missing initial checkpoint".into()));
         }
         let checkpoint = batch.checkpoint;
-        #[cfg(feature = "experimental-wal-delta")]
-        {
+        if native_validation {
             apply(seq, batch, &payload, valid_end + HEADER as u64)?;
-            drop(payload);
-        }
-        #[cfg(not(feature = "experimental-wal-delta"))]
-        {
-            drop(payload);
-            apply(seq, batch, &[], valid_end + HEADER as u64)?;
+        } else {
+            #[cfg(feature = "experimental-wal-delta")]
+            {
+                apply(seq, batch, &payload, valid_end + HEADER as u64)?;
+                drop(payload);
+            }
+            #[cfg(not(feature = "experimental-wal-delta"))]
+            {
+                drop(payload);
+                apply(seq, batch, &[], valid_end + HEADER as u64)?;
+            }
         }
         sequence = seq;
         first = false;
@@ -551,6 +694,9 @@ fn replay_impl(
     if valid_end != size && prefix.is_some() {
         return Err(Error::Corrupt("incomplete immutable source".into()));
     }
+    if expected_source_crc.is_some_and(|expected| source_crc != expected) {
+        return Err(Error::Corrupt("source checkpoint checksum mismatch".into()));
+    }
     if valid_end != size {
         file.set_len(valid_end)?;
         file.sync_all()?;
@@ -562,6 +708,171 @@ fn replay_impl(
 #[cfg(test)]
 mod crc_tests {
     use super::*;
+    #[cfg(not(feature = "experimental-streaming-open"))]
+    #[test]
+    fn native_validation_handles_large_small_growing_and_empty_frames() {
+        let path = std::env::temp_dir().join(format!("fdb-reused-frame-{}", std::process::id()));
+        let mut file = std::fs::OpenOptions::new()
+            .create_new(true)
+            .read(true)
+            .write(true)
+            .open(&path)
+            .unwrap();
+        let mut bytes = MAGIC_V4.to_vec();
+        let mut expected = Vec::new();
+        for (n, len) in [16384, 1, 32768, 7].into_iter().enumerate() {
+            let stored = StoredDocument {
+                document: crate::Document {
+                    key: crate::Key::new("shared", "texts", &n.to_string()),
+                    title: "東京".into(),
+                    text: "é".repeat(len),
+                    fields: Default::default(),
+                    links: vec![],
+                },
+                version: 7,
+            };
+            expected.push(serde_json::to_value(&stored).unwrap());
+            bytes.extend(
+                encode(
+                    7,
+                    &Batch {
+                        checkpoint: true,
+                        changes: vec![Change::Put { stored }],
+                    },
+                )
+                .unwrap(),
+            );
+        }
+        bytes.extend(
+            encode(
+                7,
+                &Batch {
+                    checkpoint: true,
+                    changes: vec![],
+                },
+            )
+            .unwrap(),
+        );
+        file.write_all(&bytes).unwrap();
+        let mut actual = Vec::new();
+        let mut frame_sizes = Vec::new();
+        validate_native_prefix(&mut file, bytes.len() as u64, crc(&bytes), |_, payload| {
+            frame_sizes.push(payload.len());
+            let (_, entries) = crate::binary_batch::entries(payload)?;
+            for (tag, _, entry) in entries {
+                assert_eq!(tag, 0);
+                let view = crate::payload::checked(entry)?;
+                view.validate_document(entry.len())?;
+                actual.push(serde_json::to_value(view.to_document()?).unwrap());
+            }
+            Ok(())
+        })
+        .unwrap();
+        assert_eq!(actual, expected);
+        assert!(frame_sizes[0] > frame_sizes[1]);
+        assert!(frame_sizes[2] > frame_sizes[0]);
+        assert!(frame_sizes[2] > frame_sizes[3]);
+        assert_eq!(frame_sizes[4], 5);
+        drop(file);
+        std::fs::remove_file(path).unwrap();
+    }
+    #[test]
+    fn accelerated_ieee_matches_tables_for_offsets_lengths_states_and_chaining() {
+        // Bounded unit bytes, not a document/benchmark corpus.
+        let mut random = 0x12345678u32;
+        let bytes: Vec<_> = (0..262_177)
+            .map(|_| {
+                random ^= random << 13;
+                random ^= random >> 17;
+                random ^= random << 5;
+                random as u8
+            })
+            .collect();
+        for offset in 0..32 {
+            for len in (0..260).chain([
+                511, 1023, 1024, 1025, 4095, 4096, 4097, 65535, 65536, 262144,
+            ]) {
+                let input = &bytes[offset..offset + len];
+                for state in [0, !0, 1, 0x12345678, 0xdeadbeef] {
+                    let expected = crc_extend_tables(state, input);
+                    assert_eq!(
+                        crc_extend(state, input),
+                        expected,
+                        "offset={offset} len={len} state={state}"
+                    );
+                    for split in [0, len.min(127), len.min(128), len / 2, len] {
+                        assert_eq!(
+                            crc_extend(crc_extend(state, &input[..split]), &input[split..]),
+                            expected
+                        );
+                    }
+                }
+            }
+        }
+    }
+    #[cfg(not(feature = "experimental-streaming-open"))]
+    #[test]
+    fn borrowed_native_validation_matches_replay_on_cuts_and_corruption() {
+        let path = std::env::temp_dir().join(format!("fdb-borrowed-frame-{}", std::process::id()));
+        let mut file = std::fs::OpenOptions::new()
+            .create(true)
+            .truncate(true)
+            .read(true)
+            .write(true)
+            .open(&path)
+            .unwrap();
+        let batch = Batch {
+            checkpoint: true,
+            changes: vec![Change::Put {
+                stored: StoredDocument {
+                    document: crate::Document {
+                        key: crate::Key::new("shared", "texts", "a"),
+                        title: "İstanbul".into(),
+                        text: "東京 🦀".into(),
+                        fields: Default::default(),
+                        links: vec![],
+                    },
+                    version: 7,
+                },
+            }],
+        };
+        file.write_all(MAGIC_V4).unwrap();
+        append(&mut file, &encode(7, &batch).unwrap()).unwrap();
+        file.seek(SeekFrom::Start(0)).unwrap();
+        let mut original = Vec::new();
+        file.read_to_end(&mut original).unwrap();
+        let expected = crc(&original);
+        let verify = |file: &mut File, end| {
+            validate_native_prefix(file, end, expected, |seq, bytes| {
+                let (checkpoint, entries) = crate::binary_batch::entries(bytes)?;
+                assert!(checkpoint);
+                assert_eq!(seq, 7);
+                for (tag, _, bytes) in entries {
+                    assert_eq!(tag, 0);
+                    let view = crate::payload::checked(bytes)?;
+                    view.validate_document(bytes.len())?;
+                    assert_eq!(view.version(), 7);
+                }
+                Ok(())
+            })
+        };
+        assert_eq!(verify(&mut file, original.len() as u64).unwrap(), 7);
+        for cut in 0..original.len() {
+            assert!(verify(&mut file, cut as u64).is_err(), "cut {cut}");
+        }
+        for position in 0..original.len() {
+            let mut bytes = original.clone();
+            bytes[position] ^= 1;
+            file.seek(SeekFrom::Start(0)).unwrap();
+            file.write_all(&bytes).unwrap();
+            assert!(
+                verify(&mut file, bytes.len() as u64).is_err(),
+                "byte {position}"
+            );
+        }
+        drop(file);
+        std::fs::remove_file(path).unwrap();
+    }
     #[cfg(feature = "experimental-streaming-open")]
     #[test]
     fn streaming_checkpoint_checks_crc_before_emitting_and_rejects_schema_errors() {
@@ -673,7 +984,7 @@ mod crc_tests {
         std::fs::remove_file(path).unwrap();
     }
     #[test]
-    fn single_buffer_frame_is_byte_compatible_with_v1_and_v3() {
+    fn binary_frame_has_versioned_header_and_expected_crc() {
         for count in [0, 1, 100] {
             let batch = Batch {
                 checkpoint: true,
@@ -683,8 +994,8 @@ mod crc_tests {
                     })
                     .collect(),
             };
-            let payload = serde_json::to_vec(&batch).unwrap();
-            let mut reference = b"TXN1".to_vec();
+            let payload = crate::binary_batch::encode(&batch).unwrap();
+            let mut reference = b"TXN2".to_vec();
             reference.extend_from_slice(&(payload.len() as u32).to_le_bytes());
             reference.extend_from_slice(&19u64.to_le_bytes());
             reference.extend_from_slice(&crc(&payload).to_le_bytes());
@@ -727,11 +1038,18 @@ mod crc_tests {
             append_checkpoint_changes(&mut file, 7, batch.changes.into_iter().map(Ok)).unwrap();
             let bytes = std::fs::read(&path).unwrap();
             assert_eq!(&bytes[8..], expected);
+            for position in 8..bytes.len() {
+                let mut damaged = bytes.clone();
+                damaged[position] ^= 1;
+                file.seek(SeekFrom::Start(0)).unwrap();
+                file.write_all(&damaged).unwrap();
+                assert!(replay(&mut file, bytes.len() as u64, |_, _| Ok(())).is_err());
+            }
+            file.seek(SeekFrom::Start(0)).unwrap();
+            file.write_all(&bytes).unwrap();
             for cut in 8..bytes.len() {
                 file.set_len(cut as u64).unwrap();
-                assert!(
-                    replay_prefix_changes(&mut file, bytes.len() as u64, |_, _| Ok(())).is_err()
-                );
+                assert!(replay(&mut file, bytes.len() as u64, |_, _| Ok(())).is_err());
                 file.seek(SeekFrom::Start(0)).unwrap();
                 file.write_all(&bytes).unwrap();
             }
@@ -810,6 +1128,85 @@ mod crc_tests {
                 !crc_extend(crc_extend(!0, &bytes[..cut]), &bytes[cut..]),
                 !reference
             );
+            assert_eq!(
+                crc_combine(
+                    crc(&bytes[..cut]),
+                    crc(&bytes[cut..]),
+                    (bytes.len() - cut) as u64
+                ),
+                !reference
+            );
         }
+        assert_eq!(crc_combine(crc(&bytes), crc(b""), 0), crc(&bytes));
+        // Powers beyond a u32 length, without allocating a multi-GB buffer.
+        let mut checksum = crc(b"abc");
+        let mut length = 3u64;
+        for _ in 0..34 {
+            let doubled = crc_combine(checksum, checksum, length);
+            let tripled = crc_combine(doubled, checksum, length);
+            assert_eq!(tripled, crc_combine(checksum, doubled, length * 2));
+            checksum = doubled;
+            length *= 2;
+        }
+    }
+
+    #[cfg(not(feature = "experimental-streaming-open"))]
+    #[test]
+    fn whole_source_crc_is_checked_even_when_each_frame_is_valid() {
+        let path = std::env::temp_dir().join(format!(
+            "fdb-combined-crc-{}-{}.tmp",
+            std::process::id(),
+            std::time::SystemTime::now()
+                .duration_since(std::time::UNIX_EPOCH)
+                .unwrap()
+                .as_nanos()
+        ));
+        let mut file = std::fs::OpenOptions::new()
+            .create_new(true)
+            .read(true)
+            .write(true)
+            .open(&path)
+            .unwrap();
+        let mut bytes = MAGIC_V4.to_vec();
+        for key in ["bir", "İKİ", "東京"] {
+            bytes.extend(
+                encode(
+                    19,
+                    &Batch {
+                        checkpoint: true,
+                        changes: vec![Change::Delete {
+                            key: crate::Key::new("scope", "docs", key),
+                        }],
+                    },
+                )
+                .unwrap(),
+            );
+        }
+        file.write_all(&bytes).unwrap();
+        let end = bytes.len() as u64;
+        let mut seen = 0;
+        assert_eq!(
+            replay_prefix_checked(&mut file, end, crc(&bytes), |_, _| {
+                seen += 1;
+                Ok(())
+            })
+            .unwrap(),
+            19
+        );
+        assert_eq!(seen, 3);
+        assert!(matches!(
+            replay_prefix_checked(&mut file, end, crc(&bytes) ^ 1, |_, _| Ok(())),
+            Err(Error::Corrupt(_))
+        ));
+        assert_eq!(std::fs::read(&path).unwrap(), bytes);
+        // Published prefix excludes trailing bytes, just like the original CRC pass.
+        file.seek(SeekFrom::End(0)).unwrap();
+        file.write_all(b"unpublished").unwrap();
+        assert_eq!(
+            replay_prefix_checked(&mut file, end, crc(&bytes), |_, _| Ok(())).unwrap(),
+            19
+        );
+        drop(file);
+        std::fs::remove_file(path).unwrap();
     }
 }
