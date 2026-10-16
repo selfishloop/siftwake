@@ -1,0 +1,13 @@
+{
+  "phase": "write",
+  "git_head": "8b90c11a5356ef427f4b83c21e82235765985962",
+  "fdb_features": "normal default bounded-engine; no diagnostics",
+  "corpus": "same first10000 existing records;264842858 body bytes;2057-51197 bytes/passage",
+  "cache": "warm OS cache; no eviction, power or hardware isolation; sequential processes",
+  "write": "4 balanced streamed/SQLite pairs;2 balanced owned/SQLite pairs;500/transaction;sync WAL",
+  "search": "same38 cases and256 gets;4 balanced pairs;20 primary/5 page samples/process;full payload/version oracle outside timing",
+  "opening": "4 balanced default strict/SQLite pairs;record-read first-use also explicit;full source integrity only on FDB strict open",
+  "memory": "2 balanced pairs;3 rounds/24 queries/771 gets without corpus/oracle resident;OS lifetime peaks include opening",
+  "sqlite": "bundled FTS5 trigram, FULL WAL,cache2MiB,mmap0,tempFILE;not all FDB field/link/guard functionality",
+  "storage": "only fixed owned data/benchmark-work/fdb and sqlite slots;no corpus generation or DB copies"
+}

@@ -1,5 +1,28 @@
 # Native SQLite comparator
 
+The current default-profile comparison uses only the existing first10k records
+and the two owned fixed slots. Start from the FDB repository root:
+
+```powershell
+cargo build --release --example measure_content_reads --example measure_content_memory
+cargo build --release --locked --manifest-path tools/native_sqlite/Cargo.toml --bin content_reads --bin content_memory
+./tools/measure-sqlite-default.ps1 -Phase write
+./tools/measure-sqlite-default.ps1 -Phase read
+./tools/measure-sqlite-default.ps1 -Phase open-memory
+```
+
+`write` resets only the owned `data/benchmark-work/fdb` and `sqlite` slots;
+`read` and `open-memory` reuse them. No new corpus is generated. Report prefixes
+must be unused. The read matrix checks all38 counts/full payload pages/versions
+and256 get keys independently against the same existing corpus. The separate
+memory probe keeps no corpus or document oracle resident. The SQLite reader
+reuses up to64 prepared statements; the2MiB page cache is a separate setting.
+Queries remain FTS5 trigram-assisted LIKE substring requests, including AND,
+with count and full decoded payloads in one snapshot transaction.
+
+The commands and results below are historical. Do not run old synthetic/100k
+preparation workflows under the current AGENTS.md corpus/storage policy.
+
 The current native OFF1 FDB comparison covers both synthetic writes/reads
 and long-passage searches plus 100 dispersed full-document lookups:
 [native general comparison](../../docs/NATIVE-SQLITE-GENERAL-20261011.md).

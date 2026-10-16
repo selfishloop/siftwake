@@ -2,6 +2,8 @@
 mod input;
 #[path = "../../../bench_support/read_matrix.rs"]
 mod matrix;
+#[path = "../../../bench_support/read_probe.rs"]
+mod read_probe;
 #[path = "../../../bench_support/content_reads.rs"]
 mod reads;
 use fdb::StoredDocument;
@@ -15,6 +17,9 @@ fn main() -> input::Result<()> {
         OpenFlags::SQLITE_OPEN_READ_ONLY,
     )?;
     db.execute_batch("PRAGMA cache_size=-2048; PRAGMA mmap_size=0; PRAGMA temp_store=FILE;")?;
+    // Reuse prepared statements as a normal SQLite caller would; this cache is
+    // separate from the requested 2 MiB database-page cache.
+    db.set_prepared_statement_cache_capacity(64);
     let open_ms = start.elapsed().as_secs_f64() * 1000.;
     assert_eq!(
         db.query_row("SELECT count(*) FROM docs", [], |r| r.get::<_, i64>(0))?,
@@ -22,8 +27,33 @@ fn main() -> input::Result<()> {
     );
     println!(
         "{}",
-        json!({"phase":"opened","engine":"sqlite","open_ms":open_ms,"sqlite_version":rusqlite::version(),"full_integrity_on_open":false,"cache_kib":2048,"mmap_bytes":0})
+        json!({"phase":"opened","engine":"sqlite","open_ms":open_ms,"sqlite_version":rusqlite::version(),"full_integrity_on_open":false,"cache_kib":2048,"mmap_bytes":0,"prepared_statement_cache_capacity":64})
     );
+    if std::env::args().any(|arg| arg == "--memory-probe") {
+        return read_probe::measure(
+            |key| get(&db, key),
+            |text, offset, limit| search(&db, text, offset, limit),
+        );
+    }
+    if std::env::args().any(|arg| arg == "--first-use-probe") {
+        let start = Instant::now();
+        let doc = get(&db, &fdb::Key::new("shared", "texts", "0000009999"))?.unwrap();
+        let first_get_ms = start.elapsed().as_secs_f64() * 1000.;
+        assert_eq!(doc.version, 20);
+        let start = Instant::now();
+        let page = search(&db, "quixote", 0, 50)?;
+        let first_search_ms = start.elapsed().as_secs_f64() * 1000.;
+        assert_eq!(page.0, 56);
+        assert_eq!(page.1.len(), 50);
+        let start = Instant::now();
+        assert_eq!(search(&db, "quixote", 0, 50)?, page);
+        let warm_search_ms = start.elapsed().as_secs_f64() * 1000.;
+        println!(
+            "{}",
+            json!({"phase":"first_use","first_get_ms":first_get_ms,"first_search_ms":first_search_ms,"warm_search_ms":warm_search_ms,"full_integrity_on_open":false})
+        );
+        return Ok(());
+    }
     if let Some(seed) = std::env::args()
         .skip(1)
         .collect::<Vec<_>>()
@@ -59,11 +89,8 @@ fn main() -> input::Result<()> {
 }
 fn get(db: &Connection, key: &fdb::Key) -> input::Result<Option<StoredDocument>> {
     let payload: Option<String> = db
-        .query_row(
-            "SELECT payload FROM docs WHERE scope=? AND collection=? AND id=?",
-            params![key.scope, key.collection, key.id],
-            |row| row.get(0),
-        )
+        .prepare_cached("SELECT payload FROM docs WHERE scope=? AND collection=? AND id=?")?
+        .query_row(params![key.scope, key.collection, key.id], |row| row.get(0))
         .optional()?;
     Ok(payload.map(|p| serde_json::from_str(&p)).transpose()?)
 }
@@ -82,16 +109,14 @@ fn search(
         "search CROSS JOIN docs d ON d.rowid=search.rowid WHERE d.scope='shared' AND d.collection='texts' AND {conditions}"
     );
     let tx = db.unchecked_transaction()?;
-    let total: i64 = tx.query_row(
-        &format!("SELECT count(*) FROM {from}"),
-        params_from_iter(&values),
-        |r| r.get(0),
-    )?;
+    let total: i64 = tx
+        .prepare_cached(&format!("SELECT count(*) FROM {from}"))?
+        .query_row(params_from_iter(&values), |r| r.get(0))?;
     let sql = format!(
         "WITH selected AS MATERIALIZED (SELECT d.rowid AS rid,d.id AS id FROM {from} ORDER BY d.id LIMIT {limit} OFFSET {offset}) SELECT d.payload FROM selected s JOIN docs d ON d.rowid=s.rid ORDER BY s.id"
     );
     let hits = {
-        let mut statement = tx.prepare(&sql)?;
+        let mut statement = tx.prepare_cached(&sql)?;
         let payloads =
             statement.query_map(params_from_iter(&values), |row| row.get::<_, String>(0))?;
         let mut hits = Vec::new();

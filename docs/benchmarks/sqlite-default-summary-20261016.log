@@ -1,0 +1,167 @@
+{
+  "query_counts": {
+    "fdb_faster_pooled_p95": 38,
+    "primary_fdb_faster": 30,
+    "page_fdb_faster": 8
+  },
+  "opening": {
+    "fdb": {
+      "process_open_ms": [
+        416.5842,
+        433.9064,
+        434.9639,
+        433.4656
+      ],
+      "median_open_ms": 433.68600000000004,
+      "process_first_use": [
+        {
+          "first_get_ms": 0.1041,
+          "first_search_ms": 4.498399999999999,
+          "warm_search_ms": 2.227
+        },
+        {
+          "first_get_ms": 0.1005,
+          "first_search_ms": 4.758,
+          "warm_search_ms": 2.6781
+        },
+        {
+          "first_get_ms": 0.0971,
+          "first_search_ms": 4.901199999999999,
+          "warm_search_ms": 2.5107
+        },
+        {
+          "first_get_ms": 0.1064,
+          "first_search_ms": 4.4223,
+          "warm_search_ms": 2.2496
+        }
+      ],
+      "median_first_get_ms": 0.1023,
+      "median_first_search_ms": 4.6282,
+      "median_warm_search_ms": 2.38015,
+      "median_open_plus_first_get_search_ms": 438.3796
+    },
+    "sqlite": {
+      "process_open_ms": [
+        1.6381,
+        1.4949,
+        1.5743,
+        1.4909000000000001
+      ],
+      "median_open_ms": 1.5346,
+      "process_first_use": [
+        {
+          "first_get_ms": 0.2106,
+          "first_search_ms": 12.2469,
+          "warm_search_ms": 10.7922
+        },
+        {
+          "first_get_ms": 0.18560000000000001,
+          "first_search_ms": 12.4256,
+          "warm_search_ms": 10.6151
+        },
+        {
+          "first_get_ms": 0.247,
+          "first_search_ms": 13.0849,
+          "warm_search_ms": 12.0233
+        },
+        {
+          "first_get_ms": 0.313,
+          "first_search_ms": 12.407,
+          "warm_search_ms": 10.743300000000001
+        }
+      ],
+      "median_first_get_ms": 0.2288,
+      "median_first_search_ms": 12.4163,
+      "median_warm_search_ms": 10.76775,
+      "median_open_plus_first_get_search_ms": 14.1585
+    },
+    "record-fdb": {
+      "process_open_ms": [
+        168.6396,
+        165.123,
+        182.96280000000002,
+        166.4006
+      ],
+      "median_open_ms": 167.5201,
+      "process_first_use": [
+        {
+          "first_get_ms": 0.161,
+          "first_search_ms": 238.4076,
+          "warm_search_ms": 2.0969
+        },
+        {
+          "first_get_ms": 0.145,
+          "first_search_ms": 237.3979,
+          "warm_search_ms": 2.3005999999999998
+        },
+        {
+          "first_get_ms": 0.1502,
+          "first_search_ms": 253.6719,
+          "warm_search_ms": 1.9960999999999998
+        },
+        {
+          "first_get_ms": 0.15510000000000002,
+          "first_search_ms": 239.5719,
+          "warm_search_ms": 2.0013
+        }
+      ],
+      "median_first_get_ms": 0.15265,
+      "median_first_search_ms": 238.98975000000002,
+      "median_warm_search_ms": 2.0491,
+      "median_open_plus_first_get_search_ms": 406.66790000000003
+    }
+  },
+  "memory": {
+    "fdb": {
+      "query_lifetime_private_bytes": 9635840.0,
+      "query_lifetime_working_set_bytes": 13447168.0,
+      "query_process_peaks": [
+        {
+          "peak_private_commit_bytes": 9633792,
+          "peak_working_set_bytes": 13455360,
+          "scope": "entire process lifetime, read after exit with retained handle; not phase-specific",
+          "private_counter": "PeakPagefileUsage: private committed bytes, not physical RAM",
+          "working_set_counter": "PeakWorkingSetSize: resident pages including shared image pages",
+          "sample_gaps": false
+        },
+        {
+          "peak_private_commit_bytes": 9637888,
+          "peak_working_set_bytes": 13438976,
+          "scope": "entire process lifetime, read after exit with retained handle; not phase-specific",
+          "private_counter": "PeakPagefileUsage: private committed bytes, not physical RAM",
+          "working_set_counter": "PeakWorkingSetSize: resident pages including shared image pages",
+          "sample_gaps": false
+        }
+      ],
+      "idle_private_bytes": 1851392.0,
+      "idle_working_set_bytes": 5783552.0
+    },
+    "sqlite": {
+      "query_lifetime_private_bytes": 13359104.0,
+      "query_lifetime_working_set_bytes": 17506304.0,
+      "query_process_peaks": [
+        {
+          "peak_private_commit_bytes": 13402112,
+          "peak_working_set_bytes": 17674240,
+          "scope": "entire process lifetime, read after exit with retained handle; not phase-specific",
+          "private_counter": "PeakPagefileUsage: private committed bytes, not physical RAM",
+          "working_set_counter": "PeakWorkingSetSize: resident pages including shared image pages",
+          "sample_gaps": false
+        },
+        {
+          "peak_private_commit_bytes": 13316096,
+          "peak_working_set_bytes": 17338368,
+          "scope": "entire process lifetime, read after exit with retained handle; not phase-specific",
+          "private_counter": "PeakPagefileUsage: private committed bytes, not physical RAM",
+          "working_set_counter": "PeakWorkingSetSize: resident pages including shared image pages",
+          "sample_gaps": false
+        }
+      ],
+      "idle_private_bytes": 1298432.0,
+      "idle_working_set_bytes": 5636096.0
+    }
+  },
+  "read_only_hashes_unchanged": true
+}
+{"api": "streamed", "medians": {"fdb": {"ingest_s": 22.750380749999998, "maintenance_s": 0.7891658500000001, "total_s": 23.59824215, "cpu_s": 21.640625, "private_bytes": 9601024.0, "working_set_bytes": 13527040.0, "disk_bytes": 1521041630.0}, "sqlite": {"ingest_s": 33.434103050000004, "maintenance_s": 1.0624919, "total_s": 34.5091788, "cpu_s": 33.421875, "private_bytes": 8810496.0, "working_set_bytes": 13250560.0, "disk_bytes": 583860224.0}}, "changes_percent": {"ingest_s": -31.954565325179274, "maintenance_s": -25.725000821182718, "total_s": -31.617491431004442, "cpu_s": -35.25011687704534, "private_bytes": 8.972570897257093, "working_set_bytes": 2.086553323029361, "disk_bytes": 160.51468613145326}}
+{"api": "owned", "medians": {"fdb": {"ingest_s": 22.91091955, "maintenance_s": 5.1040077, "total_s": 28.01492725, "cpu_s": 26.0078125, "private_bytes": 82745344.0, "working_set_bytes": 86513664.0, "disk_bytes": 1514639487.0}, "sqlite": {"ingest_s": 48.21525185, "maintenance_s": 1.6460889, "total_s": 49.86134075, "cpu_s": 47.5078125, "private_bytes": 8810496.0, "working_set_bytes": 13260800.0, "disk_bytes": 583860224.0}}, "changes_percent": {"ingest_s": -52.48200793127248, "maintenance_s": 210.0687757508115, "total_s": -43.814332248977884, "cpu_s": -45.25571452063806, "private_bytes": 839.1678289167828, "working_set_bytes": 552.4015444015445, "disk_bytes": 159.41816632468527}}

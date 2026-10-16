@@ -1,5 +1,11 @@
 # FDB
 
+[Varsayılan FDB / SQLite güncel10k karşılaştırması](docs/SQLITE-DEFAULT-COMPARISON-10K-20261016.md):
+akışlı yazma+bakım23,60/34,51s,38/38 aramada p95 FDB düşük (her biri4/4 çift).
+Query/get peak private9,19/12,74MiB; normal Vec78,91/8,40MiB,
+strict açılış434/1,53ms ve disk1,52GB/584MB. Aynı mevcut corpus/sabit iki
+slot; motor değişmedi. FTS5/LIKE, sıcak-cache ve faz sınırları rapordadır.
+
 Güncel varsayılan profil **`bounded-engine`**: normal derleme ölçülmüş
 sayfalı indeks/arama ve akışlı yazma birleşimini içerir. Özel deneysel
 feature seçmeden `Database::commit_streamed` kullanılabilir; mevcut

@@ -5,6 +5,8 @@ mod cycles;
 mod input;
 #[path = "../tools/bench_support/read_matrix.rs"]
 mod matrix;
+#[path = "../tools/bench_support/read_probe.rs"]
+mod read_probe;
 #[path = "../tools/bench_support/content_reads.rs"]
 mod reads;
 use fdb::{Database, Query};
@@ -31,6 +33,21 @@ fn main() -> input::Result<()> {
         "{}",
         json!({"phase":"opened","engine":"fdb","open_ms":open_ms,"stats":stats,"source_validation_on_open":!std::env::args().any(|arg| arg == "--deferred" || arg == "--record-reads"),"pending_source_checks":db.pending_source_checks()?})
     );
+    if std::env::args().any(|arg| arg == "--memory-probe") {
+        return read_probe::measure(
+            |key| Ok(db.get(key)?),
+            |text, offset, limit| {
+                let mut query = Query::new("shared");
+                query.collection = Some("texts".into());
+                query.text = text.into();
+                query.offset = offset;
+                query.limit = limit;
+                let page = db.search(&query)?;
+                assert_eq!(page.sequence, 20);
+                Ok((page.total, page.hits))
+            },
+        );
+    }
     if std::env::args().any(|arg| arg == "--prepare-record-reads") {
         let start = Instant::now();
         db.prepare_record_reads()?;
