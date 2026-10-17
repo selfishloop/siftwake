@@ -1,0 +1,233 @@
+{
+  "pairs": 4,
+  "blocks_per_pair": 4,
+  "repeats_per_block": 25,
+  "affinity_mask": 4,
+  "pages_only": true,
+  "cache": "warm OS cache; every block opens and verifies/warmups before query timing; no eviction",
+  "corpus": "same existing first10000; no generation/reset/copy",
+  "source_validation": "complete source check before timed search; unchanged CRC/schema/key/version checks",
+  "same_executable": false,
+  "programs": {
+    "control": {
+      "path": "output\\search-hydration-20261017-control-measure_interleaved_reads-normal.exe",
+      "sha256": "108159CD918EE1DED09C1A61C83BA63D3C90F8A5EEAD9C1CFFE72160572B4234"
+    },
+    "fdb": {
+      "path": "output\\search-hydration-20261017-candidate-measure_interleaved_reads-normal.exe",
+      "sha256": "8C6319B44E59EFE2FAA316BDB0B02D1BE9876CAE36D64BAD56C5EBDC0C91E0EB"
+    }
+  },
+  "balanced_block_first_position": true,
+  "orders": [
+    {
+      "pair": 0,
+      "block": 0,
+      "engines": [
+        "control",
+        "fdb"
+      ],
+      "command": {
+        "id": 0,
+        "seed": 0,
+        "repeats": 25
+      }
+    },
+    {
+      "pair": 0,
+      "block": 1,
+      "engines": [
+        "fdb",
+        "control"
+      ],
+      "command": {
+        "id": 1,
+        "seed": 1,
+        "repeats": 25
+      }
+    },
+    {
+      "pair": 0,
+      "block": 2,
+      "engines": [
+        "control",
+        "fdb"
+      ],
+      "command": {
+        "id": 2,
+        "seed": 2,
+        "repeats": 25
+      }
+    },
+    {
+      "pair": 0,
+      "block": 3,
+      "engines": [
+        "fdb",
+        "control"
+      ],
+      "command": {
+        "id": 3,
+        "seed": 3,
+        "repeats": 25
+      }
+    },
+    {
+      "pair": 1,
+      "block": 0,
+      "engines": [
+        "fdb",
+        "control"
+      ],
+      "command": {
+        "id": 4,
+        "seed": 10000,
+        "repeats": 25
+      }
+    },
+    {
+      "pair": 1,
+      "block": 1,
+      "engines": [
+        "control",
+        "fdb"
+      ],
+      "command": {
+        "id": 5,
+        "seed": 10001,
+        "repeats": 25
+      }
+    },
+    {
+      "pair": 1,
+      "block": 2,
+      "engines": [
+        "fdb",
+        "control"
+      ],
+      "command": {
+        "id": 6,
+        "seed": 10002,
+        "repeats": 25
+      }
+    },
+    {
+      "pair": 1,
+      "block": 3,
+      "engines": [
+        "control",
+        "fdb"
+      ],
+      "command": {
+        "id": 7,
+        "seed": 10003,
+        "repeats": 25
+      }
+    },
+    {
+      "pair": 2,
+      "block": 0,
+      "engines": [
+        "control",
+        "fdb"
+      ],
+      "command": {
+        "id": 8,
+        "seed": 20000,
+        "repeats": 25
+      }
+    },
+    {
+      "pair": 2,
+      "block": 1,
+      "engines": [
+        "fdb",
+        "control"
+      ],
+      "command": {
+        "id": 9,
+        "seed": 20001,
+        "repeats": 25
+      }
+    },
+    {
+      "pair": 2,
+      "block": 2,
+      "engines": [
+        "control",
+        "fdb"
+      ],
+      "command": {
+        "id": 10,
+        "seed": 20002,
+        "repeats": 25
+      }
+    },
+    {
+      "pair": 2,
+      "block": 3,
+      "engines": [
+        "fdb",
+        "control"
+      ],
+      "command": {
+        "id": 11,
+        "seed": 20003,
+        "repeats": 25
+      }
+    },
+    {
+      "pair": 3,
+      "block": 0,
+      "engines": [
+        "fdb",
+        "control"
+      ],
+      "command": {
+        "id": 12,
+        "seed": 30000,
+        "repeats": 25
+      }
+    },
+    {
+      "pair": 3,
+      "block": 1,
+      "engines": [
+        "control",
+        "fdb"
+      ],
+      "command": {
+        "id": 13,
+        "seed": 30001,
+        "repeats": 25
+      }
+    },
+    {
+      "pair": 3,
+      "block": 2,
+      "engines": [
+        "fdb",
+        "control"
+      ],
+      "command": {
+        "id": 14,
+        "seed": 30002,
+        "repeats": 25
+      }
+    },
+    {
+      "pair": 3,
+      "block": 3,
+      "engines": [
+        "control",
+        "fdb"
+      ],
+      "command": {
+        "id": 15,
+        "seed": 30003,
+        "repeats": 25
+      }
+    }
+  ],
+  "observe_thread": false
+}

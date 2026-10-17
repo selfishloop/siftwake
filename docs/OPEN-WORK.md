@@ -1,5 +1,28 @@
 # FDB açık işler
 
+2026-10-17 seçilen belgelerde metadata tekrarı azaltıldı: aynı 350 MB /10k
+DB'de the/200 metadata çağrısı 714→514; CRC/schema/key/version korunur.
+İki A/B dizisinde dar kazanç var; yoğun 400 örnek/sayfa/variantta p95
+6,496→5,779 ms (-%11,04), 4/4 süreç ve16/16 blok hızlı, tipik -%12,75.
+Ayrı query/get private medyanı -30 KiB, WS -6 KiB; genel RAM kapısı değil.
+Geniş 38-case23 düşük/15 yüksek; p95 sapmasının kesin nedeni ayrılmadı.
+Yeni A/A'da 29 düşük/9 yüksek, yoğun aynı-mod A/A tipik farklar küçük;
+kontrol oranları A/B'den çıkarılmaz ve kalan artışlar kapatılmaz.
+holmes payload okuması hâlâ1285 /35,9 MB; quixote56 /1,95 MB aynı.
+Sıradaki arama hedefi normal kelimelerde gerçek payload okuma/aday maliyeti.
+Yazma/bakım, normal Vec/query/caller RAM'i, açılış, disk sıkıştırma ve
+eşzamanlı/gerçek-cold yük açık. Default180/reference107/all199 test geçti,
+fmt/Clippy temiz; format/feature/bağımlılık ve0.1 fixture değişmedi.
+[Bu adımın kanıtı ve ayrıntılar](SEARCH-HYDRATION-10K-20261017.md).
+Güncel aynı-veri SQLite read-only karşılaştırması tamamlandı: 38/38 p95,
+her sorguda4/4 çift FDB düşük. Ayrı query/get peak private FDB8,78 /
+SQLite12,83 MiB, WS12,53/16,70 MiB; disk350/584 MB. Aynı mevcut8 kitap/
+ilk10k, query/get full-payload oracle ve8 snapshot çiftinde hash eşitliği
+geçti; corpus'un tamamı SHA-eşit. İlk iki hız çifti kota kesintisi öncesi,
+son ikisi aynı binary/DB hash'leriyle sonra tamamlandı; koşullar raporda.
+Bu sonuç önceki FDB'ye göre15 p95 artışını, payload okuma maliyetini,
+normal Vec ingest RAM'ini, açılışı veya yazma/bakımı kapatmaz.
+
 2026-10-17 dar arama kazancı tamamlandı: aynı350MB/10k DB'de uygun kısa
 ASCII yolunda gövde fold263.627→0; CRC/schema/UTF-8/key/version aynı.
 Son normal strict blok p95 zx277,138→190,633ms (-%31,21), the-zx

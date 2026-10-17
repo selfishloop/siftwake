@@ -1,0 +1,52 @@
+{
+  "pairs": 4,
+  "phase": "matrix",
+  "affinity_mask": 4,
+  "same_executable": false,
+  "diagnostic_timing": false,
+  "programs": {
+    "control": {
+      "path": "tools\\native_sqlite\\target\\release\\content_reads.exe",
+      "sha256": "F9D2CBD74D050B3D1CE08F37DFF672C961A826D412BA576DB3351EC4C778ADB5"
+    },
+    "fdb": {
+      "path": "output\\search-hydration-20261017-candidate-measure_content_reads-normal.exe",
+      "sha256": "24AF78E053A06C6F81991338F6A342A4F4EDDFA23E428977BFA73611FD6D6B0D"
+    }
+  },
+  "cache": "warm OS cache, fresh processes, per-case untimed warmup, no eviction",
+  "validation": "FDB strict source/index open and payload CRC/schema/identity; SQLite read-only without full integrity on open. Both full document/version oracle checks outside query timing.",
+  "corpus": "same existing first10000, 264842858 text bytes; no generation/reset/repack/copy",
+  "limits": "No concurrent load, true cold cache or hardware/power isolation. Matrix oracle memory excluded from engine memory claims. Diagnostic spans nest; never sum as exclusive elapsed time. Interrupted batch resumed with identical executable hashes and DB bytes; earlier/later pairs can have different machine conditions.",
+  "orders": [
+    [
+      "control",
+      "fdb"
+    ],
+    [
+      "fdb",
+      "control"
+    ],
+    [
+      "control",
+      "fdb"
+    ],
+    [
+      "fdb",
+      "control"
+    ]
+  ],
+  "control_engine": "sqlite",
+  "sqlite": "Bundled FTS5 trigram/LIKE; FULL-WAL-built existing DB; cache2MiB, mmap0, tempFILE, prepared statement cache64. Different source-integrity and field/link capabilities.",
+  "resumed_after_interruption": true,
+  "resume_reused_logs": [
+    "search-hydration-sqlite-10k-20261017-control-0.jsonl",
+    "search-hydration-sqlite-10k-20261017-fdb-0.jsonl",
+    "search-hydration-sqlite-10k-20261017-fdb-1.jsonl",
+    "search-hydration-sqlite-10k-20261017-control-1.jsonl"
+  ],
+  "resume_preserved_partial_logs": [
+    "search-hydration-sqlite-10k-20261017-control-2.interrupted-1.jsonl",
+    "search-hydration-sqlite-10k-20261017-control-2.interrupted-1.stderr"
+  ]
+}

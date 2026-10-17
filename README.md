@@ -1,5 +1,18 @@
 # FDB
 
+[Seçilen belgelerde metadata tekrarını azaltma](docs/SEARCH-HYDRATION-10K-20261017.md):
+aynı mevcut 10k / 350 MB veride 200 belgeli sayfa p95 6,496→5,779 ms
+(-%11,04), 4/4 süreç ve 16/16 blok hızlı; tipik kazanç %12,75.
+İzlenen metadata çağrıları 714→514, belge CRC/schema/identity korunur.
+Ayrı query/get proses bellek tepesi medyanları artmadı; DB byte'ları aynı.
+Geniş 38-case 23 düşük/15 yüksek; A/A p95 sapması ve normal kelimelerin
+payload I/O maliyeti açık. Yazma/bakım, Vec RAM, açılış, sıkıştırma ve
+eşzamanlı/soğuk yük bu dar sonuçla kapanmaz.
+Güncel aynı-veri SQLite okuma karşılaştırmasında 38/38 p95 ve her sorguda
+4/4 çift FDB düşük. Ayrı oracle'sız query/get peak private 8,78/12,83 MiB,
+working set 12,53/16,70 MiB; disk 350/584 MB. Bunlar okuma yükü sonuçlarıdır;
+normal Vec ingest RAM'i, yazma/bakım ve açılış bu tur yeniden ölçülmedi.
+
 [Aynı350MB veride arama maliyetleri](docs/SEARCH-STAGES-10K-20261017.md):
 Unicode kanıtlı kısa ASCII yolunda body fold kaldırıldı; zx/the-zx normal
 strict blok p95 -%31,21/-%33,99, ikisi4/4 süreç ve32/32 blok hızlı.

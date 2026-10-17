@@ -1,0 +1,126 @@
+{
+  "design": {
+    "pairs": 4,
+    "phase": "memory",
+    "affinity_mask": 4,
+    "same_executable": false,
+    "diagnostic_timing": false,
+    "programs": {
+      "control": {
+        "path": "tools\\native_sqlite\\target\\release\\content_reads.exe",
+        "sha256": "F9D2CBD74D050B3D1CE08F37DFF672C961A826D412BA576DB3351EC4C778ADB5"
+      },
+      "fdb": {
+        "path": "output\\search-hydration-20261017-candidate-measure_content_reads-normal.exe",
+        "sha256": "24AF78E053A06C6F81991338F6A342A4F4EDDFA23E428977BFA73611FD6D6B0D"
+      }
+    },
+    "cache": "warm OS cache, fresh processes, per-case untimed warmup, no eviction",
+    "validation": "FDB strict source/index open and payload CRC/schema/identity; SQLite read-only without full integrity on open. Both full document/version oracle checks outside query timing.",
+    "corpus": "same existing first10000, 264842858 text bytes; no generation/reset/repack/copy",
+    "limits": "No concurrent load, true cold cache or hardware/power isolation. Matrix oracle memory excluded from engine memory claims. Diagnostic spans nest; never sum as exclusive elapsed time.",
+    "orders": [
+      [
+        "control",
+        "fdb"
+      ],
+      [
+        "fdb",
+        "control"
+      ],
+      [
+        "control",
+        "fdb"
+      ],
+      [
+        "fdb",
+        "control"
+      ]
+    ],
+    "control_engine": "sqlite",
+    "sqlite": "Bundled FTS5 trigram/LIKE; FULL-WAL-built existing DB; cache2MiB, mmap0, tempFILE, prepared statement cache64. Different source-integrity and field/link capabilities."
+  },
+  "rows": [
+    {
+      "variant": "control",
+      "pair": 0,
+      "peak_private_commit_bytes": 13451264,
+      "peak_working_set_bytes": 17510400
+    },
+    {
+      "variant": "control",
+      "pair": 1,
+      "peak_private_commit_bytes": 13451264,
+      "peak_working_set_bytes": 17498112
+    },
+    {
+      "variant": "control",
+      "pair": 2,
+      "peak_private_commit_bytes": 13443072,
+      "peak_working_set_bytes": 17514496
+    },
+    {
+      "variant": "control",
+      "pair": 3,
+      "peak_private_commit_bytes": 13451264,
+      "peak_working_set_bytes": 17514496
+    },
+    {
+      "variant": "fdb",
+      "pair": 0,
+      "peak_private_commit_bytes": 9281536,
+      "peak_working_set_bytes": 13189120
+    },
+    {
+      "variant": "fdb",
+      "pair": 1,
+      "peak_private_commit_bytes": 9277440,
+      "peak_working_set_bytes": 13180928
+    },
+    {
+      "variant": "fdb",
+      "pair": 2,
+      "peak_private_commit_bytes": 9129984,
+      "peak_working_set_bytes": 13099008
+    },
+    {
+      "variant": "fdb",
+      "pair": 3,
+      "peak_private_commit_bytes": 9125888,
+      "peak_working_set_bytes": 13103104
+    }
+  ],
+  "medians": {
+    "control": {
+      "peak_private_commit_bytes": 13451264.0,
+      "peak_working_set_bytes": 17512448.0
+    },
+    "fdb": {
+      "peak_private_commit_bytes": 9203712.0,
+      "peak_working_set_bytes": 13142016.0
+    }
+  },
+  "comparisons": {
+    "peak_private_commit_bytes": {
+      "change_percent": -31.57734470158343,
+      "lower_pairs": 4,
+      "paired_change_percent": [
+        -30.998781973203414,
+        -31.029232643118142,
+        -32.08409506398537,
+        -32.15590742996346
+      ]
+    },
+    "peak_working_set_bytes": {
+      "change_percent": -24.95614548006081,
+      "lower_pairs": 4,
+      "paired_change_percent": [
+        -24.67836257309941,
+        -24.672284644194754,
+        -25.210477081384475,
+        -25.187090739008422
+      ]
+    }
+  },
+  "files_unchanged": true
+}

@@ -1,5 +1,15 @@
 # FDB mimarisi — 0.3.1
 
+2026-10-17 grouped page hydration: seçilen sıralı slotların sayısal
+metadata'sı ve key karşılaştırması aynı query-local doğrulanmış yapraktan
+okunur. Her decode öncesi yeniden sahipli Key kurma ve metadata lookup
+tekrarı kaldırılır. Payload okuma penceresi/CRC/schema/UTF-8/version ve
+source lease değişmez; büyük belge fallback'i sürer. Yeni cache/format/
+feature/bağımlılık yok; mevcut leaf sınırı 256 KiB ve cursor sorgu ömürlü.
+Aynı 10k'da 200 belgeli sayfa normal p95 -%11,04, 4/4 süreç ve16/16 blok;
+query/get peak private/WS medyanı artmadı. Genel p95 ve payload I/O açık.
+[Ölçümler, testler ve sınırlar](SEARCH-HYDRATION-10K-20261017.md).
+
 2026-10-17 bounded-engine contains: yalnız1–2 küçük ASCII harfinden oluşan
 ve Unicode/Türkçe fold'dan üretilemeyen harfleri kullanan sorgu parçaları,
 özgün metindeki bütün ASCII case yazımlarıyla kesin aranır. `c/g/i/k/o/s/u`

@@ -72,7 +72,11 @@ def summarize(prefix, design):
         matrices[variant] = []
         for pair in range(design['pairs']):
             rows = [json.loads(line) for line in Path(f'{prefix}-{variant}-{pair}.jsonl').read_text(encoding='utf-8').splitlines()]
-            assert rows[0]['phase'] == 'opened' and rows[0]['pending_source_checks'] == 0
+            assert rows[0]['phase'] == 'opened'
+            if design.get('control_engine') == 'sqlite' and variant == 'control':
+                assert rows[0]['engine'] == 'sqlite' and not rows[0]['full_integrity_on_open']
+            else:
+                assert rows[0]['engine'] == 'fdb' and rows[0]['pending_source_checks'] == 0
             matrix = next(row for row in rows if row['phase'] == 'matrix_reads')
             assert matrix['full_document_checks']
             matrices[variant].append(matrix)
@@ -165,12 +169,15 @@ def main():
     parser.add_argument('--phase', choices=('matrix', 'dense', 'stress', 'profile', 'regressions', 'open', 'memory'), default='matrix')
     parser.add_argument('--affinity', type=int, default=4)
     parser.add_argument('--sqlite-control', action='store_true', help='Read-only native SQLite comparator; matrix/memory only')
+    parser.add_argument('--resume', action='store_true', help='Resume an interrupted matrix, preserving completed logs and partial attempts')
     args = parser.parse_args()
     if args.sqlite_control and args.phase not in ('matrix', 'memory'):
         parser.error('--sqlite-control supports only matrix/memory phases')
+    if args.resume and args.phase != 'matrix':
+        parser.error('--resume supports only matrix')
     prefix = ROOT / args.prefix
     report = lambda suffix: Path(f'{prefix}-{suffix}')
-    if report('design.json').exists():
+    if report('design.json').exists() and not args.resume:
         raise RuntimeError('Preserve existing reports; choose an unused log prefix')
     programs = {'control': ROOT / args.control, 'fdb': ROOT / args.candidate}
     design = dict(pairs=args.pairs, phase=args.phase, affinity_mask=args.affinity,
@@ -186,9 +193,26 @@ def main():
     if args.sqlite_control:
         design['validation'] = 'FDB strict source/index open and payload CRC/schema/identity; SQLite read-only without full integrity on open. Both full document/version oracle checks outside query timing.'
         design['sqlite'] = 'Bundled FTS5 trigram/LIKE; FULL-WAL-built existing DB; cache2MiB, mmap0, tempFILE, prepared statement cache64. Different source-integrity and field/link capabilities.'
+    if args.resume:
+        if report('summary.json').exists() or report('after.json').exists():
+            raise RuntimeError('Completed measurements are immutable; no resume needed')
+        saved = json.loads(report('design.json').read_text(encoding='utf-8'))
+        for key in ('pairs', 'phase', 'affinity_mask', 'programs', 'control_engine'):
+            if saved[key] != design[key]:
+                raise RuntimeError(f'Resume configuration/executable mismatch: {key}')
+        before = json.loads(report('before.json').read_text(encoding='utf-8'))
+        if snapshot() != before:
+            raise RuntimeError('Database/fixture bytes changed since the interrupted run')
+        if not report('resume-original-design.json').exists():
+            write(report('resume-original-design.json'), saved)
+        design['resumed_after_interruption'] = True
+        design['resume_reused_logs'] = []
+        design['resume_preserved_partial_logs'] = []
+        design['limits'] += ' Interrupted batch resumed with identical executable hashes and DB bytes; earlier/later pairs can have different machine conditions.'
+    else:
+        before = snapshot()
+        write(report('before.json'), before)
     write(report('design.json'), design)
-    before = snapshot()
-    write(report('before.json'), before)
     api = ctypes.WinDLL('kernel32', use_last_error=True)
     api.SetProcessAffinityMask.argtypes = [ctypes.c_void_p, ctypes.c_size_t]
     api.SetProcessAffinityMask.restype = ctypes.c_int
@@ -205,6 +229,28 @@ def main():
                      'profile': ['--profile-matrix'],
                      'regressions': ['--profile-regressions'],
                      'open': ['--deferred-probe'], 'memory': ['--memory-probe']}[args.phase]
+            if args.resume and report(f'{variant}-{pair}.jsonl').exists():
+                log_path = report(f'{variant}-{pair}.jsonl')
+                rows = [json.loads(line) for line in log_path.read_text(encoding='utf-8').splitlines()]
+                matrix = [row for row in rows if row['phase'] == 'matrix_reads']
+                if matrix:
+                    assert len(matrix) == 1 and rows[-1] == matrix[0]
+                    assert matrix[0]['seed'] == pair and matrix[0]['repeats'] == 20 and matrix[0]['full_document_checks']
+                    assert len(matrix[0]['queries']) == 38 and not report(f'{variant}-{pair}.stderr').read_text().strip()
+                    design['resume_reused_logs'].append(log_path.name)
+                    write(report('design.json'), design)
+                    print(f'{args.phase} pair={pair} {variant} reused complete validated log', flush=True)
+                    continue
+                attempt = 1
+                while report(f'{variant}-{pair}.interrupted-{attempt}.jsonl').exists():
+                    attempt += 1
+                for suffix in ('jsonl', 'stderr'):
+                    partial = report(f'{variant}-{pair}.{suffix}')
+                    if partial.exists():
+                        preserved = report(f'{variant}-{pair}.interrupted-{attempt}.{suffix}')
+                        partial.rename(preserved)
+                        design['resume_preserved_partial_logs'].append(preserved.name)
+                write(report('design.json'), design)
             with report(f'{variant}-{pair}.jsonl').open('w', encoding='utf-8') as out, report(f'{variant}-{pair}.stderr').open('w', encoding='utf-8') as err:
                 process = subprocess.Popen([str(programs[variant]), *flags], cwd=ROOT, stdout=out, stderr=err, creationflags=subprocess.CREATE_NO_WINDOW)
                 try:

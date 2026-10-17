@@ -1,0 +1,32 @@
+{
+  "pairs": 2,
+  "phase": "profile",
+  "affinity_mask": 4,
+  "same_executable": false,
+  "diagnostic_timing": true,
+  "programs": {
+    "control": {
+      "path": "output\\search-hydration-20261017-control-measure_content_reads-profile.exe",
+      "sha256": "153A7A76DBE7047E5E590F7EE8FDD4F78AA15A002D93B4654CB731B19707FFF1"
+    },
+    "fdb": {
+      "path": "output\\search-hydration-20261017-candidate-measure_content_reads-profile.exe",
+      "sha256": "CA00144E13587AC866D8B86DEA95B90B80DBCFA45E2A0D13A33B69307D9FF8B0"
+    }
+  },
+  "cache": "warm OS cache, fresh processes, per-case untimed warmup, no eviction",
+  "validation": "normal strict open; complete source/index CRC and schema; pending0; payload CRC/schema/key/version preserved",
+  "corpus": "same existing first10000, 264842858 text bytes; no generation/reset/repack/copy",
+  "limits": "No concurrent load, true cold cache or hardware/power isolation. Matrix oracle memory excluded from engine memory claims. Diagnostic spans nest; never sum as exclusive elapsed time.",
+  "orders": [
+    [
+      "control",
+      "fdb"
+    ],
+    [
+      "fdb",
+      "control"
+    ]
+  ],
+  "control_engine": "fdb"
+}
