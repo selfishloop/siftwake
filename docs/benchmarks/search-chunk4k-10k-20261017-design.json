@@ -1,0 +1,37 @@
+{
+  "pairs": 4,
+  "phase": "matrix",
+  "affinity_mask": 4,
+  "programs": {
+    "control": {
+      "path": "output\\reclaim-reads-20261017.exe",
+      "sha256": "440760544233E95B4CC02831893A2D4FDFFE6C1481BA03AA02A2CEFA413818B7"
+    },
+    "fdb": {
+      "path": "output\\search-chunk4k-reads-20261017.exe",
+      "sha256": "97427E80AD0A6F42495AB5E7F587DFD185011844335D5D515B02D65BB1C7BEBE"
+    }
+  },
+  "cache": "warm OS cache, fresh processes, per-case untimed warmup, no eviction",
+  "validation": "normal strict open; complete source/index CRC and schema; pending0; payload CRC/schema/key/version preserved",
+  "corpus": "same existing first10000, 264842858 text bytes; no generation/reset/repack/copy",
+  "limits": "No concurrent load, true cold cache or hardware/power isolation. Matrix oracle memory excluded from engine memory claims. Diagnostic spans nest; never sum as exclusive elapsed time.",
+  "orders": [
+    [
+      "control",
+      "fdb"
+    ],
+    [
+      "fdb",
+      "control"
+    ],
+    [
+      "control",
+      "fdb"
+    ],
+    [
+      "fdb",
+      "control"
+    ]
+  ]
+}

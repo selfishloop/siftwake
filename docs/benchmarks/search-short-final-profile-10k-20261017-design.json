@@ -1,0 +1,31 @@
+{
+  "pairs": 2,
+  "phase": "profile",
+  "affinity_mask": 4,
+  "same_executable": false,
+  "diagnostic_timing": true,
+  "programs": {
+    "control": {
+      "path": "output\\search-stages-baseline-profile-20261017.exe",
+      "sha256": "17B977B71A0EDDD7F3E40A4BF340B4561B6822D0D3D1B023C14D1B002538D5A8"
+    },
+    "fdb": {
+      "path": "output\\search-short-final-profile-20261017.exe",
+      "sha256": "DA9798C019736882788CDB1D59BAA4C4F404B975A6FFA4882B900A12CD4E8E3F"
+    }
+  },
+  "cache": "warm OS cache, fresh processes, per-case untimed warmup, no eviction",
+  "validation": "normal strict open; complete source/index CRC and schema; pending0; payload CRC/schema/key/version preserved",
+  "corpus": "same existing first10000, 264842858 text bytes; no generation/reset/repack/copy",
+  "limits": "No concurrent load, true cold cache or hardware/power isolation. Matrix oracle memory excluded from engine memory claims. Diagnostic spans nest; never sum as exclusive elapsed time.",
+  "orders": [
+    [
+      "control",
+      "fdb"
+    ],
+    [
+      "fdb",
+      "control"
+    ]
+  ]
+}

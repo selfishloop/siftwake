@@ -1,0 +1,124 @@
+{
+  "design": {
+    "pairs": 4,
+    "phase": "open",
+    "affinity_mask": 4,
+    "same_executable": false,
+    "diagnostic_timing": false,
+    "programs": {
+      "control": {
+        "path": "output\\reclaim-reads-20261017.exe",
+        "sha256": "440760544233E95B4CC02831893A2D4FDFFE6C1481BA03AA02A2CEFA413818B7"
+      },
+      "fdb": {
+        "path": "output\\search-short-final-reads-20261017.exe",
+        "sha256": "FF31BF26CA3AD6C3EB12E439FB317476EDCA3FB3C07320BF42D40E6BB4EA1733"
+      }
+    },
+    "cache": "warm OS cache, fresh processes, per-case untimed warmup, no eviction",
+    "validation": "normal strict open; complete source/index CRC and schema; pending0; payload CRC/schema/key/version preserved",
+    "corpus": "same existing first10000, 264842858 text bytes; no generation/reset/repack/copy",
+    "limits": "No concurrent load, true cold cache or hardware/power isolation. Matrix oracle memory excluded from engine memory claims. Diagnostic spans nest; never sum as exclusive elapsed time.",
+    "orders": [
+      [
+        "control",
+        "fdb"
+      ],
+      [
+        "fdb",
+        "control"
+      ],
+      [
+        "control",
+        "fdb"
+      ],
+      [
+        "fdb",
+        "control"
+      ]
+    ]
+  },
+  "rows": [
+    {
+      "variant": "control",
+      "pair": 0,
+      "open_ms": 154.9719,
+      "first_use_ms": 158.70239999999998
+    },
+    {
+      "variant": "control",
+      "pair": 1,
+      "open_ms": 155.4349,
+      "first_use_ms": 159.0649
+    },
+    {
+      "variant": "control",
+      "pair": 2,
+      "open_ms": 155.7142,
+      "first_use_ms": 159.3211
+    },
+    {
+      "variant": "control",
+      "pair": 3,
+      "open_ms": 160.30259999999998,
+      "first_use_ms": 163.9646
+    },
+    {
+      "variant": "fdb",
+      "pair": 0,
+      "open_ms": 161.59550000000002,
+      "first_use_ms": 165.34560000000002
+    },
+    {
+      "variant": "fdb",
+      "pair": 1,
+      "open_ms": 158.9363,
+      "first_use_ms": 162.54129999999998
+    },
+    {
+      "variant": "fdb",
+      "pair": 2,
+      "open_ms": 154.3313,
+      "first_use_ms": 157.975
+    },
+    {
+      "variant": "fdb",
+      "pair": 3,
+      "open_ms": 156.4195,
+      "first_use_ms": 160.50300000000001
+    }
+  ],
+  "medians": {
+    "control": {
+      "open_ms": 155.57455,
+      "first_use_ms": 159.19299999999998
+    },
+    "fdb": {
+      "open_ms": 157.6779,
+      "first_use_ms": 161.52215
+    }
+  },
+  "comparisons": {
+    "open_ms": {
+      "change_percent": 1.3519884839776175,
+      "lower_pairs": 2,
+      "paired_change_percent": [
+        4.27406516923392,
+        2.252647249748918,
+        -0.8881014062943615,
+        -2.4223562188011805
+      ]
+    },
+    "first_use_ms": {
+      "change_percent": 1.4630982518075708,
+      "lower_pairs": 2,
+      "paired_change_percent": [
+        4.1859480385930015,
+        2.1855230160770844,
+        -0.8448975057290031,
+        -2.1111874148444065
+      ]
+    }
+  },
+  "files_unchanged": true
+}

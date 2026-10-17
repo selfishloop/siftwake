@@ -1,5 +1,16 @@
 # FDB mimarisi — 0.3.1
 
+2026-10-17 bounded-engine contains: yalnız1–2 küçük ASCII harfinden oluşan
+ve Unicode/Türkçe fold'dan üretilemeyen harfleri kullanan sorgu parçaları,
+özgün metindeki bütün ASCII case yazımlarıyla kesin aranır. `c/g/i/k/o/s/u`
+harfleri veya başka terimler varsa önceki canonical fold/chunk yolu sürer.
+Tüm Unicode scalar'ların ASCII katkıları ve hiçbir scalar'ın silinmediği
+test edilir; bu özellikler yokluk kanıtını da geçerli kılar. Payload
+CRC/schema/UTF-8/key/version önceden doğrulanır; yeni cache/heap tamponu,
+format, feature veya bağımlılık yok. No-default reference aynı kalır.
+Geniş arama, ayrı profil ve bellek sınırları
+[aynı-veri arama raporundadır](SEARCH-STAGES-10K-20261017.md).
+
 2026-10-17 eski nesil temizliği: strict açılış ve başarılı yayın sonrası,
 güncel ready yeniden doğrulanıp eski ready'ler, ardından artık referanssız
 standart kaynak/cache dosyaları kaldırılır. DB kökü kilit alınmadan önce

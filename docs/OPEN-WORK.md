@@ -1,5 +1,19 @@
 # FDB açık işler
 
+2026-10-17 dar arama kazancı tamamlandı: aynı350MB/10k DB'de uygun kısa
+ASCII yolunda gövde fold263.627→0; CRC/schema/UTF-8/key/version aynı.
+Son normal strict blok p95 zx277,138→190,633ms (-%31,21), the-zx
+266,181→175,714ms (-%33,99); ikisi4/4 süreç çiftinde,32/32 blok hızlı.
+Tipik blok kazancı%30–31. Tüm38-case28 düşük/10 yüksek; genel p95 kapısı
+açık. Aynı SHA A/A uzun38/38, kısa36/38 yüksek tail; tipik blok farkları
+-%2,41…+%2,74. Kalan artışlar dalgalanma sayılıp kapatılmadı.
+Diğer36 sorgunun izlenen bütün iş sayıları aynı.4KiB chunk reddedildi.
+Son query peak private/WS medyanı -%0,38/-%0,37; genel RAM kapısı değil.
+Açılış gözlemi -%6,81, algoritmik kazanç sayılmadı.18 dosya349.805.698 B
+hash-eşit, yeni corpus/reset/repack yok. Yazma/bakım, normal Vec/query/
+caller RAM'i, genel açılış, sıkıştırma, concurrent/cold hâlâ açık.
+[Sonuç, bütün38 tablo, A/A ve sınırlar](SEARCH-STAGES-10K-20261017.md).
+
 Standart eski nesil temizliği tamamlandı: mevcut10k'da105 dosya,
 622.859.277 B kaldırıldı; toplam972.664.975→349.805.698 B (-%64,04).
 Canlı kaynak/cache/ready byte'ları ve10k/38-case oracle aynı; yeni
@@ -121,6 +135,7 @@ deneysel profilde tutulur; genel/default kabul kapısı geçmedi.
 
 | İş | Durum / kapanış kanıtı |
 |---|---|
+| Aynı temiz veride arama gerilemelerini ayır, en pahalı aşamayı azalt | Dar kısa-ASCII adımı tamam: body fold263.627→0; iki negatifte normal p95 -%31,21/-%33,99 (4/4 süreç,32/32 blok). Tüm38-case28/10; A/A36/38 tail artışı nedeniyle genel p95 kapısı açık. Diğer36 senaryoda izlenen iş sayıları aynı; dar/uzun kelimelerde payload okuma ve sonuç hazırlama hâlâ maliyetli. Query peak medyanları artmadı, disk349.805.698 B/18 dosya aynı. Yazma/bakım, Vec/genel RAM, açılış, sıkıştırma ve concurrent/cold kapanmadı. [Son ölçüm/kanıtlar](SEARCH-STAGES-10K-20261017.md) |
 | JSON sözlük ve indeksteki267,8MB belge kopyası | SEG05 flag1 kullanıcı kararıyla native default yazıcıya taşındı: commit/flush, merge ve cache onarımı doğrudan kaynak adresi yazar, payload kopyası üretmez. Eski okunabilir SEG03/04 korunur; kaynak/WAL/manifest/fixture aynı. Varsayılan ve referans/all-feature testleri, kesilme/bozulma ve builder/repack kill kontrolleri geçti. Yeni4 çiftte write+bakım-%9,86 ve open-%34,79; canlı idx353,7→81,9MB, retained core1,521GB→972,7MB. Yeni38-case16/22; write private +%1,42/4 çift yüksek, query private düşük. Önceki yoğun sayfa artışları da açık.72 kaynak/ready ve prototip wire karşılaştırmasında122 core dosya hash-eşit. Yazma/kabul tekrarları, RAM/disk-retention ve concurrent/cold açık. [Güncel geçiş/ölçüm](DEFAULT-SEG05-10K-20261017.md), [ilk prototip](COMPACT-INDEX-10K-20261017.md) |
 | İndeks açılışında checksum okuma ve hazırlığı azalt | Dar okuma adımı ölçüldü: indekse özel max1MiB exact reads; bütün indeks CRC'si ve diğer doğrulamalar tam, kaynak/WAL ve sözlük algoritmaları aynı. İki4-çift seride ilk kullanım -%4,20/-6,18;8/8 hızlı. Yalnız open kazancı oturumlara bağlı%1–8. Yoğun8 sayfanın p95'i düşük; genel arama kapısı değil. Ayrı query/get tepesinde artış yok; Vec ve concurrent RAM ölçülmedi. COW/reuse prototipi %5–10 arama artışıyla geri alındı. Hazırlık maliyeti ve genel açılış işi açık. [Son rapor](INDEX-OPEN-10K-20261017.md) |
 | Tam doğrulamalı açılışta kaynak tarama ve belge hazırlığını azalt | Dar kaynak adımı ölçüldü:4 dengeli normal release çiftinde430,303→270,116ms (-%37,23;4/4), pending0; ilk kullanım toplamı423,924→281,714ms. Frame+source CRC, UTF-8/schema/key/link/version/sınırlar ve source lease sürer. Sağlam cache yoksa önceki builder yolu, WAL/0.1 kaynaklar aynı. Query/get peak private9,197→8,637MiB; bu Vec ingest veya toplam sistem RAM'i değildir. Son38-case23 düşük/15 yüksek; genel arama garantisi yok. İndeks CRC/directory maliyeti ve genel açılış işi açık; SQLite normal open seviyesine ulaşılmadı. [Rapor ve ham kanıt](STRICT-OPEN-10K-20261017.md) |

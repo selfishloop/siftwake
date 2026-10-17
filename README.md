@@ -1,5 +1,13 @@
 # FDB
 
+[Aynı350MB veride arama maliyetleri](docs/SEARCH-STAGES-10K-20261017.md):
+Unicode kanıtlı kısa ASCII yolunda body fold kaldırıldı; zx/the-zx normal
+strict blok p95 -%31,21/-%33,99, ikisi4/4 süreç ve32/32 blok hızlı.
+Bütün38 tekrar:28 düşük/10 yüksek; A/A p95 kararsız, genel kapı açık.
+Son query peak private/WS medyanı artmadı;18 DB dosyası349.805.698 B aynı.
+CRC/schema/UTF-8/key/version,0.1 fixture ve formatlar korunur. Yazma/bakım,
+genel RAM/açılış, sıkıştırma ve concurrent/cold işleri açık kalır.
+
 [Eski nesillerin otomatik temizliği](docs/RECLAIM-10K-20261017.md):
 mevcut10k'da105 eski dosya kaldırıldı; toplam973→350MB (-%64,04), canlı
 kaynak/indeks/ready byte'ları aynı. Yeni yazmalarda da350MB; yeni corpus yok.

@@ -1,0 +1,413 @@
+   Compiling fdb v0.3.1 (C:\Users\Serkan\Documents\ChatGPT\fdb)
+    Finished `test` profile [unoptimized + debuginfo] target(s) in 13.46s
+     Running unittests src\lib.rs (target\debug\deps\fdb-5fa571d3bb97520e.exe)
+
+running 106 tests
+test bounded::tests::serialization_preserves_original_destination_error ... ok
+test bounded::tests::short_writes_count_exactly_and_limits_stop_before_forwarding ... ok
+test engine::merge_selection_tests::automatic_merge_avoids_rewriting_large_run_and_explicit_merge_drains ... ok
+test format::crc_tests::binary_frame_has_versioned_header_and_expected_crc ... ok
+test binary_batch_tests::binary_batch_prefix_offsets_sizes_and_every_cut ... ok
+test index::compact_tests::capacity_and_duplicate_checks_leave_index_unchanged ... ok
+test index::packed_grams::tests::hash_collision_eviction_never_drops_a_distinct_or_repeated_gram ... ok
+test format::crc_tests::streaming_checkpoint_checks_crc_before_emitting_and_rejects_schema_errors ... ok
+test format::crc_tests::ieee_crc_and_streaming_boundaries_remain_compatible ... ok
+test format::crc_tests::streamed_checkpoint_is_byte_compatible_and_every_cut_is_rejected ... ok
+test index::posting::tests::randomized_reuse_union_and_deletion_match_set ... ok
+test index::posting::tests::representations_and_distant_ids_match_ordered_set ... ok
+test index::scratch_fold_tests::unchanged_unicode_runs_keep_ascii_lowering_and_changed_scalar_boundaries ... ok
+test index::packed_grams::tests::packed_grams_preserve_unicode_whitespace_nulls_and_sorted_strings ... ok
+test index::shared_tests::shared_bodies_preserve_titles_unicode_and_removal ... ok
+test format::native_check::tests::valid_crcs_do_not_hide_invalid_schema_limits_keys_links_or_versions ... ok
+test index::scratch_fold_tests::wide_ascii_prefix_handles_each_lane_and_unaligned_tails ... ok
+test payload::document_limit_tests::borrowed_limits_match_owned_validation ... ok
+test engine::reclaim_tests::future_orphan_id_is_not_reused_and_is_collected_after_next_publication ... ok
+test index::shared_tests::uncached_large_distinct_bodies_are_owned_and_searchable ... ok
+test engine::reclaim_tests::drop_keeps_database_lock_until_worker_has_stopped ... ok
+test engine::reclaim_tests::locked_obsolete_file_can_be_retried_without_poisoning_writes ... ok
+test reclaim::tests::filename_allowlist_live_future_links_and_directories_are_preserved ... ok
+test index::compact_tests::slots_recycle_without_stale_terms_or_growth_across_updates ... ok
+test engine::reclaim_tests::active_wal_tail_updates_and_deletes_survive_reclamation ... ok
+test reclaim::tests::reclaim_child ... ignored, subprocess helper for reclaim process kill
+test rkyv_payload::tests::bytecheck_valid_but_malformed_field_graphs_are_rejected ... ok
+test rkyv_payload::tests::every_json_kind_number_boundary_unicode_and_links_round_trip ... ok
+test engine::reclaim_tests::unpublished_worker_output_below_a_newer_root_is_pinned_until_install ... ok
+test reclaim::tests::deferred_open_preserves_old_files_until_explicit_full_check ... ok
+test segment::block_check::tests::prepare_child ... ignored, process helper
+test engine::reclaim_tests::pinned_retired_reader_survives_merge_then_releases_all_owned_files ... ok
+test segment::block_check::tests::process_kill_before_publication_keeps_previous_checksum_cache ... ok
+test segment::checksum::tests::exact_crc_reads_preserve_prefix_position_truncation_and_corruption ... ok
+test segment::compact::tests::native_builder_checks_final_crc_before_publication_and_handles_empty_checkpoint ... ok
+test segment::compact::tests::rebuild_child ... ignored, subprocess helper for default builder kill tests
+test segment::compact::tests::repack_child ... ignored, subprocess helper for publication kill tests
+test segment::compact::tests::term_codec_roundtrips_all_tags_and_rejects_every_cut_and_invalid_utf8 ... ok
+test segment::covering::tests::complete_gram_is_unicode_scalar_based ... ok
+test segment::covering::tests::immutable_handle_lives_until_last_arc_and_existing_writers_are_rejected ... ok
+test reclaim::tests::corrupt_latest_marker_or_source_prevents_any_reclamation ... ok
+test segment::covering::tests::short_proof_is_positive_scoped_complete_and_bounded ... ok
+test reclaim::tests::corrupt_active_wal_or_changed_root_rejects_explicit_reclaim_without_unlinks ... ok
+test segment::covering::tests::junction_ancestor_keeps_metadata_guard_instead_of_trusting_path_alias ... ok
+test segment::grouped_tests::adjacent_and_gapped_slots_share_one_window_with_independent_payload_checks ... ok
+test segment::grouped_tests::invalid_slots_tombstone_short_read_and_empty_batch ... ok
+test index::scratch_fold_tests::query_scratch_fold_matches_every_unicode_scalar_and_reuse ... ok
+test reclaim::tests::kill_during_marker_and_data_phases_keeps_current_sources_byte_equal ... ok
+test segment::grouped_tests::window_budget_gaps_and_oversized_payload_fallback ... ok
+test segment::paged::streaming::tests::intact_sidecar_cannot_hide_invalid_seg03_record_directory ... ok
+test segment::block_check::tests::lazy_blocks_check_boundaries_corruption_cuts_and_table_root ... ok
+test segment::paged::tests::corruption_truncation_binding_rebuild_and_runtime_error ... ok
+test rkyv_payload::tests::experimental_folding_matches_every_unicode_scalar_and_reused_search ... ok
+test segment::posting_spool::tests::same_directory_bytes_and_torn_or_corrupt_spool_fail_closed ... ok
+test format::crc_tests::large_fields_start_another_frame_before_crossing_existing_limit ... ok
+test segment::query_scratch_tests::cached_body_never_reuses_title_and_oversize_text_does_not_escape_budget ... ok
+test segment::paged::tests::two_level_slots_lookup_eviction_and_shared_budget ... ok
+test segment::paged::tests::text_windows_check_selected_crc_and_identity_and_handle_oversized_payloads ... ok
+test segment::grouped_tests::valid_crc_still_requires_matching_key_and_version ... ok
+test segment::record_spool::tests::streamed_directory_is_byte_compatible_and_spool_is_removed ... ok
+test segment::paged::tests::maximal_keys_unicode_prefixes_empty_and_malformed_leaf ... ok
+test segment::query_scratch_tests::speculative_scan_budget_never_limits_match_semantics ... ok
+test segment::record_spool::tests::every_torn_spool_and_payload_corruption_fails_without_source_mutation ... ok
+test segment::compact::tests::process_kill_before_during_and_after_cache_replacement_preserves_sources ... ok
+test segment::short_ascii::tests::ambiguous_unicode_letters_and_unsupported_needles_use_fallback ... ok
+test index::scratch_fold_tests::ascii_prefix_matches_byte_scan_at_every_alignment_and_boundary ... ok
+test segment::streaming::tests::entry_budget_and_order_are_rejected_without_unbounded_scratch ... ok
+test segment::streaming::tests::framing_handles_escapes_boundaries_and_strict_schema ... ok
+test segment::streaming::tests::large_exact_values_remain_compatible_with_existing_seg03 ... ok
+test segment::streaming::tests::universal_gram_uses_live_count_and_reversed_order_falls_back ... ok
+test segment::reuse::tests::delta_export_matches_reindex_after_slot_reuse_updates_and_tombstones ... ok
+test segment::reuse::tests::reused_postings_are_byte_equal_to_independent_reindex_and_reject_bad_maps_and_crc ... ok
+test segment::term_pages::tests::sparse_lookup_ranges_cursor_cache_and_uncached_corruption ... ok
+test segment::term_pages::tests::hot_descriptors_are_bounded_and_bound_to_each_index_owner ... ok
+test segment::window_tests::covering_needs_source_authorization_and_rejects_modified_unselected_payload ... ok
+test engine::streamed::tests::staged_frame_matches_existing_codec_torn_frames_are_atomic_and_entry_crc_is_checked ... ok
+test segment::query_scratch_tests::ascii_proof_and_unicode_fallback_match_folded_contains ... ok
+test segment::window_tests::large_document_keeps_exact_read_and_record_validation ... ok
+test segment::query_scratch_tests::chunked_scan_matches_full_fold_at_utf8_and_term_boundaries ... ok
+test segment::window_tests::window_matches_exact_reads_across_boundaries_and_sparse_order ... ok
+test source_records::tests::prepare_child ... ignored, process helper
+test spill::tests::chunk_boundaries_preserve_bytes_and_reject_duplicate_ids ... ok
+test spill::tests::corrupt_spill_header_term_and_postings_fail_closed ... ok
+test source_records::tests::interrupted_address_publication_preserves_prior_map_and_source ... ok
+test spill::tests::empty_and_complete_term_boundary_truncation_are_rejected ... ok
+test segment::paged::streaming::tests::streamed_pages_are_byte_compatible_and_have_no_resident_record_table ... ok
+test segment::short_ascii::tests::every_non_ascii_scalar_folds_without_eligible_ascii_letters ... ok
+test wal_delta::tests::located_encoder_matches_existing_bytes_and_borrowed_replay_offsets ... ok
+test wal_delta::tests::raw_offsets_accept_whitespace_and_reordered_existing_schema ... ok
+test wal_delta::tests::valid_crc_still_requires_identity_and_complete_bytes ... ok
+test spill::tests::spilled_groups_merge_in_term_and_id_order_and_are_removed ... ok
+test write_budget::tests::reservations_shrink_wait_and_release_on_error ... ok
+test segment::window_tests::read_window_never_uses_a_valid_vfy_to_hide_corrupt_index_blocks_or_cuts ... ok
+test segment::window_tests::raw_ascii_matches_and_absence_reject_payload_corruption_and_truncation ... ok
+test segment::reuse::tests::legacy_footer_is_verified_with_its_own_codec_and_rejects_corruption ... ok
+test reclaim::tests::automatic_reclaim_kill_after_publication_preserves_newly_published_write ... ok
+test segment::window_tests::sparse_window_stops_read_ahead_but_dense_window_keeps_it ... ok
+test segment::window_tests::prefetched_corrupt_record_is_checked_before_it_matches ... ok
+test reclaim::tests::interruption_after_each_unlink_is_safe_and_retryable ... ok
+test spill::tests::every_staged_cut_and_crc_corruption_fail_closed_and_cleanup ... ok
+test spill::tests::multiple_stages_preserve_all_ids_and_release_every_owned_file ... ok
+test segment::paged::streaming::tests::every_torn_sidecar_and_crc_valid_wrong_record_rebuild_from_seg03 ... ok
+test format::native_check::tests::native_pass_checks_every_cut_byte_and_independent_source_crc ... ok
+test segment::short_ascii::tests::all_short_spellings_and_unicode_boundaries_match_canonical_fold ... ok
+test format::crc_tests::accelerated_ieee_matches_tables_for_offsets_lengths_states_and_chaining ... ok
+test payload::document_limit_tests::utf8_validation_matches_std_including_boundaries_and_invalid_bytes ... ok
+
+test result: ok. 101 passed; 0 failed; 5 ignored; 0 measured; 0 filtered out; finished in 23.83s
+
+     Running unittests src\main.rs (target\debug\deps\fdb-1ea9e4e618692267.exe)
+
+running 0 tests
+
+test result: ok. 0 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.00s
+
+     Running unittests src\bin\fdb-import-sdb.rs (target\debug\deps\fdb_import_sdb-2a8226b51aefdf95.exe)
+
+running 0 tests
+
+test result: ok. 0 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.00s
+
+     Running tests\compact_cache.rs (target\debug\deps\compact_cache-dc69a0fcbca6f8fe.exe)
+
+running 5 tests
+test intact_seg05_cannot_hide_corrupt_authoritative_source ... ok
+test crc_valid_invalid_binary_flags_counts_and_addresses_cannot_hide_behind_metadata_cache ... ok
+test default_flush_rebuild_and_merge_write_source_references_without_conversion ... ok
+test native_layout_roundtrip_query_get_maintenance_and_source_bytes ... ok
+test every_torn_or_single_byte_corrupt_cache_fails_and_rebuilds_from_source ... ok
+
+test result: ok. 5 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 41.67s
+
+     Running tests\disk.rs (target\debug\deps\disk-2b2bc63d32e21d91.exe)
+
+running 11 tests
+test runtime_document_corruption_is_reported_before_returning_payload ... ok
+test deleted_disk_fields_and_links_never_leak_through_old_postings ... ok
+test numeric_groups_unicode_and_exact_filters_work_across_collections ... ok
+test disk_delta_merge_masks_stale_results_and_preserves_page_order ... ok
+test automatic_maintenance_preserves_guards_and_does_not_run_for_rejected_batch ... ok
+test postings_cross_block_boundaries_without_losing_page_entries ... ok
+test checkpoint_evicts_content_and_postings_from_resident_state ... ok
+test v01_checkpoint_fixture_opens_without_rewriting_authoritative_bytes ... ok
+test delta_byte_watermark_bounds_resident_long_content_after_next_write ... ok
+test missing_corrupt_and_wrong_generation_segments_rebuild_from_log ... ok
+test killing_compaction_before_publication_preserves_acknowledged_data ... ok
+
+test result: ok. 11 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 1.35s
+
+     Running tests\engine.rs (target\debug\deps\engine-47e4622410bd1fa2.exe)
+
+running 21 tests
+test buffered_wal_child ... ignored, subprocess helper; invoked by buffered_wal_process_kill
+test adapters_preserve_volume_hardlinks_and_fund_identity ... ok
+test invalid_batch_and_cross_scope_reference_do_not_write ... ok
+test complete_garbage_header_is_not_a_torn_write ... ok
+test exclusive_lock_released_on_drop ... ok
+test guard_failure_is_atomic_and_does_not_write ... ok
+test stale_postings_removed_and_short_unicode_terms_work ... ok
+test truncated_published_checkpoint_and_missing_marker_are_errors ... ok
+test synced_and_buffered_commits_produce_identical_wal_bytes ... ok
+test buffered_wal_process_kill ... ok
+test acknowledged_commit_survives_process_kill ... ok
+test corrupt_latest_checkpoint_never_falls_back_to_stale_generation ... ok
+test durable_batch_update_delete_compaction ... ok
+test empty_checkpoint_after_deleting_all_documents_reopens ... ok
+test combined_indexes_turkish_pagination_and_scope ... ok
+test incomplete_unpublished_generation_is_ignored ... ok
+test every_single_byte_corruption_in_committed_frame_is_rejected ... ok
+test multi_frame_checkpoint_preserves_versions_and_can_accept_writes ... ok
+test every_partial_transaction_cut_recovers_previous_commit ... ok
+test buffered_wal_keeps_atomic_frames_and_rejects_corruption ... ok
+test randomized_operations_match_reference_across_reopens ... ok
+
+test result: ok. 20 passed; 0 failed; 1 ignored; 0 measured; 0 filtered out; finished in 2.42s
+
+     Running tests\native_binary.rs (target\debug\deps\native_binary-c2a9cceb543025a3.exe)
+
+running 10 tests
+test explicit_log_check_rejects_partial_tail_without_repairing_it ... ok
+test binary_size_limit_and_depth_fail_before_append ... ok
+test crc_valid_index_sequence_cannot_replace_the_published_source_sequence ... ok
+test block_cache_is_optional_and_does_not_hide_bad_sources_or_change_seg04 ... ok
+test source_record_maps_preserve_newer_versions_and_tombstones ... ok
+test native_binary_roundtrip_versions_queries_and_cache_rebuild ... ok
+test deferred_open_checks_source_before_reads_searches_and_writes ... ok
+test intact_binary_cache_never_hides_cut_or_corrupt_published_source ... ok
+test deferred_index_rejects_an_unopened_payload_block_before_returning_document ... ok
+test source_record_addresses_check_actual_source_and_fall_back_for_bad_caches ... ok
+
+test result: ok. 10 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 4.20s
+
+     Running tests\rkyv_payload.rs (target\debug\deps\rkyv_payload-cdd4cfcb46a8a49e.exe)
+
+running 6 tests
+test export_child ... ignored, child helper invoked by export_process_kill
+test archive_cuts_misalignment_and_turkish_contains_keep_safe_access ... ok
+test binary_roundtrip_borrowed_views_and_malformed_offsets ... ok
+test old_json_fixture_still_opens_with_rkyv_feature_enabled ... ok
+test export_process_kill ... ok
+test every_export_cut_byte_corruption_and_runtime_payload_error_fail_closed ... ok
+
+test result: ok. 5 passed; 0 failed; 1 ignored; 0 measured; 0 filtered out; finished in 28.92s
+
+     Running tests\segments.rs (target\debug\deps\segments-fa3cce8774723486.exe)
+
+running 18 tests
+test every_manifest_section_is_checksummed_and_no_fallback_occurs ... ok
+test flush_writes_only_delta_and_does_not_rewrite_existing_sources ... ok
+test whitespace_and_short_terms_preserve_substring_and_semantics ... ok
+test process_kill_after_scheduling_merge_recovers_acknowledged_sources ... ok
+test manifest_copied_under_another_generation_is_rejected ... ok
+test full_filter_prefix_preserves_complete_hits_and_falls_back_for_hidden_slots ... ok
+test streaming_open_preserves_large_exact_fields_on_rebuild_and_reopen ... ok
+test older_referenced_source_corruption_is_rejected_even_with_valid_cache ... ok
+test repeated_content_cache_keeps_titles_and_large_uncached_text_independent ... ok
+test full_filter_count_excludes_hidden_tombstones_and_unflushed_deletes ... ok
+test bounded_prefix_boundary_and_offset_overflow_preserve_exact_pages ... ok
+test writes_during_background_merge_and_unflushed_wal_survive_publication ... ok
+test merge_reuse_rejects_runtime_source_or_index_corruption_before_publication ... ok
+test tombstone_survives_merge_and_does_not_resurrect_old_document ... ok
+test bounded_first_page_merges_numeric_unions_and_newer_visibility_in_key_order ... ok
+test grouped_hydration_preserves_large_pages_delta_versions_and_oversized_documents ... ok
+test random_multi_segment_operations_match_reference_with_fields_and_links ... ok
+test paged_metadata_deep_offsets_interleaved_runs_and_delta_match_model ... ok
+
+test result: ok. 18 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 13.49s
+
+     Running tests\streamed_transactions.rs (target\debug\deps\streamed_transactions-c81423af0f5628b0.exe)
+
+running 10 tests
+test concurrent_streamed_child ... ignored, subprocess helper for mixed_writer_workspace_admission_does_not_deadlock
+test streamed_child ... ignored, subprocess helper for streamed_process_kill
+test covered_query_never_accepts_corrupt_source_with_valid_index_and_address_caches ... ok
+test covered_queries_reject_source_or_index_changed_after_successful_warm_search ... ok
+test immutable_source_lease_blocks_mutation_and_keeps_wal_writable ... ok
+test covered_grams_preserve_unicode_mixed_terms_visibility_and_numbered_pages ... ok
+test short_coverage_and_isolated_short_fallback_match_independent_oracle ... ok
+test atomic_streamed_input_filters_delete_update_reopen_and_normal_interop ... ok
+test mixed_writer_workspace_admission_does_not_deadlock ... ok
+test streamed_process_kill_before_ack_during_wal_publication_and_after_ack ... ok
+
+test result: ok. 8 passed; 0 failed; 2 ignored; 0 measured; 0 filtered out; finished in 3.53s
+
+     Running tests\wal_delta.rs (target\debug\deps\wal_delta-8de4e3ba7c24b608.exe)
+
+running 2 tests
+test runtime_delta_corruption_is_not_hidden_by_resident_index_or_cached_result ... ok
+test delta_references_preserve_documents_updates_search_recovery_and_flush ... ok
+
+test result: ok. 2 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.08s
+
+     Running tests\write_budget.rs (target\debug\deps\write_budget-4aebb9a2620442ab.exe)
+
+running 1 test
+test concurrent_databases_stream_sources_and_release_shared_buffer_reservations ... ok
+
+test result: ok. 1 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 1.83s
+
+     Running unittests examples\compare_slot_hydration.rs (target\debug\examples\compare_slot_hydration-8090584ea9d29d51.exe)
+
+running 0 tests
+
+test result: ok. 0 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.00s
+
+     Running unittests examples\linked_search.rs (target\debug\examples\linked_search-9d00ee16f900fa8c.exe)
+
+running 0 tests
+
+test result: ok. 0 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.00s
+
+     Running unittests examples\measure.rs (target\debug\examples\measure-0a5365de71a7aa11.exe)
+
+running 0 tests
+
+test result: ok. 0 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.00s
+
+     Running unittests examples\measure_contains.rs (target\debug\examples\measure_contains-e80240bdc5d152b1.exe)
+
+running 1 test
+test verify::tests::oracle_preserves_versions_pages_and_update_delete_semantics ... ok
+
+test result: ok. 1 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.00s
+
+     Running unittests examples\measure_content_memory.rs (target\debug\examples\measure_content_memory-9ea55ecff2dd5518.exe)
+
+running 2 tests
+test allocation::tests::alignment_zeroing_reallocation_and_owner_survive_scope_change ... ok
+test input::tests::corpus_crc_uses_standard_ieee_vector ... ok
+
+test result: ok. 2 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.00s
+
+     Running unittests examples\measure_content_reads.rs (target\debug\examples\measure_content_reads-a58f74c762e82c9a.exe)
+
+running 4 tests
+test input::tests::corpus_crc_uses_standard_ieee_vector ... ok
+test matrix::tests::shuffle_is_reproducible_permutation ... ok
+test reads::tests::nearest_rank_percentiles ... ok
+test reads::tests::turkish_oracle_vectors ... ok
+
+test result: ok. 4 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.00s
+
+     Running unittests examples\measure_delta_queries.rs (target\debug\examples\measure_delta_queries-fab1166ce5842e6a.exe)
+
+running 1 test
+test input::tests::corpus_crc_uses_standard_ieee_vector ... ok
+
+test result: ok. 1 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.00s
+
+     Running unittests examples\measure_disk.rs (target\debug\examples\measure_disk-ef2497d204bf0b5b.exe)
+
+running 0 tests
+
+test result: ok. 0 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.00s
+
+     Running unittests examples\measure_engine_fold.rs (target\debug\examples\measure_engine_fold-0c8ed57918aae865.exe)
+
+running 0 tests
+
+test result: ok. 0 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.00s
+
+     Running unittests examples\measure_index_checksum.rs (target\debug\examples\measure_index_checksum-6c8d10f627fde8d3.exe)
+
+running 0 tests
+
+test result: ok. 0 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.00s
+
+     Running unittests examples\measure_interleaved_reads.rs (target\debug\examples\measure_interleaved_reads-3e3caada61d89428.exe)
+
+running 4 tests
+test input::tests::corpus_crc_uses_standard_ieee_vector ... ok
+test matrix::tests::shuffle_is_reproducible_permutation ... ok
+test reads::tests::nearest_rank_percentiles ... ok
+test reads::tests::turkish_oracle_vectors ... ok
+
+test result: ok. 4 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.00s
+
+     Running unittests examples\measure_ready_queries.rs (target\debug\examples\measure_ready_queries-9aef8c9679a5b4ed.exe)
+
+running 1 test
+test verify::tests::oracle_preserves_versions_pages_and_update_delete_semantics ... ok
+
+test result: ok. 1 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.00s
+
+     Running unittests examples\measure_rkyv_payload.rs (target\debug\examples\measure_rkyv_payload-663722d3727bfd3a.exe)
+
+running 0 tests
+
+test result: ok. 0 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.00s
+
+     Running unittests examples\measure_scale.rs (target\debug\examples\measure_scale-3b9e791c37e7be20.exe)
+
+running 1 test
+test verify::tests::oracle_preserves_versions_pages_and_update_delete_semantics ... ok
+
+test result: ok. 1 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.00s
+
+     Running unittests examples\measure_wal_sync.rs (target\debug\examples\measure_wal_sync-d83adfb9d97662e3.exe)
+
+running 0 tests
+
+test result: ok. 0 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.00s
+
+     Running unittests examples\probe_paged_records.rs (target\debug\examples\probe_paged_records-da05f604ac102536.exe)
+
+running 2 tests
+test tests::unicode_keys_metadata_and_malformed_pages ... ok
+test tests::page_boundaries_tombstones_shared_budget_and_io_failures ... ok
+
+test result: ok. 2 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.04s
+
+     Running unittests examples\profile_grouped_reads.rs (target\debug\examples\profile_grouped_reads-bfaad39e467d4aff.exe)
+
+running 0 tests
+
+test result: ok. 0 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.00s
+
+     Running unittests examples\profile_memory.rs (target\debug\examples\profile_memory-ee0f3967b0177d87.exe)
+
+running 0 tests
+
+test result: ok. 0 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.00s
+
+     Running unittests examples\profile_write_origins.rs (target\debug\examples\profile_write_origins-d6105fb063b8be13.exe)
+
+running 1 test
+test allocation::tests::alignment_zeroing_reallocation_and_owner_survive_scope_change ... ok
+
+test result: ok. 1 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.00s
+
+     Running unittests examples\profile_writes.rs (target\debug\examples\profile_writes-c80eadf5dee5547b.exe)
+
+running 0 tests
+
+test result: ok. 0 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.00s
+
+     Running unittests examples\reclaim_obsolete.rs (target\debug\examples\reclaim_obsolete-2167c88f01af76ba.exe)
+
+running 0 tests
+
+test result: ok. 0 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.00s
+
+     Running unittests examples\repack_index_cache.rs (target\debug\examples\repack_index_cache-65390108184895b0.exe)
+
+running 0 tests
+
+test result: ok. 0 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.00s
+
