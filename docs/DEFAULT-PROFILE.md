@@ -58,6 +58,14 @@ kaynak, WAL ve manifest biçimleri değişmez. Eski JSON/0.1 kaynak uyumluluğu
 korunur; fixture değiştirilmez. [Biçim ve kurtarma](SEG05-CACHE.md),
 [geçiş doğrulaması](DEFAULT-SEG05-10K-20261017.md).
 
+Tam doğrulamalı açılış ve başarılı flush/akışlı commit/merge sonrası eski
+nesiller otomatik temizlenir. Aktif kaynak/WAL ve çalışan okuyucu/worker
+korunur; bilinmeyen isimler silinmez. Açıkça `reclaim_obsolete()` çağrısı
+full integrity ve geri kazanılan dosya byte'larını raporlar. Cleanup I/O
+hatası başarılı commit'i hataya çevirmez; explicit çağrı hatayı bildirir.
+Deferred açılışta doğrulanmamış veriden hareketle silme yapılmaz.
+[Ayrıntılar ve mevcut10k kanıtı](RECLAIM-10K-20261017.md).
+
 ## Derleme seçenekleri ve uyumluluk
 
 | Derleme | Anlam |

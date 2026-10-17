@@ -1,0 +1,110 @@
+{
+  "design": {
+    "pairs": 4,
+    "orders": [
+      "control/fdb",
+      "fdb/control",
+      "control/fdb",
+      "fdb/control"
+    ],
+    "cache": "warm OS cache; no eviction; fresh normal strict processes; mask4; no hardware/power isolation",
+    "validation": "full source/index CRC and schema; pending0; get9999/quixote first-use correctness",
+    "database": "same already cleaned17 core files; no writes/reset/new corpus/DB copies",
+    "executables": [
+      {
+        "variant": "control",
+        "path": "output/seg05-default-reads-20261017.exe",
+        "sha256": "1B5F45A38442978A0EE9A3D805D4707412E81A641A59D0157A8B2CD00EBF748A"
+      },
+      {
+        "variant": "fdb",
+        "path": "output/reclaim-reads-20261017.exe",
+        "sha256": "440760544233E95B4CC02831893A2D4FDFFE6C1481BA03AA02A2CEFA413818B7"
+      }
+    ]
+  },
+  "rows": [
+    {
+      "variant": "control",
+      "pair": 0,
+      "open_ms": 216.7856,
+      "first_use_ms": 221.635
+    },
+    {
+      "variant": "fdb",
+      "pair": 0,
+      "open_ms": 249.1451,
+      "first_use_ms": 256.2088
+    },
+    {
+      "variant": "control",
+      "pair": 1,
+      "open_ms": 204.16119999999998,
+      "first_use_ms": 208.20919999999998
+    },
+    {
+      "variant": "fdb",
+      "pair": 1,
+      "open_ms": 274.0905,
+      "first_use_ms": 281.30350000000004
+    },
+    {
+      "variant": "control",
+      "pair": 2,
+      "open_ms": 177.9391,
+      "first_use_ms": 182.3869
+    },
+    {
+      "variant": "fdb",
+      "pair": 2,
+      "open_ms": 167.27100000000002,
+      "first_use_ms": 170.9939
+    },
+    {
+      "variant": "control",
+      "pair": 3,
+      "open_ms": 183.2869,
+      "first_use_ms": 188.6921
+    },
+    {
+      "variant": "fdb",
+      "pair": 3,
+      "open_ms": 170.8658,
+      "first_use_ms": 174.54760000000002
+    }
+  ],
+  "medians": {
+    "control": {
+      "open_ms": 193.72404999999998,
+      "first_use_ms": 198.45065
+    },
+    "fdb": {
+      "open_ms": 210.00545,
+      "first_use_ms": 215.3782
+    }
+  },
+  "comparisons": {
+    "open_ms": {
+      "change_percent": 8.40442887705477,
+      "lower_pairs": 2,
+      "paired_change_percent": [
+        14.926960093290331,
+        34.252002829137005,
+        -5.995365830219434,
+        -6.776861848828252
+      ]
+    },
+    "first_use_ms": {
+      "change_percent": 8.529853643714436,
+      "lower_pairs": 2,
+      "paired_change_percent": [
+        15.599431497732752,
+        35.10618166728467,
+        -6.246610913393447,
+        -7.496074292458454
+      ]
+    }
+  },
+  "limits": "Warm OS cache, no eviction/hardware isolation. Limited pairs, no general performance/RAM gate. No new SQLite, query p95, concurrent, cold or power-failure measurement. Memory is OS lifetime private commit/WS, not total system RAM.",
+  "all_slot_hashes_unchanged": true
+}

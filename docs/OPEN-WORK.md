@@ -1,5 +1,18 @@
 # FDB açık işler
 
+Standart eski nesil temizliği tamamlandı: mevcut10k'da105 dosya,
+622.859.277 B kaldırıldı; toplam972.664.975→349.805.698 B (-%64,04).
+Canlı kaynak/cache/ready byte'ları ve10k/38-case oracle aynı; yeni
+corpus/kopya yok. İki yeni ingestte de350MB, canlı17 core hash-eşit.
+Yazma+bakım iki çiftte+%1,34 (1/2 düşük), bakım+%2,82; open ilk+%8,40,
+tekrar-%2,86, aynı-program+%3,00. Performans etkileri gürültü diye
+kapatılmadı. Default159/reference90/all177 tam test, ayrıca üç profilde
+automatic publication/cleanup kill1'er test; fmt/Clippy temiz.
+Arama22/38 artış, yazma/kabul/CRC ve spool tekrarları, normal Vec/query RAM,
+açılış, eşzamanlı/gerçek-cold ve güç kesintisi hâlâ açık. Dynamic geçici
+isimler ve root'tan ileri orphan'lar için genel alan geri kazanma sınırları
+raporda. [Güncel temizlik raporu](RECLAIM-10K-20261017.md).
+
 Kullanıcı kararı: SEG05 flag1 yeni native indekslerde varsayılan. Commit/
 flush, merge ve cache onarımı gerçek kaynak entry adresini doğrudan yazar;
 önce kopyalı SEG04 oluşturulmaz. Okunabilir eski cache'ler korunur, kaynak/
@@ -141,7 +154,7 @@ deneysel profilde tutulur; genel/default kabul kapısı geçmedi.
 | Bütün temel test başlıklarını birlikte raporla | Açık: yazma, bakım, get,38 arama/sayfa, açılış, RAM ve disk |
 | Arama senaryolarındaki p95 artışını incele | Kapalı —2026-10-13 kullanıcı kararıyla kalan grouped2/default3 artış ölçüm dalgalanması kabul edildi. Ham36/2 ve35/3 sonuçlar korunur; ek istatistiksel kanıt veya bütün iş yüklerinde hız garantisi değildir. [Ölçüm ve kullanıcı kabulü](REGRESSION-READS-10K-20261013.md) |
 | RAM: boşta ve indeksleme/bakım tepesini düşür | Bu10k streamed/sayfalı profilin düşük RAM sonucu2026-10-14 kullanıcı tarafından kabul edildi; öncelik bu seviyede hız. Son source-lease3 çift indexing private9,195→9,129MiB ve bakım8,457→8,145MiB, ikisi3/3 düşük; idle1,695→1,527MiB,2/3 düşük. OS peak WS13,000→13,027MiB,2/3 yüksek; sıfır RAM artışı iddiası yok. Bunlar arama/oracle olmayan ayrı proses sayaçları; query tepe belleği, kernel handle belleği ve toplam sistem RAM'i değildir. Normal/default API, genel heap, büyük entry, WAL replay ve concurrent kapsamı açık; düşük RAM kabulü default'a geçiş değildir. [Son üç çift](SOURCE-LEASE-10K-20261015.md), [önceki üç çift](CHANGED-RUNS-10K-20261015.md), [kök neden/uygulama](BOUNDED-MEMORY-10K-20261014.md) |
-| Disk: source/index kopyaları ve tutulan eski nesiller | Açık; güncel source/index/WAL+ready621.589.411 B, retained .fdb/.idx/.ready1.521.041.630 B; SQLite583.860.224 B. Son source-lease altı sabit-slot ingestte boyutlar tekrarlandı ve124 FDB/cache/SQL dosyasının hash'i öncekiyle aynı kaldı; corpus SHA256 aynı. Yeni corpus/DB kopyası/SQLite reset yok. Eski nesil temizliği tek başına canlı alan farkını çözmez. [Son kanıt](SOURCE-LEASE-10K-20261015.md), [önceki yazma/bakım](WRITE-MAINTENANCE-10K-20261013.md) |
+| Disk: source/index kopyaları ve tutulan eski nesiller | Standart eski nesil temizliği tamam:105 dosya/622.859.277 B, retained core972.664.975→349.805.698 B; source+WAL267.900.709 B, idx+MET81.904.473 B, ready516 B. Canlı byte/hash aynı,10k full-doc ve38-case oracle geçti; eski okuyucu da açar. İki streamed ingestte aynı350MB; current17 core hash-eşit. GC güvenliği, root/source/WAL bozulması, interrupted unlink, explicit/automatic kill, reader/worker pin ve retry testleri geçti. Genel sıkıştırma, dynamic temp/orphan sınırları, concurrent/cold ve genel RAM/hız kapıları açık. [Güncel ölçüm ve sınırlar](RECLAIM-10K-20261017.md) |
 | Bakım sürerken okuma/yazma gecikmesini ölç | Açık; eşzamanlı yük ve bloklanma kapsamlı ölçülmedi |
 | Soğuk cache ve farklı iş yüklerinde sonuçları doğrula | Açık; mevcut karşılaştırmalar sıcak OS cache, belirli SQLite ayarları |
 

@@ -1,0 +1,24 @@
+{
+  "pairs": 2,
+  "orders": [
+    "control/fdb",
+    "fdb/control"
+  ],
+  "input": "same existing first10000;500 records/transaction;20 synced streamed commits; no corpus preparation",
+  "cache": "OS cache, no eviction or hardware/power isolation",
+  "scope": "write plus final flush/drain;40 boundary gets inside timing; full10000 payload and4 contains oracle outside timing; OS lifetime process memory; no query performance gate",
+  "database": "only fixed FDB slot reset for indexing; SQLite/fixture/corpus hashes protected",
+  "compatibility": "live source/index/MET04/ready hashes must be identical; obsolete files intentionally differ",
+  "executables": [
+    {
+      "variant": "control",
+      "path": "output/seg05-default-memory-20261017.exe",
+      "sha256": "83084BA0196B490CC760B92564085A819FF1AEC5D5D54F99E8048F956C6E9FCA"
+    },
+    {
+      "variant": "fdb",
+      "path": "output/reclaim-memory-20261017.exe",
+      "sha256": "9CB514BD2199D1ADE11EAE1BC690E0521C42C3790BD835B145F4C746D85E6624"
+    }
+  ]
+}

@@ -1,0 +1,159 @@
+{
+  "baseline_head": "5797b55ddc753e6b633308d4797b34b69343fd2f",
+  "final_files": {
+    "generation-0000000000000031.fdb": {
+      "bytes": 45,
+      "sha256": "90cb6cca105e6739077374a0d2b9b4099570c40dee94c183ae007fa2964f6b83"
+    },
+    "generation-0000000000000033.ready": {
+      "bytes": 516,
+      "sha256": "8bdd54e328388818e8d7abb752c256406a11d9c5368d39bd004f0d3fb9e15141"
+    },
+    "LOCK": {
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    "run-000000000000000a.fdb": {
+      "bytes": 53746407,
+      "sha256": "06b659638ebe050747065df81d367e260c967e8710950bf6d12d19dfaf897843"
+    },
+    "run-000000000000000a.idx": {
+      "bytes": 16350784,
+      "sha256": "5e181978335945df9b1f322d5969e53b8dc7f34e552efd0e7404075ff27a9032"
+    },
+    "run-000000000000000a.records04.idx": {
+      "bytes": 89121,
+      "sha256": "3068a1101093bbb7c9ad533dc7d6de8ebb4b96bb48893aa12294c4b8989a38b7"
+    },
+    "run-0000000000000014.fdb": {
+      "bytes": 52970692,
+      "sha256": "ae2e811e20d3f95d997c39e14489c74353fb9fb21f79f852b4569662420eca62"
+    },
+    "run-0000000000000014.idx": {
+      "bytes": 16203819,
+      "sha256": "f19bc0c9d4c5b484f5753452af0adca0567f507ee80e40b42e812a372bf4258c"
+    },
+    "run-0000000000000014.records04.idx": {
+      "bytes": 89121,
+      "sha256": "600471c136dc08908019beb04a0135390cd9e6b623c40e6eadf0df105d298700"
+    },
+    "run-000000000000001e.fdb": {
+      "bytes": 52914977,
+      "sha256": "40fc3ccbcc80f9756934790874e0d947101d16da540d1a965536285d3d331b7c"
+    },
+    "run-000000000000001e.idx": {
+      "bytes": 16201874,
+      "sha256": "3a8a0c7120bb35cffc295a20fa5bc327b4a5908de6ddeab8576b0ffd25c58039"
+    },
+    "run-000000000000001e.records04.idx": {
+      "bytes": 89121,
+      "sha256": "e0e4aeb7ff108e0460e924f958949240dd11e43b62d21d915030cb931fd48677"
+    },
+    "run-0000000000000028.fdb": {
+      "bytes": 54087247,
+      "sha256": "5a9fdcf1e0df35bbf77bbc1b3305568ceedb3da2753efe0729188ce5b21b6c86"
+    },
+    "run-0000000000000028.idx": {
+      "bytes": 16311854,
+      "sha256": "9efa675cafb0435549b60d13f0d4e507a46e9e9c2228f315713b7163805b11dd"
+    },
+    "run-0000000000000028.records04.idx": {
+      "bytes": 89121,
+      "sha256": "357136e6c57414b319bb239d40ce887fdb7c7bd0ce07c477e6aa54dc37319036"
+    },
+    "run-0000000000000032.fdb": {
+      "bytes": 54181341,
+      "sha256": "713afafff8ff93628baae025f14b74b8b33c247934b25179b00c8e01a5308bb2"
+    },
+    "run-0000000000000032.idx": {
+      "bytes": 16390537,
+      "sha256": "a083f60b2f11d2f3bf4a393d2c76e29845f3620ad7039a4d431f3676c5fd3332"
+    },
+    "run-0000000000000032.records04.idx": {
+      "bytes": 89121,
+      "sha256": "609d58e3b32e530fb63ef463655a083a3b775fe365c96e748039086f1bb165f2"
+    }
+  },
+  "core_files": 17,
+  "all_files": 18,
+  "total_file_bytes": 349805698,
+  "final_files_equal_initial_reclaimed_snapshot": true,
+  "all_live_hashes_equal_across_writers_and_reads": true,
+  "protected_files": {
+    "data/rkyv-corpus-20261009/json.payload-bench": {
+      "bytes": 2740862279,
+      "sha256": "11f826fce3f4ae790feb9fc6df9b1169f52c2fd699e89fc4a8a4b77aaa41731b"
+    },
+    "data/benchmark-work/sqlite/sqlite.db": {
+      "bytes": 583860224,
+      "sha256": "e0a576de81380673c30eb19b262ac2f2fb0c6a8a2f3430a5593882e2783b7086"
+    },
+    "tests/fixtures/v1/checkpoint.fdb": {
+      "bytes": 1507,
+      "sha256": "e87667c0fabe64d5a1f59ef86b99f7e612db755d239b41677da2adc24be7bf57"
+    },
+    "tests/fixtures/v1/checkpoint.ready": {
+      "bytes": 28,
+      "sha256": "bc82c18f8d5c3a209328bd59b12d828d8922bec4d26cb4d557fd4a493a4a9c2f"
+    }
+  },
+  "fixture_sources_git_byte_equal": true,
+  "unchanged_git_text_CRLF_normalized": [
+    "Cargo.toml",
+    "Cargo.lock",
+    "src/format.rs",
+    "src/format/native_check.rs",
+    "src/payload.rs"
+  ],
+  "normal_binaries": {
+    "memory": {
+      "frozen": "output/reclaim-memory-20261017.exe",
+      "final": "target/release/examples/measure_content_memory.exe",
+      "sha256": "9cb514bd2199d1ade11eae1bc690e0521c42c3790bd835b145f4c746d85e6624",
+      "full_binary_equal": true
+    },
+    "reads": {
+      "frozen": "output/reclaim-reads-20261017.exe",
+      "final": "target/release/examples/measure_content_reads.exe",
+      "sha256": "440760544233e95b4cc02831893a2d4fdffe6c1481ba03aa02a2cefa413818b7",
+      "full_binary_equal": true
+    }
+  },
+  "tests": {
+    "default-final-tests": {
+      "passed": 159,
+      "failed": 0,
+      "ignored": 7
+    },
+    "reference-tests": {
+      "passed": 90,
+      "failed": 0,
+      "ignored": 3
+    },
+    "all-tests": {
+      "passed": 177,
+      "failed": 0,
+      "ignored": 9
+    },
+    "auto-kill-tests": {
+      "passed": 1,
+      "failed": 0,
+      "ignored": 0
+    },
+    "auto-kill-reference-tests": {
+      "passed": 1,
+      "failed": 0,
+      "ignored": 0
+    },
+    "auto-kill-all-tests": {
+      "passed": 1,
+      "failed": 0,
+      "ignored": 0
+    }
+  },
+  "data_directories": [
+    "benchmark-work",
+    "rkyv-corpus-20261009"
+  ],
+  "limits": "File lengths, not physical blocks; warm OS cache. No new corpus/DB copies; write probes reset only the fixed owned FDB slot. No fresh SQLite/38-case query p95/concurrent/cold/power-failure benchmark. Failed cleanup is retryable and does not imply data failure."
+}

@@ -1,0 +1,24 @@
+{
+  "pairs": 4,
+  "orders": [
+    "control/fdb",
+    "fdb/control",
+    "control/fdb",
+    "fdb/control"
+  ],
+  "cache": "warm OS cache; no eviction; fresh normal strict processes; mask4; no hardware/power isolation",
+  "validation": "full source/index CRC and schema; pending0; get9999/quixote first-use correctness",
+  "database": "same already cleaned17 core files; no writes/reset/new corpus/DB copies",
+  "executables": [
+    {
+      "variant": "control",
+      "path": "output/reclaim-reads-20261017.exe",
+      "sha256": "440760544233E95B4CC02831893A2D4FDFFE6C1481BA03AA02A2CEFA413818B7"
+    },
+    {
+      "variant": "fdb",
+      "path": "output/reclaim-reads-20261017.exe",
+      "sha256": "440760544233E95B4CC02831893A2D4FDFFE6C1481BA03AA02A2CEFA413818B7"
+    }
+  ]
+}

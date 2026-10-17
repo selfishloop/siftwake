@@ -1,5 +1,19 @@
 # FDB mimarisi — 0.3.1
 
+2026-10-17 eski nesil temizliği: strict açılış ve başarılı yayın sonrası,
+güncel ready yeniden doğrulanıp eski ready'ler, ardından artık referanssız
+standart kaynak/cache dosyaları kaldırılır. DB kökü kilit alınmadan önce
+canonicalize edilir. Aktif WAL, canlı Run, Weak ile izlenen retired okuyucu
+ve Job.output_id korunur. Root'tan büyük/eşit orphan ID bir sonraki yayına
+kadar saklanır; allocator ID tekrar kullanmaz. Public `reclaim_obsolete`
+önce full integrity yapar; otomatik hatalar yazma sonucunu zehirlemez.
+Windows publication write-through rename, Unix directory sync kullanır;
+kalıcı biçimler aynı. Süreç sonlandırma güç kesintisi testi değildir.
+Mevcut10k'da105 dosya/622,9MB kaldırıldı,973→350MB; canlı17 core dosya
+byte-eşit, eski/yeni okuyucu ve10k oracle geçti. Yazma+bakım2 çiftte+%1,34,
+open serileri tutarsız; genel performans/RAM kapısı kapanmaz.
+[Davranış, güvenlik ve ölçüm](RECLAIM-10K-20261017.md).
+
 2026-10-17 kullanıcı onayıyla SEG05 flag1 varsayılan native Run yazıcısıdır.
 Flush/delta posting reuse, merge ve eksik/bozuk cache yeniden indekslemesi,
 doğrulanmış FDBLOG04 entry adreslerini doğrudan dictionary'ye taşır. Önce

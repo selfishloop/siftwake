@@ -1,5 +1,13 @@
 # FDB
 
+[Eski nesillerin otomatik temizliği](docs/RECLAIM-10K-20261017.md):
+mevcut10k'da105 eski dosya kaldırıldı; toplam973→350MB (-%64,04), canlı
+kaynak/indeks/ready byte'ları aynı. Yeni yazmalarda da350MB; yeni corpus yok.
+Güncel WAL, açık okuyucu ve worker çıktısı korunur. Kesilme/bozulma/kill
+testleri ve eski okuyucuyla yeniden açılış geçti. İki yazma çiftinde toplam
+medyan+%1,34, bakım+%2,82; açılış serileri değişken. Arama22/38, RAM ve
+genel yazma/bakım/açılış, eşzamanlı/soğuk yük başlıkları açık kalır.
+
 [SEG05 varsayılan yazıcı geçişi](docs/DEFAULT-SEG05-10K-20261017.md):
 kullanıcı kararıyla yeni native indeksler ikili sözlük ve kaynak referanslarıyla
 yazılır. Commit/flush, birleştirme ve cache onarımı belgeyi indekse kopyalamaz.

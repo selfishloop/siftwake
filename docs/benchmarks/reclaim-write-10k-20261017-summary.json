@@ -1,0 +1,227 @@
+{
+  "design": {
+    "pairs": 2,
+    "orders": [
+      "control/fdb",
+      "fdb/control"
+    ],
+    "input": "same existing first10000;500 records/transaction;20 synced streamed commits; no corpus preparation",
+    "cache": "OS cache, no eviction or hardware/power isolation",
+    "scope": "write plus final flush/drain;40 boundary gets inside timing; full10000 payload and4 contains oracle outside timing; OS lifetime process memory; no query performance gate",
+    "database": "only fixed FDB slot reset for indexing; SQLite/fixture/corpus hashes protected",
+    "compatibility": "live source/index/MET04/ready hashes must be identical; obsolete files intentionally differ",
+    "executables": [
+      {
+        "variant": "control",
+        "path": "output/seg05-default-memory-20261017.exe",
+        "sha256": "83084BA0196B490CC760B92564085A819FF1AEC5D5D54F99E8048F956C6E9FCA"
+      },
+      {
+        "variant": "fdb",
+        "path": "output/reclaim-memory-20261017.exe",
+        "sha256": "9CB514BD2199D1ADE11EAE1BC690E0521C42C3790BD835B145F4C746D85E6624"
+      }
+    ]
+  },
+  "rows": [
+    {
+      "variant": "control",
+      "pair": 0,
+      "ingest_s": 30.4200386,
+      "maintenance_s": 0.8686348,
+      "combined_s": 31.2886734,
+      "cpu_s": 29.046875,
+      "private_bytes": 10584064,
+      "ws_bytes": 14946304,
+      "retained_disk_bytes": 972664975.0
+    },
+    {
+      "variant": "fdb",
+      "pair": 0,
+      "ingest_s": 29.432351099999998,
+      "maintenance_s": 0.8864047,
+      "combined_s": 30.318755799999998,
+      "cpu_s": 28.046875,
+      "private_bytes": 10493952,
+      "ws_bytes": 14901248,
+      "retained_disk_bytes": 349805698.0
+    },
+    {
+      "variant": "control",
+      "pair": 1,
+      "ingest_s": 28.4835335,
+      "maintenance_s": 0.9529631,
+      "combined_s": 29.4364966,
+      "cpu_s": 26.453125,
+      "private_bytes": 10985472,
+      "ws_bytes": 15278080,
+      "retained_disk_bytes": 972664975.0
+    },
+    {
+      "variant": "fdb",
+      "pair": 1,
+      "ingest_s": 30.2354294,
+      "maintenance_s": 0.9865429,
+      "combined_s": 31.2219723,
+      "cpu_s": 28.25,
+      "private_bytes": 10559488,
+      "ws_bytes": 14970880,
+      "retained_disk_bytes": 349805698.0
+    }
+  ],
+  "medians": {
+    "control": {
+      "ingest_s": 29.451786050000003,
+      "maintenance_s": 0.91079895,
+      "combined_s": 30.362585000000003,
+      "cpu_s": 27.75,
+      "private_bytes": 10784768.0,
+      "ws_bytes": 15112192.0,
+      "retained_disk_bytes": 972664975.0
+    },
+    "fdb": {
+      "ingest_s": 29.83389025,
+      "maintenance_s": 0.9364738,
+      "combined_s": 30.770364049999998,
+      "cpu_s": 28.1484375,
+      "private_bytes": 10526720.0,
+      "ws_bytes": 14936064.0,
+      "retained_disk_bytes": 349805698.0
+    }
+  },
+  "comparisons": {
+    "ingest_s": {
+      "change_percent": 1.2973888895950303,
+      "lower_pairs": 1,
+      "paired_change_percent": [
+        -3.246831843270581,
+        6.150556776953264
+      ]
+    },
+    "maintenance_s": {
+      "change_percent": 2.8189371540228603,
+      "lower_pairs": 0,
+      "paired_change_percent": [
+        2.0457273873899506,
+        3.523725105410702
+      ]
+    },
+    "combined_s": {
+      "change_percent": 1.343031398676997,
+      "lower_pairs": 1,
+      "paired_change_percent": [
+        -3.0999000424223877,
+        6.065516981392416
+      ]
+    },
+    "cpu_s": {
+      "change_percent": 1.4358108108108114,
+      "lower_pairs": 1,
+      "paired_change_percent": [
+        -3.4427111350188278,
+        6.792675723567632
+      ]
+    },
+    "private_bytes": {
+      "change_percent": -2.392707937713634,
+      "lower_pairs": 2,
+      "paired_change_percent": [
+        -0.8513931888544879,
+        -3.8777032065622663
+      ]
+    },
+    "ws_bytes": {
+      "change_percent": -1.1654695758232858,
+      "lower_pairs": 2,
+      "paired_change_percent": [
+        -0.30145245272676924,
+        -2.0107238605898137
+      ]
+    },
+    "retained_disk_bytes": {
+      "change_percent": -64.03636329148173,
+      "lower_pairs": 2,
+      "paired_change_percent": [
+        -64.03636329148173,
+        -64.03636329148173
+      ]
+    }
+  },
+  "limits": "Warm OS cache, no eviction/hardware isolation. Limited pairs, no general performance/RAM gate. No new SQLite, query p95, concurrent, cold or power-failure measurement. Memory is OS lifetime private commit/WS, not total system RAM.",
+  "all_live_hashes_equal": true,
+  "protected_files_unchanged": true,
+  "final_files": [
+    {
+      "Name": "generation-0000000000000031.fdb",
+      "Length": 45
+    },
+    {
+      "Name": "generation-0000000000000033.ready",
+      "Length": 516
+    },
+    {
+      "Name": "LOCK",
+      "Length": 0
+    },
+    {
+      "Name": "run-000000000000000a.fdb",
+      "Length": 53746407
+    },
+    {
+      "Name": "run-000000000000000a.idx",
+      "Length": 16350784
+    },
+    {
+      "Name": "run-000000000000000a.records04.idx",
+      "Length": 89121
+    },
+    {
+      "Name": "run-0000000000000014.fdb",
+      "Length": 52970692
+    },
+    {
+      "Name": "run-0000000000000014.idx",
+      "Length": 16203819
+    },
+    {
+      "Name": "run-0000000000000014.records04.idx",
+      "Length": 89121
+    },
+    {
+      "Name": "run-000000000000001e.fdb",
+      "Length": 52914977
+    },
+    {
+      "Name": "run-000000000000001e.idx",
+      "Length": 16201874
+    },
+    {
+      "Name": "run-000000000000001e.records04.idx",
+      "Length": 89121
+    },
+    {
+      "Name": "run-0000000000000028.fdb",
+      "Length": 54087247
+    },
+    {
+      "Name": "run-0000000000000028.idx",
+      "Length": 16311854
+    },
+    {
+      "Name": "run-0000000000000028.records04.idx",
+      "Length": 89121
+    },
+    {
+      "Name": "run-0000000000000032.fdb",
+      "Length": 54181341
+    },
+    {
+      "Name": "run-0000000000000032.idx",
+      "Length": 16390537
+    },
+    {
+      "Name": "run-0000000000000032.records04.idx",
+      "Length": 89121
+    }
+  ]
+}
