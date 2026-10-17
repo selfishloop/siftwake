@@ -1,5 +1,14 @@
 # FDB mimarisi — 0.3.1
 
+2026-10-17 bilinen aday payload'larını 64 slot/128KiB, en fazla4KiB gap ve
+%5 ek veri bütçesiyle gruplama deneyi reddedildi. Okuma çağrıları azalırken
+CRC/schema/UTF-8/key/version ve tarama işi korundu; normal kelimelerde dar
+kazanç fakat hızlı sayfalarda açıklanmamış p95 artışı vardı. Genel posting
+döngüsüne eklenen kuyruk/branch varsayılanda tutulmadı; segment ve testleri
+6eb3a89'a byte-eşit döndü. Mevcut geniş-seed read-ahead ve hydration yolu
+aynıdır. Patch, yerleşim analizi, normal A/B, aynı-SHA A/A ve RAM sınırları
+[deney raporunda](PAYLOAD-BATCH-10K-20261017.md). Bu tur format değişmez.
+
 2026-10-17 grouped page hydration: seçilen sıralı slotların sayısal
 metadata'sı ve key karşılaştırması aynı query-local doğrulanmış yapraktan
 okunur. Her decode öncesi yeniden sahipli Key kurma ve metadata lookup

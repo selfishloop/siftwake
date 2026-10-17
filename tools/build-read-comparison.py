@@ -18,7 +18,7 @@ def main():
     changed = subprocess.run(['git', 'diff', '--name-only', args.base, '--', 'src',
                               'Cargo.toml', 'Cargo.lock', 'tests/fixtures'], cwd=ROOT,
                              capture_output=True, text=True, check=True).stdout.splitlines()
-    allowed = {'src/segment.rs', 'src/segment/grouped_tests.rs'}
+    allowed = {'src/segment.rs', 'src/segment/grouped_tests.rs', 'src/segment/window_tests.rs'}
     if set(changed) - allowed:
         raise RuntimeError(f'Runtime/format/fixture changes outside this comparison: {changed}')
     current = source.read_bytes()

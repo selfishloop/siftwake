@@ -1,0 +1,458 @@
+diff --git a/src/segment.rs b/src/segment.rs
+index d2809da..09ab4a0 100644
+--- a/src/segment.rs
++++ b/src/segment.rs
+@@ -1679,6 +1679,134 @@ impl DiskIndex {
+         self.binary_exact_matches(id, scratch, terms, cache, cached_bytes)
+     }
+ 
++    #[cfg(feature = "bounded-engine")]
++    fn candidate_batches(&self, seed: &[Posting], verification_terms: &[String]) -> bool {
++        #[cfg(feature = "experimental-rkyv-payload")]
++        if self.payload_benchmark.is_some() {
++            return false;
++        }
++        let count = seed.iter().map(|p| p.count as u64).sum::<u64>();
++        self.binary_payload
++            && !verification_terms.is_empty()
++            && count >= 64
++            && !self.broad_payload_seed(seed)
++    }
++
++    // Plan only known, visibility/intersection-filtered candidates. No speculative
++    // read-ahead: at most 64 slots and 128 KiB, at most 4 KiB per gap and 5% waste.
++    #[cfg(feature = "bounded-engine")]
++    #[inline(never)]
++    fn binary_candidate_batch(
++        &self,
++        ids: &[u32],
++        scratch: &mut QueryTextScratch,
++        terms: &[String],
++        cache: &mut BTreeMap<String, String>,
++        cached_bytes: &mut usize,
++    ) -> Result<u64> {
++        const WINDOW: usize = 128 * 1024;
++        if ids.len() > 64 || ids.windows(2).any(|w| w[0] >= w[1]) {
++            return Err(Error::Corrupt("invalid candidate batch order/size".into()));
++        }
++        let mut records = [None; 64];
++        for (slot, &id) in ids.iter().enumerate() {
++            if id as usize >= self.len() || self.deleted(id) {
++                return Err(Error::Corrupt("invalid candidate batch slot".into()));
++            }
++            records[slot] = Some(self.query_metadata(id, scratch)?);
++        }
++        let mut matches = 0;
++        let mut start = 0;
++        while start < ids.len() {
++            let first = records[start].unwrap();
++            if first.len as usize > WINDOW {
++                if self.binary_exact_matches(ids[start], scratch, terms, cache, cached_bytes)? {
++                    matches |= 1 << start;
++                }
++                start += 1;
++                continue;
++            }
++            let base = first.offset;
++            let mut end = base
++                .checked_add(first.len as u64)
++                .ok_or_else(|| Error::Corrupt("candidate batch payload overflow".into()))?;
++            let mut useful = first.len as u64;
++            let mut next = start + 1;
++            while next < ids.len() {
++                let r = records[next].unwrap();
++                let new_end = r
++                    .offset
++                    .checked_add(r.len as u64)
++                    .ok_or_else(|| Error::Corrupt("candidate batch payload overflow".into()))?;
++                if r.offset < end
++                    || r.offset - end > 4096
++                    || new_end - base > WINDOW as u64
++                    || (new_end - base - useful - r.len as u64) * 100 > (useful + r.len as u64) * 5
++                {
++                    break;
++                }
++                end = new_end;
++                useful += r.len as u64;
++                next += 1;
++            }
++            let len = (end - base) as usize;
++            // Exact reserve keeps this path's heap buffer within its byte budget.
++            if scratch.payload.capacity() < len {
++                scratch
++                    .payload
++                    .reserve_exact(len.saturating_sub(scratch.payload.len()));
++            }
++            scratch.payload.resize(len, 0);
++            {
++                #[cfg(feature = "diagnostic-timing")]
++                let _read = crate::timing::span("query.payload_read");
++                self.read_payload_at(base, &mut scratch.payload)?;
++            }
++            #[cfg(feature = "diagnostic-timing")]
++            {
++                scratch.reads.requests += 1;
++                scratch.reads.read_bytes += len as u64;
++                scratch.reads.requested_bytes += useful;
++                scratch.reads.hits += (next - start - 1) as u64;
++            }
++            let bytes = std::mem::take(&mut scratch.payload);
++            let result = (|| {
++                for slot in start..next {
++                    let r = records[slot].unwrap();
++                    let offset = (r.offset - base) as usize;
++                    let payload = &bytes[offset..offset + r.len as usize];
++                    {
++                        #[cfg(feature = "diagnostic-timing")]
++                        let _crc = crate::timing::span("query.payload_crc");
++                        if crc(payload) != r.checksum {
++                            return Err(Error::Corrupt(
++                                "segment document checksum mismatch".into(),
++                            ));
++                        }
++                    }
++                    let view = {
++                        #[cfg(feature = "diagnostic-timing")]
++                        let _validate = crate::timing::span("query.payload_validation");
++                        crate::payload::checked(payload)?
++                    };
++                    if view.version() != r.version
++                        || !self.query_identity(ids[slot], scratch, view.key_parts())?
++                    {
++                        return Err(Error::Corrupt("segment document identity mismatch".into()));
++                    }
++                    if scratch.matches_text(view.title(), view.text(), terms, cache, cached_bytes) {
++                        matches |= 1 << slot;
++                    }
++                }
++                Ok(())
++            })();
++            scratch.payload = bytes;
++            result?;
++            start = next;
++        }
++        Ok(matches)
++    }
++
+     fn query_metadata(&self, id: u32, scratch: &mut QueryTextScratch) -> Result<PackedRecord> {
+         #[cfg(feature = "experimental-paged-metadata")]
+         if let Some(paged) = &self.paged {
+@@ -2267,6 +2395,8 @@ impl DiskIndex {
+         let mut text_scratch = QueryTextScratch::default();
+         #[cfg(feature = "experimental-paged-metadata")]
+         let mut text_cursor = paged::TextCursor::default();
++        #[cfg(feature = "bounded-engine")]
++        let batch_candidates = self.candidate_batches(&groups[0], &verification_terms);
+         // Stream the smallest posting group in blocks; no full list hydration.
+         let mut matched = vec![];
+         let mut buffer = [0; 4096];
+@@ -2279,6 +2409,10 @@ impl DiskIndex {
+                     p.offset + slot as u64 * 4,
+                     &mut buffer[..count as usize * 4],
+                 )?;
++                #[cfg(feature = "bounded-engine")]
++                let mut pending = [0u32; 64];
++                #[cfg(feature = "bounded-engine")]
++                let mut pending_len = 0;
+                 for bytes in buffer[..count as usize * 4].as_chunks::<4>().0 {
+                     let id = u32::from_le_bytes(*bytes);
+                     if id as usize >= self.len() || previous.is_some_and(|old| old >= id) {
+@@ -2318,6 +2452,32 @@ impl DiskIndex {
+                         {
+                             work.candidates += 1;
+                         }
++                        #[cfg(feature = "bounded-engine")]
++                        if batch_candidates {
++                            pending[pending_len] = id;
++                            pending_len += 1;
++                            if pending_len == pending.len() {
++                                let accepted = self.binary_candidate_batch(
++                                    &pending,
++                                    &mut text_scratch,
++                                    &verification_terms,
++                                    &mut folded_content,
++                                    &mut folded_bytes,
++                                )?;
++                                for (bit, &selected) in pending.iter().enumerate() {
++                                    if accepted & (1 << bit) == 0 {
++                                        continue;
++                                    }
++                                    #[cfg(feature = "diagnostic-timing")]
++                                    {
++                                        work.accepted += 1;
++                                    }
++                                    matched.push(selected);
++                                }
++                                pending_len = 0;
++                            }
++                            continue;
++                        }
+                         #[cfg(feature = "experimental-rkyv-payload")]
+                         let overlay_match = self.benchmark_matches(
+                             id,
+@@ -2359,6 +2519,26 @@ impl DiskIndex {
+                         matched.push(id);
+                     }
+                 }
++                #[cfg(feature = "bounded-engine")]
++                if pending_len != 0 {
++                    let accepted = self.binary_candidate_batch(
++                        &pending[..pending_len],
++                        &mut text_scratch,
++                        &verification_terms,
++                        &mut folded_content,
++                        &mut folded_bytes,
++                    )?;
++                    for (bit, &selected) in pending[..pending_len].iter().enumerate() {
++                        if accepted & (1 << bit) == 0 {
++                            continue;
++                        }
++                        #[cfg(feature = "diagnostic-timing")]
++                        {
++                            work.accepted += 1;
++                        }
++                        matched.push(selected);
++                    }
++                }
+                 slot += count;
+             }
+         }
+@@ -2522,6 +2702,8 @@ impl DiskIndex {
+         let mut text_scratch = QueryTextScratch::default();
+         #[cfg(feature = "experimental-paged-metadata")]
+         let mut text_cursor = paged::TextCursor::default();
++        #[cfg(feature = "bounded-engine")]
++        let batch_candidates = self.candidate_batches(&groups[0], &verification_terms);
+         // Stream the smallest posting group in blocks; no full list hydration.
+         let mut total = 0;
+         let mut buffer = [0; 4096];
+@@ -2534,6 +2716,10 @@ impl DiskIndex {
+                     p.offset + slot as u64 * 4,
+                     &mut buffer[..count as usize * 4],
+                 )?;
++                #[cfg(feature = "bounded-engine")]
++                let mut pending = [0u32; 64];
++                #[cfg(feature = "bounded-engine")]
++                let mut pending_len = 0;
+                 for bytes in buffer[..count as usize * 4].as_chunks::<4>().0 {
+                     let id = u32::from_le_bytes(*bytes);
+                     if id as usize >= self.len() || previous.is_some_and(|old| old >= id) {
+@@ -2573,6 +2759,35 @@ impl DiskIndex {
+                         {
+                             work.candidates += 1;
+                         }
++                        #[cfg(feature = "bounded-engine")]
++                        if batch_candidates {
++                            pending[pending_len] = id;
++                            pending_len += 1;
++                            if pending_len == pending.len() {
++                                let accepted = self.binary_candidate_batch(
++                                    &pending,
++                                    &mut text_scratch,
++                                    &verification_terms,
++                                    &mut folded_content,
++                                    &mut folded_bytes,
++                                )?;
++                                for (bit, &selected) in pending.iter().enumerate() {
++                                    if accepted & (1 << bit) == 0 {
++                                        continue;
++                                    }
++                                    #[cfg(feature = "diagnostic-timing")]
++                                    {
++                                        work.accepted += 1;
++                                    }
++                                    if COUNT {
++                                        total += 1;
++                                    }
++                                    emit(selected, n);
++                                }
++                                pending_len = 0;
++                            }
++                            continue;
++                        }
+                         #[cfg(feature = "experimental-rkyv-payload")]
+                         let overlay_match = self.benchmark_matches(
+                             id,
+@@ -2622,6 +2837,29 @@ impl DiskIndex {
+                         }
+                     }
+                 }
++                #[cfg(feature = "bounded-engine")]
++                if pending_len != 0 {
++                    let accepted = self.binary_candidate_batch(
++                        &pending[..pending_len],
++                        &mut text_scratch,
++                        &verification_terms,
++                        &mut folded_content,
++                        &mut folded_bytes,
++                    )?;
++                    for (bit, &selected) in pending[..pending_len].iter().enumerate() {
++                        if accepted & (1 << bit) == 0 {
++                            continue;
++                        }
++                        #[cfg(feature = "diagnostic-timing")]
++                        {
++                            work.accepted += 1;
++                        }
++                        if COUNT {
++                            total += 1;
++                        }
++                        emit(selected, n);
++                    }
++                }
+                 slot += count;
+             }
+         }
+diff --git a/src/segment/window_tests.rs b/src/segment/window_tests.rs
+index 0b0902e..a2be1d1 100644
+--- a/src/segment/window_tests.rs
++++ b/src/segment/window_tests.rs
+@@ -71,6 +71,148 @@ fn sparse_window_stops_read_ahead_but_dense_window_keeps_it() {
+     }
+     assert!(dense.read_window_enabled);
+ }
++
++#[cfg(feature = "bounded-engine")]
++#[test]
++fn known_candidate_batches_match_exact_reads_and_stay_within_window_budget() {
++    let temp = Temp::new();
++    let index = build(&temp);
++    for ids in [(0..64).collect::<Vec<_>>(), vec![0, 6, 18, 31, 63]] {
++        for terms in [
++            vec!["needle".into(), "istanbul".into()],
++            vec!["zx".into()],
++            vec!["needle".into(), "missing".into()],
++        ] {
++            let mut exact = QueryTextScratch::default();
++            let mut expected = 0;
++            for (bit, &id) in ids.iter().enumerate() {
++                if index
++                    .binary_exact_matches(id, &mut exact, &terms, &mut BTreeMap::new(), &mut 0)
++                    .unwrap()
++                {
++                    expected |= 1 << bit;
++                }
++            }
++            let mut batch = QueryTextScratch::default();
++            assert_eq!(
++                index
++                    .binary_candidate_batch(&ids, &mut batch, &terms, &mut BTreeMap::new(), &mut 0)
++                    .unwrap(),
++                expected
++            );
++            assert!(batch.payload.capacity() <= 128 * 1024);
++            #[cfg(feature = "diagnostic-timing")]
++            {
++                assert!(batch.reads.read_bytes * 100 <= batch.reads.requested_bytes * 105);
++                if ids.len() == 64 {
++                    assert!(batch.reads.requests < 10);
++                } else {
++                    assert_eq!(batch.reads.requests, ids.len() as u64);
++                }
++            }
++        }
++    }
++    for ids in [vec![0; 65], vec![0, 0], vec![2, 1], vec![64]] {
++        assert!(
++            index
++                .binary_candidate_batch(
++                    &ids,
++                    &mut QueryTextScratch::default(),
++                    &["needle".into()],
++                    &mut BTreeMap::new(),
++                    &mut 0
++                )
++                .is_err()
++        );
++    }
++    assert_eq!(
++        index
++            .binary_candidate_batch(
++                &[],
++                &mut QueryTextScratch::default(),
++                &[],
++                &mut BTreeMap::new(),
++                &mut 0
++            )
++            .unwrap(),
++        0
++    );
++}
++
++#[cfg(feature = "bounded-engine")]
++#[test]
++fn known_candidate_batches_check_selected_crc_identity_and_cuts() {
++    let temp = Temp::new();
++    let mut builder = Builder::new(&temp.0, 7, 40, 0).unwrap();
++    let docs: Vec<_> = (0..5)
++        .map(|id| StoredDocument {
++            version: 7,
++            document: crate::Document {
++                key: Key::new("shared", "texts", &format!("{id:04}")),
++                title: "Şirket".into(),
++                text: format!(
++                    "needle İstanbul {}",
++                    "x".repeat(if id % 2 == 0 { 8192 } else { 20 })
++                ),
++                fields: BTreeMap::from([(
++                    "nested".into(),
++                    serde_json::json!([true,null,{"s":"😀"}]),
++                )]),
++                links: vec![Key::new("shared", "other", "link")],
++            },
++        })
++        .collect();
++    for doc in &docs {
++        builder.add(doc).unwrap();
++    }
++    drop(builder.finish().unwrap());
++    let mut index = DiskIndex::open_with_mode(&temp.0, None, false).unwrap();
++    let run = |index: &DiskIndex| {
++        let mut scratch = QueryTextScratch::default();
++        let result = index.binary_candidate_batch(
++            &[0, 2, 4],
++            &mut scratch,
++            &["needle".into(), "istanbul".into()],
++            &mut BTreeMap::new(),
++            &mut 0,
++        );
++        #[cfg(feature = "diagnostic-timing")]
++        if result.is_ok() {
++            assert_eq!(scratch.reads.requests, 1);
++        }
++        result
++    };
++    assert_eq!(run(&index).unwrap(), 7);
++    let mut file = OpenOptions::new().write(true).open(&temp.0).unwrap();
++    // A gap may be read but its document is not returned or parsed.
++    file.seek(SeekFrom::Start(index.records[1].offset)).unwrap();
++    file.write_all(&[255]).unwrap();
++    file.flush().unwrap();
++    assert_eq!(run(&index).unwrap(), 7);
++    let original = index.records[2];
++    for change_key in [false, true] {
++        let mut wrong = docs[2].clone();
++        if change_key {
++            wrong.document.key.id = "9999".into();
++        } else {
++            wrong.version += 1;
++        }
++        let bytes = crate::payload::encode(&wrong).unwrap();
++        assert_eq!(bytes.len(), original.len as usize);
++        index.records[2].checksum = crc(&bytes);
++        file.seek(SeekFrom::Start(original.offset)).unwrap();
++        file.write_all(&bytes).unwrap();
++        file.flush().unwrap();
++        assert!(matches!(run(&index), Err(Error::Corrupt(_))));
++    }
++    index.records[2] = original;
++    file.seek(SeekFrom::Start(original.offset)).unwrap();
++    file.write_all(&[255]).unwrap();
++    file.flush().unwrap();
++    assert!(matches!(run(&index), Err(Error::Corrupt(_))));
++    file.set_len(original.offset + 1).unwrap();
++    assert!(run(&index).is_err());
++}
+ #[test]
+ fn window_matches_exact_reads_across_boundaries_and_sparse_order() {
+     let temp = Temp::new();

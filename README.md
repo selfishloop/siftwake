@@ -1,5 +1,13 @@
 # FDB
 
+[Aday payload okumalarını gruplama deneyi](docs/PAYLOAD-BATCH-10K-20261017.md)
+reddedildi; varsayılan motor aynı. Aynı 10k veride holmes read 1285→1106,
+darcy 2129→1700, watson 1954→1553; ek byte %0,1'in altında. holmes p95
+-%9,18 olsa da the/200 ilk +%10,38, yoğun tekrarda +%6,02. A/A oynaklığı
+bu artışları kapatmak için yeterli değil. Query peak private medyanı +46KiB,
+disk aynı; kod arşiv patch'inde. Genel arama, yazma/bakım, Vec RAM, açılış,
+sıkıştırma ve eşzamanlı/soğuk yük açık kalır.
+
 [Seçilen belgelerde metadata tekrarını azaltma](docs/SEARCH-HYDRATION-10K-20261017.md):
 aynı mevcut 10k / 350 MB veride 200 belgeli sayfa p95 6,496→5,779 ms
 (-%11,04), 4/4 süreç ve 16/16 blok hızlı; tipik kazanç %12,75.
