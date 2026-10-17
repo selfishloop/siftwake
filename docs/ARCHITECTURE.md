@@ -1,5 +1,13 @@
 # FDB mimarisi — 0.3.1
 
+2026-10-17 ikinci payload gruplama prototipi de reddedildi. Kuyruk ve
+posting/kesişim döngüsü ayrı inline edilmeyen helper'a alındı; iki erken
+dispatch hariç eski fonksiyonlar byte-eşitti. Üç sorguluk400 örnek/variant
+kontrolünde the/200 artışı tekrarlanmadı, fakat holmes p95 kazancı da
+tekrarlanmadı. Runtime ve testler f6d18dd'a döndü; yeni format/feature/
+bağımlılık yok. Genel case-index seçicisi benchmark aracı olarak kaldı;
+motor sorgu sözcüğüne göre özel yol seçmez. [Kanıt ve sınırlar](PAYLOAD-ISOLATED-10K-20261017.md).
+
 2026-10-17 bilinen aday payload'larını 64 slot/128KiB, en fazla4KiB gap ve
 %5 ek veri bütçesiyle gruplama deneyi reddedildi. Okuma çağrıları azalırken
 CRC/schema/UTF-8/key/version ve tarama işi korundu; normal kelimelerde dar

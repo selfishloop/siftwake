@@ -1,0 +1,600 @@
+{
+  "design": {
+    "pairs": 4,
+    "blocks_per_pair": 4,
+    "repeats_per_block": 25,
+    "affinity_mask": 4,
+    "pages_only": false,
+    "case_indices": [
+      8,
+      11,
+      31
+    ],
+    "dense_selected_cases": true,
+    "cache": "warm OS cache; every block opens and verifies/warmups before query timing; no eviction",
+    "corpus": "same existing first10000; no generation/reset/copy",
+    "source_validation": "complete source check before timed search; unchanged CRC/schema/key/version checks",
+    "same_executable": false,
+    "programs": {
+      "control": {
+        "path": "output\\payload-isolated-20261017-control-measure_interleaved_reads-normal.exe",
+        "sha256": "D4BAAEBA45490A5D88E295658E5E520697925312E3E6CFD74A3A74D65F1B61B8"
+      },
+      "fdb": {
+        "path": "output\\payload-isolated-20261017-candidate-measure_interleaved_reads-normal.exe",
+        "sha256": "165746633573706F217DD0D4DC30BC5D7A13E509A80903850D22484DC8DABBD9"
+      }
+    },
+    "balanced_block_first_position": true,
+    "orders": [
+      {
+        "pair": 0,
+        "block": 0,
+        "engines": [
+          "control",
+          "fdb"
+        ],
+        "command": {
+          "id": 0,
+          "seed": 0,
+          "repeats": 25
+        }
+      },
+      {
+        "pair": 0,
+        "block": 1,
+        "engines": [
+          "fdb",
+          "control"
+        ],
+        "command": {
+          "id": 1,
+          "seed": 1,
+          "repeats": 25
+        }
+      },
+      {
+        "pair": 0,
+        "block": 2,
+        "engines": [
+          "control",
+          "fdb"
+        ],
+        "command": {
+          "id": 2,
+          "seed": 2,
+          "repeats": 25
+        }
+      },
+      {
+        "pair": 0,
+        "block": 3,
+        "engines": [
+          "fdb",
+          "control"
+        ],
+        "command": {
+          "id": 3,
+          "seed": 3,
+          "repeats": 25
+        }
+      },
+      {
+        "pair": 1,
+        "block": 0,
+        "engines": [
+          "fdb",
+          "control"
+        ],
+        "command": {
+          "id": 4,
+          "seed": 10000,
+          "repeats": 25
+        }
+      },
+      {
+        "pair": 1,
+        "block": 1,
+        "engines": [
+          "control",
+          "fdb"
+        ],
+        "command": {
+          "id": 5,
+          "seed": 10001,
+          "repeats": 25
+        }
+      },
+      {
+        "pair": 1,
+        "block": 2,
+        "engines": [
+          "fdb",
+          "control"
+        ],
+        "command": {
+          "id": 6,
+          "seed": 10002,
+          "repeats": 25
+        }
+      },
+      {
+        "pair": 1,
+        "block": 3,
+        "engines": [
+          "control",
+          "fdb"
+        ],
+        "command": {
+          "id": 7,
+          "seed": 10003,
+          "repeats": 25
+        }
+      },
+      {
+        "pair": 2,
+        "block": 0,
+        "engines": [
+          "control",
+          "fdb"
+        ],
+        "command": {
+          "id": 8,
+          "seed": 20000,
+          "repeats": 25
+        }
+      },
+      {
+        "pair": 2,
+        "block": 1,
+        "engines": [
+          "fdb",
+          "control"
+        ],
+        "command": {
+          "id": 9,
+          "seed": 20001,
+          "repeats": 25
+        }
+      },
+      {
+        "pair": 2,
+        "block": 2,
+        "engines": [
+          "control",
+          "fdb"
+        ],
+        "command": {
+          "id": 10,
+          "seed": 20002,
+          "repeats": 25
+        }
+      },
+      {
+        "pair": 2,
+        "block": 3,
+        "engines": [
+          "fdb",
+          "control"
+        ],
+        "command": {
+          "id": 11,
+          "seed": 20003,
+          "repeats": 25
+        }
+      },
+      {
+        "pair": 3,
+        "block": 0,
+        "engines": [
+          "fdb",
+          "control"
+        ],
+        "command": {
+          "id": 12,
+          "seed": 30000,
+          "repeats": 25
+        }
+      },
+      {
+        "pair": 3,
+        "block": 1,
+        "engines": [
+          "control",
+          "fdb"
+        ],
+        "command": {
+          "id": 13,
+          "seed": 30001,
+          "repeats": 25
+        }
+      },
+      {
+        "pair": 3,
+        "block": 2,
+        "engines": [
+          "fdb",
+          "control"
+        ],
+        "command": {
+          "id": 14,
+          "seed": 30002,
+          "repeats": 25
+        }
+      },
+      {
+        "pair": 3,
+        "block": 3,
+        "engines": [
+          "control",
+          "fdb"
+        ],
+        "command": {
+          "id": 15,
+          "seed": 30003,
+          "repeats": 25
+        }
+      }
+    ],
+    "observe_thread": false
+  },
+  "queries": [
+    {
+      "text": "darcy",
+      "kind": "word",
+      "offset": 0,
+      "limit": 50,
+      "total": 1220,
+      "late_matches": 34,
+      "control": {
+        "n": 400,
+        "p50_ms": 43.0637,
+        "p95_ms": 50.1665,
+        "p99_ms": 57.4662,
+        "per_process_pair_p95": [
+          50.104,
+          54.6395,
+          50.3339,
+          48.5436
+        ],
+        "block_medians": [
+          [
+            42.2888,
+            42.1274,
+            41.815,
+            42.8166
+          ],
+          [
+            42.533300000000004,
+            43.8988,
+            42.6443,
+            45.1188
+          ],
+          [
+            43.5793,
+            42.994499999999995,
+            43.3716,
+            43.471000000000004
+          ],
+          [
+            42.857,
+            42.606199999999994,
+            44.0356,
+            43.7377
+          ]
+        ]
+      },
+      "fdb": {
+        "n": 400,
+        "p50_ms": 42.172799999999995,
+        "p95_ms": 48.794200000000004,
+        "p99_ms": 53.5114,
+        "per_process_pair_p95": [
+          46.819,
+          48.0167,
+          48.0504,
+          50.461800000000004
+        ],
+        "block_medians": [
+          [
+            41.345800000000004,
+            40.80050000000001,
+            40.803399999999996,
+            42.477000000000004
+          ],
+          [
+            41.6273,
+            42.4649,
+            43.5175,
+            41.964
+          ],
+          [
+            42.1335,
+            43.063700000000004,
+            41.7919,
+            42.124700000000004
+          ],
+          [
+            43.090900000000005,
+            43.6469,
+            41.9942,
+            42.958000000000006
+          ]
+        ]
+      },
+      "change_p95_percent": -2.7354908155840962,
+      "paired_p95_change_percent": [
+        -6.556362765447865,
+        -12.12090154558515,
+        -4.536703891413141,
+        3.9514992707586627
+      ],
+      "faster_process_pairs": 3,
+      "paired_block_median_changes_percent": [
+        -2.229904844781594,
+        -3.1497315286488026,
+        -2.419227549922276,
+        -0.7931503202029067,
+        -2.1300957132411646,
+        -3.2663763018579095,
+        2.047635909136747,
+        -6.992207239554249,
+        -3.3176301592728774,
+        0.16095081929086152,
+        -3.6422451558162594,
+        -3.0970072002024285,
+        0.5457684858949596,
+        2.4426022503767353,
+        -4.635794675217331,
+        -1.78267261424353
+      ],
+      "median_block_change_percent": -2.3245661973519347,
+      "faster_blocks": 12,
+      "leave_one_pair_out_p95_changes_percent": [
+        -2.4757557334077473,
+        -2.3541034647932224,
+        -2.137011549518697,
+        -5.127835295977223
+      ]
+    },
+    {
+      "text": "holmes",
+      "kind": "word",
+      "offset": 0,
+      "limit": 50,
+      "total": 1222,
+      "late_matches": 7,
+      "control": {
+        "n": 400,
+        "p50_ms": 22.85745,
+        "p95_ms": 26.8812,
+        "p99_ms": 30.1056,
+        "per_process_pair_p95": [
+          28.6216,
+          27.5285,
+          26.0529,
+          26.156100000000002
+        ],
+        "block_medians": [
+          [
+            22.8912,
+            22.096999999999998,
+            22.0832,
+            22.4393
+          ],
+          [
+            22.1334,
+            23.7152,
+            22.7083,
+            23.472
+          ],
+          [
+            23.5625,
+            22.8786,
+            23.1964,
+            22.9289
+          ],
+          [
+            22.8838,
+            22.4093,
+            23.037399999999998,
+            22.8985
+          ]
+        ]
+      },
+      "fdb": {
+        "n": 400,
+        "p50_ms": 22.402900000000002,
+        "p95_ms": 27.1439,
+        "p99_ms": 31.363599999999998,
+        "per_process_pair_p95": [
+          26.967100000000002,
+          26.4557,
+          26.985200000000003,
+          27.2889
+        ],
+        "block_medians": [
+          [
+            21.9294,
+            21.716099999999997,
+            21.4388,
+            22.361900000000002
+          ],
+          [
+            22.4274,
+            22.4182,
+            23.2801,
+            22.477
+          ],
+          [
+            22.334799999999998,
+            22.6348,
+            22.1588,
+            22.7346
+          ],
+          [
+            23.1111,
+            22.6401,
+            22.5199,
+            22.6749
+          ]
+        ]
+      },
+      "change_p95_percent": 0.977262919810129,
+      "paired_p95_change_percent": [
+        -5.780599267685938,
+        -3.8970521459578245,
+        3.5784883832510106,
+        4.330920894169998
+      ],
+      "faster_process_pairs": 2,
+      "paired_block_median_changes_percent": [
+        -4.201614594254566,
+        -1.7237634067973073,
+        -2.918055354296478,
+        -0.34493054596176353,
+        1.3283092520805617,
+        -5.469066252867361,
+        2.5180220448030033,
+        -4.239093387866399,
+        -5.2103978779840965,
+        -1.0656246448646378,
+        -4.473107896052841,
+        -0.847402186759938,
+        0.9932790882633213,
+        1.0299295381827944,
+        -2.2463472440466314,
+        -0.9764831757538617
+      ],
+      "median_block_change_percent": -1.3946940258309726,
+      "faster_blocks": 12,
+      "leave_one_pair_out_p95_changes_percent": [
+        1.2216450442454674,
+        2.631230743058066,
+        -0.8999503475670356,
+        -0.4526355785582692
+      ]
+    },
+    {
+      "text": "the",
+      "kind": "page",
+      "offset": 0,
+      "limit": 200,
+      "total": 10000,
+      "late_matches": 0,
+      "control": {
+        "n": 400,
+        "p50_ms": 3.91585,
+        "p95_ms": 4.9337,
+        "p99_ms": 5.9561,
+        "per_process_pair_p95": [
+          4.8437,
+          5.1694,
+          4.5703000000000005,
+          4.7625
+        ],
+        "block_medians": [
+          [
+            4.136,
+            3.5646,
+            3.5089,
+            3.7262
+          ],
+          [
+            3.9732,
+            4.3335,
+            3.9782999999999995,
+            4.1849
+          ],
+          [
+            3.82,
+            3.6704,
+            3.6018,
+            3.3752
+          ],
+          [
+            3.7153,
+            3.5661,
+            4.161899999999999,
+            3.8451
+          ]
+        ]
+      },
+      "fdb": {
+        "n": 400,
+        "p50_ms": 3.83485,
+        "p95_ms": 4.7865,
+        "p99_ms": 5.4856,
+        "per_process_pair_p95": [
+          4.943300000000001,
+          4.664899999999999,
+          4.4408,
+          4.8719
+        ],
+        "block_medians": [
+          [
+            4.0964,
+            3.4541,
+            3.7605999999999997,
+            3.6545
+          ],
+          [
+            3.793,
+            3.7126,
+            3.9465000000000003,
+            3.9576999999999996
+          ],
+          [
+            3.8522,
+            3.6658,
+            3.3213,
+            3.7352000000000003
+          ],
+          [
+            4.333799999999999,
+            4.0886000000000005,
+            4.1357,
+            3.5324000000000004
+          ]
+        ]
+      },
+      "change_p95_percent": -2.9835620325516343,
+      "paired_p95_change_percent": [
+        2.0562792906249516,
+        -9.759353116415848,
+        -2.8335120232807487,
+        2.2971128608923808
+      ],
+      "faster_process_pairs": 2,
+      "paired_block_median_changes_percent": [
+        -0.9574468085106425,
+        -3.0999270605397533,
+        7.173188178631462,
+        -1.924212334281572,
+        -4.535387093526621,
+        -14.327910464982107,
+        -0.7993363999698189,
+        -5.429042509976356,
+        0.842931937172775,
+        -0.1253269398430623,
+        -7.787772780276525,
+        10.666034605356733,
+        16.647377062417547,
+        14.65186057597938,
+        -0.6295201710756926,
+        -8.13242828535017
+      ],
+      "median_block_change_percent": -0.8783916042402307,
+      "faster_blocks": 11,
+      "leave_one_pair_out_p95_changes_percent": [
+        -5.810446102555977,
+        1.0159862323498414,
+        -3.3199714240355616,
+        -7.066597872678216
+      ]
+    }
+  ],
+  "lower_p95_cases": 2,
+  "higher_p95_cases": 1,
+  "interpretation": "Short exclusive sessions, per-block source validation/warmup outside timing; two resident oracle workers, no concurrent database queries. Not identical to a continuously open single-process matrix. Pooled p95 and block medians describe different distributions; no automatic significance claim."
+}

@@ -39,11 +39,11 @@ def percentile(values, p):
 
 
 class Worker:
-    def __init__(self, executable, log_path, affinity, pages_only, observe_thread=False):
+    def __init__(self, executable, log_path, affinity, pages_only, observe_thread=False, case_indices=None):
         self.observe_thread = observe_thread
         self.log = log_path.open('w', encoding='utf-8')
         self.stderr = log_path.with_suffix('.stderr').open('w', encoding='utf-8')
-        self.process = subprocess.Popen([str(executable), *(['--pages-only'] if pages_only else []), *(['--observe-thread'] if observe_thread else [])], cwd=ROOT, stdin=subprocess.PIPE, stdout=subprocess.PIPE, stderr=self.stderr, text=True, encoding='utf-8', creationflags=subprocess.CREATE_NO_WINDOW)
+        self.process = subprocess.Popen([str(executable), *(['--pages-only'] if pages_only else []), *(['--observe-thread'] if observe_thread else []), *(['--case-indices', ','.join(map(str, case_indices))] if case_indices else [])], cwd=ROOT, stdin=subprocess.PIPE, stdout=subprocess.PIPE, stderr=self.stderr, text=True, encoding='utf-8', creationflags=subprocess.CREATE_NO_WINDOW)
         api = ctypes.WinDLL('kernel32', use_last_error=True)
         api.SetProcessAffinityMask.argtypes = [ctypes.c_void_p, ctypes.c_size_t]
         api.SetProcessAffinityMask.restype = ctypes.c_int
@@ -61,7 +61,9 @@ class Worker:
         while True:
             row = self.read()
             if row['phase'] == 'worker_ready':
-                assert row['cases'] == (8 if pages_only else 38) and not row['diagnostic_timing']
+                assert row['cases'] == (len(case_indices) if case_indices else 8 if pages_only else 38) and not row['diagnostic_timing']
+                if case_indices:
+                    assert row['case_indices'] == case_indices
                 break
 
     def read(self):
@@ -161,14 +163,20 @@ def main():
     parser.add_argument('--repeats', type=int, default=25, choices=(1, 5, 10, 25))
     parser.add_argument('--affinity', type=int, default=4)
     parser.add_argument('--full-matrix', action='store_true')
+    parser.add_argument('--case-indices', help='Comma-separated indices from the existing38-case oracle; selected cases run every round')
     parser.add_argument('--observe-thread', action='store_true', help='Benchmark-only calling-thread CPU/cycle counters outside the wall bracket')
     args = parser.parse_args()
+    if args.case_indices is not None:
+        args.case_indices = [int(n) for n in args.case_indices.split(',')]
+        if not args.case_indices or len(set(args.case_indices)) != len(args.case_indices) or any(n < 0 or n >= 38 for n in args.case_indices):
+            parser.error('case indices must be unique and in0..37')
+    pages_only = not args.full_matrix and not args.case_indices
     prefix = ROOT / args.prefix
     report = lambda suffix: Path(f'{prefix}-{suffix}')
     if report('design.json').exists():
         raise RuntimeError('Preserve existing reports; use an unused log prefix')
     programs = {key: ROOT / value for key, value in [('control', args.control), ('fdb', args.candidate)]}
-    design = dict(pairs=args.pairs, blocks_per_pair=args.blocks, repeats_per_block=args.repeats, affinity_mask=args.affinity, pages_only=not args.full_matrix, cache='warm OS cache; every block opens and verifies/warmups before query timing; no eviction', corpus='same existing first10000; no generation/reset/copy', source_validation='complete source check before timed search; unchanged CRC/schema/key/version checks', same_executable=sha(programs['control']) == sha(programs['fdb']), programs={key: dict(path=str(value.relative_to(ROOT)), sha256=sha(value)) for key, value in programs.items()}, balanced_block_first_position=True, orders=[])
+    design = dict(pairs=args.pairs, blocks_per_pair=args.blocks, repeats_per_block=args.repeats, affinity_mask=args.affinity, pages_only=pages_only, case_indices=args.case_indices, dense_selected_cases=bool(args.case_indices), cache='warm OS cache; every block opens and verifies/warmups before query timing; no eviction', corpus='same existing first10000; no generation/reset/copy', source_validation='complete source check before timed search; unchanged CRC/schema/key/version checks', same_executable=sha(programs['control']) == sha(programs['fdb']), programs={key: dict(path=str(value.relative_to(ROOT)), sha256=sha(value)) for key, value in programs.items()}, balanced_block_first_position=True, orders=[])
     design['observe_thread'] = args.observe_thread
     write(report('design.json'), design)
     before = snapshot()
@@ -179,7 +187,7 @@ def main():
         start_order = ['control', 'fdb'] if pair % 2 == 0 else ['fdb', 'control']
         try:
             for engine in start_order:
-                workers[engine] = Worker(programs[engine], report(f'{engine}-{pair}.jsonl'), args.affinity, not args.full_matrix, args.observe_thread)
+                workers[engine] = Worker(programs[engine], report(f'{engine}-{pair}.jsonl'), args.affinity, pages_only, args.observe_thread, args.case_indices)
                 records[engine].append([])
             write(report(f'pair-{pair}-workers.json'), {key: value.metadata for key, value in workers.items()})
             for block in range(args.blocks):

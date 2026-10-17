@@ -1,5 +1,19 @@
 # FDB açık işler
 
+2026-10-17 gruplamayı hızlı döngüden ayıran ikinci prototip de reddedildi.
+Kaynakta eski döngüler korundu; aynı10k/4 çift/16 blok/400 örnek kontrolünde
+darcy p95-%2,74 (3/4 çift), holmes+%0,98 (2/4 düşük), the/200-%2,98.
+Tipik blok -%2,32/-%1,39/-%0,88; holmes'ta tekrarlanan p95 kazancı yok.
+the/200 artışı bu koşuda tekrarlanmadı; kök nedeni kesin çözüldü sayılmaz.
+Dar kapı geçmedi, yeni38-case/diagnostic/RAM koşusu yapılmadı. Runtime ve
+window_tests f6d18dd'a byte-eşit döndü; kod/testler patch'te saklandı.
+Gruplama ayar denemeleri burada kapandı; sonraki bağımsız arama işi kalan
+byte doğrulama/tarama/hydration tekrarını ölçüp tek hedef seçmek olmalı.
+Yazma/bakım, genel arama, normal Vec/query RAM'i, açılış, disk sıkıştırma,
+eşzamanlı/gerçek-cold işler açık. [Son kontrol](PAYLOAD-ISOLATED-10K-20261017.md).
+18 Ekim final kontrolü:180 default/all-targets test, fmt ve default/all-features
+Clippy geçti;21 dosya ve tüm corpus SHA-eşit. Yeni RAM/38-case sonucu yok.
+
 2026-10-17 payload adaylarını gruplama prototipi reddedildi/default'a alınmadı.
 Aynı mevcut10k'da holmes read1285→1106, darcy2129→1700, watson1954→1553;
 ek byte%0,1 altı, bütün38 senaryoda doğrulama ve tarama iş sayıları aynı.
@@ -173,6 +187,7 @@ deneysel profilde tutulur; genel/default kabul kapısı geçmedi.
 
 | İş | Durum / kapanış kanıtı |
 |---|---|
+| Gruplamayı hızlı sorgu yolundan ayır | İkinci prototip reddedildi; aynı10k/400 örnekte darcy -%2,74, holmes +%0,98/2 çift düşük, the/200 -%2,98. the/200 artışı bu koşuda yok; hedefte tekrarlanan p95 kazancı yok. Eski döngüler byte-eşit korunmuştu, runtime geri alındı. Yeni38-case/RAM koşusu yapılmadı. Gruplama için yeni ayar turu yok; genel arama ve diğer performans işleri açık. [Kanıt/patch](PAYLOAD-ISOLATED-10K-20261017.md) |
 | Bilinen payload adaylarının yakın okumalarını birleştir | 2026-10-17 ilk prototip reddedildi; runtime 6eb3a89'a döndü. 19/38 senaryoda read azaldı, holmes 1285→1106 ve p95 -%9,18; the/200 ilk +%10,38, yoğun tekrarda +%6,02. A/A oynaklığı kod payını sıfırlamaz. Ayrı query/get private +46KiB/WS +72KiB medyan, disk aynı. Kuyruk/planlamayı hızlı döngüden ayırma henüz ölçülmüş çözüm değil; genel arama, yazma/bakım, Vec/genel RAM, açılış, sıkıştırma ve eşzamanlı/soğuk yük açık. [Patch ve kanıt](PAYLOAD-BATCH-10K-20261017.md) |
 | Aynı temiz veride arama gerilemelerini ayır, en pahalı aşamayı azalt | Dar kısa-ASCII adımı tamam: body fold263.627→0; iki negatifte normal p95 -%31,21/-%33,99 (4/4 süreç,32/32 blok). Tüm38-case28/10; A/A36/38 tail artışı nedeniyle genel p95 kapısı açık. Diğer36 senaryoda izlenen iş sayıları aynı; dar/uzun kelimelerde payload okuma ve sonuç hazırlama hâlâ maliyetli. Query peak medyanları artmadı, disk349.805.698 B/18 dosya aynı. Yazma/bakım, Vec/genel RAM, açılış, sıkıştırma ve concurrent/cold kapanmadı. [Son ölçüm/kanıtlar](SEARCH-STAGES-10K-20261017.md) |
 | JSON sözlük ve indeksteki267,8MB belge kopyası | SEG05 flag1 kullanıcı kararıyla native default yazıcıya taşındı: commit/flush, merge ve cache onarımı doğrudan kaynak adresi yazar, payload kopyası üretmez. Eski okunabilir SEG03/04 korunur; kaynak/WAL/manifest/fixture aynı. Varsayılan ve referans/all-feature testleri, kesilme/bozulma ve builder/repack kill kontrolleri geçti. Yeni4 çiftte write+bakım-%9,86 ve open-%34,79; canlı idx353,7→81,9MB, retained core1,521GB→972,7MB. Yeni38-case16/22; write private +%1,42/4 çift yüksek, query private düşük. Önceki yoğun sayfa artışları da açık.72 kaynak/ready ve prototip wire karşılaştırmasında122 core dosya hash-eşit. Yazma/kabul tekrarları, RAM/disk-retention ve concurrent/cold açık. [Güncel geçiş/ölçüm](DEFAULT-SEG05-10K-20261017.md), [ilk prototip](COMPACT-INDEX-10K-20261017.md) |

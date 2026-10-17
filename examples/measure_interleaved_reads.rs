@@ -32,12 +32,40 @@ fn main() -> input::Result<()> {
     }
     let mut matrix = matrix::Matrix::load()?;
     let pages_only = std::env::args().any(|arg| arg == "--pages-only");
+    let args: Vec<_> = std::env::args().collect();
+    let case_indices = if let Some(at) = args.iter().position(|arg| arg == "--case-indices") {
+        if pages_only {
+            return Err("case indices require the full matrix selector".into());
+        }
+        let selected: Vec<usize> = args
+            .get(at + 1)
+            .ok_or("missing case indices")?
+            .split(',')
+            .map(str::parse)
+            .collect::<Result<_, _>>()?;
+        let unique: std::collections::BTreeSet<_> = selected.iter().copied().collect();
+        if selected.is_empty()
+            || selected.len() != unique.len()
+            || selected.iter().any(|&n| n >= matrix.cases.len())
+        {
+            return Err("invalid or duplicate matrix case index".into());
+        }
+        matrix.cases = matrix
+            .cases
+            .into_iter()
+            .enumerate()
+            .filter_map(|(n, case)| unique.contains(&n).then_some(case))
+            .collect();
+        Some(selected)
+    } else {
+        None
+    };
     if pages_only {
         matrix.cases.retain(|case| case.kind == "page");
     }
     println!(
         "{}",
-        json!({"phase":"worker_ready","cases":matrix.cases.len(),"pages_only":pages_only,"no_database_handle_retained_between_blocks":true,"diagnostic_timing":cfg!(feature="diagnostic-timing")})
+        json!({"phase":"worker_ready","cases":matrix.cases.len(),"pages_only":pages_only,"case_indices":case_indices,"no_database_handle_retained_between_blocks":true,"diagnostic_timing":cfg!(feature="diagnostic-timing")})
     );
     std::io::stdout().flush()?;
     for line in std::io::stdin().lock().lines() {
@@ -59,7 +87,7 @@ fn main() -> input::Result<()> {
         matrix.measure_rounds(
             command.seed,
             command.repeats,
-            pages_only,
+            pages_only || case_indices.is_some(),
             |key| Ok(db.get(key)?),
             |text, offset, limit| {
                 let mut query = Query::new("shared");

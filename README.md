@@ -1,5 +1,12 @@
 # FDB
 
+[Gruplamayı hızlı sorgu yolundan ayırma kontrolü](docs/PAYLOAD-ISOLATED-10K-20261017.md)
+de reddedildi; motor önceki sürümde. Aynı10k/üç sorgu/400 örnek kontrolünde
+darcy p95 -%2,74, holmes +%0,98, the/200 -%2,98. the/200 gerilemesi bu
+koşuda tekrarlanmadı; holmes kazancı ise süreçlerde2/4 kaldı. Gruplama için
+yeni ayar turu yapılmayacak; genel arama, yazma/bakım, RAM/açılış/disk ve
+eşzamanlı/soğuk yük işleri açık. Yeni38-case veya RAM sonucu iddiası yok.
+
 [Aday payload okumalarını gruplama deneyi](docs/PAYLOAD-BATCH-10K-20261017.md)
 reddedildi; varsayılan motor aynı. Aynı 10k veride holmes read 1285→1106,
 darcy 2129→1700, watson 1954→1553; ek byte %0,1'in altında. holmes p95
