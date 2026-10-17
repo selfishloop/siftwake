@@ -1,0 +1,454 @@
+{
+  "design": {
+    "phase": "profile",
+    "pairs": 4,
+    "orders": [
+      [
+        "json",
+        "binary",
+        "references"
+      ],
+      [
+        "references",
+        "binary",
+        "json"
+      ],
+      [
+        "binary",
+        "json",
+        "references"
+      ],
+      [
+        "references",
+        "json",
+        "binary"
+      ]
+    ],
+    "pairwise_balanced_order": true,
+    "reader_sha256": "C461E39E72DD5F81A44065EBE6869025AB50DEEDEE7462D618FFA09BCEE2EC65",
+    "repacker_sha256": "7771C499552DACC3678A5939235A6A22EF2E349FFC9A2F7D560B28C10C8C82F8",
+    "cache": "fresh process; warm OS cache; no eviction; untimed strict first-use warmup after each repack",
+    "affinity_mask": 4,
+    "validation": "full source CRC/schema/version and full index CRC plus directory/page validation; pending0",
+    "corpus": "same existing first10000; no corpus preparation or DB copies",
+    "write_scope": "only fixed-slot derived indexes rewritten between conditions; source/ready/SQLite hashes checked",
+    "query_memory": "24 searches/771 gets; no corpus/oracle loaded",
+    "measurement": "instrumented strict open-only; nested counters; untimed first-use warmup; no query timing or memory probe",
+    "diagnostic_timing": true,
+    "description_correction": "Initial inherited matrix label corrected to match raw open_profile events; no timing or raw results modified."
+  },
+  "layouts": {
+    "json": {
+      "batch.decode_binary": {
+        "median_ms": 0.0012499999999999998,
+        "run_ms": [
+          0.0013,
+          0.0017,
+          0.0012,
+          0.0012
+        ]
+      },
+      "checksum.index_compute": {
+        "median_ms": 26.64015,
+        "run_ms": [
+          26.9227,
+          26.8358,
+          26.4445,
+          26.4028
+        ]
+      },
+      "checksum.index_read": {
+        "median_ms": 60.517700000000005,
+        "run_ms": [
+          62.1659,
+          59.0375,
+          61.9979,
+          58.3585
+        ]
+      },
+      "disk.read_at": {
+        "median_ms": 3.2218999999999998,
+        "run_ms": [
+          3.1479,
+          2.8696,
+          3.2959,
+          3.3469
+        ]
+      },
+      "open.index": {
+        "median_ms": 167.63195000000002,
+        "run_ms": [
+          164.0804,
+          158.9705,
+          171.1835,
+          173.5895
+        ]
+      },
+      "open.index_crc": {
+        "median_ms": 87.65225000000001,
+        "run_ms": [
+          89.8046,
+          86.3572,
+          88.9473,
+          85.4845
+        ]
+      },
+      "open.index_directory_parse": {
+        "median_ms": 73.05335,
+        "run_ms": [
+          69.214,
+          67.6358,
+          76.8927,
+          79.7739
+        ]
+      },
+      "open.index_metadata_prepare": {
+        "median_ms": 74.31645,
+        "run_ms": [
+          70.4619,
+          68.8791,
+          78.171,
+          81.0336
+        ]
+      },
+      "open.index_term_page_checksums": {
+        "median_ms": 2.95245,
+        "run_ms": [
+          2.8588,
+          2.7936,
+          3.0461,
+          6.1019
+        ]
+      },
+      "open.source_native_check": {
+        "median_ms": 110.43865,
+        "run_ms": [
+          110.3082,
+          106.388,
+          115.4778,
+          110.5691
+        ]
+      },
+      "open.source_replay": {
+        "median_ms": 0.00035,
+        "run_ms": [
+          0.0003,
+          0.0006,
+          0.0004,
+          0.0003
+        ]
+      },
+      "open.total": {
+        "median_ms": 284.54330000000004,
+        "run_ms": [
+          279.4845,
+          270.5015,
+          292.1458,
+          289.6021
+        ]
+      },
+      "segment.open": {
+        "median_ms": 167.62775,
+        "run_ms": [
+          164.0762,
+          158.9655,
+          171.1793,
+          173.5852
+        ]
+      },
+      "source.frame_crc": {
+        "median_ms": 0.0003,
+        "run_ms": [
+          0.0003,
+          0.0003,
+          0.0003,
+          0.0003
+        ]
+      },
+      "source.frame_read_allocate": {
+        "median_ms": 0.0179,
+        "run_ms": [
+          0.0182,
+          0.0164,
+          0.0176,
+          0.0186
+        ]
+      }
+    },
+    "binary": {
+      "batch.decode_binary": {
+        "median_ms": 0.0012499999999999998,
+        "run_ms": [
+          0.0012,
+          0.0015,
+          0.0012,
+          0.0013
+        ]
+      },
+      "checksum.index_compute": {
+        "median_ms": 27.54365,
+        "run_ms": [
+          26.4651,
+          29.2491,
+          27.7032,
+          27.3841
+        ]
+      },
+      "checksum.index_read": {
+        "median_ms": 70.21285,
+        "run_ms": [
+          57.8153,
+          69.8574,
+          70.5683,
+          71.6247
+        ]
+      },
+      "disk.read_at": {
+        "median_ms": 2.81815,
+        "run_ms": [
+          2.2018,
+          2.8654,
+          2.7709,
+          3.8693
+        ]
+      },
+      "open.index": {
+        "median_ms": 144.459,
+        "run_ms": [
+          125.3222,
+          143.5352,
+          145.3828,
+          153.208
+        ]
+      },
+      "open.index_binary_directory_parse": {
+        "median_ms": 40.7509,
+        "run_ms": [
+          36.5501,
+          39.6182,
+          41.8836,
+          48.1858
+        ]
+      },
+      "open.index_crc": {
+        "median_ms": 99.34415,
+        "run_ms": [
+          84.769,
+          99.5943,
+          99.094,
+          99.6651
+        ]
+      },
+      "open.index_metadata_prepare": {
+        "median_ms": 41.9957,
+        "run_ms": [
+          37.787,
+          40.8098,
+          43.1816,
+          49.6694
+        ]
+      },
+      "open.index_term_page_checksums": {
+        "median_ms": 2.2329499999999998,
+        "run_ms": [
+          1.8898,
+          2.2875,
+          2.1784,
+          2.4983
+        ]
+      },
+      "open.source_native_check": {
+        "median_ms": 117.20205,
+        "run_ms": [
+          102.7963,
+          117.9775,
+          116.4266,
+          419.8902
+        ]
+      },
+      "open.source_replay": {
+        "median_ms": 0.0004,
+        "run_ms": [
+          0.0004,
+          0.0001,
+          0.0004,
+          0.0004
+        ]
+      },
+      "open.total": {
+        "median_ms": 267.41285,
+        "run_ms": [
+          233.3713,
+          267.623,
+          267.2027,
+          579.9434
+        ]
+      },
+      "segment.open": {
+        "median_ms": 144.45445,
+        "run_ms": [
+          125.3185,
+          143.5303,
+          145.3786,
+          153.2028
+        ]
+      },
+      "source.frame_crc": {
+        "median_ms": 0.0003,
+        "run_ms": [
+          0.0003,
+          0.0002,
+          0.0004,
+          0.0003
+        ]
+      },
+      "source.frame_read_allocate": {
+        "median_ms": 0.0184,
+        "run_ms": [
+          0.0169,
+          0.0199,
+          0.0167,
+          0.0199
+        ]
+      }
+    },
+    "references": {
+      "batch.decode_binary": {
+        "median_ms": 0.0012499999999999998,
+        "run_ms": [
+          0.0013,
+          0.0012,
+          0.0012,
+          0.0022
+        ]
+      },
+      "checksum.index_compute": {
+        "median_ms": 6.16155,
+        "run_ms": [
+          6.318,
+          5.9145,
+          6.3106,
+          6.0125
+        ]
+      },
+      "checksum.index_read": {
+        "median_ms": 13.4526,
+        "run_ms": [
+          12.3333,
+          14.0791,
+          15.7891,
+          12.8261
+        ]
+      },
+      "disk.read_at": {
+        "median_ms": 2.5144,
+        "run_ms": [
+          2.4308,
+          2.3441,
+          2.7299,
+          2.598
+        ]
+      },
+      "open.index": {
+        "median_ms": 60.37495,
+        "run_ms": [
+          58.4411,
+          59.6888,
+          66.7776,
+          61.0611
+        ]
+      },
+      "open.index_binary_directory_parse": {
+        "median_ms": 36.76555,
+        "run_ms": [
+          35.9657,
+          35.3061,
+          40.0869,
+          37.5654
+        ]
+      },
+      "open.index_crc": {
+        "median_ms": 19.8049,
+        "run_ms": [
+          19.0164,
+          20.3564,
+          22.4677,
+          19.2534
+        ]
+      },
+      "open.index_metadata_prepare": {
+        "median_ms": 37.73415,
+        "run_ms": [
+          36.7792,
+          36.388,
+          41.1239,
+          38.6891
+        ]
+      },
+      "open.index_term_page_checksums": {
+        "median_ms": 2.1481500000000002,
+        "run_ms": [
+          1.98,
+          1.9744,
+          2.4047,
+          2.3163
+        ]
+      },
+      "open.source_native_check": {
+        "median_ms": 108.44005,
+        "run_ms": [
+          107.7917,
+          102.5393,
+          123.7555,
+          109.0884
+        ]
+      },
+      "open.source_replay": {
+        "median_ms": 0.0006000000000000001,
+        "run_ms": [
+          0.0004,
+          0.0007,
+          0.0005,
+          0.0007
+        ]
+      },
+      "open.total": {
+        "median_ms": 173.482,
+        "run_ms": [
+          171.0877,
+          167.0008,
+          196.9822,
+          175.8763
+        ]
+      },
+      "segment.open": {
+        "median_ms": 60.3705,
+        "run_ms": [
+          58.4371,
+          59.685,
+          66.7729,
+          61.056
+        ]
+      },
+      "source.frame_crc": {
+        "median_ms": 0.00030000000000000003,
+        "run_ms": [
+          0.0001,
+          0.0002,
+          0.0004,
+          0.0004
+        ]
+      },
+      "source.frame_read_allocate": {
+        "median_ms": 0.0135,
+        "run_ms": [
+          0.0137,
+          0.0122,
+          0.0133,
+          0.0187
+        ]
+      }
+    }
+  },
+  "limits": "Warm OS cache, explicit cache repack excluded; no power loss/cold/concurrent/write throughput measurement."
+}

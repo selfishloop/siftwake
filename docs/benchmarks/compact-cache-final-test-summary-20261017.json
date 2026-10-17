@@ -1,0 +1,35 @@
+{
+  "default": {
+    "passed": 161,
+    "ignored": 5,
+    "suites": 33,
+    "log": "compact-cache-window-tests-default-20261017.log",
+    "all_results_ok": true
+  },
+  "reference": {
+    "passed": 94,
+    "ignored": 2,
+    "suites": 33,
+    "log": "compact-cache-tests-reference-20261017.log",
+    "all_results_ok": true
+  },
+  "all": {
+    "passed": 180,
+    "ignored": 7,
+    "suites": 33,
+    "log": "compact-cache-final-tests-all-20261017.log",
+    "all_results_ok": true
+  },
+  "deferred_default": {
+    "passed": 1,
+    "ignored": 0,
+    "suites": 1,
+    "log": "compact-cache-final-deferred-tests-20261017.log",
+    "all_results_ok": true
+  },
+  "fmt": "cargo fmt --check passed",
+  "clippy": [
+    "cargo clippy --all-targets -- -D warnings",
+    "cargo clippy --all-features --all-targets -- -D warnings"
+  ]
+}

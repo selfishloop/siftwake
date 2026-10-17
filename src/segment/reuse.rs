@@ -15,6 +15,12 @@ impl DiskIndex {
         } else {
             LEGACY_FOOTER
         };
+        #[cfg(feature = "bounded-engine")]
+        let expected_footer = if self.compact_directory {
+            compact::FOOTER
+        } else {
+            expected_footer
+        };
         if &footer[..8] != expected_footer
             || crc(&footer[..28]) != u32::from_le_bytes(footer[28..].try_into().unwrap())
         {

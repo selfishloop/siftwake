@@ -1,4 +1,4 @@
-//! Stream validated SEG03 records into/against the unchanged MET04 sidecar.
+//! Compare independently validated segment records with the unchanged MET04 pages.
 use super::*;
 
 struct Validator {

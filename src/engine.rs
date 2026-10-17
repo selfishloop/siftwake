@@ -1152,6 +1152,26 @@ impl Database {
         }
         Ok(())
     }
+    /// Explicit SEG05 cache experiment, consuming this handle before callers
+    /// reopen it. Normal source writes and index builders still emit SEG04.
+    #[cfg(feature = "bounded-engine")]
+    pub fn repack_index_cache(self, layout: crate::IndexCacheLayout) -> Result<()> {
+        self.healthy()?;
+        if self.job.is_some()
+            || !self.shadow.is_empty()
+            || self.runs.iter().any(|r| r.source.kind != Kind::Run)
+        {
+            return Err(Error::Invalid(
+                "repack requires idle native immutable runs".into(),
+            ));
+        }
+        self.ensure_sources()?;
+        for run in &self.runs {
+            run.index
+                .repack(&run.source.path(&self.dir, "idx"), layout)?;
+        }
+        Ok(())
+    }
     /// Number of immutable sources still awaiting their first full verification.
     /// Stats/count are provisional until these sources have been verified.
     pub fn pending_source_checks(&self) -> Result<usize> {

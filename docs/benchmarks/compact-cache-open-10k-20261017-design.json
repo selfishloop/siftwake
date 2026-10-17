@@ -1,0 +1,36 @@
+{
+  "phase": "open",
+  "pairs": 4,
+  "orders": [
+    [
+      "json",
+      "binary",
+      "references"
+    ],
+    [
+      "references",
+      "binary",
+      "json"
+    ],
+    [
+      "binary",
+      "json",
+      "references"
+    ],
+    [
+      "references",
+      "json",
+      "binary"
+    ]
+  ],
+  "pairwise_balanced_order": true,
+  "reader_sha256": "54577C275BCD8B62FB5234418220AAE7F55E75310A330E3E0D7FF083EC627120",
+  "repacker_sha256": "7771C499552DACC3678A5939235A6A22EF2E349FFC9A2F7D560B28C10C8C82F8",
+  "cache": "fresh process; warm OS cache; no eviction; untimed strict first-use warmup after each repack",
+  "affinity_mask": 4,
+  "validation": "full source CRC/schema/version and full index CRC plus directory/page validation; pending0",
+  "corpus": "same existing first10000; no corpus preparation or DB copies",
+  "write_scope": "only fixed-slot derived indexes rewritten between conditions; source/ready/SQLite hashes checked",
+  "query_memory": "24 searches/771 gets; no corpus/oracle loaded",
+  "measurement": "strict open+get9999+quixote first/warm, separate lifetime memory"
+}

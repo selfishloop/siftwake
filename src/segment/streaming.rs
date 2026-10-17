@@ -1,5 +1,5 @@
-//! Bounded JSON entry framing; serde still validates each complete entry.
-//! SEG03 bytes and schema remain unchanged. Only derived caches are streamed.
+//! Bounded directory dispatch. SEG03/04 retain checked JSON entry framing;
+//! the explicit SEG05 experiment uses the compact typed directory reader.
 use super::*;
 use std::io::{BufRead, BufReader, Read};
 
@@ -9,6 +9,13 @@ fn corrupt(message: &str) -> Error {
 }
 
 use crate::json_stream::Input;
+
+#[cfg(feature = "bounded-engine")]
+fn is_compact(file: &File) -> Result<bool> {
+    let mut magic = [0; 8];
+    read_at(file, 0, &mut magic)?;
+    Ok(&magic == super::compact::MAGIC)
+}
 
 pub(super) struct Parsed {
     pub records: Vec<PackedRecord>,
@@ -24,7 +31,27 @@ pub(super) struct Parsed {
     pub entries: u64,
 }
 
+pub(super) fn empty() -> Parsed {
+    Parsed {
+        records: Vec::new(),
+        groups: Vec::new(),
+        ids: String::new(),
+        postings: BTreeMap::new(),
+        pages: Vec::new(),
+        collections: Vec::new(),
+        bloom: super::term_pages::Bloom::default(),
+        #[cfg(feature = "bounded-engine")]
+        universal: super::covering::Universal::default(),
+        live: 0,
+        entries: 0,
+    }
+}
+
 pub(super) fn read(file: &mut File, offset: u64, len: u64, sequence: u64) -> Result<Parsed> {
+    #[cfg(feature = "bounded-engine")]
+    if is_compact(file)? {
+        return super::compact::read(file, offset, len, sequence, pack);
+    }
     file.seek(SeekFrom::Start(offset))?;
     let reader = BufReader::with_capacity(64 * 1024, file.take(len));
     parse_entries(reader, offset, sequence, true, pack)
@@ -33,7 +60,7 @@ pub(super) fn read(file: &mut File, offset: u64, len: u64, sequence: u64) -> Res
 fn parse(reader: impl BufRead, data_end: u64, sequence: u64) -> Result<Parsed> {
     parse_entries(reader, data_end, sequence, false, pack)
 }
-fn pack(r: &Record, parsed: &mut Parsed) -> Result<()> {
+pub(super) fn pack(r: &Record, parsed: &mut Parsed) -> Result<()> {
     let new_group = parsed
         .groups
         .last()
@@ -67,6 +94,10 @@ pub(super) fn read_with(
     sequence: u64,
     mut accept: impl FnMut(&Record) -> Result<()>,
 ) -> Result<Parsed> {
+    #[cfg(feature = "bounded-engine")]
+    if is_compact(file)? {
+        return super::compact::read(file, offset, len, sequence, |r, _| accept(r));
+    }
     file.seek(SeekFrom::Start(offset))?;
     let reader = BufReader::with_capacity(64 * 1024, file.take(len));
     parse_entries(reader, offset, sequence, true, |record, _| accept(record))
@@ -86,19 +117,7 @@ fn parse_entries(
         limit: ENTRY_LIMIT,
         position: 0,
     };
-    let mut parsed = Parsed {
-        records: Vec::new(),
-        groups: Vec::new(),
-        ids: String::new(),
-        postings: BTreeMap::new(),
-        pages: Vec::new(),
-        collections: Vec::new(),
-        bloom: super::term_pages::Bloom::default(),
-        #[cfg(feature = "bounded-engine")]
-        universal: super::covering::Universal::default(),
-        live: 0,
-        entries: 0,
-    };
+    let mut parsed = empty();
     let mut cursor = HEADER_SIZE;
     let mut record_count = 0usize;
     let mut previous = None;

@@ -1,0 +1,50 @@
+{
+  "baseline_head": "380b7f66077ea126fb9115283c17f6a0d3fe66a6",
+  "same_all_fixed_slot_files_as_before": true,
+  "fixed_slot_files": 133,
+  "final_main_magics": [
+    "FDBSEG04",
+    "FDBSEG04",
+    "FDBSEG04",
+    "FDBSEG04",
+    "FDBSEG04"
+  ],
+  "final_layout": "SEG04 reconstructed by previous frozen reader after SEG05; full38-case oracle passed",
+  "live_inventory": [
+    {
+      "layout": "json",
+      "live_main_bytes": 353242581,
+      "live_metadata_bytes": 445605,
+      "live_index_bytes": 353688186
+    },
+    {
+      "layout": "binary",
+      "live_main_bytes": 349308197,
+      "live_metadata_bytes": 445605,
+      "live_index_bytes": 349753802
+    },
+    {
+      "layout": "references",
+      "live_main_bytes": 81458868,
+      "live_metadata_bytes": 445605,
+      "live_index_bytes": 81904473
+    }
+  ],
+  "retained_core_json_bytes": 1521041630,
+  "retained_core_references_bytes_during_experiment": 1249257917,
+  "all_slot_bytes": 1521206110,
+  "index_bytes_saved": 271783713,
+  "corpus_bytes": 2740862279,
+  "corpus_sha256": "11F826FCE3F4AE790FEB9FC6DF9B1169F52C2FD699E89FC4A8A4B77AAA41731B",
+  "unchanged_fixture_sources": [
+    "tests/fixtures/v1/checkpoint.fdb",
+    "tests/fixtures/v1/checkpoint.ready"
+  ],
+  "frozen_and_final_normal_reader_text_equal": true,
+  "reader_text_sha256": "59c5258083658e20e443c0b7bcc01f6de97108ec8d7efc2e5b7b1dc6c8884786",
+  "data_directories": [
+    "benchmark-work",
+    "rkyv-corpus-20261009"
+  ],
+  "unchanged_dependencies_manifest_payload_source": []
+}

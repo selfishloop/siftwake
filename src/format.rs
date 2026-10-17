@@ -17,6 +17,8 @@ const FOOTER: &[u8; 8] = b"FDBDONE1";
 mod native_check;
 #[cfg(feature = "experimental-streaming-open")]
 pub(crate) use native_check::check_native_prefix;
+#[cfg(feature = "bounded-engine")]
+pub(crate) use native_check::visit_native_prefix;
 
 #[derive(Serialize, Deserialize)]
 #[serde(deny_unknown_fields)]

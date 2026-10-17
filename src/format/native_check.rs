@@ -9,6 +9,19 @@ pub(crate) fn check_native_prefix(
     end: u64,
     expected: u32,
 ) -> Result<(u64, usize)> {
+    visit_native_prefix(file, end, expected, |_, _, _, _| Ok(()))
+}
+
+// Visitors may write only unpublished derived data: the final source CRC is
+// checked after the last callback, before callers are allowed to publish it.
+#[cold]
+#[inline(never)]
+pub(crate) fn visit_native_prefix(
+    file: &mut File,
+    end: u64,
+    expected: u32,
+    mut accept: impl FnMut(u64, u64, u8, &[u8]) -> Result<()>,
+) -> Result<(u64, usize)> {
     #[cfg(feature = "diagnostic-timing")]
     let _span = crate::timing::span("open.source_native_check");
     file.seek(SeekFrom::Start(0))?;
@@ -86,6 +99,12 @@ pub(crate) fn check_native_prefix(
             } else if let Change::Delete { key } = crate::binary_batch::decode_entry(1, &scratch)? {
                 crate::validate_key(&key).map_err(|e| Error::Corrupt(e.to_string()))?;
             }
+            accept(
+                cursor + HEADER as u64 + (len - remaining) as u64,
+                seq,
+                entry[0],
+                &scratch,
+            )?;
             records = records
                 .checked_add(1)
                 .ok_or_else(|| Error::Corrupt("source record count overflow".into()))?;

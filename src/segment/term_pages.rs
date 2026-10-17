@@ -1,4 +1,4 @@
-//! Sparse fences over the existing JSON directory; no new on-disk format.
+//! Sparse fences over SEG03/04 JSON or SEG05 binary directory pages.
 use super::*;
 use std::collections::VecDeque;
 use std::hash::{Hash, Hasher};
@@ -178,6 +178,8 @@ fn strings(term: &Term) -> usize {
     }
 }
 pub(super) struct Pages {
+    #[cfg(feature = "bounded-engine")]
+    binary: bool,
     file: File,
     fences: Vec<Fence>,
     pub collections: Vec<(String, String)>,
@@ -217,7 +219,15 @@ impl Pages {
         }
         let count = fences.iter().map(|p| p.count).sum();
         fences.shrink_to_fit();
+        #[cfg(feature = "bounded-engine")]
+        let binary = {
+            let mut magic = [0; 8];
+            read_at(file, 0, &mut magic)?;
+            &magic == super::compact::MAGIC
+        };
         Ok(Self {
+            #[cfg(feature = "bounded-engine")]
+            binary,
             file: file.try_clone()?,
             fences,
             collections,
@@ -252,8 +262,22 @@ impl Pages {
             return Err(Error::Corrupt("term directory page checksum".into()));
         }
         raw[p.len + 1] = b']';
-        let values: Vec<(Term, Posting)> =
-            serde_json::from_slice(&raw).map_err(|e| Error::Corrupt(e.to_string()))?;
+        #[cfg(feature = "bounded-engine")]
+        let binary = self.binary;
+        #[cfg(not(feature = "bounded-engine"))]
+        let binary = false;
+        let values: Vec<(Term, Posting)> = if binary {
+            #[cfg(feature = "bounded-engine")]
+            {
+                super::compact::decode_page(&raw[1..p.len + 1], p.count)?
+            }
+            #[cfg(not(feature = "bounded-engine"))]
+            {
+                unreachable!()
+            }
+        } else {
+            serde_json::from_slice(&raw).map_err(|e| Error::Corrupt(e.to_string()))?
+        };
         if values.len() != p.count
             || values.first().is_none_or(|v| v.0 != p.first)
             || values.last().is_none_or(|v| v.0 != p.last)

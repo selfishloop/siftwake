@@ -1,6 +1,20 @@
 # FDB açık işler
 
-Son indeks açılışı adımı: kaynak/WAL ve sözlük yolunu koruyan bağımsız
+Son SEG05 deneyi: JSON dictionary73→41ms (kopya korunurken instrumented),
+source referansıyla267.849.329B payload kopyası çıkarıldı. Son normal4 çiftte
+strict open260,075→170,024ms (-%34,62;4/4), ilk kullanım264,784→173,884ms.
+Canlı indeks353.688.186→81.904.473B; ayrı query/get private8,891→8,795MiB,
+WS13,301→13,260MiB,4/4 düşük. Kayıp read-ahead1104→10000 isteğe çıkmıştı;
+5/42B kaynak başlıkları tanınınca1104/8896 hit geri geldi,10k CRC/schema aynı.
+Geniş38-case32 düşük/5 yüksek/1 eşit, yoğun8 sayfa5/3; artışlar kapanmadı.
+Normal yazıcı SEG04; isteğe bağlı prototype otomatik/default'a alınmadı.
+Sonraki kalıcı adım source adresini streamed builder'a bağlamak ve yazma/
+bakım/query/get/bellek kapılarını birlikte ölçmek. Vec RAM'i, eski nesiller,
+kernel/file cache, concurrent/gerçek-cold açık. Yeni corpus/reset/DB kopyası
+yok; eski okuyucu38-case kontrolüyle SEG04'e döndü,133 dosya byte-eşit.
+[Son rapor](COMPACT-INDEX-10K-20261017.md).
+
+Önceki indeks açılışı adımı: kaynak/WAL ve sözlük yolunu koruyan bağımsız
 exact-read CRC helper'ı. İki ayrı dört dengeli çiftte strict open+ilk
 get+search279,712→267,971ms (-%4,20),282,370→264,915ms (-%6,18);8/8 hızlı.
 Yalnız open -%1,08/-%8,16; tek sabit yüzde iddiası yok. Yoğun8 sayfa p95
@@ -80,6 +94,7 @@ deneysel profilde tutulur; genel/default kabul kapısı geçmedi.
 
 | İş | Durum / kapanış kanıtı |
 |---|---|
+| JSON sözlük ve indeksteki267,8MB belge kopyası | İsteğe bağlı SEG05 uygulandı/ölçüldü; normal4 çiftte open-%34,62 ve4/4 hızlı, canlı indeks353,7→81,9MB, ayrı query private/WS4/4 düşük. Tam kaynak/indeks/payload doğrulaması sürer. Kaynak başlıkları nedeniyle kaybolan read-ahead sayaçlarla bulunup düzeltildi:10000→1104 read,10k CRC/schema aynı. Son38-case32/5/1, yoğun8 sayfa5/3; artışlar açık, genel/default kapısı geçmedi. Normal builder/onarım/merge SEG04; source adresini streamed builder'a taşıma ve yazma/bakım ölçümü bekliyor. Eski okuyucu SEG05'i SEG04'e yeniden kurdu/38-case doğruladı;133 sabit-slot dosyası byte-eşit, fixture/kaynak/corpus aynı. Vec RAM/disk-retention/concurrent/cold açık. [Kanıt/karar](COMPACT-INDEX-10K-20261017.md) |
 | İndeks açılışında checksum okuma ve hazırlığı azalt | Dar okuma adımı ölçüldü: indekse özel max1MiB exact reads; bütün indeks CRC'si ve diğer doğrulamalar tam, kaynak/WAL ve sözlük algoritmaları aynı. İki4-çift seride ilk kullanım -%4,20/-6,18;8/8 hızlı. Yalnız open kazancı oturumlara bağlı%1–8. Yoğun8 sayfanın p95'i düşük; genel arama kapısı değil. Ayrı query/get tepesinde artış yok; Vec ve concurrent RAM ölçülmedi. COW/reuse prototipi %5–10 arama artışıyla geri alındı. Hazırlık maliyeti ve genel açılış işi açık. [Son rapor](INDEX-OPEN-10K-20261017.md) |
 | Tam doğrulamalı açılışta kaynak tarama ve belge hazırlığını azalt | Dar kaynak adımı ölçüldü:4 dengeli normal release çiftinde430,303→270,116ms (-%37,23;4/4), pending0; ilk kullanım toplamı423,924→281,714ms. Frame+source CRC, UTF-8/schema/key/link/version/sınırlar ve source lease sürer. Sağlam cache yoksa önceki builder yolu, WAL/0.1 kaynaklar aynı. Query/get peak private9,197→8,637MiB; bu Vec ingest veya toplam sistem RAM'i değildir. Son38-case23 düşük/15 yüksek; genel arama garantisi yok. İndeks CRC/directory maliyeti ve genel açılış işi açık; SQLite normal open seviyesine ulaşılmadı. [Rapor ve ham kanıt](STRICT-OPEN-10K-20261017.md) |
 | Varsayılan FDB'yi SQLite ile aynı10k'da yeniden karşılaştır | Tamamlandı, kapsam sınırlı:4 dengeli streamed ve2 Vec yazma çifti;38-case ve256 get için4 dengeli okuma çifti;4 opening ve2 oracle'sız query/idle memory çifti. Streamed toplam23,598/34,509s;38/38 p95 ve bütün durumlarda4/4 FDB hızlı. Query private9,189/12,740MiB; normal Vec78,912/8,402MiB, strict open433,686/1,535ms ve retained disk2,61 kat. İlk iki SQLite write süresi yüksekliği ayrıştırılmadı; SQL prepared cache64, FTS5/LIKE/native3.53.2; validator3.53.1. Kaynak/fixture/corpus/hash/10k payload/FTS integrity aynı. Motor, storage, protokol değişmedi; eski/yeni arama regresyonları ve genel kapılar bu kıyasla kapanmaz. [Rapor](SQLITE-DEFAULT-COMPARISON-10K-20261016.md) |

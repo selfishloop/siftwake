@@ -1,5 +1,13 @@
 # FDB
 
+[İkili sözlük ve kaynak referansı deneyi](docs/COMPACT-INDEX-10K-20261017.md):
+aynı10k/4 dengeli çiftte strict open260→170ms (-%34,62;4/4), canlı indeks
+353,7→81,9MB;267,8MB belge kopyası çıktı. Query private/WS artmadı.
+Son geniş38-case32 düşük/5 yüksek/1 eşit, yoğun8 sayfa5/3; genel kapı açık.
+Yeni SEG05 isteğe bağlı; normal yazıcı SEG04, fixture/kaynak/protokol aynı.
+Sabit slot eski okuyucuyla SEG04'e döndürüldü,133 dosyanın byte'ı başlangıçla
+aynı. Yazma/bakım, normal Vec RAM'i, eski nesiller ve concurrent/cold açık.
+
 [İndeks CRC okuması ve ilk kullanım ölçümü](docs/INDEX-OPEN-10K-20261017.md):
 indekse özel en fazla1MiB exact-read checksum yolu; kaynak/WAL ve sözlük
 algoritmaları aynı. İki ayrı dört-çift seride strict open+ilk get+search

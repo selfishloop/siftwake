@@ -41,6 +41,16 @@ pub use engine::Database;
 pub use model::*;
 pub type Result<T> = std::result::Result<T, Error>;
 
+/// Explicit, reversible derived-index experiment. Normal writers retain SEG04.
+/// Repacking never changes the authoritative FDBLOG04/ready files.
+#[cfg(feature = "bounded-engine")]
+#[derive(Clone, Copy, Debug, PartialEq, Eq)]
+pub enum IndexCacheLayout {
+    JsonPayloadCopy,
+    BinaryPayloadCopy,
+    BinarySourceReferences,
+}
+
 #[derive(Debug)]
 pub enum Error {
     Io(std::io::Error),

@@ -70,7 +70,7 @@ fn indexes() -> Result<Vec<Index>> {
         file.seek(SeekFrom::End(-32))?;
         let mut footer = [0; 32];
         file.read_exact(&mut footer)?;
-        if !matches!(&footer[..8], b"FDBEND03" | b"FDBEND04")
+        if !matches!(&footer[..8], b"FDBEND03" | b"FDBEND04" | b"FDBEND05")
             || crc32fast::hash(&footer[..28]) != u32::from_le_bytes(footer[28..32].try_into()?)
         {
             return Err("invalid index footer".into());

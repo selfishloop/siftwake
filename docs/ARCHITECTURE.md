@@ -1,5 +1,16 @@
 # FDB mimarisi — 0.3.1
 
+2026-10-17 isteğe bağlı SEG05 cache prototipi: typed binary directory ve
+FDBLOG04 source entry referansları; yeni kaynak/WAL/manifest/payload biçimi
+yok. Normal builder/onarım/merge SEG04 kalır. CRC/schema/identity ve source
+lease sürer; kaynak referansında5/42B entry/frame aralıkları mevcut bounded
+read-ahead'e katılır. Tam dictionary taraması sürer, resident adres/belge
+tablosu eklenmez. Normal4 çiftte open260→170ms; canlı idx353,7→81,9MB,
+private/WS artışı yok.38-case32/5/1 ve yoğun8 sayfa5/3: genel/default geçiş
+kapısı açık.133 sabit-slot dosyası deney sonunda eski okuyucuyla byte-eşit
+SEG04'e döndü;0.1 fixture aynı. [Wire/API/kurtarma](SEG05-CACHE.md),
+[ölçüm ve açık sınırlar](COMPACT-INDEX-10K-20261017.md).
+
 2026-10-17 indeks CRC okuması: `segment::checksum` soğuk/ayrı fonksiyonda
 tam prefix'i en fazla1MiB exact-read tamponuyla doğrular. Küçük indeks için
 tampon prefix boyutuyla sınırlıdır; EOF bozuk indeks sayılır ve kaynak

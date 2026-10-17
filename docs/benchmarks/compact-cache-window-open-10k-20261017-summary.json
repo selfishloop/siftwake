@@ -1,0 +1,311 @@
+{
+  "design": {
+    "phase": "open",
+    "pairs": 4,
+    "orders": [
+      [
+        "json",
+        "references"
+      ],
+      [
+        "references",
+        "json"
+      ],
+      [
+        "json",
+        "references"
+      ],
+      [
+        "references",
+        "json"
+      ]
+    ],
+    "pairwise_balanced_order": true,
+    "reader_sha256": "7B00C5E0085D33B0FD029476D2F6EC03EB3BF0AED8527BB9B3ECBC22B5084E8D",
+    "repacker_sha256": "7771C499552DACC3678A5939235A6A22EF2E349FFC9A2F7D560B28C10C8C82F8",
+    "cache": "fresh process; warm OS cache; no eviction; untimed strict first-use warmup after each repack",
+    "affinity_mask": 4,
+    "validation": "full source CRC/schema/version and full index CRC plus directory/page validation; pending0",
+    "corpus": "same existing first10000; no corpus preparation or DB copies",
+    "write_scope": "only fixed-slot derived indexes rewritten between conditions; source/ready/SQLite hashes checked",
+    "query_memory": "24 searches/771 gets; no corpus/oracle loaded",
+    "measurement": "strict open+get9999+quixote first/warm, separate lifetime memory"
+  },
+  "layouts": {
+    "json": {
+      "open_ms": {
+        "median": 260.07480000000004,
+        "runs": [
+          259.02160000000003,
+          261.12800000000004,
+          276.8466,
+          258.8423
+        ],
+        "change_percent": 0.0,
+        "lower_pairs": 0,
+        "paired_change_percent": [
+          0.0,
+          0.0,
+          0.0,
+          0.0
+        ]
+      },
+      "first_get_ms": {
+        "median": 0.10155,
+        "runs": [
+          0.088,
+          0.0984,
+          0.1116,
+          0.1047
+        ],
+        "change_percent": 0.0,
+        "lower_pairs": 0,
+        "paired_change_percent": [
+          0.0,
+          0.0,
+          0.0,
+          0.0
+        ]
+      },
+      "first_search_ms": {
+        "median": 4.5724,
+        "runs": [
+          4.5111,
+          4.7204,
+          4.632899999999999,
+          4.5119
+        ],
+        "change_percent": 0.0,
+        "lower_pairs": 0,
+        "paired_change_percent": [
+          0.0,
+          0.0,
+          0.0,
+          0.0
+        ]
+      },
+      "warm_search_ms": {
+        "median": 2.22615,
+        "runs": [
+          2.2274,
+          2.2204,
+          2.4068,
+          2.2249000000000003
+        ],
+        "change_percent": 0.0,
+        "lower_pairs": 0,
+        "paired_change_percent": [
+          0.0,
+          0.0,
+          0.0,
+          0.0
+        ]
+      },
+      "first_use_ms": {
+        "median": 264.78375000000005,
+        "runs": [
+          263.62070000000006,
+          265.94680000000005,
+          281.59110000000004,
+          263.4589
+        ],
+        "change_percent": 0.0,
+        "lower_pairs": 0,
+        "paired_change_percent": [
+          0.0,
+          0.0,
+          0.0,
+          0.0
+        ]
+      },
+      "memory": {
+        "peak_private_commit_bytes": {
+          "median": 9322496.0,
+          "runs": [
+            9322496,
+            9322496,
+            9326592,
+            9322496
+          ],
+          "change_percent": 0.0,
+          "lower_pairs": 0,
+          "paired_change_percent": [
+            0.0,
+            0.0,
+            0.0,
+            0.0
+          ]
+        },
+        "peak_working_set_bytes": {
+          "median": 13946880.0,
+          "runs": [
+            13942784,
+            13946880,
+            13946880,
+            13950976
+          ],
+          "change_percent": 0.0,
+          "lower_pairs": 0,
+          "paired_change_percent": [
+            0.0,
+            0.0,
+            0.0,
+            0.0
+          ]
+        }
+      },
+      "stats": {
+        "compaction_running": false,
+        "delta_keys": 0,
+        "disk_index_bytes": 353688186,
+        "disk_posting_entries": 19221340,
+        "documents": 10000,
+        "generation": 51,
+        "log_bytes": 45,
+        "resident_documents": 0,
+        "resident_text_bytes": 0,
+        "segments": 5,
+        "sequence": 20,
+        "source_bytes": 267900709
+      }
+    },
+    "references": {
+      "open_ms": {
+        "median": 170.02405,
+        "runs": [
+          168.5604,
+          174.44570000000002,
+          169.06799999999998,
+          170.9801
+        ],
+        "change_percent": -34.62494251653756,
+        "lower_pairs": 4,
+        "paired_change_percent": [
+          -34.92419165042608,
+          -33.195329493581696,
+          -38.93080138965045,
+          -33.944297357889354
+        ]
+      },
+      "first_get_ms": {
+        "median": 0.11030000000000001,
+        "runs": [
+          0.1087,
+          0.2585,
+          0.1119,
+          0.1064
+        ],
+        "change_percent": 8.616445100935511,
+        "lower_pairs": 0,
+        "paired_change_percent": [
+          23.522727272727284,
+          162.7032520325203,
+          0.26881720430107503,
+          1.623686723973261
+        ]
+      },
+      "first_search_ms": {
+        "median": 3.75095,
+        "runs": [
+          3.6682,
+          4.0129,
+          3.7046,
+          3.7973
+        ],
+        "change_percent": -17.965401102265766,
+        "lower_pairs": 4,
+        "paired_change_percent": [
+          -18.6850213916783,
+          -14.988136598593327,
+          -20.037125774352983,
+          -15.838116979542981
+        ]
+      },
+      "warm_search_ms": {
+        "median": 2.21995,
+        "runs": [
+          2.3173,
+          2.2316,
+          2.0967,
+          2.2083
+        ],
+        "change_percent": -0.27850773757385205,
+        "lower_pairs": 2,
+        "paired_change_percent": [
+          4.0360958965610205,
+          0.5044136191677095,
+          -12.884327738075463,
+          -0.7461009483572423
+        ]
+      },
+      "first_use_ms": {
+        "median": 173.88414999999998,
+        "runs": [
+          172.3373,
+          178.71710000000002,
+          172.88449999999997,
+          174.8838
+        ],
+        "change_percent": -34.32975022069898,
+        "lower_pairs": 4,
+        "paired_change_percent": [
+          -34.62679524028274,
+          -32.79968023679925,
+          -38.60441611968562,
+          -33.62008267703236
+        ]
+      },
+      "memory": {
+        "peak_private_commit_bytes": {
+          "median": 9222144.0,
+          "runs": [
+            9224192,
+            9224192,
+            9220096,
+            9220096
+          ],
+          "change_percent": -1.0764499121265425,
+          "lower_pairs": 4,
+          "paired_change_percent": [
+            -1.0544815465729385,
+            -1.0544815465729385,
+            -1.1418533157663613,
+            -1.0984182776801354
+          ]
+        },
+        "peak_working_set_bytes": {
+          "median": 13903872.0,
+          "runs": [
+            13930496,
+            13873152,
+            13930496,
+            13877248
+          ],
+          "change_percent": -0.3083700440528636,
+          "lower_pairs": 4,
+          "paired_change_percent": [
+            -0.0881316098707452,
+            -0.5286343612334821,
+            -0.11747430249633428,
+            -0.5284791544333478
+          ]
+        }
+      },
+      "stats": {
+        "compaction_running": false,
+        "delta_keys": 0,
+        "disk_index_bytes": 81904473,
+        "disk_posting_entries": 19221340,
+        "documents": 10000,
+        "generation": 51,
+        "log_bytes": 45,
+        "resident_documents": 0,
+        "resident_text_bytes": 0,
+        "segments": 5,
+        "sequence": 20,
+        "source_bytes": 267900709
+      }
+    }
+  },
+  "limits": "Warm OS cache, explicit cache repack excluded; no power loss/cold/concurrent/write throughput measurement."
+}

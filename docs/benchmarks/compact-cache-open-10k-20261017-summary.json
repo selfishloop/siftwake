@@ -1,0 +1,452 @@
+{
+  "design": {
+    "phase": "open",
+    "pairs": 4,
+    "orders": [
+      [
+        "json",
+        "binary",
+        "references"
+      ],
+      [
+        "references",
+        "binary",
+        "json"
+      ],
+      [
+        "binary",
+        "json",
+        "references"
+      ],
+      [
+        "references",
+        "json",
+        "binary"
+      ]
+    ],
+    "pairwise_balanced_order": true,
+    "reader_sha256": "54577C275BCD8B62FB5234418220AAE7F55E75310A330E3E0D7FF083EC627120",
+    "repacker_sha256": "7771C499552DACC3678A5939235A6A22EF2E349FFC9A2F7D560B28C10C8C82F8",
+    "cache": "fresh process; warm OS cache; no eviction; untimed strict first-use warmup after each repack",
+    "affinity_mask": 4,
+    "validation": "full source CRC/schema/version and full index CRC plus directory/page validation; pending0",
+    "corpus": "same existing first10000; no corpus preparation or DB copies",
+    "write_scope": "only fixed-slot derived indexes rewritten between conditions; source/ready/SQLite hashes checked",
+    "query_memory": "24 searches/771 gets; no corpus/oracle loaded",
+    "measurement": "strict open+get9999+quixote first/warm, separate lifetime memory"
+  },
+  "layouts": {
+    "json": {
+      "open_ms": {
+        "median": 265.709,
+        "runs": [
+          253.88870000000003,
+          264.4916,
+          266.9264,
+          331.3705
+        ],
+        "change_percent": 0.0,
+        "lower_pairs": 0,
+        "paired_change_percent": [
+          0.0,
+          0.0,
+          0.0,
+          0.0
+        ]
+      },
+      "first_get_ms": {
+        "median": 0.10425000000000001,
+        "runs": [
+          0.10500000000000001,
+          0.1035,
+          0.10840000000000001,
+          0.093
+        ],
+        "change_percent": 0.0,
+        "lower_pairs": 0,
+        "paired_change_percent": [
+          0.0,
+          0.0,
+          0.0,
+          0.0
+        ]
+      },
+      "first_search_ms": {
+        "median": 4.6376,
+        "runs": [
+          4.5278,
+          4.435,
+          4.7474,
+          5.5201
+        ],
+        "change_percent": 0.0,
+        "lower_pairs": 0,
+        "paired_change_percent": [
+          0.0,
+          0.0,
+          0.0,
+          0.0
+        ]
+      },
+      "warm_search_ms": {
+        "median": 2.26505,
+        "runs": [
+          2.2355,
+          2.2527,
+          2.2774,
+          3.4001
+        ],
+        "change_percent": 0.0,
+        "lower_pairs": 0,
+        "paired_change_percent": [
+          0.0,
+          0.0,
+          0.0,
+          0.0
+        ]
+      },
+      "first_use_ms": {
+        "median": 270.40615,
+        "runs": [
+          258.5215,
+          269.0301,
+          271.78220000000005,
+          336.9836
+        ],
+        "change_percent": 0.0,
+        "lower_pairs": 0,
+        "paired_change_percent": [
+          0.0,
+          0.0,
+          0.0,
+          0.0
+        ]
+      },
+      "memory": {
+        "peak_private_commit_bytes": {
+          "median": 9355264.0,
+          "runs": [
+            9355264,
+            9355264,
+            9355264,
+            9355264
+          ],
+          "change_percent": 0.0,
+          "lower_pairs": 0,
+          "paired_change_percent": [
+            0.0,
+            0.0,
+            0.0,
+            0.0
+          ]
+        },
+        "peak_working_set_bytes": {
+          "median": 13967360.0,
+          "runs": [
+            13967360,
+            13963264,
+            13967360,
+            13967360
+          ],
+          "change_percent": 0.0,
+          "lower_pairs": 0,
+          "paired_change_percent": [
+            0.0,
+            0.0,
+            0.0,
+            0.0
+          ]
+        }
+      },
+      "stats": {
+        "compaction_running": false,
+        "delta_keys": 0,
+        "disk_index_bytes": 353688186,
+        "disk_posting_entries": 19221340,
+        "documents": 10000,
+        "generation": 51,
+        "log_bytes": 45,
+        "resident_documents": 0,
+        "resident_text_bytes": 0,
+        "segments": 5,
+        "sequence": 20,
+        "source_bytes": 267900709
+      }
+    },
+    "binary": {
+      "open_ms": {
+        "median": 236.54410000000001,
+        "runs": [
+          252.26229999999998,
+          232.847,
+          224.08149999999998,
+          240.2412
+        ],
+        "change_percent": -10.97625597928561,
+        "lower_pairs": 4,
+        "paired_change_percent": [
+          -0.6405956625876064,
+          -11.964311910094683,
+          -16.051203627666666,
+          -27.50072803704615
+        ]
+      },
+      "first_get_ms": {
+        "median": 0.11665,
+        "runs": [
+          0.1348,
+          0.09849999999999999,
+          0.0841,
+          0.1497
+        ],
+        "change_percent": 11.894484412470007,
+        "lower_pairs": 2,
+        "paired_change_percent": [
+          28.380952380952372,
+          -4.8309178743961345,
+          -22.41697416974171,
+          60.967741935483865
+        ]
+      },
+      "first_search_ms": {
+        "median": 4.153449999999999,
+        "runs": [
+          4.1686,
+          4.1383,
+          3.5533,
+          4.489
+        ],
+        "change_percent": -10.43966706917372,
+        "lower_pairs": 4,
+        "paired_change_percent": [
+          -7.933212597729589,
+          -6.689966178128515,
+          -25.152715170409056,
+          -18.679009438234818
+        ]
+      },
+      "warm_search_ms": {
+        "median": 2.7136000000000005,
+        "runs": [
+          2.9716,
+          2.7448,
+          2.2578,
+          2.6824000000000003
+        ],
+        "change_percent": 19.803094854418248,
+        "lower_pairs": 2,
+        "paired_change_percent": [
+          32.92775665399239,
+          21.844897234429794,
+          -0.8606305436023587,
+          -21.108202699920586
+        ]
+      },
+      "first_use_ms": {
+        "median": 240.98185,
+        "runs": [
+          256.5657,
+          237.0838,
+          227.7189,
+          244.8799
+        ],
+        "change_percent": -10.881520261281041,
+        "lower_pairs": 4,
+        "paired_change_percent": [
+          -0.756532822221756,
+          -11.874619234055972,
+          -16.212724747978356,
+          -27.331804871216292
+        ]
+      },
+      "memory": {
+        "peak_private_commit_bytes": {
+          "median": 9201664.0,
+          "runs": [
+            9203712,
+            9170944,
+            9199616,
+            9203712
+          ],
+          "change_percent": -1.6418563922942164,
+          "lower_pairs": 4,
+          "paired_change_percent": [
+            -1.6199649737302924,
+            -1.9702276707530664,
+            -1.6637478108581405,
+            -1.6199649737302924
+          ]
+        },
+        "peak_working_set_bytes": {
+          "median": 13899776.0,
+          "runs": [
+            13897728,
+            13844480,
+            13901824,
+            13910016
+          ],
+          "change_percent": -0.4838709677419395,
+          "lower_pairs": 4,
+          "paired_change_percent": [
+            -0.49853372434017773,
+            -0.8506893517160496,
+            -0.46920821114369016,
+            -0.4105571847507372
+          ]
+        }
+      },
+      "stats": {
+        "compaction_running": false,
+        "delta_keys": 0,
+        "disk_index_bytes": 349753802,
+        "disk_posting_entries": 19221340,
+        "documents": 10000,
+        "generation": 51,
+        "log_bytes": 45,
+        "resident_documents": 0,
+        "resident_text_bytes": 0,
+        "segments": 5,
+        "sequence": 20,
+        "source_bytes": 267900709
+      }
+    },
+    "references": {
+      "open_ms": {
+        "median": 178.51205000000002,
+        "runs": [
+          171.83200000000002,
+          201.0446,
+          185.1921,
+          168.0162
+        ],
+        "change_percent": -32.816709257119626,
+        "lower_pairs": 4,
+        "paired_change_percent": [
+          -32.31994964722731,
+          -23.98828545027517,
+          -30.620538095894588,
+          -49.29657286934111
+        ]
+      },
+      "first_get_ms": {
+        "median": 0.08815,
+        "runs": [
+          0.0776,
+          0.094,
+          0.0995,
+          0.0823
+        ],
+        "change_percent": -15.443645083932855,
+        "lower_pairs": 4,
+        "paired_change_percent": [
+          -26.095238095238106,
+          -9.178743961352653,
+          -8.210332103321038,
+          -11.505376344086027
+        ]
+      },
+      "first_search_ms": {
+        "median": 4.1923,
+        "runs": [
+          3.9095,
+          4.695,
+          4.4751,
+          3.6403999999999996
+        ],
+        "change_percent": -9.601949284112465,
+        "lower_pairs": 3,
+        "paired_change_percent": [
+          -13.655638499933742,
+          5.862457722660674,
+          -5.735771158950154,
+          -34.05191934928716
+        ]
+      },
+      "warm_search_ms": {
+        "median": 2.6661,
+        "runs": [
+          2.4407,
+          2.8915,
+          3.2439999999999998,
+          2.3506
+        ],
+        "change_percent": 17.706010904836546,
+        "lower_pairs": 1,
+        "paired_change_percent": [
+          9.179154551554468,
+          28.357082611976757,
+          42.44313691051198,
+          -30.866739213552542
+        ]
+      },
+      "first_use_ms": {
+        "median": 182.79290000000003,
+        "runs": [
+          175.81910000000002,
+          205.8336,
+          189.76670000000001,
+          171.7389
+        ],
+        "change_percent": -32.40061292984645,
+        "lower_pairs": 4,
+        "paired_change_percent": [
+          -31.99053076823397,
+          -23.49049418633826,
+          -30.176921078716713,
+          -49.03642195050442
+        ]
+      },
+      "memory": {
+        "peak_private_commit_bytes": {
+          "median": 9211904.0,
+          "runs": [
+            9179136,
+            9236480,
+            9191424,
+            9232384
+          ],
+          "change_percent": -1.5323992994746072,
+          "lower_pairs": 4,
+          "paired_change_percent": [
+            -1.88266199649737,
+            -1.2697022767075294,
+            -1.7513134851138368,
+            -1.3134851138353776
+          ]
+        },
+        "peak_working_set_bytes": {
+          "median": 13885440.0,
+          "runs": [
+            13844480,
+            13934592,
+            13836288,
+            13926400
+          ],
+          "change_percent": -0.5865102639296182,
+          "lower_pairs": 4,
+          "paired_change_percent": [
+            -0.8797653958944274,
+            -0.2053388090349051,
+            -0.9384164222873914,
+            -0.2932551319648091
+          ]
+        }
+      },
+      "stats": {
+        "compaction_running": false,
+        "delta_keys": 0,
+        "disk_index_bytes": 81904473,
+        "disk_posting_entries": 19221340,
+        "documents": 10000,
+        "generation": 51,
+        "log_bytes": 45,
+        "resident_documents": 0,
+        "resident_text_bytes": 0,
+        "segments": 5,
+        "sequence": 20,
+        "source_bytes": 267900709
+      }
+    }
+  },
+  "limits": "Warm OS cache, explicit cache repack excluded; no power loss/cold/concurrent/write throughput measurement."
+}

@@ -16,6 +16,8 @@ mod payload_bench;
 pub(crate) mod block_check;
 mod checksum;
 #[cfg(feature = "bounded-engine")]
+mod compact;
+#[cfg(feature = "bounded-engine")]
 mod covering;
 #[cfg(feature = "bounded-engine")]
 pub(crate) use covering::SourceLease;
@@ -902,6 +904,12 @@ struct PackedRecord {
 
 pub(crate) struct DiskIndex {
     #[cfg(feature = "bounded-engine")]
+    compact_directory: bool,
+    #[cfg(feature = "bounded-engine")]
+    source_references: bool,
+    #[cfg(feature = "bounded-engine")]
+    payload_source: Option<File>,
+    #[cfg(feature = "bounded-engine")]
     covering: covering::Covering,
     file: File,
     verification: Option<block_check::Checks>,
@@ -1065,10 +1073,14 @@ impl DiskIndex {
         }
         let mut header = [0; HEADER_SIZE as usize];
         read_at(&file, 0, &mut header)?;
-        if &header[..8] != MAGIC && &header[..8] != LEGACY_MAGIC {
+        #[cfg(feature = "bounded-engine")]
+        let compact_directory = &header[..8] == compact::MAGIC;
+        #[cfg(not(feature = "bounded-engine"))]
+        let compact_directory = false;
+        if &header[..8] != MAGIC && &header[..8] != LEGACY_MAGIC && !compact_directory {
             return Err(Error::Corrupt("unsupported segment format".into()));
         }
-        let binary_payload = &header[..8] == MAGIC;
+        let binary_payload = &header[..8] == MAGIC || compact_directory;
         let sequence = u64::from_le_bytes(header[8..16].try_into().unwrap());
         let end = u64::from_le_bytes(header[16..24].try_into().unwrap());
         let log_crc = u32::from_le_bytes(header[24..28].try_into().unwrap());
@@ -1077,12 +1089,18 @@ impl DiskIndex {
         }
         let mut footer = [0; FOOTER_SIZE as usize];
         read_at(&file, size - FOOTER_SIZE, &mut footer)?;
-        if &footer[..8]
-            != (if binary_payload {
-                FOOTER
-            } else {
-                LEGACY_FOOTER
-            })
+        let footer_magic = if binary_payload {
+            FOOTER
+        } else {
+            LEGACY_FOOTER
+        };
+        #[cfg(feature = "bounded-engine")]
+        let footer_magic = if compact_directory {
+            compact::FOOTER
+        } else {
+            footer_magic
+        };
+        if &footer[..8] != footer_magic
             || crc(&footer[..28]) != u32::from_le_bytes(footer[28..32].try_into().unwrap())
         {
             return Err(Error::Corrupt("invalid segment footer".into()));
@@ -1096,6 +1114,8 @@ impl DiskIndex {
             return Err(Error::Corrupt("invalid segment directory bounds".into()));
         }
         let expected = u32::from_le_bytes(footer[24..28].try_into().unwrap());
+        #[cfg(feature = "bounded-engine")]
+        let source_references = compact_directory && compact::flags(&file, offset)?;
         let verification = if blocks {
             block_check::Checks::load(path, size - FOOTER_SIZE, expected).ok()
         } else {
@@ -1123,6 +1143,12 @@ impl DiskIndex {
                 parsed.bloom,
             )?);
             return Ok(Self {
+                #[cfg(feature = "bounded-engine")]
+                compact_directory,
+                #[cfg(feature = "bounded-engine")]
+                source_references,
+                #[cfg(feature = "bounded-engine")]
+                payload_source: None,
                 #[cfg(feature = "bounded-engine")]
                 covering: covering.with_grams(parsed.universal),
                 file,
@@ -1152,6 +1178,12 @@ impl DiskIndex {
                 parsed.bloom,
             )?);
             Ok(Self {
+                #[cfg(feature = "bounded-engine")]
+                compact_directory,
+                #[cfg(feature = "bounded-engine")]
+                source_references,
+                #[cfg(feature = "bounded-engine")]
+                payload_source: None,
                 #[cfg(feature = "bounded-engine")]
                 covering: covering.with_grams(parsed.universal),
                 file,
@@ -1290,6 +1322,23 @@ impl DiskIndex {
             checks.verify(&self.file, offset, buffer.len())?;
         }
         read_at(&self.file, offset, buffer)
+    }
+    fn payload_file(&self) -> Result<&File> {
+        #[cfg(feature = "bounded-engine")]
+        if self.source_references {
+            return self
+                .payload_source
+                .as_ref()
+                .ok_or_else(|| Error::Corrupt("unbound SEG05 source".into()));
+        }
+        Ok(&self.file)
+    }
+    fn read_payload_at(&self, offset: u64, buffer: &mut [u8]) -> Result<()> {
+        #[cfg(feature = "bounded-engine")]
+        if self.source_references {
+            return read_at(self.payload_file()?, offset, buffer);
+        }
+        self.read_at(offset, buffer)
     }
     pub(crate) fn prepare_open_checks(&self, path: &Path) -> Result<()> {
         let size = self.file.metadata()?.len();
@@ -1487,7 +1536,7 @@ impl DiskIndex {
         cursor: &mut paged::TextCursor,
     ) -> Result<StoredDocument> {
         if let Some(paged) = &self.paged {
-            paged.text_document(id, cursor, &self.file)
+            paged.text_document(id, cursor, self.payload_file()?)
         } else {
             self.read_document(id)
         }
@@ -1503,7 +1552,7 @@ impl DiskIndex {
         if let Some(paged) = &self.paged {
             let record = paged.record(id)?;
             let mut bytes = vec![0; record.len as usize];
-            self.read_at(record.offset, &mut bytes)?;
+            self.read_payload_at(record.offset, &mut bytes)?;
             if crc(&bytes) != record.checksum {
                 return Err(Error::Corrupt("segment document checksum mismatch".into()));
             }
@@ -1515,7 +1564,7 @@ impl DiskIndex {
         }
         let r = self.metadata(id)?;
         let mut bytes = vec![0; r.len as usize];
-        self.read_at(r.offset, &mut bytes)?;
+        self.read_payload_at(r.offset, &mut bytes)?;
         self.decode_document(id, &bytes)
     }
 
@@ -1586,7 +1635,7 @@ impl DiskIndex {
         {
             #[cfg(feature = "diagnostic-timing")]
             let _read = crate::timing::span("query.payload_read");
-            self.read_at(r.offset, &mut scratch.payload)?;
+            self.read_payload_at(r.offset, &mut scratch.payload)?;
         }
         #[cfg(feature = "diagnostic-timing")]
         {
@@ -1632,11 +1681,19 @@ impl DiskIndex {
         let read_limit = if let Some(limit) = scratch.read_limit {
             limit
         } else {
+            #[cfg(feature = "bounded-engine")]
+            let footer = if self.source_references {
+                0
+            } else {
+                FOOTER_SIZE
+            };
+            #[cfg(not(feature = "bounded-engine"))]
+            let footer = FOOTER_SIZE;
             let limit = self
-                .file
+                .payload_file()?
                 .metadata()?
                 .len()
-                .checked_sub(FOOTER_SIZE)
+                .checked_sub(footer)
                 .ok_or_else(|| Error::Corrupt("segment payload read bounds".into()))?;
             scratch.read_limit = Some(limit);
             limit
@@ -1646,7 +1703,20 @@ impl DiskIndex {
             .checked_add(r.len as u64)
             .filter(|end| *end <= read_limit)
             .ok_or_else(|| Error::Corrupt("segment payload read bounds".into()))?;
-        scratch.adjacent = if scratch.previous_end == Some(r.offset) {
+        let adjacent = scratch.previous_end.is_some_and(|previous| {
+            if previous == r.offset {
+                return true;
+            }
+            #[cfg(feature = "bounded-engine")]
+            if self.source_references {
+                // FDBLOG04: 5-byte entry header, or footer8 + frame24 +
+                // batch5 + entry5 at a checkpoint-frame boundary. Payloads
+                // retain per-record CRC/schema/identity checks after slicing.
+                return matches!(r.offset.checked_sub(previous), Some(5) | Some(42));
+            }
+            false
+        });
+        scratch.adjacent = if adjacent {
             scratch.adjacent.saturating_add(1)
         } else {
             0
@@ -1684,7 +1754,7 @@ impl DiskIndex {
                 };
                 scratch.payload.resize(length, 0);
                 scratch.read_len = 0;
-                self.read_at(r.offset, &mut scratch.payload)?;
+                self.read_payload_at(r.offset, &mut scratch.payload)?;
                 scratch.read_base = r.offset;
                 scratch.read_len = length;
                 scratch.window_used = 0;
@@ -1821,7 +1891,7 @@ impl DiskIndex {
                 scratch.reserve_exact(len.saturating_sub(scratch.len()));
             }
             scratch.resize(len, 0);
-            self.read_at(offset, scratch)?;
+            self.read_payload_at(offset, scratch)?;
             stats.requests += 1;
             stats.requested_bytes += len as u64;
             for &(id, position) in &slots[start..next] {
@@ -1953,6 +2023,9 @@ impl DiskIndex {
     }
     #[cfg(feature = "bounded-engine")]
     pub(crate) fn bind_text_source(&mut self, path: PathBuf, lease: SourceLease) -> Result<()> {
+        if self.source_references {
+            self.payload_source = Some(lease.try_clone()?);
+        }
         self.covering.bind_source(path, lease)
     }
     fn verification_terms<'a>(

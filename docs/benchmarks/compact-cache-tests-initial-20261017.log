@@ -1,0 +1,23 @@
+    Finished `test` profile [unoptimized + debuginfo] target(s) in 0.06s
+     Running tests\compact_cache.rs (target\debug\deps\compact_cache-a9691e546c79919e.exe)
+
+running 3 tests
+
+thread 'native_layout_roundtrip_query_get_maintenance_and_source_bytes' (31676) panicked at tests\compact_cache.rs:37:13:
+assertion `left == right` failed: he
+  left: 0
+ right: 1
+note: run with `RUST_BACKTRACE=1` environment variable to display a backtrace
+test native_layout_roundtrip_query_get_maintenance_and_source_bytes ... FAILED
+test intact_seg05_cannot_hide_corrupt_authoritative_source ... ok
+test every_torn_or_single_byte_corrupt_cache_fails_and_rebuilds_from_source has been running for over 60 seconds
+test every_torn_or_single_byte_corrupt_cache_fails_and_rebuilds_from_source ... ok
+
+failures:
+
+failures:
+    native_layout_roundtrip_query_get_maintenance_and_source_bytes
+
+test result: FAILED. 2 passed; 1 failed; 0 ignored; 0 measured; 0 filtered out; finished in 64.33s
+
+error: test failed, to rerun pass `--test compact_cache`
