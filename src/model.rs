@@ -124,3 +124,10 @@ pub struct SearchPage {
     pub sequence: u64,
     pub hits: Vec<StoredDocument>,
 }
+/// Successfully unlinked engine-owned obsolete files. This is logical file
+/// space, not a measurement of physical disk blocks or total process memory.
+#[derive(Clone, Debug, Default, PartialEq, Eq, Serialize)]
+pub struct ReclaimStats {
+    pub removed_files: usize,
+    pub reclaimed_bytes: u64,
+}

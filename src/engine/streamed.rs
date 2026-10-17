@@ -273,6 +273,9 @@ impl Database {
         }
         drop(stage);
         drop(intake);
+        if result.is_ok() {
+            self.try_reclaim();
+        }
         if result.is_ok() && self.runs.len() >= 4 {
             self.start_compaction_mode(true)?;
         }

@@ -21,6 +21,7 @@ pub mod memory;
 pub mod model;
 mod payload;
 mod query;
+mod reclaim;
 #[cfg(feature = "experimental-rkyv-payload")]
 pub mod rkyv_payload;
 mod segment;

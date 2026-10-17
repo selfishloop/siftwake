@@ -84,6 +84,7 @@ struct Run {
 }
 struct Job {
     inputs: Vec<Source>,
+    output_id: u64,
     handle: JoinHandle<Result<Run>>,
 }
 
@@ -222,6 +223,7 @@ pub struct Database {
     sequence: u64,
     count: usize,
     runs: Vec<Run>,
+    retired: Vec<(Source, std::sync::Weak<DiskIndex>)>,
     #[cfg(not(any(
         feature = "experimental-wal-delta",
         feature = "experimental-shared-documents"
@@ -890,6 +892,9 @@ impl Database {
         }
         let dir = dir.as_ref().to_path_buf();
         fs::create_dir_all(&dir)?;
+        // Keep all publication/reclamation paths under the same resolved root
+        // for which the database lock is acquired.
+        let dir = dir.canonicalize()?;
         let lock = OpenOptions::new()
             .read(true)
             .write(true)
@@ -1127,6 +1132,7 @@ impl Database {
             sequence,
             count,
             runs,
+            retired: Vec::new(),
             docs,
             #[cfg(all(
                 feature = "experimental-shared-documents",
@@ -1146,6 +1152,9 @@ impl Database {
         };
         if db.needs_flush() {
             db.flush()?;
+        }
+        if !deferred {
+            db.try_reclaim();
         }
         Ok(db)
     }
@@ -1897,6 +1906,62 @@ impl Database {
     fn descriptors(&self) -> Vec<Source> {
         self.runs.iter().map(|r| r.source.clone()).collect()
     }
+    /// Reclaim obsolete engine-owned files after full integrity validation.
+    /// Current sources/WAL, pinned readers, and in-flight merge files survive.
+    /// An I/O error can leave a partially completed, safely retryable cleanup.
+    pub fn reclaim_obsolete(&mut self) -> Result<crate::ReclaimStats> {
+        self.check_integrity()?;
+        self.collect_obsolete()
+    }
+
+    fn collect_obsolete(&mut self) -> Result<crate::ReclaimStats> {
+        self.healthy()?;
+        if manifest::inventory(&self.dir)?.0 != Some(self.generation) {
+            return Err(Error::Corrupt("reclaim latest publication changed".into()));
+        }
+        // Re-read the authoritative root. A corrupt/stale manifest must never
+        // turn the in-memory descriptor list into authority for deletion.
+        match manifest::read(&self.dir, self.generation)? {
+            Publication::Current(m) if m.active == self.active && m.runs == self.descriptors() => {}
+            Publication::Legacy { end }
+                if self.active.id == self.generation
+                    && self.active.end == end
+                    && self.runs.len() == 1
+                    && self.runs[0].source.kind == Kind::Legacy
+                    && self.runs[0].source.id == self.generation
+                    && self.runs[0].source.end == end => {}
+            _ => {
+                return Err(Error::Corrupt(
+                    "reclaim publication identity mismatch".into(),
+                ));
+            }
+        }
+        let mut live: BTreeSet<_> = self
+            .runs
+            .iter()
+            .map(|r| (r.source.kind, r.source.id))
+            .collect();
+        live.insert((Kind::Legacy, self.active.id));
+        self.retired
+            .retain(|(_, reader)| reader.strong_count() != 0);
+        live.extend(
+            self.retired
+                .iter()
+                .map(|(source, _)| (source.kind, source.id)),
+        );
+        if let Some(job) = &self.job {
+            live.insert((Kind::Run, job.output_id));
+            live.extend(job.inputs.iter().map(|source| (source.kind, source.id)));
+        }
+        crate::reclaim::collect(&self.dir, self.generation, &live)
+    }
+
+    fn try_reclaim(&mut self) {
+        // Publication already succeeded: cleanup failure must not turn an
+        // acknowledged write into an ambiguous error or poison the database.
+        // Explicit reclaim reports errors; later publication/open retries.
+        let _ = self.collect_obsolete();
+    }
     fn publish(&mut self, id: u64, m: &Manifest) -> Result<()> {
         if let Err(e) = manifest::publish(&self.dir, id, m) {
             self.poisoned = true;
@@ -1913,6 +1978,7 @@ impl Database {
         self.ensure_sources()?;
         self.poll_compaction()?;
         if self.shadow.is_empty() {
+            self.try_reclaim();
             return self.stats();
         }
         let id = self.allocate()?;
@@ -1986,6 +2052,7 @@ impl Database {
         self.shadow.clear();
         self.index = Index::default();
         self.delta_bytes = 0;
+        self.try_reclaim();
         if self.runs.len() >= 4 {
             self.start_compaction_mode(true)?;
         }
@@ -2112,6 +2179,7 @@ impl Database {
         });
         self.job = Some(Job {
             inputs: descriptors,
+            output_id: id,
             handle,
         });
         Ok(true)
@@ -2139,7 +2207,9 @@ impl Database {
                 active: self.active.clone(),
             },
         )?;
-        self.runs.splice(start..start + job.inputs.len(), [run]);
+        for old in self.runs.splice(start..start + job.inputs.len(), [run]) {
+            self.retired.push((old.source, Arc::downgrade(&old.index)));
+        }
         #[cfg(feature = "experimental-paged-metadata")]
         {
             *self
@@ -2148,6 +2218,7 @@ impl Database {
                 .map_err(|_| Error::Corrupt("visibility cache poisoned".into()))? =
                 MaskCache::default();
         }
+        self.try_reclaim();
         Ok(true)
     }
     pub fn poll_compaction(&mut self) -> Result<bool> {
@@ -2218,3 +2289,6 @@ impl Drop for Database {
         }
     }
 }
+
+#[cfg(test)]
+mod reclaim_tests;

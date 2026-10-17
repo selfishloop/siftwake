@@ -380,9 +380,16 @@ fn v01_checkpoint_fixture_opens_without_rewriting_authoritative_bytes() {
         db.commit(vec![put(doc("new-v02", "yeni sürüm"))]).unwrap(),
         2
     );
+    assert!(fs::read(&log).unwrap().starts_with(original));
     db.compact().unwrap();
     db.wait_for_compaction().unwrap();
-    assert!(fs::read(&log).unwrap().starts_with(original));
+    // Once a published merge contains every version, this copied legacy
+    // generation is obsolete and may be reclaimed. The fixture is untouched.
+    assert!(!log.exists());
+    assert_eq!(
+        fs::read("tests/fixtures/v1/checkpoint.fdb").unwrap(),
+        original
+    );
     drop(db);
     let db = Database::open(&temp.0).unwrap();
     assert_eq!(db.stats().unwrap().documents, 5);
