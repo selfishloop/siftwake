@@ -109,6 +109,31 @@ fn native_binary_roundtrip_versions_queries_and_cache_rebuild() {
 }
 
 #[test]
+fn crc_valid_index_sequence_cannot_replace_the_published_source_sequence() {
+    let temp = Temp::new();
+    let mut db = Database::open(&temp.0).unwrap();
+    db.commit(vec![put(document("a"))]).unwrap();
+    db.compact().unwrap();
+    drop(db);
+    let source = immutable_source(&temp.0);
+    let original = fs::read(&source).unwrap();
+    let path = source.with_extension("idx");
+    let mut bytes = fs::read(&path).unwrap();
+    let sequence = u64::from_le_bytes(bytes[8..16].try_into().unwrap());
+    bytes[8..16].copy_from_slice(&(sequence + 1).to_le_bytes());
+    let footer = bytes.len() - 32;
+    let checksum = crc32fast::hash(&bytes[..footer]);
+    bytes[footer + 24..footer + 28].copy_from_slice(&checksum.to_le_bytes());
+    let checksum = crc32fast::hash(&bytes[footer..footer + 28]);
+    bytes[footer + 28..].copy_from_slice(&checksum.to_le_bytes());
+    fs::write(path, bytes).unwrap();
+    assert!(
+        matches!(Database::open(&temp.0), Err(Error::Corrupt(message)) if message == "source/index sequence mismatch")
+    );
+    assert_eq!(fs::read(source).unwrap(), original);
+}
+
+#[test]
 fn intact_binary_cache_never_hides_cut_or_corrupt_published_source() {
     let temp = Temp::new();
     let mut db = Database::open(&temp.0).unwrap();

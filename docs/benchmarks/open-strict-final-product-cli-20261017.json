@@ -1,0 +1,49 @@
+{
+  "product_path": "target/release/fdb.exe",
+  "product_sha256": "272FA0E873038A83843CB8BFEBF04583900918F227252BAEFF8CC332E7E1E3C2",
+  "normal_reader_text_matches_measured_candidate": true,
+  "reader_sha256": "2ADA300216368DFAC3E02F7AA1C13EC75983F5B2A06DC07A872A7C565A47B45C",
+  "frozen_reader_sha256": "1287643D1B59284196D5C45AA700400AD8B7B025949291F8D669FA721A1A802B",
+  "reader_text_sha256": "F3AA82631320EB12BA49A6EB1067A707C5D5A6F424B6425AD8901342D00E4886",
+  "same_pe_sections": {
+    ".text": true,
+    ".rdata": false,
+    ".data": true,
+    ".pdata": true,
+    ".reloc": true
+  },
+  "rdata_different_bytes": 7,
+  "stats": {
+    "compaction_running": false,
+    "delta_keys": 0,
+    "disk_index_bytes": 353688186,
+    "disk_posting_entries": 19221340,
+    "documents": 10000,
+    "generation": 51,
+    "log_bytes": 45,
+    "resident_documents": 0,
+    "resident_text_bytes": 0,
+    "segments": 5,
+    "sequence": 20,
+    "source_bytes": 267900709
+  },
+  "get": {
+    "key": {
+      "collection": "texts",
+      "id": "0000009999",
+      "scope": "shared"
+    },
+    "version": 20,
+    "text_bytes": 46848
+  },
+  "search": {
+    "text": "quixote",
+    "offset": 0,
+    "limit": 1,
+    "total": 56,
+    "sequence": 20,
+    "hits": 1
+  },
+  "read_only": true,
+  "exit_code": 0
+}

@@ -1,0 +1,88 @@
+{
+  "baseline_commit": "86a3928b378720fb8f7086eb894302117eff4730",
+  "platform": "Windows-11-10.0.26200-SP0",
+  "machine": "AMD64",
+  "corpus": {
+    "path": "data\\rkyv-corpus-20261009\\json.payload-bench",
+    "bytes": 2740862279,
+    "sha256": "11F826FCE3F4AE790FEB9FC6DF9B1169F52C2FD699E89FC4A8A4B77AAA41731B",
+    "documents_used": 10000
+  },
+  "fixture_unchanged": [
+    {
+      "path": "tests/fixtures/v1/checkpoint.fdb",
+      "bytes": 1507,
+      "sha256": "E87667C0FABE64D5A1F59EF86B99F7E612DB755D239B41677DA2ADC24BE7BF57"
+    },
+    {
+      "path": "tests/fixtures/v1/checkpoint.ready",
+      "bytes": 28,
+      "sha256": "BC82C18F8D5C3A209328BD59B12D828D8922BEC4D26CB4D557FD4A493A4A9C2F"
+    },
+    {
+      "path": "tests/fixtures/v1/README.md",
+      "bytes": 417,
+      "sha256": "E38173AB6C21108AB3355DA21310FEC5C27A77707E1E168AA16504F8B651380C"
+    }
+  ],
+  "manifest_dependency_features_unchanged": true,
+  "read_series_hashes_unchanged": [
+    "open-strict-native-10k",
+    "open-strict-native-checked-10k",
+    "open-strict-read-matrix-10k",
+    "open-strict-isolated-10k",
+    "open-strict-isolated-matrix-10k",
+    "open-strict-dense-pages-10k",
+    "open-strict-dense-aa-10k"
+  ],
+  "current_fixed_slot_hashes_match_before": true,
+  "fixed_slot_file_count": 134,
+  "data_directories": [
+    "benchmark-work",
+    "rkyv-corpus-20261009"
+  ],
+  "sqlite_reference": {
+    "rows": [
+      {
+        "open_ms": 1.7963,
+        "first_get_ms": 0.20379999999999998,
+        "first_search_ms": 12.3126,
+        "warm_search_ms": 10.687800000000001,
+        "open_get_search_ms": 14.3127
+      },
+      {
+        "open_ms": 1.7736,
+        "first_get_ms": 0.19440000000000002,
+        "first_search_ms": 11.705,
+        "warm_search_ms": 10.6096,
+        "open_get_search_ms": 13.673
+      },
+      {
+        "open_ms": 1.6328,
+        "first_get_ms": 0.20479999999999998,
+        "first_search_ms": 13.1755,
+        "warm_search_ms": 11.8342,
+        "open_get_search_ms": 15.0131
+      },
+      {
+        "open_ms": 1.4451,
+        "first_get_ms": 0.1922,
+        "first_search_ms": 12.2406,
+        "warm_search_ms": 11.436200000000001,
+        "open_get_search_ms": 13.8779
+      }
+    ],
+    "medians": {
+      "open_ms": 1.7032,
+      "first_get_ms": 0.1991,
+      "first_search_ms": 12.2766,
+      "warm_search_ms": 11.062000000000001,
+      "open_get_search_ms": 14.0953
+    },
+    "full_integrity_on_open": false,
+    "paired_with_fdb": false
+  },
+  "scope": "No new corpus, DB reset, DB copy, writes or integrity transaction in this task. Full corpus hash read after performance series.",
+  "fixed_slot_hashes_unchanged_after_normal_cli": true,
+  "restored_normal_reader_text_matches_measured_candidate": true
+}

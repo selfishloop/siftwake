@@ -13,6 +13,11 @@ pub(crate) const MAX_FRAME: usize = 64 * 1024 * 1024;
 const HEADER: usize = 24;
 const FOOTER: &[u8; 8] = b"FDBDONE1";
 
+#[cfg(feature = "experimental-streaming-open")]
+mod native_check;
+#[cfg(feature = "experimental-streaming-open")]
+pub(crate) use native_check::check_native_prefix;
+
 #[derive(Serialize, Deserialize)]
 #[serde(deny_unknown_fields)]
 pub(crate) struct Batch {

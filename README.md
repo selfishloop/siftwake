@@ -1,5 +1,11 @@
 # FDB
 
+[Tam doğrulamalı açılış iyileştirmesi](docs/STRICT-OPEN-10K-20261017.md):
+aynı mevcut10k/dört dengeli çiftte normal strict open430→270ms (%37 düşük),
+açılış+ilk get+arama424→282ms. Kaynak CRC/schema/version kontrolleri tam,
+bekleyen doğrulama0; sağlam indeks varsa sahipli belge replay'i gerekmiyor.
+Genel arama gerilemesi, normal Vec RAM'i, disk ve concurrent/cold işleri açık.
+
 [Varsayılan FDB / SQLite güncel10k karşılaştırması](docs/SQLITE-DEFAULT-COMPARISON-10K-20261016.md):
 akışlı yazma+bakım23,60/34,51s,38/38 aramada p95 FDB düşük (her biri4/4 çift).
 Query/get peak private9,19/12,74MiB; normal Vec78,91/8,40MiB,

@@ -1,5 +1,15 @@
 # FDB mimarisi — 0.3.1
 
+2026-10-17 normal strict açılış: yayınlanmış FDBLOG04 Run kaynaklarında
+ayrı prefix CRC ve sahipli belge replay'i yerine tek sınırlı doğrulama geçişi.
+Frame CRC'sinden birleştirilen kaynak CRC'si ready checksum'ıyla eşleşir;
+frame/schema/UTF-8/key/link/version/sınır kontrolleri ve source lease korunur.
+Kaynak tamamen doğrulanmadan cache kabul edilmez. Sağlam cache replay'i
+atlatır; eksik/bozuk cache eski builder yoluyla yeniden oluşturulur. Yeni Run,
+WAL ve JSON/0.1 yolları aynı; yeni format/feature/bağımlılık yok. Dört normal
+release çiftinde430→270ms strict open, pending0; bütün arama/RAM/disk
+kapıları kapanmış sayılmaz. [Ölçüm ve doğrulama](STRICT-OPEN-10K-20261017.md).
+
 2026-10-16 varsayılan profil: `bounded-engine`, önceki ölçülmüş
 builder-budget birleşiminin aynısını varsayılan derlemeye taşır.
 Kaynak cfg'leri yeni ada bağlı; `experimental-builder-budget` yalnız

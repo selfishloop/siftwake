@@ -1,0 +1,22 @@
+{
+  "pairs": 4,
+  "orders": [
+    "control/fdb",
+    "fdb/control",
+    "control/fdb",
+    "fdb/control"
+  ],
+  "cache": "fresh processes, warm OS cache; no eviction",
+  "modes": [
+    "strict",
+    "strict-first",
+    "record-first"
+  ],
+  "explicit_untimed_warmup": true,
+  "query_memory_pairs": 2,
+  "first_query": "quixote; exact total56, first50 and repeated full page; get9999 version20",
+  "strict": "Database::open with full source verification; no query",
+  "strict_first": "normal strict open then get9999 and first/warm quixote",
+  "record_first": "explicit open_record_reads; first get and first search include required checks",
+  "diagnostic_timing": false
+}

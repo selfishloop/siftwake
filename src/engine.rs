@@ -260,17 +260,39 @@ fn open_source(dir: &Path, mut source: Source, legacy_unknown: bool) -> Result<R
     if source.kind == Kind::Run && file.metadata()?.len() != source.end {
         return Err(Error::Corrupt("immutable source length mismatch".into()));
     }
-    let checksum = if legacy_unknown || cfg!(feature = "experimental-streaming-open") {
-        #[cfg(feature = "diagnostic-timing")]
-        let _span = crate::timing::span("open.source_crc");
-        let checksum = format::prefix_crc(&mut file, source.end)?;
-        if !legacy_unknown && checksum != source.checksum {
-            return Err(Error::Corrupt("source checkpoint checksum mismatch".into()));
+    #[cfg(feature = "experimental-streaming-open")]
+    let checked_sequence = if source.kind == Kind::Run && !legacy_unknown {
+        let mut magic = [0; 8];
+        crate::segment::read_at(&file, 0, &mut magic)?;
+        if &magic == format::MAGIC_V4 {
+            let (sequence, count) =
+                format::check_native_prefix(&mut file, source.end, source.checksum)?;
+            if sequence != source.sequence || count != source.keys {
+                return Err(Error::Corrupt("manifest/source identity mismatch".into()));
+            }
+            Some(sequence)
+        } else {
+            None
         }
-        checksum
     } else {
-        source.checksum
+        None
     };
+    #[cfg(feature = "experimental-streaming-open")]
+    let already_checked = checked_sequence.is_some();
+    #[cfg(not(feature = "experimental-streaming-open"))]
+    let already_checked = false;
+    let checksum =
+        if !already_checked && (legacy_unknown || cfg!(feature = "experimental-streaming-open")) {
+            #[cfg(feature = "diagnostic-timing")]
+            let _span = crate::timing::span("open.source_crc");
+            let checksum = format::prefix_crc(&mut file, source.end)?;
+            if !legacy_unknown && checksum != source.checksum {
+                return Err(Error::Corrupt("source checkpoint checksum mismatch".into()));
+            }
+            checksum
+        } else {
+            source.checksum
+        };
     source.checksum = checksum;
     let target = source.path(dir, "idx");
     let opened_index = {
@@ -325,43 +347,51 @@ fn open_source(dir: &Path, mut source: Source, legacy_unknown: bool) -> Result<R
         Ok(())
     })?;
     #[cfg(feature = "experimental-streaming-open")]
-    let sequence = format::replay_prefix_changes(&mut file, source.end, |seq, change| {
-        if index.as_ref().is_some_and(|i| i.sequence != seq) {
-            return Err(Error::Corrupt("source/index sequence mismatch".into()));
-        }
-        if index.is_none() && builder.is_none() {
-            builder = Some(Builder::new(&target, seq, source.end, checksum)?);
-        }
-        if let Some(change) = change {
-            match change {
-                Change::Put { stored } => {
-                    validate_doc(&stored.document).map_err(|e| Error::Corrupt(e.to_string()))?;
-                    if stored.version == 0 || stored.version > seq {
-                        return Err(Error::Corrupt("invalid checkpoint version".into()));
+    let sequence = if let Some(sequence) = checked_sequence.filter(|_| index.is_some()) {
+        sequence
+    } else {
+        format::replay_prefix_changes(&mut file, source.end, |seq, change| {
+            if index.as_ref().is_some_and(|i| i.sequence != seq) {
+                return Err(Error::Corrupt("source/index sequence mismatch".into()));
+            }
+            if index.is_none() && builder.is_none() {
+                builder = Some(Builder::new(&target, seq, source.end, checksum)?);
+            }
+            if let Some(change) = change {
+                match change {
+                    Change::Put { stored } => {
+                        validate_doc(&stored.document)
+                            .map_err(|e| Error::Corrupt(e.to_string()))?;
+                        if stored.version == 0 || stored.version > seq {
+                            return Err(Error::Corrupt("invalid checkpoint version".into()));
+                        }
+                        if let Some(b) = &mut builder {
+                            b.add(&stored)?;
+                        }
                     }
-                    if let Some(b) = &mut builder {
-                        b.add(&stored)?;
-                    }
-                }
-                Change::Delete { key } => {
-                    if source.kind == Kind::Legacy {
-                        return Err(Error::Corrupt("legacy checkpoint tombstone".into()));
-                    }
-                    validate_key(&key).map_err(|e| Error::Corrupt(e.to_string()))?;
-                    if let Some(b) = &mut builder {
-                        b.add_delete(&key)?;
+                    Change::Delete { key } => {
+                        if source.kind == Kind::Legacy {
+                            return Err(Error::Corrupt("legacy checkpoint tombstone".into()));
+                        }
+                        validate_key(&key).map_err(|e| Error::Corrupt(e.to_string()))?;
+                        if let Some(b) = &mut builder {
+                            b.add_delete(&key)?;
+                        }
                     }
                 }
             }
-        }
-        Ok(())
-    })?;
+            Ok(())
+        })?
+    };
     #[cfg(feature = "diagnostic-timing")]
     drop(replay_start);
     if let Some(b) = builder {
         index = Some(b.finish()?);
     }
     let index = index.ok_or_else(|| Error::Corrupt("missing checkpoint index".into()))?;
+    if index.sequence != sequence {
+        return Err(Error::Corrupt("source/index sequence mismatch".into()));
+    }
     if !legacy_unknown && (index.len() != source.keys || sequence != source.sequence) {
         return Err(Error::Corrupt("manifest/source identity mismatch".into()));
     }

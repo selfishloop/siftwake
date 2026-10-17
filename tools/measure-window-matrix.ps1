@@ -5,6 +5,7 @@ param(
     [ValidateRange(2,12)][int]$Pairs=4,
     [switch]$SkipSqliteReference,
     [switch]$PagesOnly,
+    [switch]$StrictOpen,
     # Optional diagnostic isolation; zero preserves the original launch path.
     [ValidateRange(0,2147483647)][long]$AffinityMask=0
 )
@@ -24,11 +25,12 @@ $orders=@(foreach($n in 0..($Pairs-1)){
     $order=@('control','fdb');if($n%2){$order=@('fdb','control')}
     [PSCustomObject]@{pair=$n;engines=$order}
 })
-[PSCustomObject]@{pairs=$Pairs;orders=$orders;balanced_first_position=$true;pages_only=[bool]$PagesOnly;processor_affinity_mask=$AffinityMask;cache='warm OS cache, no eviction'} | ConvertTo-Json -Depth 5 | Set-Content "$prefix-design.json" -Encoding utf8
+[PSCustomObject]@{pairs=$Pairs;orders=$orders;balanced_first_position=$true;pages_only=[bool]$PagesOnly;strict_open=[bool]$StrictOpen;processor_affinity_mask=$AffinityMask;cache='warm OS cache, no eviction'} | ConvertTo-Json -Depth 5 | Set-Content "$prefix-design.json" -Encoding utf8
 foreach($n in 0..($Pairs-1)){
     $order=@('control','fdb');if($n%2){$order=@('fdb','control')}
     foreach($engine in $order){
-        $probeArguments=@('--record-reads','--matrix',$n)
+        $probeArguments=@('--matrix',$n)
+        if(-not $StrictOpen){$probeArguments=@('--record-reads')+$probeArguments}
         if($PagesOnly){$probeArguments += '--pages-only'}
         if($AffinityMask -eq 0){
             & $programs[$engine] @probeArguments | Out-File -LiteralPath "$prefix-$engine-$n.jsonl" -Encoding utf8

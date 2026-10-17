@@ -328,7 +328,8 @@ pub fn checked(bytes: &[u8]) -> Result<View<'_>> {
 impl View<'_> {
     /// The same document limits as validate_doc, without materializing strings
     /// or JSON values. checked() already guarantees canonical wire sizes.
-    #[cfg(any(not(feature = "experimental-streaming-open"), test))]
+    #[cold]
+    #[inline(never)]
     pub(crate) fn validate_document(&self, encoded_len: usize) -> Result<()> {
         let (scope, collection, id) = self.key_parts();
         crate::validate_key_parts([scope, collection, id])?;
