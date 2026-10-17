@@ -4,6 +4,8 @@ use fdb::{Key, StoredDocument};
 use serde_json::json;
 use std::collections::{BTreeMap, BTreeSet};
 use std::time::Instant;
+#[path = "thread_observation.rs"]
+mod observation;
 
 const REPEATS: usize = 20;
 pub struct Case {
@@ -252,6 +254,17 @@ impl Matrix {
         let mut query_order: Vec<_> = (0..self.cases.len()).collect();
         let mut key_order = self.gets.clone();
         let mut samples = vec![Vec::new(); self.cases.len()];
+        let observe = std::env::args().any(|arg| arg == "--observe-thread");
+        let mut cycles = vec![Vec::new(); self.cases.len()];
+        let mut cpu_ms = vec![Vec::new(); self.cases.len()];
+        let mut counter_cost = Vec::new();
+        if observe {
+            for _ in 0..1000 {
+                let start = Instant::now();
+                std::hint::black_box(observation::read().ok_or("thread counters unavailable")?);
+                counter_cost.push(start.elapsed().as_secs_f64() * 1000.);
+            }
+        }
         let mut get_samples: [Vec<f64>; 5] = std::array::from_fn(|_| Vec::new());
         for round in 0..repeats {
             shuffle(&mut query_order, &mut random_seed);
@@ -262,9 +275,16 @@ impl Matrix {
                 if case.kind == "page" && !pages_only && round % 4 != 0 {
                     continue;
                 }
+                let before = observe.then(observation::read).flatten();
                 let start = Instant::now();
                 let (total, hits) = search(&case.text, case.offset, case.limit)?;
                 samples[n].push(start.elapsed().as_secs_f64() * 1000.);
+                if let Some(before) = before {
+                    let after = observation::read().ok_or("thread counters unavailable")?;
+                    cycles[n].push(after.cycles.saturating_sub(before.cycles));
+                    cpu_ms[n]
+                        .push(after.cpu_100ns.saturating_sub(before.cpu_100ns) as f64 / 10000.);
+                }
                 check(case, total, &hits);
             }
             shuffle(&mut key_order, &mut random_seed);
@@ -292,6 +312,12 @@ impl Matrix {
             "{}",
             json!({"phase":"matrix_reads","seed":seed,"repeats":repeats,"pages_only":pages_only,"queries":self.cases.iter().enumerate().map(|(n,c)|json!({"text":c.text,"kind":c.kind,"offset":c.offset,"limit":c.limit,"total":c.total,"late_matches":c.late_matches,"timing":stats(&samples[n])})).collect::<Vec<_>>(),"gets":get_samples.iter().enumerate().map(|(n,s)|json!({"bin":n,"timing":stats(s)})).collect::<Vec<_>>(),"full_document_checks":true,"cache":"warm OS cache; per-case/key untimed warmup; no eviction","memory_not_measured":true})
         );
+        if observe {
+            println!(
+                "{}",
+                json!({"phase":"thread_observations","seed":seed,"queries":self.cases.iter().enumerate().map(|(n,c)|json!({"text":c.text,"offset":c.offset,"limit":c.limit,"cycles":cycles[n],"cpu_ms":cpu_ms[n]})).collect::<Vec<_>>(),"single_counter_read_ms":stats(&counter_cost),"counter_reads_outside_wall_bracket":true,"cpu_and_cycles_include_counter_overhead":true,"cpu_time_may_be_quantized":true,"cycles_not_fixed_frequency":true})
+            );
+        }
         Ok(())
     }
 }

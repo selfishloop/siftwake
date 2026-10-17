@@ -198,3 +198,77 @@ fn valid_crc_still_requires_matching_key_and_version() {
         ));
     }
 }
+
+#[cfg(feature = "experimental-paged-metadata")]
+#[test]
+fn paged_batch_reuses_checked_leaves_without_skipping_payload_checks() {
+    let temp = TempIndex::new();
+    // Small unit fixture spanning two metadata leaves, not a benchmark corpus.
+    let docs: Vec<_> = (0..70)
+        .map(|id| {
+            let mut stored = doc(id, "İstanbul 東京 😀 needle".repeat(3));
+            stored.document.fields.insert(
+                "nested".into(),
+                serde_json::json!({"list":[null,true,-3,4.25,"şirket"]}),
+            );
+            stored
+                .document
+                .links
+                .push(Key::new("shared", "other", "link"));
+            stored
+        })
+        .collect();
+    let mut index = temp.build(&docs, false);
+    let paged = paged::PagedRecords::prepare(&temp.0, &index).unwrap();
+    index.paged = Some(paged);
+    let slots: Vec<_> = (0..70).map(|id| (id, 70 - id as usize)).collect();
+    let mut output = Vec::new();
+    let mut scratch = Vec::new();
+    let stats = index
+        .read_selected_batch(&slots, &mut scratch, &mut output)
+        .unwrap();
+    assert_eq!(stats.requests, 1);
+    assert_eq!(
+        output,
+        docs.iter()
+            .enumerate()
+            .map(|(id, d)| (70 - id, d.clone()))
+            .collect::<Vec<_>>()
+    );
+    assert!(scratch.capacity() <= READ_WINDOW);
+
+    // Even a correctly checksummed payload must match the paged key/version.
+    for change_key in [false, true] {
+        let mut wrong = docs[64].clone();
+        if change_key {
+            wrong.document.key.id = "00000065".into();
+        } else {
+            wrong.version += 1;
+        }
+        let bytes = crate::payload::encode(&wrong).unwrap();
+        let mut cursor = QueryTextScratch::default();
+        let mut record = index.query_metadata(64, &mut cursor).unwrap();
+        record.checksum = crc(&bytes);
+        assert!(matches!(
+            index.decode_selected(64, &record, &bytes, &mut cursor),
+            Err(Error::Corrupt(_))
+        ));
+    }
+    let record = index.metadata(64).unwrap();
+    temp.replace(record.offset + record.len as u64 - 1, &[255]);
+    assert!(matches!(
+        index.read_selected_batch(&[(64, 0)], &mut scratch, &mut Vec::new()),
+        Err(Error::Corrupt(_))
+    ));
+    OpenOptions::new()
+        .write(true)
+        .open(&temp.0)
+        .unwrap()
+        .set_len(record.offset + 1)
+        .unwrap();
+    assert!(
+        index
+            .read_selected_batch(&[(64, 0)], &mut scratch, &mut Vec::new())
+            .is_err()
+    );
+}

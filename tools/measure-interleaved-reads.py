@@ -21,8 +21,11 @@ def sha(path):
 
 
 def snapshot():
+    if not any((ROOT / 'data/benchmark-work/fdb').glob('generation-*.ready')):
+        raise RuntimeError('Existing published FDB slot required; never initialize a read slot')
     paths = sorted((ROOT / 'data/benchmark-work/fdb').iterdir())
     paths.append(ROOT / 'data/benchmark-work/sqlite/sqlite.db')
+    paths.extend([ROOT / 'tests/fixtures/v1/checkpoint.fdb', ROOT / 'tests/fixtures/v1/checkpoint.ready'])
     return [dict(path=str(p.relative_to(ROOT)), bytes=p.stat().st_size, sha256=sha(p)) for p in paths if p.is_file()]
 
 
@@ -36,10 +39,11 @@ def percentile(values, p):
 
 
 class Worker:
-    def __init__(self, executable, log_path, affinity, pages_only):
+    def __init__(self, executable, log_path, affinity, pages_only, observe_thread=False):
+        self.observe_thread = observe_thread
         self.log = log_path.open('w', encoding='utf-8')
         self.stderr = log_path.with_suffix('.stderr').open('w', encoding='utf-8')
-        self.process = subprocess.Popen([str(executable), *(['--pages-only'] if pages_only else [])], cwd=ROOT, stdin=subprocess.PIPE, stdout=subprocess.PIPE, stderr=self.stderr, text=True, encoding='utf-8', creationflags=subprocess.CREATE_NO_WINDOW)
+        self.process = subprocess.Popen([str(executable), *(['--pages-only'] if pages_only else []), *(['--observe-thread'] if observe_thread else [])], cwd=ROOT, stdin=subprocess.PIPE, stdout=subprocess.PIPE, stderr=self.stderr, text=True, encoding='utf-8', creationflags=subprocess.CREATE_NO_WINDOW)
         api = ctypes.WinDLL('kernel32', use_last_error=True)
         api.SetProcessAffinityMask.argtypes = [ctypes.c_void_p, ctypes.c_size_t]
         api.SetProcessAffinityMask.restype = ctypes.c_int
@@ -77,8 +81,16 @@ class Worker:
             if row['phase'] == 'matrix_reads':
                 assert measured is None and row['seed'] == command['seed'] and row['repeats'] == command['repeats'] and row['full_document_checks']
                 measured = row
+            if row['phase'] == 'thread_observations':
+                assert measured is not None and row['seed'] == command['seed']
+                for query, observed in zip(measured['queries'], row['queries'], strict=True):
+                    assert all(query[key] == observed[key] for key in ('text', 'offset', 'limit'))
+                    assert len(observed['cycles']) == len(observed['cpu_ms']) == query['timing']['n']
+                    query['thread_observation'] = observed
             if row['phase'] == 'block_done':
                 assert row['id'] == command['id'] and row['database_released'] and measured is not None
+                if self.observe_thread:
+                    assert all('thread_observation' in query for query in measured['queries'])
                 return measured
 
     def close(self):
@@ -120,6 +132,10 @@ def summarize(records, design):
                 pair_stats[engine].append(percentile(per_pair, 95))
                 block_medians.append(medians)
             result[engine] = dict(n=len(values), p50_ms=statistics.median(values), p95_ms=percentile(values, 95), p99_ms=percentile(values, 99), per_process_pair_p95=pair_stats[engine], block_medians=block_medians)
+            if 'thread_observation' in pairs[0][0]['queries'][index]:
+                for metric in ('cycles', 'cpu_ms'):
+                    observed = [x for blocks in pairs for block in blocks for x in block['queries'][index]['thread_observation'][metric]]
+                    result[engine][metric] = dict(p50=statistics.median(observed), p95=percentile(observed, 95))
         result['change_p95_percent'] = 100 * (result['fdb']['p95_ms'] / result['control']['p95_ms'] - 1)
         result['paired_p95_change_percent'] = [100 * (a / b - 1) for a, b in zip(pair_stats['fdb'], pair_stats['control'])]
         result['faster_process_pairs'] = sum(a < b for a, b in zip(pair_stats['fdb'], pair_stats['control']))
@@ -127,6 +143,10 @@ def summarize(records, design):
         result['paired_block_median_changes_percent'] = paired
         result['median_block_change_percent'] = statistics.median(paired)
         result['faster_blocks'] = sum(value < 0 for value in paired)
+        result['leave_one_pair_out_p95_changes_percent'] = []
+        for omitted in range(len(records['control'])):
+            values = {engine: [x for pair, blocks in enumerate(pairs) if pair != omitted for block in blocks for x in block['queries'][index]['timing']['samples']] for engine, pairs in records.items()}
+            result['leave_one_pair_out_p95_changes_percent'].append(100 * (percentile(values['fdb'], 95) / percentile(values['control'], 95) - 1))
         queries.append(result)
     return dict(design=design, queries=queries, lower_p95_cases=sum(q['change_p95_percent'] < 0 for q in queries), higher_p95_cases=sum(q['change_p95_percent'] > 0 for q in queries), interpretation='Short exclusive sessions, per-block source validation/warmup outside timing; two resident oracle workers, no concurrent database queries. Not identical to a continuously open single-process matrix. Pooled p95 and block medians describe different distributions; no automatic significance claim.')
 
@@ -141,6 +161,7 @@ def main():
     parser.add_argument('--repeats', type=int, default=25, choices=(1, 5, 10, 25))
     parser.add_argument('--affinity', type=int, default=4)
     parser.add_argument('--full-matrix', action='store_true')
+    parser.add_argument('--observe-thread', action='store_true', help='Benchmark-only calling-thread CPU/cycle counters outside the wall bracket')
     args = parser.parse_args()
     prefix = ROOT / args.prefix
     report = lambda suffix: Path(f'{prefix}-{suffix}')
@@ -148,6 +169,7 @@ def main():
         raise RuntimeError('Preserve existing reports; use an unused log prefix')
     programs = {key: ROOT / value for key, value in [('control', args.control), ('fdb', args.candidate)]}
     design = dict(pairs=args.pairs, blocks_per_pair=args.blocks, repeats_per_block=args.repeats, affinity_mask=args.affinity, pages_only=not args.full_matrix, cache='warm OS cache; every block opens and verifies/warmups before query timing; no eviction', corpus='same existing first10000; no generation/reset/copy', source_validation='complete source check before timed search; unchanged CRC/schema/key/version checks', same_executable=sha(programs['control']) == sha(programs['fdb']), programs={key: dict(path=str(value.relative_to(ROOT)), sha256=sha(value)) for key, value in programs.items()}, balanced_block_first_position=True, orders=[])
+    design['observe_thread'] = args.observe_thread
     write(report('design.json'), design)
     before = snapshot()
     write(report('before.json'), before)
@@ -157,7 +179,7 @@ def main():
         start_order = ['control', 'fdb'] if pair % 2 == 0 else ['fdb', 'control']
         try:
             for engine in start_order:
-                workers[engine] = Worker(programs[engine], report(f'{engine}-{pair}.jsonl'), args.affinity, not args.full_matrix)
+                workers[engine] = Worker(programs[engine], report(f'{engine}-{pair}.jsonl'), args.affinity, not args.full_matrix, args.observe_thread)
                 records[engine].append([])
             write(report(f'pair-{pair}-workers.json'), {key: value.metadata for key, value in workers.items()})
             for block in range(args.blocks):

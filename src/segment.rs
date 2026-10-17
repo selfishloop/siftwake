@@ -1941,10 +1941,13 @@ impl DiskIndex {
             previous = Some(id);
         }
         let mut stats = BatchReadStats::default();
+        // Reuse one checked metadata leaf while hydrating a sorted page. The
+        // payload still gets its own CRC, schema and key/version checks.
+        let mut metadata = QueryTextScratch::default();
         let mut start = 0;
         while start < slots.len() {
             let (id, position) = slots[start];
-            let first = self.metadata(id)?;
+            let first = self.query_metadata(id, &mut metadata)?;
             if first.len as usize > READ_WINDOW {
                 output.push((position, self.read_selected_document(id)?));
                 stats.requests += 1;
@@ -1959,7 +1962,7 @@ impl DiskIndex {
                 .ok_or_else(|| Error::Corrupt("selected payload end overflow".into()))?;
             let mut next = start + 1;
             while next < slots.len() {
-                let r = self.metadata(slots[next].0)?;
+                let r = self.query_metadata(slots[next].0, &mut metadata)?;
                 let record_end = r
                     .offset
                     .checked_add(r.len as u64)
@@ -1983,16 +1986,42 @@ impl DiskIndex {
             stats.requests += 1;
             stats.requested_bytes += len as u64;
             for &(id, position) in &slots[start..next] {
-                let r = self.metadata(id)?;
+                let r = self.query_metadata(id, &mut metadata)?;
                 let begin = (r.offset - offset) as usize;
                 let bytes = scratch
                     .get(begin..begin + r.len as usize)
                     .ok_or_else(|| Error::Corrupt("invalid grouped payload bounds".into()))?;
-                output.push((position, self.decode_document(id, bytes)?));
+                output.push((
+                    position,
+                    self.decode_selected(id, &r, bytes, &mut metadata)?,
+                ));
             }
             start = next;
         }
         Ok(stats)
+    }
+
+    #[cfg(feature = "experimental-grouped-read")]
+    fn decode_selected(
+        &self,
+        id: u32,
+        record: &PackedRecord,
+        bytes: &[u8],
+        scratch: &mut QueryTextScratch,
+    ) -> Result<StoredDocument> {
+        #[cfg(feature = "diagnostic-timing")]
+        let _decode = crate::timing::span("payload.decode_crc_identity");
+        if bytes.len() != record.len as usize || crc(bytes) != record.checksum {
+            return Err(Error::Corrupt("segment document checksum mismatch".into()));
+        }
+        let stored = self.decode_payload(bytes)?;
+        let key = &stored.document.key;
+        if stored.version != record.version
+            || !self.query_identity(id, scratch, (&key.scope, &key.collection, &key.id))?
+        {
+            return Err(Error::Corrupt("segment document identity mismatch".into()));
+        }
+        Ok(stored)
     }
 
     fn one(&self, term: Term) -> Result<Vec<Posting>> {

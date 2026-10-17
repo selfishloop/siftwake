@@ -164,7 +164,10 @@ def main():
     parser.add_argument('--pairs', type=int, choices=(2, 4), default=4)
     parser.add_argument('--phase', choices=('matrix', 'dense', 'stress', 'profile', 'regressions', 'open', 'memory'), default='matrix')
     parser.add_argument('--affinity', type=int, default=4)
+    parser.add_argument('--sqlite-control', action='store_true', help='Read-only native SQLite comparator; matrix/memory only')
     args = parser.parse_args()
+    if args.sqlite_control and args.phase not in ('matrix', 'memory'):
+        parser.error('--sqlite-control supports only matrix/memory phases')
     prefix = ROOT / args.prefix
     report = lambda suffix: Path(f'{prefix}-{suffix}')
     if report('design.json').exists():
@@ -179,6 +182,10 @@ def main():
                   corpus='same existing first10000, 264842858 text bytes; no generation/reset/repack/copy',
                   limits='No concurrent load, true cold cache or hardware/power isolation. Matrix oracle memory excluded from engine memory claims. Diagnostic spans nest; never sum as exclusive elapsed time.',
                   orders=[])
+    design['control_engine'] = 'sqlite' if args.sqlite_control else 'fdb'
+    if args.sqlite_control:
+        design['validation'] = 'FDB strict source/index open and payload CRC/schema/identity; SQLite read-only without full integrity on open. Both full document/version oracle checks outside query timing.'
+        design['sqlite'] = 'Bundled FTS5 trigram/LIKE; FULL-WAL-built existing DB; cache2MiB, mmap0, tempFILE, prepared statement cache64. Different source-integrity and field/link capabilities.'
     write(report('design.json'), design)
     before = snapshot()
     write(report('before.json'), before)
@@ -215,7 +222,11 @@ def main():
                         process.kill()
                         process.wait()
             rows = [json.loads(line) for line in report(f'{variant}-{pair}.jsonl').read_text(encoding='utf-8').splitlines()]
-            assert rows[0]['phase'] == 'opened' and rows[0]['pending_source_checks'] == 0
+            assert rows[0]['phase'] == 'opened'
+            if args.sqlite_control and variant == 'control':
+                assert rows[0]['engine'] == 'sqlite' and not rows[0]['full_integrity_on_open']
+            else:
+                assert rows[0]['engine'] == 'fdb' and rows[0]['pending_source_checks'] == 0
             if args.phase == 'profile':
                 samples = [row for row in rows if row['phase'] == 'selectivity_profile']
                 assert len(samples) == 38 * 3 and all(row['instrumented'] for row in samples)
