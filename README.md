@@ -1,5 +1,15 @@
 # FDB
 
+[SEG05 varsayılan yazıcı geçişi](docs/DEFAULT-SEG05-10K-20261017.md):
+kullanıcı kararıyla yeni native indeksler ikili sözlük ve kaynak referanslarıyla
+yazılır. Commit/flush, birleştirme ve cache onarımı belgeyi indekse kopyalamaz.
+Okunabilir eski indeksler desteklenir; kaynak/WAL/manifest ve0.1 fixture aynı.
+Dört normal çiftte yazma+bakım28,559→25,744s (-%9,86), strict open
+259,443→169,180ms (-%34,79), canlı idx353,7→81,9MB, retained core
+1,521GB→972,7MB. Yeni38-case16 düşük/22 yüksek; akışlı write private
++%1,42, query private düşük. Arama ve genel RAM kapıları açık kalır.
+
+Önceki prototipin tarihsel sonucu:
 [İkili sözlük ve kaynak referansı deneyi](docs/COMPACT-INDEX-10K-20261017.md):
 aynı10k/4 dengeli çiftte strict open260→170ms (-%34,62;4/4), canlı indeks
 353,7→81,9MB;267,8MB belge kopyası çıktı. Query private/WS artmadı.

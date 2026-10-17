@@ -1,0 +1,62 @@
+{
+  "baseline_head": "6336018d71243f595c1edc18859587f0021ad654",
+  "final_normal_code": {
+    "memory": {
+      "frozen": "output/seg05-default-memory-20261017.exe",
+      "final": "target/release/examples/measure_content_memory.exe",
+      "same_text": true,
+      "text_sha256": "872c7c22ca208543c417f62bcface2c1700207f2adbacc2f1d30059c99227efd"
+    },
+    "reads": {
+      "frozen": "output/seg05-default-reads-20261017.exe",
+      "final": "target/release/examples/measure_content_reads.exe",
+      "same_text": true,
+      "text_sha256": "45ece53d1760417cc3dc168372ecb3164037f7e7cccf79c1fa5bbea2f1b36fd1"
+    }
+  },
+  "test_runs": {
+    "tests": {
+      "passed": 147,
+      "failed": 0,
+      "ignored": 6,
+      "suites": 13
+    },
+    "reference-tests": {
+      "passed": 78,
+      "failed": 0,
+      "ignored": 2,
+      "suites": 13
+    },
+    "all-tests": {
+      "passed": 165,
+      "failed": 0,
+      "ignored": 8,
+      "suites": 13
+    }
+  },
+  "clippy_profiles": [
+    "default",
+    "all-features",
+    "no-default-features",
+    "no-default-features+experimental-grouped-read"
+  ],
+  "fmt_check": true,
+  "byte_equal_fixture_sources": [
+    "tests/fixtures/v1/checkpoint.fdb",
+    "tests/fixtures/v1/checkpoint.ready"
+  ],
+  "git_equal_text_files_CRLF_normalized": [
+    "Cargo.toml",
+    "Cargo.lock",
+    "src/manifest.rs",
+    "src/payload.rs",
+    "src/format.rs",
+    "src/format/native_check.rs"
+  ],
+  "data_directories": [
+    "benchmark-work",
+    "rkyv-corpus-20261009"
+  ],
+  "core_files": 122,
+  "final_layout": "normal directly-written SEG05 flag1, byte equal to previous prototype repack; full38-case oracle passed"
+}

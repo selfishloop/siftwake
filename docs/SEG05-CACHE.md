@@ -1,9 +1,11 @@
-# SEG05 türetilmiş indeks deneyi
+# SEG05 türetilmiş indeks
 
-SEG05 yalnız isteğe bağlı cache dönüşümünde üretilir. Normal commit, flush,
-merge ve bozuk cache'i yeniden oluşturma yolu SEG04 üretmeye devam eder.
-FDBLOG04, WAL ve FDBMAN03/ready biçimleri değişmez. `.fdb/.ready` kaynak,
-`.idx` yeniden oluşturulabilir cache olmaya devam eder.
+2026-10-17 kullanıcı kararıyla SEG05 flag1, normal `bounded-engine` profilinde
+yeni native Run indekslerinin varsayılan biçimidir. Normal commit/flush,
+merge ve eksik/bozuk native cache onarımı doğrudan kaynak referansı üretir;
+önce SEG04 yazıp sonra dönüştürmez. Okunabilir eski cache açılışta yeniden
+yazılmaz. FDBLOG04, WAL ve FDBMAN03/ready biçimleri değişmez. `.fdb/.ready`
+kaynak, `.idx` yeniden oluşturulabilir cache olmaya devam eder.
 
 `bounded-engine` okuyucusu SEG03/04/05 karışımını kabul eder. SEG05 desteği
 olmayan okuyucu bilinmeyen cache'i kaynak replay'iyle kendi desteklediği
@@ -53,7 +55,7 @@ ve kayıt sayısından büyük olamaz.
 Tam kaynak CRC/frame/schema/UTF-8/key/link/version kontrolü normal açılışta
 indeks kabulünden önce tamamlanır. İndeksin tam prefix CRC'si ve footer CRC'si
 kontrol edilir. İkili directory akışla tamamen taranır; kayıt/terim sırası,
-uzunluklar, sürümler ve alan sınırları doğrulanır. Bu deneme bütün dictionary
+uzunluklar, sürümler ve alan sınırları doğrulanır. Bu biçim bütün dictionary
 tarama maliyetini kaldırmaz; JSON ayrıştırmasını değiştirir.
 
 MET04 kayıt sayfaları bağımsız directory doğrulamasıyla karşılaştırılır;
@@ -74,6 +76,19 @@ komşu istek görülmeden read-ahead başlamaz. Her kayıt aralıktan ayrı dili
 ve doğrulanır. Arama sözcüklerine özel durum eklenmez.
 
 ## Dönüştürme ve kurtarma
+
+Normal native builder, tam doğrulamalı kaynak ziyaretçisinden gerçek entry
+adresini/uzunluğunu ve payload CRC'sini alır. Son toplam kaynak CRC kontrolü
+geçmeden türetilmiş cache yayımlanamaz. Flush/merge posting reuse yolunda
+title/text/fields/links nesnesi kurulmaz; metadata ve adres yeterlidir.
+Eksik cache'in tam yeniden indekslemesinde belge terimleri için bir belge
+çözülür. Kayıt ve posting geçici spool'ları mevcut checksum'lı JSON çerçevelerini
+kullanmaya devam eder; her biri tek girişle okunup ikili dictionary'ye yazılır.
+Kalıcı JSON dictionary ve indeks içindeki belge kopyası üretilmez; resident
+adres tablosu eklenmez. `--no-default-features` temel yazıcısı SEG04 kalır.
+
+Aşağıdaki API, mevcut cache'ler için açıkça seçilen dönüşümdür; yeni normal
+yazmada bu çağrı gerekmez.
 
 ```rust,ignore
 use fdb::{Database, IndexCacheLayout};
@@ -96,8 +111,10 @@ normal açılışta yeniden indekslenir. Kaynak/ready yayını yapılmaz.
 
 Kesilme/tek-byte bozulması, CRC'si yeniden hesaplanmış geçersiz metadata,
 silme/merge, eski biçime dönüş ve cache değişiminin üç aşamasında process kill
-test edilir. Process kill elektrik kesintisi değildir. Repack'in tepe belleği,
-normal yazma hızı, soğuk/eşzamanlı yük ve otomatik SEG05 builder geçişi bu
-deneyin ölçülmüş sonuçları değildir.
+test edilir. Varsayılan builder için de sync edilmiş geçici dosya, hedefin
+kaldırılması ve rename sonrası süreç sonlandırılır; kaynak/ready değişmeden
+yeniden açılır. Process kill elektrik kesintisi değildir. Repack'in kendi
+tepe belleği, gerçek soğuk/eşzamanlı yük bu testlerle ölçülmüş sayılmaz.
 
-[Ölçüm, karar ve açık sınırlar](COMPACT-INDEX-10K-20261017.md).
+[İlk deneyin ölçümü ve açık sınırları](COMPACT-INDEX-10K-20261017.md),
+[varsayılan yazıcı geçişi](DEFAULT-SEG05-10K-20261017.md).

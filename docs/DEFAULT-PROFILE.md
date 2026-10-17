@@ -51,8 +51,12 @@ ilk search bütün pending kaynakları doğrular. Hızlı açılışın karşıl
 ertelenmiş doğrulamaya sahip API'ler normal `open` yerine otomatik seçilmez.
 
 `.fdb` ve `.ready` kaynağı, `.idx` ve yardımcı cache'lerin türetilmiş olma
-kuralı değişmedi. Yeni kalıcı biçim veya veri taşıma yoktur. Eski JSON ve
-0.1 kaynak uyumluluğu mevcut okuyucu testleriyle korunur; fixture değiştirilmez.
+kuralı değişmedi. Yeni native indeksler artık SEG05 ikili sözlük ve kaynak
+referanslarıyla yazılır: belge indekse kopyalanmaz. Flush, merge ve cache
+onarımı aynı yolu kullanır. Okunabilir SEG03/04 cache açılışta korunur;
+kaynak, WAL ve manifest biçimleri değişmez. Eski JSON/0.1 kaynak uyumluluğu
+korunur; fixture değiştirilmez. [Biçim ve kurtarma](SEG05-CACHE.md),
+[geçiş doğrulaması](DEFAULT-SEG05-10K-20261017.md).
 
 ## Derleme seçenekleri ve uyumluluk
 

@@ -1,5 +1,8 @@
 # İkili sözlük ve kaynak referansı — aynı10k
 
+Bu belge isteğe bağlı prototipin tarihsel ölçümüdür. Sonraki kullanıcı kararı
+ve doğrudan varsayılan yazıcı uygulaması [yeni geçiş raporundadır](DEFAULT-SEG05-10K-20261017.md).
+
 İki hedefte ölçülmüş kazanç var: JSON directory yerine sürümlü ikili
 directory, ardından payload kopyası yerine değişmez FDBLOG04 adresleri.
 Son normal derlemede strict open260,075→170,024ms (-%34,62;4/4 hızlı).

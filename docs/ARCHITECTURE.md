@@ -1,5 +1,16 @@
 # FDB mimarisi — 0.3.1
 
+2026-10-17 kullanıcı onayıyla SEG05 flag1 varsayılan native Run yazıcısıdır.
+Flush/delta posting reuse, merge ve eksik/bozuk cache yeniden indekslemesi,
+doğrulanmış FDBLOG04 entry adreslerini doğrudan dictionary'ye taşır. Önce
+kopyalı SEG04 üretip dönüştürmez. Reuse sırasında tam belge nesnesi kurulmaz;
+tam yeniden indeksleme terim çıkarmak için tek belgeyi çözer. Kayıt/posting
+spool'ları checksum'lı ve akışlıdır; nihai directory ikilidir. Tam kaynak CRC
+geçmeden builder yayımlanmaz. Sağlam eski cache'ler otomatik yazılmaz;
+Legacy kaynaklar ve no-default temel profil SEG04 yolunu korur. WAL/manifest/
+kaynak/payload biçimleri aynı. [Güncel geçiş ve sınırlar](DEFAULT-SEG05-10K-20261017.md).
+
+Önceki prototip ve ölçüm geçmişi:
 2026-10-17 isteğe bağlı SEG05 cache prototipi: typed binary directory ve
 FDBLOG04 source entry referansları; yeni kaynak/WAL/manifest/payload biçimi
 yok. Normal builder/onarım/merge SEG04 kalır. CRC/schema/identity ve source

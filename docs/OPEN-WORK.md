@@ -1,5 +1,19 @@
 # FDB açık işler
 
+Kullanıcı kararı: SEG05 flag1 yeni native indekslerde varsayılan. Commit/
+flush, merge ve cache onarımı gerçek kaynak entry adresini doğrudan yazar;
+önce kopyalı SEG04 oluşturulmaz. Okunabilir eski cache'ler korunur, kaynak/
+WAL/manifest/0.1 fixture değişmez. Default147/reference78/all165 test,
+fmt ve üç profil Clippy temiz. Yeni4 çiftte yazma+bakım28,559→25,744s
+(-%9,86), strict open259,443→169,180ms (-%34,79), canlı indeks353,7→
+81,9MB, retained core1,521GB→972,7MB. Ayrı query private8,883→8,766MiB;
+akışlı write private10,156→10,301MiB (+%1,42;4/4 yüksek).38-case16 düşük/
+22 yüksek p95; arama ve genel RAM kapısı kapanmadı. Yeni Run'ın son
+kabulündeki sahipli replay tekrarı, geçici JSON spool maliyeti, normal Vec
+RAM'i, eski nesiller ve concurrent/
+gerçek-cold açık. [Geçiş raporu](DEFAULT-SEG05-10K-20261017.md).
+
+Önceki isteğe bağlı prototipin tarihsel sonucu:
 Son SEG05 deneyi: JSON dictionary73→41ms (kopya korunurken instrumented),
 source referansıyla267.849.329B payload kopyası çıkarıldı. Son normal4 çiftte
 strict open260,075→170,024ms (-%34,62;4/4), ilk kullanım264,784→173,884ms.
@@ -94,7 +108,7 @@ deneysel profilde tutulur; genel/default kabul kapısı geçmedi.
 
 | İş | Durum / kapanış kanıtı |
 |---|---|
-| JSON sözlük ve indeksteki267,8MB belge kopyası | İsteğe bağlı SEG05 uygulandı/ölçüldü; normal4 çiftte open-%34,62 ve4/4 hızlı, canlı indeks353,7→81,9MB, ayrı query private/WS4/4 düşük. Tam kaynak/indeks/payload doğrulaması sürer. Kaynak başlıkları nedeniyle kaybolan read-ahead sayaçlarla bulunup düzeltildi:10000→1104 read,10k CRC/schema aynı. Son38-case32/5/1, yoğun8 sayfa5/3; artışlar açık, genel/default kapısı geçmedi. Normal builder/onarım/merge SEG04; source adresini streamed builder'a taşıma ve yazma/bakım ölçümü bekliyor. Eski okuyucu SEG05'i SEG04'e yeniden kurdu/38-case doğruladı;133 sabit-slot dosyası byte-eşit, fixture/kaynak/corpus aynı. Vec RAM/disk-retention/concurrent/cold açık. [Kanıt/karar](COMPACT-INDEX-10K-20261017.md) |
+| JSON sözlük ve indeksteki267,8MB belge kopyası | SEG05 flag1 kullanıcı kararıyla native default yazıcıya taşındı: commit/flush, merge ve cache onarımı doğrudan kaynak adresi yazar, payload kopyası üretmez. Eski okunabilir SEG03/04 korunur; kaynak/WAL/manifest/fixture aynı. Varsayılan ve referans/all-feature testleri, kesilme/bozulma ve builder/repack kill kontrolleri geçti. Yeni4 çiftte write+bakım-%9,86 ve open-%34,79; canlı idx353,7→81,9MB, retained core1,521GB→972,7MB. Yeni38-case16/22; write private +%1,42/4 çift yüksek, query private düşük. Önceki yoğun sayfa artışları da açık.72 kaynak/ready ve prototip wire karşılaştırmasında122 core dosya hash-eşit. Yazma/kabul tekrarları, RAM/disk-retention ve concurrent/cold açık. [Güncel geçiş/ölçüm](DEFAULT-SEG05-10K-20261017.md), [ilk prototip](COMPACT-INDEX-10K-20261017.md) |
 | İndeks açılışında checksum okuma ve hazırlığı azalt | Dar okuma adımı ölçüldü: indekse özel max1MiB exact reads; bütün indeks CRC'si ve diğer doğrulamalar tam, kaynak/WAL ve sözlük algoritmaları aynı. İki4-çift seride ilk kullanım -%4,20/-6,18;8/8 hızlı. Yalnız open kazancı oturumlara bağlı%1–8. Yoğun8 sayfanın p95'i düşük; genel arama kapısı değil. Ayrı query/get tepesinde artış yok; Vec ve concurrent RAM ölçülmedi. COW/reuse prototipi %5–10 arama artışıyla geri alındı. Hazırlık maliyeti ve genel açılış işi açık. [Son rapor](INDEX-OPEN-10K-20261017.md) |
 | Tam doğrulamalı açılışta kaynak tarama ve belge hazırlığını azalt | Dar kaynak adımı ölçüldü:4 dengeli normal release çiftinde430,303→270,116ms (-%37,23;4/4), pending0; ilk kullanım toplamı423,924→281,714ms. Frame+source CRC, UTF-8/schema/key/link/version/sınırlar ve source lease sürer. Sağlam cache yoksa önceki builder yolu, WAL/0.1 kaynaklar aynı. Query/get peak private9,197→8,637MiB; bu Vec ingest veya toplam sistem RAM'i değildir. Son38-case23 düşük/15 yüksek; genel arama garantisi yok. İndeks CRC/directory maliyeti ve genel açılış işi açık; SQLite normal open seviyesine ulaşılmadı. [Rapor ve ham kanıt](STRICT-OPEN-10K-20261017.md) |
 | Varsayılan FDB'yi SQLite ile aynı10k'da yeniden karşılaştır | Tamamlandı, kapsam sınırlı:4 dengeli streamed ve2 Vec yazma çifti;38-case ve256 get için4 dengeli okuma çifti;4 opening ve2 oracle'sız query/idle memory çifti. Streamed toplam23,598/34,509s;38/38 p95 ve bütün durumlarda4/4 FDB hızlı. Query private9,189/12,740MiB; normal Vec78,912/8,402MiB, strict open433,686/1,535ms ve retained disk2,61 kat. İlk iki SQLite write süresi yüksekliği ayrıştırılmadı; SQL prepared cache64, FTS5/LIKE/native3.53.2; validator3.53.1. Kaynak/fixture/corpus/hash/10k payload/FTS integrity aynı. Motor, storage, protokol değişmedi; eski/yeni arama regresyonları ve genel kapılar bu kıyasla kapanmaz. [Rapor](SQLITE-DEFAULT-COMPARISON-10K-20261016.md) |

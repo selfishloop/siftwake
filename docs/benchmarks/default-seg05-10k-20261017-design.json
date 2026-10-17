@@ -1,0 +1,33 @@
+{
+  "pairs": 4,
+  "orders": [
+    "control/fdb",
+    "fdb/control",
+    "fdb/control",
+    "control/fdb"
+  ],
+  "input": "same first10000 existing CRC-checked corpus records;500/transaction;20 transactions; synced WAL",
+  "input_api": "commit_streamed(iterator)",
+  "cache": "warm OS cache; fresh processes; no eviction; untimed strict first-use before timed reads",
+  "validation": "full source/frame/index CRC, schema, versions, directory/page checks; pending0",
+  "writes": "only owned fixed FDB slot reset for ingest; no corpus generation, DB copies or SQLite writes",
+  "reads": "same38-case full payload/version oracle; common, rare, two-character, AND, negative and page queries; separate oracle-free24search/771get memory",
+  "affinity": "read probes mask4; ingest not pinned; no hardware or power isolation",
+  "diagnostics": false,
+  "executables": [
+    {
+      "variant": "control",
+      "writer": "output/compact-cache-memory-20261017.exe",
+      "writer_sha256": "FFFDFFB9D0288B40C96E18D491B37964C3A63F02A21C5587BB578EA1F558E039",
+      "reader": "output/compact-cache-window-reads-20261017.exe",
+      "reader_sha256": "7B00C5E0085D33B0FD029476D2F6EC03EB3BF0AED8527BB9B3ECBC22B5084E8D"
+    },
+    {
+      "variant": "fdb",
+      "writer": "output/seg05-default-memory-20261017.exe",
+      "writer_sha256": "83084BA0196B490CC760B92564085A819FF1AEC5D5D54F99E8048F956C6E9FCA",
+      "reader": "output/seg05-default-reads-20261017.exe",
+      "reader_sha256": "1B5F45A38442978A0EE9A3D805D4707412E81A641A59D0157A8B2CD00EBF748A"
+    }
+  ]
+}
