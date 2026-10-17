@@ -14,6 +14,7 @@ use std::sync::atomic::{AtomicU64, Ordering};
 mod payload_bench;
 
 pub(crate) mod block_check;
+mod checksum;
 #[cfg(feature = "bounded-engine")]
 mod covering;
 #[cfg(feature = "bounded-engine")]
@@ -1106,9 +1107,7 @@ impl DiskIndex {
         } else {
             #[cfg(feature = "diagnostic-timing")]
             let _span = crate::timing::span("open.index_crc");
-            if prefix_crc(&mut file, size - FOOTER_SIZE)? != expected {
-                return Err(Error::Corrupt("segment checksum mismatch".into()));
-            }
+            checksum::check(&mut file, size - FOOTER_SIZE, expected)?;
         }
         #[cfg(feature = "experimental-streaming-metadata")]
         if streamed {

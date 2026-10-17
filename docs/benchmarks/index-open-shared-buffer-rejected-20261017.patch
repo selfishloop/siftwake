@@ -1,0 +1,108 @@
+diff --git a/src/format.rs b/src/format.rs
+index ea3bb52..c23c61b 100644
+--- a/src/format.rs
++++ b/src/format.rs
+@@ -155,18 +155,32 @@ pub(crate) fn crc_combine(mut left: u32, right: u32, mut right_len: u64) -> u32
+ }
+ 
+ pub(crate) fn prefix_crc(file: &mut File, end: u64) -> Result<u32> {
++    prefix_crc_with_buffer(file, end, &mut [0; 65536])
++}
++
++pub(crate) fn prefix_crc_with_buffer(file: &mut File, end: u64, buffer: &mut [u8]) -> Result<u32> {
++    if buffer.is_empty() {
++        return Err(Error::Invalid("empty checksum buffer".into()));
++    }
+     file.seek(SeekFrom::Start(0))?;
+     let mut input = file.take(end);
+-    let mut buffer = [0; 65536];
+     let mut state = !0;
+     let mut size = 0u64;
+     loop {
+-        let n = input.read(&mut buffer)?;
++        let n = {
++            #[cfg(feature = "diagnostic-timing")]
++            let _read = crate::timing::span("checksum.prefix_read");
++            input.read(buffer)?
++        };
+         if n == 0 {
+             break;
+         }
+         size += n as u64;
+-        state = crc_extend(state, &buffer[..n]);
++        {
++            #[cfg(feature = "diagnostic-timing")]
++            let _crc = crate::timing::span("checksum.prefix_compute");
++            state = crc_extend(state, &buffer[..n]);
++        }
+     }
+     if size != end {
+         return Err(Error::Corrupt("truncated checkpoint".into()));
+@@ -713,6 +727,49 @@ fn replay_impl(
+ #[cfg(test)]
+ mod crc_tests {
+     use super::*;
++    #[test]
++    fn checksum_buffers_preserve_prefix_bounds_crc_and_truncation() {
++        struct Temp(std::path::PathBuf);
++        impl Drop for Temp {
++            fn drop(&mut self) {
++                let _ = std::fs::remove_file(&self.0);
++            }
++        }
++        let temp = Temp(std::env::temp_dir().join(format!(
++                "fdb-crc-buffer-{}-{}",
++                std::process::id(),
++                std::time::SystemTime::now()
++                    .duration_since(std::time::UNIX_EPOCH)
++                    .unwrap()
++                    .as_nanos()
++            )));
++        let bytes: Vec<u8> = (0..1024 * 1024 + 67)
++            .map(|n| ((n * 71) % 256) as u8)
++            .collect();
++        std::fs::write(&temp.0, &bytes).unwrap();
++        let mut file = File::open(&temp.0).unwrap();
++        for size in [1, 31, 65536, 1024 * 1024] {
++            let mut buffer = vec![0; size];
++            for end in [0, 1, 127, 1023, 65537, 1024 * 1024, bytes.len()] {
++                if size < 64 && end > 1023 {
++                    continue;
++                }
++                assert_eq!(
++                    prefix_crc_with_buffer(&mut file, end as u64, &mut buffer).unwrap(),
++                    crc32fast::hash(&bytes[..end])
++                );
++            }
++        }
++        assert!(matches!(
++            prefix_crc_with_buffer(&mut file, bytes.len() as u64 + 1, &mut [0; 65536]),
++            Err(Error::Corrupt(_))
++        ));
++        assert!(matches!(
++            prefix_crc_with_buffer(&mut file, 1, &mut []),
++            Err(Error::Invalid(_))
++        ));
++        assert_eq!(std::fs::read(&temp.0).unwrap(), bytes);
++    }
+     #[cfg(not(feature = "experimental-streaming-open"))]
+     #[test]
+     fn native_validation_handles_large_small_growing_and_empty_frames() {
+diff --git a/src/segment.rs b/src/segment.rs
+index 004b5a6..2e68705 100644
+--- a/src/segment.rs
++++ b/src/segment.rs
+@@ -1106,7 +1106,12 @@ impl DiskIndex {
+         } else {
+             #[cfg(feature = "diagnostic-timing")]
+             let _span = crate::timing::span("open.index_crc");
+-            if prefix_crc(&mut file, size - FOOTER_SIZE)? != expected {
++            // A transient buffer reduces ReadFile calls on the full index scan.
++            // It is dropped before metadata parsing or query caches are built.
++            let mut buffer = vec![0; (size - FOOTER_SIZE).min(1024 * 1024) as usize];
++            if crate::format::prefix_crc_with_buffer(&mut file, size - FOOTER_SIZE, &mut buffer)?
++                != expected
++            {
+                 return Err(Error::Corrupt("segment checksum mismatch".into()));
+             }
+         }

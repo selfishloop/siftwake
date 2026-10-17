@@ -1,0 +1,361 @@
+{
+  "design": {
+    "pairs": 4,
+    "orders": [
+      "control/fdb",
+      "fdb/control",
+      "control/fdb",
+      "fdb/control"
+    ],
+    "cache": "fresh processes, warm OS cache; no eviction",
+    "modes": [
+      "strict",
+      "strict-first",
+      "record-first"
+    ],
+    "explicit_untimed_warmup": true,
+    "query_memory_pairs": 2,
+    "first_query": "quixote; exact total56, first50 and repeated full page; get9999 version20",
+    "strict": "Database::open with full source verification; no query",
+    "strict_first": "normal strict open then get9999 and first/warm quixote",
+    "record_first": "explicit open_record_reads; first get and first search include required checks",
+    "diagnostic_timing": false
+  },
+  "modes": {
+    "strict": {
+      "rows": {
+        "control": [
+          {
+            "open_ms": 280.17150000000004
+          },
+          {
+            "open_ms": 277.1908
+          },
+          {
+            "open_ms": 300.6221
+          },
+          {
+            "open_ms": 286.91889999999995
+          }
+        ],
+        "fdb": [
+          {
+            "open_ms": 278.4479
+          },
+          {
+            "open_ms": 266.809
+          },
+          {
+            "open_ms": 285.04049999999995
+          },
+          {
+            "open_ms": 291.54780000000005
+          }
+        ]
+      },
+      "medians": {
+        "control": {
+          "open_ms": 283.5452
+        },
+        "fdb": {
+          "open_ms": 281.7442
+        }
+      },
+      "changes_percent": {
+        "open_ms": -0.6351720995453447
+      },
+      "paired_changes_percent": {
+        "open_ms": [
+          -0.6151946218655446,
+          -3.745362400195096,
+          -5.183118606383241,
+          1.6133130302674825
+        ]
+      },
+      "lower_pairs": {
+        "open_ms": 3
+      }
+    },
+    "strict-first": {
+      "rows": {
+        "control": [
+          {
+            "open_ms": 274.14480000000003,
+            "first_get_ms": 0.0958,
+            "first_search_ms": 4.379499999999999,
+            "warm_search_ms": 2.3476,
+            "open_get_search_ms": 278.62010000000004
+          },
+          {
+            "open_ms": 277.3554,
+            "first_get_ms": 0.0833,
+            "first_search_ms": 4.5032,
+            "warm_search_ms": 2.3411,
+            "open_get_search_ms": 281.9419
+          },
+          {
+            "open_ms": 271.2585,
+            "first_get_ms": 0.0838,
+            "first_search_ms": 4.582400000000001,
+            "warm_search_ms": 2.1947,
+            "open_get_search_ms": 275.92470000000003
+          },
+          {
+            "open_ms": 270.44669999999996,
+            "first_get_ms": 0.088,
+            "first_search_ms": 4.584300000000001,
+            "warm_search_ms": 2.2139,
+            "open_get_search_ms": 275.11899999999997
+          }
+        ],
+        "fdb": [
+          {
+            "open_ms": 277.8079,
+            "first_get_ms": 0.09179999999999999,
+            "first_search_ms": 4.8914,
+            "warm_search_ms": 2.6633,
+            "open_get_search_ms": 282.7911
+          },
+          {
+            "open_ms": 289.1977,
+            "first_get_ms": 0.08610000000000001,
+            "first_search_ms": 5.2807,
+            "warm_search_ms": 3.8176,
+            "open_get_search_ms": 294.5645
+          },
+          {
+            "open_ms": 261.90360000000004,
+            "first_get_ms": 0.08739999999999999,
+            "first_search_ms": 4.3386,
+            "warm_search_ms": 2.1841999999999997,
+            "open_get_search_ms": 266.3296
+          },
+          {
+            "open_ms": 271.197,
+            "first_get_ms": 0.1197,
+            "first_search_ms": 4.4543,
+            "warm_search_ms": 2.3274,
+            "open_get_search_ms": 275.771
+          }
+        ]
+      },
+      "medians": {
+        "control": {
+          "open_ms": 272.70165000000003,
+          "first_get_ms": 0.0859,
+          "first_search_ms": 4.5428,
+          "warm_search_ms": 2.2775,
+          "open_get_search_ms": 277.27240000000006
+        },
+        "fdb": {
+          "open_ms": 274.50245,
+          "first_get_ms": 0.08959999999999999,
+          "first_search_ms": 4.67285,
+          "warm_search_ms": 2.49535,
+          "open_get_search_ms": 279.28105
+        }
+      },
+      "changes_percent": {
+        "open_ms": 0.6603553737206891,
+        "first_get_ms": 4.307334109429539,
+        "first_search_ms": 2.8627718587655338,
+        "warm_search_ms": 9.56531284302966,
+        "open_get_search_ms": 0.7244320026082329
+      },
+      "paired_changes_percent": {
+        "open_ms": [
+          1.3361916768072968,
+          4.26972036599973,
+          -3.448702989952379,
+          0.2774298965378508
+        ],
+        "first_get_ms": [
+          -4.175365344467641,
+          3.3613445378151363,
+          4.2959427207637235,
+          36.02272727272728
+        ],
+        "first_search_ms": [
+          11.688548921109732,
+          17.265500088825746,
+          -5.320356145251425,
+          -2.835765547629976
+        ],
+        "warm_search_ms": [
+          13.447776452547288,
+          63.068642945623864,
+          -0.4784252973071723,
+          5.126699489588504
+        ],
+        "open_get_search_ms": [
+          1.4970204949319665,
+          4.477021684254812,
+          -3.4774342420232807,
+          0.2369883577651999
+        ]
+      },
+      "lower_pairs": {
+        "open_ms": 1,
+        "first_get_ms": 1,
+        "first_search_ms": 2,
+        "warm_search_ms": 1,
+        "open_get_search_ms": 1
+      }
+    },
+    "record-first": {
+      "rows": {
+        "control": [
+          {
+            "open_ms": 165.9593,
+            "first_get_ms": 0.1735,
+            "first_search_ms": 241.0458,
+            "warm_search_ms": 2.1370999999999998,
+            "open_get_search_ms": 407.1786
+          },
+          {
+            "open_ms": 168.006,
+            "first_get_ms": 0.1931,
+            "first_search_ms": 242.7258,
+            "warm_search_ms": 1.9569,
+            "open_get_search_ms": 410.9249
+          },
+          {
+            "open_ms": 171.08290000000002,
+            "first_get_ms": 0.1714,
+            "first_search_ms": 270.97130000000004,
+            "warm_search_ms": 2.1925999999999997,
+            "open_get_search_ms": 442.2256000000001
+          },
+          {
+            "open_ms": 169.3692,
+            "first_get_ms": 0.22010000000000002,
+            "first_search_ms": 256.73990000000003,
+            "warm_search_ms": 2.0886,
+            "open_get_search_ms": 426.3292
+          }
+        ],
+        "fdb": [
+          {
+            "open_ms": 156.13569999999999,
+            "first_get_ms": 0.2154,
+            "first_search_ms": 247.53810000000001,
+            "warm_search_ms": 2.5547,
+            "open_get_search_ms": 403.88919999999996
+          },
+          {
+            "open_ms": 164.8802,
+            "first_get_ms": 0.1806,
+            "first_search_ms": 249.10399999999998,
+            "warm_search_ms": 2.0842,
+            "open_get_search_ms": 414.1648
+          },
+          {
+            "open_ms": 165.7191,
+            "first_get_ms": 0.1952,
+            "first_search_ms": 251.3455,
+            "warm_search_ms": 2.5505,
+            "open_get_search_ms": 417.2598
+          },
+          {
+            "open_ms": 156.8251,
+            "first_get_ms": 0.16440000000000002,
+            "first_search_ms": 245.8533,
+            "warm_search_ms": 2.4047,
+            "open_get_search_ms": 402.8428
+          }
+        ]
+      },
+      "medians": {
+        "control": {
+          "open_ms": 168.6876,
+          "first_get_ms": 0.1833,
+          "first_search_ms": 249.73285,
+          "warm_search_ms": 2.11285,
+          "open_get_search_ms": 418.62705
+        },
+        "fdb": {
+          "open_ms": 160.85264999999998,
+          "first_get_ms": 0.1879,
+          "first_search_ms": 248.32105,
+          "warm_search_ms": 2.4776,
+          "open_get_search_ms": 409.027
+        }
+      },
+      "changes_percent": {
+        "open_ms": -4.644650821992857,
+        "first_get_ms": 2.5095471903982647,
+        "first_search_ms": -0.5653241053389602,
+        "warm_search_ms": 17.263411979080388,
+        "open_get_search_ms": -2.293222571260034
+      },
+      "paired_changes_percent": {
+        "open_ms": [
+          -5.9192826192928205,
+          -1.8605287906384271,
+          -3.135205213379022,
+          -7.406364321257941
+        ],
+        "first_get_ms": [
+          24.149855907781003,
+          -6.473329880890722,
+          13.88564760793467,
+          -25.306678782371648
+        ],
+        "first_search_ms": [
+          2.6933885593526163,
+          2.6277387900256244,
+          -7.242759657572606,
+          -4.240322598863688
+        ],
+        "warm_search_ms": [
+          19.54049880679427,
+          6.50518677500127,
+          16.323086746328585,
+          15.134539883175325
+        ],
+        "open_get_search_ms": [
+          -0.8078518861256656,
+          0.7884409048952934,
+          -5.645489541989457,
+          -5.508982260656792
+        ]
+      },
+      "lower_pairs": {
+        "open_ms": 4,
+        "first_get_ms": 2,
+        "first_search_ms": 2,
+        "warm_search_ms": 0,
+        "open_get_search_ms": 3
+      }
+    }
+  },
+  "memory": {
+    "control": {
+      "peak_private_commit_bytes": 9160704.0,
+      "peak_working_set_bytes": 13215744.0
+    },
+    "fdb": {
+      "peak_private_commit_bytes": 9220096.0,
+      "peak_working_set_bytes": 13320192.0
+    }
+  },
+  "tests": {
+    "default-final": {
+      "log": "docs\\benchmarks\\open-strict-final-tests-default-final-20261017.log",
+      "passed": 154,
+      "ignored_helpers": 4
+    },
+    "reference": {
+      "log": "docs\\benchmarks\\open-strict-final-tests-reference-20261017.log",
+      "passed": 93,
+      "ignored_helpers": 2
+    },
+    "all": {
+      "log": "docs\\benchmarks\\open-strict-final-tests-all-20261017.log",
+      "passed": 173,
+      "ignored_helpers": 6
+    }
+  },
+  "source_cache_hashes_unchanged": true,
+  "scope": "same first10k existing source;strict full validation;warm OS cache;no eviction;no mutations or new corpus;query-memory lifetime peaks exclude OS file cache"
+}

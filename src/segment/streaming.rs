@@ -78,6 +78,8 @@ fn parse_entries(
     paged_terms: bool,
     mut accept: impl FnMut(&Record, &mut Parsed) -> Result<()>,
 ) -> Result<Parsed> {
+    #[cfg(feature = "diagnostic-timing")]
+    let _span = crate::timing::span("open.index_directory_parse");
     let mut input = Input {
         reader,
         scratch: Vec::new(),

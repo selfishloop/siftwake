@@ -314,6 +314,8 @@ pub(in crate::segment) fn prepare(
     offset: u64,
     len: u64,
 ) -> Result<(PagedRecords, super::super::streaming::Parsed)> {
+    #[cfg(feature = "diagnostic-timing")]
+    let _span = crate::timing::span("open.index_metadata_prepare");
     let target = path.with_extension("records04.idx");
     let binding = (size, footer_crc, sequence);
     let validate = |file: &mut File| -> Result<_> {

@@ -1,5 +1,14 @@
 # FDB
 
+[İndeks CRC okuması ve ilk kullanım ölçümü](docs/INDEX-OPEN-10K-20261017.md):
+indekse özel en fazla1MiB exact-read checksum yolu; kaynak/WAL ve sözlük
+algoritmaları aynı. İki ayrı dört-çift seride strict open+ilk get+search
+-%4,20/-%6,18 (8/8 hızlı); yalnız open kazancı%1–8 arasında değişti.
+Yoğun8 sayfanın p95'i düşük, ayrı query/get tepesinde artış yok. Sözlük
+prototipi arama artışı nedeniyle geri alındı; genel kapılar hâlâ açık.
+Son instrumented profilde CRC83,8→78,3ms, toplam indeks156→158ms;
+indeks hazırlığı çözülmüş sayılmaz.
+
 [Tam doğrulamalı açılış iyileştirmesi](docs/STRICT-OPEN-10K-20261017.md):
 aynı mevcut10k/dört dengeli çiftte normal strict open430→270ms (%37 düşük),
 açılış+ilk get+arama424→282ms. Kaynak CRC/schema/version kontrolleri tam,

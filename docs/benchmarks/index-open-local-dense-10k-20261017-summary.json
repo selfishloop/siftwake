@@ -1,0 +1,480 @@
+{
+  "cache": "warm OS cache, no eviction",
+  "processes_per_fdb_variant": 4,
+  "design": {
+    "pairs": 4,
+    "orders": [
+      {
+        "pair": 0,
+        "engines": [
+          "control",
+          "fdb"
+        ]
+      },
+      {
+        "pair": 1,
+        "engines": [
+          "fdb",
+          "control"
+        ]
+      },
+      {
+        "pair": 2,
+        "engines": [
+          "control",
+          "fdb"
+        ]
+      },
+      {
+        "pair": 3,
+        "engines": [
+          "fdb",
+          "control"
+        ]
+      }
+    ],
+    "balanced_first_position": true,
+    "pages_only": true,
+    "strict_open": true,
+    "processor_affinity_mask": 4,
+    "cache": "warm OS cache, no eviction"
+  },
+  "queries": [
+    {
+      "text": "the",
+      "kind": "page",
+      "offset": 0,
+      "limit": 1,
+      "total": 10000,
+      "late_matches": 0,
+      "control": {
+        "n": 800,
+        "per_process_n": [
+          200,
+          200,
+          200,
+          200
+        ],
+        "p50_ms": 0.1514,
+        "p95_ms": 0.2831,
+        "p99_ms": 0.339,
+        "run_p95": [
+          0.2998,
+          0.27290000000000003,
+          0.2828,
+          0.26699999999999996
+        ]
+      },
+      "fdb": {
+        "n": 800,
+        "per_process_n": [
+          200,
+          200,
+          200,
+          200
+        ],
+        "p50_ms": 0.1482,
+        "p95_ms": 0.2676,
+        "p99_ms": 0.3748,
+        "run_p95": [
+          0.26239999999999997,
+          0.2676,
+          0.27690000000000003,
+          0.2672
+        ]
+      },
+      "change_p95_percent": -5.475097138820207,
+      "faster_pairs": 3,
+      "paired_p95_change_percent": [
+        -12.474983322214827,
+        -1.94210333455479,
+        -2.0862800565770723,
+        0.07490636704121645
+      ],
+      "median_paired_p95_change_percent": -2.0141916955659314,
+      "tail_samples_per_process_below_20": false
+    },
+    {
+      "text": "the",
+      "kind": "page",
+      "offset": 0,
+      "limit": 200,
+      "total": 10000,
+      "late_matches": 0,
+      "control": {
+        "n": 800,
+        "per_process_n": [
+          200,
+          200,
+          200,
+          200
+        ],
+        "p50_ms": 5.564,
+        "p95_ms": 7.2155,
+        "p99_ms": 8.286399999999999,
+        "run_p95": [
+          7.928599999999999,
+          7.4945,
+          6.7683,
+          6.6262
+        ]
+      },
+      "fdb": {
+        "n": 800,
+        "per_process_n": [
+          200,
+          200,
+          200,
+          200
+        ],
+        "p50_ms": 5.1192,
+        "p95_ms": 6.795,
+        "p99_ms": 8.5061,
+        "run_p95": [
+          7.1248,
+          6.6734,
+          6.542,
+          7.207599999999999
+        ]
+      },
+      "change_p95_percent": -5.8277319659067235,
+      "faster_pairs": 3,
+      "paired_p95_change_percent": [
+        -10.137981484751402,
+        -10.956034425245187,
+        -3.3435279169067633,
+        8.774259756723302
+      ],
+      "median_paired_p95_change_percent": -6.740754700829083,
+      "tail_samples_per_process_below_20": false
+    },
+    {
+      "text": "the",
+      "kind": "page",
+      "offset": 5000,
+      "limit": 50,
+      "total": 10000,
+      "late_matches": 0,
+      "control": {
+        "n": 800,
+        "per_process_n": [
+          200,
+          200,
+          200,
+          200
+        ],
+        "p50_ms": 1.5590000000000002,
+        "p95_ms": 2.3557,
+        "p99_ms": 3.3807,
+        "run_p95": [
+          2.5136,
+          2.3432,
+          2.2606,
+          2.2033
+        ]
+      },
+      "fdb": {
+        "n": 800,
+        "per_process_n": [
+          200,
+          200,
+          200,
+          200
+        ],
+        "p50_ms": 1.5068,
+        "p95_ms": 2.3134,
+        "p99_ms": 2.6308,
+        "run_p95": [
+          2.3233,
+          2.3432,
+          2.3007,
+          2.199
+        ]
+      },
+      "change_p95_percent": -1.7956446066986431,
+      "faster_pairs": 2,
+      "paired_p95_change_percent": [
+        -7.570814767663892,
+        0.0,
+        1.773865345483494,
+        -0.19516180275043205
+      ],
+      "median_paired_p95_change_percent": -0.09758090137521602,
+      "tail_samples_per_process_below_20": false
+    },
+    {
+      "text": "the",
+      "kind": "page",
+      "offset": 9950,
+      "limit": 50,
+      "total": 10000,
+      "late_matches": 0,
+      "control": {
+        "n": 800,
+        "per_process_n": [
+          200,
+          200,
+          200,
+          200
+        ],
+        "p50_ms": 1.3948999999999998,
+        "p95_ms": 2.105,
+        "p99_ms": 2.5357000000000003,
+        "run_p95": [
+          2.2245,
+          2.2104999999999997,
+          1.9780000000000002,
+          1.9459
+        ]
+      },
+      "fdb": {
+        "n": 800,
+        "per_process_n": [
+          200,
+          200,
+          200,
+          200
+        ],
+        "p50_ms": 1.3599,
+        "p95_ms": 1.9680000000000002,
+        "p99_ms": 2.3070999999999997,
+        "run_p95": [
+          1.9883000000000002,
+          1.9159,
+          2.0078,
+          1.9784999999999997
+        ]
+      },
+      "change_p95_percent": -6.50831353919239,
+      "faster_pairs": 2,
+      "paired_p95_change_percent": [
+        -10.618116430658564,
+        -13.327301515494227,
+        1.50657229524771,
+        1.6753173338814875
+      ],
+      "median_paired_p95_change_percent": -4.555772067705426,
+      "tail_samples_per_process_below_20": false
+    },
+    {
+      "text": "ishmael",
+      "kind": "page",
+      "offset": 130,
+      "limit": 1,
+      "total": 260,
+      "late_matches": 39,
+      "control": {
+        "n": 800,
+        "per_process_n": [
+          200,
+          200,
+          200,
+          200
+        ],
+        "p50_ms": 6.2797,
+        "p95_ms": 8.284400000000002,
+        "p99_ms": 9.6769,
+        "run_p95": [
+          8.8674,
+          8.414100000000001,
+          7.6157,
+          7.8624
+        ]
+      },
+      "fdb": {
+        "n": 800,
+        "per_process_n": [
+          200,
+          200,
+          200,
+          200
+        ],
+        "p50_ms": 6.1773,
+        "p95_ms": 7.7343,
+        "p99_ms": 8.2562,
+        "run_p95": [
+          7.7496,
+          7.3063,
+          7.1567,
+          7.998399999999999
+        ]
+      },
+      "change_p95_percent": -6.640191202742518,
+      "faster_pairs": 3,
+      "paired_p95_change_percent": [
+        -12.605724338588542,
+        -13.165995174766177,
+        -6.027023123284803,
+        1.7297517297517162
+      ],
+      "median_paired_p95_change_percent": -9.316373730936672,
+      "tail_samples_per_process_below_20": false
+    },
+    {
+      "text": "ishmael",
+      "kind": "page",
+      "offset": 60,
+      "limit": 200,
+      "total": 260,
+      "late_matches": 39,
+      "control": {
+        "n": 800,
+        "per_process_n": [
+          200,
+          200,
+          200,
+          200
+        ],
+        "p50_ms": 13.5955,
+        "p95_ms": 17.488500000000002,
+        "p99_ms": 22.1961,
+        "run_p95": [
+          19.1371,
+          17.756,
+          16.1249,
+          16.2835
+        ]
+      },
+      "fdb": {
+        "n": 800,
+        "per_process_n": [
+          200,
+          200,
+          200,
+          200
+        ],
+        "p50_ms": 12.8619,
+        "p95_ms": 16.405900000000003,
+        "p99_ms": 18.8888,
+        "run_p95": [
+          16.8341,
+          15.4944,
+          15.703999999999999,
+          16.491100000000003
+        ]
+      },
+      "change_p95_percent": -6.190353660977211,
+      "faster_pairs": 3,
+      "paired_p95_change_percent": [
+        -12.034216260561948,
+        -12.737102951115109,
+        -2.6102487457286605,
+        1.2749101851567746
+      ],
+      "median_paired_p95_change_percent": -7.322232503145305,
+      "tail_samples_per_process_below_20": false
+    },
+    {
+      "text": "quixote",
+      "kind": "page",
+      "offset": 28,
+      "limit": 10,
+      "total": 56,
+      "late_matches": 8,
+      "control": {
+        "n": 800,
+        "per_process_n": [
+          200,
+          200,
+          200,
+          200
+        ],
+        "p50_ms": 1.7810000000000001,
+        "p95_ms": 2.5398,
+        "p99_ms": 3.0921,
+        "run_p95": [
+          2.7165000000000004,
+          2.4724999999999997,
+          2.2289,
+          2.5102
+        ]
+      },
+      "fdb": {
+        "n": 800,
+        "per_process_n": [
+          200,
+          200,
+          200,
+          200
+        ],
+        "p50_ms": 1.7453,
+        "p95_ms": 2.3213,
+        "p99_ms": 2.6876,
+        "run_p95": [
+          2.3213,
+          2.3053000000000003,
+          2.2895,
+          2.3459000000000003
+        ]
+      },
+      "change_p95_percent": -8.603039609418072,
+      "faster_pairs": 3,
+      "paired_p95_change_percent": [
+        -14.548131787226225,
+        -6.762386248736075,
+        2.7188299161021057,
+        -6.545295195601941
+      ],
+      "median_paired_p95_change_percent": -6.653840722169008,
+      "tail_samples_per_process_below_20": false
+    },
+    {
+      "text": "quixote",
+      "kind": "page",
+      "offset": 57,
+      "limit": 50,
+      "total": 56,
+      "late_matches": 8,
+      "control": {
+        "n": 800,
+        "per_process_n": [
+          200,
+          200,
+          200,
+          200
+        ],
+        "p50_ms": 1.5907,
+        "p95_ms": 2.1944,
+        "p99_ms": 2.7538,
+        "run_p95": [
+          2.4003,
+          2.1932,
+          2.0665,
+          2.1385
+        ]
+      },
+      "fdb": {
+        "n": 800,
+        "per_process_n": [
+          200,
+          200,
+          200,
+          200
+        ],
+        "p50_ms": 1.5522,
+        "p95_ms": 2.0515,
+        "p99_ms": 2.3223,
+        "run_p95": [
+          2.0258,
+          2.0372,
+          1.9802000000000002,
+          2.0774
+        ]
+      },
+      "change_p95_percent": -6.51203062340503,
+      "faster_pairs": 4,
+      "paired_p95_change_percent": [
+        -15.602216389617974,
+        -7.112894400875436,
+        -4.176143237357843,
+        -2.857142857142869
+      ],
+      "median_paired_p95_change_percent": -5.644518819116639,
+      "tail_samples_per_process_below_20": false
+    }
+  ],
+  "lower_p95_cases": 8,
+  "higher_p95_cases": 0,
+  "same_executable_control": false,
+  "interpretation": "Pooled p95 changes and paired process p95 changes describe different distributions; neither case count alone establishes engine regressions or statistical significance."
+}

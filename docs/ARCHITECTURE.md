@@ -1,5 +1,15 @@
 # FDB mimarisi — 0.3.1
 
+2026-10-17 indeks CRC okuması: `segment::checksum` soğuk/ayrı fonksiyonda
+tam prefix'i en fazla1MiB exact-read tamponuyla doğrular. Küçük indeks için
+tampon prefix boyutuyla sınırlıdır; EOF bozuk indeks sayılır ve kaynak
+rebuild yolu korunur. Header/footer/binding, tam CRC, JSON directory/slot/
+sıra ve kaynak doğrulaması aynı. Kaynak/WAL `format::prefix_crc` yolu
+değişmedi; yeni format/feature/bağımlılık yok. İki normal dört-çift seride
+ilk kullanım -%4,20/-%6,18,8/8 hızlı. Büyük sözlük COW/reuse denemesi yoğun
+aramada%5–10 artışla reddedildi; üretimde yok. Geniş arama, Vec RAM, disk,
+concurrent/cold işleri açık. [Son kanıt/sınırlar](INDEX-OPEN-10K-20261017.md).
+
 2026-10-17 normal strict açılış: yayınlanmış FDBLOG04 Run kaynaklarında
 ayrı prefix CRC ve sahipli belge replay'i yerine tek sınırlı doğrulama geçişi.
 Frame CRC'sinden birleştirilen kaynak CRC'si ready checksum'ıyla eşleşir;

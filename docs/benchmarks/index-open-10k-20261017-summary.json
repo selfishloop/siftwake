@@ -1,0 +1,345 @@
+{
+  "design": {
+    "pairs": 4,
+    "orders": [
+      "control/fdb",
+      "fdb/control",
+      "control/fdb",
+      "fdb/control"
+    ],
+    "cache": "fresh processes, warm OS cache; no eviction",
+    "modes": [
+      "strict",
+      "strict-first",
+      "record-first"
+    ],
+    "explicit_untimed_warmup": true,
+    "query_memory_pairs": 2,
+    "first_query": "quixote; exact total56, first50 and repeated full page; get9999 version20",
+    "strict": "Database::open with full source verification; no query",
+    "strict_first": "normal strict open then get9999 and first/warm quixote",
+    "record_first": "explicit open_record_reads; first get and first search include required checks",
+    "diagnostic_timing": false
+  },
+  "modes": {
+    "strict": {
+      "rows": {
+        "control": [
+          {
+            "open_ms": 275.90229999999997
+          },
+          {
+            "open_ms": 277.5856
+          },
+          {
+            "open_ms": 271.73960000000005
+          },
+          {
+            "open_ms": 278.5359
+          }
+        ],
+        "fdb": [
+          {
+            "open_ms": 247.8495
+          },
+          {
+            "open_ms": 251.5861
+          },
+          {
+            "open_ms": 242.07899999999998
+          },
+          {
+            "open_ms": 250.89889999999997
+          }
+        ]
+      },
+      "medians": {
+        "control": {
+          "open_ms": 276.74395
+        },
+        "fdb": {
+          "open_ms": 249.37419999999997
+        }
+      },
+      "changes_percent": {
+        "open_ms": -9.889918099383932
+      },
+      "paired_changes_percent": {
+        "open_ms": [
+          -10.16765717429683,
+          -9.366299980978843,
+          -10.915081938738435,
+          -9.922239826176826
+        ]
+      },
+      "lower_pairs": {
+        "open_ms": 4
+      }
+    },
+    "strict-first": {
+      "rows": {
+        "control": [
+          {
+            "open_ms": 297.71189999999996,
+            "first_get_ms": 0.09129999999999999,
+            "first_search_ms": 4.6948,
+            "warm_search_ms": 2.9372000000000003,
+            "open_get_search_ms": 302.49799999999993
+          },
+          {
+            "open_ms": 316.5109,
+            "first_get_ms": 0.132,
+            "first_search_ms": 5.3313,
+            "warm_search_ms": 2.7959,
+            "open_get_search_ms": 321.9742
+          },
+          {
+            "open_ms": 320.4383,
+            "first_get_ms": 0.09770000000000001,
+            "first_search_ms": 5.8367,
+            "warm_search_ms": 3.8634,
+            "open_get_search_ms": 326.3727
+          },
+          {
+            "open_ms": 323.64369999999997,
+            "first_get_ms": 0.1154,
+            "first_search_ms": 4.9512,
+            "warm_search_ms": 2.9584,
+            "open_get_search_ms": 328.71029999999996
+          }
+        ],
+        "fdb": [
+          {
+            "open_ms": 320.2891,
+            "first_get_ms": 0.2668,
+            "first_search_ms": 7.2736,
+            "warm_search_ms": 3.7119,
+            "open_get_search_ms": 327.8295
+          },
+          {
+            "open_ms": 296.8351,
+            "first_get_ms": 0.0893,
+            "first_search_ms": 4.8464,
+            "warm_search_ms": 2.5022,
+            "open_get_search_ms": 301.7708
+          },
+          {
+            "open_ms": 300.3243,
+            "first_get_ms": 0.1109,
+            "first_search_ms": 5.4597999999999995,
+            "warm_search_ms": 3.201,
+            "open_get_search_ms": 305.895
+          },
+          {
+            "open_ms": 280.9405,
+            "first_get_ms": 0.0956,
+            "first_search_ms": 5.7652,
+            "warm_search_ms": 3.0458,
+            "open_get_search_ms": 286.80129999999997
+          }
+        ]
+      },
+      "medians": {
+        "control": {
+          "open_ms": 318.4746,
+          "first_get_ms": 0.10655,
+          "first_search_ms": 5.141249999999999,
+          "warm_search_ms": 2.9478,
+          "open_get_search_ms": 324.17345
+        },
+        "fdb": {
+          "open_ms": 298.5797,
+          "first_get_ms": 0.10325000000000001,
+          "first_search_ms": 5.6125,
+          "warm_search_ms": 3.1234,
+          "open_get_search_ms": 303.8329
+        }
+      },
+      "changes_percent": {
+        "open_ms": -6.246934606401899,
+        "first_get_ms": -3.0971374941342056,
+        "first_search_ms": 9.166058837831281,
+        "warm_search_ms": 5.9569848700726125,
+        "open_get_search_ms": -6.274588495757438
+      },
+      "paired_changes_percent": {
+        "open_ms": [
+          7.5835732464842875,
+          -6.216468374390893,
+          -6.277027433986526,
+          -13.194509888497752
+        ],
+        "first_get_ms": [
+          192.22343921139102,
+          -32.34848484848485,
+          13.510747185260996,
+          -17.157712305025996
+        ],
+        "first_search_ms": [
+          54.9288574593167,
+          -9.095342599366008,
+          -6.457416005619631,
+          16.440458878655683
+        ],
+        "warm_search_ms": [
+          26.375459621408126,
+          -10.504667548910895,
+          -17.145519490604133,
+          2.954299621416978
+        ],
+        "open_get_search_ms": [
+          8.374104952760032,
+          -6.274850593618986,
+          -6.274329930168799,
+          -12.749524429261871
+        ]
+      },
+      "lower_pairs": {
+        "open_ms": 3,
+        "first_get_ms": 2,
+        "first_search_ms": 2,
+        "warm_search_ms": 2,
+        "open_get_search_ms": 3
+      }
+    },
+    "record-first": {
+      "rows": {
+        "control": [
+          {
+            "open_ms": 200.0827,
+            "first_get_ms": 0.2122,
+            "first_search_ms": 319.5363,
+            "warm_search_ms": 2.2615,
+            "open_get_search_ms": 519.8312
+          },
+          {
+            "open_ms": 195.0528,
+            "first_get_ms": 0.1681,
+            "first_search_ms": 278.9818,
+            "warm_search_ms": 2.7053,
+            "open_get_search_ms": 474.20270000000005
+          },
+          {
+            "open_ms": 183.1223,
+            "first_get_ms": 0.24630000000000002,
+            "first_search_ms": 297.525,
+            "warm_search_ms": 2.7954999999999997,
+            "open_get_search_ms": 480.8936
+          },
+          {
+            "open_ms": 187.8542,
+            "first_get_ms": 0.0896,
+            "first_search_ms": 275.51120000000003,
+            "warm_search_ms": 2.3709,
+            "open_get_search_ms": 463.45500000000004
+          }
+        ],
+        "fdb": [
+          {
+            "open_ms": 173.4929,
+            "first_get_ms": 0.087,
+            "first_search_ms": 309.81370000000004,
+            "warm_search_ms": 2.9068,
+            "open_get_search_ms": 483.3936
+          },
+          {
+            "open_ms": 180.779,
+            "first_get_ms": 0.1103,
+            "first_search_ms": 348.0861,
+            "warm_search_ms": 3.2302,
+            "open_get_search_ms": 528.9754
+          },
+          {
+            "open_ms": 177.05360000000002,
+            "first_get_ms": 0.1032,
+            "first_search_ms": 291.7883,
+            "warm_search_ms": 2.6682,
+            "open_get_search_ms": 468.9451
+          },
+          {
+            "open_ms": 155.6588,
+            "first_get_ms": 0.082,
+            "first_search_ms": 286.0883,
+            "warm_search_ms": 2.3067,
+            "open_get_search_ms": 441.82910000000004
+          }
+        ]
+      },
+      "medians": {
+        "control": {
+          "open_ms": 191.4535,
+          "first_get_ms": 0.19014999999999999,
+          "first_search_ms": 288.2534,
+          "warm_search_ms": 2.5381,
+          "open_get_search_ms": 477.54815
+        },
+        "fdb": {
+          "open_ms": 175.27325000000002,
+          "first_get_ms": 0.09509999999999999,
+          "first_search_ms": 300.80100000000004,
+          "warm_search_ms": 2.7875,
+          "open_get_search_ms": 476.16935
+        }
+      },
+      "changes_percent": {
+        "open_ms": -8.45126884595997,
+        "first_get_ms": -49.98685248488036,
+        "first_search_ms": 4.3529755416588545,
+        "warm_search_ms": 9.82624798077303,
+        "open_get_search_ms": -0.2887248123566222
+      },
+      "paired_changes_percent": {
+        "open_ms": [
+          -13.289404831102337,
+          -7.317915969419564,
+          -3.314014732230852,
+          -17.138504222955874
+        ],
+        "first_get_ms": [
+          -59.0009425070688,
+          -34.38429506246282,
+          -58.09987819732034,
+          -8.482142857142849
+        ],
+        "first_search_ms": [
+          -3.0427215937594343,
+          24.770182140913843,
+          -1.9281404923955914,
+          3.8390816779862114
+        ],
+        "warm_search_ms": [
+          28.534158744196336,
+          19.40265404945847,
+          -4.553747093543182,
+          -2.707832468682758
+        ],
+        "open_get_search_ms": [
+          -7.0095061627697515,
+          11.550482525721595,
+          -2.484645252089024,
+          -4.666235125308827
+        ]
+      },
+      "lower_pairs": {
+        "open_ms": 4,
+        "first_get_ms": 4,
+        "first_search_ms": 2,
+        "warm_search_ms": 2,
+        "open_get_search_ms": 3
+      }
+    }
+  },
+  "memory": {
+    "control": {
+      "peak_private_commit_bytes": 9095168.0,
+      "peak_working_set_bytes": 13211648.0
+    },
+    "fdb": {
+      "peak_private_commit_bytes": 9326592.0,
+      "peak_working_set_bytes": 13428736.0
+    }
+  },
+  "source_cache_hashes_unchanged": true,
+  "scope": "same first10k existing source;strict full validation;warm OS cache;no eviction;no mutations or new corpus;query-memory lifetime peaks exclude OS file cache",
+  "test_scope": "Rejected prototype: no full final suite is claimed; preliminary summary logs referenced baseline tests. Runtime rolled back; helper logs are separate."
+}

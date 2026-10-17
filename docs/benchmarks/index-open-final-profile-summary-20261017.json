@@ -1,0 +1,139 @@
+{
+  "pairs": 4,
+  "balanced_orders": [
+    "control/candidate",
+    "candidate/control",
+    "control/candidate",
+    "candidate/control"
+  ],
+  "cache": "warm OS cache;fresh processes;two untimed warmups",
+  "instrumented": true,
+  "nested_spans_do_not_sum": true,
+  "normal_performance_gate_is_separate": true,
+  "medians": {
+    "control": {
+      "batch.decode_binary": {
+        "calls_median": 1.0,
+        "ms_median": 0.0002
+      },
+      "checksum.prefix_compute": {
+        "calls_median": 5403.0,
+        "ms_median": 26.588099999999997
+      },
+      "checksum.prefix_read": {
+        "calls_median": 5413.0,
+        "ms_median": 56.59015
+      },
+      "disk.read_at": {
+        "calls_median": 1007.0,
+        "ms_median": 2.8953499999999996
+      },
+      "open.index": {
+        "calls_median": 5.0,
+        "ms_median": 155.88625
+      },
+      "open.index_crc": {
+        "calls_median": 5.0,
+        "ms_median": 83.83055
+      },
+      "open.index_directory_parse": {
+        "calls_median": 5.0,
+        "ms_median": 66.9118
+      },
+      "open.index_metadata_prepare": {
+        "calls_median": 5.0,
+        "ms_median": 68.03475
+      },
+      "open.index_term_page_checksums": {
+        "calls_median": 5.0,
+        "ms_median": 2.8133
+      },
+      "open.source_native_check": {
+        "calls_median": 5.0,
+        "ms_median": 95.2476
+      },
+      "open.source_replay": {
+        "calls_median": 5.0,
+        "ms_median": 0.0004
+      },
+      "open.total": {
+        "calls_median": 1.0,
+        "ms_median": 256.4262
+      },
+      "segment.open": {
+        "calls_median": 5.0,
+        "ms_median": 155.88175
+      },
+      "source.frame_crc": {
+        "calls_median": 1.0,
+        "ms_median": 0.0002
+      },
+      "source.frame_read_allocate": {
+        "calls_median": 1.0,
+        "ms_median": 0.01355
+      }
+    },
+    "candidate": {
+      "batch.decode_binary": {
+        "calls_median": 1.0,
+        "ms_median": 0.00025
+      },
+      "checksum.index_compute": {
+        "calls_median": 339.0,
+        "ms_median": 26.98115
+      },
+      "checksum.index_read": {
+        "calls_median": 339.0,
+        "ms_median": 51.3314
+      },
+      "disk.read_at": {
+        "calls_median": 1007.0,
+        "ms_median": 3.25425
+      },
+      "open.index": {
+        "calls_median": 5.0,
+        "ms_median": 158.37715
+      },
+      "open.index_crc": {
+        "calls_median": 5.0,
+        "ms_median": 78.3364
+      },
+      "open.index_directory_parse": {
+        "calls_median": 5.0,
+        "ms_median": 74.23425
+      },
+      "open.index_metadata_prepare": {
+        "calls_median": 5.0,
+        "ms_median": 75.43545
+      },
+      "open.index_term_page_checksums": {
+        "calls_median": 5.0,
+        "ms_median": 3.16295
+      },
+      "open.source_native_check": {
+        "calls_median": 5.0,
+        "ms_median": 104.6453
+      },
+      "open.source_replay": {
+        "calls_median": 5.0,
+        "ms_median": 0.0005
+      },
+      "open.total": {
+        "calls_median": 1.0,
+        "ms_median": 268.21320000000003
+      },
+      "segment.open": {
+        "calls_median": 5.0,
+        "ms_median": 158.37285
+      },
+      "source.frame_crc": {
+        "calls_median": 1.0,
+        "ms_median": 0.0003
+      },
+      "source.frame_read_allocate": {
+        "calls_median": 1.0,
+        "ms_median": 0.01765
+      }
+    }
+  }
+}

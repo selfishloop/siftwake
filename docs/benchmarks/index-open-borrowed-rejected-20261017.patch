@@ -1,0 +1,292 @@
+diff --git a/src/json_stream.rs b/src/json_stream.rs
+index 61681ec..edba652 100644
+--- a/src/json_stream.rs
++++ b/src/json_stream.rs
+@@ -52,6 +52,10 @@ impl<R: BufRead> Input<R> {
+         Ok(())
+     }
+     pub fn value<T: serde::de::DeserializeOwned>(&mut self) -> Result<T> {
++        serde_json::from_slice(self.value_bytes()?).map_err(|e| invalid(&e.to_string()))
++    }
++    /// One bounded, framed value; callers may borrow until the next input use.
++    pub fn value_bytes(&mut self) -> Result<&[u8]> {
+         self.whitespace()?;
+         self.scratch.clear();
+         let first = self.byte()?;
+@@ -129,7 +133,7 @@ impl<R: BufRead> Input<R> {
+                 self.push(byte)?;
+             }
+         }
+-        serde_json::from_slice(&self.scratch).map_err(|e| invalid(&e.to_string()))
++        Ok(&self.scratch)
+     }
+     pub fn array<T: serde::de::DeserializeOwned>(
+         &mut self,
+diff --git a/src/segment/streaming.rs b/src/segment/streaming.rs
+index 92fd0c1..2745d1c 100644
+--- a/src/segment/streaming.rs
++++ b/src/segment/streaming.rs
+@@ -9,6 +9,7 @@ fn corrupt(message: &str) -> Error {
+ }
+ 
+ use crate::json_stream::Input;
++pub(super) mod borrowed_term;
+ 
+ pub(super) struct Parsed {
+     pub records: Vec<PackedRecord>,
+@@ -78,6 +79,8 @@ fn parse_entries(
+     paged_terms: bool,
+     mut accept: impl FnMut(&Record, &mut Parsed) -> Result<()>,
+ ) -> Result<Parsed> {
++    #[cfg(feature = "diagnostic-timing")]
++    let _span = crate::timing::span("open.index_directory_parse");
+     let mut input = Input {
+         reader,
+         scratch: Vec::new(),
+@@ -102,6 +105,7 @@ fn parse_entries(
+     let mut previous = None;
+     let mut postings = Vec::new();
+     let mut previous_term = None;
++    let mut term = Term::Scope(String::new());
+     let mut previous_posting = None;
+     let mut posting_end = None;
+     let mut records_seen = false;
+@@ -151,7 +155,10 @@ fn parse_entries(
+                     loop {
+                         input.whitespace()?;
+                         let start = input.position;
+-                        let (term, posting): (Term, Posting) = input.value()?;
++                        let (borrowed, posting): (borrowed_term::TermRef<'_>, Posting) =
++                            serde_json::from_slice(input.value_bytes()?)
++                                .map_err(|e| corrupt(&e.to_string()))?;
++                        borrowed.assign(&mut term);
+                         if previous_term
+                             .as_ref()
+                             .is_some_and(|previous| previous >= &term)
+@@ -191,7 +198,12 @@ fn parse_entries(
+                         } else {
+                             postings.push((term.clone(), posting));
+                         }
+-                        previous_term = Some(term);
++                        if let Some(previous) = &mut previous_term {
++                            std::mem::swap(previous, &mut term);
++                        } else {
++                            previous_term =
++                                Some(std::mem::replace(&mut term, Term::Scope(String::new())));
++                        }
+                         input.whitespace()?;
+                         match input.byte()? {
+                             b']' => break,
+diff --git a/src/segment/term_pages.rs b/src/segment/term_pages.rs
+index c48e677..670a68b 100644
+--- a/src/segment/term_pages.rs
++++ b/src/segment/term_pages.rs
+@@ -80,7 +80,7 @@ pub(super) fn push_fence(
+         p.len = (end - p.offset) as usize;
+         p.count += 1;
+         p.max_count = p.max_count.max(count);
+-        p.last = term.clone();
++        super::streaming::borrowed_term::copy_owned(term, &mut p.last);
+     }
+     Ok(())
+ }
+@@ -201,6 +201,8 @@ impl Pages {
+         collections: Vec<(String, String)>,
+         bloom: Bloom,
+     ) -> Result<Self> {
++        #[cfg(feature = "diagnostic-timing")]
++        let _span = crate::timing::span("open.index_term_page_checksums");
+         let mut buffer = [0; PAGE_BYTES];
+         for fence in &mut fences {
+             let mut consumed = 0;
+diff --git "a/src\\segment\\streaming\\borrowed_term.rs" "b/src\\segment\\streaming\\borrowed_term.rs"
+new file mode 100644
+index 0000000..42ff40a
+--- /dev/null
++++ "b/src\\segment\\streaming\\borrowed_term.rs"
+@@ -0,0 +1,185 @@
++//! Borrow directory strings from the bounded input entry and recycle order keys.
++//! This is only an opening-time representation; serialized Term is unchanged.
++use super::super::Term;
++use serde::Deserialize;
++use std::borrow::Cow;
++
++#[derive(Deserialize)]
++pub(super) enum TermRef<'a> {
++    Scope(#[serde(borrow)] Cow<'a, str>),
++    Collection(#[serde(borrow)] Cow<'a, str>, #[serde(borrow)] Cow<'a, str>),
++    Exact(
++        #[serde(borrow)] Cow<'a, str>,
++        #[serde(borrow)] Cow<'a, str>,
++        #[serde(borrow)] Cow<'a, str>,
++        #[serde(borrow)] Cow<'a, str>,
++    ),
++    Numeric(
++        #[serde(borrow)] Cow<'a, str>,
++        #[serde(borrow)] Cow<'a, str>,
++        #[serde(borrow)] Cow<'a, str>,
++        i64,
++    ),
++    Gram(#[serde(borrow)] Cow<'a, str>, #[serde(borrow)] Cow<'a, str>),
++    Link(#[serde(borrow)] KeyRef<'a>),
++}
++#[derive(Deserialize)]
++#[serde(deny_unknown_fields)]
++pub(super) struct KeyRef<'a> {
++    #[serde(borrow)]
++    scope: Cow<'a, str>,
++    #[serde(borrow)]
++    collection: Cow<'a, str>,
++    #[serde(borrow)]
++    id: Cow<'a, str>,
++}
++fn copy(value: &str, target: &mut String) {
++    // Oversized legacy exact values remain supported but are not retained.
++    if target.capacity() > 64 * 1024 {
++        *target = String::new();
++    }
++    value.clone_into(target);
++}
++impl TermRef<'_> {
++    pub(super) fn assign(self, target: &mut Term) {
++        match (self, target) {
++            (Self::Scope(s), Term::Scope(a)) => copy(&s, a),
++            (Self::Collection(s, c), Term::Collection(a, b))
++            | (Self::Gram(s, c), Term::Gram(a, b)) => {
++                copy(&s, a);
++                copy(&c, b);
++            }
++            (Self::Exact(s, c, f, v), Term::Exact(a, b, d, e)) => {
++                copy(&s, a);
++                copy(&c, b);
++                copy(&f, d);
++                copy(&v, e);
++            }
++            (Self::Numeric(s, c, f, n), Term::Numeric(a, b, d, e)) => {
++                copy(&s, a);
++                copy(&c, b);
++                copy(&f, d);
++                *e = n;
++            }
++            (Self::Link(k), Term::Link(a)) => {
++                copy(&k.scope, &mut a.scope);
++                copy(&k.collection, &mut a.collection);
++                copy(&k.id, &mut a.id);
++            }
++            (value, target) => *target = value.into_owned(),
++        }
++    }
++    fn into_owned(self) -> Term {
++        match self {
++            Self::Scope(s) => Term::Scope(s.into_owned()),
++            Self::Collection(s, c) => Term::Collection(s.into_owned(), c.into_owned()),
++            Self::Gram(s, c) => Term::Gram(s.into_owned(), c.into_owned()),
++            Self::Exact(s, c, f, v) => Term::Exact(
++                s.into_owned(),
++                c.into_owned(),
++                f.into_owned(),
++                v.into_owned(),
++            ),
++            Self::Numeric(s, c, f, n) => {
++                Term::Numeric(s.into_owned(), c.into_owned(), f.into_owned(), n)
++            }
++            Self::Link(k) => Term::Link(crate::Key {
++                scope: k.scope.into_owned(),
++                collection: k.collection.into_owned(),
++                id: k.id.into_owned(),
++            }),
++        }
++    }
++}
++impl<'a> From<&'a Term> for TermRef<'a> {
++    fn from(term: &'a Term) -> Self {
++        match term {
++            Term::Scope(s) => Self::Scope(s.as_str().into()),
++            Term::Collection(s, c) => Self::Collection(s.as_str().into(), c.as_str().into()),
++            Term::Gram(s, c) => Self::Gram(s.as_str().into(), c.as_str().into()),
++            Term::Exact(s, c, f, v) => Self::Exact(
++                s.as_str().into(),
++                c.as_str().into(),
++                f.as_str().into(),
++                v.as_str().into(),
++            ),
++            Term::Numeric(s, c, f, n) => {
++                Self::Numeric(s.as_str().into(), c.as_str().into(), f.as_str().into(), *n)
++            }
++            Term::Link(k) => Self::Link(KeyRef {
++                scope: k.scope.as_str().into(),
++                collection: k.collection.as_str().into(),
++                id: k.id.as_str().into(),
++            }),
++        }
++    }
++}
++pub(in crate::segment) fn copy_owned(source: &Term, target: &mut Term) {
++    TermRef::from(source).assign(target);
++}
++
++#[cfg(test)]
++mod tests {
++    use super::*;
++    #[test]
++    fn borrowed_schema_matches_every_owned_variant_escaping_and_order_keys() {
++        let mut cases = vec![
++            Term::Scope("şirket".into()),
++            Term::Collection("s".into(), "東京".into()),
++            Term::Exact(
++                "s".into(),
++                "c".into(),
++                "field".into(),
++                "quoted\"\\\n🦀".into(),
++            ),
++            Term::Numeric("s".into(), "c".into(), "n".into(), i64::MIN),
++            Term::Gram("s".into(), "the".into()),
++            Term::Link(crate::Key::new("s", "c", "id")),
++        ];
++        cases.extend(cases.clone());
++        cases.reverse();
++        let mut target = Term::Scope(String::new());
++        for expected in cases {
++            let bytes = serde_json::to_vec(&expected).unwrap();
++            for _ in 0..2 {
++                let value: TermRef<'_> = serde_json::from_slice(&bytes).unwrap();
++                value.assign(&mut target);
++                assert_eq!(target, expected);
++            }
++            let mut second = Term::Gram("old".into(), "old".into());
++            copy_owned(&target, &mut second);
++            assert_eq!(second, expected);
++        }
++        for bad in [
++            r#"{"Gram":["s","abc",0]}"#,
++            r#"{"Unknown":"s"}"#,
++            r#"{"Link":{"scope":"s","collection":"c","id":"i","extra":1}}"#,
++            r#"{"Link":{"scope":"s","collection":"c"}}"#,
++            r#"{"Numeric":["s","c","n",1.5]}"#,
++        ] {
++            assert!(serde_json::from_str::<Term>(bad).is_err());
++            assert!(serde_json::from_str::<TermRef<'_>>(bad).is_err());
++        }
++    }
++    #[test]
++    fn plain_strings_borrow_reuse_capacity_and_release_oversized_values() {
++        let value: TermRef<'_> = serde_json::from_str(r#"{"Gram":["şirket","東京🦀"]}"#).unwrap();
++        assert!(matches!(
++            value,
++            TermRef::Gram(Cow::Borrowed(_), Cow::Borrowed(_))
++        ));
++        let mut target = Term::Gram(String::with_capacity(64), String::with_capacity(64));
++        value.assign(&mut target);
++        let Term::Gram(s, c) = &target else { panic!() };
++        let pointers = (s.as_ptr(), c.as_ptr());
++        TermRef::Gram("s".into(), "abc".into()).assign(&mut target);
++        let Term::Gram(s, c) = &target else { panic!() };
++        assert_eq!(pointers, (s.as_ptr(), c.as_ptr()));
++        target = Term::Exact("s".into(), "c".into(), "f".into(), "x".repeat(256 * 1024));
++        TermRef::Exact("s".into(), "c".into(), "f".into(), "small".into()).assign(&mut target);
++        let Term::Exact(_, _, _, v) = target else {
++            panic!()
++        };
++        assert!(v.capacity() <= 64 * 1024);
++    }
++}

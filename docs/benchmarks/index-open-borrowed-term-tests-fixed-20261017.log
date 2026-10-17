@@ -1,0 +1,13 @@
+   Compiling fdb v0.3.1 (C:\Users\Serkan\Documents\ChatGPT\fdb)
+    Finished `test` profile [unoptimized + debuginfo] target(s) in 6.22s
+     Running unittests src\lib.rs (target\debug\deps\fdb-647b6e7626a49143.exe)
+
+running 6 tests
+test segment::streaming::borrowed_term::tests::plain_strings_borrow_reuse_capacity_and_release_oversized_values ... ok
+test segment::streaming::borrowed_term::tests::borrowed_schema_matches_every_owned_variant_escaping_and_order_keys ... ok
+test segment::streaming::tests::universal_gram_uses_live_count_and_reversed_order_falls_back ... ok
+test segment::streaming::tests::entry_budget_and_order_are_rejected_without_unbounded_scratch ... ok
+test segment::streaming::tests::framing_handles_escapes_boundaries_and_strict_schema ... ok
+test segment::streaming::tests::large_exact_values_remain_compatible_with_existing_seg03 ... ok
+
+test result: ok. 6 passed; 0 failed; 0 ignored; 0 measured; 71 filtered out; finished in 0.02s

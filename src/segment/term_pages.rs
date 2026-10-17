@@ -201,6 +201,8 @@ impl Pages {
         collections: Vec<(String, String)>,
         bloom: Bloom,
     ) -> Result<Self> {
+        #[cfg(feature = "diagnostic-timing")]
+        let _span = crate::timing::span("open.index_term_page_checksums");
         let mut buffer = [0; PAGE_BYTES];
         for fence in &mut fences {
             let mut consumed = 0;

@@ -1,0 +1,93 @@
+{
+  "baseline_commit": "22c8e78852946e4a7b85fbfa415eff77ea80c0ee",
+  "platform": "Windows-11-10.0.26200-SP0",
+  "corpus": {
+    "bytes": 2740862279,
+    "sha256": "11F826FCE3F4AE790FEB9FC6DF9B1169F52C2FD699E89FC4A8A4B77AAA41731B",
+    "documents_used": 10000
+  },
+  "fixture_unchanged": [
+    {
+      "path": "tests/fixtures/v1/checkpoint.fdb",
+      "sha256": "E87667C0FABE64D5A1F59EF86B99F7E612DB755D239B41677DA2ADC24BE7BF57"
+    },
+    {
+      "path": "tests/fixtures/v1/checkpoint.ready",
+      "sha256": "BC82C18F8D5C3A209328BD59B12D828D8922BEC4D26CB4D557FD4A493A4A9C2F"
+    },
+    {
+      "path": "tests/fixtures/v1/README.md",
+      "sha256": "E38173AB6C21108AB3355DA21310FEC5C27A77707E1E168AA16504F8B651380C"
+    }
+  ],
+  "source_checksum_and_json_stream_unchanged": true,
+  "manifest_dependency_features_unchanged": true,
+  "read_series_hashes_unchanged": [
+    "index-open-10k",
+    "index-open-matrix-10k",
+    "index-open-dense-10k",
+    "index-open-buffer-only-10k",
+    "index-open-buffer-only-dense-10k",
+    "index-open-local-10k",
+    "index-open-local-confirm-10k",
+    "index-open-local-dense-10k"
+  ],
+  "fixed_slot_file_count": 134,
+  "current_hashes_match_before": true,
+  "data_directories": [
+    "benchmark-work",
+    "rkyv-corpus-20261009"
+  ],
+  "index_components": [
+    {
+      "path": "run-000000000000000a.idx",
+      "bytes": 70872210,
+      "payload_bytes": 53736140,
+      "posting_bytes": 15436744,
+      "directory_bytes": 1699266,
+      "records": 2000
+    },
+    {
+      "path": "run-0000000000000014.idx",
+      "bytes": 69949707,
+      "payload_bytes": 52960425,
+      "posting_bytes": 15289452,
+      "directory_bytes": 1699770,
+      "records": 2000
+    },
+    {
+      "path": "run-000000000000001e.idx",
+      "bytes": 69894154,
+      "payload_bytes": 52904710,
+      "posting_bytes": 15286692,
+      "directory_bytes": 1702692,
+      "records": 2000
+    },
+    {
+      "path": "run-0000000000000028.idx",
+      "bytes": 71177214,
+      "payload_bytes": 54076980,
+      "posting_bytes": 15396472,
+      "directory_bytes": 1703702,
+      "records": 2000
+    },
+    {
+      "path": "run-0000000000000032.idx",
+      "bytes": 71349296,
+      "payload_bytes": 54171074,
+      "posting_bytes": 15476000,
+      "directory_bytes": 1702162,
+      "records": 2000
+    }
+  ],
+  "component_totals": {
+    "bytes": 353242581,
+    "payload_bytes": 267849329,
+    "posting_bytes": 76885360,
+    "directory_bytes": 8507592,
+    "records": 10000
+  },
+  "scope": "No new corpus, DB reset/copy, source/manifest/protocol changes or SQLite integrity transaction in this task. Full hashes read after all timed series.",
+  "fixed_slot_hashes_unchanged_after_product_cli": true,
+  "normal_reader_text_matches_measured_candidate": true
+}

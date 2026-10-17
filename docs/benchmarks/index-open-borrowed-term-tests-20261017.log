@@ -1,0 +1,33 @@
+   Compiling fdb v0.3.1 (C:\Users\Serkan\Documents\ChatGPT\fdb)
+error[E0308]: arguments to this function are incorrect
+  --> src\segment\streaming\borrowed_term.rs:86:41
+   |
+86 |             Self::Link(k) => Term::Link(crate::Key::new(
+   |                                         ^^^^^^^^^^^^^^^
+87 |                 k.scope.into_owned(),
+   |                 -------------------- expected `&str`, found `String`
+88 |                 k.collection.into_owned(),
+   |                 ------------------------- expected `&str`, found `String`
+89 |                 k.id.into_owned(),
+   |                 ----------------- expected `&str`, found `String`
+   |
+note: associated function defined here
+  --> src\model.rs:15:12
+   |
+15 |     pub fn new(scope: &str, collection: &str, id: &str) -> Self {
+   |            ^^^ -----------  ----------------  --------
+help: consider borrowing here
+   |
+87 |                 &k.scope.into_owned(),
+   |                 +
+help: consider borrowing here
+   |
+88 |                 &k.collection.into_owned(),
+   |                 +
+help: consider borrowing here
+   |
+89 |                 &k.id.into_owned(),
+   |                 +
+
+For more information about this error, try `rustc --explain E0308`.
+error: could not compile `fdb` (lib test) due to 1 previous error

@@ -1,5 +1,19 @@
 # FDB açık işler
 
+Son indeks açılışı adımı: kaynak/WAL ve sözlük yolunu koruyan bağımsız
+exact-read CRC helper'ı. İki ayrı dört dengeli çiftte strict open+ilk
+get+search279,712→267,971ms (-%4,20),282,370→264,915ms (-%6,18);8/8 hızlı.
+Yalnız open -%1,08/-%8,16; tek sabit yüzde iddiası yok. Yoğun8 sayfa p95
+düşük; son adayda geniş38-case performansı yeniden ölçülmedi. Ayrı dört
+query/get memory çiftinde private/WS tepe artışı yok; genel/Vec RAM kapısı
+kapanmaz. İlk COW/sözlük adayı yoğun8/8 p95 +%5,17…10,08 ile geri alındı.
+Metadata/sözlük maliyeti, yazma/bakım, önceki arama artışları, disk ve
+eşzamanlı/gerçek-cold yük açık. Kaynak/indeks byte'ları korunur; yeni
+corpus/reset/kopya yok. Son dört-çift instrumented profilde CRC83,831→
+78,336ms, toplam indeks155,886→158,377ms; indeks toplamı hızlandı iddiası
+yok. Son testler155/94/174, fmt/Clippy ve normal CLI geçti.
+[Son rapor](INDEX-OPEN-10K-20261017.md).
+
 Güncel dar açılış adımı: aynı mevcut10k/dört dengeli çiftte normal strict
 open430,303→270,116ms (-%37,23;4/4), açılış+ilk get+search423,924→281,714ms
 (-%33,55;4/4). Kaynak CRC/schema/key/link/version kontrolleri tam; pending0.
@@ -66,6 +80,7 @@ deneysel profilde tutulur; genel/default kabul kapısı geçmedi.
 
 | İş | Durum / kapanış kanıtı |
 |---|---|
+| İndeks açılışında checksum okuma ve hazırlığı azalt | Dar okuma adımı ölçüldü: indekse özel max1MiB exact reads; bütün indeks CRC'si ve diğer doğrulamalar tam, kaynak/WAL ve sözlük algoritmaları aynı. İki4-çift seride ilk kullanım -%4,20/-6,18;8/8 hızlı. Yalnız open kazancı oturumlara bağlı%1–8. Yoğun8 sayfanın p95'i düşük; genel arama kapısı değil. Ayrı query/get tepesinde artış yok; Vec ve concurrent RAM ölçülmedi. COW/reuse prototipi %5–10 arama artışıyla geri alındı. Hazırlık maliyeti ve genel açılış işi açık. [Son rapor](INDEX-OPEN-10K-20261017.md) |
 | Tam doğrulamalı açılışta kaynak tarama ve belge hazırlığını azalt | Dar kaynak adımı ölçüldü:4 dengeli normal release çiftinde430,303→270,116ms (-%37,23;4/4), pending0; ilk kullanım toplamı423,924→281,714ms. Frame+source CRC, UTF-8/schema/key/link/version/sınırlar ve source lease sürer. Sağlam cache yoksa önceki builder yolu, WAL/0.1 kaynaklar aynı. Query/get peak private9,197→8,637MiB; bu Vec ingest veya toplam sistem RAM'i değildir. Son38-case23 düşük/15 yüksek; genel arama garantisi yok. İndeks CRC/directory maliyeti ve genel açılış işi açık; SQLite normal open seviyesine ulaşılmadı. [Rapor ve ham kanıt](STRICT-OPEN-10K-20261017.md) |
 | Varsayılan FDB'yi SQLite ile aynı10k'da yeniden karşılaştır | Tamamlandı, kapsam sınırlı:4 dengeli streamed ve2 Vec yazma çifti;38-case ve256 get için4 dengeli okuma çifti;4 opening ve2 oracle'sız query/idle memory çifti. Streamed toplam23,598/34,509s;38/38 p95 ve bütün durumlarda4/4 FDB hızlı. Query private9,189/12,740MiB; normal Vec78,912/8,402MiB, strict open433,686/1,535ms ve retained disk2,61 kat. İlk iki SQLite write süresi yüksekliği ayrıştırılmadı; SQL prepared cache64, FTS5/LIKE/native3.53.2; validator3.53.1. Kaynak/fixture/corpus/hash/10k payload/FTS integrity aynı. Motor, storage, protokol değişmedi; eski/yeni arama regresyonları ve genel kapılar bu kıyasla kapanmaz. [Rapor](SQLITE-DEFAULT-COMPARISON-10K-20261016.md) |
 | Kabul edilen birleşimi normal derlemeye taşı ve yerelde sabitle | Tamamlandı (dar kapsam): checkpoint42116f7; bounded-engine default, eski feature alias'ı ve no-default reference korunur. Runtime algoritmaları/bağımlılıklar/kalıcı biçim/protokol aynı; bağımsız rkyv/WAL-delta/shared-documents/sync-off deneyleri kapalı.151/92/170 test, Clippy/fmt, eski alias ve comparator check, varsayılan fdb.exe stats/get/search geçti.2 çift Vec,4 çift streamed+2 SQLite referansı,2 çift A/A ve2 çift tekrar,38-case/yoğun sayfa/açılış/idle ölçüldü. İlk streamed+%4,88 tekrar-%0,87; broad24 düşük/14 yüksek ve pages5/3. Kalan hız artışları kapatılmadı; genel hız/Vec-query RAM/disk/eşzamanlı/cold kapıları açık.122 dosya16 streamed ingestte ve önceki profille byte-eşit. Yeni corpus/DB kopyası yok; yalnız sabit slotlar sıfırlandı. [Sonuç/karar](DEFAULT-PROFILE-VALIDATION-10K-20261016.md) |
