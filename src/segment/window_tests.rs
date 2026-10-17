@@ -116,11 +116,23 @@ fn prefetched_corrupt_record_is_checked_before_it_matches() {
         assert!(matches(&index, &mut scratch, id).unwrap());
     }
     assert!(matches(&index, &mut scratch, 4).is_err());
+    #[cfg(feature = "bounded-engine")]
+    assert!(
+        index
+            .binary_matches(
+                4,
+                &mut scratch,
+                &["zx".into()],
+                &mut BTreeMap::new(),
+                &mut 0
+            )
+            .is_err()
+    );
 }
 
 #[cfg(feature = "bounded-engine")]
 #[test]
-fn raw_ascii_positive_still_rejects_payload_corruption_and_truncation() {
+fn raw_ascii_matches_and_absence_reject_payload_corruption_and_truncation() {
     for read_window_enabled in [false, true] {
         let temp = Temp::new();
         let index = build(&temp);
@@ -128,12 +140,20 @@ fn raw_ascii_positive_still_rejects_payload_corruption_and_truncation() {
             read_window_enabled,
             ..Default::default()
         };
-        let terms = ["needle".into()];
-        assert!(
-            index
-                .binary_matches(0, &mut scratch, &terms, &mut BTreeMap::new(), &mut 0)
-                .unwrap()
-        );
+        for needle in ["needle", "ed", "zx"] {
+            assert_eq!(
+                index
+                    .binary_matches(
+                        0,
+                        &mut scratch,
+                        &[needle.into()],
+                        &mut BTreeMap::new(),
+                        &mut 0
+                    )
+                    .unwrap(),
+                needle != "zx"
+            );
+        }
         // Corrupt bytes outside the matching substring. The raw positive proof
         // must never hide a bad record, even with a valid needle still present.
         let target = index.metadata(40).unwrap();
@@ -142,21 +162,37 @@ fn raw_ascii_positive_still_rejects_payload_corruption_and_truncation() {
             .unwrap();
         file.write_all(&[0xff]).unwrap();
         file.flush().unwrap();
-        assert!(
-            index
-                .binary_matches(40, &mut scratch, &terms, &mut BTreeMap::new(), &mut 0)
-                .is_err()
-        );
+        for needle in ["needle", "ed", "zx"] {
+            assert!(
+                index
+                    .binary_matches(
+                        40,
+                        &mut scratch,
+                        &[needle.into()],
+                        &mut BTreeMap::new(),
+                        &mut 0
+                    )
+                    .is_err()
+            );
+        }
         file.set_len(target.offset + 70).unwrap();
         let mut scratch = QueryTextScratch {
             read_window_enabled,
             ..Default::default()
         };
-        assert!(
-            index
-                .binary_matches(40, &mut scratch, &terms, &mut BTreeMap::new(), &mut 0)
-                .is_err()
-        );
+        for needle in ["needle", "ed", "zx"] {
+            assert!(
+                index
+                    .binary_matches(
+                        40,
+                        &mut scratch,
+                        &[needle.into()],
+                        &mut BTreeMap::new(),
+                        &mut 0
+                    )
+                    .is_err()
+            );
+        }
     }
 }
 

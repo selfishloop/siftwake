@@ -46,7 +46,7 @@ fn main() -> input::Result<()> {
             return Err("block repeats must be 1..=200".into());
         }
         let start = Instant::now();
-        let db = Database::open_record_reads(path)?;
+        let db = Database::open(path)?;
         let stats = db.stats()?;
         assert_eq!(
             (stats.documents, stats.delta_keys, stats.sequence),

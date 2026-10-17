@@ -188,7 +188,8 @@ fn main() -> input::Result<()> {
     if std::env::args().any(|arg| {
         matches!(
             arg.as_str(),
-            "--profile-selectivity"
+            "--profile-matrix"
+                | "--profile-selectivity"
                 | "--profile-regressions"
                 | "--profile-covering"
                 | "--profile-pages"
@@ -216,8 +217,11 @@ fn main() -> input::Result<()> {
         let regressions = std::env::args().any(|arg| arg == "--profile-regressions");
         let covering = std::env::args().any(|arg| arg == "--profile-covering");
         let pages = std::env::args().any(|arg| arg == "--profile-pages");
+        let all = std::env::args().any(|arg| arg == "--profile-matrix");
         for case in matrix.cases.iter().filter(|case| {
-            if pages {
+            if all {
+                true
+            } else if pages {
                 case.kind == "page"
             } else if covering {
                 matches!(

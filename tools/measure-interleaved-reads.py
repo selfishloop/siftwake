@@ -138,7 +138,7 @@ def main():
     parser.add_argument('--candidate', required=True)
     parser.add_argument('--pairs', type=int, default=4, choices=(2, 4))
     parser.add_argument('--blocks', type=int, default=8, choices=(2, 4, 8))
-    parser.add_argument('--repeats', type=int, default=25, choices=(1, 10, 25))
+    parser.add_argument('--repeats', type=int, default=25, choices=(1, 5, 10, 25))
     parser.add_argument('--affinity', type=int, default=4)
     parser.add_argument('--full-matrix', action='store_true')
     args = parser.parse_args()

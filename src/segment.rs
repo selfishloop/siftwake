@@ -20,6 +20,8 @@ mod compact;
 #[cfg(feature = "bounded-engine")]
 mod covering;
 #[cfg(feature = "bounded-engine")]
+mod short_ascii;
+#[cfg(feature = "bounded-engine")]
 pub(crate) use covering::SourceLease;
 #[cfg(feature = "bounded-engine")]
 mod posting_spool;
@@ -127,6 +129,14 @@ impl QueryTextScratch {
         }
         if terms.iter().all(|term| self.title.contains(term)) {
             return true;
+        }
+        #[cfg(feature = "bounded-engine")]
+        if terms.iter().all(|term| short_ascii::eligible(term)) {
+            #[cfg(feature = "diagnostic-timing")]
+            let _scan = crate::timing::span("query.scan.raw_short");
+            return terms
+                .iter()
+                .all(|term| self.title.contains(term) || short_ascii::contains(text, term));
         }
         #[cfg(feature = "bounded-engine")]
         if self.raw_probes < 8
@@ -367,7 +377,7 @@ mod query_scratch_tests {
     #[test]
     fn chunked_scan_matches_full_fold_at_utf8_and_term_boundaries() {
         let mut scratch = QueryTextScratch::default();
-        for prefix in 1000..1040 {
+        for prefix in (1000..1040).chain(4072..4120).chain(8176..8216) {
             let body = format!(
                 "{}İŞIK ȺΣ 🦀 QUİXOTE{}last",
                 "x".repeat(prefix),
