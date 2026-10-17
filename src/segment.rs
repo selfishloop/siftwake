@@ -537,6 +537,8 @@ struct Directory {
 }
 
 pub(crate) struct Builder {
+    #[cfg(feature = "bounded-engine")]
+    source_references: bool,
     temporary: PathBuf,
     target: PathBuf,
     writer: Option<BufWriter<File>>,
@@ -564,6 +566,23 @@ impl Builder {
         checkpoint_end: u64,
         checkpoint_crc: u32,
     ) -> Result<Self> {
+        Self::new_layout(
+            target,
+            sequence,
+            checkpoint_end,
+            checkpoint_crc,
+            #[cfg(feature = "bounded-engine")]
+            false,
+        )
+    }
+
+    fn new_layout(
+        target: &Path,
+        sequence: u64,
+        checkpoint_end: u64,
+        checkpoint_crc: u32,
+        #[cfg(feature = "bounded-engine")] source_references: bool,
+    ) -> Result<Self> {
         // Acquire posting quota before I/O quota: waiters must not hold all I/O
         // reservations while active builders need I/O to finish and release.
         #[cfg(feature = "bounded-engine")]
@@ -587,11 +606,21 @@ impl Builder {
             .create_new(true)
             .open(&temporary)?;
         let mut writer = BufWriter::with_capacity(8 * 1024, file);
-        writer.write_all(MAGIC)?;
+        #[cfg(feature = "bounded-engine")]
+        let magic = if source_references {
+            compact::MAGIC
+        } else {
+            MAGIC
+        };
+        #[cfg(not(feature = "bounded-engine"))]
+        let magic = MAGIC;
+        writer.write_all(magic)?;
         writer.write_all(&sequence.to_le_bytes())?;
         writer.write_all(&checkpoint_end.to_le_bytes())?;
         writer.write_all(&checkpoint_crc.to_le_bytes())?;
         Ok(Self {
+            #[cfg(feature = "bounded-engine")]
+            source_references,
             #[cfg(feature = "experimental-write-buffer-budget")]
             _write_lease: write_lease,
             #[cfg(feature = "bounded-engine")]
@@ -650,12 +679,21 @@ impl Builder {
         self.add_document(stored, true)
     }
 
-    #[cfg(feature = "experimental-merge-postings")]
+    #[cfg(all(
+        feature = "experimental-merge-postings",
+        any(not(feature = "bounded-engine"), test)
+    ))]
     pub(crate) fn add_reused(&mut self, stored: &StoredDocument) -> Result<()> {
         self.add_document(stored, false)
     }
 
     fn add_document(&mut self, stored: &StoredDocument, index_terms: bool) -> Result<()> {
+        #[cfg(feature = "bounded-engine")]
+        if self.source_references {
+            return Err(Error::Invalid(
+                "source reference requires a validated entry".into(),
+            ));
+        }
         #[cfg(feature = "diagnostic-memory")]
         let _origin = crate::memory::Scope::new(6);
         #[cfg(feature = "diagnostic-timing")]
@@ -686,17 +724,22 @@ impl Builder {
         })?;
         self.offset += bytes.len() as u64;
         if index_terms {
-            let extracted = {
-                #[cfg(feature = "diagnostic-timing")]
-                let _span = crate::timing::span("builder.extract_terms");
-                let body = self.body_cache.get(&stored.document.text);
-                terms(stored, &body)
-            };
+            self.index_document(stored, id)?;
+        }
+        Ok(())
+    }
+
+    fn index_document(&mut self, stored: &StoredDocument, id: u32) -> Result<()> {
+        let extracted = {
             #[cfg(feature = "diagnostic-timing")]
-            let _span = crate::timing::span("builder.insert_postings");
-            for term in extracted {
-                self.postings.add(term, id)?;
-            }
+            let _span = crate::timing::span("builder.extract_terms");
+            let body = self.body_cache.get(&stored.document.text);
+            terms(stored, &body)
+        };
+        #[cfg(feature = "diagnostic-timing")]
+        let _span = crate::timing::span("builder.insert_postings");
+        for term in extracted {
+            self.postings.add(term, id)?;
         }
         Ok(())
     }
@@ -706,9 +749,17 @@ impl Builder {
         if self.last_record_key().is_some_and(|last| last >= key) {
             return Err(Error::Corrupt("unordered tombstone key".into()));
         }
+        #[cfg(feature = "bounded-engine")]
+        let offset = if self.source_references {
+            0
+        } else {
+            self.offset
+        };
+        #[cfg(not(feature = "bounded-engine"))]
+        let offset = self.offset;
         self.push_record(Record {
             key: key.clone(),
-            offset: self.offset,
+            offset,
             len: 0,
             checksum: 0,
             version: self.sequence,
@@ -838,6 +889,18 @@ impl Builder {
         let encoded = serde_json::to_writer(&mut sink, &directory).map_err(Error::from);
         #[cfg(feature = "experimental-write-record-spool")]
         let encoded: Result<()> = (|| {
+            #[cfg(feature = "bounded-engine")]
+            if self.source_references {
+                compact::write_directory_header(
+                    &mut sink,
+                    true,
+                    self.records.count,
+                    postings.count(),
+                )?;
+                self.records.write_binary(&mut sink)?;
+                postings.write_binary(&mut sink)?;
+                return Ok(());
+            }
             sink.write_all(b"{\"records\":")?;
             self.records.write_json(&mut sink)?;
             sink.write_all(b",\"postings\":")?;
@@ -865,7 +928,15 @@ impl Builder {
         let checksum = prefix_crc(writer.get_mut(), end)?;
         // prefix_crc changed the file position; flush already completed above.
         writer.get_mut().seek(SeekFrom::Start(end))?;
-        let mut footer = FOOTER.to_vec();
+        #[cfg(feature = "bounded-engine")]
+        let footer_magic = if self.source_references {
+            compact::FOOTER
+        } else {
+            FOOTER
+        };
+        #[cfg(not(feature = "bounded-engine"))]
+        let footer_magic = FOOTER;
+        let mut footer = footer_magic.to_vec();
         footer.extend_from_slice(&directory_offset.to_le_bytes());
         footer.extend_from_slice(&directory_len.to_le_bytes());
         footer.extend_from_slice(&checksum.to_le_bytes());
@@ -874,11 +945,17 @@ impl Builder {
         writer.flush()?;
         writer.get_ref().sync_all()?;
         self.writer.take();
+        #[cfg(all(feature = "bounded-engine", test))]
+        compact::builder_stage("prepared");
         let index = DiskIndex::open(&self.temporary, None)?;
         if self.target.exists() {
             std::fs::remove_file(&self.target)?;
         }
+        #[cfg(all(feature = "bounded-engine", test))]
+        compact::builder_stage("unlinked");
         std::fs::rename(&self.temporary, &self.target)?;
+        #[cfg(all(feature = "bounded-engine", test))]
+        compact::builder_stage("published");
         Ok(index)
     }
 }
@@ -1323,6 +1400,7 @@ impl DiskIndex {
         }
         read_at(&self.file, offset, buffer)
     }
+    #[cfg(feature = "experimental-grouped-read")]
     fn payload_file(&self) -> Result<&File> {
         #[cfg(feature = "bounded-engine")]
         if self.source_references {

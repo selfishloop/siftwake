@@ -70,6 +70,9 @@ fn native_binary_roundtrip_versions_queries_and_cache_rebuild() {
     assert_eq!(&raw[8..12], b"TXN2");
     assert!(raw.windows(4).any(|w| w == b"OFF1"));
     let idx = source.with_extension("idx");
+    #[cfg(feature = "bounded-engine")]
+    assert_eq!(&fs::read(&idx).unwrap()[..8], b"FDBSEG05");
+    #[cfg(not(feature = "bounded-engine"))]
     assert_eq!(&fs::read(&idx).unwrap()[..8], b"FDBSEG04");
     assert!(!fs::read_dir(&temp.0).unwrap().any(|e| {
         e.unwrap()
@@ -354,6 +357,14 @@ fn deferred_index_rejects_an_unopened_payload_block_before_returning_document() 
     let mut db = Database::open(&temp.0).unwrap();
     db.commit(vec![put(expected.clone())]).unwrap();
     db.compact().unwrap();
+    // This test specifically covers an old copied-payload cache. SEG05 has no
+    // index payload block; source corruption is covered by the address tests.
+    #[cfg(feature = "bounded-engine")]
+    {
+        db.repack_index_cache(fdb::IndexCacheLayout::JsonPayloadCopy)
+            .unwrap();
+        db = Database::open(&temp.0).unwrap();
+    }
     db.prepare_open_checks().unwrap();
     drop(db);
     let source = immutable_source(&temp.0);

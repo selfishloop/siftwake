@@ -41,7 +41,8 @@ pub use engine::Database;
 pub use model::*;
 pub type Result<T> = std::result::Result<T, Error>;
 
-/// Explicit, reversible derived-index experiment. Normal writers retain SEG04.
+/// Explicit, reversible cache conversion. Native bounded writers use
+/// BinarySourceReferences by default; readable older caches remain supported.
 /// Repacking never changes the authoritative FDBLOG04/ready files.
 #[cfg(feature = "bounded-engine")]
 #[derive(Clone, Copy, Debug, PartialEq, Eq)]

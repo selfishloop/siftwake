@@ -110,6 +110,65 @@ fn source_files(temp: &Temp) -> Vec<(PathBuf, Vec<u8>)> {
     files.sort();
     files
 }
+
+fn assert_references(path: &std::path::Path) {
+    let bytes = std::fs::read(path).unwrap();
+    assert_eq!(&bytes[..8], b"FDBSEG05");
+    let footer = bytes.len() - 32;
+    assert_eq!(&bytes[footer..footer + 8], b"FDBEND05");
+    let directory = u64::from_le_bytes(bytes[footer + 8..footer + 16].try_into().unwrap()) as usize;
+    assert_eq!(&bytes[directory..directory + 8], b"FDBDIC01");
+    assert_eq!(bytes[directory + 8], 1);
+    // The entire data area consists of u32 posting IDs, no OFF1 payload copy.
+    assert_eq!((directory - 28) % 4, 0);
+    assert!(!bytes[28..directory].windows(4).any(|w| w == b"OFF1"));
+}
+
+#[test]
+fn default_flush_rebuild_and_merge_write_source_references_without_conversion() {
+    let t = Temp::new();
+    t.seed();
+    assert_references(&t.index());
+    let source = source_files(&t);
+    // A readable SEG04 remains usable without an implicit rewrite on open.
+    Database::open(&t.0)
+        .unwrap()
+        .repack_index_cache(Layout::JsonPayloadCopy)
+        .unwrap();
+    let old = std::fs::read(t.index()).unwrap();
+    t.verify();
+    assert_eq!(std::fs::read(t.index()).unwrap(), old);
+    // Missing old cache is rebuilt directly as SEG05.
+    std::fs::remove_file(t.index()).unwrap();
+    t.verify();
+    assert_references(&t.index());
+    assert_eq!(source_files(&t), source);
+    let mut db = Database::open(&t.0).unwrap();
+    db.commit(vec![Mutation::Delete {
+        key: Key::new("shared", "texts", "b"),
+        guard: fdb::Guard::Any,
+    }])
+    .unwrap();
+    db.flush().unwrap();
+    db.compact().unwrap();
+    db.wait_for_compaction().unwrap();
+    assert!(db.get(&Key::new("shared", "texts", "b")).unwrap().is_none());
+    db.check_integrity().unwrap();
+    drop(db);
+    for entry in std::fs::read_dir(&t.0).unwrap().flatten() {
+        let path = entry.path();
+        if path.extension().is_some_and(|e| e == "idx")
+            && path
+                .file_stem()
+                .unwrap()
+                .to_string_lossy()
+                .starts_with("run-")
+            && !path.file_stem().unwrap().to_string_lossy().contains('.')
+        {
+            assert_references(&path);
+        }
+    }
+}
 #[test]
 fn native_layout_roundtrip_query_get_maintenance_and_source_bytes() {
     let t = Temp::new();

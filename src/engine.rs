@@ -307,6 +307,26 @@ fn open_source(dir: &Path, mut source: Source, legacy_unknown: bool) -> Result<R
         Err(e) => return Err(e),
     };
     let mut builder = None;
+    #[cfg(feature = "bounded-engine")]
+    let rebuilt_sequence = if index.is_none() && source.kind == Kind::Run {
+        let mut magic = [0; 8];
+        crate::segment::read_at(&file, 0, &mut magic)?;
+        if &magic == format::MAGIC_V4 {
+            let (built, sequence) =
+                Builder::from_native(&target, &mut file, source.end, checksum, true)?;
+            builder = Some(built);
+            Some(sequence)
+        } else {
+            None
+        }
+    } else {
+        None
+    };
+    #[cfg(all(
+        feature = "experimental-streaming-open",
+        not(feature = "bounded-engine")
+    ))]
+    let rebuilt_sequence = None;
     #[cfg(feature = "diagnostic-timing")]
     let replay_start = crate::timing::span("open.source_replay");
     #[cfg(not(feature = "experimental-streaming-open"))]
@@ -347,7 +367,10 @@ fn open_source(dir: &Path, mut source: Source, legacy_unknown: bool) -> Result<R
         Ok(())
     })?;
     #[cfg(feature = "experimental-streaming-open")]
-    let sequence = if let Some(sequence) = checked_sequence.filter(|_| index.is_some()) {
+    let sequence = if let Some(sequence) = checked_sequence
+        .filter(|_| index.is_some())
+        .or(rebuilt_sequence)
+    {
         sequence
     } else {
         format::replay_prefix_changes(&mut file, source.end, |seq, change| {
@@ -629,14 +652,26 @@ fn write_run(
 
 #[cfg(feature = "experimental-merge-postings")]
 fn reused_builder(dir: &Path, source: &Source) -> Result<Builder> {
+    let mut file = File::open(source.path(dir, "fdb"))?;
+    #[cfg(feature = "bounded-engine")]
+    let (builder, found) = Builder::from_native(
+        &source.path(dir, "idx"),
+        &mut file,
+        source.end,
+        source.checksum,
+        false,
+    )?;
+    #[cfg(not(feature = "bounded-engine"))]
     let mut builder = Builder::new(
         &source.path(dir, "idx"),
         source.sequence,
         source.end,
         source.checksum,
     )?;
-    let mut file = File::open(source.path(dir, "fdb"))?;
-    #[cfg(feature = "experimental-streaming-open")]
+    #[cfg(all(
+        feature = "experimental-streaming-open",
+        not(feature = "bounded-engine")
+    ))]
     let found = format::replay_prefix_changes(&mut file, source.end, |seq, change| {
         if seq != source.sequence {
             return Err(Error::Corrupt("reused source sequence".into()));
@@ -2064,38 +2099,7 @@ impl Database {
             #[cfg(feature = "experimental-merge-postings")]
             {
                 write_run_prepared(&dir, id, sequence, changes, |source| {
-                    let target = source.path(&dir, "idx");
-                    let mut builder = Builder::new(&target, sequence, source.end, source.checksum)?;
-                    let mut file = File::open(source.path(&dir, "fdb"))?;
-                    #[cfg(feature = "experimental-streaming-open")]
-                    let found =
-                        format::replay_prefix_changes(&mut file, source.end, |seq, change| {
-                            if seq != sequence {
-                                return Err(Error::Corrupt("reused source sequence".into()));
-                            }
-                            match change {
-                                Some(Change::Put { stored }) => builder.add_reused(&stored)?,
-                                Some(Change::Delete { key }) => builder.add_delete(&key)?,
-                                None => {}
-                            }
-                            Ok(())
-                        })?;
-                    #[cfg(not(feature = "experimental-streaming-open"))]
-                    let found = format::replay_prefix(&mut file, source.end, |seq, batch| {
-                        if seq != sequence || !batch.checkpoint {
-                            return Err(Error::Corrupt("reused source sequence/checkpoint".into()));
-                        }
-                        for change in batch.changes {
-                            match change {
-                                Change::Put { stored } => builder.add_reused(&stored)?,
-                                Change::Delete { key } => builder.add_delete(&key)?,
-                            }
-                        }
-                        Ok(())
-                    })?;
-                    if found != sequence {
-                        return Err(Error::Corrupt("reused source sequence".into()));
-                    }
+                    let builder = reused_builder(&dir, source)?;
                     let paired: Vec<_> = inputs
                         .iter()
                         .zip(&maps)

@@ -269,6 +269,14 @@ fn runtime_document_corruption_is_reported_before_returning_payload() {
     let mut db = Database::open(&temp.0).unwrap();
     db.commit(vec![put(doc("a", "hello"))]).unwrap();
     db.compact().unwrap();
+    // Keep coverage of runtime corruption in legacy index payload copies.
+    // Native default payloads now live only in the checked, leased source.
+    #[cfg(feature = "bounded-engine")]
+    {
+        db.repack_index_cache(fdb::IndexCacheLayout::JsonPayloadCopy)
+            .unwrap();
+        db = Database::open(&temp.0).unwrap();
+    }
     let target = temp.index();
     let mut bytes = fs::read(&target).unwrap();
     bytes[30] ^= 1;

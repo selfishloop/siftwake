@@ -1,4 +1,4 @@
-//! Temporary builder metadata; never authoritative. Output remains SEG03 JSON.
+//! Checked temporary builder metadata; drains to JSON or a SEG05 directory.
 use super::*;
 use std::io::{BufReader, Read};
 const LIMIT: usize = 256 * 1024;
@@ -40,13 +40,28 @@ impl Records {
         Ok(())
     }
     pub fn write_json(&mut self, output: &mut impl Write) -> Result<()> {
+        output.write_all(b"[")?;
+        self.drain(|n, bytes| {
+            if n != 0 {
+                output.write_all(b",")?;
+            }
+            output.write_all(bytes)?;
+            Ok(())
+        })?;
+        output.write_all(b"]")?;
+        Ok(())
+    }
+    #[cfg(feature = "bounded-engine")]
+    pub fn write_binary(&mut self, output: &mut impl Write) -> Result<()> {
+        self.drain(|_, bytes| super::compact::write_record(output, &serde_json::from_slice(bytes)?))
+    }
+    fn drain(&mut self, mut accept: impl FnMut(usize, &[u8]) -> Result<()>) -> Result<()> {
         let mut writer = self.writer.take().unwrap();
         writer.flush()?;
         let mut file = writer.into_inner().map_err(|e| Error::Io(e.into_error()))?;
         file.seek(SeekFrom::Start(0))?;
         let mut input = BufReader::with_capacity(8 * 1024, file);
         let mut scratch = Vec::new();
-        output.write_all(b"[")?;
         for n in 0..self.count {
             let mut header = [0; 8];
             input.read_exact(&mut header)?;
@@ -62,16 +77,12 @@ impl Records {
             if crc(&scratch) != u32::from_le_bytes(header[4..].try_into().unwrap()) {
                 return Err(Error::Corrupt("builder spool checksum".into()));
             }
-            if n != 0 {
-                output.write_all(b",")?;
-            }
-            output.write_all(&scratch)?;
+            accept(n, &scratch)?;
         }
         let mut extra = [0];
         if input.read(&mut extra)? != 0 {
             return Err(Error::Corrupt("builder spool trailing bytes".into()));
         }
-        output.write_all(b"]")?;
         Ok(())
     }
 }

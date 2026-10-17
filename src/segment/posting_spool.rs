@@ -1,4 +1,4 @@
-//! Stream builder dictionary entries; the final JSON directory is unchanged.
+//! Checked temporary dictionary entries; drains to JSON or SEG05.
 use super::*;
 use std::io::{BufReader, Read};
 pub(super) struct Postings {
@@ -36,13 +36,33 @@ impl Postings {
         Ok(())
     }
     pub fn write_json(&mut self, output: &mut impl Write) -> Result<()> {
+        output.write_all(b"[")?;
+        self.drain(|n, bytes| {
+            if n != 0 {
+                output.write_all(b",")?;
+            }
+            output.write_all(bytes)?;
+            Ok(())
+        })?;
+        output.write_all(b"]")?;
+        Ok(())
+    }
+    pub fn count(&self) -> usize {
+        self.count
+    }
+    pub fn write_binary(&mut self, output: &mut impl Write) -> Result<()> {
+        self.drain(|_, bytes| {
+            let (term, posting) = serde_json::from_slice(bytes)?;
+            super::compact::write_posting(output, &term, posting)
+        })
+    }
+    fn drain(&mut self, mut accept: impl FnMut(usize, &[u8]) -> Result<()>) -> Result<()> {
         let mut writer = self.writer.take().unwrap();
         writer.flush()?;
         let mut file = writer.into_inner().map_err(|e| Error::Io(e.into_error()))?;
         file.seek(SeekFrom::Start(0))?;
         let mut reader = BufReader::with_capacity(8 * 1024, file);
         let mut bytes = Vec::new();
-        output.write_all(b"[")?;
         for n in 0..self.count {
             let mut header = [0; 8];
             reader.read_exact(&mut header)?;
@@ -55,15 +75,11 @@ impl Postings {
             if crc(&bytes) != u32::from_le_bytes(header[4..].try_into().unwrap()) {
                 return Err(Error::Corrupt("posting spool checksum".into()));
             }
-            if n != 0 {
-                output.write_all(b",")?;
-            }
-            output.write_all(&bytes)?;
+            accept(n, &bytes)?;
         }
         if reader.read(&mut [0])? != 0 {
             return Err(Error::Corrupt("posting spool trailing data".into()));
         }
-        output.write_all(b"]")?;
         Ok(())
     }
 }

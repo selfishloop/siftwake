@@ -1,4 +1,4 @@
-//! Explicit SEG05 cache experiment. Sources/WAL/ready files are unchanged.
+//! Default native SEG05 cache and explicit layout conversion. Sources are unchanged.
 //! Directory integers are little endian; strings are u32-length UTF-8. No
 //! serializer ABI or Rust enum layout is persisted. Flag 1 addresses FDBLOG04.
 use super::*;
@@ -23,7 +23,21 @@ fn key(output: &mut impl Write, value: &Key) -> Result<()> {
     }
     Ok(())
 }
-fn write_record(output: &mut impl Write, r: &Record) -> Result<()> {
+pub(super) fn write_directory_header(
+    output: &mut impl Write,
+    references: bool,
+    records: usize,
+    postings: usize,
+) -> Result<()> {
+    let records = u32::try_from(records).map_err(|_| bad())?;
+    let postings = u32::try_from(postings).map_err(|_| bad())?;
+    output.write_all(DIRECTORY)?;
+    output.write_all(&[u8::from(references)])?;
+    output.write_all(&records.to_le_bytes())?;
+    output.write_all(&postings.to_le_bytes())?;
+    Ok(())
+}
+pub(super) fn write_record(output: &mut impl Write, r: &Record) -> Result<()> {
     key(output, &r.key)?;
     output.write_all(&r.offset.to_le_bytes())?;
     output.write_all(&r.len.to_le_bytes())?;
@@ -32,7 +46,7 @@ fn write_record(output: &mut impl Write, r: &Record) -> Result<()> {
     output.write_all(&[u8::from(r.deleted)])?;
     Ok(())
 }
-fn write_posting(output: &mut impl Write, term: &Term, p: Posting) -> Result<()> {
+pub(super) fn write_posting(output: &mut impl Write, term: &Term, p: Posting) -> Result<()> {
     let (tag, parts): (u8, Vec<&str>) = match term {
         Term::Scope(s) => (0, vec![s]),
         Term::Collection(s, c) => (1, vec![s, c]),
@@ -51,6 +65,66 @@ fn write_posting(output: &mut impl Write, term: &Term, p: Posting) -> Result<()>
     output.write_all(&p.offset.to_le_bytes())?;
     output.write_all(&p.count.to_le_bytes())?;
     Ok(())
+}
+
+impl Builder {
+    /// Build references only from checked native entry boundaries. Nothing is
+    /// published until the visitor has checked the complete source/frame CRCs.
+    pub(crate) fn from_native(
+        target: &Path,
+        file: &mut File,
+        end: u64,
+        checksum: u32,
+        index_terms: bool,
+    ) -> Result<(Self, u64)> {
+        let mut builder = None;
+        let (sequence, count) =
+            crate::format::visit_native_prefix(file, end, checksum, |offset, seq, tag, bytes| {
+                if builder.is_none() {
+                    builder = Some(Self::new_layout(target, seq, end, checksum, true)?);
+                }
+                let b = builder.as_mut().unwrap();
+                if tag == 0 {
+                    let view = crate::payload::checked(bytes)?;
+                    let (scope, collection, id) = view.key_parts();
+                    let key = Key::new(scope, collection, id);
+                    if b.last_record_key().is_some_and(|last| last >= &key) {
+                        return Err(Error::Corrupt(
+                            "checkpoint keys must be strictly sorted".into(),
+                        ));
+                    }
+                    let id = u32::try_from(b.record_count()).map_err(|_| {
+                        Error::Invalid("segment exceeds u32 record capacity".into())
+                    })?;
+                    b.push_record(Record {
+                        key,
+                        offset,
+                        len: u32::try_from(bytes.len()).map_err(|_| bad())?,
+                        checksum: crc(bytes),
+                        version: view.version(),
+                        deleted: false,
+                    })?;
+                    // Posting reuse needs only key/version/address metadata,
+                    // so it never materializes title/text/fields/links here.
+                    if index_terms {
+                        b.index_document(&view.to_document()?, id)?;
+                    }
+                } else if let crate::format::Change::Delete { key } =
+                    crate::binary_batch::decode_entry(tag, bytes)?
+                {
+                    b.add_delete(&key)?;
+                }
+                Ok(())
+            })?;
+        let builder = match builder {
+            Some(builder) => builder,
+            None => Self::new_layout(target, sequence, end, checksum, true)?,
+        };
+        if builder.record_count() != count {
+            return Err(bad());
+        }
+        Ok((builder, sequence))
+    }
 }
 struct Input<R> {
     reader: R,
@@ -500,6 +574,17 @@ impl DiskIndex {
 }
 
 #[cfg(test)]
+pub(super) fn builder_stage(stage: &str) {
+    if std::env::var("FDB_TEST_BUILDER_STAGE").ok().as_deref() == Some(stage) {
+        let marker = std::env::var_os("FDB_TEST_BUILDER_MARKER").unwrap();
+        std::fs::write(marker, stage).unwrap();
+        loop {
+            std::thread::park();
+        }
+    }
+}
+
+#[cfg(test)]
 fn publication_stage(stage: &str) {
     if std::env::var("FDB_TEST_REPACK_STAGE").ok().as_deref() == Some(stage) {
         let marker = std::env::var_os("FDB_TEST_REPACK_MARKER").unwrap();
@@ -513,6 +598,95 @@ fn publication_stage(stage: &str) {
 #[cfg(test)]
 mod tests {
     use super::*;
+    #[test]
+    fn native_builder_checks_final_crc_before_publication_and_handles_empty_checkpoint() {
+        let root = std::env::temp_dir().join(format!(
+            "fdb-native-builder-{}-{}",
+            std::process::id(),
+            TEMP.fetch_add(1, Ordering::Relaxed)
+        ));
+        std::fs::create_dir(&root).unwrap();
+        let source = root.join("source.fdb");
+        let target = root.join("source.idx");
+        let mut bytes = crate::format::MAGIC_V4.to_vec();
+        bytes.extend(
+            crate::format::encode(
+                7,
+                &crate::format::Batch {
+                    checkpoint: true,
+                    changes: vec![crate::format::Change::Put {
+                        stored: StoredDocument {
+                            version: 3,
+                            document: crate::Document {
+                                key: Key::new("s", "c", "a"),
+                                title: "東京".into(),
+                                text: "actual source".into(),
+                                fields: BTreeMap::new(),
+                                links: vec![],
+                            },
+                        },
+                    }],
+                },
+            )
+            .unwrap(),
+        );
+        let expected = crc(&bytes);
+        // Valid individual frames but an independently wrong source checksum
+        // must drop the unpublished builder and leave the old target untouched.
+        std::fs::write(&source, &bytes).unwrap();
+        std::fs::write(&target, b"old derived cache").unwrap();
+        assert!(
+            Builder::from_native(
+                &target,
+                &mut File::open(&source).unwrap(),
+                bytes.len() as u64,
+                expected ^ 1,
+                false
+            )
+            .is_err()
+        );
+        assert_eq!(std::fs::read(&target).unwrap(), b"old derived cache");
+        assert_eq!(std::fs::read_dir(&root).unwrap().count(), 2);
+        // No entry callback occurs in an empty checkpoint; its frame sequence
+        // still initializes a valid SEG05 header/directory.
+        let mut empty = crate::format::MAGIC_V4.to_vec();
+        empty.extend(
+            crate::format::encode(
+                9,
+                &crate::format::Batch {
+                    checkpoint: true,
+                    changes: vec![],
+                },
+            )
+            .unwrap(),
+        );
+        std::fs::write(&source, &empty).unwrap();
+        let (builder, seq) = Builder::from_native(
+            &target,
+            &mut File::open(&source).unwrap(),
+            empty.len() as u64,
+            crc(&empty),
+            true,
+        )
+        .unwrap();
+        assert_eq!(seq, 9);
+        let index = builder.finish().unwrap();
+        assert_eq!(index.len(), 0);
+        assert!(index.source_references);
+        drop(index);
+        assert_eq!(&std::fs::read(&target).unwrap()[..8], MAGIC);
+        let resolved = root.canonicalize().unwrap();
+        assert!(resolved.starts_with(std::env::temp_dir().canonicalize().unwrap()));
+        assert!(
+            resolved
+                .file_name()
+                .unwrap()
+                .to_string_lossy()
+                .starts_with("fdb-native-builder-")
+        );
+        std::fs::remove_dir_all(resolved).unwrap();
+    }
+
     #[test]
     fn term_codec_roundtrips_all_tags_and_rejects_every_cut_and_invalid_utf8() {
         let values = vec![
@@ -560,6 +734,15 @@ mod tests {
             .unwrap();
     }
     #[test]
+    #[ignore = "subprocess helper for default builder kill tests"]
+    fn rebuild_child() {
+        let root = std::env::var_os("FDB_TEST_REPACK_ROOT").unwrap();
+        crate::Database::open(root)
+            .unwrap()
+            .check_integrity()
+            .unwrap();
+    }
+    #[test]
     fn process_kill_before_during_and_after_cache_replacement_preserves_sources() {
         use std::process::{Command, Stdio};
         use std::time::{Duration, Instant};
@@ -597,37 +780,59 @@ mod tests {
             files
         };
         let before = snapshot();
-        for stage in ["prepared", "unlinked", "published"] {
-            let marker = root.join(format!("stage-{stage}"));
-            let mut child = Command::new(std::env::current_exe().unwrap())
-                .args([
-                    "--exact",
-                    "segment::compact::tests::repack_child",
-                    "--ignored",
-                ])
-                .env("FDB_TEST_REPACK_ROOT", &root)
-                .env("FDB_TEST_REPACK_STAGE", stage)
-                .env("FDB_TEST_REPACK_MARKER", &marker)
-                .stdout(Stdio::null())
-                .stderr(Stdio::null())
-                .spawn()
-                .unwrap();
-            let start = Instant::now();
-            while !marker.exists() && start.elapsed() < Duration::from_secs(20) {
-                if child.try_wait().unwrap().is_some() {
-                    break;
+        for operation in ["REPACK", "BUILDER"] {
+            for stage in ["prepared", "unlinked", "published"] {
+                if operation == "BUILDER" {
+                    // Force the default writer, without any explicit conversion.
+                    for entry in std::fs::read_dir(&root).unwrap().flatten() {
+                        let path = entry.path();
+                        if path.extension().is_some_and(|e| e == "idx")
+                            && path
+                                .file_stem()
+                                .unwrap()
+                                .to_string_lossy()
+                                .starts_with("run-")
+                            && !path.file_stem().unwrap().to_string_lossy().contains('.')
+                        {
+                            std::fs::remove_file(path).unwrap();
+                        }
+                    }
                 }
-                std::thread::sleep(Duration::from_millis(10));
+                let marker = root.join(format!("stage-{operation}-{stage}"));
+                let mut child = Command::new(std::env::current_exe().unwrap())
+                    .args([
+                        "--exact",
+                        if operation == "BUILDER" {
+                            "segment::compact::tests::rebuild_child"
+                        } else {
+                            "segment::compact::tests::repack_child"
+                        },
+                        "--ignored",
+                    ])
+                    .env("FDB_TEST_REPACK_ROOT", &root)
+                    .env(format!("FDB_TEST_{operation}_STAGE"), stage)
+                    .env(format!("FDB_TEST_{operation}_MARKER"), &marker)
+                    .stdout(Stdio::null())
+                    .stderr(Stdio::null())
+                    .spawn()
+                    .unwrap();
+                let start = Instant::now();
+                while !marker.exists() && start.elapsed() < Duration::from_secs(20) {
+                    if child.try_wait().unwrap().is_some() {
+                        break;
+                    }
+                    std::thread::sleep(Duration::from_millis(10));
+                }
+                let reached = marker.exists();
+                let _ = child.kill();
+                child.wait().unwrap();
+                assert!(reached, "{stage}");
+                assert_eq!(snapshot(), before);
+                let db = crate::Database::open(&root).unwrap();
+                assert_eq!(db.get(&doc.key).unwrap().unwrap().document, doc);
+                db.check_integrity().unwrap();
+                drop(db);
             }
-            let reached = marker.exists();
-            let _ = child.kill();
-            child.wait().unwrap();
-            assert!(reached, "{stage}");
-            assert_eq!(snapshot(), before);
-            let db = crate::Database::open(&root).unwrap();
-            assert_eq!(db.get(&doc.key).unwrap().unwrap().document, doc);
-            db.check_integrity().unwrap();
-            drop(db);
         }
         let target = root.canonicalize().unwrap();
         assert!(
