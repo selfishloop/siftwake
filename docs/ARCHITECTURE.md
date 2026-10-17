@@ -1,5 +1,12 @@
 # FDB mimarisi — 0.3.1
 
+2026-10-18 query-only CRC/UTF-8 interleave deneyi reddedildi.8KiB geçerli
+UTF-8 parçaları sırayla IEEE CRC durumuna ekleniyordu; tam schema ve
+identity korunuyordu. Normal4-case kontrolünde zx4/4 ve holmes3/4 süreçte
+daha yüksek p95 verdi. segment/payload kaynakları cb2c19e'a byte-eşit döndü;
+unsafe içeren private helper/testler yalnız arşiv patch'indedir. Yeni
+format/feature/bağımlılık yok. [Ölçüm ve sınırlar](VALIDATION-CHUNK-10K-20261018.md).
+
 2026-10-17 ikinci payload gruplama prototipi de reddedildi. Kuyruk ve
 posting/kesişim döngüsü ayrı inline edilmeyen helper'a alındı; iki erken
 dispatch hariç eski fonksiyonlar byte-eşitti. Üç sorguluk400 örnek/variant

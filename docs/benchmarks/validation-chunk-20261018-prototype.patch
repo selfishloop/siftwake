@@ -1,0 +1,253 @@
+diff --git a/src/payload.rs b/src/payload.rs
+index a6b8201..da90f35 100644
+--- a/src/payload.rs
++++ b/src/payload.rs
+@@ -7,6 +7,11 @@ use std::collections::BTreeMap;
+ const HEADER: usize = 44;
+ const MAGIC: &[u8; 4] = b"OFF1";
+ 
++#[cfg(feature = "bounded-engine")]
++mod checked_crc;
++#[cfg(feature = "bounded-engine")]
++pub(crate) use checked_crc::checked as checked_with_crc;
++
+ fn failure(message: impl std::fmt::Display) -> crate::Error {
+     crate::Error::Corrupt(format!("binary payload: {message}"))
+ }
+diff --git a/src/segment.rs b/src/segment.rs
+index d2809da..8ecf482 100644
+--- a/src/segment.rs
++++ b/src/segment.rs
+@@ -1731,6 +1731,7 @@ impl DiskIndex {
+             scratch.reads.read_bytes += r.len as u64;
+             scratch.reads.requested_bytes += r.len as u64;
+         }
++        #[cfg(not(feature = "bounded-engine"))]
+         {
+             #[cfg(feature = "diagnostic-timing")]
+             let _crc = crate::timing::span("query.payload_crc");
+@@ -1740,6 +1741,9 @@ impl DiskIndex {
+         }
+         let bytes = std::mem::take(&mut scratch.payload);
+         let result = (|| {
++            #[cfg(feature = "bounded-engine")]
++            let view = crate::payload::checked_with_crc(&bytes, r.checksum)?;
++            #[cfg(not(feature = "bounded-engine"))]
+             let view = {
+                 #[cfg(feature = "diagnostic-timing")]
+                 let _validation = crate::timing::span("query.payload_validation");
+@@ -1865,6 +1869,7 @@ impl DiskIndex {
+             .min(scratch.read_len);
+         let start = (r.offset - scratch.read_base) as usize;
+         let payload_range = start..start + r.len as usize;
++        #[cfg(not(feature = "bounded-engine"))]
+         {
+             #[cfg(feature = "diagnostic-timing")]
+             let _crc = crate::timing::span("query.payload_crc");
+@@ -1875,6 +1880,9 @@ impl DiskIndex {
+         // Take the reusable buffer so title/text can be borrowed while mutating fold scratch.
+         let bytes = std::mem::take(&mut scratch.payload);
+         let result = (|| {
++            #[cfg(feature = "bounded-engine")]
++            let view = crate::payload::checked_with_crc(&bytes[payload_range], r.checksum)?;
++            #[cfg(not(feature = "bounded-engine"))]
+             let view = {
+                 #[cfg(feature = "diagnostic-timing")]
+                 let _validation = crate::timing::span("query.payload_validation");
+diff --git a/src/payload/checked_crc.rs b/src/payload/checked_crc.rs
+new file mode 100644
+--- /dev/null
++++ b/src/payload/checked_crc.rs
+@@ -0,0 +1,192 @@
++//! Query-only prototype: interleave IEEE CRC and UTF-8 validation in bounded
++//! pieces. The source, payload encoding and ordinary decoder stay unchanged.
++use super::*;
++
++const CHUNK: usize = 8 * 1024;
++
++fn string_with_crc<'a>(bytes: &'a [u8], crc: &mut crc32fast::Hasher) -> Result<&'a str> {
++    if bytes.len() <= CHUNK {
++        let value = checked_utf8(bytes)?;
++        crc.update(bytes);
++        return Ok(value);
++    }
++    let mut start = 0;
++    while start < bytes.len() {
++        let mut end = start.saturating_add(CHUNK).min(bytes.len());
++        if end < bytes.len() {
++            // A valid scalar has at most three continuation bytes. Malformed
++            // runs cannot cause an unbounded backwards scan or empty piece.
++            for _ in 0..3 {
++                if bytes[end] & 0xc0 != 0x80 {
++                    break;
++                }
++                end -= 1;
++            }
++        }
++        let piece = &bytes[start..end];
++        checked_utf8(piece)?;
++        crc.update(piece);
++        start = end;
++    }
++    // SAFETY: immutable adjacent, nonempty pieces cover the complete slice.
++    // Each piece independently passed checked_utf8, including its last scalar;
++    // concatenating valid UTF-8 pieces is valid UTF-8. No byte is skipped.
++    Ok(unsafe { std::str::from_utf8_unchecked(bytes) })
++}
++
++#[inline(never)]
++pub(crate) fn checked(bytes: &[u8], expected: u32) -> Result<View<'_>> {
++    #[cfg(feature = "diagnostic-timing")]
++    let _span = crate::timing::span("query.payload_crc_and_validation");
++    if bytes.len() <= CHUNK {
++        if crate::format::crc(bytes) != expected {
++            return Err(crate::Error::Corrupt(
++                "segment document checksum mismatch".into(),
++            ));
++        }
++        return super::checked(bytes);
++    }
++    if bytes.len() < HEADER || &bytes[..4] != MAGIC {
++        return Err(failure("binary header"));
++    }
++    let mut offsets = [0usize; 8];
++    for (i, offset) in offsets.iter_mut().enumerate() {
++        *offset = u32::from_le_bytes(bytes[12 + i * 4..16 + i * 4].try_into().unwrap()) as usize;
++    }
++    if offsets[0] != HEADER
++        || offsets[7] != bytes.len()
++        || !offsets.windows(2).all(|w| w[0] <= w[1])
++    {
++        return Err(failure("binary offsets"));
++    }
++    let mut checksum = crc32fast::Hasher::new();
++    checksum.update(&bytes[..HEADER]);
++    let mut strings = [""; 5];
++    for i in 0..5 {
++        strings[i] = string_with_crc(&bytes[offsets[i]..offsets[i + 1]], &mut checksum)?;
++    }
++    checksum.update(&bytes[offsets[5]..]);
++    if checksum.finalize() != expected {
++        return Err(crate::Error::Corrupt(
++            "segment document checksum mismatch".into(),
++        ));
++    }
++    let field_bytes = &bytes[offsets[5]..offsets[6]];
++    let link_bytes = &bytes[offsets[6]..offsets[7]];
++    fields(field_bytes, false)?;
++    links(link_bytes, false)?;
++    Ok(View {
++        strings,
++        version: u64::from_le_bytes(bytes[4..12].try_into().unwrap()),
++        fields: field_bytes,
++        links: link_bytes,
++    })
++}
++
++#[cfg(test)]
++mod tests {
++    use super::*;
++
++    fn document(text: String) -> StoredDocument {
++        StoredDocument {
++            version: 73,
++            document: Document {
++                key: Key::new("shared", "texts", "one"),
++                title: "İstanbul Şirket".into(),
++                text,
++                fields: BTreeMap::from([(
++                    "nested".into(),
++                    serde_json::json!(
++                        [null, true, -9, 1.25, {"s":"東京 🦀", "list":[1,2,3]}]
++                    ),
++                )]),
++                links: vec![Key::new("shared", "targets", "two")],
++            },
++        }
++    }
++
++    #[test]
++    fn valid_unicode_and_each_chunk_boundary_preserve_crc_and_document() {
++        for pad in [
++            0,
++            1,
++            CHUNK - 4,
++            CHUNK - 3,
++            CHUNK - 2,
++            CHUNK - 1,
++            CHUNK,
++            CHUNK + 1,
++            2 * CHUNK - 3,
++            3 * CHUNK + 1,
++        ] {
++            for scalar in ["a", "İ", "東", "🦀"] {
++                let stored = document(format!("{}{scalar}{}", "x".repeat(pad), "ö".repeat(CHUNK)));
++                let bytes = encode(&stored).unwrap();
++                let view = checked(&bytes, crate::format::crc(&bytes)).unwrap();
++                assert_eq!(view.to_document().unwrap(), stored);
++            }
++        }
++    }
++
++    #[test]
++    fn invalid_utf8_at_piece_boundaries_matches_standard_validation() {
++        for at in [
++            0,
++            CHUNK - 4,
++            CHUNK - 3,
++            CHUNK - 2,
++            CHUNK - 1,
++            CHUNK,
++            CHUNK + 1,
++            2 * CHUNK - 4,
++        ] {
++            for bad in [
++                &[0xff][..],
++                &[0x80],
++                &[0xc0, 0xaf],
++                &[0xed, 0xa0, 0x80],
++                &[0xf4, 0x90, 0x80, 0x80],
++                &[0xc2],
++                &[0xe2, 0x82],
++                &[0xf0, 0x9f, 0xa6],
++            ] {
++                let mut bytes = vec![b'x'; 2 * CHUNK + 5];
++                bytes[at..at + bad.len()].copy_from_slice(bad);
++                assert_eq!(
++                    string_with_crc(&bytes, &mut crc32fast::Hasher::new()).is_ok(),
++                    std::str::from_utf8(&bytes).is_ok()
++                );
++                bytes.truncate(at + bad.len());
++                assert_eq!(
++                    string_with_crc(&bytes, &mut crc32fast::Hasher::new()).is_ok(),
++                    std::str::from_utf8(&bytes).is_ok()
++                );
++            }
++        }
++        let bytes = vec![0x80; 3 * CHUNK];
++        assert!(string_with_crc(&bytes, &mut crc32fast::Hasher::new()).is_err());
++    }
++
++    #[test]
++    fn every_cut_and_byte_change_rejects_bad_crc_and_preserves_schema_checks() {
++        let bytes = encode(&document(format!("{}İ🦀", "x".repeat(CHUNK + 9)))).unwrap();
++        let checksum = crate::format::crc(&bytes);
++        for end in 0..bytes.len() {
++            assert!(checked(&bytes[..end], checksum).is_err());
++        }
++        for at in 0..bytes.len() {
++            let mut bad = bytes.clone();
++            bad[at] ^= 0x80;
++            assert!(
++                checked(&bad, checksum).is_err(),
++                "unchanged checksum, byte{at}"
++            );
++            let expected = super::super::checked(&bad).is_ok();
++            assert_eq!(
++                checked(&bad, crate::format::crc(&bad)).is_ok(),
++                expected,
++                "valid CRC, byte{at}"
++            );
++        }
++    }
++}

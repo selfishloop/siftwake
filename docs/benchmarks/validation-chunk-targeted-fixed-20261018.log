@@ -1,0 +1,11 @@
+   Compiling fdb v0.3.1 (C:\Users\Serkan\Documents\ChatGPT\fdb)
+    Finished `test` profile [unoptimized + debuginfo] target(s) in 4.57s
+     Running unittests src\lib.rs (target\debug\deps\fdb-647b6e7626a49143.exe)
+
+running 3 tests
+test payload::checked_crc::tests::invalid_utf8_at_piece_boundaries_matches_standard_validation ... ok
+test payload::checked_crc::tests::valid_unicode_and_each_chunk_boundary_preserve_crc_and_document ... ok
+test payload::checked_crc::tests::every_cut_and_byte_change_rejects_bad_crc_and_preserves_schema_checks ... ok
+
+test result: ok. 3 passed; 0 failed; 0 ignored; 0 measured; 99 filtered out; finished in 1.04s
+

@@ -1,5 +1,12 @@
 # FDB
 
+[CRC/UTF-8 parçalamasını ölçme](docs/VALIDATION-CHUNK-10K-20261018.md)
+reddedildi; varsayılan motor aynı. Aynı10k/400 örnek kontrolünde holmes
+p95+%1,80 (3/4 çift yüksek), zx+%0,32 (4/4 çift yüksek); tipik blok da
+yavaş. Normalde bu yola girmeyen the/200 farkı algoritma kazancı sayılmadı.
+CRC/schema/UTF-8/identity kontrolleri korunur; yeni38-case/RAM koşusu yok.
+Yazma/bakım, genel arama, RAM/açılış/disk ve eşzamanlı/soğuk yük açık.
+
 [Gruplamayı hızlı sorgu yolundan ayırma kontrolü](docs/PAYLOAD-ISOLATED-10K-20261017.md)
 de reddedildi; motor önceki sürümde. Aynı10k/üç sorgu/400 örnek kontrolünde
 darcy p95 -%2,74, holmes +%0,98, the/200 -%2,98. the/200 gerilemesi bu

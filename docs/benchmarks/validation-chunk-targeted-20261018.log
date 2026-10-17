@@ -1,0 +1,60 @@
+   Compiling fdb v0.3.1 (C:\Users\Serkan\Documents\ChatGPT\fdb)
+error[E0364]: `checked` is private, and cannot be re-exported
+  --> src\payload.rs:13:16
+   |
+13 | pub(crate) use checked_crc::checked as checked_with_crc;
+   |                ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+   |
+note: consider marking `checked` as `pub` in the imported module
+  --> src\payload.rs:13:16
+   |
+13 | pub(crate) use checked_crc::checked as checked_with_crc;
+   |                ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+error[E0603]: function import `checked_with_crc` is private
+    --> src\segment.rs:1745:40
+     |
+1745 |             let view = crate::payload::checked_with_crc(&bytes, r.checksum)?;
+     |                                        ^^^^^^^^^^^^^^^^ private function import
+     |
+note: the function import `checked_with_crc` is defined here...
+    --> src\payload.rs:13:16
+     |
+  13 | pub(crate) use checked_crc::checked as checked_with_crc;
+     |                ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+note: ...and refers to the function `checked` which is defined here
+    --> src\payload\checked_crc.rs:38:1
+     |
+  38 | pub(super) fn checked(bytes: &[u8], expected: u32) -> Result<View<'_>> {
+     | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+help: import `checked_with_crc` directly
+     |
+1745 -             let view = crate::payload::checked_with_crc(&bytes, r.checksum)?;
+1745 +             let view = checked_crc::checked_with_crc(&bytes, r.checksum)?;
+     |
+
+error[E0603]: function import `checked_with_crc` is private
+    --> src\segment.rs:1884:40
+     |
+1884 |             let view = crate::payload::checked_with_crc(&bytes[payload_range], r.checksum)?;
+     |                                        ^^^^^^^^^^^^^^^^ private function import
+     |
+note: the function import `checked_with_crc` is defined here...
+    --> src\payload.rs:13:16
+     |
+  13 | pub(crate) use checked_crc::checked as checked_with_crc;
+     |                ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+note: ...and refers to the function `checked` which is defined here
+    --> src\payload\checked_crc.rs:38:1
+     |
+  38 | pub(super) fn checked(bytes: &[u8], expected: u32) -> Result<View<'_>> {
+     | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+help: import `checked_with_crc` directly
+     |
+1884 -             let view = crate::payload::checked_with_crc(&bytes[payload_range], r.checksum)?;
+1884 +             let view = checked_crc::checked_with_crc(&bytes[payload_range], r.checksum)?;
+     |
+
+Some errors have detailed explanations: E0364, E0603.
+For more information about an error, try `rustc --explain E0364`.
+error: could not compile `fdb` (lib test) due to 3 previous errors

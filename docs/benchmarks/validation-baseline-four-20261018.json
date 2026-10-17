@@ -1,0 +1,575 @@
+{
+  "queries": [
+    {
+      "text": "quixote",
+      "offset": 0,
+      "limit": 50,
+      "n": 12,
+      "instrumented_median_ms": 2.68765,
+      "stages": {
+        "disk.read_at": {
+          "median_ms": 1.01205,
+          "calls": [
+            131
+          ]
+        },
+        "payload.decode_crc_identity": {
+          "median_ms": 0.65435,
+          "calls": [
+            50
+          ]
+        },
+        "query.accepted_ids": {
+          "median_ms": 0.0,
+          "calls": [
+            56
+          ]
+        },
+        "query.covered_candidates": {
+          "median_ms": 0.0,
+          "calls": [
+            0
+          ]
+        },
+        "query.fold.title": {
+          "median_ms": 0.00425,
+          "calls": [
+            56
+          ]
+        },
+        "query.payload_candidates": {
+          "median_ms": 0.0,
+          "calls": [
+            56
+          ]
+        },
+        "query.payload_crc": {
+          "median_ms": 0.1839,
+          "calls": [
+            56
+          ]
+        },
+        "query.payload_read": {
+          "median_ms": 0.4078,
+          "calls": [
+            56
+          ]
+        },
+        "query.payload_read_bytes": {
+          "median_ms": 0.0,
+          "calls": [
+            1945325
+          ]
+        },
+        "query.payload_read_requests": {
+          "median_ms": 0.0,
+          "calls": [
+            56
+          ]
+        },
+        "query.payload_requested_bytes": {
+          "median_ms": 0.0,
+          "calls": [
+            1945325
+          ]
+        },
+        "query.payload_validation": {
+          "median_ms": 0.14155,
+          "calls": [
+            56
+          ]
+        },
+        "query.payload_window_hits": {
+          "median_ms": 0.0,
+          "calls": [
+            0
+          ]
+        },
+        "query.posting_cache_read": {
+          "median_ms": 0.24455,
+          "calls": [
+            20
+          ]
+        },
+        "query.posting_intersection": {
+          "median_ms": 0.0077,
+          "calls": [
+            56
+          ]
+        },
+        "query.raw_ascii_probe": {
+          "median_ms": 0.1021,
+          "calls": [
+            56
+          ]
+        },
+        "query.raw_ascii_proven": {
+          "median_ms": 0.002,
+          "calls": [
+            56
+          ]
+        },
+        "query.record_identity": {
+          "median_ms": 0.01125,
+          "calls": [
+            106
+          ]
+        },
+        "query.record_metadata": {
+          "median_ms": 0.16704999999999998,
+          "calls": [
+            201
+          ]
+        },
+        "query.verify_text": {
+          "median_ms": 0.1297,
+          "calls": [
+            56
+          ]
+        },
+        "query.visible_seed_ids": {
+          "median_ms": 0.0,
+          "calls": [
+            56
+          ]
+        },
+        "search.filter_visibility_text": {
+          "median_ms": 1.3615,
+          "calls": [
+            1
+          ]
+        },
+        "search.merge_page_hydration": {
+          "median_ms": 1.3415,
+          "calls": [
+            1
+          ]
+        },
+        "search.total": {
+          "median_ms": 2.6868,
+          "calls": [
+            1
+          ]
+        }
+      }
+    },
+    {
+      "text": "holmes",
+      "offset": 0,
+      "limit": 50,
+      "n": 12,
+      "instrumented_median_ms": 29.71705,
+      "stages": {
+        "disk.read_at": {
+          "median_ms": 13.474900000000002,
+          "calls": [
+            1514
+          ]
+        },
+        "payload.decode_crc_identity": {
+          "median_ms": 0.5093,
+          "calls": [
+            50
+          ]
+        },
+        "query.accepted_ids": {
+          "median_ms": 0.0,
+          "calls": [
+            1222
+          ]
+        },
+        "query.covered_candidates": {
+          "median_ms": 0.0,
+          "calls": [
+            0
+          ]
+        },
+        "query.fold.body": {
+          "median_ms": 0.72885,
+          "calls": [
+            2501
+          ]
+        },
+        "query.fold.title": {
+          "median_ms": 0.08405,
+          "calls": [
+            1285
+          ]
+        },
+        "query.payload_candidates": {
+          "median_ms": 0.0,
+          "calls": [
+            1285
+          ]
+        },
+        "query.payload_crc": {
+          "median_ms": 3.49085,
+          "calls": [
+            1285
+          ]
+        },
+        "query.payload_read": {
+          "median_ms": 12.45495,
+          "calls": [
+            1285
+          ]
+        },
+        "query.payload_read_bytes": {
+          "median_ms": 0.0,
+          "calls": [
+            35906386
+          ]
+        },
+        "query.payload_read_requests": {
+          "median_ms": 0.0,
+          "calls": [
+            1285
+          ]
+        },
+        "query.payload_requested_bytes": {
+          "median_ms": 0.0,
+          "calls": [
+            35906386
+          ]
+        },
+        "query.payload_validation": {
+          "median_ms": 4.21475,
+          "calls": [
+            1285
+          ]
+        },
+        "query.payload_window_hits": {
+          "median_ms": 0.0,
+          "calls": [
+            0
+          ]
+        },
+        "query.posting_cache_read": {
+          "median_ms": 0.22035,
+          "calls": [
+            15
+          ]
+        },
+        "query.posting_intersection": {
+          "median_ms": 0.2081,
+          "calls": [
+            1440
+          ]
+        },
+        "query.raw_ascii_probe": {
+          "median_ms": 3.4291,
+          "calls": [
+            1285
+          ]
+        },
+        "query.raw_ascii_proven": {
+          "median_ms": 0.051199999999999996,
+          "calls": [
+            1222
+          ]
+        },
+        "query.record_identity": {
+          "median_ms": 0.1289,
+          "calls": [
+            1335
+          ]
+        },
+        "query.record_metadata": {
+          "median_ms": 1.13635,
+          "calls": [
+            1431
+          ]
+        },
+        "query.scan.body": {
+          "median_ms": 0.3145,
+          "calls": [
+            2501
+          ]
+        },
+        "query.verify_text": {
+          "median_ms": 5.5283999999999995,
+          "calls": [
+            1285
+          ]
+        },
+        "query.visible_seed_ids": {
+          "median_ms": 0.0,
+          "calls": [
+            1440
+          ]
+        },
+        "search.filter_visibility_text": {
+          "median_ms": 28.6327,
+          "calls": [
+            1
+          ]
+        },
+        "search.merge_page_hydration": {
+          "median_ms": 1.1755499999999999,
+          "calls": [
+            1
+          ]
+        },
+        "search.total": {
+          "median_ms": 29.7164,
+          "calls": [
+            1
+          ]
+        }
+      }
+    },
+    {
+      "text": "zx",
+      "offset": 0,
+      "limit": 50,
+      "n": 12,
+      "instrumented_median_ms": 158.6305,
+      "stages": {
+        "disk.read_at": {
+          "median_ms": 55.3143,
+          "calls": [
+            1279
+          ]
+        },
+        "query.accepted_ids": {
+          "median_ms": 0.0,
+          "calls": [
+            0
+          ]
+        },
+        "query.covered_candidates": {
+          "median_ms": 0.0,
+          "calls": [
+            0
+          ]
+        },
+        "query.fold.title": {
+          "median_ms": 0.64525,
+          "calls": [
+            10000
+          ]
+        },
+        "query.payload_candidates": {
+          "median_ms": 0.0,
+          "calls": [
+            10000
+          ]
+        },
+        "query.payload_crc": {
+          "median_ms": 26.84855,
+          "calls": [
+            10000
+          ]
+        },
+        "query.payload_read": {
+          "median_ms": 55.06185,
+          "calls": [
+            10000
+          ]
+        },
+        "query.payload_read_bytes": {
+          "median_ms": 0.0,
+          "calls": [
+            286500112
+          ]
+        },
+        "query.payload_read_requests": {
+          "median_ms": 0.0,
+          "calls": [
+            1104
+          ]
+        },
+        "query.payload_requested_bytes": {
+          "median_ms": 0.0,
+          "calls": [
+            267849329
+          ]
+        },
+        "query.payload_validation": {
+          "median_ms": 26.56915,
+          "calls": [
+            10000
+          ]
+        },
+        "query.payload_window_hits": {
+          "median_ms": 0.0,
+          "calls": [
+            8896
+          ]
+        },
+        "query.posting_intersection": {
+          "median_ms": 0.4299,
+          "calls": [
+            10000
+          ]
+        },
+        "query.record_identity": {
+          "median_ms": 0.8578,
+          "calls": [
+            10000
+          ]
+        },
+        "query.record_metadata": {
+          "median_ms": 2.73225,
+          "calls": [
+            10000
+          ]
+        },
+        "query.scan.raw_short": {
+          "median_ms": 38.06235,
+          "calls": [
+            10000
+          ]
+        },
+        "query.verify_text": {
+          "median_ms": 40.78005,
+          "calls": [
+            10000
+          ]
+        },
+        "query.visible_seed_ids": {
+          "median_ms": 0.0,
+          "calls": [
+            10000
+          ]
+        },
+        "search.filter_visibility_text": {
+          "median_ms": 158.62545,
+          "calls": [
+            1
+          ]
+        },
+        "search.merge_page_hydration": {
+          "median_ms": 0.0023,
+          "calls": [
+            1
+          ]
+        },
+        "search.total": {
+          "median_ms": 158.629,
+          "calls": [
+            1
+          ]
+        }
+      }
+    },
+    {
+      "text": "the",
+      "offset": 0,
+      "limit": 200,
+      "n": 12,
+      "instrumented_median_ms": 6.31435,
+      "stages": {
+        "disk.read_at": {
+          "median_ms": 1.4392,
+          "calls": [
+            120
+          ]
+        },
+        "payload.decode_crc_identity": {
+          "median_ms": 4.2313,
+          "calls": [
+            200
+          ]
+        },
+        "query.accepted_ids": {
+          "median_ms": 0.0,
+          "calls": [
+            1000
+          ]
+        },
+        "query.covered_candidates": {
+          "median_ms": 0.0,
+          "calls": [
+            1000
+          ]
+        },
+        "query.covering_guard": {
+          "median_ms": 0.0718,
+          "calls": [
+            5
+          ]
+        },
+        "query.covering_index_metadata": {
+          "median_ms": 0.06965,
+          "calls": [
+            5
+          ]
+        },
+        "query.payload_candidates": {
+          "median_ms": 0.0,
+          "calls": [
+            0
+          ]
+        },
+        "query.payload_read_bytes": {
+          "median_ms": 0.0,
+          "calls": [
+            0
+          ]
+        },
+        "query.payload_read_requests": {
+          "median_ms": 0.0,
+          "calls": [
+            0
+          ]
+        },
+        "query.payload_requested_bytes": {
+          "median_ms": 0.0,
+          "calls": [
+            0
+          ]
+        },
+        "query.payload_window_hits": {
+          "median_ms": 0.0,
+          "calls": [
+            0
+          ]
+        },
+        "query.posting_intersection": {
+          "median_ms": 0.042550000000000004,
+          "calls": [
+            1000
+          ]
+        },
+        "query.record_identity": {
+          "median_ms": 0.02375,
+          "calls": [
+            200
+          ]
+        },
+        "query.record_metadata": {
+          "median_ms": 0.08035,
+          "calls": [
+            514
+          ]
+        },
+        "query.visible_seed_ids": {
+          "median_ms": 0.0,
+          "calls": [
+            1000
+          ]
+        },
+        "search.filter_visibility_text": {
+          "median_ms": 0.28535,
+          "calls": [
+            1
+          ]
+        },
+        "search.merge_page_hydration": {
+          "median_ms": 6.05495,
+          "calls": [
+            1
+          ]
+        },
+        "search.total": {
+          "median_ms": 6.3134999999999994,
+          "calls": [
+            1
+          ]
+        }
+      }
+    }
+  ],
+  "limits": "Same frozen executable under both labels,12 diagnostic samples/query, warm OS cache. Nested wall spans and bookkeeping, not normal p95 or CPU attribution. Payload read spans include window hits; request counter gives actual read API count."
+}

@@ -1,0 +1,25 @@
+{
+  "base": "cb2c19e",
+  "backups": {
+    "src/segment.rs": {
+      "path": "output\\validation-chunk-20261018-segment-backup.rs",
+      "sha256": "653ea02a6f49ddb5c43006f3867fef2e91d6b14bf6994c60e05ce949b7dc219c"
+    },
+    "src/payload.rs": {
+      "path": "output\\validation-chunk-20261018-payload-backup.rs",
+      "sha256": "2cfd2fb9f65d6895d6acfa8db0404d23c5345744653538e4e88f90ff84a8b441"
+    },
+    "src/payload/checked_crc.rs": {
+      "path": "output\\validation-chunk-20261018-checked-crc-backup.rs",
+      "sha256": "dc94d7989b906fcb2d25b31a47c8010584fffb63d54b061bbda18624a824f770"
+    }
+  },
+  "programs": {
+    "output\\validation-chunk-20261018-candidate-measure_content_reads-normal.exe": "f7b36496ee5eb87da21d95ad32fbe3403c422e7037c420b6e1df7a5abec87000",
+    "output\\validation-chunk-20261018-candidate-measure_interleaved_reads-normal.exe": "b945813f69f05898d5e8268989ac51623b540b8e37ed727d7b6a072f6611ed10",
+    "output\\validation-chunk-20261018-candidate-measure_content_reads-profile.exe": "b8e1a97bfba9dcbe3d4a7cefb060c1c86df5f1e09a8d4490f05f902a1c060a04"
+  },
+  "rustc": "rustc 1.99.0 (b940084d7 2026-09-28)\nbinary: rustc\ncommit-hash: b940084d7eb6a299eb4bfeb8e34901bc051e7ac4\ncommit-date: 2026-09-28\nhost: x86_64-pc-windows-msvc\nrelease: 1.99.0\nLLVM version: 23.1.1\n",
+  "baseline": "output/payload-isolated-20261017-control-measure_interleaved_reads-normal.exe",
+  "note": "Baseline library, dependencies and harness equal cb2c19e; only the three archived runtime sources differ. Baseline comes from the preceding immutable build manifest."
+}
