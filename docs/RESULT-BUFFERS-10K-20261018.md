@@ -1,5 +1,10 @@
 # Çağırana ait sonuç metni tamponları — 18 Ekim 2026
 
+Sonraki kullanıcı kararıyla bu V3 kodu motora alındı:
+[güncel durum ve API kullanımı](RESULT-BUFFERS-ACTIVE-20261018.md).
+Aşağıdaki reddetme/geri dönüş kaydı geçişten önceki değerlendirmedir;
+ölçüm rakamları ve eski ham kanıtlar değiştirilmedi.
+
 **Karar: genel geçiş reddedildi.** Dar tekrar kazancı ölçüldü; genel hız/RAM
 kapısı geçilmedi. Prototip kod/test yaması arşivlendi; normal motorun kaynakları
 başlangıçtaki f89b827 koduna döndü. `search_into` normal kaynaklarda yoktur.

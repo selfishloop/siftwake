@@ -1,5 +1,18 @@
 # FDB mimarisi — 0.3.1
 
+2026-10-18 sonraki kullanıcı kararıyla sonuç tamponlu V3 normal bounded-engine
+profiline alındı. `Database::search_into` çağıranın önceki SearchPage'ini tüketir;
+uygun gruplu sorgularda yalnız exact kapasiteli String'leri tekrar kullanır.
+Eski metadata/links filtrelemeden önce bırakılır; içerik her defasında güncel
+doğrulanmış baytlardan doldurulur. Hata boş page bırakır. İlk kullanım, limit1,
+direct ve checked-payload capture sorguları normal aramaya döner. `search`
+imzası ve sahipli sayfa semantiği korunur; CLI/dış entegrasyon yapılmadı.
+Kalıcı format, bağımlılık ve feature değişikliği yoktur. Önceki genel hız/RAM
+kapısı geçmedi; geçiş kullanıcı kararıdır ve kalan p95/RAM işleri açıktır.
+[Güncel kullanım ve doğrulama](RESULT-BUFFERS-ACTIVE-20261018.md).
+
+## Geçişten önceki deney kaydı
+
 2026-10-18 sonuç metni tamponu prototipinin genel geçişi reddedildi.
 Arşiv yamasındaki `search_into`, çağıranın eski sonucundan yalnız metin
 String'lerini taşıyor, diğer metadata'yı filtrelemeden önce bırakıyor ve

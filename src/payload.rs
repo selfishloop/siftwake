@@ -425,11 +425,101 @@ impl View<'_> {
             version: self.version,
         })
     }
+
+    /// The pool owns only the previous caller result, never a database cache.
+    #[cfg(feature = "bounded-engine")]
+    pub(crate) fn to_document_reusing(
+        &self,
+        pool: &mut std::vec::IntoIter<String>,
+    ) -> Result<StoredDocument> {
+        let Some(mut text) = pool.next() else {
+            return self.to_document();
+        };
+        // Reuse only exact capacity: no growing reallocations, no retained
+        // text slack after a different page. Other slots use normal decoding.
+        if text.capacity() != self.text().len() {
+            drop(text);
+            return self.to_document();
+        }
+        #[cfg(feature = "diagnostic-timing")]
+        let _materialize = crate::timing::span("payload.materialize");
+        let (scope, collection, id) = self.key_parts();
+        let key = Key::new(scope, collection, id);
+        let title = self.title().to_owned();
+        {
+            #[cfg(feature = "diagnostic-timing")]
+            let _text = crate::timing::span("payload.copy_text");
+            #[cfg(feature = "diagnostic-timing")]
+            let _reused = crate::timing::span("payload.text_reused");
+            text.clear();
+            {
+                #[cfg(feature = "diagnostic-timing")]
+                let _copy = crate::timing::span("payload.text_fill");
+                text.push_str(self.text());
+            }
+        }
+        Ok(StoredDocument {
+            document: Document {
+                key,
+                title,
+                text,
+                fields: fields(self.fields, true)?,
+                links: links(self.links, true)?,
+            },
+            version: self.version,
+        })
+    }
 }
 
 #[cfg(test)]
 mod document_limit_tests {
     use super::*;
+
+    #[cfg(feature = "bounded-engine")]
+    #[test]
+    fn reused_text_replaces_content_preserves_metadata_and_releases_excess_capacity() {
+        let mut expected = StoredDocument {
+            document: Document {
+                key: Key::new("shared", "texts", "a"),
+                title: "İstanbul 東京".into(),
+                text: "🦀 needle".into(),
+                fields: BTreeMap::from([(
+                    "nested".into(),
+                    serde_json::json!({"list":[null,true,i64::MIN,u64::MAX,-0.0,"ışık"]}),
+                )]),
+                links: vec![Key::new("shared", "other", "target")],
+            },
+            version: 77,
+        };
+        let mut previous = expected.clone();
+        previous.document.text = String::with_capacity(128 * 1024);
+        previous.document.text.push_str("old data must disappear");
+        for (step, length) in [9, 6000, 6000, 5999, 0, 4000, 3].into_iter().enumerate() {
+            // Equal byte lengths must still overwrite the old UTF-8 content.
+            expected.document.text = if step.is_multiple_of(2) { "ş" } else { "ö" }.repeat(length);
+            expected.document.title = format!("revision {step}");
+            expected
+                .document
+                .fields
+                .insert("revision".into(), serde_json::json!(step));
+            expected.version += 1;
+            let bytes = encode(&expected).unwrap();
+            let same_capacity = previous.document.text.capacity() == expected.document.text.len();
+            let previous_pointer = previous.document.text.as_ptr();
+            let mut pool = vec![previous.document.text].into_iter();
+            let actual = checked(&bytes)
+                .unwrap()
+                .to_document_reusing(&mut pool)
+                .unwrap();
+            assert_eq!(actual, expected);
+            if same_capacity {
+                assert_eq!(actual.document.text.as_ptr(), previous_pointer);
+            }
+            assert_eq!(actual.document.text.capacity(), actual.document.text.len());
+            assert_eq!(pool.len(), 0);
+            previous = actual;
+        }
+    }
 
     #[test]
     fn utf8_validation_matches_std_including_boundaries_and_invalid_bytes() {

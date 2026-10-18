@@ -1,0 +1,67 @@
+{
+  "decision": "User requested activation of measured V3; previous latency/RAM gates remain open. search_into is caller-owned reuse; ordinary search/CLI are not automatically stateful.",
+  "parent_commit": "e355a8ada2e76c2c747ae2ae375be3ba30746bd2",
+  "archive_patch": {
+    "path": "docs\\benchmarks\\buffers-v3-20261018-prototype.patch",
+    "sha256": "8EEB4A37573549C01EF0225D72E5DD616D132FB355F87575088F97669C3A3D0D"
+  },
+  "sources": [
+    {
+      "path": "src/engine.rs",
+      "sha256": "1C102A766867D3B71A33239CA4461FA37BB168249E20998B48EC4C312CCB67A4"
+    },
+    {
+      "path": "src/payload.rs",
+      "sha256": "EF3C9B13452A1D804D56FDA3E91B3BA6986E73E1DBAFEB1A55E6160AADFB1E95"
+    },
+    {
+      "path": "src/segment.rs",
+      "sha256": "D55B1BD8FCBD9B10AC4EF899B2036DF719A2D5872AE41EC25B86613A867E6DDA"
+    },
+    {
+      "path": "src/segment/grouped_tests.rs",
+      "sha256": "8D02416FCB08C579DE2E25577FCB41CC970655C649CA2AB9BD42364C9C124B06"
+    },
+    {
+      "path": "tests/engine.rs",
+      "sha256": "DD321E5B8E2D7F22A7C3660711E9EE63256F521750CB820125D59F6B8374C4C4"
+    },
+    {
+      "path": "tests/disk.rs",
+      "sha256": "091CDAB8C144818344C9F617AC9A91E4B3757F27C1CA52B50B573A35A52FF14D"
+    },
+    {
+      "path": "examples/measure_result_buffers.rs",
+      "sha256": "4A05AEE569AE89706D3D6BC79F33E8A7271CB2427FCF38ADAADD649321BBFBB4"
+    }
+  ],
+  "checks_manifest": "docs/benchmarks/activate-buffers-20261018-checks.json",
+  "normal_and_timing_binaries_verified": true,
+  "oracles": "docs/benchmarks/activate-buffers-20261018-oracles.json",
+  "reuse_counters": "docs/benchmarks/activate-buffers-20261018-reuse-proof.json",
+  "cli": "docs/benchmarks/activate-buffers-20261018-cli.json",
+  "all_21_source_index_sqlite_fixture_hashes_unchanged": true,
+  "after": "docs/benchmarks/activate-buffers-20261018-after.json",
+  "corpus": {
+    "path": "data\\rkyv-corpus-20261009\\json.payload-bench",
+    "bytes": 2740862279,
+    "sha256": "11F826FCE3F4AE790FEB9FC6DF9B1169F52C2FD699E89FC4A8A4B77AAA41731B",
+    "first_records_used": 10000
+  },
+  "fdb_bytes": 349805698,
+  "sqlite_bytes": 583860224,
+  "only_data_directories": [
+    "benchmark-work",
+    "rkyv-corpus-20261009"
+  ],
+  "git_unchanged": [
+    "Cargo.toml",
+    "Cargo.lock",
+    "tests/fixtures/v1",
+    "src/main.rs"
+  ],
+  "new_corpus": false,
+  "reset_repack_or_database_copy": false,
+  "new_persistent_format_or_feature": false,
+  "new_performance_acceptance_claim": false
+}

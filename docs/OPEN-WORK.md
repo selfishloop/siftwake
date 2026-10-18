@@ -1,5 +1,23 @@
 # FDB açık işler
 
+2026-10-18 kullanıcı "bu motora geç" kararıyla ölçülen V3'ü normal bounded-engine
+profiline aldı. `search_into` etkin; önceki sayfayı tekrar veren çağıran uygun
+metin tamponlarını kullanır. `search` uyumlu kalır. Geçiş doğrulandı: normal
+paket 191 test/7 ignored; fmt ve üç profil Clippy geçti. Normal release'te
+search38 + search_into38 tam belge/sıra/sürüm oracle kontrolü başarılı.
+Sayaçlar ikinci the200 çağrısında 200 tamponun yeniden kullanıldığını ve aynı
+okuma/CRC/schema/kimlik kontrollerini doğruladı.21 veri/fixture dosyası ve
+bütün corpus SHA-eşit; yeni corpus/DB/reset/kopya/format/feature yok.
+Önceki kabul reddi aşağıda tarihçedir; kapı geçildi denmiyor. Tek sonuç/normal
+okuyucu p95 artışları, OS private+28KiB/WS+48KiB ve geniş sorgu farkları açık.
+[Güncel geçiş kaydı](RESULT-BUFFERS-ACTIVE-20261018.md).
+
+Yazma/bakım aşama ayrımı sıradaki bağımsız öncelik. Normal Vec ingest/query/
+caller RAM'i, Harpoon/genel arama p95'i, açılış/disk sıkıştırma ve eşzamanlı/
+gerçek-soğuk yük kapanmadı.
+
+## Geçiş öncesi kabul değerlendirmesi
+
 2026-10-18 sonuç tamponu deneyinin genel geçişi reddedildi. Arşiv prototip
 aynı the200 tekrarında p95 -%38,78 (4/4 çift,16/16 blok), değişen dört sayfada
 -%10,18 verdi; tek sonuç p95 +%10,68 açık. Geniş38'de the200 p95 yaklaşık aynı

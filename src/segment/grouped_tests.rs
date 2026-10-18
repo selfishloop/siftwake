@@ -253,11 +253,40 @@ fn paged_batch_reuses_checked_leaves_without_skipping_payload_checks() {
             index.decode_selected(64, &record, &bytes, &mut cursor),
             Err(Error::Corrupt(_))
         ));
+        #[cfg(feature = "bounded-engine")]
+        assert!(matches!(
+            index.decode_selected_with_pool::<true>(
+                64,
+                &record,
+                &bytes,
+                &mut cursor,
+                &mut docs
+                    .iter()
+                    .map(|d| d.document.text.clone())
+                    .collect::<Vec<_>>()
+                    .into_iter()
+            ),
+            Err(Error::Corrupt(_))
+        ));
     }
     let record = index.metadata(64).unwrap();
     temp.replace(record.offset + record.len as u64 - 1, &[255]);
     assert!(matches!(
         index.read_selected_batch(&[(64, 0)], &mut scratch, &mut Vec::new()),
+        Err(Error::Corrupt(_))
+    ));
+    #[cfg(feature = "bounded-engine")]
+    assert!(matches!(
+        index.read_selected_batch_with_pool::<true>(
+            &[(64, 0)],
+            &mut scratch,
+            &mut Vec::new(),
+            &mut docs
+                .iter()
+                .map(|d| d.document.text.clone())
+                .collect::<Vec<_>>()
+                .into_iter()
+        ),
         Err(Error::Corrupt(_))
     ));
     OpenOptions::new()
@@ -269,6 +298,21 @@ fn paged_batch_reuses_checked_leaves_without_skipping_payload_checks() {
     assert!(
         index
             .read_selected_batch(&[(64, 0)], &mut scratch, &mut Vec::new())
+            .is_err()
+    );
+    #[cfg(feature = "bounded-engine")]
+    assert!(
+        index
+            .read_selected_batch_with_pool::<true>(
+                &[(64, 0)],
+                &mut scratch,
+                &mut Vec::new(),
+                &mut docs
+                    .into_iter()
+                    .map(|d| d.document.text)
+                    .collect::<Vec<_>>()
+                    .into_iter()
+            )
             .is_err()
     );
 }

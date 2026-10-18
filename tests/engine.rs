@@ -196,6 +196,11 @@ fn checked_page_preserves_global_order_visibility_filters_and_fallback_pages() {
         put(doc("delta", "needle İstanbul")),
     ])
     .unwrap();
+    let mut reused_page = fdb::SearchPage {
+        total: 0,
+        sequence: 0,
+        hits: Vec::new(),
+    };
     for text in ["needle", "needle istanbul", "zzzz", "nee", ""] {
         for filtered in [false, true] {
             let mut q = Query::new("shared");
@@ -213,6 +218,10 @@ fn checked_page_preserves_global_order_visibility_filters_and_fallback_pages() {
                 q.offset = offset;
                 q.limit = limit;
                 let actual = db.search(&q).unwrap();
+                db.search_into(&q, &mut reused_page).unwrap();
+                assert_eq!(reused_page.total, actual.total);
+                assert_eq!(reused_page.sequence, actual.sequence);
+                assert_eq!(reused_page.hits, actual.hits);
                 let reference = db.search_direct_slots(&q).unwrap();
                 assert_eq!(
                     actual.total, reference.total,
@@ -229,6 +238,20 @@ fn checked_page_preserves_global_order_visibility_filters_and_fallback_pages() {
             }
         }
     }
+    let mut invalid = Query::new("shared");
+    db.search_into(&invalid, &mut reused_page).unwrap();
+    assert!(!reused_page.hits.is_empty());
+    invalid.limit = 0;
+    assert!(db.search_into(&invalid, &mut reused_page).is_err());
+    assert_eq!(
+        (
+            reused_page.total,
+            reused_page.sequence,
+            reused_page.hits.len(),
+            reused_page.hits.capacity()
+        ),
+        (0, 0, 0, 0)
+    );
 }
 
 #[test]

@@ -1,0 +1,32 @@
+{
+  "results": {
+    "normal": {
+      "second_the200_checks": {
+        "payload.result_read": 115,
+        "payload.result_crc": 200,
+        "payload.schema_utf8": 200,
+        "payload.result_identity": 200
+      },
+      "second_the200_reused": 0,
+      "empty_final_text_capacity": 0,
+      "empty_final_result_capacity": 0,
+      "all_full_documents_verified": true
+    },
+    "reuse": {
+      "second_the200_checks": {
+        "payload.result_read": 115,
+        "payload.result_crc": 200,
+        "payload.schema_utf8": 200,
+        "payload.result_identity": 200
+      },
+      "second_the200_reused": 200,
+      "empty_final_text_capacity": 0,
+      "empty_final_result_capacity": 0,
+      "all_full_documents_verified": true
+    }
+  },
+  "instrumentation": "diagnostic-timing; retention path; one normal/reuse pair; not a latency benchmark",
+  "corpus": "existing same first10000",
+  "cache": "warm OS cache; strict source/index validation and full payload oracle",
+  "performance_not_claimed": true
+}

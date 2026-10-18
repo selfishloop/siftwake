@@ -1666,6 +1666,47 @@ impl Database {
         }
     }
 
+    /// Replace a caller-owned page, reusing eligible binary result text buffers.
+    /// Old results are consumed even on error; an error leaves an empty page.
+    /// No off-page document cache survives the call. Oversized/legacy/direct
+    /// reads retain their normal checked decoding path. Empty buffers, single
+    /// hits and checked-payload capture queries use ordinary search; text
+    /// reuse requires an exact capacity match, retaining no text slack.
+    #[cfg(feature = "bounded-engine")]
+    pub fn search_into(&self, query: &Query, page: &mut SearchPage) -> Result<()> {
+        let mut previous = std::mem::take(&mut page.hits);
+        page.total = 0;
+        page.sequence = 0;
+        let hydration = if query
+            .offset
+            .checked_add(query.limit)
+            .is_some_and(|n| n <= 4096)
+        {
+            2
+        } else {
+            1
+        };
+        if previous.is_empty()
+            || query.limit <= 1
+            || hydration != 2
+            || Self::captures_checked_page(query, hydration)
+        {
+            previous.clear();
+            *page = self.search(query)?;
+            return Ok(());
+        }
+        previous.truncate(query.limit.min(1000));
+        // Release old keys/metadata/links before filtering the next query.
+        // Only text allocations are useful to hydration; no old document cache.
+        let mut texts = Vec::with_capacity(previous.len());
+        for stored in previous {
+            texts.push(stored.document.text);
+        }
+        let mut pool = texts.into_iter();
+        *page = self.search_with_pool::<true>(query, hydration, &mut pool)?;
+        Ok(())
+    }
+
     /// Opt-in run/slot hydration with identical query semantics.
     #[cfg(feature = "experimental-direct-slot")]
     pub fn search_direct_slots(&self, query: &Query) -> Result<SearchPage> {
@@ -1689,8 +1730,25 @@ impl Database {
     }
 
     fn search_impl(&self, query: &Query, hydration: u8) -> Result<SearchPage> {
+        self.search_with_pool::<false>(query, hydration, &mut Vec::new().into_iter())
+    }
+
+    fn search_with_pool<const REUSE: bool>(
+        &self,
+        query: &Query,
+        hydration: u8,
+        pool: &mut std::vec::IntoIter<String>,
+    ) -> Result<SearchPage> {
         #[cfg(feature = "bounded-engine")]
-        if query.offset == 0
+        if !REUSE && Self::captures_checked_page(query, hydration) {
+            return self.search_impl_mode::<true, REUSE>(query, hydration, pool);
+        }
+        self.search_impl_mode::<false, REUSE>(query, hydration, pool)
+    }
+
+    #[cfg(feature = "bounded-engine")]
+    fn captures_checked_page(query: &Query, hydration: u8) -> bool {
+        query.offset == 0
             && query.limit <= 50
             && hydration == 2
             && query.text.len() <= 4096
@@ -1698,16 +1756,13 @@ impl Database {
                 .text
                 .split_whitespace()
                 .any(|term| term.chars().nth(3).is_some())
-        {
-            return self.search_impl_mode::<true>(query, hydration);
-        }
-        self.search_impl_mode::<false>(query, hydration)
     }
 
-    fn search_impl_mode<const CAPTURE: bool>(
+    fn search_impl_mode<const CAPTURE: bool, const REUSE: bool>(
         &self,
         query: &Query,
         _hydration: u8,
+        pool: &mut std::vec::IntoIter<String>,
     ) -> Result<SearchPage> {
         #[cfg(feature = "diagnostic-timing")]
         let _search = crate::timing::span("search.total");
@@ -1969,13 +2024,26 @@ impl Database {
             // One bounded window is reused across all selected runs.
             let mut scratch = Vec::new();
             for (run, slots) in by_run {
-                self.runs[run]
-                    .index
-                    .read_selected_batch(&slots, &mut scratch, &mut hydrated)?;
+                if REUSE {
+                    self.runs[run].index.read_selected_batch_with_pool::<true>(
+                        &slots,
+                        &mut scratch,
+                        &mut hydrated,
+                        pool,
+                    )?;
+                } else {
+                    self.runs[run].index.read_selected_batch(
+                        &slots,
+                        &mut scratch,
+                        &mut hydrated,
+                    )?;
+                }
             }
             hydrated.sort_unstable_by_key(|(position, _)| *position);
             hits = hydrated.into_iter().map(|(_, stored)| stored).collect();
         }
+        // Non-grouped feature profiles do not consume the previous page.
+        let _ = pool;
         Ok(SearchPage {
             total,
             sequence: self.sequence,

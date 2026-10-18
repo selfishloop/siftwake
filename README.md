@@ -1,12 +1,15 @@
 # FDB
 
-[Sonuç metni tamponu deneyi — genel geçiş reddedildi](docs/RESULT-BUFFERS-10K-20261018.md):
-aynı 200 sonuçlu sayfanın tekrarında p95 6,653→4,073 ms (-%38,78), dört
-çift/16 blok hızlı. Değişen sayfalar ve ilk kullanım aynı kazancı vermedi;
-tek sonuç p95'i ve mevcut normal okuyucu kontrolü kabulü geçmedi. OS private
-medyan +28 KiB/working set +48 KiB. Kod/test yaması arşivlendi; normal motor
-f89b827 kaynaklarına döndü, yeni API varsayılanda yok. Yeni corpus/DB yok.
-Yazma/bakım, arama p95, genel RAM/açılış/disk ve eşzamanlı/soğuk işler açık.
+[Sonuç tamponlu V3 motoru etkin](docs/RESULT-BUFFERS-ACTIVE-20261018.md):
+kullanıcı kararıyla ölçülen V3 normal `bounded-engine` profiline alındı.
+`search_into` aynı çağıran sonuç sayfasındaki uygun metin belleğini tekrar
+kullanır; eski `search` yeni sahipli sayfa döndürmeye devam eder. Önceki aynı200
+sonuç tekrarında p95 -%38,78; bu bütün sorguların veya ilk kullanımın kazancı
+değildir. Tek sonuç/normal okuyucu p95 farkları ve OS private+28KiB/WS+48KiB
+açık tutulur. Kalıcı format/feature değişmedi; yeni corpus/DB yok.
+[İlk ölçüm ve geçiş öncesi reddetme kararı](docs/RESULT-BUFFERS-10K-20261018.md)
+tarihçe olarak korunur. Yazma/bakım, genel arama/RAM/açılış/disk ve eşzamanlı/
+soğuk işler açık.
 
 [200 belgeli sayfanın profili ve reddedilen denemeler](docs/HYDRATION-10K-20261018.md):
 baskın kalem sahipli metin tahsisi/kopyası; diagnostic200 belgede2,907ms.

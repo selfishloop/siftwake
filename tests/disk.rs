@@ -376,6 +376,16 @@ fn v01_checkpoint_fixture_opens_without_rewriting_authoritative_bytes() {
     q.text = "TEKNOLOJİ yatırımları".into();
     q.linked_to = Some(Key::new("shared", "funds", "ABC"));
     assert_eq!(db.search(&q).unwrap().total, 2);
+    #[cfg(feature = "bounded-engine")]
+    {
+        q.limit = 51;
+        let mut page = db.search(&q).unwrap();
+        let expected = page.hits.clone();
+        db.search_into(&q, &mut page).unwrap();
+        assert_eq!(page.total, 2);
+        assert_eq!(page.hits, expected);
+        assert_eq!(fs::read(&log).unwrap(), original);
+    }
     assert_eq!(
         db.commit(vec![put(doc("new-v02", "yeni sürüm"))]).unwrap(),
         2

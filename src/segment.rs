@@ -1973,6 +1973,22 @@ impl DiskIndex {
         scratch: &mut Vec<u8>,
         output: &mut Vec<(usize, StoredDocument)>,
     ) -> Result<BatchReadStats> {
+        self.read_selected_batch_with_pool::<false>(
+            slots,
+            scratch,
+            output,
+            &mut Vec::new().into_iter(),
+        )
+    }
+
+    #[cfg(feature = "experimental-grouped-read")]
+    pub(crate) fn read_selected_batch_with_pool<const REUSE: bool>(
+        &self,
+        slots: &[(u32, usize)],
+        scratch: &mut Vec<u8>,
+        output: &mut Vec<(usize, StoredDocument)>,
+        pool: &mut std::vec::IntoIter<String>,
+    ) -> Result<BatchReadStats> {
         let mut previous = None;
         for &(id, _) in slots {
             if id as usize >= self.len() || self.deleted(id) || previous.is_some_and(|p| p >= id) {
@@ -2035,10 +2051,12 @@ impl DiskIndex {
                 let bytes = scratch
                     .get(begin..begin + r.len as usize)
                     .ok_or_else(|| Error::Corrupt("invalid grouped payload bounds".into()))?;
-                output.push((
-                    position,
-                    self.decode_selected(id, &r, bytes, &mut metadata)?,
-                ));
+                let stored = if REUSE {
+                    self.decode_selected_with_pool::<true>(id, &r, bytes, &mut metadata, pool)?
+                } else {
+                    self.decode_selected(id, &r, bytes, &mut metadata)?
+                };
+                output.push((position, stored));
             }
             start = next;
         }
@@ -2053,6 +2071,24 @@ impl DiskIndex {
         bytes: &[u8],
         scratch: &mut QueryTextScratch,
     ) -> Result<StoredDocument> {
+        self.decode_selected_with_pool::<false>(
+            id,
+            record,
+            bytes,
+            scratch,
+            &mut Vec::new().into_iter(),
+        )
+    }
+
+    #[cfg(feature = "experimental-grouped-read")]
+    fn decode_selected_with_pool<const REUSE: bool>(
+        &self,
+        id: u32,
+        record: &PackedRecord,
+        bytes: &[u8],
+        scratch: &mut QueryTextScratch,
+        pool: &mut std::vec::IntoIter<String>,
+    ) -> Result<StoredDocument> {
         #[cfg(feature = "diagnostic-timing")]
         let _decode = crate::timing::span("payload.decode_crc_identity");
         {
@@ -2062,7 +2098,17 @@ impl DiskIndex {
                 return Err(Error::Corrupt("segment document checksum mismatch".into()));
             }
         }
-        let stored = self.decode_payload(bytes)?;
+        #[cfg(feature = "bounded-engine")]
+        let stored = if REUSE && self.binary_payload {
+            crate::payload::checked(bytes)?.to_document_reusing(pool)?
+        } else {
+            self.decode_payload(bytes)?
+        };
+        #[cfg(not(feature = "bounded-engine"))]
+        let stored = {
+            let _ = pool;
+            self.decode_payload(bytes)?
+        };
         let key = &stored.document.key;
         {
             #[cfg(feature = "diagnostic-timing")]

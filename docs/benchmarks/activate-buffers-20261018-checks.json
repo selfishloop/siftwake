@@ -1,0 +1,145 @@
+[
+  {
+    "log": "docs/benchmarks/activate-buffers-20261018-tests.log",
+    "exit_code": 0,
+    "command": [
+      "cargo",
+      "test",
+      "--all-targets"
+    ]
+  },
+  {
+    "log": "docs/benchmarks/activate-buffers-20261018-fmt.log",
+    "exit_code": 0,
+    "command": [
+      "cargo",
+      "fmt",
+      "--check"
+    ]
+  },
+  {
+    "log": "docs/benchmarks/activate-buffers-20261018-reference.log",
+    "exit_code": 0,
+    "command": [
+      "cargo",
+      "test",
+      "--no-default-features",
+      "--test",
+      "engine"
+    ]
+  },
+  {
+    "log": "docs/benchmarks/activate-buffers-20261018-all-payload.log",
+    "exit_code": 0,
+    "command": [
+      "cargo",
+      "test",
+      "--all-features",
+      "--lib",
+      "reused_text"
+    ]
+  },
+  {
+    "log": "docs/benchmarks/activate-buffers-20261018-all-grouped.log",
+    "exit_code": 0,
+    "command": [
+      "cargo",
+      "test",
+      "--all-features",
+      "--lib",
+      "grouped_tests"
+    ]
+  },
+  {
+    "log": "docs/benchmarks/activate-buffers-20261018-all-engine.log",
+    "exit_code": 0,
+    "command": [
+      "cargo",
+      "test",
+      "--all-features",
+      "--test",
+      "engine",
+      "checked_page_preserves"
+    ]
+  },
+  {
+    "log": "docs/benchmarks/activate-buffers-20261018-all-fixture.log",
+    "exit_code": 0,
+    "command": [
+      "cargo",
+      "test",
+      "--all-features",
+      "--test",
+      "disk",
+      "v01_checkpoint_fixture"
+    ]
+  },
+  {
+    "log": "docs/benchmarks/activate-buffers-20261018-clippy.log",
+    "exit_code": 0,
+    "command": [
+      "cargo",
+      "clippy",
+      "--all-targets",
+      "--",
+      "-D",
+      "warnings"
+    ]
+  },
+  {
+    "log": "docs/benchmarks/activate-buffers-20261018-clippy-all.log",
+    "exit_code": 0,
+    "command": [
+      "cargo",
+      "clippy",
+      "--all-features",
+      "--all-targets",
+      "--",
+      "-D",
+      "warnings"
+    ]
+  },
+  {
+    "log": "docs/benchmarks/activate-buffers-20261018-clippy-reference.log",
+    "exit_code": 0,
+    "command": [
+      "cargo",
+      "clippy",
+      "--no-default-features",
+      "--all-targets",
+      "--",
+      "-D",
+      "warnings"
+    ]
+  },
+  {
+    "log": "docs/benchmarks/activate-buffers-20261018-build-timing.log",
+    "exit_code": 0,
+    "command": [
+      "cargo",
+      "build",
+      "--release",
+      "--example",
+      "measure_result_buffers",
+      "--features",
+      "diagnostic-timing"
+    ]
+  },
+  {
+    "command": [
+      "cargo",
+      "build",
+      "--release",
+      "--bin",
+      "fdb",
+      "--example",
+      "measure_result_buffers",
+      "--example",
+      "measure_content_reads",
+      "--example",
+      "measure_interleaved_reads"
+    ],
+    "exit_code": 0,
+    "log": "docs/benchmarks/activate-buffers-20261018-build-normal.log"
+  }
+]
