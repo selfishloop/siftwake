@@ -1,0 +1,31 @@
+[
+  {
+    "command": [
+      "cargo",
+      "test",
+      "--all-targets"
+    ],
+    "exit_code": 0,
+    "log": "docs\\benchmarks\\reuse-controls-20261018-probe-tests-default.log"
+  },
+  {
+    "command": [
+      "cargo",
+      "test",
+      "--all-targets",
+      "--no-default-features"
+    ],
+    "exit_code": 0,
+    "log": "docs\\benchmarks\\reuse-controls-20261018-probe-tests-reference.log"
+  },
+  {
+    "command": [
+      "cargo",
+      "test",
+      "--all-targets",
+      "--all-features"
+    ],
+    "exit_code": 0,
+    "log": "docs\\benchmarks\\reuse-controls-20261018-probe-tests-all.log"
+  }
+]

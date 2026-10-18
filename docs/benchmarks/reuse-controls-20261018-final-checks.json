@@ -1,0 +1,46 @@
+[
+  {
+    "command": [
+      "cargo",
+      "test",
+      "--lib",
+      "segment::window_tests"
+    ],
+    "exit_code": 0,
+    "log": "docs\\benchmarks\\reuse-controls-20261018-restored-window-tests.log"
+  },
+  {
+    "command": [
+      "cargo",
+      "fmt",
+      "--check"
+    ],
+    "exit_code": 0,
+    "log": "docs\\benchmarks\\reuse-controls-20261018-restored-fmt.log"
+  },
+  {
+    "command": [
+      "cargo",
+      "clippy",
+      "--all-targets",
+      "--",
+      "-D",
+      "warnings"
+    ],
+    "exit_code": 0,
+    "log": "docs\\benchmarks\\reuse-controls-20261018-restored-clippy.log"
+  },
+  {
+    "command": [
+      "cargo",
+      "clippy",
+      "--all-targets",
+      "--all-features",
+      "--",
+      "-D",
+      "warnings"
+    ],
+    "exit_code": 0,
+    "log": "docs\\benchmarks\\reuse-controls-20261018-restored-clippy-all.log"
+  }
+]

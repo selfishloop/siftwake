@@ -1,5 +1,14 @@
 # FDB
 
+[Tek programda açık/kapalı kontrol](docs/REUSE-CONTROLS-10K-20261018.md):
+38 sorguda aynı kapalı yol bile 20 düşük/18 yüksek p95 verdi; genel geçiş
+kanıtlanmadı. Thread CPU kontrolü büyük uç sürelerde bekleme payını gösterdi.
+Dar quixote okuma çağrısı 131→81; uzun negatif artışı açık. Sonuç vektörünün
+52 yerine 66 kapasiteli dönmesi ölçülen 2.464B canlı heap farkıyla eşleşti;
+bu, önceki proses RAM farkının tamamı değildir. Prototip arşivde kaldı,
+aktif motor aynı. Yazma/bakım, genel arama/RAM/açılış, sıkıştırma ve
+eşzamanlı/soğuk yük işleri açık.
+
 [Contains sonrası aynı doğrulanmış byte'ları kullanma](docs/CHECKED-PAGE-10K-20261018.md):
 dar prototipte quixote okuma131→81, ikinci CRC/decode50→0; candidate56
 kontrolü korunur. Son400-örnek/variant kontrolde p95-%11,11/tipik-%17,92,

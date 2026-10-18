@@ -1,0 +1,119 @@
+{
+  "executable": "output\\payload-isolated-20261017-control-measure_interleaved_reads-normal.exe",
+  "sha256": "D4BAAEBA45490A5D88E295658E5E520697925312E3E6CFD74A3A74D65F1B61B8",
+  "cases": [
+    0,
+    11,
+    20,
+    31
+  ],
+  "labels": {
+    "control": "Normal priority 0x20",
+    "fdb": "AboveNormal priority 0x8000"
+  },
+  "processes": 2,
+  "blocks_per_condition_per_process": 2,
+  "repeats": 10,
+  "affinity_mask": 4,
+  "cache": "warm OS cache; strict open + all oracle checks/warmup outside clocks; no eviction",
+  "observation": "QueryThreadCycleTime/GetThreadTimes before/after query clock. CPU tick quantization makes micro-query CPU ratios unsuitable.",
+  "source": "same existing first10000, no database reset/copy/corpus creation",
+  "orders": [
+    {
+      "process": 0,
+      "block": 0,
+      "priority_class": 32,
+      "command": {
+        "id": 0,
+        "seed": 0,
+        "repeats": 10
+      }
+    },
+    {
+      "process": 0,
+      "block": 1,
+      "priority_class": 32768,
+      "command": {
+        "id": 1,
+        "seed": 0,
+        "repeats": 10
+      }
+    },
+    {
+      "process": 0,
+      "block": 2,
+      "priority_class": 32768,
+      "command": {
+        "id": 2,
+        "seed": 1,
+        "repeats": 10
+      }
+    },
+    {
+      "process": 0,
+      "block": 3,
+      "priority_class": 32,
+      "command": {
+        "id": 3,
+        "seed": 1,
+        "repeats": 10
+      }
+    },
+    {
+      "process": 1,
+      "block": 0,
+      "priority_class": 32768,
+      "command": {
+        "id": 10,
+        "seed": 100,
+        "repeats": 10
+      }
+    },
+    {
+      "process": 1,
+      "block": 1,
+      "priority_class": 32,
+      "command": {
+        "id": 11,
+        "seed": 100,
+        "repeats": 10
+      }
+    },
+    {
+      "process": 1,
+      "block": 2,
+      "priority_class": 32,
+      "command": {
+        "id": 12,
+        "seed": 101,
+        "repeats": 10
+      }
+    },
+    {
+      "process": 1,
+      "block": 3,
+      "priority_class": 32768,
+      "command": {
+        "id": 13,
+        "seed": 101,
+        "repeats": 10
+      }
+    }
+  ],
+  "workers": [
+    {
+      "pid": 65888,
+      "affinity_mask": 4,
+      "executable": "C:\\Users\\Serkan\\Documents\\ChatGPT\\fdb\\output\\payload-isolated-20261017-control-measure_interleaved_reads-normal.exe",
+      "executable_sha256": "D4BAAEBA45490A5D88E295658E5E520697925312E3E6CFD74A3A74D65F1B61B8",
+      "priority_class_verified": 32
+    },
+    {
+      "pid": 56256,
+      "affinity_mask": 4,
+      "executable": "C:\\Users\\Serkan\\Documents\\ChatGPT\\fdb\\output\\payload-isolated-20261017-control-measure_interleaved_reads-normal.exe",
+      "executable_sha256": "D4BAAEBA45490A5D88E295658E5E520697925312E3E6CFD74A3A74D65F1B61B8",
+      "priority_class_verified": 32768
+    }
+  ]
+}

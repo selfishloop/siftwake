@@ -1,0 +1,876 @@
+{
+  "phase": "timing",
+  "processes": 2,
+  "cycles_per_process": 6,
+  "repeats_per_cycle": 1,
+  "pattern": "mixed",
+  "case_indices": [
+    0,
+    11,
+    18,
+    20,
+    28,
+    31,
+    34,
+    37
+  ],
+  "get_interleave": false,
+  "affinity_mask": 4,
+  "labels": {
+    "0": "off0",
+    "1": "off1 placebo",
+    "2": "on"
+  },
+  "same_process": true,
+  "executable": "output\\reuse-controls-20261018-timing.exe",
+  "executable_sha256": "529EB61B3B9C88B27FE9578DCF7BC298AD9D4B9AF77393C5BD12BBC1133493C7",
+  "cache": "warm OS cache, no eviction; strict source/index open and oracle warmup outside query clocks",
+  "corpus": "existing same first10000 from json.payload-bench; no creation/reset/copy",
+  "source_validation": "strict full open, candidate CRC/schema/UTF8/key/version; on reuses checked owned bytes at hydration",
+  "query_clock": "Query construction plus search; full oracle check and hit disposal outside clock",
+  "instrumented_timings_are_normal_speed": false,
+  "orders": [
+    {
+      "process": 0,
+      "cycle": 0,
+      "command": {
+        "id": 0,
+        "seed": 0,
+        "repeats": 1,
+        "label": 0,
+        "reuse": false,
+        "pattern": "mixed",
+        "case_indices": [
+          0,
+          11,
+          18,
+          20,
+          28,
+          31,
+          34,
+          37
+        ],
+        "get_interleave": false
+      }
+    },
+    {
+      "process": 0,
+      "cycle": 0,
+      "command": {
+        "id": 1,
+        "seed": 0,
+        "repeats": 1,
+        "label": 1,
+        "reuse": false,
+        "pattern": "mixed",
+        "case_indices": [
+          0,
+          11,
+          18,
+          20,
+          28,
+          31,
+          34,
+          37
+        ],
+        "get_interleave": false
+      }
+    },
+    {
+      "process": 0,
+      "cycle": 0,
+      "command": {
+        "id": 2,
+        "seed": 0,
+        "repeats": 1,
+        "label": 2,
+        "reuse": true,
+        "pattern": "mixed",
+        "case_indices": [
+          0,
+          11,
+          18,
+          20,
+          28,
+          31,
+          34,
+          37
+        ],
+        "get_interleave": false
+      }
+    },
+    {
+      "process": 0,
+      "cycle": 1,
+      "command": {
+        "id": 3,
+        "seed": 1,
+        "repeats": 1,
+        "label": 0,
+        "reuse": false,
+        "pattern": "mixed",
+        "case_indices": [
+          0,
+          11,
+          18,
+          20,
+          28,
+          31,
+          34,
+          37
+        ],
+        "get_interleave": false
+      }
+    },
+    {
+      "process": 0,
+      "cycle": 1,
+      "command": {
+        "id": 4,
+        "seed": 1,
+        "repeats": 1,
+        "label": 2,
+        "reuse": true,
+        "pattern": "mixed",
+        "case_indices": [
+          0,
+          11,
+          18,
+          20,
+          28,
+          31,
+          34,
+          37
+        ],
+        "get_interleave": false
+      }
+    },
+    {
+      "process": 0,
+      "cycle": 1,
+      "command": {
+        "id": 5,
+        "seed": 1,
+        "repeats": 1,
+        "label": 1,
+        "reuse": false,
+        "pattern": "mixed",
+        "case_indices": [
+          0,
+          11,
+          18,
+          20,
+          28,
+          31,
+          34,
+          37
+        ],
+        "get_interleave": false
+      }
+    },
+    {
+      "process": 0,
+      "cycle": 2,
+      "command": {
+        "id": 6,
+        "seed": 2,
+        "repeats": 1,
+        "label": 1,
+        "reuse": false,
+        "pattern": "mixed",
+        "case_indices": [
+          0,
+          11,
+          18,
+          20,
+          28,
+          31,
+          34,
+          37
+        ],
+        "get_interleave": false
+      }
+    },
+    {
+      "process": 0,
+      "cycle": 2,
+      "command": {
+        "id": 7,
+        "seed": 2,
+        "repeats": 1,
+        "label": 0,
+        "reuse": false,
+        "pattern": "mixed",
+        "case_indices": [
+          0,
+          11,
+          18,
+          20,
+          28,
+          31,
+          34,
+          37
+        ],
+        "get_interleave": false
+      }
+    },
+    {
+      "process": 0,
+      "cycle": 2,
+      "command": {
+        "id": 8,
+        "seed": 2,
+        "repeats": 1,
+        "label": 2,
+        "reuse": true,
+        "pattern": "mixed",
+        "case_indices": [
+          0,
+          11,
+          18,
+          20,
+          28,
+          31,
+          34,
+          37
+        ],
+        "get_interleave": false
+      }
+    },
+    {
+      "process": 0,
+      "cycle": 3,
+      "command": {
+        "id": 9,
+        "seed": 3,
+        "repeats": 1,
+        "label": 1,
+        "reuse": false,
+        "pattern": "mixed",
+        "case_indices": [
+          0,
+          11,
+          18,
+          20,
+          28,
+          31,
+          34,
+          37
+        ],
+        "get_interleave": false
+      }
+    },
+    {
+      "process": 0,
+      "cycle": 3,
+      "command": {
+        "id": 10,
+        "seed": 3,
+        "repeats": 1,
+        "label": 2,
+        "reuse": true,
+        "pattern": "mixed",
+        "case_indices": [
+          0,
+          11,
+          18,
+          20,
+          28,
+          31,
+          34,
+          37
+        ],
+        "get_interleave": false
+      }
+    },
+    {
+      "process": 0,
+      "cycle": 3,
+      "command": {
+        "id": 11,
+        "seed": 3,
+        "repeats": 1,
+        "label": 0,
+        "reuse": false,
+        "pattern": "mixed",
+        "case_indices": [
+          0,
+          11,
+          18,
+          20,
+          28,
+          31,
+          34,
+          37
+        ],
+        "get_interleave": false
+      }
+    },
+    {
+      "process": 0,
+      "cycle": 4,
+      "command": {
+        "id": 12,
+        "seed": 4,
+        "repeats": 1,
+        "label": 2,
+        "reuse": true,
+        "pattern": "mixed",
+        "case_indices": [
+          0,
+          11,
+          18,
+          20,
+          28,
+          31,
+          34,
+          37
+        ],
+        "get_interleave": false
+      }
+    },
+    {
+      "process": 0,
+      "cycle": 4,
+      "command": {
+        "id": 13,
+        "seed": 4,
+        "repeats": 1,
+        "label": 0,
+        "reuse": false,
+        "pattern": "mixed",
+        "case_indices": [
+          0,
+          11,
+          18,
+          20,
+          28,
+          31,
+          34,
+          37
+        ],
+        "get_interleave": false
+      }
+    },
+    {
+      "process": 0,
+      "cycle": 4,
+      "command": {
+        "id": 14,
+        "seed": 4,
+        "repeats": 1,
+        "label": 1,
+        "reuse": false,
+        "pattern": "mixed",
+        "case_indices": [
+          0,
+          11,
+          18,
+          20,
+          28,
+          31,
+          34,
+          37
+        ],
+        "get_interleave": false
+      }
+    },
+    {
+      "process": 0,
+      "cycle": 5,
+      "command": {
+        "id": 15,
+        "seed": 5,
+        "repeats": 1,
+        "label": 2,
+        "reuse": true,
+        "pattern": "mixed",
+        "case_indices": [
+          0,
+          11,
+          18,
+          20,
+          28,
+          31,
+          34,
+          37
+        ],
+        "get_interleave": false
+      }
+    },
+    {
+      "process": 0,
+      "cycle": 5,
+      "command": {
+        "id": 16,
+        "seed": 5,
+        "repeats": 1,
+        "label": 1,
+        "reuse": false,
+        "pattern": "mixed",
+        "case_indices": [
+          0,
+          11,
+          18,
+          20,
+          28,
+          31,
+          34,
+          37
+        ],
+        "get_interleave": false
+      }
+    },
+    {
+      "process": 0,
+      "cycle": 5,
+      "command": {
+        "id": 17,
+        "seed": 5,
+        "repeats": 1,
+        "label": 0,
+        "reuse": false,
+        "pattern": "mixed",
+        "case_indices": [
+          0,
+          11,
+          18,
+          20,
+          28,
+          31,
+          34,
+          37
+        ],
+        "get_interleave": false
+      }
+    },
+    {
+      "process": 1,
+      "cycle": 0,
+      "command": {
+        "id": 1000,
+        "seed": 10000,
+        "repeats": 1,
+        "label": 0,
+        "reuse": false,
+        "pattern": "mixed",
+        "case_indices": [
+          0,
+          11,
+          18,
+          20,
+          28,
+          31,
+          34,
+          37
+        ],
+        "get_interleave": false
+      }
+    },
+    {
+      "process": 1,
+      "cycle": 0,
+      "command": {
+        "id": 1001,
+        "seed": 10000,
+        "repeats": 1,
+        "label": 2,
+        "reuse": true,
+        "pattern": "mixed",
+        "case_indices": [
+          0,
+          11,
+          18,
+          20,
+          28,
+          31,
+          34,
+          37
+        ],
+        "get_interleave": false
+      }
+    },
+    {
+      "process": 1,
+      "cycle": 0,
+      "command": {
+        "id": 1002,
+        "seed": 10000,
+        "repeats": 1,
+        "label": 1,
+        "reuse": false,
+        "pattern": "mixed",
+        "case_indices": [
+          0,
+          11,
+          18,
+          20,
+          28,
+          31,
+          34,
+          37
+        ],
+        "get_interleave": false
+      }
+    },
+    {
+      "process": 1,
+      "cycle": 1,
+      "command": {
+        "id": 1003,
+        "seed": 10001,
+        "repeats": 1,
+        "label": 1,
+        "reuse": false,
+        "pattern": "mixed",
+        "case_indices": [
+          0,
+          11,
+          18,
+          20,
+          28,
+          31,
+          34,
+          37
+        ],
+        "get_interleave": false
+      }
+    },
+    {
+      "process": 1,
+      "cycle": 1,
+      "command": {
+        "id": 1004,
+        "seed": 10001,
+        "repeats": 1,
+        "label": 0,
+        "reuse": false,
+        "pattern": "mixed",
+        "case_indices": [
+          0,
+          11,
+          18,
+          20,
+          28,
+          31,
+          34,
+          37
+        ],
+        "get_interleave": false
+      }
+    },
+    {
+      "process": 1,
+      "cycle": 1,
+      "command": {
+        "id": 1005,
+        "seed": 10001,
+        "repeats": 1,
+        "label": 2,
+        "reuse": true,
+        "pattern": "mixed",
+        "case_indices": [
+          0,
+          11,
+          18,
+          20,
+          28,
+          31,
+          34,
+          37
+        ],
+        "get_interleave": false
+      }
+    },
+    {
+      "process": 1,
+      "cycle": 2,
+      "command": {
+        "id": 1006,
+        "seed": 10002,
+        "repeats": 1,
+        "label": 1,
+        "reuse": false,
+        "pattern": "mixed",
+        "case_indices": [
+          0,
+          11,
+          18,
+          20,
+          28,
+          31,
+          34,
+          37
+        ],
+        "get_interleave": false
+      }
+    },
+    {
+      "process": 1,
+      "cycle": 2,
+      "command": {
+        "id": 1007,
+        "seed": 10002,
+        "repeats": 1,
+        "label": 2,
+        "reuse": true,
+        "pattern": "mixed",
+        "case_indices": [
+          0,
+          11,
+          18,
+          20,
+          28,
+          31,
+          34,
+          37
+        ],
+        "get_interleave": false
+      }
+    },
+    {
+      "process": 1,
+      "cycle": 2,
+      "command": {
+        "id": 1008,
+        "seed": 10002,
+        "repeats": 1,
+        "label": 0,
+        "reuse": false,
+        "pattern": "mixed",
+        "case_indices": [
+          0,
+          11,
+          18,
+          20,
+          28,
+          31,
+          34,
+          37
+        ],
+        "get_interleave": false
+      }
+    },
+    {
+      "process": 1,
+      "cycle": 3,
+      "command": {
+        "id": 1009,
+        "seed": 10003,
+        "repeats": 1,
+        "label": 2,
+        "reuse": true,
+        "pattern": "mixed",
+        "case_indices": [
+          0,
+          11,
+          18,
+          20,
+          28,
+          31,
+          34,
+          37
+        ],
+        "get_interleave": false
+      }
+    },
+    {
+      "process": 1,
+      "cycle": 3,
+      "command": {
+        "id": 1010,
+        "seed": 10003,
+        "repeats": 1,
+        "label": 0,
+        "reuse": false,
+        "pattern": "mixed",
+        "case_indices": [
+          0,
+          11,
+          18,
+          20,
+          28,
+          31,
+          34,
+          37
+        ],
+        "get_interleave": false
+      }
+    },
+    {
+      "process": 1,
+      "cycle": 3,
+      "command": {
+        "id": 1011,
+        "seed": 10003,
+        "repeats": 1,
+        "label": 1,
+        "reuse": false,
+        "pattern": "mixed",
+        "case_indices": [
+          0,
+          11,
+          18,
+          20,
+          28,
+          31,
+          34,
+          37
+        ],
+        "get_interleave": false
+      }
+    },
+    {
+      "process": 1,
+      "cycle": 4,
+      "command": {
+        "id": 1012,
+        "seed": 10004,
+        "repeats": 1,
+        "label": 2,
+        "reuse": true,
+        "pattern": "mixed",
+        "case_indices": [
+          0,
+          11,
+          18,
+          20,
+          28,
+          31,
+          34,
+          37
+        ],
+        "get_interleave": false
+      }
+    },
+    {
+      "process": 1,
+      "cycle": 4,
+      "command": {
+        "id": 1013,
+        "seed": 10004,
+        "repeats": 1,
+        "label": 1,
+        "reuse": false,
+        "pattern": "mixed",
+        "case_indices": [
+          0,
+          11,
+          18,
+          20,
+          28,
+          31,
+          34,
+          37
+        ],
+        "get_interleave": false
+      }
+    },
+    {
+      "process": 1,
+      "cycle": 4,
+      "command": {
+        "id": 1014,
+        "seed": 10004,
+        "repeats": 1,
+        "label": 0,
+        "reuse": false,
+        "pattern": "mixed",
+        "case_indices": [
+          0,
+          11,
+          18,
+          20,
+          28,
+          31,
+          34,
+          37
+        ],
+        "get_interleave": false
+      }
+    },
+    {
+      "process": 1,
+      "cycle": 5,
+      "command": {
+        "id": 1015,
+        "seed": 10005,
+        "repeats": 1,
+        "label": 0,
+        "reuse": false,
+        "pattern": "mixed",
+        "case_indices": [
+          0,
+          11,
+          18,
+          20,
+          28,
+          31,
+          34,
+          37
+        ],
+        "get_interleave": false
+      }
+    },
+    {
+      "process": 1,
+      "cycle": 5,
+      "command": {
+        "id": 1016,
+        "seed": 10005,
+        "repeats": 1,
+        "label": 1,
+        "reuse": false,
+        "pattern": "mixed",
+        "case_indices": [
+          0,
+          11,
+          18,
+          20,
+          28,
+          31,
+          34,
+          37
+        ],
+        "get_interleave": false
+      }
+    },
+    {
+      "process": 1,
+      "cycle": 5,
+      "command": {
+        "id": 1017,
+        "seed": 10005,
+        "repeats": 1,
+        "label": 2,
+        "reuse": true,
+        "pattern": "mixed",
+        "case_indices": [
+          0,
+          11,
+          18,
+          20,
+          28,
+          31,
+          34,
+          37
+        ],
+        "get_interleave": false
+      }
+    }
+  ],
+  "workers": [
+    {
+      "pid": 73720,
+      "affinity_mask": 4,
+      "executable": "output\\reuse-controls-20261018-timing.exe",
+      "executable_sha256": "529EB61B3B9C88B27FE9578DCF7BC298AD9D4B9AF77393C5BD12BBC1133493C7"
+    },
+    {
+      "pid": 70296,
+      "affinity_mask": 4,
+      "executable": "output\\reuse-controls-20261018-timing.exe",
+      "executable_sha256": "529EB61B3B9C88B27FE9578DCF7BC298AD9D4B9AF77393C5BD12BBC1133493C7"
+    }
+  ]
+}

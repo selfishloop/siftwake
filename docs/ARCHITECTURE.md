@@ -1,5 +1,17 @@
 # FDB mimarisi — 0.3.1
 
+2026-10-18 aynı executable/süreçte off0/off1/on kontrolü tamamlandı.
+Normal 38-case 120 örnek/koşulda p95 plasebo da kararsız; genel geçiş yok.
+İki normal query-history düzeninde uzun negatif off0'a karşı 4/4 süreçte
+p95 artışı verdi; payload read/CRC ve ek heap işi yoktur. Quixote ikinci
+read/CRC azalması korunur. Ayrı requested-heap profilinde canlı +2.464B,
+52→66 sonuç Vec kapasitesi ×176B ile eşleşti; OS private/WS farkını tek
+başına açıklamaz. CPU/wall kontrolünde büyük bekleme gözlendi; process
+AboveNormal öncelik bunu bütünüyle çözmedi. Runtime/API/feature/format
+kaynakları başlangıca döndü. Ortak boş/negatif yol korunmalı, pozitif
+sonuç kapasitesi ayrı düzeltilip ölçülmeli; henüz uygulanmış çözüm değil.
+[Kanıtlar ve sınırlar](REUSE-CONTROLS-10K-20261018.md).
+
 2026-10-18 checked-page prototipinde doğrulanmış binary contains slice'ları
 global Key sırasıyla en fazla50 kayıt/2MiB encoded byte tutan query-local
 private Box alanında denenmiştir. Dönen50 kaydın ikinci read/CRC'si kalkar;

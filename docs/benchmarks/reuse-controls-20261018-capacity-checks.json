@@ -1,0 +1,35 @@
+[
+  {
+    "command": [
+      "rustfmt",
+      "--edition",
+      "2024",
+      "--check",
+      "C:\\Users\\Serkan\\Documents\\ChatGPT\\fdb\\docs\\benchmarks\\reuse-controls-20261018-capacity-probe.rs"
+    ],
+    "exit_code": 0,
+    "log": "docs\\benchmarks\\reuse-controls-20261018-capacity-fmt.log"
+  },
+  {
+    "command": [
+      "rustc",
+      "--edition=2024",
+      "-L",
+      "dependency=target/debug/deps",
+      "--extern",
+      "fdb=target/debug/deps/libfdb-8d12c539a9023745.rlib",
+      "C:\\Users\\Serkan\\Documents\\ChatGPT\\fdb\\docs\\benchmarks\\reuse-controls-20261018-capacity-probe.rs",
+      "-o",
+      "output/reuse-controls-20261018-capacity.exe"
+    ],
+    "exit_code": 0,
+    "log": "docs\\benchmarks\\reuse-controls-20261018-capacity-build.log"
+  },
+  {
+    "command": [
+      "C:\\Users\\Serkan\\Documents\\ChatGPT\\fdb\\output\\reuse-controls-20261018-capacity.exe"
+    ],
+    "exit_code": 0,
+    "log": "docs\\benchmarks\\reuse-controls-20261018-capacity-run.log"
+  }
+]

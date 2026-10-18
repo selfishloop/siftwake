@@ -1,5 +1,32 @@
 # FDB açık işler
 
+2026-10-18 tek-program kontrolü tamamlandı; yeni çalışma yönü daraldı.
+38-case /120 örnek/koşulda off1/off0 20 düşük/18 yüksek p95; on/off0
+22/16, on/off1 19/19. Genel p95 kabulü yok. Quixote dar tipik blok kazancı
+iki kapalı kontrol karşısında sürüyor; holmes genel kazancı kanıtlanmadı.
+Uzun negatif karışık/tek-sorgu normal düzende off0'a göre 4/4 süreçte daha
+yüksek p95; kapatılmadı. Payload read/CRC/retention sıfır, requested heap
+sayaçları aynı: CRC/codec ayarı bu kalemi hedeflemez. Büyük wall/CPU
+farkları bekleme payını kanıtladı; bütün eski artışları veya belirli bir
+uygulamayı açıklayan kök neden olarak sunulmadı. AboveNormal da plasebo
+oynaklığını gideremedi.
+
+Pozitiflerde sorgu sonrası +2.464B canlı heap: sonuç Vec kapasitesi
+52→66, 14×176B ile eşleşti. Bu, önceki +64KiB private/+170KiB WS'nin
+tamamının açıklaması değildir; yeni oracle'sız OS RAM koşusu yok. Sonraki
+kod işi: ortak boş/negatif yolu korumak, yeniden kullanım helper'ını gerçek
+pozitif aşamasında tutmak ve sonuç vektörünün fazla kapasitesini düzeltmek.
+Bu henüz uygulanmış/hızlanmış bir çözüm değil. 2MiB/50 eşik turu veya
+format değişimi yok. Genel geçiş için plasebo kontrollü bütün 38 sorgu ve
+ayrı proses RAM kapısı gerekiyor.
+
+Prototip 190/111/209 test (7/3/9 ignored), fmt ve Clippy geçti; aktif
+runtime/test/Cargo başlangıç byte'larına döndü. Geri dönen motorda 7 window
+testi, fmt/default+all-features Clippy geçti. On fazda 21 dosya ve bütün
+corpus SHA-eşit; yeni corpus/DB/reset/kopya yok. Yazma/bakım, diğer arama
+regresyonları, normal Vec/query/caller RAM, genel açılış, disk sıkıştırma,
+eşzamanlı/gerçek-cold yük açık. [Son rapor](REUSE-CONTROLS-10K-20261018.md).
+
 2026-10-18 pozitif contains sonrası ikinci payload okuması ölçüldü. Son
 izole prototipte quixote read API131→81, ikinci CRC/decode50→0, candidate
 CRC56→56; holmes1514→1467 read/1285 candidate CRC korunur. Aynı mevcut10k,
