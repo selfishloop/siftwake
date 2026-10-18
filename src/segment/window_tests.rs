@@ -132,6 +132,38 @@ fn prefetched_corrupt_record_is_checked_before_it_matches() {
 
 #[cfg(feature = "bounded-engine")]
 #[test]
+fn checked_capture_rejects_corruption_and_cuts_before_admission() {
+    for cut in [false, true] {
+        let temp = Temp::new();
+        let index = build(&temp);
+        let record = index.metadata(40).unwrap();
+        let mut file = OpenOptions::new().write(true).open(&temp.0).unwrap();
+        if cut {
+            file.set_len(record.offset + record.len as u64 - 1).unwrap();
+        } else {
+            file.seek(SeekFrom::Start(record.offset + 80)).unwrap();
+            file.write_all(&[0xff]).unwrap();
+        }
+        file.flush().unwrap();
+        let mut calls = 0;
+        assert!(
+            index
+                .binary_matches_with_capture(
+                    40,
+                    &mut QueryTextScratch::default(),
+                    &["needle".into()],
+                    &mut BTreeMap::new(),
+                    &mut 0,
+                    &mut |_, _, _| calls += 1
+                )
+                .is_err()
+        );
+        assert_eq!(calls, 0);
+    }
+}
+
+#[cfg(feature = "bounded-engine")]
+#[test]
 fn raw_ascii_matches_and_absence_reject_payload_corruption_and_truncation() {
     for read_window_enabled in [false, true] {
         let temp = Temp::new();

@@ -158,6 +158,79 @@ fn put(document: Document) -> Mutation {
     }
 }
 
+#[cfg(feature = "bounded-engine")]
+#[test]
+fn checked_page_preserves_global_order_visibility_filters_and_fallback_pages() {
+    let tmp = Temp::new();
+    let mut db = Database::open(&tmp.0).unwrap();
+    let target = Key::new("shared", "targets", "one");
+    // Small unit fixture; no benchmark corpus or persistent work slot changes.
+    for batch in 0..3 {
+        let mut mutations = Vec::new();
+        for n in 0..8 {
+            let id = n * 3 + batch;
+            let mut d = doc(&format!("{id:03}"), "İSTANBUL needle 東京 🦀");
+            d.key.collection = if id % 2 == 0 { "a" } else { "b" }.into();
+            d.fields.insert("kind".into(), json!(id % 3));
+            d.fields.insert("rank".into(), json!(id));
+            d.fields
+                .insert("nested".into(), json!([null, {"ok": true}]));
+            d.links.push(target.clone());
+            mutations.push(put(d));
+        }
+        db.commit(mutations).unwrap();
+        db.flush().unwrap();
+    }
+    let mut changed = db
+        .get(&Key::new("shared", "a", "000"))
+        .unwrap()
+        .unwrap()
+        .document;
+    changed.text = "new needle İstanbul".into();
+    db.commit(vec![
+        put(changed),
+        Mutation::Delete {
+            key: Key::new("shared", "b", "001"),
+            guard: Guard::Any,
+        },
+        put(doc("delta", "needle İstanbul")),
+    ])
+    .unwrap();
+    for text in ["needle", "needle istanbul", "zzzz", "nee", ""] {
+        for filtered in [false, true] {
+            let mut q = Query::new("shared");
+            q.text = text.into();
+            if filtered {
+                q.exact.insert("kind".into(), json!(2));
+                q.ranges.push(Range {
+                    field: "rank".into(),
+                    min: 2,
+                    max: 20,
+                });
+                q.linked_to = Some(target.clone());
+            }
+            for (offset, limit) in [(0, 1), (0, 5), (0, 50), (0, 51), (1, 5), (5000, 5)] {
+                q.offset = offset;
+                q.limit = limit;
+                let actual = db.search(&q).unwrap();
+                let reference = db.search_direct_slots(&q).unwrap();
+                assert_eq!(
+                    actual.total, reference.total,
+                    "{text}/{filtered}/{offset}/{limit}"
+                );
+                assert_eq!(actual.sequence, reference.sequence);
+                assert_eq!(
+                    actual.hits, reference.hits,
+                    "{text}/{filtered}/{offset}/{limit}"
+                );
+                for stored in actual.hits {
+                    assert_eq!(db.get(&stored.document.key).unwrap(), Some(stored));
+                }
+            }
+        }
+    }
+}
+
 #[test]
 fn durable_batch_update_delete_compaction() {
     let tmp = Temp::new();

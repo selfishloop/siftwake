@@ -1688,7 +1688,27 @@ impl Database {
         }
     }
 
-    fn search_impl(&self, query: &Query, _hydration: u8) -> Result<SearchPage> {
+    fn search_impl(&self, query: &Query, hydration: u8) -> Result<SearchPage> {
+        #[cfg(feature = "bounded-engine")]
+        if query.offset == 0
+            && query.limit <= 50
+            && hydration == 2
+            && query.text.len() <= 4096
+            && query
+                .text
+                .split_whitespace()
+                .any(|term| term.chars().count() > 3)
+        {
+            return self.search_impl_mode::<true>(query, hydration);
+        }
+        self.search_impl_mode::<false>(query, hydration)
+    }
+
+    fn search_impl_mode<const CAPTURE: bool>(
+        &self,
+        query: &Query,
+        _hydration: u8,
+    ) -> Result<SearchPage> {
         #[cfg(feature = "diagnostic-timing")]
         let _search = crate::timing::span("search.total");
         #[cfg(feature = "diagnostic-timing")]
@@ -1725,6 +1745,12 @@ impl Database {
         // Keep ordinary numbered pages bounded. Very large offsets retain the
         // original path until ranked disk cursors replace that fallback.
         let prefix_limit = query.offset.checked_add(query.limit).filter(|n| *n <= 4096);
+        #[cfg(feature = "bounded-engine")]
+        let mut checked_page = crate::segment::CheckedPage::new(query.limit);
+        #[cfg(feature = "bounded-engine")]
+        let reuse_checked = CAPTURE;
+        #[cfg(feature = "bounded-engine")]
+        let mut fallback_positions = Vec::new();
         for (n, run) in self.runs.iter().enumerate() {
             let mut mask = vec![0u64; run.index.len().div_ceil(64)];
             #[cfg(feature = "experimental-paged-metadata")]
@@ -1752,6 +1778,14 @@ impl Database {
             }
             let hidden = |id: u32| mask[id as usize / 64] & (1u64 << (id % 64)) != 0;
             let ids = if let Some(limit) = prefix_limit {
+                #[cfg(feature = "bounded-engine")]
+                let (count, ids) = if reuse_checked {
+                    run.index
+                        .prefix_matches_checked(query, &mask, limit, n, &mut checked_page)?
+                } else {
+                    run.index.prefix_matches(query, &mask, limit)?
+                };
+                #[cfg(not(feature = "bounded-engine"))]
                 let (count, ids) = run.index.prefix_matches(query, &mask, limit)?;
                 total += count;
                 ids
@@ -1779,6 +1813,8 @@ impl Database {
         #[cfg(feature = "experimental-grouped-read")]
         let mut selected = Vec::new();
         let grouped = cfg!(feature = "experimental-grouped-read") && _hydration == 2;
+        #[cfg(feature = "bounded-engine")]
+        let mut reused = Vec::new();
         let mut page_size = 0;
         let mut position = 0;
         while let Some(Reverse((key, n, slot))) = heap.pop() {
@@ -1825,6 +1861,22 @@ impl Database {
             if position >= query.offset {
                 #[cfg(feature = "experimental-grouped-read")]
                 if grouped {
+                    #[cfg(feature = "bounded-engine")]
+                    let retained = if reuse_checked && n < self.runs.len() {
+                        checked_page.take(&key, n, lists[n][slot])?
+                    } else {
+                        None
+                    };
+                    #[cfg(feature = "bounded-engine")]
+                    if let Some(stored) = retained {
+                        reused.push((page_size, stored));
+                    } else {
+                        selected.push((n, slot));
+                        if CAPTURE {
+                            fallback_positions.push(page_size);
+                        }
+                    }
+                    #[cfg(not(feature = "bounded-engine"))]
                     selected.push((n, slot));
                 }
                 if !grouped {
@@ -1868,11 +1920,33 @@ impl Database {
                 heap.push(Reverse((key, n, next)));
             }
         }
+        // Any remaining copies are outside the selected page (e.g. displaced
+        // by delta hits). Release them before allocating fallback documents.
+        #[cfg(feature = "bounded-engine")]
+        drop(checked_page);
         #[cfg(feature = "experimental-grouped-read")]
         if grouped {
             let mut by_run: BTreeMap<usize, Vec<(u32, usize)>> = BTreeMap::new();
+            #[cfg(feature = "bounded-engine")]
+            let mut hydrated = if CAPTURE {
+                reused
+            } else {
+                Vec::with_capacity(selected.len())
+            };
+            #[cfg(not(feature = "bounded-engine"))]
             let mut hydrated = Vec::with_capacity(selected.len());
-            for (position, (run, slot)) in selected.into_iter().enumerate() {
+            if CAPTURE {
+                hydrated.reserve_exact(selected.len());
+            }
+            for (ordinal, (run, slot)) in selected.into_iter().enumerate() {
+                #[cfg(feature = "bounded-engine")]
+                let position = if CAPTURE {
+                    fallback_positions[ordinal]
+                } else {
+                    ordinal
+                };
+                #[cfg(not(feature = "bounded-engine"))]
+                let position = ordinal;
                 if run == self.runs.len() {
                     let key = &delta[slot];
                     let stored = self

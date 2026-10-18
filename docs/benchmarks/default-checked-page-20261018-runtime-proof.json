@@ -1,0 +1,38 @@
+{
+  "automatic_default_reuse": {
+    "queries": 4,
+    "iterations_each": 3,
+    "quixote_reused_each": 50,
+    "candidate_crc_each": 56,
+    "second_payload_crc_each": 0,
+    "instrumented_debug_not_performance": true
+  },
+  "normal_release_matrix": {
+    "cases": 38,
+    "full_pages_and_versions_verified": true,
+    "performance_not_measured": true,
+    "phase": "matrix_checked"
+  },
+  "normal_cli": {
+    "stats": {
+      "compaction_running": false,
+      "delta_keys": 0,
+      "disk_index_bytes": 81904473,
+      "disk_posting_entries": 19221340,
+      "documents": 10000,
+      "generation": 51,
+      "log_bytes": 45,
+      "resident_documents": 0,
+      "resident_text_bytes": 0,
+      "segments": 5,
+      "sequence": 20,
+      "source_bytes": 267900709
+    },
+    "query": "quixote",
+    "total": 56,
+    "hits": 50,
+    "sequence": 20,
+    "key_order_and_versions": true,
+    "full_pages_verified_separately_by_oracle": true
+  }
+}

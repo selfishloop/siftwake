@@ -14,6 +14,8 @@ use std::sync::atomic::{AtomicU64, Ordering};
 mod payload_bench;
 
 pub(crate) mod block_check;
+#[cfg(feature = "bounded-engine")]
+mod checked_page;
 mod checksum;
 #[cfg(feature = "bounded-engine")]
 mod compact;
@@ -21,6 +23,8 @@ mod compact;
 mod covering;
 #[cfg(feature = "bounded-engine")]
 mod short_ascii;
+#[cfg(feature = "bounded-engine")]
+pub(crate) use checked_page::CheckedPage;
 #[cfg(feature = "bounded-engine")]
 pub(crate) use covering::SourceLease;
 #[cfg(feature = "bounded-engine")]
@@ -1672,11 +1676,23 @@ impl DiskIndex {
         cache: &mut BTreeMap<String, String>,
         cached_bytes: &mut usize,
     ) -> Result<bool> {
+        self.binary_matches_with_capture(id, scratch, terms, cache, cached_bytes, &mut |_, _, _| {})
+    }
+
+    fn binary_matches_with_capture(
+        &self,
+        id: u32,
+        scratch: &mut QueryTextScratch,
+        terms: &[String],
+        cache: &mut BTreeMap<String, String>,
+        cached_bytes: &mut usize,
+        capture: &mut impl FnMut(u32, &crate::payload::View<'_>, &[u8]),
+    ) -> Result<bool> {
         #[cfg(feature = "experimental-grouped-read")]
         if scratch.read_window_enabled {
-            return self.binary_window_matches(id, scratch, terms, cache, cached_bytes);
+            return self.binary_window_matches(id, scratch, terms, cache, cached_bytes, capture);
         }
-        self.binary_exact_matches(id, scratch, terms, cache, cached_bytes)
+        self.binary_exact_matches(id, scratch, terms, cache, cached_bytes, capture)
     }
 
     fn query_metadata(&self, id: u32, scratch: &mut QueryTextScratch) -> Result<PackedRecord> {
@@ -1717,6 +1733,7 @@ impl DiskIndex {
         terms: &[String],
         cache: &mut BTreeMap<String, String>,
         cached_bytes: &mut usize,
+        capture: &mut impl FnMut(u32, &crate::payload::View<'_>, &[u8]),
     ) -> Result<bool> {
         let r = self.query_metadata(id, scratch)?;
         scratch.payload.resize(r.len as usize, 0);
@@ -1748,7 +1765,12 @@ impl DiskIndex {
             if !self.query_identity(id, scratch, view.key_parts())? || view.version() != r.version {
                 return Err(Error::Corrupt("segment document identity mismatch".into()));
             }
-            Ok(scratch.matches_text(view.title(), view.text(), terms, cache, cached_bytes))
+            let matched =
+                scratch.matches_text(view.title(), view.text(), terms, cache, cached_bytes);
+            if matched {
+                capture(id, &view, &bytes);
+            }
+            Ok(matched)
         })();
         scratch.payload = bytes;
         result
@@ -1763,6 +1785,7 @@ impl DiskIndex {
         terms: &[String],
         cache: &mut BTreeMap<String, String>,
         cached_bytes: &mut usize,
+        capture: &mut impl FnMut(u32, &crate::payload::View<'_>, &[u8]),
     ) -> Result<bool> {
         let r = self.query_metadata(id, scratch)?;
         const WINDOW: usize = 256 * 1024;
@@ -1819,7 +1842,7 @@ impl DiskIndex {
         if !covered && scratch.window_prefetched && scratch.window_used * 4 < scratch.read_len * 3 {
             scratch.read_window_enabled = false;
             scratch.read_len = 0;
-            return self.binary_exact_matches(id, scratch, terms, cache, cached_bytes);
+            return self.binary_exact_matches(id, scratch, terms, cache, cached_bytes, capture);
         }
         #[cfg(feature = "diagnostic-timing")]
         {
@@ -1878,12 +1901,17 @@ impl DiskIndex {
             let view = {
                 #[cfg(feature = "diagnostic-timing")]
                 let _validation = crate::timing::span("query.payload_validation");
-                crate::payload::checked(&bytes[payload_range])?
+                crate::payload::checked(&bytes[payload_range.clone()])?
             };
             if !self.query_identity(id, scratch, view.key_parts())? || view.version() != r.version {
                 return Err(Error::Corrupt("segment document identity mismatch".into()));
             }
-            Ok(scratch.matches_text(view.title(), view.text(), terms, cache, cached_bytes))
+            let matched =
+                scratch.matches_text(view.title(), view.text(), terms, cache, cached_bytes);
+            if matched {
+                capture(id, &view, &bytes[payload_range]);
+            }
+            Ok(matched)
         })();
         scratch.payload = bytes;
         result
@@ -2392,40 +2420,72 @@ impl DiskIndex {
         mask: &[u64],
         limit: usize,
     ) -> Result<(usize, Vec<u32>)> {
+        self.prefix_matches_with_capture(q, mask, limit, &mut |_, _, _| {})
+    }
+
+    #[cfg(feature = "bounded-engine")]
+    pub(crate) fn prefix_matches_checked(
+        &self,
+        q: &Query,
+        mask: &[u64],
+        limit: usize,
+        run: usize,
+        page: &mut CheckedPage,
+    ) -> Result<(usize, Vec<u32>)> {
+        self.prefix_matches_with_capture(q, mask, limit, &mut |id, view, bytes| {
+            page.retain(run, id, view, bytes);
+        })
+    }
+
+    fn prefix_matches_with_capture(
+        &self,
+        q: &Query,
+        mask: &[u64],
+        limit: usize,
+        capture: &mut impl FnMut(u32, &crate::payload::View<'_>, &[u8]),
+    ) -> Result<(usize, Vec<u32>)> {
         let visible = self.visible_count(mask)?;
         let hidden = |id: u32| mask[id as usize / 64] & (1u64 << (id % 64)) != 0;
         let mut ids = BinaryHeap::with_capacity(limit.min(self.len()));
         let mut group = None;
-        let mut capture = true;
+        let mut capture_ids = true;
         // Within a union, collection/scalar-value postings are disjoint by
         // construction. IDs in each posting are increasing; after an ID exceeds
         // our largest retained ID the rest of that posting cannot improve it.
-        let total = self.visit_matches::<true>(q, hidden, Some(visible), limit, |id, n| {
-            if group != Some(n) {
-                group = Some(n);
-                capture = true;
-            }
-            if !capture {
-                return;
-            }
-            if ids.len() < limit {
-                ids.push(id);
-            } else if id < *ids.peek().unwrap() {
-                *ids.peek_mut().unwrap() = id;
-            } else {
-                capture = false;
-            }
-        })?;
+        let total = self.visit_matches_with_capture::<true>(
+            q,
+            hidden,
+            Some(visible),
+            limit,
+            |id, n| {
+                if group != Some(n) {
+                    group = Some(n);
+                    capture_ids = true;
+                }
+                if !capture_ids {
+                    return;
+                }
+                if ids.len() < limit {
+                    ids.push(id);
+                } else if id < *ids.peek().unwrap() {
+                    *ids.peek_mut().unwrap() = id;
+                } else {
+                    capture_ids = false;
+                }
+            },
+            capture,
+        )?;
         Ok((total, ids.into_sorted_vec()))
     }
 
-    fn visit_matches<const COUNT: bool>(
+    fn visit_matches_with_capture<const COUNT: bool>(
         &self,
         q: &Query,
         hidden: impl Fn(u32) -> bool,
         visible_total: Option<usize>,
         capture_limit: usize,
         mut emit: impl FnMut(u32, usize),
+        capture: &mut impl FnMut(u32, &crate::payload::View<'_>, &[u8]),
     ) -> Result<usize> {
         let terms = Self::query_terms(q);
         let verification_terms = self.verification_terms(q, &terms)?;
@@ -2586,12 +2646,13 @@ impl DiskIndex {
                         if let Some(result) = overlay_match {
                             include = result;
                         } else if self.binary_payload {
-                            include = self.binary_matches(
+                            include = self.binary_matches_with_capture(
                                 id,
                                 &mut text_scratch,
                                 &verification_terms,
                                 &mut folded_content,
                                 &mut folded_bytes,
+                                capture,
                             )?;
                         } else {
                             #[cfg(feature = "experimental-paged-metadata")]

@@ -1,5 +1,16 @@
 # FDB
 
+[Doğrulanmış payload tekrar kullanımı varsayılan motorda](docs/DEFAULT-CHECKED-PAGE-10K-20261018.md)
+(18 Ekim 2026, kullanıcı kararı). Normal `bounded-engine` derlemesinde uygun
+ilk sayfa sorguları, contains sırasında doğrulanan belge baytlarını sonuç
+hazırlarken yeniden kullanır. En fazla 50 kayıt ve 2 MiB kodlanmış payload
+baytı sorgu boyunca tutulur; bu sınır toplam sorgu RAM'i değildir. Kaynak
+doğrulaması korunur, kalıcı format ve bağımlılıklar değişmez. Kalan sorgu
+gerilemeleri, sonuç vektörü kapasitesi ve yazma/bakım işleri
+[açık iş listesinde](docs/OPEN-WORK.md) izlenir.
+
+Aşağıdaki deney kararları, bu varsayılan geçişinden önceki ölçüm tarihçesidir.
+
 [Arka plan işleri kapatıldıktan sonraki tekrar](docs/REUSE-REPEAT-10K-20261018.md):
 aynı executable / aynı 10k / 38 sorgu / 120 örnekle quixote p95 iki kapalı
 kontrole göre -%11,64/-%10,59; yoğun 240 örnekte -%13,68/-%14,96, ikisinde

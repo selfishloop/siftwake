@@ -1,5 +1,29 @@
 # FDB mimarisi — 0.3.1
 
+2026-10-18 güncel varsayılan: kullanıcı, ölçülen checked-page yolunun
+varsayılan motora alınmasını istedi. Önceki arşiv prototipin aynı çalışma
+algoritması mevcut `bounded-engine` profilinde etkinleştirildi; yeni feature,
+API, codec veya kalıcı format eklenmedi. Genel hız/OS RAM kabul kapısının
+geçilmesi bu kararın gerekçesi değildir; kalan farklar açık tutulur.
+
+Grouped hydration, offset=0, limit<=50, en fazla4096 UTF-8 byte sorgu ve
+en az bir terimde üçten fazla Unicode scalar koşullarında CAPTURE=true
+yolu seçilir. Sözcük adına göre özel yol yoktur. Contains doğrulamasından
+geçen aynı slice, private ve sorgu ömürlü `Box<[u8]>` içine kopyalanır;
+global Key sırasıyla en fazla50 kayıt/2MiB encoded byte tutulur. Bu bütçe
+map/key/result allocation'larını kapsamaz. Sonuç hazırlanırken aynı sahipli
+baytların ikinci dosya okuması/CRC'si kaldırılır; schema/UTF-8 yeniden
+kontrol edilir. Candidate CRC/schema/UTF-8/key/version ve kaynak lease
+korunur; yeni bir disk okuması bu istisnayı kullanamaz. Delta görünürlüğü
+ve genel sıra korunur, sayfa dışı kopyalar fallback hydration'dan önce
+bırakılır. Büyük kayıt/bütçe dışı sonuçlar ve uygun olmayan sorgular mevcut
+okuma yolunu kullanır. `--no-default-features` referans motoru etkilenmez.
+
+Sonuç Vec kapasitesindeki ölçülmüş+2.464B fazlalık bu geçişte düzeltilmedi;
+aynı ölçülen algoritma korunur. [Geçiş doğrulaması ve sınırlar](DEFAULT-CHECKED-PAGE-10K-20261018.md).
+
+## Önceki deneyler ve kararlar
+
 2026-10-18 kullanıcı arka plan işlerini kapattıktan sonra aynı frozen
 executable ile yeniden ölçüldü. Quixote 38-case / 120 örnekte iki kapalı
 kontrole göre p95 -%11,64/-%10,59; yoğun 240 örnekte -%13,68/-%14,96.

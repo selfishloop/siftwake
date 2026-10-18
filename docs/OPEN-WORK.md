@@ -1,5 +1,33 @@
 # FDB açık işler
 
+2026-10-18 güncel karar: kullanıcı talebiyle ölçülen checked-page algoritması
+varsayılan `bounded-engine` motoruna alındı. Aynı arşiv kodu/beş test;
+feature/API/kalıcı format değişikliği yok. Kaynak ve candidate doğrulaması
+korunur. Default185 test (7 ignored), referans engine17 ve all-features
+hedefli5 test, fmt ve üç profil Clippy geçti. Normal release38 sorgu tam
+oracle ve CLI kontrolü, diagnostic default reuse kanıtı geçti.
+
+Son normal release A/B: aynı10k,38 sorgu,80 örnek/motor/sorgu, sıcak cache,
+dört dengeli süreç çifti. P95:20 düşük/18 yüksek; quixote -%6,62
+(3/4 çift, tipik blok -%18,40,8/8 hızlı), quixote-whale -%11,03 (4/4).
+Beagle +%14,33 (4/4 yüksek), harpoon +%14,91, the/200 +%8,88 ve
+ishmael/130/1 +%13,12 açık; he/zx ve uzun negatif tipik blok maliyeti de
+kapanmadı. Ayrı oracle'sız24 search/771 get,4 çift: OS peak private
+8,7090→8,7363MiB (+28KiB,3/4 artış); WS12,5859→12,6797MiB
+(+96KiB,4/4 artış). Genel bütün-sorgu/OS RAM kapısı geçti denmiyor;
+varsayılan geçiş kullanıcı kararıdır. Önceki tek-executable tekrar ve
+bu iki-executable sonuç birbirine karıştırılmaz.
+
+Öncelikli küçük takip: ölçülmüş2.464B fazla sonuç Vec kapasitesi ve ortak
+boş/negatif yol. Bu geçişte kapasite veya eşik ayarı yapılmadı; yeni hız
+iddiası bunlara atfedilmez. Beagle/harpoon/sayfa p95 payları, yazma/bakım,
+normal Vec/query/caller RAM, genel açılış, disk sıkıştırma, eşzamanlı ve
+gerçek-soğuk yük açık.21 dosya ve tüm corpus SHA-eşit; FDB349.805.698B,
+SQLite583.860.224B, fixture/Cargo aynı. Yeni corpus/DB/reset/kopya yok.
+[Varsayılan geçiş raporu](DEFAULT-CHECKED-PAGE-10K-20261018.md).
+
+## Önceki ölçümler ve kararlar (varsayılan geçişinden önce)
+
 2026-10-18 arka plan işleri kapatıldıktan sonraki tekrar tamamlandı.
 Aynı SHA’lı program, aynı 10k, 38 sorgu /120 örnek/koşul: quixote p95
 -%11,64/-%10,59 (iki kapalı kontrol), ikisinde 4/4 süreç ve 23/24 blok hızlı.
