@@ -1,0 +1,722 @@
+{
+  "design": {
+    "pairs": 4,
+    "blocks_per_pair": 4,
+    "repeats_per_block": 25,
+    "affinity_mask": 4,
+    "pages_only": false,
+    "case_indices": [
+      30,
+      31,
+      35,
+      37
+    ],
+    "dense_selected_cases": true,
+    "cache": "warm OS cache; every block opens and verifies/warmups before query timing; no eviction",
+    "corpus": "same existing first10000; no generation/reset/copy",
+    "source_validation": "complete source check before timed search; unchanged CRC/schema/key/version checks",
+    "same_executable": true,
+    "programs": {
+      "control": {
+        "path": "output\\buffers-v2-20261018-normal.exe",
+        "sha256": "8AEFD96D21B6F10A9EFB28222AC19B3185B781153F1BEB72A4448EB6B7C2C975"
+      },
+      "fdb": {
+        "path": "output\\buffers-v2-20261018-normal.exe",
+        "sha256": "8AEFD96D21B6F10A9EFB28222AC19B3185B781153F1BEB72A4448EB6B7C2C975"
+      }
+    },
+    "balanced_block_first_position": true,
+    "orders": [
+      {
+        "pair": 0,
+        "block": 0,
+        "engines": [
+          "control",
+          "fdb"
+        ],
+        "command": {
+          "id": 0,
+          "seed": 0,
+          "repeats": 25
+        }
+      },
+      {
+        "pair": 0,
+        "block": 1,
+        "engines": [
+          "fdb",
+          "control"
+        ],
+        "command": {
+          "id": 1,
+          "seed": 1,
+          "repeats": 25
+        }
+      },
+      {
+        "pair": 0,
+        "block": 2,
+        "engines": [
+          "control",
+          "fdb"
+        ],
+        "command": {
+          "id": 2,
+          "seed": 2,
+          "repeats": 25
+        }
+      },
+      {
+        "pair": 0,
+        "block": 3,
+        "engines": [
+          "fdb",
+          "control"
+        ],
+        "command": {
+          "id": 3,
+          "seed": 3,
+          "repeats": 25
+        }
+      },
+      {
+        "pair": 1,
+        "block": 0,
+        "engines": [
+          "fdb",
+          "control"
+        ],
+        "command": {
+          "id": 4,
+          "seed": 10000,
+          "repeats": 25
+        }
+      },
+      {
+        "pair": 1,
+        "block": 1,
+        "engines": [
+          "control",
+          "fdb"
+        ],
+        "command": {
+          "id": 5,
+          "seed": 10001,
+          "repeats": 25
+        }
+      },
+      {
+        "pair": 1,
+        "block": 2,
+        "engines": [
+          "fdb",
+          "control"
+        ],
+        "command": {
+          "id": 6,
+          "seed": 10002,
+          "repeats": 25
+        }
+      },
+      {
+        "pair": 1,
+        "block": 3,
+        "engines": [
+          "control",
+          "fdb"
+        ],
+        "command": {
+          "id": 7,
+          "seed": 10003,
+          "repeats": 25
+        }
+      },
+      {
+        "pair": 2,
+        "block": 0,
+        "engines": [
+          "control",
+          "fdb"
+        ],
+        "command": {
+          "id": 8,
+          "seed": 20000,
+          "repeats": 25
+        }
+      },
+      {
+        "pair": 2,
+        "block": 1,
+        "engines": [
+          "fdb",
+          "control"
+        ],
+        "command": {
+          "id": 9,
+          "seed": 20001,
+          "repeats": 25
+        }
+      },
+      {
+        "pair": 2,
+        "block": 2,
+        "engines": [
+          "control",
+          "fdb"
+        ],
+        "command": {
+          "id": 10,
+          "seed": 20002,
+          "repeats": 25
+        }
+      },
+      {
+        "pair": 2,
+        "block": 3,
+        "engines": [
+          "fdb",
+          "control"
+        ],
+        "command": {
+          "id": 11,
+          "seed": 20003,
+          "repeats": 25
+        }
+      },
+      {
+        "pair": 3,
+        "block": 0,
+        "engines": [
+          "fdb",
+          "control"
+        ],
+        "command": {
+          "id": 12,
+          "seed": 30000,
+          "repeats": 25
+        }
+      },
+      {
+        "pair": 3,
+        "block": 1,
+        "engines": [
+          "control",
+          "fdb"
+        ],
+        "command": {
+          "id": 13,
+          "seed": 30001,
+          "repeats": 25
+        }
+      },
+      {
+        "pair": 3,
+        "block": 2,
+        "engines": [
+          "fdb",
+          "control"
+        ],
+        "command": {
+          "id": 14,
+          "seed": 30002,
+          "repeats": 25
+        }
+      },
+      {
+        "pair": 3,
+        "block": 3,
+        "engines": [
+          "control",
+          "fdb"
+        ],
+        "command": {
+          "id": 15,
+          "seed": 30003,
+          "repeats": 25
+        }
+      }
+    ],
+    "observe_thread": false,
+    "candidate_reuse_results": true,
+    "fresh_caller_results": false,
+    "limits_result_buffers": "Dedicated worker: both consume previous page inside query timing; shuffled selected searches without get interleaving. Not the historical search-return-only distribution."
+  },
+  "queries": [
+    {
+      "text": "the",
+      "kind": "page",
+      "offset": 0,
+      "limit": 1,
+      "total": 10000,
+      "late_matches": 0,
+      "control": {
+        "n": 400,
+        "p50_ms": 0.35575,
+        "p95_ms": 0.9235,
+        "p99_ms": 1.1074,
+        "per_process_pair_p95": [
+          0.8603000000000001,
+          0.9087999999999999,
+          0.8901,
+          0.9474
+        ],
+        "block_medians": [
+          [
+            0.1673,
+            0.32880000000000004,
+            0.40030000000000004,
+            0.29460000000000003
+          ],
+          [
+            0.3905,
+            0.34919999999999995,
+            0.15430000000000002,
+            0.3565
+          ],
+          [
+            0.357,
+            0.3305,
+            0.3864,
+            0.3402
+          ],
+          [
+            0.5235,
+            0.4113,
+            0.523,
+            0.4299
+          ]
+        ]
+      },
+      "fdb": {
+        "n": 400,
+        "p50_ms": 0.36,
+        "p95_ms": 1.0412,
+        "p99_ms": 1.2064000000000001,
+        "per_process_pair_p95": [
+          1.0807,
+          0.9882999999999998,
+          0.9531999999999999,
+          1.0064
+        ],
+        "block_medians": [
+          [
+            0.2,
+            0.2681,
+            0.30269999999999997,
+            0.3407
+          ],
+          [
+            0.4684,
+            0.3474,
+            0.2356,
+            0.4022
+          ],
+          [
+            0.44079999999999997,
+            0.3764,
+            0.3937,
+            0.3776
+          ],
+          [
+            0.48040000000000005,
+            0.3112,
+            0.31129999999999997,
+            0.3151
+          ]
+        ]
+      },
+      "change_p95_percent": 12.744991878722246,
+      "paired_p95_change_percent": [
+        25.61897012669998,
+        8.747799295774627,
+        7.089091113358048,
+        6.227570192104692
+      ],
+      "faster_process_pairs": 0,
+      "paired_block_median_changes_percent": [
+        19.54572624028692,
+        -18.461070559610715,
+        -24.38171371471398,
+        15.648336727766443,
+        19.948783610755427,
+        -0.5154639175257603,
+        52.68956578094619,
+        12.81907433380085,
+        23.473389355742302,
+        13.888048411497733,
+        1.8892339544513304,
+        10.993533215755424,
+        -8.233046800382027,
+        -24.337466569414058,
+        -40.47801147227534,
+        -26.70388462433124
+      ],
+      "median_block_change_percent": 6.441383585103377,
+      "faster_blocks": 7,
+      "leave_one_pair_out_p95_changes_percent": [
+        8.565264293419638,
+        13.00970873786409,
+        12.319309600863004,
+        18.11032468261995
+      ]
+    },
+    {
+      "text": "the",
+      "kind": "page",
+      "offset": 0,
+      "limit": 200,
+      "total": 10000,
+      "late_matches": 0,
+      "control": {
+        "n": 400,
+        "p50_ms": 4.2744,
+        "p95_ms": 6.6160000000000005,
+        "p99_ms": 7.7336,
+        "per_process_pair_p95": [
+          6.5543,
+          6.6003,
+          5.9343,
+          7.1852
+        ],
+        "block_medians": [
+          [
+            5.113,
+            5.0907,
+            3.9528999999999996,
+            4.6335
+          ],
+          [
+            4.6127,
+            4.3572999999999995,
+            3.7095000000000002,
+            4.4990000000000006
+          ],
+          [
+            3.7870999999999997,
+            3.6965000000000003,
+            3.8097,
+            3.7439
+          ],
+          [
+            4.8896,
+            4.168500000000001,
+            5.2588,
+            4.232200000000001
+          ]
+        ]
+      },
+      "fdb": {
+        "n": 400,
+        "p50_ms": 3.8510999999999997,
+        "p95_ms": 5.7122,
+        "p99_ms": 6.7624,
+        "per_process_pair_p95": [
+          5.587899999999999,
+          5.6273,
+          5.8603,
+          5.4673
+        ],
+        "block_medians": [
+          [
+            4.7765,
+            3.8872999999999998,
+            3.5978999999999997,
+            3.7735999999999996
+          ],
+          [
+            4.3472,
+            3.98,
+            3.7428,
+            3.7297
+          ],
+          [
+            4.825399999999999,
+            3.9536,
+            3.6852,
+            3.5623
+          ],
+          [
+            3.8647,
+            3.9744,
+            3.5128,
+            3.5687
+          ]
+        ]
+      },
+      "change_p95_percent": -13.660822249093108,
+      "paired_p95_change_percent": [
+        -14.74451886547763,
+        -14.741754162689569,
+        -1.246987850294068,
+        -23.90886822913767
+      ],
+      "faster_process_pairs": 4,
+      "paired_block_median_changes_percent": [
+        -6.5812634461177355,
+        -23.639185180819933,
+        -8.980748311366337,
+        -18.558325240099283,
+        -5.755847984911233,
+        -8.659031969338804,
+        0.8976951071572925,
+        -17.099355412313866,
+        27.416756885215587,
+        6.955227918301077,
+        -3.26797385620915,
+        -4.850556905900261,
+        -20.96081479057591,
+        -4.656351205469611,
+        -33.2014908344109,
+        -15.677425452483352
+      ],
+      "median_block_change_percent": -7.62014770772827,
+      "faster_blocks": 13,
+      "leave_one_pair_out_p95_changes_percent": [
+        -14.475220841443326,
+        -14.475220841443326,
+        -17.74964589235126,
+        -10.340728389915554
+      ]
+    },
+    {
+      "text": "ishmael",
+      "kind": "page",
+      "offset": 60,
+      "limit": 200,
+      "total": 260,
+      "late_matches": 39,
+      "control": {
+        "n": 400,
+        "p50_ms": 11.8109,
+        "p95_ms": 15.452399999999999,
+        "p99_ms": 16.5737,
+        "per_process_pair_p95": [
+          14.9307,
+          15.1037,
+          14.639100000000001,
+          15.680699999999998
+        ],
+        "block_medians": [
+          [
+            12.0482,
+            11.7991,
+            11.5762,
+            11.299399999999999
+          ],
+          [
+            12.981100000000001,
+            10.636899999999999,
+            10.8677,
+            11.7841
+          ],
+          [
+            11.278500000000001,
+            11.6132,
+            11.8061,
+            11.2078
+          ],
+          [
+            14.0382,
+            11.694899999999999,
+            14.9768,
+            11.495
+          ]
+        ]
+      },
+      "fdb": {
+        "n": 400,
+        "p50_ms": 11.4189,
+        "p95_ms": 14.406600000000001,
+        "p99_ms": 15.854099999999999,
+        "per_process_pair_p95": [
+          15.2293,
+          14.4476,
+          14.0551,
+          13.1646
+        ],
+        "block_medians": [
+          [
+            12.7711,
+            11.3963,
+            10.8908,
+            10.9663
+          ],
+          [
+            12.4464,
+            12.0189,
+            11.1021,
+            11.6715
+          ],
+          [
+            12.6624,
+            11.4368,
+            11.2452,
+            10.7842
+          ],
+          [
+            11.6256,
+            11.1362,
+            11.0123,
+            11.0913
+          ]
+        ]
+      },
+      "change_p95_percent": -6.767880717558428,
+      "paired_p95_change_percent": [
+        1.9999062334652873,
+        -4.343968696412137,
+        -3.989316283104849,
+        -16.045839790315476
+      ],
+      "faster_process_pairs": 3,
+      "paired_block_median_changes_percent": [
+        6.000066399960158,
+        -3.4138196981125635,
+        -5.920768473246829,
+        -2.9479441386268124,
+        -4.119065410481393,
+        12.992507215448136,
+        2.1568501154798136,
+        -0.9555248173386266,
+        12.270248703284992,
+        -1.518961182103129,
+        -4.750933839286475,
+        -3.7795106979068183,
+        -17.185964012480227,
+        -4.777296086328208,
+        -26.47094172319855,
+        -3.511961722488033
+      ],
+      "median_block_change_percent": -3.4628907103002984,
+      "faster_blocks": 12,
+      "leave_one_pair_out_p95_changes_percent": [
+        -9.239506140934605,
+        -8.886749665656634,
+        -7.35305466237941,
+        -1.9590047664186039
+      ]
+    },
+    {
+      "text": "quixote",
+      "kind": "page",
+      "offset": 57,
+      "limit": 50,
+      "total": 56,
+      "late_matches": 8,
+      "control": {
+        "n": 400,
+        "p50_ms": 1.8022,
+        "p95_ms": 2.5599,
+        "p99_ms": 3.1497,
+        "per_process_pair_p95": [
+          2.509,
+          2.3838000000000004,
+          2.4818000000000002,
+          2.7494
+        ],
+        "block_medians": [
+          [
+            1.8419,
+            1.9421,
+            1.6845,
+            1.6604
+          ],
+          [
+            1.7233999999999998,
+            1.7464,
+            1.7254,
+            1.694
+          ],
+          [
+            1.8338,
+            1.8315,
+            1.7869,
+            1.7993
+          ],
+          [
+            2.0979,
+            1.7733,
+            2.1031,
+            1.8448
+          ]
+        ]
+      },
+      "fdb": {
+        "n": 400,
+        "p50_ms": 1.7806,
+        "p95_ms": 2.5492000000000004,
+        "p99_ms": 2.9878,
+        "per_process_pair_p95": [
+          2.6742,
+          2.5492000000000004,
+          2.5003,
+          2.3262
+        ],
+        "block_medians": [
+          [
+            2.1194,
+            1.7857999999999998,
+            1.6978,
+            1.6784000000000001
+          ],
+          [
+            1.9107,
+            1.9195,
+            1.7484,
+            1.7462
+          ],
+          [
+            2.2721999999999998,
+            1.8018,
+            1.7612,
+            1.7388
+          ],
+          [
+            1.903,
+            1.7631000000000001,
+            1.6941,
+            1.754
+          ]
+        ]
+      },
+      "change_p95_percent": -0.41798507754207126,
+      "paired_p95_change_percent": [
+        6.584296532483069,
+        6.938501552143639,
+        0.7454267064227471,
+        -15.392449261657093
+      ],
+      "faster_process_pairs": 1,
+      "paired_block_median_changes_percent": [
+        15.065964493186378,
+        -8.04798928994388,
+        0.7895517957850817,
+        1.0840761262346454,
+        10.868051526053168,
+        9.91181859825927,
+        1.3330242262663772,
+        3.0814639905549113,
+        23.906641945686523,
+        -1.6216216216216162,
+        -1.438245005316463,
+        -3.362418718390481,
+        -9.290242623575962,
+        -0.5751987819319959,
+        -19.447482288050978,
+        -4.921942758022546
+      ],
+      "median_block_change_percent": 0.1071765069265429,
+      "faster_blocks": 8,
+      "leave_one_pair_out_p95_changes_percent": [
+        -2.347161572052403,
+        -3.2424633609233755,
+        -0.6508437585252658,
+        9.970954356846494
+      ]
+    }
+  ],
+  "lower_p95_cases": 3,
+  "higher_p95_cases": 1,
+  "interpretation": "Short exclusive sessions, per-block source validation/warmup outside timing; two resident oracle workers, no concurrent database queries. Not identical to a continuously open single-process matrix. Pooled p95 and block medians describe different distributions; no automatic significance claim."
+}

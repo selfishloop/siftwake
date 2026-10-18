@@ -1,0 +1,354 @@
+{
+  "normal": [
+    {
+      "step": 0,
+      "text_bytes": 5383655,
+      "spans": {
+        "payload.copy_text": {
+          "calls": 200,
+          "elapsed_ns": 2729500
+        },
+        "payload.materialize": {
+          "calls": 200,
+          "elapsed_ns": 3686600
+        },
+        "payload.result_crc": {
+          "calls": 200,
+          "elapsed_ns": 792500
+        },
+        "payload.result_identity": {
+          "calls": 200,
+          "elapsed_ns": 62800
+        },
+        "payload.result_read": {
+          "calls": 115,
+          "elapsed_ns": 2029700
+        },
+        "payload.schema_utf8": {
+          "calls": 200,
+          "elapsed_ns": 667900
+        },
+        "search.total": {
+          "calls": 1,
+          "elapsed_ns": 9115600
+        }
+      }
+    },
+    {
+      "step": 1,
+      "text_bytes": 5383655,
+      "spans": {
+        "payload.copy_text": {
+          "calls": 200,
+          "elapsed_ns": 1380600
+        },
+        "payload.materialize": {
+          "calls": 200,
+          "elapsed_ns": 2004100
+        },
+        "payload.result_crc": {
+          "calls": 200,
+          "elapsed_ns": 616400
+        },
+        "payload.result_identity": {
+          "calls": 200,
+          "elapsed_ns": 48000
+        },
+        "payload.result_read": {
+          "calls": 115,
+          "elapsed_ns": 1289800
+        },
+        "payload.schema_utf8": {
+          "calls": 200,
+          "elapsed_ns": 565600
+        },
+        "search.total": {
+          "calls": 1,
+          "elapsed_ns": 5617100
+        }
+      }
+    },
+    {
+      "step": 2,
+      "text_bytes": 1227203,
+      "spans": {
+        "payload.copy_text": {
+          "calls": 50,
+          "elapsed_ns": 95900
+        },
+        "payload.materialize": {
+          "calls": 50,
+          "elapsed_ns": 209100
+        },
+        "payload.schema_utf8": {
+          "calls": 50,
+          "elapsed_ns": 140100
+        },
+        "search.total": {
+          "calls": 1,
+          "elapsed_ns": 2082300
+        }
+      }
+    },
+    {
+      "step": 3,
+      "text_bytes": 5383655,
+      "spans": {
+        "payload.copy_text": {
+          "calls": 200,
+          "elapsed_ns": 1546700
+        },
+        "payload.materialize": {
+          "calls": 200,
+          "elapsed_ns": 2246600
+        },
+        "payload.result_crc": {
+          "calls": 200,
+          "elapsed_ns": 682800
+        },
+        "payload.result_identity": {
+          "calls": 200,
+          "elapsed_ns": 61500
+        },
+        "payload.result_read": {
+          "calls": 115,
+          "elapsed_ns": 1383800
+        },
+        "payload.schema_utf8": {
+          "calls": 200,
+          "elapsed_ns": 607300
+        },
+        "search.total": {
+          "calls": 1,
+          "elapsed_ns": 5704500
+        }
+      }
+    },
+    {
+      "step": 4,
+      "text_bytes": 32272,
+      "spans": {
+        "payload.copy_text": {
+          "calls": 1,
+          "elapsed_ns": 18400
+        },
+        "payload.materialize": {
+          "calls": 1,
+          "elapsed_ns": 25000
+        },
+        "payload.result_crc": {
+          "calls": 1,
+          "elapsed_ns": 5000
+        },
+        "payload.result_identity": {
+          "calls": 1,
+          "elapsed_ns": 1000
+        },
+        "payload.result_read": {
+          "calls": 1,
+          "elapsed_ns": 16700
+        },
+        "payload.schema_utf8": {
+          "calls": 1,
+          "elapsed_ns": 7500
+        },
+        "search.total": {
+          "calls": 1,
+          "elapsed_ns": 262700
+        }
+      }
+    },
+    {
+      "step": 5,
+      "text_bytes": 0,
+      "spans": {
+        "payload.schema_utf8": {
+          "calls": 56,
+          "elapsed_ns": 218400
+        },
+        "search.total": {
+          "calls": 1,
+          "elapsed_ns": 2905100
+        }
+      }
+    }
+  ],
+  "reuse": [
+    {
+      "step": 0,
+      "text_bytes": 5383655,
+      "spans": {
+        "payload.copy_text": {
+          "calls": 200,
+          "elapsed_ns": 2035500
+        },
+        "payload.materialize": {
+          "calls": 200,
+          "elapsed_ns": 2774000
+        },
+        "payload.result_crc": {
+          "calls": 200,
+          "elapsed_ns": 509800
+        },
+        "payload.result_identity": {
+          "calls": 200,
+          "elapsed_ns": 41500
+        },
+        "payload.result_read": {
+          "calls": 115,
+          "elapsed_ns": 1121000
+        },
+        "payload.schema_utf8": {
+          "calls": 200,
+          "elapsed_ns": 534000
+        },
+        "search.total": {
+          "calls": 1,
+          "elapsed_ns": 6234200
+        }
+      }
+    },
+    {
+      "step": 1,
+      "text_bytes": 5383655,
+      "spans": {
+        "payload.copy_text": {
+          "calls": 200,
+          "elapsed_ns": 340800
+        },
+        "payload.materialize": {
+          "calls": 200,
+          "elapsed_ns": 703400
+        },
+        "payload.result_crc": {
+          "calls": 200,
+          "elapsed_ns": 505400
+        },
+        "payload.result_identity": {
+          "calls": 200,
+          "elapsed_ns": 38500
+        },
+        "payload.result_read": {
+          "calls": 115,
+          "elapsed_ns": 996000
+        },
+        "payload.schema_utf8": {
+          "calls": 200,
+          "elapsed_ns": 511500
+        },
+        "payload.text_reused": {
+          "calls": 200,
+          "elapsed_ns": 319400
+        },
+        "search.total": {
+          "calls": 1,
+          "elapsed_ns": 3408900
+        }
+      }
+    },
+    {
+      "step": 2,
+      "text_bytes": 1227203,
+      "spans": {
+        "payload.copy_text": {
+          "calls": 50,
+          "elapsed_ns": 79600
+        },
+        "payload.materialize": {
+          "calls": 50,
+          "elapsed_ns": 231300
+        },
+        "payload.schema_utf8": {
+          "calls": 50,
+          "elapsed_ns": 143300
+        },
+        "search.total": {
+          "calls": 1,
+          "elapsed_ns": 2226100
+        }
+      }
+    },
+    {
+      "step": 3,
+      "text_bytes": 5383655,
+      "spans": {
+        "payload.copy_text": {
+          "calls": 200,
+          "elapsed_ns": 1819800
+        },
+        "payload.materialize": {
+          "calls": 200,
+          "elapsed_ns": 2365200
+        },
+        "payload.result_crc": {
+          "calls": 200,
+          "elapsed_ns": 528100
+        },
+        "payload.result_identity": {
+          "calls": 200,
+          "elapsed_ns": 41500
+        },
+        "payload.result_read": {
+          "calls": 115,
+          "elapsed_ns": 1068000
+        },
+        "payload.schema_utf8": {
+          "calls": 200,
+          "elapsed_ns": 530700
+        },
+        "search.total": {
+          "calls": 1,
+          "elapsed_ns": 5200100
+        }
+      }
+    },
+    {
+      "step": 4,
+      "text_bytes": 32272,
+      "spans": {
+        "payload.copy_text": {
+          "calls": 1,
+          "elapsed_ns": 2800
+        },
+        "payload.materialize": {
+          "calls": 1,
+          "elapsed_ns": 9400
+        },
+        "payload.result_crc": {
+          "calls": 1,
+          "elapsed_ns": 6700
+        },
+        "payload.result_identity": {
+          "calls": 1,
+          "elapsed_ns": 1100
+        },
+        "payload.result_read": {
+          "calls": 1,
+          "elapsed_ns": 15100
+        },
+        "payload.schema_utf8": {
+          "calls": 1,
+          "elapsed_ns": 7200
+        },
+        "search.total": {
+          "calls": 1,
+          "elapsed_ns": 233100
+        }
+      }
+    },
+    {
+      "step": 5,
+      "text_bytes": 0,
+      "spans": {
+        "payload.schema_utf8": {
+          "calls": 56,
+          "elapsed_ns": 227800
+        },
+        "search.total": {
+          "calls": 1,
+          "elapsed_ns": 3066800
+        }
+      }
+    }
+  ]
+}

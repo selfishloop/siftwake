@@ -1,0 +1,22 @@
+    Checking fdb v0.3.1 (C:\Users\Serkan\Documents\ChatGPT\fdb)
+error[E0061]: this method takes 5 arguments but 4 arguments were supplied
+    --> src\segment\grouped_tests.rs:253:19
+     |
+ 253 |             index.decode_selected(64, &record, &bytes, &mut cursor),
+     |                   ^^^^^^^^^^^^^^^---------------------------------- argument #5 of type `&mut std::vec::IntoIter<model::StoredDocument>` is missing
+     |
+note: method defined here
+    --> src\segment.rs:2065:8
+     |
+2065 |     fn decode_selected<const REUSE: bool>(
+     |        ^^^^^^^^^^^^^^^
+...
+2071 |         pool: &mut std::vec::IntoIter<StoredDocument>,
+     |         ---------------------------------------------
+help: provide the argument
+     |
+ 253 |             index.decode_selected(64, &record, &bytes, &mut cursor, /* &mut IntoIter<StoredDocument> */),
+     |                                                                   +++++++++++++++++++++++++++++++++++++
+
+For more information about this error, try `rustc --explain E0061`.
+error: could not compile `fdb` (lib test) due to 1 previous error

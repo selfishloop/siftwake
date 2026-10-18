@@ -1,0 +1,723 @@
+diff --git a/examples/measure_result_buffers.rs b/examples/measure_result_buffers.rs
+new file mode 100644
+index 0000000..82595a8
+--- /dev/null
++++ b/examples/measure_result_buffers.rs
+@@ -0,0 +1,264 @@
++//! Optional caller-result reuse against normal search, same existing corpus.
++#[cfg(feature = "diagnostic-memory")]
++#[path = "../tools/bench_support/allocation.rs"]
++mod allocation;
++#[cfg(feature = "diagnostic-memory")]
++#[global_allocator]
++static ALLOCATOR: allocation::Tracking = allocation::Tracking;
++#[path = "../tools/bench_support/memory_corpus.rs"]
++mod input;
++#[path = "../tools/bench_support/read_matrix.rs"]
++#[allow(dead_code)]
++mod matrix;
++#[path = "../tools/bench_support/content_reads.rs"]
++#[allow(dead_code)]
++mod reads;
++use fdb::{Database, Query, SearchPage};
++use serde::Deserialize;
++use serde_json::json;
++use std::{
++    io::{BufRead, Write},
++    path::Path,
++    time::Instant,
++};
++
++#[derive(Deserialize)]
++#[serde(deny_unknown_fields)]
++struct Block {
++    id: u64,
++    seed: u64,
++    repeats: usize,
++}
++fn empty() -> SearchPage {
++    SearchPage {
++        total: 0,
++        sequence: 0,
++        hits: Vec::new(),
++    }
++}
++fn run(db: &Database, query: &Query, page: &mut SearchPage, reuse: bool) -> input::Result<()> {
++    #[cfg(feature = "bounded-engine")]
++    if reuse {
++        db.search_into(query, page)?;
++        return Ok(());
++    }
++    assert!(!reuse, "reuse requires bounded-engine");
++    // Both contracts consume the previous page inside the timed call.
++    page.hits.clear();
++    *page = db.search(query)?;
++    Ok(())
++}
++fn query(text: &str, offset: usize, limit: usize) -> Query {
++    let mut q = Query::new("shared");
++    q.collection = Some("texts".into());
++    q.text = text.into();
++    q.offset = offset;
++    q.limit = limit;
++    q
++}
++fn check(matrix: &matrix::Matrix, case: &matrix::Case, page: &SearchPage) {
++    assert_eq!(page.total, case.total);
++    assert_eq!(page.sequence, 20);
++    assert_eq!(page.hits.len(), case.ids.len());
++    for (stored, id) in page.hits.iter().zip(&case.ids) {
++        assert_eq!(stored, &matrix.documents[id]);
++    }
++}
++fn shuffle(items: &mut [usize], state: &mut u64) {
++    for n in (1..items.len()).rev() {
++        *state ^= *state << 13;
++        *state ^= *state >> 7;
++        *state ^= *state << 17;
++        items.swap(n, *state as usize % (n + 1));
++    }
++}
++fn memory_probe(db: &Database, reuse: bool) -> input::Result<()> {
++    let mut page = empty();
++    for round in 0..3 {
++        for (text, offset, limit, total) in [
++            ("the", 0, 50, 10000usize),
++            ("quixote", 0, 50, 56),
++            ("he", 0, 50, 10000),
++            ("quixote whale", 0, 50, 44),
++            ("zx", 0, 50, 0),
++            ("the zx", 0, 50, 0),
++            ("the", 9950, 50, 10000),
++            ("the", 0, 200, 10000),
++        ] {
++            run(db, &query(text, offset, limit), &mut page, reuse)?;
++            assert_eq!(page.total, total);
++            assert_eq!(page.sequence, 20);
++            assert_eq!(page.hits.len(), total.saturating_sub(offset).min(limit));
++            let mut previous = None;
++            for s in &page.hits {
++                let id: usize = s.document.key.id.parse()?;
++                assert_eq!(
++                    (&*s.document.key.scope, &*s.document.key.collection),
++                    ("shared", "texts")
++                );
++                assert!(previous.is_none_or(|n| n < id));
++                previous = Some(id);
++                assert_eq!(s.version, (id / 500 + 1) as u64);
++            }
++            println!(
++                "{}",
++                json!({"phase":"query_memory_result","round":round,"text":text,"offset":offset,"limit":limit,"hits":page.hits.len()})
++            );
++        }
++        // Match the ordinary oracle-free probe's lifetime and key reads.
++        for n in 0..256 {
++            let id = n * 9999 / 255;
++            let key = fdb::Key::new("shared", "texts", &format!("{id:010}"));
++            let got = db.get(&key)?.ok_or("missing key")?;
++            assert_eq!(got.document.key, key);
++            assert_eq!(got.version, (id / 500 + 1) as u64);
++        }
++        assert!(
++            db.get(&fdb::Key::new("shared", "texts", "9999999999"))?
++                .is_none()
++        );
++    }
++    drop(page);
++    println!(
++        "{}",
++        json!({"phase":"query_memory_verified","rounds":3,"searches":24,"gets":771,"oracle_loaded":false,"performance_not_measured":true,"full_payload_equality_in_separate_matrix":true})
++    );
++    Ok(())
++}
++fn main() -> input::Result<()> {
++    let args: Vec<_> = std::env::args().collect();
++    let reuse = args.iter().any(|s| s == "--reuse-results");
++    let fresh = args.iter().any(|s| s == "--fresh-results");
++    let path = Path::new("data/benchmark-work/fdb");
++    if !path.is_dir() {
++        return Err("existing fixed slot required".into());
++    }
++    if args.iter().any(|s| s == "--memory-probe") {
++        let now = Instant::now();
++        let db = Database::open(path)?;
++        assert_eq!((db.stats()?.documents, db.stats()?.sequence), (10000, 20));
++        println!(
++            "{}",
++            json!({"phase":"opened","engine":"fdb","open_ms":now.elapsed().as_secs_f64()*1000.,"pending_source_checks":db.pending_source_checks()?,"reuse":reuse})
++        );
++        return memory_probe(&db, reuse);
++    }
++    let mut matrix = matrix::Matrix::load()?;
++    if args.iter().any(|s| s == "--retention-probe") {
++        let db = Database::open(path)?;
++        let mut page = empty();
++        for (step, n) in [31, 31, 33, 31, 30, 37].into_iter().enumerate() {
++            let c = &matrix.cases[n];
++            let q = query(&c.text, c.offset, c.limit);
++            #[cfg(feature = "diagnostic-timing")]
++            let _ = fdb::timing::take();
++            #[cfg(feature = "diagnostic-memory")]
++            let before = allocation::reset();
++            run(&db, &q, &mut page, reuse)?;
++            #[cfg(feature = "diagnostic-memory")]
++            let (live, peak, calls) = allocation::snapshot();
++            #[allow(unused_mut)]
++            let mut row = json!({"phase":"retention","reuse":reuse,"step":step,"case_index":n,"text":c.text,"offset":c.offset,"limit":c.limit,"hits":page.hits.len(),"text_bytes":page.hits.iter().map(|s|s.document.text.len()).sum::<usize>(),"text_capacity":page.hits.iter().map(|s|s.document.text.capacity()).sum::<usize>(),"result_capacity":page.hits.capacity(),"full_document_checks":true});
++            #[cfg(feature = "diagnostic-memory")]
++            {
++                row["live_requested_delta_bytes"] = json!(live as i64 - before as i64);
++                row["additional_requested_peak_bytes"] = json!(peak.saturating_sub(before));
++                row["allocation_calls"] = json!(calls);
++            }
++            #[cfg(feature = "diagnostic-timing")]
++            {
++                row["spans"] = json!(fdb::timing::take());
++            }
++            check(&matrix, c, &page);
++            println!("{row}");
++        }
++        return Ok(());
++    }
++    let pages_only = args.iter().any(|s| s == "--pages-only");
++    let case_indices = if let Some(at) = args.iter().position(|s| s == "--case-indices") {
++        let selected: Vec<usize> = args
++            .get(at + 1)
++            .ok_or("missing indices")?
++            .split(',')
++            .map(str::parse)
++            .collect::<Result<_, _>>()?;
++        let unique: std::collections::BTreeSet<_> = selected.iter().copied().collect();
++        if selected.is_empty()
++            || selected.len() != unique.len()
++            || selected.iter().any(|n| *n >= 38)
++        {
++            return Err("bad indices".into());
++        }
++        matrix.cases = matrix
++            .cases
++            .into_iter()
++            .enumerate()
++            .filter_map(|(n, c)| unique.contains(&n).then_some(c))
++            .collect();
++        Some(selected)
++    } else {
++        None
++    };
++    if pages_only {
++        matrix.cases.retain(|c| c.kind == "page");
++    }
++    println!(
++        "{}",
++        json!({"phase":"worker_ready","cases":matrix.cases.len(),"pages_only":pages_only,"case_indices":case_indices,"diagnostic_timing":cfg!(feature="diagnostic-timing"),"diagnostic_memory":cfg!(feature="diagnostic-memory"),"reuse_results":reuse,"previous_result_release_inside_timing":true})
++    );
++    std::io::stdout().flush()?;
++    for line in std::io::stdin().lock().lines() {
++        let command: Block = serde_json::from_str(&line?)?;
++        if !(1..=200).contains(&command.repeats) {
++            return Err("bad repeats".into());
++        }
++        let db = Database::open(path)?;
++        assert_eq!(
++            (
++                db.stats()?.documents,
++                db.stats()?.delta_keys,
++                db.stats()?.sequence
++            ),
++            (10000, 0, 20)
++        );
++        let mut page = empty();
++        for case in &matrix.cases {
++            run(
++                &db,
++                &query(&case.text, case.offset, case.limit),
++                &mut page,
++                reuse,
++            )?;
++            check(&matrix, case, &page);
++        }
++        let mut state = command.seed + 1;
++        let mut order: Vec<_> = (0..matrix.cases.len()).collect();
++        let mut samples = vec![Vec::new(); matrix.cases.len()];
++        for _ in 0..command.repeats {
++            shuffle(&mut order, &mut state);
++            for &n in &order {
++                let c = &matrix.cases[n];
++                if fresh {
++                    page = empty();
++                }
++                let now = Instant::now();
++                run(&db, &query(&c.text, c.offset, c.limit), &mut page, reuse)?;
++                samples[n].push(now.elapsed().as_secs_f64() * 1000.);
++                check(&matrix, c, &page);
++            }
++        }
++        println!(
++            "{}",
++            json!({"phase":"matrix_reads","seed":command.seed,"repeats":command.repeats,"queries":matrix.cases.iter().enumerate().map(|(n,c)|json!({"text":c.text,"kind":c.kind,"offset":c.offset,"limit":c.limit,"total":c.total,"late_matches":c.late_matches,"timing":reads::summary(&samples[n])})).collect::<Vec<_>>(),"full_document_checks":true,"cache":"warm OS cache; each block full source validation and untimed warmup; no eviction","includes_previous_result_release":true,"includes_get_interleaving":false})
++        );
++        drop(page);
++        assert_eq!(db.pending_source_checks()?, 0);
++        drop(db);
++        println!(
++            "{}",
++            json!({"phase":"block_done","id":command.id,"database_released":true})
++        );
++        std::io::stdout().flush()?;
++    }
++    Ok(())
++}
+diff --git a/src/engine.rs b/src/engine.rs
+index bcf92d1..a2d7c55 100644
+--- a/src/engine.rs
++++ b/src/engine.rs
+@@ -1666,6 +1666,47 @@ impl Database {
+         }
+     }
+ 
++    /// Replace a caller-owned page, reusing eligible binary result text buffers.
++    /// Old results are consumed even on error; an error leaves an empty page.
++    /// No off-page document cache survives the call. Oversized/legacy/direct
++    /// reads retain their normal checked decoding path. Empty buffers, single
++    /// hits and checked-payload capture queries use ordinary search; text
++    /// reuse requires an exact capacity match, retaining no text slack.
++    #[cfg(feature = "bounded-engine")]
++    pub fn search_into(&self, query: &Query, page: &mut SearchPage) -> Result<()> {
++        let mut previous = std::mem::take(&mut page.hits);
++        page.total = 0;
++        page.sequence = 0;
++        let hydration = if query
++            .offset
++            .checked_add(query.limit)
++            .is_some_and(|n| n <= 4096)
++        {
++            2
++        } else {
++            1
++        };
++        if previous.is_empty()
++            || query.limit <= 1
++            || hydration != 2
++            || Self::captures_checked_page(query, hydration)
++        {
++            previous.clear();
++            *page = self.search(query)?;
++            return Ok(());
++        }
++        previous.truncate(query.limit.min(1000));
++        // Release old keys/metadata/links before filtering the next query.
++        // Only text allocations are useful to hydration; no old document cache.
++        let mut texts = Vec::with_capacity(previous.len());
++        for stored in previous {
++            texts.push(stored.document.text);
++        }
++        let mut pool = texts.into_iter();
++        *page = self.search_with_pool::<true>(query, hydration, &mut pool)?;
++        Ok(())
++    }
++
+     /// Opt-in run/slot hydration with identical query semantics.
+     #[cfg(feature = "experimental-direct-slot")]
+     pub fn search_direct_slots(&self, query: &Query) -> Result<SearchPage> {
+@@ -1689,8 +1730,25 @@ impl Database {
+     }
+ 
+     fn search_impl(&self, query: &Query, hydration: u8) -> Result<SearchPage> {
++        self.search_with_pool::<false>(query, hydration, &mut Vec::new().into_iter())
++    }
++
++    fn search_with_pool<const REUSE: bool>(
++        &self,
++        query: &Query,
++        hydration: u8,
++        pool: &mut std::vec::IntoIter<String>,
++    ) -> Result<SearchPage> {
+         #[cfg(feature = "bounded-engine")]
+-        if query.offset == 0
++        if !REUSE && Self::captures_checked_page(query, hydration) {
++            return self.search_impl_mode::<true, REUSE>(query, hydration, pool);
++        }
++        self.search_impl_mode::<false, REUSE>(query, hydration, pool)
++    }
++
++    #[cfg(feature = "bounded-engine")]
++    fn captures_checked_page(query: &Query, hydration: u8) -> bool {
++        query.offset == 0
+             && query.limit <= 50
+             && hydration == 2
+             && query.text.len() <= 4096
+@@ -1698,16 +1756,13 @@ impl Database {
+                 .text
+                 .split_whitespace()
+                 .any(|term| term.chars().nth(3).is_some())
+-        {
+-            return self.search_impl_mode::<true>(query, hydration);
+-        }
+-        self.search_impl_mode::<false>(query, hydration)
+     }
+ 
+-    fn search_impl_mode<const CAPTURE: bool>(
++    fn search_impl_mode<const CAPTURE: bool, const REUSE: bool>(
+         &self,
+         query: &Query,
+         _hydration: u8,
++        pool: &mut std::vec::IntoIter<String>,
+     ) -> Result<SearchPage> {
+         #[cfg(feature = "diagnostic-timing")]
+         let _search = crate::timing::span("search.total");
+@@ -1969,13 +2024,26 @@ impl Database {
+             // One bounded window is reused across all selected runs.
+             let mut scratch = Vec::new();
+             for (run, slots) in by_run {
+-                self.runs[run]
+-                    .index
+-                    .read_selected_batch(&slots, &mut scratch, &mut hydrated)?;
++                if REUSE {
++                    self.runs[run].index.read_selected_batch_with_pool::<true>(
++                        &slots,
++                        &mut scratch,
++                        &mut hydrated,
++                        pool,
++                    )?;
++                } else {
++                    self.runs[run].index.read_selected_batch(
++                        &slots,
++                        &mut scratch,
++                        &mut hydrated,
++                    )?;
++                }
+             }
+             hydrated.sort_unstable_by_key(|(position, _)| *position);
+             hits = hydrated.into_iter().map(|(_, stored)| stored).collect();
+         }
++        // Non-grouped feature profiles do not consume the previous page.
++        let _ = pool;
+         Ok(SearchPage {
+             total,
+             sequence: self.sequence,
+diff --git a/src/payload.rs b/src/payload.rs
+index 184f6f9..8e68f6c 100644
+--- a/src/payload.rs
++++ b/src/payload.rs
+@@ -425,12 +425,96 @@ impl View<'_> {
+             version: self.version,
+         })
+     }
++
++    /// The pool owns only the previous caller result, never a database cache.
++    #[cfg(feature = "bounded-engine")]
++    pub(crate) fn to_document_reusing(
++        &self,
++        pool: &mut std::vec::IntoIter<String>,
++    ) -> Result<StoredDocument> {
++        let Some(mut text) = pool.next() else {
++            return self.to_document();
++        };
++        // Reuse only exact capacity: no growing reallocations, no retained
++        // text slack after a different page. Other slots use normal decoding.
++        if text.capacity() != self.text().len() {
++            drop(text);
++            return self.to_document();
++        }
++        #[cfg(feature = "diagnostic-timing")]
++        let _materialize = crate::timing::span("payload.materialize");
++        let (scope, collection, id) = self.key_parts();
++        let key = Key::new(scope, collection, id);
++        let title = self.title().to_owned();
++        {
++            #[cfg(feature = "diagnostic-timing")]
++            let _text = crate::timing::span("payload.copy_text");
++            #[cfg(feature = "diagnostic-timing")]
++            let _reused = crate::timing::span("payload.text_reused");
++            text.clear();
++            {
++                #[cfg(feature = "diagnostic-timing")]
++                let _copy = crate::timing::span("payload.text_fill");
++                text.push_str(self.text());
++            }
++        }
++        Ok(StoredDocument {
++            document: Document {
++                key,
++                title,
++                text,
++                fields: fields(self.fields, true)?,
++                links: links(self.links, true)?,
++            },
++            version: self.version,
++        })
++    }
+ }
+ 
+ #[cfg(test)]
+ mod document_limit_tests {
+     use super::*;
+ 
++    #[cfg(feature = "bounded-engine")]
++    #[test]
++    fn reused_text_replaces_content_preserves_metadata_and_releases_excess_capacity() {
++        let mut expected = StoredDocument {
++            document: Document {
++                key: Key::new("shared", "texts", "a"),
++                title: "İstanbul 東京".into(),
++                text: "🦀 needle".into(),
++                fields: BTreeMap::from([(
++                    "nested".into(),
++                    serde_json::json!({"list":[null,true,i64::MIN,u64::MAX,-0.0,"ışık"]}),
++                )]),
++                links: vec![Key::new("shared", "other", "target")],
++            },
++            version: 77,
++        };
++        let mut previous = expected.clone();
++        previous.document.text = String::with_capacity(128 * 1024);
++        previous.document.text.push_str("old data must disappear");
++        for length in [9, 6000, 6000, 5999, 0, 4000, 3] {
++            expected.document.text = "ş".repeat(length);
++            expected.version += 1;
++            let bytes = encode(&expected).unwrap();
++            let same_capacity = previous.document.text.capacity() == expected.document.text.len();
++            let previous_pointer = previous.document.text.as_ptr();
++            let mut pool = vec![previous.document.text].into_iter();
++            let actual = checked(&bytes)
++                .unwrap()
++                .to_document_reusing(&mut pool)
++                .unwrap();
++            assert_eq!(actual, expected);
++            if same_capacity {
++                assert_eq!(actual.document.text.as_ptr(), previous_pointer);
++            }
++            assert_eq!(actual.document.text.capacity(), actual.document.text.len());
++            assert_eq!(pool.len(), 0);
++            previous = actual;
++        }
++    }
++
+     #[test]
+     fn utf8_validation_matches_std_including_boundaries_and_invalid_bytes() {
+         fn compare(bytes: &[u8]) {
+diff --git a/src/segment.rs b/src/segment.rs
+index 71b3d30..dfc2224 100644
+--- a/src/segment.rs
++++ b/src/segment.rs
+@@ -1972,6 +1972,22 @@ impl DiskIndex {
+         slots: &[(u32, usize)],
+         scratch: &mut Vec<u8>,
+         output: &mut Vec<(usize, StoredDocument)>,
++    ) -> Result<BatchReadStats> {
++        self.read_selected_batch_with_pool::<false>(
++            slots,
++            scratch,
++            output,
++            &mut Vec::new().into_iter(),
++        )
++    }
++
++    #[cfg(feature = "experimental-grouped-read")]
++    pub(crate) fn read_selected_batch_with_pool<const REUSE: bool>(
++        &self,
++        slots: &[(u32, usize)],
++        scratch: &mut Vec<u8>,
++        output: &mut Vec<(usize, StoredDocument)>,
++        pool: &mut std::vec::IntoIter<String>,
+     ) -> Result<BatchReadStats> {
+         let mut previous = None;
+         for &(id, _) in slots {
+@@ -2035,10 +2051,12 @@ impl DiskIndex {
+                 let bytes = scratch
+                     .get(begin..begin + r.len as usize)
+                     .ok_or_else(|| Error::Corrupt("invalid grouped payload bounds".into()))?;
+-                output.push((
+-                    position,
+-                    self.decode_selected(id, &r, bytes, &mut metadata)?,
+-                ));
++                let stored = if REUSE {
++                    self.decode_selected_with_pool::<true>(id, &r, bytes, &mut metadata, pool)?
++                } else {
++                    self.decode_selected(id, &r, bytes, &mut metadata)?
++                };
++                output.push((position, stored));
+             }
+             start = next;
+         }
+@@ -2052,6 +2070,24 @@ impl DiskIndex {
+         record: &PackedRecord,
+         bytes: &[u8],
+         scratch: &mut QueryTextScratch,
++    ) -> Result<StoredDocument> {
++        self.decode_selected_with_pool::<false>(
++            id,
++            record,
++            bytes,
++            scratch,
++            &mut Vec::new().into_iter(),
++        )
++    }
++
++    #[cfg(feature = "experimental-grouped-read")]
++    fn decode_selected_with_pool<const REUSE: bool>(
++        &self,
++        id: u32,
++        record: &PackedRecord,
++        bytes: &[u8],
++        scratch: &mut QueryTextScratch,
++        pool: &mut std::vec::IntoIter<String>,
+     ) -> Result<StoredDocument> {
+         #[cfg(feature = "diagnostic-timing")]
+         let _decode = crate::timing::span("payload.decode_crc_identity");
+@@ -2062,7 +2098,17 @@ impl DiskIndex {
+                 return Err(Error::Corrupt("segment document checksum mismatch".into()));
+             }
+         }
+-        let stored = self.decode_payload(bytes)?;
++        #[cfg(feature = "bounded-engine")]
++        let stored = if REUSE && self.binary_payload {
++            crate::payload::checked(bytes)?.to_document_reusing(pool)?
++        } else {
++            self.decode_payload(bytes)?
++        };
++        #[cfg(not(feature = "bounded-engine"))]
++        let stored = {
++            let _ = pool;
++            self.decode_payload(bytes)?
++        };
+         let key = &stored.document.key;
+         {
+             #[cfg(feature = "diagnostic-timing")]
+diff --git a/src/segment/grouped_tests.rs b/src/segment/grouped_tests.rs
+index 2eeedb7..44bd3b0 100644
+--- a/src/segment/grouped_tests.rs
++++ b/src/segment/grouped_tests.rs
+@@ -253,6 +253,21 @@ fn paged_batch_reuses_checked_leaves_without_skipping_payload_checks() {
+             index.decode_selected(64, &record, &bytes, &mut cursor),
+             Err(Error::Corrupt(_))
+         ));
++        #[cfg(feature = "bounded-engine")]
++        assert!(matches!(
++            index.decode_selected_with_pool::<true>(
++                64,
++                &record,
++                &bytes,
++                &mut cursor,
++                &mut docs
++                    .iter()
++                    .map(|d| d.document.text.clone())
++                    .collect::<Vec<_>>()
++                    .into_iter()
++            ),
++            Err(Error::Corrupt(_))
++        ));
+     }
+     let record = index.metadata(64).unwrap();
+     temp.replace(record.offset + record.len as u64 - 1, &[255]);
+@@ -260,6 +275,20 @@ fn paged_batch_reuses_checked_leaves_without_skipping_payload_checks() {
+         index.read_selected_batch(&[(64, 0)], &mut scratch, &mut Vec::new()),
+         Err(Error::Corrupt(_))
+     ));
++    #[cfg(feature = "bounded-engine")]
++    assert!(matches!(
++        index.read_selected_batch_with_pool::<true>(
++            &[(64, 0)],
++            &mut scratch,
++            &mut Vec::new(),
++            &mut docs
++                .iter()
++                .map(|d| d.document.text.clone())
++                .collect::<Vec<_>>()
++                .into_iter()
++        ),
++        Err(Error::Corrupt(_))
++    ));
+     OpenOptions::new()
+         .write(true)
+         .open(&temp.0)
+@@ -271,4 +300,19 @@ fn paged_batch_reuses_checked_leaves_without_skipping_payload_checks() {
+             .read_selected_batch(&[(64, 0)], &mut scratch, &mut Vec::new())
+             .is_err()
+     );
++    #[cfg(feature = "bounded-engine")]
++    assert!(
++        index
++            .read_selected_batch_with_pool::<true>(
++                &[(64, 0)],
++                &mut scratch,
++                &mut Vec::new(),
++                &mut docs
++                    .into_iter()
++                    .map(|d| d.document.text)
++                    .collect::<Vec<_>>()
++                    .into_iter()
++            )
++            .is_err()
++    );
+ }
+diff --git a/tests/disk.rs b/tests/disk.rs
+index 0e8aacd..0ac1097 100644
+--- a/tests/disk.rs
++++ b/tests/disk.rs
+@@ -376,6 +376,16 @@ fn v01_checkpoint_fixture_opens_without_rewriting_authoritative_bytes() {
+     q.text = "TEKNOLOJİ yatırımları".into();
+     q.linked_to = Some(Key::new("shared", "funds", "ABC"));
+     assert_eq!(db.search(&q).unwrap().total, 2);
++    #[cfg(feature = "bounded-engine")]
++    {
++        q.limit = 51;
++        let mut page = db.search(&q).unwrap();
++        let expected = page.hits.clone();
++        db.search_into(&q, &mut page).unwrap();
++        assert_eq!(page.total, 2);
++        assert_eq!(page.hits, expected);
++        assert_eq!(fs::read(&log).unwrap(), original);
++    }
+     assert_eq!(
+         db.commit(vec![put(doc("new-v02", "yeni sürüm"))]).unwrap(),
+         2
+diff --git a/tests/engine.rs b/tests/engine.rs
+index 65fd850..167af80 100644
+--- a/tests/engine.rs
++++ b/tests/engine.rs
+@@ -196,6 +196,11 @@ fn checked_page_preserves_global_order_visibility_filters_and_fallback_pages() {
+         put(doc("delta", "needle İstanbul")),
+     ])
+     .unwrap();
++    let mut reused_page = fdb::SearchPage {
++        total: 0,
++        sequence: 0,
++        hits: Vec::new(),
++    };
+     for text in ["needle", "needle istanbul", "zzzz", "nee", ""] {
+         for filtered in [false, true] {
+             let mut q = Query::new("shared");
+@@ -213,6 +218,10 @@ fn checked_page_preserves_global_order_visibility_filters_and_fallback_pages() {
+                 q.offset = offset;
+                 q.limit = limit;
+                 let actual = db.search(&q).unwrap();
++                db.search_into(&q, &mut reused_page).unwrap();
++                assert_eq!(reused_page.total, actual.total);
++                assert_eq!(reused_page.sequence, actual.sequence);
++                assert_eq!(reused_page.hits, actual.hits);
+                 let reference = db.search_direct_slots(&q).unwrap();
+                 assert_eq!(
+                     actual.total, reference.total,
+@@ -229,6 +238,20 @@ fn checked_page_preserves_global_order_visibility_filters_and_fallback_pages() {
+             }
+         }
+     }
++    let mut invalid = Query::new("shared");
++    db.search_into(&invalid, &mut reused_page).unwrap();
++    assert!(!reused_page.hits.is_empty());
++    invalid.limit = 0;
++    assert!(db.search_into(&invalid, &mut reused_page).is_err());
++    assert_eq!(
++        (
++            reused_page.total,
++            reused_page.sequence,
++            reused_page.hits.len(),
++            reused_page.hits.capacity()
++        ),
++        (0, 0, 0, 0)
++    );
+ }
+ 
+ #[test]

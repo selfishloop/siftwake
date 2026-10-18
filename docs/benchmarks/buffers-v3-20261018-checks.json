@@ -1,0 +1,141 @@
+[
+  {
+    "command": [
+      "cargo",
+      "fmt",
+      "--check"
+    ],
+    "exit_code": 0,
+    "log": "docs/benchmarks/buffers-v3-20261018-prototype-fmt.log"
+  },
+  {
+    "command": [
+      "cargo",
+      "test",
+      "--all-targets"
+    ],
+    "exit_code": 0,
+    "log": "docs/benchmarks/buffers-v3-20261018-prototype-tests.log"
+  },
+  {
+    "command": [
+      "cargo",
+      "test",
+      "--no-default-features",
+      "--test",
+      "engine"
+    ],
+    "exit_code": 0,
+    "log": "docs/benchmarks/buffers-v3-20261018-prototype-reference.log"
+  },
+  {
+    "command": [
+      "cargo",
+      "test",
+      "--all-features",
+      "--lib",
+      "reused_text"
+    ],
+    "exit_code": 0,
+    "log": "docs/benchmarks/buffers-v3-20261018-prototype-all-payload.log"
+  },
+  {
+    "command": [
+      "cargo",
+      "test",
+      "--all-features",
+      "--lib",
+      "grouped_tests"
+    ],
+    "exit_code": 0,
+    "log": "docs/benchmarks/buffers-v3-20261018-prototype-all-grouped.log"
+  },
+  {
+    "command": [
+      "cargo",
+      "test",
+      "--all-features",
+      "--test",
+      "engine",
+      "checked_page_preserves"
+    ],
+    "exit_code": 0,
+    "log": "docs/benchmarks/buffers-v3-20261018-prototype-all-engine.log"
+  },
+  {
+    "command": [
+      "cargo",
+      "test",
+      "--all-features",
+      "--test",
+      "disk",
+      "v01_checkpoint_fixture"
+    ],
+    "exit_code": 0,
+    "log": "docs/benchmarks/buffers-v3-20261018-prototype-all-fixture.log"
+  },
+  {
+    "command": [
+      "cargo",
+      "clippy",
+      "--all-targets",
+      "--",
+      "-D",
+      "warnings"
+    ],
+    "exit_code": 0,
+    "log": "docs/benchmarks/buffers-v3-20261018-prototype-clippy.log"
+  },
+  {
+    "command": [
+      "cargo",
+      "clippy",
+      "--all-features",
+      "--all-targets",
+      "--",
+      "-D",
+      "warnings"
+    ],
+    "exit_code": 0,
+    "log": "docs/benchmarks/buffers-v3-20261018-prototype-clippy-all.log"
+  },
+  {
+    "command": [
+      "cargo",
+      "clippy",
+      "--no-default-features",
+      "--all-targets",
+      "--",
+      "-D",
+      "warnings"
+    ],
+    "exit_code": 0,
+    "log": "docs/benchmarks/buffers-v3-20261018-prototype-clippy-reference.log"
+  },
+  {
+    "command": [
+      "cargo",
+      "build",
+      "--release",
+      "--example",
+      "measure_result_buffers",
+      "--features",
+      "diagnostic-memory"
+    ],
+    "exit_code": 0,
+    "log": "docs/benchmarks/buffers-v3-20261018-prototype-build-heap.log"
+  },
+  {
+    "command": [
+      "cargo",
+      "build",
+      "--release",
+      "--example",
+      "measure_result_buffers",
+      "--features",
+      "diagnostic-timing"
+    ],
+    "exit_code": 0,
+    "log": "docs/benchmarks/buffers-v3-20261018-prototype-build-timing.log"
+  }
+]

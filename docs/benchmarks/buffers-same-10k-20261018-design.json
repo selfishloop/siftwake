@@ -1,0 +1,240 @@
+{
+  "pairs": 4,
+  "blocks_per_pair": 4,
+  "repeats_per_block": 25,
+  "affinity_mask": 4,
+  "pages_only": false,
+  "case_indices": [
+    31
+  ],
+  "dense_selected_cases": true,
+  "cache": "warm OS cache; every block opens and verifies/warmups before query timing; no eviction",
+  "corpus": "same existing first10000; no generation/reset/copy",
+  "source_validation": "complete source check before timed search; unchanged CRC/schema/key/version checks",
+  "same_executable": true,
+  "programs": {
+    "control": {
+      "path": "output\\buffers-20261018-normal.exe",
+      "sha256": "A95591B63E11CB58E31009B50EDDDF86443B6B3A6A5AA47BED294EEC1657E60E"
+    },
+    "fdb": {
+      "path": "output\\buffers-20261018-normal.exe",
+      "sha256": "A95591B63E11CB58E31009B50EDDDF86443B6B3A6A5AA47BED294EEC1657E60E"
+    }
+  },
+  "balanced_block_first_position": true,
+  "orders": [
+    {
+      "pair": 0,
+      "block": 0,
+      "engines": [
+        "control",
+        "fdb"
+      ],
+      "command": {
+        "id": 0,
+        "seed": 0,
+        "repeats": 25
+      }
+    },
+    {
+      "pair": 0,
+      "block": 1,
+      "engines": [
+        "fdb",
+        "control"
+      ],
+      "command": {
+        "id": 1,
+        "seed": 1,
+        "repeats": 25
+      }
+    },
+    {
+      "pair": 0,
+      "block": 2,
+      "engines": [
+        "control",
+        "fdb"
+      ],
+      "command": {
+        "id": 2,
+        "seed": 2,
+        "repeats": 25
+      }
+    },
+    {
+      "pair": 0,
+      "block": 3,
+      "engines": [
+        "fdb",
+        "control"
+      ],
+      "command": {
+        "id": 3,
+        "seed": 3,
+        "repeats": 25
+      }
+    },
+    {
+      "pair": 1,
+      "block": 0,
+      "engines": [
+        "fdb",
+        "control"
+      ],
+      "command": {
+        "id": 4,
+        "seed": 10000,
+        "repeats": 25
+      }
+    },
+    {
+      "pair": 1,
+      "block": 1,
+      "engines": [
+        "control",
+        "fdb"
+      ],
+      "command": {
+        "id": 5,
+        "seed": 10001,
+        "repeats": 25
+      }
+    },
+    {
+      "pair": 1,
+      "block": 2,
+      "engines": [
+        "fdb",
+        "control"
+      ],
+      "command": {
+        "id": 6,
+        "seed": 10002,
+        "repeats": 25
+      }
+    },
+    {
+      "pair": 1,
+      "block": 3,
+      "engines": [
+        "control",
+        "fdb"
+      ],
+      "command": {
+        "id": 7,
+        "seed": 10003,
+        "repeats": 25
+      }
+    },
+    {
+      "pair": 2,
+      "block": 0,
+      "engines": [
+        "control",
+        "fdb"
+      ],
+      "command": {
+        "id": 8,
+        "seed": 20000,
+        "repeats": 25
+      }
+    },
+    {
+      "pair": 2,
+      "block": 1,
+      "engines": [
+        "fdb",
+        "control"
+      ],
+      "command": {
+        "id": 9,
+        "seed": 20001,
+        "repeats": 25
+      }
+    },
+    {
+      "pair": 2,
+      "block": 2,
+      "engines": [
+        "control",
+        "fdb"
+      ],
+      "command": {
+        "id": 10,
+        "seed": 20002,
+        "repeats": 25
+      }
+    },
+    {
+      "pair": 2,
+      "block": 3,
+      "engines": [
+        "fdb",
+        "control"
+      ],
+      "command": {
+        "id": 11,
+        "seed": 20003,
+        "repeats": 25
+      }
+    },
+    {
+      "pair": 3,
+      "block": 0,
+      "engines": [
+        "fdb",
+        "control"
+      ],
+      "command": {
+        "id": 12,
+        "seed": 30000,
+        "repeats": 25
+      }
+    },
+    {
+      "pair": 3,
+      "block": 1,
+      "engines": [
+        "control",
+        "fdb"
+      ],
+      "command": {
+        "id": 13,
+        "seed": 30001,
+        "repeats": 25
+      }
+    },
+    {
+      "pair": 3,
+      "block": 2,
+      "engines": [
+        "fdb",
+        "control"
+      ],
+      "command": {
+        "id": 14,
+        "seed": 30002,
+        "repeats": 25
+      }
+    },
+    {
+      "pair": 3,
+      "block": 3,
+      "engines": [
+        "control",
+        "fdb"
+      ],
+      "command": {
+        "id": 15,
+        "seed": 30003,
+        "repeats": 25
+      }
+    }
+  ],
+  "observe_thread": false,
+  "candidate_reuse_results": true,
+  "fresh_caller_results": false,
+  "limits_result_buffers": "Dedicated worker: both consume previous page inside query timing; shuffled selected searches without get interleaving. Not the historical search-return-only distribution."
+}

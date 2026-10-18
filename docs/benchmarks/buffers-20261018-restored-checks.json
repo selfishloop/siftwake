@@ -1,0 +1,115 @@
+[
+  {
+    "log": "docs/benchmarks/buffers-20261018-restored-fmt.log",
+    "command": [
+      "cargo",
+      "fmt",
+      "--check"
+    ],
+    "exit_code": 0
+  },
+  {
+    "log": "docs/benchmarks/buffers-20261018-restored-engine.log",
+    "command": [
+      "cargo",
+      "test",
+      "--test",
+      "engine"
+    ],
+    "exit_code": 0
+  },
+  {
+    "log": "docs/benchmarks/buffers-20261018-restored-payload.log",
+    "command": [
+      "cargo",
+      "test",
+      "--lib",
+      "payload::"
+    ],
+    "exit_code": 0
+  },
+  {
+    "log": "docs/benchmarks/buffers-20261018-restored-grouped.log",
+    "command": [
+      "cargo",
+      "test",
+      "--lib",
+      "grouped_tests"
+    ],
+    "exit_code": 0
+  },
+  {
+    "log": "docs/benchmarks/buffers-20261018-restored-fixture.log",
+    "command": [
+      "cargo",
+      "test",
+      "--test",
+      "disk",
+      "v01_checkpoint_fixture"
+    ],
+    "exit_code": 0
+  },
+  {
+    "log": "docs/benchmarks/buffers-20261018-restored-text-probe.log",
+    "command": [
+      "cargo",
+      "test",
+      "--example",
+      "measure_text_transfer"
+    ],
+    "exit_code": 0
+  },
+  {
+    "log": "docs/benchmarks/buffers-20261018-restored-clippy.log",
+    "command": [
+      "cargo",
+      "clippy",
+      "--all-targets",
+      "--",
+      "-D",
+      "warnings"
+    ],
+    "exit_code": 0
+  },
+  {
+    "log": "docs/benchmarks/buffers-20261018-restored-clippy-all.log",
+    "command": [
+      "cargo",
+      "clippy",
+      "--all-features",
+      "--all-targets",
+      "--",
+      "-D",
+      "warnings"
+    ],
+    "exit_code": 0
+  },
+  {
+    "log": "docs/benchmarks/buffers-20261018-restored-clippy-reference.log",
+    "command": [
+      "cargo",
+      "clippy",
+      "--no-default-features",
+      "--all-targets",
+      "--",
+      "-D",
+      "warnings"
+    ],
+    "exit_code": 0
+  },
+  {
+    "log": "docs/benchmarks/buffers-20261018-restored-build.log",
+    "command": [
+      "cargo",
+      "build",
+      "--release",
+      "--bin",
+      "fdb",
+      "--example",
+      "measure_interleaved_reads",
+      "--example",
+      "measure_content_reads"
+    ],
+    "exit_code": 0
+  }
+]

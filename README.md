@@ -1,5 +1,13 @@
 # FDB
 
+[Sonuç metni tamponu deneyi — genel geçiş reddedildi](docs/RESULT-BUFFERS-10K-20261018.md):
+aynı 200 sonuçlu sayfanın tekrarında p95 6,653→4,073 ms (-%38,78), dört
+çift/16 blok hızlı. Değişen sayfalar ve ilk kullanım aynı kazancı vermedi;
+tek sonuç p95'i ve mevcut normal okuyucu kontrolü kabulü geçmedi. OS private
+medyan +28 KiB/working set +48 KiB. Kod/test yaması arşivlendi; normal motor
+f89b827 kaynaklarına döndü, yeni API varsayılanda yok. Yeni corpus/DB yok.
+Yazma/bakım, arama p95, genel RAM/açılış/disk ve eşzamanlı/soğuk işler açık.
+
 [200 belgeli sayfanın profili ve reddedilen denemeler](docs/HYDRATION-10K-20261018.md):
 baskın kalem sahipli metin tahsisi/kopyası; diagnostic200 belgede2,907ms.
 Metadata tek-geçişinin iki varyantı ve128KiB sonuç okuma penceresi normal

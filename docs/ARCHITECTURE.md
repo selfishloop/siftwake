@@ -1,5 +1,20 @@
 # FDB mimarisi — 0.3.1
 
+2026-10-18 sonuç metni tamponu prototipinin genel geçişi reddedildi.
+Arşiv yamasındaki `search_into`, çağıranın eski sonucundan yalnız metin
+String'lerini taşıyor, diğer metadata'yı filtrelemeden önce bırakıyor ve
+yalnız exact kapasiteyi tekrar kullanıyordu. Baytlar her çağrıda yeniden
+okunup CRC/schema/UTF-8/key/version doğrulanıyordu; yeni format veya feature
+yoktu. Tekrar edilen 200 sonuçta güvenilir dar kazanç çıktı; mevcut normal
+okuyucunun p95 artışı ve küçük sayfa farkı kapanmadı, OS RAM azalmadı.
+
+Engine/payload/segment ve ilgili test kaynakları f89b827 HEAD blob'larına
+byte-eşit geri döndü. Yeni API/helper normal kaynaklarda bulunmaz. Deneyin
+tam kodu, worker'ı ve testleri uygulanabilir patch'te; aktif kodda yalnız
+bağımsız, read-only metin aktarım ölçüm aracı ve benchmark araç desteği kaldı.
+Eski doğrulamalar, feature'lar, Cargo ve kalıcı kaynak/cache formatları aynı.
+[Deney, kabul kararı ve kanıtlar](RESULT-BUFFERS-10K-20261018.md).
+
 2026-10-18 hydration profili tamamlandı. Yalnız `diagnostic-timing` altında
 result read/CRC/schema/UTF-8, Key/title/text kopyası, fields/links oluşturma
 ve key/version kontrolü ayrı ölçülür; normal derlemede sayaç yoktur.
@@ -9,7 +24,8 @@ varyantı ve ayrı128KiB sonuç penceresi hız kabulünü geçmeyip geri alınd�
 Normal ABI/API/format/dependency/feature değişmez. Profilde String tahsisi+
 kopyası baskın; allocator/memcpy/first-touch ayrı atfedilmedi. Sonraki
 bağımsız hipotez caller sonuç tamponunun tekrar kullanılmasıdır; yeni
-ömür/API sözleşmesi ve kendi ölçümü gerekir, henüz çözülmüş iş değildir.
+ömür/API sözleşmesi ve kendi ölçümü gerekir; bu hipotezin sonraki deneyi
+yukarıdaki raporda ölçülüp genel geçiş için reddedilmiştir.
 [Profiller, deneyler ve sınırlar](HYDRATION-10K-20261018.md).
 
 2026-10-18 sonraki dar takip varsayılanda korundu: checked reuse sonuç

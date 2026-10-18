@@ -1,0 +1,522 @@
+{
+  "design": {
+    "pairs": 4,
+    "blocks_per_pair": 2,
+    "repeats_per_block": 25,
+    "affinity_mask": 4,
+    "pages_only": false,
+    "case_indices": [
+      0,
+      30,
+      31,
+      37
+    ],
+    "dense_selected_cases": true,
+    "cache": "warm OS cache; every block opens and verifies/warmups before query timing; no eviction",
+    "corpus": "same existing first10000; no generation/reset/copy",
+    "source_validation": "complete source check before timed search; unchanged CRC/schema/key/version checks",
+    "same_executable": true,
+    "programs": {
+      "control": {
+        "path": "output\\buffers-v3-20261018-normal.exe",
+        "sha256": "F3DA014F0340A442BA493A355F5E8BA9ED0D20215F797CC2C4B177B2D1D737D5"
+      },
+      "fdb": {
+        "path": "output\\buffers-v3-20261018-normal.exe",
+        "sha256": "F3DA014F0340A442BA493A355F5E8BA9ED0D20215F797CC2C4B177B2D1D737D5"
+      }
+    },
+    "balanced_block_first_position": true,
+    "orders": [
+      {
+        "pair": 0,
+        "block": 0,
+        "engines": [
+          "control",
+          "fdb"
+        ],
+        "command": {
+          "id": 0,
+          "seed": 0,
+          "repeats": 25
+        }
+      },
+      {
+        "pair": 0,
+        "block": 1,
+        "engines": [
+          "fdb",
+          "control"
+        ],
+        "command": {
+          "id": 1,
+          "seed": 1,
+          "repeats": 25
+        }
+      },
+      {
+        "pair": 1,
+        "block": 0,
+        "engines": [
+          "fdb",
+          "control"
+        ],
+        "command": {
+          "id": 2,
+          "seed": 10000,
+          "repeats": 25
+        }
+      },
+      {
+        "pair": 1,
+        "block": 1,
+        "engines": [
+          "control",
+          "fdb"
+        ],
+        "command": {
+          "id": 3,
+          "seed": 10001,
+          "repeats": 25
+        }
+      },
+      {
+        "pair": 2,
+        "block": 0,
+        "engines": [
+          "control",
+          "fdb"
+        ],
+        "command": {
+          "id": 4,
+          "seed": 20000,
+          "repeats": 25
+        }
+      },
+      {
+        "pair": 2,
+        "block": 1,
+        "engines": [
+          "fdb",
+          "control"
+        ],
+        "command": {
+          "id": 5,
+          "seed": 20001,
+          "repeats": 25
+        }
+      },
+      {
+        "pair": 3,
+        "block": 0,
+        "engines": [
+          "fdb",
+          "control"
+        ],
+        "command": {
+          "id": 6,
+          "seed": 30000,
+          "repeats": 25
+        }
+      },
+      {
+        "pair": 3,
+        "block": 1,
+        "engines": [
+          "control",
+          "fdb"
+        ],
+        "command": {
+          "id": 7,
+          "seed": 30001,
+          "repeats": 25
+        }
+      }
+    ],
+    "observe_thread": false,
+    "candidate_reuse_results": true,
+    "fresh_caller_results": true,
+    "limits_result_buffers": "Dedicated worker: both consume previous page inside query timing; shuffled selected searches without get interleaving. Not the historical search-return-only distribution."
+  },
+  "queries": [
+    {
+      "text": "quixote",
+      "kind": "word",
+      "offset": 0,
+      "limit": 50,
+      "total": 56,
+      "late_matches": 8,
+      "control": {
+        "n": 200,
+        "p50_ms": 2.1997,
+        "p95_ms": 3.5125,
+        "p99_ms": 5.990200000000001,
+        "per_process_pair_p95": [
+          3.6458,
+          3.5125,
+          3.4788,
+          3.3527
+        ],
+        "block_medians": [
+          [
+            2.6404,
+            2.7515
+          ],
+          [
+            2.1077,
+            2.1415
+          ],
+          [
+            1.8131,
+            1.9834000000000003
+          ],
+          [
+            1.851,
+            2.5355999999999996
+          ]
+        ]
+      },
+      "fdb": {
+        "n": 200,
+        "p50_ms": 2.0811,
+        "p95_ms": 3.3186,
+        "p99_ms": 14.2699,
+        "per_process_pair_p95": [
+          14.2699,
+          2.8357,
+          2.9600999999999997,
+          3.211
+        ],
+        "block_medians": [
+          [
+            2.4777,
+            2.6357
+          ],
+          [
+            1.8295,
+            1.9989999999999999
+          ],
+          [
+            2.3070999999999997,
+            2.0267000000000004
+          ],
+          [
+            1.8835,
+            2.1256
+          ]
+        ]
+      },
+      "change_p95_percent": -5.520284697508904,
+      "paired_p95_change_percent": [
+        291.40655000274285,
+        -19.26832740213523,
+        -14.910313901345306,
+        -4.226444358278403
+      ],
+      "faster_process_pairs": 3,
+      "paired_block_median_changes_percent": [
+        -6.161945159824267,
+        -4.208613483554425,
+        -13.199221900649993,
+        -6.654214335745989,
+        27.246152997628357,
+        2.1831198951295816,
+        1.7558076715288973,
+        -16.169742861650093
+      ],
+      "median_block_change_percent": -5.185279321689346,
+      "faster_blocks": 5,
+      "leave_one_pair_out_p95_changes_percent": [
+        -14.214919144496607,
+        -1.4089308033177983,
+        -2.046115203341514,
+        -2.156569785470641
+      ]
+    },
+    {
+      "text": "the",
+      "kind": "page",
+      "offset": 0,
+      "limit": 1,
+      "total": 10000,
+      "late_matches": 0,
+      "control": {
+        "n": 200,
+        "p50_ms": 0.1796,
+        "p95_ms": 0.2814,
+        "p99_ms": 0.33849999999999997,
+        "per_process_pair_p95": [
+          0.3028,
+          0.2758,
+          0.2545,
+          0.2809
+        ],
+        "block_medians": [
+          [
+            0.2174,
+            0.2
+          ],
+          [
+            0.1775,
+            0.19249999999999998
+          ],
+          [
+            0.1512,
+            0.1753
+          ],
+          [
+            0.1412,
+            0.1783
+          ]
+        ]
+      },
+      "fdb": {
+        "n": 200,
+        "p50_ms": 0.17160000000000003,
+        "p95_ms": 0.2714,
+        "p99_ms": 0.345,
+        "per_process_pair_p95": [
+          0.345,
+          0.22540000000000002,
+          0.2714,
+          0.27149999999999996
+        ],
+        "block_medians": [
+          [
+            0.1939,
+            0.2049
+          ],
+          [
+            0.1676,
+            0.1447
+          ],
+          [
+            0.1622,
+            0.1554
+          ],
+          [
+            0.132,
+            0.1815
+          ]
+        ]
+      },
+      "change_p95_percent": -3.553660270078185,
+      "paired_p95_change_percent": [
+        13.936591809775422,
+        -18.274111675126893,
+        6.640471512770119,
+        -3.346386614453545
+      ],
+      "faster_process_pairs": 2,
+      "paired_block_median_changes_percent": [
+        -10.809567617295313,
+        2.4499999999999966,
+        -5.577464788732389,
+        -24.831168831168824,
+        7.275132275132279,
+        -11.351968054763262,
+        -6.515580736543902,
+        1.794727986539546
+      ],
+      "median_block_change_percent": -6.046522762638146,
+      "faster_blocks": 5,
+      "leave_one_pair_out_p95_changes_percent": [
+        -6.816533720087015,
+        -3.531468531468551,
+        -6.540447504302948,
+        -5.1048951048951245
+      ]
+    },
+    {
+      "text": "the",
+      "kind": "page",
+      "offset": 0,
+      "limit": 200,
+      "total": 10000,
+      "late_matches": 0,
+      "control": {
+        "n": 200,
+        "p50_ms": 4.9385,
+        "p95_ms": 6.5956,
+        "p99_ms": 8.3333,
+        "per_process_pair_p95": [
+          6.8751999999999995,
+          6.5902,
+          5.9606,
+          6.9355
+        ],
+        "block_medians": [
+          [
+            5.5622,
+            5.2734000000000005
+          ],
+          [
+            4.9574,
+            5.1629
+          ],
+          [
+            4.551699999999999,
+            4.8102
+          ],
+          [
+            4.3061,
+            4.8626
+          ]
+        ]
+      },
+      "fdb": {
+        "n": 200,
+        "p50_ms": 4.78845,
+        "p95_ms": 6.6562,
+        "p99_ms": 18.2542,
+        "per_process_pair_p95": [
+          18.2542,
+          5.3231,
+          6.1914,
+          5.9483
+        ],
+        "block_medians": [
+          [
+            5.0477,
+            5.6898
+          ],
+          [
+            4.4774,
+            4.194
+          ],
+          [
+            5.3676,
+            4.313199999999999
+          ],
+          [
+            4.5831,
+            4.9498
+          ]
+        ]
+      },
+      "change_p95_percent": 0.9187943477469762,
+      "paired_p95_change_percent": [
+        165.507912497091,
+        -19.227034080908012,
+        3.8720934134147456,
+        -14.234013409271151
+      ],
+      "faster_process_pairs": 2,
+      "paired_block_median_changes_percent": [
+        -9.249937075257986,
+        7.8962339287745875,
+        -9.682494856174594,
+        -18.766584671405596,
+        17.925170815299808,
+        -10.332210718889046,
+        6.432734957386033,
+        1.7932793155924776
+      ],
+      "median_block_change_percent": -3.728328879832754,
+      "faster_blocks": 4,
+      "leave_one_pair_out_p95_changes_percent": [
+        -6.393961000713033,
+        7.4585134359036465,
+        7.4585134359036465,
+        7.80065498210929
+      ]
+    },
+    {
+      "text": "quixote",
+      "kind": "page",
+      "offset": 57,
+      "limit": 50,
+      "total": 56,
+      "late_matches": 8,
+      "control": {
+        "n": 200,
+        "p50_ms": 1.45755,
+        "p95_ms": 1.9457,
+        "p99_ms": 2.7883,
+        "per_process_pair_p95": [
+          1.9725,
+          1.9382,
+          2.0741,
+          1.7918
+        ],
+        "block_medians": [
+          [
+            1.5976,
+            1.5021
+          ],
+          [
+            1.3663,
+            1.5514999999999999
+          ],
+          [
+            1.3411,
+            1.4889000000000001
+          ],
+          [
+            1.3356999999999999,
+            1.4337
+          ]
+        ]
+      },
+      "fdb": {
+        "n": 200,
+        "p50_ms": 1.37615,
+        "p95_ms": 2.0671,
+        "p99_ms": 4.2381,
+        "per_process_pair_p95": [
+          4.2381,
+          1.5733,
+          2.0815,
+          1.7266
+        ],
+        "block_medians": [
+          [
+            1.5317,
+            1.5714
+          ],
+          [
+            1.2373,
+            1.3592000000000002
+          ],
+          [
+            1.601,
+            1.3825
+          ],
+          [
+            1.2032,
+            1.3314
+          ]
+        ]
+      },
+      "change_p95_percent": 6.239399701906767,
+      "paired_p95_change_percent": [
+        114.85931558935363,
+        -18.826746465793008,
+        0.3567812545200333,
+        -3.6387989730996884
+      ],
+      "faster_process_pairs": 2,
+      "paired_block_median_changes_percent": [
+        -4.124937406109153,
+        4.613541042540437,
+        -9.44155749103418,
+        -12.394456977118896,
+        19.3796137499068,
+        -7.1462153267512925,
+        -9.919892191360324,
+        -7.135383971542164
+      ],
+      "median_block_change_percent": -7.140799649146729,
+      "faster_blocks": 6,
+      "leave_one_pair_out_p95_changes_percent": [
+        0.1960581983283527,
+        11.810300866904623,
+        6.573109070271377,
+        11.158428390367536
+      ]
+    }
+  ],
+  "lower_p95_cases": 2,
+  "higher_p95_cases": 2,
+  "interpretation": "Short exclusive sessions, per-block source validation/warmup outside timing; two resident oracle workers, no concurrent database queries. Not identical to a continuously open single-process matrix. Pooled p95 and block medians describe different distributions; no automatic significance claim."
+}

@@ -1,5 +1,24 @@
 # FDB açık işler
 
+2026-10-18 sonuç tamponu deneyinin genel geçişi reddedildi. Arşiv prototip
+aynı the200 tekrarında p95 -%38,78 (4/4 çift,16/16 blok), değişen dört sayfada
+-%10,18 verdi; tek sonuç p95 +%10,68 açık. Geniş38'de the200 p95 yaklaşık aynı
+(+%0,01). Eski normal okuyucuya karşı 38-case kontrolünün ardından yoğun400
+tekrarda normal API/the200 +%10,01 p95 kaldı (yalnız1/4 çift hızlı); tipik
+blok +%0,76. Bekleme/dalgalanma denilerek kapatılmadı. Oracle'sız OS private
+medyan +28KiB/WS+48KiB; RAM kazancı yok. Motor/test kaynakları f89b827'ye
+döndü; yeni API/helper yalnız source patch'te. Prototip191/7ignored ve üç
+profil Clippy geçti. Geri dönüşte engine18/payload2/grouped5/fixture1/aktarim1,
+fmt/üç profil Clippy ve normal38-case full oracle geçti.21 veri/fixture dosyası
+ve tüm corpus SHA-eşit; yeni corpus/DB/reset/kopya/format/feature yok.
+[Güncel rapor](RESULT-BUFFERS-10K-20261018.md).
+
+Sonraki bağımsız öncelik yazma/bakım aşamalarını ayırmak. Normal Vec ingest
+RAM'i, tek sonuç/Harpoon/genel arama p95'i, açılış/disk sıkıştırma ve eşzamanlı/
+gerçek-soğuk yük açık. Büyük sayfa tekrarındaki dar kazanç bu işleri kapatmaz.
+
+## Önceki hydration profili
+
 2026-10-18 the200 hydration profili tamamlandı; bu tur hız kazancı yok.
 Diagnostic30 tekrar: read115/1,810ms, CRC200/0,577ms, schema200/0,586ms,
 materialize200/3,631ms; içindeki text String tahsisi+kopyası2,907ms baskın,

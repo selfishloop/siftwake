@@ -1,0 +1,365 @@
+{
+  "design": {
+    "pairs": 4,
+    "blocks_per_pair": 4,
+    "repeats_per_block": 25,
+    "affinity_mask": 4,
+    "pages_only": false,
+    "case_indices": [
+      31
+    ],
+    "dense_selected_cases": true,
+    "cache": "warm OS cache; every block opens and verifies/warmups before query timing; no eviction",
+    "corpus": "same existing first10000; no generation/reset/copy",
+    "source_validation": "complete source check before timed search; unchanged CRC/schema/key/version checks",
+    "same_executable": true,
+    "programs": {
+      "control": {
+        "path": "output\\buffers-20261018-normal.exe",
+        "sha256": "A95591B63E11CB58E31009B50EDDDF86443B6B3A6A5AA47BED294EEC1657E60E"
+      },
+      "fdb": {
+        "path": "output\\buffers-20261018-normal.exe",
+        "sha256": "A95591B63E11CB58E31009B50EDDDF86443B6B3A6A5AA47BED294EEC1657E60E"
+      }
+    },
+    "balanced_block_first_position": true,
+    "orders": [
+      {
+        "pair": 0,
+        "block": 0,
+        "engines": [
+          "control",
+          "fdb"
+        ],
+        "command": {
+          "id": 0,
+          "seed": 0,
+          "repeats": 25
+        }
+      },
+      {
+        "pair": 0,
+        "block": 1,
+        "engines": [
+          "fdb",
+          "control"
+        ],
+        "command": {
+          "id": 1,
+          "seed": 1,
+          "repeats": 25
+        }
+      },
+      {
+        "pair": 0,
+        "block": 2,
+        "engines": [
+          "control",
+          "fdb"
+        ],
+        "command": {
+          "id": 2,
+          "seed": 2,
+          "repeats": 25
+        }
+      },
+      {
+        "pair": 0,
+        "block": 3,
+        "engines": [
+          "fdb",
+          "control"
+        ],
+        "command": {
+          "id": 3,
+          "seed": 3,
+          "repeats": 25
+        }
+      },
+      {
+        "pair": 1,
+        "block": 0,
+        "engines": [
+          "fdb",
+          "control"
+        ],
+        "command": {
+          "id": 4,
+          "seed": 10000,
+          "repeats": 25
+        }
+      },
+      {
+        "pair": 1,
+        "block": 1,
+        "engines": [
+          "control",
+          "fdb"
+        ],
+        "command": {
+          "id": 5,
+          "seed": 10001,
+          "repeats": 25
+        }
+      },
+      {
+        "pair": 1,
+        "block": 2,
+        "engines": [
+          "fdb",
+          "control"
+        ],
+        "command": {
+          "id": 6,
+          "seed": 10002,
+          "repeats": 25
+        }
+      },
+      {
+        "pair": 1,
+        "block": 3,
+        "engines": [
+          "control",
+          "fdb"
+        ],
+        "command": {
+          "id": 7,
+          "seed": 10003,
+          "repeats": 25
+        }
+      },
+      {
+        "pair": 2,
+        "block": 0,
+        "engines": [
+          "control",
+          "fdb"
+        ],
+        "command": {
+          "id": 8,
+          "seed": 20000,
+          "repeats": 25
+        }
+      },
+      {
+        "pair": 2,
+        "block": 1,
+        "engines": [
+          "fdb",
+          "control"
+        ],
+        "command": {
+          "id": 9,
+          "seed": 20001,
+          "repeats": 25
+        }
+      },
+      {
+        "pair": 2,
+        "block": 2,
+        "engines": [
+          "control",
+          "fdb"
+        ],
+        "command": {
+          "id": 10,
+          "seed": 20002,
+          "repeats": 25
+        }
+      },
+      {
+        "pair": 2,
+        "block": 3,
+        "engines": [
+          "fdb",
+          "control"
+        ],
+        "command": {
+          "id": 11,
+          "seed": 20003,
+          "repeats": 25
+        }
+      },
+      {
+        "pair": 3,
+        "block": 0,
+        "engines": [
+          "fdb",
+          "control"
+        ],
+        "command": {
+          "id": 12,
+          "seed": 30000,
+          "repeats": 25
+        }
+      },
+      {
+        "pair": 3,
+        "block": 1,
+        "engines": [
+          "control",
+          "fdb"
+        ],
+        "command": {
+          "id": 13,
+          "seed": 30001,
+          "repeats": 25
+        }
+      },
+      {
+        "pair": 3,
+        "block": 2,
+        "engines": [
+          "fdb",
+          "control"
+        ],
+        "command": {
+          "id": 14,
+          "seed": 30002,
+          "repeats": 25
+        }
+      },
+      {
+        "pair": 3,
+        "block": 3,
+        "engines": [
+          "control",
+          "fdb"
+        ],
+        "command": {
+          "id": 15,
+          "seed": 30003,
+          "repeats": 25
+        }
+      }
+    ],
+    "observe_thread": false,
+    "candidate_reuse_results": true,
+    "fresh_caller_results": false,
+    "limits_result_buffers": "Dedicated worker: both consume previous page inside query timing; shuffled selected searches without get interleaving. Not the historical search-return-only distribution."
+  },
+  "queries": [
+    {
+      "text": "the",
+      "kind": "page",
+      "offset": 0,
+      "limit": 200,
+      "total": 10000,
+      "late_matches": 0,
+      "control": {
+        "n": 400,
+        "p50_ms": 4.8294999999999995,
+        "p95_ms": 7.1689,
+        "p99_ms": 9.692400000000001,
+        "per_process_pair_p95": [
+          7.2382,
+          7.5426,
+          6.4116,
+          6.6502
+        ],
+        "block_medians": [
+          [
+            3.1098,
+            4.8472,
+            4.6243,
+            4.0342
+          ],
+          [
+            4.8808,
+            4.9826999999999995,
+            4.9435,
+            5.8502
+          ],
+          [
+            5.2711,
+            4.1342,
+            3.5465,
+            4.267499999999999
+          ],
+          [
+            4.2862,
+            5.2223,
+            4.209499999999999,
+            4.4809
+          ]
+        ]
+      },
+      "fdb": {
+        "n": 400,
+        "p50_ms": 3.2014500000000004,
+        "p95_ms": 4.4394,
+        "p99_ms": 4.7967,
+        "per_process_pair_p95": [
+          3.9857,
+          4.7298,
+          4.3316,
+          4.2639000000000005
+        ],
+        "block_medians": [
+          [
+            3.1669,
+            3.0141,
+            3.0650999999999997,
+            3.2315
+          ],
+          [
+            3.2156,
+            3.1633,
+            3.2329,
+            4.0116
+          ],
+          [
+            3.1297,
+            3.0947,
+            3.1391,
+            3.8943
+          ],
+          [
+            3.1413,
+            3.3505000000000003,
+            3.1262,
+            3.1468
+          ]
+        ]
+      },
+      "change_p95_percent": -38.07418153412657,
+      "paired_p95_change_percent": [
+        -44.93520488519245,
+        -37.292180415241425,
+        -32.441200324412,
+        -35.88313133439595
+      ],
+      "faster_process_pairs": 4,
+      "paired_block_median_changes_percent": [
+        1.8361309408965187,
+        -37.81770919293612,
+        -33.71753562701382,
+        -19.89737742303307,
+        -34.117357810195045,
+        -36.514339615068124,
+        -34.60301405886518,
+        -31.427985368021616,
+        -40.62529642769061,
+        -25.143921435827966,
+        -11.487381925842378,
+        -8.745166959578189,
+        -26.711306051980767,
+        -35.842444899756806,
+        -25.73464782040622,
+        -29.77303666674106
+      ],
+      "median_block_change_percent": -30.600511017381336,
+      "faster_blocks": 15,
+      "leave_one_pair_out_p95_changes_percent": [
+        -33.25283463407451,
+        -37.15211309085555,
+        -37.798864625202,
+        -37.16052292293403
+      ]
+    }
+  ],
+  "lower_p95_cases": 1,
+  "higher_p95_cases": 0,
+  "interpretation": "Short exclusive sessions, per-block source validation/warmup outside timing; two resident oracle workers, no concurrent database queries. Not identical to a continuously open single-process matrix. Pooled p95 and block medians describe different distributions; no automatic significance claim."
+}
