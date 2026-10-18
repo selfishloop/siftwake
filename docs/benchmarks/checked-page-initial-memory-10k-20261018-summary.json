@@ -1,0 +1,89 @@
+{
+  "design": {
+    "pairs": 2,
+    "phase": "memory",
+    "affinity_mask": 4,
+    "same_executable": false,
+    "diagnostic_timing": false,
+    "programs": {
+      "control": {
+        "path": "output\\payload-isolated-20261017-control-measure_content_reads-normal.exe",
+        "sha256": "C9375CC8ABC6257AB56778A9C110EACD6147F2821F86E198421D5470B8A92424"
+      },
+      "fdb": {
+        "path": "output\\checked-page-20261018-candidate-measure_content_reads-normal.exe",
+        "sha256": "AB5119DBEDD42C4B7EA4259C1C89492C3D15F98480A10D9D882569E68E4F6878"
+      }
+    },
+    "cache": "warm OS cache, fresh processes, per-case untimed warmup, no eviction",
+    "validation": "normal strict open; complete source/index CRC and schema; pending0; payload CRC/schema/key/version preserved",
+    "corpus": "same existing first10000, 264842858 text bytes; no generation/reset/repack/copy",
+    "limits": "No concurrent load, true cold cache or hardware/power isolation. Matrix oracle memory excluded from engine memory claims. Diagnostic spans nest; never sum as exclusive elapsed time.",
+    "orders": [
+      [
+        "control",
+        "fdb"
+      ],
+      [
+        "fdb",
+        "control"
+      ]
+    ],
+    "control_engine": "fdb"
+  },
+  "rows": [
+    {
+      "variant": "control",
+      "pair": 0,
+      "peak_private_commit_bytes": 9269248,
+      "peak_working_set_bytes": 13795328
+    },
+    {
+      "variant": "control",
+      "pair": 1,
+      "peak_private_commit_bytes": 9125888,
+      "peak_working_set_bytes": 13225984
+    },
+    {
+      "variant": "fdb",
+      "pair": 0,
+      "peak_private_commit_bytes": 9428992,
+      "peak_working_set_bytes": 13905920
+    },
+    {
+      "variant": "fdb",
+      "pair": 1,
+      "peak_private_commit_bytes": 9207808,
+      "peak_working_set_bytes": 13307904
+    }
+  ],
+  "medians": {
+    "control": {
+      "peak_private_commit_bytes": 9197568.0,
+      "peak_working_set_bytes": 13510656.0
+    },
+    "fdb": {
+      "peak_private_commit_bytes": 9318400.0,
+      "peak_working_set_bytes": 13606912.0
+    }
+  },
+  "comparisons": {
+    "peak_private_commit_bytes": {
+      "change_percent": 1.313738588287694,
+      "lower_pairs": 0,
+      "paired_change_percent": [
+        1.7233760494918204,
+        0.8976660682226134
+      ]
+    },
+    "peak_working_set_bytes": {
+      "change_percent": 0.7124450507806523,
+      "lower_pairs": 0,
+      "paired_change_percent": [
+        0.8016627078384797,
+        0.6193868070610176
+      ]
+    }
+  },
+  "files_unchanged": true
+}

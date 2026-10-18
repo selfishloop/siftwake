@@ -1,0 +1,66 @@
+[
+  {
+    "label": "final-fmt",
+    "command": [
+      "cargo",
+      "fmt",
+      "--check"
+    ],
+    "exit_code": 0,
+    "passed": 0
+  },
+  {
+    "label": "final-window-tests",
+    "command": [
+      "cargo",
+      "test",
+      "--lib",
+      "window_tests"
+    ],
+    "exit_code": 0,
+    "passed": 7
+  },
+  {
+    "label": "final-clippy",
+    "command": [
+      "cargo",
+      "clippy",
+      "--all-targets",
+      "--",
+      "-D",
+      "warnings"
+    ],
+    "exit_code": 0,
+    "passed": 0
+  },
+  {
+    "label": "final-all-clippy",
+    "command": [
+      "cargo",
+      "clippy",
+      "--all-features",
+      "--all-targets",
+      "--",
+      "-D",
+      "warnings"
+    ],
+    "exit_code": 0,
+    "passed": 0
+  },
+  {
+    "label": "final-normal-release",
+    "command": [
+      "cargo",
+      "build",
+      "--release",
+      "--bin",
+      "fdb",
+      "--example",
+      "measure_content_reads",
+      "--example",
+      "measure_interleaved_reads"
+    ],
+    "exit_code": 0,
+    "passed": 0
+  }
+]

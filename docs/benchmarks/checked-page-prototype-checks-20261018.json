@@ -1,0 +1,77 @@
+[
+  {
+    "label": "prototype-fmt",
+    "command": [
+      "cargo",
+      "fmt",
+      "--check"
+    ],
+    "exit_code": 0,
+    "passed": 0,
+    "ignored": 0
+  },
+  {
+    "label": "prototype-default-tests",
+    "command": [
+      "cargo",
+      "test",
+      "--all-targets"
+    ],
+    "exit_code": 0,
+    "passed": 185,
+    "ignored": 7
+  },
+  {
+    "label": "prototype-reference-tests",
+    "command": [
+      "cargo",
+      "test",
+      "--no-default-features",
+      "--all-targets"
+    ],
+    "exit_code": 0,
+    "passed": 107,
+    "ignored": 3
+  },
+  {
+    "label": "prototype-all-tests",
+    "command": [
+      "cargo",
+      "test",
+      "--all-features",
+      "--all-targets"
+    ],
+    "exit_code": 0,
+    "passed": 204,
+    "ignored": 9
+  },
+  {
+    "label": "prototype-clippy",
+    "command": [
+      "cargo",
+      "clippy",
+      "--all-targets",
+      "--",
+      "-D",
+      "warnings"
+    ],
+    "exit_code": 0,
+    "passed": 0,
+    "ignored": 0
+  },
+  {
+    "label": "prototype-all-clippy",
+    "command": [
+      "cargo",
+      "clippy",
+      "--all-features",
+      "--all-targets",
+      "--",
+      "-D",
+      "warnings"
+    ],
+    "exit_code": 0,
+    "passed": 0,
+    "ignored": 0
+  }
+]

@@ -1,0 +1,642 @@
+diff --git a/src/engine.rs b/src/engine.rs
+index 5fb8111..de7b48e 100644
+--- a/src/engine.rs
++++ b/src/engine.rs
+@@ -1688,7 +1688,27 @@ impl Database {
+         }
+     }
+ 
+-    fn search_impl(&self, query: &Query, _hydration: u8) -> Result<SearchPage> {
++    fn search_impl(&self, query: &Query, hydration: u8) -> Result<SearchPage> {
++        #[cfg(feature = "bounded-engine")]
++        if query.offset == 0
++            && query.limit <= 50
++            && hydration == 2
++            && query.text.len() <= 4096
++            && query
++                .text
++                .split_whitespace()
++                .any(|term| term.chars().count() > 3)
++        {
++            return self.search_impl_mode::<true>(query, hydration);
++        }
++        self.search_impl_mode::<false>(query, hydration)
++    }
++
++    fn search_impl_mode<const CAPTURE: bool>(
++        &self,
++        query: &Query,
++        _hydration: u8,
++    ) -> Result<SearchPage> {
+         #[cfg(feature = "diagnostic-timing")]
+         let _search = crate::timing::span("search.total");
+         #[cfg(feature = "diagnostic-timing")]
+@@ -1725,6 +1745,12 @@ impl Database {
+         // Keep ordinary numbered pages bounded. Very large offsets retain the
+         // original path until ranked disk cursors replace that fallback.
+         let prefix_limit = query.offset.checked_add(query.limit).filter(|n| *n <= 4096);
++        #[cfg(feature = "bounded-engine")]
++        let mut checked_page = crate::segment::CheckedPage::new(query.limit);
++        #[cfg(feature = "bounded-engine")]
++        let reuse_checked = CAPTURE;
++        #[cfg(feature = "bounded-engine")]
++        let mut fallback_positions = Vec::new();
+         for (n, run) in self.runs.iter().enumerate() {
+             let mut mask = vec![0u64; run.index.len().div_ceil(64)];
+             #[cfg(feature = "experimental-paged-metadata")]
+@@ -1752,6 +1778,14 @@ impl Database {
+             }
+             let hidden = |id: u32| mask[id as usize / 64] & (1u64 << (id % 64)) != 0;
+             let ids = if let Some(limit) = prefix_limit {
++                #[cfg(feature = "bounded-engine")]
++                let (count, ids) = if reuse_checked {
++                    run.index
++                        .prefix_matches_checked(query, &mask, limit, n, &mut checked_page)?
++                } else {
++                    run.index.prefix_matches(query, &mask, limit)?
++                };
++                #[cfg(not(feature = "bounded-engine"))]
+                 let (count, ids) = run.index.prefix_matches(query, &mask, limit)?;
+                 total += count;
+                 ids
+@@ -1779,6 +1813,8 @@ impl Database {
+         #[cfg(feature = "experimental-grouped-read")]
+         let mut selected = Vec::new();
+         let grouped = cfg!(feature = "experimental-grouped-read") && _hydration == 2;
++        #[cfg(feature = "bounded-engine")]
++        let mut reused = Vec::new();
+         let mut page_size = 0;
+         let mut position = 0;
+         while let Some(Reverse((key, n, slot))) = heap.pop() {
+@@ -1825,6 +1861,22 @@ impl Database {
+             if position >= query.offset {
+                 #[cfg(feature = "experimental-grouped-read")]
+                 if grouped {
++                    #[cfg(feature = "bounded-engine")]
++                    let retained = if reuse_checked && n < self.runs.len() {
++                        checked_page.take(&key, n, lists[n][slot])?
++                    } else {
++                        None
++                    };
++                    #[cfg(feature = "bounded-engine")]
++                    if let Some(stored) = retained {
++                        reused.push((page_size, stored));
++                    } else {
++                        selected.push((n, slot));
++                        if CAPTURE {
++                            fallback_positions.push(page_size);
++                        }
++                    }
++                    #[cfg(not(feature = "bounded-engine"))]
+                     selected.push((n, slot));
+                 }
+                 if !grouped {
+@@ -1868,11 +1920,33 @@ impl Database {
+                 heap.push(Reverse((key, n, next)));
+             }
+         }
++        // Any remaining copies are outside the selected page (e.g. displaced
++        // by delta hits). Release them before allocating fallback documents.
++        #[cfg(feature = "bounded-engine")]
++        drop(checked_page);
+         #[cfg(feature = "experimental-grouped-read")]
+         if grouped {
+             let mut by_run: BTreeMap<usize, Vec<(u32, usize)>> = BTreeMap::new();
++            #[cfg(feature = "bounded-engine")]
++            let mut hydrated = if CAPTURE {
++                reused
++            } else {
++                Vec::with_capacity(selected.len())
++            };
++            #[cfg(not(feature = "bounded-engine"))]
+             let mut hydrated = Vec::with_capacity(selected.len());
+-            for (position, (run, slot)) in selected.into_iter().enumerate() {
++            if CAPTURE {
++                hydrated.reserve_exact(selected.len());
++            }
++            for (ordinal, (run, slot)) in selected.into_iter().enumerate() {
++                #[cfg(feature = "bounded-engine")]
++                let position = if CAPTURE {
++                    fallback_positions[ordinal]
++                } else {
++                    ordinal
++                };
++                #[cfg(not(feature = "bounded-engine"))]
++                let position = ordinal;
+                 if run == self.runs.len() {
+                     let key = &delta[slot];
+                     let stored = self
+diff --git a/src/segment.rs b/src/segment.rs
+index d2809da..e5cc434 100644
+--- a/src/segment.rs
++++ b/src/segment.rs
+@@ -14,6 +14,8 @@ use std::sync::atomic::{AtomicU64, Ordering};
+ mod payload_bench;
+ 
+ pub(crate) mod block_check;
++#[cfg(feature = "bounded-engine")]
++mod checked_page;
+ mod checksum;
+ #[cfg(feature = "bounded-engine")]
+ mod compact;
+@@ -22,6 +24,8 @@ mod covering;
+ #[cfg(feature = "bounded-engine")]
+ mod short_ascii;
+ #[cfg(feature = "bounded-engine")]
++pub(crate) use checked_page::CheckedPage;
++#[cfg(feature = "bounded-engine")]
+ pub(crate) use covering::SourceLease;
+ #[cfg(feature = "bounded-engine")]
+ mod posting_spool;
+@@ -1671,12 +1675,24 @@ impl DiskIndex {
+         terms: &[String],
+         cache: &mut BTreeMap<String, String>,
+         cached_bytes: &mut usize,
++    ) -> Result<bool> {
++        self.binary_matches_with_capture(id, scratch, terms, cache, cached_bytes, &mut |_, _, _| {})
++    }
++
++    fn binary_matches_with_capture(
++        &self,
++        id: u32,
++        scratch: &mut QueryTextScratch,
++        terms: &[String],
++        cache: &mut BTreeMap<String, String>,
++        cached_bytes: &mut usize,
++        capture: &mut impl FnMut(u32, &crate::payload::View<'_>, &[u8]),
+     ) -> Result<bool> {
+         #[cfg(feature = "experimental-grouped-read")]
+         if scratch.read_window_enabled {
+-            return self.binary_window_matches(id, scratch, terms, cache, cached_bytes);
++            return self.binary_window_matches(id, scratch, terms, cache, cached_bytes, capture);
+         }
+-        self.binary_exact_matches(id, scratch, terms, cache, cached_bytes)
++        self.binary_exact_matches(id, scratch, terms, cache, cached_bytes, capture)
+     }
+ 
+     fn query_metadata(&self, id: u32, scratch: &mut QueryTextScratch) -> Result<PackedRecord> {
+@@ -1717,6 +1733,7 @@ impl DiskIndex {
+         terms: &[String],
+         cache: &mut BTreeMap<String, String>,
+         cached_bytes: &mut usize,
++        capture: &mut impl FnMut(u32, &crate::payload::View<'_>, &[u8]),
+     ) -> Result<bool> {
+         let r = self.query_metadata(id, scratch)?;
+         scratch.payload.resize(r.len as usize, 0);
+@@ -1748,7 +1765,12 @@ impl DiskIndex {
+             if !self.query_identity(id, scratch, view.key_parts())? || view.version() != r.version {
+                 return Err(Error::Corrupt("segment document identity mismatch".into()));
+             }
+-            Ok(scratch.matches_text(view.title(), view.text(), terms, cache, cached_bytes))
++            let matched =
++                scratch.matches_text(view.title(), view.text(), terms, cache, cached_bytes);
++            if matched {
++                capture(id, &view, &bytes);
++            }
++            Ok(matched)
+         })();
+         scratch.payload = bytes;
+         result
+@@ -1763,6 +1785,7 @@ impl DiskIndex {
+         terms: &[String],
+         cache: &mut BTreeMap<String, String>,
+         cached_bytes: &mut usize,
++        capture: &mut impl FnMut(u32, &crate::payload::View<'_>, &[u8]),
+     ) -> Result<bool> {
+         let r = self.query_metadata(id, scratch)?;
+         const WINDOW: usize = 256 * 1024;
+@@ -1819,7 +1842,7 @@ impl DiskIndex {
+         if !covered && scratch.window_prefetched && scratch.window_used * 4 < scratch.read_len * 3 {
+             scratch.read_window_enabled = false;
+             scratch.read_len = 0;
+-            return self.binary_exact_matches(id, scratch, terms, cache, cached_bytes);
++            return self.binary_exact_matches(id, scratch, terms, cache, cached_bytes, capture);
+         }
+         #[cfg(feature = "diagnostic-timing")]
+         {
+@@ -1878,12 +1901,17 @@ impl DiskIndex {
+             let view = {
+                 #[cfg(feature = "diagnostic-timing")]
+                 let _validation = crate::timing::span("query.payload_validation");
+-                crate::payload::checked(&bytes[payload_range])?
++                crate::payload::checked(&bytes[payload_range.clone()])?
+             };
+             if !self.query_identity(id, scratch, view.key_parts())? || view.version() != r.version {
+                 return Err(Error::Corrupt("segment document identity mismatch".into()));
+             }
+-            Ok(scratch.matches_text(view.title(), view.text(), terms, cache, cached_bytes))
++            let matched =
++                scratch.matches_text(view.title(), view.text(), terms, cache, cached_bytes);
++            if matched {
++                capture(id, &view, &bytes[payload_range]);
++            }
++            Ok(matched)
+         })();
+         scratch.payload = bytes;
+         result
+@@ -2391,41 +2419,73 @@ impl DiskIndex {
+         q: &Query,
+         mask: &[u64],
+         limit: usize,
++    ) -> Result<(usize, Vec<u32>)> {
++        self.prefix_matches_with_capture(q, mask, limit, &mut |_, _, _| {})
++    }
++
++    #[cfg(feature = "bounded-engine")]
++    pub(crate) fn prefix_matches_checked(
++        &self,
++        q: &Query,
++        mask: &[u64],
++        limit: usize,
++        run: usize,
++        page: &mut CheckedPage,
++    ) -> Result<(usize, Vec<u32>)> {
++        self.prefix_matches_with_capture(q, mask, limit, &mut |id, view, bytes| {
++            page.retain(run, id, view, bytes);
++        })
++    }
++
++    fn prefix_matches_with_capture(
++        &self,
++        q: &Query,
++        mask: &[u64],
++        limit: usize,
++        capture: &mut impl FnMut(u32, &crate::payload::View<'_>, &[u8]),
+     ) -> Result<(usize, Vec<u32>)> {
+         let visible = self.visible_count(mask)?;
+         let hidden = |id: u32| mask[id as usize / 64] & (1u64 << (id % 64)) != 0;
+         let mut ids = BinaryHeap::with_capacity(limit.min(self.len()));
+         let mut group = None;
+-        let mut capture = true;
++        let mut capture_ids = true;
+         // Within a union, collection/scalar-value postings are disjoint by
+         // construction. IDs in each posting are increasing; after an ID exceeds
+         // our largest retained ID the rest of that posting cannot improve it.
+-        let total = self.visit_matches::<true>(q, hidden, Some(visible), limit, |id, n| {
+-            if group != Some(n) {
+-                group = Some(n);
+-                capture = true;
+-            }
+-            if !capture {
+-                return;
+-            }
+-            if ids.len() < limit {
+-                ids.push(id);
+-            } else if id < *ids.peek().unwrap() {
+-                *ids.peek_mut().unwrap() = id;
+-            } else {
+-                capture = false;
+-            }
+-        })?;
++        let total = self.visit_matches_with_capture::<true>(
++            q,
++            hidden,
++            Some(visible),
++            limit,
++            |id, n| {
++                if group != Some(n) {
++                    group = Some(n);
++                    capture_ids = true;
++                }
++                if !capture_ids {
++                    return;
++                }
++                if ids.len() < limit {
++                    ids.push(id);
++                } else if id < *ids.peek().unwrap() {
++                    *ids.peek_mut().unwrap() = id;
++                } else {
++                    capture_ids = false;
++                }
++            },
++            capture,
++        )?;
+         Ok((total, ids.into_sorted_vec()))
+     }
+ 
+-    fn visit_matches<const COUNT: bool>(
++    fn visit_matches_with_capture<const COUNT: bool>(
+         &self,
+         q: &Query,
+         hidden: impl Fn(u32) -> bool,
+         visible_total: Option<usize>,
+         capture_limit: usize,
+         mut emit: impl FnMut(u32, usize),
++        capture: &mut impl FnMut(u32, &crate::payload::View<'_>, &[u8]),
+     ) -> Result<usize> {
+         let terms = Self::query_terms(q);
+         let verification_terms = self.verification_terms(q, &terms)?;
+@@ -2586,12 +2646,13 @@ impl DiskIndex {
+                         if let Some(result) = overlay_match {
+                             include = result;
+                         } else if self.binary_payload {
+-                            include = self.binary_matches(
++                            include = self.binary_matches_with_capture(
+                                 id,
+                                 &mut text_scratch,
+                                 &verification_terms,
+                                 &mut folded_content,
+                                 &mut folded_bytes,
++                                capture,
+                             )?;
+                         } else {
+                             #[cfg(feature = "experimental-paged-metadata")]
+diff --git a/src/segment/window_tests.rs b/src/segment/window_tests.rs
+index 0b0902e..89ada29 100644
+--- a/src/segment/window_tests.rs
++++ b/src/segment/window_tests.rs
+@@ -130,6 +130,38 @@ fn prefetched_corrupt_record_is_checked_before_it_matches() {
+     );
+ }
+ 
++#[cfg(feature = "bounded-engine")]
++#[test]
++fn checked_capture_rejects_corruption_and_cuts_before_admission() {
++    for cut in [false, true] {
++        let temp = Temp::new();
++        let index = build(&temp);
++        let record = index.metadata(40).unwrap();
++        let mut file = OpenOptions::new().write(true).open(&temp.0).unwrap();
++        if cut {
++            file.set_len(record.offset + record.len as u64 - 1).unwrap();
++        } else {
++            file.seek(SeekFrom::Start(record.offset + 80)).unwrap();
++            file.write_all(&[0xff]).unwrap();
++        }
++        file.flush().unwrap();
++        let mut calls = 0;
++        assert!(
++            index
++                .binary_matches_with_capture(
++                    40,
++                    &mut QueryTextScratch::default(),
++                    &["needle".into()],
++                    &mut BTreeMap::new(),
++                    &mut 0,
++                    &mut |_, _, _| calls += 1
++                )
++                .is_err()
++        );
++        assert_eq!(calls, 0);
++    }
++}
++
+ #[cfg(feature = "bounded-engine")]
+ #[test]
+ fn raw_ascii_matches_and_absence_reject_payload_corruption_and_truncation() {
+diff --git a/tests/engine.rs b/tests/engine.rs
+index b55385a..65fd850 100644
+--- a/tests/engine.rs
++++ b/tests/engine.rs
+@@ -158,6 +158,79 @@ fn put(document: Document) -> Mutation {
+     }
+ }
+ 
++#[cfg(feature = "bounded-engine")]
++#[test]
++fn checked_page_preserves_global_order_visibility_filters_and_fallback_pages() {
++    let tmp = Temp::new();
++    let mut db = Database::open(&tmp.0).unwrap();
++    let target = Key::new("shared", "targets", "one");
++    // Small unit fixture; no benchmark corpus or persistent work slot changes.
++    for batch in 0..3 {
++        let mut mutations = Vec::new();
++        for n in 0..8 {
++            let id = n * 3 + batch;
++            let mut d = doc(&format!("{id:03}"), "İSTANBUL needle 東京 🦀");
++            d.key.collection = if id % 2 == 0 { "a" } else { "b" }.into();
++            d.fields.insert("kind".into(), json!(id % 3));
++            d.fields.insert("rank".into(), json!(id));
++            d.fields
++                .insert("nested".into(), json!([null, {"ok": true}]));
++            d.links.push(target.clone());
++            mutations.push(put(d));
++        }
++        db.commit(mutations).unwrap();
++        db.flush().unwrap();
++    }
++    let mut changed = db
++        .get(&Key::new("shared", "a", "000"))
++        .unwrap()
++        .unwrap()
++        .document;
++    changed.text = "new needle İstanbul".into();
++    db.commit(vec![
++        put(changed),
++        Mutation::Delete {
++            key: Key::new("shared", "b", "001"),
++            guard: Guard::Any,
++        },
++        put(doc("delta", "needle İstanbul")),
++    ])
++    .unwrap();
++    for text in ["needle", "needle istanbul", "zzzz", "nee", ""] {
++        for filtered in [false, true] {
++            let mut q = Query::new("shared");
++            q.text = text.into();
++            if filtered {
++                q.exact.insert("kind".into(), json!(2));
++                q.ranges.push(Range {
++                    field: "rank".into(),
++                    min: 2,
++                    max: 20,
++                });
++                q.linked_to = Some(target.clone());
++            }
++            for (offset, limit) in [(0, 1), (0, 5), (0, 50), (0, 51), (1, 5), (5000, 5)] {
++                q.offset = offset;
++                q.limit = limit;
++                let actual = db.search(&q).unwrap();
++                let reference = db.search_direct_slots(&q).unwrap();
++                assert_eq!(
++                    actual.total, reference.total,
++                    "{text}/{filtered}/{offset}/{limit}"
++                );
++                assert_eq!(actual.sequence, reference.sequence);
++                assert_eq!(
++                    actual.hits, reference.hits,
++                    "{text}/{filtered}/{offset}/{limit}"
++                );
++                for stored in actual.hits {
++                    assert_eq!(db.get(&stored.document.key).unwrap(), Some(stored));
++                }
++            }
++        }
++    }
++}
++
+ #[test]
+ fn durable_batch_update_delete_compaction() {
+     let tmp = Temp::new();
+diff --git a/src/segment/checked_page.rs b/src/segment/checked_page.rs
+new file mode 100644
+index 0000000..c165a47
+--- /dev/null
++++ b/src/segment/checked_page.rs
+@@ -0,0 +1,166 @@
++//! Query-local copies of bytes checked during contains verification. No source
++//! address or checksum exemption survives the query or applies to a fresh read.
++use super::*;
++
++const PAYLOAD_BUDGET: usize = 2 * 1024 * 1024;
++
++pub(crate) struct CheckedPage {
++    limit: usize,
++    bytes: usize,
++    entries: BTreeMap<Key, (usize, u32, Box<[u8]>)>,
++}
++
++impl CheckedPage {
++    pub(crate) fn new(limit: usize) -> Self {
++        Self {
++            limit: limit.min(50),
++            bytes: 0,
++            entries: BTreeMap::new(),
++        }
++    }
++
++    // Called only with the very slice whose CRC, schema, UTF-8 and key/version
++    // have just passed. Copies are private and never mutated after admission.
++    pub(super) fn retain(
++        &mut self,
++        run: usize,
++        id: u32,
++        view: &crate::payload::View<'_>,
++        bytes: &[u8],
++    ) {
++        if self.limit == 0 || bytes.len() > PAYLOAD_BUDGET {
++            return;
++        }
++        let parts = view.key_parts();
++        while let Some((last, _)) = self.entries.last_key_value() {
++            if self.entries.len() < self.limit && self.bytes + bytes.len() <= PAYLOAD_BUDGET {
++                break;
++            }
++            if parts
++                >= (
++                    last.scope.as_str(),
++                    last.collection.as_str(),
++                    last.id.as_str(),
++                )
++            {
++                return;
++            }
++            let (_, (_, _, old)) = self.entries.pop_last().unwrap();
++            self.bytes -= old.len();
++        }
++        #[cfg(feature = "diagnostic-timing")]
++        let _copy = crate::timing::span("query.retain_checked_payload");
++        let key = Key::new(parts.0, parts.1, parts.2);
++        let len = bytes.len();
++        if let Some((_, _, old)) = self.entries.insert(key, (run, id, bytes.into())) {
++            self.bytes -= old.len();
++        }
++        self.bytes += len;
++    }
++
++    pub(crate) fn take(
++        &mut self,
++        key: &Key,
++        run: usize,
++        id: u32,
++    ) -> Result<Option<StoredDocument>> {
++        let Some((source, slot, bytes)) = self.entries.remove(key) else {
++            return Ok(None);
++        };
++        self.bytes -= bytes.len();
++        if source != run || slot != id {
++            return Err(Error::Corrupt("checked page slot mismatch".into()));
++        }
++        #[cfg(feature = "diagnostic-timing")]
++        let _reuse = crate::timing::span("payload.reuse_checked");
++        // Recheck schema/UTF-8 while decoding the same immutable owned bytes.
++        // No second file read or CRC is needed; fresh reads always use both.
++        Ok(Some(crate::payload::checked(&bytes)?.to_document()?))
++    }
++}
++
++#[cfg(test)]
++mod tests {
++    use super::*;
++
++    fn record(id: &str, len: usize) -> StoredDocument {
++        StoredDocument {
++            document: crate::Document {
++                key: Key::new("shared", "texts", id),
++                title: "İstanbul 東京".into(),
++                text: "needle 🦀".repeat(len),
++                fields: BTreeMap::from([(
++                    "nested".into(),
++                    serde_json::json!({"list": [null, true, -17, 1.25, "ışık"]}),
++                )]),
++                links: vec![Key::new("shared", "other", "target")],
++            },
++            version: 77,
++        }
++    }
++
++    fn retain(page: &mut CheckedPage, run: usize, slot: u32, document: &StoredDocument) {
++        let bytes = crate::payload::encode(document).unwrap();
++        page.retain(run, slot, &crate::payload::checked(&bytes).unwrap(), &bytes);
++    }
++
++    #[test]
++    fn page_uses_global_keys_and_preserves_full_document() {
++        let mut page = CheckedPage::new(2);
++        retain(&mut page, 0, 0, &record("z", 1));
++        retain(&mut page, 1, 9, &record("c", 1));
++        retain(&mut page, 2, 8, &record("a", 1));
++        retain(&mut page, 3, 1, &record("b", 1));
++        assert_eq!(page.entries.len(), 2);
++        assert!(
++            page.take(&record("z", 1).document.key, 0, 0)
++                .unwrap()
++                .is_none()
++        );
++        for (id, run, slot) in [("a", 2, 8), ("b", 3, 1)] {
++            let expected = record(id, 1);
++            assert_eq!(
++                page.take(&expected.document.key, run, slot).unwrap(),
++                Some(expected)
++            );
++        }
++        assert_eq!(page.bytes, 0);
++    }
++
++    #[test]
++    fn page_bounds_payload_bytes_and_slots_with_oversized_fallback() {
++        let mut page = CheckedPage::new(1000);
++        for id in 0..80 {
++            retain(&mut page, 0, id, &record(&format!("{id:03}"), 8000));
++            assert!(page.bytes <= PAYLOAD_BUDGET);
++            assert!(page.entries.len() <= 50);
++        }
++        let oversized = record("!large", 200_000);
++        retain(&mut page, 4, 0, &oversized);
++        assert!(page.take(&oversized.document.key, 4, 0).unwrap().is_none());
++        let mut small = CheckedPage::new(1000);
++        for id in (0..80).rev() {
++            retain(&mut small, 0, id, &record(&format!("{id:03}"), 1));
++        }
++        assert_eq!(small.entries.len(), 50);
++        assert_eq!(small.entries.last_key_value().unwrap().0.id, "049");
++    }
++
++    #[test]
++    fn retained_bytes_are_owned_and_slot_identity_is_enforced() {
++        let expected = record("a", 1);
++        let mut bytes = crate::payload::encode(&expected).unwrap();
++        let mut page = CheckedPage::new(1);
++        page.retain(2, 3, &crate::payload::checked(&bytes).unwrap(), &bytes);
++        bytes.fill(0xff);
++        assert_eq!(
++            page.take(&expected.document.key, 2, 3).unwrap(),
++            Some(expected.clone())
++        );
++        retain(&mut page, 2, 3, &expected);
++        assert!(matches!(
++            page.take(&expected.document.key, 4, 3),
++            Err(Error::Corrupt(_))
++        ));
++    }
++}

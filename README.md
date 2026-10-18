@@ -1,5 +1,13 @@
 # FDB
 
+[Contains sonrası aynı doğrulanmış byte'ları kullanma](docs/CHECKED-PAGE-10K-20261018.md):
+dar prototipte quixote okuma131→81, ikinci CRC/decode50→0; candidate56
+kontrolü korunur. Son400-örnek/variant kontrolde p95-%11,11/tipik-%17,92,
+4/4 süreç hızlı. Geniş38-case15 düşük/23 yüksek p95 ve query/get private
+medyan+64KiB/WS+170KiB nedeniyle varsayılan geçiş reddedildi. Kod/testler
+patch'te saklanır; kaynak/format/corpus/DB aynı. Yazma/bakım, genel arama,
+RAM/açılış/sıkıştırma ve concurrent/soğuk yük açık kalır.
+
 [CRC/UTF-8 parçalamasını ölçme](docs/VALIDATION-CHUNK-10K-20261018.md)
 reddedildi; varsayılan motor aynı. Aynı10k/400 örnek kontrolünde holmes
 p95+%1,80 (3/4 çift yüksek), zx+%0,32 (4/4 çift yüksek); tipik blok da

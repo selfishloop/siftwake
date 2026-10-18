@@ -1,0 +1,32 @@
+{
+  "pairs": 2,
+  "phase": "profile",
+  "affinity_mask": 4,
+  "same_executable": false,
+  "diagnostic_timing": true,
+  "programs": {
+    "control": {
+      "path": "output\\payload-isolated-20261017-control-measure_content_reads-profile.exe",
+      "sha256": "CC8E9FF72843050A5F0EBEB860F341646F2ECCEAD21F3399B31079D128654C11"
+    },
+    "fdb": {
+      "path": "output\\checked-page-isolated-20261018-candidate-measure_content_reads-profile.exe",
+      "sha256": "A597A93D56D422C3534540A35E6630251CF5F24424396A75F8B281EEE1010B8D"
+    }
+  },
+  "cache": "warm OS cache, fresh processes, per-case untimed warmup, no eviction",
+  "validation": "normal strict open; complete source/index CRC and schema; pending0; payload CRC/schema/key/version preserved",
+  "corpus": "same existing first10000, 264842858 text bytes; no generation/reset/repack/copy",
+  "limits": "No concurrent load, true cold cache or hardware/power isolation. Matrix oracle memory excluded from engine memory claims. Diagnostic spans nest; never sum as exclusive elapsed time.",
+  "orders": [
+    [
+      "control",
+      "fdb"
+    ],
+    [
+      "fdb",
+      "control"
+    ]
+  ],
+  "control_engine": "fdb"
+}

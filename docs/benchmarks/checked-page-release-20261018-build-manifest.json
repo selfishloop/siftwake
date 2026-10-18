@@ -1,0 +1,16 @@
+{
+  "base": "97f6ef7",
+  "sources": {
+    "src/segment.rs": "9097eb90f3f89b4bfa83cc1112e5e78537eaf4f4ca3f4bd2a87d0cda695a276c",
+    "src/engine.rs": "ef4e58bcb475f4a11894bb20846aa8d06eda24ad1a831b39255822734b4b989e",
+    "src/segment/checked_page.rs": "a60e14d4458872da75c1caf824bbccacffd4cc7c42d0be89bae49954c0f0832d",
+    "src/segment/window_tests.rs": "b44622004bee4537c8990b9549482797e72d713fdccc33693923438c3db86750",
+    "tests/engine.rs": "7b5429a064f454fe8f5f57c73dbee5088ad2d1c15cae5bbf801f886877fa44a9"
+  },
+  "programs": {
+    "output\\checked-page-release-20261018-candidate-measure_content_reads-normal.exe": "e22c62ef3200ed4aad8232f2846900c451f6ee5b750a92c1811158a5d8dc41a5",
+    "output\\checked-page-release-20261018-candidate-measure_interleaved_reads-normal.exe": "ab8c42cd40843b7976a0184d1322b866901861e6992b75db5b6b923f6a4897f8",
+    "output\\checked-page-release-20261018-candidate-measure_content_reads-profile.exe": "77d832edf43311e23ae33b76dbfbb6699c5d6c3938f5982a0a708ca6611a8071"
+  },
+  "difference_from_previous": "Drop unselected CheckedPage copies before fallback hydration; empty on the corpus first50 pages"
+}

@@ -1,0 +1,481 @@
+{
+  "design": {
+    "pairs": 4,
+    "blocks_per_pair": 4,
+    "repeats_per_block": 25,
+    "affinity_mask": 4,
+    "pages_only": false,
+    "case_indices": [
+      0,
+      11
+    ],
+    "dense_selected_cases": true,
+    "cache": "warm OS cache; every block opens and verifies/warmups before query timing; no eviction",
+    "corpus": "same existing first10000; no generation/reset/copy",
+    "source_validation": "complete source check before timed search; unchanged CRC/schema/key/version checks",
+    "same_executable": false,
+    "programs": {
+      "control": {
+        "path": "output\\payload-isolated-20261017-control-measure_interleaved_reads-normal.exe",
+        "sha256": "D4BAAEBA45490A5D88E295658E5E520697925312E3E6CFD74A3A74D65F1B61B8"
+      },
+      "fdb": {
+        "path": "output\\checked-page-release-20261018-candidate-measure_interleaved_reads-normal.exe",
+        "sha256": "AB8C42CD40843B7976A0184D1322B866901861E6992B75DB5B6B923F6A4897F8"
+      }
+    },
+    "balanced_block_first_position": true,
+    "orders": [
+      {
+        "pair": 0,
+        "block": 0,
+        "engines": [
+          "control",
+          "fdb"
+        ],
+        "command": {
+          "id": 0,
+          "seed": 0,
+          "repeats": 25
+        }
+      },
+      {
+        "pair": 0,
+        "block": 1,
+        "engines": [
+          "fdb",
+          "control"
+        ],
+        "command": {
+          "id": 1,
+          "seed": 1,
+          "repeats": 25
+        }
+      },
+      {
+        "pair": 0,
+        "block": 2,
+        "engines": [
+          "control",
+          "fdb"
+        ],
+        "command": {
+          "id": 2,
+          "seed": 2,
+          "repeats": 25
+        }
+      },
+      {
+        "pair": 0,
+        "block": 3,
+        "engines": [
+          "fdb",
+          "control"
+        ],
+        "command": {
+          "id": 3,
+          "seed": 3,
+          "repeats": 25
+        }
+      },
+      {
+        "pair": 1,
+        "block": 0,
+        "engines": [
+          "fdb",
+          "control"
+        ],
+        "command": {
+          "id": 4,
+          "seed": 10000,
+          "repeats": 25
+        }
+      },
+      {
+        "pair": 1,
+        "block": 1,
+        "engines": [
+          "control",
+          "fdb"
+        ],
+        "command": {
+          "id": 5,
+          "seed": 10001,
+          "repeats": 25
+        }
+      },
+      {
+        "pair": 1,
+        "block": 2,
+        "engines": [
+          "fdb",
+          "control"
+        ],
+        "command": {
+          "id": 6,
+          "seed": 10002,
+          "repeats": 25
+        }
+      },
+      {
+        "pair": 1,
+        "block": 3,
+        "engines": [
+          "control",
+          "fdb"
+        ],
+        "command": {
+          "id": 7,
+          "seed": 10003,
+          "repeats": 25
+        }
+      },
+      {
+        "pair": 2,
+        "block": 0,
+        "engines": [
+          "control",
+          "fdb"
+        ],
+        "command": {
+          "id": 8,
+          "seed": 20000,
+          "repeats": 25
+        }
+      },
+      {
+        "pair": 2,
+        "block": 1,
+        "engines": [
+          "fdb",
+          "control"
+        ],
+        "command": {
+          "id": 9,
+          "seed": 20001,
+          "repeats": 25
+        }
+      },
+      {
+        "pair": 2,
+        "block": 2,
+        "engines": [
+          "control",
+          "fdb"
+        ],
+        "command": {
+          "id": 10,
+          "seed": 20002,
+          "repeats": 25
+        }
+      },
+      {
+        "pair": 2,
+        "block": 3,
+        "engines": [
+          "fdb",
+          "control"
+        ],
+        "command": {
+          "id": 11,
+          "seed": 20003,
+          "repeats": 25
+        }
+      },
+      {
+        "pair": 3,
+        "block": 0,
+        "engines": [
+          "fdb",
+          "control"
+        ],
+        "command": {
+          "id": 12,
+          "seed": 30000,
+          "repeats": 25
+        }
+      },
+      {
+        "pair": 3,
+        "block": 1,
+        "engines": [
+          "control",
+          "fdb"
+        ],
+        "command": {
+          "id": 13,
+          "seed": 30001,
+          "repeats": 25
+        }
+      },
+      {
+        "pair": 3,
+        "block": 2,
+        "engines": [
+          "fdb",
+          "control"
+        ],
+        "command": {
+          "id": 14,
+          "seed": 30002,
+          "repeats": 25
+        }
+      },
+      {
+        "pair": 3,
+        "block": 3,
+        "engines": [
+          "control",
+          "fdb"
+        ],
+        "command": {
+          "id": 15,
+          "seed": 30003,
+          "repeats": 25
+        }
+      }
+    ],
+    "observe_thread": false
+  },
+  "queries": [
+    {
+      "text": "quixote",
+      "kind": "word",
+      "offset": 0,
+      "limit": 50,
+      "total": 56,
+      "late_matches": 8,
+      "control": {
+        "n": 400,
+        "p50_ms": 3.0854999999999997,
+        "p95_ms": 4.1475,
+        "p99_ms": 5.288099999999999,
+        "per_process_pair_p95": [
+          3.6302000000000003,
+          3.4827,
+          4.3239,
+          4.5013
+        ],
+        "block_medians": [
+          [
+            2.8902,
+            2.9673999999999996,
+            2.8337000000000003,
+            2.8785999999999996
+          ],
+          [
+            2.9772000000000003,
+            2.7766,
+            2.783,
+            2.8398999999999996
+          ],
+          [
+            3.415,
+            2.9549,
+            3.4484,
+            3.4466
+          ],
+          [
+            3.042,
+            3.6878,
+            3.5913,
+            3.6439
+          ]
+        ]
+      },
+      "fdb": {
+        "n": 400,
+        "p50_ms": 2.6414999999999997,
+        "p95_ms": 3.5668,
+        "p99_ms": 6.2737,
+        "per_process_pair_p95": [
+          3.3164000000000002,
+          3.352,
+          3.4777,
+          3.7215
+        ],
+        "block_medians": [
+          [
+            2.483,
+            2.2728,
+            2.5358,
+            2.3646000000000003
+          ],
+          [
+            2.5006999999999997,
+            2.3005999999999998,
+            2.4614,
+            2.7537
+          ],
+          [
+            2.7152000000000003,
+            2.7226,
+            2.9449,
+            2.8265000000000002
+          ],
+          [
+            2.5408000000000004,
+            2.9311,
+            3.1668,
+            2.6766
+          ]
+        ]
+      },
+      "change_p95_percent": -14.001205545509332,
+      "paired_p95_change_percent": [
+        -8.644151837364333,
+        -3.7528354437649014,
+        -19.57029533522977,
+        -17.32388421122787
+      ],
+      "faster_process_pairs": 4,
+      "paired_block_median_changes_percent": [
+        -14.088990381288491,
+        -23.407696973781743,
+        -10.512757172601205,
+        -17.855902174668227,
+        -16.004971113798216,
+        -17.14326874594829,
+        -11.555874955084445,
+        -3.035318145005095,
+        -20.491947291361633,
+        -7.861518156282788,
+        -14.600974364922859,
+        -17.991643938954326,
+        -16.476002629848765,
+        -20.51900862302729,
+        -11.820232227884054,
+        -26.545733966354724
+      ],
+      "median_block_change_percent": -16.240486871823492,
+      "faster_blocks": 16,
+      "leave_one_pair_out_p95_changes_percent": [
+        -19.599821149116934,
+        -17.9228149829739,
+        -13.824595312877507,
+        -13.537737043319753
+      ]
+    },
+    {
+      "text": "holmes",
+      "kind": "word",
+      "offset": 0,
+      "limit": 50,
+      "total": 1222,
+      "late_matches": 7,
+      "control": {
+        "n": 400,
+        "p50_ms": 30.5182,
+        "p95_ms": 38.04,
+        "p99_ms": 45.6102,
+        "per_process_pair_p95": [
+          33.4651,
+          32.150999999999996,
+          38.8726,
+          39.940000000000005
+        ],
+        "block_medians": [
+          [
+            28.688200000000002,
+            28.851200000000002,
+            29.1071,
+            29.729499999999998
+          ],
+          [
+            29.5126,
+            28.7103,
+            28.6523,
+            29.1756
+          ],
+          [
+            33.4663,
+            31.8356,
+            31.8605,
+            34.339099999999995
+          ],
+          [
+            31.0853,
+            34.978,
+            35.8625,
+            31.9046
+          ]
+        ]
+      },
+      "fdb": {
+        "n": 400,
+        "p50_ms": 30.56555,
+        "p95_ms": 36.408,
+        "p99_ms": 46.1967,
+        "per_process_pair_p95": [
+          31.512600000000003,
+          35.849399999999996,
+          37.155899999999995,
+          38.542699999999996
+        ],
+        "block_medians": [
+          [
+            29.9537,
+            28.152900000000002,
+            28.837600000000002,
+            28.781299999999998
+          ],
+          [
+            31.291,
+            28.3072,
+            29.3424,
+            30.7093
+          ],
+          [
+            31.6542,
+            30.0554,
+            33.0266,
+            34.4897
+          ],
+          [
+            30.5243,
+            33.9894,
+            35.006,
+            32.3391
+          ]
+        ]
+      },
+      "change_p95_percent": -4.290220820189273,
+      "paired_p95_change_percent": [
+        -5.834436472623706,
+        11.503219184473256,
+        -4.416221194363135,
+        -3.498497746619955
+      ],
+      "faster_process_pairs": 3,
+      "paired_block_median_changes_percent": [
+        4.411221338390003,
+        -2.4203499334516376,
+        -0.9258909338271337,
+        -3.1894246455540842,
+        6.025900801691475,
+        -1.4040257329251071,
+        2.4085326483388902,
+        5.256789920344396,
+        -5.414700758673641,
+        -5.591853145535186,
+        3.660017890491374,
+        0.43856711445553476,
+        -1.8047115517624057,
+        -2.8263479901652455,
+        -2.388288602300448,
+        1.3618725826370026
+      ],
+      "median_block_change_percent": -1.1649583333761204,
+      "faster_blocks": 9,
+      "leave_one_pair_out_p95_changes_percent": [
+        -3.340279241101063,
+        -5.4908108915198595,
+        -2.997270099561078,
+        -1.9594425619505418
+      ]
+    }
+  ],
+  "lower_p95_cases": 2,
+  "higher_p95_cases": 0,
+  "interpretation": "Short exclusive sessions, per-block source validation/warmup outside timing; two resident oracle workers, no concurrent database queries. Not identical to a continuously open single-process matrix. Pooled p95 and block medians describe different distributions; no automatic significance claim."
+}

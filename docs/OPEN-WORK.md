@@ -1,5 +1,26 @@
 # FDB açık işler
 
+2026-10-18 pozitif contains sonrası ikinci payload okuması ölçüldü. Son
+izole prototipte quixote read API131→81, ikinci CRC/decode50→0, candidate
+CRC56→56; holmes1514→1467 read/1285 candidate CRC korunur. Aynı mevcut10k,
+400-örnek/variant quixote p95-%11,11/tipik-%17,92 (4/4 süreç,15/16 blok),
+holmes-%13,52/tipik-%3,82 (4/4,15/16). Dar8-case8/8 düşük, önceki he/the200
+artışları bu tekrarda yok. Buna rağmen geniş38-case15 düşük/23 yüksek p95;
+quixote-%6,17, zx+%15,14, the200+%10,83. Ortam/yerleşim/kod payları tam
+ayrılmadı; artışlar kapatılmaz. Query/get peak private medyan+64KiB,
+WS+170KiB; ikisi4/4 süreçte arttı. Genel geçiş reddedildi, prototip/beş
+test patch'te saklanır. Sonraki iş bu dar iş azalmasını genel sorgu ve bellek
+regresyonu olmadan koruyan tasarım olmalı; henüz çözülmedi. Daha fazla2MiB/
+50/eşik ayar turu yok. Yazma/bakım, genel arama, normal Vec/query/caller RAM,
+açılış, disk sıkıştırma ve eşzamanlı/gerçek-cold yük açık kalır.
+[Bütün sonuçlar ve sınırlar](CHECKED-PAGE-10K-20261018.md).
+Final: prototip185/107/204 test, fmt ve default/all-features Clippy geçti.
+Runtime ve test kaynakları97f6ef7'a byte-eşit döndü;7 window testi ve fmt/
+Clippy yeniden geçti. Normal CLI10k/sequence20, dört sorgu total/hit/version
+kontrolü ve21-file SHA eşitliği geçti;12 ölçüm snapshot'ı ve tüm corpus da
+SHA-eşit. Yeni hız/RAM sonucu aktif, geri dönülen motora atfedilmez.
+[Final doğrulama](benchmarks/checked-page-final-proof-20261018.json).
+
 2026-10-18 CRC/UTF-8 parçalama hipotezi ölçüldü ve reddedildi. Baseline
 12 diagnostic örnekte holmes CRC3,491ms/yapı4,215ms; zx26,849/26,569ms.
 Normal4-case/400 örnek kontrolünde holmes p95+%1,80 (3/4 çift yüksek),

@@ -1,5 +1,18 @@
 # FDB mimarisi — 0.3.1
 
+2026-10-18 checked-page prototipinde doğrulanmış binary contains slice'ları
+global Key sırasıyla en fazla50 kayıt/2MiB encoded byte tutan query-local
+private Box alanında denenmiştir. Dönen50 kaydın ikinci read/CRC'si kalkar;
+schema/UTF-8 decode sırasında tekrar kontrol edilir. Source/key/version
+doğrulaması ve fresh read CRC'si sürer. Offset0/limit<=50/uzun terimli
+sorgulara dar yol, oversized/bütçe/deep sayfaya eski fallback vardır.
+Const CAPTURE=false eski pair-slot/ordinal/exact allocation yolunu koruyan
+ayrı kod üretir. Dar quixote p95-%11,11 (4/4 süreç) fakat geniş15 düşük/
+23 yüksek p95, query private+64KiB/WS+170KiB: varsayılan geçiş reddedildi;
+bu cache runtime tasarımına eklenmeyecek. Kod/beş yeni test patch'tedir.
+Format/feature/dependency,0.1 fixture ve sabit10k verisi değişmez.
+[Ölçüm ve karar](CHECKED-PAGE-10K-20261018.md).
+
 2026-10-18 query-only CRC/UTF-8 interleave deneyi reddedildi.8KiB geçerli
 UTF-8 parçaları sırayla IEEE CRC durumuna ekleniyordu; tam schema ve
 identity korunuyordu. Normal4-case kontrolünde zx4/4 ve holmes3/4 süreçte

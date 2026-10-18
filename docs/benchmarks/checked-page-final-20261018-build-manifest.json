@@ -1,0 +1,16 @@
+{
+  "base": "97f6ef7",
+  "sources": {
+    "src/segment.rs": "9097eb90f3f89b4bfa83cc1112e5e78537eaf4f4ca3f4bd2a87d0cda695a276c",
+    "src/engine.rs": "8023a1bfb9a3608d4817f4246fe7147785eb4a80cfa28220f4fba92a1d44f362",
+    "src/segment/checked_page.rs": "a60e14d4458872da75c1caf824bbccacffd4cc7c42d0be89bae49954c0f0832d",
+    "src/segment/window_tests.rs": "b44622004bee4537c8990b9549482797e72d713fdccc33693923438c3db86750",
+    "tests/engine.rs": "7b5429a064f454fe8f5f57c73dbee5088ad2d1c15cae5bbf801f886877fa44a9"
+  },
+  "programs": {
+    "output\\checked-page-final-20261018-candidate-measure_content_reads-normal.exe": "08c50ad271f5b958a2339fc7810f88519ea387da16e349162e3bba9eb591837f",
+    "output\\checked-page-final-20261018-candidate-measure_interleaved_reads-normal.exe": "2d80e2a4566519b7f9254debd15c51e699e342abe8f53cfa3c2d7e3080ac3136",
+    "output\\checked-page-final-20261018-candidate-measure_content_reads-profile.exe": "fecc5f6990f5870fd281c37c3e32037786bd09fc83f997a9f43fde969be0d0d1"
+  },
+  "difference_from_initial": "hydrated.reserve_exact(selected.len()) preserves uncaptured page allocation; capture algorithm unchanged"
+}

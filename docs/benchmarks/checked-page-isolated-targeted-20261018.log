@@ -1,0 +1,81 @@
+   Compiling fdb v0.3.1 (C:\Users\Serkan\Documents\ChatGPT\fdb)
+    Finished `test` profile [unoptimized + debuginfo] target(s) in 15.48s
+     Running unittests src\lib.rs (target\debug\deps\fdb-647b6e7626a49143.exe)
+
+running 6 tests
+test segment::checked_page::tests::page_uses_global_keys_and_preserves_full_document ... ok
+test segment::checked_page::tests::retained_bytes_are_owned_and_slot_identity_is_enforced ... ok
+test segment::window_tests::prefetched_corrupt_record_is_checked_before_it_matches ... ok
+test segment::grouped_tests::paged_batch_reuses_checked_leaves_without_skipping_payload_checks ... ok
+test segment::window_tests::checked_capture_rejects_corruption_and_cuts_before_admission ... ok
+test segment::checked_page::tests::page_bounds_payload_bytes_and_slots_with_oversized_fallback ... ok
+
+test result: ok. 6 passed; 0 failed; 0 ignored; 0 measured; 97 filtered out; finished in 0.49s
+
+     Running unittests src\main.rs (target\debug\deps\fdb-f8f0a6c314d9bae6.exe)
+
+running 0 tests
+
+test result: ok. 0 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.00s
+
+     Running unittests src\bin\fdb-import-sdb.rs (target\debug\deps\fdb_import_sdb-946396f0c98da297.exe)
+
+running 0 tests
+
+test result: ok. 0 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.00s
+
+     Running tests\compact_cache.rs (target\debug\deps\compact_cache-a9691e546c79919e.exe)
+
+running 0 tests
+
+test result: ok. 0 passed; 0 failed; 0 ignored; 0 measured; 5 filtered out; finished in 0.00s
+
+     Running tests\disk.rs (target\debug\deps\disk-01176b63226fbf33.exe)
+
+running 0 tests
+
+test result: ok. 0 passed; 0 failed; 0 ignored; 0 measured; 11 filtered out; finished in 0.00s
+
+     Running tests\engine.rs (target\debug\deps\engine-4312bba9304cfa93.exe)
+
+running 1 test
+test checked_page_preserves_global_order_visibility_filters_and_fallback_pages ... ok
+
+test result: ok. 1 passed; 0 failed; 0 ignored; 0 measured; 17 filtered out; finished in 0.27s
+
+     Running tests\native_binary.rs (target\debug\deps\native_binary-62293e5ebb62be1a.exe)
+
+running 0 tests
+
+test result: ok. 0 passed; 0 failed; 0 ignored; 0 measured; 10 filtered out; finished in 0.00s
+
+     Running tests\rkyv_payload.rs (target\debug\deps\rkyv_payload-0f6708174290fba0.exe)
+
+running 0 tests
+
+test result: ok. 0 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.00s
+
+     Running tests\segments.rs (target\debug\deps\segments-8bda26fdb0d77189.exe)
+
+running 0 tests
+
+test result: ok. 0 passed; 0 failed; 0 ignored; 0 measured; 18 filtered out; finished in 0.00s
+
+     Running tests\streamed_transactions.rs (target\debug\deps\streamed_transactions-69458a63c3438466.exe)
+
+running 0 tests
+
+test result: ok. 0 passed; 0 failed; 0 ignored; 0 measured; 10 filtered out; finished in 0.00s
+
+     Running tests\wal_delta.rs (target\debug\deps\wal_delta-76717b1fd7b53e12.exe)
+
+running 0 tests
+
+test result: ok. 0 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.00s
+
+     Running tests\write_budget.rs (target\debug\deps\write_budget-98fb605c451c761c.exe)
+
+running 0 tests
+
+test result: ok. 0 passed; 0 failed; 0 ignored; 0 measured; 1 filtered out; finished in 0.00s
+

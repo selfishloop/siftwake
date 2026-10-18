@@ -1,0 +1,196 @@
+{
+  "decision": "rejected default promotion; source restored byte-exact to97f6ef7",
+  "prototype_patch": "docs/benchmarks/checked-page-20261018-prototype.patch",
+  "prototype_checks": [
+    {
+      "label": "prototype-fmt",
+      "command": [
+        "cargo",
+        "fmt",
+        "--check"
+      ],
+      "exit_code": 0,
+      "passed": 0,
+      "ignored": 0
+    },
+    {
+      "label": "prototype-default-tests",
+      "command": [
+        "cargo",
+        "test",
+        "--all-targets"
+      ],
+      "exit_code": 0,
+      "passed": 185,
+      "ignored": 7
+    },
+    {
+      "label": "prototype-reference-tests",
+      "command": [
+        "cargo",
+        "test",
+        "--no-default-features",
+        "--all-targets"
+      ],
+      "exit_code": 0,
+      "passed": 107,
+      "ignored": 3
+    },
+    {
+      "label": "prototype-all-tests",
+      "command": [
+        "cargo",
+        "test",
+        "--all-features",
+        "--all-targets"
+      ],
+      "exit_code": 0,
+      "passed": 204,
+      "ignored": 9
+    },
+    {
+      "label": "prototype-clippy",
+      "command": [
+        "cargo",
+        "clippy",
+        "--all-targets",
+        "--",
+        "-D",
+        "warnings"
+      ],
+      "exit_code": 0,
+      "passed": 0,
+      "ignored": 0
+    },
+    {
+      "label": "prototype-all-clippy",
+      "command": [
+        "cargo",
+        "clippy",
+        "--all-features",
+        "--all-targets",
+        "--",
+        "-D",
+        "warnings"
+      ],
+      "exit_code": 0,
+      "passed": 0,
+      "ignored": 0
+    }
+  ],
+  "restored_checks": [
+    {
+      "label": "final-fmt",
+      "command": [
+        "cargo",
+        "fmt",
+        "--check"
+      ],
+      "exit_code": 0,
+      "passed": 0
+    },
+    {
+      "label": "final-window-tests",
+      "command": [
+        "cargo",
+        "test",
+        "--lib",
+        "window_tests"
+      ],
+      "exit_code": 0,
+      "passed": 7
+    },
+    {
+      "label": "final-clippy",
+      "command": [
+        "cargo",
+        "clippy",
+        "--all-targets",
+        "--",
+        "-D",
+        "warnings"
+      ],
+      "exit_code": 0,
+      "passed": 0
+    },
+    {
+      "label": "final-all-clippy",
+      "command": [
+        "cargo",
+        "clippy",
+        "--all-features",
+        "--all-targets",
+        "--",
+        "-D",
+        "warnings"
+      ],
+      "exit_code": 0,
+      "passed": 0
+    },
+    {
+      "label": "final-normal-release",
+      "command": [
+        "cargo",
+        "build",
+        "--release",
+        "--bin",
+        "fdb",
+        "--example",
+        "measure_content_reads",
+        "--example",
+        "measure_interleaved_reads"
+      ],
+      "exit_code": 0,
+      "passed": 0
+    }
+  ],
+  "default_cli_results": [
+    {
+      "text": "quixote",
+      "offset": 0,
+      "limit": 50,
+      "total": 56,
+      "hits": 50,
+      "order_and_versions_verified": true
+    },
+    {
+      "text": "holmes",
+      "offset": 0,
+      "limit": 50,
+      "total": 1222,
+      "hits": 50,
+      "order_and_versions_verified": true
+    },
+    {
+      "text": "zx",
+      "offset": 0,
+      "limit": 50,
+      "total": 0,
+      "hits": 0,
+      "order_and_versions_verified": true
+    },
+    {
+      "text": "the",
+      "offset": 0,
+      "limit": 200,
+      "total": 10000,
+      "hits": 200,
+      "order_and_versions_verified": true
+    }
+  ],
+  "programs": {
+    "target/release/fdb.exe": "7D0E19C917B5B884A2CD113D687D0AC21E6DA363B66EFD95A090D969453BB58A",
+    "target/release/examples/measure_content_reads.exe": "A0C362B222DB5AFA54E6D1AF21674B3C2438FA1D51D3CBFB1BC8D505E7BE88B1",
+    "target/release/examples/measure_interleaved_reads.exe": "183DEF3DD73F4EEAE339079DE15E22B47F759AC2BD5D78E25A7CB331B8BB972A"
+  },
+  "normal_readers_match_frozen_control": {
+    "content": false,
+    "interleaved": false
+  },
+  "database_files_unchanged": true,
+  "snapshot_files": 21,
+  "fdb_bytes": 349805698,
+  "corpus_proof": "docs/benchmarks/checked-page-data-proof-20261018.json",
+  "runtime_fixture_dependency_diff_empty": true,
+  "patch_forward_check": true
+}

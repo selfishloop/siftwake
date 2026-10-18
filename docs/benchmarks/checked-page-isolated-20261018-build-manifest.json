@@ -1,0 +1,16 @@
+{
+  "base": "97f6ef7",
+  "sources": {
+    "src/segment.rs": "9097eb90f3f89b4bfa83cc1112e5e78537eaf4f4ca3f4bd2a87d0cda695a276c",
+    "src/engine.rs": "27c15bbbf9d400966deccfb0f18f87d8b0b9dfab7217003f7228d7ba59aca495",
+    "src/segment/checked_page.rs": "a60e14d4458872da75c1caf824bbccacffd4cc7c42d0be89bae49954c0f0832d",
+    "src/segment/window_tests.rs": "b44622004bee4537c8990b9549482797e72d713fdccc33693923438c3db86750",
+    "tests/engine.rs": "7b5429a064f454fe8f5f57c73dbee5088ad2d1c15cae5bbf801f886877fa44a9"
+  },
+  "programs": {
+    "output\\checked-page-isolated-20261018-candidate-measure_content_reads-normal.exe": "d5dc7be6acbd0a5ce530ba2dc67ed1f3b211d6f8b8326f282b912e772fbca5d9",
+    "output\\checked-page-isolated-20261018-candidate-measure_interleaved_reads-normal.exe": "6388fd6fb32ccb0d353048879a09aed35fa73973b8ed9b3079d337d2e550b210",
+    "output\\checked-page-isolated-20261018-candidate-measure_content_reads-profile.exe": "a597a93d56d422c3534540a35e6630251cf5f24424396a75f8b281eee1010b8d"
+  },
+  "difference_from_previous": "const CAPTURE false keeps pair slots, ordinal positions and exact page allocation; true uses separate fallback positions"
+}
