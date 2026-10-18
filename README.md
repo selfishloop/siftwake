@@ -1,5 +1,13 @@
 # FDB
 
+[Arka plan işleri kapatıldıktan sonraki tekrar](docs/REUSE-REPEAT-10K-20261018.md):
+aynı executable / aynı 10k / 38 sorgu / 120 örnekle quixote p95 iki kapalı
+kontrole göre -%11,64/-%10,59; yoğun 240 örnekte -%13,68/-%14,96, ikisinde
+4/4 süreç hızlı. Uzun negatifte yoğun kontrolde +0,9/+1,7µs artık artış var.
+Önceki büyük sapmalar küçüldü; bütün regresyonlar kapanmadı. Prototip hâlâ
+varsayılanda değil, aktif motor aynı. Yazma/bakım, genel arama/RAM/açılış,
+sıkıştırma ve eşzamanlı/soğuk işler açık.
+
 [Tek programda açık/kapalı kontrol](docs/REUSE-CONTROLS-10K-20261018.md):
 38 sorguda aynı kapalı yol bile 20 düşük/18 yüksek p95 verdi; genel geçiş
 kanıtlanmadı. Thread CPU kontrolü büyük uç sürelerde bekleme payını gösterdi.

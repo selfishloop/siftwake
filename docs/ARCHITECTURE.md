@@ -1,5 +1,13 @@
 # FDB mimarisi — 0.3.1
 
+2026-10-18 kullanıcı arka plan işlerini kapattıktan sonra aynı frozen
+executable ile yeniden ölçüldü. Quixote 38-case / 120 örnekte iki kapalı
+kontrole göre p95 -%11,64/-%10,59; yoğun 240 örnekte -%13,68/-%14,96.
+Geniş/yoğun her iki kontrolde 4/4 süreç hızlı. Uzun negatif +0,9/+1,7µs
+artık artışla açık; sayfa artışları dar yükte tutarlı tekrarlanmadı.
+Yeni source/API/format/feature yok; genel hız ve OS RAM kapısı açık.
+[Kontrollü tekrar ve bütün sorgular](REUSE-REPEAT-10K-20261018.md).
+
 2026-10-18 aynı executable/süreçte off0/off1/on kontrolü tamamlandı.
 Normal 38-case 120 örnek/koşulda p95 plasebo da kararsız; genel geçiş yok.
 İki normal query-history düzeninde uzun negatif off0'a karşı 4/4 süreçte

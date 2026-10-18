@@ -1,5 +1,24 @@
 # FDB açık işler
 
+2026-10-18 arka plan işleri kapatıldıktan sonraki tekrar tamamlandı.
+Aynı SHA’lı program, aynı 10k, 38 sorgu /120 örnek/koşul: quixote p95
+-%11,64/-%10,59 (iki kapalı kontrol), ikisinde 4/4 süreç ve 23/24 blok hızlı.
+Yoğun dört sorgu /240 örnek: quixote -%13,68/-%14,96; 4/4 süreç, 24/24 blok.
+Holmes genel p95 kazancı hâlâ tutarsız; zx’in eski büyük artışı bu koşuda
+tekrarlanmadı. Uzun negatif yoğun p95 +0,9/+1,7µs (+%2,86/+%5,54), ikinci
+kontrole göre 4/4 süreçte yüksek; açık. the/1 ve ishmael/130/1 artışları
+dört-sorguluk yükte iki kontrole göre tutarlı tekrarlanmadı; geniş sorgu
+setindeki artışlar kapatılmadı. Sıra/durum/yerleşim payları tam ayrılmadı.
+
+Geniş koşuda blok CPU/wall medyanı %99,60; blok süreleri kararlı, tamamen izole sistem iddiası yok. Genel 38-case/OS RAM kabulü geçmedi;
+aktif motor kaynakları aynı, prototip varsayılana alınmadı. Sonraki küçük
+kod işi: 2.464 B sonuç kapasitesi fazlasını gidermek ve ortak boş/negatif
+hızlı yolu korumak. Henüz uygulanmış çözüm değil. Yazma/bakım, diğer arama
+regresyonları, normal Vec/query/caller RAM, açılış, sıkıştırma ve eşzamanlı/
+gerçek-soğuk işler açık. fmt/Clippy ve tüm oracle kontrolleri geçti; 21 dosya
+ve tüm corpus SHA-eşit, yeni corpus/DB/reset/kopya yok.
+[Son tekrar](REUSE-REPEAT-10K-20261018.md).
+
 2026-10-18 tek-program kontrolü tamamlandı; yeni çalışma yönü daraldı.
 38-case /120 örnek/koşulda off1/off0 20 düşük/18 yüksek p95; on/off0
 22/16, on/off1 19/19. Genel p95 kabulü yok. Quixote dar tipik blok kazancı

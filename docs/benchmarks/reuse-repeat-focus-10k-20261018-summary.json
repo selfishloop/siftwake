@@ -1,0 +1,7426 @@
+{
+  "design": {
+    "phase": "normal",
+    "processes": 4,
+    "cycles_per_process": 6,
+    "repeats_per_cycle": 10,
+    "pattern": "mixed",
+    "case_indices": [
+      0,
+      28,
+      30,
+      34
+    ],
+    "get_interleave": true,
+    "affinity_mask": 4,
+    "labels": {
+      "0": "off0",
+      "1": "off1 placebo",
+      "2": "on"
+    },
+    "same_process": true,
+    "executable": "output\\reuse-controls-20261018-normal.exe",
+    "executable_sha256": "0324F3CC03424CB8FB63DE010AB337B22091A1A60E92B3C401D7472B417725B2",
+    "cache": "warm OS cache, no eviction; strict source/index open and oracle warmup outside query clocks",
+    "corpus": "existing same first10000 from json.payload-bench; no creation/reset/copy",
+    "source_validation": "strict full open, candidate CRC/schema/UTF8/key/version; on reuses checked owned bytes at hydration",
+    "query_clock": "Query construction plus search; full oracle check and hit disposal outside clock",
+    "instrumented_timings_are_normal_speed": false,
+    "orders": [
+      {
+        "process": 0,
+        "cycle": 0,
+        "command": {
+          "id": 0,
+          "seed": 0,
+          "repeats": 10,
+          "label": 0,
+          "reuse": false,
+          "pattern": "mixed",
+          "case_indices": [
+            0,
+            28,
+            30,
+            34
+          ],
+          "get_interleave": true
+        }
+      },
+      {
+        "process": 0,
+        "cycle": 0,
+        "command": {
+          "id": 1,
+          "seed": 0,
+          "repeats": 10,
+          "label": 1,
+          "reuse": false,
+          "pattern": "mixed",
+          "case_indices": [
+            0,
+            28,
+            30,
+            34
+          ],
+          "get_interleave": true
+        }
+      },
+      {
+        "process": 0,
+        "cycle": 0,
+        "command": {
+          "id": 2,
+          "seed": 0,
+          "repeats": 10,
+          "label": 2,
+          "reuse": true,
+          "pattern": "mixed",
+          "case_indices": [
+            0,
+            28,
+            30,
+            34
+          ],
+          "get_interleave": true
+        }
+      },
+      {
+        "process": 0,
+        "cycle": 1,
+        "command": {
+          "id": 3,
+          "seed": 1,
+          "repeats": 10,
+          "label": 0,
+          "reuse": false,
+          "pattern": "mixed",
+          "case_indices": [
+            0,
+            28,
+            30,
+            34
+          ],
+          "get_interleave": true
+        }
+      },
+      {
+        "process": 0,
+        "cycle": 1,
+        "command": {
+          "id": 4,
+          "seed": 1,
+          "repeats": 10,
+          "label": 2,
+          "reuse": true,
+          "pattern": "mixed",
+          "case_indices": [
+            0,
+            28,
+            30,
+            34
+          ],
+          "get_interleave": true
+        }
+      },
+      {
+        "process": 0,
+        "cycle": 1,
+        "command": {
+          "id": 5,
+          "seed": 1,
+          "repeats": 10,
+          "label": 1,
+          "reuse": false,
+          "pattern": "mixed",
+          "case_indices": [
+            0,
+            28,
+            30,
+            34
+          ],
+          "get_interleave": true
+        }
+      },
+      {
+        "process": 0,
+        "cycle": 2,
+        "command": {
+          "id": 6,
+          "seed": 2,
+          "repeats": 10,
+          "label": 1,
+          "reuse": false,
+          "pattern": "mixed",
+          "case_indices": [
+            0,
+            28,
+            30,
+            34
+          ],
+          "get_interleave": true
+        }
+      },
+      {
+        "process": 0,
+        "cycle": 2,
+        "command": {
+          "id": 7,
+          "seed": 2,
+          "repeats": 10,
+          "label": 0,
+          "reuse": false,
+          "pattern": "mixed",
+          "case_indices": [
+            0,
+            28,
+            30,
+            34
+          ],
+          "get_interleave": true
+        }
+      },
+      {
+        "process": 0,
+        "cycle": 2,
+        "command": {
+          "id": 8,
+          "seed": 2,
+          "repeats": 10,
+          "label": 2,
+          "reuse": true,
+          "pattern": "mixed",
+          "case_indices": [
+            0,
+            28,
+            30,
+            34
+          ],
+          "get_interleave": true
+        }
+      },
+      {
+        "process": 0,
+        "cycle": 3,
+        "command": {
+          "id": 9,
+          "seed": 3,
+          "repeats": 10,
+          "label": 1,
+          "reuse": false,
+          "pattern": "mixed",
+          "case_indices": [
+            0,
+            28,
+            30,
+            34
+          ],
+          "get_interleave": true
+        }
+      },
+      {
+        "process": 0,
+        "cycle": 3,
+        "command": {
+          "id": 10,
+          "seed": 3,
+          "repeats": 10,
+          "label": 2,
+          "reuse": true,
+          "pattern": "mixed",
+          "case_indices": [
+            0,
+            28,
+            30,
+            34
+          ],
+          "get_interleave": true
+        }
+      },
+      {
+        "process": 0,
+        "cycle": 3,
+        "command": {
+          "id": 11,
+          "seed": 3,
+          "repeats": 10,
+          "label": 0,
+          "reuse": false,
+          "pattern": "mixed",
+          "case_indices": [
+            0,
+            28,
+            30,
+            34
+          ],
+          "get_interleave": true
+        }
+      },
+      {
+        "process": 0,
+        "cycle": 4,
+        "command": {
+          "id": 12,
+          "seed": 4,
+          "repeats": 10,
+          "label": 2,
+          "reuse": true,
+          "pattern": "mixed",
+          "case_indices": [
+            0,
+            28,
+            30,
+            34
+          ],
+          "get_interleave": true
+        }
+      },
+      {
+        "process": 0,
+        "cycle": 4,
+        "command": {
+          "id": 13,
+          "seed": 4,
+          "repeats": 10,
+          "label": 0,
+          "reuse": false,
+          "pattern": "mixed",
+          "case_indices": [
+            0,
+            28,
+            30,
+            34
+          ],
+          "get_interleave": true
+        }
+      },
+      {
+        "process": 0,
+        "cycle": 4,
+        "command": {
+          "id": 14,
+          "seed": 4,
+          "repeats": 10,
+          "label": 1,
+          "reuse": false,
+          "pattern": "mixed",
+          "case_indices": [
+            0,
+            28,
+            30,
+            34
+          ],
+          "get_interleave": true
+        }
+      },
+      {
+        "process": 0,
+        "cycle": 5,
+        "command": {
+          "id": 15,
+          "seed": 5,
+          "repeats": 10,
+          "label": 2,
+          "reuse": true,
+          "pattern": "mixed",
+          "case_indices": [
+            0,
+            28,
+            30,
+            34
+          ],
+          "get_interleave": true
+        }
+      },
+      {
+        "process": 0,
+        "cycle": 5,
+        "command": {
+          "id": 16,
+          "seed": 5,
+          "repeats": 10,
+          "label": 1,
+          "reuse": false,
+          "pattern": "mixed",
+          "case_indices": [
+            0,
+            28,
+            30,
+            34
+          ],
+          "get_interleave": true
+        }
+      },
+      {
+        "process": 0,
+        "cycle": 5,
+        "command": {
+          "id": 17,
+          "seed": 5,
+          "repeats": 10,
+          "label": 0,
+          "reuse": false,
+          "pattern": "mixed",
+          "case_indices": [
+            0,
+            28,
+            30,
+            34
+          ],
+          "get_interleave": true
+        }
+      },
+      {
+        "process": 1,
+        "cycle": 0,
+        "command": {
+          "id": 1000,
+          "seed": 10000,
+          "repeats": 10,
+          "label": 0,
+          "reuse": false,
+          "pattern": "mixed",
+          "case_indices": [
+            0,
+            28,
+            30,
+            34
+          ],
+          "get_interleave": true
+        }
+      },
+      {
+        "process": 1,
+        "cycle": 0,
+        "command": {
+          "id": 1001,
+          "seed": 10000,
+          "repeats": 10,
+          "label": 2,
+          "reuse": true,
+          "pattern": "mixed",
+          "case_indices": [
+            0,
+            28,
+            30,
+            34
+          ],
+          "get_interleave": true
+        }
+      },
+      {
+        "process": 1,
+        "cycle": 0,
+        "command": {
+          "id": 1002,
+          "seed": 10000,
+          "repeats": 10,
+          "label": 1,
+          "reuse": false,
+          "pattern": "mixed",
+          "case_indices": [
+            0,
+            28,
+            30,
+            34
+          ],
+          "get_interleave": true
+        }
+      },
+      {
+        "process": 1,
+        "cycle": 1,
+        "command": {
+          "id": 1003,
+          "seed": 10001,
+          "repeats": 10,
+          "label": 1,
+          "reuse": false,
+          "pattern": "mixed",
+          "case_indices": [
+            0,
+            28,
+            30,
+            34
+          ],
+          "get_interleave": true
+        }
+      },
+      {
+        "process": 1,
+        "cycle": 1,
+        "command": {
+          "id": 1004,
+          "seed": 10001,
+          "repeats": 10,
+          "label": 0,
+          "reuse": false,
+          "pattern": "mixed",
+          "case_indices": [
+            0,
+            28,
+            30,
+            34
+          ],
+          "get_interleave": true
+        }
+      },
+      {
+        "process": 1,
+        "cycle": 1,
+        "command": {
+          "id": 1005,
+          "seed": 10001,
+          "repeats": 10,
+          "label": 2,
+          "reuse": true,
+          "pattern": "mixed",
+          "case_indices": [
+            0,
+            28,
+            30,
+            34
+          ],
+          "get_interleave": true
+        }
+      },
+      {
+        "process": 1,
+        "cycle": 2,
+        "command": {
+          "id": 1006,
+          "seed": 10002,
+          "repeats": 10,
+          "label": 1,
+          "reuse": false,
+          "pattern": "mixed",
+          "case_indices": [
+            0,
+            28,
+            30,
+            34
+          ],
+          "get_interleave": true
+        }
+      },
+      {
+        "process": 1,
+        "cycle": 2,
+        "command": {
+          "id": 1007,
+          "seed": 10002,
+          "repeats": 10,
+          "label": 2,
+          "reuse": true,
+          "pattern": "mixed",
+          "case_indices": [
+            0,
+            28,
+            30,
+            34
+          ],
+          "get_interleave": true
+        }
+      },
+      {
+        "process": 1,
+        "cycle": 2,
+        "command": {
+          "id": 1008,
+          "seed": 10002,
+          "repeats": 10,
+          "label": 0,
+          "reuse": false,
+          "pattern": "mixed",
+          "case_indices": [
+            0,
+            28,
+            30,
+            34
+          ],
+          "get_interleave": true
+        }
+      },
+      {
+        "process": 1,
+        "cycle": 3,
+        "command": {
+          "id": 1009,
+          "seed": 10003,
+          "repeats": 10,
+          "label": 2,
+          "reuse": true,
+          "pattern": "mixed",
+          "case_indices": [
+            0,
+            28,
+            30,
+            34
+          ],
+          "get_interleave": true
+        }
+      },
+      {
+        "process": 1,
+        "cycle": 3,
+        "command": {
+          "id": 1010,
+          "seed": 10003,
+          "repeats": 10,
+          "label": 0,
+          "reuse": false,
+          "pattern": "mixed",
+          "case_indices": [
+            0,
+            28,
+            30,
+            34
+          ],
+          "get_interleave": true
+        }
+      },
+      {
+        "process": 1,
+        "cycle": 3,
+        "command": {
+          "id": 1011,
+          "seed": 10003,
+          "repeats": 10,
+          "label": 1,
+          "reuse": false,
+          "pattern": "mixed",
+          "case_indices": [
+            0,
+            28,
+            30,
+            34
+          ],
+          "get_interleave": true
+        }
+      },
+      {
+        "process": 1,
+        "cycle": 4,
+        "command": {
+          "id": 1012,
+          "seed": 10004,
+          "repeats": 10,
+          "label": 2,
+          "reuse": true,
+          "pattern": "mixed",
+          "case_indices": [
+            0,
+            28,
+            30,
+            34
+          ],
+          "get_interleave": true
+        }
+      },
+      {
+        "process": 1,
+        "cycle": 4,
+        "command": {
+          "id": 1013,
+          "seed": 10004,
+          "repeats": 10,
+          "label": 1,
+          "reuse": false,
+          "pattern": "mixed",
+          "case_indices": [
+            0,
+            28,
+            30,
+            34
+          ],
+          "get_interleave": true
+        }
+      },
+      {
+        "process": 1,
+        "cycle": 4,
+        "command": {
+          "id": 1014,
+          "seed": 10004,
+          "repeats": 10,
+          "label": 0,
+          "reuse": false,
+          "pattern": "mixed",
+          "case_indices": [
+            0,
+            28,
+            30,
+            34
+          ],
+          "get_interleave": true
+        }
+      },
+      {
+        "process": 1,
+        "cycle": 5,
+        "command": {
+          "id": 1015,
+          "seed": 10005,
+          "repeats": 10,
+          "label": 0,
+          "reuse": false,
+          "pattern": "mixed",
+          "case_indices": [
+            0,
+            28,
+            30,
+            34
+          ],
+          "get_interleave": true
+        }
+      },
+      {
+        "process": 1,
+        "cycle": 5,
+        "command": {
+          "id": 1016,
+          "seed": 10005,
+          "repeats": 10,
+          "label": 1,
+          "reuse": false,
+          "pattern": "mixed",
+          "case_indices": [
+            0,
+            28,
+            30,
+            34
+          ],
+          "get_interleave": true
+        }
+      },
+      {
+        "process": 1,
+        "cycle": 5,
+        "command": {
+          "id": 1017,
+          "seed": 10005,
+          "repeats": 10,
+          "label": 2,
+          "reuse": true,
+          "pattern": "mixed",
+          "case_indices": [
+            0,
+            28,
+            30,
+            34
+          ],
+          "get_interleave": true
+        }
+      },
+      {
+        "process": 2,
+        "cycle": 0,
+        "command": {
+          "id": 2000,
+          "seed": 20000,
+          "repeats": 10,
+          "label": 1,
+          "reuse": false,
+          "pattern": "mixed",
+          "case_indices": [
+            0,
+            28,
+            30,
+            34
+          ],
+          "get_interleave": true
+        }
+      },
+      {
+        "process": 2,
+        "cycle": 0,
+        "command": {
+          "id": 2001,
+          "seed": 20000,
+          "repeats": 10,
+          "label": 0,
+          "reuse": false,
+          "pattern": "mixed",
+          "case_indices": [
+            0,
+            28,
+            30,
+            34
+          ],
+          "get_interleave": true
+        }
+      },
+      {
+        "process": 2,
+        "cycle": 0,
+        "command": {
+          "id": 2002,
+          "seed": 20000,
+          "repeats": 10,
+          "label": 2,
+          "reuse": true,
+          "pattern": "mixed",
+          "case_indices": [
+            0,
+            28,
+            30,
+            34
+          ],
+          "get_interleave": true
+        }
+      },
+      {
+        "process": 2,
+        "cycle": 1,
+        "command": {
+          "id": 2003,
+          "seed": 20001,
+          "repeats": 10,
+          "label": 1,
+          "reuse": false,
+          "pattern": "mixed",
+          "case_indices": [
+            0,
+            28,
+            30,
+            34
+          ],
+          "get_interleave": true
+        }
+      },
+      {
+        "process": 2,
+        "cycle": 1,
+        "command": {
+          "id": 2004,
+          "seed": 20001,
+          "repeats": 10,
+          "label": 2,
+          "reuse": true,
+          "pattern": "mixed",
+          "case_indices": [
+            0,
+            28,
+            30,
+            34
+          ],
+          "get_interleave": true
+        }
+      },
+      {
+        "process": 2,
+        "cycle": 1,
+        "command": {
+          "id": 2005,
+          "seed": 20001,
+          "repeats": 10,
+          "label": 0,
+          "reuse": false,
+          "pattern": "mixed",
+          "case_indices": [
+            0,
+            28,
+            30,
+            34
+          ],
+          "get_interleave": true
+        }
+      },
+      {
+        "process": 2,
+        "cycle": 2,
+        "command": {
+          "id": 2006,
+          "seed": 20002,
+          "repeats": 10,
+          "label": 2,
+          "reuse": true,
+          "pattern": "mixed",
+          "case_indices": [
+            0,
+            28,
+            30,
+            34
+          ],
+          "get_interleave": true
+        }
+      },
+      {
+        "process": 2,
+        "cycle": 2,
+        "command": {
+          "id": 2007,
+          "seed": 20002,
+          "repeats": 10,
+          "label": 0,
+          "reuse": false,
+          "pattern": "mixed",
+          "case_indices": [
+            0,
+            28,
+            30,
+            34
+          ],
+          "get_interleave": true
+        }
+      },
+      {
+        "process": 2,
+        "cycle": 2,
+        "command": {
+          "id": 2008,
+          "seed": 20002,
+          "repeats": 10,
+          "label": 1,
+          "reuse": false,
+          "pattern": "mixed",
+          "case_indices": [
+            0,
+            28,
+            30,
+            34
+          ],
+          "get_interleave": true
+        }
+      },
+      {
+        "process": 2,
+        "cycle": 3,
+        "command": {
+          "id": 2009,
+          "seed": 20003,
+          "repeats": 10,
+          "label": 2,
+          "reuse": true,
+          "pattern": "mixed",
+          "case_indices": [
+            0,
+            28,
+            30,
+            34
+          ],
+          "get_interleave": true
+        }
+      },
+      {
+        "process": 2,
+        "cycle": 3,
+        "command": {
+          "id": 2010,
+          "seed": 20003,
+          "repeats": 10,
+          "label": 1,
+          "reuse": false,
+          "pattern": "mixed",
+          "case_indices": [
+            0,
+            28,
+            30,
+            34
+          ],
+          "get_interleave": true
+        }
+      },
+      {
+        "process": 2,
+        "cycle": 3,
+        "command": {
+          "id": 2011,
+          "seed": 20003,
+          "repeats": 10,
+          "label": 0,
+          "reuse": false,
+          "pattern": "mixed",
+          "case_indices": [
+            0,
+            28,
+            30,
+            34
+          ],
+          "get_interleave": true
+        }
+      },
+      {
+        "process": 2,
+        "cycle": 4,
+        "command": {
+          "id": 2012,
+          "seed": 20004,
+          "repeats": 10,
+          "label": 0,
+          "reuse": false,
+          "pattern": "mixed",
+          "case_indices": [
+            0,
+            28,
+            30,
+            34
+          ],
+          "get_interleave": true
+        }
+      },
+      {
+        "process": 2,
+        "cycle": 4,
+        "command": {
+          "id": 2013,
+          "seed": 20004,
+          "repeats": 10,
+          "label": 1,
+          "reuse": false,
+          "pattern": "mixed",
+          "case_indices": [
+            0,
+            28,
+            30,
+            34
+          ],
+          "get_interleave": true
+        }
+      },
+      {
+        "process": 2,
+        "cycle": 4,
+        "command": {
+          "id": 2014,
+          "seed": 20004,
+          "repeats": 10,
+          "label": 2,
+          "reuse": true,
+          "pattern": "mixed",
+          "case_indices": [
+            0,
+            28,
+            30,
+            34
+          ],
+          "get_interleave": true
+        }
+      },
+      {
+        "process": 2,
+        "cycle": 5,
+        "command": {
+          "id": 2015,
+          "seed": 20005,
+          "repeats": 10,
+          "label": 0,
+          "reuse": false,
+          "pattern": "mixed",
+          "case_indices": [
+            0,
+            28,
+            30,
+            34
+          ],
+          "get_interleave": true
+        }
+      },
+      {
+        "process": 2,
+        "cycle": 5,
+        "command": {
+          "id": 2016,
+          "seed": 20005,
+          "repeats": 10,
+          "label": 2,
+          "reuse": true,
+          "pattern": "mixed",
+          "case_indices": [
+            0,
+            28,
+            30,
+            34
+          ],
+          "get_interleave": true
+        }
+      },
+      {
+        "process": 2,
+        "cycle": 5,
+        "command": {
+          "id": 2017,
+          "seed": 20005,
+          "repeats": 10,
+          "label": 1,
+          "reuse": false,
+          "pattern": "mixed",
+          "case_indices": [
+            0,
+            28,
+            30,
+            34
+          ],
+          "get_interleave": true
+        }
+      },
+      {
+        "process": 3,
+        "cycle": 0,
+        "command": {
+          "id": 3000,
+          "seed": 30000,
+          "repeats": 10,
+          "label": 1,
+          "reuse": false,
+          "pattern": "mixed",
+          "case_indices": [
+            0,
+            28,
+            30,
+            34
+          ],
+          "get_interleave": true
+        }
+      },
+      {
+        "process": 3,
+        "cycle": 0,
+        "command": {
+          "id": 3001,
+          "seed": 30000,
+          "repeats": 10,
+          "label": 2,
+          "reuse": true,
+          "pattern": "mixed",
+          "case_indices": [
+            0,
+            28,
+            30,
+            34
+          ],
+          "get_interleave": true
+        }
+      },
+      {
+        "process": 3,
+        "cycle": 0,
+        "command": {
+          "id": 3002,
+          "seed": 30000,
+          "repeats": 10,
+          "label": 0,
+          "reuse": false,
+          "pattern": "mixed",
+          "case_indices": [
+            0,
+            28,
+            30,
+            34
+          ],
+          "get_interleave": true
+        }
+      },
+      {
+        "process": 3,
+        "cycle": 1,
+        "command": {
+          "id": 3003,
+          "seed": 30001,
+          "repeats": 10,
+          "label": 2,
+          "reuse": true,
+          "pattern": "mixed",
+          "case_indices": [
+            0,
+            28,
+            30,
+            34
+          ],
+          "get_interleave": true
+        }
+      },
+      {
+        "process": 3,
+        "cycle": 1,
+        "command": {
+          "id": 3004,
+          "seed": 30001,
+          "repeats": 10,
+          "label": 0,
+          "reuse": false,
+          "pattern": "mixed",
+          "case_indices": [
+            0,
+            28,
+            30,
+            34
+          ],
+          "get_interleave": true
+        }
+      },
+      {
+        "process": 3,
+        "cycle": 1,
+        "command": {
+          "id": 3005,
+          "seed": 30001,
+          "repeats": 10,
+          "label": 1,
+          "reuse": false,
+          "pattern": "mixed",
+          "case_indices": [
+            0,
+            28,
+            30,
+            34
+          ],
+          "get_interleave": true
+        }
+      },
+      {
+        "process": 3,
+        "cycle": 2,
+        "command": {
+          "id": 3006,
+          "seed": 30002,
+          "repeats": 10,
+          "label": 2,
+          "reuse": true,
+          "pattern": "mixed",
+          "case_indices": [
+            0,
+            28,
+            30,
+            34
+          ],
+          "get_interleave": true
+        }
+      },
+      {
+        "process": 3,
+        "cycle": 2,
+        "command": {
+          "id": 3007,
+          "seed": 30002,
+          "repeats": 10,
+          "label": 1,
+          "reuse": false,
+          "pattern": "mixed",
+          "case_indices": [
+            0,
+            28,
+            30,
+            34
+          ],
+          "get_interleave": true
+        }
+      },
+      {
+        "process": 3,
+        "cycle": 2,
+        "command": {
+          "id": 3008,
+          "seed": 30002,
+          "repeats": 10,
+          "label": 0,
+          "reuse": false,
+          "pattern": "mixed",
+          "case_indices": [
+            0,
+            28,
+            30,
+            34
+          ],
+          "get_interleave": true
+        }
+      },
+      {
+        "process": 3,
+        "cycle": 3,
+        "command": {
+          "id": 3009,
+          "seed": 30003,
+          "repeats": 10,
+          "label": 0,
+          "reuse": false,
+          "pattern": "mixed",
+          "case_indices": [
+            0,
+            28,
+            30,
+            34
+          ],
+          "get_interleave": true
+        }
+      },
+      {
+        "process": 3,
+        "cycle": 3,
+        "command": {
+          "id": 3010,
+          "seed": 30003,
+          "repeats": 10,
+          "label": 1,
+          "reuse": false,
+          "pattern": "mixed",
+          "case_indices": [
+            0,
+            28,
+            30,
+            34
+          ],
+          "get_interleave": true
+        }
+      },
+      {
+        "process": 3,
+        "cycle": 3,
+        "command": {
+          "id": 3011,
+          "seed": 30003,
+          "repeats": 10,
+          "label": 2,
+          "reuse": true,
+          "pattern": "mixed",
+          "case_indices": [
+            0,
+            28,
+            30,
+            34
+          ],
+          "get_interleave": true
+        }
+      },
+      {
+        "process": 3,
+        "cycle": 4,
+        "command": {
+          "id": 3012,
+          "seed": 30004,
+          "repeats": 10,
+          "label": 0,
+          "reuse": false,
+          "pattern": "mixed",
+          "case_indices": [
+            0,
+            28,
+            30,
+            34
+          ],
+          "get_interleave": true
+        }
+      },
+      {
+        "process": 3,
+        "cycle": 4,
+        "command": {
+          "id": 3013,
+          "seed": 30004,
+          "repeats": 10,
+          "label": 2,
+          "reuse": true,
+          "pattern": "mixed",
+          "case_indices": [
+            0,
+            28,
+            30,
+            34
+          ],
+          "get_interleave": true
+        }
+      },
+      {
+        "process": 3,
+        "cycle": 4,
+        "command": {
+          "id": 3014,
+          "seed": 30004,
+          "repeats": 10,
+          "label": 1,
+          "reuse": false,
+          "pattern": "mixed",
+          "case_indices": [
+            0,
+            28,
+            30,
+            34
+          ],
+          "get_interleave": true
+        }
+      },
+      {
+        "process": 3,
+        "cycle": 5,
+        "command": {
+          "id": 3015,
+          "seed": 30005,
+          "repeats": 10,
+          "label": 1,
+          "reuse": false,
+          "pattern": "mixed",
+          "case_indices": [
+            0,
+            28,
+            30,
+            34
+          ],
+          "get_interleave": true
+        }
+      },
+      {
+        "process": 3,
+        "cycle": 5,
+        "command": {
+          "id": 3016,
+          "seed": 30005,
+          "repeats": 10,
+          "label": 0,
+          "reuse": false,
+          "pattern": "mixed",
+          "case_indices": [
+            0,
+            28,
+            30,
+            34
+          ],
+          "get_interleave": true
+        }
+      },
+      {
+        "process": 3,
+        "cycle": 5,
+        "command": {
+          "id": 3017,
+          "seed": 30005,
+          "repeats": 10,
+          "label": 2,
+          "reuse": true,
+          "pattern": "mixed",
+          "case_indices": [
+            0,
+            28,
+            30,
+            34
+          ],
+          "get_interleave": true
+        }
+      }
+    ],
+    "workers": [
+      {
+        "pid": 43896,
+        "affinity_mask": 4,
+        "executable": "output\\reuse-controls-20261018-normal.exe",
+        "executable_sha256": "0324F3CC03424CB8FB63DE010AB337B22091A1A60E92B3C401D7472B417725B2"
+      },
+      {
+        "pid": 42144,
+        "affinity_mask": 4,
+        "executable": "output\\reuse-controls-20261018-normal.exe",
+        "executable_sha256": "0324F3CC03424CB8FB63DE010AB337B22091A1A60E92B3C401D7472B417725B2"
+      },
+      {
+        "pid": 14808,
+        "affinity_mask": 4,
+        "executable": "output\\reuse-controls-20261018-normal.exe",
+        "executable_sha256": "0324F3CC03424CB8FB63DE010AB337B22091A1A60E92B3C401D7472B417725B2"
+      },
+      {
+        "pid": 75576,
+        "affinity_mask": 4,
+        "executable": "output\\reuse-controls-20261018-normal.exe",
+        "executable_sha256": "0324F3CC03424CB8FB63DE010AB337B22091A1A60E92B3C401D7472B417725B2"
+      }
+    ]
+  },
+  "files_unchanged": true,
+  "comparisons": {
+    "off1_vs_off0": {
+      "design": {
+        "phase": "normal",
+        "processes": 4,
+        "cycles_per_process": 6,
+        "repeats_per_cycle": 10,
+        "pattern": "mixed",
+        "case_indices": [
+          0,
+          28,
+          30,
+          34
+        ],
+        "get_interleave": true,
+        "affinity_mask": 4,
+        "labels": {
+          "0": "off0",
+          "1": "off1 placebo",
+          "2": "on"
+        },
+        "same_process": true,
+        "executable": "output\\reuse-controls-20261018-normal.exe",
+        "executable_sha256": "0324F3CC03424CB8FB63DE010AB337B22091A1A60E92B3C401D7472B417725B2",
+        "cache": "warm OS cache, no eviction; strict source/index open and oracle warmup outside query clocks",
+        "corpus": "existing same first10000 from json.payload-bench; no creation/reset/copy",
+        "source_validation": "strict full open, candidate CRC/schema/UTF8/key/version; on reuses checked owned bytes at hydration",
+        "query_clock": "Query construction plus search; full oracle check and hit disposal outside clock",
+        "instrumented_timings_are_normal_speed": false,
+        "orders": [
+          {
+            "process": 0,
+            "cycle": 0,
+            "command": {
+              "id": 0,
+              "seed": 0,
+              "repeats": 10,
+              "label": 0,
+              "reuse": false,
+              "pattern": "mixed",
+              "case_indices": [
+                0,
+                28,
+                30,
+                34
+              ],
+              "get_interleave": true
+            }
+          },
+          {
+            "process": 0,
+            "cycle": 0,
+            "command": {
+              "id": 1,
+              "seed": 0,
+              "repeats": 10,
+              "label": 1,
+              "reuse": false,
+              "pattern": "mixed",
+              "case_indices": [
+                0,
+                28,
+                30,
+                34
+              ],
+              "get_interleave": true
+            }
+          },
+          {
+            "process": 0,
+            "cycle": 0,
+            "command": {
+              "id": 2,
+              "seed": 0,
+              "repeats": 10,
+              "label": 2,
+              "reuse": true,
+              "pattern": "mixed",
+              "case_indices": [
+                0,
+                28,
+                30,
+                34
+              ],
+              "get_interleave": true
+            }
+          },
+          {
+            "process": 0,
+            "cycle": 1,
+            "command": {
+              "id": 3,
+              "seed": 1,
+              "repeats": 10,
+              "label": 0,
+              "reuse": false,
+              "pattern": "mixed",
+              "case_indices": [
+                0,
+                28,
+                30,
+                34
+              ],
+              "get_interleave": true
+            }
+          },
+          {
+            "process": 0,
+            "cycle": 1,
+            "command": {
+              "id": 4,
+              "seed": 1,
+              "repeats": 10,
+              "label": 2,
+              "reuse": true,
+              "pattern": "mixed",
+              "case_indices": [
+                0,
+                28,
+                30,
+                34
+              ],
+              "get_interleave": true
+            }
+          },
+          {
+            "process": 0,
+            "cycle": 1,
+            "command": {
+              "id": 5,
+              "seed": 1,
+              "repeats": 10,
+              "label": 1,
+              "reuse": false,
+              "pattern": "mixed",
+              "case_indices": [
+                0,
+                28,
+                30,
+                34
+              ],
+              "get_interleave": true
+            }
+          },
+          {
+            "process": 0,
+            "cycle": 2,
+            "command": {
+              "id": 6,
+              "seed": 2,
+              "repeats": 10,
+              "label": 1,
+              "reuse": false,
+              "pattern": "mixed",
+              "case_indices": [
+                0,
+                28,
+                30,
+                34
+              ],
+              "get_interleave": true
+            }
+          },
+          {
+            "process": 0,
+            "cycle": 2,
+            "command": {
+              "id": 7,
+              "seed": 2,
+              "repeats": 10,
+              "label": 0,
+              "reuse": false,
+              "pattern": "mixed",
+              "case_indices": [
+                0,
+                28,
+                30,
+                34
+              ],
+              "get_interleave": true
+            }
+          },
+          {
+            "process": 0,
+            "cycle": 2,
+            "command": {
+              "id": 8,
+              "seed": 2,
+              "repeats": 10,
+              "label": 2,
+              "reuse": true,
+              "pattern": "mixed",
+              "case_indices": [
+                0,
+                28,
+                30,
+                34
+              ],
+              "get_interleave": true
+            }
+          },
+          {
+            "process": 0,
+            "cycle": 3,
+            "command": {
+              "id": 9,
+              "seed": 3,
+              "repeats": 10,
+              "label": 1,
+              "reuse": false,
+              "pattern": "mixed",
+              "case_indices": [
+                0,
+                28,
+                30,
+                34
+              ],
+              "get_interleave": true
+            }
+          },
+          {
+            "process": 0,
+            "cycle": 3,
+            "command": {
+              "id": 10,
+              "seed": 3,
+              "repeats": 10,
+              "label": 2,
+              "reuse": true,
+              "pattern": "mixed",
+              "case_indices": [
+                0,
+                28,
+                30,
+                34
+              ],
+              "get_interleave": true
+            }
+          },
+          {
+            "process": 0,
+            "cycle": 3,
+            "command": {
+              "id": 11,
+              "seed": 3,
+              "repeats": 10,
+              "label": 0,
+              "reuse": false,
+              "pattern": "mixed",
+              "case_indices": [
+                0,
+                28,
+                30,
+                34
+              ],
+              "get_interleave": true
+            }
+          },
+          {
+            "process": 0,
+            "cycle": 4,
+            "command": {
+              "id": 12,
+              "seed": 4,
+              "repeats": 10,
+              "label": 2,
+              "reuse": true,
+              "pattern": "mixed",
+              "case_indices": [
+                0,
+                28,
+                30,
+                34
+              ],
+              "get_interleave": true
+            }
+          },
+          {
+            "process": 0,
+            "cycle": 4,
+            "command": {
+              "id": 13,
+              "seed": 4,
+              "repeats": 10,
+              "label": 0,
+              "reuse": false,
+              "pattern": "mixed",
+              "case_indices": [
+                0,
+                28,
+                30,
+                34
+              ],
+              "get_interleave": true
+            }
+          },
+          {
+            "process": 0,
+            "cycle": 4,
+            "command": {
+              "id": 14,
+              "seed": 4,
+              "repeats": 10,
+              "label": 1,
+              "reuse": false,
+              "pattern": "mixed",
+              "case_indices": [
+                0,
+                28,
+                30,
+                34
+              ],
+              "get_interleave": true
+            }
+          },
+          {
+            "process": 0,
+            "cycle": 5,
+            "command": {
+              "id": 15,
+              "seed": 5,
+              "repeats": 10,
+              "label": 2,
+              "reuse": true,
+              "pattern": "mixed",
+              "case_indices": [
+                0,
+                28,
+                30,
+                34
+              ],
+              "get_interleave": true
+            }
+          },
+          {
+            "process": 0,
+            "cycle": 5,
+            "command": {
+              "id": 16,
+              "seed": 5,
+              "repeats": 10,
+              "label": 1,
+              "reuse": false,
+              "pattern": "mixed",
+              "case_indices": [
+                0,
+                28,
+                30,
+                34
+              ],
+              "get_interleave": true
+            }
+          },
+          {
+            "process": 0,
+            "cycle": 5,
+            "command": {
+              "id": 17,
+              "seed": 5,
+              "repeats": 10,
+              "label": 0,
+              "reuse": false,
+              "pattern": "mixed",
+              "case_indices": [
+                0,
+                28,
+                30,
+                34
+              ],
+              "get_interleave": true
+            }
+          },
+          {
+            "process": 1,
+            "cycle": 0,
+            "command": {
+              "id": 1000,
+              "seed": 10000,
+              "repeats": 10,
+              "label": 0,
+              "reuse": false,
+              "pattern": "mixed",
+              "case_indices": [
+                0,
+                28,
+                30,
+                34
+              ],
+              "get_interleave": true
+            }
+          },
+          {
+            "process": 1,
+            "cycle": 0,
+            "command": {
+              "id": 1001,
+              "seed": 10000,
+              "repeats": 10,
+              "label": 2,
+              "reuse": true,
+              "pattern": "mixed",
+              "case_indices": [
+                0,
+                28,
+                30,
+                34
+              ],
+              "get_interleave": true
+            }
+          },
+          {
+            "process": 1,
+            "cycle": 0,
+            "command": {
+              "id": 1002,
+              "seed": 10000,
+              "repeats": 10,
+              "label": 1,
+              "reuse": false,
+              "pattern": "mixed",
+              "case_indices": [
+                0,
+                28,
+                30,
+                34
+              ],
+              "get_interleave": true
+            }
+          },
+          {
+            "process": 1,
+            "cycle": 1,
+            "command": {
+              "id": 1003,
+              "seed": 10001,
+              "repeats": 10,
+              "label": 1,
+              "reuse": false,
+              "pattern": "mixed",
+              "case_indices": [
+                0,
+                28,
+                30,
+                34
+              ],
+              "get_interleave": true
+            }
+          },
+          {
+            "process": 1,
+            "cycle": 1,
+            "command": {
+              "id": 1004,
+              "seed": 10001,
+              "repeats": 10,
+              "label": 0,
+              "reuse": false,
+              "pattern": "mixed",
+              "case_indices": [
+                0,
+                28,
+                30,
+                34
+              ],
+              "get_interleave": true
+            }
+          },
+          {
+            "process": 1,
+            "cycle": 1,
+            "command": {
+              "id": 1005,
+              "seed": 10001,
+              "repeats": 10,
+              "label": 2,
+              "reuse": true,
+              "pattern": "mixed",
+              "case_indices": [
+                0,
+                28,
+                30,
+                34
+              ],
+              "get_interleave": true
+            }
+          },
+          {
+            "process": 1,
+            "cycle": 2,
+            "command": {
+              "id": 1006,
+              "seed": 10002,
+              "repeats": 10,
+              "label": 1,
+              "reuse": false,
+              "pattern": "mixed",
+              "case_indices": [
+                0,
+                28,
+                30,
+                34
+              ],
+              "get_interleave": true
+            }
+          },
+          {
+            "process": 1,
+            "cycle": 2,
+            "command": {
+              "id": 1007,
+              "seed": 10002,
+              "repeats": 10,
+              "label": 2,
+              "reuse": true,
+              "pattern": "mixed",
+              "case_indices": [
+                0,
+                28,
+                30,
+                34
+              ],
+              "get_interleave": true
+            }
+          },
+          {
+            "process": 1,
+            "cycle": 2,
+            "command": {
+              "id": 1008,
+              "seed": 10002,
+              "repeats": 10,
+              "label": 0,
+              "reuse": false,
+              "pattern": "mixed",
+              "case_indices": [
+                0,
+                28,
+                30,
+                34
+              ],
+              "get_interleave": true
+            }
+          },
+          {
+            "process": 1,
+            "cycle": 3,
+            "command": {
+              "id": 1009,
+              "seed": 10003,
+              "repeats": 10,
+              "label": 2,
+              "reuse": true,
+              "pattern": "mixed",
+              "case_indices": [
+                0,
+                28,
+                30,
+                34
+              ],
+              "get_interleave": true
+            }
+          },
+          {
+            "process": 1,
+            "cycle": 3,
+            "command": {
+              "id": 1010,
+              "seed": 10003,
+              "repeats": 10,
+              "label": 0,
+              "reuse": false,
+              "pattern": "mixed",
+              "case_indices": [
+                0,
+                28,
+                30,
+                34
+              ],
+              "get_interleave": true
+            }
+          },
+          {
+            "process": 1,
+            "cycle": 3,
+            "command": {
+              "id": 1011,
+              "seed": 10003,
+              "repeats": 10,
+              "label": 1,
+              "reuse": false,
+              "pattern": "mixed",
+              "case_indices": [
+                0,
+                28,
+                30,
+                34
+              ],
+              "get_interleave": true
+            }
+          },
+          {
+            "process": 1,
+            "cycle": 4,
+            "command": {
+              "id": 1012,
+              "seed": 10004,
+              "repeats": 10,
+              "label": 2,
+              "reuse": true,
+              "pattern": "mixed",
+              "case_indices": [
+                0,
+                28,
+                30,
+                34
+              ],
+              "get_interleave": true
+            }
+          },
+          {
+            "process": 1,
+            "cycle": 4,
+            "command": {
+              "id": 1013,
+              "seed": 10004,
+              "repeats": 10,
+              "label": 1,
+              "reuse": false,
+              "pattern": "mixed",
+              "case_indices": [
+                0,
+                28,
+                30,
+                34
+              ],
+              "get_interleave": true
+            }
+          },
+          {
+            "process": 1,
+            "cycle": 4,
+            "command": {
+              "id": 1014,
+              "seed": 10004,
+              "repeats": 10,
+              "label": 0,
+              "reuse": false,
+              "pattern": "mixed",
+              "case_indices": [
+                0,
+                28,
+                30,
+                34
+              ],
+              "get_interleave": true
+            }
+          },
+          {
+            "process": 1,
+            "cycle": 5,
+            "command": {
+              "id": 1015,
+              "seed": 10005,
+              "repeats": 10,
+              "label": 0,
+              "reuse": false,
+              "pattern": "mixed",
+              "case_indices": [
+                0,
+                28,
+                30,
+                34
+              ],
+              "get_interleave": true
+            }
+          },
+          {
+            "process": 1,
+            "cycle": 5,
+            "command": {
+              "id": 1016,
+              "seed": 10005,
+              "repeats": 10,
+              "label": 1,
+              "reuse": false,
+              "pattern": "mixed",
+              "case_indices": [
+                0,
+                28,
+                30,
+                34
+              ],
+              "get_interleave": true
+            }
+          },
+          {
+            "process": 1,
+            "cycle": 5,
+            "command": {
+              "id": 1017,
+              "seed": 10005,
+              "repeats": 10,
+              "label": 2,
+              "reuse": true,
+              "pattern": "mixed",
+              "case_indices": [
+                0,
+                28,
+                30,
+                34
+              ],
+              "get_interleave": true
+            }
+          },
+          {
+            "process": 2,
+            "cycle": 0,
+            "command": {
+              "id": 2000,
+              "seed": 20000,
+              "repeats": 10,
+              "label": 1,
+              "reuse": false,
+              "pattern": "mixed",
+              "case_indices": [
+                0,
+                28,
+                30,
+                34
+              ],
+              "get_interleave": true
+            }
+          },
+          {
+            "process": 2,
+            "cycle": 0,
+            "command": {
+              "id": 2001,
+              "seed": 20000,
+              "repeats": 10,
+              "label": 0,
+              "reuse": false,
+              "pattern": "mixed",
+              "case_indices": [
+                0,
+                28,
+                30,
+                34
+              ],
+              "get_interleave": true
+            }
+          },
+          {
+            "process": 2,
+            "cycle": 0,
+            "command": {
+              "id": 2002,
+              "seed": 20000,
+              "repeats": 10,
+              "label": 2,
+              "reuse": true,
+              "pattern": "mixed",
+              "case_indices": [
+                0,
+                28,
+                30,
+                34
+              ],
+              "get_interleave": true
+            }
+          },
+          {
+            "process": 2,
+            "cycle": 1,
+            "command": {
+              "id": 2003,
+              "seed": 20001,
+              "repeats": 10,
+              "label": 1,
+              "reuse": false,
+              "pattern": "mixed",
+              "case_indices": [
+                0,
+                28,
+                30,
+                34
+              ],
+              "get_interleave": true
+            }
+          },
+          {
+            "process": 2,
+            "cycle": 1,
+            "command": {
+              "id": 2004,
+              "seed": 20001,
+              "repeats": 10,
+              "label": 2,
+              "reuse": true,
+              "pattern": "mixed",
+              "case_indices": [
+                0,
+                28,
+                30,
+                34
+              ],
+              "get_interleave": true
+            }
+          },
+          {
+            "process": 2,
+            "cycle": 1,
+            "command": {
+              "id": 2005,
+              "seed": 20001,
+              "repeats": 10,
+              "label": 0,
+              "reuse": false,
+              "pattern": "mixed",
+              "case_indices": [
+                0,
+                28,
+                30,
+                34
+              ],
+              "get_interleave": true
+            }
+          },
+          {
+            "process": 2,
+            "cycle": 2,
+            "command": {
+              "id": 2006,
+              "seed": 20002,
+              "repeats": 10,
+              "label": 2,
+              "reuse": true,
+              "pattern": "mixed",
+              "case_indices": [
+                0,
+                28,
+                30,
+                34
+              ],
+              "get_interleave": true
+            }
+          },
+          {
+            "process": 2,
+            "cycle": 2,
+            "command": {
+              "id": 2007,
+              "seed": 20002,
+              "repeats": 10,
+              "label": 0,
+              "reuse": false,
+              "pattern": "mixed",
+              "case_indices": [
+                0,
+                28,
+                30,
+                34
+              ],
+              "get_interleave": true
+            }
+          },
+          {
+            "process": 2,
+            "cycle": 2,
+            "command": {
+              "id": 2008,
+              "seed": 20002,
+              "repeats": 10,
+              "label": 1,
+              "reuse": false,
+              "pattern": "mixed",
+              "case_indices": [
+                0,
+                28,
+                30,
+                34
+              ],
+              "get_interleave": true
+            }
+          },
+          {
+            "process": 2,
+            "cycle": 3,
+            "command": {
+              "id": 2009,
+              "seed": 20003,
+              "repeats": 10,
+              "label": 2,
+              "reuse": true,
+              "pattern": "mixed",
+              "case_indices": [
+                0,
+                28,
+                30,
+                34
+              ],
+              "get_interleave": true
+            }
+          },
+          {
+            "process": 2,
+            "cycle": 3,
+            "command": {
+              "id": 2010,
+              "seed": 20003,
+              "repeats": 10,
+              "label": 1,
+              "reuse": false,
+              "pattern": "mixed",
+              "case_indices": [
+                0,
+                28,
+                30,
+                34
+              ],
+              "get_interleave": true
+            }
+          },
+          {
+            "process": 2,
+            "cycle": 3,
+            "command": {
+              "id": 2011,
+              "seed": 20003,
+              "repeats": 10,
+              "label": 0,
+              "reuse": false,
+              "pattern": "mixed",
+              "case_indices": [
+                0,
+                28,
+                30,
+                34
+              ],
+              "get_interleave": true
+            }
+          },
+          {
+            "process": 2,
+            "cycle": 4,
+            "command": {
+              "id": 2012,
+              "seed": 20004,
+              "repeats": 10,
+              "label": 0,
+              "reuse": false,
+              "pattern": "mixed",
+              "case_indices": [
+                0,
+                28,
+                30,
+                34
+              ],
+              "get_interleave": true
+            }
+          },
+          {
+            "process": 2,
+            "cycle": 4,
+            "command": {
+              "id": 2013,
+              "seed": 20004,
+              "repeats": 10,
+              "label": 1,
+              "reuse": false,
+              "pattern": "mixed",
+              "case_indices": [
+                0,
+                28,
+                30,
+                34
+              ],
+              "get_interleave": true
+            }
+          },
+          {
+            "process": 2,
+            "cycle": 4,
+            "command": {
+              "id": 2014,
+              "seed": 20004,
+              "repeats": 10,
+              "label": 2,
+              "reuse": true,
+              "pattern": "mixed",
+              "case_indices": [
+                0,
+                28,
+                30,
+                34
+              ],
+              "get_interleave": true
+            }
+          },
+          {
+            "process": 2,
+            "cycle": 5,
+            "command": {
+              "id": 2015,
+              "seed": 20005,
+              "repeats": 10,
+              "label": 0,
+              "reuse": false,
+              "pattern": "mixed",
+              "case_indices": [
+                0,
+                28,
+                30,
+                34
+              ],
+              "get_interleave": true
+            }
+          },
+          {
+            "process": 2,
+            "cycle": 5,
+            "command": {
+              "id": 2016,
+              "seed": 20005,
+              "repeats": 10,
+              "label": 2,
+              "reuse": true,
+              "pattern": "mixed",
+              "case_indices": [
+                0,
+                28,
+                30,
+                34
+              ],
+              "get_interleave": true
+            }
+          },
+          {
+            "process": 2,
+            "cycle": 5,
+            "command": {
+              "id": 2017,
+              "seed": 20005,
+              "repeats": 10,
+              "label": 1,
+              "reuse": false,
+              "pattern": "mixed",
+              "case_indices": [
+                0,
+                28,
+                30,
+                34
+              ],
+              "get_interleave": true
+            }
+          },
+          {
+            "process": 3,
+            "cycle": 0,
+            "command": {
+              "id": 3000,
+              "seed": 30000,
+              "repeats": 10,
+              "label": 1,
+              "reuse": false,
+              "pattern": "mixed",
+              "case_indices": [
+                0,
+                28,
+                30,
+                34
+              ],
+              "get_interleave": true
+            }
+          },
+          {
+            "process": 3,
+            "cycle": 0,
+            "command": {
+              "id": 3001,
+              "seed": 30000,
+              "repeats": 10,
+              "label": 2,
+              "reuse": true,
+              "pattern": "mixed",
+              "case_indices": [
+                0,
+                28,
+                30,
+                34
+              ],
+              "get_interleave": true
+            }
+          },
+          {
+            "process": 3,
+            "cycle": 0,
+            "command": {
+              "id": 3002,
+              "seed": 30000,
+              "repeats": 10,
+              "label": 0,
+              "reuse": false,
+              "pattern": "mixed",
+              "case_indices": [
+                0,
+                28,
+                30,
+                34
+              ],
+              "get_interleave": true
+            }
+          },
+          {
+            "process": 3,
+            "cycle": 1,
+            "command": {
+              "id": 3003,
+              "seed": 30001,
+              "repeats": 10,
+              "label": 2,
+              "reuse": true,
+              "pattern": "mixed",
+              "case_indices": [
+                0,
+                28,
+                30,
+                34
+              ],
+              "get_interleave": true
+            }
+          },
+          {
+            "process": 3,
+            "cycle": 1,
+            "command": {
+              "id": 3004,
+              "seed": 30001,
+              "repeats": 10,
+              "label": 0,
+              "reuse": false,
+              "pattern": "mixed",
+              "case_indices": [
+                0,
+                28,
+                30,
+                34
+              ],
+              "get_interleave": true
+            }
+          },
+          {
+            "process": 3,
+            "cycle": 1,
+            "command": {
+              "id": 3005,
+              "seed": 30001,
+              "repeats": 10,
+              "label": 1,
+              "reuse": false,
+              "pattern": "mixed",
+              "case_indices": [
+                0,
+                28,
+                30,
+                34
+              ],
+              "get_interleave": true
+            }
+          },
+          {
+            "process": 3,
+            "cycle": 2,
+            "command": {
+              "id": 3006,
+              "seed": 30002,
+              "repeats": 10,
+              "label": 2,
+              "reuse": true,
+              "pattern": "mixed",
+              "case_indices": [
+                0,
+                28,
+                30,
+                34
+              ],
+              "get_interleave": true
+            }
+          },
+          {
+            "process": 3,
+            "cycle": 2,
+            "command": {
+              "id": 3007,
+              "seed": 30002,
+              "repeats": 10,
+              "label": 1,
+              "reuse": false,
+              "pattern": "mixed",
+              "case_indices": [
+                0,
+                28,
+                30,
+                34
+              ],
+              "get_interleave": true
+            }
+          },
+          {
+            "process": 3,
+            "cycle": 2,
+            "command": {
+              "id": 3008,
+              "seed": 30002,
+              "repeats": 10,
+              "label": 0,
+              "reuse": false,
+              "pattern": "mixed",
+              "case_indices": [
+                0,
+                28,
+                30,
+                34
+              ],
+              "get_interleave": true
+            }
+          },
+          {
+            "process": 3,
+            "cycle": 3,
+            "command": {
+              "id": 3009,
+              "seed": 30003,
+              "repeats": 10,
+              "label": 0,
+              "reuse": false,
+              "pattern": "mixed",
+              "case_indices": [
+                0,
+                28,
+                30,
+                34
+              ],
+              "get_interleave": true
+            }
+          },
+          {
+            "process": 3,
+            "cycle": 3,
+            "command": {
+              "id": 3010,
+              "seed": 30003,
+              "repeats": 10,
+              "label": 1,
+              "reuse": false,
+              "pattern": "mixed",
+              "case_indices": [
+                0,
+                28,
+                30,
+                34
+              ],
+              "get_interleave": true
+            }
+          },
+          {
+            "process": 3,
+            "cycle": 3,
+            "command": {
+              "id": 3011,
+              "seed": 30003,
+              "repeats": 10,
+              "label": 2,
+              "reuse": true,
+              "pattern": "mixed",
+              "case_indices": [
+                0,
+                28,
+                30,
+                34
+              ],
+              "get_interleave": true
+            }
+          },
+          {
+            "process": 3,
+            "cycle": 4,
+            "command": {
+              "id": 3012,
+              "seed": 30004,
+              "repeats": 10,
+              "label": 0,
+              "reuse": false,
+              "pattern": "mixed",
+              "case_indices": [
+                0,
+                28,
+                30,
+                34
+              ],
+              "get_interleave": true
+            }
+          },
+          {
+            "process": 3,
+            "cycle": 4,
+            "command": {
+              "id": 3013,
+              "seed": 30004,
+              "repeats": 10,
+              "label": 2,
+              "reuse": true,
+              "pattern": "mixed",
+              "case_indices": [
+                0,
+                28,
+                30,
+                34
+              ],
+              "get_interleave": true
+            }
+          },
+          {
+            "process": 3,
+            "cycle": 4,
+            "command": {
+              "id": 3014,
+              "seed": 30004,
+              "repeats": 10,
+              "label": 1,
+              "reuse": false,
+              "pattern": "mixed",
+              "case_indices": [
+                0,
+                28,
+                30,
+                34
+              ],
+              "get_interleave": true
+            }
+          },
+          {
+            "process": 3,
+            "cycle": 5,
+            "command": {
+              "id": 3015,
+              "seed": 30005,
+              "repeats": 10,
+              "label": 1,
+              "reuse": false,
+              "pattern": "mixed",
+              "case_indices": [
+                0,
+                28,
+                30,
+                34
+              ],
+              "get_interleave": true
+            }
+          },
+          {
+            "process": 3,
+            "cycle": 5,
+            "command": {
+              "id": 3016,
+              "seed": 30005,
+              "repeats": 10,
+              "label": 0,
+              "reuse": false,
+              "pattern": "mixed",
+              "case_indices": [
+                0,
+                28,
+                30,
+                34
+              ],
+              "get_interleave": true
+            }
+          },
+          {
+            "process": 3,
+            "cycle": 5,
+            "command": {
+              "id": 3017,
+              "seed": 30005,
+              "repeats": 10,
+              "label": 2,
+              "reuse": true,
+              "pattern": "mixed",
+              "case_indices": [
+                0,
+                28,
+                30,
+                34
+              ],
+              "get_interleave": true
+            }
+          }
+        ],
+        "workers": [
+          {
+            "pid": 43896,
+            "affinity_mask": 4,
+            "executable": "output\\reuse-controls-20261018-normal.exe",
+            "executable_sha256": "0324F3CC03424CB8FB63DE010AB337B22091A1A60E92B3C401D7472B417725B2"
+          },
+          {
+            "pid": 42144,
+            "affinity_mask": 4,
+            "executable": "output\\reuse-controls-20261018-normal.exe",
+            "executable_sha256": "0324F3CC03424CB8FB63DE010AB337B22091A1A60E92B3C401D7472B417725B2"
+          },
+          {
+            "pid": 14808,
+            "affinity_mask": 4,
+            "executable": "output\\reuse-controls-20261018-normal.exe",
+            "executable_sha256": "0324F3CC03424CB8FB63DE010AB337B22091A1A60E92B3C401D7472B417725B2"
+          },
+          {
+            "pid": 75576,
+            "affinity_mask": 4,
+            "executable": "output\\reuse-controls-20261018-normal.exe",
+            "executable_sha256": "0324F3CC03424CB8FB63DE010AB337B22091A1A60E92B3C401D7472B417725B2"
+          }
+        ]
+      },
+      "queries": [
+        {
+          "text": "quixote",
+          "kind": "word",
+          "offset": 0,
+          "limit": 50,
+          "total": 56,
+          "late_matches": 8,
+          "control": {
+            "n": 240,
+            "p50_ms": 2.0271999999999997,
+            "p95_ms": 2.2592,
+            "p99_ms": 2.56,
+            "per_process_pair_p95": [
+              2.4125,
+              2.2534,
+              2.2532,
+              2.2081
+            ],
+            "block_medians": [
+              [
+                2.10025,
+                2.02045,
+                2.04685,
+                2.0668,
+                2.10745,
+                2.07735
+              ],
+              [
+                1.9752,
+                2.16735,
+                2.0122,
+                1.9573,
+                2.0298499999999997,
+                2.0435999999999996
+              ],
+              [
+                2.0174,
+                1.9292500000000001,
+                2.0035,
+                2.1079999999999997,
+                1.98395,
+                1.9602499999999998
+              ],
+              [
+                1.9581999999999997,
+                2.0054499999999997,
+                1.9491,
+                1.9473,
+                1.9893999999999998,
+                2.0755999999999997
+              ]
+            ]
+          },
+          "fdb": {
+            "n": 240,
+            "p50_ms": 2.00385,
+            "p95_ms": 2.2931000000000004,
+            "p99_ms": 2.4639,
+            "per_process_pair_p95": [
+              2.2893000000000003,
+              2.3268999999999997,
+              2.2294,
+              2.12
+            ],
+            "block_medians": [
+              [
+                2.1098999999999997,
+                1.9777,
+                1.93045,
+                1.9592,
+                2.0313499999999998,
+                2.11735
+              ],
+              [
+                2.0077,
+                2.05235,
+                2.21145,
+                1.9366499999999998,
+                1.97715,
+                2.0225
+              ],
+              [
+                1.9840499999999999,
+                1.9705,
+                1.9839000000000002,
+                1.9718999999999998,
+                2.04195,
+                1.9741
+              ],
+              [
+                2.0448,
+                1.963,
+                1.9639,
+                1.9632,
+                1.98205,
+                1.9939
+              ]
+            ]
+          },
+          "change_p95_percent": 1.5005311614731065,
+          "paired_p95_change_percent": [
+            -5.1067357512953215,
+            3.2617378184077284,
+            -1.0562755192614959,
+            -3.989855531905251
+          ],
+          "faster_process_pairs": 3,
+          "paired_block_median_changes_percent": [
+            0.4594691108201321,
+            -2.1158652775371767,
+            -5.68678701419254,
+            -5.206115734468753,
+            -3.610999074711152,
+            1.9255301225118648,
+            1.6454029971648243,
+            -5.306018870971451,
+            9.902097207037075,
+            -1.0550247790323541,
+            -2.59625095450402,
+            -1.0324916813466256,
+            -1.6531178744919162,
+            2.1381365815731357,
+            -0.9782879960069657,
+            -6.456356736242885,
+            2.9234607727009143,
+            0.7065425328402153,
+            4.4224287611071444,
+            -2.116731905557334,
+            0.7593248165820077,
+            0.8165151748575017,
+            -0.3694581280788034,
+            -3.9362112160339024
+          ],
+          "median_block_change_percent": -1.0053898386767957,
+          "faster_blocks": 14,
+          "leave_one_pair_out_p95_changes_percent": [
+            1.770814841114876,
+            -2.0689655172413723,
+            2.9656515580736675,
+            2.018340573033206
+          ]
+        },
+        {
+          "text": "zxzxzxzxzxzxzxzxzxzxzxzxzxzxzxzxzxzxzxzxzxzxzxzxzxzxzxzxzxzxzxzxzxzxzxzxzxzxzxzxzxzxzxzxzxzxzxzxzxzxzxzxzxzxzxzxzxzxzxzxzxzxzxzxzxzxzxzxzxzxzxzxzxzxzxzxzxzxzxzxzxzxzxzxzxzxzxzxzxzxzxzxzxzxzxzxzxzxzxzxzxzxzxzxzxzxzxzxzxzxzxzxzxzxzxzxzxzxzxzxzxzxzxzxzxzxzxzxzxzxzxzxzxzxzxzxzxzxzxzxzxzxzxzxzxzxzxzxzxzx",
+          "kind": "long-negative",
+          "offset": 0,
+          "limit": 50,
+          "total": 0,
+          "late_matches": 0,
+          "control": {
+            "n": 240,
+            "p50_ms": 0.0206,
+            "p95_ms": 0.0315,
+            "p99_ms": 0.0382,
+            "per_process_pair_p95": [
+              0.0315,
+              0.0304,
+              0.031099999999999996,
+              0.0346
+            ],
+            "block_medians": [
+              [
+                0.0187,
+                0.02055,
+                0.021949999999999997,
+                0.022350000000000002,
+                0.02635,
+                0.022199999999999998
+              ],
+              [
+                0.020450000000000003,
+                0.02315,
+                0.0223,
+                0.02065,
+                0.020499999999999997,
+                0.0201
+              ],
+              [
+                0.020050000000000002,
+                0.0197,
+                0.02105,
+                0.0206,
+                0.0226,
+                0.0183
+              ],
+              [
+                0.0197,
+                0.0196,
+                0.0214,
+                0.0199,
+                0.02025,
+                0.029150000000000002
+              ]
+            ]
+          },
+          "fdb": {
+            "n": 240,
+            "p50_ms": 0.0208,
+            "p95_ms": 0.0307,
+            "p99_ms": 0.039,
+            "per_process_pair_p95": [
+              0.0324,
+              0.0294,
+              0.030199999999999998,
+              0.030800000000000004
+            ],
+            "block_medians": [
+              [
+                0.01755,
+                0.02095,
+                0.02035,
+                0.02305,
+                0.0249,
+                0.022400000000000003
+              ],
+              [
+                0.01895,
+                0.0203,
+                0.02275,
+                0.0197,
+                0.02195,
+                0.01805
+              ],
+              [
+                0.019700000000000002,
+                0.020900000000000002,
+                0.019799999999999998,
+                0.02055,
+                0.02035,
+                0.019700000000000002
+              ],
+              [
+                0.0215,
+                0.01715,
+                0.0207,
+                0.01935,
+                0.020999999999999998,
+                0.0207
+              ]
+            ]
+          },
+          "change_p95_percent": -2.5396825396825307,
+          "paired_p95_change_percent": [
+            2.857142857142847,
+            -3.289473684210531,
+            -2.893890675241151,
+            -10.982658959537561
+          ],
+          "faster_process_pairs": 3,
+          "paired_block_median_changes_percent": [
+            -6.149732620320869,
+            1.9464720194647178,
+            -7.289293849658307,
+            3.1319910514541416,
+            -5.502846299810249,
+            0.9009009009009361,
+            -7.334963325183375,
+            -12.311015118790502,
+            2.0179372197309364,
+            -4.600484261501226,
+            7.073170731707323,
+            -10.199004975124382,
+            -1.7456359102244412,
+            6.091370558375653,
+            -5.938242280285044,
+            -0.24271844660195274,
+            -9.95575221238938,
+            7.650273224043724,
+            9.137055837563457,
+            -12.5,
+            -3.2710280373831724,
+            -2.7638190954773934,
+            3.703703703703698,
+            -28.98799313893654
+          ],
+          "median_block_change_percent": -3.017423566430283,
+          "faster_blocks": 15,
+          "leave_one_pair_out_p95_changes_percent": [
+            -2.250803858520889,
+            -1.577287066246058,
+            -2.5396825396825307,
+            -3.1847133757961665
+          ]
+        },
+        {
+          "text": "the",
+          "kind": "page",
+          "offset": 0,
+          "limit": 1,
+          "total": 10000,
+          "late_matches": 0,
+          "control": {
+            "n": 240,
+            "p50_ms": 0.13224999999999998,
+            "p95_ms": 0.1819,
+            "p99_ms": 0.2299,
+            "per_process_pair_p95": [
+              0.185,
+              0.18080000000000002,
+              0.17300000000000001,
+              0.18009999999999998
+            ],
+            "block_medians": [
+              [
+                0.13724999999999998,
+                0.1318,
+                0.13185,
+                0.13495000000000001,
+                0.13235,
+                0.13365
+              ],
+              [
+                0.1268,
+                0.1517,
+                0.13085,
+                0.13774999999999998,
+                0.133,
+                0.14134999999999998
+              ],
+              [
+                0.15489999999999998,
+                0.1227,
+                0.1279,
+                0.14155,
+                0.13374999999999998,
+                0.12100000000000001
+              ],
+              [
+                0.12335,
+                0.13745,
+                0.1401,
+                0.11574999999999999,
+                0.12105,
+                0.14175
+              ]
+            ]
+          },
+          "fdb": {
+            "n": 240,
+            "p50_ms": 0.13080000000000003,
+            "p95_ms": 0.1683,
+            "p99_ms": 0.2017,
+            "per_process_pair_p95": [
+              0.1614,
+              0.1741,
+              0.1762,
+              0.1587
+            ],
+            "block_medians": [
+              [
+                0.1517,
+                0.13265,
+                0.1157,
+                0.12179999999999999,
+                0.1243,
+                0.13625
+              ],
+              [
+                0.12585000000000002,
+                0.15284999999999999,
+                0.15805000000000002,
+                0.124,
+                0.12585000000000002,
+                0.1401
+              ],
+              [
+                0.15585,
+                0.1306,
+                0.1335,
+                0.1416,
+                0.12510000000000002,
+                0.1222
+              ],
+              [
+                0.12729999999999997,
+                0.13265,
+                0.14185,
+                0.11645,
+                0.1204,
+                0.14229999999999998
+              ]
+            ]
+          },
+          "change_p95_percent": -7.476635514018692,
+          "paired_p95_change_percent": [
+            -12.75675675675676,
+            -3.7057522123893905,
+            1.8497109826589586,
+            -11.882287617989995
+          ],
+          "faster_process_pairs": 3,
+          "paired_block_median_changes_percent": [
+            10.528233151183986,
+            0.6449165402124368,
+            -12.24876753886993,
+            -9.74434975917008,
+            -6.082357385719684,
+            1.9453797231575143,
+            -0.7492113564668612,
+            0.7580751483190484,
+            20.78716087122663,
+            -9.981851179673306,
+            -5.375939849624056,
+            -0.8843296781039789,
+            0.613298902517756,
+            6.4384678076609525,
+            4.37842064112588,
+            0.03532320734722649,
+            -6.467289719626146,
+            0.9917355371900749,
+            3.2022699635184226,
+            -3.492178974172422,
+            1.2491077801570327,
+            0.6047516198704139,
+            -0.5369681949607741,
+            0.38800705467372243
+          ],
+          "median_block_change_percent": 0.4963793372720682,
+          "faster_blocks": 10,
+          "leave_one_pair_out_p95_changes_percent": [
+            -6.52654867256639,
+            -10.115448048378239,
+            -8.851017042330955,
+            -7.303679297089516
+          ]
+        },
+        {
+          "text": "ishmael",
+          "kind": "page",
+          "offset": 130,
+          "limit": 1,
+          "total": 260,
+          "late_matches": 39,
+          "control": {
+            "n": 240,
+            "p50_ms": 4.7223500000000005,
+            "p95_ms": 5.1649,
+            "p99_ms": 5.7995,
+            "per_process_pair_p95": [
+              5.1747,
+              5.1474,
+              5.2307999999999995,
+              5.0882000000000005
+            ],
+            "block_medians": [
+              [
+                4.763199999999999,
+                4.7452000000000005,
+                4.803800000000001,
+                4.6576,
+                4.85425,
+                4.981
+              ],
+              [
+                4.652799999999999,
+                4.9113500000000005,
+                4.77055,
+                4.64455,
+                4.703200000000001,
+                4.7965
+              ],
+              [
+                4.68565,
+                4.69525,
+                4.601999999999999,
+                4.82785,
+                4.9308499999999995,
+                4.73555
+              ],
+              [
+                4.65165,
+                4.67915,
+                4.64575,
+                4.616,
+                4.7623,
+                4.745800000000001
+              ]
+            ]
+          },
+          "fdb": {
+            "n": 240,
+            "p50_ms": 4.7237,
+            "p95_ms": 5.2886,
+            "p99_ms": 5.7875000000000005,
+            "per_process_pair_p95": [
+              5.289000000000001,
+              5.4422999999999995,
+              4.9864999999999995,
+              5.1297
+            ],
+            "block_medians": [
+              [
+                4.8564,
+                4.697699999999999,
+                4.7871,
+                4.74705,
+                4.83015,
+                4.930149999999999
+              ],
+              [
+                4.662,
+                4.7856000000000005,
+                5.194649999999999,
+                4.64835,
+                4.739949999999999,
+                4.7133
+              ],
+              [
+                4.72775,
+                4.6335,
+                4.62625,
+                4.7859,
+                4.68505,
+                4.600849999999999
+              ],
+              [
+                4.879300000000001,
+                4.6222,
+                4.6813,
+                4.67135,
+                4.6625,
+                4.614050000000001
+              ]
+            ]
+          },
+          "change_p95_percent": 2.3950124881410906,
+          "paired_p95_change_percent": [
+            2.2088236999246558,
+            5.729105956405167,
+            -4.670413703448806,
+            0.8156125938445724
+          ],
+          "faster_process_pairs": 1,
+          "paired_block_median_changes_percent": [
+            1.9566677863621207,
+            -1.0010115485122095,
+            -0.3476414505183656,
+            1.9205170044658049,
+            -0.49647216356801804,
+            -1.0208793414977047,
+            0.1977303988996093,
+            -2.5603958178504915,
+            8.88996027711688,
+            0.08181632235630953,
+            0.7813828882462737,
+            -1.7345981444803482,
+            0.8984879365723009,
+            -1.3151589372237926,
+            0.5269448066058224,
+            -0.8689168056174035,
+            -4.9849417443239785,
+            -2.844442567389227,
+            4.89396235744306,
+            -1.2171013966211675,
+            0.7652155195609023,
+            1.1990901213171812,
+            -2.0956260630367707,
+            -2.776138901765779
+          ],
+          "median_block_change_percent": -0.4220568070431918,
+          "faster_blocks": 13,
+          "leave_one_pair_out_p95_changes_percent": [
+            2.2691067334965176,
+            0.8364150322368147,
+            2.850808960796525,
+            1.1126405138793594
+          ]
+        }
+      ],
+      "lower_p95_cases": 2,
+      "higher_p95_cases": 2,
+      "interpretation": "One resident oracle worker, same process/executable, three balanced conditions; strict open/warmup outside query clocks. Pooled p95 and typical paired block medians are different statistics; no subtraction of placebo percentages or automatic significance claim."
+    },
+    "on_vs_off0": {
+      "design": {
+        "phase": "normal",
+        "processes": 4,
+        "cycles_per_process": 6,
+        "repeats_per_cycle": 10,
+        "pattern": "mixed",
+        "case_indices": [
+          0,
+          28,
+          30,
+          34
+        ],
+        "get_interleave": true,
+        "affinity_mask": 4,
+        "labels": {
+          "0": "off0",
+          "1": "off1 placebo",
+          "2": "on"
+        },
+        "same_process": true,
+        "executable": "output\\reuse-controls-20261018-normal.exe",
+        "executable_sha256": "0324F3CC03424CB8FB63DE010AB337B22091A1A60E92B3C401D7472B417725B2",
+        "cache": "warm OS cache, no eviction; strict source/index open and oracle warmup outside query clocks",
+        "corpus": "existing same first10000 from json.payload-bench; no creation/reset/copy",
+        "source_validation": "strict full open, candidate CRC/schema/UTF8/key/version; on reuses checked owned bytes at hydration",
+        "query_clock": "Query construction plus search; full oracle check and hit disposal outside clock",
+        "instrumented_timings_are_normal_speed": false,
+        "orders": [
+          {
+            "process": 0,
+            "cycle": 0,
+            "command": {
+              "id": 0,
+              "seed": 0,
+              "repeats": 10,
+              "label": 0,
+              "reuse": false,
+              "pattern": "mixed",
+              "case_indices": [
+                0,
+                28,
+                30,
+                34
+              ],
+              "get_interleave": true
+            }
+          },
+          {
+            "process": 0,
+            "cycle": 0,
+            "command": {
+              "id": 1,
+              "seed": 0,
+              "repeats": 10,
+              "label": 1,
+              "reuse": false,
+              "pattern": "mixed",
+              "case_indices": [
+                0,
+                28,
+                30,
+                34
+              ],
+              "get_interleave": true
+            }
+          },
+          {
+            "process": 0,
+            "cycle": 0,
+            "command": {
+              "id": 2,
+              "seed": 0,
+              "repeats": 10,
+              "label": 2,
+              "reuse": true,
+              "pattern": "mixed",
+              "case_indices": [
+                0,
+                28,
+                30,
+                34
+              ],
+              "get_interleave": true
+            }
+          },
+          {
+            "process": 0,
+            "cycle": 1,
+            "command": {
+              "id": 3,
+              "seed": 1,
+              "repeats": 10,
+              "label": 0,
+              "reuse": false,
+              "pattern": "mixed",
+              "case_indices": [
+                0,
+                28,
+                30,
+                34
+              ],
+              "get_interleave": true
+            }
+          },
+          {
+            "process": 0,
+            "cycle": 1,
+            "command": {
+              "id": 4,
+              "seed": 1,
+              "repeats": 10,
+              "label": 2,
+              "reuse": true,
+              "pattern": "mixed",
+              "case_indices": [
+                0,
+                28,
+                30,
+                34
+              ],
+              "get_interleave": true
+            }
+          },
+          {
+            "process": 0,
+            "cycle": 1,
+            "command": {
+              "id": 5,
+              "seed": 1,
+              "repeats": 10,
+              "label": 1,
+              "reuse": false,
+              "pattern": "mixed",
+              "case_indices": [
+                0,
+                28,
+                30,
+                34
+              ],
+              "get_interleave": true
+            }
+          },
+          {
+            "process": 0,
+            "cycle": 2,
+            "command": {
+              "id": 6,
+              "seed": 2,
+              "repeats": 10,
+              "label": 1,
+              "reuse": false,
+              "pattern": "mixed",
+              "case_indices": [
+                0,
+                28,
+                30,
+                34
+              ],
+              "get_interleave": true
+            }
+          },
+          {
+            "process": 0,
+            "cycle": 2,
+            "command": {
+              "id": 7,
+              "seed": 2,
+              "repeats": 10,
+              "label": 0,
+              "reuse": false,
+              "pattern": "mixed",
+              "case_indices": [
+                0,
+                28,
+                30,
+                34
+              ],
+              "get_interleave": true
+            }
+          },
+          {
+            "process": 0,
+            "cycle": 2,
+            "command": {
+              "id": 8,
+              "seed": 2,
+              "repeats": 10,
+              "label": 2,
+              "reuse": true,
+              "pattern": "mixed",
+              "case_indices": [
+                0,
+                28,
+                30,
+                34
+              ],
+              "get_interleave": true
+            }
+          },
+          {
+            "process": 0,
+            "cycle": 3,
+            "command": {
+              "id": 9,
+              "seed": 3,
+              "repeats": 10,
+              "label": 1,
+              "reuse": false,
+              "pattern": "mixed",
+              "case_indices": [
+                0,
+                28,
+                30,
+                34
+              ],
+              "get_interleave": true
+            }
+          },
+          {
+            "process": 0,
+            "cycle": 3,
+            "command": {
+              "id": 10,
+              "seed": 3,
+              "repeats": 10,
+              "label": 2,
+              "reuse": true,
+              "pattern": "mixed",
+              "case_indices": [
+                0,
+                28,
+                30,
+                34
+              ],
+              "get_interleave": true
+            }
+          },
+          {
+            "process": 0,
+            "cycle": 3,
+            "command": {
+              "id": 11,
+              "seed": 3,
+              "repeats": 10,
+              "label": 0,
+              "reuse": false,
+              "pattern": "mixed",
+              "case_indices": [
+                0,
+                28,
+                30,
+                34
+              ],
+              "get_interleave": true
+            }
+          },
+          {
+            "process": 0,
+            "cycle": 4,
+            "command": {
+              "id": 12,
+              "seed": 4,
+              "repeats": 10,
+              "label": 2,
+              "reuse": true,
+              "pattern": "mixed",
+              "case_indices": [
+                0,
+                28,
+                30,
+                34
+              ],
+              "get_interleave": true
+            }
+          },
+          {
+            "process": 0,
+            "cycle": 4,
+            "command": {
+              "id": 13,
+              "seed": 4,
+              "repeats": 10,
+              "label": 0,
+              "reuse": false,
+              "pattern": "mixed",
+              "case_indices": [
+                0,
+                28,
+                30,
+                34
+              ],
+              "get_interleave": true
+            }
+          },
+          {
+            "process": 0,
+            "cycle": 4,
+            "command": {
+              "id": 14,
+              "seed": 4,
+              "repeats": 10,
+              "label": 1,
+              "reuse": false,
+              "pattern": "mixed",
+              "case_indices": [
+                0,
+                28,
+                30,
+                34
+              ],
+              "get_interleave": true
+            }
+          },
+          {
+            "process": 0,
+            "cycle": 5,
+            "command": {
+              "id": 15,
+              "seed": 5,
+              "repeats": 10,
+              "label": 2,
+              "reuse": true,
+              "pattern": "mixed",
+              "case_indices": [
+                0,
+                28,
+                30,
+                34
+              ],
+              "get_interleave": true
+            }
+          },
+          {
+            "process": 0,
+            "cycle": 5,
+            "command": {
+              "id": 16,
+              "seed": 5,
+              "repeats": 10,
+              "label": 1,
+              "reuse": false,
+              "pattern": "mixed",
+              "case_indices": [
+                0,
+                28,
+                30,
+                34
+              ],
+              "get_interleave": true
+            }
+          },
+          {
+            "process": 0,
+            "cycle": 5,
+            "command": {
+              "id": 17,
+              "seed": 5,
+              "repeats": 10,
+              "label": 0,
+              "reuse": false,
+              "pattern": "mixed",
+              "case_indices": [
+                0,
+                28,
+                30,
+                34
+              ],
+              "get_interleave": true
+            }
+          },
+          {
+            "process": 1,
+            "cycle": 0,
+            "command": {
+              "id": 1000,
+              "seed": 10000,
+              "repeats": 10,
+              "label": 0,
+              "reuse": false,
+              "pattern": "mixed",
+              "case_indices": [
+                0,
+                28,
+                30,
+                34
+              ],
+              "get_interleave": true
+            }
+          },
+          {
+            "process": 1,
+            "cycle": 0,
+            "command": {
+              "id": 1001,
+              "seed": 10000,
+              "repeats": 10,
+              "label": 2,
+              "reuse": true,
+              "pattern": "mixed",
+              "case_indices": [
+                0,
+                28,
+                30,
+                34
+              ],
+              "get_interleave": true
+            }
+          },
+          {
+            "process": 1,
+            "cycle": 0,
+            "command": {
+              "id": 1002,
+              "seed": 10000,
+              "repeats": 10,
+              "label": 1,
+              "reuse": false,
+              "pattern": "mixed",
+              "case_indices": [
+                0,
+                28,
+                30,
+                34
+              ],
+              "get_interleave": true
+            }
+          },
+          {
+            "process": 1,
+            "cycle": 1,
+            "command": {
+              "id": 1003,
+              "seed": 10001,
+              "repeats": 10,
+              "label": 1,
+              "reuse": false,
+              "pattern": "mixed",
+              "case_indices": [
+                0,
+                28,
+                30,
+                34
+              ],
+              "get_interleave": true
+            }
+          },
+          {
+            "process": 1,
+            "cycle": 1,
+            "command": {
+              "id": 1004,
+              "seed": 10001,
+              "repeats": 10,
+              "label": 0,
+              "reuse": false,
+              "pattern": "mixed",
+              "case_indices": [
+                0,
+                28,
+                30,
+                34
+              ],
+              "get_interleave": true
+            }
+          },
+          {
+            "process": 1,
+            "cycle": 1,
+            "command": {
+              "id": 1005,
+              "seed": 10001,
+              "repeats": 10,
+              "label": 2,
+              "reuse": true,
+              "pattern": "mixed",
+              "case_indices": [
+                0,
+                28,
+                30,
+                34
+              ],
+              "get_interleave": true
+            }
+          },
+          {
+            "process": 1,
+            "cycle": 2,
+            "command": {
+              "id": 1006,
+              "seed": 10002,
+              "repeats": 10,
+              "label": 1,
+              "reuse": false,
+              "pattern": "mixed",
+              "case_indices": [
+                0,
+                28,
+                30,
+                34
+              ],
+              "get_interleave": true
+            }
+          },
+          {
+            "process": 1,
+            "cycle": 2,
+            "command": {
+              "id": 1007,
+              "seed": 10002,
+              "repeats": 10,
+              "label": 2,
+              "reuse": true,
+              "pattern": "mixed",
+              "case_indices": [
+                0,
+                28,
+                30,
+                34
+              ],
+              "get_interleave": true
+            }
+          },
+          {
+            "process": 1,
+            "cycle": 2,
+            "command": {
+              "id": 1008,
+              "seed": 10002,
+              "repeats": 10,
+              "label": 0,
+              "reuse": false,
+              "pattern": "mixed",
+              "case_indices": [
+                0,
+                28,
+                30,
+                34
+              ],
+              "get_interleave": true
+            }
+          },
+          {
+            "process": 1,
+            "cycle": 3,
+            "command": {
+              "id": 1009,
+              "seed": 10003,
+              "repeats": 10,
+              "label": 2,
+              "reuse": true,
+              "pattern": "mixed",
+              "case_indices": [
+                0,
+                28,
+                30,
+                34
+              ],
+              "get_interleave": true
+            }
+          },
+          {
+            "process": 1,
+            "cycle": 3,
+            "command": {
+              "id": 1010,
+              "seed": 10003,
+              "repeats": 10,
+              "label": 0,
+              "reuse": false,
+              "pattern": "mixed",
+              "case_indices": [
+                0,
+                28,
+                30,
+                34
+              ],
+              "get_interleave": true
+            }
+          },
+          {
+            "process": 1,
+            "cycle": 3,
+            "command": {
+              "id": 1011,
+              "seed": 10003,
+              "repeats": 10,
+              "label": 1,
+              "reuse": false,
+              "pattern": "mixed",
+              "case_indices": [
+                0,
+                28,
+                30,
+                34
+              ],
+              "get_interleave": true
+            }
+          },
+          {
+            "process": 1,
+            "cycle": 4,
+            "command": {
+              "id": 1012,
+              "seed": 10004,
+              "repeats": 10,
+              "label": 2,
+              "reuse": true,
+              "pattern": "mixed",
+              "case_indices": [
+                0,
+                28,
+                30,
+                34
+              ],
+              "get_interleave": true
+            }
+          },
+          {
+            "process": 1,
+            "cycle": 4,
+            "command": {
+              "id": 1013,
+              "seed": 10004,
+              "repeats": 10,
+              "label": 1,
+              "reuse": false,
+              "pattern": "mixed",
+              "case_indices": [
+                0,
+                28,
+                30,
+                34
+              ],
+              "get_interleave": true
+            }
+          },
+          {
+            "process": 1,
+            "cycle": 4,
+            "command": {
+              "id": 1014,
+              "seed": 10004,
+              "repeats": 10,
+              "label": 0,
+              "reuse": false,
+              "pattern": "mixed",
+              "case_indices": [
+                0,
+                28,
+                30,
+                34
+              ],
+              "get_interleave": true
+            }
+          },
+          {
+            "process": 1,
+            "cycle": 5,
+            "command": {
+              "id": 1015,
+              "seed": 10005,
+              "repeats": 10,
+              "label": 0,
+              "reuse": false,
+              "pattern": "mixed",
+              "case_indices": [
+                0,
+                28,
+                30,
+                34
+              ],
+              "get_interleave": true
+            }
+          },
+          {
+            "process": 1,
+            "cycle": 5,
+            "command": {
+              "id": 1016,
+              "seed": 10005,
+              "repeats": 10,
+              "label": 1,
+              "reuse": false,
+              "pattern": "mixed",
+              "case_indices": [
+                0,
+                28,
+                30,
+                34
+              ],
+              "get_interleave": true
+            }
+          },
+          {
+            "process": 1,
+            "cycle": 5,
+            "command": {
+              "id": 1017,
+              "seed": 10005,
+              "repeats": 10,
+              "label": 2,
+              "reuse": true,
+              "pattern": "mixed",
+              "case_indices": [
+                0,
+                28,
+                30,
+                34
+              ],
+              "get_interleave": true
+            }
+          },
+          {
+            "process": 2,
+            "cycle": 0,
+            "command": {
+              "id": 2000,
+              "seed": 20000,
+              "repeats": 10,
+              "label": 1,
+              "reuse": false,
+              "pattern": "mixed",
+              "case_indices": [
+                0,
+                28,
+                30,
+                34
+              ],
+              "get_interleave": true
+            }
+          },
+          {
+            "process": 2,
+            "cycle": 0,
+            "command": {
+              "id": 2001,
+              "seed": 20000,
+              "repeats": 10,
+              "label": 0,
+              "reuse": false,
+              "pattern": "mixed",
+              "case_indices": [
+                0,
+                28,
+                30,
+                34
+              ],
+              "get_interleave": true
+            }
+          },
+          {
+            "process": 2,
+            "cycle": 0,
+            "command": {
+              "id": 2002,
+              "seed": 20000,
+              "repeats": 10,
+              "label": 2,
+              "reuse": true,
+              "pattern": "mixed",
+              "case_indices": [
+                0,
+                28,
+                30,
+                34
+              ],
+              "get_interleave": true
+            }
+          },
+          {
+            "process": 2,
+            "cycle": 1,
+            "command": {
+              "id": 2003,
+              "seed": 20001,
+              "repeats": 10,
+              "label": 1,
+              "reuse": false,
+              "pattern": "mixed",
+              "case_indices": [
+                0,
+                28,
+                30,
+                34
+              ],
+              "get_interleave": true
+            }
+          },
+          {
+            "process": 2,
+            "cycle": 1,
+            "command": {
+              "id": 2004,
+              "seed": 20001,
+              "repeats": 10,
+              "label": 2,
+              "reuse": true,
+              "pattern": "mixed",
+              "case_indices": [
+                0,
+                28,
+                30,
+                34
+              ],
+              "get_interleave": true
+            }
+          },
+          {
+            "process": 2,
+            "cycle": 1,
+            "command": {
+              "id": 2005,
+              "seed": 20001,
+              "repeats": 10,
+              "label": 0,
+              "reuse": false,
+              "pattern": "mixed",
+              "case_indices": [
+                0,
+                28,
+                30,
+                34
+              ],
+              "get_interleave": true
+            }
+          },
+          {
+            "process": 2,
+            "cycle": 2,
+            "command": {
+              "id": 2006,
+              "seed": 20002,
+              "repeats": 10,
+              "label": 2,
+              "reuse": true,
+              "pattern": "mixed",
+              "case_indices": [
+                0,
+                28,
+                30,
+                34
+              ],
+              "get_interleave": true
+            }
+          },
+          {
+            "process": 2,
+            "cycle": 2,
+            "command": {
+              "id": 2007,
+              "seed": 20002,
+              "repeats": 10,
+              "label": 0,
+              "reuse": false,
+              "pattern": "mixed",
+              "case_indices": [
+                0,
+                28,
+                30,
+                34
+              ],
+              "get_interleave": true
+            }
+          },
+          {
+            "process": 2,
+            "cycle": 2,
+            "command": {
+              "id": 2008,
+              "seed": 20002,
+              "repeats": 10,
+              "label": 1,
+              "reuse": false,
+              "pattern": "mixed",
+              "case_indices": [
+                0,
+                28,
+                30,
+                34
+              ],
+              "get_interleave": true
+            }
+          },
+          {
+            "process": 2,
+            "cycle": 3,
+            "command": {
+              "id": 2009,
+              "seed": 20003,
+              "repeats": 10,
+              "label": 2,
+              "reuse": true,
+              "pattern": "mixed",
+              "case_indices": [
+                0,
+                28,
+                30,
+                34
+              ],
+              "get_interleave": true
+            }
+          },
+          {
+            "process": 2,
+            "cycle": 3,
+            "command": {
+              "id": 2010,
+              "seed": 20003,
+              "repeats": 10,
+              "label": 1,
+              "reuse": false,
+              "pattern": "mixed",
+              "case_indices": [
+                0,
+                28,
+                30,
+                34
+              ],
+              "get_interleave": true
+            }
+          },
+          {
+            "process": 2,
+            "cycle": 3,
+            "command": {
+              "id": 2011,
+              "seed": 20003,
+              "repeats": 10,
+              "label": 0,
+              "reuse": false,
+              "pattern": "mixed",
+              "case_indices": [
+                0,
+                28,
+                30,
+                34
+              ],
+              "get_interleave": true
+            }
+          },
+          {
+            "process": 2,
+            "cycle": 4,
+            "command": {
+              "id": 2012,
+              "seed": 20004,
+              "repeats": 10,
+              "label": 0,
+              "reuse": false,
+              "pattern": "mixed",
+              "case_indices": [
+                0,
+                28,
+                30,
+                34
+              ],
+              "get_interleave": true
+            }
+          },
+          {
+            "process": 2,
+            "cycle": 4,
+            "command": {
+              "id": 2013,
+              "seed": 20004,
+              "repeats": 10,
+              "label": 1,
+              "reuse": false,
+              "pattern": "mixed",
+              "case_indices": [
+                0,
+                28,
+                30,
+                34
+              ],
+              "get_interleave": true
+            }
+          },
+          {
+            "process": 2,
+            "cycle": 4,
+            "command": {
+              "id": 2014,
+              "seed": 20004,
+              "repeats": 10,
+              "label": 2,
+              "reuse": true,
+              "pattern": "mixed",
+              "case_indices": [
+                0,
+                28,
+                30,
+                34
+              ],
+              "get_interleave": true
+            }
+          },
+          {
+            "process": 2,
+            "cycle": 5,
+            "command": {
+              "id": 2015,
+              "seed": 20005,
+              "repeats": 10,
+              "label": 0,
+              "reuse": false,
+              "pattern": "mixed",
+              "case_indices": [
+                0,
+                28,
+                30,
+                34
+              ],
+              "get_interleave": true
+            }
+          },
+          {
+            "process": 2,
+            "cycle": 5,
+            "command": {
+              "id": 2016,
+              "seed": 20005,
+              "repeats": 10,
+              "label": 2,
+              "reuse": true,
+              "pattern": "mixed",
+              "case_indices": [
+                0,
+                28,
+                30,
+                34
+              ],
+              "get_interleave": true
+            }
+          },
+          {
+            "process": 2,
+            "cycle": 5,
+            "command": {
+              "id": 2017,
+              "seed": 20005,
+              "repeats": 10,
+              "label": 1,
+              "reuse": false,
+              "pattern": "mixed",
+              "case_indices": [
+                0,
+                28,
+                30,
+                34
+              ],
+              "get_interleave": true
+            }
+          },
+          {
+            "process": 3,
+            "cycle": 0,
+            "command": {
+              "id": 3000,
+              "seed": 30000,
+              "repeats": 10,
+              "label": 1,
+              "reuse": false,
+              "pattern": "mixed",
+              "case_indices": [
+                0,
+                28,
+                30,
+                34
+              ],
+              "get_interleave": true
+            }
+          },
+          {
+            "process": 3,
+            "cycle": 0,
+            "command": {
+              "id": 3001,
+              "seed": 30000,
+              "repeats": 10,
+              "label": 2,
+              "reuse": true,
+              "pattern": "mixed",
+              "case_indices": [
+                0,
+                28,
+                30,
+                34
+              ],
+              "get_interleave": true
+            }
+          },
+          {
+            "process": 3,
+            "cycle": 0,
+            "command": {
+              "id": 3002,
+              "seed": 30000,
+              "repeats": 10,
+              "label": 0,
+              "reuse": false,
+              "pattern": "mixed",
+              "case_indices": [
+                0,
+                28,
+                30,
+                34
+              ],
+              "get_interleave": true
+            }
+          },
+          {
+            "process": 3,
+            "cycle": 1,
+            "command": {
+              "id": 3003,
+              "seed": 30001,
+              "repeats": 10,
+              "label": 2,
+              "reuse": true,
+              "pattern": "mixed",
+              "case_indices": [
+                0,
+                28,
+                30,
+                34
+              ],
+              "get_interleave": true
+            }
+          },
+          {
+            "process": 3,
+            "cycle": 1,
+            "command": {
+              "id": 3004,
+              "seed": 30001,
+              "repeats": 10,
+              "label": 0,
+              "reuse": false,
+              "pattern": "mixed",
+              "case_indices": [
+                0,
+                28,
+                30,
+                34
+              ],
+              "get_interleave": true
+            }
+          },
+          {
+            "process": 3,
+            "cycle": 1,
+            "command": {
+              "id": 3005,
+              "seed": 30001,
+              "repeats": 10,
+              "label": 1,
+              "reuse": false,
+              "pattern": "mixed",
+              "case_indices": [
+                0,
+                28,
+                30,
+                34
+              ],
+              "get_interleave": true
+            }
+          },
+          {
+            "process": 3,
+            "cycle": 2,
+            "command": {
+              "id": 3006,
+              "seed": 30002,
+              "repeats": 10,
+              "label": 2,
+              "reuse": true,
+              "pattern": "mixed",
+              "case_indices": [
+                0,
+                28,
+                30,
+                34
+              ],
+              "get_interleave": true
+            }
+          },
+          {
+            "process": 3,
+            "cycle": 2,
+            "command": {
+              "id": 3007,
+              "seed": 30002,
+              "repeats": 10,
+              "label": 1,
+              "reuse": false,
+              "pattern": "mixed",
+              "case_indices": [
+                0,
+                28,
+                30,
+                34
+              ],
+              "get_interleave": true
+            }
+          },
+          {
+            "process": 3,
+            "cycle": 2,
+            "command": {
+              "id": 3008,
+              "seed": 30002,
+              "repeats": 10,
+              "label": 0,
+              "reuse": false,
+              "pattern": "mixed",
+              "case_indices": [
+                0,
+                28,
+                30,
+                34
+              ],
+              "get_interleave": true
+            }
+          },
+          {
+            "process": 3,
+            "cycle": 3,
+            "command": {
+              "id": 3009,
+              "seed": 30003,
+              "repeats": 10,
+              "label": 0,
+              "reuse": false,
+              "pattern": "mixed",
+              "case_indices": [
+                0,
+                28,
+                30,
+                34
+              ],
+              "get_interleave": true
+            }
+          },
+          {
+            "process": 3,
+            "cycle": 3,
+            "command": {
+              "id": 3010,
+              "seed": 30003,
+              "repeats": 10,
+              "label": 1,
+              "reuse": false,
+              "pattern": "mixed",
+              "case_indices": [
+                0,
+                28,
+                30,
+                34
+              ],
+              "get_interleave": true
+            }
+          },
+          {
+            "process": 3,
+            "cycle": 3,
+            "command": {
+              "id": 3011,
+              "seed": 30003,
+              "repeats": 10,
+              "label": 2,
+              "reuse": true,
+              "pattern": "mixed",
+              "case_indices": [
+                0,
+                28,
+                30,
+                34
+              ],
+              "get_interleave": true
+            }
+          },
+          {
+            "process": 3,
+            "cycle": 4,
+            "command": {
+              "id": 3012,
+              "seed": 30004,
+              "repeats": 10,
+              "label": 0,
+              "reuse": false,
+              "pattern": "mixed",
+              "case_indices": [
+                0,
+                28,
+                30,
+                34
+              ],
+              "get_interleave": true
+            }
+          },
+          {
+            "process": 3,
+            "cycle": 4,
+            "command": {
+              "id": 3013,
+              "seed": 30004,
+              "repeats": 10,
+              "label": 2,
+              "reuse": true,
+              "pattern": "mixed",
+              "case_indices": [
+                0,
+                28,
+                30,
+                34
+              ],
+              "get_interleave": true
+            }
+          },
+          {
+            "process": 3,
+            "cycle": 4,
+            "command": {
+              "id": 3014,
+              "seed": 30004,
+              "repeats": 10,
+              "label": 1,
+              "reuse": false,
+              "pattern": "mixed",
+              "case_indices": [
+                0,
+                28,
+                30,
+                34
+              ],
+              "get_interleave": true
+            }
+          },
+          {
+            "process": 3,
+            "cycle": 5,
+            "command": {
+              "id": 3015,
+              "seed": 30005,
+              "repeats": 10,
+              "label": 1,
+              "reuse": false,
+              "pattern": "mixed",
+              "case_indices": [
+                0,
+                28,
+                30,
+                34
+              ],
+              "get_interleave": true
+            }
+          },
+          {
+            "process": 3,
+            "cycle": 5,
+            "command": {
+              "id": 3016,
+              "seed": 30005,
+              "repeats": 10,
+              "label": 0,
+              "reuse": false,
+              "pattern": "mixed",
+              "case_indices": [
+                0,
+                28,
+                30,
+                34
+              ],
+              "get_interleave": true
+            }
+          },
+          {
+            "process": 3,
+            "cycle": 5,
+            "command": {
+              "id": 3017,
+              "seed": 30005,
+              "repeats": 10,
+              "label": 2,
+              "reuse": true,
+              "pattern": "mixed",
+              "case_indices": [
+                0,
+                28,
+                30,
+                34
+              ],
+              "get_interleave": true
+            }
+          }
+        ],
+        "workers": [
+          {
+            "pid": 43896,
+            "affinity_mask": 4,
+            "executable": "output\\reuse-controls-20261018-normal.exe",
+            "executable_sha256": "0324F3CC03424CB8FB63DE010AB337B22091A1A60E92B3C401D7472B417725B2"
+          },
+          {
+            "pid": 42144,
+            "affinity_mask": 4,
+            "executable": "output\\reuse-controls-20261018-normal.exe",
+            "executable_sha256": "0324F3CC03424CB8FB63DE010AB337B22091A1A60E92B3C401D7472B417725B2"
+          },
+          {
+            "pid": 14808,
+            "affinity_mask": 4,
+            "executable": "output\\reuse-controls-20261018-normal.exe",
+            "executable_sha256": "0324F3CC03424CB8FB63DE010AB337B22091A1A60E92B3C401D7472B417725B2"
+          },
+          {
+            "pid": 75576,
+            "affinity_mask": 4,
+            "executable": "output\\reuse-controls-20261018-normal.exe",
+            "executable_sha256": "0324F3CC03424CB8FB63DE010AB337B22091A1A60E92B3C401D7472B417725B2"
+          }
+        ]
+      },
+      "queries": [
+        {
+          "text": "quixote",
+          "kind": "word",
+          "offset": 0,
+          "limit": 50,
+          "total": 56,
+          "late_matches": 8,
+          "control": {
+            "n": 240,
+            "p50_ms": 2.0271999999999997,
+            "p95_ms": 2.2592,
+            "p99_ms": 2.56,
+            "per_process_pair_p95": [
+              2.4125,
+              2.2534,
+              2.2532,
+              2.2081
+            ],
+            "block_medians": [
+              [
+                2.10025,
+                2.02045,
+                2.04685,
+                2.0668,
+                2.10745,
+                2.07735
+              ],
+              [
+                1.9752,
+                2.16735,
+                2.0122,
+                1.9573,
+                2.0298499999999997,
+                2.0435999999999996
+              ],
+              [
+                2.0174,
+                1.9292500000000001,
+                2.0035,
+                2.1079999999999997,
+                1.98395,
+                1.9602499999999998
+              ],
+              [
+                1.9581999999999997,
+                2.0054499999999997,
+                1.9491,
+                1.9473,
+                1.9893999999999998,
+                2.0755999999999997
+              ]
+            ]
+          },
+          "fdb": {
+            "n": 240,
+            "p50_ms": 1.6914,
+            "p95_ms": 1.9501,
+            "p99_ms": 2.2361,
+            "per_process_pair_p95": [
+              1.9276,
+              1.9976,
+              1.913,
+              1.8548
+            ],
+            "block_medians": [
+              [
+                1.7166000000000001,
+                1.70695,
+                1.7667,
+                1.6622,
+                1.65095,
+                1.6993999999999998
+              ],
+              [
+                1.6824000000000001,
+                1.7967,
+                1.6835,
+                1.726,
+                1.6495,
+                1.6458
+              ],
+              [
+                1.6672000000000002,
+                1.6733,
+                1.6472499999999999,
+                1.62065,
+                1.7321,
+                1.68555
+              ],
+              [
+                1.7227000000000001,
+                1.6149,
+                1.67305,
+                1.71485,
+                1.7049500000000002,
+                1.75895
+              ]
+            ]
+          },
+          "change_p95_percent": -13.681834277620396,
+          "paired_p95_change_percent": [
+            -20.099481865284975,
+            -11.351735155764619,
+            -15.098526540031953,
+            -16.000181151215976
+          ],
+          "faster_process_pairs": 4,
+          "paired_block_median_changes_percent": [
+            -18.266872991310546,
+            -15.516345368606,
+            -13.686884725309623,
+            -19.576156377007948,
+            -21.661249377209423,
+            -18.193852745083895,
+            -14.823815309842036,
+            -17.101529517613677,
+            -16.335354338534934,
+            -11.817299340928834,
+            -18.737837771263877,
+            -19.465648854961827,
+            -17.358976900961622,
+            -13.266813528573284,
+            -17.781382580484152,
+            -23.119070208728644,
+            -12.69437233801256,
+            -14.01351868384133,
+            -12.02635073026247,
+            -19.474432172330392,
+            -14.162947001180036,
+            -11.937041031171368,
+            -14.298280888710146,
+            -15.255829639622265
+          ],
+          "median_block_change_percent": -15.925849853570467,
+          "faster_blocks": 24,
+          "leave_one_pair_out_p95_changes_percent": [
+            -13.451979407065517,
+            -16.591258510871953,
+            -13.681834277620396,
+            -13.421964810670882
+          ]
+        },
+        {
+          "text": "zxzxzxzxzxzxzxzxzxzxzxzxzxzxzxzxzxzxzxzxzxzxzxzxzxzxzxzxzxzxzxzxzxzxzxzxzxzxzxzxzxzxzxzxzxzxzxzxzxzxzxzxzxzxzxzxzxzxzxzxzxzxzxzxzxzxzxzxzxzxzxzxzxzxzxzxzxzxzxzxzxzxzxzxzxzxzxzxzxzxzxzxzxzxzxzxzxzxzxzxzxzxzxzxzxzxzxzxzxzxzxzxzxzxzxzxzxzxzxzxzxzxzxzxzxzxzxzxzxzxzxzxzxzxzxzxzxzxzxzxzxzxzxzxzxzxzxzxzxzx",
+          "kind": "long-negative",
+          "offset": 0,
+          "limit": 50,
+          "total": 0,
+          "late_matches": 0,
+          "control": {
+            "n": 240,
+            "p50_ms": 0.0206,
+            "p95_ms": 0.0315,
+            "p99_ms": 0.0382,
+            "per_process_pair_p95": [
+              0.0315,
+              0.0304,
+              0.031099999999999996,
+              0.0346
+            ],
+            "block_medians": [
+              [
+                0.0187,
+                0.02055,
+                0.021949999999999997,
+                0.022350000000000002,
+                0.02635,
+                0.022199999999999998
+              ],
+              [
+                0.020450000000000003,
+                0.02315,
+                0.0223,
+                0.02065,
+                0.020499999999999997,
+                0.0201
+              ],
+              [
+                0.020050000000000002,
+                0.0197,
+                0.02105,
+                0.0206,
+                0.0226,
+                0.0183
+              ],
+              [
+                0.0197,
+                0.0196,
+                0.0214,
+                0.0199,
+                0.02025,
+                0.029150000000000002
+              ]
+            ]
+          },
+          "fdb": {
+            "n": 240,
+            "p50_ms": 0.0212,
+            "p95_ms": 0.0324,
+            "p99_ms": 0.039799999999999995,
+            "per_process_pair_p95": [
+              0.0336,
+              0.0299,
+              0.032100000000000004,
+              0.032100000000000004
+            ],
+            "block_medians": [
+              [
+                0.02105,
+                0.0216,
+                0.023100000000000002,
+                0.022,
+                0.02525,
+                0.022699999999999998
+              ],
+              [
+                0.0189,
+                0.0248,
+                0.0205,
+                0.020999999999999998,
+                0.019700000000000002,
+                0.0189
+              ],
+              [
+                0.0208,
+                0.0211,
+                0.0208,
+                0.02135,
+                0.021699999999999997,
+                0.0207
+              ],
+              [
+                0.0225,
+                0.019,
+                0.021900000000000003,
+                0.01965,
+                0.02205,
+                0.02555
+              ]
+            ]
+          },
+          "change_p95_percent": 2.857142857142847,
+          "paired_p95_change_percent": [
+            6.666666666666665,
+            -1.6447368421052655,
+            3.2154340836013207,
+            -7.225433526011549
+          ],
+          "faster_process_pairs": 2,
+          "paired_block_median_changes_percent": [
+            12.56684491978608,
+            5.109489051094895,
+            5.2391799544419415,
+            -1.565995525727082,
+            -4.174573055028452,
+            2.2522522522522515,
+            -7.579462102689494,
+            7.127429805615537,
+            -8.071748878923767,
+            1.6949152542372614,
+            -3.902439024390225,
+            -5.970149253731338,
+            3.740648379052347,
+            7.106598984771595,
+            -1.187648456057011,
+            3.6407766990291357,
+            -3.9823008849557584,
+            13.114754098360649,
+            14.213197969543145,
+            -3.0612244897959218,
+            2.336448598130869,
+            -1.2562814070351758,
+            8.888888888888879,
+            -12.349914236706693
+          ],
+          "median_block_change_percent": 1.9735837532447564,
+          "faster_blocks": 11,
+          "leave_one_pair_out_p95_changes_percent": [
+            3.2154340836013207,
+            2.208201892744488,
+            2.857142857142847,
+            4.458598726114649
+          ]
+        },
+        {
+          "text": "the",
+          "kind": "page",
+          "offset": 0,
+          "limit": 1,
+          "total": 10000,
+          "late_matches": 0,
+          "control": {
+            "n": 240,
+            "p50_ms": 0.13224999999999998,
+            "p95_ms": 0.1819,
+            "p99_ms": 0.2299,
+            "per_process_pair_p95": [
+              0.185,
+              0.18080000000000002,
+              0.17300000000000001,
+              0.18009999999999998
+            ],
+            "block_medians": [
+              [
+                0.13724999999999998,
+                0.1318,
+                0.13185,
+                0.13495000000000001,
+                0.13235,
+                0.13365
+              ],
+              [
+                0.1268,
+                0.1517,
+                0.13085,
+                0.13774999999999998,
+                0.133,
+                0.14134999999999998
+              ],
+              [
+                0.15489999999999998,
+                0.1227,
+                0.1279,
+                0.14155,
+                0.13374999999999998,
+                0.12100000000000001
+              ],
+              [
+                0.12335,
+                0.13745,
+                0.1401,
+                0.11574999999999999,
+                0.12105,
+                0.14175
+              ]
+            ]
+          },
+          "fdb": {
+            "n": 240,
+            "p50_ms": 0.1305,
+            "p95_ms": 0.1769,
+            "p99_ms": 0.21350000000000002,
+            "per_process_pair_p95": [
+              0.1872,
+              0.16699999999999998,
+              0.1603,
+              0.17129999999999998
+            ],
+            "block_medians": [
+              [
+                0.1592,
+                0.14735,
+                0.1264,
+                0.12075,
+                0.12585000000000002,
+                0.1308
+              ],
+              [
+                0.1192,
+                0.13445000000000001,
+                0.14135,
+                0.1368,
+                0.11985,
+                0.13905
+              ],
+              [
+                0.15075,
+                0.1284,
+                0.12455000000000001,
+                0.13115,
+                0.1266,
+                0.12819999999999998
+              ],
+              [
+                0.1301,
+                0.1341,
+                0.13829999999999998,
+                0.12275,
+                0.1237,
+                0.1483
+              ]
+            ]
+          },
+          "change_p95_percent": -2.748763056624526,
+          "paired_p95_change_percent": [
+            1.1891891891891992,
+            -7.632743362831873,
+            -7.341040462427751,
+            -4.8861743475846815
+          ],
+          "faster_process_pairs": 3,
+          "paired_block_median_changes_percent": [
+            15.99271402550093,
+            11.79817905918059,
+            -4.1334850208570195,
+            -10.52241570952206,
+            -4.911220249338855,
+            -2.1324354657687894,
+            -5.993690851735012,
+            -11.371127224785749,
+            8.024455483377913,
+            -0.6896551724137723,
+            -9.887218045112789,
+            -1.6271666077113278,
+            -2.6791478373143884,
+            4.645476772616131,
+            -2.619233776387808,
+            -7.347227128223254,
+            -5.345794392523362,
+            5.950413223140472,
+            5.472233481961886,
+            -2.437249909057837,
+            -1.2847965738758238,
+            6.047516198704117,
+            2.189178025609251,
+            4.620811287477955
+          ],
+          "median_block_change_percent": -1.8798010367400586,
+          "faster_blocks": 15,
+          "leave_one_pair_out_p95_changes_percent": [
+            -7.632743362831873,
+            -2.748763056624526,
+            1.6492578339747155,
+            -2.855573860516203
+          ]
+        },
+        {
+          "text": "ishmael",
+          "kind": "page",
+          "offset": 130,
+          "limit": 1,
+          "total": 260,
+          "late_matches": 39,
+          "control": {
+            "n": 240,
+            "p50_ms": 4.7223500000000005,
+            "p95_ms": 5.1649,
+            "p99_ms": 5.7995,
+            "per_process_pair_p95": [
+              5.1747,
+              5.1474,
+              5.2307999999999995,
+              5.0882000000000005
+            ],
+            "block_medians": [
+              [
+                4.763199999999999,
+                4.7452000000000005,
+                4.803800000000001,
+                4.6576,
+                4.85425,
+                4.981
+              ],
+              [
+                4.652799999999999,
+                4.9113500000000005,
+                4.77055,
+                4.64455,
+                4.703200000000001,
+                4.7965
+              ],
+              [
+                4.68565,
+                4.69525,
+                4.601999999999999,
+                4.82785,
+                4.9308499999999995,
+                4.73555
+              ],
+              [
+                4.65165,
+                4.67915,
+                4.64575,
+                4.616,
+                4.7623,
+                4.745800000000001
+              ]
+            ]
+          },
+          "fdb": {
+            "n": 240,
+            "p50_ms": 4.71845,
+            "p95_ms": 5.170100000000001,
+            "p99_ms": 6.4975,
+            "per_process_pair_p95": [
+              5.54,
+              5.2721,
+              4.9882,
+              5.1063
+            ],
+            "block_medians": [
+              [
+                4.7259,
+                4.7409,
+                5.022349999999999,
+                4.74255,
+                4.635999999999999,
+                4.82635
+              ],
+              [
+                4.7558,
+                5.1423,
+                4.5908,
+                4.708,
+                4.6842,
+                4.67515
+              ],
+              [
+                4.70635,
+                4.6478,
+                4.646850000000001,
+                4.71155,
+                4.67735,
+                4.5933
+              ],
+              [
+                4.777950000000001,
+                4.66595,
+                4.64525,
+                5.053749999999999,
+                4.738900000000001,
+                4.81665
+              ]
+            ]
+          },
+          "change_p95_percent": 0.1006795872136923,
+          "paired_p95_change_percent": [
+            7.059346435542158,
+            2.42258227454637,
+            -4.637913894624135,
+            0.35572501080931573
+          ],
+          "faster_process_pairs": 1,
+          "paired_block_median_changes_percent": [
+            -0.7830870003358914,
+            -0.09061788754953781,
+            4.549523294058844,
+            1.8239007214015723,
+            -4.496060153473779,
+            -3.1047982332864876,
+            2.213720770288874,
+            4.702373074612876,
+            -3.767909360555921,
+            1.3661172772389207,
+            -0.40398026875321236,
+            -2.5299697696236745,
+            0.44177435361154593,
+            -1.010595814919324,
+            0.974576271186467,
+            -2.4089397972182236,
+            -5.141101432815843,
+            -3.0038749458880076,
+            2.715165586404833,
+            -0.28210251861984226,
+            -0.010762524888330294,
+            9.483318890814552,
+            -0.4913592171849501,
+            1.4928989843651097
+          ],
+          "median_block_change_percent": -0.18636020308469003,
+          "faster_blocks": 14,
+          "leave_one_pair_out_p95_changes_percent": [
+            0.2583828729066928,
+            -0.8228620108811535,
+            0.8225731176104478,
+            0.7895541790930771
+          ]
+        }
+      ],
+      "lower_p95_cases": 2,
+      "higher_p95_cases": 2,
+      "interpretation": "One resident oracle worker, same process/executable, three balanced conditions; strict open/warmup outside query clocks. Pooled p95 and typical paired block medians are different statistics; no subtraction of placebo percentages or automatic significance claim."
+    },
+    "on_vs_off1": {
+      "design": {
+        "phase": "normal",
+        "processes": 4,
+        "cycles_per_process": 6,
+        "repeats_per_cycle": 10,
+        "pattern": "mixed",
+        "case_indices": [
+          0,
+          28,
+          30,
+          34
+        ],
+        "get_interleave": true,
+        "affinity_mask": 4,
+        "labels": {
+          "0": "off0",
+          "1": "off1 placebo",
+          "2": "on"
+        },
+        "same_process": true,
+        "executable": "output\\reuse-controls-20261018-normal.exe",
+        "executable_sha256": "0324F3CC03424CB8FB63DE010AB337B22091A1A60E92B3C401D7472B417725B2",
+        "cache": "warm OS cache, no eviction; strict source/index open and oracle warmup outside query clocks",
+        "corpus": "existing same first10000 from json.payload-bench; no creation/reset/copy",
+        "source_validation": "strict full open, candidate CRC/schema/UTF8/key/version; on reuses checked owned bytes at hydration",
+        "query_clock": "Query construction plus search; full oracle check and hit disposal outside clock",
+        "instrumented_timings_are_normal_speed": false,
+        "orders": [
+          {
+            "process": 0,
+            "cycle": 0,
+            "command": {
+              "id": 0,
+              "seed": 0,
+              "repeats": 10,
+              "label": 0,
+              "reuse": false,
+              "pattern": "mixed",
+              "case_indices": [
+                0,
+                28,
+                30,
+                34
+              ],
+              "get_interleave": true
+            }
+          },
+          {
+            "process": 0,
+            "cycle": 0,
+            "command": {
+              "id": 1,
+              "seed": 0,
+              "repeats": 10,
+              "label": 1,
+              "reuse": false,
+              "pattern": "mixed",
+              "case_indices": [
+                0,
+                28,
+                30,
+                34
+              ],
+              "get_interleave": true
+            }
+          },
+          {
+            "process": 0,
+            "cycle": 0,
+            "command": {
+              "id": 2,
+              "seed": 0,
+              "repeats": 10,
+              "label": 2,
+              "reuse": true,
+              "pattern": "mixed",
+              "case_indices": [
+                0,
+                28,
+                30,
+                34
+              ],
+              "get_interleave": true
+            }
+          },
+          {
+            "process": 0,
+            "cycle": 1,
+            "command": {
+              "id": 3,
+              "seed": 1,
+              "repeats": 10,
+              "label": 0,
+              "reuse": false,
+              "pattern": "mixed",
+              "case_indices": [
+                0,
+                28,
+                30,
+                34
+              ],
+              "get_interleave": true
+            }
+          },
+          {
+            "process": 0,
+            "cycle": 1,
+            "command": {
+              "id": 4,
+              "seed": 1,
+              "repeats": 10,
+              "label": 2,
+              "reuse": true,
+              "pattern": "mixed",
+              "case_indices": [
+                0,
+                28,
+                30,
+                34
+              ],
+              "get_interleave": true
+            }
+          },
+          {
+            "process": 0,
+            "cycle": 1,
+            "command": {
+              "id": 5,
+              "seed": 1,
+              "repeats": 10,
+              "label": 1,
+              "reuse": false,
+              "pattern": "mixed",
+              "case_indices": [
+                0,
+                28,
+                30,
+                34
+              ],
+              "get_interleave": true
+            }
+          },
+          {
+            "process": 0,
+            "cycle": 2,
+            "command": {
+              "id": 6,
+              "seed": 2,
+              "repeats": 10,
+              "label": 1,
+              "reuse": false,
+              "pattern": "mixed",
+              "case_indices": [
+                0,
+                28,
+                30,
+                34
+              ],
+              "get_interleave": true
+            }
+          },
+          {
+            "process": 0,
+            "cycle": 2,
+            "command": {
+              "id": 7,
+              "seed": 2,
+              "repeats": 10,
+              "label": 0,
+              "reuse": false,
+              "pattern": "mixed",
+              "case_indices": [
+                0,
+                28,
+                30,
+                34
+              ],
+              "get_interleave": true
+            }
+          },
+          {
+            "process": 0,
+            "cycle": 2,
+            "command": {
+              "id": 8,
+              "seed": 2,
+              "repeats": 10,
+              "label": 2,
+              "reuse": true,
+              "pattern": "mixed",
+              "case_indices": [
+                0,
+                28,
+                30,
+                34
+              ],
+              "get_interleave": true
+            }
+          },
+          {
+            "process": 0,
+            "cycle": 3,
+            "command": {
+              "id": 9,
+              "seed": 3,
+              "repeats": 10,
+              "label": 1,
+              "reuse": false,
+              "pattern": "mixed",
+              "case_indices": [
+                0,
+                28,
+                30,
+                34
+              ],
+              "get_interleave": true
+            }
+          },
+          {
+            "process": 0,
+            "cycle": 3,
+            "command": {
+              "id": 10,
+              "seed": 3,
+              "repeats": 10,
+              "label": 2,
+              "reuse": true,
+              "pattern": "mixed",
+              "case_indices": [
+                0,
+                28,
+                30,
+                34
+              ],
+              "get_interleave": true
+            }
+          },
+          {
+            "process": 0,
+            "cycle": 3,
+            "command": {
+              "id": 11,
+              "seed": 3,
+              "repeats": 10,
+              "label": 0,
+              "reuse": false,
+              "pattern": "mixed",
+              "case_indices": [
+                0,
+                28,
+                30,
+                34
+              ],
+              "get_interleave": true
+            }
+          },
+          {
+            "process": 0,
+            "cycle": 4,
+            "command": {
+              "id": 12,
+              "seed": 4,
+              "repeats": 10,
+              "label": 2,
+              "reuse": true,
+              "pattern": "mixed",
+              "case_indices": [
+                0,
+                28,
+                30,
+                34
+              ],
+              "get_interleave": true
+            }
+          },
+          {
+            "process": 0,
+            "cycle": 4,
+            "command": {
+              "id": 13,
+              "seed": 4,
+              "repeats": 10,
+              "label": 0,
+              "reuse": false,
+              "pattern": "mixed",
+              "case_indices": [
+                0,
+                28,
+                30,
+                34
+              ],
+              "get_interleave": true
+            }
+          },
+          {
+            "process": 0,
+            "cycle": 4,
+            "command": {
+              "id": 14,
+              "seed": 4,
+              "repeats": 10,
+              "label": 1,
+              "reuse": false,
+              "pattern": "mixed",
+              "case_indices": [
+                0,
+                28,
+                30,
+                34
+              ],
+              "get_interleave": true
+            }
+          },
+          {
+            "process": 0,
+            "cycle": 5,
+            "command": {
+              "id": 15,
+              "seed": 5,
+              "repeats": 10,
+              "label": 2,
+              "reuse": true,
+              "pattern": "mixed",
+              "case_indices": [
+                0,
+                28,
+                30,
+                34
+              ],
+              "get_interleave": true
+            }
+          },
+          {
+            "process": 0,
+            "cycle": 5,
+            "command": {
+              "id": 16,
+              "seed": 5,
+              "repeats": 10,
+              "label": 1,
+              "reuse": false,
+              "pattern": "mixed",
+              "case_indices": [
+                0,
+                28,
+                30,
+                34
+              ],
+              "get_interleave": true
+            }
+          },
+          {
+            "process": 0,
+            "cycle": 5,
+            "command": {
+              "id": 17,
+              "seed": 5,
+              "repeats": 10,
+              "label": 0,
+              "reuse": false,
+              "pattern": "mixed",
+              "case_indices": [
+                0,
+                28,
+                30,
+                34
+              ],
+              "get_interleave": true
+            }
+          },
+          {
+            "process": 1,
+            "cycle": 0,
+            "command": {
+              "id": 1000,
+              "seed": 10000,
+              "repeats": 10,
+              "label": 0,
+              "reuse": false,
+              "pattern": "mixed",
+              "case_indices": [
+                0,
+                28,
+                30,
+                34
+              ],
+              "get_interleave": true
+            }
+          },
+          {
+            "process": 1,
+            "cycle": 0,
+            "command": {
+              "id": 1001,
+              "seed": 10000,
+              "repeats": 10,
+              "label": 2,
+              "reuse": true,
+              "pattern": "mixed",
+              "case_indices": [
+                0,
+                28,
+                30,
+                34
+              ],
+              "get_interleave": true
+            }
+          },
+          {
+            "process": 1,
+            "cycle": 0,
+            "command": {
+              "id": 1002,
+              "seed": 10000,
+              "repeats": 10,
+              "label": 1,
+              "reuse": false,
+              "pattern": "mixed",
+              "case_indices": [
+                0,
+                28,
+                30,
+                34
+              ],
+              "get_interleave": true
+            }
+          },
+          {
+            "process": 1,
+            "cycle": 1,
+            "command": {
+              "id": 1003,
+              "seed": 10001,
+              "repeats": 10,
+              "label": 1,
+              "reuse": false,
+              "pattern": "mixed",
+              "case_indices": [
+                0,
+                28,
+                30,
+                34
+              ],
+              "get_interleave": true
+            }
+          },
+          {
+            "process": 1,
+            "cycle": 1,
+            "command": {
+              "id": 1004,
+              "seed": 10001,
+              "repeats": 10,
+              "label": 0,
+              "reuse": false,
+              "pattern": "mixed",
+              "case_indices": [
+                0,
+                28,
+                30,
+                34
+              ],
+              "get_interleave": true
+            }
+          },
+          {
+            "process": 1,
+            "cycle": 1,
+            "command": {
+              "id": 1005,
+              "seed": 10001,
+              "repeats": 10,
+              "label": 2,
+              "reuse": true,
+              "pattern": "mixed",
+              "case_indices": [
+                0,
+                28,
+                30,
+                34
+              ],
+              "get_interleave": true
+            }
+          },
+          {
+            "process": 1,
+            "cycle": 2,
+            "command": {
+              "id": 1006,
+              "seed": 10002,
+              "repeats": 10,
+              "label": 1,
+              "reuse": false,
+              "pattern": "mixed",
+              "case_indices": [
+                0,
+                28,
+                30,
+                34
+              ],
+              "get_interleave": true
+            }
+          },
+          {
+            "process": 1,
+            "cycle": 2,
+            "command": {
+              "id": 1007,
+              "seed": 10002,
+              "repeats": 10,
+              "label": 2,
+              "reuse": true,
+              "pattern": "mixed",
+              "case_indices": [
+                0,
+                28,
+                30,
+                34
+              ],
+              "get_interleave": true
+            }
+          },
+          {
+            "process": 1,
+            "cycle": 2,
+            "command": {
+              "id": 1008,
+              "seed": 10002,
+              "repeats": 10,
+              "label": 0,
+              "reuse": false,
+              "pattern": "mixed",
+              "case_indices": [
+                0,
+                28,
+                30,
+                34
+              ],
+              "get_interleave": true
+            }
+          },
+          {
+            "process": 1,
+            "cycle": 3,
+            "command": {
+              "id": 1009,
+              "seed": 10003,
+              "repeats": 10,
+              "label": 2,
+              "reuse": true,
+              "pattern": "mixed",
+              "case_indices": [
+                0,
+                28,
+                30,
+                34
+              ],
+              "get_interleave": true
+            }
+          },
+          {
+            "process": 1,
+            "cycle": 3,
+            "command": {
+              "id": 1010,
+              "seed": 10003,
+              "repeats": 10,
+              "label": 0,
+              "reuse": false,
+              "pattern": "mixed",
+              "case_indices": [
+                0,
+                28,
+                30,
+                34
+              ],
+              "get_interleave": true
+            }
+          },
+          {
+            "process": 1,
+            "cycle": 3,
+            "command": {
+              "id": 1011,
+              "seed": 10003,
+              "repeats": 10,
+              "label": 1,
+              "reuse": false,
+              "pattern": "mixed",
+              "case_indices": [
+                0,
+                28,
+                30,
+                34
+              ],
+              "get_interleave": true
+            }
+          },
+          {
+            "process": 1,
+            "cycle": 4,
+            "command": {
+              "id": 1012,
+              "seed": 10004,
+              "repeats": 10,
+              "label": 2,
+              "reuse": true,
+              "pattern": "mixed",
+              "case_indices": [
+                0,
+                28,
+                30,
+                34
+              ],
+              "get_interleave": true
+            }
+          },
+          {
+            "process": 1,
+            "cycle": 4,
+            "command": {
+              "id": 1013,
+              "seed": 10004,
+              "repeats": 10,
+              "label": 1,
+              "reuse": false,
+              "pattern": "mixed",
+              "case_indices": [
+                0,
+                28,
+                30,
+                34
+              ],
+              "get_interleave": true
+            }
+          },
+          {
+            "process": 1,
+            "cycle": 4,
+            "command": {
+              "id": 1014,
+              "seed": 10004,
+              "repeats": 10,
+              "label": 0,
+              "reuse": false,
+              "pattern": "mixed",
+              "case_indices": [
+                0,
+                28,
+                30,
+                34
+              ],
+              "get_interleave": true
+            }
+          },
+          {
+            "process": 1,
+            "cycle": 5,
+            "command": {
+              "id": 1015,
+              "seed": 10005,
+              "repeats": 10,
+              "label": 0,
+              "reuse": false,
+              "pattern": "mixed",
+              "case_indices": [
+                0,
+                28,
+                30,
+                34
+              ],
+              "get_interleave": true
+            }
+          },
+          {
+            "process": 1,
+            "cycle": 5,
+            "command": {
+              "id": 1016,
+              "seed": 10005,
+              "repeats": 10,
+              "label": 1,
+              "reuse": false,
+              "pattern": "mixed",
+              "case_indices": [
+                0,
+                28,
+                30,
+                34
+              ],
+              "get_interleave": true
+            }
+          },
+          {
+            "process": 1,
+            "cycle": 5,
+            "command": {
+              "id": 1017,
+              "seed": 10005,
+              "repeats": 10,
+              "label": 2,
+              "reuse": true,
+              "pattern": "mixed",
+              "case_indices": [
+                0,
+                28,
+                30,
+                34
+              ],
+              "get_interleave": true
+            }
+          },
+          {
+            "process": 2,
+            "cycle": 0,
+            "command": {
+              "id": 2000,
+              "seed": 20000,
+              "repeats": 10,
+              "label": 1,
+              "reuse": false,
+              "pattern": "mixed",
+              "case_indices": [
+                0,
+                28,
+                30,
+                34
+              ],
+              "get_interleave": true
+            }
+          },
+          {
+            "process": 2,
+            "cycle": 0,
+            "command": {
+              "id": 2001,
+              "seed": 20000,
+              "repeats": 10,
+              "label": 0,
+              "reuse": false,
+              "pattern": "mixed",
+              "case_indices": [
+                0,
+                28,
+                30,
+                34
+              ],
+              "get_interleave": true
+            }
+          },
+          {
+            "process": 2,
+            "cycle": 0,
+            "command": {
+              "id": 2002,
+              "seed": 20000,
+              "repeats": 10,
+              "label": 2,
+              "reuse": true,
+              "pattern": "mixed",
+              "case_indices": [
+                0,
+                28,
+                30,
+                34
+              ],
+              "get_interleave": true
+            }
+          },
+          {
+            "process": 2,
+            "cycle": 1,
+            "command": {
+              "id": 2003,
+              "seed": 20001,
+              "repeats": 10,
+              "label": 1,
+              "reuse": false,
+              "pattern": "mixed",
+              "case_indices": [
+                0,
+                28,
+                30,
+                34
+              ],
+              "get_interleave": true
+            }
+          },
+          {
+            "process": 2,
+            "cycle": 1,
+            "command": {
+              "id": 2004,
+              "seed": 20001,
+              "repeats": 10,
+              "label": 2,
+              "reuse": true,
+              "pattern": "mixed",
+              "case_indices": [
+                0,
+                28,
+                30,
+                34
+              ],
+              "get_interleave": true
+            }
+          },
+          {
+            "process": 2,
+            "cycle": 1,
+            "command": {
+              "id": 2005,
+              "seed": 20001,
+              "repeats": 10,
+              "label": 0,
+              "reuse": false,
+              "pattern": "mixed",
+              "case_indices": [
+                0,
+                28,
+                30,
+                34
+              ],
+              "get_interleave": true
+            }
+          },
+          {
+            "process": 2,
+            "cycle": 2,
+            "command": {
+              "id": 2006,
+              "seed": 20002,
+              "repeats": 10,
+              "label": 2,
+              "reuse": true,
+              "pattern": "mixed",
+              "case_indices": [
+                0,
+                28,
+                30,
+                34
+              ],
+              "get_interleave": true
+            }
+          },
+          {
+            "process": 2,
+            "cycle": 2,
+            "command": {
+              "id": 2007,
+              "seed": 20002,
+              "repeats": 10,
+              "label": 0,
+              "reuse": false,
+              "pattern": "mixed",
+              "case_indices": [
+                0,
+                28,
+                30,
+                34
+              ],
+              "get_interleave": true
+            }
+          },
+          {
+            "process": 2,
+            "cycle": 2,
+            "command": {
+              "id": 2008,
+              "seed": 20002,
+              "repeats": 10,
+              "label": 1,
+              "reuse": false,
+              "pattern": "mixed",
+              "case_indices": [
+                0,
+                28,
+                30,
+                34
+              ],
+              "get_interleave": true
+            }
+          },
+          {
+            "process": 2,
+            "cycle": 3,
+            "command": {
+              "id": 2009,
+              "seed": 20003,
+              "repeats": 10,
+              "label": 2,
+              "reuse": true,
+              "pattern": "mixed",
+              "case_indices": [
+                0,
+                28,
+                30,
+                34
+              ],
+              "get_interleave": true
+            }
+          },
+          {
+            "process": 2,
+            "cycle": 3,
+            "command": {
+              "id": 2010,
+              "seed": 20003,
+              "repeats": 10,
+              "label": 1,
+              "reuse": false,
+              "pattern": "mixed",
+              "case_indices": [
+                0,
+                28,
+                30,
+                34
+              ],
+              "get_interleave": true
+            }
+          },
+          {
+            "process": 2,
+            "cycle": 3,
+            "command": {
+              "id": 2011,
+              "seed": 20003,
+              "repeats": 10,
+              "label": 0,
+              "reuse": false,
+              "pattern": "mixed",
+              "case_indices": [
+                0,
+                28,
+                30,
+                34
+              ],
+              "get_interleave": true
+            }
+          },
+          {
+            "process": 2,
+            "cycle": 4,
+            "command": {
+              "id": 2012,
+              "seed": 20004,
+              "repeats": 10,
+              "label": 0,
+              "reuse": false,
+              "pattern": "mixed",
+              "case_indices": [
+                0,
+                28,
+                30,
+                34
+              ],
+              "get_interleave": true
+            }
+          },
+          {
+            "process": 2,
+            "cycle": 4,
+            "command": {
+              "id": 2013,
+              "seed": 20004,
+              "repeats": 10,
+              "label": 1,
+              "reuse": false,
+              "pattern": "mixed",
+              "case_indices": [
+                0,
+                28,
+                30,
+                34
+              ],
+              "get_interleave": true
+            }
+          },
+          {
+            "process": 2,
+            "cycle": 4,
+            "command": {
+              "id": 2014,
+              "seed": 20004,
+              "repeats": 10,
+              "label": 2,
+              "reuse": true,
+              "pattern": "mixed",
+              "case_indices": [
+                0,
+                28,
+                30,
+                34
+              ],
+              "get_interleave": true
+            }
+          },
+          {
+            "process": 2,
+            "cycle": 5,
+            "command": {
+              "id": 2015,
+              "seed": 20005,
+              "repeats": 10,
+              "label": 0,
+              "reuse": false,
+              "pattern": "mixed",
+              "case_indices": [
+                0,
+                28,
+                30,
+                34
+              ],
+              "get_interleave": true
+            }
+          },
+          {
+            "process": 2,
+            "cycle": 5,
+            "command": {
+              "id": 2016,
+              "seed": 20005,
+              "repeats": 10,
+              "label": 2,
+              "reuse": true,
+              "pattern": "mixed",
+              "case_indices": [
+                0,
+                28,
+                30,
+                34
+              ],
+              "get_interleave": true
+            }
+          },
+          {
+            "process": 2,
+            "cycle": 5,
+            "command": {
+              "id": 2017,
+              "seed": 20005,
+              "repeats": 10,
+              "label": 1,
+              "reuse": false,
+              "pattern": "mixed",
+              "case_indices": [
+                0,
+                28,
+                30,
+                34
+              ],
+              "get_interleave": true
+            }
+          },
+          {
+            "process": 3,
+            "cycle": 0,
+            "command": {
+              "id": 3000,
+              "seed": 30000,
+              "repeats": 10,
+              "label": 1,
+              "reuse": false,
+              "pattern": "mixed",
+              "case_indices": [
+                0,
+                28,
+                30,
+                34
+              ],
+              "get_interleave": true
+            }
+          },
+          {
+            "process": 3,
+            "cycle": 0,
+            "command": {
+              "id": 3001,
+              "seed": 30000,
+              "repeats": 10,
+              "label": 2,
+              "reuse": true,
+              "pattern": "mixed",
+              "case_indices": [
+                0,
+                28,
+                30,
+                34
+              ],
+              "get_interleave": true
+            }
+          },
+          {
+            "process": 3,
+            "cycle": 0,
+            "command": {
+              "id": 3002,
+              "seed": 30000,
+              "repeats": 10,
+              "label": 0,
+              "reuse": false,
+              "pattern": "mixed",
+              "case_indices": [
+                0,
+                28,
+                30,
+                34
+              ],
+              "get_interleave": true
+            }
+          },
+          {
+            "process": 3,
+            "cycle": 1,
+            "command": {
+              "id": 3003,
+              "seed": 30001,
+              "repeats": 10,
+              "label": 2,
+              "reuse": true,
+              "pattern": "mixed",
+              "case_indices": [
+                0,
+                28,
+                30,
+                34
+              ],
+              "get_interleave": true
+            }
+          },
+          {
+            "process": 3,
+            "cycle": 1,
+            "command": {
+              "id": 3004,
+              "seed": 30001,
+              "repeats": 10,
+              "label": 0,
+              "reuse": false,
+              "pattern": "mixed",
+              "case_indices": [
+                0,
+                28,
+                30,
+                34
+              ],
+              "get_interleave": true
+            }
+          },
+          {
+            "process": 3,
+            "cycle": 1,
+            "command": {
+              "id": 3005,
+              "seed": 30001,
+              "repeats": 10,
+              "label": 1,
+              "reuse": false,
+              "pattern": "mixed",
+              "case_indices": [
+                0,
+                28,
+                30,
+                34
+              ],
+              "get_interleave": true
+            }
+          },
+          {
+            "process": 3,
+            "cycle": 2,
+            "command": {
+              "id": 3006,
+              "seed": 30002,
+              "repeats": 10,
+              "label": 2,
+              "reuse": true,
+              "pattern": "mixed",
+              "case_indices": [
+                0,
+                28,
+                30,
+                34
+              ],
+              "get_interleave": true
+            }
+          },
+          {
+            "process": 3,
+            "cycle": 2,
+            "command": {
+              "id": 3007,
+              "seed": 30002,
+              "repeats": 10,
+              "label": 1,
+              "reuse": false,
+              "pattern": "mixed",
+              "case_indices": [
+                0,
+                28,
+                30,
+                34
+              ],
+              "get_interleave": true
+            }
+          },
+          {
+            "process": 3,
+            "cycle": 2,
+            "command": {
+              "id": 3008,
+              "seed": 30002,
+              "repeats": 10,
+              "label": 0,
+              "reuse": false,
+              "pattern": "mixed",
+              "case_indices": [
+                0,
+                28,
+                30,
+                34
+              ],
+              "get_interleave": true
+            }
+          },
+          {
+            "process": 3,
+            "cycle": 3,
+            "command": {
+              "id": 3009,
+              "seed": 30003,
+              "repeats": 10,
+              "label": 0,
+              "reuse": false,
+              "pattern": "mixed",
+              "case_indices": [
+                0,
+                28,
+                30,
+                34
+              ],
+              "get_interleave": true
+            }
+          },
+          {
+            "process": 3,
+            "cycle": 3,
+            "command": {
+              "id": 3010,
+              "seed": 30003,
+              "repeats": 10,
+              "label": 1,
+              "reuse": false,
+              "pattern": "mixed",
+              "case_indices": [
+                0,
+                28,
+                30,
+                34
+              ],
+              "get_interleave": true
+            }
+          },
+          {
+            "process": 3,
+            "cycle": 3,
+            "command": {
+              "id": 3011,
+              "seed": 30003,
+              "repeats": 10,
+              "label": 2,
+              "reuse": true,
+              "pattern": "mixed",
+              "case_indices": [
+                0,
+                28,
+                30,
+                34
+              ],
+              "get_interleave": true
+            }
+          },
+          {
+            "process": 3,
+            "cycle": 4,
+            "command": {
+              "id": 3012,
+              "seed": 30004,
+              "repeats": 10,
+              "label": 0,
+              "reuse": false,
+              "pattern": "mixed",
+              "case_indices": [
+                0,
+                28,
+                30,
+                34
+              ],
+              "get_interleave": true
+            }
+          },
+          {
+            "process": 3,
+            "cycle": 4,
+            "command": {
+              "id": 3013,
+              "seed": 30004,
+              "repeats": 10,
+              "label": 2,
+              "reuse": true,
+              "pattern": "mixed",
+              "case_indices": [
+                0,
+                28,
+                30,
+                34
+              ],
+              "get_interleave": true
+            }
+          },
+          {
+            "process": 3,
+            "cycle": 4,
+            "command": {
+              "id": 3014,
+              "seed": 30004,
+              "repeats": 10,
+              "label": 1,
+              "reuse": false,
+              "pattern": "mixed",
+              "case_indices": [
+                0,
+                28,
+                30,
+                34
+              ],
+              "get_interleave": true
+            }
+          },
+          {
+            "process": 3,
+            "cycle": 5,
+            "command": {
+              "id": 3015,
+              "seed": 30005,
+              "repeats": 10,
+              "label": 1,
+              "reuse": false,
+              "pattern": "mixed",
+              "case_indices": [
+                0,
+                28,
+                30,
+                34
+              ],
+              "get_interleave": true
+            }
+          },
+          {
+            "process": 3,
+            "cycle": 5,
+            "command": {
+              "id": 3016,
+              "seed": 30005,
+              "repeats": 10,
+              "label": 0,
+              "reuse": false,
+              "pattern": "mixed",
+              "case_indices": [
+                0,
+                28,
+                30,
+                34
+              ],
+              "get_interleave": true
+            }
+          },
+          {
+            "process": 3,
+            "cycle": 5,
+            "command": {
+              "id": 3017,
+              "seed": 30005,
+              "repeats": 10,
+              "label": 2,
+              "reuse": true,
+              "pattern": "mixed",
+              "case_indices": [
+                0,
+                28,
+                30,
+                34
+              ],
+              "get_interleave": true
+            }
+          }
+        ],
+        "workers": [
+          {
+            "pid": 43896,
+            "affinity_mask": 4,
+            "executable": "output\\reuse-controls-20261018-normal.exe",
+            "executable_sha256": "0324F3CC03424CB8FB63DE010AB337B22091A1A60E92B3C401D7472B417725B2"
+          },
+          {
+            "pid": 42144,
+            "affinity_mask": 4,
+            "executable": "output\\reuse-controls-20261018-normal.exe",
+            "executable_sha256": "0324F3CC03424CB8FB63DE010AB337B22091A1A60E92B3C401D7472B417725B2"
+          },
+          {
+            "pid": 14808,
+            "affinity_mask": 4,
+            "executable": "output\\reuse-controls-20261018-normal.exe",
+            "executable_sha256": "0324F3CC03424CB8FB63DE010AB337B22091A1A60E92B3C401D7472B417725B2"
+          },
+          {
+            "pid": 75576,
+            "affinity_mask": 4,
+            "executable": "output\\reuse-controls-20261018-normal.exe",
+            "executable_sha256": "0324F3CC03424CB8FB63DE010AB337B22091A1A60E92B3C401D7472B417725B2"
+          }
+        ]
+      },
+      "queries": [
+        {
+          "text": "quixote",
+          "kind": "word",
+          "offset": 0,
+          "limit": 50,
+          "total": 56,
+          "late_matches": 8,
+          "control": {
+            "n": 240,
+            "p50_ms": 2.00385,
+            "p95_ms": 2.2931000000000004,
+            "p99_ms": 2.4639,
+            "per_process_pair_p95": [
+              2.2893000000000003,
+              2.3268999999999997,
+              2.2294,
+              2.12
+            ],
+            "block_medians": [
+              [
+                2.1098999999999997,
+                1.9777,
+                1.93045,
+                1.9592,
+                2.0313499999999998,
+                2.11735
+              ],
+              [
+                2.0077,
+                2.05235,
+                2.21145,
+                1.9366499999999998,
+                1.97715,
+                2.0225
+              ],
+              [
+                1.9840499999999999,
+                1.9705,
+                1.9839000000000002,
+                1.9718999999999998,
+                2.04195,
+                1.9741
+              ],
+              [
+                2.0448,
+                1.963,
+                1.9639,
+                1.9632,
+                1.98205,
+                1.9939
+              ]
+            ]
+          },
+          "fdb": {
+            "n": 240,
+            "p50_ms": 1.6914,
+            "p95_ms": 1.9501,
+            "p99_ms": 2.2361,
+            "per_process_pair_p95": [
+              1.9276,
+              1.9976,
+              1.913,
+              1.8548
+            ],
+            "block_medians": [
+              [
+                1.7166000000000001,
+                1.70695,
+                1.7667,
+                1.6622,
+                1.65095,
+                1.6993999999999998
+              ],
+              [
+                1.6824000000000001,
+                1.7967,
+                1.6835,
+                1.726,
+                1.6495,
+                1.6458
+              ],
+              [
+                1.6672000000000002,
+                1.6733,
+                1.6472499999999999,
+                1.62065,
+                1.7321,
+                1.68555
+              ],
+              [
+                1.7227000000000001,
+                1.6149,
+                1.67305,
+                1.71485,
+                1.7049500000000002,
+                1.75895
+              ]
+            ]
+          },
+          "change_p95_percent": -14.957917229950734,
+          "paired_p95_change_percent": [
+            -15.799589394137959,
+            -14.151875886372412,
+            -14.192159325379027,
+            -12.509433962264161
+          ],
+          "faster_process_pairs": 4,
+          "paired_block_median_changes_percent": [
+            -18.64069387174746,
+            -13.690145118066443,
+            -8.482478178663012,
+            -15.159248672927728,
+            -18.72646269722106,
+            -19.739296762462523,
+            -16.20261991333365,
+            -12.456452359490344,
+            -23.87347667819757,
+            -10.877029922804837,
+            -16.571833194244245,
+            -18.625463535228683,
+            -15.969859630553652,
+            -15.082466379091597,
+            -16.96910126518475,
+            -17.81276941021349,
+            -15.174220720389819,
+            -14.6167873967884,
+            -15.752151799686997,
+            -17.733061640346413,
+            -14.809817200468455,
+            -12.650264873675631,
+            -13.980474760979789,
+            -11.783439490445858
+          ],
+          "median_block_change_percent": -15.463186260038409,
+          "faster_blocks": 24,
+          "leave_one_pair_out_p95_changes_percent": [
+            -14.957917229950734,
+            -14.829102000538263,
+            -16.167999312182967,
+            -15.134832910412454
+          ]
+        },
+        {
+          "text": "zxzxzxzxzxzxzxzxzxzxzxzxzxzxzxzxzxzxzxzxzxzxzxzxzxzxzxzxzxzxzxzxzxzxzxzxzxzxzxzxzxzxzxzxzxzxzxzxzxzxzxzxzxzxzxzxzxzxzxzxzxzxzxzxzxzxzxzxzxzxzxzxzxzxzxzxzxzxzxzxzxzxzxzxzxzxzxzxzxzxzxzxzxzxzxzxzxzxzxzxzxzxzxzxzxzxzxzxzxzxzxzxzxzxzxzxzxzxzxzxzxzxzxzxzxzxzxzxzxzxzxzxzxzxzxzxzxzxzxzxzxzxzxzxzxzxzxzxzxzx",
+          "kind": "long-negative",
+          "offset": 0,
+          "limit": 50,
+          "total": 0,
+          "late_matches": 0,
+          "control": {
+            "n": 240,
+            "p50_ms": 0.0208,
+            "p95_ms": 0.0307,
+            "p99_ms": 0.039,
+            "per_process_pair_p95": [
+              0.0324,
+              0.0294,
+              0.030199999999999998,
+              0.030800000000000004
+            ],
+            "block_medians": [
+              [
+                0.01755,
+                0.02095,
+                0.02035,
+                0.02305,
+                0.0249,
+                0.022400000000000003
+              ],
+              [
+                0.01895,
+                0.0203,
+                0.02275,
+                0.0197,
+                0.02195,
+                0.01805
+              ],
+              [
+                0.019700000000000002,
+                0.020900000000000002,
+                0.019799999999999998,
+                0.02055,
+                0.02035,
+                0.019700000000000002
+              ],
+              [
+                0.0215,
+                0.01715,
+                0.0207,
+                0.01935,
+                0.020999999999999998,
+                0.0207
+              ]
+            ]
+          },
+          "fdb": {
+            "n": 240,
+            "p50_ms": 0.0212,
+            "p95_ms": 0.0324,
+            "p99_ms": 0.039799999999999995,
+            "per_process_pair_p95": [
+              0.0336,
+              0.0299,
+              0.032100000000000004,
+              0.032100000000000004
+            ],
+            "block_medians": [
+              [
+                0.02105,
+                0.0216,
+                0.023100000000000002,
+                0.022,
+                0.02525,
+                0.022699999999999998
+              ],
+              [
+                0.0189,
+                0.0248,
+                0.0205,
+                0.020999999999999998,
+                0.019700000000000002,
+                0.0189
+              ],
+              [
+                0.0208,
+                0.0211,
+                0.0208,
+                0.02135,
+                0.021699999999999997,
+                0.0207
+              ],
+              [
+                0.0225,
+                0.019,
+                0.021900000000000003,
+                0.01965,
+                0.02205,
+                0.02555
+              ]
+            ]
+          },
+          "change_p95_percent": 5.537459283387602,
+          "paired_p95_change_percent": [
+            3.703703703703698,
+            1.7006802721088343,
+            6.291390728476842,
+            4.220779220779214
+          ],
+          "faster_process_pairs": 0,
+          "paired_block_median_changes_percent": [
+            19.943019943019948,
+            3.1026252983293645,
+            13.51351351351353,
+            -4.5553145336225676,
+            1.4056224899598568,
+            1.3392857142856984,
+            -0.26385224274406704,
+            22.16748768472907,
+            -9.890109890109889,
+            6.5989847715735905,
+            -10.250569476081994,
+            4.709141274238227,
+            5.583756345177648,
+            0.9569377990430672,
+            5.050505050505061,
+            3.892944038929458,
+            6.633906633906617,
+            5.076142131979688,
+            4.651162790697683,
+            10.787172011661816,
+            5.797101449275388,
+            1.5503875968992276,
+            5.000000000000004,
+            23.429951690821248
+          ],
+          "median_block_change_percent": 4.8545706371191155,
+          "faster_blocks": 4,
+          "leave_one_pair_out_p95_changes_percent": [
+            5.592105263157898,
+            3.8461538461538547,
+            5.537459283387602,
+            7.894736842105243
+          ]
+        },
+        {
+          "text": "the",
+          "kind": "page",
+          "offset": 0,
+          "limit": 1,
+          "total": 10000,
+          "late_matches": 0,
+          "control": {
+            "n": 240,
+            "p50_ms": 0.13080000000000003,
+            "p95_ms": 0.1683,
+            "p99_ms": 0.2017,
+            "per_process_pair_p95": [
+              0.1614,
+              0.1741,
+              0.1762,
+              0.1587
+            ],
+            "block_medians": [
+              [
+                0.1517,
+                0.13265,
+                0.1157,
+                0.12179999999999999,
+                0.1243,
+                0.13625
+              ],
+              [
+                0.12585000000000002,
+                0.15284999999999999,
+                0.15805000000000002,
+                0.124,
+                0.12585000000000002,
+                0.1401
+              ],
+              [
+                0.15585,
+                0.1306,
+                0.1335,
+                0.1416,
+                0.12510000000000002,
+                0.1222
+              ],
+              [
+                0.12729999999999997,
+                0.13265,
+                0.14185,
+                0.11645,
+                0.1204,
+                0.14229999999999998
+              ]
+            ]
+          },
+          "fdb": {
+            "n": 240,
+            "p50_ms": 0.1305,
+            "p95_ms": 0.1769,
+            "p99_ms": 0.21350000000000002,
+            "per_process_pair_p95": [
+              0.1872,
+              0.16699999999999998,
+              0.1603,
+              0.17129999999999998
+            ],
+            "block_medians": [
+              [
+                0.1592,
+                0.14735,
+                0.1264,
+                0.12075,
+                0.12585000000000002,
+                0.1308
+              ],
+              [
+                0.1192,
+                0.13445000000000001,
+                0.14135,
+                0.1368,
+                0.11985,
+                0.13905
+              ],
+              [
+                0.15075,
+                0.1284,
+                0.12455000000000001,
+                0.13115,
+                0.1266,
+                0.12819999999999998
+              ],
+              [
+                0.1301,
+                0.1341,
+                0.13829999999999998,
+                0.12275,
+                0.1237,
+                0.1483
+              ]
+            ]
+          },
+          "change_p95_percent": 5.109922756981589,
+          "paired_p95_change_percent": [
+            15.985130111524182,
+            -4.078116025272848,
+            -9.023836549375709,
+            7.939508506616244
+          ],
+          "faster_process_pairs": 2,
+          "paired_block_median_changes_percent": [
+            4.943968358602513,
+            11.081794195250684,
+            9.24805531547106,
+            -0.8620689655172376,
+            1.246983105390198,
+            -4.0000000000000036,
+            -5.284068335319835,
+            -12.0379456983971,
+            -10.566276494780148,
+            10.322580645161295,
+            -4.7675804529201615,
+            -0.749464668094213,
+            -3.2723772858517797,
+            -1.6845329249617236,
+            -6.704119850187262,
+            -7.3799435028248705,
+            1.1990407673860615,
+            4.90998363338786,
+            2.1995286724273644,
+            1.093102148511127,
+            -2.5026436376454186,
+            5.410047230571058,
+            2.740863787375414,
+            4.21644413211526
+          ],
+          "median_block_change_percent": 0.171818740208457,
+          "faster_blocks": 12,
+          "leave_one_pair_out_p95_changes_percent": [
+            -1.183431952662728,
+            8.19571865443427,
+            11.519903498190587,
+            4.798578199052139
+          ]
+        },
+        {
+          "text": "ishmael",
+          "kind": "page",
+          "offset": 130,
+          "limit": 1,
+          "total": 260,
+          "late_matches": 39,
+          "control": {
+            "n": 240,
+            "p50_ms": 4.7237,
+            "p95_ms": 5.2886,
+            "p99_ms": 5.7875000000000005,
+            "per_process_pair_p95": [
+              5.289000000000001,
+              5.4422999999999995,
+              4.9864999999999995,
+              5.1297
+            ],
+            "block_medians": [
+              [
+                4.8564,
+                4.697699999999999,
+                4.7871,
+                4.74705,
+                4.83015,
+                4.930149999999999
+              ],
+              [
+                4.662,
+                4.7856000000000005,
+                5.194649999999999,
+                4.64835,
+                4.739949999999999,
+                4.7133
+              ],
+              [
+                4.72775,
+                4.6335,
+                4.62625,
+                4.7859,
+                4.68505,
+                4.600849999999999
+              ],
+              [
+                4.879300000000001,
+                4.6222,
+                4.6813,
+                4.67135,
+                4.6625,
+                4.614050000000001
+              ]
+            ]
+          },
+          "fdb": {
+            "n": 240,
+            "p50_ms": 4.71845,
+            "p95_ms": 5.170100000000001,
+            "p99_ms": 6.4975,
+            "per_process_pair_p95": [
+              5.54,
+              5.2721,
+              4.9882,
+              5.1063
+            ],
+            "block_medians": [
+              [
+                4.7259,
+                4.7409,
+                5.022349999999999,
+                4.74255,
+                4.635999999999999,
+                4.82635
+              ],
+              [
+                4.7558,
+                5.1423,
+                4.5908,
+                4.708,
+                4.6842,
+                4.67515
+              ],
+              [
+                4.70635,
+                4.6478,
+                4.646850000000001,
+                4.71155,
+                4.67735,
+                4.5933
+              ],
+              [
+                4.777950000000001,
+                4.66595,
+                4.64525,
+                5.053749999999999,
+                4.738900000000001,
+                4.81665
+              ]
+            ]
+          },
+          "change_p95_percent": -2.240668607949159,
+          "paired_p95_change_percent": [
+            4.745698619776895,
+            -3.1273542436102253,
+            0.03409204853104253,
+            -0.45616702731152703
+          ],
+          "faster_process_pairs": 2,
+          "paired_block_median_changes_percent": [
+            -2.6871756856930995,
+            0.9195989526789905,
+            4.914248710074998,
+            -0.09479571523367536,
+            -4.019543906503953,
+            -2.1054126142206586,
+            2.012012012011999,
+            7.45361083249747,
+            -11.62445978073594,
+            1.2832510460701219,
+            -1.1761727444382308,
+            -0.8094116648632577,
+            -0.4526466077944158,
+            0.3086219920146904,
+            0.44528505809242613,
+            -1.5535218036314968,
+            -0.1643525682757052,
+            -0.16410011193582763,
+            -2.077142213022365,
+            0.9465189736489021,
+            -0.7700852327345076,
+            8.186070407912037,
+            1.6386058981233464,
+            4.39093637910295
+          ],
+          "median_block_change_percent": -0.1294479135847515,
+          "faster_blocks": 13,
+          "leave_one_pair_out_p95_changes_percent": [
+            -1.9661107100794162,
+            -1.645513719014613,
+            -1.9720173945925512,
+            -0.31953110228777337
+          ]
+        }
+      ],
+      "lower_p95_cases": 2,
+      "higher_p95_cases": 2,
+      "interpretation": "One resident oracle worker, same process/executable, three balanced conditions; strict open/warmup outside query clocks. Pooled p95 and typical paired block medians are different statistics; no subtraction of placebo percentages or automatic significance claim."
+    }
+  }
+}

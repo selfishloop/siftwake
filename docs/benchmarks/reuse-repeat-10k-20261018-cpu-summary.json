@@ -1,0 +1,19 @@
+{
+  "executable_sha256": "0324F3CC03424CB8FB63DE010AB337B22091A1A60E92B3C401D7472B417725B2",
+  "logical_processors": 16,
+  "power_scheme": "Power Scheme GUID: 381b4222-f694-41f0-9685-ff5bb260df2e  (Balanced)",
+  "sample_scope": "whole block; open/warmup/get/query/full oracle; outside query clocks",
+  "background_estimate": "system busy CPU minus child and harness CPU, divided by wall time; all logical CPUs; not target-core scheduling or I/O attribution; counters not atomic and quantized",
+  "blocks": 72,
+  "other_cpu_logical_cores": {
+    "median": 0.905216451189748,
+    "p95": 1.4839561205753882,
+    "maximum": 1.8052960898945518,
+    "minimum": 0.28094878042068216
+  },
+  "child_cpu_to_wall_ratio": {
+    "median": 0.996033540267491,
+    "minimum": 0.9643751012523222,
+    "maximum": 1.0020430917394125
+  }
+}
