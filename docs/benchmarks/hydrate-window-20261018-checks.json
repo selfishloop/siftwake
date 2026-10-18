@@ -1,0 +1,21 @@
+[
+  {
+    "command": [
+      "cargo",
+      "fmt",
+      "--check"
+    ],
+    "exit_code": 0,
+    "log": "docs\\benchmarks\\hydrate-window-20261018-fmt.log"
+  },
+  {
+    "command": [
+      "cargo",
+      "test",
+      "--lib",
+      "grouped_tests"
+    ],
+    "exit_code": 0,
+    "log": "docs\\benchmarks\\hydrate-window-20261018-grouped.log"
+  }
+]

@@ -297,6 +297,8 @@ fn links(bytes: &[u8], decode: bool) -> Result<Vec<Key>> {
 /// Structural/UTF-8/metadata validation without document or field allocation.
 /// Caller must also verify the transport CRC on every read.
 pub fn checked(bytes: &[u8]) -> Result<View<'_>> {
+    #[cfg(feature = "diagnostic-timing")]
+    let _schema = crate::timing::span("payload.schema_utf8");
     if bytes.len() < HEADER || &bytes[..4] != MAGIC {
         return Err(failure("binary header"));
     }
@@ -389,14 +391,36 @@ impl View<'_> {
         self.version
     }
     pub fn to_document(&self) -> Result<StoredDocument> {
+        #[cfg(feature = "diagnostic-timing")]
+        let _materialize = crate::timing::span("payload.materialize");
         let (scope, collection, id) = self.key_parts();
         Ok(StoredDocument {
             document: Document {
-                key: Key::new(scope, collection, id),
-                title: self.title().to_owned(),
-                text: self.text().to_owned(),
-                fields: fields(self.fields, true)?,
-                links: links(self.links, true)?,
+                key: {
+                    #[cfg(feature = "diagnostic-timing")]
+                    let _copy = crate::timing::span("payload.copy_key");
+                    Key::new(scope, collection, id)
+                },
+                title: {
+                    #[cfg(feature = "diagnostic-timing")]
+                    let _copy = crate::timing::span("payload.copy_title");
+                    self.title().to_owned()
+                },
+                text: {
+                    #[cfg(feature = "diagnostic-timing")]
+                    let _copy = crate::timing::span("payload.copy_text");
+                    self.text().to_owned()
+                },
+                fields: {
+                    #[cfg(feature = "diagnostic-timing")]
+                    let _fields = crate::timing::span("payload.materialize_fields");
+                    fields(self.fields, true)?
+                },
+                links: {
+                    #[cfg(feature = "diagnostic-timing")]
+                    let _links = crate::timing::span("payload.materialize_links");
+                    links(self.links, true)?
+                },
             },
             version: self.version,
         })

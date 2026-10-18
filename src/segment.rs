@@ -2022,7 +2022,11 @@ impl DiskIndex {
                 scratch.reserve_exact(len.saturating_sub(scratch.len()));
             }
             scratch.resize(len, 0);
-            self.read_payload_at(offset, scratch)?;
+            {
+                #[cfg(feature = "diagnostic-timing")]
+                let _read = crate::timing::span("payload.result_read");
+                self.read_payload_at(offset, scratch)?;
+            }
             stats.requests += 1;
             stats.requested_bytes += len as u64;
             for &(id, position) in &slots[start..next] {
@@ -2051,15 +2055,23 @@ impl DiskIndex {
     ) -> Result<StoredDocument> {
         #[cfg(feature = "diagnostic-timing")]
         let _decode = crate::timing::span("payload.decode_crc_identity");
-        if bytes.len() != record.len as usize || crc(bytes) != record.checksum {
-            return Err(Error::Corrupt("segment document checksum mismatch".into()));
+        {
+            #[cfg(feature = "diagnostic-timing")]
+            let _crc = crate::timing::span("payload.result_crc");
+            if bytes.len() != record.len as usize || crc(bytes) != record.checksum {
+                return Err(Error::Corrupt("segment document checksum mismatch".into()));
+            }
         }
         let stored = self.decode_payload(bytes)?;
         let key = &stored.document.key;
-        if stored.version != record.version
-            || !self.query_identity(id, scratch, (&key.scope, &key.collection, &key.id))?
         {
-            return Err(Error::Corrupt("segment document identity mismatch".into()));
+            #[cfg(feature = "diagnostic-timing")]
+            let _identity = crate::timing::span("payload.result_identity");
+            if stored.version != record.version
+                || !self.query_identity(id, scratch, (&key.scope, &key.collection, &key.id))?
+            {
+                return Err(Error::Corrupt("segment document identity mismatch".into()));
+            }
         }
         Ok(stored)
     }

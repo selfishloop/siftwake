@@ -1,0 +1,187 @@
+diff --git a/src/payload.rs b/src/payload.rs
+index a6b8201..6a8ee5b 100644
+--- a/src/payload.rs
++++ b/src/payload.rs
+@@ -297,6 +297,25 @@ fn links(bytes: &[u8], decode: bool) -> Result<Vec<Key>> {
+ /// Structural/UTF-8/metadata validation without document or field allocation.
+ /// Caller must also verify the transport CRC on every read.
+ pub fn checked(bytes: &[u8]) -> Result<View<'_>> {
++    #[cfg(feature = "diagnostic-timing")]
++    let _schema = crate::timing::span("payload.schema_utf8");
++    let view = header_view(bytes)?;
++    fields(view.fields, false)?;
++    links(view.links, false)?;
++    Ok(view)
++}
++
++/// Owned result decoding validates field/link sections while materializing
++/// them. The borrowed contains view still validates both before returning.
++pub(crate) fn decode_owned(bytes: &[u8]) -> Result<StoredDocument> {
++    header_view(bytes)?.to_document()
++}
++
++// This private view has only checked offsets and header strings. Never expose
++// it without either checking or decoding the complete field/link sections.
++fn header_view(bytes: &[u8]) -> Result<View<'_>> {
++    #[cfg(feature = "diagnostic-timing")]
++    let _header = crate::timing::span("payload.header_utf8");
+     if bytes.len() < HEADER || &bytes[..4] != MAGIC {
+         return Err(failure("binary header"));
+     }
+@@ -316,8 +335,6 @@ pub fn checked(bytes: &[u8]) -> Result<View<'_>> {
+     }
+     let field_bytes = &bytes[offsets[5]..offsets[6]];
+     let link_bytes = &bytes[offsets[6]..offsets[7]];
+-    fields(field_bytes, false)?;
+-    links(link_bytes, false)?;
+     Ok(View {
+         strings,
+         version: u64::from_le_bytes(bytes[4..12].try_into().unwrap()),
+@@ -389,20 +406,87 @@ impl View<'_> {
+         self.version
+     }
+     pub fn to_document(&self) -> Result<StoredDocument> {
++        #[cfg(feature = "diagnostic-timing")]
++        let _materialize = crate::timing::span("payload.materialize");
+         let (scope, collection, id) = self.key_parts();
+         Ok(StoredDocument {
+             document: Document {
+-                key: Key::new(scope, collection, id),
+-                title: self.title().to_owned(),
+-                text: self.text().to_owned(),
+-                fields: fields(self.fields, true)?,
+-                links: links(self.links, true)?,
++                key: {
++                    #[cfg(feature = "diagnostic-timing")]
++                    let _copy = crate::timing::span("payload.copy_key");
++                    Key::new(scope, collection, id)
++                },
++                title: {
++                    #[cfg(feature = "diagnostic-timing")]
++                    let _copy = crate::timing::span("payload.copy_title");
++                    self.title().to_owned()
++                },
++                text: {
++                    #[cfg(feature = "diagnostic-timing")]
++                    let _copy = crate::timing::span("payload.copy_text");
++                    self.text().to_owned()
++                },
++                fields: {
++                    #[cfg(feature = "diagnostic-timing")]
++                    let _fields = crate::timing::span("payload.materialize_fields");
++                    fields(self.fields, true)?
++                },
++                links: {
++                    #[cfg(feature = "diagnostic-timing")]
++                    let _links = crate::timing::span("payload.materialize_links");
++                    links(self.links, true)?
++                },
+             },
+             version: self.version,
+         })
+     }
+ }
+ 
++#[cfg(test)]
++mod owned_decode_tests {
++    use super::*;
++
++    #[test]
++    fn owned_decode_matches_checked_view_for_every_cut_and_byte_change() {
++        // Small unit fixture, independent of the existing benchmark corpus.
++        let expected = StoredDocument {
++            document: Document {
++                key: Key::new("shared", "texts", "şirket"),
++                title: "İstanbul 東京".into(),
++                text: "İŞIK 🦀 ȺΣ".repeat(4),
++                fields: BTreeMap::from([
++                    (
++                        "a".into(),
++                        serde_json::json!([null, true, -17, 1.25, u64::MAX]),
++                    ),
++                    ("z".into(), serde_json::json!({"nested": ["ş", false]})),
++                ]),
++                links: vec![Key::new("shared", "other", "対象")],
++            },
++            version: 17,
++        };
++        let bytes = encode(&expected).unwrap();
++        assert_eq!(decode_owned(&bytes).unwrap(), expected);
++        for cut in 0..bytes.len() {
++            assert!(checked(&bytes[..cut]).is_err(), "cut={cut}");
++            assert!(decode_owned(&bytes[..cut]).is_err(), "cut={cut}");
++        }
++        for at in 0..bytes.len() {
++            let mut changed = bytes.clone();
++            changed[at] ^= 0x80;
++            let reference = checked(&changed).and_then(|view| view.to_document());
++            let owned = decode_owned(&changed);
++            assert_eq!(owned.is_ok(), reference.is_ok(), "byte={at}");
++            if let (Ok(owned), Ok(reference)) = (owned, reference) {
++                assert_eq!(owned, reference, "byte={at}");
++            }
++        }
++        let legacy = serde_json::to_vec(&expected).unwrap();
++        assert_eq!(decode(&legacy).unwrap(), expected);
++        assert!(decode_owned(&legacy).is_err());
++    }
++}
++
+ #[cfg(test)]
+ mod document_limit_tests {
+     use super::*;
+diff --git a/src/segment.rs b/src/segment.rs
+index 8ddf44a..ce5613d 100644
+--- a/src/segment.rs
++++ b/src/segment.rs
+@@ -1674,7 +1674,7 @@ impl DiskIndex {
+ 
+     fn decode_payload(&self, bytes: &[u8]) -> Result<StoredDocument> {
+         if self.binary_payload {
+-            crate::payload::checked(bytes)?.to_document()
++            crate::payload::decode_owned(bytes)
+         } else {
+             crate::payload::decode(bytes)
+         }
+@@ -2022,7 +2022,11 @@ impl DiskIndex {
+                 scratch.reserve_exact(len.saturating_sub(scratch.len()));
+             }
+             scratch.resize(len, 0);
+-            self.read_payload_at(offset, scratch)?;
++            {
++                #[cfg(feature = "diagnostic-timing")]
++                let _read = crate::timing::span("payload.result_read");
++                self.read_payload_at(offset, scratch)?;
++            }
+             stats.requests += 1;
+             stats.requested_bytes += len as u64;
+             for &(id, position) in &slots[start..next] {
+@@ -2051,15 +2055,23 @@ impl DiskIndex {
+     ) -> Result<StoredDocument> {
+         #[cfg(feature = "diagnostic-timing")]
+         let _decode = crate::timing::span("payload.decode_crc_identity");
+-        if bytes.len() != record.len as usize || crc(bytes) != record.checksum {
+-            return Err(Error::Corrupt("segment document checksum mismatch".into()));
++        {
++            #[cfg(feature = "diagnostic-timing")]
++            let _crc = crate::timing::span("payload.result_crc");
++            if bytes.len() != record.len as usize || crc(bytes) != record.checksum {
++                return Err(Error::Corrupt("segment document checksum mismatch".into()));
++            }
+         }
+         let stored = self.decode_payload(bytes)?;
+         let key = &stored.document.key;
+-        if stored.version != record.version
+-            || !self.query_identity(id, scratch, (&key.scope, &key.collection, &key.id))?
+         {
+-            return Err(Error::Corrupt("segment document identity mismatch".into()));
++            #[cfg(feature = "diagnostic-timing")]
++            let _identity = crate::timing::span("payload.result_identity");
++            if stored.version != record.version
++                || !self.query_identity(id, scratch, (&key.scope, &key.collection, &key.id))?
++            {
++                return Err(Error::Corrupt("segment document identity mismatch".into()));
++            }
+         }
+         Ok(stored)
+     }

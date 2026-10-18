@@ -1,0 +1,989 @@
+{
+  "queries": [
+    {
+      "text": "the",
+      "offset": 0,
+      "limit": 1,
+      "samples": 30,
+      "elapsed_ms_median": 0.08955,
+      "counters": {
+        "disk.read_at": {
+          "calls_median": 6.0,
+          "elapsed_ms_median": 0.0188
+        },
+        "payload.copy_key": {
+          "calls_median": 1.0,
+          "elapsed_ms_median": 0.0002
+        },
+        "payload.copy_text": {
+          "calls_median": 1.0,
+          "elapsed_ms_median": 0.0013
+        },
+        "payload.copy_title": {
+          "calls_median": 1.0,
+          "elapsed_ms_median": 0.0001
+        },
+        "payload.decode_crc_identity": {
+          "calls_median": 1.0,
+          "elapsed_ms_median": 0.01085
+        },
+        "payload.materialize": {
+          "calls_median": 1.0,
+          "elapsed_ms_median": 0.0041
+        },
+        "payload.materialize_fields": {
+          "calls_median": 1.0,
+          "elapsed_ms_median": 0.00165
+        },
+        "payload.materialize_links": {
+          "calls_median": 1.0,
+          "elapsed_ms_median": 0.00035
+        },
+        "payload.result_crc": {
+          "calls_median": 1.0,
+          "elapsed_ms_median": 0.0031
+        },
+        "payload.result_identity": {
+          "calls_median": 1.0,
+          "elapsed_ms_median": 0.0003
+        },
+        "payload.result_read": {
+          "calls_median": 1.0,
+          "elapsed_ms_median": 0.0045
+        },
+        "payload.schema_utf8": {
+          "calls_median": 1.0,
+          "elapsed_ms_median": 0.0026
+        },
+        "query.accepted_ids": {
+          "calls_median": 5.0,
+          "elapsed_ms_median": 0.0
+        },
+        "query.covered_candidates": {
+          "calls_median": 5.0,
+          "elapsed_ms_median": 0.0
+        },
+        "query.covering_guard": {
+          "calls_median": 5.0,
+          "elapsed_ms_median": 0.027049999999999998
+        },
+        "query.covering_index_metadata": {
+          "calls_median": 5.0,
+          "elapsed_ms_median": 0.0263
+        },
+        "query.payload_candidates": {
+          "calls_median": 0.0,
+          "elapsed_ms_median": 0.0
+        },
+        "query.payload_read_bytes": {
+          "calls_median": 0.0,
+          "elapsed_ms_median": 0.0
+        },
+        "query.payload_read_requests": {
+          "calls_median": 0.0,
+          "elapsed_ms_median": 0.0
+        },
+        "query.payload_requested_bytes": {
+          "calls_median": 0.0,
+          "elapsed_ms_median": 0.0
+        },
+        "query.payload_window_hits": {
+          "calls_median": 0.0,
+          "elapsed_ms_median": 0.0
+        },
+        "query.posting_intersection": {
+          "calls_median": 5.0,
+          "elapsed_ms_median": 0.0003
+        },
+        "query.record_identity": {
+          "calls_median": 1.0,
+          "elapsed_ms_median": 0.0002
+        },
+        "query.record_metadata": {
+          "calls_median": 2.0,
+          "elapsed_ms_median": 0.0013
+        },
+        "query.visible_seed_ids": {
+          "calls_median": 5.0,
+          "elapsed_ms_median": 0.0
+        },
+        "search.filter_visibility_text": {
+          "calls_median": 1.0,
+          "elapsed_ms_median": 0.06420000000000001
+        },
+        "search.merge_page_hydration": {
+          "calls_median": 1.0,
+          "elapsed_ms_median": 0.02375
+        },
+        "search.total": {
+          "calls_median": 1.0,
+          "elapsed_ms_median": 0.08935
+        }
+      }
+    },
+    {
+      "text": "the",
+      "offset": 0,
+      "limit": 200,
+      "samples": 30,
+      "elapsed_ms_median": 7.596399999999999,
+      "counters": {
+        "disk.read_at": {
+          "calls_median": 120.0,
+          "elapsed_ms_median": 1.81845
+        },
+        "payload.copy_key": {
+          "calls_median": 200.0,
+          "elapsed_ms_median": 0.05015
+        },
+        "payload.copy_text": {
+          "calls_median": 200.0,
+          "elapsed_ms_median": 2.90685
+        },
+        "payload.copy_title": {
+          "calls_median": 200.0,
+          "elapsed_ms_median": 0.017050000000000003
+        },
+        "payload.decode_crc_identity": {
+          "calls_median": 200.0,
+          "elapsed_ms_median": 5.00695
+        },
+        "payload.materialize": {
+          "calls_median": 200.0,
+          "elapsed_ms_median": 3.6309
+        },
+        "payload.materialize_fields": {
+          "calls_median": 200.0,
+          "elapsed_ms_median": 0.5571999999999999
+        },
+        "payload.materialize_links": {
+          "calls_median": 200.0,
+          "elapsed_ms_median": 0.041999999999999996
+        },
+        "payload.result_crc": {
+          "calls_median": 200.0,
+          "elapsed_ms_median": 0.5770500000000001
+        },
+        "payload.result_identity": {
+          "calls_median": 200.0,
+          "elapsed_ms_median": 0.051250000000000004
+        },
+        "payload.result_read": {
+          "calls_median": 115.0,
+          "elapsed_ms_median": 1.80995
+        },
+        "payload.schema_utf8": {
+          "calls_median": 200.0,
+          "elapsed_ms_median": 0.5864499999999999
+        },
+        "query.accepted_ids": {
+          "calls_median": 1000.0,
+          "elapsed_ms_median": 0.0
+        },
+        "query.covered_candidates": {
+          "calls_median": 1000.0,
+          "elapsed_ms_median": 0.0
+        },
+        "query.covering_guard": {
+          "calls_median": 5.0,
+          "elapsed_ms_median": 0.06205
+        },
+        "query.covering_index_metadata": {
+          "calls_median": 5.0,
+          "elapsed_ms_median": 0.060149999999999995
+        },
+        "query.payload_candidates": {
+          "calls_median": 0.0,
+          "elapsed_ms_median": 0.0
+        },
+        "query.payload_read_bytes": {
+          "calls_median": 0.0,
+          "elapsed_ms_median": 0.0
+        },
+        "query.payload_read_requests": {
+          "calls_median": 0.0,
+          "elapsed_ms_median": 0.0
+        },
+        "query.payload_requested_bytes": {
+          "calls_median": 0.0,
+          "elapsed_ms_median": 0.0
+        },
+        "query.payload_window_hits": {
+          "calls_median": 0.0,
+          "elapsed_ms_median": 0.0
+        },
+        "query.posting_intersection": {
+          "calls_median": 1000.0,
+          "elapsed_ms_median": 0.0435
+        },
+        "query.record_identity": {
+          "calls_median": 200.0,
+          "elapsed_ms_median": 0.02345
+        },
+        "query.record_metadata": {
+          "calls_median": 514.0,
+          "elapsed_ms_median": 0.08715
+        },
+        "query.visible_seed_ids": {
+          "calls_median": 1000.0,
+          "elapsed_ms_median": 0.0
+        },
+        "search.filter_visibility_text": {
+          "calls_median": 1.0,
+          "elapsed_ms_median": 0.28095
+        },
+        "search.merge_page_hydration": {
+          "calls_median": 1.0,
+          "elapsed_ms_median": 7.32365
+        },
+        "search.total": {
+          "calls_median": 1.0,
+          "elapsed_ms_median": 7.5956
+        }
+      }
+    },
+    {
+      "text": "the",
+      "offset": 5000,
+      "limit": 50,
+      "samples": 30,
+      "elapsed_ms_median": 2.57755,
+      "counters": {
+        "disk.read_at": {
+          "calls_median": 60.0,
+          "elapsed_ms_median": 0.597
+        },
+        "payload.copy_key": {
+          "calls_median": 50.0,
+          "elapsed_ms_median": 0.01355
+        },
+        "payload.copy_text": {
+          "calls_median": 50.0,
+          "elapsed_ms_median": 0.11574999999999999
+        },
+        "payload.copy_title": {
+          "calls_median": 50.0,
+          "elapsed_ms_median": 0.0049
+        },
+        "payload.materialize": {
+          "calls_median": 50.0,
+          "elapsed_ms_median": 0.2854
+        },
+        "payload.materialize_fields": {
+          "calls_median": 50.0,
+          "elapsed_ms_median": 0.1122
+        },
+        "payload.materialize_links": {
+          "calls_median": 50.0,
+          "elapsed_ms_median": 0.0104
+        },
+        "payload.read_document": {
+          "calls_median": 50.0,
+          "elapsed_ms_median": 1.2947000000000002
+        },
+        "payload.schema_utf8": {
+          "calls_median": 50.0,
+          "elapsed_ms_median": 0.1392
+        },
+        "query.accepted_ids": {
+          "calls_median": 10000.0,
+          "elapsed_ms_median": 0.0
+        },
+        "query.covered_candidates": {
+          "calls_median": 10000.0,
+          "elapsed_ms_median": 0.0
+        },
+        "query.covering_guard": {
+          "calls_median": 5.0,
+          "elapsed_ms_median": 0.06985
+        },
+        "query.covering_index_metadata": {
+          "calls_median": 5.0,
+          "elapsed_ms_median": 0.06845
+        },
+        "query.payload_candidates": {
+          "calls_median": 0.0,
+          "elapsed_ms_median": 0.0
+        },
+        "query.payload_read_bytes": {
+          "calls_median": 0.0,
+          "elapsed_ms_median": 0.0
+        },
+        "query.payload_read_requests": {
+          "calls_median": 0.0,
+          "elapsed_ms_median": 0.0
+        },
+        "query.payload_requested_bytes": {
+          "calls_median": 0.0,
+          "elapsed_ms_median": 0.0
+        },
+        "query.payload_window_hits": {
+          "calls_median": 0.0,
+          "elapsed_ms_median": 0.0
+        },
+        "query.posting_intersection": {
+          "calls_median": 10000.0,
+          "elapsed_ms_median": 0.44575
+        },
+        "query.visible_seed_ids": {
+          "calls_median": 10000.0,
+          "elapsed_ms_median": 0.0
+        },
+        "search.filter_visibility_text": {
+          "calls_median": 1.0,
+          "elapsed_ms_median": 1.1537000000000002
+        },
+        "search.merge_page_hydration": {
+          "calls_median": 1.0,
+          "elapsed_ms_median": 1.4220000000000002
+        },
+        "search.total": {
+          "calls_median": 1.0,
+          "elapsed_ms_median": 2.57695
+        }
+      }
+    },
+    {
+      "text": "the",
+      "offset": 9950,
+      "limit": 50,
+      "samples": 30,
+      "elapsed_ms_median": 2.11585,
+      "counters": {
+        "disk.read_at": {
+          "calls_median": 60.0,
+          "elapsed_ms_median": 0.3144
+        },
+        "payload.copy_key": {
+          "calls_median": 50.0,
+          "elapsed_ms_median": 0.0116
+        },
+        "payload.copy_text": {
+          "calls_median": 50.0,
+          "elapsed_ms_median": 0.08360000000000001
+        },
+        "payload.copy_title": {
+          "calls_median": 50.0,
+          "elapsed_ms_median": 0.00415
+        },
+        "payload.materialize": {
+          "calls_median": 50.0,
+          "elapsed_ms_median": 0.23170000000000002
+        },
+        "payload.materialize_fields": {
+          "calls_median": 50.0,
+          "elapsed_ms_median": 0.0942
+        },
+        "payload.materialize_links": {
+          "calls_median": 50.0,
+          "elapsed_ms_median": 0.00915
+        },
+        "payload.read_document": {
+          "calls_median": 50.0,
+          "elapsed_ms_median": 0.931
+        },
+        "payload.schema_utf8": {
+          "calls_median": 50.0,
+          "elapsed_ms_median": 0.13574999999999998
+        },
+        "query.accepted_ids": {
+          "calls_median": 10000.0,
+          "elapsed_ms_median": 0.0
+        },
+        "query.covered_candidates": {
+          "calls_median": 10000.0,
+          "elapsed_ms_median": 0.0
+        },
+        "query.covering_guard": {
+          "calls_median": 5.0,
+          "elapsed_ms_median": 0.0549
+        },
+        "query.covering_index_metadata": {
+          "calls_median": 5.0,
+          "elapsed_ms_median": 0.0534
+        },
+        "query.payload_candidates": {
+          "calls_median": 0.0,
+          "elapsed_ms_median": 0.0
+        },
+        "query.payload_read_bytes": {
+          "calls_median": 0.0,
+          "elapsed_ms_median": 0.0
+        },
+        "query.payload_read_requests": {
+          "calls_median": 0.0,
+          "elapsed_ms_median": 0.0
+        },
+        "query.payload_requested_bytes": {
+          "calls_median": 0.0,
+          "elapsed_ms_median": 0.0
+        },
+        "query.payload_window_hits": {
+          "calls_median": 0.0,
+          "elapsed_ms_median": 0.0
+        },
+        "query.posting_intersection": {
+          "calls_median": 10000.0,
+          "elapsed_ms_median": 0.44525000000000003
+        },
+        "query.visible_seed_ids": {
+          "calls_median": 10000.0,
+          "elapsed_ms_median": 0.0
+        },
+        "search.filter_visibility_text": {
+          "calls_median": 1.0,
+          "elapsed_ms_median": 1.09755
+        },
+        "search.merge_page_hydration": {
+          "calls_median": 1.0,
+          "elapsed_ms_median": 1.0663
+        },
+        "search.total": {
+          "calls_median": 1.0,
+          "elapsed_ms_median": 2.11555
+        }
+      }
+    },
+    {
+      "text": "ishmael",
+      "offset": 130,
+      "limit": 1,
+      "samples": 30,
+      "elapsed_ms_median": 6.50225,
+      "counters": {
+        "disk.read_at": {
+          "calls_median": 404.0,
+          "elapsed_ms_median": 3.1647499999999997
+        },
+        "payload.copy_key": {
+          "calls_median": 1.0,
+          "elapsed_ms_median": 0.0003
+        },
+        "payload.copy_text": {
+          "calls_median": 1.0,
+          "elapsed_ms_median": 0.00265
+        },
+        "payload.copy_title": {
+          "calls_median": 1.0,
+          "elapsed_ms_median": 0.0001
+        },
+        "payload.decode_crc_identity": {
+          "calls_median": 1.0,
+          "elapsed_ms_median": 0.01575
+        },
+        "payload.materialize": {
+          "calls_median": 1.0,
+          "elapsed_ms_median": 0.0071
+        },
+        "payload.materialize_fields": {
+          "calls_median": 1.0,
+          "elapsed_ms_median": 0.0029
+        },
+        "payload.materialize_links": {
+          "calls_median": 1.0,
+          "elapsed_ms_median": 0.0001
+        },
+        "payload.result_crc": {
+          "calls_median": 1.0,
+          "elapsed_ms_median": 0.0041
+        },
+        "payload.result_identity": {
+          "calls_median": 1.0,
+          "elapsed_ms_median": 0.0003
+        },
+        "payload.result_read": {
+          "calls_median": 1.0,
+          "elapsed_ms_median": 0.01065
+        },
+        "payload.schema_utf8": {
+          "calls_median": 261.0,
+          "elapsed_ms_median": 0.65375
+        },
+        "query.accepted_ids": {
+          "calls_median": 260.0,
+          "elapsed_ms_median": 0.0
+        },
+        "query.covered_candidates": {
+          "calls_median": 0.0,
+          "elapsed_ms_median": 0.0
+        },
+        "query.fold.title": {
+          "calls_median": 260.0,
+          "elapsed_ms_median": 0.0166
+        },
+        "query.payload_candidates": {
+          "calls_median": 260.0,
+          "elapsed_ms_median": 0.0
+        },
+        "query.payload_crc": {
+          "calls_median": 260.0,
+          "elapsed_ms_median": 0.8012
+        },
+        "query.payload_read": {
+          "calls_median": 260.0,
+          "elapsed_ms_median": 2.6378
+        },
+        "query.payload_read_bytes": {
+          "calls_median": 8285621.0,
+          "elapsed_ms_median": 0.0
+        },
+        "query.payload_read_requests": {
+          "calls_median": 260.0,
+          "elapsed_ms_median": 0.0
+        },
+        "query.payload_requested_bytes": {
+          "calls_median": 8285621.0,
+          "elapsed_ms_median": 0.0
+        },
+        "query.payload_validation": {
+          "calls_median": 260.0,
+          "elapsed_ms_median": 0.68025
+        },
+        "query.payload_window_hits": {
+          "calls_median": 0.0,
+          "elapsed_ms_median": 0.0
+        },
+        "query.posting_cache_read": {
+          "calls_median": 20.0,
+          "elapsed_ms_median": 0.15885
+        },
+        "query.posting_intersection": {
+          "calls_median": 361.0,
+          "elapsed_ms_median": 0.04845
+        },
+        "query.raw_ascii_probe": {
+          "calls_median": 260.0,
+          "elapsed_ms_median": 0.6828
+        },
+        "query.raw_ascii_proven": {
+          "calls_median": 260.0,
+          "elapsed_ms_median": 0.011
+        },
+        "query.record_identity": {
+          "calls_median": 261.0,
+          "elapsed_ms_median": 0.0229
+        },
+        "query.record_metadata": {
+          "calls_median": 262.0,
+          "elapsed_ms_median": 0.5489999999999999
+        },
+        "query.verify_text": {
+          "calls_median": 260.0,
+          "elapsed_ms_median": 0.8021499999999999
+        },
+        "query.visible_seed_ids": {
+          "calls_median": 361.0,
+          "elapsed_ms_median": 0.0
+        },
+        "search.filter_visibility_text": {
+          "calls_median": 1.0,
+          "elapsed_ms_median": 6.3765
+        },
+        "search.merge_page_hydration": {
+          "calls_median": 1.0,
+          "elapsed_ms_median": 0.08275
+        },
+        "search.total": {
+          "calls_median": 1.0,
+          "elapsed_ms_median": 6.501799999999999
+        }
+      }
+    },
+    {
+      "text": "ishmael",
+      "offset": 60,
+      "limit": 200,
+      "samples": 30,
+      "elapsed_ms_median": 15.225650000000002,
+      "counters": {
+        "disk.read_at": {
+          "calls_median": 819.0,
+          "elapsed_ms_median": 6.11145
+        },
+        "payload.copy_key": {
+          "calls_median": 200.0,
+          "elapsed_ms_median": 0.04005
+        },
+        "payload.copy_text": {
+          "calls_median": 200.0,
+          "elapsed_ms_median": 2.8404
+        },
+        "payload.copy_title": {
+          "calls_median": 200.0,
+          "elapsed_ms_median": 0.01595
+        },
+        "payload.decode_crc_identity": {
+          "calls_median": 200.0,
+          "elapsed_ms_median": 4.77
+        },
+        "payload.materialize": {
+          "calls_median": 200.0,
+          "elapsed_ms_median": 3.52445
+        },
+        "payload.materialize_fields": {
+          "calls_median": 200.0,
+          "elapsed_ms_median": 0.47785
+        },
+        "payload.materialize_links": {
+          "calls_median": 200.0,
+          "elapsed_ms_median": 0.035750000000000004
+        },
+        "payload.result_crc": {
+          "calls_median": 200.0,
+          "elapsed_ms_median": 0.6152
+        },
+        "payload.result_identity": {
+          "calls_median": 200.0,
+          "elapsed_ms_median": 0.04265
+        },
+        "payload.result_read": {
+          "calls_median": 197.0,
+          "elapsed_ms_median": 1.9280499999999998
+        },
+        "payload.schema_utf8": {
+          "calls_median": 460.0,
+          "elapsed_ms_median": 1.19835
+        },
+        "query.accepted_ids": {
+          "calls_median": 260.0,
+          "elapsed_ms_median": 0.0
+        },
+        "query.covered_candidates": {
+          "calls_median": 0.0,
+          "elapsed_ms_median": 0.0
+        },
+        "query.fold.title": {
+          "calls_median": 260.0,
+          "elapsed_ms_median": 0.016149999999999998
+        },
+        "query.payload_candidates": {
+          "calls_median": 260.0,
+          "elapsed_ms_median": 0.0
+        },
+        "query.payload_crc": {
+          "calls_median": 260.0,
+          "elapsed_ms_median": 0.8029
+        },
+        "query.payload_read": {
+          "calls_median": 260.0,
+          "elapsed_ms_median": 2.90795
+        },
+        "query.payload_read_bytes": {
+          "calls_median": 8285621.0,
+          "elapsed_ms_median": 0.0
+        },
+        "query.payload_read_requests": {
+          "calls_median": 260.0,
+          "elapsed_ms_median": 0.0
+        },
+        "query.payload_requested_bytes": {
+          "calls_median": 8285621.0,
+          "elapsed_ms_median": 0.0
+        },
+        "query.payload_validation": {
+          "calls_median": 260.0,
+          "elapsed_ms_median": 0.71735
+        },
+        "query.payload_window_hits": {
+          "calls_median": 0.0,
+          "elapsed_ms_median": 0.0
+        },
+        "query.posting_cache_read": {
+          "calls_median": 20.0,
+          "elapsed_ms_median": 0.1987
+        },
+        "query.posting_intersection": {
+          "calls_median": 361.0,
+          "elapsed_ms_median": 0.05045
+        },
+        "query.raw_ascii_probe": {
+          "calls_median": 260.0,
+          "elapsed_ms_median": 0.6956
+        },
+        "query.raw_ascii_proven": {
+          "calls_median": 260.0,
+          "elapsed_ms_median": 0.011
+        },
+        "query.record_identity": {
+          "calls_median": 460.0,
+          "elapsed_ms_median": 0.0401
+        },
+        "query.record_metadata": {
+          "calls_median": 852.0,
+          "elapsed_ms_median": 1.3145
+        },
+        "query.verify_text": {
+          "calls_median": 260.0,
+          "elapsed_ms_median": 0.8192999999999999
+        },
+        "query.visible_seed_ids": {
+          "calls_median": 361.0,
+          "elapsed_ms_median": 0.0
+        },
+        "search.filter_visibility_text": {
+          "calls_median": 1.0,
+          "elapsed_ms_median": 6.635949999999999
+        },
+        "search.merge_page_hydration": {
+          "calls_median": 1.0,
+          "elapsed_ms_median": 8.5032
+        },
+        "search.total": {
+          "calls_median": 1.0,
+          "elapsed_ms_median": 15.22505
+        }
+      }
+    },
+    {
+      "text": "quixote",
+      "offset": 28,
+      "limit": 10,
+      "samples": 30,
+      "elapsed_ms_median": 1.32295,
+      "counters": {
+        "disk.read_at": {
+          "calls_median": 91.0,
+          "elapsed_ms_median": 0.49365000000000003
+        },
+        "payload.copy_key": {
+          "calls_median": 10.0,
+          "elapsed_ms_median": 0.0018
+        },
+        "payload.copy_text": {
+          "calls_median": 10.0,
+          "elapsed_ms_median": 0.014
+        },
+        "payload.copy_title": {
+          "calls_median": 10.0,
+          "elapsed_ms_median": 0.0006
+        },
+        "payload.decode_crc_identity": {
+          "calls_median": 10.0,
+          "elapsed_ms_median": 0.09534999999999999
+        },
+        "payload.materialize": {
+          "calls_median": 10.0,
+          "elapsed_ms_median": 0.03725
+        },
+        "payload.materialize_fields": {
+          "calls_median": 10.0,
+          "elapsed_ms_median": 0.014700000000000001
+        },
+        "payload.materialize_links": {
+          "calls_median": 10.0,
+          "elapsed_ms_median": 0.0015
+        },
+        "payload.result_crc": {
+          "calls_median": 10.0,
+          "elapsed_ms_median": 0.0319
+        },
+        "payload.result_identity": {
+          "calls_median": 10.0,
+          "elapsed_ms_median": 0.002
+        },
+        "payload.result_read": {
+          "calls_median": 10.0,
+          "elapsed_ms_median": 0.04345
+        },
+        "payload.schema_utf8": {
+          "calls_median": 66.0,
+          "elapsed_ms_median": 0.14245
+        },
+        "query.accepted_ids": {
+          "calls_median": 56.0,
+          "elapsed_ms_median": 0.0
+        },
+        "query.covered_candidates": {
+          "calls_median": 0.0,
+          "elapsed_ms_median": 0.0
+        },
+        "query.fold.title": {
+          "calls_median": 56.0,
+          "elapsed_ms_median": 0.0038
+        },
+        "query.payload_candidates": {
+          "calls_median": 56.0,
+          "elapsed_ms_median": 0.0
+        },
+        "query.payload_crc": {
+          "calls_median": 56.0,
+          "elapsed_ms_median": 0.1823
+        },
+        "query.payload_read": {
+          "calls_median": 56.0,
+          "elapsed_ms_median": 0.31610000000000005
+        },
+        "query.payload_read_bytes": {
+          "calls_median": 1945325.0,
+          "elapsed_ms_median": 0.0
+        },
+        "query.payload_read_requests": {
+          "calls_median": 56.0,
+          "elapsed_ms_median": 0.0
+        },
+        "query.payload_requested_bytes": {
+          "calls_median": 1945325.0,
+          "elapsed_ms_median": 0.0
+        },
+        "query.payload_validation": {
+          "calls_median": 56.0,
+          "elapsed_ms_median": 0.1279
+        },
+        "query.payload_window_hits": {
+          "calls_median": 0.0,
+          "elapsed_ms_median": 0.0
+        },
+        "query.posting_cache_read": {
+          "calls_median": 20.0,
+          "elapsed_ms_median": 0.1805
+        },
+        "query.posting_intersection": {
+          "calls_median": 56.0,
+          "elapsed_ms_median": 0.0072
+        },
+        "query.raw_ascii_probe": {
+          "calls_median": 56.0,
+          "elapsed_ms_median": 0.10145
+        },
+        "query.raw_ascii_proven": {
+          "calls_median": 56.0,
+          "elapsed_ms_median": 0.00245
+        },
+        "query.record_identity": {
+          "calls_median": 66.0,
+          "elapsed_ms_median": 0.005050000000000001
+        },
+        "query.record_metadata": {
+          "calls_median": 84.0,
+          "elapsed_ms_median": 0.04795
+        },
+        "query.verify_text": {
+          "calls_median": 56.0,
+          "elapsed_ms_median": 0.12635000000000002
+        },
+        "query.visible_seed_ids": {
+          "calls_median": 56.0,
+          "elapsed_ms_median": 0.0
+        },
+        "search.filter_visibility_text": {
+          "calls_median": 1.0,
+          "elapsed_ms_median": 1.1209
+        },
+        "search.merge_page_hydration": {
+          "calls_median": 1.0,
+          "elapsed_ms_median": 0.18030000000000002
+        },
+        "search.total": {
+          "calls_median": 1.0,
+          "elapsed_ms_median": 1.3226499999999999
+        }
+      }
+    },
+    {
+      "text": "quixote",
+      "offset": 57,
+      "limit": 50,
+      "samples": 30,
+      "elapsed_ms_median": 1.096,
+      "counters": {
+        "disk.read_at": {
+          "calls_median": 81.0,
+          "elapsed_ms_median": 0.4391
+        },
+        "payload.schema_utf8": {
+          "calls_median": 56.0,
+          "elapsed_ms_median": 0.11665
+        },
+        "query.accepted_ids": {
+          "calls_median": 56.0,
+          "elapsed_ms_median": 0.0
+        },
+        "query.covered_candidates": {
+          "calls_median": 0.0,
+          "elapsed_ms_median": 0.0
+        },
+        "query.fold.title": {
+          "calls_median": 56.0,
+          "elapsed_ms_median": 0.0038
+        },
+        "query.payload_candidates": {
+          "calls_median": 56.0,
+          "elapsed_ms_median": 0.0
+        },
+        "query.payload_crc": {
+          "calls_median": 56.0,
+          "elapsed_ms_median": 0.1809
+        },
+        "query.payload_read": {
+          "calls_median": 56.0,
+          "elapsed_ms_median": 0.3091
+        },
+        "query.payload_read_bytes": {
+          "calls_median": 1945325.0,
+          "elapsed_ms_median": 0.0
+        },
+        "query.payload_read_requests": {
+          "calls_median": 56.0,
+          "elapsed_ms_median": 0.0
+        },
+        "query.payload_requested_bytes": {
+          "calls_median": 1945325.0,
+          "elapsed_ms_median": 0.0
+        },
+        "query.payload_validation": {
+          "calls_median": 56.0,
+          "elapsed_ms_median": 0.1225
+        },
+        "query.payload_window_hits": {
+          "calls_median": 0.0,
+          "elapsed_ms_median": 0.0
+        },
+        "query.posting_cache_read": {
+          "calls_median": 20.0,
+          "elapsed_ms_median": 0.17245
+        },
+        "query.posting_intersection": {
+          "calls_median": 56.0,
+          "elapsed_ms_median": 0.0072
+        },
+        "query.raw_ascii_probe": {
+          "calls_median": 56.0,
+          "elapsed_ms_median": 0.10389999999999999
+        },
+        "query.raw_ascii_proven": {
+          "calls_median": 56.0,
+          "elapsed_ms_median": 0.0024
+        },
+        "query.record_identity": {
+          "calls_median": 56.0,
+          "elapsed_ms_median": 0.00445
+        },
+        "query.record_metadata": {
+          "calls_median": 56.0,
+          "elapsed_ms_median": 0.0371
+        },
+        "query.verify_text": {
+          "calls_median": 56.0,
+          "elapsed_ms_median": 0.1309
+        },
+        "query.visible_seed_ids": {
+          "calls_median": 56.0,
+          "elapsed_ms_median": 0.0
+        },
+        "search.filter_visibility_text": {
+          "calls_median": 1.0,
+          "elapsed_ms_median": 1.0795
+        },
+        "search.merge_page_hydration": {
+          "calls_median": 1.0,
+          "elapsed_ms_median": 0.0162
+        },
+        "search.total": {
+          "calls_median": 1.0,
+          "elapsed_ms_median": 1.09585
+        }
+      }
+    }
+  ],
+  "limits": "Diagnostic release, same existing10k, warm OS cache/no eviction, strict full open,8 page cases/30 warm repetitions,full payload/version oracle. Nested spans and timer/mutex overhead; do not sum or present as normal p95. Result_read measures OS API, not physical IO."
+}

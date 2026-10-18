@@ -1,0 +1,648 @@
+{
+  "design": {
+    "pairs": 4,
+    "blocks_per_pair": 4,
+    "repeats_per_block": 25,
+    "affinity_mask": 4,
+    "pages_only": false,
+    "case_indices": [
+      31,
+      35,
+      37
+    ],
+    "dense_selected_cases": true,
+    "cache": "warm OS cache; every block opens and verifies/warmups before query timing; no eviction",
+    "corpus": "same existing first10000; no generation/reset/copy",
+    "source_validation": "complete source check before timed search; unchanged CRC/schema/key/version checks",
+    "same_executable": false,
+    "programs": {
+      "control": {
+        "path": "output\\search-followup-20261018-candidate-measure_interleaved_reads-normal.exe",
+        "sha256": "2A1802E658B96BE9AC4E1949EC63B14D533BC7C4E360999E0C4D8E004E9CDA82"
+      },
+      "fdb": {
+        "path": "output\\hydrate-20261018-candidate2-measure_interleaved_reads-normal.exe",
+        "sha256": "9F2451A231E963C51D7F7036B220080FD90495D7E9DEDCFD96B95F03624C279D"
+      }
+    },
+    "balanced_block_first_position": true,
+    "orders": [
+      {
+        "pair": 0,
+        "block": 0,
+        "engines": [
+          "control",
+          "fdb"
+        ],
+        "command": {
+          "id": 0,
+          "seed": 0,
+          "repeats": 25
+        }
+      },
+      {
+        "pair": 0,
+        "block": 1,
+        "engines": [
+          "fdb",
+          "control"
+        ],
+        "command": {
+          "id": 1,
+          "seed": 1,
+          "repeats": 25
+        }
+      },
+      {
+        "pair": 0,
+        "block": 2,
+        "engines": [
+          "control",
+          "fdb"
+        ],
+        "command": {
+          "id": 2,
+          "seed": 2,
+          "repeats": 25
+        }
+      },
+      {
+        "pair": 0,
+        "block": 3,
+        "engines": [
+          "fdb",
+          "control"
+        ],
+        "command": {
+          "id": 3,
+          "seed": 3,
+          "repeats": 25
+        }
+      },
+      {
+        "pair": 1,
+        "block": 0,
+        "engines": [
+          "fdb",
+          "control"
+        ],
+        "command": {
+          "id": 4,
+          "seed": 10000,
+          "repeats": 25
+        }
+      },
+      {
+        "pair": 1,
+        "block": 1,
+        "engines": [
+          "control",
+          "fdb"
+        ],
+        "command": {
+          "id": 5,
+          "seed": 10001,
+          "repeats": 25
+        }
+      },
+      {
+        "pair": 1,
+        "block": 2,
+        "engines": [
+          "fdb",
+          "control"
+        ],
+        "command": {
+          "id": 6,
+          "seed": 10002,
+          "repeats": 25
+        }
+      },
+      {
+        "pair": 1,
+        "block": 3,
+        "engines": [
+          "control",
+          "fdb"
+        ],
+        "command": {
+          "id": 7,
+          "seed": 10003,
+          "repeats": 25
+        }
+      },
+      {
+        "pair": 2,
+        "block": 0,
+        "engines": [
+          "control",
+          "fdb"
+        ],
+        "command": {
+          "id": 8,
+          "seed": 20000,
+          "repeats": 25
+        }
+      },
+      {
+        "pair": 2,
+        "block": 1,
+        "engines": [
+          "fdb",
+          "control"
+        ],
+        "command": {
+          "id": 9,
+          "seed": 20001,
+          "repeats": 25
+        }
+      },
+      {
+        "pair": 2,
+        "block": 2,
+        "engines": [
+          "control",
+          "fdb"
+        ],
+        "command": {
+          "id": 10,
+          "seed": 20002,
+          "repeats": 25
+        }
+      },
+      {
+        "pair": 2,
+        "block": 3,
+        "engines": [
+          "fdb",
+          "control"
+        ],
+        "command": {
+          "id": 11,
+          "seed": 20003,
+          "repeats": 25
+        }
+      },
+      {
+        "pair": 3,
+        "block": 0,
+        "engines": [
+          "fdb",
+          "control"
+        ],
+        "command": {
+          "id": 12,
+          "seed": 30000,
+          "repeats": 25
+        }
+      },
+      {
+        "pair": 3,
+        "block": 1,
+        "engines": [
+          "control",
+          "fdb"
+        ],
+        "command": {
+          "id": 13,
+          "seed": 30001,
+          "repeats": 25
+        }
+      },
+      {
+        "pair": 3,
+        "block": 2,
+        "engines": [
+          "fdb",
+          "control"
+        ],
+        "command": {
+          "id": 14,
+          "seed": 30002,
+          "repeats": 25
+        }
+      },
+      {
+        "pair": 3,
+        "block": 3,
+        "engines": [
+          "control",
+          "fdb"
+        ],
+        "command": {
+          "id": 15,
+          "seed": 30003,
+          "repeats": 25
+        }
+      }
+    ],
+    "observe_thread": true
+  },
+  "queries": [
+    {
+      "text": "the",
+      "kind": "page",
+      "offset": 0,
+      "limit": 200,
+      "total": 10000,
+      "late_matches": 0,
+      "control": {
+        "n": 400,
+        "p50_ms": 4.11495,
+        "p95_ms": 6.1131,
+        "p99_ms": 7.4041999999999994,
+        "per_process_pair_p95": [
+          5.7299999999999995,
+          6.678599999999999,
+          5.8223,
+          6.4174
+        ],
+        "block_medians": [
+          [
+            3.835,
+            3.8219,
+            3.5176000000000003,
+            3.3937
+          ],
+          [
+            4.5776,
+            4.080699999999999,
+            4.2483,
+            4.342300000000001
+          ],
+          [
+            4.2715000000000005,
+            3.8562000000000003,
+            4.7997,
+            4.1345
+          ],
+          [
+            4.390899999999999,
+            4.7929,
+            4.156,
+            4.4123
+          ]
+        ],
+        "cycles": {
+          "p50": 15506542.0,
+          "p95": 23061061
+        },
+        "cpu_ms": {
+          "p50": 0.0,
+          "p95": 15.625
+        }
+      },
+      "fdb": {
+        "n": 400,
+        "p50_ms": 4.28615,
+        "p95_ms": 6.0876,
+        "p99_ms": 6.7058,
+        "per_process_pair_p95": [
+          6.1106,
+          5.9634,
+          5.698499999999999,
+          6.1574
+        ],
+        "block_medians": [
+          [
+            4.8735,
+            5.0200000000000005,
+            4.099,
+            4.8885
+          ],
+          [
+            4.460999999999999,
+            3.5874,
+            3.339,
+            3.6151999999999997
+          ],
+          [
+            4.0895,
+            3.8857000000000004,
+            3.5171,
+            4.2132000000000005
+          ],
+          [
+            4.8369,
+            4.443,
+            4.2651,
+            3.8742
+          ]
+        ],
+        "cycles": {
+          "p50": 16204075.5,
+          "p95": 22711725
+        },
+        "cpu_ms": {
+          "p50": 0.0,
+          "p95": 15.625
+        }
+      },
+      "change_p95_percent": -0.4171369681503667,
+      "paired_p95_change_percent": [
+        6.6422338568935535,
+        -10.708831192166013,
+        -2.1263074729917952,
+        -4.051485025088041
+      ],
+      "faster_process_pairs": 3,
+      "paired_block_median_changes_percent": [
+        27.079530638852667,
+        31.34828226798192,
+        16.528314760063665,
+        44.046321124436446,
+        -2.5471862984970506,
+        -12.088612247898622,
+        -21.40385565991103,
+        -16.7445823641849,
+        -4.260798314409464,
+        0.7650018152585369,
+        -26.72250348980144,
+        1.9034949812553048,
+        10.15737092623381,
+        -7.300381814767698,
+        2.625120307988471,
+        -12.195453618294316
+      ],
+      "median_block_change_percent": -0.8910922416192568,
+      "faster_blocks": 8,
+      "leave_one_pair_out_p95_changes_percent": [
+        -5.262255742200872,
+        1.0317119142885467,
+        -1.7696262510677352,
+        0.37334390590411104
+      ]
+    },
+    {
+      "text": "ishmael",
+      "kind": "page",
+      "offset": 60,
+      "limit": 200,
+      "total": 260,
+      "late_matches": 39,
+      "control": {
+        "n": 400,
+        "p50_ms": 12.585550000000001,
+        "p95_ms": 16.1756,
+        "p99_ms": 17.9882,
+        "per_process_pair_p95": [
+          15.5255,
+          16.450400000000002,
+          15.4844,
+          16.1756
+        ],
+        "block_medians": [
+          [
+            13.1579,
+            12.2476,
+            12.5286,
+            11.1279
+          ],
+          [
+            12.6979,
+            12.475399999999999,
+            12.4757,
+            12.8036
+          ],
+          [
+            12.577100000000002,
+            11.6599,
+            13.2202,
+            13.9722
+          ],
+          [
+            13.6192,
+            12.947500000000002,
+            12.8597,
+            11.683300000000001
+          ]
+        ],
+        "cycles": {
+          "p50": 47188522.0,
+          "p95": 59759475
+        },
+        "cpu_ms": {
+          "p50": 15.625,
+          "p95": 15.625
+        }
+      },
+      "fdb": {
+        "n": 400,
+        "p50_ms": 12.48585,
+        "p95_ms": 16.4756,
+        "p99_ms": 19.705299999999998,
+        "per_process_pair_p95": [
+          18.253,
+          14.5126,
+          14.9415,
+          14.3349
+        ],
+        "block_medians": [
+          [
+            13.5745,
+            12.296,
+            13.8982,
+            14.95
+          ],
+          [
+            13.1859,
+            12.0399,
+            11.0969,
+            12.7236
+          ],
+          [
+            11.4639,
+            12.983,
+            11.269,
+            11.8437
+          ],
+          [
+            13.0703,
+            12.087,
+            11.8808,
+            11.8451
+          ]
+        ],
+        "cycles": {
+          "p50": 46908031.0,
+          "p95": 59621407
+        },
+        "cpu_ms": {
+          "p50": 15.625,
+          "p95": 15.625
+        }
+      },
+      "change_p95_percent": 1.8546452681817094,
+      "paired_p95_change_percent": [
+        17.567872210234793,
+        -11.779652774400628,
+        -3.506109374596378,
+        -11.379485150473556
+      ],
+      "faster_process_pairs": 3,
+      "paired_block_median_changes_percent": [
+        3.166158733536517,
+        0.39517946373166524,
+        10.93178806889834,
+        34.34700168046081,
+        3.843155167389889,
+        -3.4908700322234143,
+        -11.051884864175953,
+        -0.624824268174573,
+        -8.851006988892518,
+        11.347438657278364,
+        -14.75923208423473,
+        -15.233821445441665,
+        -4.0303395206766846,
+        -6.646070670013526,
+        -7.612152694075281,
+        1.3848826958136717
+      ],
+      "median_block_change_percent": -2.0578471501989934,
+      "faster_blocks": 9,
+      "leave_one_pair_out_p95_changes_percent": [
+        -9.983574992156608,
+        5.685205110129976,
+        5.660377358490565,
+        5.712882733929225
+      ]
+    },
+    {
+      "text": "quixote",
+      "kind": "page",
+      "offset": 57,
+      "limit": 50,
+      "total": 56,
+      "late_matches": 8,
+      "control": {
+        "n": 400,
+        "p50_ms": 1.6907,
+        "p95_ms": 2.2015,
+        "p99_ms": 2.4415999999999998,
+        "per_process_pair_p95": [
+          2.2726,
+          2.2306,
+          2.1247000000000003,
+          2.181
+        ],
+        "block_medians": [
+          [
+            1.6745,
+            1.6391,
+            1.7624,
+            1.6214
+          ],
+          [
+            1.7348999999999999,
+            1.7224,
+            1.6764,
+            1.8013000000000001
+          ],
+          [
+            1.5913,
+            1.677,
+            1.6354,
+            1.8626
+          ],
+          [
+            1.6953,
+            1.7546,
+            1.8565,
+            1.6611
+          ]
+        ],
+        "cycles": {
+          "p50": 6367498.5,
+          "p95": 8190984
+        },
+        "cpu_ms": {
+          "p50": 0.0,
+          "p95": 15.625
+        }
+      },
+      "fdb": {
+        "n": 400,
+        "p50_ms": 1.7063000000000001,
+        "p95_ms": 2.2448,
+        "p99_ms": 2.4653,
+        "per_process_pair_p95": [
+          2.3828,
+          2.1647,
+          2.1224,
+          2.0531
+        ],
+        "block_medians": [
+          [
+            1.7973,
+            1.6929,
+            1.8428,
+            2.0944000000000003
+          ],
+          [
+            1.6766,
+            1.6412,
+            1.629,
+            1.753
+          ],
+          [
+            1.6784000000000001,
+            1.764,
+            1.6638,
+            1.6459000000000001
+          ],
+          [
+            1.7471999999999999,
+            1.7706,
+            1.6987,
+            1.676
+          ]
+        ],
+        "cycles": {
+          "p50": 6434635.5,
+          "p95": 8375703
+        },
+        "cpu_ms": {
+          "p50": 0.0,
+          "p95": 15.625
+        }
+      },
+      "change_p95_percent": 1.9668407903702168,
+      "paired_p95_change_percent": [
+        4.849071548006689,
+        -2.9543620550524508,
+        -0.10825057655200476,
+        -5.864282439248047
+      ],
+      "faster_process_pairs": 3,
+      "paired_block_median_changes_percent": [
+        7.333532397730647,
+        3.2822890610701094,
+        4.5619609623241075,
+        29.17232021709635,
+        -3.3604242319441924,
+        -4.7143520668834205,
+        -2.8274874731567534,
+        -2.681396769000177,
+        5.473512222710997,
+        5.187835420393561,
+        1.7365782071664393,
+        -11.63427466981638,
+        3.0614050610511256,
+        0.9118887495725536,
+        -8.49986533800161,
+        0.8969959665281912
+      ],
+      "median_block_change_percent": 1.3242334783694965,
+      "faster_blocks": 6,
+      "leave_one_pair_out_p95_changes_percent": [
+        -4.565167769915545,
+        3.1317050901620735,
+        1.6056490060268214,
+        2.662695189096498
+      ]
+    }
+  ],
+  "lower_p95_cases": 1,
+  "higher_p95_cases": 2,
+  "interpretation": "Short exclusive sessions, per-block source validation/warmup outside timing; two resident oracle workers, no concurrent database queries. Not identical to a continuously open single-process matrix. Pooled p95 and block medians describe different distributions; no automatic significance claim."
+}

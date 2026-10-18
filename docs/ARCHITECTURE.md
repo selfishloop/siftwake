@@ -1,5 +1,17 @@
 # FDB mimarisi — 0.3.1
 
+2026-10-18 hydration profili tamamlandı. Yalnız `diagnostic-timing` altında
+result read/CRC/schema/UTF-8, Key/title/text kopyası, fields/links oluşturma
+ve key/version kontrolü ayrı ölçülür; normal derlemede sayaç yoktur.
+Checked borrowed view ve owned decode'un iki-geçişli metadata yolu,
+tahsis sırası ve64KiB ortak sonuç penceresi korundu. Tek-geçişin iki
+varyantı ve ayrı128KiB sonuç penceresi hız kabulünü geçmeyip geri alındı.
+Normal ABI/API/format/dependency/feature değişmez. Profilde String tahsisi+
+kopyası baskın; allocator/memcpy/first-touch ayrı atfedilmedi. Sonraki
+bağımsız hipotez caller sonuç tamponunun tekrar kullanılmasıdır; yeni
+ömür/API sözleşmesi ve kendi ölçümü gerekir, henüz çözülmüş iş değildir.
+[Profiller, deneyler ve sınırlar](HYDRATION-10K-20261018.md).
+
 2026-10-18 sonraki dar takip varsayılanda korundu: checked reuse sonuç
 tamponu, bilinen total ve limitin küçüğüyle bir kez ayrılır. Sonuç Vec'i
 50 kayıtta66 yerine52 kapasiteyle döner; ölçülmüş2.464B fazlalık giderildi.

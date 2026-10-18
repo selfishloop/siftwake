@@ -1,0 +1,509 @@
+{
+  "parent_head": "7cc6eb5d7bd76a0abd8d5a343899804058bf6901",
+  "utc": "2026-10-18T13:42:55.088195+00:00",
+  "decision": "Both single-pass prototypes rejected and removed. Only opt-in diagnostic spans remain; normal algorithm/checks/format restored. No speed/RAM gain claimed for final build.",
+  "checks": [
+    {
+      "command": [
+        "cargo",
+        "fmt"
+      ],
+      "exit_code": 0,
+      "log": "docs\\benchmarks\\hydrate-20261018-fmt.log"
+    },
+    {
+      "command": [
+        "cargo",
+        "test",
+        "--lib",
+        "owned_decode_tests"
+      ],
+      "exit_code": 0,
+      "log": "docs\\benchmarks\\hydrate-20261018-owned.log"
+    },
+    {
+      "command": [
+        "cargo",
+        "test",
+        "--lib",
+        "grouped_tests"
+      ],
+      "exit_code": 0,
+      "log": "docs\\benchmarks\\hydrate-20261018-grouped.log"
+    },
+    {
+      "command": [
+        "cargo",
+        "fmt",
+        "--check"
+      ],
+      "exit_code": 0,
+      "log": "docs\\benchmarks\\hydrate-20261018-final-fmt.log",
+      "scope": "restored runtime; diagnostic counters only"
+    },
+    {
+      "command": [
+        "cargo",
+        "test",
+        "--all-targets"
+      ],
+      "exit_code": 0,
+      "log": "docs\\benchmarks\\hydrate-20261018-final-tests.log",
+      "scope": "restored runtime; diagnostic counters only",
+      "totals": {
+        "passed": 185,
+        "failed": 0,
+        "ignored": 7
+      }
+    },
+    {
+      "command": [
+        "cargo",
+        "test",
+        "--no-default-features",
+        "--test",
+        "engine"
+      ],
+      "exit_code": 0,
+      "log": "docs\\benchmarks\\hydrate-20261018-final-reference.log",
+      "scope": "restored runtime; diagnostic counters only",
+      "totals": {
+        "passed": 17,
+        "failed": 0,
+        "ignored": 0
+      }
+    },
+    {
+      "command": [
+        "cargo",
+        "test",
+        "--all-features",
+        "--lib",
+        "payload::"
+      ],
+      "exit_code": 0,
+      "log": "docs\\benchmarks\\hydrate-20261018-final-all-payload.log",
+      "scope": "restored runtime; diagnostic counters only",
+      "totals": {
+        "passed": 5,
+        "failed": 0,
+        "ignored": 0
+      }
+    },
+    {
+      "command": [
+        "cargo",
+        "test",
+        "--all-features",
+        "--lib",
+        "grouped_tests"
+      ],
+      "exit_code": 0,
+      "log": "docs\\benchmarks\\hydrate-20261018-final-all-grouped.log",
+      "scope": "restored runtime; diagnostic counters only",
+      "totals": {
+        "passed": 5,
+        "failed": 0,
+        "ignored": 0
+      }
+    },
+    {
+      "command": [
+        "cargo",
+        "clippy",
+        "--all-targets",
+        "--",
+        "-D",
+        "warnings"
+      ],
+      "exit_code": 0,
+      "log": "docs\\benchmarks\\hydrate-20261018-final-clippy.log",
+      "scope": "restored runtime; diagnostic counters only"
+    },
+    {
+      "command": [
+        "cargo",
+        "clippy",
+        "--all-targets",
+        "--all-features",
+        "--",
+        "-D",
+        "warnings"
+      ],
+      "exit_code": 0,
+      "log": "docs\\benchmarks\\hydrate-20261018-final-clippy-all.log",
+      "scope": "restored runtime; diagnostic counters only"
+    },
+    {
+      "command": [
+        "cargo",
+        "clippy",
+        "--all-targets",
+        "--no-default-features",
+        "--",
+        "-D",
+        "warnings"
+      ],
+      "exit_code": 0,
+      "log": "docs\\benchmarks\\hydrate-20261018-final-clippy-reference.log",
+      "scope": "restored runtime; diagnostic counters only"
+    }
+  ],
+  "final_normal_matrix": {
+    "cases": 38,
+    "full_pages_and_versions_verified": true,
+    "performance_not_measured": true,
+    "phase": "matrix_checked"
+  },
+  "final_normal_cli": {
+    "stats": {
+      "compaction_running": false,
+      "delta_keys": 0,
+      "disk_index_bytes": 81904473,
+      "disk_posting_entries": 19221340,
+      "documents": 10000,
+      "generation": 51,
+      "log_bytes": 45,
+      "resident_documents": 0,
+      "resident_text_bytes": 0,
+      "segments": 5,
+      "sequence": 20,
+      "source_bytes": 267900709
+    },
+    "queries": [
+      {
+        "text": "the",
+        "total": 10000,
+        "hits": 200,
+        "order_sequence_version_checked": true
+      },
+      {
+        "text": "quixote",
+        "total": 56,
+        "hits": 50,
+        "order_sequence_version_checked": true
+      }
+    ]
+  },
+  "normal_binaries_not_byte_identical_to_parent": true,
+  "binaries": [
+    {
+      "path": "output\\hydrate-20261018-candidate-fdb-normal.exe",
+      "mode": "normal",
+      "sha256": "C4386592A275C01A9EE898A27B370DF198A16247FAE2E1B381F9D99E72DCF013",
+      "bytes": 1945088
+    },
+    {
+      "path": "output\\hydrate-20261018-candidate-measure_content_reads-normal.exe",
+      "mode": "normal",
+      "sha256": "07D1A5E1916FFA34B0A003F757E10C4D2A4B69F8B26BBA312C398236920FC85B",
+      "bytes": 2022400
+    },
+    {
+      "path": "output\\hydrate-20261018-candidate-measure_interleaved_reads-normal.exe",
+      "mode": "normal",
+      "sha256": "86CDCDE5AA583A7B360E9337D86E445E064AAAB4127EA0BAE5D1A303368F7C93",
+      "bytes": 1953280
+    },
+    {
+      "path": "output\\hydrate-20261018-candidate2-fdb-normal.exe",
+      "sha256": "815E5CA7AE2C42440875C6644C7B915ED87D321A9C05853A8D802C0D183579D9",
+      "bytes": 1945088
+    },
+    {
+      "path": "output\\hydrate-20261018-candidate2-measure_content_reads-normal.exe",
+      "sha256": "12848EAF78148BE9C6B370D2C768E51E547AA807C584CF267301CCA57D46FA2F",
+      "bytes": 2022400
+    },
+    {
+      "path": "output\\hydrate-20261018-candidate2-measure_interleaved_reads-normal.exe",
+      "sha256": "9F2451A231E963C51D7F7036B220080FD90495D7E9DEDCFD96B95F03624C279D",
+      "bytes": 1953280
+    },
+    {
+      "path": "output\\hydrate-20261018-final-fdb-normal.exe",
+      "sha256": "03FF84F5EF08FB3401EDDDFCB40B08C194159D3A71CB37783528EA257A48AD96",
+      "bytes": 1945088
+    },
+    {
+      "path": "output\\hydrate-20261018-final-reader-normal.exe",
+      "sha256": "911930F7439D408CF0D11B067721C1EE0C2463C3BD703689F80A58BAD4633B22",
+      "bytes": 2021888
+    },
+    {
+      "path": "output/search-followup-20261018-candidate-measure_interleaved_reads-normal.exe",
+      "sha256": "2A1802E658B96BE9AC4E1949EC63B14D533BC7C4E360999E0C4D8E004E9CDA82",
+      "bytes": 1953280
+    },
+    {
+      "path": "output/hydrate-20261018-baseline-profile.exe",
+      "sha256": "344C347CCFC5EE42A82DB1823583B07D9AAD22217E9530557C25A2732C42B3CB",
+      "bytes": 2103296
+    }
+  ],
+  "source": [
+    {
+      "path": "src/payload.rs",
+      "sha256": "A7F34C53970577B39CF8D2B883958BF2343961CFFEA2435AD0F7E853CEAFEA4A",
+      "git_blob": "184f6f9f7ecbc85d085a977081150c6c3bdcb57f"
+    },
+    {
+      "path": "src/segment.rs",
+      "sha256": "34039F0899A69D1D46F6E9C797B96CC0E1AD0947DF7C95DF88322C30B5A5A25F",
+      "git_blob": "71b3d3029ef64f059bea60f90840517a2bd5a5c4"
+    }
+  ],
+  "archives": [
+    {
+      "path": "docs\\benchmarks\\hydrate-20261018-candidate1.patch",
+      "sha256": "DF730486F1E0C4921B2B4EF70467A3B109929E21FF0F493E9663CB8BA48748C1"
+    },
+    {
+      "path": "docs\\benchmarks\\hydrate-20261018-candidate2.patch",
+      "sha256": "1C236BE4BF462A62D367530AB9FA31AFDABCF03CCEFB7A59E22E21ED75994DA5"
+    }
+  ],
+  "no_owned_decoder_in_runtime": true,
+  "all21_files_sha_equal": true,
+  "before": [
+    {
+      "path": "data\\benchmark-work\\fdb\\generation-0000000000000031.fdb",
+      "bytes": 45,
+      "sha256": "90CB6CCA105E6739077374A0D2B9B4099570C40DEE94C183AE007FA2964F6B83"
+    },
+    {
+      "path": "data\\benchmark-work\\fdb\\generation-0000000000000033.ready",
+      "bytes": 516,
+      "sha256": "8BDD54E328388818E8D7ABB752C256406A11D9C5368D39BD004F0D3FB9E15141"
+    },
+    {
+      "path": "data\\benchmark-work\\fdb\\LOCK",
+      "bytes": 0,
+      "sha256": "E3B0C44298FC1C149AFBF4C8996FB92427AE41E4649B934CA495991B7852B855"
+    },
+    {
+      "path": "data\\benchmark-work\\fdb\\run-000000000000000a.fdb",
+      "bytes": 53746407,
+      "sha256": "06B659638EBE050747065DF81D367E260C967E8710950BF6D12D19DFAF897843"
+    },
+    {
+      "path": "data\\benchmark-work\\fdb\\run-000000000000000a.idx",
+      "bytes": 16350784,
+      "sha256": "5E181978335945DF9B1F322D5969E53B8DC7F34E552EFD0E7404075FF27A9032"
+    },
+    {
+      "path": "data\\benchmark-work\\fdb\\run-000000000000000a.records04.idx",
+      "bytes": 89121,
+      "sha256": "3068A1101093BBB7C9AD533DC7D6DE8EBB4B96BB48893AA12294C4B8989A38B7"
+    },
+    {
+      "path": "data\\benchmark-work\\fdb\\run-0000000000000014.fdb",
+      "bytes": 52970692,
+      "sha256": "AE2E811E20D3F95D997C39E14489C74353FB9FB21F79F852B4569662420ECA62"
+    },
+    {
+      "path": "data\\benchmark-work\\fdb\\run-0000000000000014.idx",
+      "bytes": 16203819,
+      "sha256": "F19BC0C9D4C5B484F5753452AF0ADCA0567F507EE80E40B42E812A372BF4258C"
+    },
+    {
+      "path": "data\\benchmark-work\\fdb\\run-0000000000000014.records04.idx",
+      "bytes": 89121,
+      "sha256": "600471C136DC08908019BEB04A0135390CD9E6B623C40E6EADF0DF105D298700"
+    },
+    {
+      "path": "data\\benchmark-work\\fdb\\run-000000000000001e.fdb",
+      "bytes": 52914977,
+      "sha256": "40FC3CCBCC80F9756934790874E0D947101D16DA540D1A965536285D3D331B7C"
+    },
+    {
+      "path": "data\\benchmark-work\\fdb\\run-000000000000001e.idx",
+      "bytes": 16201874,
+      "sha256": "3A8A0C7120BB35CFFC295A20FA5BC327B4A5908DE6DDEAB8576B0FFD25C58039"
+    },
+    {
+      "path": "data\\benchmark-work\\fdb\\run-000000000000001e.records04.idx",
+      "bytes": 89121,
+      "sha256": "E0E4AEB7FF108E0460E924F958949240DD11E43B62D21D915030CB931FD48677"
+    },
+    {
+      "path": "data\\benchmark-work\\fdb\\run-0000000000000028.fdb",
+      "bytes": 54087247,
+      "sha256": "5A9FDCF1E0DF35BBF77BBC1B3305568CEEDB3DA2753EFE0729188CE5B21B6C86"
+    },
+    {
+      "path": "data\\benchmark-work\\fdb\\run-0000000000000028.idx",
+      "bytes": 16311854,
+      "sha256": "9EFA675CAFB0435549B60D13F0D4E507A46E9E9C2228F315713B7163805B11DD"
+    },
+    {
+      "path": "data\\benchmark-work\\fdb\\run-0000000000000028.records04.idx",
+      "bytes": 89121,
+      "sha256": "357136E6C57414B319BB239D40CE887FDB7C7BD0CE07C477E6AA54DC37319036"
+    },
+    {
+      "path": "data\\benchmark-work\\fdb\\run-0000000000000032.fdb",
+      "bytes": 54181341,
+      "sha256": "713AFAFFF8FF93628BAAE025F14B74B8B33C247934B25179B00C8E01A5308BB2"
+    },
+    {
+      "path": "data\\benchmark-work\\fdb\\run-0000000000000032.idx",
+      "bytes": 16390537,
+      "sha256": "A083F60B2F11D2F3BF4A393D2C76E29845F3620AD7039A4D431F3676C5FD3332"
+    },
+    {
+      "path": "data\\benchmark-work\\fdb\\run-0000000000000032.records04.idx",
+      "bytes": 89121,
+      "sha256": "609D58E3B32E530FB63EF463655A083A3B775FE365C96E748039086F1BB165F2"
+    },
+    {
+      "path": "data\\benchmark-work\\sqlite\\sqlite.db",
+      "bytes": 583860224,
+      "sha256": "E0A576DE81380673C30EB19B262AC2F2FB0C6A8A2F3430A5593882E2783B7086"
+    },
+    {
+      "path": "tests\\fixtures\\v1\\checkpoint.fdb",
+      "bytes": 1507,
+      "sha256": "E87667C0FABE64D5A1F59EF86B99F7E612DB755D239B41677DA2ADC24BE7BF57"
+    },
+    {
+      "path": "tests\\fixtures\\v1\\checkpoint.ready",
+      "bytes": 28,
+      "sha256": "BC82C18F8D5C3A209328BD59B12D828D8922BEC4D26CB4D557FD4A493A4A9C2F"
+    }
+  ],
+  "after": [
+    {
+      "path": "data\\benchmark-work\\fdb\\generation-0000000000000031.fdb",
+      "bytes": 45,
+      "sha256": "90CB6CCA105E6739077374A0D2B9B4099570C40DEE94C183AE007FA2964F6B83"
+    },
+    {
+      "path": "data\\benchmark-work\\fdb\\generation-0000000000000033.ready",
+      "bytes": 516,
+      "sha256": "8BDD54E328388818E8D7ABB752C256406A11D9C5368D39BD004F0D3FB9E15141"
+    },
+    {
+      "path": "data\\benchmark-work\\fdb\\LOCK",
+      "bytes": 0,
+      "sha256": "E3B0C44298FC1C149AFBF4C8996FB92427AE41E4649B934CA495991B7852B855"
+    },
+    {
+      "path": "data\\benchmark-work\\fdb\\run-000000000000000a.fdb",
+      "bytes": 53746407,
+      "sha256": "06B659638EBE050747065DF81D367E260C967E8710950BF6D12D19DFAF897843"
+    },
+    {
+      "path": "data\\benchmark-work\\fdb\\run-000000000000000a.idx",
+      "bytes": 16350784,
+      "sha256": "5E181978335945DF9B1F322D5969E53B8DC7F34E552EFD0E7404075FF27A9032"
+    },
+    {
+      "path": "data\\benchmark-work\\fdb\\run-000000000000000a.records04.idx",
+      "bytes": 89121,
+      "sha256": "3068A1101093BBB7C9AD533DC7D6DE8EBB4B96BB48893AA12294C4B8989A38B7"
+    },
+    {
+      "path": "data\\benchmark-work\\fdb\\run-0000000000000014.fdb",
+      "bytes": 52970692,
+      "sha256": "AE2E811E20D3F95D997C39E14489C74353FB9FB21F79F852B4569662420ECA62"
+    },
+    {
+      "path": "data\\benchmark-work\\fdb\\run-0000000000000014.idx",
+      "bytes": 16203819,
+      "sha256": "F19BC0C9D4C5B484F5753452AF0ADCA0567F507EE80E40B42E812A372BF4258C"
+    },
+    {
+      "path": "data\\benchmark-work\\fdb\\run-0000000000000014.records04.idx",
+      "bytes": 89121,
+      "sha256": "600471C136DC08908019BEB04A0135390CD9E6B623C40E6EADF0DF105D298700"
+    },
+    {
+      "path": "data\\benchmark-work\\fdb\\run-000000000000001e.fdb",
+      "bytes": 52914977,
+      "sha256": "40FC3CCBCC80F9756934790874E0D947101D16DA540D1A965536285D3D331B7C"
+    },
+    {
+      "path": "data\\benchmark-work\\fdb\\run-000000000000001e.idx",
+      "bytes": 16201874,
+      "sha256": "3A8A0C7120BB35CFFC295A20FA5BC327B4A5908DE6DDEAB8576B0FFD25C58039"
+    },
+    {
+      "path": "data\\benchmark-work\\fdb\\run-000000000000001e.records04.idx",
+      "bytes": 89121,
+      "sha256": "E0E4AEB7FF108E0460E924F958949240DD11E43B62D21D915030CB931FD48677"
+    },
+    {
+      "path": "data\\benchmark-work\\fdb\\run-0000000000000028.fdb",
+      "bytes": 54087247,
+      "sha256": "5A9FDCF1E0DF35BBF77BBC1B3305568CEEDB3DA2753EFE0729188CE5B21B6C86"
+    },
+    {
+      "path": "data\\benchmark-work\\fdb\\run-0000000000000028.idx",
+      "bytes": 16311854,
+      "sha256": "9EFA675CAFB0435549B60D13F0D4E507A46E9E9C2228F315713B7163805B11DD"
+    },
+    {
+      "path": "data\\benchmark-work\\fdb\\run-0000000000000028.records04.idx",
+      "bytes": 89121,
+      "sha256": "357136E6C57414B319BB239D40CE887FDB7C7BD0CE07C477E6AA54DC37319036"
+    },
+    {
+      "path": "data\\benchmark-work\\fdb\\run-0000000000000032.fdb",
+      "bytes": 54181341,
+      "sha256": "713AFAFFF8FF93628BAAE025F14B74B8B33C247934B25179B00C8E01A5308BB2"
+    },
+    {
+      "path": "data\\benchmark-work\\fdb\\run-0000000000000032.idx",
+      "bytes": 16390537,
+      "sha256": "A083F60B2F11D2F3BF4A393D2C76E29845F3620AD7039A4D431F3676C5FD3332"
+    },
+    {
+      "path": "data\\benchmark-work\\fdb\\run-0000000000000032.records04.idx",
+      "bytes": 89121,
+      "sha256": "609D58E3B32E530FB63EF463655A083A3B775FE365C96E748039086F1BB165F2"
+    },
+    {
+      "path": "data\\benchmark-work\\sqlite\\sqlite.db",
+      "bytes": 583860224,
+      "sha256": "E0A576DE81380673C30EB19B262AC2F2FB0C6A8A2F3430A5593882E2783B7086"
+    },
+    {
+      "path": "tests\\fixtures\\v1\\checkpoint.fdb",
+      "bytes": 1507,
+      "sha256": "E87667C0FABE64D5A1F59EF86B99F7E612DB755D239B41677DA2ADC24BE7BF57"
+    },
+    {
+      "path": "tests\\fixtures\\v1\\checkpoint.ready",
+      "bytes": 28,
+      "sha256": "BC82C18F8D5C3A209328BD59B12D828D8922BEC4D26CB4D557FD4A493A4A9C2F"
+    }
+  ],
+  "corpus": {
+    "bytes": 2740862279,
+    "sha256": "11F826FCE3F4AE790FEB9FC6DF9B1169F52C2FD699E89FC4A8A4B77AAA41731B"
+  },
+  "fdb_bytes": 349805698,
+  "sqlite_bytes": 583860224,
+  "data_directories": [
+    "benchmark-work",
+    "rkyv-corpus-20261009"
+  ],
+  "cargo_dependencies_features_and_v01_fixtures_unchanged": true,
+  "source_checks": "strict authoritative source/index, full payload CRC/schema/UTF8/key/version preserved",
+  "environment": {
+    "os": "Windows-11-10.0.26200-SP0",
+    "logical_cpus": 16,
+    "rustc": "rustc 1.99.0 (b940084d7 2026-09-28)\nbinary: rustc\ncommit-hash: b940084d7eb6a299eb4bfeb8e34901bc051e7ac4\ncommit-date: 2026-09-28\nhost: x86_64-pc-windows-msvc\nrelease: 1.99.0\nLLVM version: 23.1.1\n",
+    "power_scheme": "Power Scheme GUID: 381b4222-f694-41f0-9685-ff5bb260df2e  (Balanced)"
+  },
+  "unmeasured": [
+    "accepted runtime speed gain",
+    "fresh full38 timing",
+    "fresh OS process RAM",
+    "write/maintenance",
+    "general opening",
+    "concurrent/true cold load",
+    "allocator vs memcpy/first-touch cost inside copy_text"
+  ]
+}

@@ -1,5 +1,12 @@
 # FDB
 
+[200 belgeli sayfanın profili ve reddedilen denemeler](docs/HYDRATION-10K-20261018.md):
+baskın kalem sahipli metin tahsisi/kopyası; diagnostic200 belgede2,907ms.
+Metadata tek-geçişinin iki varyantı ve128KiB sonuç okuma penceresi normal
+tekrarda güvenilir kazanç vermedi; hepsi geri alındı. Normal okuma yolu
+korundu, yalnız opt-in profil sayaçları eklendi. The200/genel RAM ve
+yazma/bakım/açılış/disk/eşzamanlı-soğuk işler açık; bu tur hız kazancı yok.
+
 [Arama takibi: normalleştirme ve sonuç kapasitesi](docs/SEARCH-FOLLOWUP-10K-20261018.md):
 sonuçta kalan 2.464 B fazlalık giderildi. Aynı mevcut10k veride beagle p95
 geniş/yoğun iki düzende dört çiftte hızlı; yoğun p95 -%3,49, tipik blok

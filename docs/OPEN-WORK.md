@@ -1,5 +1,32 @@
 # FDB açık işler
 
+2026-10-18 the200 hydration profili tamamlandı; bu tur hız kazancı yok.
+Diagnostic30 tekrar: read115/1,810ms, CRC200/0,577ms, schema200/0,586ms,
+materialize200/3,631ms; içindeki text String tahsisi+kopyası2,907ms baskın,
+fields0,557ms, key0,050ms, links0,042ms. Span'ler nested/instrumented;
+normal p95/CPU yüzdesi değildir. Dönen metin5.383.655B; tahsis/memcpy/
+ilk erişim payı ayrılmadı. Codec/CRC ayarı ana maliyeti açıklayan çözüm
+diye seçilmedi. Sonraki hipotez caller-owned sonuç tamponu tekrar kullanımı;
+ayrı API/ömür sözleşmesi ve ölçüm gerekir, henüz uygulanmadı.
+
+İki tek-geçiş prototipi reddedildi: ilk400 örnek the200 p95+%11,58,
+tipik+%11,33; eski tahsis sırasını koruyan ikincide p95-%0,42, yalnız8/16
+blok hızlı. Ayrı sonuç penceresi64→128KiB çağrıyı115→47 azalttı fakat
+normal400 örnekte the200 p95+%8,32/tipik+%16,38,1/4 çift hızlı; reddedildi.
+Üçü de kod/test patch'inde arşivlenip geri alındı. Algoritma/source-check/
+codec/format aynı, yalnız mevcut diagnostic feature'da sayaçlar kaldı.
+
+The200 uçtan uca hedefi, Harpoon p95, kalan arama farkları, normal Vec/
+query/caller RAM, yazma/bakım, genel açılış/disk sıkıştırma ve eşzamanlı/
+gerçek-soğuk yük açık. Hız kabulü geçmediği için yeni38-case hız/OS RAM
+koşusu yok; final normal38-case full oracle var. Default185/7 ignored,
+referans engine17, all-features payload5/grouped5, fmt/üç profil Clippy
+geçti; son restore kaynak checkpoint'e byte-eşit, grouped/fmt/default+
+all-features Clippy tekrar geçti. Yeni corpus/DB/reset/kopya yok.
+[Son hydration raporu](HYDRATION-10K-20261018.md).
+
+## Önceki arama ve kapasite takibi
+
 2026-10-18 sonraki dar takip tamamlandı: ölçülmüş2.464B ek canlı sonuç
 kapasitesi giderildi. 38/38 sorguda kapasite artmadı; canlı heap farkı
 tam olarak kapasite farkı×176B. Boş sonuçta capacity/live delta0; hemen

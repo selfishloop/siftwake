@@ -1,0 +1,147 @@
+[
+  {
+    "command": [
+      "cargo",
+      "fmt"
+    ],
+    "exit_code": 0,
+    "log": "docs\\benchmarks\\hydrate-20261018-fmt.log"
+  },
+  {
+    "command": [
+      "cargo",
+      "test",
+      "--lib",
+      "owned_decode_tests"
+    ],
+    "exit_code": 0,
+    "log": "docs\\benchmarks\\hydrate-20261018-owned.log"
+  },
+  {
+    "command": [
+      "cargo",
+      "test",
+      "--lib",
+      "grouped_tests"
+    ],
+    "exit_code": 0,
+    "log": "docs\\benchmarks\\hydrate-20261018-grouped.log"
+  },
+  {
+    "command": [
+      "cargo",
+      "fmt",
+      "--check"
+    ],
+    "exit_code": 0,
+    "log": "docs\\benchmarks\\hydrate-20261018-final-fmt.log",
+    "scope": "restored runtime; diagnostic counters only"
+  },
+  {
+    "command": [
+      "cargo",
+      "test",
+      "--all-targets"
+    ],
+    "exit_code": 0,
+    "log": "docs\\benchmarks\\hydrate-20261018-final-tests.log",
+    "scope": "restored runtime; diagnostic counters only",
+    "totals": {
+      "passed": 185,
+      "failed": 0,
+      "ignored": 7
+    }
+  },
+  {
+    "command": [
+      "cargo",
+      "test",
+      "--no-default-features",
+      "--test",
+      "engine"
+    ],
+    "exit_code": 0,
+    "log": "docs\\benchmarks\\hydrate-20261018-final-reference.log",
+    "scope": "restored runtime; diagnostic counters only",
+    "totals": {
+      "passed": 17,
+      "failed": 0,
+      "ignored": 0
+    }
+  },
+  {
+    "command": [
+      "cargo",
+      "test",
+      "--all-features",
+      "--lib",
+      "payload::"
+    ],
+    "exit_code": 0,
+    "log": "docs\\benchmarks\\hydrate-20261018-final-all-payload.log",
+    "scope": "restored runtime; diagnostic counters only",
+    "totals": {
+      "passed": 5,
+      "failed": 0,
+      "ignored": 0
+    }
+  },
+  {
+    "command": [
+      "cargo",
+      "test",
+      "--all-features",
+      "--lib",
+      "grouped_tests"
+    ],
+    "exit_code": 0,
+    "log": "docs\\benchmarks\\hydrate-20261018-final-all-grouped.log",
+    "scope": "restored runtime; diagnostic counters only",
+    "totals": {
+      "passed": 5,
+      "failed": 0,
+      "ignored": 0
+    }
+  },
+  {
+    "command": [
+      "cargo",
+      "clippy",
+      "--all-targets",
+      "--",
+      "-D",
+      "warnings"
+    ],
+    "exit_code": 0,
+    "log": "docs\\benchmarks\\hydrate-20261018-final-clippy.log",
+    "scope": "restored runtime; diagnostic counters only"
+  },
+  {
+    "command": [
+      "cargo",
+      "clippy",
+      "--all-targets",
+      "--all-features",
+      "--",
+      "-D",
+      "warnings"
+    ],
+    "exit_code": 0,
+    "log": "docs\\benchmarks\\hydrate-20261018-final-clippy-all.log",
+    "scope": "restored runtime; diagnostic counters only"
+  },
+  {
+    "command": [
+      "cargo",
+      "clippy",
+      "--all-targets",
+      "--no-default-features",
+      "--",
+      "-D",
+      "warnings"
+    ],
+    "exit_code": 0,
+    "log": "docs\\benchmarks\\hydrate-20261018-final-clippy-reference.log",
+    "scope": "restored runtime; diagnostic counters only"
+  }
+]

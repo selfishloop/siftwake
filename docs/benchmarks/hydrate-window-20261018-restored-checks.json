@@ -1,0 +1,47 @@
+[
+  {
+    "command": [
+      "cargo",
+      "fmt",
+      "--check"
+    ],
+    "exit_code": 0,
+    "log": "docs\\benchmarks\\hydrate-window-20261018-restored-fmt.log"
+  },
+  {
+    "command": [
+      "cargo",
+      "test",
+      "--all-features",
+      "--lib",
+      "grouped_tests"
+    ],
+    "exit_code": 0,
+    "log": "docs\\benchmarks\\hydrate-window-20261018-restored-grouped.log"
+  },
+  {
+    "command": [
+      "cargo",
+      "clippy",
+      "--all-targets",
+      "--",
+      "-D",
+      "warnings"
+    ],
+    "exit_code": 0,
+    "log": "docs\\benchmarks\\hydrate-window-20261018-restored-clippy.log"
+  },
+  {
+    "command": [
+      "cargo",
+      "clippy",
+      "--all-targets",
+      "--all-features",
+      "--",
+      "-D",
+      "warnings"
+    ],
+    "exit_code": 0,
+    "log": "docs\\benchmarks\\hydrate-window-20261018-restored-clippy-all.log"
+  }
+]

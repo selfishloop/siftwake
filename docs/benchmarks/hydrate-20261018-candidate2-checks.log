@@ -1,0 +1,21 @@
+   Compiling fdb v0.3.1 (C:\Users\Serkan\Documents\ChatGPT\fdb)
+    Finished `test` profile [unoptimized + debuginfo] target(s) in 3.28s
+     Running unittests src\lib.rs (target\debug\deps\fdb-647b6e7626a49143.exe)
+
+running 1 test
+test payload::owned_decode_tests::owned_decode_matches_checked_view_for_every_cut_and_byte_change ... ok
+
+test result: ok. 1 passed; 0 failed; 0 ignored; 0 measured; 103 filtered out; finished in 0.00s
+
+    Finished `test` profile [unoptimized + debuginfo] target(s) in 0.05s
+     Running unittests src\lib.rs (target\debug\deps\fdb-647b6e7626a49143.exe)
+
+running 5 tests
+test segment::grouped_tests::window_budget_gaps_and_oversized_payload_fallback ... ok
+test segment::grouped_tests::valid_crc_still_requires_matching_key_and_version ... ok
+test segment::grouped_tests::paged_batch_reuses_checked_leaves_without_skipping_payload_checks ... ok
+test segment::grouped_tests::adjacent_and_gapped_slots_share_one_window_with_independent_payload_checks ... ok
+test segment::grouped_tests::invalid_slots_tombstone_short_read_and_empty_batch ... ok
+
+test result: ok. 5 passed; 0 failed; 0 ignored; 0 measured; 99 filtered out; finished in 0.12s
+

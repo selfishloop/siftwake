@@ -1,0 +1,25 @@
+   Compiling fdb v0.3.1 (C:\Users\Serkan\Documents\ChatGPT\fdb)
+    Finished `test` profile [unoptimized + debuginfo] target(s) in 5.23s
+     Running tests\engine.rs (target\debug\deps\engine-fab47a9d4a21ac70.exe)
+
+running 17 tests
+test adapters_preserve_volume_hardlinks_and_fund_identity ... ok
+test exclusive_lock_released_on_drop ... ok
+test invalid_batch_and_cross_scope_reference_do_not_write ... ok
+test guard_failure_is_atomic_and_does_not_write ... ok
+test stale_postings_removed_and_short_unicode_terms_work ... ok
+test truncated_published_checkpoint_and_missing_marker_are_errors ... ok
+test complete_garbage_header_is_not_a_torn_write ... ok
+test empty_checkpoint_after_deleting_all_documents_reopens ... ok
+test corrupt_latest_checkpoint_never_falls_back_to_stale_generation ... ok
+test incomplete_unpublished_generation_is_ignored ... ok
+test durable_batch_update_delete_compaction ... ok
+test combined_indexes_turkish_pagination_and_scope ... ok
+test acknowledged_commit_survives_process_kill ... ok
+test every_single_byte_corruption_in_committed_frame_is_rejected ... ok
+test randomized_operations_match_reference_across_reopens ... ok
+test every_partial_transaction_cut_recovers_previous_commit ... ok
+test multi_frame_checkpoint_preserves_versions_and_can_accept_writes ... ok
+
+test result: ok. 17 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 2.97s
+
