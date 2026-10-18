@@ -1,0 +1,141 @@
+{
+  "pairs": 4,
+  "blocks_per_pair": 2,
+  "repeats_per_block": 25,
+  "affinity_mask": 4,
+  "pages_only": false,
+  "case_indices": [
+    0,
+    2,
+    5,
+    6,
+    17,
+    27,
+    31,
+    34,
+    35
+  ],
+  "dense_selected_cases": true,
+  "cache": "warm OS cache; every block opens and verifies/warmups before query timing; no eviction",
+  "corpus": "same existing first10000; no generation/reset/copy",
+  "source_validation": "complete source check before timed search; unchanged CRC/schema/key/version checks",
+  "same_executable": false,
+  "programs": {
+    "control": {
+      "path": "output\\default-checked-page-20261018-measure_interleaved_reads-normal.exe",
+      "sha256": "4EB198668CD851CAC8B533C6B347ED3DC7692C50F9BFB3025AA407F65114A729"
+    },
+    "fdb": {
+      "path": "output\\search-followup-20261018-candidate-measure_interleaved_reads-normal.exe",
+      "sha256": "2A1802E658B96BE9AC4E1949EC63B14D533BC7C4E360999E0C4D8E004E9CDA82"
+    }
+  },
+  "balanced_block_first_position": true,
+  "orders": [
+    {
+      "pair": 0,
+      "block": 0,
+      "engines": [
+        "control",
+        "fdb"
+      ],
+      "command": {
+        "id": 0,
+        "seed": 0,
+        "repeats": 25
+      }
+    },
+    {
+      "pair": 0,
+      "block": 1,
+      "engines": [
+        "fdb",
+        "control"
+      ],
+      "command": {
+        "id": 1,
+        "seed": 1,
+        "repeats": 25
+      }
+    },
+    {
+      "pair": 1,
+      "block": 0,
+      "engines": [
+        "fdb",
+        "control"
+      ],
+      "command": {
+        "id": 2,
+        "seed": 10000,
+        "repeats": 25
+      }
+    },
+    {
+      "pair": 1,
+      "block": 1,
+      "engines": [
+        "control",
+        "fdb"
+      ],
+      "command": {
+        "id": 3,
+        "seed": 10001,
+        "repeats": 25
+      }
+    },
+    {
+      "pair": 2,
+      "block": 0,
+      "engines": [
+        "control",
+        "fdb"
+      ],
+      "command": {
+        "id": 4,
+        "seed": 20000,
+        "repeats": 25
+      }
+    },
+    {
+      "pair": 2,
+      "block": 1,
+      "engines": [
+        "fdb",
+        "control"
+      ],
+      "command": {
+        "id": 5,
+        "seed": 20001,
+        "repeats": 25
+      }
+    },
+    {
+      "pair": 3,
+      "block": 0,
+      "engines": [
+        "fdb",
+        "control"
+      ],
+      "command": {
+        "id": 6,
+        "seed": 30000,
+        "repeats": 25
+      }
+    },
+    {
+      "pair": 3,
+      "block": 1,
+      "engines": [
+        "control",
+        "fdb"
+      ],
+      "command": {
+        "id": 7,
+        "seed": 30001,
+        "repeats": 25
+      }
+    }
+  ],
+  "observe_thread": true
+}

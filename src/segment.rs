@@ -214,7 +214,14 @@ impl QueryTextScratch {
             .saturating_sub(1);
         let mut first = 0;
         while first < text.len() {
-            let mut end = (first + 1024).min(text.len());
+            // Preserve the small first probe for early matches. Once it fails,
+            // amortize folding/window maintenance over larger bounded blocks.
+            let step = if cfg!(feature = "bounded-engine") && first != 0 {
+                4096
+            } else {
+                1024
+            };
+            let mut end = (first + step).min(text.len());
             while !text.is_char_boundary(end) {
                 end += 1;
             }
@@ -381,7 +388,12 @@ mod query_scratch_tests {
     #[test]
     fn chunked_scan_matches_full_fold_at_utf8_and_term_boundaries() {
         let mut scratch = QueryTextScratch::default();
-        for prefix in (1000..1040).chain(4072..4120).chain(8176..8216) {
+        for prefix in (1000..1040)
+            .chain(4072..4120)
+            .chain(5096..5144)
+            .chain(8176..8216)
+            .chain(9192..9240)
+        {
             let body = format!(
                 "{}İŞIK ȺΣ 🦀 QUİXOTE{}last",
                 "x".repeat(prefix),

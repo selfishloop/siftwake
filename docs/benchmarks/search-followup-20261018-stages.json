@@ -1,0 +1,7333 @@
+{
+  "queries": [
+    {
+      "text": "quixote",
+      "offset": 0,
+      "limit": 50,
+      "before": {
+        "disk.read_at": {
+          "calls": 81,
+          "elapsed_ms": 0.725
+        },
+        "payload.reuse_checked": {
+          "calls": 50,
+          "elapsed_ms": 0.2756
+        },
+        "query.accepted_ids": {
+          "calls": 56,
+          "elapsed_ms": 0.0
+        },
+        "query.covered_candidates": {
+          "calls": 0,
+          "elapsed_ms": 0.0
+        },
+        "query.fold.title": {
+          "calls": 56,
+          "elapsed_ms": 0.0049
+        },
+        "query.payload_candidates": {
+          "calls": 56,
+          "elapsed_ms": 0.0
+        },
+        "query.payload_crc": {
+          "calls": 56,
+          "elapsed_ms": 0.1833
+        },
+        "query.payload_read": {
+          "calls": 56,
+          "elapsed_ms": 0.5278
+        },
+        "query.payload_read_bytes": {
+          "calls": 1945325,
+          "elapsed_ms": 0.0
+        },
+        "query.payload_read_requests": {
+          "calls": 56,
+          "elapsed_ms": 0.0
+        },
+        "query.payload_requested_bytes": {
+          "calls": 1945325,
+          "elapsed_ms": 0.0
+        },
+        "query.payload_validation": {
+          "calls": 56,
+          "elapsed_ms": 0.1521
+        },
+        "query.payload_window_hits": {
+          "calls": 0,
+          "elapsed_ms": 0.0
+        },
+        "query.posting_cache_read": {
+          "calls": 20,
+          "elapsed_ms": 0.2525
+        },
+        "query.posting_intersection": {
+          "calls": 56,
+          "elapsed_ms": 0.0086
+        },
+        "query.raw_ascii_probe": {
+          "calls": 56,
+          "elapsed_ms": 0.1053
+        },
+        "query.raw_ascii_proven": {
+          "calls": 56,
+          "elapsed_ms": 0.002
+        },
+        "query.record_identity": {
+          "calls": 56,
+          "elapsed_ms": 0.0066
+        },
+        "query.record_metadata": {
+          "calls": 56,
+          "elapsed_ms": 0.067
+        },
+        "query.retain_checked_payload": {
+          "calls": 50,
+          "elapsed_ms": 0.1437
+        },
+        "query.verify_text": {
+          "calls": 56,
+          "elapsed_ms": 0.1327
+        },
+        "query.visible_seed_ids": {
+          "calls": 56,
+          "elapsed_ms": 0.0
+        },
+        "search.filter_visibility_text": {
+          "calls": 1,
+          "elapsed_ms": 1.6677
+        },
+        "search.merge_page_hydration": {
+          "calls": 1,
+          "elapsed_ms": 0.3568
+        },
+        "search.total": {
+          "calls": 1,
+          "elapsed_ms": 2.0252
+        }
+      },
+      "after": {
+        "disk.read_at": {
+          "calls": 81,
+          "elapsed_ms": 0.7889
+        },
+        "payload.reuse_checked": {
+          "calls": 50,
+          "elapsed_ms": 0.4121
+        },
+        "query.accepted_ids": {
+          "calls": 56,
+          "elapsed_ms": 0.0
+        },
+        "query.covered_candidates": {
+          "calls": 0,
+          "elapsed_ms": 0.0
+        },
+        "query.fold.title": {
+          "calls": 56,
+          "elapsed_ms": 0.0049
+        },
+        "query.payload_candidates": {
+          "calls": 56,
+          "elapsed_ms": 0.0
+        },
+        "query.payload_crc": {
+          "calls": 56,
+          "elapsed_ms": 0.3015
+        },
+        "query.payload_read": {
+          "calls": 56,
+          "elapsed_ms": 0.5477
+        },
+        "query.payload_read_bytes": {
+          "calls": 1945325,
+          "elapsed_ms": 0.0
+        },
+        "query.payload_read_requests": {
+          "calls": 56,
+          "elapsed_ms": 0.0
+        },
+        "query.payload_requested_bytes": {
+          "calls": 1945325,
+          "elapsed_ms": 0.0
+        },
+        "query.payload_validation": {
+          "calls": 56,
+          "elapsed_ms": 0.1726
+        },
+        "query.payload_window_hits": {
+          "calls": 0,
+          "elapsed_ms": 0.0
+        },
+        "query.posting_cache_read": {
+          "calls": 20,
+          "elapsed_ms": 0.3269
+        },
+        "query.posting_intersection": {
+          "calls": 56,
+          "elapsed_ms": 0.0115
+        },
+        "query.raw_ascii_probe": {
+          "calls": 56,
+          "elapsed_ms": 0.163
+        },
+        "query.raw_ascii_proven": {
+          "calls": 56,
+          "elapsed_ms": 0.0018
+        },
+        "query.record_identity": {
+          "calls": 56,
+          "elapsed_ms": 0.009
+        },
+        "query.record_metadata": {
+          "calls": 56,
+          "elapsed_ms": 0.0746
+        },
+        "query.retain_checked_payload": {
+          "calls": 50,
+          "elapsed_ms": 0.1408
+        },
+        "query.verify_text": {
+          "calls": 56,
+          "elapsed_ms": 0.1963
+        },
+        "query.visible_seed_ids": {
+          "calls": 56,
+          "elapsed_ms": 0.0
+        },
+        "search.filter_visibility_text": {
+          "calls": 1,
+          "elapsed_ms": 1.9847
+        },
+        "search.merge_page_hydration": {
+          "calls": 1,
+          "elapsed_ms": 0.5346
+        },
+        "search.total": {
+          "calls": 1,
+          "elapsed_ms": 2.6295
+        }
+      }
+    },
+    {
+      "text": "zeuglodon",
+      "offset": 0,
+      "limit": 50,
+      "before": {
+        "disk.read_at": {
+          "calls": 67,
+          "elapsed_ms": 0.3757
+        },
+        "payload.reuse_checked": {
+          "calls": 32,
+          "elapsed_ms": 0.1665
+        },
+        "query.accepted_ids": {
+          "calls": 32,
+          "elapsed_ms": 0.0
+        },
+        "query.covered_candidates": {
+          "calls": 0,
+          "elapsed_ms": 0.0
+        },
+        "query.fold.title": {
+          "calls": 32,
+          "elapsed_ms": 0.0021
+        },
+        "query.payload_candidates": {
+          "calls": 32,
+          "elapsed_ms": 0.0
+        },
+        "query.payload_crc": {
+          "calls": 32,
+          "elapsed_ms": 0.1183
+        },
+        "query.payload_read": {
+          "calls": 32,
+          "elapsed_ms": 0.1914
+        },
+        "query.payload_read_bytes": {
+          "calls": 1281999,
+          "elapsed_ms": 0.0
+        },
+        "query.payload_read_requests": {
+          "calls": 32,
+          "elapsed_ms": 0.0
+        },
+        "query.payload_requested_bytes": {
+          "calls": 1281999,
+          "elapsed_ms": 0.0
+        },
+        "query.payload_validation": {
+          "calls": 32,
+          "elapsed_ms": 0.0656
+        },
+        "query.payload_window_hits": {
+          "calls": 0,
+          "elapsed_ms": 0.0
+        },
+        "query.posting_cache_read": {
+          "calls": 30,
+          "elapsed_ms": 0.2408
+        },
+        "query.posting_intersection": {
+          "calls": 32,
+          "elapsed_ms": 0.0059
+        },
+        "query.raw_ascii_probe": {
+          "calls": 32,
+          "elapsed_ms": 0.0667
+        },
+        "query.raw_ascii_proven": {
+          "calls": 32,
+          "elapsed_ms": 0.0013
+        },
+        "query.record_identity": {
+          "calls": 32,
+          "elapsed_ms": 0.0029
+        },
+        "query.record_metadata": {
+          "calls": 32,
+          "elapsed_ms": 0.03
+        },
+        "query.retain_checked_payload": {
+          "calls": 32,
+          "elapsed_ms": 0.0616
+        },
+        "query.verify_text": {
+          "calls": 32,
+          "elapsed_ms": 0.082
+        },
+        "query.visible_seed_ids": {
+          "calls": 32,
+          "elapsed_ms": 0.0
+        },
+        "search.filter_visibility_text": {
+          "calls": 1,
+          "elapsed_ms": 1.1546
+        },
+        "search.merge_page_hydration": {
+          "calls": 1,
+          "elapsed_ms": 0.217
+        },
+        "search.total": {
+          "calls": 1,
+          "elapsed_ms": 1.3723
+        }
+      },
+      "after": {
+        "disk.read_at": {
+          "calls": 67,
+          "elapsed_ms": 0.4265
+        },
+        "payload.reuse_checked": {
+          "calls": 32,
+          "elapsed_ms": 0.164
+        },
+        "query.accepted_ids": {
+          "calls": 32,
+          "elapsed_ms": 0.0
+        },
+        "query.covered_candidates": {
+          "calls": 0,
+          "elapsed_ms": 0.0
+        },
+        "query.fold.title": {
+          "calls": 32,
+          "elapsed_ms": 0.003
+        },
+        "query.payload_candidates": {
+          "calls": 32,
+          "elapsed_ms": 0.0
+        },
+        "query.payload_crc": {
+          "calls": 32,
+          "elapsed_ms": 0.1237
+        },
+        "query.payload_read": {
+          "calls": 32,
+          "elapsed_ms": 0.2182
+        },
+        "query.payload_read_bytes": {
+          "calls": 1281999,
+          "elapsed_ms": 0.0
+        },
+        "query.payload_read_requests": {
+          "calls": 32,
+          "elapsed_ms": 0.0
+        },
+        "query.payload_requested_bytes": {
+          "calls": 1281999,
+          "elapsed_ms": 0.0
+        },
+        "query.payload_validation": {
+          "calls": 32,
+          "elapsed_ms": 0.0555
+        },
+        "query.payload_window_hits": {
+          "calls": 0,
+          "elapsed_ms": 0.0
+        },
+        "query.posting_cache_read": {
+          "calls": 30,
+          "elapsed_ms": 0.2706
+        },
+        "query.posting_intersection": {
+          "calls": 32,
+          "elapsed_ms": 0.0052
+        },
+        "query.raw_ascii_probe": {
+          "calls": 32,
+          "elapsed_ms": 0.0665
+        },
+        "query.raw_ascii_proven": {
+          "calls": 32,
+          "elapsed_ms": 0.0013
+        },
+        "query.record_identity": {
+          "calls": 32,
+          "elapsed_ms": 0.003
+        },
+        "query.record_metadata": {
+          "calls": 32,
+          "elapsed_ms": 0.0298
+        },
+        "query.retain_checked_payload": {
+          "calls": 32,
+          "elapsed_ms": 0.0884
+        },
+        "query.verify_text": {
+          "calls": 32,
+          "elapsed_ms": 0.0822
+        },
+        "query.visible_seed_ids": {
+          "calls": 32,
+          "elapsed_ms": 0.0
+        },
+        "search.filter_visibility_text": {
+          "calls": 1,
+          "elapsed_ms": 1.0356
+        },
+        "search.merge_page_hydration": {
+          "calls": 1,
+          "elapsed_ms": 0.2149
+        },
+        "search.total": {
+          "calls": 1,
+          "elapsed_ms": 1.2513
+        }
+      }
+    },
+    {
+      "text": "beagle",
+      "offset": 0,
+      "limit": 50,
+      "before": {
+        "disk.read_at": {
+          "calls": 770,
+          "elapsed_ms": 7.1588
+        },
+        "payload.reuse_checked": {
+          "calls": 46,
+          "elapsed_ms": 0.3185
+        },
+        "query.accepted_ids": {
+          "calls": 46,
+          "elapsed_ms": 0.0
+        },
+        "query.covered_candidates": {
+          "calls": 0,
+          "elapsed_ms": 0.0
+        },
+        "query.fold.body": {
+          "calls": 19483,
+          "elapsed_ms": 6.8731
+        },
+        "query.fold.title": {
+          "calls": 579,
+          "elapsed_ms": 0.0377
+        },
+        "query.payload_candidates": {
+          "calls": 579,
+          "elapsed_ms": 0.0
+        },
+        "query.payload_crc": {
+          "calls": 579,
+          "elapsed_ms": 2.0794
+        },
+        "query.payload_read": {
+          "calls": 579,
+          "elapsed_ms": 6.4261
+        },
+        "query.payload_read_bytes": {
+          "calls": 20798429,
+          "elapsed_ms": 0.0
+        },
+        "query.payload_read_requests": {
+          "calls": 579,
+          "elapsed_ms": 0.0
+        },
+        "query.payload_requested_bytes": {
+          "calls": 20798429,
+          "elapsed_ms": 0.0
+        },
+        "query.payload_validation": {
+          "calls": 579,
+          "elapsed_ms": 1.9409
+        },
+        "query.payload_window_hits": {
+          "calls": 0,
+          "elapsed_ms": 0.0
+        },
+        "query.posting_cache_read": {
+          "calls": 15,
+          "elapsed_ms": 0.1696
+        },
+        "query.posting_intersection": {
+          "calls": 837,
+          "elapsed_ms": 0.1312
+        },
+        "query.raw_ascii_probe": {
+          "calls": 40,
+          "elapsed_ms": 0.1803
+        },
+        "query.raw_ascii_proven": {
+          "calls": 4,
+          "elapsed_ms": 0.0002
+        },
+        "query.record_identity": {
+          "calls": 579,
+          "elapsed_ms": 0.0712
+        },
+        "query.record_metadata": {
+          "calls": 579,
+          "elapsed_ms": 1.0001
+        },
+        "query.retain_checked_payload": {
+          "calls": 46,
+          "elapsed_ms": 0.1661
+        },
+        "query.scan.body": {
+          "calls": 19483,
+          "elapsed_ms": 2.4784
+        },
+        "query.verify_text": {
+          "calls": 579,
+          "elapsed_ms": 13.212
+        },
+        "query.visible_seed_ids": {
+          "calls": 837,
+          "elapsed_ms": 0.0
+        },
+        "search.filter_visibility_text": {
+          "calls": 1,
+          "elapsed_ms": 27.0342
+        },
+        "search.merge_page_hydration": {
+          "calls": 1,
+          "elapsed_ms": 0.6337
+        },
+        "search.total": {
+          "calls": 1,
+          "elapsed_ms": 27.7847
+        }
+      },
+      "after": {
+        "disk.read_at": {
+          "calls": 770,
+          "elapsed_ms": 8.1279
+        },
+        "payload.reuse_checked": {
+          "calls": 46,
+          "elapsed_ms": 0.3157
+        },
+        "query.accepted_ids": {
+          "calls": 46,
+          "elapsed_ms": 0.0
+        },
+        "query.covered_candidates": {
+          "calls": 0,
+          "elapsed_ms": 0.0
+        },
+        "query.fold.body": {
+          "calls": 5520,
+          "elapsed_ms": 5.9481
+        },
+        "query.fold.title": {
+          "calls": 579,
+          "elapsed_ms": 0.0375
+        },
+        "query.payload_candidates": {
+          "calls": 579,
+          "elapsed_ms": 0.0
+        },
+        "query.payload_crc": {
+          "calls": 579,
+          "elapsed_ms": 2.1791
+        },
+        "query.payload_read": {
+          "calls": 579,
+          "elapsed_ms": 7.5883
+        },
+        "query.payload_read_bytes": {
+          "calls": 20798429,
+          "elapsed_ms": 0.0
+        },
+        "query.payload_read_requests": {
+          "calls": 579,
+          "elapsed_ms": 0.0
+        },
+        "query.payload_requested_bytes": {
+          "calls": 20798429,
+          "elapsed_ms": 0.0
+        },
+        "query.payload_validation": {
+          "calls": 579,
+          "elapsed_ms": 1.7739
+        },
+        "query.payload_window_hits": {
+          "calls": 0,
+          "elapsed_ms": 0.0
+        },
+        "query.posting_cache_read": {
+          "calls": 15,
+          "elapsed_ms": 0.1777
+        },
+        "query.posting_intersection": {
+          "calls": 837,
+          "elapsed_ms": 0.128
+        },
+        "query.raw_ascii_probe": {
+          "calls": 40,
+          "elapsed_ms": 0.1819
+        },
+        "query.raw_ascii_proven": {
+          "calls": 4,
+          "elapsed_ms": 0.0002
+        },
+        "query.record_identity": {
+          "calls": 579,
+          "elapsed_ms": 0.0659
+        },
+        "query.record_metadata": {
+          "calls": 579,
+          "elapsed_ms": 0.9658
+        },
+        "query.retain_checked_payload": {
+          "calls": 46,
+          "elapsed_ms": 0.1846
+        },
+        "query.scan.body": {
+          "calls": 5520,
+          "elapsed_ms": 2.4198
+        },
+        "query.verify_text": {
+          "calls": 579,
+          "elapsed_ms": 10.2754
+        },
+        "query.visible_seed_ids": {
+          "calls": 837,
+          "elapsed_ms": 0.0
+        },
+        "search.filter_visibility_text": {
+          "calls": 1,
+          "elapsed_ms": 23.8747
+        },
+        "search.merge_page_hydration": {
+          "calls": 1,
+          "elapsed_ms": 0.5162
+        },
+        "search.total": {
+          "calls": 1,
+          "elapsed_ms": 24.589
+        }
+      }
+    },
+    {
+      "text": "mesopotamia",
+      "offset": 0,
+      "limit": 50,
+      "before": {
+        "disk.read_at": {
+          "calls": 82,
+          "elapsed_ms": 0.5036
+        },
+        "payload.reuse_checked": {
+          "calls": 31,
+          "elapsed_ms": 0.1548
+        },
+        "query.accepted_ids": {
+          "calls": 31,
+          "elapsed_ms": 0.0
+        },
+        "query.covered_candidates": {
+          "calls": 0,
+          "elapsed_ms": 0.0
+        },
+        "query.fold.body": {
+          "calls": 292,
+          "elapsed_ms": 0.0665
+        },
+        "query.fold.title": {
+          "calls": 37,
+          "elapsed_ms": 0.0032
+        },
+        "query.payload_candidates": {
+          "calls": 37,
+          "elapsed_ms": 0.0
+        },
+        "query.payload_crc": {
+          "calls": 37,
+          "elapsed_ms": 0.1301
+        },
+        "query.payload_read": {
+          "calls": 37,
+          "elapsed_ms": 0.246
+        },
+        "query.payload_read_bytes": {
+          "calls": 1322556,
+          "elapsed_ms": 0.0
+        },
+        "query.payload_read_requests": {
+          "calls": 37,
+          "elapsed_ms": 0.0
+        },
+        "query.payload_requested_bytes": {
+          "calls": 1322556,
+          "elapsed_ms": 0.0
+        },
+        "query.payload_validation": {
+          "calls": 37,
+          "elapsed_ms": 0.0705
+        },
+        "query.payload_window_hits": {
+          "calls": 0,
+          "elapsed_ms": 0.0
+        },
+        "query.posting_cache_read": {
+          "calls": 40,
+          "elapsed_ms": 0.4067
+        },
+        "query.posting_intersection": {
+          "calls": 1746,
+          "elapsed_ms": 0.1188
+        },
+        "query.raw_ascii_probe": {
+          "calls": 37,
+          "elapsed_ms": 0.1274
+        },
+        "query.raw_ascii_proven": {
+          "calls": 31,
+          "elapsed_ms": 0.0012
+        },
+        "query.record_identity": {
+          "calls": 37,
+          "elapsed_ms": 0.004
+        },
+        "query.record_metadata": {
+          "calls": 37,
+          "elapsed_ms": 0.0407
+        },
+        "query.retain_checked_payload": {
+          "calls": 31,
+          "elapsed_ms": 0.0568
+        },
+        "query.scan.body": {
+          "calls": 292,
+          "elapsed_ms": 0.031
+        },
+        "query.verify_text": {
+          "calls": 37,
+          "elapsed_ms": 0.2841
+        },
+        "query.visible_seed_ids": {
+          "calls": 1746,
+          "elapsed_ms": 0.0
+        },
+        "search.filter_visibility_text": {
+          "calls": 1,
+          "elapsed_ms": 1.5789
+        },
+        "search.merge_page_hydration": {
+          "calls": 1,
+          "elapsed_ms": 0.209
+        },
+        "search.total": {
+          "calls": 1,
+          "elapsed_ms": 1.8039
+        }
+      },
+      "after": {
+        "disk.read_at": {
+          "calls": 82,
+          "elapsed_ms": 0.6403
+        },
+        "payload.reuse_checked": {
+          "calls": 31,
+          "elapsed_ms": 0.2
+        },
+        "query.accepted_ids": {
+          "calls": 31,
+          "elapsed_ms": 0.0
+        },
+        "query.covered_candidates": {
+          "calls": 0,
+          "elapsed_ms": 0.0
+        },
+        "query.fold.body": {
+          "calls": 80,
+          "elapsed_ms": 0.0649
+        },
+        "query.fold.title": {
+          "calls": 37,
+          "elapsed_ms": 0.0042
+        },
+        "query.payload_candidates": {
+          "calls": 37,
+          "elapsed_ms": 0.0
+        },
+        "query.payload_crc": {
+          "calls": 37,
+          "elapsed_ms": 0.1354
+        },
+        "query.payload_read": {
+          "calls": 37,
+          "elapsed_ms": 0.3536
+        },
+        "query.payload_read_bytes": {
+          "calls": 1322556,
+          "elapsed_ms": 0.0
+        },
+        "query.payload_read_requests": {
+          "calls": 37,
+          "elapsed_ms": 0.0
+        },
+        "query.payload_requested_bytes": {
+          "calls": 1322556,
+          "elapsed_ms": 0.0
+        },
+        "query.payload_validation": {
+          "calls": 37,
+          "elapsed_ms": 0.0945
+        },
+        "query.payload_window_hits": {
+          "calls": 0,
+          "elapsed_ms": 0.0
+        },
+        "query.posting_cache_read": {
+          "calls": 40,
+          "elapsed_ms": 0.4467
+        },
+        "query.posting_intersection": {
+          "calls": 1746,
+          "elapsed_ms": 0.1219
+        },
+        "query.raw_ascii_probe": {
+          "calls": 37,
+          "elapsed_ms": 0.1397
+        },
+        "query.raw_ascii_proven": {
+          "calls": 31,
+          "elapsed_ms": 0.0011
+        },
+        "query.record_identity": {
+          "calls": 37,
+          "elapsed_ms": 0.0061
+        },
+        "query.record_metadata": {
+          "calls": 37,
+          "elapsed_ms": 0.0581
+        },
+        "query.retain_checked_payload": {
+          "calls": 31,
+          "elapsed_ms": 0.0774
+        },
+        "query.scan.body": {
+          "calls": 80,
+          "elapsed_ms": 0.0249
+        },
+        "query.verify_text": {
+          "calls": 37,
+          "elapsed_ms": 0.2861
+        },
+        "query.visible_seed_ids": {
+          "calls": 1746,
+          "elapsed_ms": 0.0
+        },
+        "search.filter_visibility_text": {
+          "calls": 1,
+          "elapsed_ms": 2.268
+        },
+        "search.merge_page_hydration": {
+          "calls": 1,
+          "elapsed_ms": 0.3135
+        },
+        "search.total": {
+          "calls": 1,
+          "elapsed_ms": 2.5336
+        }
+      }
+    },
+    {
+      "text": "transubstantiation",
+      "offset": 0,
+      "limit": 50,
+      "before": {
+        "disk.read_at": {
+          "calls": 1772,
+          "elapsed_ms": 19.119
+        },
+        "query.accepted_ids": {
+          "calls": 0,
+          "elapsed_ms": 0.0
+        },
+        "query.covered_candidates": {
+          "calls": 0,
+          "elapsed_ms": 0.0
+        },
+        "query.fold.body": {
+          "calls": 55676,
+          "elapsed_ms": 17.3082
+        },
+        "query.fold.title": {
+          "calls": 1527,
+          "elapsed_ms": 0.099
+        },
+        "query.payload_candidates": {
+          "calls": 1527,
+          "elapsed_ms": 0.0
+        },
+        "query.payload_crc": {
+          "calls": 1527,
+          "elapsed_ms": 5.7382
+        },
+        "query.payload_read": {
+          "calls": 1527,
+          "elapsed_ms": 18.0976
+        },
+        "query.payload_read_bytes": {
+          "calls": 56692301,
+          "elapsed_ms": 0.0
+        },
+        "query.payload_read_requests": {
+          "calls": 1527,
+          "elapsed_ms": 0.0
+        },
+        "query.payload_requested_bytes": {
+          "calls": 56692301,
+          "elapsed_ms": 0.0
+        },
+        "query.payload_validation": {
+          "calls": 1527,
+          "elapsed_ms": 5.3362
+        },
+        "query.payload_window_hits": {
+          "calls": 0,
+          "elapsed_ms": 0.0
+        },
+        "query.posting_cache_read": {
+          "calls": 75,
+          "elapsed_ms": 0.9551
+        },
+        "query.posting_intersection": {
+          "calls": 3619,
+          "elapsed_ms": 1.0486
+        },
+        "query.raw_ascii_probe": {
+          "calls": 40,
+          "elapsed_ms": 0.2464
+        },
+        "query.record_identity": {
+          "calls": 1527,
+          "elapsed_ms": 0.1868
+        },
+        "query.record_metadata": {
+          "calls": 1527,
+          "elapsed_ms": 1.6278
+        },
+        "query.scan.body": {
+          "calls": 55676,
+          "elapsed_ms": 8.2742
+        },
+        "query.verify_text": {
+          "calls": 1527,
+          "elapsed_ms": 36.0523
+        },
+        "query.visible_seed_ids": {
+          "calls": 3619,
+          "elapsed_ms": 0.0
+        },
+        "search.filter_visibility_text": {
+          "calls": 1,
+          "elapsed_ms": 70.5455
+        },
+        "search.merge_page_hydration": {
+          "calls": 1,
+          "elapsed_ms": 0.0023
+        },
+        "search.total": {
+          "calls": 1,
+          "elapsed_ms": 70.5486
+        }
+      },
+      "after": {
+        "disk.read_at": {
+          "calls": 1772,
+          "elapsed_ms": 18.9358
+        },
+        "query.accepted_ids": {
+          "calls": 0,
+          "elapsed_ms": 0.0
+        },
+        "query.covered_candidates": {
+          "calls": 0,
+          "elapsed_ms": 0.0
+        },
+        "query.fold.body": {
+          "calls": 15664,
+          "elapsed_ms": 15.0388
+        },
+        "query.fold.title": {
+          "calls": 1527,
+          "elapsed_ms": 0.1001
+        },
+        "query.payload_candidates": {
+          "calls": 1527,
+          "elapsed_ms": 0.0
+        },
+        "query.payload_crc": {
+          "calls": 1527,
+          "elapsed_ms": 6.186
+        },
+        "query.payload_read": {
+          "calls": 1527,
+          "elapsed_ms": 18.0833
+        },
+        "query.payload_read_bytes": {
+          "calls": 56692301,
+          "elapsed_ms": 0.0
+        },
+        "query.payload_read_requests": {
+          "calls": 1527,
+          "elapsed_ms": 0.0
+        },
+        "query.payload_requested_bytes": {
+          "calls": 56692301,
+          "elapsed_ms": 0.0
+        },
+        "query.payload_validation": {
+          "calls": 1527,
+          "elapsed_ms": 5.0394
+        },
+        "query.payload_window_hits": {
+          "calls": 0,
+          "elapsed_ms": 0.0
+        },
+        "query.posting_cache_read": {
+          "calls": 75,
+          "elapsed_ms": 0.8909
+        },
+        "query.posting_intersection": {
+          "calls": 3619,
+          "elapsed_ms": 1.0182
+        },
+        "query.raw_ascii_probe": {
+          "calls": 40,
+          "elapsed_ms": 0.2395
+        },
+        "query.record_identity": {
+          "calls": 1527,
+          "elapsed_ms": 0.1669
+        },
+        "query.record_metadata": {
+          "calls": 1527,
+          "elapsed_ms": 1.4433
+        },
+        "query.scan.body": {
+          "calls": 15664,
+          "elapsed_ms": 6.9767
+        },
+        "query.verify_text": {
+          "calls": 1527,
+          "elapsed_ms": 26.1421
+        },
+        "query.visible_seed_ids": {
+          "calls": 3619,
+          "elapsed_ms": 0.0
+        },
+        "search.filter_visibility_text": {
+          "calls": 1,
+          "elapsed_ms": 60.9048
+        },
+        "search.merge_page_hydration": {
+          "calls": 1,
+          "elapsed_ms": 0.0023
+        },
+        "search.total": {
+          "calls": 1,
+          "elapsed_ms": 60.9081
+        }
+      }
+    },
+    {
+      "text": "harpoon",
+      "offset": 0,
+      "limit": 50,
+      "before": {
+        "disk.read_at": {
+          "calls": 2278,
+          "elapsed_ms": 24.2713
+        },
+        "payload.reuse_checked": {
+          "calls": 50,
+          "elapsed_ms": 0.3535
+        },
+        "query.accepted_ids": {
+          "calls": 1006,
+          "elapsed_ms": 0.0
+        },
+        "query.covered_candidates": {
+          "calls": 0,
+          "elapsed_ms": 0.0
+        },
+        "query.fold.body": {
+          "calls": 46903,
+          "elapsed_ms": 20.9994
+        },
+        "query.fold.title": {
+          "calls": 2089,
+          "elapsed_ms": 0.1333
+        },
+        "query.payload_candidates": {
+          "calls": 2089,
+          "elapsed_ms": 0.0
+        },
+        "query.payload_crc": {
+          "calls": 2089,
+          "elapsed_ms": 7.2579
+        },
+        "query.payload_read": {
+          "calls": 2089,
+          "elapsed_ms": 23.7796
+        },
+        "query.payload_read_bytes": {
+          "calls": 69213695,
+          "elapsed_ms": 0.0
+        },
+        "query.payload_read_requests": {
+          "calls": 2089,
+          "elapsed_ms": 0.0
+        },
+        "query.payload_requested_bytes": {
+          "calls": 69213695,
+          "elapsed_ms": 0.0
+        },
+        "query.payload_validation": {
+          "calls": 2089,
+          "elapsed_ms": 8.4336
+        },
+        "query.payload_window_hits": {
+          "calls": 0,
+          "elapsed_ms": 0.0
+        },
+        "query.posting_cache_read": {
+          "calls": 20,
+          "elapsed_ms": 0.4888
+        },
+        "query.posting_intersection": {
+          "calls": 3905,
+          "elapsed_ms": 0.5783
+        },
+        "query.raw_ascii_probe": {
+          "calls": 40,
+          "elapsed_ms": 0.1556
+        },
+        "query.raw_ascii_proven": {
+          "calls": 17,
+          "elapsed_ms": 0.0006
+        },
+        "query.record_identity": {
+          "calls": 2089,
+          "elapsed_ms": 0.2417
+        },
+        "query.record_metadata": {
+          "calls": 2089,
+          "elapsed_ms": 1.4569
+        },
+        "query.retain_checked_payload": {
+          "calls": 50,
+          "elapsed_ms": 0.104
+        },
+        "query.scan.body": {
+          "calls": 46903,
+          "elapsed_ms": 7.1549
+        },
+        "query.verify_text": {
+          "calls": 2089,
+          "elapsed_ms": 36.4171
+        },
+        "query.visible_seed_ids": {
+          "calls": 3905,
+          "elapsed_ms": 0.0
+        },
+        "search.filter_visibility_text": {
+          "calls": 1,
+          "elapsed_ms": 81.1444
+        },
+        "search.merge_page_hydration": {
+          "calls": 1,
+          "elapsed_ms": 0.6994
+        },
+        "search.total": {
+          "calls": 1,
+          "elapsed_ms": 81.939
+        }
+      },
+      "after": {
+        "disk.read_at": {
+          "calls": 2278,
+          "elapsed_ms": 23.9188
+        },
+        "payload.reuse_checked": {
+          "calls": 50,
+          "elapsed_ms": 0.3564
+        },
+        "query.accepted_ids": {
+          "calls": 1006,
+          "elapsed_ms": 0.0
+        },
+        "query.covered_candidates": {
+          "calls": 0,
+          "elapsed_ms": 0.0
+        },
+        "query.fold.body": {
+          "calls": 14039,
+          "elapsed_ms": 19.8339
+        },
+        "query.fold.title": {
+          "calls": 2089,
+          "elapsed_ms": 0.1339
+        },
+        "query.payload_candidates": {
+          "calls": 2089,
+          "elapsed_ms": 0.0
+        },
+        "query.payload_crc": {
+          "calls": 2089,
+          "elapsed_ms": 6.9253
+        },
+        "query.payload_read": {
+          "calls": 2089,
+          "elapsed_ms": 23.4781
+        },
+        "query.payload_read_bytes": {
+          "calls": 69213695,
+          "elapsed_ms": 0.0
+        },
+        "query.payload_read_requests": {
+          "calls": 2089,
+          "elapsed_ms": 0.0
+        },
+        "query.payload_requested_bytes": {
+          "calls": 69213695,
+          "elapsed_ms": 0.0
+        },
+        "query.payload_validation": {
+          "calls": 2089,
+          "elapsed_ms": 9.1874
+        },
+        "query.payload_window_hits": {
+          "calls": 0,
+          "elapsed_ms": 0.0
+        },
+        "query.posting_cache_read": {
+          "calls": 20,
+          "elapsed_ms": 0.3281
+        },
+        "query.posting_intersection": {
+          "calls": 3905,
+          "elapsed_ms": 0.5524
+        },
+        "query.raw_ascii_probe": {
+          "calls": 40,
+          "elapsed_ms": 0.156
+        },
+        "query.raw_ascii_proven": {
+          "calls": 17,
+          "elapsed_ms": 0.0006
+        },
+        "query.record_identity": {
+          "calls": 2089,
+          "elapsed_ms": 0.2075
+        },
+        "query.record_metadata": {
+          "calls": 2089,
+          "elapsed_ms": 1.3646
+        },
+        "query.retain_checked_payload": {
+          "calls": 50,
+          "elapsed_ms": 0.1424
+        },
+        "query.scan.body": {
+          "calls": 14039,
+          "elapsed_ms": 4.903
+        },
+        "query.verify_text": {
+          "calls": 2089,
+          "elapsed_ms": 28.6354
+        },
+        "query.visible_seed_ids": {
+          "calls": 3905,
+          "elapsed_ms": 0.0
+        },
+        "search.filter_visibility_text": {
+          "calls": 1,
+          "elapsed_ms": 72.9517
+        },
+        "search.merge_page_hydration": {
+          "calls": 1,
+          "elapsed_ms": 0.5066
+        },
+        "search.total": {
+          "calls": 1,
+          "elapsed_ms": 73.4506
+        }
+      }
+    },
+    {
+      "text": "ishmael",
+      "offset": 0,
+      "limit": 50,
+      "before": {
+        "disk.read_at": {
+          "calls": 411,
+          "elapsed_ms": 3.2576
+        },
+        "payload.reuse_checked": {
+          "calls": 50,
+          "elapsed_ms": 0.3628
+        },
+        "query.accepted_ids": {
+          "calls": 260,
+          "elapsed_ms": 0.0
+        },
+        "query.covered_candidates": {
+          "calls": 0,
+          "elapsed_ms": 0.0
+        },
+        "query.fold.title": {
+          "calls": 260,
+          "elapsed_ms": 0.0169
+        },
+        "query.payload_candidates": {
+          "calls": 260,
+          "elapsed_ms": 0.0
+        },
+        "query.payload_crc": {
+          "calls": 260,
+          "elapsed_ms": 0.8401
+        },
+        "query.payload_read": {
+          "calls": 260,
+          "elapsed_ms": 2.7889
+        },
+        "query.payload_read_bytes": {
+          "calls": 8285621,
+          "elapsed_ms": 0.0
+        },
+        "query.payload_read_requests": {
+          "calls": 260,
+          "elapsed_ms": 0.0
+        },
+        "query.payload_requested_bytes": {
+          "calls": 8285621,
+          "elapsed_ms": 0.0
+        },
+        "query.payload_validation": {
+          "calls": 260,
+          "elapsed_ms": 0.6582
+        },
+        "query.payload_window_hits": {
+          "calls": 0,
+          "elapsed_ms": 0.0
+        },
+        "query.posting_cache_read": {
+          "calls": 20,
+          "elapsed_ms": 0.1749
+        },
+        "query.posting_intersection": {
+          "calls": 361,
+          "elapsed_ms": 0.0524
+        },
+        "query.raw_ascii_probe": {
+          "calls": 260,
+          "elapsed_ms": 0.7182
+        },
+        "query.raw_ascii_proven": {
+          "calls": 260,
+          "elapsed_ms": 0.0105
+        },
+        "query.record_identity": {
+          "calls": 260,
+          "elapsed_ms": 0.032
+        },
+        "query.record_metadata": {
+          "calls": 260,
+          "elapsed_ms": 0.5469
+        },
+        "query.retain_checked_payload": {
+          "calls": 50,
+          "elapsed_ms": 0.1282
+        },
+        "query.verify_text": {
+          "calls": 260,
+          "elapsed_ms": 0.8298
+        },
+        "query.visible_seed_ids": {
+          "calls": 361,
+          "elapsed_ms": 0.0
+        },
+        "search.filter_visibility_text": {
+          "calls": 1,
+          "elapsed_ms": 6.3393
+        },
+        "search.merge_page_hydration": {
+          "calls": 1,
+          "elapsed_ms": 0.5941
+        },
+        "search.total": {
+          "calls": 1,
+          "elapsed_ms": 6.9347
+        }
+      },
+      "after": {
+        "disk.read_at": {
+          "calls": 411,
+          "elapsed_ms": 3.6426
+        },
+        "payload.reuse_checked": {
+          "calls": 50,
+          "elapsed_ms": 0.4171
+        },
+        "query.accepted_ids": {
+          "calls": 260,
+          "elapsed_ms": 0.0
+        },
+        "query.covered_candidates": {
+          "calls": 0,
+          "elapsed_ms": 0.0
+        },
+        "query.fold.title": {
+          "calls": 260,
+          "elapsed_ms": 0.0188
+        },
+        "query.payload_candidates": {
+          "calls": 260,
+          "elapsed_ms": 0.0
+        },
+        "query.payload_crc": {
+          "calls": 260,
+          "elapsed_ms": 0.8319
+        },
+        "query.payload_read": {
+          "calls": 260,
+          "elapsed_ms": 3.0497
+        },
+        "query.payload_read_bytes": {
+          "calls": 8285621,
+          "elapsed_ms": 0.0
+        },
+        "query.payload_read_requests": {
+          "calls": 260,
+          "elapsed_ms": 0.0
+        },
+        "query.payload_requested_bytes": {
+          "calls": 8285621,
+          "elapsed_ms": 0.0
+        },
+        "query.payload_validation": {
+          "calls": 260,
+          "elapsed_ms": 0.769
+        },
+        "query.payload_window_hits": {
+          "calls": 0,
+          "elapsed_ms": 0.0
+        },
+        "query.posting_cache_read": {
+          "calls": 20,
+          "elapsed_ms": 0.2083
+        },
+        "query.posting_intersection": {
+          "calls": 361,
+          "elapsed_ms": 0.0638
+        },
+        "query.raw_ascii_probe": {
+          "calls": 260,
+          "elapsed_ms": 0.7795
+        },
+        "query.raw_ascii_proven": {
+          "calls": 260,
+          "elapsed_ms": 0.01
+        },
+        "query.record_identity": {
+          "calls": 260,
+          "elapsed_ms": 0.0317
+        },
+        "query.record_metadata": {
+          "calls": 260,
+          "elapsed_ms": 0.6287
+        },
+        "query.retain_checked_payload": {
+          "calls": 50,
+          "elapsed_ms": 0.0945
+        },
+        "query.verify_text": {
+          "calls": 260,
+          "elapsed_ms": 0.9018
+        },
+        "query.visible_seed_ids": {
+          "calls": 361,
+          "elapsed_ms": 0.0
+        },
+        "search.filter_visibility_text": {
+          "calls": 1,
+          "elapsed_ms": 7.5985
+        },
+        "search.merge_page_hydration": {
+          "calls": 1,
+          "elapsed_ms": 0.6485
+        },
+        "search.total": {
+          "calls": 1,
+          "elapsed_ms": 8.2826
+        }
+      }
+    },
+    {
+      "text": "invertebrata",
+      "offset": 0,
+      "limit": 50,
+      "before": {
+        "disk.read_at": {
+          "calls": 471,
+          "elapsed_ms": 4.5714
+        },
+        "payload.reuse_checked": {
+          "calls": 43,
+          "elapsed_ms": 0.3036
+        },
+        "query.accepted_ids": {
+          "calls": 43,
+          "elapsed_ms": 0.0
+        },
+        "query.covered_candidates": {
+          "calls": 0,
+          "elapsed_ms": 0.0
+        },
+        "query.fold.body": {
+          "calls": 9663,
+          "elapsed_ms": 2.0598
+        },
+        "query.fold.title": {
+          "calls": 286,
+          "elapsed_ms": 0.0182
+        },
+        "query.payload_candidates": {
+          "calls": 286,
+          "elapsed_ms": 0.0
+        },
+        "query.payload_crc": {
+          "calls": 286,
+          "elapsed_ms": 1.0756
+        },
+        "query.payload_read": {
+          "calls": 286,
+          "elapsed_ms": 3.6732
+        },
+        "query.payload_read_bytes": {
+          "calls": 10588258,
+          "elapsed_ms": 0.0
+        },
+        "query.payload_read_requests": {
+          "calls": 286,
+          "elapsed_ms": 0.0
+        },
+        "query.payload_requested_bytes": {
+          "calls": 10588258,
+          "elapsed_ms": 0.0
+        },
+        "query.payload_validation": {
+          "calls": 286,
+          "elapsed_ms": 0.6254
+        },
+        "query.payload_window_hits": {
+          "calls": 0,
+          "elapsed_ms": 0.0
+        },
+        "query.posting_cache_read": {
+          "calls": 44,
+          "elapsed_ms": 0.6197
+        },
+        "query.posting_intersection": {
+          "calls": 499,
+          "elapsed_ms": 0.1252
+        },
+        "query.raw_ascii_probe": {
+          "calls": 40,
+          "elapsed_ms": 0.2281
+        },
+        "query.raw_ascii_proven": {
+          "calls": 5,
+          "elapsed_ms": 0.0002
+        },
+        "query.record_identity": {
+          "calls": 286,
+          "elapsed_ms": 0.033
+        },
+        "query.record_metadata": {
+          "calls": 286,
+          "elapsed_ms": 0.7346
+        },
+        "query.retain_checked_payload": {
+          "calls": 43,
+          "elapsed_ms": 0.1275
+        },
+        "query.scan.body": {
+          "calls": 9663,
+          "elapsed_ms": 1.5216
+        },
+        "query.verify_text": {
+          "calls": 286,
+          "elapsed_ms": 5.5904
+        },
+        "query.visible_seed_ids": {
+          "calls": 499,
+          "elapsed_ms": 0.0
+        },
+        "search.filter_visibility_text": {
+          "calls": 1,
+          "elapsed_ms": 13.1384
+        },
+        "search.merge_page_hydration": {
+          "calls": 1,
+          "elapsed_ms": 0.4702
+        },
+        "search.total": {
+          "calls": 1,
+          "elapsed_ms": 13.7307
+        }
+      },
+      "after": {
+        "disk.read_at": {
+          "calls": 471,
+          "elapsed_ms": 4.1767
+        },
+        "payload.reuse_checked": {
+          "calls": 43,
+          "elapsed_ms": 0.2505
+        },
+        "query.accepted_ids": {
+          "calls": 43,
+          "elapsed_ms": 0.0
+        },
+        "query.covered_candidates": {
+          "calls": 0,
+          "elapsed_ms": 0.0
+        },
+        "query.fold.body": {
+          "calls": 2731,
+          "elapsed_ms": 1.8061
+        },
+        "query.fold.title": {
+          "calls": 286,
+          "elapsed_ms": 0.0186
+        },
+        "query.payload_candidates": {
+          "calls": 286,
+          "elapsed_ms": 0.0
+        },
+        "query.payload_crc": {
+          "calls": 286,
+          "elapsed_ms": 0.992
+        },
+        "query.payload_read": {
+          "calls": 286,
+          "elapsed_ms": 3.3348
+        },
+        "query.payload_read_bytes": {
+          "calls": 10588258,
+          "elapsed_ms": 0.0
+        },
+        "query.payload_read_requests": {
+          "calls": 286,
+          "elapsed_ms": 0.0
+        },
+        "query.payload_requested_bytes": {
+          "calls": 10588258,
+          "elapsed_ms": 0.0
+        },
+        "query.payload_validation": {
+          "calls": 286,
+          "elapsed_ms": 0.5833
+        },
+        "query.payload_window_hits": {
+          "calls": 0,
+          "elapsed_ms": 0.0
+        },
+        "query.posting_cache_read": {
+          "calls": 44,
+          "elapsed_ms": 0.5054
+        },
+        "query.posting_intersection": {
+          "calls": 499,
+          "elapsed_ms": 0.1166
+        },
+        "query.raw_ascii_probe": {
+          "calls": 40,
+          "elapsed_ms": 0.2271
+        },
+        "query.raw_ascii_proven": {
+          "calls": 5,
+          "elapsed_ms": 0.0
+        },
+        "query.record_identity": {
+          "calls": 286,
+          "elapsed_ms": 0.0281
+        },
+        "query.record_metadata": {
+          "calls": 286,
+          "elapsed_ms": 0.6282
+        },
+        "query.retain_checked_payload": {
+          "calls": 43,
+          "elapsed_ms": 0.1232
+        },
+        "query.scan.body": {
+          "calls": 2731,
+          "elapsed_ms": 1.3187
+        },
+        "query.verify_text": {
+          "calls": 286,
+          "elapsed_ms": 4.7295
+        },
+        "query.visible_seed_ids": {
+          "calls": 499,
+          "elapsed_ms": 0.0
+        },
+        "search.filter_visibility_text": {
+          "calls": 1,
+          "elapsed_ms": 11.4235
+        },
+        "search.merge_page_hydration": {
+          "calls": 1,
+          "elapsed_ms": 0.3892
+        },
+        "search.total": {
+          "calls": 1,
+          "elapsed_ms": 11.8137
+        }
+      }
+    },
+    {
+      "text": "darcy",
+      "offset": 0,
+      "limit": 50,
+      "before": {
+        "disk.read_at": {
+          "calls": 2308,
+          "elapsed_ms": 24.172
+        },
+        "payload.reuse_checked": {
+          "calls": 50,
+          "elapsed_ms": 0.5665
+        },
+        "query.accepted_ids": {
+          "calls": 1220,
+          "elapsed_ms": 0.0
+        },
+        "query.covered_candidates": {
+          "calls": 0,
+          "elapsed_ms": 0.0
+        },
+        "query.fold.body": {
+          "calls": 38120,
+          "elapsed_ms": 14.0155
+        },
+        "query.fold.title": {
+          "calls": 2129,
+          "elapsed_ms": 0.1421
+        },
+        "query.payload_candidates": {
+          "calls": 2129,
+          "elapsed_ms": 0.0
+        },
+        "query.payload_crc": {
+          "calls": 2129,
+          "elapsed_ms": 7.5884
+        },
+        "query.payload_read": {
+          "calls": 2129,
+          "elapsed_ms": 23.7477
+        },
+        "query.payload_read_bytes": {
+          "calls": 67132043,
+          "elapsed_ms": 0.0
+        },
+        "query.payload_read_requests": {
+          "calls": 2129,
+          "elapsed_ms": 0.0
+        },
+        "query.payload_requested_bytes": {
+          "calls": 67132043,
+          "elapsed_ms": 0.0
+        },
+        "query.payload_validation": {
+          "calls": 2129,
+          "elapsed_ms": 7.517
+        },
+        "query.payload_window_hits": {
+          "calls": 0,
+          "elapsed_ms": 0.0
+        },
+        "query.posting_cache_read": {
+          "calls": 10,
+          "elapsed_ms": 0.4382
+        },
+        "query.posting_intersection": {
+          "calls": 2512,
+          "elapsed_ms": 0.3406
+        },
+        "query.raw_ascii_probe": {
+          "calls": 56,
+          "elapsed_ms": 0.1684
+        },
+        "query.raw_ascii_proven": {
+          "calls": 34,
+          "elapsed_ms": 0.0015
+        },
+        "query.record_identity": {
+          "calls": 2129,
+          "elapsed_ms": 0.2541
+        },
+        "query.record_metadata": {
+          "calls": 2129,
+          "elapsed_ms": 1.6214
+        },
+        "query.retain_checked_payload": {
+          "calls": 50,
+          "elapsed_ms": 0.1415
+        },
+        "query.scan.body": {
+          "calls": 38120,
+          "elapsed_ms": 4.2992
+        },
+        "query.verify_text": {
+          "calls": 2129,
+          "elapsed_ms": 27.0451
+        },
+        "query.visible_seed_ids": {
+          "calls": 2512,
+          "elapsed_ms": 0.0
+        },
+        "search.filter_visibility_text": {
+          "calls": 1,
+          "elapsed_ms": 71.1052
+        },
+        "search.merge_page_hydration": {
+          "calls": 1,
+          "elapsed_ms": 0.7372
+        },
+        "search.total": {
+          "calls": 1,
+          "elapsed_ms": 71.8437
+        }
+      },
+      "after": {
+        "disk.read_at": {
+          "calls": 2308,
+          "elapsed_ms": 21.5609
+        },
+        "payload.reuse_checked": {
+          "calls": 50,
+          "elapsed_ms": 0.3558
+        },
+        "query.accepted_ids": {
+          "calls": 1220,
+          "elapsed_ms": 0.0
+        },
+        "query.covered_candidates": {
+          "calls": 0,
+          "elapsed_ms": 0.0
+        },
+        "query.fold.body": {
+          "calls": 11790,
+          "elapsed_ms": 12.8297
+        },
+        "query.fold.title": {
+          "calls": 2129,
+          "elapsed_ms": 0.1331
+        },
+        "query.payload_candidates": {
+          "calls": 2129,
+          "elapsed_ms": 0.0
+        },
+        "query.payload_crc": {
+          "calls": 2129,
+          "elapsed_ms": 7.2679
+        },
+        "query.payload_read": {
+          "calls": 2129,
+          "elapsed_ms": 21.4675
+        },
+        "query.payload_read_bytes": {
+          "calls": 67132043,
+          "elapsed_ms": 0.0
+        },
+        "query.payload_read_requests": {
+          "calls": 2129,
+          "elapsed_ms": 0.0
+        },
+        "query.payload_requested_bytes": {
+          "calls": 67132043,
+          "elapsed_ms": 0.0
+        },
+        "query.payload_validation": {
+          "calls": 2129,
+          "elapsed_ms": 7.3646
+        },
+        "query.payload_window_hits": {
+          "calls": 0,
+          "elapsed_ms": 0.0
+        },
+        "query.posting_cache_read": {
+          "calls": 10,
+          "elapsed_ms": 0.1485
+        },
+        "query.posting_intersection": {
+          "calls": 2512,
+          "elapsed_ms": 0.3148
+        },
+        "query.raw_ascii_probe": {
+          "calls": 56,
+          "elapsed_ms": 0.1543
+        },
+        "query.raw_ascii_proven": {
+          "calls": 34,
+          "elapsed_ms": 0.0013
+        },
+        "query.record_identity": {
+          "calls": 2129,
+          "elapsed_ms": 0.1874
+        },
+        "query.record_metadata": {
+          "calls": 2129,
+          "elapsed_ms": 1.1481
+        },
+        "query.retain_checked_payload": {
+          "calls": 50,
+          "elapsed_ms": 0.108
+        },
+        "query.scan.body": {
+          "calls": 11790,
+          "elapsed_ms": 2.5643
+        },
+        "query.verify_text": {
+          "calls": 2129,
+          "elapsed_ms": 18.5002
+        },
+        "query.visible_seed_ids": {
+          "calls": 2512,
+          "elapsed_ms": 0.0
+        },
+        "search.filter_visibility_text": {
+          "calls": 1,
+          "elapsed_ms": 59.196
+        },
+        "search.merge_page_hydration": {
+          "calls": 1,
+          "elapsed_ms": 0.5142
+        },
+        "search.total": {
+          "calls": 1,
+          "elapsed_ms": 59.7115
+        }
+      }
+    },
+    {
+      "text": "elizabeth",
+      "offset": 0,
+      "limit": 50,
+      "before": {
+        "disk.read_at": {
+          "calls": 2552,
+          "elapsed_ms": 22.8381
+        },
+        "payload.reuse_checked": {
+          "calls": 50,
+          "elapsed_ms": 0.3291
+        },
+        "query.accepted_ids": {
+          "calls": 2280,
+          "elapsed_ms": 0.0
+        },
+        "query.covered_candidates": {
+          "calls": 0,
+          "elapsed_ms": 0.0
+        },
+        "query.fold.body": {
+          "calls": 2776,
+          "elapsed_ms": 1.8465
+        },
+        "query.fold.title": {
+          "calls": 2353,
+          "elapsed_ms": 0.1456
+        },
+        "query.payload_candidates": {
+          "calls": 2353,
+          "elapsed_ms": 0.0
+        },
+        "query.payload_crc": {
+          "calls": 2353,
+          "elapsed_ms": 7.1387
+        },
+        "query.payload_read": {
+          "calls": 2353,
+          "elapsed_ms": 22.65
+        },
+        "query.payload_read_bytes": {
+          "calls": 66797629,
+          "elapsed_ms": 0.0
+        },
+        "query.payload_read_requests": {
+          "calls": 2353,
+          "elapsed_ms": 0.0
+        },
+        "query.payload_requested_bytes": {
+          "calls": 66797629,
+          "elapsed_ms": 0.0
+        },
+        "query.payload_validation": {
+          "calls": 2353,
+          "elapsed_ms": 6.7439
+        },
+        "query.payload_window_hits": {
+          "calls": 0,
+          "elapsed_ms": 0.0
+        },
+        "query.posting_cache_read": {
+          "calls": 30,
+          "elapsed_ms": 0.5711
+        },
+        "query.posting_intersection": {
+          "calls": 2353,
+          "elapsed_ms": 0.5518
+        },
+        "query.raw_ascii_probe": {
+          "calls": 2228,
+          "elapsed_ms": 9.7501
+        },
+        "query.raw_ascii_proven": {
+          "calls": 2158,
+          "elapsed_ms": 0.0875
+        },
+        "query.record_identity": {
+          "calls": 2353,
+          "elapsed_ms": 0.2628
+        },
+        "query.record_metadata": {
+          "calls": 2353,
+          "elapsed_ms": 1.2295
+        },
+        "query.retain_checked_payload": {
+          "calls": 50,
+          "elapsed_ms": 0.095
+        },
+        "query.scan.body": {
+          "calls": 2776,
+          "elapsed_ms": 0.4211
+        },
+        "query.verify_text": {
+          "calls": 2353,
+          "elapsed_ms": 13.9903
+        },
+        "query.visible_seed_ids": {
+          "calls": 2353,
+          "elapsed_ms": 0.0
+        },
+        "search.filter_visibility_text": {
+          "calls": 1,
+          "elapsed_ms": 56.1403
+        },
+        "search.merge_page_hydration": {
+          "calls": 1,
+          "elapsed_ms": 0.6395
+        },
+        "search.total": {
+          "calls": 1,
+          "elapsed_ms": 56.6111
+        }
+      },
+      "after": {
+        "disk.read_at": {
+          "calls": 2552,
+          "elapsed_ms": 24.2062
+        },
+        "payload.reuse_checked": {
+          "calls": 50,
+          "elapsed_ms": 0.3157
+        },
+        "query.accepted_ids": {
+          "calls": 2280,
+          "elapsed_ms": 0.0
+        },
+        "query.covered_candidates": {
+          "calls": 0,
+          "elapsed_ms": 0.0
+        },
+        "query.fold.body": {
+          "calls": 898,
+          "elapsed_ms": 1.3915
+        },
+        "query.fold.title": {
+          "calls": 2353,
+          "elapsed_ms": 0.1422
+        },
+        "query.payload_candidates": {
+          "calls": 2353,
+          "elapsed_ms": 0.0
+        },
+        "query.payload_crc": {
+          "calls": 2353,
+          "elapsed_ms": 6.7001
+        },
+        "query.payload_read": {
+          "calls": 2353,
+          "elapsed_ms": 23.7801
+        },
+        "query.payload_read_bytes": {
+          "calls": 66797629,
+          "elapsed_ms": 0.0
+        },
+        "query.payload_read_requests": {
+          "calls": 2353,
+          "elapsed_ms": 0.0
+        },
+        "query.payload_requested_bytes": {
+          "calls": 66797629,
+          "elapsed_ms": 0.0
+        },
+        "query.payload_validation": {
+          "calls": 2353,
+          "elapsed_ms": 6.9361
+        },
+        "query.payload_window_hits": {
+          "calls": 0,
+          "elapsed_ms": 0.0
+        },
+        "query.posting_cache_read": {
+          "calls": 30,
+          "elapsed_ms": 0.3854
+        },
+        "query.posting_intersection": {
+          "calls": 2353,
+          "elapsed_ms": 0.5261
+        },
+        "query.raw_ascii_probe": {
+          "calls": 2228,
+          "elapsed_ms": 9.5496
+        },
+        "query.raw_ascii_proven": {
+          "calls": 2158,
+          "elapsed_ms": 0.089
+        },
+        "query.record_identity": {
+          "calls": 2353,
+          "elapsed_ms": 0.2071
+        },
+        "query.record_metadata": {
+          "calls": 2353,
+          "elapsed_ms": 1.2926
+        },
+        "query.retain_checked_payload": {
+          "calls": 50,
+          "elapsed_ms": 0.0974
+        },
+        "query.scan.body": {
+          "calls": 898,
+          "elapsed_ms": 0.3625
+        },
+        "query.verify_text": {
+          "calls": 2353,
+          "elapsed_ms": 12.6309
+        },
+        "query.visible_seed_ids": {
+          "calls": 2353,
+          "elapsed_ms": 0.0
+        },
+        "search.filter_visibility_text": {
+          "calls": 1,
+          "elapsed_ms": 55.1911
+        },
+        "search.merge_page_hydration": {
+          "calls": 1,
+          "elapsed_ms": 0.6343
+        },
+        "search.total": {
+          "calls": 1,
+          "elapsed_ms": 56.1406
+        }
+      }
+    },
+    {
+      "text": "watson",
+      "offset": 0,
+      "limit": 50,
+      "before": {
+        "disk.read_at": {
+          "calls": 2138,
+          "elapsed_ms": 20.2312
+        },
+        "payload.reuse_checked": {
+          "calls": 50,
+          "elapsed_ms": 0.3675
+        },
+        "query.accepted_ids": {
+          "calls": 1707,
+          "elapsed_ms": 0.0
+        },
+        "query.covered_candidates": {
+          "calls": 0,
+          "elapsed_ms": 0.0
+        },
+        "query.fold.body": {
+          "calls": 19974,
+          "elapsed_ms": 8.2306
+        },
+        "query.fold.title": {
+          "calls": 1954,
+          "elapsed_ms": 0.1267
+        },
+        "query.payload_candidates": {
+          "calls": 1954,
+          "elapsed_ms": 0.0
+        },
+        "query.payload_crc": {
+          "calls": 1954,
+          "elapsed_ms": 6.6449
+        },
+        "query.payload_read": {
+          "calls": 1954,
+          "elapsed_ms": 19.7161
+        },
+        "query.payload_read_bytes": {
+          "calls": 61078835,
+          "elapsed_ms": 0.0
+        },
+        "query.payload_read_requests": {
+          "calls": 1954,
+          "elapsed_ms": 0.0
+        },
+        "query.payload_requested_bytes": {
+          "calls": 61078835,
+          "elapsed_ms": 0.0
+        },
+        "query.payload_validation": {
+          "calls": 1954,
+          "elapsed_ms": 7.7022
+        },
+        "query.payload_window_hits": {
+          "calls": 0,
+          "elapsed_ms": 0.0
+        },
+        "query.posting_cache_read": {
+          "calls": 15,
+          "elapsed_ms": 0.2033
+        },
+        "query.posting_intersection": {
+          "calls": 1987,
+          "elapsed_ms": 0.3233
+        },
+        "query.raw_ascii_probe": {
+          "calls": 600,
+          "elapsed_ms": 1.5876
+        },
+        "query.raw_ascii_proven": {
+          "calls": 525,
+          "elapsed_ms": 0.0215
+        },
+        "query.record_identity": {
+          "calls": 1954,
+          "elapsed_ms": 0.2196
+        },
+        "query.record_metadata": {
+          "calls": 1954,
+          "elapsed_ms": 1.3452
+        },
+        "query.retain_checked_payload": {
+          "calls": 50,
+          "elapsed_ms": 0.1064
+        },
+        "query.scan.body": {
+          "calls": 19974,
+          "elapsed_ms": 2.1127
+        },
+        "query.verify_text": {
+          "calls": 1954,
+          "elapsed_ms": 16.3295
+        },
+        "query.visible_seed_ids": {
+          "calls": 1987,
+          "elapsed_ms": 0.0
+        },
+        "search.filter_visibility_text": {
+          "calls": 1,
+          "elapsed_ms": 55.1862
+        },
+        "search.merge_page_hydration": {
+          "calls": 1,
+          "elapsed_ms": 0.5339
+        },
+        "search.total": {
+          "calls": 1,
+          "elapsed_ms": 55.6913
+        }
+      },
+      "after": {
+        "disk.read_at": {
+          "calls": 2138,
+          "elapsed_ms": 19.8144
+        },
+        "payload.reuse_checked": {
+          "calls": 50,
+          "elapsed_ms": 0.385
+        },
+        "query.accepted_ids": {
+          "calls": 1707,
+          "elapsed_ms": 0.0
+        },
+        "query.covered_candidates": {
+          "calls": 0,
+          "elapsed_ms": 0.0
+        },
+        "query.fold.body": {
+          "calls": 6583,
+          "elapsed_ms": 9.1316
+        },
+        "query.fold.title": {
+          "calls": 1954,
+          "elapsed_ms": 0.1261
+        },
+        "query.payload_candidates": {
+          "calls": 1954,
+          "elapsed_ms": 0.0
+        },
+        "query.payload_crc": {
+          "calls": 1954,
+          "elapsed_ms": 6.379
+        },
+        "query.payload_read": {
+          "calls": 1954,
+          "elapsed_ms": 19.4457
+        },
+        "query.payload_read_bytes": {
+          "calls": 61078835,
+          "elapsed_ms": 0.0
+        },
+        "query.payload_read_requests": {
+          "calls": 1954,
+          "elapsed_ms": 0.0
+        },
+        "query.payload_requested_bytes": {
+          "calls": 61078835,
+          "elapsed_ms": 0.0
+        },
+        "query.payload_validation": {
+          "calls": 1954,
+          "elapsed_ms": 7.2253
+        },
+        "query.payload_window_hits": {
+          "calls": 0,
+          "elapsed_ms": 0.0
+        },
+        "query.posting_cache_read": {
+          "calls": 15,
+          "elapsed_ms": 0.1886
+        },
+        "query.posting_intersection": {
+          "calls": 1987,
+          "elapsed_ms": 0.3194
+        },
+        "query.raw_ascii_probe": {
+          "calls": 600,
+          "elapsed_ms": 1.6025
+        },
+        "query.raw_ascii_proven": {
+          "calls": 525,
+          "elapsed_ms": 0.0225
+        },
+        "query.record_identity": {
+          "calls": 1954,
+          "elapsed_ms": 0.1867
+        },
+        "query.record_metadata": {
+          "calls": 1954,
+          "elapsed_ms": 1.2455
+        },
+        "query.retain_checked_payload": {
+          "calls": 50,
+          "elapsed_ms": 0.1078
+        },
+        "query.scan.body": {
+          "calls": 6583,
+          "elapsed_ms": 1.6197
+        },
+        "query.verify_text": {
+          "calls": 1954,
+          "elapsed_ms": 14.4323
+        },
+        "query.visible_seed_ids": {
+          "calls": 1987,
+          "elapsed_ms": 0.0
+        },
+        "search.filter_visibility_text": {
+          "calls": 1,
+          "elapsed_ms": 50.8874
+        },
+        "search.merge_page_hydration": {
+          "calls": 1,
+          "elapsed_ms": 0.5609
+        },
+        "search.total": {
+          "calls": 1,
+          "elapsed_ms": 51.4016
+        }
+      }
+    },
+    {
+      "text": "holmes",
+      "offset": 0,
+      "limit": 50,
+      "before": {
+        "disk.read_at": {
+          "calls": 1467,
+          "elapsed_ms": 12.2979
+        },
+        "payload.reuse_checked": {
+          "calls": 50,
+          "elapsed_ms": 0.338
+        },
+        "query.accepted_ids": {
+          "calls": 1222,
+          "elapsed_ms": 0.0
+        },
+        "query.covered_candidates": {
+          "calls": 0,
+          "elapsed_ms": 0.0
+        },
+        "query.fold.body": {
+          "calls": 2501,
+          "elapsed_ms": 0.7566
+        },
+        "query.fold.title": {
+          "calls": 1285,
+          "elapsed_ms": 0.0836
+        },
+        "query.payload_candidates": {
+          "calls": 1285,
+          "elapsed_ms": 0.0
+        },
+        "query.payload_crc": {
+          "calls": 1285,
+          "elapsed_ms": 3.6994
+        },
+        "query.payload_read": {
+          "calls": 1285,
+          "elapsed_ms": 11.8054
+        },
+        "query.payload_read_bytes": {
+          "calls": 35906386,
+          "elapsed_ms": 0.0
+        },
+        "query.payload_read_requests": {
+          "calls": 1285,
+          "elapsed_ms": 0.0
+        },
+        "query.payload_requested_bytes": {
+          "calls": 35906386,
+          "elapsed_ms": 0.0
+        },
+        "query.payload_validation": {
+          "calls": 1285,
+          "elapsed_ms": 4.0543
+        },
+        "query.payload_window_hits": {
+          "calls": 0,
+          "elapsed_ms": 0.0
+        },
+        "query.posting_cache_read": {
+          "calls": 15,
+          "elapsed_ms": 0.217
+        },
+        "query.posting_intersection": {
+          "calls": 1440,
+          "elapsed_ms": 0.2027
+        },
+        "query.raw_ascii_probe": {
+          "calls": 1285,
+          "elapsed_ms": 3.4633
+        },
+        "query.raw_ascii_proven": {
+          "calls": 1222,
+          "elapsed_ms": 0.0499
+        },
+        "query.record_identity": {
+          "calls": 1285,
+          "elapsed_ms": 0.1457
+        },
+        "query.record_metadata": {
+          "calls": 1285,
+          "elapsed_ms": 1.012
+        },
+        "query.retain_checked_payload": {
+          "calls": 50,
+          "elapsed_ms": 0.0853
+        },
+        "query.scan.body": {
+          "calls": 2501,
+          "elapsed_ms": 0.3115
+        },
+        "query.verify_text": {
+          "calls": 1285,
+          "elapsed_ms": 5.7695
+        },
+        "query.visible_seed_ids": {
+          "calls": 1440,
+          "elapsed_ms": 0.0
+        },
+        "search.filter_visibility_text": {
+          "calls": 1,
+          "elapsed_ms": 28.312
+        },
+        "search.merge_page_hydration": {
+          "calls": 1,
+          "elapsed_ms": 0.4911
+        },
+        "search.total": {
+          "calls": 1,
+          "elapsed_ms": 28.8042
+        }
+      },
+      "after": {
+        "disk.read_at": {
+          "calls": 1467,
+          "elapsed_ms": 12.4829
+        },
+        "payload.reuse_checked": {
+          "calls": 50,
+          "elapsed_ms": 0.3356
+        },
+        "query.accepted_ids": {
+          "calls": 1222,
+          "elapsed_ms": 0.0
+        },
+        "query.covered_candidates": {
+          "calls": 0,
+          "elapsed_ms": 0.0
+        },
+        "query.fold.body": {
+          "calls": 699,
+          "elapsed_ms": 0.6609
+        },
+        "query.fold.title": {
+          "calls": 1285,
+          "elapsed_ms": 0.0818
+        },
+        "query.payload_candidates": {
+          "calls": 1285,
+          "elapsed_ms": 0.0
+        },
+        "query.payload_crc": {
+          "calls": 1285,
+          "elapsed_ms": 3.7824
+        },
+        "query.payload_read": {
+          "calls": 1285,
+          "elapsed_ms": 12.0034
+        },
+        "query.payload_read_bytes": {
+          "calls": 35906386,
+          "elapsed_ms": 0.0
+        },
+        "query.payload_read_requests": {
+          "calls": 1285,
+          "elapsed_ms": 0.0
+        },
+        "query.payload_requested_bytes": {
+          "calls": 35906386,
+          "elapsed_ms": 0.0
+        },
+        "query.payload_validation": {
+          "calls": 1285,
+          "elapsed_ms": 4.1234
+        },
+        "query.payload_window_hits": {
+          "calls": 0,
+          "elapsed_ms": 0.0
+        },
+        "query.posting_cache_read": {
+          "calls": 15,
+          "elapsed_ms": 0.2505
+        },
+        "query.posting_intersection": {
+          "calls": 1440,
+          "elapsed_ms": 0.2125
+        },
+        "query.raw_ascii_probe": {
+          "calls": 1285,
+          "elapsed_ms": 3.411
+        },
+        "query.raw_ascii_proven": {
+          "calls": 1222,
+          "elapsed_ms": 0.0516
+        },
+        "query.record_identity": {
+          "calls": 1285,
+          "elapsed_ms": 0.1205
+        },
+        "query.record_metadata": {
+          "calls": 1285,
+          "elapsed_ms": 0.9953
+        },
+        "query.retain_checked_payload": {
+          "calls": 50,
+          "elapsed_ms": 0.09
+        },
+        "query.scan.body": {
+          "calls": 699,
+          "elapsed_ms": 0.238
+        },
+        "query.verify_text": {
+          "calls": 1285,
+          "elapsed_ms": 5.0726
+        },
+        "query.visible_seed_ids": {
+          "calls": 1440,
+          "elapsed_ms": 0.0
+        },
+        "search.filter_visibility_text": {
+          "calls": 1,
+          "elapsed_ms": 28.2869
+        },
+        "search.merge_page_hydration": {
+          "calls": 1,
+          "elapsed_ms": 0.4827
+        },
+        "search.total": {
+          "calls": 1,
+          "elapsed_ms": 28.7696
+        }
+      }
+    },
+    {
+      "text": "frankenstein",
+      "offset": 0,
+      "limit": 50,
+      "before": {
+        "disk.read_at": {
+          "calls": 836,
+          "elapsed_ms": 7.1084
+        },
+        "payload.reuse_checked": {
+          "calls": 50,
+          "elapsed_ms": 0.3425
+        },
+        "query.accepted_ids": {
+          "calls": 607,
+          "elapsed_ms": 0.0
+        },
+        "query.covered_candidates": {
+          "calls": 0,
+          "elapsed_ms": 0.0
+        },
+        "query.fold.body": {
+          "calls": 770,
+          "elapsed_ms": 0.3001
+        },
+        "query.fold.title": {
+          "calls": 626,
+          "elapsed_ms": 0.0429
+        },
+        "query.payload_candidates": {
+          "calls": 626,
+          "elapsed_ms": 0.0
+        },
+        "query.payload_crc": {
+          "calls": 626,
+          "elapsed_ms": 2.1672
+        },
+        "query.payload_read": {
+          "calls": 626,
+          "elapsed_ms": 6.4478
+        },
+        "query.payload_read_bytes": {
+          "calls": 19887753,
+          "elapsed_ms": 0.0
+        },
+        "query.payload_read_requests": {
+          "calls": 626,
+          "elapsed_ms": 0.0
+        },
+        "query.payload_requested_bytes": {
+          "calls": 19887753,
+          "elapsed_ms": 0.0
+        },
+        "query.payload_validation": {
+          "calls": 626,
+          "elapsed_ms": 1.2531
+        },
+        "query.payload_window_hits": {
+          "calls": 0,
+          "elapsed_ms": 0.0
+        },
+        "query.posting_cache_read": {
+          "calls": 45,
+          "elapsed_ms": 0.5008
+        },
+        "query.posting_intersection": {
+          "calls": 665,
+          "elapsed_ms": 0.232
+        },
+        "query.raw_ascii_probe": {
+          "calls": 626,
+          "elapsed_ms": 1.529
+        },
+        "query.raw_ascii_proven": {
+          "calls": 607,
+          "elapsed_ms": 0.0252
+        },
+        "query.record_identity": {
+          "calls": 626,
+          "elapsed_ms": 0.0752
+        },
+        "query.record_metadata": {
+          "calls": 626,
+          "elapsed_ms": 0.8653
+        },
+        "query.retain_checked_payload": {
+          "calls": 50,
+          "elapsed_ms": 0.1177
+        },
+        "query.scan.body": {
+          "calls": 770,
+          "elapsed_ms": 0.0775
+        },
+        "query.verify_text": {
+          "calls": 626,
+          "elapsed_ms": 2.3893
+        },
+        "query.visible_seed_ids": {
+          "calls": 665,
+          "elapsed_ms": 0.0
+        },
+        "search.filter_visibility_text": {
+          "calls": 1,
+          "elapsed_ms": 14.897
+        },
+        "search.merge_page_hydration": {
+          "calls": 1,
+          "elapsed_ms": 0.5226
+        },
+        "search.total": {
+          "calls": 1,
+          "elapsed_ms": 15.4374
+        }
+      },
+      "after": {
+        "disk.read_at": {
+          "calls": 836,
+          "elapsed_ms": 8.2085
+        },
+        "payload.reuse_checked": {
+          "calls": 50,
+          "elapsed_ms": 0.3224
+        },
+        "query.accepted_ids": {
+          "calls": 607,
+          "elapsed_ms": 0.0
+        },
+        "query.covered_candidates": {
+          "calls": 0,
+          "elapsed_ms": 0.0
+        },
+        "query.fold.body": {
+          "calls": 215,
+          "elapsed_ms": 0.2855
+        },
+        "query.fold.title": {
+          "calls": 626,
+          "elapsed_ms": 0.0453
+        },
+        "query.payload_candidates": {
+          "calls": 626,
+          "elapsed_ms": 0.0
+        },
+        "query.payload_crc": {
+          "calls": 626,
+          "elapsed_ms": 2.2787
+        },
+        "query.payload_read": {
+          "calls": 626,
+          "elapsed_ms": 7.3337
+        },
+        "query.payload_read_bytes": {
+          "calls": 19887753,
+          "elapsed_ms": 0.0
+        },
+        "query.payload_read_requests": {
+          "calls": 626,
+          "elapsed_ms": 0.0
+        },
+        "query.payload_requested_bytes": {
+          "calls": 19887753,
+          "elapsed_ms": 0.0
+        },
+        "query.payload_validation": {
+          "calls": 626,
+          "elapsed_ms": 1.3855
+        },
+        "query.payload_window_hits": {
+          "calls": 0,
+          "elapsed_ms": 0.0
+        },
+        "query.posting_cache_read": {
+          "calls": 45,
+          "elapsed_ms": 0.5381
+        },
+        "query.posting_intersection": {
+          "calls": 665,
+          "elapsed_ms": 0.2786
+        },
+        "query.raw_ascii_probe": {
+          "calls": 626,
+          "elapsed_ms": 1.8134
+        },
+        "query.raw_ascii_proven": {
+          "calls": 607,
+          "elapsed_ms": 0.0248
+        },
+        "query.record_identity": {
+          "calls": 626,
+          "elapsed_ms": 0.0796
+        },
+        "query.record_metadata": {
+          "calls": 626,
+          "elapsed_ms": 1.0937
+        },
+        "query.retain_checked_payload": {
+          "calls": 50,
+          "elapsed_ms": 0.1083
+        },
+        "query.scan.body": {
+          "calls": 215,
+          "elapsed_ms": 0.0672
+        },
+        "query.verify_text": {
+          "calls": 626,
+          "elapsed_ms": 2.6106
+        },
+        "query.visible_seed_ids": {
+          "calls": 665,
+          "elapsed_ms": 0.0
+        },
+        "search.filter_visibility_text": {
+          "calls": 1,
+          "elapsed_ms": 16.8467
+        },
+        "search.merge_page_hydration": {
+          "calls": 1,
+          "elapsed_ms": 0.4985
+        },
+        "search.total": {
+          "calls": 1,
+          "elapsed_ms": 17.3343
+        }
+      }
+    },
+    {
+      "text": "galapagos",
+      "offset": 0,
+      "limit": 50,
+      "before": {
+        "disk.read_at": {
+          "calls": 458,
+          "elapsed_ms": 3.8839
+        },
+        "payload.reuse_checked": {
+          "calls": 50,
+          "elapsed_ms": 0.3617
+        },
+        "query.accepted_ids": {
+          "calls": 179,
+          "elapsed_ms": 0.0
+        },
+        "query.covered_candidates": {
+          "calls": 0,
+          "elapsed_ms": 0.0
+        },
+        "query.fold.body": {
+          "calls": 6482,
+          "elapsed_ms": 2.132
+        },
+        "query.fold.title": {
+          "calls": 287,
+          "elapsed_ms": 0.0209
+        },
+        "query.payload_candidates": {
+          "calls": 287,
+          "elapsed_ms": 0.0
+        },
+        "query.payload_crc": {
+          "calls": 287,
+          "elapsed_ms": 1.0489
+        },
+        "query.payload_read": {
+          "calls": 287,
+          "elapsed_ms": 3.255
+        },
+        "query.payload_read_bytes": {
+          "calls": 9853610,
+          "elapsed_ms": 0.0
+        },
+        "query.payload_read_requests": {
+          "calls": 287,
+          "elapsed_ms": 0.0
+        },
+        "query.payload_requested_bytes": {
+          "calls": 9853610,
+          "elapsed_ms": 0.0
+        },
+        "query.payload_validation": {
+          "calls": 287,
+          "elapsed_ms": 0.7868
+        },
+        "query.payload_window_hits": {
+          "calls": 0,
+          "elapsed_ms": 0.0
+        },
+        "query.posting_cache_read": {
+          "calls": 30,
+          "elapsed_ms": 0.308
+        },
+        "query.posting_intersection": {
+          "calls": 1000,
+          "elapsed_ms": 0.1419
+        },
+        "query.raw_ascii_probe": {
+          "calls": 48,
+          "elapsed_ms": 0.1775
+        },
+        "query.raw_ascii_proven": {
+          "calls": 27,
+          "elapsed_ms": 0.001
+        },
+        "query.record_identity": {
+          "calls": 287,
+          "elapsed_ms": 0.0388
+        },
+        "query.record_metadata": {
+          "calls": 287,
+          "elapsed_ms": 0.7105
+        },
+        "query.retain_checked_payload": {
+          "calls": 50,
+          "elapsed_ms": 0.1257
+        },
+        "query.scan.body": {
+          "calls": 6482,
+          "elapsed_ms": 0.6345
+        },
+        "query.verify_text": {
+          "calls": 287,
+          "elapsed_ms": 4.0926
+        },
+        "query.visible_seed_ids": {
+          "calls": 1000,
+          "elapsed_ms": 0.0
+        },
+        "search.filter_visibility_text": {
+          "calls": 1,
+          "elapsed_ms": 11.3109
+        },
+        "search.merge_page_hydration": {
+          "calls": 1,
+          "elapsed_ms": 0.64
+        },
+        "search.total": {
+          "calls": 1,
+          "elapsed_ms": 11.9525
+        }
+      },
+      "after": {
+        "disk.read_at": {
+          "calls": 458,
+          "elapsed_ms": 4.1214
+        },
+        "payload.reuse_checked": {
+          "calls": 50,
+          "elapsed_ms": 0.4229
+        },
+        "query.accepted_ids": {
+          "calls": 179,
+          "elapsed_ms": 0.0
+        },
+        "query.covered_candidates": {
+          "calls": 0,
+          "elapsed_ms": 0.0
+        },
+        "query.fold.body": {
+          "calls": 1918,
+          "elapsed_ms": 2.0352
+        },
+        "query.fold.title": {
+          "calls": 287,
+          "elapsed_ms": 0.0227
+        },
+        "query.payload_candidates": {
+          "calls": 287,
+          "elapsed_ms": 0.0
+        },
+        "query.payload_crc": {
+          "calls": 287,
+          "elapsed_ms": 1.038
+        },
+        "query.payload_read": {
+          "calls": 287,
+          "elapsed_ms": 3.502
+        },
+        "query.payload_read_bytes": {
+          "calls": 9853610,
+          "elapsed_ms": 0.0
+        },
+        "query.payload_read_requests": {
+          "calls": 287,
+          "elapsed_ms": 0.0
+        },
+        "query.payload_requested_bytes": {
+          "calls": 9853610,
+          "elapsed_ms": 0.0
+        },
+        "query.payload_validation": {
+          "calls": 287,
+          "elapsed_ms": 0.8188
+        },
+        "query.payload_window_hits": {
+          "calls": 0,
+          "elapsed_ms": 0.0
+        },
+        "query.posting_cache_read": {
+          "calls": 30,
+          "elapsed_ms": 0.3102
+        },
+        "query.posting_intersection": {
+          "calls": 1000,
+          "elapsed_ms": 0.1538
+        },
+        "query.raw_ascii_probe": {
+          "calls": 48,
+          "elapsed_ms": 0.1839
+        },
+        "query.raw_ascii_proven": {
+          "calls": 27,
+          "elapsed_ms": 0.001
+        },
+        "query.record_identity": {
+          "calls": 287,
+          "elapsed_ms": 0.0408
+        },
+        "query.record_metadata": {
+          "calls": 287,
+          "elapsed_ms": 0.7669
+        },
+        "query.retain_checked_payload": {
+          "calls": 50,
+          "elapsed_ms": 0.1322
+        },
+        "query.scan.body": {
+          "calls": 1918,
+          "elapsed_ms": 0.4621
+        },
+        "query.verify_text": {
+          "calls": 287,
+          "elapsed_ms": 3.1938
+        },
+        "query.visible_seed_ids": {
+          "calls": 1000,
+          "elapsed_ms": 0.0
+        },
+        "search.filter_visibility_text": {
+          "calls": 1,
+          "elapsed_ms": 10.7397
+        },
+        "search.merge_page_hydration": {
+          "calls": 1,
+          "elapsed_ms": 0.7274
+        },
+        "search.total": {
+          "calls": 1,
+          "elapsed_ms": 11.3294
+        }
+      }
+    },
+    {
+      "text": "fossil",
+      "offset": 0,
+      "limit": 50,
+      "before": {
+        "disk.read_at": {
+          "calls": 1394,
+          "elapsed_ms": 13.9204
+        },
+        "payload.reuse_checked": {
+          "calls": 50,
+          "elapsed_ms": 0.3434
+        },
+        "query.accepted_ids": {
+          "calls": 595,
+          "elapsed_ms": 0.0
+        },
+        "query.covered_candidates": {
+          "calls": 0,
+          "elapsed_ms": 0.0
+        },
+        "query.fold.body": {
+          "calls": 27608,
+          "elapsed_ms": 6.091
+        },
+        "query.fold.title": {
+          "calls": 1212,
+          "elapsed_ms": 0.0839
+        },
+        "query.payload_candidates": {
+          "calls": 1212,
+          "elapsed_ms": 0.0
+        },
+        "query.payload_crc": {
+          "calls": 1212,
+          "elapsed_ms": 4.3605
+        },
+        "query.payload_read": {
+          "calls": 1212,
+          "elapsed_ms": 13.4139
+        },
+        "query.payload_read_bytes": {
+          "calls": 40394729,
+          "elapsed_ms": 0.0
+        },
+        "query.payload_read_requests": {
+          "calls": 1212,
+          "elapsed_ms": 0.0
+        },
+        "query.payload_requested_bytes": {
+          "calls": 40394729,
+          "elapsed_ms": 0.0
+        },
+        "query.payload_validation": {
+          "calls": 1212,
+          "elapsed_ms": 2.5735
+        },
+        "query.payload_window_hits": {
+          "calls": 0,
+          "elapsed_ms": 0.0
+        },
+        "query.posting_cache_read": {
+          "calls": 15,
+          "elapsed_ms": 0.2428
+        },
+        "query.posting_intersection": {
+          "calls": 1288,
+          "elapsed_ms": 0.2336
+        },
+        "query.raw_ascii_probe": {
+          "calls": 48,
+          "elapsed_ms": 0.1395
+        },
+        "query.raw_ascii_proven": {
+          "calls": 22,
+          "elapsed_ms": 0.0009
+        },
+        "query.record_identity": {
+          "calls": 1212,
+          "elapsed_ms": 0.1519
+        },
+        "query.record_metadata": {
+          "calls": 1212,
+          "elapsed_ms": 1.1343
+        },
+        "query.retain_checked_payload": {
+          "calls": 50,
+          "elapsed_ms": 0.1374
+        },
+        "query.scan.body": {
+          "calls": 27608,
+          "elapsed_ms": 2.6891
+        },
+        "query.verify_text": {
+          "calls": 1212,
+          "elapsed_ms": 14.0011
+        },
+        "query.visible_seed_ids": {
+          "calls": 1288,
+          "elapsed_ms": 0.0
+        },
+        "search.filter_visibility_text": {
+          "calls": 1,
+          "elapsed_ms": 37.7966
+        },
+        "search.merge_page_hydration": {
+          "calls": 1,
+          "elapsed_ms": 0.5192
+        },
+        "search.total": {
+          "calls": 1,
+          "elapsed_ms": 38.4706
+        }
+      },
+      "after": {
+        "disk.read_at": {
+          "calls": 1394,
+          "elapsed_ms": 13.3551
+        },
+        "payload.reuse_checked": {
+          "calls": 50,
+          "elapsed_ms": 0.3576
+        },
+        "query.accepted_ids": {
+          "calls": 595,
+          "elapsed_ms": 0.0
+        },
+        "query.covered_candidates": {
+          "calls": 0,
+          "elapsed_ms": 0.0
+        },
+        "query.fold.body": {
+          "calls": 8229,
+          "elapsed_ms": 5.4707
+        },
+        "query.fold.title": {
+          "calls": 1212,
+          "elapsed_ms": 0.0821
+        },
+        "query.payload_candidates": {
+          "calls": 1212,
+          "elapsed_ms": 0.0
+        },
+        "query.payload_crc": {
+          "calls": 1212,
+          "elapsed_ms": 4.1599
+        },
+        "query.payload_read": {
+          "calls": 1212,
+          "elapsed_ms": 12.9008
+        },
+        "query.payload_read_bytes": {
+          "calls": 40394729,
+          "elapsed_ms": 0.0
+        },
+        "query.payload_read_requests": {
+          "calls": 1212,
+          "elapsed_ms": 0.0
+        },
+        "query.payload_requested_bytes": {
+          "calls": 40394729,
+          "elapsed_ms": 0.0
+        },
+        "query.payload_validation": {
+          "calls": 1212,
+          "elapsed_ms": 2.4816
+        },
+        "query.payload_window_hits": {
+          "calls": 0,
+          "elapsed_ms": 0.0
+        },
+        "query.posting_cache_read": {
+          "calls": 15,
+          "elapsed_ms": 0.2026
+        },
+        "query.posting_intersection": {
+          "calls": 1288,
+          "elapsed_ms": 0.2264
+        },
+        "query.raw_ascii_probe": {
+          "calls": 48,
+          "elapsed_ms": 0.1299
+        },
+        "query.raw_ascii_proven": {
+          "calls": 22,
+          "elapsed_ms": 0.0009
+        },
+        "query.record_identity": {
+          "calls": 1212,
+          "elapsed_ms": 0.1314
+        },
+        "query.record_metadata": {
+          "calls": 1212,
+          "elapsed_ms": 1.0514
+        },
+        "query.retain_checked_payload": {
+          "calls": 50,
+          "elapsed_ms": 0.1369
+        },
+        "query.scan.body": {
+          "calls": 8229,
+          "elapsed_ms": 1.832
+        },
+        "query.verify_text": {
+          "calls": 1212,
+          "elapsed_ms": 9.6377
+        },
+        "query.visible_seed_ids": {
+          "calls": 1288,
+          "elapsed_ms": 0.0
+        },
+        "search.filter_visibility_text": {
+          "calls": 1,
+          "elapsed_ms": 32.1532
+        },
+        "search.merge_page_hydration": {
+          "calls": 1,
+          "elapsed_ms": 0.5395
+        },
+        "search.total": {
+          "calls": 1,
+          "elapsed_ms": 32.6525
+        }
+      }
+    },
+    {
+      "text": "geologist",
+      "offset": 0,
+      "limit": 50,
+      "before": {
+        "disk.read_at": {
+          "calls": 804,
+          "elapsed_ms": 7.598
+        },
+        "payload.reuse_checked": {
+          "calls": 50,
+          "elapsed_ms": 0.343
+        },
+        "query.accepted_ids": {
+          "calls": 306,
+          "elapsed_ms": 0.0
+        },
+        "query.covered_candidates": {
+          "calls": 0,
+          "elapsed_ms": 0.0
+        },
+        "query.fold.body": {
+          "calls": 14387,
+          "elapsed_ms": 3.5114
+        },
+        "query.fold.title": {
+          "calls": 611,
+          "elapsed_ms": 0.04
+        },
+        "query.payload_candidates": {
+          "calls": 611,
+          "elapsed_ms": 0.0
+        },
+        "query.payload_crc": {
+          "calls": 611,
+          "elapsed_ms": 2.0994
+        },
+        "query.payload_read": {
+          "calls": 611,
+          "elapsed_ms": 6.943
+        },
+        "query.payload_read_bytes": {
+          "calls": 20674098,
+          "elapsed_ms": 0.0
+        },
+        "query.payload_read_requests": {
+          "calls": 611,
+          "elapsed_ms": 0.0
+        },
+        "query.payload_requested_bytes": {
+          "calls": 20674098,
+          "elapsed_ms": 0.0
+        },
+        "query.payload_validation": {
+          "calls": 611,
+          "elapsed_ms": 1.3085
+        },
+        "query.payload_window_hits": {
+          "calls": 0,
+          "elapsed_ms": 0.0
+        },
+        "query.posting_cache_read": {
+          "calls": 30,
+          "elapsed_ms": 0.391
+        },
+        "query.posting_intersection": {
+          "calls": 1195,
+          "elapsed_ms": 0.2066
+        },
+        "query.raw_ascii_probe": {
+          "calls": 40,
+          "elapsed_ms": 0.1269
+        },
+        "query.raw_ascii_proven": {
+          "calls": 17,
+          "elapsed_ms": 0.0008
+        },
+        "query.record_identity": {
+          "calls": 611,
+          "elapsed_ms": 0.0727
+        },
+        "query.record_metadata": {
+          "calls": 611,
+          "elapsed_ms": 0.8612
+        },
+        "query.retain_checked_payload": {
+          "calls": 50,
+          "elapsed_ms": 0.1087
+        },
+        "query.scan.body": {
+          "calls": 14387,
+          "elapsed_ms": 1.4798
+        },
+        "query.verify_text": {
+          "calls": 611,
+          "elapsed_ms": 7.6185
+        },
+        "query.visible_seed_ids": {
+          "calls": 1195,
+          "elapsed_ms": 0.0
+        },
+        "search.filter_visibility_text": {
+          "calls": 1,
+          "elapsed_ms": 20.4224
+        },
+        "search.merge_page_hydration": {
+          "calls": 1,
+          "elapsed_ms": 0.5806
+        },
+        "search.total": {
+          "calls": 1,
+          "elapsed_ms": 21.0042
+        }
+      },
+      "after": {
+        "disk.read_at": {
+          "calls": 804,
+          "elapsed_ms": 7.2927
+        },
+        "payload.reuse_checked": {
+          "calls": 50,
+          "elapsed_ms": 0.3473
+        },
+        "query.accepted_ids": {
+          "calls": 306,
+          "elapsed_ms": 0.0
+        },
+        "query.covered_candidates": {
+          "calls": 0,
+          "elapsed_ms": 0.0
+        },
+        "query.fold.body": {
+          "calls": 4260,
+          "elapsed_ms": 3.1166
+        },
+        "query.fold.title": {
+          "calls": 611,
+          "elapsed_ms": 0.0393
+        },
+        "query.payload_candidates": {
+          "calls": 611,
+          "elapsed_ms": 0.0
+        },
+        "query.payload_crc": {
+          "calls": 611,
+          "elapsed_ms": 2.1046
+        },
+        "query.payload_read": {
+          "calls": 611,
+          "elapsed_ms": 6.6191
+        },
+        "query.payload_read_bytes": {
+          "calls": 20674098,
+          "elapsed_ms": 0.0
+        },
+        "query.payload_read_requests": {
+          "calls": 611,
+          "elapsed_ms": 0.0
+        },
+        "query.payload_requested_bytes": {
+          "calls": 20674098,
+          "elapsed_ms": 0.0
+        },
+        "query.payload_validation": {
+          "calls": 611,
+          "elapsed_ms": 1.2937
+        },
+        "query.payload_window_hits": {
+          "calls": 0,
+          "elapsed_ms": 0.0
+        },
+        "query.posting_cache_read": {
+          "calls": 30,
+          "elapsed_ms": 0.3767
+        },
+        "query.posting_intersection": {
+          "calls": 1195,
+          "elapsed_ms": 0.2075
+        },
+        "query.raw_ascii_probe": {
+          "calls": 40,
+          "elapsed_ms": 0.1159
+        },
+        "query.raw_ascii_proven": {
+          "calls": 17,
+          "elapsed_ms": 0.001
+        },
+        "query.record_identity": {
+          "calls": 611,
+          "elapsed_ms": 0.0692
+        },
+        "query.record_metadata": {
+          "calls": 611,
+          "elapsed_ms": 0.8816
+        },
+        "query.retain_checked_payload": {
+          "calls": 50,
+          "elapsed_ms": 0.1196
+        },
+        "query.scan.body": {
+          "calls": 4260,
+          "elapsed_ms": 1.0374
+        },
+        "query.verify_text": {
+          "calls": 611,
+          "elapsed_ms": 5.3192
+        },
+        "query.visible_seed_ids": {
+          "calls": 1195,
+          "elapsed_ms": 0.0
+        },
+        "search.filter_visibility_text": {
+          "calls": 1,
+          "elapsed_ms": 17.9551
+        },
+        "search.merge_page_hydration": {
+          "calls": 1,
+          "elapsed_ms": 0.578
+        },
+        "search.total": {
+          "calls": 1,
+          "elapsed_ms": 18.5156
+        }
+      }
+    },
+    {
+      "text": "the",
+      "offset": 0,
+      "limit": 50,
+      "before": {
+        "disk.read_at": {
+          "calls": 34,
+          "elapsed_ms": 0.21
+        },
+        "payload.decode_crc_identity": {
+          "calls": 50,
+          "elapsed_ms": 0.4491
+        },
+        "query.accepted_ids": {
+          "calls": 250,
+          "elapsed_ms": 0.0
+        },
+        "query.covered_candidates": {
+          "calls": 250,
+          "elapsed_ms": 0.0
+        },
+        "query.covering_guard": {
+          "calls": 5,
+          "elapsed_ms": 0.0382
+        },
+        "query.covering_index_metadata": {
+          "calls": 5,
+          "elapsed_ms": 0.0372
+        },
+        "query.payload_candidates": {
+          "calls": 0,
+          "elapsed_ms": 0.0
+        },
+        "query.payload_read_bytes": {
+          "calls": 0,
+          "elapsed_ms": 0.0
+        },
+        "query.payload_read_requests": {
+          "calls": 0,
+          "elapsed_ms": 0.0
+        },
+        "query.payload_requested_bytes": {
+          "calls": 0,
+          "elapsed_ms": 0.0
+        },
+        "query.payload_window_hits": {
+          "calls": 0,
+          "elapsed_ms": 0.0
+        },
+        "query.posting_intersection": {
+          "calls": 250,
+          "elapsed_ms": 0.0109
+        },
+        "query.record_identity": {
+          "calls": 50,
+          "elapsed_ms": 0.0051
+        },
+        "query.record_metadata": {
+          "calls": 128,
+          "elapsed_ms": 0.0159
+        },
+        "query.visible_seed_ids": {
+          "calls": 250,
+          "elapsed_ms": 0.0
+        },
+        "search.filter_visibility_text": {
+          "calls": 1,
+          "elapsed_ms": 0.1368
+        },
+        "search.merge_page_hydration": {
+          "calls": 1,
+          "elapsed_ms": 0.7345
+        },
+        "search.total": {
+          "calls": 1,
+          "elapsed_ms": 0.8784
+        }
+      },
+      "after": {
+        "disk.read_at": {
+          "calls": 34,
+          "elapsed_ms": 0.2738
+        },
+        "payload.decode_crc_identity": {
+          "calls": 50,
+          "elapsed_ms": 0.4744
+        },
+        "query.accepted_ids": {
+          "calls": 250,
+          "elapsed_ms": 0.0
+        },
+        "query.covered_candidates": {
+          "calls": 250,
+          "elapsed_ms": 0.0
+        },
+        "query.covering_guard": {
+          "calls": 5,
+          "elapsed_ms": 0.0432
+        },
+        "query.covering_index_metadata": {
+          "calls": 5,
+          "elapsed_ms": 0.0422
+        },
+        "query.payload_candidates": {
+          "calls": 0,
+          "elapsed_ms": 0.0
+        },
+        "query.payload_read_bytes": {
+          "calls": 0,
+          "elapsed_ms": 0.0
+        },
+        "query.payload_read_requests": {
+          "calls": 0,
+          "elapsed_ms": 0.0
+        },
+        "query.payload_requested_bytes": {
+          "calls": 0,
+          "elapsed_ms": 0.0
+        },
+        "query.payload_window_hits": {
+          "calls": 0,
+          "elapsed_ms": 0.0
+        },
+        "query.posting_intersection": {
+          "calls": 250,
+          "elapsed_ms": 0.0109
+        },
+        "query.record_identity": {
+          "calls": 50,
+          "elapsed_ms": 0.0058
+        },
+        "query.record_metadata": {
+          "calls": 128,
+          "elapsed_ms": 0.0166
+        },
+        "query.visible_seed_ids": {
+          "calls": 250,
+          "elapsed_ms": 0.0
+        },
+        "search.filter_visibility_text": {
+          "calls": 1,
+          "elapsed_ms": 0.1368
+        },
+        "search.merge_page_hydration": {
+          "calls": 1,
+          "elapsed_ms": 1.0195
+        },
+        "search.total": {
+          "calls": 1,
+          "elapsed_ms": 1.1215
+        }
+      }
+    },
+    {
+      "text": "man",
+      "offset": 0,
+      "limit": 50,
+      "before": {
+        "disk.read_at": {
+          "calls": 39,
+          "elapsed_ms": 0.2179
+        },
+        "payload.decode_crc_identity": {
+          "calls": 50,
+          "elapsed_ms": 0.4406
+        },
+        "query.accepted_ids": {
+          "calls": 9932,
+          "elapsed_ms": 0.0
+        },
+        "query.covered_candidates": {
+          "calls": 9932,
+          "elapsed_ms": 0.0
+        },
+        "query.covering_guard": {
+          "calls": 5,
+          "elapsed_ms": 0.043
+        },
+        "query.covering_index_metadata": {
+          "calls": 5,
+          "elapsed_ms": 0.0418
+        },
+        "query.payload_candidates": {
+          "calls": 0,
+          "elapsed_ms": 0.0
+        },
+        "query.payload_read_bytes": {
+          "calls": 0,
+          "elapsed_ms": 0.0
+        },
+        "query.payload_read_requests": {
+          "calls": 0,
+          "elapsed_ms": 0.0
+        },
+        "query.payload_requested_bytes": {
+          "calls": 0,
+          "elapsed_ms": 0.0
+        },
+        "query.payload_window_hits": {
+          "calls": 0,
+          "elapsed_ms": 0.0
+        },
+        "query.posting_intersection": {
+          "calls": 9932,
+          "elapsed_ms": 0.4246
+        },
+        "query.record_identity": {
+          "calls": 50,
+          "elapsed_ms": 0.0049
+        },
+        "query.record_metadata": {
+          "calls": 128,
+          "elapsed_ms": 0.0148
+        },
+        "query.visible_seed_ids": {
+          "calls": 9932,
+          "elapsed_ms": 0.0
+        },
+        "search.filter_visibility_text": {
+          "calls": 1,
+          "elapsed_ms": 1.039
+        },
+        "search.merge_page_hydration": {
+          "calls": 1,
+          "elapsed_ms": 0.7167
+        },
+        "search.total": {
+          "calls": 1,
+          "elapsed_ms": 1.749
+        }
+      },
+      "after": {
+        "disk.read_at": {
+          "calls": 39,
+          "elapsed_ms": 0.212
+        },
+        "payload.decode_crc_identity": {
+          "calls": 50,
+          "elapsed_ms": 0.4793
+        },
+        "query.accepted_ids": {
+          "calls": 9932,
+          "elapsed_ms": 0.0
+        },
+        "query.covered_candidates": {
+          "calls": 9932,
+          "elapsed_ms": 0.0
+        },
+        "query.covering_guard": {
+          "calls": 5,
+          "elapsed_ms": 0.0517
+        },
+        "query.covering_index_metadata": {
+          "calls": 5,
+          "elapsed_ms": 0.0498
+        },
+        "query.payload_candidates": {
+          "calls": 0,
+          "elapsed_ms": 0.0
+        },
+        "query.payload_read_bytes": {
+          "calls": 0,
+          "elapsed_ms": 0.0
+        },
+        "query.payload_read_requests": {
+          "calls": 0,
+          "elapsed_ms": 0.0
+        },
+        "query.payload_requested_bytes": {
+          "calls": 0,
+          "elapsed_ms": 0.0
+        },
+        "query.payload_window_hits": {
+          "calls": 0,
+          "elapsed_ms": 0.0
+        },
+        "query.posting_intersection": {
+          "calls": 9932,
+          "elapsed_ms": 0.4224
+        },
+        "query.record_identity": {
+          "calls": 50,
+          "elapsed_ms": 0.0051
+        },
+        "query.record_metadata": {
+          "calls": 128,
+          "elapsed_ms": 0.0156
+        },
+        "query.visible_seed_ids": {
+          "calls": 9932,
+          "elapsed_ms": 0.0
+        },
+        "search.filter_visibility_text": {
+          "calls": 1,
+          "elapsed_ms": 1.0909
+        },
+        "search.merge_page_hydration": {
+          "calls": 1,
+          "elapsed_ms": 0.7541
+        },
+        "search.total": {
+          "calls": 1,
+          "elapsed_ms": 1.8291
+        }
+      }
+    },
+    {
+      "text": "he",
+      "offset": 0,
+      "limit": 50,
+      "before": {
+        "disk.read_at": {
+          "calls": 34,
+          "elapsed_ms": 0.1649
+        },
+        "payload.decode_crc_identity": {
+          "calls": 50,
+          "elapsed_ms": 0.3707
+        },
+        "query.accepted_ids": {
+          "calls": 250,
+          "elapsed_ms": 0.0
+        },
+        "query.covered_candidates": {
+          "calls": 250,
+          "elapsed_ms": 0.0
+        },
+        "query.covering_guard": {
+          "calls": 5,
+          "elapsed_ms": 0.037
+        },
+        "query.covering_index_metadata": {
+          "calls": 5,
+          "elapsed_ms": 0.036
+        },
+        "query.payload_candidates": {
+          "calls": 0,
+          "elapsed_ms": 0.0
+        },
+        "query.payload_read_bytes": {
+          "calls": 0,
+          "elapsed_ms": 0.0
+        },
+        "query.payload_read_requests": {
+          "calls": 0,
+          "elapsed_ms": 0.0
+        },
+        "query.payload_requested_bytes": {
+          "calls": 0,
+          "elapsed_ms": 0.0
+        },
+        "query.payload_window_hits": {
+          "calls": 0,
+          "elapsed_ms": 0.0
+        },
+        "query.posting_intersection": {
+          "calls": 250,
+          "elapsed_ms": 0.011
+        },
+        "query.record_identity": {
+          "calls": 50,
+          "elapsed_ms": 0.0039
+        },
+        "query.record_metadata": {
+          "calls": 128,
+          "elapsed_ms": 0.013
+        },
+        "query.visible_seed_ids": {
+          "calls": 250,
+          "elapsed_ms": 0.0
+        },
+        "search.filter_visibility_text": {
+          "calls": 1,
+          "elapsed_ms": 0.1089
+        },
+        "search.merge_page_hydration": {
+          "calls": 1,
+          "elapsed_ms": 0.605
+        },
+        "search.total": {
+          "calls": 1,
+          "elapsed_ms": 0.7145
+        }
+      },
+      "after": {
+        "disk.read_at": {
+          "calls": 34,
+          "elapsed_ms": 0.1613
+        },
+        "payload.decode_crc_identity": {
+          "calls": 50,
+          "elapsed_ms": 0.3844
+        },
+        "query.accepted_ids": {
+          "calls": 250,
+          "elapsed_ms": 0.0
+        },
+        "query.covered_candidates": {
+          "calls": 250,
+          "elapsed_ms": 0.0
+        },
+        "query.covering_guard": {
+          "calls": 5,
+          "elapsed_ms": 0.0329
+        },
+        "query.covering_index_metadata": {
+          "calls": 5,
+          "elapsed_ms": 0.0318
+        },
+        "query.payload_candidates": {
+          "calls": 0,
+          "elapsed_ms": 0.0
+        },
+        "query.payload_read_bytes": {
+          "calls": 0,
+          "elapsed_ms": 0.0
+        },
+        "query.payload_read_requests": {
+          "calls": 0,
+          "elapsed_ms": 0.0
+        },
+        "query.payload_requested_bytes": {
+          "calls": 0,
+          "elapsed_ms": 0.0
+        },
+        "query.payload_window_hits": {
+          "calls": 0,
+          "elapsed_ms": 0.0
+        },
+        "query.posting_intersection": {
+          "calls": 250,
+          "elapsed_ms": 0.0099
+        },
+        "query.record_identity": {
+          "calls": 50,
+          "elapsed_ms": 0.0036
+        },
+        "query.record_metadata": {
+          "calls": 128,
+          "elapsed_ms": 0.0127
+        },
+        "query.visible_seed_ids": {
+          "calls": 250,
+          "elapsed_ms": 0.0
+        },
+        "search.filter_visibility_text": {
+          "calls": 1,
+          "elapsed_ms": 0.0934
+        },
+        "search.merge_page_hydration": {
+          "calls": 1,
+          "elapsed_ms": 0.6087
+        },
+        "search.total": {
+          "calls": 1,
+          "elapsed_ms": 0.6976
+        }
+      }
+    },
+    {
+      "text": "zzxqnever",
+      "offset": 0,
+      "limit": 50,
+      "before": {
+        "search.filter_visibility_text": {
+          "calls": 1,
+          "elapsed_ms": 0.0095
+        },
+        "search.merge_page_hydration": {
+          "calls": 1,
+          "elapsed_ms": 0.0001
+        },
+        "search.total": {
+          "calls": 1,
+          "elapsed_ms": 0.0099
+        }
+      },
+      "after": {
+        "search.filter_visibility_text": {
+          "calls": 1,
+          "elapsed_ms": 0.0099
+        },
+        "search.merge_page_hydration": {
+          "calls": 1,
+          "elapsed_ms": 0.0001
+        },
+        "search.total": {
+          "calls": 1,
+          "elapsed_ms": 0.0104
+        }
+      }
+    },
+    {
+      "text": "zx",
+      "offset": 0,
+      "limit": 50,
+      "before": {
+        "disk.read_at": {
+          "calls": 1279,
+          "elapsed_ms": 49.4316
+        },
+        "query.accepted_ids": {
+          "calls": 0,
+          "elapsed_ms": 0.0
+        },
+        "query.covered_candidates": {
+          "calls": 0,
+          "elapsed_ms": 0.0
+        },
+        "query.fold.title": {
+          "calls": 10000,
+          "elapsed_ms": 0.6134
+        },
+        "query.payload_candidates": {
+          "calls": 10000,
+          "elapsed_ms": 0.0
+        },
+        "query.payload_crc": {
+          "calls": 10000,
+          "elapsed_ms": 28.2663
+        },
+        "query.payload_read": {
+          "calls": 10000,
+          "elapsed_ms": 49.311
+        },
+        "query.payload_read_bytes": {
+          "calls": 286500112,
+          "elapsed_ms": 0.0
+        },
+        "query.payload_read_requests": {
+          "calls": 1104,
+          "elapsed_ms": 0.0
+        },
+        "query.payload_requested_bytes": {
+          "calls": 267849329,
+          "elapsed_ms": 0.0
+        },
+        "query.payload_validation": {
+          "calls": 10000,
+          "elapsed_ms": 26.4749
+        },
+        "query.payload_window_hits": {
+          "calls": 8896,
+          "elapsed_ms": 0.0
+        },
+        "query.posting_intersection": {
+          "calls": 10000,
+          "elapsed_ms": 0.446
+        },
+        "query.record_identity": {
+          "calls": 10000,
+          "elapsed_ms": 0.779
+        },
+        "query.record_metadata": {
+          "calls": 10000,
+          "elapsed_ms": 2.4134
+        },
+        "query.scan.raw_short": {
+          "calls": 10000,
+          "elapsed_ms": 40.4757
+        },
+        "query.verify_text": {
+          "calls": 10000,
+          "elapsed_ms": 44.1746
+        },
+        "query.visible_seed_ids": {
+          "calls": 10000,
+          "elapsed_ms": 0.0
+        },
+        "search.filter_visibility_text": {
+          "calls": 1,
+          "elapsed_ms": 157.3734
+        },
+        "search.merge_page_hydration": {
+          "calls": 1,
+          "elapsed_ms": 0.0029
+        },
+        "search.total": {
+          "calls": 1,
+          "elapsed_ms": 157.3772
+        }
+      },
+      "after": {
+        "disk.read_at": {
+          "calls": 1279,
+          "elapsed_ms": 51.6026
+        },
+        "query.accepted_ids": {
+          "calls": 0,
+          "elapsed_ms": 0.0
+        },
+        "query.covered_candidates": {
+          "calls": 0,
+          "elapsed_ms": 0.0
+        },
+        "query.fold.title": {
+          "calls": 10000,
+          "elapsed_ms": 0.6838
+        },
+        "query.payload_candidates": {
+          "calls": 10000,
+          "elapsed_ms": 0.0
+        },
+        "query.payload_crc": {
+          "calls": 10000,
+          "elapsed_ms": 28.4196
+        },
+        "query.payload_read": {
+          "calls": 10000,
+          "elapsed_ms": 51.4297
+        },
+        "query.payload_read_bytes": {
+          "calls": 286500112,
+          "elapsed_ms": 0.0
+        },
+        "query.payload_read_requests": {
+          "calls": 1104,
+          "elapsed_ms": 0.0
+        },
+        "query.payload_requested_bytes": {
+          "calls": 267849329,
+          "elapsed_ms": 0.0
+        },
+        "query.payload_validation": {
+          "calls": 10000,
+          "elapsed_ms": 28.3457
+        },
+        "query.payload_window_hits": {
+          "calls": 8896,
+          "elapsed_ms": 0.0
+        },
+        "query.posting_intersection": {
+          "calls": 10000,
+          "elapsed_ms": 0.5634
+        },
+        "query.record_identity": {
+          "calls": 10000,
+          "elapsed_ms": 0.931
+        },
+        "query.record_metadata": {
+          "calls": 10000,
+          "elapsed_ms": 2.6931
+        },
+        "query.scan.raw_short": {
+          "calls": 10000,
+          "elapsed_ms": 42.4394
+        },
+        "query.verify_text": {
+          "calls": 10000,
+          "elapsed_ms": 45.6987
+        },
+        "query.visible_seed_ids": {
+          "calls": 10000,
+          "elapsed_ms": 0.0
+        },
+        "search.filter_visibility_text": {
+          "calls": 1,
+          "elapsed_ms": 165.4769
+        },
+        "search.merge_page_hydration": {
+          "calls": 1,
+          "elapsed_ms": 0.0025
+        },
+        "search.total": {
+          "calls": 1,
+          "elapsed_ms": 165.4805
+        }
+      }
+    },
+    {
+      "text": "the zx",
+      "offset": 0,
+      "limit": 50,
+      "before": {
+        "disk.read_at": {
+          "calls": 1279,
+          "elapsed_ms": 56.8122
+        },
+        "query.accepted_ids": {
+          "calls": 0,
+          "elapsed_ms": 0.0
+        },
+        "query.covered_candidates": {
+          "calls": 10000,
+          "elapsed_ms": 0.0
+        },
+        "query.covering_guard": {
+          "calls": 5,
+          "elapsed_ms": 0.1098
+        },
+        "query.covering_index_metadata": {
+          "calls": 5,
+          "elapsed_ms": 0.1082
+        },
+        "query.fold.title": {
+          "calls": 10000,
+          "elapsed_ms": 0.6561
+        },
+        "query.payload_candidates": {
+          "calls": 10000,
+          "elapsed_ms": 0.0
+        },
+        "query.payload_crc": {
+          "calls": 10000,
+          "elapsed_ms": 29.5535
+        },
+        "query.payload_read": {
+          "calls": 10000,
+          "elapsed_ms": 56.4857
+        },
+        "query.payload_read_bytes": {
+          "calls": 286500112,
+          "elapsed_ms": 0.0
+        },
+        "query.payload_read_requests": {
+          "calls": 1104,
+          "elapsed_ms": 0.0
+        },
+        "query.payload_requested_bytes": {
+          "calls": 267849329,
+          "elapsed_ms": 0.0
+        },
+        "query.payload_validation": {
+          "calls": 10000,
+          "elapsed_ms": 28.3265
+        },
+        "query.payload_window_hits": {
+          "calls": 8896,
+          "elapsed_ms": 0.0
+        },
+        "query.posting_intersection": {
+          "calls": 10000,
+          "elapsed_ms": 0.5442
+        },
+        "query.record_identity": {
+          "calls": 10000,
+          "elapsed_ms": 0.9288
+        },
+        "query.record_metadata": {
+          "calls": 10000,
+          "elapsed_ms": 3.075
+        },
+        "query.scan.raw_short": {
+          "calls": 10000,
+          "elapsed_ms": 42.9197
+        },
+        "query.verify_text": {
+          "calls": 10000,
+          "elapsed_ms": 46.1709
+        },
+        "query.visible_seed_ids": {
+          "calls": 10000,
+          "elapsed_ms": 0.0
+        },
+        "search.filter_visibility_text": {
+          "calls": 1,
+          "elapsed_ms": 172.0101
+        },
+        "search.merge_page_hydration": {
+          "calls": 1,
+          "elapsed_ms": 0.0025
+        },
+        "search.total": {
+          "calls": 1,
+          "elapsed_ms": 172.0141
+        }
+      },
+      "after": {
+        "disk.read_at": {
+          "calls": 1279,
+          "elapsed_ms": 49.3095
+        },
+        "query.accepted_ids": {
+          "calls": 0,
+          "elapsed_ms": 0.0
+        },
+        "query.covered_candidates": {
+          "calls": 10000,
+          "elapsed_ms": 0.0
+        },
+        "query.covering_guard": {
+          "calls": 5,
+          "elapsed_ms": 0.1196
+        },
+        "query.covering_index_metadata": {
+          "calls": 5,
+          "elapsed_ms": 0.118
+        },
+        "query.fold.title": {
+          "calls": 10000,
+          "elapsed_ms": 0.6075
+        },
+        "query.payload_candidates": {
+          "calls": 10000,
+          "elapsed_ms": 0.0
+        },
+        "query.payload_crc": {
+          "calls": 10000,
+          "elapsed_ms": 27.5156
+        },
+        "query.payload_read": {
+          "calls": 10000,
+          "elapsed_ms": 49.2069
+        },
+        "query.payload_read_bytes": {
+          "calls": 286500112,
+          "elapsed_ms": 0.0
+        },
+        "query.payload_read_requests": {
+          "calls": 1104,
+          "elapsed_ms": 0.0
+        },
+        "query.payload_requested_bytes": {
+          "calls": 267849329,
+          "elapsed_ms": 0.0
+        },
+        "query.payload_validation": {
+          "calls": 10000,
+          "elapsed_ms": 26.8247
+        },
+        "query.payload_window_hits": {
+          "calls": 8896,
+          "elapsed_ms": 0.0
+        },
+        "query.posting_intersection": {
+          "calls": 10000,
+          "elapsed_ms": 0.6261
+        },
+        "query.record_identity": {
+          "calls": 10000,
+          "elapsed_ms": 0.8307
+        },
+        "query.record_metadata": {
+          "calls": 10000,
+          "elapsed_ms": 2.505
+        },
+        "query.scan.raw_short": {
+          "calls": 10000,
+          "elapsed_ms": 40.0464
+        },
+        "query.verify_text": {
+          "calls": 10000,
+          "elapsed_ms": 42.9864
+        },
+        "query.visible_seed_ids": {
+          "calls": 10000,
+          "elapsed_ms": 0.0
+        },
+        "search.filter_visibility_text": {
+          "calls": 1,
+          "elapsed_ms": 158.5043
+        },
+        "search.merge_page_hydration": {
+          "calls": 1,
+          "elapsed_ms": 0.0026
+        },
+        "search.total": {
+          "calls": 1,
+          "elapsed_ms": 158.5091
+        }
+      }
+    },
+    {
+      "text": "quixote whale",
+      "offset": 0,
+      "limit": 50,
+      "before": {
+        "disk.read_at": {
+          "calls": 84,
+          "elapsed_ms": 0.8004
+        },
+        "payload.reuse_checked": {
+          "calls": 44,
+          "elapsed_ms": 0.3211
+        },
+        "query.accepted_ids": {
+          "calls": 44,
+          "elapsed_ms": 0.0
+        },
+        "query.covered_candidates": {
+          "calls": 0,
+          "elapsed_ms": 0.0
+        },
+        "query.fold.title": {
+          "calls": 44,
+          "elapsed_ms": 0.004
+        },
+        "query.payload_candidates": {
+          "calls": 44,
+          "elapsed_ms": 0.0
+        },
+        "query.payload_crc": {
+          "calls": 44,
+          "elapsed_ms": 0.1858
+        },
+        "query.payload_read": {
+          "calls": 44,
+          "elapsed_ms": 0.4047
+        },
+        "query.payload_read_bytes": {
+          "calls": 1590663,
+          "elapsed_ms": 0.0
+        },
+        "query.payload_read_requests": {
+          "calls": 44,
+          "elapsed_ms": 0.0
+        },
+        "query.payload_requested_bytes": {
+          "calls": 1590663,
+          "elapsed_ms": 0.0
+        },
+        "query.payload_validation": {
+          "calls": 44,
+          "elapsed_ms": 0.1569
+        },
+        "query.payload_window_hits": {
+          "calls": 0,
+          "elapsed_ms": 0.0
+        },
+        "query.posting_cache_read": {
+          "calls": 35,
+          "elapsed_ms": 0.546
+        },
+        "query.posting_intersection": {
+          "calls": 56,
+          "elapsed_ms": 0.0163
+        },
+        "query.raw_ascii_probe": {
+          "calls": 44,
+          "elapsed_ms": 0.1653
+        },
+        "query.raw_ascii_proven": {
+          "calls": 44,
+          "elapsed_ms": 0.0024
+        },
+        "query.record_identity": {
+          "calls": 44,
+          "elapsed_ms": 0.0067
+        },
+        "query.record_metadata": {
+          "calls": 44,
+          "elapsed_ms": 0.0583
+        },
+        "query.retain_checked_payload": {
+          "calls": 44,
+          "elapsed_ms": 0.1098
+        },
+        "query.verify_text": {
+          "calls": 44,
+          "elapsed_ms": 0.1958
+        },
+        "query.visible_seed_ids": {
+          "calls": 56,
+          "elapsed_ms": 0.0
+        },
+        "search.filter_visibility_text": {
+          "calls": 1,
+          "elapsed_ms": 2.0782
+        },
+        "search.merge_page_hydration": {
+          "calls": 1,
+          "elapsed_ms": 0.4254
+        },
+        "search.total": {
+          "calls": 1,
+          "elapsed_ms": 2.4217
+        }
+      },
+      "after": {
+        "disk.read_at": {
+          "calls": 84,
+          "elapsed_ms": 0.5876
+        },
+        "payload.reuse_checked": {
+          "calls": 44,
+          "elapsed_ms": 0.2345
+        },
+        "query.accepted_ids": {
+          "calls": 44,
+          "elapsed_ms": 0.0
+        },
+        "query.covered_candidates": {
+          "calls": 0,
+          "elapsed_ms": 0.0
+        },
+        "query.fold.title": {
+          "calls": 44,
+          "elapsed_ms": 0.0035
+        },
+        "query.payload_candidates": {
+          "calls": 44,
+          "elapsed_ms": 0.0
+        },
+        "query.payload_crc": {
+          "calls": 44,
+          "elapsed_ms": 0.1478
+        },
+        "query.payload_read": {
+          "calls": 44,
+          "elapsed_ms": 0.2816
+        },
+        "query.payload_read_bytes": {
+          "calls": 1590663,
+          "elapsed_ms": 0.0
+        },
+        "query.payload_read_requests": {
+          "calls": 44,
+          "elapsed_ms": 0.0
+        },
+        "query.payload_requested_bytes": {
+          "calls": 1590663,
+          "elapsed_ms": 0.0
+        },
+        "query.payload_validation": {
+          "calls": 44,
+          "elapsed_ms": 0.1327
+        },
+        "query.payload_window_hits": {
+          "calls": 0,
+          "elapsed_ms": 0.0
+        },
+        "query.posting_cache_read": {
+          "calls": 35,
+          "elapsed_ms": 0.4964
+        },
+        "query.posting_intersection": {
+          "calls": 56,
+          "elapsed_ms": 0.0124
+        },
+        "query.raw_ascii_probe": {
+          "calls": 44,
+          "elapsed_ms": 0.1355
+        },
+        "query.raw_ascii_proven": {
+          "calls": 44,
+          "elapsed_ms": 0.0019
+        },
+        "query.record_identity": {
+          "calls": 44,
+          "elapsed_ms": 0.0048
+        },
+        "query.record_metadata": {
+          "calls": 44,
+          "elapsed_ms": 0.0427
+        },
+        "query.retain_checked_payload": {
+          "calls": 44,
+          "elapsed_ms": 0.0963
+        },
+        "query.verify_text": {
+          "calls": 44,
+          "elapsed_ms": 0.1592
+        },
+        "query.visible_seed_ids": {
+          "calls": 56,
+          "elapsed_ms": 0.0
+        },
+        "search.filter_visibility_text": {
+          "calls": 1,
+          "elapsed_ms": 1.5922
+        },
+        "search.merge_page_hydration": {
+          "calls": 1,
+          "elapsed_ms": 0.3016
+        },
+        "search.total": {
+          "calls": 1,
+          "elapsed_ms": 1.8944
+        }
+      }
+    },
+    {
+      "text": "holmes elementary",
+      "offset": 0,
+      "limit": 50,
+      "before": {
+        "disk.read_at": {
+          "calls": 1151,
+          "elapsed_ms": 12.3285
+        },
+        "payload.reuse_checked": {
+          "calls": 50,
+          "elapsed_ms": 0.3978
+        },
+        "query.accepted_ids": {
+          "calls": 65,
+          "elapsed_ms": 0.0
+        },
+        "query.covered_candidates": {
+          "calls": 0,
+          "elapsed_ms": 0.0
+        },
+        "query.fold.body": {
+          "calls": 29490,
+          "elapsed_ms": 14.6389
+        },
+        "query.fold.title": {
+          "calls": 924,
+          "elapsed_ms": 0.0638
+        },
+        "query.payload_candidates": {
+          "calls": 924,
+          "elapsed_ms": 0.0
+        },
+        "query.payload_crc": {
+          "calls": 924,
+          "elapsed_ms": 3.3949
+        },
+        "query.payload_read": {
+          "calls": 924,
+          "elapsed_ms": 11.368
+        },
+        "query.payload_read_bytes": {
+          "calls": 31146329,
+          "elapsed_ms": 0.0
+        },
+        "query.payload_read_requests": {
+          "calls": 924,
+          "elapsed_ms": 0.0
+        },
+        "query.payload_requested_bytes": {
+          "calls": 31146329,
+          "elapsed_ms": 0.0
+        },
+        "query.payload_validation": {
+          "calls": 924,
+          "elapsed_ms": 3.9068
+        },
+        "query.payload_window_hits": {
+          "calls": 0,
+          "elapsed_ms": 0.0
+        },
+        "query.posting_cache_read": {
+          "calls": 54,
+          "elapsed_ms": 0.7258
+        },
+        "query.posting_intersection": {
+          "calls": 1440,
+          "elapsed_ms": 0.5108
+        },
+        "query.raw_ascii_probe": {
+          "calls": 40,
+          "elapsed_ms": 0.3178
+        },
+        "query.raw_ascii_proven": {
+          "calls": 4,
+          "elapsed_ms": 0.0001
+        },
+        "query.record_identity": {
+          "calls": 924,
+          "elapsed_ms": 0.1356
+        },
+        "query.record_metadata": {
+          "calls": 924,
+          "elapsed_ms": 1.2468
+        },
+        "query.retain_checked_payload": {
+          "calls": 50,
+          "elapsed_ms": 0.2213
+        },
+        "query.scan.body": {
+          "calls": 29490,
+          "elapsed_ms": 4.0067
+        },
+        "query.verify_text": {
+          "calls": 924,
+          "elapsed_ms": 24.7767
+        },
+        "query.visible_seed_ids": {
+          "calls": 1440,
+          "elapsed_ms": 0.0
+        },
+        "search.filter_visibility_text": {
+          "calls": 1,
+          "elapsed_ms": 48.3062
+        },
+        "search.merge_page_hydration": {
+          "calls": 1,
+          "elapsed_ms": 0.9011
+        },
+        "search.total": {
+          "calls": 1,
+          "elapsed_ms": 48.9135
+        }
+      },
+      "after": {
+        "disk.read_at": {
+          "calls": 1151,
+          "elapsed_ms": 10.6246
+        },
+        "payload.reuse_checked": {
+          "calls": 50,
+          "elapsed_ms": 0.332
+        },
+        "query.accepted_ids": {
+          "calls": 65,
+          "elapsed_ms": 0.0
+        },
+        "query.covered_candidates": {
+          "calls": 0,
+          "elapsed_ms": 0.0
+        },
+        "query.fold.body": {
+          "calls": 8421,
+          "elapsed_ms": 12.3956
+        },
+        "query.fold.title": {
+          "calls": 924,
+          "elapsed_ms": 0.064
+        },
+        "query.payload_candidates": {
+          "calls": 924,
+          "elapsed_ms": 0.0
+        },
+        "query.payload_crc": {
+          "calls": 924,
+          "elapsed_ms": 3.128
+        },
+        "query.payload_read": {
+          "calls": 924,
+          "elapsed_ms": 9.786
+        },
+        "query.payload_read_bytes": {
+          "calls": 31146329,
+          "elapsed_ms": 0.0
+        },
+        "query.payload_read_requests": {
+          "calls": 924,
+          "elapsed_ms": 0.0
+        },
+        "query.payload_requested_bytes": {
+          "calls": 31146329,
+          "elapsed_ms": 0.0
+        },
+        "query.payload_validation": {
+          "calls": 924,
+          "elapsed_ms": 3.6818
+        },
+        "query.payload_window_hits": {
+          "calls": 0,
+          "elapsed_ms": 0.0
+        },
+        "query.posting_cache_read": {
+          "calls": 54,
+          "elapsed_ms": 0.6879
+        },
+        "query.posting_intersection": {
+          "calls": 1440,
+          "elapsed_ms": 0.4701
+        },
+        "query.raw_ascii_probe": {
+          "calls": 40,
+          "elapsed_ms": 0.2854
+        },
+        "query.raw_ascii_proven": {
+          "calls": 4,
+          "elapsed_ms": 0.0003
+        },
+        "query.record_identity": {
+          "calls": 924,
+          "elapsed_ms": 0.0959
+        },
+        "query.record_metadata": {
+          "calls": 924,
+          "elapsed_ms": 1.0039
+        },
+        "query.retain_checked_payload": {
+          "calls": 50,
+          "elapsed_ms": 0.1892
+        },
+        "query.scan.body": {
+          "calls": 8421,
+          "elapsed_ms": 2.7724
+        },
+        "query.verify_text": {
+          "calls": 924,
+          "elapsed_ms": 17.6246
+        },
+        "query.visible_seed_ids": {
+          "calls": 1440,
+          "elapsed_ms": 0.0
+        },
+        "search.filter_visibility_text": {
+          "calls": 1,
+          "elapsed_ms": 37.8056
+        },
+        "search.merge_page_hydration": {
+          "calls": 1,
+          "elapsed_ms": 0.5701
+        },
+        "search.total": {
+          "calls": 1,
+          "elapsed_ms": 38.4411
+        }
+      }
+    },
+    {
+      "text": "fossil geologist",
+      "offset": 0,
+      "limit": 50,
+      "before": {
+        "disk.read_at": {
+          "calls": 607,
+          "elapsed_ms": 5.646
+        },
+        "payload.reuse_checked": {
+          "calls": 50,
+          "elapsed_ms": 0.3179
+        },
+        "query.accepted_ids": {
+          "calls": 293,
+          "elapsed_ms": 0.0
+        },
+        "query.covered_candidates": {
+          "calls": 0,
+          "elapsed_ms": 0.0
+        },
+        "query.fold.body": {
+          "calls": 7327,
+          "elapsed_ms": 1.2406
+        },
+        "query.fold.title": {
+          "calls": 408,
+          "elapsed_ms": 0.0287
+        },
+        "query.payload_candidates": {
+          "calls": 408,
+          "elapsed_ms": 0.0
+        },
+        "query.payload_crc": {
+          "calls": 408,
+          "elapsed_ms": 1.405
+        },
+        "query.payload_read": {
+          "calls": 408,
+          "elapsed_ms": 4.8364
+        },
+        "query.payload_read_bytes": {
+          "calls": 13425742,
+          "elapsed_ms": 0.0
+        },
+        "query.payload_read_requests": {
+          "calls": 408,
+          "elapsed_ms": 0.0
+        },
+        "query.payload_requested_bytes": {
+          "calls": 13425742,
+          "elapsed_ms": 0.0
+        },
+        "query.payload_validation": {
+          "calls": 408,
+          "elapsed_ms": 0.7171
+        },
+        "query.payload_window_hits": {
+          "calls": 0,
+          "elapsed_ms": 0.0
+        },
+        "query.posting_cache_read": {
+          "calls": 50,
+          "elapsed_ms": 0.7173
+        },
+        "query.posting_intersection": {
+          "calls": 1195,
+          "elapsed_ms": 0.2061
+        },
+        "query.raw_ascii_probe": {
+          "calls": 56,
+          "elapsed_ms": 0.1423
+        },
+        "query.raw_ascii_proven": {
+          "calls": 38,
+          "elapsed_ms": 0.0014
+        },
+        "query.record_identity": {
+          "calls": 408,
+          "elapsed_ms": 0.0486
+        },
+        "query.record_metadata": {
+          "calls": 408,
+          "elapsed_ms": 0.692
+        },
+        "query.retain_checked_payload": {
+          "calls": 50,
+          "elapsed_ms": 0.145
+        },
+        "query.scan.body": {
+          "calls": 7327,
+          "elapsed_ms": 1.1085
+        },
+        "query.verify_text": {
+          "calls": 408,
+          "elapsed_ms": 3.7452
+        },
+        "query.visible_seed_ids": {
+          "calls": 1195,
+          "elapsed_ms": 0.0
+        },
+        "search.filter_visibility_text": {
+          "calls": 1,
+          "elapsed_ms": 14.2321
+        },
+        "search.merge_page_hydration": {
+          "calls": 1,
+          "elapsed_ms": 0.5249
+        },
+        "search.total": {
+          "calls": 1,
+          "elapsed_ms": 14.7582
+        }
+      },
+      "after": {
+        "disk.read_at": {
+          "calls": 607,
+          "elapsed_ms": 4.9327
+        },
+        "payload.reuse_checked": {
+          "calls": 50,
+          "elapsed_ms": 0.3146
+        },
+        "query.accepted_ids": {
+          "calls": 293,
+          "elapsed_ms": 0.0
+        },
+        "query.covered_candidates": {
+          "calls": 0,
+          "elapsed_ms": 0.0
+        },
+        "query.fold.body": {
+          "calls": 2243,
+          "elapsed_ms": 1.1431
+        },
+        "query.fold.title": {
+          "calls": 408,
+          "elapsed_ms": 0.0268
+        },
+        "query.payload_candidates": {
+          "calls": 408,
+          "elapsed_ms": 0.0
+        },
+        "query.payload_crc": {
+          "calls": 408,
+          "elapsed_ms": 1.3282
+        },
+        "query.payload_read": {
+          "calls": 408,
+          "elapsed_ms": 4.165
+        },
+        "query.payload_read_bytes": {
+          "calls": 13425742,
+          "elapsed_ms": 0.0
+        },
+        "query.payload_read_requests": {
+          "calls": 408,
+          "elapsed_ms": 0.0
+        },
+        "query.payload_requested_bytes": {
+          "calls": 13425742,
+          "elapsed_ms": 0.0
+        },
+        "query.payload_validation": {
+          "calls": 408,
+          "elapsed_ms": 0.7095
+        },
+        "query.payload_window_hits": {
+          "calls": 0,
+          "elapsed_ms": 0.0
+        },
+        "query.posting_cache_read": {
+          "calls": 50,
+          "elapsed_ms": 0.6228
+        },
+        "query.posting_intersection": {
+          "calls": 1195,
+          "elapsed_ms": 0.2061
+        },
+        "query.raw_ascii_probe": {
+          "calls": 56,
+          "elapsed_ms": 0.1402
+        },
+        "query.raw_ascii_proven": {
+          "calls": 38,
+          "elapsed_ms": 0.0011
+        },
+        "query.record_identity": {
+          "calls": 408,
+          "elapsed_ms": 0.0394
+        },
+        "query.record_metadata": {
+          "calls": 408,
+          "elapsed_ms": 0.6396
+        },
+        "query.retain_checked_payload": {
+          "calls": 50,
+          "elapsed_ms": 0.1379
+        },
+        "query.scan.body": {
+          "calls": 2243,
+          "elapsed_ms": 0.7453
+        },
+        "query.verify_text": {
+          "calls": 408,
+          "elapsed_ms": 2.6244
+        },
+        "query.visible_seed_ids": {
+          "calls": 1195,
+          "elapsed_ms": 0.0
+        },
+        "search.filter_visibility_text": {
+          "calls": 1,
+          "elapsed_ms": 11.0891
+        },
+        "search.merge_page_hydration": {
+          "calls": 1,
+          "elapsed_ms": 0.5071
+        },
+        "search.total": {
+          "calls": 1,
+          "elapsed_ms": 11.5971
+        }
+      }
+    },
+    {
+      "text": "whale harpoon",
+      "offset": 0,
+      "limit": 50,
+      "before": {
+        "disk.read_at": {
+          "calls": 2153,
+          "elapsed_ms": 21.7352
+        },
+        "payload.reuse_checked": {
+          "calls": 50,
+          "elapsed_ms": 0.3941
+        },
+        "query.accepted_ids": {
+          "calls": 995,
+          "elapsed_ms": 0.0
+        },
+        "query.covered_candidates": {
+          "calls": 0,
+          "elapsed_ms": 0.0
+        },
+        "query.fold.body": {
+          "calls": 43358,
+          "elapsed_ms": 17.5879
+        },
+        "query.fold.title": {
+          "calls": 1949,
+          "elapsed_ms": 0.1288
+        },
+        "query.payload_candidates": {
+          "calls": 1949,
+          "elapsed_ms": 0.0
+        },
+        "query.payload_crc": {
+          "calls": 1949,
+          "elapsed_ms": 6.6677
+        },
+        "query.payload_read": {
+          "calls": 1949,
+          "elapsed_ms": 21.0398
+        },
+        "query.payload_read_bytes": {
+          "calls": 65219314,
+          "elapsed_ms": 0.0
+        },
+        "query.payload_read_requests": {
+          "calls": 1949,
+          "elapsed_ms": 0.0
+        },
+        "query.payload_requested_bytes": {
+          "calls": 65219314,
+          "elapsed_ms": 0.0
+        },
+        "query.payload_validation": {
+          "calls": 1949,
+          "elapsed_ms": 7.223
+        },
+        "query.payload_window_hits": {
+          "calls": 0,
+          "elapsed_ms": 0.0
+        },
+        "query.posting_cache_read": {
+          "calls": 35,
+          "elapsed_ms": 0.5362
+        },
+        "query.posting_intersection": {
+          "calls": 3905,
+          "elapsed_ms": 0.7651
+        },
+        "query.raw_ascii_probe": {
+          "calls": 40,
+          "elapsed_ms": 0.1552
+        },
+        "query.raw_ascii_proven": {
+          "calls": 17,
+          "elapsed_ms": 0.001
+        },
+        "query.record_identity": {
+          "calls": 1949,
+          "elapsed_ms": 0.2485
+        },
+        "query.record_metadata": {
+          "calls": 1949,
+          "elapsed_ms": 1.461
+        },
+        "query.retain_checked_payload": {
+          "calls": 50,
+          "elapsed_ms": 0.1165
+        },
+        "query.scan.body": {
+          "calls": 43358,
+          "elapsed_ms": 9.1547
+        },
+        "query.verify_text": {
+          "calls": 1949,
+          "elapsed_ms": 34.8486
+        },
+        "query.visible_seed_ids": {
+          "calls": 3905,
+          "elapsed_ms": 0.0
+        },
+        "search.filter_visibility_text": {
+          "calls": 1,
+          "elapsed_ms": 75.2791
+        },
+        "search.merge_page_hydration": {
+          "calls": 1,
+          "elapsed_ms": 0.5745
+        },
+        "search.total": {
+          "calls": 1,
+          "elapsed_ms": 75.8547
+        }
+      },
+      "after": {
+        "disk.read_at": {
+          "calls": 2153,
+          "elapsed_ms": 20.1094
+        },
+        "payload.reuse_checked": {
+          "calls": 50,
+          "elapsed_ms": 0.3562
+        },
+        "query.accepted_ids": {
+          "calls": 995,
+          "elapsed_ms": 0.0
+        },
+        "query.covered_candidates": {
+          "calls": 0,
+          "elapsed_ms": 0.0
+        },
+        "query.fold.body": {
+          "calls": 13017,
+          "elapsed_ms": 16.1194
+        },
+        "query.fold.title": {
+          "calls": 1949,
+          "elapsed_ms": 0.126
+        },
+        "query.payload_candidates": {
+          "calls": 1949,
+          "elapsed_ms": 0.0
+        },
+        "query.payload_crc": {
+          "calls": 1949,
+          "elapsed_ms": 6.6705
+        },
+        "query.payload_read": {
+          "calls": 1949,
+          "elapsed_ms": 19.5525
+        },
+        "query.payload_read_bytes": {
+          "calls": 65219314,
+          "elapsed_ms": 0.0
+        },
+        "query.payload_read_requests": {
+          "calls": 1949,
+          "elapsed_ms": 0.0
+        },
+        "query.payload_requested_bytes": {
+          "calls": 65219314,
+          "elapsed_ms": 0.0
+        },
+        "query.payload_validation": {
+          "calls": 1949,
+          "elapsed_ms": 7.0316
+        },
+        "query.payload_window_hits": {
+          "calls": 0,
+          "elapsed_ms": 0.0
+        },
+        "query.posting_cache_read": {
+          "calls": 35,
+          "elapsed_ms": 0.509
+        },
+        "query.posting_intersection": {
+          "calls": 3905,
+          "elapsed_ms": 0.7395
+        },
+        "query.raw_ascii_probe": {
+          "calls": 40,
+          "elapsed_ms": 0.1498
+        },
+        "query.raw_ascii_proven": {
+          "calls": 17,
+          "elapsed_ms": 0.0006
+        },
+        "query.record_identity": {
+          "calls": 1949,
+          "elapsed_ms": 0.1946
+        },
+        "query.record_metadata": {
+          "calls": 1949,
+          "elapsed_ms": 1.2626
+        },
+        "query.retain_checked_payload": {
+          "calls": 50,
+          "elapsed_ms": 0.1208
+        },
+        "query.scan.body": {
+          "calls": 13017,
+          "elapsed_ms": 7.3795
+        },
+        "query.verify_text": {
+          "calls": 1949,
+          "elapsed_ms": 27.2686
+        },
+        "query.visible_seed_ids": {
+          "calls": 3905,
+          "elapsed_ms": 0.0
+        },
+        "search.filter_visibility_text": {
+          "calls": 1,
+          "elapsed_ms": 65.5764
+        },
+        "search.merge_page_hydration": {
+          "calls": 1,
+          "elapsed_ms": 0.5141
+        },
+        "search.total": {
+          "calls": 1,
+          "elapsed_ms": 66.0846
+        }
+      }
+    },
+    {
+      "text": "QU\u0130XOTE",
+      "offset": 0,
+      "limit": 50,
+      "before": {
+        "disk.read_at": {
+          "calls": 81,
+          "elapsed_ms": 0.5877
+        },
+        "payload.reuse_checked": {
+          "calls": 50,
+          "elapsed_ms": 0.284
+        },
+        "query.accepted_ids": {
+          "calls": 56,
+          "elapsed_ms": 0.0
+        },
+        "query.covered_candidates": {
+          "calls": 0,
+          "elapsed_ms": 0.0
+        },
+        "query.fold.title": {
+          "calls": 56,
+          "elapsed_ms": 0.0051
+        },
+        "query.payload_candidates": {
+          "calls": 56,
+          "elapsed_ms": 0.0
+        },
+        "query.payload_crc": {
+          "calls": 56,
+          "elapsed_ms": 0.191
+        },
+        "query.payload_read": {
+          "calls": 56,
+          "elapsed_ms": 0.4302
+        },
+        "query.payload_read_bytes": {
+          "calls": 1945325,
+          "elapsed_ms": 0.0
+        },
+        "query.payload_read_requests": {
+          "calls": 56,
+          "elapsed_ms": 0.0
+        },
+        "query.payload_requested_bytes": {
+          "calls": 1945325,
+          "elapsed_ms": 0.0
+        },
+        "query.payload_validation": {
+          "calls": 56,
+          "elapsed_ms": 0.1369
+        },
+        "query.payload_window_hits": {
+          "calls": 0,
+          "elapsed_ms": 0.0
+        },
+        "query.posting_cache_read": {
+          "calls": 20,
+          "elapsed_ms": 0.2248
+        },
+        "query.posting_intersection": {
+          "calls": 56,
+          "elapsed_ms": 0.0095
+        },
+        "query.raw_ascii_probe": {
+          "calls": 56,
+          "elapsed_ms": 0.1089
+        },
+        "query.raw_ascii_proven": {
+          "calls": 56,
+          "elapsed_ms": 0.0027
+        },
+        "query.record_identity": {
+          "calls": 56,
+          "elapsed_ms": 0.0058
+        },
+        "query.record_metadata": {
+          "calls": 56,
+          "elapsed_ms": 0.0494
+        },
+        "query.retain_checked_payload": {
+          "calls": 50,
+          "elapsed_ms": 0.1048
+        },
+        "query.verify_text": {
+          "calls": 56,
+          "elapsed_ms": 0.1341
+        },
+        "query.visible_seed_ids": {
+          "calls": 56,
+          "elapsed_ms": 0.0
+        },
+        "search.filter_visibility_text": {
+          "calls": 1,
+          "elapsed_ms": 1.4699
+        },
+        "search.merge_page_hydration": {
+          "calls": 1,
+          "elapsed_ms": 0.3695
+        },
+        "search.total": {
+          "calls": 1,
+          "elapsed_ms": 1.8297
+        }
+      },
+      "after": {
+        "disk.read_at": {
+          "calls": 81,
+          "elapsed_ms": 0.6148
+        },
+        "payload.reuse_checked": {
+          "calls": 50,
+          "elapsed_ms": 0.2759
+        },
+        "query.accepted_ids": {
+          "calls": 56,
+          "elapsed_ms": 0.0
+        },
+        "query.covered_candidates": {
+          "calls": 0,
+          "elapsed_ms": 0.0
+        },
+        "query.fold.title": {
+          "calls": 56,
+          "elapsed_ms": 0.0043
+        },
+        "query.payload_candidates": {
+          "calls": 56,
+          "elapsed_ms": 0.0
+        },
+        "query.payload_crc": {
+          "calls": 56,
+          "elapsed_ms": 0.2006
+        },
+        "query.payload_read": {
+          "calls": 56,
+          "elapsed_ms": 0.4297
+        },
+        "query.payload_read_bytes": {
+          "calls": 1945325,
+          "elapsed_ms": 0.0
+        },
+        "query.payload_read_requests": {
+          "calls": 56,
+          "elapsed_ms": 0.0
+        },
+        "query.payload_requested_bytes": {
+          "calls": 1945325,
+          "elapsed_ms": 0.0
+        },
+        "query.payload_validation": {
+          "calls": 56,
+          "elapsed_ms": 0.1646
+        },
+        "query.payload_window_hits": {
+          "calls": 0,
+          "elapsed_ms": 0.0
+        },
+        "query.posting_cache_read": {
+          "calls": 20,
+          "elapsed_ms": 0.2548
+        },
+        "query.posting_intersection": {
+          "calls": 56,
+          "elapsed_ms": 0.0084
+        },
+        "query.raw_ascii_probe": {
+          "calls": 56,
+          "elapsed_ms": 0.1198
+        },
+        "query.raw_ascii_proven": {
+          "calls": 56,
+          "elapsed_ms": 0.0026
+        },
+        "query.record_identity": {
+          "calls": 56,
+          "elapsed_ms": 0.0059
+        },
+        "query.record_metadata": {
+          "calls": 56,
+          "elapsed_ms": 0.0538
+        },
+        "query.retain_checked_payload": {
+          "calls": 50,
+          "elapsed_ms": 0.1262
+        },
+        "query.verify_text": {
+          "calls": 56,
+          "elapsed_ms": 0.1485
+        },
+        "query.visible_seed_ids": {
+          "calls": 56,
+          "elapsed_ms": 0.0
+        },
+        "search.filter_visibility_text": {
+          "calls": 1,
+          "elapsed_ms": 1.6297
+        },
+        "search.merge_page_hydration": {
+          "calls": 1,
+          "elapsed_ms": 0.3573
+        },
+        "search.total": {
+          "calls": 1,
+          "elapsed_ms": 1.9869
+        }
+      }
+    },
+    {
+      "text": "\u0130SHMAEL",
+      "offset": 0,
+      "limit": 50,
+      "before": {
+        "disk.read_at": {
+          "calls": 411,
+          "elapsed_ms": 3.2514
+        },
+        "payload.reuse_checked": {
+          "calls": 50,
+          "elapsed_ms": 0.3331
+        },
+        "query.accepted_ids": {
+          "calls": 260,
+          "elapsed_ms": 0.0
+        },
+        "query.covered_candidates": {
+          "calls": 0,
+          "elapsed_ms": 0.0
+        },
+        "query.fold.title": {
+          "calls": 260,
+          "elapsed_ms": 0.0173
+        },
+        "query.payload_candidates": {
+          "calls": 260,
+          "elapsed_ms": 0.0
+        },
+        "query.payload_crc": {
+          "calls": 260,
+          "elapsed_ms": 0.8554
+        },
+        "query.payload_read": {
+          "calls": 260,
+          "elapsed_ms": 2.7996
+        },
+        "query.payload_read_bytes": {
+          "calls": 8285621,
+          "elapsed_ms": 0.0
+        },
+        "query.payload_read_requests": {
+          "calls": 260,
+          "elapsed_ms": 0.0
+        },
+        "query.payload_requested_bytes": {
+          "calls": 8285621,
+          "elapsed_ms": 0.0
+        },
+        "query.payload_validation": {
+          "calls": 260,
+          "elapsed_ms": 0.6436
+        },
+        "query.payload_window_hits": {
+          "calls": 0,
+          "elapsed_ms": 0.0
+        },
+        "query.posting_cache_read": {
+          "calls": 20,
+          "elapsed_ms": 0.1974
+        },
+        "query.posting_intersection": {
+          "calls": 361,
+          "elapsed_ms": 0.0553
+        },
+        "query.raw_ascii_probe": {
+          "calls": 260,
+          "elapsed_ms": 0.6955
+        },
+        "query.raw_ascii_proven": {
+          "calls": 260,
+          "elapsed_ms": 0.0101
+        },
+        "query.record_identity": {
+          "calls": 260,
+          "elapsed_ms": 0.0336
+        },
+        "query.record_metadata": {
+          "calls": 260,
+          "elapsed_ms": 0.5805
+        },
+        "query.retain_checked_payload": {
+          "calls": 50,
+          "elapsed_ms": 0.1045
+        },
+        "query.verify_text": {
+          "calls": 260,
+          "elapsed_ms": 0.8134
+        },
+        "query.visible_seed_ids": {
+          "calls": 361,
+          "elapsed_ms": 0.0
+        },
+        "search.filter_visibility_text": {
+          "calls": 1,
+          "elapsed_ms": 6.425
+        },
+        "search.merge_page_hydration": {
+          "calls": 1,
+          "elapsed_ms": 0.5233
+        },
+        "search.total": {
+          "calls": 1,
+          "elapsed_ms": 6.9241
+        }
+      },
+      "after": {
+        "disk.read_at": {
+          "calls": 411,
+          "elapsed_ms": 3.2585
+        },
+        "payload.reuse_checked": {
+          "calls": 50,
+          "elapsed_ms": 0.3525
+        },
+        "query.accepted_ids": {
+          "calls": 260,
+          "elapsed_ms": 0.0
+        },
+        "query.covered_candidates": {
+          "calls": 0,
+          "elapsed_ms": 0.0
+        },
+        "query.fold.title": {
+          "calls": 260,
+          "elapsed_ms": 0.0184
+        },
+        "query.payload_candidates": {
+          "calls": 260,
+          "elapsed_ms": 0.0
+        },
+        "query.payload_crc": {
+          "calls": 260,
+          "elapsed_ms": 0.8271
+        },
+        "query.payload_read": {
+          "calls": 260,
+          "elapsed_ms": 2.7397
+        },
+        "query.payload_read_bytes": {
+          "calls": 8285621,
+          "elapsed_ms": 0.0
+        },
+        "query.payload_read_requests": {
+          "calls": 260,
+          "elapsed_ms": 0.0
+        },
+        "query.payload_requested_bytes": {
+          "calls": 8285621,
+          "elapsed_ms": 0.0
+        },
+        "query.payload_validation": {
+          "calls": 260,
+          "elapsed_ms": 0.65
+        },
+        "query.payload_window_hits": {
+          "calls": 0,
+          "elapsed_ms": 0.0
+        },
+        "query.posting_cache_read": {
+          "calls": 20,
+          "elapsed_ms": 0.1843
+        },
+        "query.posting_intersection": {
+          "calls": 361,
+          "elapsed_ms": 0.0565
+        },
+        "query.raw_ascii_probe": {
+          "calls": 260,
+          "elapsed_ms": 0.7295
+        },
+        "query.raw_ascii_proven": {
+          "calls": 260,
+          "elapsed_ms": 0.0108
+        },
+        "query.record_identity": {
+          "calls": 260,
+          "elapsed_ms": 0.0273
+        },
+        "query.record_metadata": {
+          "calls": 260,
+          "elapsed_ms": 0.5635
+        },
+        "query.retain_checked_payload": {
+          "calls": 50,
+          "elapsed_ms": 0.0939
+        },
+        "query.verify_text": {
+          "calls": 260,
+          "elapsed_ms": 0.8473
+        },
+        "query.visible_seed_ids": {
+          "calls": 361,
+          "elapsed_ms": 0.0
+        },
+        "search.filter_visibility_text": {
+          "calls": 1,
+          "elapsed_ms": 6.4392
+        },
+        "search.merge_page_hydration": {
+          "calls": 1,
+          "elapsed_ms": 0.5625
+        },
+        "search.total": {
+          "calls": 1,
+          "elapsed_ms": 6.9692
+        }
+      }
+    },
+    {
+      "text": "zxzxzxzxzxzxzxzxzxzxzxzxzxzxzxzxzxzxzxzxzxzxzxzxzxzxzxzxzxzxzxzxzxzxzxzxzxzxzxzxzxzxzxzxzxzxzxzxzxzxzxzxzxzxzxzxzxzxzxzxzxzxzxzxzxzxzxzxzxzxzxzxzxzxzxzxzxzxzxzxzxzxzxzxzxzxzxzxzxzxzxzxzxzxzxzxzxzxzxzxzxzxzxzxzxzxzxzxzxzxzxzxzxzxzxzxzxzxzxzxzxzxzxzxzxzxzxzxzxzxzxzxzxzxzxzxzxzxzxzxzxzxzxzxzxzxzxzxzxzx",
+      "offset": 0,
+      "limit": 50,
+      "before": {
+        "search.filter_visibility_text": {
+          "calls": 1,
+          "elapsed_ms": 0.0157
+        },
+        "search.merge_page_hydration": {
+          "calls": 1,
+          "elapsed_ms": 0.0001
+        },
+        "search.total": {
+          "calls": 1,
+          "elapsed_ms": 0.0161
+        }
+      },
+      "after": {
+        "search.filter_visibility_text": {
+          "calls": 1,
+          "elapsed_ms": 0.016
+        },
+        "search.merge_page_hydration": {
+          "calls": 1,
+          "elapsed_ms": 0.0001
+        },
+        "search.total": {
+          "calls": 1,
+          "elapsed_ms": 0.0163
+        }
+      }
+    },
+    {
+      "text": "presumption",
+      "offset": 0,
+      "limit": 50,
+      "before": {
+        "disk.read_at": {
+          "calls": 2745,
+          "elapsed_ms": 27.9515
+        },
+        "payload.reuse_checked": {
+          "calls": 50,
+          "elapsed_ms": 0.3581
+        },
+        "query.accepted_ids": {
+          "calls": 883,
+          "elapsed_ms": 0.0
+        },
+        "query.covered_candidates": {
+          "calls": 0,
+          "elapsed_ms": 0.0
+        },
+        "query.fold.body": {
+          "calls": 75581,
+          "elapsed_ms": 26.7476
+        },
+        "query.fold.title": {
+          "calls": 2541,
+          "elapsed_ms": 0.1631
+        },
+        "query.payload_candidates": {
+          "calls": 2541,
+          "elapsed_ms": 0.0
+        },
+        "query.payload_crc": {
+          "calls": 2541,
+          "elapsed_ms": 9.3766
+        },
+        "query.payload_read": {
+          "calls": 2541,
+          "elapsed_ms": 26.9733
+        },
+        "query.payload_read_bytes": {
+          "calls": 93423204,
+          "elapsed_ms": 0.0
+        },
+        "query.payload_read_requests": {
+          "calls": 2531,
+          "elapsed_ms": 0.0
+        },
+        "query.payload_requested_bytes": {
+          "calls": 92702693,
+          "elapsed_ms": 0.0
+        },
+        "query.payload_validation": {
+          "calls": 2541,
+          "elapsed_ms": 9.0533
+        },
+        "query.payload_window_hits": {
+          "calls": 10,
+          "elapsed_ms": 0.0
+        },
+        "query.posting_cache_read": {
+          "calls": 40,
+          "elapsed_ms": 0.6298
+        },
+        "query.posting_intersection": {
+          "calls": 5302,
+          "elapsed_ms": 1.0856
+        },
+        "query.raw_ascii_probe": {
+          "calls": 40,
+          "elapsed_ms": 0.1342
+        },
+        "query.raw_ascii_proven": {
+          "calls": 16,
+          "elapsed_ms": 0.0008
+        },
+        "query.record_identity": {
+          "calls": 2541,
+          "elapsed_ms": 0.3077
+        },
+        "query.record_metadata": {
+          "calls": 2546,
+          "elapsed_ms": 1.4703
+        },
+        "query.retain_checked_payload": {
+          "calls": 50,
+          "elapsed_ms": 0.1436
+        },
+        "query.scan.body": {
+          "calls": 75581,
+          "elapsed_ms": 7.3851
+        },
+        "query.verify_text": {
+          "calls": 2541,
+          "elapsed_ms": 47.0069
+        },
+        "query.visible_seed_ids": {
+          "calls": 5302,
+          "elapsed_ms": 0.0
+        },
+        "search.filter_visibility_text": {
+          "calls": 1,
+          "elapsed_ms": 99.0475
+        },
+        "search.merge_page_hydration": {
+          "calls": 1,
+          "elapsed_ms": 0.522
+        },
+        "search.total": {
+          "calls": 1,
+          "elapsed_ms": 99.5673
+        }
+      },
+      "after": {
+        "disk.read_at": {
+          "calls": 2745,
+          "elapsed_ms": 26.6935
+        },
+        "payload.reuse_checked": {
+          "calls": 50,
+          "elapsed_ms": 0.3707
+        },
+        "query.accepted_ids": {
+          "calls": 883,
+          "elapsed_ms": 0.0
+        },
+        "query.covered_candidates": {
+          "calls": 0,
+          "elapsed_ms": 0.0
+        },
+        "query.fold.body": {
+          "calls": 21752,
+          "elapsed_ms": 23.9391
+        },
+        "query.fold.title": {
+          "calls": 2541,
+          "elapsed_ms": 0.1658
+        },
+        "query.payload_candidates": {
+          "calls": 2541,
+          "elapsed_ms": 0.0
+        },
+        "query.payload_crc": {
+          "calls": 2541,
+          "elapsed_ms": 9.492
+        },
+        "query.payload_read": {
+          "calls": 2541,
+          "elapsed_ms": 26.2752
+        },
+        "query.payload_read_bytes": {
+          "calls": 93423204,
+          "elapsed_ms": 0.0
+        },
+        "query.payload_read_requests": {
+          "calls": 2531,
+          "elapsed_ms": 0.0
+        },
+        "query.payload_requested_bytes": {
+          "calls": 92702693,
+          "elapsed_ms": 0.0
+        },
+        "query.payload_validation": {
+          "calls": 2541,
+          "elapsed_ms": 8.7223
+        },
+        "query.payload_window_hits": {
+          "calls": 10,
+          "elapsed_ms": 0.0
+        },
+        "query.posting_cache_read": {
+          "calls": 40,
+          "elapsed_ms": 0.5675
+        },
+        "query.posting_intersection": {
+          "calls": 5302,
+          "elapsed_ms": 1.0366
+        },
+        "query.raw_ascii_probe": {
+          "calls": 40,
+          "elapsed_ms": 0.1167
+        },
+        "query.raw_ascii_proven": {
+          "calls": 16,
+          "elapsed_ms": 0.0007
+        },
+        "query.record_identity": {
+          "calls": 2541,
+          "elapsed_ms": 0.2646
+        },
+        "query.record_metadata": {
+          "calls": 2546,
+          "elapsed_ms": 1.4316
+        },
+        "query.retain_checked_payload": {
+          "calls": 50,
+          "elapsed_ms": 0.1503
+        },
+        "query.scan.body": {
+          "calls": 21752,
+          "elapsed_ms": 4.9906
+        },
+        "query.verify_text": {
+          "calls": 2541,
+          "elapsed_ms": 34.2558
+        },
+        "query.visible_seed_ids": {
+          "calls": 5302,
+          "elapsed_ms": 0.0
+        },
+        "search.filter_visibility_text": {
+          "calls": 1,
+          "elapsed_ms": 84.641
+        },
+        "search.merge_page_hydration": {
+          "calls": 1,
+          "elapsed_ms": 0.5338
+        },
+        "search.total": {
+          "calls": 1,
+          "elapsed_ms": 85.176
+        }
+      }
+    },
+    {
+      "text": "the",
+      "offset": 0,
+      "limit": 1,
+      "before": {
+        "disk.read_at": {
+          "calls": 6,
+          "elapsed_ms": 0.0177
+        },
+        "payload.decode_crc_identity": {
+          "calls": 1,
+          "elapsed_ms": 0.0087
+        },
+        "query.accepted_ids": {
+          "calls": 5,
+          "elapsed_ms": 0.0
+        },
+        "query.covered_candidates": {
+          "calls": 5,
+          "elapsed_ms": 0.0
+        },
+        "query.covering_guard": {
+          "calls": 5,
+          "elapsed_ms": 0.0272
+        },
+        "query.covering_index_metadata": {
+          "calls": 5,
+          "elapsed_ms": 0.0264
+        },
+        "query.payload_candidates": {
+          "calls": 0,
+          "elapsed_ms": 0.0
+        },
+        "query.payload_read_bytes": {
+          "calls": 0,
+          "elapsed_ms": 0.0
+        },
+        "query.payload_read_requests": {
+          "calls": 0,
+          "elapsed_ms": 0.0
+        },
+        "query.payload_requested_bytes": {
+          "calls": 0,
+          "elapsed_ms": 0.0
+        },
+        "query.payload_window_hits": {
+          "calls": 0,
+          "elapsed_ms": 0.0
+        },
+        "query.posting_intersection": {
+          "calls": 5,
+          "elapsed_ms": 0.0002
+        },
+        "query.record_identity": {
+          "calls": 1,
+          "elapsed_ms": 0.0001
+        },
+        "query.record_metadata": {
+          "calls": 2,
+          "elapsed_ms": 0.0011
+        },
+        "query.visible_seed_ids": {
+          "calls": 5,
+          "elapsed_ms": 0.0
+        },
+        "search.filter_visibility_text": {
+          "calls": 1,
+          "elapsed_ms": 0.0626
+        },
+        "search.merge_page_hydration": {
+          "calls": 1,
+          "elapsed_ms": 0.0214
+        },
+        "search.total": {
+          "calls": 1,
+          "elapsed_ms": 0.0845
+        }
+      },
+      "after": {
+        "disk.read_at": {
+          "calls": 6,
+          "elapsed_ms": 0.0158
+        },
+        "payload.decode_crc_identity": {
+          "calls": 1,
+          "elapsed_ms": 0.0096
+        },
+        "query.accepted_ids": {
+          "calls": 5,
+          "elapsed_ms": 0.0
+        },
+        "query.covered_candidates": {
+          "calls": 5,
+          "elapsed_ms": 0.0
+        },
+        "query.covering_guard": {
+          "calls": 5,
+          "elapsed_ms": 0.0262
+        },
+        "query.covering_index_metadata": {
+          "calls": 5,
+          "elapsed_ms": 0.0257
+        },
+        "query.payload_candidates": {
+          "calls": 0,
+          "elapsed_ms": 0.0
+        },
+        "query.payload_read_bytes": {
+          "calls": 0,
+          "elapsed_ms": 0.0
+        },
+        "query.payload_read_requests": {
+          "calls": 0,
+          "elapsed_ms": 0.0
+        },
+        "query.payload_requested_bytes": {
+          "calls": 0,
+          "elapsed_ms": 0.0
+        },
+        "query.payload_window_hits": {
+          "calls": 0,
+          "elapsed_ms": 0.0
+        },
+        "query.posting_intersection": {
+          "calls": 5,
+          "elapsed_ms": 0.0004
+        },
+        "query.record_identity": {
+          "calls": 1,
+          "elapsed_ms": 0.0001
+        },
+        "query.record_metadata": {
+          "calls": 2,
+          "elapsed_ms": 0.0009
+        },
+        "query.visible_seed_ids": {
+          "calls": 5,
+          "elapsed_ms": 0.0
+        },
+        "search.filter_visibility_text": {
+          "calls": 1,
+          "elapsed_ms": 0.0566
+        },
+        "search.merge_page_hydration": {
+          "calls": 1,
+          "elapsed_ms": 0.021
+        },
+        "search.total": {
+          "calls": 1,
+          "elapsed_ms": 0.0779
+        }
+      }
+    },
+    {
+      "text": "the",
+      "offset": 0,
+      "limit": 200,
+      "before": {
+        "disk.read_at": {
+          "calls": 120,
+          "elapsed_ms": 1.2406
+        },
+        "payload.decode_crc_identity": {
+          "calls": 200,
+          "elapsed_ms": 3.5905
+        },
+        "query.accepted_ids": {
+          "calls": 1000,
+          "elapsed_ms": 0.0
+        },
+        "query.covered_candidates": {
+          "calls": 1000,
+          "elapsed_ms": 0.0
+        },
+        "query.covering_guard": {
+          "calls": 5,
+          "elapsed_ms": 0.0587
+        },
+        "query.covering_index_metadata": {
+          "calls": 5,
+          "elapsed_ms": 0.0575
+        },
+        "query.payload_candidates": {
+          "calls": 0,
+          "elapsed_ms": 0.0
+        },
+        "query.payload_read_bytes": {
+          "calls": 0,
+          "elapsed_ms": 0.0
+        },
+        "query.payload_read_requests": {
+          "calls": 0,
+          "elapsed_ms": 0.0
+        },
+        "query.payload_requested_bytes": {
+          "calls": 0,
+          "elapsed_ms": 0.0
+        },
+        "query.payload_window_hits": {
+          "calls": 0,
+          "elapsed_ms": 0.0
+        },
+        "query.posting_intersection": {
+          "calls": 1000,
+          "elapsed_ms": 0.0413
+        },
+        "query.record_identity": {
+          "calls": 200,
+          "elapsed_ms": 0.0183
+        },
+        "query.record_metadata": {
+          "calls": 514,
+          "elapsed_ms": 0.0722
+        },
+        "query.visible_seed_ids": {
+          "calls": 1000,
+          "elapsed_ms": 0.0
+        },
+        "search.filter_visibility_text": {
+          "calls": 1,
+          "elapsed_ms": 0.2451
+        },
+        "search.merge_page_hydration": {
+          "calls": 1,
+          "elapsed_ms": 5.1618
+        },
+        "search.total": {
+          "calls": 1,
+          "elapsed_ms": 5.4156
+        }
+      },
+      "after": {
+        "disk.read_at": {
+          "calls": 120,
+          "elapsed_ms": 1.3012
+        },
+        "payload.decode_crc_identity": {
+          "calls": 200,
+          "elapsed_ms": 3.8032
+        },
+        "query.accepted_ids": {
+          "calls": 1000,
+          "elapsed_ms": 0.0
+        },
+        "query.covered_candidates": {
+          "calls": 1000,
+          "elapsed_ms": 0.0
+        },
+        "query.covering_guard": {
+          "calls": 5,
+          "elapsed_ms": 0.062
+        },
+        "query.covering_index_metadata": {
+          "calls": 5,
+          "elapsed_ms": 0.0598
+        },
+        "query.payload_candidates": {
+          "calls": 0,
+          "elapsed_ms": 0.0
+        },
+        "query.payload_read_bytes": {
+          "calls": 0,
+          "elapsed_ms": 0.0
+        },
+        "query.payload_read_requests": {
+          "calls": 0,
+          "elapsed_ms": 0.0
+        },
+        "query.payload_requested_bytes": {
+          "calls": 0,
+          "elapsed_ms": 0.0
+        },
+        "query.payload_window_hits": {
+          "calls": 0,
+          "elapsed_ms": 0.0
+        },
+        "query.posting_intersection": {
+          "calls": 1000,
+          "elapsed_ms": 0.0433
+        },
+        "query.record_identity": {
+          "calls": 200,
+          "elapsed_ms": 0.017
+        },
+        "query.record_metadata": {
+          "calls": 514,
+          "elapsed_ms": 0.0685
+        },
+        "query.visible_seed_ids": {
+          "calls": 1000,
+          "elapsed_ms": 0.0
+        },
+        "search.filter_visibility_text": {
+          "calls": 1,
+          "elapsed_ms": 0.2788
+        },
+        "search.merge_page_hydration": {
+          "calls": 1,
+          "elapsed_ms": 5.4978
+        },
+        "search.total": {
+          "calls": 1,
+          "elapsed_ms": 5.7794
+        }
+      }
+    },
+    {
+      "text": "the",
+      "offset": 5000,
+      "limit": 50,
+      "before": {
+        "disk.read_at": {
+          "calls": 60,
+          "elapsed_ms": 0.4165
+        },
+        "payload.read_document": {
+          "calls": 50,
+          "elapsed_ms": 0.9249
+        },
+        "query.accepted_ids": {
+          "calls": 10000,
+          "elapsed_ms": 0.0
+        },
+        "query.covered_candidates": {
+          "calls": 10000,
+          "elapsed_ms": 0.0
+        },
+        "query.covering_guard": {
+          "calls": 5,
+          "elapsed_ms": 0.0478
+        },
+        "query.covering_index_metadata": {
+          "calls": 5,
+          "elapsed_ms": 0.0462
+        },
+        "query.payload_candidates": {
+          "calls": 0,
+          "elapsed_ms": 0.0
+        },
+        "query.payload_read_bytes": {
+          "calls": 0,
+          "elapsed_ms": 0.0
+        },
+        "query.payload_read_requests": {
+          "calls": 0,
+          "elapsed_ms": 0.0
+        },
+        "query.payload_requested_bytes": {
+          "calls": 0,
+          "elapsed_ms": 0.0
+        },
+        "query.payload_window_hits": {
+          "calls": 0,
+          "elapsed_ms": 0.0
+        },
+        "query.posting_intersection": {
+          "calls": 10000,
+          "elapsed_ms": 0.4247
+        },
+        "query.visible_seed_ids": {
+          "calls": 10000,
+          "elapsed_ms": 0.0
+        },
+        "search.filter_visibility_text": {
+          "calls": 1,
+          "elapsed_ms": 1.0256
+        },
+        "search.merge_page_hydration": {
+          "calls": 1,
+          "elapsed_ms": 1.0192
+        },
+        "search.total": {
+          "calls": 1,
+          "elapsed_ms": 1.9495
+        }
+      },
+      "after": {
+        "disk.read_at": {
+          "calls": 60,
+          "elapsed_ms": 0.3316
+        },
+        "payload.read_document": {
+          "calls": 50,
+          "elapsed_ms": 0.8639
+        },
+        "query.accepted_ids": {
+          "calls": 10000,
+          "elapsed_ms": 0.0
+        },
+        "query.covered_candidates": {
+          "calls": 10000,
+          "elapsed_ms": 0.0
+        },
+        "query.covering_guard": {
+          "calls": 5,
+          "elapsed_ms": 0.0446
+        },
+        "query.covering_index_metadata": {
+          "calls": 5,
+          "elapsed_ms": 0.0436
+        },
+        "query.payload_candidates": {
+          "calls": 0,
+          "elapsed_ms": 0.0
+        },
+        "query.payload_read_bytes": {
+          "calls": 0,
+          "elapsed_ms": 0.0
+        },
+        "query.payload_read_requests": {
+          "calls": 0,
+          "elapsed_ms": 0.0
+        },
+        "query.payload_requested_bytes": {
+          "calls": 0,
+          "elapsed_ms": 0.0
+        },
+        "query.payload_window_hits": {
+          "calls": 0,
+          "elapsed_ms": 0.0
+        },
+        "query.posting_intersection": {
+          "calls": 10000,
+          "elapsed_ms": 0.4226
+        },
+        "query.visible_seed_ids": {
+          "calls": 10000,
+          "elapsed_ms": 0.0
+        },
+        "search.filter_visibility_text": {
+          "calls": 1,
+          "elapsed_ms": 1.0118
+        },
+        "search.merge_page_hydration": {
+          "calls": 1,
+          "elapsed_ms": 0.9484
+        },
+        "search.total": {
+          "calls": 1,
+          "elapsed_ms": 1.9556
+        }
+      }
+    },
+    {
+      "text": "the",
+      "offset": 9950,
+      "limit": 50,
+      "before": {
+        "disk.read_at": {
+          "calls": 60,
+          "elapsed_ms": 0.2705
+        },
+        "payload.read_document": {
+          "calls": 50,
+          "elapsed_ms": 0.7453
+        },
+        "query.accepted_ids": {
+          "calls": 10000,
+          "elapsed_ms": 0.0
+        },
+        "query.covered_candidates": {
+          "calls": 10000,
+          "elapsed_ms": 0.0
+        },
+        "query.covering_guard": {
+          "calls": 5,
+          "elapsed_ms": 0.0409
+        },
+        "query.covering_index_metadata": {
+          "calls": 5,
+          "elapsed_ms": 0.04
+        },
+        "query.payload_candidates": {
+          "calls": 0,
+          "elapsed_ms": 0.0
+        },
+        "query.payload_read_bytes": {
+          "calls": 0,
+          "elapsed_ms": 0.0
+        },
+        "query.payload_read_requests": {
+          "calls": 0,
+          "elapsed_ms": 0.0
+        },
+        "query.payload_requested_bytes": {
+          "calls": 0,
+          "elapsed_ms": 0.0
+        },
+        "query.payload_window_hits": {
+          "calls": 0,
+          "elapsed_ms": 0.0
+        },
+        "query.posting_intersection": {
+          "calls": 10000,
+          "elapsed_ms": 0.4255
+        },
+        "query.visible_seed_ids": {
+          "calls": 10000,
+          "elapsed_ms": 0.0
+        },
+        "search.filter_visibility_text": {
+          "calls": 1,
+          "elapsed_ms": 1.032
+        },
+        "search.merge_page_hydration": {
+          "calls": 1,
+          "elapsed_ms": 0.8428
+        },
+        "search.total": {
+          "calls": 1,
+          "elapsed_ms": 1.8759
+        }
+      },
+      "after": {
+        "disk.read_at": {
+          "calls": 60,
+          "elapsed_ms": 0.226
+        },
+        "payload.read_document": {
+          "calls": 50,
+          "elapsed_ms": 0.6634
+        },
+        "query.accepted_ids": {
+          "calls": 10000,
+          "elapsed_ms": 0.0
+        },
+        "query.covered_candidates": {
+          "calls": 10000,
+          "elapsed_ms": 0.0
+        },
+        "query.covering_guard": {
+          "calls": 5,
+          "elapsed_ms": 0.0425
+        },
+        "query.covering_index_metadata": {
+          "calls": 5,
+          "elapsed_ms": 0.0411
+        },
+        "query.payload_candidates": {
+          "calls": 0,
+          "elapsed_ms": 0.0
+        },
+        "query.payload_read_bytes": {
+          "calls": 0,
+          "elapsed_ms": 0.0
+        },
+        "query.payload_read_requests": {
+          "calls": 0,
+          "elapsed_ms": 0.0
+        },
+        "query.payload_requested_bytes": {
+          "calls": 0,
+          "elapsed_ms": 0.0
+        },
+        "query.payload_window_hits": {
+          "calls": 0,
+          "elapsed_ms": 0.0
+        },
+        "query.posting_intersection": {
+          "calls": 10000,
+          "elapsed_ms": 0.4217
+        },
+        "query.visible_seed_ids": {
+          "calls": 10000,
+          "elapsed_ms": 0.0
+        },
+        "search.filter_visibility_text": {
+          "calls": 1,
+          "elapsed_ms": 1.0308
+        },
+        "search.merge_page_hydration": {
+          "calls": 1,
+          "elapsed_ms": 0.7664
+        },
+        "search.total": {
+          "calls": 1,
+          "elapsed_ms": 1.753
+        }
+      }
+    },
+    {
+      "text": "ishmael",
+      "offset": 130,
+      "limit": 1,
+      "before": {
+        "disk.read_at": {
+          "calls": 404,
+          "elapsed_ms": 3.1207
+        },
+        "payload.decode_crc_identity": {
+          "calls": 1,
+          "elapsed_ms": 0.0167
+        },
+        "query.accepted_ids": {
+          "calls": 260,
+          "elapsed_ms": 0.0
+        },
+        "query.covered_candidates": {
+          "calls": 0,
+          "elapsed_ms": 0.0
+        },
+        "query.fold.title": {
+          "calls": 260,
+          "elapsed_ms": 0.0158
+        },
+        "query.payload_candidates": {
+          "calls": 260,
+          "elapsed_ms": 0.0
+        },
+        "query.payload_crc": {
+          "calls": 260,
+          "elapsed_ms": 0.8305
+        },
+        "query.payload_read": {
+          "calls": 260,
+          "elapsed_ms": 2.6707
+        },
+        "query.payload_read_bytes": {
+          "calls": 8285621,
+          "elapsed_ms": 0.0
+        },
+        "query.payload_read_requests": {
+          "calls": 260,
+          "elapsed_ms": 0.0
+        },
+        "query.payload_requested_bytes": {
+          "calls": 8285621,
+          "elapsed_ms": 0.0
+        },
+        "query.payload_validation": {
+          "calls": 260,
+          "elapsed_ms": 0.6856
+        },
+        "query.payload_window_hits": {
+          "calls": 0,
+          "elapsed_ms": 0.0
+        },
+        "query.posting_cache_read": {
+          "calls": 20,
+          "elapsed_ms": 0.1748
+        },
+        "query.posting_intersection": {
+          "calls": 361,
+          "elapsed_ms": 0.0556
+        },
+        "query.raw_ascii_probe": {
+          "calls": 260,
+          "elapsed_ms": 0.705
+        },
+        "query.raw_ascii_proven": {
+          "calls": 260,
+          "elapsed_ms": 0.0108
+        },
+        "query.record_identity": {
+          "calls": 261,
+          "elapsed_ms": 0.0299
+        },
+        "query.record_metadata": {
+          "calls": 262,
+          "elapsed_ms": 0.5845
+        },
+        "query.verify_text": {
+          "calls": 260,
+          "elapsed_ms": 0.8279
+        },
+        "query.visible_seed_ids": {
+          "calls": 361,
+          "elapsed_ms": 0.0
+        },
+        "search.filter_visibility_text": {
+          "calls": 1,
+          "elapsed_ms": 6.2706
+        },
+        "search.merge_page_hydration": {
+          "calls": 1,
+          "elapsed_ms": 0.0903
+        },
+        "search.total": {
+          "calls": 1,
+          "elapsed_ms": 6.3618
+        }
+      },
+      "after": {
+        "disk.read_at": {
+          "calls": 404,
+          "elapsed_ms": 2.8989
+        },
+        "payload.decode_crc_identity": {
+          "calls": 1,
+          "elapsed_ms": 0.0156
+        },
+        "query.accepted_ids": {
+          "calls": 260,
+          "elapsed_ms": 0.0
+        },
+        "query.covered_candidates": {
+          "calls": 0,
+          "elapsed_ms": 0.0
+        },
+        "query.fold.title": {
+          "calls": 260,
+          "elapsed_ms": 0.017
+        },
+        "query.payload_candidates": {
+          "calls": 260,
+          "elapsed_ms": 0.0
+        },
+        "query.payload_crc": {
+          "calls": 260,
+          "elapsed_ms": 0.8462
+        },
+        "query.payload_read": {
+          "calls": 260,
+          "elapsed_ms": 2.4537
+        },
+        "query.payload_read_bytes": {
+          "calls": 8285621,
+          "elapsed_ms": 0.0
+        },
+        "query.payload_read_requests": {
+          "calls": 260,
+          "elapsed_ms": 0.0
+        },
+        "query.payload_requested_bytes": {
+          "calls": 8285621,
+          "elapsed_ms": 0.0
+        },
+        "query.payload_validation": {
+          "calls": 260,
+          "elapsed_ms": 0.6877
+        },
+        "query.payload_window_hits": {
+          "calls": 0,
+          "elapsed_ms": 0.0
+        },
+        "query.posting_cache_read": {
+          "calls": 20,
+          "elapsed_ms": 0.1614
+        },
+        "query.posting_intersection": {
+          "calls": 361,
+          "elapsed_ms": 0.0527
+        },
+        "query.raw_ascii_probe": {
+          "calls": 260,
+          "elapsed_ms": 0.7239
+        },
+        "query.raw_ascii_proven": {
+          "calls": 260,
+          "elapsed_ms": 0.0108
+        },
+        "query.record_identity": {
+          "calls": 261,
+          "elapsed_ms": 0.0236
+        },
+        "query.record_metadata": {
+          "calls": 262,
+          "elapsed_ms": 0.5959
+        },
+        "query.verify_text": {
+          "calls": 260,
+          "elapsed_ms": 0.8488
+        },
+        "query.visible_seed_ids": {
+          "calls": 361,
+          "elapsed_ms": 0.0
+        },
+        "search.filter_visibility_text": {
+          "calls": 1,
+          "elapsed_ms": 5.9743
+        },
+        "search.merge_page_hydration": {
+          "calls": 1,
+          "elapsed_ms": 0.0828
+        },
+        "search.total": {
+          "calls": 1,
+          "elapsed_ms": 6.0618
+        }
+      }
+    },
+    {
+      "text": "ishmael",
+      "offset": 60,
+      "limit": 200,
+      "before": {
+        "disk.read_at": {
+          "calls": 819,
+          "elapsed_ms": 5.9864
+        },
+        "payload.decode_crc_identity": {
+          "calls": 200,
+          "elapsed_ms": 4.6443
+        },
+        "query.accepted_ids": {
+          "calls": 260,
+          "elapsed_ms": 0.0
+        },
+        "query.covered_candidates": {
+          "calls": 0,
+          "elapsed_ms": 0.0
+        },
+        "query.fold.title": {
+          "calls": 260,
+          "elapsed_ms": 0.0171
+        },
+        "query.payload_candidates": {
+          "calls": 260,
+          "elapsed_ms": 0.0
+        },
+        "query.payload_crc": {
+          "calls": 260,
+          "elapsed_ms": 0.8371
+        },
+        "query.payload_read": {
+          "calls": 260,
+          "elapsed_ms": 2.6645
+        },
+        "query.payload_read_bytes": {
+          "calls": 8285621,
+          "elapsed_ms": 0.0
+        },
+        "query.payload_read_requests": {
+          "calls": 260,
+          "elapsed_ms": 0.0
+        },
+        "query.payload_requested_bytes": {
+          "calls": 8285621,
+          "elapsed_ms": 0.0
+        },
+        "query.payload_validation": {
+          "calls": 260,
+          "elapsed_ms": 0.6669
+        },
+        "query.payload_window_hits": {
+          "calls": 0,
+          "elapsed_ms": 0.0
+        },
+        "query.posting_cache_read": {
+          "calls": 20,
+          "elapsed_ms": 0.2047
+        },
+        "query.posting_intersection": {
+          "calls": 361,
+          "elapsed_ms": 0.05
+        },
+        "query.raw_ascii_probe": {
+          "calls": 260,
+          "elapsed_ms": 0.7287
+        },
+        "query.raw_ascii_proven": {
+          "calls": 260,
+          "elapsed_ms": 0.0104
+        },
+        "query.record_identity": {
+          "calls": 460,
+          "elapsed_ms": 0.0497
+        },
+        "query.record_metadata": {
+          "calls": 852,
+          "elapsed_ms": 1.3821
+        },
+        "query.verify_text": {
+          "calls": 260,
+          "elapsed_ms": 0.8493
+        },
+        "query.visible_seed_ids": {
+          "calls": 361,
+          "elapsed_ms": 0.0
+        },
+        "search.filter_visibility_text": {
+          "calls": 1,
+          "elapsed_ms": 6.7637
+        },
+        "search.merge_page_hydration": {
+          "calls": 1,
+          "elapsed_ms": 8.1428
+        },
+        "search.total": {
+          "calls": 1,
+          "elapsed_ms": 15.1413
+        }
+      },
+      "after": {
+        "disk.read_at": {
+          "calls": 819,
+          "elapsed_ms": 5.6378
+        },
+        "payload.decode_crc_identity": {
+          "calls": 200,
+          "elapsed_ms": 3.2685
+        },
+        "query.accepted_ids": {
+          "calls": 260,
+          "elapsed_ms": 0.0
+        },
+        "query.covered_candidates": {
+          "calls": 0,
+          "elapsed_ms": 0.0
+        },
+        "query.fold.title": {
+          "calls": 260,
+          "elapsed_ms": 0.0188
+        },
+        "query.payload_candidates": {
+          "calls": 260,
+          "elapsed_ms": 0.0
+        },
+        "query.payload_crc": {
+          "calls": 260,
+          "elapsed_ms": 0.8377
+        },
+        "query.payload_read": {
+          "calls": 260,
+          "elapsed_ms": 2.7162
+        },
+        "query.payload_read_bytes": {
+          "calls": 8285621,
+          "elapsed_ms": 0.0
+        },
+        "query.payload_read_requests": {
+          "calls": 260,
+          "elapsed_ms": 0.0
+        },
+        "query.payload_requested_bytes": {
+          "calls": 8285621,
+          "elapsed_ms": 0.0
+        },
+        "query.payload_validation": {
+          "calls": 260,
+          "elapsed_ms": 0.6941
+        },
+        "query.payload_window_hits": {
+          "calls": 0,
+          "elapsed_ms": 0.0
+        },
+        "query.posting_cache_read": {
+          "calls": 20,
+          "elapsed_ms": 0.198
+        },
+        "query.posting_intersection": {
+          "calls": 361,
+          "elapsed_ms": 0.0513
+        },
+        "query.raw_ascii_probe": {
+          "calls": 260,
+          "elapsed_ms": 0.7587
+        },
+        "query.raw_ascii_proven": {
+          "calls": 260,
+          "elapsed_ms": 0.0102
+        },
+        "query.record_identity": {
+          "calls": 460,
+          "elapsed_ms": 0.0428
+        },
+        "query.record_metadata": {
+          "calls": 852,
+          "elapsed_ms": 1.3402
+        },
+        "query.verify_text": {
+          "calls": 260,
+          "elapsed_ms": 0.8834
+        },
+        "query.visible_seed_ids": {
+          "calls": 361,
+          "elapsed_ms": 0.0
+        },
+        "search.filter_visibility_text": {
+          "calls": 1,
+          "elapsed_ms": 6.5286
+        },
+        "search.merge_page_hydration": {
+          "calls": 1,
+          "elapsed_ms": 6.5587
+        },
+        "search.total": {
+          "calls": 1,
+          "elapsed_ms": 13.5177
+        }
+      }
+    },
+    {
+      "text": "quixote",
+      "offset": 28,
+      "limit": 10,
+      "before": {
+        "disk.read_at": {
+          "calls": 91,
+          "elapsed_ms": 0.5372
+        },
+        "payload.decode_crc_identity": {
+          "calls": 10,
+          "elapsed_ms": 0.0945
+        },
+        "query.accepted_ids": {
+          "calls": 56,
+          "elapsed_ms": 0.0
+        },
+        "query.covered_candidates": {
+          "calls": 0,
+          "elapsed_ms": 0.0
+        },
+        "query.fold.title": {
+          "calls": 56,
+          "elapsed_ms": 0.0042
+        },
+        "query.payload_candidates": {
+          "calls": 56,
+          "elapsed_ms": 0.0
+        },
+        "query.payload_crc": {
+          "calls": 56,
+          "elapsed_ms": 0.2003
+        },
+        "query.payload_read": {
+          "calls": 56,
+          "elapsed_ms": 0.3366
+        },
+        "query.payload_read_bytes": {
+          "calls": 1945325,
+          "elapsed_ms": 0.0
+        },
+        "query.payload_read_requests": {
+          "calls": 56,
+          "elapsed_ms": 0.0
+        },
+        "query.payload_requested_bytes": {
+          "calls": 1945325,
+          "elapsed_ms": 0.0
+        },
+        "query.payload_validation": {
+          "calls": 56,
+          "elapsed_ms": 0.138
+        },
+        "query.payload_window_hits": {
+          "calls": 0,
+          "elapsed_ms": 0.0
+        },
+        "query.posting_cache_read": {
+          "calls": 20,
+          "elapsed_ms": 0.1987
+        },
+        "query.posting_intersection": {
+          "calls": 56,
+          "elapsed_ms": 0.008
+        },
+        "query.raw_ascii_probe": {
+          "calls": 56,
+          "elapsed_ms": 0.1194
+        },
+        "query.raw_ascii_proven": {
+          "calls": 56,
+          "elapsed_ms": 0.0022
+        },
+        "query.record_identity": {
+          "calls": 66,
+          "elapsed_ms": 0.0058
+        },
+        "query.record_metadata": {
+          "calls": 84,
+          "elapsed_ms": 0.0543
+        },
+        "query.verify_text": {
+          "calls": 56,
+          "elapsed_ms": 0.1466
+        },
+        "query.visible_seed_ids": {
+          "calls": 56,
+          "elapsed_ms": 0.0
+        },
+        "search.filter_visibility_text": {
+          "calls": 1,
+          "elapsed_ms": 1.2032
+        },
+        "search.merge_page_hydration": {
+          "calls": 1,
+          "elapsed_ms": 0.2017
+        },
+        "search.total": {
+          "calls": 1,
+          "elapsed_ms": 1.4057
+        }
+      },
+      "after": {
+        "disk.read_at": {
+          "calls": 91,
+          "elapsed_ms": 0.4979
+        },
+        "payload.decode_crc_identity": {
+          "calls": 10,
+          "elapsed_ms": 0.1159
+        },
+        "query.accepted_ids": {
+          "calls": 56,
+          "elapsed_ms": 0.0
+        },
+        "query.covered_candidates": {
+          "calls": 0,
+          "elapsed_ms": 0.0
+        },
+        "query.fold.title": {
+          "calls": 56,
+          "elapsed_ms": 0.0036
+        },
+        "query.payload_candidates": {
+          "calls": 56,
+          "elapsed_ms": 0.0
+        },
+        "query.payload_crc": {
+          "calls": 56,
+          "elapsed_ms": 0.1787
+        },
+        "query.payload_read": {
+          "calls": 56,
+          "elapsed_ms": 0.3131
+        },
+        "query.payload_read_bytes": {
+          "calls": 1945325,
+          "elapsed_ms": 0.0
+        },
+        "query.payload_read_requests": {
+          "calls": 56,
+          "elapsed_ms": 0.0
+        },
+        "query.payload_requested_bytes": {
+          "calls": 1945325,
+          "elapsed_ms": 0.0
+        },
+        "query.payload_validation": {
+          "calls": 56,
+          "elapsed_ms": 0.1298
+        },
+        "query.payload_window_hits": {
+          "calls": 0,
+          "elapsed_ms": 0.0
+        },
+        "query.posting_cache_read": {
+          "calls": 20,
+          "elapsed_ms": 0.1822
+        },
+        "query.posting_intersection": {
+          "calls": 56,
+          "elapsed_ms": 0.0071
+        },
+        "query.raw_ascii_probe": {
+          "calls": 56,
+          "elapsed_ms": 0.099
+        },
+        "query.raw_ascii_proven": {
+          "calls": 56,
+          "elapsed_ms": 0.0023
+        },
+        "query.record_identity": {
+          "calls": 66,
+          "elapsed_ms": 0.0059
+        },
+        "query.record_metadata": {
+          "calls": 84,
+          "elapsed_ms": 0.052
+        },
+        "query.verify_text": {
+          "calls": 56,
+          "elapsed_ms": 0.126
+        },
+        "query.visible_seed_ids": {
+          "calls": 56,
+          "elapsed_ms": 0.0
+        },
+        "search.filter_visibility_text": {
+          "calls": 1,
+          "elapsed_ms": 1.1157
+        },
+        "search.merge_page_hydration": {
+          "calls": 1,
+          "elapsed_ms": 0.2425
+        },
+        "search.total": {
+          "calls": 1,
+          "elapsed_ms": 1.3661
+        }
+      }
+    },
+    {
+      "text": "quixote",
+      "offset": 57,
+      "limit": 50,
+      "before": {
+        "disk.read_at": {
+          "calls": 81,
+          "elapsed_ms": 0.4855
+        },
+        "query.accepted_ids": {
+          "calls": 56,
+          "elapsed_ms": 0.0
+        },
+        "query.covered_candidates": {
+          "calls": 0,
+          "elapsed_ms": 0.0
+        },
+        "query.fold.title": {
+          "calls": 56,
+          "elapsed_ms": 0.004
+        },
+        "query.payload_candidates": {
+          "calls": 56,
+          "elapsed_ms": 0.0
+        },
+        "query.payload_crc": {
+          "calls": 56,
+          "elapsed_ms": 0.2138
+        },
+        "query.payload_read": {
+          "calls": 56,
+          "elapsed_ms": 0.3499
+        },
+        "query.payload_read_bytes": {
+          "calls": 1945325,
+          "elapsed_ms": 0.0
+        },
+        "query.payload_read_requests": {
+          "calls": 56,
+          "elapsed_ms": 0.0
+        },
+        "query.payload_requested_bytes": {
+          "calls": 1945325,
+          "elapsed_ms": 0.0
+        },
+        "query.payload_validation": {
+          "calls": 56,
+          "elapsed_ms": 0.127
+        },
+        "query.payload_window_hits": {
+          "calls": 0,
+          "elapsed_ms": 0.0
+        },
+        "query.posting_cache_read": {
+          "calls": 20,
+          "elapsed_ms": 0.1918
+        },
+        "query.posting_intersection": {
+          "calls": 56,
+          "elapsed_ms": 0.0076
+        },
+        "query.raw_ascii_probe": {
+          "calls": 56,
+          "elapsed_ms": 0.1121
+        },
+        "query.raw_ascii_proven": {
+          "calls": 56,
+          "elapsed_ms": 0.0026
+        },
+        "query.record_identity": {
+          "calls": 56,
+          "elapsed_ms": 0.0048
+        },
+        "query.record_metadata": {
+          "calls": 56,
+          "elapsed_ms": 0.0435
+        },
+        "query.verify_text": {
+          "calls": 56,
+          "elapsed_ms": 0.1404
+        },
+        "query.visible_seed_ids": {
+          "calls": 56,
+          "elapsed_ms": 0.0
+        },
+        "search.filter_visibility_text": {
+          "calls": 1,
+          "elapsed_ms": 1.2246
+        },
+        "search.merge_page_hydration": {
+          "calls": 1,
+          "elapsed_ms": 0.0148
+        },
+        "search.total": {
+          "calls": 1,
+          "elapsed_ms": 1.2462
+        }
+      },
+      "after": {
+        "disk.read_at": {
+          "calls": 81,
+          "elapsed_ms": 0.3921
+        },
+        "query.accepted_ids": {
+          "calls": 56,
+          "elapsed_ms": 0.0
+        },
+        "query.covered_candidates": {
+          "calls": 0,
+          "elapsed_ms": 0.0
+        },
+        "query.fold.title": {
+          "calls": 56,
+          "elapsed_ms": 0.0033
+        },
+        "query.payload_candidates": {
+          "calls": 56,
+          "elapsed_ms": 0.0
+        },
+        "query.payload_crc": {
+          "calls": 56,
+          "elapsed_ms": 0.1853
+        },
+        "query.payload_read": {
+          "calls": 56,
+          "elapsed_ms": 0.2816
+        },
+        "query.payload_read_bytes": {
+          "calls": 1945325,
+          "elapsed_ms": 0.0
+        },
+        "query.payload_read_requests": {
+          "calls": 56,
+          "elapsed_ms": 0.0
+        },
+        "query.payload_requested_bytes": {
+          "calls": 1945325,
+          "elapsed_ms": 0.0
+        },
+        "query.payload_validation": {
+          "calls": 56,
+          "elapsed_ms": 0.1076
+        },
+        "query.payload_window_hits": {
+          "calls": 0,
+          "elapsed_ms": 0.0
+        },
+        "query.posting_cache_read": {
+          "calls": 20,
+          "elapsed_ms": 0.1653
+        },
+        "query.posting_intersection": {
+          "calls": 56,
+          "elapsed_ms": 0.0074
+        },
+        "query.raw_ascii_probe": {
+          "calls": 56,
+          "elapsed_ms": 0.0992
+        },
+        "query.raw_ascii_proven": {
+          "calls": 56,
+          "elapsed_ms": 0.0021
+        },
+        "query.record_identity": {
+          "calls": 56,
+          "elapsed_ms": 0.0046
+        },
+        "query.record_metadata": {
+          "calls": 56,
+          "elapsed_ms": 0.0331
+        },
+        "query.verify_text": {
+          "calls": 56,
+          "elapsed_ms": 0.1242
+        },
+        "query.visible_seed_ids": {
+          "calls": 56,
+          "elapsed_ms": 0.0
+        },
+        "search.filter_visibility_text": {
+          "calls": 1,
+          "elapsed_ms": 1.0165
+        },
+        "search.merge_page_hydration": {
+          "calls": 1,
+          "elapsed_ms": 0.0142
+        },
+        "search.total": {
+          "calls": 1,
+          "elapsed_ms": 1.0312
+        }
+      }
+    }
+  ],
+  "all38_candidate_validation_read_and_reuse_call_counts_unchanged": true,
+  "instrumented_not_normal_p95": true,
+  "nested_spans_do_not_sum": true
+}

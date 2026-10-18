@@ -1,6 +1,12 @@
+#[cfg(feature = "diagnostic-memory")]
+#[path = "../tools/bench_support/allocation.rs"]
+mod allocation;
 #[cfg(feature = "diagnostic-timing")]
 #[path = "../tools/bench_support/thread_cycles.rs"]
 mod cycles;
+#[cfg(feature = "diagnostic-memory")]
+#[global_allocator]
+static ALLOCATOR: allocation::Tracking = allocation::Tracking;
 #[path = "../tools/bench_support/memory_corpus.rs"]
 mod input;
 #[path = "../tools/bench_support/read_matrix.rs"]
@@ -33,6 +39,39 @@ fn main() -> input::Result<()> {
         "{}",
         json!({"phase":"opened","engine":"fdb","open_ms":open_ms,"stats":stats,"source_validation_on_open":!std::env::args().any(|arg| arg == "--deferred" || arg == "--record-reads"),"pending_source_checks":db.pending_source_checks()?})
     );
+    #[cfg(feature = "diagnostic-memory")]
+    if std::env::args().any(|arg| arg == "--allocation-matrix") {
+        if cfg!(feature = "diagnostic-timing") {
+            return Err("run allocation and timing diagnostics separately".into());
+        }
+        let matrix = matrix::Matrix::load()?;
+        for case in &matrix.cases {
+            let mut query = Query::new("shared");
+            query.collection = Some("texts".into());
+            query.text = case.text.clone();
+            query.offset = case.offset;
+            query.limit = case.limit;
+            let expected: Vec<_> = case
+                .ids
+                .iter()
+                .map(|id| matrix.documents[id].clone())
+                .collect();
+            assert_eq!(db.search(&query)?.hits, expected);
+            for iteration in 0..3 {
+                let before = allocation::reset();
+                let page = db.search(&query)?;
+                let (live, peak, calls) = allocation::snapshot();
+                assert_eq!(page.total, case.total);
+                assert_eq!(page.hits, expected);
+                assert_eq!(page.sequence, 20);
+                println!(
+                    "{}",
+                    json!({"phase":"query_allocation","text":case.text,"offset":case.offset,"limit":case.limit,"iteration":iteration,"hits":page.hits.len(),"capacity":page.hits.capacity(),"stored_document_bytes":std::mem::size_of::<fdb::StoredDocument>(),"additional_requested_peak_bytes":peak.saturating_sub(before),"live_requested_delta_bytes":live as i64-before as i64,"allocation_calls":calls,"includes_os_memory":false,"timings_are_invalid":true,"full_document_and_version_checks":true})
+                );
+            }
+        }
+        return Ok(());
+    }
     if std::env::args().any(|arg| arg == "--memory-probe") {
         return read_probe::measure(
             |key| Ok(db.get(key)?),

@@ -1,0 +1,125 @@
+{
+  "design": {
+    "pairs": 4,
+    "phase": "memory",
+    "affinity_mask": 4,
+    "same_executable": false,
+    "diagnostic_timing": false,
+    "programs": {
+      "control": {
+        "path": "output\\default-checked-page-20261018-measure_content_reads-normal.exe",
+        "sha256": "39EE8ADCF9BC62CCBCC664F7C59F52BBBDCEAEFE6DA825B49EF5E0F7927CA9AB"
+      },
+      "fdb": {
+        "path": "output\\search-followup-20261018-candidate-measure_content_reads-normal.exe",
+        "sha256": "6132CC5BA4D75D45FA9B589C5BCC1815E2424CEF54DE139625570AA2FA0B2691"
+      }
+    },
+    "cache": "warm OS cache, fresh processes, per-case untimed warmup, no eviction",
+    "validation": "normal strict open; complete source/index CRC and schema; pending0; payload CRC/schema/key/version preserved",
+    "corpus": "same existing first10000, 264842858 text bytes; no generation/reset/repack/copy",
+    "limits": "No concurrent load, true cold cache or hardware/power isolation. Matrix oracle memory excluded from engine memory claims. Diagnostic spans nest; never sum as exclusive elapsed time.",
+    "orders": [
+      [
+        "control",
+        "fdb"
+      ],
+      [
+        "fdb",
+        "control"
+      ],
+      [
+        "control",
+        "fdb"
+      ],
+      [
+        "fdb",
+        "control"
+      ]
+    ],
+    "control_engine": "fdb"
+  },
+  "rows": [
+    {
+      "variant": "control",
+      "pair": 0,
+      "peak_private_commit_bytes": 9162752,
+      "peak_working_set_bytes": 13332480
+    },
+    {
+      "variant": "control",
+      "pair": 1,
+      "peak_private_commit_bytes": 9183232,
+      "peak_working_set_bytes": 13328384
+    },
+    {
+      "variant": "control",
+      "pair": 2,
+      "peak_private_commit_bytes": 9183232,
+      "peak_working_set_bytes": 13332480
+    },
+    {
+      "variant": "control",
+      "pair": 3,
+      "peak_private_commit_bytes": 9175040,
+      "peak_working_set_bytes": 13324288
+    },
+    {
+      "variant": "fdb",
+      "pair": 0,
+      "peak_private_commit_bytes": 9293824,
+      "peak_working_set_bytes": 13832192
+    },
+    {
+      "variant": "fdb",
+      "pair": 1,
+      "peak_private_commit_bytes": 9216000,
+      "peak_working_set_bytes": 13340672
+    },
+    {
+      "variant": "fdb",
+      "pair": 2,
+      "peak_private_commit_bytes": 9207808,
+      "peak_working_set_bytes": 13340672
+    },
+    {
+      "variant": "fdb",
+      "pair": 3,
+      "peak_private_commit_bytes": 9216000,
+      "peak_working_set_bytes": 13340672
+    }
+  ],
+  "medians": {
+    "control": {
+      "peak_private_commit_bytes": 9179136.0,
+      "peak_working_set_bytes": 13330432.0
+    },
+    "fdb": {
+      "peak_private_commit_bytes": 9216000.0,
+      "peak_working_set_bytes": 13340672.0
+    }
+  },
+  "comparisons": {
+    "peak_private_commit_bytes": {
+      "change_percent": 0.40160642570281624,
+      "lower_pairs": 0,
+      "paired_change_percent": [
+        1.4304872597228346,
+        0.3568242640499486,
+        0.267618198037467,
+        0.44642857142858094
+      ]
+    },
+    "peak_working_set_bytes": {
+      "change_percent": 0.07681671531725165,
+      "lower_pairs": 0,
+      "paired_change_percent": [
+        3.7480798771121426,
+        0.09219422249540088,
+        0.06144393241167556,
+        0.12296341838302638
+      ]
+    }
+  },
+  "files_unchanged": true
+}

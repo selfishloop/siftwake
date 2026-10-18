@@ -1,5 +1,18 @@
 # FDB mimarisi — 0.3.1
 
+2026-10-18 sonraki dar takip varsayılanda korundu: checked reuse sonuç
+tamponu, bilinen total ve limitin küçüğüyle bir kez ayrılır. Sonuç Vec'i
+50 kayıtta66 yerine52 kapasiteyle döner; ölçülmüş2.464B fazlalık giderildi.
+Uygunlukta dördüncü scalar bulununca durulur. Bounded gövde doğrulamasında
+ilk1KiB probe korunur, sonraki bloklar4KiB olur; overlap/UTF-8 ve tam fold
+semantiği aynıdır. Referans motor1KiB kalır. Scratch'in ek peak heap'i
+yaklaşık12KiB artar; canlı sonuç heap'i azalırken OS RAM azaldı denmez.
+Beagle iki normal düzende dört çift hızlı; harpoon tipik blok hızlandı,
+genel p95/the200 hydration ve kalan sorgular açık.
+[Ölçümler ve sınırlar](SEARCH-FOLLOWUP-10K-20261018.md).
+
+## Varsayılan geçişi
+
 2026-10-18 güncel varsayılan: kullanıcı, ölçülen checked-page yolunun
 varsayılan motora alınmasını istedi. Önceki arşiv prototipin aynı çalışma
 algoritması mevcut `bounded-engine` profilinde etkinleştirildi; yeni feature,
@@ -19,8 +32,8 @@ ve genel sıra korunur, sayfa dışı kopyalar fallback hydration'dan önce
 bırakılır. Büyük kayıt/bütçe dışı sonuçlar ve uygun olmayan sorgular mevcut
 okuma yolunu kullanır. `--no-default-features` referans motoru etkilenmez.
 
-Sonuç Vec kapasitesindeki ölçülmüş+2.464B fazlalık bu geçişte düzeltilmedi;
-aynı ölçülen algoritma korunur. [Geçiş doğrulaması ve sınırlar](DEFAULT-CHECKED-PAGE-10K-20261018.md).
+Sonuç Vec kapasitesindeki ölçülmüş+2.464B fazlalık ilk geçişte düzeltilmedi;
+yukarıdaki takipte giderildi. [İlk geçişin doğrulaması ve sınırlar](DEFAULT-CHECKED-PAGE-10K-20261018.md).
 
 ## Önceki deneyler ve kararlar
 

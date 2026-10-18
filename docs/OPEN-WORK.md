@@ -1,5 +1,34 @@
 # FDB açık işler
 
+2026-10-18 sonraki dar takip tamamlandı: ölçülmüş2.464B ek canlı sonuç
+kapasitesi giderildi. 38/38 sorguda kapasite artmadı; canlı heap farkı
+tam olarak kapasite farkı×176B. Boş sonuçta capacity/live delta0; hemen
+elenen negatiflerin tahsis/tepe sayıları aynı. Candidate metni tarayan
+negatif ve pozitiflerde yeni4KiB scratch ile geçici peak yaklaşık12KiB
+artabilir; genel RAM işi kapanmadı.
+
+Profil beagle19.483→5.520, harpoon46.903→14.039 body fold/scan çağrısı;
+38/38 candidate CRC/schema/accepted/payload request-byte/reuse sayıları
+aynı. Normal80 örnek/case/variant:38 sorgu31 düşük/7 yüksek p95, beagle
+-%20,33 (4/4 çift,8/8 blok). Aynı SHA'larla yoğun9-case200 örnekte beagle
+-%3,49 (4/4,8/8), tipik -%4,24. Harpoon tipik -%2,33/8/8 hızlı fakat
+yoğun p95 -%0,43/2/4: genel p95 kazancı kanıtlanmadı. The200 hydration
+algoritması değişmedi, yoğun p95 -%0,51; büyük kazanım/kök neden işi açık.
+Geniş man+%11,60/İSHMAEL+%10,51 yoğun yükte tekrarlanmadı; Unicode-fold
+ve sayfa artık artışları açık tutulur. Önceki38/80 ve9/200 örnekler ayrı
+dağılımlardır; «bütün regresyonlar çözüldü» denmez.
+
+Oracle'sız4 çift/24search771get OS peak private8,75391→8,78906MiB (+36KiB),
+WS12,71289→12,72266MiB (+10KiB); ikisi4/4 artış. Yazma/bakım, diğer sorgu
+regresyonları, normal Vec/query/caller RAM, genel açılış, disk sıkıştırma,
+eşzamanlı/gerçek-soğuk yük açık. Default185/7ignored, referans engine17+
+scratch2, all-features engine1+scratch4, fmt ve üç profil Clippy geçti.
+Normal bütün38+yoğun9 full oracle ve CLI kontrolleri geçti.21 dosya ve
+tüm corpus SHA-eşit; yeni corpus/DB/reset/kopya/format/feature yok.
+[Son arama/kapasite takibi](SEARCH-FOLLOWUP-10K-20261018.md).
+
+## Varsayılan geçişi ve önceki ölçümler
+
 2026-10-18 güncel karar: kullanıcı talebiyle ölçülen checked-page algoritması
 varsayılan `bounded-engine` motoruna alındı. Aynı arşiv kodu/beş test;
 feature/API/kalıcı format değişikliği yok. Kaynak ve candidate doğrulaması

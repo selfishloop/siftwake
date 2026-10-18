@@ -1697,7 +1697,7 @@ impl Database {
             && query
                 .text
                 .split_whitespace()
-                .any(|term| term.chars().count() > 3)
+                .any(|term| term.chars().nth(3).is_some())
         {
             return self.search_impl_mode::<true>(query, hydration);
         }
@@ -1814,7 +1814,13 @@ impl Database {
         let mut selected = Vec::new();
         let grouped = cfg!(feature = "experimental-grouped-read") && _hydration == 2;
         #[cfg(feature = "bounded-engine")]
-        let mut reused = Vec::new();
+        let mut reused = if CAPTURE {
+            // The exact total is already known. Keep the page buffer bounded
+            // without geometric growth surviving the final in-place collect.
+            Vec::with_capacity(query.limit.min(total))
+        } else {
+            Vec::new()
+        };
         let mut page_size = 0;
         let mut position = 0;
         while let Some(Reverse((key, n, slot))) = heap.pop() {

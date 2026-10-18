@@ -1,12 +1,20 @@
 # FDB
 
+[Arama takibi: normalleştirme ve sonuç kapasitesi](docs/SEARCH-FOLLOWUP-10K-20261018.md):
+sonuçta kalan 2.464 B fazlalık giderildi. Aynı mevcut10k veride beagle p95
+geniş/yoğun iki düzende dört çiftte hızlı; yoğun p95 -%3,49, tipik blok
+-%4,24. Harpoon tipik süre kazanımı var, genel p95 ve the200 hydration
+işleri açık. Geniş38 sorgu31 düşük/7 yüksek p95; OS query/get peak private
++36KiB/WS+10KiB. Genel RAM/yazma/bakım/açılış/disk ve eşzamanlı/soğuk yük
+bu dar sonuçla kapanmaz. Kalıcı veri ve format aynı.
+
 [Doğrulanmış payload tekrar kullanımı varsayılan motorda](docs/DEFAULT-CHECKED-PAGE-10K-20261018.md)
 (18 Ekim 2026, kullanıcı kararı). Normal `bounded-engine` derlemesinde uygun
 ilk sayfa sorguları, contains sırasında doğrulanan belge baytlarını sonuç
 hazırlarken yeniden kullanır. En fazla 50 kayıt ve 2 MiB kodlanmış payload
 baytı sorgu boyunca tutulur; bu sınır toplam sorgu RAM'i değildir. Kaynak
 doğrulaması korunur, kalıcı format ve bağımlılıklar değişmez. Kalan sorgu
-gerilemeleri, sonuç vektörü kapasitesi ve yazma/bakım işleri
+gerilemeleri, genel sorgu RAM'i ve yazma/bakım işleri
 [açık iş listesinde](docs/OPEN-WORK.md) izlenir.
 
 Aşağıdaki deney kararları, bu varsayılan geçişinden önceki ölçüm tarihçesidir.

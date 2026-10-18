@@ -1,0 +1,157 @@
+[
+  {
+    "command": [
+      "cargo",
+      "fmt"
+    ],
+    "exit_code": 0,
+    "log": "docs\\benchmarks\\search-followup-20261018-fmt.log"
+  },
+  {
+    "command": [
+      "cargo",
+      "test",
+      "--lib",
+      "query_scratch_tests"
+    ],
+    "exit_code": 0,
+    "log": "docs\\benchmarks\\search-followup-20261018-scratch-tests.log"
+  },
+  {
+    "command": [
+      "cargo",
+      "test",
+      "--test",
+      "engine",
+      "checked_page_preserves"
+    ],
+    "exit_code": 0,
+    "log": "docs\\benchmarks\\search-followup-20261018-engine-tests.log"
+  },
+  {
+    "command": [
+      "cargo",
+      "test",
+      "--all-targets"
+    ],
+    "exit_code": 0,
+    "log": "docs\\benchmarks\\search-followup-20261018-default-tests.log",
+    "totals": {
+      "passed": 185,
+      "failed": 0,
+      "ignored": 7
+    }
+  },
+  {
+    "command": [
+      "cargo",
+      "test",
+      "--no-default-features",
+      "--test",
+      "engine"
+    ],
+    "exit_code": 0,
+    "log": "docs\\benchmarks\\search-followup-20261018-reference-engine.log",
+    "totals": {
+      "passed": 17,
+      "failed": 0,
+      "ignored": 0
+    }
+  },
+  {
+    "command": [
+      "cargo",
+      "test",
+      "--no-default-features",
+      "--lib",
+      "query_scratch_tests"
+    ],
+    "exit_code": 0,
+    "log": "docs\\benchmarks\\search-followup-20261018-reference-scratch.log",
+    "totals": {
+      "passed": 2,
+      "failed": 0,
+      "ignored": 0
+    }
+  },
+  {
+    "command": [
+      "cargo",
+      "test",
+      "--all-features",
+      "--test",
+      "engine",
+      "checked_page_preserves"
+    ],
+    "exit_code": 0,
+    "log": "docs\\benchmarks\\search-followup-20261018-all-engine.log",
+    "totals": {
+      "passed": 1,
+      "failed": 0,
+      "ignored": 0
+    }
+  },
+  {
+    "command": [
+      "cargo",
+      "test",
+      "--all-features",
+      "--lib",
+      "query_scratch_tests"
+    ],
+    "exit_code": 0,
+    "log": "docs\\benchmarks\\search-followup-20261018-all-scratch.log",
+    "totals": {
+      "passed": 4,
+      "failed": 0,
+      "ignored": 0
+    }
+  },
+  {
+    "command": [
+      "cargo",
+      "fmt",
+      "--check"
+    ],
+    "exit_code": 0,
+    "log": "docs\\benchmarks\\search-followup-20261018-fmt-check.log"
+  },
+  {
+    "command": [
+      "cargo",
+      "clippy",
+      "--all-targets",
+      "--",
+      "-D",
+      "warnings"
+    ],
+    "exit_code": 0,
+    "log": "docs\\benchmarks\\search-followup-20261018-clippy.log"
+  },
+  {
+    "command": [
+      "cargo",
+      "clippy",
+      "--all-targets",
+      "--all-features",
+      "--",
+      "-D",
+      "warnings"
+    ],
+    "exit_code": 0,
+    "log": "docs\\benchmarks\\search-followup-20261018-clippy-all.log"
+  },
+  {
+    "command": [
+      "cargo",
+      "clippy",
+      "--all-targets",
+      "--no-default-features",
+      "--",
+      "-D",
+      "warnings"
+    ],
+    "exit_code": 0,
+    "log": "docs\\benchmarks\\search-followup-20261018-clippy-reference.log"
+  }
+]
