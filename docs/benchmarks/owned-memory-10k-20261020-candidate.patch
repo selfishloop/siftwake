@@ -1,0 +1,325 @@
+diff --git a/examples/measure_content_memory.rs b/examples/measure_content_memory.rs
+index 2d8548c..0a2c498 100644
+--- a/examples/measure_content_memory.rs
++++ b/examples/measure_content_memory.rs
+@@ -16,7 +16,10 @@ use std::{
+ };
+ fn main() -> input::Result<()> {
+     #[cfg(feature = "diagnostic-memory")]
+-    fdb::memory::install(allocation::origin);
++    {
++        fdb::memory::install(allocation::origin);
++        fdb::memory::install_observer(allocation_checkpoint);
++    }
+     let args: Vec<_> = std::env::args().skip(1).collect();
+     if args.len() != 4 && !(args.len() == 5 && args[4] == "--streamed") {
+         return Err("idle|ingest|verify <db> <from> <to>".into());
+@@ -167,6 +170,17 @@ fn main() -> input::Result<()> {
+     Ok(())
+ }
+ 
++#[cfg(feature = "diagnostic-memory")]
++fn allocation_checkpoint(stage: &'static str, sequence: u64) {
++    let (live, peak, total, total_peak) = allocation::snapshot();
++    println!(
++        "{}",
++        json!({"phase":"allocation_checkpoint","stage":stage,"sequence":sequence,
++            "origin_names":fdb::memory::NAMES,"requested_live":live,"requested_peak":peak,
++            "total_live":total,"total_peak":total_peak,"not_rss":true,"not_normal_timing":true})
++    );
++}
++
+ // Independent scan oracle, outside all measured ingest/maintenance processes.
+ fn verify(db: &Database, count: usize) -> input::Result<()> {
+     let queries = ["the", "quixote", "he", "the man"];
+diff --git a/src/engine.rs b/src/engine.rs
+index a2d7c55..85fcf2e 100644
+--- a/src/engine.rs
++++ b/src/engine.rs
+@@ -1369,6 +1369,8 @@ impl Database {
+             .sequence
+             .checked_add(1)
+             .ok_or_else(|| Error::Invalid("sequence overflow".into()))?;
++        #[cfg(feature = "diagnostic-memory")]
++        crate::memory::observe("commit.input", seq);
+         let mut seen = BTreeSet::new();
+         let mut changes = vec![];
+         let mut count = self.count;
+@@ -1413,6 +1415,8 @@ impl Database {
+             checkpoint: false,
+             changes,
+         };
++        #[cfg(feature = "diagnostic-memory")]
++        crate::memory::observe("commit.validated", seq);
+         #[cfg(feature = "diagnostic-timing")]
+         drop(validation);
+         #[cfg(not(feature = "experimental-wal-delta"))]
+@@ -1435,7 +1439,11 @@ impl Database {
+         let maintenance = crate::timing::span("commit.foreground_maintenance");
+         self.poll_compaction()?;
+         if self.needs_flush() {
++            #[cfg(feature = "diagnostic-memory")]
++            crate::memory::observe("commit.before_flush", seq);
+             self.flush()?;
++            #[cfg(feature = "diagnostic-memory")]
++            crate::memory::observe("commit.after_flush", seq);
+         }
+         #[cfg(not(feature = "experimental-wal-delta"))]
+         let bytes = match bytes {
+@@ -1447,6 +1455,8 @@ impl Database {
+             Some(encoded) => encoded,
+             None => format::encode_located(seq, &batch)?,
+         };
++        #[cfg(feature = "diagnostic-memory")]
++        crate::memory::observe("commit.frame_ready", seq);
+         #[cfg(feature = "diagnostic-timing")]
+         drop(maintenance);
+         #[cfg(feature = "diagnostic-timing")]
+@@ -1548,6 +1558,8 @@ impl Database {
+         // Durability has completed. The owned changes/locations remain; the
+         // encoded frame is no longer needed during delta indexing.
+         drop(bytes);
++        #[cfg(feature = "diagnostic-memory")]
++        crate::memory::observe("commit.frame_dropped", seq);
+         #[cfg(feature = "diagnostic-timing")]
+         let _apply = crate::timing::span("commit.apply_delta_index");
+         #[cfg(feature = "experimental-wal-delta")]
+@@ -1652,6 +1664,17 @@ impl Database {
+         self.count = count;
+         self.delta_bytes = delta_bytes;
+         self.sequence = seq;
++        #[cfg(feature = "diagnostic-memory")]
++        crate::memory::observe("commit.applied", seq);
++        // Release a full resident delta before the caller constructs the next
++        // batch. The acknowledged WAL already contains this entire transaction.
++        #[cfg(feature = "bounded-engine")]
++        if self.needs_flush() {
++            if let Err(error) = self.flush() {
++                self.poisoned = true;
++                return Err(error);
++            }
++        }
+         Ok(seq)
+     }
+ 
+diff --git a/src/index.rs b/src/index.rs
+index 98e979f..922ea3a 100644
+--- a/src/index.rs
++++ b/src/index.rs
+@@ -151,6 +151,23 @@ fn fold_changed_runs(text: &str, output: &mut String) {
+ 
+ #[cfg(test)]
+ mod scratch_fold_tests {
++    #[cfg(feature = "bounded-engine")]
++    #[test]
++    fn intake_body_cache_preserves_scalar_fold_and_grams_with_expansion() {
++        let mut cache = super::BodyCache::default();
++        for padding in [0, 31, 32, 1023, 1024, 1025, 4096] {
++            for body in ["ASCII Plain TEXT", "İŞIK ıÇĞÖÜ 東京 🦀", "ȺΣẞK é—\u{1f88}"] {
++                let text = format!("{}{body}{}", "A".repeat(padding), body.repeat(4));
++                let expected = super::fold(&text);
++                let grams = super::grams(&expected);
++                for _ in 0..2 {
++                    let terms = cache.get(&text);
++                    assert_eq!(&*terms.folded, expected);
++                    assert_eq!(terms.grams, grams);
++                }
++            }
++        }
++    }
+     #[test]
+     fn unchanged_unicode_runs_keep_ascii_lowering_and_changed_scalar_boundaries() {
+         let mut scratch = String::new();
+@@ -307,6 +324,13 @@ impl BodyCache {
+         let folded = {
+             #[cfg(feature = "diagnostic-timing")]
+             let _span = crate::timing::span("body.fold");
++            #[cfg(feature = "bounded-engine")]
++            {
++                let mut output = String::with_capacity(text.len());
++                fold_into(text, &mut output);
++                output
++            }
++            #[cfg(not(feature = "bounded-engine"))]
+             fold(text)
+         };
+         #[cfg(feature = "experimental-shared-delta-text")]
+diff --git a/src/memory.rs b/src/memory.rs
+index 0433af6..dba5922 100644
+--- a/src/memory.rs
++++ b/src/memory.rs
+@@ -11,10 +11,22 @@ pub const NAMES: [&str; 8] = [
+     "packed_metadata",
+ ];
+ static HOOK: OnceLock<fn(usize) -> usize> = OnceLock::new();
++type Observer = fn(&'static str, u64);
++static OBSERVER: OnceLock<Observer> = OnceLock::new();
+ /// Install before using the engine. A hook changes thread-local allocation origin.
+ pub fn install(hook: fn(usize) -> usize) {
+     let _ = HOOK.set(hook);
+ }
++/// Optional diagnostic stage snapshots. Absent from normal builds; callbacks
++/// run outside allocation hooks and must not call back into the database.
++pub fn install_observer(observer: Observer) {
++    let _ = OBSERVER.set(observer);
++}
++pub(crate) fn observe(stage: &'static str, sequence: u64) {
++    if let Some(observer) = OBSERVER.get() {
++        observer(stage, sequence);
++    }
++}
+ pub struct Scope {
+     old: usize,
+     hook: Option<fn(usize) -> usize>,
+--- /dev/null
++++ b/tests/owned_watermark.rs
+@@ -0,0 +1,149 @@
++#![cfg(feature = "bounded-engine")]
++use fdb::{Database, Document, Error, Guard, Key, Mutation, Options, Query};
++use std::fs;
++use std::path::PathBuf;
++use std::sync::atomic::{AtomicU64, Ordering};
++
++static NEXT: AtomicU64 = AtomicU64::new(0);
++struct Temp(PathBuf);
++impl Temp {
++    fn new() -> Self {
++        let path = std::env::temp_dir().join(format!(
++            "fdb-owned-watermark-{}-{}",
++            std::process::id(),
++            NEXT.fetch_add(1, Ordering::Relaxed)
++        ));
++        fs::create_dir(&path).unwrap();
++        Self(path)
++    }
++}
++impl Drop for Temp {
++    fn drop(&mut self) {
++        let _ = fs::remove_dir_all(&self.0);
++    }
++}
++fn document(id: &str) -> Document {
++    Document {
++        key: Key::new("shared", "reports", id),
++        title: "İŞIK 東京".into(),
++        text: "Şirket sonucu 🦀".into(),
++        fields: [("nested".into(), serde_json::json!({"a":[1,null,"ü"]}))].into(),
++        links: vec![Key::new("shared", "funds", "ABC")],
++    }
++}
++fn put(document: Document) -> Mutation {
++    Mutation::Put {
++        document,
++        guard: Guard::Any,
++    }
++}
++
++#[test]
++fn reached_watermark_releases_delta_and_failed_validation_remains_atomic() {
++    let temp = Temp::new();
++    let options = Options {
++        max_delta_keys: 2,
++        max_delta_bytes: 16 * 1024 * 1024,
++    };
++    let mut db = Database::open_with_options(&temp.0, options.clone()).unwrap();
++    let a = document("a");
++    let b = document("b");
++    db.commit(vec![put(a.clone())]).unwrap();
++    let before = db.stats().unwrap();
++    assert_eq!(before.delta_keys, 1);
++    assert!(matches!(
++        db.commit(vec![put(b.clone()), put(b.clone())]),
++        Err(Error::Invalid(_))
++    ));
++    let after = db.stats().unwrap();
++    assert_eq!(after.sequence, before.sequence);
++    assert_eq!(after.log_bytes, before.log_bytes);
++    assert_eq!(after.generation, before.generation);
++    assert_eq!(db.get(&b.key).unwrap(), None);
++    assert_eq!(db.commit(vec![put(b.clone())]).unwrap(), 2);
++    let stats = db.stats().unwrap();
++    assert_eq!(stats.delta_keys, 0);
++    assert_eq!(stats.resident_documents, 0);
++    let mut query = Query::new("shared");
++    query.text = "isik sirket".into();
++    let page = db.search(&query).unwrap();
++    assert_eq!(page.total, 2);
++    assert_eq!(page.hits[0].document, a);
++    assert_eq!(page.hits[0].version, 1);
++    assert_eq!(page.hits[1].document, b);
++    assert_eq!(page.hits[1].version, 2);
++    db.commit(vec![Mutation::Delete {
++        key: a.key.clone(),
++        guard: Guard::Version { version: 1 },
++    }])
++    .unwrap();
++    let mut updated = b.clone();
++    updated.text = "güncel şirket".into();
++    db.commit(vec![Mutation::Put {
++        document: updated.clone(),
++        guard: Guard::Version { version: 2 },
++    }])
++    .unwrap();
++    drop(db);
++    let db = Database::open_with_options(&temp.0, options).unwrap();
++    assert!(db.get(&a.key).unwrap().is_none());
++    let found = db.get(&b.key).unwrap().unwrap();
++    assert_eq!(found.document, updated);
++    assert_eq!(found.version, 4);
++}
++
++#[test]
++fn byte_watermark_preserves_owned_documents_larger_than_streamed_admission() {
++    let temp = Temp::new();
++    let mut db = Database::open_with_options(
++        &temp.0,
++        Options {
++            max_delta_keys: 10_000,
++            max_delta_bytes: 1,
++        },
++    )
++    .unwrap();
++    let mut large = document("large");
++    large.text = "İŞIK 東京 🦀 ".repeat(20_000);
++    assert!(large.text.len() > 256 * 1024);
++    assert_eq!(db.commit(vec![put(large.clone())]).unwrap(), 1);
++    assert_eq!(db.stats().unwrap().delta_keys, 0);
++    drop(db);
++    assert_eq!(
++        Database::open(&temp.0)
++            .unwrap()
++            .get(&large.key)
++            .unwrap()
++            .unwrap()
++            .document,
++        large
++    );
++}
++
++#[test]
++fn failed_automatic_flush_poisoning_keeps_synced_transaction_recoverable() {
++    let temp = Temp::new();
++    let mut db = Database::open_with_options(
++        &temp.0,
++        Options {
++            max_delta_keys: 1,
++            max_delta_bytes: 16 * 1024 * 1024,
++        },
++    )
++    .unwrap();
++    let blocker = temp.0.join("run-0000000000000002.fdb");
++    fs::create_dir(&blocker).unwrap();
++    let original = document("recover");
++    assert!(matches!(
++        db.commit(vec![put(original.clone())]),
++        Err(Error::Io(_))
++    ));
++    assert!(matches!(db.get(&original.key), Err(Error::Poisoned)));
++    drop(db);
++    fs::remove_dir(blocker).unwrap();
++    let db = Database::open(&temp.0).unwrap();
++    let recovered = db.get(&original.key).unwrap().unwrap();
++    assert_eq!(recovered.document, original);
++    assert_eq!(recovered.version, 1);
++    assert_eq!(db.stats().unwrap().sequence, 1);
++}

@@ -16,7 +16,10 @@ use std::{
 };
 fn main() -> input::Result<()> {
     #[cfg(feature = "diagnostic-memory")]
-    fdb::memory::install(allocation::origin);
+    {
+        fdb::memory::install(allocation::origin);
+        fdb::memory::install_observer(allocation_checkpoint);
+    }
     let args: Vec<_> = std::env::args().skip(1).collect();
     if args.len() != 4 && !(args.len() == 5 && args[4] == "--streamed") {
         return Err("idle|ingest|verify <db> <from> <to>".into());
@@ -165,6 +168,17 @@ fn main() -> input::Result<()> {
         json!({"phase":"result","from":from,"to":to,"ingest_ms":ingest_ms,"maintenance_ms":maintenance_ms,"text_bytes":source.text_bytes,"stats":stats,"sampled_full_document_checks":(to-from)/250,"all_input_crc_verified":true,"database":Path::new(&args[1])})
     );
     Ok(())
+}
+
+#[cfg(feature = "diagnostic-memory")]
+fn allocation_checkpoint(stage: &'static str, sequence: u64) {
+    let (live, peak, total, total_peak) = allocation::snapshot();
+    println!(
+        "{}",
+        json!({"phase":"allocation_checkpoint","stage":stage,"sequence":sequence,
+            "origin_names":fdb::memory::NAMES,"requested_live":live,"requested_peak":peak,
+            "total_live":total,"total_peak":total_peak,"not_rss":true,"not_normal_timing":true})
+    );
 }
 
 // Independent scan oracle, outside all measured ingest/maintenance processes.

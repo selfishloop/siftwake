@@ -1,5 +1,13 @@
 # FDB
 
+[Toplu yazma belleğinin kök nedeni ve reddedilen erken flush](docs/OWNED-MEMORY-10K-20261020.md):
+eski1k delta ile sonraki500 input üst üste geliyor; bir aşamada41,13MiB belge
+kökeni+28,91MiB arama indeksi canlı, WAL frame0. Ayrı normal4 çiftte prototip
+private80,10→66,75MiB ve yazma+bakım-%3,92; fakat watermark sonrası6 sorgunun
+tamamı4/4 çiftte yavaş. Runtime deneyi geri alındı, ölçülmüş mevcut motor
+korundu; RAM sorunu kapanmadı. Opt-in aşama gözlemleri ve kanıtlar eklendi.
+Arama p95/yazma-bakım/genel RAM/açılış/disk ve eşzamanlı-soğuk işler açık.
+
 [Yazma/bakımda checkpoint kimlik eşlemesi](docs/WRITE-STAGES-10K-20261018.md):
 aynı10k normal release'te akışlı toplam27,277→22,334s (-%18,12;4/4 çift),
 toplu API23,274→17,246s (-%25,90;2/2). CPU bütün çiftlerde düşük. Aynı19,22M

@@ -1,0 +1,113 @@
+[
+  {
+    "command": [
+      "cargo",
+      "fmt",
+      "--check"
+    ],
+    "exit_code": 0,
+    "log": "docs\\benchmarks\\owned-memory-10k-20261020-check-0.log"
+  },
+  {
+    "command": [
+      "cargo",
+      "test",
+      "--all-targets"
+    ],
+    "exit_code": 0,
+    "log": "docs\\benchmarks\\owned-memory-10k-20261020-check-1.log"
+  },
+  {
+    "command": [
+      "cargo",
+      "test",
+      "--all-features",
+      "--lib",
+      "--test",
+      "segments",
+      "--test",
+      "streamed_transactions"
+    ],
+    "exit_code": 0,
+    "log": "docs\\benchmarks\\owned-memory-10k-20261020-check-2.log"
+  },
+  {
+    "command": [
+      "cargo",
+      "test",
+      "--no-default-features",
+      "--all-targets"
+    ],
+    "exit_code": 0,
+    "log": "docs\\benchmarks\\owned-memory-10k-20261020-check-3.log"
+  },
+  {
+    "command": [
+      "cargo",
+      "clippy",
+      "--all-targets",
+      "--",
+      "-D",
+      "warnings"
+    ],
+    "exit_code": 0,
+    "log": "docs\\benchmarks\\owned-memory-10k-20261020-check-4.log"
+  },
+  {
+    "command": [
+      "cargo",
+      "clippy",
+      "--all-features",
+      "--all-targets",
+      "--",
+      "-D",
+      "warnings"
+    ],
+    "exit_code": 0,
+    "log": "docs\\benchmarks\\owned-memory-10k-20261020-check-5.log"
+  },
+  {
+    "command": [
+      "cargo",
+      "clippy",
+      "--no-default-features",
+      "--all-targets",
+      "--",
+      "-D",
+      "warnings"
+    ],
+    "exit_code": 0,
+    "log": "docs\\benchmarks\\owned-memory-10k-20261020-check-6.log"
+  },
+  {
+    "command": [
+      "cargo",
+      "test",
+      "--features",
+      "diagnostic-memory",
+      "--example",
+      "measure_content_memory"
+    ],
+    "exit_code": 0,
+    "log": "docs\\benchmarks\\owned-memory-10k-20261020-check-7.log"
+  },
+  {
+    "command": [
+      "cargo",
+      "build",
+      "--release",
+      "--bin",
+      "fdb",
+      "--example",
+      "measure_content_memory",
+      "--example",
+      "measure_content_reads",
+      "--example",
+      "measure_interleaved_reads",
+      "--example",
+      "measure_result_buffers"
+    ],
+    "exit_code": 0,
+    "log": "docs\\benchmarks\\owned-memory-10k-20261020-check-8.log"
+  }
+]

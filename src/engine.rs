@@ -1369,6 +1369,8 @@ impl Database {
             .sequence
             .checked_add(1)
             .ok_or_else(|| Error::Invalid("sequence overflow".into()))?;
+        #[cfg(feature = "diagnostic-memory")]
+        crate::memory::observe("commit.input", seq);
         let mut seen = BTreeSet::new();
         let mut changes = vec![];
         let mut count = self.count;
@@ -1413,6 +1415,8 @@ impl Database {
             checkpoint: false,
             changes,
         };
+        #[cfg(feature = "diagnostic-memory")]
+        crate::memory::observe("commit.validated", seq);
         #[cfg(feature = "diagnostic-timing")]
         drop(validation);
         #[cfg(not(feature = "experimental-wal-delta"))]
@@ -1435,7 +1439,11 @@ impl Database {
         let maintenance = crate::timing::span("commit.foreground_maintenance");
         self.poll_compaction()?;
         if self.needs_flush() {
+            #[cfg(feature = "diagnostic-memory")]
+            crate::memory::observe("commit.before_flush", seq);
             self.flush()?;
+            #[cfg(feature = "diagnostic-memory")]
+            crate::memory::observe("commit.after_flush", seq);
         }
         #[cfg(not(feature = "experimental-wal-delta"))]
         let bytes = match bytes {
@@ -1447,6 +1455,8 @@ impl Database {
             Some(encoded) => encoded,
             None => format::encode_located(seq, &batch)?,
         };
+        #[cfg(feature = "diagnostic-memory")]
+        crate::memory::observe("commit.frame_ready", seq);
         #[cfg(feature = "diagnostic-timing")]
         drop(maintenance);
         #[cfg(feature = "diagnostic-timing")]
@@ -1548,6 +1558,8 @@ impl Database {
         // Durability has completed. The owned changes/locations remain; the
         // encoded frame is no longer needed during delta indexing.
         drop(bytes);
+        #[cfg(feature = "diagnostic-memory")]
+        crate::memory::observe("commit.frame_dropped", seq);
         #[cfg(feature = "diagnostic-timing")]
         let _apply = crate::timing::span("commit.apply_delta_index");
         #[cfg(feature = "experimental-wal-delta")]
@@ -1652,6 +1664,8 @@ impl Database {
         self.count = count;
         self.delta_bytes = delta_bytes;
         self.sequence = seq;
+        #[cfg(feature = "diagnostic-memory")]
+        crate::memory::observe("commit.applied", seq);
         Ok(seq)
     }
 

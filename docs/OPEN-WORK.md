@@ -1,5 +1,23 @@
 # FDB açık işler
 
+2026-10-20 owned RAM kök nedeni ölçüldü: sonraki500 input, önceki1k
+özgün+folded delta ile üst üste; max aşama71,39MiB requested-live, bunun
+41,13MiB'si input+özgün belge kökeni,28,91MiB'si RAM arama indeksi. Bu
+OS/physical RAM değildir; o anda WAL frame0. Erken flush+hızlı intake fold
+normal4 çiftte private80,10→66,75MiB/toplam15,726→15,110s,CPU-%3,91,
+disk/core byte'ları aynı verdi. Ancak ilk1k watermark sonrası6 CLI sorgusunun
+tamamı4/4 çiftte yavaş: +%19–516p95. Genel geçiş reddedildi, iki runtime
+değişikliği geri alındı; normal motor ve önceki yazma kazanımı korundu.
+Opt-in aşama gözlemleri/paired araçlar kaldı. Yeni corpus/DB kopyası yok,
+boundary sonrası sabit FDB slotu eski normal10k'ya döndü. Normal Vec RAM'i
+kapanmadı: yalnız flush zamanını değiştirmek yeterli değil; sıcak yeni
+belge okumasını koruyan input/delta tasarımı gerekli. Son sayfa/genel arama
+p95,yazma/son merge,query/caller RAM,açılış/disk sıkıştırma,eşzamanlı/cold
+yük açık. [Rapor ve bütün örnekler](OWNED-MEMORY-10K-20261020.md).
+Geri dönüş193 default/135 all-feature hedef/112 referans ve diagnostic example2
+test,fmt/üç profil Clippy,10k/38-case/256-key oracle ve CLI ile doğrulandı;
+core/corpus/0.1 fixture byte'ları aynı,SQLite read-only integrity başarılı.
+
 2026-10-18–19 yazma/bakımın dar kimlik eşleme adımı uygulandı/ölçüldü:
 19.221.340 posting girdisi10.000 Key aramasıyla eşleniyor. Normal akışlı
 yazma+bakım27,277→22,334s (-%18,12;4/4 çift),owned23,274→17,246s

@@ -1,0 +1,276 @@
+{
+  "base_commit": "49ee3e59a41572cad3898ba16fc9877a9ebae66b",
+  "decision": "Rejected eager flush and combined normalizer;both runtime changes reverted;previous measured default engine preserved",
+  "restoration": {
+    "default_engine_identical_after_removing_seven_diagnostic_observations": true,
+    "other_runtime_format_dependency_protocol_fixture_paths_git_unchanged": true,
+    "core_files_identical": true,
+    "protected_unchanged": true,
+    "core_files": 17,
+    "corpus_no_generation": true
+  },
+  "checks": [
+    {
+      "command": [
+        "cargo",
+        "fmt",
+        "--check"
+      ],
+      "exit_code": 0,
+      "log": "docs\\benchmarks\\owned-memory-10k-20261020-check-0.log"
+    },
+    {
+      "command": [
+        "cargo",
+        "test",
+        "--all-targets"
+      ],
+      "exit_code": 0,
+      "log": "docs\\benchmarks\\owned-memory-10k-20261020-check-1.log"
+    },
+    {
+      "command": [
+        "cargo",
+        "test",
+        "--all-features",
+        "--lib",
+        "--test",
+        "segments",
+        "--test",
+        "streamed_transactions"
+      ],
+      "exit_code": 0,
+      "log": "docs\\benchmarks\\owned-memory-10k-20261020-check-2.log"
+    },
+    {
+      "command": [
+        "cargo",
+        "test",
+        "--no-default-features",
+        "--all-targets"
+      ],
+      "exit_code": 0,
+      "log": "docs\\benchmarks\\owned-memory-10k-20261020-check-3.log"
+    },
+    {
+      "command": [
+        "cargo",
+        "clippy",
+        "--all-targets",
+        "--",
+        "-D",
+        "warnings"
+      ],
+      "exit_code": 0,
+      "log": "docs\\benchmarks\\owned-memory-10k-20261020-check-4.log"
+    },
+    {
+      "command": [
+        "cargo",
+        "clippy",
+        "--all-features",
+        "--all-targets",
+        "--",
+        "-D",
+        "warnings"
+      ],
+      "exit_code": 0,
+      "log": "docs\\benchmarks\\owned-memory-10k-20261020-check-5.log"
+    },
+    {
+      "command": [
+        "cargo",
+        "clippy",
+        "--no-default-features",
+        "--all-targets",
+        "--",
+        "-D",
+        "warnings"
+      ],
+      "exit_code": 0,
+      "log": "docs\\benchmarks\\owned-memory-10k-20261020-check-6.log"
+    },
+    {
+      "command": [
+        "cargo",
+        "test",
+        "--features",
+        "diagnostic-memory",
+        "--example",
+        "measure_content_memory"
+      ],
+      "exit_code": 0,
+      "log": "docs\\benchmarks\\owned-memory-10k-20261020-check-7.log"
+    },
+    {
+      "command": [
+        "cargo",
+        "build",
+        "--release",
+        "--bin",
+        "fdb",
+        "--example",
+        "measure_content_memory",
+        "--example",
+        "measure_content_reads",
+        "--example",
+        "measure_interleaved_reads",
+        "--example",
+        "measure_result_buffers"
+      ],
+      "exit_code": 0,
+      "log": "docs\\benchmarks\\owned-memory-10k-20261020-check-8.log"
+    }
+  ],
+  "test_counts": [
+    {
+      "check": 1,
+      "passed": 193,
+      "failed": 0,
+      "ignored": 7,
+      "targets": 36
+    },
+    {
+      "check": 2,
+      "passed": 135,
+      "failed": 0,
+      "ignored": 7,
+      "targets": 3
+    },
+    {
+      "check": 3,
+      "passed": 112,
+      "failed": 0,
+      "ignored": 3,
+      "targets": 36
+    },
+    {
+      "check": 7,
+      "passed": 2,
+      "failed": 0,
+      "ignored": 0,
+      "targets": 1
+    }
+  ],
+  "sources": [
+    {
+      "path": "src/engine.rs",
+      "sha256": "B4171692F5B5CF667EAB409F3ABEB4EBED23D45FC5B094900E9C94F7CEA4ECB7"
+    },
+    {
+      "path": "src/memory.rs",
+      "sha256": "5373B94A80143D8E7626A1E973DF86476CB2F84DC3A1BE953529799F20B242A7"
+    },
+    {
+      "path": "src/index.rs",
+      "sha256": "1EB09C9C34C31A60C7444BD33C4E74890C4E998B9C6E1777DE300B840310EE35"
+    },
+    {
+      "path": "examples/measure_content_memory.rs",
+      "sha256": "78115E9F1904277D0E89D2D2F3FB968EDE26D416C337782781578A6B65DC7694"
+    },
+    {
+      "path": "tools/measure-write-stages.py",
+      "sha256": "887F280910E07AD957F69DF14C9F1177F8B986E3CCEE2575C3F8144892B6D374"
+    },
+    {
+      "path": "tools/measure-owned-boundary.py",
+      "sha256": "445AFD53D674E149897183BBB6DDCDFF91806F77BF6A8BC3EE44E039A8243E6F"
+    },
+    {
+      "path": "Cargo.toml",
+      "sha256": "1AD78DAC979BB49E4CFAFC7BE53B52B0D3261499613531221C7B0C10EBC56432"
+    },
+    {
+      "path": "Cargo.lock",
+      "sha256": "57F2192106DC532AFC442099A68F285CC6475427E30716505DF143CB5ADEA55C"
+    },
+    {
+      "path": "src/format.rs",
+      "sha256": "DFC15D3148777B4132D9632972E121F7D8A3FDC6A33A01645D43F4D3D7EE809C"
+    },
+    {
+      "path": "src/engine/streamed.rs",
+      "sha256": "8A35ACACF75C9528A357AC8E7902A48CF45A1B3F897E0B4B41C5FDB8963A792B"
+    },
+    {
+      "path": "src/main.rs",
+      "sha256": "EAC65B6AF172A12B4965E3A21134B71F46A1FF31E34F005B8877361502130097"
+    }
+  ],
+  "binaries": [
+    {
+      "path": "output/owned-memory-profile-control-20261020.exe",
+      "sha256": "4CD6D74B783CD7E2887C243CF516C52D0486111AAC7DD90427D4D7B8918CF204",
+      "bytes": 2178048
+    },
+    {
+      "path": "output/owned-memory-eager-candidate-20261020.exe",
+      "sha256": "D84348D0E535DE56CAA3210C2BB979F1299EAA3236F0EA839A676D05FA48AF97",
+      "bytes": 1953792
+    },
+    {
+      "path": "output/owned-memory-combined-candidate-20261020.exe",
+      "sha256": "60DDFD7E98FF08311C070750D271791C3F197041B4D6AC1B1EA5BF30016B3CCD",
+      "bytes": 1953792
+    },
+    {
+      "path": "output/owned-memory-combined-fdb-20261020.exe",
+      "sha256": "50D4E937F3D8EEEBA21322130E1B5319E18E8006D28F2AAB05EDE4FD68A12911",
+      "bytes": 1946624
+    },
+    {
+      "path": "output/write-stages-candidate-20261018.exe",
+      "sha256": "47487337A018439703C34EF8B3252321731CBF50E52078794B2B9E67F56C3ED3",
+      "bytes": 1953280
+    },
+    {
+      "path": "output/write-stages-fdb-20261018.exe",
+      "sha256": "2468574B8B4270003875C5974078D4DFDC96CDE2AFE7A4B10379CBE602B9D2C4",
+      "bytes": 1946112
+    },
+    {
+      "path": "target/release/fdb.exe",
+      "sha256": "6C6F25A67AEBA8E01435395777EE056B48BA35F96D8A4883B6D780C3A2A5B712",
+      "bytes": 1946112
+    },
+    {
+      "path": "target/release/examples/measure_content_memory.exe",
+      "sha256": "41A31482C433260A6328BD1E08F6B408429F16854DBF5DDA8EDE77EAE35FD77B",
+      "bytes": 1953280
+    },
+    {
+      "path": "target/release/examples/measure_content_reads.exe",
+      "sha256": "7947C33C38C41061C7BCDB6C098D3A575638FEB5A2ED8BE87DC56EA4612CBE73",
+      "bytes": 2023424
+    },
+    {
+      "path": "target/release/examples/measure_interleaved_reads.exe",
+      "sha256": "30DA15342E1633CB58A8C07681A0076F6522063D449508E469B34B52460AC875",
+      "bytes": 1953280
+    },
+    {
+      "path": "target/release/examples/measure_result_buffers.exe",
+      "sha256": "40ECCEE9580D1F89DBDB2D8759126BE6A849C6D8392660F4D72D388C8F5423AF",
+      "bytes": 1962496
+    }
+  ],
+  "normal_processes_verified": 24,
+  "normal_diagnostics_disabled": true,
+  "boundary_processes_verified": 8,
+  "boundary_query_gate": "6/6 slower p95;every case4/4 pairs;CLI serialization+IPC included;not pure Rust API timing",
+  "final_full_payload_oracle": 10000,
+  "final_matrix_cases": 38,
+  "final_matrix_get_keys": 256,
+  "final_read_timings_are_not_new_performance_claims": true,
+  "corpus_and_fixture_sha_unchanged": true,
+  "final_core_sha_identical_to_initial": true,
+  "sqlite_integrity": "ok;10000 docs;read-only outside timing",
+  "data_directories": [
+    "benchmark-work",
+    "rkyv-corpus-20261009"
+  ],
+  "archive_patch_checked_on_base": true,
+  "new_corpus_or_db_copies": false,
+  "open_work": "Owned input/delta RAM,query/caller RAM,last-page/general search p95,write/final-merge,opening,disk compression,concurrent/cold remain open"
+}

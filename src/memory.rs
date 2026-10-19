@@ -11,9 +11,21 @@ pub const NAMES: [&str; 8] = [
     "packed_metadata",
 ];
 static HOOK: OnceLock<fn(usize) -> usize> = OnceLock::new();
+type Observer = fn(&'static str, u64);
+static OBSERVER: OnceLock<Observer> = OnceLock::new();
 /// Install before using the engine. A hook changes thread-local allocation origin.
 pub fn install(hook: fn(usize) -> usize) {
     let _ = HOOK.set(hook);
+}
+/// Optional diagnostic stage snapshots. Absent from normal builds; callbacks
+/// run outside allocation hooks and must not call back into the database.
+pub fn install_observer(observer: Observer) {
+    let _ = OBSERVER.set(observer);
+}
+pub(crate) fn observe(stage: &'static str, sequence: u64) {
+    if let Some(observer) = OBSERVER.get() {
+        observer(stage, sequence);
+    }
 }
 pub struct Scope {
     old: usize,

@@ -42,7 +42,10 @@ def main():
     parser.add_argument('--sqlite', default='tools/native_sqlite/target/release/content_memory.exe')
     parser.add_argument('--pairs', type=int, choices=(2, 4), default=4)
     parser.add_argument('--owned-pairs', type=int, choices=(2, 4), default=2)
+    parser.add_argument('--apis', nargs='+', choices=('streamed', 'owned'),
+                        default=['streamed', 'owned'])
     args = parser.parse_args()
+    args.apis = list(dict.fromkeys(args.apis))
     prefix = ROOT / args.prefix
     report = lambda suffix: Path(f'{prefix}-{suffix}')
     if prefix.parent != ROOT / 'docs/benchmarks' or report('design.json').exists():
@@ -51,12 +54,13 @@ def main():
                     sqlite=ROOT / args.sqlite)
     design = dict(
         programs={k: dict(path=str(v.relative_to(ROOT)), sha256=sha(v)) for k, v in programs.items()},
-        streamed_pairs=args.pairs, owned_pairs=args.owned_pairs,
+        streamed_pairs=args.pairs if 'streamed' in args.apis else 0,
+        owned_pairs=args.owned_pairs if 'owned' in args.apis else 0,
         corpus='same existing first10000;264842858 text bytes;no corpus generation/download',
         transactions='500 records/batch;20 acknowledged synced WAL commits;unchanged normal durability',
         timing='normal release;no diagnostic features;input CRC/JSON and40 boundary gets included in ingest',
         maintenance='final flush/drain for FDB;FTS optimize+WAL checkpoint for SQLite;not identical algorithms',
-        api='streamed and owned FDB measured separately;SQLite streaming input in both sets',
+        api='FDB APIs: ' + ','.join(args.apis) + ';SQLite input remains streaming',
         sqlite='bundled FTS5 trigram;FULL WAL;cache2MiB;mmap0;tempFILE;not all FDB field/link/guard features',
         cache='warm OS cache;no eviction;sequential processes;no power/hardware isolation',
         memory='OS lifetime private commit/working set;not physical RAM/system RAM;phase samples may miss peaks',
@@ -68,6 +72,8 @@ def main():
     write(report('protected-before.json'), before)
     records = []
     for api, pairs in [('streamed', args.pairs), ('owned', args.owned_pairs)]:
+        if api not in args.apis:
+            continue
         reference = None
         for pair in range(pairs):
             # Reverse adjacent pairs, including SQLite's position.
@@ -112,7 +118,7 @@ def main():
     assert before == after, 'Protected corpus or legacy source changed'
     write(report('protected-after.json'), after)
     summary = dict(design=design, protected_unchanged=True, fdb_sources_indexes_ready_byte_equal=True, apis={})
-    for api in ('streamed', 'owned'):
+    for api in args.apis:
         groups = {variant: [r for r in records if r['api'] == api and r['engine'] == variant] for variant in programs}
         for group in groups.values():
             for row in group:

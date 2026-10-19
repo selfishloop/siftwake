@@ -1,0 +1,29 @@
+{
+  "programs": {
+    "control": {
+      "path": "output\\write-stages-fdb-20261018.exe",
+      "sha256": "2468574B8B4270003875C5974078D4DFDC96CDE2AFE7A4B10379CBE602B9D2C4"
+    },
+    "candidate": {
+      "path": "output\\owned-memory-combined-fdb-20261020.exe",
+      "sha256": "50D4E937F3D8EEEBA21322130E1B5319E18E8006D28F2AAB05EDE4FD68A12911"
+    }
+  },
+  "corpus": "same first1000 of allowed first10k;no generation/download",
+  "write": "two500-row default synced owned commits;intake/commits outside read timing",
+  "timing": "CLI request/response wall time;includes native JSON serialization+IPC;parent encode/decode+oracle excluded;not pure Rust API timing",
+  "queries": [
+    "the",
+    "quixote",
+    "he",
+    "the man",
+    "zx",
+    "transubstantiation"
+  ],
+  "pairs": 4,
+  "samples_per_process": 20,
+  "warmup_per_case": 1,
+  "cache": "warm OS cache;no eviction,CPU pinning,power or background isolation",
+  "memory": "not measured;caller/oracle stays in separate Python process",
+  "storage": "only owned fixed FDB slot reset;SQLite not touched;no DB copies"
+}

@@ -1,0 +1,66 @@
+{
+  "programs": {
+    "control": {
+      "path": "output\\write-stages-candidate-20261018.exe",
+      "sha256": "47487337A018439703C34EF8B3252321731CBF50E52078794B2B9E67F56C3ED3"
+    },
+    "candidate": {
+      "path": "output\\owned-memory-eager-candidate-20261020.exe",
+      "sha256": "D84348D0E535DE56CAA3210C2BB979F1299EAA3236F0EA839A676D05FA48AF97"
+    },
+    "sqlite": {
+      "path": "tools\\native_sqlite\\target\\release\\content_memory.exe",
+      "sha256": "24B7989064F59F266A391633D166B9680E932DE3D1B4838DC2F35150811950ED"
+    }
+  },
+  "streamed_pairs": 0,
+  "owned_pairs": 4,
+  "corpus": "same existing first10000;264842858 text bytes;no corpus generation/download",
+  "transactions": "500 records/batch;20 acknowledged synced WAL commits;unchanged normal durability",
+  "timing": "normal release;no diagnostic features;input CRC/JSON and40 boundary gets included in ingest",
+  "maintenance": "final flush/drain for FDB;FTS optimize+WAL checkpoint for SQLite;not identical algorithms",
+  "api": "streamed and owned FDB measured separately;SQLite streaming input in both sets",
+  "sqlite": "bundled FTS5 trigram;FULL WAL;cache2MiB;mmap0;tempFILE;not all FDB field/link/guard features",
+  "cache": "warm OS cache;no eviction;sequential processes;no power/hardware isolation",
+  "memory": "OS lifetime private commit/working set;not physical RAM/system RAM;phase samples may miss peaks",
+  "storage": "only fixed FDB/SQLite slots reset through benchmark-workspace.ps1;no DB copies",
+  "verification": "all10000 payloads after every run outside timing;FDB also4 full contains page oracles",
+  "orders": [
+    {
+      "api": "owned",
+      "pair": 0,
+      "engines": [
+        "control",
+        "candidate",
+        "sqlite"
+      ]
+    },
+    {
+      "api": "owned",
+      "pair": 1,
+      "engines": [
+        "sqlite",
+        "candidate",
+        "control"
+      ]
+    },
+    {
+      "api": "owned",
+      "pair": 2,
+      "engines": [
+        "control",
+        "candidate",
+        "sqlite"
+      ]
+    },
+    {
+      "api": "owned",
+      "pair": 3,
+      "engines": [
+        "sqlite",
+        "candidate",
+        "control"
+      ]
+    }
+  ]
+}

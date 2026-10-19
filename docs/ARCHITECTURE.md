@@ -1,5 +1,15 @@
 # FDB mimarisi — 0.3.1
 
+2026-10-20 owned RAM teşhisi: watermark flush'ı sonraki geçerli commit'e
+kaldığından önceki1k resident belge+folded indeks ile yeni500 input çakışıyor.
+`diagnostic-memory` altında opsiyonel `install_observer` callback'i commit
+aşamalarının allocation snapshot'ını alır; normal derlemede çağrılar yoktur.
+Erken flush+hızlı intake fold4 çiftte private-%16,67/toplam-%3,92 verdi;
+ancak watermark sonrası6 CLI sorgusunun tamamı4/4 çiftte yavaşladı.
+Her iki runtime değişikliği geri alındı; bounded owned/delta watermark,
+fold,kalıcı biçimler ve feature'lar aynı. Caller Vec RAM'i/genel arama kapısı
+kapanmadı. [Teşhis,reddedilen prototip ve kanıt](OWNED-MEMORY-10K-20261020.md).
+
 2026-10-18–19 yazma adımı: normal bounded profilinde `finish_delta`, RAM slotu
 ile checkpoint kimliği arasındaki eşlemeyi bir kez kurar.4 byte/slot geçici
 Vec her posting girdisindeki Key/BTreeMap aramasını kaldırır. Boş slot,
