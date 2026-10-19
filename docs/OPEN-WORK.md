@@ -1,5 +1,18 @@
 # FDB açık işler
 
+2026-10-20 RAM sıkıştırma ön testi tamamlandı/reddedildi:aynı ilk10k,
+en fazla200 kaynak metin,4 read-only süreç. Bağımsız LZ4 block+UTF-8 alanı
+-%34,17;50 metin yeni sonuç p95 medyan0,462→1,250ms,tampon tekrar
+0,095→0,930ms.1/50/200 ve CRC-açık/kapalı bütün karşılaştırmalarda4/4
+süreç yavaş. Bu yalnız metin allocation kapasitesi/geri-hazırlama zamanıdır;
+proses RAM'i veya gerçek DB get/arama kaybı değildir. Ön kapı geçmediği
+için motorun RAM yapısı değiştirilmedi;LZ4 bağımlılığı yalnız ayrı araçta.
+5 test/root+probe fmt/Clippy geçti;21 DB/cache/0.1 dosyası ve corpus SHA-eşit.
+DB açma/reset,yeni corpus/kalıcı codec/engine feature veya dış entegrasyon
+yok. Normal Vec/caller/query RAM,son sayfa/genel p95,yazma/son merge,
+açılış/disk sıkıştırma,eşzamanlı/gerçek-cold işler açık.
+[Ön test ve kanıtlar](RAM-TEXT-LZ4-10K-20261020.md).
+
 2026-10-20 owned RAM kök nedeni ölçüldü: sonraki500 input, önceki1k
 özgün+folded delta ile üst üste; max aşama71,39MiB requested-live, bunun
 41,13MiB'si input+özgün belge kökeni,28,91MiB'si RAM arama indeksi. Bu

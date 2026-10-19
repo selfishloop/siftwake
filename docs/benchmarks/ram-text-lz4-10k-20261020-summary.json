@@ -1,0 +1,240 @@
+{
+  "design": {
+    "executable": "target\\ram-text-probe\\release\\fdb-ram-text-probe.exe",
+    "sha256": "B18AC7C42D0656EEBA5338A299204B0658583F6261ADCF12778F389BC35E4C75",
+    "codec": "lz4_flex0.14.0;safe-encode,safe-decode,checked-decode,std;block per document;no trained/inter-document dictionary",
+    "corpus": "existing first10000;264842858 text bytes;200 source texts maximum;no generation/download",
+    "modes": "raw owned copy versus LZ4 decode+UTF8,optional decoded CRC;fresh/reused output separately",
+    "retained": "sum of200-text groups;String/encoded capacities+actual vector metadata;not simultaneous/process/physical memory",
+    "timing": "normal System allocator;input CRC/JSON+input clone+output vector reserve+oracle+drop outside materialization timer;UTF8+optional CRC inside",
+    "encode": "compression+decoded CRC+compact box+raw/packed selection;owned input cloning excluded",
+    "cache": "resident group;two warmups per mode/page;OS/allocator warm;no eviction/power/background isolation",
+    "affinity": 4,
+    "runs": 4,
+    "rounds_per_page": 8,
+    "queries": "materialize1,50,200 texts only;no contains/normalization/postings/API/DB/SQLite query speed claim",
+    "exclusions": "fields,title,links,normalized search text,WAL,maintenance;both raw oracle and compressed data coexist in probe",
+    "engine": "unchanged;new compression dependency confined to standalone probe;no new engine feature",
+    "rustflags": null,
+    "cargo_flags": "release;thin LTO;one codegen unit",
+    "sources": {
+      "tools\\ram_text_probe\\Cargo.toml": "EB05D00C911100608667AF50E0E6C1BDB2814533471C4C508522C9D3C00BFF78",
+      "tools\\ram_text_probe\\Cargo.lock": "CA385E3ACF54EE396B5AFD3321DD73B9CE1F64A80E5E7D61D5DB7FFDDBA31D58",
+      "tools\\ram_text_probe\\src\\main.rs": "F55D6CAE768124CB07F3B2819776CAA82DFBE22F8242743471C4B1442357E307",
+      "tools\\ram_text_probe\\src\\text.rs": "3497FA7262A5CE5B33AE2EF7778BA3339B7F76DD7818F807B363CE49A7BE5025",
+      "tools\\measure-ram-text.py": "1FA3D54363B84ED7DCE6988518C53C8F1CD168939260A301D7EB48D8775C58BB"
+    }
+  },
+  "all_db_corpus_fixture_bytes_unchanged": true,
+  "retained_sums": {
+    "raw_retained_sum_bytes": 265082858,
+    "packed_retained_sum_bytes": 174495362,
+    "compressed_records": 10000
+  },
+  "encode_crc_compact_ms": [
+    820.3853,
+    811.1713,
+    794.6351,
+    795.8837
+  ],
+  "materialization": {
+    "1": {
+      "lz4_utf8_fresh": {
+        "control": "raw_fresh",
+        "p95_ms": {
+          "control": 0.001,
+          "candidate": 0.0272
+        },
+        "total_ratio_per_run": [
+          26.093971631205672,
+          25.10386690647482,
+          25.373517786561266,
+          25.726764199655765
+        ],
+        "p95_lower_runs": 0,
+        "total_lower_runs": 0,
+        "samples_per_mode_run": 400
+      },
+      "lz4_crc_utf8_fresh": {
+        "control": "raw_fresh",
+        "p95_ms": {
+          "control": 0.001,
+          "candidate": 0.0302
+        },
+        "total_ratio_per_run": [
+          29.58776595744681,
+          31.74730215827338,
+          29.33201581027668,
+          29.236230636833046
+        ],
+        "p95_lower_runs": 0,
+        "total_lower_runs": 0,
+        "samples_per_mode_run": 400
+      },
+      "lz4_utf8_reused": {
+        "control": "raw_reused",
+        "p95_ms": {
+          "control": 0.00115,
+          "candidate": 0.02645
+        },
+        "total_ratio_per_run": [
+          24.766410912190963,
+          23.273200346921076,
+          23.74082896617437,
+          24.772364552708947
+        ],
+        "p95_lower_runs": 0,
+        "total_lower_runs": 0,
+        "samples_per_mode_run": 400
+      },
+      "lz4_crc_utf8_reused": {
+        "control": "raw_reused",
+        "p95_ms": {
+          "control": 0.00115,
+          "candidate": 0.0302
+        },
+        "total_ratio_per_run": [
+          28.35848252344416,
+          26.602341717259325,
+          29.95759885659838,
+          28.55186896262075
+        ],
+        "p95_lower_runs": 0,
+        "total_lower_runs": 0,
+        "samples_per_mode_run": 400
+      }
+    },
+    "50": {
+      "lz4_utf8_fresh": {
+        "control": "raw_fresh",
+        "p95_ms": {
+          "control": 0.4618,
+          "candidate": 1.2501
+        },
+        "total_ratio_per_run": [
+          7.247529420387537,
+          9.135854262556396,
+          8.942229314985422,
+          8.497878916172734
+        ],
+        "p95_lower_runs": 0,
+        "total_lower_runs": 0,
+        "samples_per_mode_run": 1600
+      },
+      "lz4_crc_utf8_fresh": {
+        "control": "raw_fresh",
+        "p95_ms": {
+          "control": 0.4618,
+          "candidate": 1.36965
+        },
+        "total_ratio_per_run": [
+          8.186169409334,
+          10.307994726024237,
+          10.062163033842909,
+          9.61609048022257
+        ],
+        "p95_lower_runs": 0,
+        "total_lower_runs": 0,
+        "samples_per_mode_run": 1600
+      },
+      "lz4_utf8_reused": {
+        "control": "raw_reused",
+        "p95_ms": {
+          "control": 0.09475,
+          "candidate": 0.93
+        },
+        "total_ratio_per_run": [
+          14.594453377112176,
+          13.69483879570466,
+          14.594657247064887,
+          13.094312215034648
+        ],
+        "p95_lower_runs": 0,
+        "total_lower_runs": 0,
+        "samples_per_mode_run": 1600
+      },
+      "lz4_crc_utf8_reused": {
+        "control": "raw_reused",
+        "p95_ms": {
+          "control": 0.09475,
+          "candidate": 1.0396
+        },
+        "total_ratio_per_run": [
+          16.459512088417625,
+          15.432815951170939,
+          16.375653827312977,
+          14.685418827053809
+        ],
+        "p95_lower_runs": 0,
+        "total_lower_runs": 0,
+        "samples_per_mode_run": 1600
+      }
+    },
+    "200": {
+      "lz4_utf8_fresh": {
+        "control": "raw_fresh",
+        "p95_ms": {
+          "control": 2.27415,
+          "candidate": 5.4384
+        },
+        "total_ratio_per_run": [
+          3.0645319942890676,
+          3.190216420179711,
+          3.211012449724985,
+          3.1858492133362524
+        ],
+        "p95_lower_runs": 0,
+        "total_lower_runs": 0,
+        "samples_per_mode_run": 400
+      },
+      "lz4_crc_utf8_fresh": {
+        "control": "raw_fresh",
+        "p95_ms": {
+          "control": 2.27415,
+          "candidate": 5.9119
+        },
+        "total_ratio_per_run": [
+          3.3851777417643363,
+          3.5112776533703385,
+          3.5077040464921767,
+          3.4923157157987115
+        ],
+        "p95_lower_runs": 0,
+        "total_lower_runs": 0,
+        "samples_per_mode_run": 400
+      },
+      "lz4_utf8_reused": {
+        "control": "raw_reused",
+        "p95_ms": {
+          "control": 0.52625,
+          "candidate": 3.541
+        },
+        "total_ratio_per_run": [
+          8.293025689276476,
+          7.9953795411360655,
+          8.12725583309688,
+          8.09444510258192
+        ],
+        "p95_lower_runs": 0,
+        "total_lower_runs": 0,
+        "samples_per_mode_run": 400
+      },
+      "lz4_crc_utf8_reused": {
+        "control": "raw_reused",
+        "p95_ms": {
+          "control": 0.52625,
+          "candidate": 3.98915
+        },
+        "total_ratio_per_run": [
+          9.19313541903704,
+          8.916955884772372,
+          9.125815292800729,
+          9.030892430347004
+        ],
+        "p95_lower_runs": 0,
+        "total_lower_runs": 0,
+        "samples_per_mode_run": 400
+      }
+    }
+  }
+}

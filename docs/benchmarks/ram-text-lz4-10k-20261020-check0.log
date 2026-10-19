@@ -1,0 +1,13 @@
+   Compiling fdb-ram-text-probe v0.1.0 (C:\Users\Serkan\Documents\ChatGPT\fdb\tools\ram_text_probe)
+    Finished `test` profile [unoptimized + debuginfo] target(s) in 1.59s
+     Running unittests src\main.rs (target/ram-text-probe\debug\deps\fdb_ram_text_probe-6b8c99900d864384.exe)
+
+running 5 tests
+test input::tests::corpus_crc_uses_standard_ieee_vector ... ok
+test text::tests::unicode_empty_and_small_raw_fallback_roundtrip_without_changing_input ... ok
+test text::tests::oversized_input_and_raw_corruption_do_not_escape_validation ... ok
+test text::tests::truncation_corruption_bounds_and_utf8_fail_with_empty_output ... ok
+test text::tests::compressed_text_reuses_exact_output_and_handles_length_changes ... ok
+
+test result: ok. 5 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.01s
+

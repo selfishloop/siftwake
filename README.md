@@ -1,5 +1,12 @@
 # FDB
 
+[RAM'de LZ4 özgün metin ön testi](docs/RAM-TEXT-LZ4-10K-20261020.md):
+aynı10k,dört read-only süreç. Metin allocation alanı-%34,17;50 metnin yeni
+sonuca hazırlanması p95 medyan0,462→1,250ms,tampon tekrar0,095→0,930ms.
+Bütün1/50/200 durumları4/4 süreçte yavaş;ön kapı geçmedi,motora alınmadı.
+Bu alan hesabı proses RAM'i veya DB sorgu hızı değildir. Motor/Cargo/format
+aynı;DB reset/yeni corpus yok. Genel RAM ve diğer performans işleri açık.
+
 [Toplu yazma belleğinin kök nedeni ve reddedilen erken flush](docs/OWNED-MEMORY-10K-20261020.md):
 eski1k delta ile sonraki500 input üst üste geliyor; bir aşamada41,13MiB belge
 kökeni+28,91MiB arama indeksi canlı, WAL frame0. Ayrı normal4 çiftte prototip

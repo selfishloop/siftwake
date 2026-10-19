@@ -1,0 +1,26 @@
+{
+  "executable": "target\\ram-text-probe\\release\\fdb-ram-text-probe.exe",
+  "sha256": "B18AC7C42D0656EEBA5338A299204B0658583F6261ADCF12778F389BC35E4C75",
+  "codec": "lz4_flex0.14.0;safe-encode,safe-decode,checked-decode,std;block per document;no trained/inter-document dictionary",
+  "corpus": "existing first10000;264842858 text bytes;200 source texts maximum;no generation/download",
+  "modes": "raw owned copy versus LZ4 decode+UTF8,optional decoded CRC;fresh/reused output separately",
+  "retained": "sum of200-text groups;String/encoded capacities+actual vector metadata;not simultaneous/process/physical memory",
+  "timing": "normal System allocator;input CRC/JSON+input clone+output vector reserve+oracle+drop outside materialization timer;UTF8+optional CRC inside",
+  "encode": "compression+decoded CRC+compact box+raw/packed selection;owned input cloning excluded",
+  "cache": "resident group;two warmups per mode/page;OS/allocator warm;no eviction/power/background isolation",
+  "affinity": 4,
+  "runs": 4,
+  "rounds_per_page": 8,
+  "queries": "materialize1,50,200 texts only;no contains/normalization/postings/API/DB/SQLite query speed claim",
+  "exclusions": "fields,title,links,normalized search text,WAL,maintenance;both raw oracle and compressed data coexist in probe",
+  "engine": "unchanged;new compression dependency confined to standalone probe;no new engine feature",
+  "rustflags": null,
+  "cargo_flags": "release;thin LTO;one codegen unit",
+  "sources": {
+    "tools\\ram_text_probe\\Cargo.toml": "EB05D00C911100608667AF50E0E6C1BDB2814533471C4C508522C9D3C00BFF78",
+    "tools\\ram_text_probe\\Cargo.lock": "CA385E3ACF54EE396B5AFD3321DD73B9CE1F64A80E5E7D61D5DB7FFDDBA31D58",
+    "tools\\ram_text_probe\\src\\main.rs": "F55D6CAE768124CB07F3B2819776CAA82DFBE22F8242743471C4B1442357E307",
+    "tools\\ram_text_probe\\src\\text.rs": "3497FA7262A5CE5B33AE2EF7778BA3339B7F76DD7818F807B363CE49A7BE5025",
+    "tools\\measure-ram-text.py": "1FA3D54363B84ED7DCE6988518C53C8F1CD168939260A301D7EB48D8775C58BB"
+  }
+}

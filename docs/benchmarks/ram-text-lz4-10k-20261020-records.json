@@ -1,0 +1,542 @@
+[
+  {
+    "run": 0,
+    "result": {
+      "all_payloads_byte_equal": true,
+      "cache": "resident group;two warmups per mode/page;warmed allocator/OS;no eviction",
+      "compressed_records": 10000,
+      "documents": 10000,
+      "encode_crc_compact_ns": 820385300,
+      "excludes": "JSON corpus decode+CRC,input copying,fields,title,links,folded search text,normalization,posting lookup,WAL,maintenance,disk IO;no DB engine timing",
+      "includes": "materialization to owned UTF-8 String;fresh output allocation or reused caller buffer;optional CRC separately",
+      "maximum_input_group": 200,
+      "packed_retained_sum_bytes": 174495362,
+      "phase": "result",
+      "raw_retained_sum_bytes": 265082858,
+      "retained_sums_are_not_simultaneous_or_process_memory": true,
+      "run": 0,
+      "text_bytes": 264842858
+    },
+    "metrics": {
+      "1": {
+        "raw_fresh": {
+          "p50_ns": 600.0,
+          "p95_ns": 1000,
+          "samples": 400,
+          "sum_ns": 225600
+        },
+        "lz4_utf8_fresh": {
+          "p50_ns": 15950.0,
+          "p95_ns": 28100,
+          "samples": 400,
+          "sum_ns": 5886800
+        },
+        "lz4_crc_utf8_fresh": {
+          "p50_ns": 18300.0,
+          "p95_ns": 31300,
+          "samples": 400,
+          "sum_ns": 6675000
+        },
+        "raw_reused": {
+          "p50_ns": 600.0,
+          "p95_ns": 1200,
+          "samples": 400,
+          "sum_ns": 234600
+        },
+        "lz4_utf8_reused": {
+          "p50_ns": 16200.0,
+          "p95_ns": 27300,
+          "samples": 400,
+          "sum_ns": 5810200
+        },
+        "lz4_crc_utf8_reused": {
+          "p50_ns": 18050.0,
+          "p95_ns": 30600,
+          "samples": 400,
+          "sum_ns": 6652900
+        }
+      },
+      "50": {
+        "raw_fresh": {
+          "p50_ns": 39100.0,
+          "p95_ns": 510200,
+          "samples": 1600,
+          "sum_ns": 201926300
+        },
+        "lz4_utf8_fresh": {
+          "p50_ns": 839800.0,
+          "p95_ns": 1309600,
+          "samples": 1600,
+          "sum_ns": 1463466800
+        },
+        "lz4_crc_utf8_fresh": {
+          "p50_ns": 954750.0,
+          "p95_ns": 1434800,
+          "samples": 1600,
+          "sum_ns": 1653002900
+        },
+        "raw_reused": {
+          "p50_ns": 50150.0,
+          "p95_ns": 98800,
+          "samples": 1600,
+          "sum_ns": 88688200
+        },
+        "lz4_utf8_reused": {
+          "p50_ns": 791850.0,
+          "p95_ns": 972500,
+          "samples": 1600,
+          "sum_ns": 1294355800
+        },
+        "lz4_crc_utf8_reused": {
+          "p50_ns": 889700.0,
+          "p95_ns": 1077100,
+          "samples": 1600,
+          "sum_ns": 1459764500
+        }
+      },
+      "200": {
+        "raw_fresh": {
+          "p50_ns": 1601500.0,
+          "p95_ns": 2282500,
+          "samples": 400,
+          "sum_ns": 622175100
+        },
+        "lz4_utf8_fresh": {
+          "p50_ns": 4754550.0,
+          "p95_ns": 5722500,
+          "samples": 400,
+          "sum_ns": 1906675500
+        },
+        "lz4_crc_utf8_fresh": {
+          "p50_ns": 5213100.0,
+          "p95_ns": 6184900,
+          "samples": 400,
+          "sum_ns": 2106173300
+        },
+        "raw_reused": {
+          "p50_ns": 390950.0,
+          "p95_ns": 519800,
+          "samples": 400,
+          "sum_ns": 163036900
+        },
+        "lz4_utf8_reused": {
+          "p50_ns": 3280450.0,
+          "p95_ns": 3832700,
+          "samples": 400,
+          "sum_ns": 1352069200
+        },
+        "lz4_crc_utf8_reused": {
+          "p50_ns": 3672750.0,
+          "p95_ns": 4179000,
+          "samples": 400,
+          "sum_ns": 1498820300
+        }
+      }
+    }
+  },
+  {
+    "run": 1,
+    "result": {
+      "all_payloads_byte_equal": true,
+      "cache": "resident group;two warmups per mode/page;warmed allocator/OS;no eviction",
+      "compressed_records": 10000,
+      "documents": 10000,
+      "encode_crc_compact_ns": 811171300,
+      "excludes": "JSON corpus decode+CRC,input copying,fields,title,links,folded search text,normalization,posting lookup,WAL,maintenance,disk IO;no DB engine timing",
+      "includes": "materialization to owned UTF-8 String;fresh output allocation or reused caller buffer;optional CRC separately",
+      "maximum_input_group": 200,
+      "packed_retained_sum_bytes": 174495362,
+      "phase": "result",
+      "raw_retained_sum_bytes": 265082858,
+      "retained_sums_are_not_simultaneous_or_process_memory": true,
+      "run": 1,
+      "text_bytes": 264842858
+    },
+    "metrics": {
+      "1": {
+        "raw_fresh": {
+          "p50_ns": 600.0,
+          "p95_ns": 1000,
+          "samples": 400,
+          "sum_ns": 222400
+        },
+        "lz4_utf8_fresh": {
+          "p50_ns": 12650.0,
+          "p95_ns": 27000,
+          "samples": 400,
+          "sum_ns": 5583100
+        },
+        "lz4_crc_utf8_fresh": {
+          "p50_ns": 14350.0,
+          "p95_ns": 30500,
+          "samples": 400,
+          "sum_ns": 7060600
+        },
+        "raw_reused": {
+          "p50_ns": 500.0,
+          "p95_ns": 1100,
+          "samples": 400,
+          "sum_ns": 230600
+        },
+        "lz4_utf8_reused": {
+          "p50_ns": 12200.0,
+          "p95_ns": 25600,
+          "samples": 400,
+          "sum_ns": 5366800
+        },
+        "lz4_crc_utf8_reused": {
+          "p50_ns": 13750.0,
+          "p95_ns": 29800,
+          "samples": 400,
+          "sum_ns": 6134500
+        }
+      },
+      "50": {
+        "raw_fresh": {
+          "p50_ns": 38800.0,
+          "p95_ns": 462200,
+          "samples": 1600,
+          "sum_ns": 153887700
+        },
+        "lz4_utf8_fresh": {
+          "p50_ns": 828950.0,
+          "p95_ns": 1239500,
+          "samples": 1600,
+          "sum_ns": 1405895600
+        },
+        "lz4_crc_utf8_fresh": {
+          "p50_ns": 942450.0,
+          "p95_ns": 1358500,
+          "samples": 1600,
+          "sum_ns": 1586273600
+        },
+        "raw_reused": {
+          "p50_ns": 55200.0,
+          "p95_ns": 91500,
+          "samples": 1600,
+          "sum_ns": 92993800
+        },
+        "lz4_utf8_reused": {
+          "p50_ns": 785450.0,
+          "p95_ns": 933200,
+          "samples": 1600,
+          "sum_ns": 1273535100
+        },
+        "lz4_crc_utf8_reused": {
+          "p50_ns": 884400.0,
+          "p95_ns": 1041400,
+          "samples": 1600,
+          "sum_ns": 1435156200
+        }
+      },
+      "200": {
+        "raw_fresh": {
+          "p50_ns": 1530700.0,
+          "p95_ns": 2278600,
+          "samples": 400,
+          "sum_ns": 574188600
+        },
+        "lz4_utf8_fresh": {
+          "p50_ns": 4614750.0,
+          "p95_ns": 5436500,
+          "samples": 400,
+          "sum_ns": 1831785900
+        },
+        "lz4_crc_utf8_fresh": {
+          "p50_ns": 5094950.0,
+          "p95_ns": 5969200,
+          "samples": 400,
+          "sum_ns": 2016135600
+        },
+        "raw_reused": {
+          "p50_ns": 396300.0,
+          "p95_ns": 536100,
+          "samples": 400,
+          "sum_ns": 165935900
+        },
+        "lz4_utf8_reused": {
+          "p50_ns": 3281750.0,
+          "p95_ns": 3575500,
+          "samples": 400,
+          "sum_ns": 1326720500
+        },
+        "lz4_crc_utf8_reused": {
+          "p50_ns": 3666600.0,
+          "p95_ns": 3965600,
+          "samples": 400,
+          "sum_ns": 1479643100
+        }
+      }
+    }
+  },
+  {
+    "run": 2,
+    "result": {
+      "all_payloads_byte_equal": true,
+      "cache": "resident group;two warmups per mode/page;warmed allocator/OS;no eviction",
+      "compressed_records": 10000,
+      "documents": 10000,
+      "encode_crc_compact_ns": 794635100,
+      "excludes": "JSON corpus decode+CRC,input copying,fields,title,links,folded search text,normalization,posting lookup,WAL,maintenance,disk IO;no DB engine timing",
+      "includes": "materialization to owned UTF-8 String;fresh output allocation or reused caller buffer;optional CRC separately",
+      "maximum_input_group": 200,
+      "packed_retained_sum_bytes": 174495362,
+      "phase": "result",
+      "raw_retained_sum_bytes": 265082858,
+      "retained_sums_are_not_simultaneous_or_process_memory": true,
+      "run": 2,
+      "text_bytes": 264842858
+    },
+    "metrics": {
+      "1": {
+        "raw_fresh": {
+          "p50_ns": 500.0,
+          "p95_ns": 1000,
+          "samples": 400,
+          "sum_ns": 202400
+        },
+        "lz4_utf8_fresh": {
+          "p50_ns": 12750.0,
+          "p95_ns": 24800,
+          "samples": 400,
+          "sum_ns": 5135600
+        },
+        "lz4_crc_utf8_fresh": {
+          "p50_ns": 14500.0,
+          "p95_ns": 27400,
+          "samples": 400,
+          "sum_ns": 5936800
+        },
+        "raw_reused": {
+          "p50_ns": 500.0,
+          "p95_ns": 1100,
+          "samples": 400,
+          "sum_ns": 209900
+        },
+        "lz4_utf8_reused": {
+          "p50_ns": 12550.0,
+          "p95_ns": 24500,
+          "samples": 400,
+          "sum_ns": 4983200
+        },
+        "lz4_crc_utf8_reused": {
+          "p50_ns": 14100.0,
+          "p95_ns": 27700,
+          "samples": 400,
+          "sum_ns": 6288100
+        }
+      },
+      "50": {
+        "raw_fresh": {
+          "p50_ns": 38000.0,
+          "p95_ns": 459100,
+          "samples": 1600,
+          "sum_ns": 155338300
+        },
+        "lz4_utf8_fresh": {
+          "p50_ns": 818800.0,
+          "p95_ns": 1226000,
+          "samples": 1600,
+          "sum_ns": 1389070700
+        },
+        "lz4_crc_utf8_fresh": {
+          "p50_ns": 930600.0,
+          "p95_ns": 1335900,
+          "samples": 1600,
+          "sum_ns": 1563039300
+        },
+        "raw_reused": {
+          "p50_ns": 51150.0,
+          "p95_ns": 83900,
+          "samples": 1600,
+          "sum_ns": 86146600
+        },
+        "lz4_utf8_reused": {
+          "p50_ns": 781150.0,
+          "p95_ns": 905200,
+          "samples": 1600,
+          "sum_ns": 1257280100
+        },
+        "lz4_crc_utf8_reused": {
+          "p50_ns": 878750.0,
+          "p95_ns": 1009000,
+          "samples": 1600,
+          "sum_ns": 1410706900
+        }
+      },
+      "200": {
+        "raw_fresh": {
+          "p50_ns": 1498700.0,
+          "p95_ns": 2215400,
+          "samples": 400,
+          "sum_ns": 565514500
+        },
+        "lz4_utf8_fresh": {
+          "p50_ns": 4635000.0,
+          "p95_ns": 5301900,
+          "samples": 400,
+          "sum_ns": 1815874100
+        },
+        "lz4_crc_utf8_fresh": {
+          "p50_ns": 5067050.0,
+          "p95_ns": 5723300,
+          "samples": 400,
+          "sum_ns": 1983657500
+        },
+        "raw_reused": {
+          "p50_ns": 390200.0,
+          "p95_ns": 508400,
+          "samples": 400,
+          "sum_ns": 160356500
+        },
+        "lz4_utf8_reused": {
+          "p50_ns": 3255300.0,
+          "p95_ns": 3450400,
+          "samples": 400,
+          "sum_ns": 1303258300
+        },
+        "lz4_crc_utf8_reused": {
+          "p50_ns": 3652500.0,
+          "p95_ns": 3856600,
+          "samples": 400,
+          "sum_ns": 1463383800
+        }
+      }
+    }
+  },
+  {
+    "run": 3,
+    "result": {
+      "all_payloads_byte_equal": true,
+      "cache": "resident group;two warmups per mode/page;warmed allocator/OS;no eviction",
+      "compressed_records": 10000,
+      "documents": 10000,
+      "encode_crc_compact_ns": 795883700,
+      "excludes": "JSON corpus decode+CRC,input copying,fields,title,links,folded search text,normalization,posting lookup,WAL,maintenance,disk IO;no DB engine timing",
+      "includes": "materialization to owned UTF-8 String;fresh output allocation or reused caller buffer;optional CRC separately",
+      "maximum_input_group": 200,
+      "packed_retained_sum_bytes": 174495362,
+      "phase": "result",
+      "raw_retained_sum_bytes": 265082858,
+      "retained_sums_are_not_simultaneous_or_process_memory": true,
+      "run": 3,
+      "text_bytes": 264842858
+    },
+    "metrics": {
+      "1": {
+        "raw_fresh": {
+          "p50_ns": 600.0,
+          "p95_ns": 1000,
+          "samples": 400,
+          "sum_ns": 232400
+        },
+        "lz4_utf8_fresh": {
+          "p50_ns": 16550.0,
+          "p95_ns": 27400,
+          "samples": 400,
+          "sum_ns": 5978900
+        },
+        "lz4_crc_utf8_fresh": {
+          "p50_ns": 19400.0,
+          "p95_ns": 29900,
+          "samples": 400,
+          "sum_ns": 6794500
+        },
+        "raw_reused": {
+          "p50_ns": 600.0,
+          "p95_ns": 1200,
+          "samples": 400,
+          "sum_ns": 238100
+        },
+        "lz4_utf8_reused": {
+          "p50_ns": 16400.0,
+          "p95_ns": 27700,
+          "samples": 400,
+          "sum_ns": 5898300
+        },
+        "lz4_crc_utf8_reused": {
+          "p50_ns": 18800.0,
+          "p95_ns": 31100,
+          "samples": 400,
+          "sum_ns": 6798200
+        }
+      },
+      "50": {
+        "raw_fresh": {
+          "p50_ns": 39400.0,
+          "p95_ns": 461400,
+          "samples": 1600,
+          "sum_ns": 165340000
+        },
+        "lz4_utf8_fresh": {
+          "p50_ns": 820550.0,
+          "p95_ns": 1260700,
+          "samples": 1600,
+          "sum_ns": 1405039300
+        },
+        "lz4_crc_utf8_fresh": {
+          "p50_ns": 935800.0,
+          "p95_ns": 1380800,
+          "samples": 1600,
+          "sum_ns": 1589924400
+        },
+        "raw_reused": {
+          "p50_ns": 57050.0,
+          "p95_ns": 98000,
+          "samples": 1600,
+          "sum_ns": 97204800
+        },
+        "lz4_utf8_reused": {
+          "p50_ns": 784050.0,
+          "p95_ns": 926800,
+          "samples": 1600,
+          "sum_ns": 1272830000
+        },
+        "lz4_crc_utf8_reused": {
+          "p50_ns": 880200.0,
+          "p95_ns": 1037800,
+          "samples": 1600,
+          "sum_ns": 1427493200
+        }
+      },
+      "200": {
+        "raw_fresh": {
+          "p50_ns": 1454550.0,
+          "p95_ns": 2269700,
+          "samples": 400,
+          "sum_ns": 579644100
+        },
+        "lz4_utf8_fresh": {
+          "p50_ns": 4598750.0,
+          "p95_ns": 5440300,
+          "samples": 400,
+          "sum_ns": 1846658700
+        },
+        "lz4_crc_utf8_fresh": {
+          "p50_ns": 5021300.0,
+          "p95_ns": 5854600,
+          "samples": 400,
+          "sum_ns": 2024300200
+        },
+        "raw_reused": {
+          "p50_ns": 391400.0,
+          "p95_ns": 532700,
+          "samples": 400,
+          "sum_ns": 163761800
+        },
+        "lz4_utf8_reused": {
+          "p50_ns": 3265300.0,
+          "p95_ns": 3506500,
+          "samples": 400,
+          "sum_ns": 1325560900
+        },
+        "lz4_crc_utf8_reused": {
+          "p50_ns": 3657250.0,
+          "p95_ns": 4012700,
+          "samples": 400,
+          "sum_ns": 1478915200
+        }
+      }
+    }
+  }
+]

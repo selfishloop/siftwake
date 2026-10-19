@@ -1,0 +1,62 @@
+[
+  {
+    "command": [
+      "cargo",
+      "test",
+      "--manifest-path",
+      "tools/ram_text_probe/Cargo.toml",
+      "--target-dir",
+      "target/ram-text-probe"
+    ],
+    "exit_code": 0,
+    "log": "docs\\benchmarks\\ram-text-lz4-10k-20261020-check0.log"
+  },
+  {
+    "command": [
+      "cargo",
+      "fmt",
+      "--manifest-path",
+      "tools/ram_text_probe/Cargo.toml",
+      "--check"
+    ],
+    "exit_code": 0,
+    "log": "docs\\benchmarks\\ram-text-lz4-10k-20261020-check1.log"
+  },
+  {
+    "command": [
+      "cargo",
+      "clippy",
+      "--manifest-path",
+      "tools/ram_text_probe/Cargo.toml",
+      "--target-dir",
+      "target/ram-text-probe",
+      "--all-targets",
+      "--",
+      "-D",
+      "warnings"
+    ],
+    "exit_code": 0,
+    "log": "docs\\benchmarks\\ram-text-lz4-10k-20261020-check2.log"
+  },
+  {
+    "command": [
+      "cargo",
+      "fmt",
+      "--check"
+    ],
+    "exit_code": 0,
+    "log": "docs\\benchmarks\\ram-text-lz4-10k-20261020-check3.log"
+  },
+  {
+    "command": [
+      "cargo",
+      "clippy",
+      "--all-targets",
+      "--",
+      "-D",
+      "warnings"
+    ],
+    "exit_code": 0,
+    "log": "docs\\benchmarks\\ram-text-lz4-10k-20261020-check4.log"
+  }
+]

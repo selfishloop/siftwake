@@ -1,5 +1,13 @@
 # FDB mimarisi — 0.3.1
 
+2026-10-20 RAM LZ4 ön testi bağımsız `tools/ram_text_probe` içinde kaldı;
+engine'e dependency/feature/codec eklenmedi.200 metinlik gruplarda özgün
+gövdeyi bağımsız block/Box olarak saklamak-%34,17 alan verdi,ancak sahipli
+UTF-8 sonuç hazırlama1/50/200'de4/4 süreçte yavaş. CRC modu ayrıca ölçüldü.
+Ön kapı reddedildi;normal delta/arama/builder ve kalıcı kaynak/cache aynı.
+RAM sayaçları değil metin kapasitesi toplamlarıdır;DB araması ölçülmedi.
+[Tasarım,sınırlar ve ölçüler](RAM-TEXT-LZ4-10K-20261020.md).
+
 2026-10-20 owned RAM teşhisi: watermark flush'ı sonraki geçerli commit'e
 kaldığından önceki1k resident belge+folded indeks ile yeni500 input çakışıyor.
 `diagnostic-memory` altında opsiyonel `install_observer` callback'i commit

@@ -1,0 +1,110 @@
+{
+  "base_commit": "503a090402250859a55914478eb6d584eb7b5280",
+  "decision": "LZ4 independent resident text prototype rejected at materialization preflight;no engine integration or DB benchmark",
+  "design": {
+    "executable": "target\\ram-text-probe\\release\\fdb-ram-text-probe.exe",
+    "sha256": "B18AC7C42D0656EEBA5338A299204B0658583F6261ADCF12778F389BC35E4C75",
+    "codec": "lz4_flex0.14.0;safe-encode,safe-decode,checked-decode,std;block per document;no trained/inter-document dictionary",
+    "corpus": "existing first10000;264842858 text bytes;200 source texts maximum;no generation/download",
+    "modes": "raw owned copy versus LZ4 decode+UTF8,optional decoded CRC;fresh/reused output separately",
+    "retained": "sum of200-text groups;String/encoded capacities+actual vector metadata;not simultaneous/process/physical memory",
+    "timing": "normal System allocator;input CRC/JSON+input clone+output vector reserve+oracle+drop outside materialization timer;UTF8+optional CRC inside",
+    "encode": "compression+decoded CRC+compact box+raw/packed selection;owned input cloning excluded",
+    "cache": "resident group;two warmups per mode/page;OS/allocator warm;no eviction/power/background isolation",
+    "affinity": 4,
+    "runs": 4,
+    "rounds_per_page": 8,
+    "queries": "materialize1,50,200 texts only;no contains/normalization/postings/API/DB/SQLite query speed claim",
+    "exclusions": "fields,title,links,normalized search text,WAL,maintenance;both raw oracle and compressed data coexist in probe",
+    "engine": "unchanged;new compression dependency confined to standalone probe;no new engine feature",
+    "rustflags": null,
+    "cargo_flags": "release;thin LTO;one codegen unit",
+    "sources": {
+      "tools\\ram_text_probe\\Cargo.toml": "EB05D00C911100608667AF50E0E6C1BDB2814533471C4C508522C9D3C00BFF78",
+      "tools\\ram_text_probe\\Cargo.lock": "CA385E3ACF54EE396B5AFD3321DD73B9CE1F64A80E5E7D61D5DB7FFDDBA31D58",
+      "tools\\ram_text_probe\\src\\main.rs": "F55D6CAE768124CB07F3B2819776CAA82DFBE22F8242743471C4B1442357E307",
+      "tools\\ram_text_probe\\src\\text.rs": "3497FA7262A5CE5B33AE2EF7778BA3339B7F76DD7818F807B363CE49A7BE5025",
+      "tools\\measure-ram-text.py": "1FA3D54363B84ED7DCE6988518C53C8F1CD168939260A301D7EB48D8775C58BB"
+    }
+  },
+  "checks": [
+    {
+      "command": [
+        "cargo",
+        "test",
+        "--manifest-path",
+        "tools/ram_text_probe/Cargo.toml",
+        "--target-dir",
+        "target/ram-text-probe"
+      ],
+      "exit_code": 0,
+      "log": "docs\\benchmarks\\ram-text-lz4-10k-20261020-check0.log"
+    },
+    {
+      "command": [
+        "cargo",
+        "fmt",
+        "--manifest-path",
+        "tools/ram_text_probe/Cargo.toml",
+        "--check"
+      ],
+      "exit_code": 0,
+      "log": "docs\\benchmarks\\ram-text-lz4-10k-20261020-check1.log"
+    },
+    {
+      "command": [
+        "cargo",
+        "clippy",
+        "--manifest-path",
+        "tools/ram_text_probe/Cargo.toml",
+        "--target-dir",
+        "target/ram-text-probe",
+        "--all-targets",
+        "--",
+        "-D",
+        "warnings"
+      ],
+      "exit_code": 0,
+      "log": "docs\\benchmarks\\ram-text-lz4-10k-20261020-check2.log"
+    },
+    {
+      "command": [
+        "cargo",
+        "fmt",
+        "--check"
+      ],
+      "exit_code": 0,
+      "log": "docs\\benchmarks\\ram-text-lz4-10k-20261020-check3.log"
+    },
+    {
+      "command": [
+        "cargo",
+        "clippy",
+        "--all-targets",
+        "--",
+        "-D",
+        "warnings"
+      ],
+      "exit_code": 0,
+      "log": "docs\\benchmarks\\ram-text-lz4-10k-20261020-check4.log"
+    }
+  ],
+  "related_tests": 5,
+  "all10000_texts_byte_equal_in_every_run": true,
+  "no_full_document_payload_or_DB_API_speed_claim": true,
+  "retained_capacities_are_group_sums_not_process_memory": true,
+  "all12_candidate_comparisons_slower_p95_and_sum_in_all4_runs": true,
+  "all21_db_cache_fixture_hashes_unchanged": true,
+  "entire_corpus_sha_unchanged": true,
+  "engine_sources_manifest_lock_tests_comparator_and_shared_bench_support_git_unchanged": true,
+  "default_release_binary_hashes_still_match_previous_engine_proof": true,
+  "no_new_engine_features": true,
+  "new_dependency_confined_to_standalone_tool": true,
+  "probe_sources_current_match_measured_source_hashes": true,
+  "data_directories": [
+    "benchmark-work",
+    "rkyv-corpus-20261009"
+  ],
+  "new_corpus_DB_files_or_DB_resets": false,
+  "open_work": "Owned Vec/caller/query RAM,last-page/general p95,write/final-merge,opening,disk compression,concurrent/cold remain open"
+}
