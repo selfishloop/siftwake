@@ -857,9 +857,14 @@ impl Builder {
         if records.len() != self.record_count() {
             return Err(Error::Corrupt("delta checkpoint record count".into()));
         }
+        #[cfg(feature = "bounded-engine")]
+        let remap = index.checkpoint_ids(records)?;
         let mut postings = posting_output(&self.temporary)?;
         let mut previous: Option<Term> = None;
         index.visit_terms(|term, posting| {
+            #[cfg(feature = "bounded-engine")]
+            let ids = remap.disk_ids(posting)?;
+            #[cfg(not(feature = "bounded-engine"))]
             let ids = index.disk_ids(posting, records)?;
             let count = u32::try_from(ids.len())
                 .map_err(|_| Error::Invalid("delta posting too large".into()))?;
@@ -901,6 +906,8 @@ impl Builder {
     }
 
     fn finish_directory(mut self, postings: PostingOutput) -> Result<DiskIndex> {
+        #[cfg(feature = "diagnostic-timing")]
+        let _directory = crate::timing::span("builder.finish_directory");
         #[cfg(feature = "bounded-engine")]
         let mut postings = postings;
         let writer = self.writer.as_mut().unwrap();

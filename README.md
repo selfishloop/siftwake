@@ -1,5 +1,15 @@
 # FDB
 
+[Yazma/bakımda checkpoint kimlik eşlemesi](docs/WRITE-STAGES-10K-20261018.md):
+aynı10k normal release'te akışlı toplam27,277→22,334s (-%18,12;4/4 çift),
+toplu API23,274→17,246s (-%25,90;2/2). CPU bütün çiftlerde düşük. Aynı19,22M
+posting girdisi için10k Key araması; kaynak/indeks byte'ları aynı, yeni format
+ve feature yok. Owned private+310KiB/WS+454KiB ve yoğun son-sayfa p95+%7,45
+açık. Geniş38'de11 düşük/27 yüksek; yoğun9'da8/1. SQLite FTS5+LIKE kıyası
+38/38 düşük p95 verse de genel arama/RAM kapısı geçmedi. Akışlı son bakım,
+metin/posting CPU'su, normal Vec RAM'i, açılış/sıkıştırma ve eşzamanlı/soğuk
+yük işleri [açık listede](docs/OPEN-WORK.md).
+
 [Sonuç tamponlu V3 motoru etkin](docs/RESULT-BUFFERS-ACTIVE-20261018.md):
 kullanıcı kararıyla ölçülen V3 normal `bounded-engine` profiline alındı.
 `search_into` aynı çağıran sonuç sayfasındaki uygun metin belleğini tekrar

@@ -38,6 +38,8 @@ impl Stage {
         })
     }
     fn push(&mut self, change: Change) -> Result<()> {
+        #[cfg(feature = "diagnostic-timing")]
+        let _span = crate::timing::span("stream.stage_entry");
         let key = match &change {
             Change::Put { stored } => &stored.document.key,
             Change::Delete { key } => key,
@@ -57,7 +59,11 @@ impl Stage {
         if self.key_bytes + cost > KEY_ALLOWANCE {
             return Err(Error::Invalid("streamed transaction key allowance".into()));
         }
-        let bytes = crate::binary_batch::entry(&change)?;
+        let bytes = {
+            #[cfg(feature = "diagnostic-timing")]
+            let _encode = crate::timing::span("stream.encode_entry");
+            crate::binary_batch::entry(&change)?
+        };
         if let Change::Put { stored } = &change {
             self.index.add_builder(stored)?;
         }
@@ -75,6 +81,8 @@ impl Stage {
         Ok(())
     }
     fn finish(&mut self, sequence: u64) -> Result<()> {
+        #[cfg(feature = "diagnostic-timing")]
+        let _span = crate::timing::span("stream.finish_frame_crc");
         let file = self.file.as_mut().unwrap();
         file.seek(SeekFrom::Start(HEADER as u64))?;
         file.write_all(&[0])?;
@@ -102,6 +110,8 @@ impl Stage {
         Ok(())
     }
     fn append(&mut self, wal: &mut File) -> Result<()> {
+        #[cfg(feature = "diagnostic-timing")]
+        let _span = crate::timing::span("stream.wal_copy_and_sync");
         let file = self.file.as_mut().unwrap();
         file.seek(SeekFrom::Start(0))?;
         wal.seek(SeekFrom::End(0))?;
@@ -113,7 +123,11 @@ impl Stage {
             wal.write_all(&bytes[..n])?;
             remaining -= n;
         }
-        wal.sync_all()?;
+        {
+            #[cfg(feature = "diagnostic-timing")]
+            let _sync = crate::timing::span("stream.wal_sync");
+            wal.sync_all()?;
+        }
         Ok(())
     }
     fn changes(&self) -> Result<impl Iterator<Item = Result<Change>> + '_> {
@@ -122,6 +136,8 @@ impl Stage {
             .rows
             .iter()
             .map(move |(key, &(offset, len, checksum))| {
+                #[cfg(feature = "diagnostic-timing")]
+                let _span = crate::timing::span("stream.read_decode_entry");
                 let mut bytes = vec![0; len];
                 crate::segment::read_at(&file, offset, &mut bytes)?;
                 if format::crc(&bytes) != checksum
@@ -162,6 +178,8 @@ impl Database {
         &mut self,
         mutations: impl IntoIterator<Item = Result<Mutation>>,
     ) -> Result<u64> {
+        #[cfg(feature = "diagnostic-timing")]
+        let _total = crate::timing::span("stream.commit_total");
         self.healthy()?;
         self.ensure_sources()?;
         let sequence = self

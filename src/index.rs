@@ -3,6 +3,9 @@ use std::borrow::Cow;
 use std::collections::{BTreeMap, BTreeSet};
 use std::sync::Arc;
 
+#[cfg(feature = "bounded-engine")]
+mod checkpoint_ids;
+
 pub(crate) fn fold(text: &str) -> String {
     text.chars()
         .flat_map(|c| {
@@ -425,7 +428,10 @@ impl Index {
         Ok(())
     }
 
-    #[cfg(feature = "experimental-merge-postings")]
+    #[cfg(all(
+        feature = "experimental-merge-postings",
+        any(not(feature = "bounded-engine"), test)
+    ))]
     pub(crate) fn disk_ids(
         &self,
         posting: &Posting,
@@ -520,6 +526,8 @@ impl Index {
         retain_text: bool,
     ) -> crate::Result<()> {
         let doc = &stored.document;
+        #[cfg(feature = "diagnostic-timing")]
+        let _total = crate::timing::span("index.change_total");
         #[cfg(not(feature = "experimental-compact-delta-postings"))]
         let shared = provided.unwrap_or_else(|| Arc::new(doc.key.clone()));
         #[cfg(not(feature = "experimental-compact-delta-postings"))]
@@ -591,6 +599,8 @@ impl Index {
         let title = fold(&doc.title);
         let title_grams = grams(&title);
         let body = self.body_cache.get(&doc.text);
+        #[cfg(feature = "diagnostic-timing")]
+        let _postings = crate::timing::span("index.insert_grams_and_text");
         #[cfg(feature = "bounded-engine")]
         if !retain_text && !self.grams.contains_key(&key.scope) {
             self.builder_gram_bytes += 96 + key.scope.len();

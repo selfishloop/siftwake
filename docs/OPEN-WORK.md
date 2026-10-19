@@ -1,5 +1,23 @@
 # FDB açık işler
 
+2026-10-18–19 yazma/bakımın dar kimlik eşleme adımı uygulandı/ölçüldü:
+19.221.340 posting girdisi10.000 Key aramasıyla eşleniyor. Normal akışlı
+yazma+bakım27,277→22,334s (-%18,12;4/4 çift),owned23,274→17,246s
+(-%25,90;2/2); CPU bütün çiftlerde düşük. Kaynak/indeks byte'ları API başına
+aynı. Streamed son bakım +%0,96/2/4 hızlı: ayrı merge kazancı kanıtlanmadı.
+Owned private+310KiB/WS+454KiB,ikisi2/2 yüksek ve açıklaması açık. Ayrı
+query/get private -52KiB/WS -72KiB,3/4 düşük; owned RAM'i kapatmaz.
+Geniş38'de11 düşük/27 yüksek p95; yoğun9/200'de8/1. Son sayfa
+1,8581→1,9965ms (+%7,45) açık; genel arama/RAM kabulü geçmedi.
+SQLite yazma kıyası ve iki çift38-case FTS5+LIKE okuma kıyası tamamlandı;
+38/38 p95 FDB düşük,bu kendi okuyucumuza karşı artışları kapatmaz.
+193 default/135 all-feature hedef/112 referans test;fmt/üç profil Clippy,
+kesilme/bozulma/kill,full10k/38-case oracle ve CLI geçti.21 okuma dosyası,
+corpus/0.1 fixture SHA-eşit;format/feature/protokol/entegrasyon değişmedi,
+yeni corpus/DB kopyası yok. [Rapor ve ham kanıtlar](WRITE-STAGES-10K-20261018.md).
+Metin parçalama/RAM posting CPU'su,son merge,normal Vec/caller RAM'i,kalan
+arama p95'i,açılış/disk sıkıştırma ve eşzamanlı/gerçek-soğuk yük açık.
+
 2026-10-18 kullanıcı "bu motora geç" kararıyla ölçülen V3'ü normal bounded-engine
 profiline aldı. `search_into` etkin; önceki sayfayı tekrar veren çağıran uygun
 metin tamponlarını kullanır. `search` uyumlu kalır. Geçiş doğrulandı: normal
@@ -12,7 +30,7 @@ bütün corpus SHA-eşit; yeni corpus/DB/reset/kopya/format/feature yok.
 okuyucu p95 artışları, OS private+28KiB/WS+48KiB ve geniş sorgu farkları açık.
 [Güncel geçiş kaydı](RESULT-BUFFERS-ACTIVE-20261018.md).
 
-Yazma/bakım aşama ayrımı sıradaki bağımsız öncelik. Normal Vec ingest/query/
+Yazma/bakımın ilk yeni adımı yukarıda ölçüldü. Normal Vec ingest/query/
 caller RAM'i, Harpoon/genel arama p95'i, açılış/disk sıkıştırma ve eşzamanlı/
 gerçek-soğuk yük kapanmadı.
 

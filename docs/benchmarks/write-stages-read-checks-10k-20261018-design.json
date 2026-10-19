@@ -1,0 +1,23 @@
+{
+  "programs": {
+    "fdb": {
+      "path": "output\\write-stages-reads-candidate-20261018.exe",
+      "sha256": "64171FF5683BDA56146DB5F53F207F45CA3F9343467EA7FD519A6DDA9A0F73EA"
+    },
+    "sqlite": {
+      "path": "tools\\native_sqlite\\target\\release\\content_reads.exe",
+      "sha256": "F9D2CBD74D050B3D1CE08F37DFF672C961A826D412BA576DB3351EC4C778ADB5"
+    }
+  },
+  "sqlite_read_pairs": 2,
+  "orders": [
+    "fdb/sqlite",
+    "sqlite/fdb"
+  ],
+  "samples": "40/primary;10/page across two processes;all full-payload oracle checks outside timing",
+  "cache": "warm OS cache;no eviction;no processor affinity for these two comparison pairs;strict FDB source/index open outside timing;ordinary SQLite open",
+  "memory": "separate oracle-free processes;4 balanced pairs;24 searches771gets;OS lifetime private commit/working set",
+  "search_into": "one functional block only;no speed claim",
+  "files_unchanged": true,
+  "files": 21
+}

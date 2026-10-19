@@ -38,6 +38,13 @@ pub fn take() -> BTreeMap<&'static str, Counter> {
     std::mem::take(&mut *counters().lock().expect("timing mutex poisoned"))
 }
 
+#[cfg(feature = "bounded-engine")]
+pub(crate) fn count(name: &'static str, calls: usize) {
+    let mut values = counters().lock().expect("timing mutex poisoned");
+    let value = values.entry(name).or_default();
+    value.calls = value.calls.saturating_add(calls as u64);
+}
+
 /// One aggregate publication per long-text extraction, never per scalar.
 #[cfg(feature = "bounded-engine")]
 #[derive(Default)]

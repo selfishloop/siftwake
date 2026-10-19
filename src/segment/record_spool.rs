@@ -56,6 +56,8 @@ impl Records {
         self.drain(|_, bytes| super::compact::write_record(output, &serde_json::from_slice(bytes)?))
     }
     fn drain(&mut self, mut accept: impl FnMut(usize, &[u8]) -> Result<()>) -> Result<()> {
+        #[cfg(feature = "diagnostic-timing")]
+        let _span = crate::timing::span("spool.records_drain");
         let mut writer = self.writer.take().unwrap();
         writer.flush()?;
         let mut file = writer.into_inner().map_err(|e| Error::Io(e.into_error()))?;

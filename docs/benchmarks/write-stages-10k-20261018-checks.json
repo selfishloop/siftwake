@@ -1,0 +1,173 @@
+[
+  {
+    "command": [
+      "cargo",
+      "fmt"
+    ],
+    "exit_code": 0,
+    "elapsed_s": 1.6400000000139698,
+    "log": "docs\\benchmarks\\write-stages-10k-20261018-fmt.log"
+  },
+  {
+    "command": [
+      "cargo",
+      "test",
+      "--lib",
+      "checkpoint_ids"
+    ],
+    "exit_code": 0,
+    "elapsed_s": 10.202999999979511,
+    "log": "docs\\benchmarks\\write-stages-10k-20261018-unit.log"
+  },
+  {
+    "command": [
+      "cargo",
+      "build",
+      "--release",
+      "--example",
+      "measure_content_memory",
+      "--example",
+      "measure_content_reads",
+      "--example",
+      "measure_interleaved_reads",
+      "--example",
+      "measure_result_buffers"
+    ],
+    "exit_code": 0,
+    "elapsed_s": 59.125,
+    "log": "docs\\benchmarks\\write-stages-10k-20261018-normal-build.log"
+  },
+  {
+    "command": [
+      "cargo",
+      "build",
+      "--release",
+      "--example",
+      "measure_content_memory",
+      "--features",
+      "diagnostic-timing"
+    ],
+    "exit_code": 0,
+    "elapsed_s": 52.25,
+    "log": "docs\\benchmarks\\write-stages-10k-20261018-profile-build.log"
+  },
+  {
+    "command": [
+      "cargo",
+      "test",
+      "--all-targets"
+    ],
+    "exit_code": 0,
+    "elapsed_s": 138.64000000001397,
+    "log": "docs\\benchmarks\\write-stages-10k-20261018-tests.log"
+  },
+  {
+    "command": [
+      "cargo",
+      "test",
+      "--all-features",
+      "--test",
+      "segments",
+      "--test",
+      "streamed_transactions",
+      "--lib"
+    ],
+    "exit_code": 0,
+    "elapsed_s": 65.06300000002375,
+    "log": "docs\\benchmarks\\write-stages-10k-20261018-tests-all.log"
+  },
+  {
+    "command": [
+      "cargo",
+      "test",
+      "--no-default-features",
+      "--all-targets"
+    ],
+    "exit_code": 0,
+    "elapsed_s": 61.38999999995576,
+    "log": "docs\\benchmarks\\write-stages-10k-20261018-reference.log"
+  },
+  {
+    "command": [
+      "cargo",
+      "fmt",
+      "--check"
+    ],
+    "exit_code": 0,
+    "elapsed_s": 0.875,
+    "log": "docs\\benchmarks\\write-stages-10k-20261018-fmt-check.log"
+  },
+  {
+    "command": [
+      "cargo",
+      "clippy",
+      "--all-targets",
+      "--",
+      "-D",
+      "warnings"
+    ],
+    "exit_code": 0,
+    "elapsed_s": 4.110000000044238,
+    "log": "docs\\benchmarks\\write-stages-10k-20261018-clippy.log"
+  },
+  {
+    "command": [
+      "cargo",
+      "clippy",
+      "--all-features",
+      "--all-targets",
+      "--",
+      "-D",
+      "warnings"
+    ],
+    "exit_code": 0,
+    "elapsed_s": 4.296999999962281,
+    "log": "docs\\benchmarks\\write-stages-10k-20261018-clippy-all.log"
+  },
+  {
+    "command": [
+      "cargo",
+      "clippy",
+      "--no-default-features",
+      "--all-targets",
+      "--",
+      "-D",
+      "warnings"
+    ],
+    "exit_code": 0,
+    "elapsed_s": 3.047000000020489,
+    "log": "docs\\benchmarks\\write-stages-10k-20261018-clippy-reference.log"
+  },
+  {
+    "command": [
+      "cargo",
+      "build",
+      "--release",
+      "--bin",
+      "fdb"
+    ],
+    "exit_code": 0,
+    "elapsed_s": 27.56200000003446,
+    "log": "docs\\benchmarks\\write-stages-10k-20261018-cli-build.log"
+  },
+  {
+    "command": [
+      "cargo",
+      "build",
+      "--release",
+      "--bin",
+      "fdb",
+      "--example",
+      "measure_content_memory",
+      "--example",
+      "measure_content_reads",
+      "--example",
+      "measure_interleaved_reads",
+      "--example",
+      "measure_result_buffers"
+    ],
+    "exit_code": 0,
+    "elapsed_s": 17.96799999999348,
+    "log": "docs\\benchmarks\\write-stages-10k-20261018-final-default-build.log"
+  }
+]

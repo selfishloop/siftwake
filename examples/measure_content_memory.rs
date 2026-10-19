@@ -72,7 +72,11 @@ fn main() -> input::Result<()> {
         let caller_origin = fdb::memory::Scope::new(1);
         let mut expected = Vec::new();
         let changes = (first..first + 500).map(|id| -> input::Result<Mutation> {
-            let stored = source.read()?;
+            let stored = {
+                #[cfg(feature = "diagnostic-timing")]
+                let _input = fdb::timing::span("input.corpus_crc_json");
+                source.read()?
+            };
             if id == first || id == first + 499 {
                 expected.push(stored.clone());
             }

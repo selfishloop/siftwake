@@ -1,0 +1,136 @@
+{
+  "parent_commit": "a77906a8dd91a2c116ddfad78a63296dcd7f2216",
+  "change": "bounded-engine checkpoint IDs precomputed once per flush;source/WAL/manifest/cache/payload format unchanged;no new feature/dependency/API/protocol/integration",
+  "sources": [
+    {
+      "path": "src/index.rs",
+      "sha256": "1EB09C9C34C31A60C7444BD33C4E74890C4E998B9C6E1777DE300B840310EE35"
+    },
+    {
+      "path": "src/index/checkpoint_ids.rs",
+      "sha256": "AB8B3D3A2664FE64A7F34FD1FE3FA479C5686059425D71F256FA04F11EEFDFD9"
+    },
+    {
+      "path": "src/segment.rs",
+      "sha256": "D0D562C7D9924E030D6D7A22D7DC7E54A2AC6F05CDD1173C7F2F3C00659E09F7"
+    },
+    {
+      "path": "src/engine/streamed.rs",
+      "sha256": "8A35ACACF75C9528A357AC8E7902A48CF45A1B3F897E0B4B41C5FDB8963A792B"
+    },
+    {
+      "path": "src/format.rs",
+      "sha256": "DFC15D3148777B4132D9632972E121F7D8A3FDC6A33A01645D43F4D3D7EE809C"
+    },
+    {
+      "path": "src/timing.rs",
+      "sha256": "418E47FA28A63337999E2B8BB1A40D26A6BFE65833199972E08A01254C62280B"
+    },
+    {
+      "path": "src/segment/posting_spool.rs",
+      "sha256": "9A362E4B1377593D94A835069207E2B6C562B87EF90F22700FA89FB59A339618"
+    },
+    {
+      "path": "src/segment/record_spool.rs",
+      "sha256": "F6A1C49E7963676F8764202B8AF059573164AB6D85AE3FF533478A52E96ACC39"
+    },
+    {
+      "path": "examples/measure_content_memory.rs",
+      "sha256": "EC66E27E29544B022D5A1433D0BF3E98F94BB44CAB063FC0666047919C5E83EE"
+    },
+    {
+      "path": "tools/measure-write-stages.py",
+      "sha256": "05BC8E7CAE2928DBF893943D34E02669967C07D659646857091AA56FA18898E9"
+    },
+    {
+      "path": "tools/measure-query-memory.ps1",
+      "sha256": "367B03A554FD70FE1CCBFD8F5AAB41BBFFA2BD298F58042AFE839971B77D374D"
+    }
+  ],
+  "binaries": [
+    {
+      "path": "output\\write-stages-buffers-candidate-20261018.exe",
+      "bytes": 1962496,
+      "sha256": "CA9B1A86BD952E4600413413400621BFAC030FCBE01EF2F3CA18986762F1785F"
+    },
+    {
+      "path": "output\\write-stages-candidate-20261018.exe",
+      "bytes": 1953280,
+      "sha256": "47487337A018439703C34EF8B3252321731CBF50E52078794B2B9E67F56C3ED3"
+    },
+    {
+      "path": "output\\write-stages-control-20261018.exe",
+      "bytes": 1951744,
+      "sha256": "AD9021C3382120C755744DD5A9E703BC4E16D9604196A04ED22F0A244E7D4E66"
+    },
+    {
+      "path": "output\\write-stages-fdb-20261018.exe",
+      "bytes": 1946112,
+      "sha256": "2468574B8B4270003875C5974078D4DFDC96CDE2AFE7A4B10379CBE602B9D2C4"
+    },
+    {
+      "path": "output\\write-stages-profile-candidate-20261018.exe",
+      "bytes": 2002432,
+      "sha256": "900DD07CA2E91413AE594ACCA81231CDB0220FCC81E6A09D76BA40CA44D85A60"
+    },
+    {
+      "path": "output\\write-stages-profile-control-20261018.exe",
+      "bytes": 1999360,
+      "sha256": "8D9A42D7528E4618B25FB21304795BE8D9B9DAAA3D9DD4B7879A99ED75B792CB"
+    },
+    {
+      "path": "output\\write-stages-reader-candidate-20261018.exe",
+      "bytes": 1953280,
+      "sha256": "E727C274F953DFF1F06245DF5899E14814AD2ED8EE9CBDD78929B271DBEC493E"
+    },
+    {
+      "path": "output\\write-stages-reads-candidate-20261018.exe",
+      "bytes": 2023424,
+      "sha256": "64171FF5683BDA56146DB5F53F207F45CA3F9343467EA7FD519A6DDA9A0F73EA"
+    }
+  ],
+  "checks_manifest": "docs\\benchmarks\\write-stages-10k-20261018-checks.json",
+  "normal_write_processes": 18,
+  "normal_diagnostics_disabled_verified": true,
+  "corpus_and_v01_fixture_sha_equal": true,
+  "read_only_snapshots": [
+    {
+      "prefix": "write-stages-reads-10k-20261018",
+      "files": 21,
+      "all_hashes_equal": true
+    },
+    {
+      "prefix": "write-stages-reads-dense-10k-20261018",
+      "files": 21,
+      "all_hashes_equal": true
+    },
+    {
+      "prefix": "write-stages-read-checks-10k-20261018",
+      "files": 21,
+      "all_hashes_equal": true
+    }
+  ],
+  "cli": "write-stages-10k-20261018-cli.json",
+  "sqlite_integrity": {
+    "integrity_check": "ok",
+    "documents": 10000,
+    "read_only_immutable": true,
+    "validator_version": "3.53.1",
+    "native_comparator_version": "3.53.2"
+  },
+  "no_new_corpus_download_generation": true,
+  "no_database_copies": true,
+  "only_fixed_slots_reset_for_write_benchmarks": true,
+  "fdb_final_disk_bytes": 349805698,
+  "sqlite_final_disk_bytes": 583860224,
+  "unchanged_git_paths": [
+    "Cargo.toml",
+    "Cargo.lock",
+    "tests/fixtures/v1",
+    "src/main.rs",
+    "tools/native_sqlite",
+    "tools/bench_support/memory_corpus.rs",
+    "tools/bench_support/read_matrix.rs"
+  ],
+  "acceptance": "write/CPU step gained in4/4 streamed and2/2 owned pairs;general search/OS RAM gate remains open;owned private+310KiB/WS+454KiB,last-page dense p95+7.45%;streamed final maintenance not proven faster"
+}

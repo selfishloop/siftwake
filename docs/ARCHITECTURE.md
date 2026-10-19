@@ -1,5 +1,16 @@
 # FDB mimarisi — 0.3.1
 
+2026-10-18–19 yazma adımı: normal bounded profilinde `finish_delta`, RAM slotu
+ile checkpoint kimliği arasındaki eşlemeyi bir kez kurar.4 byte/slot geçici
+Vec her posting girdisindeki Key/BTreeMap aramasını kaldırır. Boş slot,
+eksik Key ve hedef sınırı kontrol edilir; remap sonrası sıralama/yinelenen ID
+kontrolü korunur. Slota yeniden atanmış kimlik kalıcı sıra sanılmaz. Bounded
+olmayan merge bileşeni eski lookup yolunu korur. Kaynak/WAL/manifest/payload/
+cache/protokol ve feature'lar aynı; tablo diske veya sorgu cache'ine yazılmaz.
+Normal akışlı toplam -%18,12/4 çift,owned -%25,90/2 çift ve CPU kazancı var.
+Owned OS private+310KiB/WS+454KiB,streamed son bakım ve genel query p95/RAM
+kapıları açık. [Teşhis, ölçüm ve doğrulama](WRITE-STAGES-10K-20261018.md).
+
 2026-10-18 sonraki kullanıcı kararıyla sonuç tamponlu V3 normal bounded-engine
 profiline alındı. `Database::search_into` çağıranın önceki SearchPage'ini tüketir;
 uygun gruplu sorgularda yalnız exact kapasiteli String'leri tekrar kullanır.

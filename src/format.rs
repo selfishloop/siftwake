@@ -261,6 +261,8 @@ pub(crate) fn append_checkpoint_changes(
     sequence: u64,
     changes: impl Iterator<Item = Result<Change>>,
 ) -> Result<()> {
+    #[cfg(feature = "diagnostic-timing")]
+    let _span = crate::timing::span("source.encode_write_frames");
     use std::io::BufWriter;
     let mut changes = changes.peekable();
     loop {

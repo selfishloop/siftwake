@@ -1,0 +1,33 @@
+﻿{
+    "variant":  "sqlite",
+    "pair":  3,
+    "exit_code":  0,
+    "cpu_ms":  23171.875,
+    "os_lifetime_peaks":  {
+                              "peak_private_commit_bytes":  13189120,
+                              "peak_working_set_bytes":  17285120,
+                              "scope":  "entire process lifetime, read after exit with retained handle; not phase-specific",
+                              "private_counter":  "PeakPagefileUsage: private committed bytes, not physical RAM",
+                              "working_set_counter":  "PeakWorkingSetSize: resident pages including shared image pages",
+                              "sample_gaps":  false
+                          },
+    "opened":  {
+                   "cache_kib":  2048,
+                   "engine":  "sqlite",
+                   "full_integrity_on_open":  false,
+                   "mmap_bytes":  0,
+                   "open_ms":  1.5891,
+                   "phase":  "opened",
+                   "prepared_statement_cache_capacity":  64,
+                   "sqlite_version":  "3.53.2"
+               },
+    "verified":  {
+                     "full_payload_equality_in_separate_matrix":  true,
+                     "gets":  771,
+                     "oracle_loaded":  false,
+                     "performance_not_measured":  true,
+                     "phase":  "query_memory_verified",
+                     "rounds":  3,
+                     "searches":  24
+                 }
+}

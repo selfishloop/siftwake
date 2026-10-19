@@ -1,0 +1,97 @@
+{
+  "results": {
+    "control": {
+      "peak_private_commit_bytes": {
+        "samples": [
+          9179136,
+          9191424,
+          9232384,
+          9195520
+        ],
+        "median": 9193472.0
+      },
+      "peak_working_set_bytes": {
+        "samples": [
+          13320192,
+          13348864,
+          13344768,
+          13340672
+        ],
+        "median": 13342720.0
+      },
+      "open_ms": {
+        "samples": [
+          168.4844,
+          187.7518,
+          165.086,
+          166.69
+        ],
+        "median": 167.5872
+      }
+    },
+    "candidate": {
+      "peak_private_commit_bytes": {
+        "samples": [
+          9232384,
+          9158656,
+          9121792,
+          9117696
+        ],
+        "median": 9140224.0,
+        "difference_bytes": -53248.0,
+        "lower_pairs": 3
+      },
+      "peak_working_set_bytes": {
+        "samples": [
+          13897728,
+          13283328,
+          13254656,
+          13254656
+        ],
+        "median": 13268992.0,
+        "difference_bytes": -73728.0,
+        "lower_pairs": 3
+      },
+      "open_ms": {
+        "samples": [
+          171.8777,
+          171.28199999999998,
+          167.2637,
+          165.22899999999998
+        ],
+        "median": 169.27285
+      }
+    },
+    "sqlite": {
+      "peak_private_commit_bytes": {
+        "samples": [
+          13189120,
+          13197312,
+          13627392,
+          13189120
+        ],
+        "median": 13193216.0
+      },
+      "peak_working_set_bytes": {
+        "samples": [
+          18079744,
+          17272832,
+          17686528,
+          17285120
+        ],
+        "median": 17485824.0
+      },
+      "open_ms": {
+        "samples": [
+          11.286100000000001,
+          1.4166,
+          1.6145,
+          1.5891
+        ],
+        "median": 1.6018
+      }
+    }
+  },
+  "scope": "separate oracle-free processes;strict FDB source/index open+24searches771gets;normal ordinary search;4 balanced pairs;OS lifetime counters;not system RAM",
+  "opens": "measured as part of the memory scope;not an opening algorithm optimization;SQLite ordinary open does not perform full integrity checks"
+}

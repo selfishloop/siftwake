@@ -1,0 +1,993 @@
+{
+  "apis": {
+    "streamed": {
+      "control": {
+        "counters": {
+          "batch.decode_binary": {
+            "calls": 1,
+            "elapsed_ns": 14500
+          },
+          "body.fold": {
+            "calls": 10000,
+            "elapsed_ns": 1087030400
+          },
+          "body.grams": {
+            "calls": 10000,
+            "elapsed_ns": 6320431200
+          },
+          "builder.finish_delta": {
+            "calls": 20,
+            "elapsed_ns": 7261506400
+          },
+          "builder.finish_directory": {
+            "calls": 25,
+            "elapsed_ns": 1799354800
+          },
+          "builder.finish_reused": {
+            "calls": 5,
+            "elapsed_ns": 2097190700
+          },
+          "checksum.index_compute": {
+            "calls": 360,
+            "elapsed_ns": 37402500
+          },
+          "checksum.index_read": {
+            "calls": 360,
+            "elapsed_ns": 82309200
+          },
+          "disk.read_at": {
+            "calls": 311927,
+            "elapsed_ns": 1127043600
+          },
+          "flush.total": {
+            "calls": 41,
+            "elapsed_ns": 35913000
+          },
+          "frame.encode_binary_crc": {
+            "calls": 21,
+            "elapsed_ns": 74200
+          },
+          "index.change_total": {
+            "calls": 10000,
+            "elapsed_ns": 13843203700
+          },
+          "index.distinct_grams": {
+            "calls": 19070767,
+            "elapsed_ns": 0
+          },
+          "index.gram_cache_hits": {
+            "calls": 74463502,
+            "elapsed_ns": 0
+          },
+          "index.gram_tree_probes": {
+            "calls": 46964562,
+            "elapsed_ns": 0
+          },
+          "index.gram_windows": {
+            "calls": 121428064,
+            "elapsed_ns": 0
+          },
+          "index.insert_grams_and_text": {
+            "calls": 10000,
+            "elapsed_ns": 5667034200
+          },
+          "input.corpus_crc_json": {
+            "calls": 10000,
+            "elapsed_ns": 1447830400
+          },
+          "merge.worker": {
+            "calls": 5,
+            "elapsed_ns": 4203640000
+          },
+          "open.index": {
+            "calls": 25,
+            "elapsed_ns": 276814100
+          },
+          "open.index_binary_directory_parse": {
+            "calls": 75,
+            "elapsed_ns": 582933000
+          },
+          "open.index_crc": {
+            "calls": 50,
+            "elapsed_ns": 126654200
+          },
+          "open.index_metadata_prepare": {
+            "calls": 50,
+            "elapsed_ns": 906533000
+          },
+          "open.index_term_page_checksums": {
+            "calls": 50,
+            "elapsed_ns": 22922100
+          },
+          "open.source_crc": {
+            "calls": 25,
+            "elapsed_ns": 210430900
+          },
+          "open.source_native_check": {
+            "calls": 25,
+            "elapsed_ns": 495442400
+          },
+          "open.source_replay": {
+            "calls": 25,
+            "elapsed_ns": 580948900
+          },
+          "open.total": {
+            "calls": 1,
+            "elapsed_ns": 11808300
+          },
+          "payload.copy_key": {
+            "calls": 40040,
+            "elapsed_ns": 12854300
+          },
+          "payload.copy_text": {
+            "calls": 40040,
+            "elapsed_ns": 99655200
+          },
+          "payload.copy_title": {
+            "calls": 40040,
+            "elapsed_ns": 3531600
+          },
+          "payload.materialize": {
+            "calls": 40040,
+            "elapsed_ns": 232802900
+          },
+          "payload.materialize_fields": {
+            "calls": 40040,
+            "elapsed_ns": 82860800
+          },
+          "payload.materialize_links": {
+            "calls": 40040,
+            "elapsed_ns": 8084200
+          },
+          "payload.read_document": {
+            "calls": 10040,
+            "elapsed_ns": 317200000
+          },
+          "payload.schema_utf8": {
+            "calls": 80040,
+            "elapsed_ns": 232559300
+          },
+          "query.term_page_decode": {
+            "calls": 2134,
+            "elapsed_ns": 62987100
+          },
+          "run.write_source_rebuild": {
+            "calls": 25,
+            "elapsed_ns": 13431568700
+          },
+          "segment.open": {
+            "calls": 50,
+            "elapsed_ns": 1295480600
+          },
+          "source.encode_write_frames": {
+            "calls": 25,
+            "elapsed_ns": 1943767000
+          },
+          "source.frame_crc": {
+            "calls": 1,
+            "elapsed_ns": 700
+          },
+          "source.frame_read_allocate": {
+            "calls": 1,
+            "elapsed_ns": 22800
+          },
+          "spool.postings_drain": {
+            "calls": 25,
+            "elapsed_ns": 304909400
+          },
+          "spool.records_drain": {
+            "calls": 25,
+            "elapsed_ns": 24162800
+          },
+          "stream.commit_total": {
+            "calls": 20,
+            "elapsed_ns": 29966666400
+          },
+          "stream.encode_entry": {
+            "calls": 10000,
+            "elapsed_ns": 50326500
+          },
+          "stream.finish_frame_crc": {
+            "calls": 20,
+            "elapsed_ns": 93086600
+          },
+          "stream.read_decode_entry": {
+            "calls": 10000,
+            "elapsed_ns": 276322100
+          },
+          "stream.stage_entry": {
+            "calls": 10000,
+            "elapsed_ns": 14693555800
+          },
+          "stream.wal_copy_and_sync": {
+            "calls": 20,
+            "elapsed_ns": 433488900
+          },
+          "stream.wal_sync": {
+            "calls": 20,
+            "elapsed_ns": 193920500
+          },
+          "wal.sync": {
+            "calls": 21,
+            "elapsed_ns": 35511100
+          },
+          "wal.write": {
+            "calls": 21,
+            "elapsed_ns": 1302500
+          }
+        },
+        "result": {
+          "all_input_crc_verified": true,
+          "database": "C:\\Users\\Serkan\\Documents\\ChatGPT\\fdb\\data\\benchmark-work\\fdb",
+          "from": 0,
+          "ingest_ms": 29974.7529,
+          "maintenance_ms": 879.2512,
+          "phase": "result",
+          "sampled_full_document_checks": 40,
+          "stats": {
+            "compaction_running": false,
+            "delta_keys": 0,
+            "disk_index_bytes": 81904473,
+            "disk_posting_entries": 19221340,
+            "documents": 10000,
+            "generation": 51,
+            "log_bytes": 45,
+            "resident_documents": 0,
+            "resident_text_bytes": 0,
+            "segments": 5,
+            "sequence": 20,
+            "source_bytes": 267900709
+          },
+          "text_bytes": 264842858,
+          "to": 10000
+        },
+        "profile_not_normal_performance": true
+      },
+      "candidate": {
+        "counters": {
+          "batch.decode_binary": {
+            "calls": 1,
+            "elapsed_ns": 200
+          },
+          "body.fold": {
+            "calls": 10000,
+            "elapsed_ns": 1020698800
+          },
+          "body.grams": {
+            "calls": 10000,
+            "elapsed_ns": 6020004700
+          },
+          "builder.finish_delta": {
+            "calls": 20,
+            "elapsed_ns": 1694934700
+          },
+          "builder.finish_directory": {
+            "calls": 25,
+            "elapsed_ns": 1511810600
+          },
+          "builder.finish_reused": {
+            "calls": 5,
+            "elapsed_ns": 1950751000
+          },
+          "checksum.index_compute": {
+            "calls": 360,
+            "elapsed_ns": 36078500
+          },
+          "checksum.index_read": {
+            "calls": 360,
+            "elapsed_ns": 73868400
+          },
+          "delta.build_id_map": {
+            "calls": 20,
+            "elapsed_ns": 5553100
+          },
+          "delta.checkpoint_key_lookups": {
+            "calls": 10000,
+            "elapsed_ns": 0
+          },
+          "delta.remap_posting_ids": {
+            "calls": 271815,
+            "elapsed_ns": 142554500
+          },
+          "delta.remapped_entries": {
+            "calls": 19221340,
+            "elapsed_ns": 0
+          },
+          "disk.read_at": {
+            "calls": 311927,
+            "elapsed_ns": 1070568700
+          },
+          "flush.total": {
+            "calls": 41,
+            "elapsed_ns": 35616200
+          },
+          "frame.encode_binary_crc": {
+            "calls": 21,
+            "elapsed_ns": 67200
+          },
+          "index.change_total": {
+            "calls": 10000,
+            "elapsed_ns": 12597246500
+          },
+          "index.distinct_grams": {
+            "calls": 19070767,
+            "elapsed_ns": 0
+          },
+          "index.gram_cache_hits": {
+            "calls": 74463502,
+            "elapsed_ns": 0
+          },
+          "index.gram_tree_probes": {
+            "calls": 46964562,
+            "elapsed_ns": 0
+          },
+          "index.gram_windows": {
+            "calls": 121428064,
+            "elapsed_ns": 0
+          },
+          "index.insert_grams_and_text": {
+            "calls": 10000,
+            "elapsed_ns": 4879097400
+          },
+          "input.corpus_crc_json": {
+            "calls": 10000,
+            "elapsed_ns": 1374950700
+          },
+          "merge.worker": {
+            "calls": 5,
+            "elapsed_ns": 3865075500
+          },
+          "open.index": {
+            "calls": 25,
+            "elapsed_ns": 245087000
+          },
+          "open.index_binary_directory_parse": {
+            "calls": 75,
+            "elapsed_ns": 553002000
+          },
+          "open.index_crc": {
+            "calls": 50,
+            "elapsed_ns": 115276100
+          },
+          "open.index_metadata_prepare": {
+            "calls": 50,
+            "elapsed_ns": 835885200
+          },
+          "open.index_term_page_checksums": {
+            "calls": 50,
+            "elapsed_ns": 21268100
+          },
+          "open.source_crc": {
+            "calls": 25,
+            "elapsed_ns": 195355300
+          },
+          "open.source_native_check": {
+            "calls": 25,
+            "elapsed_ns": 468466700
+          },
+          "open.source_replay": {
+            "calls": 25,
+            "elapsed_ns": 496687900
+          },
+          "open.total": {
+            "calls": 1,
+            "elapsed_ns": 14074200
+          },
+          "payload.copy_key": {
+            "calls": 40040,
+            "elapsed_ns": 10537200
+          },
+          "payload.copy_text": {
+            "calls": 40040,
+            "elapsed_ns": 83800200
+          },
+          "payload.copy_title": {
+            "calls": 40040,
+            "elapsed_ns": 3231700
+          },
+          "payload.materialize": {
+            "calls": 40040,
+            "elapsed_ns": 201432100
+          },
+          "payload.materialize_fields": {
+            "calls": 40040,
+            "elapsed_ns": 72969800
+          },
+          "payload.materialize_links": {
+            "calls": 40040,
+            "elapsed_ns": 7202700
+          },
+          "payload.read_document": {
+            "calls": 10040,
+            "elapsed_ns": 295350400
+          },
+          "payload.schema_utf8": {
+            "calls": 80040,
+            "elapsed_ns": 221719200
+          },
+          "query.term_page_decode": {
+            "calls": 2134,
+            "elapsed_ns": 57781300
+          },
+          "run.write_source_rebuild": {
+            "calls": 25,
+            "elapsed_ns": 7372374500
+          },
+          "segment.open": {
+            "calls": 50,
+            "elapsed_ns": 1195227100
+          },
+          "source.encode_write_frames": {
+            "calls": 25,
+            "elapsed_ns": 1764871500
+          },
+          "source.frame_crc": {
+            "calls": 1,
+            "elapsed_ns": 5100
+          },
+          "source.frame_read_allocate": {
+            "calls": 1,
+            "elapsed_ns": 26100
+          },
+          "spool.postings_drain": {
+            "calls": 25,
+            "elapsed_ns": 281940000
+          },
+          "spool.records_drain": {
+            "calls": 25,
+            "elapsed_ns": 25296600
+          },
+          "stream.commit_total": {
+            "calls": 20,
+            "elapsed_ns": 22427548000
+          },
+          "stream.encode_entry": {
+            "calls": 10000,
+            "elapsed_ns": 44863100
+          },
+          "stream.finish_frame_crc": {
+            "calls": 20,
+            "elapsed_ns": 83206500
+          },
+          "stream.read_decode_entry": {
+            "calls": 10000,
+            "elapsed_ns": 256664000
+          },
+          "stream.stage_entry": {
+            "calls": 10000,
+            "elapsed_ns": 13308905500
+          },
+          "stream.wal_copy_and_sync": {
+            "calls": 20,
+            "elapsed_ns": 434431400
+          },
+          "stream.wal_sync": {
+            "calls": 20,
+            "elapsed_ns": 205991200
+          },
+          "wal.sync": {
+            "calls": 21,
+            "elapsed_ns": 20557200
+          },
+          "wal.write": {
+            "calls": 21,
+            "elapsed_ns": 1638700
+          }
+        },
+        "result": {
+          "all_input_crc_verified": true,
+          "database": "C:\\Users\\Serkan\\Documents\\ChatGPT\\fdb\\data\\benchmark-work\\fdb",
+          "from": 0,
+          "ingest_ms": 22433.037200000002,
+          "maintenance_ms": 788.1375,
+          "phase": "result",
+          "sampled_full_document_checks": 40,
+          "stats": {
+            "compaction_running": false,
+            "delta_keys": 0,
+            "disk_index_bytes": 81904473,
+            "disk_posting_entries": 19221340,
+            "documents": 10000,
+            "generation": 51,
+            "log_bytes": 45,
+            "resident_documents": 0,
+            "resident_text_bytes": 0,
+            "segments": 5,
+            "sequence": 20,
+            "source_bytes": 267900709
+          },
+          "text_bytes": 264842858,
+          "to": 10000
+        },
+        "profile_not_normal_performance": true
+      }
+    },
+    "owned": {
+      "control": {
+        "counters": {
+          "batch.decode_binary": {
+            "calls": 1,
+            "elapsed_ns": 4200
+          },
+          "body.fold": {
+            "calls": 10000,
+            "elapsed_ns": 1326502000
+          },
+          "body.grams": {
+            "calls": 10000,
+            "elapsed_ns": 6648339800
+          },
+          "builder.finish_delta": {
+            "calls": 10,
+            "elapsed_ns": 8270134000
+          },
+          "builder.finish_directory": {
+            "calls": 15,
+            "elapsed_ns": 1202065600
+          },
+          "checksum.index_compute": {
+            "calls": 322,
+            "elapsed_ns": 35339700
+          },
+          "checksum.index_read": {
+            "calls": 322,
+            "elapsed_ns": 67220800
+          },
+          "commit.apply_delta_index": {
+            "calls": 20,
+            "elapsed_ns": 14586277300
+          },
+          "commit.delta_size_json": {
+            "calls": 20,
+            "elapsed_ns": 7038700
+          },
+          "commit.foreground_maintenance": {
+            "calls": 20,
+            "elapsed_ns": 9379323500
+          },
+          "commit.total": {
+            "calls": 20,
+            "elapsed_ns": 24311549200
+          },
+          "commit.validate_guard": {
+            "calls": 20,
+            "elapsed_ns": 24282700
+          },
+          "disk.read_at": {
+            "calls": 190508,
+            "elapsed_ns": 705010800
+          },
+          "flush.total": {
+            "calls": 10,
+            "elapsed_ns": 10308886300
+          },
+          "frame.encode_binary_crc": {
+            "calls": 31,
+            "elapsed_ns": 107679800
+          },
+          "index.change_total": {
+            "calls": 10000,
+            "elapsed_ns": 14519807500
+          },
+          "index.distinct_grams": {
+            "calls": 19070767,
+            "elapsed_ns": 0
+          },
+          "index.gram_cache_hits": {
+            "calls": 74463502,
+            "elapsed_ns": 0
+          },
+          "index.gram_tree_probes": {
+            "calls": 46964562,
+            "elapsed_ns": 0
+          },
+          "index.gram_windows": {
+            "calls": 121428064,
+            "elapsed_ns": 0
+          },
+          "index.insert_grams_and_text": {
+            "calls": 10000,
+            "elapsed_ns": 5621873800
+          },
+          "input.corpus_crc_json": {
+            "calls": 10000,
+            "elapsed_ns": 1353145000
+          },
+          "open.index": {
+            "calls": 15,
+            "elapsed_ns": 207416000
+          },
+          "open.index_binary_directory_parse": {
+            "calls": 45,
+            "elapsed_ns": 428678600
+          },
+          "open.index_crc": {
+            "calls": 30,
+            "elapsed_ns": 106059600
+          },
+          "open.index_metadata_prepare": {
+            "calls": 30,
+            "elapsed_ns": 602994600
+          },
+          "open.index_term_page_checksums": {
+            "calls": 30,
+            "elapsed_ns": 14606700
+          },
+          "open.source_crc": {
+            "calls": 15,
+            "elapsed_ns": 190559300
+          },
+          "open.source_native_check": {
+            "calls": 15,
+            "elapsed_ns": 495253400
+          },
+          "open.source_replay": {
+            "calls": 15,
+            "elapsed_ns": 509461200
+          },
+          "open.total": {
+            "calls": 1,
+            "elapsed_ns": 6098300
+          },
+          "payload.copy_key": {
+            "calls": 30000,
+            "elapsed_ns": 7377200
+          },
+          "payload.copy_text": {
+            "calls": 30000,
+            "elapsed_ns": 56644400
+          },
+          "payload.copy_title": {
+            "calls": 30000,
+            "elapsed_ns": 2434900
+          },
+          "payload.materialize": {
+            "calls": 30000,
+            "elapsed_ns": 144017100
+          },
+          "payload.materialize_fields": {
+            "calls": 30000,
+            "elapsed_ns": 54831300
+          },
+          "payload.materialize_links": {
+            "calls": 30000,
+            "elapsed_ns": 5754500
+          },
+          "payload.schema_utf8": {
+            "calls": 70000,
+            "elapsed_ns": 190290400
+          },
+          "run.write_source_rebuild": {
+            "calls": 15,
+            "elapsed_ns": 13422112300
+          },
+          "segment.open": {
+            "calls": 30,
+            "elapsed_ns": 860122200
+          },
+          "source.encode_write_frames": {
+            "calls": 15,
+            "elapsed_ns": 1699041900
+          },
+          "source.frame_crc": {
+            "calls": 1,
+            "elapsed_ns": 600
+          },
+          "source.frame_read_allocate": {
+            "calls": 1,
+            "elapsed_ns": 16600
+          },
+          "spool.postings_drain": {
+            "calls": 15,
+            "elapsed_ns": 230501000
+          },
+          "spool.records_drain": {
+            "calls": 15,
+            "elapsed_ns": 22003100
+          },
+          "wal.sync": {
+            "calls": 31,
+            "elapsed_ns": 196344400
+          },
+          "wal.write": {
+            "calls": 31,
+            "elapsed_ns": 96589900
+          },
+          "builder.finish_reused": {
+            "calls": 5,
+            "elapsed_ns": 1611402600
+          },
+          "merge.worker": {
+            "calls": 5,
+            "elapsed_ns": 3583203200
+          },
+          "payload.read_document": {
+            "calls": 10000,
+            "elapsed_ns": 294049500
+          },
+          "query.term_page_decode": {
+            "calls": 1283,
+            "elapsed_ns": 38312400
+          }
+        },
+        "result": {
+          "all_input_crc_verified": true,
+          "database": "C:\\Users\\Serkan\\Documents\\ChatGPT\\fdb\\data\\benchmark-work\\fdb",
+          "from": 0,
+          "ingest_ms": 25670.9091,
+          "maintenance_ms": 4673.0124000000005,
+          "phase": "result",
+          "sampled_full_document_checks": 40,
+          "stats": {
+            "compaction_running": false,
+            "delta_keys": 0,
+            "disk_index_bytes": 81904473,
+            "disk_posting_entries": 19221340,
+            "documents": 10000,
+            "generation": 31,
+            "log_bytes": 45,
+            "resident_documents": 0,
+            "resident_text_bytes": 0,
+            "segments": 5,
+            "sequence": 20,
+            "source_bytes": 267900709
+          },
+          "text_bytes": 264842858,
+          "to": 10000
+        },
+        "profile_not_normal_performance": true
+      },
+      "candidate": {
+        "counters": {
+          "batch.decode_binary": {
+            "calls": 1,
+            "elapsed_ns": 200
+          },
+          "body.fold": {
+            "calls": 10000,
+            "elapsed_ns": 1017619100
+          },
+          "body.grams": {
+            "calls": 10000,
+            "elapsed_ns": 6074178200
+          },
+          "builder.finish_delta": {
+            "calls": 10,
+            "elapsed_ns": 1135802900
+          },
+          "builder.finish_directory": {
+            "calls": 15,
+            "elapsed_ns": 1185600500
+          },
+          "checksum.index_compute": {
+            "calls": 322,
+            "elapsed_ns": 34641800
+          },
+          "checksum.index_read": {
+            "calls": 322,
+            "elapsed_ns": 68604200
+          },
+          "commit.apply_delta_index": {
+            "calls": 20,
+            "elapsed_ns": 12767984400
+          },
+          "commit.delta_size_json": {
+            "calls": 20,
+            "elapsed_ns": 5830500
+          },
+          "commit.foreground_maintenance": {
+            "calls": 20,
+            "elapsed_ns": 2717706000
+          },
+          "commit.total": {
+            "calls": 20,
+            "elapsed_ns": 15889123800
+          },
+          "commit.validate_guard": {
+            "calls": 20,
+            "elapsed_ns": 20074600
+          },
+          "delta.build_id_map": {
+            "calls": 10,
+            "elapsed_ns": 5753500
+          },
+          "delta.checkpoint_key_lookups": {
+            "calls": 10000,
+            "elapsed_ns": 0
+          },
+          "delta.remap_posting_ids": {
+            "calls": 163668,
+            "elapsed_ns": 111879000
+          },
+          "delta.remapped_entries": {
+            "calls": 19221340,
+            "elapsed_ns": 0
+          },
+          "disk.read_at": {
+            "calls": 190508,
+            "elapsed_ns": 770640800
+          },
+          "flush.total": {
+            "calls": 10,
+            "elapsed_ns": 3022181900
+          },
+          "frame.encode_binary_crc": {
+            "calls": 31,
+            "elapsed_ns": 102364600
+          },
+          "index.change_total": {
+            "calls": 10000,
+            "elapsed_ns": 12712770300
+          },
+          "index.distinct_grams": {
+            "calls": 19070767,
+            "elapsed_ns": 0
+          },
+          "index.gram_cache_hits": {
+            "calls": 74463502,
+            "elapsed_ns": 0
+          },
+          "index.gram_tree_probes": {
+            "calls": 46964562,
+            "elapsed_ns": 0
+          },
+          "index.gram_windows": {
+            "calls": 121428064,
+            "elapsed_ns": 0
+          },
+          "index.insert_grams_and_text": {
+            "calls": 10000,
+            "elapsed_ns": 4881569400
+          },
+          "input.corpus_crc_json": {
+            "calls": 10000,
+            "elapsed_ns": 1251403200
+          },
+          "open.index": {
+            "calls": 15,
+            "elapsed_ns": 210413200
+          },
+          "open.index_binary_directory_parse": {
+            "calls": 45,
+            "elapsed_ns": 451939400
+          },
+          "open.index_crc": {
+            "calls": 30,
+            "elapsed_ns": 106766900
+          },
+          "open.index_metadata_prepare": {
+            "calls": 30,
+            "elapsed_ns": 625080000
+          },
+          "open.index_term_page_checksums": {
+            "calls": 30,
+            "elapsed_ns": 16653700
+          },
+          "open.source_crc": {
+            "calls": 15,
+            "elapsed_ns": 201834700
+          },
+          "open.source_native_check": {
+            "calls": 15,
+            "elapsed_ns": 492795900
+          },
+          "open.source_replay": {
+            "calls": 15,
+            "elapsed_ns": 566883300
+          },
+          "open.total": {
+            "calls": 1,
+            "elapsed_ns": 4905400
+          },
+          "payload.copy_key": {
+            "calls": 30000,
+            "elapsed_ns": 8381200
+          },
+          "payload.copy_text": {
+            "calls": 30000,
+            "elapsed_ns": 67272000
+          },
+          "payload.copy_title": {
+            "calls": 30000,
+            "elapsed_ns": 2587100
+          },
+          "payload.materialize": {
+            "calls": 30000,
+            "elapsed_ns": 163590300
+          },
+          "payload.materialize_fields": {
+            "calls": 30000,
+            "elapsed_ns": 62021800
+          },
+          "payload.materialize_links": {
+            "calls": 30000,
+            "elapsed_ns": 5892800
+          },
+          "payload.schema_utf8": {
+            "calls": 70000,
+            "elapsed_ns": 193509900
+          },
+          "run.write_source_rebuild": {
+            "calls": 15,
+            "elapsed_ns": 6485553800
+          },
+          "segment.open": {
+            "calls": 30,
+            "elapsed_ns": 892610700
+          },
+          "source.encode_write_frames": {
+            "calls": 15,
+            "elapsed_ns": 1675668600
+          },
+          "source.frame_crc": {
+            "calls": 1,
+            "elapsed_ns": 1800
+          },
+          "source.frame_read_allocate": {
+            "calls": 1,
+            "elapsed_ns": 10200
+          },
+          "spool.postings_drain": {
+            "calls": 15,
+            "elapsed_ns": 212775300
+          },
+          "spool.records_drain": {
+            "calls": 15,
+            "elapsed_ns": 23406700
+          },
+          "wal.sync": {
+            "calls": 31,
+            "elapsed_ns": 231998500
+          },
+          "wal.write": {
+            "calls": 31,
+            "elapsed_ns": 89503100
+          },
+          "builder.finish_reused": {
+            "calls": 5,
+            "elapsed_ns": 1763576900
+          },
+          "merge.worker": {
+            "calls": 5,
+            "elapsed_ns": 3902721600
+          },
+          "payload.read_document": {
+            "calls": 10000,
+            "elapsed_ns": 324183100
+          },
+          "query.term_page_decode": {
+            "calls": 1283,
+            "elapsed_ns": 44323800
+          }
+        },
+        "result": {
+          "all_input_crc_verified": true,
+          "database": "C:\\Users\\Serkan\\Documents\\ChatGPT\\fdb\\data\\benchmark-work\\fdb",
+          "from": 0,
+          "ingest_ms": 17146.219800000003,
+          "maintenance_ms": 4369.1233,
+          "phase": "result",
+          "sampled_full_document_checks": 40,
+          "stats": {
+            "compaction_running": false,
+            "delta_keys": 0,
+            "disk_index_bytes": 81904473,
+            "disk_posting_entries": 19221340,
+            "documents": 10000,
+            "generation": 31,
+            "log_bytes": 45,
+            "resident_documents": 0,
+            "resident_text_bytes": 0,
+            "segments": 5,
+            "sequence": 20,
+            "source_bytes": 267900709
+          },
+          "text_bytes": 264842858,
+          "to": 10000
+        },
+        "profile_not_normal_performance": true
+      }
+    }
+  },
+  "interpretation": "Nested/worker wall spans overlap;do not sum as total CPU. One instrumented run per API/variant; normal performance gate measured separately. Baseline code performs one tree key lookup per remapped entry; new counters count one lookup per live document."
+}

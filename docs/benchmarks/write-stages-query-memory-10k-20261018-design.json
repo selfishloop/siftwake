@@ -1,0 +1,23 @@
+﻿{
+    "pairs":  4,
+    "scope":  "normal open plus24 searches/771 gets;no corpus or full payload oracle resident;OS process lifetime peaks",
+    "cache":  "same existing first10000 in fixed slots;warm OS cache;no eviction or power isolation",
+    "validation":  "strict full source/index open on FDB;ordinary SQLite open;full payload equality checked separately",
+    "executables":  [
+                        {
+                            "variant":  "control",
+                            "path":  "output/activate-buffers-20261018-content.exe",
+                            "sha256":  "9ADC6299AF908D9F81DED0247DF22CD2F89C5D7650896BC9650A3586C7CC10F9"
+                        },
+                        {
+                            "variant":  "candidate",
+                            "path":  "output/write-stages-reads-candidate-20261018.exe",
+                            "sha256":  "64171FF5683BDA56146DB5F53F207F45CA3F9343467EA7FD519A6DDA9A0F73EA"
+                        },
+                        {
+                            "variant":  "sqlite",
+                            "path":  "tools/native_sqlite/target/release/content_reads.exe",
+                            "sha256":  "F9D2CBD74D050B3D1CE08F37DFF672C961A826D412BA576DB3351EC4C778ADB5"
+                        }
+                    ]
+}

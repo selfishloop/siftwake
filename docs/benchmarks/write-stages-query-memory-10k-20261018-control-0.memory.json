@@ -1,0 +1,44 @@
+﻿{
+    "variant":  "control",
+    "pair":  0,
+    "exit_code":  0,
+    "cpu_ms":  968.75,
+    "os_lifetime_peaks":  {
+                              "peak_private_commit_bytes":  9179136,
+                              "peak_working_set_bytes":  13320192,
+                              "scope":  "entire process lifetime, read after exit with retained handle; not phase-specific",
+                              "private_counter":  "PeakPagefileUsage: private committed bytes, not physical RAM",
+                              "working_set_counter":  "PeakWorkingSetSize: resident pages including shared image pages",
+                              "sample_gaps":  false
+                          },
+    "opened":  {
+                   "engine":  "fdb",
+                   "open_ms":  168.4844,
+                   "pending_source_checks":  0,
+                   "phase":  "opened",
+                   "source_validation_on_open":  true,
+                   "stats":  {
+                                 "compaction_running":  false,
+                                 "delta_keys":  0,
+                                 "disk_index_bytes":  81904473,
+                                 "disk_posting_entries":  19221340,
+                                 "documents":  10000,
+                                 "generation":  31,
+                                 "log_bytes":  45,
+                                 "resident_documents":  0,
+                                 "resident_text_bytes":  0,
+                                 "segments":  5,
+                                 "sequence":  20,
+                                 "source_bytes":  267900709
+                             }
+               },
+    "verified":  {
+                     "full_payload_equality_in_separate_matrix":  true,
+                     "gets":  771,
+                     "oracle_loaded":  false,
+                     "performance_not_measured":  true,
+                     "phase":  "query_memory_verified",
+                     "rounds":  3,
+                     "searches":  24
+                 }
+}

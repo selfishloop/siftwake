@@ -1,0 +1,486 @@
+﻿[
+    {
+        "variant":  "control",
+        "pair":  0,
+        "exit_code":  0,
+        "cpu_ms":  968.75,
+        "os_lifetime_peaks":  {
+                                  "peak_private_commit_bytes":  9179136,
+                                  "peak_working_set_bytes":  13320192,
+                                  "scope":  "entire process lifetime, read after exit with retained handle; not phase-specific",
+                                  "private_counter":  "PeakPagefileUsage: private committed bytes, not physical RAM",
+                                  "working_set_counter":  "PeakWorkingSetSize: resident pages including shared image pages",
+                                  "sample_gaps":  false
+                              },
+        "opened":  {
+                       "engine":  "fdb",
+                       "open_ms":  168.4844,
+                       "pending_source_checks":  0,
+                       "phase":  "opened",
+                       "source_validation_on_open":  true,
+                       "stats":  {
+                                     "compaction_running":  false,
+                                     "delta_keys":  0,
+                                     "disk_index_bytes":  81904473,
+                                     "disk_posting_entries":  19221340,
+                                     "documents":  10000,
+                                     "generation":  31,
+                                     "log_bytes":  45,
+                                     "resident_documents":  0,
+                                     "resident_text_bytes":  0,
+                                     "segments":  5,
+                                     "sequence":  20,
+                                     "source_bytes":  267900709
+                                 }
+                   },
+        "verified":  {
+                         "full_payload_equality_in_separate_matrix":  true,
+                         "gets":  771,
+                         "oracle_loaded":  false,
+                         "performance_not_measured":  true,
+                         "phase":  "query_memory_verified",
+                         "rounds":  3,
+                         "searches":  24
+                     }
+    },
+    {
+        "variant":  "candidate",
+        "pair":  0,
+        "exit_code":  0,
+        "cpu_ms":  1031.25,
+        "os_lifetime_peaks":  {
+                                  "peak_private_commit_bytes":  9232384,
+                                  "peak_working_set_bytes":  13897728,
+                                  "scope":  "entire process lifetime, read after exit with retained handle; not phase-specific",
+                                  "private_counter":  "PeakPagefileUsage: private committed bytes, not physical RAM",
+                                  "working_set_counter":  "PeakWorkingSetSize: resident pages including shared image pages",
+                                  "sample_gaps":  false
+                              },
+        "opened":  {
+                       "engine":  "fdb",
+                       "open_ms":  171.8777,
+                       "pending_source_checks":  0,
+                       "phase":  "opened",
+                       "source_validation_on_open":  true,
+                       "stats":  {
+                                     "compaction_running":  false,
+                                     "delta_keys":  0,
+                                     "disk_index_bytes":  81904473,
+                                     "disk_posting_entries":  19221340,
+                                     "documents":  10000,
+                                     "generation":  31,
+                                     "log_bytes":  45,
+                                     "resident_documents":  0,
+                                     "resident_text_bytes":  0,
+                                     "segments":  5,
+                                     "sequence":  20,
+                                     "source_bytes":  267900709
+                                 }
+                   },
+        "verified":  {
+                         "full_payload_equality_in_separate_matrix":  true,
+                         "gets":  771,
+                         "oracle_loaded":  false,
+                         "performance_not_measured":  true,
+                         "phase":  "query_memory_verified",
+                         "rounds":  3,
+                         "searches":  24
+                     }
+    },
+    {
+        "variant":  "sqlite",
+        "pair":  0,
+        "exit_code":  0,
+        "cpu_ms":  23828.125,
+        "os_lifetime_peaks":  {
+                                  "peak_private_commit_bytes":  13189120,
+                                  "peak_working_set_bytes":  18079744,
+                                  "scope":  "entire process lifetime, read after exit with retained handle; not phase-specific",
+                                  "private_counter":  "PeakPagefileUsage: private committed bytes, not physical RAM",
+                                  "working_set_counter":  "PeakWorkingSetSize: resident pages including shared image pages",
+                                  "sample_gaps":  false
+                              },
+        "opened":  {
+                       "cache_kib":  2048,
+                       "engine":  "sqlite",
+                       "full_integrity_on_open":  false,
+                       "mmap_bytes":  0,
+                       "open_ms":  11.286100000000001,
+                       "phase":  "opened",
+                       "prepared_statement_cache_capacity":  64,
+                       "sqlite_version":  "3.53.2"
+                   },
+        "verified":  {
+                         "full_payload_equality_in_separate_matrix":  true,
+                         "gets":  771,
+                         "oracle_loaded":  false,
+                         "performance_not_measured":  true,
+                         "phase":  "query_memory_verified",
+                         "rounds":  3,
+                         "searches":  24
+                     }
+    },
+    {
+        "variant":  "sqlite",
+        "pair":  1,
+        "exit_code":  0,
+        "cpu_ms":  25078.125,
+        "os_lifetime_peaks":  {
+                                  "peak_private_commit_bytes":  13197312,
+                                  "peak_working_set_bytes":  17272832,
+                                  "scope":  "entire process lifetime, read after exit with retained handle; not phase-specific",
+                                  "private_counter":  "PeakPagefileUsage: private committed bytes, not physical RAM",
+                                  "working_set_counter":  "PeakWorkingSetSize: resident pages including shared image pages",
+                                  "sample_gaps":  false
+                              },
+        "opened":  {
+                       "cache_kib":  2048,
+                       "engine":  "sqlite",
+                       "full_integrity_on_open":  false,
+                       "mmap_bytes":  0,
+                       "open_ms":  1.4166,
+                       "phase":  "opened",
+                       "prepared_statement_cache_capacity":  64,
+                       "sqlite_version":  "3.53.2"
+                   },
+        "verified":  {
+                         "full_payload_equality_in_separate_matrix":  true,
+                         "gets":  771,
+                         "oracle_loaded":  false,
+                         "performance_not_measured":  true,
+                         "phase":  "query_memory_verified",
+                         "rounds":  3,
+                         "searches":  24
+                     }
+    },
+    {
+        "variant":  "candidate",
+        "pair":  1,
+        "exit_code":  0,
+        "cpu_ms":  984.375,
+        "os_lifetime_peaks":  {
+                                  "peak_private_commit_bytes":  9158656,
+                                  "peak_working_set_bytes":  13283328,
+                                  "scope":  "entire process lifetime, read after exit with retained handle; not phase-specific",
+                                  "private_counter":  "PeakPagefileUsage: private committed bytes, not physical RAM",
+                                  "working_set_counter":  "PeakWorkingSetSize: resident pages including shared image pages",
+                                  "sample_gaps":  false
+                              },
+        "opened":  {
+                       "engine":  "fdb",
+                       "open_ms":  171.28199999999998,
+                       "pending_source_checks":  0,
+                       "phase":  "opened",
+                       "source_validation_on_open":  true,
+                       "stats":  {
+                                     "compaction_running":  false,
+                                     "delta_keys":  0,
+                                     "disk_index_bytes":  81904473,
+                                     "disk_posting_entries":  19221340,
+                                     "documents":  10000,
+                                     "generation":  31,
+                                     "log_bytes":  45,
+                                     "resident_documents":  0,
+                                     "resident_text_bytes":  0,
+                                     "segments":  5,
+                                     "sequence":  20,
+                                     "source_bytes":  267900709
+                                 }
+                   },
+        "verified":  {
+                         "full_payload_equality_in_separate_matrix":  true,
+                         "gets":  771,
+                         "oracle_loaded":  false,
+                         "performance_not_measured":  true,
+                         "phase":  "query_memory_verified",
+                         "rounds":  3,
+                         "searches":  24
+                     }
+    },
+    {
+        "variant":  "control",
+        "pair":  1,
+        "exit_code":  0,
+        "cpu_ms":  1031.25,
+        "os_lifetime_peaks":  {
+                                  "peak_private_commit_bytes":  9191424,
+                                  "peak_working_set_bytes":  13348864,
+                                  "scope":  "entire process lifetime, read after exit with retained handle; not phase-specific",
+                                  "private_counter":  "PeakPagefileUsage: private committed bytes, not physical RAM",
+                                  "working_set_counter":  "PeakWorkingSetSize: resident pages including shared image pages",
+                                  "sample_gaps":  false
+                              },
+        "opened":  {
+                       "engine":  "fdb",
+                       "open_ms":  187.7518,
+                       "pending_source_checks":  0,
+                       "phase":  "opened",
+                       "source_validation_on_open":  true,
+                       "stats":  {
+                                     "compaction_running":  false,
+                                     "delta_keys":  0,
+                                     "disk_index_bytes":  81904473,
+                                     "disk_posting_entries":  19221340,
+                                     "documents":  10000,
+                                     "generation":  31,
+                                     "log_bytes":  45,
+                                     "resident_documents":  0,
+                                     "resident_text_bytes":  0,
+                                     "segments":  5,
+                                     "sequence":  20,
+                                     "source_bytes":  267900709
+                                 }
+                   },
+        "verified":  {
+                         "full_payload_equality_in_separate_matrix":  true,
+                         "gets":  771,
+                         "oracle_loaded":  false,
+                         "performance_not_measured":  true,
+                         "phase":  "query_memory_verified",
+                         "rounds":  3,
+                         "searches":  24
+                     }
+    },
+    {
+        "variant":  "control",
+        "pair":  2,
+        "exit_code":  0,
+        "cpu_ms":  1000,
+        "os_lifetime_peaks":  {
+                                  "peak_private_commit_bytes":  9232384,
+                                  "peak_working_set_bytes":  13344768,
+                                  "scope":  "entire process lifetime, read after exit with retained handle; not phase-specific",
+                                  "private_counter":  "PeakPagefileUsage: private committed bytes, not physical RAM",
+                                  "working_set_counter":  "PeakWorkingSetSize: resident pages including shared image pages",
+                                  "sample_gaps":  false
+                              },
+        "opened":  {
+                       "engine":  "fdb",
+                       "open_ms":  165.086,
+                       "pending_source_checks":  0,
+                       "phase":  "opened",
+                       "source_validation_on_open":  true,
+                       "stats":  {
+                                     "compaction_running":  false,
+                                     "delta_keys":  0,
+                                     "disk_index_bytes":  81904473,
+                                     "disk_posting_entries":  19221340,
+                                     "documents":  10000,
+                                     "generation":  31,
+                                     "log_bytes":  45,
+                                     "resident_documents":  0,
+                                     "resident_text_bytes":  0,
+                                     "segments":  5,
+                                     "sequence":  20,
+                                     "source_bytes":  267900709
+                                 }
+                   },
+        "verified":  {
+                         "full_payload_equality_in_separate_matrix":  true,
+                         "gets":  771,
+                         "oracle_loaded":  false,
+                         "performance_not_measured":  true,
+                         "phase":  "query_memory_verified",
+                         "rounds":  3,
+                         "searches":  24
+                     }
+    },
+    {
+        "variant":  "candidate",
+        "pair":  2,
+        "exit_code":  0,
+        "cpu_ms":  984.375,
+        "os_lifetime_peaks":  {
+                                  "peak_private_commit_bytes":  9121792,
+                                  "peak_working_set_bytes":  13254656,
+                                  "scope":  "entire process lifetime, read after exit with retained handle; not phase-specific",
+                                  "private_counter":  "PeakPagefileUsage: private committed bytes, not physical RAM",
+                                  "working_set_counter":  "PeakWorkingSetSize: resident pages including shared image pages",
+                                  "sample_gaps":  false
+                              },
+        "opened":  {
+                       "engine":  "fdb",
+                       "open_ms":  167.2637,
+                       "pending_source_checks":  0,
+                       "phase":  "opened",
+                       "source_validation_on_open":  true,
+                       "stats":  {
+                                     "compaction_running":  false,
+                                     "delta_keys":  0,
+                                     "disk_index_bytes":  81904473,
+                                     "disk_posting_entries":  19221340,
+                                     "documents":  10000,
+                                     "generation":  31,
+                                     "log_bytes":  45,
+                                     "resident_documents":  0,
+                                     "resident_text_bytes":  0,
+                                     "segments":  5,
+                                     "sequence":  20,
+                                     "source_bytes":  267900709
+                                 }
+                   },
+        "verified":  {
+                         "full_payload_equality_in_separate_matrix":  true,
+                         "gets":  771,
+                         "oracle_loaded":  false,
+                         "performance_not_measured":  true,
+                         "phase":  "query_memory_verified",
+                         "rounds":  3,
+                         "searches":  24
+                     }
+    },
+    {
+        "variant":  "sqlite",
+        "pair":  2,
+        "exit_code":  0,
+        "cpu_ms":  24390.625,
+        "os_lifetime_peaks":  {
+                                  "peak_private_commit_bytes":  13627392,
+                                  "peak_working_set_bytes":  17686528,
+                                  "scope":  "entire process lifetime, read after exit with retained handle; not phase-specific",
+                                  "private_counter":  "PeakPagefileUsage: private committed bytes, not physical RAM",
+                                  "working_set_counter":  "PeakWorkingSetSize: resident pages including shared image pages",
+                                  "sample_gaps":  false
+                              },
+        "opened":  {
+                       "cache_kib":  2048,
+                       "engine":  "sqlite",
+                       "full_integrity_on_open":  false,
+                       "mmap_bytes":  0,
+                       "open_ms":  1.6145,
+                       "phase":  "opened",
+                       "prepared_statement_cache_capacity":  64,
+                       "sqlite_version":  "3.53.2"
+                   },
+        "verified":  {
+                         "full_payload_equality_in_separate_matrix":  true,
+                         "gets":  771,
+                         "oracle_loaded":  false,
+                         "performance_not_measured":  true,
+                         "phase":  "query_memory_verified",
+                         "rounds":  3,
+                         "searches":  24
+                     }
+    },
+    {
+        "variant":  "sqlite",
+        "pair":  3,
+        "exit_code":  0,
+        "cpu_ms":  23171.875,
+        "os_lifetime_peaks":  {
+                                  "peak_private_commit_bytes":  13189120,
+                                  "peak_working_set_bytes":  17285120,
+                                  "scope":  "entire process lifetime, read after exit with retained handle; not phase-specific",
+                                  "private_counter":  "PeakPagefileUsage: private committed bytes, not physical RAM",
+                                  "working_set_counter":  "PeakWorkingSetSize: resident pages including shared image pages",
+                                  "sample_gaps":  false
+                              },
+        "opened":  {
+                       "cache_kib":  2048,
+                       "engine":  "sqlite",
+                       "full_integrity_on_open":  false,
+                       "mmap_bytes":  0,
+                       "open_ms":  1.5891,
+                       "phase":  "opened",
+                       "prepared_statement_cache_capacity":  64,
+                       "sqlite_version":  "3.53.2"
+                   },
+        "verified":  {
+                         "full_payload_equality_in_separate_matrix":  true,
+                         "gets":  771,
+                         "oracle_loaded":  false,
+                         "performance_not_measured":  true,
+                         "phase":  "query_memory_verified",
+                         "rounds":  3,
+                         "searches":  24
+                     }
+    },
+    {
+        "variant":  "candidate",
+        "pair":  3,
+        "exit_code":  0,
+        "cpu_ms":  937.5,
+        "os_lifetime_peaks":  {
+                                  "peak_private_commit_bytes":  9117696,
+                                  "peak_working_set_bytes":  13254656,
+                                  "scope":  "entire process lifetime, read after exit with retained handle; not phase-specific",
+                                  "private_counter":  "PeakPagefileUsage: private committed bytes, not physical RAM",
+                                  "working_set_counter":  "PeakWorkingSetSize: resident pages including shared image pages",
+                                  "sample_gaps":  false
+                              },
+        "opened":  {
+                       "engine":  "fdb",
+                       "open_ms":  165.22899999999998,
+                       "pending_source_checks":  0,
+                       "phase":  "opened",
+                       "source_validation_on_open":  true,
+                       "stats":  {
+                                     "compaction_running":  false,
+                                     "delta_keys":  0,
+                                     "disk_index_bytes":  81904473,
+                                     "disk_posting_entries":  19221340,
+                                     "documents":  10000,
+                                     "generation":  31,
+                                     "log_bytes":  45,
+                                     "resident_documents":  0,
+                                     "resident_text_bytes":  0,
+                                     "segments":  5,
+                                     "sequence":  20,
+                                     "source_bytes":  267900709
+                                 }
+                   },
+        "verified":  {
+                         "full_payload_equality_in_separate_matrix":  true,
+                         "gets":  771,
+                         "oracle_loaded":  false,
+                         "performance_not_measured":  true,
+                         "phase":  "query_memory_verified",
+                         "rounds":  3,
+                         "searches":  24
+                     }
+    },
+    {
+        "variant":  "control",
+        "pair":  3,
+        "exit_code":  0,
+        "cpu_ms":  968.75,
+        "os_lifetime_peaks":  {
+                                  "peak_private_commit_bytes":  9195520,
+                                  "peak_working_set_bytes":  13340672,
+                                  "scope":  "entire process lifetime, read after exit with retained handle; not phase-specific",
+                                  "private_counter":  "PeakPagefileUsage: private committed bytes, not physical RAM",
+                                  "working_set_counter":  "PeakWorkingSetSize: resident pages including shared image pages",
+                                  "sample_gaps":  false
+                              },
+        "opened":  {
+                       "engine":  "fdb",
+                       "open_ms":  166.69,
+                       "pending_source_checks":  0,
+                       "phase":  "opened",
+                       "source_validation_on_open":  true,
+                       "stats":  {
+                                     "compaction_running":  false,
+                                     "delta_keys":  0,
+                                     "disk_index_bytes":  81904473,
+                                     "disk_posting_entries":  19221340,
+                                     "documents":  10000,
+                                     "generation":  31,
+                                     "log_bytes":  45,
+                                     "resident_documents":  0,
+                                     "resident_text_bytes":  0,
+                                     "segments":  5,
+                                     "sequence":  20,
+                                     "source_bytes":  267900709
+                                 }
+                   },
+        "verified":  {
+                         "full_payload_equality_in_separate_matrix":  true,
+                         "gets":  771,
+                         "oracle_loaded":  false,
+                         "performance_not_measured":  true,
+                         "phase":  "query_memory_verified",
+                         "rounds":  3,
+                         "searches":  24
+                     }
+    }
+]
