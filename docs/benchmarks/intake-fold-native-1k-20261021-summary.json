@@ -1,0 +1,140 @@
+{
+  "design": {
+    "programs": {
+      "control": {
+        "path": "output\\intake-fold-native-control-20261021.exe",
+        "sha256": "A648131E5810777BFD8D112CA026100F780C5BFD1150BEA6BEDCCA68F55A48D4"
+      },
+      "candidate": {
+        "path": "output\\intake-fold-native-candidate-20261021.exe",
+        "sha256": "2AB361C44093321039F2A491D17B71B709FEB0C0266C939B4F3C0B6BA45FF280"
+      }
+    },
+    "phase": "native API/JSON attribution",
+    "pairs": 4,
+    "affinity_mask": 4,
+    "corpus": "same existing first1000 of permitted first10k;two500-row synced owned commits",
+    "timing": "native Database::search and serde_json::to_vec timed separately;100 samples/case/process;one warmup;CRC/checks/drops outside timing",
+    "cache": "warm OS cache;no eviction or power/background isolation",
+    "limits": "not exact CLI serializer/IPC;no RAM claim;warm expected hashes are cross-reader checks,not an independent oracle;separate CLI test supplies full-page oracle",
+    "storage": "only owned fixed FDB slot reset;no new corpus or DB copies"
+  },
+  "protected_unchanged": true,
+  "results_equal": true,
+  "queries": [
+    {
+      "text": "the",
+      "search": {
+        "p95_ms": {
+          "control": 0.5113,
+          "candidate": 0.5814
+        },
+        "change_percent": 13.710150596518677,
+        "candidate_lower_pairs": 1
+      },
+      "json": {
+        "p95_ms": {
+          "control": 1.2973999999999999,
+          "candidate": 1.4982000000000002
+        },
+        "change_percent": 15.477108062278422,
+        "candidate_lower_pairs": 0
+      }
+    },
+    {
+      "text": "quixote",
+      "search": {
+        "p95_ms": {
+          "control": 0.1384,
+          "candidate": 0.1175
+        },
+        "change_percent": -15.101156069364164,
+        "candidate_lower_pairs": 2
+      },
+      "json": {
+        "p95_ms": {
+          "control": 0.1704,
+          "candidate": 0.1772
+        },
+        "change_percent": 3.9906103286384997,
+        "candidate_lower_pairs": 2
+      }
+    },
+    {
+      "text": "he",
+      "search": {
+        "p95_ms": {
+          "control": 0.47100000000000003,
+          "candidate": 0.5375
+        },
+        "change_percent": 14.11889596602971,
+        "candidate_lower_pairs": 2
+      },
+      "json": {
+        "p95_ms": {
+          "control": 1.3168,
+          "candidate": 1.5636999999999999
+        },
+        "change_percent": 18.75,
+        "candidate_lower_pairs": 2
+      }
+    },
+    {
+      "text": "the man",
+      "search": {
+        "p95_ms": {
+          "control": 0.8356,
+          "candidate": 0.8859
+        },
+        "change_percent": 6.019626615605556,
+        "candidate_lower_pairs": 2
+      },
+      "json": {
+        "p95_ms": {
+          "control": 1.4058,
+          "candidate": 1.5172
+        },
+        "change_percent": 7.92431355811638,
+        "candidate_lower_pairs": 3
+      }
+    },
+    {
+      "text": "zx",
+      "search": {
+        "p95_ms": {
+          "control": 1.9667999999999999,
+          "candidate": 1.9321
+        },
+        "change_percent": -1.764287166971723,
+        "candidate_lower_pairs": 2
+      },
+      "json": {
+        "p95_ms": {
+          "control": 0.0039,
+          "candidate": 0.0039
+        },
+        "change_percent": 0.0,
+        "candidate_lower_pairs": 2
+      }
+    },
+    {
+      "text": "transubstantiation",
+      "search": {
+        "p95_ms": {
+          "control": 0.6573,
+          "candidate": 0.6604
+        },
+        "change_percent": 0.47162635022059973,
+        "candidate_lower_pairs": 3
+      },
+      "json": {
+        "p95_ms": {
+          "control": 0.0014,
+          "candidate": 0.0012
+        },
+        "change_percent": -14.28571428571429,
+        "candidate_lower_pairs": 3
+      }
+    }
+  ]
+}

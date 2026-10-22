@@ -1,0 +1,59 @@
+﻿{
+    "engine":  "sqlite",
+    "mode":  "ingest",
+    "from":  0,
+    "to":  10000,
+    "run":  0,
+    "exit_code":  0,
+    "low_disk_stop":  false,
+    "phases":  {
+                   "runtime_baseline":  {
+                                            "sampled_peak_private_bytes":  3022848,
+                                            "sampled_peak_working_set_bytes":  7553024,
+                                            "samples":  28
+                                        },
+                   "startup":  {
+                                   "sampled_peak_private_bytes":  671744,
+                                   "sampled_peak_working_set_bytes":  4067328,
+                                   "samples":  2
+                               },
+                   "maintenance":  {
+                                       "sampled_peak_private_bytes":  7966720,
+                                       "sampled_peak_working_set_bytes":  12607488,
+                                       "samples":  38
+                                   },
+                   "indexing":  {
+                                    "sampled_peak_private_bytes":  8904704,
+                                    "sampled_peak_working_set_bytes":  13365248,
+                                    "samples":  1130
+                                }
+               },
+    "idle":  null,
+    "os_peak_working_set_bytes":  13365248,
+    "samples":  1198,
+    "sample_interval_ms":  20,
+    "phase_poll_ms":  100,
+    "elapsed_s":  42.050319699999996,
+    "cpu_ms":  38656.25,
+    "retained_disk_bytes":  583860224,
+    "files":  [
+                  {
+                      "name":  "sqlite.db",
+                      "bytes":  583860224
+                  }
+              ],
+    "features":  "default only",
+    "cache":  "OS cache, no eviction, no search warmup",
+    "includes_os_file_cache":  false,
+    "input":  "streamed CRC-checked JSON corpus, batch500; no books/oracle resident",
+    "executable":  "C:\\Users\\Serkan\\Documents\\ChatGPT\\fdb\\tools\\native_sqlite\\target\\release\\content_memory.exe",
+    "database":  "C:\\Users\\Serkan\\Documents\\ChatGPT\\fdb\\data\\benchmark-work\\sqlite",
+    "os_lifetime_peaks":  {
+                              "peak_private_commit_bytes":  8904704,
+                              "peak_working_set_bytes":  13365248,
+                              "scope":  "entire process lifetime, read after exit with retained handle; not phase-specific",
+                              "private_counter":  "PeakPagefileUsage: private committed bytes, not physical RAM",
+                              "working_set_counter":  "PeakWorkingSetSize: resident pages including shared image pages",
+                              "sample_gaps":  false
+                          }
+}

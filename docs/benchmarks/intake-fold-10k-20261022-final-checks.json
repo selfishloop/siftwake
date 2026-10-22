@@ -1,0 +1,72 @@
+[
+  {
+    "command": [
+      "cargo",
+      "fmt",
+      "--check"
+    ],
+    "exit_code": 0,
+    "log": "docs\\benchmarks\\intake-fold-10k-20261022-final-check0.log"
+  },
+  {
+    "command": [
+      "cargo",
+      "test",
+      "--lib",
+      "--test",
+      "engine",
+      "--test",
+      "streamed_transactions"
+    ],
+    "exit_code": 0,
+    "log": "docs\\benchmarks\\intake-fold-10k-20261022-final-check1.log"
+  },
+  {
+    "command": [
+      "cargo",
+      "test",
+      "--example",
+      "measure_owned_boundary"
+    ],
+    "exit_code": 0,
+    "log": "docs\\benchmarks\\intake-fold-10k-20261022-final-check2.log"
+  },
+  {
+    "command": [
+      "cargo",
+      "clippy",
+      "--all-targets",
+      "--",
+      "-D",
+      "warnings"
+    ],
+    "exit_code": 0,
+    "log": "docs\\benchmarks\\intake-fold-10k-20261022-final-check3.log"
+  },
+  {
+    "command": [
+      "cargo",
+      "clippy",
+      "--all-features",
+      "--all-targets",
+      "--",
+      "-D",
+      "warnings"
+    ],
+    "exit_code": 0,
+    "log": "docs\\benchmarks\\intake-fold-10k-20261022-final-check4.log"
+  },
+  {
+    "command": [
+      "cargo",
+      "clippy",
+      "--no-default-features",
+      "--all-targets",
+      "--",
+      "-D",
+      "warnings"
+    ],
+    "exit_code": 0,
+    "log": "docs\\benchmarks\\intake-fold-10k-20261022-final-check5.log"
+  }
+]

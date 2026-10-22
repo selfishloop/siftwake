@@ -1,5 +1,27 @@
 # FDB açık işler
 
+2026-10-21–22 bağımsız intake fold deneyi tamamlandı/reddedildi. Aynı10k,
+normal4 çift/API:akışlı yazma+bakım20,251→19,488s (-%3,77),owned19,263→
+18,180s (-%5,62),ikisi4/4 hızlı. Akışlı son bakım+%5,58/4 çift yüksek;
+owned CPU3/4 düşük,ayrı son bakım2/4 hızlı. RAM kazancı yok:owned private
++150KiB/3 çift yüksek,WS+274KiB/4 çift yüksek;akışlı private+68KiB/3 çift
+yüksek. Bunlar OS lifetime sayaçları,fiziksel/toplam RAM değildir.
+Unpinned1k sıcak CLI kontrolünde5/6 sorgu4/4 p95 yüksek;aynı çekirdekte
+AND+%7,20 yine4/4 yüksek. Native API/JSON ayrımı kök nedeni kesin atfetmedi.
+Tam10k/38-case15 düşük23 yüksek;quixote/man/zx/quixote-whale p95 dört
+çiftte yüksek,son-sayfa+%3,13/2 çift hızlı. Genel arama kapısı geçmedi;
+runtime fold değişikliği geri alındı,eski normal motor korundu. Dar fold
+ön testindeki-%81,6 DB'nin toplam kazancı gibi sunulmaz.
+24 normal yazma sürecinde10k tam oracle,16 FDB'de dört contains oracle;
+API içinde core byte'ları aynı. Boundary sonrası normal10k restore edildi.
+194 default/136 all-feature hedef/113 referans;geri dönüşte128+1 test,
+fmt ve üç profil Clippy geçti. Yalnız test/probe/worker/tool/kanıt eklendi;
+format/feature/dependency/protokol/dış entegrasyon veya yeni corpus yok.
+Owned/caller/query RAM,yazma/son merge,genel/son-sayfa p95,açılış,disk/
+geçici alan,eşzamanlı/gerçek-cold yük açık. Normalizer'a yeniden geçmeden
+önce ölçülen query artışının nedeni ve kayıpsız geçişi kanıtlanmalı.
+[Bütün ölçüler,ret ve final kanıt](INTAKE-FOLD-10K-20261021.md).
+
 2026-10-20 RAM sıkıştırma ön testi tamamlandı/reddedildi:aynı ilk10k,
 en fazla200 kaynak metin,4 read-only süreç. Bağımsız LZ4 block+UTF-8 alanı
 -%34,17;50 metin yeni sonuç p95 medyan0,462→1,250ms,tampon tekrar

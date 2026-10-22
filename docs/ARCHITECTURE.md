@@ -1,5 +1,15 @@
 # FDB mimarisi — 0.3.1
 
+2026-10-21–22 intake normalleştirme ayrı deneyi reddedildi. Bounded
+BodyCache miss'inde mevcut `fold_into` kullanımı dar aşamada-%81,6,
+gerçek akışlı toplam-%3,77/owned-%5,62 verdi;fakat private RAM azalmadı
+ve sıcak AND CLI p95+%7,20 aynı CPU çekirdeğinde4/4 çiftte tekrarlandı.
+Runtime geri alındı;BodyCache scalar fold,delta/flush/bütçeler ve bütün
+kalıcı formatlar aynı. Yalnız test-only modül+read-only probe ve benchmark
+worker/tool ekleri kaldı. Kaynak doğrulaması,feature/dependency/WAL/protokol
+değişmez;genel RAM/arama kapısı açık.
+[Deney,koşullar,ret kararı ve kanıt](INTAKE-FOLD-10K-20261021.md).
+
 2026-10-20 RAM LZ4 ön testi bağımsız `tools/ram_text_probe` içinde kaldı;
 engine'e dependency/feature/codec eklenmedi.200 metinlik gruplarda özgün
 gövdeyi bağımsız block/Box olarak saklamak-%34,17 alan verdi,ancak sahipli

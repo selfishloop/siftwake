@@ -1,0 +1,11 @@
+{
+  "program": "target\\release\\deps\\fdb-090f63db585859fb.exe",
+  "sha256": "9BB80FB0FD356EEA810E05F2C8BB6E9802E9A24CA877F260BFE7128FF28E7EC3",
+  "processes": 4,
+  "affinity_mask": 4,
+  "corpus": "same existing first10000;264842858 text bytes",
+  "scope": "fresh scalar fold versus existing fold_into with input-sized String;normal release test binary",
+  "timing": "200 texts/group;1 warmup and4 timed rounds/mode/group;String allocation+fold included;Vec reserve,input CRC/JSON,equality,output drop excluded",
+  "cache": "warm group and OS cache;alternate mode order;fresh processes;no eviction or power/background isolation",
+  "limits": "not DB write/query timing;capacity sums are not simultaneous RAM or process memory;no DB opened/reset/copied or corpus generated"
+}

@@ -1,5 +1,12 @@
 # FDB
 
+[Yazma normalleştirmesi tek başına ölçüldü — genel geçiş reddedildi](docs/INTAKE-FOLD-10K-20261021.md):
+aynı10k/4 çiftte akışlı yazma+bakım-%3,77,owned-%5,62;ancak RAM azalmadı.
+Yazma sonrası AND p95 artışı aynı çekirdekte4/4 çiftte kaldı (+%7,20).
+Runtime değişikliği geri alındı;normal motor,format ve mevcut kazanımlar
+korundu. Test/probe ve kanıtlar eklendi;genel RAM/arama/yazma-bakım/açılış/
+disk/eşzamanlı-soğuk işler açık.
+
 [RAM'de LZ4 özgün metin ön testi](docs/RAM-TEXT-LZ4-10K-20261020.md):
 aynı10k,dört read-only süreç. Metin allocation alanı-%34,17;50 metnin yeni
 sonuca hazırlanması p95 medyan0,462→1,250ms,tampon tekrar0,095→0,930ms.

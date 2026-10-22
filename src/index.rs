@@ -990,3 +990,7 @@ mod compact_tests {
         live_postings(&index);
     }
 }
+
+#[cfg(test)]
+#[path = "index/intake_fold_tests.rs"]
+mod intake_fold_tests;

@@ -1,0 +1,20 @@
+{
+  "programs": {
+    "control": {
+      "path": "output\\intake-fold-native-control-20261021.exe",
+      "sha256": "A648131E5810777BFD8D112CA026100F780C5BFD1150BEA6BEDCCA68F55A48D4"
+    },
+    "candidate": {
+      "path": "output\\intake-fold-native-candidate-20261021.exe",
+      "sha256": "2AB361C44093321039F2A491D17B71B709FEB0C0266C939B4F3C0B6BA45FF280"
+    }
+  },
+  "phase": "native API/JSON attribution",
+  "pairs": 4,
+  "affinity_mask": 4,
+  "corpus": "same existing first1000 of permitted first10k;two500-row synced owned commits",
+  "timing": "native Database::search and serde_json::to_vec timed separately;100 samples/case/process;one warmup;CRC/checks/drops outside timing",
+  "cache": "warm OS cache;no eviction or power/background isolation",
+  "limits": "not exact CLI serializer/IPC;no RAM claim;warm expected hashes are cross-reader checks,not an independent oracle;separate CLI test supplies full-page oracle",
+  "storage": "only owned fixed FDB slot reset;no new corpus or DB copies"
+}

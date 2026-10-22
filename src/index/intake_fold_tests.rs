@@ -1,0 +1,101 @@
+use super::{BodyCache, fold, grams};
+
+#[test]
+fn body_cache_preserves_unicode_expansion_grams_and_cached_results() {
+    let mut cache = BodyCache::default();
+    for padding in [0, 31, 32, 1023, 1024, 1025, 4096] {
+        for body in ["ASCII Plain TEXT", "İŞIK ıÇĞÖÜ 東京 🦀", "ȺΣẞK é—\u{1f88}"]
+        {
+            let text = format!("{}{body}{}", "A".repeat(padding), body.repeat(4));
+            let expected = fold(&text);
+            let expected_grams = grams(&expected);
+            for _ in 0..2 {
+                let terms = cache.get(&text);
+                assert_eq!(&*terms.folded, expected);
+                assert_eq!(terms.grams, expected_grams);
+            }
+        }
+    }
+}
+
+// An explicit read-only probe, never run by the ordinary test suite. It consumes
+// only the permitted first 10k records and keeps at most 200 source texts live.
+#[cfg(feature = "bounded-engine")]
+#[test]
+#[ignore = "read-only normalization benchmark over the existing first 10k corpus"]
+fn existing_corpus_normalization_probe() -> Result<(), Box<dyn std::error::Error>> {
+    use std::{fs::File, hint::black_box, io::Read, time::Instant};
+
+    let mut source = File::open("data/rkyv-corpus-20261009/json.payload-bench")?;
+    let mut header = [0u8; 20];
+    source.read_exact(&mut header)?;
+    assert_eq!(&header[..8], b"PLOADB01");
+    assert_eq!(crc32fast::hash(&header[..16]), word(&header[16..]));
+    let run: usize = std::env::var("FDB_INTAKE_PROBE_RUN")
+        .unwrap_or_else(|_| "0".into())
+        .parse()?;
+    let mut samples = [Vec::new(), Vec::new()];
+    let mut capacity_bytes = [0usize; 2];
+    let mut text_bytes = 0;
+    for first in (0..10_000).step_by(200) {
+        let mut texts = Vec::with_capacity(200);
+        for id in first..first + 200 {
+            let mut frame = [0u8; 16];
+            source.read_exact(&mut frame)?;
+            assert_eq!(crc32fast::hash(&frame[..12]), word(&frame[12..]));
+            assert_eq!(word(&frame[8..12]) as usize, id);
+            let len = word(&frame[..4]) as usize;
+            assert!(len <= 4 * 1024 * 1024);
+            let mut bytes = vec![0; len];
+            source.read_exact(&mut bytes)?;
+            assert_eq!(crc32fast::hash(&bytes), word(&frame[4..8]));
+            let row: crate::model::StoredDocument = serde_json::from_slice(&bytes)?;
+            assert_eq!(row.document.key.id, format!("{id:010}"));
+            text_bytes += row.document.text.len();
+            texts.push(row.document.text);
+        }
+        // Warm each mode once, then alternate order for four timed rounds.
+        // Input CRC/JSON, Vec capacity and byte equality checks are not timed.
+        for round in 0..5 {
+            let mut outputs = [Vec::with_capacity(200), Vec::with_capacity(200)];
+            let first_mode = (run + first / 200 + round) % 2;
+            for mode in [first_mode, 1 - first_mode] {
+                let start = Instant::now();
+                for text in &texts {
+                    let output = if mode == 0 {
+                        fold(black_box(text))
+                    } else {
+                        let mut output = String::with_capacity(text.len());
+                        super::fold_into(black_box(text), &mut output);
+                        output
+                    };
+                    outputs[mode].push(black_box(output));
+                }
+                let elapsed = start.elapsed().as_secs_f64() * 1000.;
+                if round != 0 {
+                    samples[mode].push(elapsed);
+                } else {
+                    capacity_bytes[mode] +=
+                        outputs[mode].iter().map(String::capacity).sum::<usize>();
+                }
+            }
+            assert_eq!(outputs[0], outputs[1]);
+        }
+    }
+    assert_eq!(text_bytes, 264_842_858);
+    println!(
+        "{}",
+        serde_json::json!({"phase":"intake_fold_probe", "run":run,
+            "documents":10000,"text_bytes":text_bytes,"group_size":200,
+            "warmups_per_group":1,"timed_rounds_per_group":4,
+            "scalar_ms":samples[0],"fast_ms":samples[1],
+            "output_capacity_bytes_summed":capacity_bytes,
+            "byte_equal":true,"not_process_ram":true})
+    );
+    Ok(())
+}
+
+#[cfg(feature = "bounded-engine")]
+fn word(bytes: &[u8]) -> u32 {
+    u32::from_le_bytes(bytes.try_into().unwrap())
+}
