@@ -1,0 +1,15 @@
+{
+  "program": "output\\intake-fold-causal-20261022.exe",
+  "sha256": "860B9857EE221D064C85A2CC25746974514384FC79CE191C6597E8F2E24A438D",
+  "same_executable": true,
+  "pairs": 4,
+  "affinity_mask": 4,
+  "affinity_verified": true,
+  "corpus": "same existing first1000 of permitted first10k;two500-row synced owned commits;no corpus generation",
+  "control": "test-only scalar/fast intake switch;one compiled search and serialization path;not a production runtime option",
+  "timing": "native search,page-to-Value,response wrapper,Value Display to fresh Vec separately;one warmup+200 samples/case/process;checks/CRC/drops outside brackets",
+  "validation": "independent total/key/version/page oracle;all encoded lengths/CRCs cross-mode identical;not an independent full-payload oracle",
+  "cache": "warm OS cache;no eviction or power/background isolation;query/serialization interleaved as in CLI preparation",
+  "limits": "release test binary,not normal release speed;no pipe/IPC/system-I/O in these timings;no RAM claim",
+  "storage": "only owned fixed FDB slot reset;no DB copies;restore10k after this probe"
+}

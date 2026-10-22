@@ -1,0 +1,97 @@
+{
+  "design": {
+    "programs": {
+      "control": {
+        "path": "output\\intake-fold-10k-20261021-control-fdb.exe",
+        "sha256": "6C6F25A67AEBA8E01435395777EE056B48BA35F96D8A4883B6D780C3A2A5B712"
+      },
+      "candidate": {
+        "path": "output\\intake-fold-recovery-candidate-fdb-20261022.exe",
+        "sha256": "44D7103647B9838BCF47BF4CDBE9F587D05CE5B56C5A5D1368180EA468C9362E"
+      }
+    },
+    "corpus": "same first1000 of allowed first10k;no generation/download",
+    "write": "two500-row default synced owned commits;intake/commits outside read timing",
+    "timing": "CLI request/response wall time;includes native JSON serialization+IPC;parent encode/decode+oracle excluded;not pure Rust API timing",
+    "queries": [
+      "the",
+      "quixote",
+      "he",
+      "the man",
+      "zx",
+      "transubstantiation"
+    ],
+    "pairs": 4,
+    "samples_per_process": 100,
+    "warmup_per_case": 1,
+    "candidate_delta_keys": 1000,
+    "cache": "warm OS cache;no eviction,power or background isolation",
+    "affinity_mask": 4,
+    "affinity_verified": true,
+    "memory": "not measured;caller/oracle stays in separate Python process",
+    "storage": "only owned fixed FDB slot reset;SQLite not touched;no DB copies"
+  },
+  "protected_unchanged": true,
+  "queries": [
+    {
+      "text": "the",
+      "n": 400,
+      "p95_ms": {
+        "control": 11.2351,
+        "candidate": 11.3773
+      },
+      "change_percent": 1.265676317967812,
+      "candidate_lower_pairs": 1
+    },
+    {
+      "text": "quixote",
+      "n": 400,
+      "p95_ms": {
+        "control": 2.0101,
+        "candidate": 2.0952
+      },
+      "change_percent": 4.233620217899614,
+      "candidate_lower_pairs": 0
+    },
+    {
+      "text": "he",
+      "n": 400,
+      "p95_ms": {
+        "control": 11.1653,
+        "candidate": 11.2364
+      },
+      "change_percent": 0.6367943539358434,
+      "candidate_lower_pairs": 2
+    },
+    {
+      "text": "the man",
+      "n": 400,
+      "p95_ms": {
+        "control": 11.4009,
+        "candidate": 11.5493
+      },
+      "change_percent": 1.301651623994604,
+      "candidate_lower_pairs": 2
+    },
+    {
+      "text": "zx",
+      "n": 400,
+      "p95_ms": {
+        "control": 2.1444,
+        "candidate": 2.1885
+      },
+      "change_percent": 2.0565193060996023,
+      "candidate_lower_pairs": 2
+    },
+    {
+      "text": "transubstantiation",
+      "n": 400,
+      "p95_ms": {
+        "control": 0.8482,
+        "candidate": 0.8508
+      },
+      "change_percent": 0.3065314784248985,
+      "candidate_lower_pairs": 3
+    }
+  ]
+}

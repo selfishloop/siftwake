@@ -1,5 +1,16 @@
 # FDB mimarisi — 0.3.1
 
+2026-10-22 yazma kazanımı yeni uygulamayla normal bounded profilde korundu.
+`BodyCache` miss'i ayrı call sınırındaki `fold_for_intake` üzerinden mevcut
+`fold_into`yu kullanır;String kapasitesi scalar sınıfıyla eşlenir,Unicode
+genişleme/kısalma ve çıktı eşitliği testlidir. Referans profil scalar kalır.
+Test-only scalar/exact/rounded seçimi normal library/CLI'ye derlenmez;
+yeni feature/format/durability veya sorgu mantığı değişikliği yoktur.
+Normal4 çiftte akışlı toplam-%4,51,owned-%4,81;CPU ikisinde4/4 düşük.
+Genel RAM/arama kabulü geçti denmez:karma man p95+%19,74,tek man kontrolü
++%1,26/3 çift hızlı/cycle p95 aynı;CLI quixote kuyruğu da açık.
+[Ayrıştırma,düzeltilmiş test,etkin karar ve kanıt](INTAKE-FOLD-RECOVERY-10K-20261022.md).
+
 2026-10-21–22 intake normalleştirme ayrı deneyi reddedildi. Bounded
 BodyCache miss'inde mevcut `fold_into` kullanımı dar aşamada-%81,6,
 gerçek akışlı toplam-%3,77/owned-%5,62 verdi;fakat private RAM azalmadı

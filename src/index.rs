@@ -299,6 +299,29 @@ pub(crate) struct BodyCache {
     entries: BTreeMap<String, BodyTerms>,
     bytes: usize,
 }
+
+#[cfg(feature = "bounded-engine")]
+fn folded_capacity(len: usize) -> usize {
+    if len == 0 {
+        0
+    } else {
+        len.max(8).next_power_of_two()
+    }
+}
+
+// Keep the scalar String's allocation class while replacing its CPU loop.
+#[cfg(feature = "bounded-engine")]
+#[inline(never)]
+fn fold_for_intake(text: &str) -> String {
+    let mut output = String::with_capacity(folded_capacity(text.len()));
+    fold_into(text, &mut output);
+    let target = folded_capacity(output.len());
+    if output.capacity() > target {
+        output.shrink_to(target);
+    }
+    output
+}
+
 impl BodyCache {
     pub fn get(&mut self, text: &str) -> Cow<'_, BodyTerms> {
         if self.entries.contains_key(text) {
@@ -307,6 +330,15 @@ impl BodyCache {
         let folded = {
             #[cfg(feature = "diagnostic-timing")]
             let _span = crate::timing::span("body.fold");
+            #[cfg(all(feature = "bounded-engine", test))]
+            {
+                intake_fold_tests::normalize(text)
+            }
+            #[cfg(all(feature = "bounded-engine", not(test)))]
+            {
+                fold_for_intake(text)
+            }
+            #[cfg(not(feature = "bounded-engine"))]
             fold(text)
         };
         #[cfg(feature = "experimental-shared-delta-text")]

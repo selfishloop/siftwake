@@ -1,0 +1,90 @@
+[
+  {
+    "command": [
+      "cargo",
+      "fmt",
+      "--check"
+    ],
+    "exit_code": 0,
+    "log": "docs\\benchmarks\\intake-fold-recovery-10k-20261022-check0.log"
+  },
+  {
+    "command": [
+      "cargo",
+      "test",
+      "--lib",
+      "--test",
+      "engine",
+      "--test",
+      "streamed_transactions",
+      "--test",
+      "segments",
+      "--test",
+      "native_binary"
+    ],
+    "exit_code": 0,
+    "log": "docs\\benchmarks\\intake-fold-recovery-10k-20261022-check1.log"
+  },
+  {
+    "command": [
+      "cargo",
+      "test",
+      "--all-features",
+      "--lib",
+      "--test",
+      "streamed_transactions"
+    ],
+    "exit_code": 0,
+    "log": "docs\\benchmarks\\intake-fold-recovery-10k-20261022-check2.log"
+  },
+  {
+    "command": [
+      "cargo",
+      "test",
+      "--no-default-features",
+      "--lib",
+      "--test",
+      "engine"
+    ],
+    "exit_code": 0,
+    "log": "docs\\benchmarks\\intake-fold-recovery-10k-20261022-check3.log"
+  },
+  {
+    "command": [
+      "cargo",
+      "clippy",
+      "--all-targets",
+      "--",
+      "-D",
+      "warnings"
+    ],
+    "exit_code": 0,
+    "log": "docs\\benchmarks\\intake-fold-recovery-10k-20261022-check4.log"
+  },
+  {
+    "command": [
+      "cargo",
+      "clippy",
+      "--all-features",
+      "--all-targets",
+      "--",
+      "-D",
+      "warnings"
+    ],
+    "exit_code": 0,
+    "log": "docs\\benchmarks\\intake-fold-recovery-10k-20261022-check5.log"
+  },
+  {
+    "command": [
+      "cargo",
+      "clippy",
+      "--no-default-features",
+      "--all-targets",
+      "--",
+      "-D",
+      "warnings"
+    ],
+    "exit_code": 0,
+    "log": "docs\\benchmarks\\intake-fold-recovery-10k-20261022-check6.log"
+  }
+]

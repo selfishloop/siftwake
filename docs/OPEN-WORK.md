@@ -1,5 +1,32 @@
 # FDB açık işler
 
+2026-10-22 yazma kazanımı korunarak normal bounded profilde etkinleştirildi.
+Yeni `fold_for_intake`,hızlı normalleştirme+scalar ile son kapasite eşlemesi+
+write-only call sınırı kullanır. Referans scalar,normal API/format/feature/
+WAL/guard/bütçe/delta eşikleri aynı;test-only mod seçimi üretimde yoktur.
+Normal4 çift/API:akışlı toplam19,661→18,774s (-%4,51),owned17,922→17,060s
+(-%4,81);CPU-%5,11/-%4,95,toplam ve CPU iki API'de4/4 düşük. RAM yaklaşık
+aynı:owned private79,89→79,85MiB;fiziksel/toplam RAM değildir. Akışlı son
+bakım+%1,85/3 çift yüksek,owned son bakım2/4 hızlı:ayrı bakım işi açık.
+
+Arama ayrıştırmasındaki ilk worker'ın ara Value ömrü CLI ile farklıydı;
+düzeltilmiş tek binary/üç mod kontrolünde büyük JSON artışı tekrarlanmadı.
+NormalCLI eski/eski A/A da quixote+%3,94 verdi;yeni A/B+%4,23/4 çift yüksek.
+Bu iki değer çıkarılıp kesin etki hesabı yapılmaz,CLI kuyruğu açık. AND yeni
+A/B+%1,30/2 çift hızlı;önceki+%7,20/4 çift yüksek aynı tutarlılıkta kalmadı.
+Yeni aynı-program native kontrolünde altı sorguda rounded p95 düşük,fakat
+bu release test binary'si normal genel arama performans garantisi değildir.
+
+Karma dört sorgu yoğun kontrolde man p95+%19,74/4 çift yüksek,tipik blok
++%0,53;zx+%7,16/3 çift yüksek. Bunlar ayrı açık tail işleri. Man tek başına
+kontrolde p95+%1,26/3 çift hızlı,cycle p95 yaklaşık aynı. Karma yük/ortam
+payları kesin ayrıştırılmadı;"dalgalanma" diye kapanmadı. Genel38-case tam
+doğruluk az-örnek smoke geçti,p95 kolonları genel hız sonucu sayılmaz.
+Yazma kazanımı bu açıkları çözülmüş ilan etmeden kalıcı tutuldu.
+16 normal süreçte10k tam payload+dört contains oracle,API içi core SHA-eşit;
+SQLite bu follow-up'ta yazılmadı. Diğer caller/query RAM,açılış,disk/geçici
+alan,eşzamanlı/gerçek-soğuk yük işleri açık. [Ölçüler ve etkin karar](INTAKE-FOLD-RECOVERY-10K-20261022.md).
+
 2026-10-21–22 bağımsız intake fold deneyi tamamlandı/reddedildi. Aynı10k,
 normal4 çift/API:akışlı yazma+bakım20,251→19,488s (-%3,77),owned19,263→
 18,180s (-%5,62),ikisi4/4 hızlı. Akışlı son bakım+%5,58/4 çift yüksek;

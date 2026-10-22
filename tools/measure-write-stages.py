@@ -44,6 +44,8 @@ def main():
     parser.add_argument('--owned-pairs', type=int, choices=(2, 4), default=2)
     parser.add_argument('--apis', nargs='+', choices=('streamed', 'owned'),
                         default=['streamed', 'owned'])
+    parser.add_argument('--skip-sqlite', action='store_true',
+                        help='Isolated FDB follow-up;do not repeat the existing SQLite comparison')
     args = parser.parse_args()
     args.apis = list(dict.fromkeys(args.apis))
     prefix = ROOT / args.prefix
@@ -52,15 +54,19 @@ def main():
         raise RuntimeError('Unused docs/benchmarks prefix required')
     programs = dict(control=ROOT / args.control, candidate=ROOT / args.candidate,
                     sqlite=ROOT / args.sqlite)
+    sqlite_program = programs['sqlite']
+    if args.skip_sqlite:
+        programs.pop('sqlite')
     design = dict(
         programs={k: dict(path=str(v.relative_to(ROOT)), sha256=sha(v)) for k, v in programs.items()},
         streamed_pairs=args.pairs if 'streamed' in args.apis else 0,
         owned_pairs=args.owned_pairs if 'owned' in args.apis else 0,
+        sqlite_remeasured=not args.skip_sqlite,
         corpus='same existing first10000;264842858 text bytes;no corpus generation/download',
         transactions='500 records/batch;20 acknowledged synced WAL commits;unchanged normal durability',
         timing='normal release;no diagnostic features;input CRC/JSON and40 boundary gets included in ingest',
         maintenance='final flush/drain for FDB;FTS optimize+WAL checkpoint for SQLite;not identical algorithms',
-        api='FDB APIs: ' + ','.join(args.apis) + ';SQLite input remains streaming',
+        api='FDB APIs: ' + ','.join(args.apis) + (';SQLite not remeasured' if args.skip_sqlite else ';SQLite input remains streaming'),
         sqlite='bundled FTS5 trigram;FULL WAL;cache2MiB;mmap0;tempFILE;not all FDB field/link/guard features',
         cache='warm OS cache;no eviction;sequential processes;no power/hardware isolation',
         memory='OS lifetime private commit/working set;not physical RAM/system RAM;phase samples may miss peaks',
@@ -78,6 +84,7 @@ def main():
         for pair in range(pairs):
             # Reverse adjacent pairs, including SQLite's position.
             order = ['control', 'candidate', 'sqlite'] if pair % 2 == 0 else ['sqlite', 'candidate', 'control']
+            order = [variant for variant in order if variant in programs]
             design['orders'].append(dict(api=api, pair=pair, engines=order))
             write(report('design.json'), design)
             for variant in order:
@@ -86,7 +93,7 @@ def main():
                 command = ['powershell.exe', '-NoProfile', '-ExecutionPolicy', 'Bypass', '-File',
                            str(ROOT / 'tools/measure-content-memory.ps1'), '-Prefix', leaf,
                            '-FdbExecutable', str(programs[variant]),
-                           '-SqliteExecutable', str(programs['sqlite']),
+                           '-SqliteExecutable', str(sqlite_program),
                            '-FdbFeatures', 'normal bounded-engine;no diagnostics',
                            '-Engines', engine, '-IdleRuns', '0']
                 if api == 'streamed' and engine == 'fdb':

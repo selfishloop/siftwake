@@ -37,6 +37,20 @@ senkron WAL korunur. Akışlı API kendi admission sınırına sığmayan işlem
 WAL append öncesi reddeder. Normal API bu daha dar sınıra otomatik
 yönlendirilmez; mevcut geçerli büyük belgeler reddedilmeye başlanmaz.
 
+## Yazma normalleştirmesi — 22 Ekim 2026
+
+Normal bounded profilde gövdenin arama için hazırlanması `fold_for_intake`
+üzerinden mevcut hızlı `fold_into` ile yapılır. Geçici String'in son kapasitesi
+scalar yolun sınıfıyla eşlenir;Türkçe kısalma ve Unicode genişlemesi testlidir.
+Bu yolun test-only scalar/exact/rounded kontrolü normal library/CLI'de yoktur.
+Referans `--no-default-features` profili scalar normalleştirmeyi korur.
+
+Aynı10k/4 çiftte akışlı yazma+bakım-%4,51,owned-%4,81;CPU her iki API'de
+4/4 düşük. Genel RAM veya bütün sorgu p95'leri bu sonuçla kapanmaz. Karma
+yükteki man kuyruğu,CLI quixote kuyruğu ve ayrı son bakım işi açık tutulur;
+kanıtlı yazma kazanımı varsayılanda korunur. Format/WAL/guard/admission/delta
+eşikleri ve sorgu semantiği aynı. [Ölçüm ve kapsam](INTAKE-FOLD-RECOVERY-10K-20261022.md).
+
 ## Açılış ve arama
 
 `Database::open` tam kaynak doğrulamasını korur. Sayfalı metadata/terim

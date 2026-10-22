@@ -1,0 +1,521 @@
+{
+  "design": {
+    "pairs": 4,
+    "blocks_per_pair": 2,
+    "repeats_per_block": 25,
+    "affinity_mask": 4,
+    "pages_only": false,
+    "case_indices": [
+      0,
+      17,
+      20,
+      22
+    ],
+    "dense_selected_cases": true,
+    "cache": "warm OS cache; every block opens and verifies/warmups before query timing; no eviction",
+    "corpus": "same existing first10000; no generation/reset/copy",
+    "source_validation": "complete source check before timed search; unchanged CRC/schema/key/version checks",
+    "same_executable": false,
+    "programs": {
+      "control": {
+        "path": "output\\intake-fold-10k-20261021-control-read.exe",
+        "sha256": "30DA15342E1633CB58A8C07681A0076F6522063D449508E469B34B52460AC875"
+      },
+      "fdb": {
+        "path": "output\\intake-fold-recovery-candidate-read-20261022.exe",
+        "sha256": "0BE3F4112FA58E9656B58B15551618A307CFF09A5E45B94D956BCC295B2E7612"
+      }
+    },
+    "balanced_block_first_position": true,
+    "orders": [
+      {
+        "pair": 0,
+        "block": 0,
+        "engines": [
+          "control",
+          "fdb"
+        ],
+        "command": {
+          "id": 0,
+          "seed": 0,
+          "repeats": 25
+        }
+      },
+      {
+        "pair": 0,
+        "block": 1,
+        "engines": [
+          "fdb",
+          "control"
+        ],
+        "command": {
+          "id": 1,
+          "seed": 1,
+          "repeats": 25
+        }
+      },
+      {
+        "pair": 1,
+        "block": 0,
+        "engines": [
+          "fdb",
+          "control"
+        ],
+        "command": {
+          "id": 2,
+          "seed": 10000,
+          "repeats": 25
+        }
+      },
+      {
+        "pair": 1,
+        "block": 1,
+        "engines": [
+          "control",
+          "fdb"
+        ],
+        "command": {
+          "id": 3,
+          "seed": 10001,
+          "repeats": 25
+        }
+      },
+      {
+        "pair": 2,
+        "block": 0,
+        "engines": [
+          "control",
+          "fdb"
+        ],
+        "command": {
+          "id": 4,
+          "seed": 20000,
+          "repeats": 25
+        }
+      },
+      {
+        "pair": 2,
+        "block": 1,
+        "engines": [
+          "fdb",
+          "control"
+        ],
+        "command": {
+          "id": 5,
+          "seed": 20001,
+          "repeats": 25
+        }
+      },
+      {
+        "pair": 3,
+        "block": 0,
+        "engines": [
+          "fdb",
+          "control"
+        ],
+        "command": {
+          "id": 6,
+          "seed": 30000,
+          "repeats": 25
+        }
+      },
+      {
+        "pair": 3,
+        "block": 1,
+        "engines": [
+          "control",
+          "fdb"
+        ],
+        "command": {
+          "id": 7,
+          "seed": 30001,
+          "repeats": 25
+        }
+      }
+    ],
+    "observe_thread": false,
+    "candidate_reuse_results": false,
+    "fresh_caller_results": false
+  },
+  "queries": [
+    {
+      "text": "quixote",
+      "kind": "word",
+      "offset": 0,
+      "limit": 50,
+      "total": 56,
+      "late_matches": 8,
+      "control": {
+        "n": 200,
+        "p50_ms": 2.0361,
+        "p95_ms": 2.4257,
+        "p99_ms": 2.7111,
+        "per_process_pair_p95": [
+          2.2377,
+          2.6401,
+          2.4636,
+          2.2006
+        ],
+        "block_medians": [
+          [
+            2.0473000000000003,
+            1.9875
+          ],
+          [
+            2.0624,
+            1.9948000000000001
+          ],
+          [
+            2.0422000000000002,
+            2.0677999999999996
+          ],
+          [
+            1.9986000000000002,
+            2.0709999999999997
+          ]
+        ]
+      },
+      "fdb": {
+        "n": 200,
+        "p50_ms": 2.03125,
+        "p95_ms": 2.4735,
+        "p99_ms": 2.9684,
+        "per_process_pair_p95": [
+          2.4735,
+          2.4583,
+          2.5206999999999997,
+          2.5119000000000002
+        ],
+        "block_medians": [
+          [
+            2.0095,
+            1.9259
+          ],
+          [
+            2.1079,
+            2.0657
+          ],
+          [
+            2.0254000000000003,
+            1.9559
+          ],
+          [
+            2.0566999999999998,
+            2.0534
+          ]
+        ]
+      },
+      "change_p95_percent": 1.9705651976749117,
+      "paired_p95_change_percent": [
+        10.53760557715513,
+        -6.8861027991363954,
+        2.3177463874005433,
+        14.146141961283298
+      ],
+      "faster_process_pairs": 1,
+      "paired_block_median_changes_percent": [
+        -1.8463341962585034,
+        -3.0993710691823995,
+        2.206167571761064,
+        3.554241026669347,
+        -0.8226422485554719,
+        -5.41154850565817,
+        2.907034924447083,
+        -0.8498309995171316
+      ],
+      "median_block_change_percent": -0.8362366240363017,
+      "faster_blocks": 5,
+      "leave_one_pair_out_p95_changes_percent": [
+        1.3148872665671885,
+        8.243557700594707,
+        2.609308885754591,
+        0.40185094982951863
+      ]
+    },
+    {
+      "text": "man",
+      "kind": "common",
+      "offset": 0,
+      "limit": 50,
+      "total": 9932,
+      "late_matches": 61,
+      "control": {
+        "n": 200,
+        "p50_ms": 1.1298,
+        "p95_ms": 1.3392,
+        "p99_ms": 1.5134,
+        "per_process_pair_p95": [
+          1.3414,
+          1.3864,
+          1.3742999999999999,
+          1.3246
+        ],
+        "block_medians": [
+          [
+            1.1195000000000002,
+            1.1187
+          ],
+          [
+            1.1222999999999999,
+            1.1502999999999999
+          ],
+          [
+            1.1556,
+            1.1731
+          ],
+          [
+            1.1019,
+            1.1749
+          ]
+        ]
+      },
+      "fdb": {
+        "n": 200,
+        "p50_ms": 1.14255,
+        "p95_ms": 1.6035000000000001,
+        "p99_ms": 2.1094999999999997,
+        "per_process_pair_p95": [
+          1.7293,
+          1.5037,
+          1.6035000000000001,
+          1.6091
+        ],
+        "block_medians": [
+          [
+            1.0945,
+            1.1058000000000001
+          ],
+          [
+            1.1605999999999999,
+            1.1761
+          ],
+          [
+            1.1773,
+            1.1352
+          ],
+          [
+            1.1139,
+            1.1746
+          ]
+        ]
+      },
+      "change_p95_percent": 19.735663082437284,
+      "paired_p95_change_percent": [
+        28.91754882958104,
+        8.46076168493941,
+        16.67758131412358,
+        21.478182092707222
+      ],
+      "faster_process_pairs": 0,
+      "paired_block_median_changes_percent": [
+        -2.2331397945511533,
+        -1.1531241619737065,
+        3.412634767887379,
+        2.242893158306525,
+        1.8778123918310907,
+        -3.2307561162731258,
+        1.0890280424720844,
+        -0.025534088007483913
+      ],
+      "median_block_change_percent": 0.5317469772323002,
+      "faster_blocks": 4,
+      "leave_one_pair_out_p95_changes_percent": [
+        20.391921315414073,
+        20.15382317801673,
+        20.921319606222276,
+        16.67758131412358
+      ]
+    },
+    {
+      "text": "zx",
+      "kind": "short-negative",
+      "offset": 0,
+      "limit": 50,
+      "total": 0,
+      "late_matches": 0,
+      "control": {
+        "n": 200,
+        "p50_ms": 141.8533,
+        "p95_ms": 165.37779999999998,
+        "p99_ms": 186.6068,
+        "per_process_pair_p95": [
+          154.9886,
+          149.4922,
+          186.6068,
+          163.28599999999997
+        ],
+        "block_medians": [
+          [
+            142.2268,
+            140.9849
+          ],
+          [
+            141.8597,
+            141.4508
+          ],
+          [
+            145.5465,
+            142.15890000000002
+          ],
+          [
+            141.7074,
+            142.538
+          ]
+        ]
+      },
+      "fdb": {
+        "n": 200,
+        "p50_ms": 142.7131,
+        "p95_ms": 177.227,
+        "p99_ms": 190.05349999999999,
+        "per_process_pair_p95": [
+          178.07829999999998,
+          177.3738,
+          160.9689,
+          190.05349999999999
+        ],
+        "block_medians": [
+          [
+            146.9184,
+            141.8689
+          ],
+          [
+            141.674,
+            141.7858
+          ],
+          [
+            142.2959,
+            143.3642
+          ],
+          [
+            145.4862,
+            142.3684
+          ]
+        ]
+      },
+      "change_p95_percent": 7.164927819816214,
+      "paired_p95_change_percent": [
+        14.89767634522796,
+        18.650872754565118,
+        -13.738995577867474,
+        16.393015935230217
+      ],
+      "faster_process_pairs": 1,
+      "paired_block_median_changes_percent": [
+        3.2986750738960513,
+        0.6270175032929037,
+        -0.13090398471165,
+        0.23683146366086927,
+        -2.2333755878705563,
+        0.8478540562708359,
+        2.6666215031819096,
+        -0.11898581430916932
+      ],
+      "median_block_change_percent": 0.4319244834768865,
+      "faster_blocks": 3,
+      "leave_one_pair_out_p95_changes_percent": [
+        1.1140262123814582,
+        4.253629497164635,
+        12.056509539807546,
+        1.355650975212086
+      ]
+    },
+    {
+      "text": "quixote whale",
+      "kind": "and",
+      "offset": 0,
+      "limit": 50,
+      "total": 44,
+      "late_matches": 8,
+      "control": {
+        "n": 200,
+        "p50_ms": 2.0039000000000002,
+        "p95_ms": 2.4939,
+        "p99_ms": 2.7185,
+        "per_process_pair_p95": [
+          2.7023,
+          2.4215,
+          2.6271,
+          2.3603
+        ],
+        "block_medians": [
+          [
+            2.0284999999999997,
+            2.003
+          ],
+          [
+            2.006,
+            1.9929000000000001
+          ],
+          [
+            2.0318,
+            1.9938
+          ],
+          [
+            2.0048000000000004,
+            2.0243
+          ]
+        ]
+      },
+      "fdb": {
+        "n": 200,
+        "p50_ms": 2.0040000000000004,
+        "p95_ms": 2.497,
+        "p99_ms": 2.9080999999999997,
+        "per_process_pair_p95": [
+          2.6026000000000002,
+          2.7961,
+          2.3313,
+          2.5571
+        ],
+        "block_medians": [
+          [
+            1.9975,
+            2.078
+          ],
+          [
+            1.9677000000000002,
+            1.9866
+          ],
+          [
+            1.9627999999999999,
+            2.0427
+          ],
+          [
+            1.9915000000000003,
+            2.0093
+          ]
+        ]
+      },
+      "change_p95_percent": 0.12430330005213097,
+      "paired_p95_change_percent": [
+        -3.689449728009464,
+        15.469750154862695,
+        -11.259563777549387,
+        8.337923145362879
+      ],
+      "faster_process_pairs": 2,
+      "paired_block_median_changes_percent": [
+        -1.5282228247473384,
+        3.744383424862696,
+        -1.9092721834496285,
+        -0.31612223393046035,
+        -3.396003543655879,
+        2.452603069515491,
+        -0.6634078212290562,
+        -0.7409968878130724
+      ],
+      "median_block_change_percent": -0.7022023545210643,
+      "faster_blocks": 6,
+      "leave_one_pair_out_p95_changes_percent": [
+        1.3721987658330548,
+        -2.748935831642585,
+        4.3586350695697496,
+        -1.3628283626308524
+      ]
+    }
+  ],
+  "lower_p95_cases": 0,
+  "higher_p95_cases": 4,
+  "interpretation": "Short exclusive sessions, per-block source validation/warmup outside timing; two resident oracle workers, no concurrent database queries. Not identical to a continuously open single-process matrix. Pooled p95 and block medians describe different distributions; no automatic significance claim."
+}

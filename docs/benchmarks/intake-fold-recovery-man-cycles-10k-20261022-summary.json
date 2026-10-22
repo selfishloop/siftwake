@@ -1,0 +1,252 @@
+{
+  "design": {
+    "pairs": 4,
+    "blocks_per_pair": 2,
+    "repeats_per_block": 25,
+    "affinity_mask": 4,
+    "pages_only": false,
+    "case_indices": [
+      17
+    ],
+    "dense_selected_cases": true,
+    "cache": "warm OS cache; every block opens and verifies/warmups before query timing; no eviction",
+    "corpus": "same existing first10000; no generation/reset/copy",
+    "source_validation": "complete source check before timed search; unchanged CRC/schema/key/version checks",
+    "same_executable": false,
+    "programs": {
+      "control": {
+        "path": "output\\intake-fold-10k-20261021-control-read.exe",
+        "sha256": "30DA15342E1633CB58A8C07681A0076F6522063D449508E469B34B52460AC875"
+      },
+      "fdb": {
+        "path": "output\\intake-fold-recovery-candidate-read-20261022.exe",
+        "sha256": "0BE3F4112FA58E9656B58B15551618A307CFF09A5E45B94D956BCC295B2E7612"
+      }
+    },
+    "balanced_block_first_position": true,
+    "orders": [
+      {
+        "pair": 0,
+        "block": 0,
+        "engines": [
+          "control",
+          "fdb"
+        ],
+        "command": {
+          "id": 0,
+          "seed": 0,
+          "repeats": 25
+        }
+      },
+      {
+        "pair": 0,
+        "block": 1,
+        "engines": [
+          "fdb",
+          "control"
+        ],
+        "command": {
+          "id": 1,
+          "seed": 1,
+          "repeats": 25
+        }
+      },
+      {
+        "pair": 1,
+        "block": 0,
+        "engines": [
+          "fdb",
+          "control"
+        ],
+        "command": {
+          "id": 2,
+          "seed": 10000,
+          "repeats": 25
+        }
+      },
+      {
+        "pair": 1,
+        "block": 1,
+        "engines": [
+          "control",
+          "fdb"
+        ],
+        "command": {
+          "id": 3,
+          "seed": 10001,
+          "repeats": 25
+        }
+      },
+      {
+        "pair": 2,
+        "block": 0,
+        "engines": [
+          "control",
+          "fdb"
+        ],
+        "command": {
+          "id": 4,
+          "seed": 20000,
+          "repeats": 25
+        }
+      },
+      {
+        "pair": 2,
+        "block": 1,
+        "engines": [
+          "fdb",
+          "control"
+        ],
+        "command": {
+          "id": 5,
+          "seed": 20001,
+          "repeats": 25
+        }
+      },
+      {
+        "pair": 3,
+        "block": 0,
+        "engines": [
+          "fdb",
+          "control"
+        ],
+        "command": {
+          "id": 6,
+          "seed": 30000,
+          "repeats": 25
+        }
+      },
+      {
+        "pair": 3,
+        "block": 1,
+        "engines": [
+          "control",
+          "fdb"
+        ],
+        "command": {
+          "id": 7,
+          "seed": 30001,
+          "repeats": 25
+        }
+      }
+    ],
+    "observe_thread": true,
+    "candidate_reuse_results": false,
+    "fresh_caller_results": false
+  },
+  "queries": [
+    {
+      "text": "man",
+      "kind": "common",
+      "offset": 0,
+      "limit": 50,
+      "total": 9932,
+      "late_matches": 61,
+      "control": {
+        "n": 200,
+        "p50_ms": 1.0654,
+        "p95_ms": 1.4739,
+        "p99_ms": 1.6363,
+        "per_process_pair_p95": [
+          1.203,
+          1.3858,
+          1.5148,
+          1.6363
+        ],
+        "block_medians": [
+          [
+            1.0331,
+            1.0457
+          ],
+          [
+            0.9959999999999999,
+            1.1486
+          ],
+          [
+            1.0234,
+            1.0617
+          ],
+          [
+            1.1081999999999999,
+            1.1754
+          ]
+        ],
+        "cycles": {
+          "p50": 4034613.5,
+          "p95": 5583674
+        },
+        "cpu_ms": {
+          "p50": 0.0,
+          "p95": 0.0
+        }
+      },
+      "fdb": {
+        "n": 200,
+        "p50_ms": 1.0645,
+        "p95_ms": 1.4924000000000002,
+        "p99_ms": 1.6177,
+        "per_process_pair_p95": [
+          1.5775,
+          1.2498,
+          1.4295,
+          1.4924000000000002
+        ],
+        "block_medians": [
+          [
+            1.0371,
+            1.2289
+          ],
+          [
+            1.0284,
+            1.0269000000000001
+          ],
+          [
+            1.0717999999999999,
+            1.1217
+          ],
+          [
+            1.1685,
+            1.0176
+          ]
+        ],
+        "cycles": {
+          "p50": 4019821.0,
+          "p95": 5583296
+        },
+        "cpu_ms": {
+          "p50": 0.0,
+          "p95": 15.625
+        }
+      },
+      "change_p95_percent": 1.2551733496166673,
+      "paired_p95_change_percent": [
+        31.130507065669157,
+        -9.81382594891037,
+        -5.631106416688669,
+        -8.794230886756704
+      ],
+      "faster_process_pairs": 3,
+      "paired_block_median_changes_percent": [
+        0.3871842028845274,
+        17.519365018647793,
+        3.2530120481927716,
+        -10.595507574438434,
+        4.729333593902663,
+        5.651313930488833,
+        5.441256090958335,
+        -13.425216947422147
+      ],
+      "median_block_change_percent": 3.991172821047717,
+      "faster_blocks": 2,
+      "leave_one_pair_out_p95_changes_percent": [
+        -6.674148402429358,
+        -0.534724055980984,
+        6.517585450428132,
+        7.247311827956993
+      ]
+    }
+  ],
+  "lower_p95_cases": 0,
+  "higher_p95_cases": 1,
+  "interpretation": "Short exclusive sessions, per-block source validation/warmup outside timing; two resident oracle workers, no concurrent database queries. Not identical to a continuously open single-process matrix. Pooled p95 and block medians describe different distributions; no automatic significance claim."
+}

@@ -1,0 +1,311 @@
+{
+  "design": {
+    "programs": {
+      "control": {
+        "path": "output\\intake-fold-10k-20261021-control-write.exe",
+        "sha256": "41A31482C433260A6328BD1E08F6B408429F16854DBF5DDA8EDE77EAE35FD77B"
+      },
+      "candidate": {
+        "path": "output\\intake-fold-recovery-candidate-write-20261022.exe",
+        "sha256": "B687A98DBF7B0ABF63F69129926329900CAEC11ADE92052CD7AA99AB0A95A8FF"
+      }
+    },
+    "streamed_pairs": 4,
+    "owned_pairs": 4,
+    "sqlite_remeasured": false,
+    "corpus": "same existing first10000;264842858 text bytes;no corpus generation/download",
+    "transactions": "500 records/batch;20 acknowledged synced WAL commits;unchanged normal durability",
+    "timing": "normal release;no diagnostic features;input CRC/JSON and40 boundary gets included in ingest",
+    "maintenance": "final flush/drain for FDB;FTS optimize+WAL checkpoint for SQLite;not identical algorithms",
+    "api": "FDB APIs: streamed,owned;SQLite not remeasured",
+    "sqlite": "bundled FTS5 trigram;FULL WAL;cache2MiB;mmap0;tempFILE;not all FDB field/link/guard features",
+    "cache": "warm OS cache;no eviction;sequential processes;no power/hardware isolation",
+    "memory": "OS lifetime private commit/working set;not physical RAM/system RAM;phase samples may miss peaks",
+    "storage": "only fixed FDB/SQLite slots reset through benchmark-workspace.ps1;no DB copies",
+    "verification": "all10000 payloads after every run outside timing;FDB also4 full contains page oracles",
+    "orders": [
+      {
+        "api": "streamed",
+        "pair": 0,
+        "engines": [
+          "control",
+          "candidate"
+        ]
+      },
+      {
+        "api": "streamed",
+        "pair": 1,
+        "engines": [
+          "candidate",
+          "control"
+        ]
+      },
+      {
+        "api": "streamed",
+        "pair": 2,
+        "engines": [
+          "control",
+          "candidate"
+        ]
+      },
+      {
+        "api": "streamed",
+        "pair": 3,
+        "engines": [
+          "candidate",
+          "control"
+        ]
+      },
+      {
+        "api": "owned",
+        "pair": 0,
+        "engines": [
+          "control",
+          "candidate"
+        ]
+      },
+      {
+        "api": "owned",
+        "pair": 1,
+        "engines": [
+          "candidate",
+          "control"
+        ]
+      },
+      {
+        "api": "owned",
+        "pair": 2,
+        "engines": [
+          "control",
+          "candidate"
+        ]
+      },
+      {
+        "api": "owned",
+        "pair": 3,
+        "engines": [
+          "candidate",
+          "control"
+        ]
+      }
+    ]
+  },
+  "protected_unchanged": true,
+  "fdb_sources_indexes_ready_byte_equal": true,
+  "apis": {
+    "streamed": {
+      "write_ms": {
+        "medians": {
+          "control": 18989.92455,
+          "candidate": 18083.3908
+        },
+        "candidate_change_percent": -4.77376172618863,
+        "candidate_lower_pairs": 4,
+        "pairs": 4,
+        "paired_changes_percent": [
+          -8.76322025879639,
+          -3.72822637468444,
+          -4.977083864229471,
+          -5.46749038746187
+        ]
+      },
+      "maintenance_ms": {
+        "medians": {
+          "control": 670.8639499999999,
+          "candidate": 683.2417
+        },
+        "candidate_change_percent": 1.8450462273312151,
+        "candidate_lower_pairs": 1,
+        "pairs": 4,
+        "paired_changes_percent": [
+          5.786550020375292,
+          2.0405777033602357,
+          1.4643494482284858,
+          -4.530105870608692
+        ]
+      },
+      "total_ms": {
+        "medians": {
+          "control": 19661.394350000002,
+          "candidate": 18773.8091
+        },
+        "candidate_change_percent": -4.514355565021278,
+        "candidate_lower_pairs": 4,
+        "pairs": 4,
+        "paired_changes_percent": [
+          -8.295665508973048,
+          -3.531720937402494,
+          -4.7565240405198494,
+          -5.435265749546203
+        ]
+      },
+      "cpu_ms": {
+        "medians": {
+          "control": 18179.6875,
+          "candidate": 17250.0
+        },
+        "candidate_change_percent": -5.113880532874948,
+        "candidate_lower_pairs": 4,
+        "pairs": 4,
+        "paired_changes_percent": [
+          -9.640522875816993,
+          -4.6888320545609545,
+          -4.423243712055502,
+          -5.97920277296361
+        ]
+      },
+      "peak_private_bytes": {
+        "medians": {
+          "control": 10592256.0,
+          "candidate": 10512384.0
+        },
+        "candidate_change_percent": -0.7540603248259892,
+        "candidate_lower_pairs": 3,
+        "pairs": 4,
+        "paired_changes_percent": [
+          -1.7753763025858738,
+          -0.46385775028990883,
+          2.126821583300509,
+          -1.0444874274661564
+        ]
+      },
+      "peak_working_set_bytes": {
+        "medians": {
+          "control": 14524416.0,
+          "candidate": 14620672.0
+        },
+        "candidate_change_percent": 0.6627185561195681,
+        "candidate_lower_pairs": 1,
+        "pairs": 4,
+        "paired_changes_percent": [
+          3.117913832199548,
+          0.3394625176803334,
+          -0.7028394714647224,
+          0.7008690776562965
+        ]
+      },
+      "disk_bytes": {
+        "medians": {
+          "control": 349805698.0,
+          "candidate": 349805698.0
+        },
+        "candidate_change_percent": 0.0,
+        "candidate_lower_pairs": 0,
+        "pairs": 4,
+        "paired_changes_percent": [
+          0.0,
+          0.0,
+          0.0,
+          0.0
+        ]
+      }
+    },
+    "owned": {
+      "write_ms": {
+        "medians": {
+          "control": 14575.766200000002,
+          "candidate": 13706.73135
+        },
+        "candidate_change_percent": -5.96218982985609,
+        "candidate_lower_pairs": 4,
+        "pairs": 4,
+        "paired_changes_percent": [
+          -5.965622878669574,
+          -3.507329336284304,
+          -6.631301375917042,
+          -6.57065726300049
+        ]
+      },
+      "maintenance_ms": {
+        "medians": {
+          "control": 3355.1021499999997,
+          "candidate": 3353.5730999999996
+        },
+        "candidate_change_percent": -0.045573873212778615,
+        "candidate_lower_pairs": 2,
+        "pairs": 4,
+        "paired_changes_percent": [
+          2.683567963362221,
+          10.784779726164206,
+          -3.9152625539393138,
+          -4.6371905848120125
+        ]
+      },
+      "total_ms": {
+        "medians": {
+          "control": 17922.461450000003,
+          "candidate": 17060.30445
+        },
+        "candidate_change_percent": -4.810483216299522,
+        "candidate_lower_pairs": 4,
+        "pairs": 4,
+        "paired_changes_percent": [
+          -4.369100643085478,
+          -0.8212857993676992,
+          -6.118348326720369,
+          -6.199920351124089
+        ]
+      },
+      "cpu_ms": {
+        "medians": {
+          "control": 16726.5625,
+          "candidate": 15898.4375
+        },
+        "candidate_change_percent": -4.950957496496966,
+        "candidate_lower_pairs": 4,
+        "pairs": 4,
+        "paired_changes_percent": [
+          -5.023255813953487,
+          -4.708097928436916,
+          -4.878048780487809,
+          -5.519779208831643
+        ]
+      },
+      "peak_private_bytes": {
+        "medians": {
+          "control": 83773440.0,
+          "candidate": 83724288.0
+        },
+        "candidate_change_percent": -0.05867253392005667,
+        "candidate_lower_pairs": 3,
+        "pairs": 4,
+        "paired_changes_percent": [
+          -0.10768477728829717,
+          -0.2102689486552567,
+          -0.10245901639344135,
+          0.08799804448789139
+        ]
+      },
+      "peak_working_set_bytes": {
+        "medians": {
+          "control": 87312384.0,
+          "candidate": 87287808.0
+        },
+        "candidate_change_percent": -0.02814720990781394,
+        "candidate_lower_pairs": 1,
+        "pairs": 4,
+        "paired_changes_percent": [
+          0.08924796843439164,
+          -0.1640881387716786,
+          0.19678583142013206,
+          0.04694174529409345
+        ]
+      },
+      "disk_bytes": {
+        "medians": {
+          "control": 349805698.0,
+          "candidate": 349805698.0
+        },
+        "candidate_change_percent": 0.0,
+        "candidate_lower_pairs": 0,
+        "pairs": 4,
+        "paired_changes_percent": [
+          0.0,
+          0.0,
+          0.0,
+          0.0
+        ]
+      }
+    }
+  }
+}

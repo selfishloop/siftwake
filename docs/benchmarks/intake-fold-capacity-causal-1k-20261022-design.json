@@ -1,0 +1,47 @@
+{
+  "program": "output\\intake-fold-capacity-causal-20261022.exe",
+  "sha256": "6D3CAF2A8748CC308F5DC0B64CB2C011319531D5A104DAF00014E5B67D3BB1F3",
+  "same_executable": true,
+  "pairs": 4,
+  "modes": [
+    "scalar",
+    "fast",
+    "rounded"
+  ],
+  "affinity_mask": 4,
+  "affinity_verified": true,
+  "source_sha256": {
+    "src/index.rs": "68A5F4ABE66271864B478F8B2BE9797062BF4A3826C2F671D62BD65E09423CE2",
+    "src/index/intake_fold_tests.rs": "814005060E5A39EFA20E1622117EAD3FE5216BD8D027D70F6AB6F132BBDFCFD4",
+    "tools/measure-intake-causal.py": "EE5912112A85266FF170EBBE8C59DA3C93F5FDD0F3EE83034DE466B09C2B998D"
+  },
+  "orders": [
+    [
+      "scalar",
+      "fast",
+      "rounded"
+    ],
+    [
+      "rounded",
+      "fast",
+      "scalar"
+    ],
+    [
+      "fast",
+      "scalar",
+      "rounded"
+    ],
+    [
+      "rounded",
+      "scalar",
+      "fast"
+    ]
+  ],
+  "corpus": "same existing first1000 of permitted first10k;two500-row synced owned commits;no corpus generation",
+  "control": "test-only scalar/fast intake switch;one compiled search and serialization path;not a production runtime option",
+  "timing": "native search,page-to-Value,response wrapper,Value Display to fresh Vec separately;one warmup+200 samples/case/process;checks/CRC/drops outside brackets",
+  "validation": "independent total/key/version/page oracle;all encoded lengths/CRCs cross-mode identical;not an independent full-payload oracle",
+  "cache": "warm OS cache;no eviction or power/background isolation;query/serialization interleaved as in CLI preparation",
+  "limits": "release test binary,not normal release speed;no pipe/IPC/system-I/O in these timings;no RAM claim",
+  "storage": "only owned fixed FDB slot reset;no DB copies;restore10k after this probe"
+}

@@ -1,5 +1,12 @@
 # FDB
 
+[Yazma kazanımı varsayılanda korundu](docs/INTAKE-FOLD-RECOVERY-10K-20261022.md):
+aynı10k/4 çiftte yeni normal akışlı yazma+bakım-%4,51,owned-%4,81;
+CPU iki API'de de4/4 düşük. Scalar ile kapasitesi eşlenen hızlı intake
+normalleştirmesi etkin. Tek program kontrolü ve doğru JSON ömrü ile arama/
+CLI etkileri ayrıldı. Genel RAM/arama kapısı açık;karma man p95 ve CLI
+kuyruğu ayrı izleniyor. Veri/format/WAL/protokol aynı,yeni corpus yok.
+
 [Yazma normalleştirmesi tek başına ölçüldü — genel geçiş reddedildi](docs/INTAKE-FOLD-10K-20261021.md):
 aynı10k/4 çiftte akışlı yazma+bakım-%3,77,owned-%5,62;ancak RAM azalmadı.
 Yazma sonrası AND p95 artışı aynı çekirdekte4/4 çiftte kaldı (+%7,20).

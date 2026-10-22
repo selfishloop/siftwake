@@ -1,0 +1,282 @@
+{
+  "base_commit": "1f5e0ba",
+  "decision": "Preserve verified write improvement in normal bounded-engine;general RAM/read p95 remain open",
+  "active_default": true,
+  "completed_client_date": "2026-10-22",
+  "checks": [
+    {
+      "command": [
+        "cargo",
+        "fmt",
+        "--check"
+      ],
+      "exit_code": 0,
+      "log": "docs\\benchmarks\\intake-fold-recovery-10k-20261022-check0.log"
+    },
+    {
+      "command": [
+        "cargo",
+        "test",
+        "--lib",
+        "--test",
+        "engine",
+        "--test",
+        "streamed_transactions",
+        "--test",
+        "segments",
+        "--test",
+        "native_binary"
+      ],
+      "exit_code": 0,
+      "log": "docs\\benchmarks\\intake-fold-recovery-10k-20261022-check1.log"
+    },
+    {
+      "command": [
+        "cargo",
+        "test",
+        "--all-features",
+        "--lib",
+        "--test",
+        "streamed_transactions"
+      ],
+      "exit_code": 0,
+      "log": "docs\\benchmarks\\intake-fold-recovery-10k-20261022-check2.log"
+    },
+    {
+      "command": [
+        "cargo",
+        "test",
+        "--no-default-features",
+        "--lib",
+        "--test",
+        "engine"
+      ],
+      "exit_code": 0,
+      "log": "docs\\benchmarks\\intake-fold-recovery-10k-20261022-check3.log"
+    },
+    {
+      "command": [
+        "cargo",
+        "clippy",
+        "--all-targets",
+        "--",
+        "-D",
+        "warnings"
+      ],
+      "exit_code": 0,
+      "log": "docs\\benchmarks\\intake-fold-recovery-10k-20261022-check4.log"
+    },
+    {
+      "command": [
+        "cargo",
+        "clippy",
+        "--all-features",
+        "--all-targets",
+        "--",
+        "-D",
+        "warnings"
+      ],
+      "exit_code": 0,
+      "log": "docs\\benchmarks\\intake-fold-recovery-10k-20261022-check5.log"
+    },
+    {
+      "command": [
+        "cargo",
+        "clippy",
+        "--no-default-features",
+        "--all-targets",
+        "--",
+        "-D",
+        "warnings"
+      ],
+      "exit_code": 0,
+      "log": "docs\\benchmarks\\intake-fold-recovery-10k-20261022-check6.log"
+    }
+  ],
+  "test_counts": [
+    {
+      "log": "docs\\benchmarks\\intake-fold-recovery-10k-20261022-check1.log",
+      "passed": 157,
+      "failed": 0,
+      "ignored": 9
+    },
+    {
+      "log": "docs\\benchmarks\\intake-fold-recovery-10k-20261022-check2.log",
+      "passed": 119,
+      "failed": 0,
+      "ignored": 9
+    },
+    {
+      "log": "docs\\benchmarks\\intake-fold-recovery-10k-20261022-check3.log",
+      "passed": 57,
+      "failed": 0,
+      "ignored": 3
+    }
+  ],
+  "normal_programs": [
+    {
+      "path": "target/release/fdb.exe",
+      "sha256": "44D7103647B9838BCF47BF4CDBE9F587D05CE5B56C5A5D1368180EA468C9362E",
+      "matches_measured_candidate": true,
+      "no_test_control_env_string": true
+    },
+    {
+      "path": "target/release/examples/measure_content_memory.exe",
+      "sha256": "B687A98DBF7B0ABF63F69129926329900CAEC11ADE92052CD7AA99AB0A95A8FF",
+      "matches_measured_candidate": true,
+      "no_test_control_env_string": true
+    },
+    {
+      "path": "target/release/examples/measure_interleaved_reads.exe",
+      "sha256": "0BE3F4112FA58E9656B58B15551618A307CFF09A5E45B94D956BCC295B2E7612",
+      "matches_measured_candidate": true,
+      "no_test_control_env_string": true
+    },
+    {
+      "path": "target/release/examples/measure_content_reads.exe",
+      "sha256": "2450808560E766B87B186F68D7A84C1E3DEFFCD6C800B3D9A6235F74317ECB02",
+      "matches_measured_candidate": true,
+      "no_test_control_env_string": true
+    }
+  ],
+  "same_binary_causal_modes": [
+    "scalar",
+    "fast",
+    "rounded"
+  ],
+  "corrected_Value_lifetime": true,
+  "first_causal_probe_excluded_from_CLI_regression_claims": true,
+  "measured_causal_source_hashes_match_current": true,
+  "initial_causal_patch_applies_to_base": true,
+  "normal_write_processes": 16,
+  "both_APIs_total_and_CPU_lower_in_all4_pairs": true,
+  "writer_full10000_payload_and4_search_page_oracles": true,
+  "old_new_writer_core_sha_equal": true,
+  "final_core17_files_identical_to_original": true,
+  "all21_read_files_hash_unchanged": true,
+  "final_normal_release_payload_oracle": 10000,
+  "final_default_CLI_documents": 10000,
+  "final_default_CLI_sequence": 20,
+  "normal_diagnostics_and_test_switch_disabled": true,
+  "fixture_and_entire_corpus_sha_unchanged": true,
+  "sqlite_remeasured": false,
+  "sqlite_integrity_readonly": "ok",
+  "sqlite_count": 10000,
+  "no_new_formats_features_dependencies_protocol_or_integration": true,
+  "no_new_corpus_or_DB_copies": true,
+  "data_directories": [
+    "benchmark-work",
+    "rkyv-corpus-20261009"
+  ],
+  "protected": [
+    {
+      "path": "data\\rkyv-corpus-20261009\\json.payload-bench",
+      "bytes": 2740862279,
+      "sha256": "11F826FCE3F4AE790FEB9FC6DF9B1169F52C2FD699E89FC4A8A4B77AAA41731B"
+    },
+    {
+      "path": "tests\\fixtures\\v1\\checkpoint.fdb",
+      "bytes": 1507,
+      "sha256": "E87667C0FABE64D5A1F59EF86B99F7E612DB755D239B41677DA2ADC24BE7BF57"
+    },
+    {
+      "path": "tests\\fixtures\\v1\\checkpoint.ready",
+      "bytes": 28,
+      "sha256": "BC82C18F8D5C3A209328BD59B12D828D8922BEC4D26CB4D557FD4A493A4A9C2F"
+    }
+  ],
+  "core": [
+    {
+      "name": "generation-0000000000000015.fdb",
+      "bytes": 45,
+      "sha256": "90CB6CCA105E6739077374A0D2B9B4099570C40DEE94C183AE007FA2964F6B83"
+    },
+    {
+      "name": "generation-000000000000001f.ready",
+      "bytes": 516,
+      "sha256": "D88E704058EA5609D7A976395780F553B7C4285674B301A3E1C2930F578D4EE4"
+    },
+    {
+      "name": "run-0000000000000016.fdb",
+      "bytes": 53746407,
+      "sha256": "06B659638EBE050747065DF81D367E260C967E8710950BF6D12D19DFAF897843"
+    },
+    {
+      "name": "run-0000000000000016.idx",
+      "bytes": 16350784,
+      "sha256": "5E181978335945DF9B1F322D5969E53B8DC7F34E552EFD0E7404075FF27A9032"
+    },
+    {
+      "name": "run-0000000000000016.records04.idx",
+      "bytes": 89121,
+      "sha256": "3068A1101093BBB7C9AD533DC7D6DE8EBB4B96BB48893AA12294C4B8989A38B7"
+    },
+    {
+      "name": "run-0000000000000018.fdb",
+      "bytes": 52970692,
+      "sha256": "AE2E811E20D3F95D997C39E14489C74353FB9FB21F79F852B4569662420ECA62"
+    },
+    {
+      "name": "run-0000000000000018.idx",
+      "bytes": 16203819,
+      "sha256": "F19BC0C9D4C5B484F5753452AF0ADCA0567F507EE80E40B42E812A372BF4258C"
+    },
+    {
+      "name": "run-0000000000000018.records04.idx",
+      "bytes": 89121,
+      "sha256": "600471C136DC08908019BEB04A0135390CD9E6B623C40E6EADF0DF105D298700"
+    },
+    {
+      "name": "run-000000000000001a.fdb",
+      "bytes": 52914977,
+      "sha256": "40FC3CCBCC80F9756934790874E0D947101D16DA540D1A965536285D3D331B7C"
+    },
+    {
+      "name": "run-000000000000001a.idx",
+      "bytes": 16201874,
+      "sha256": "3A8A0C7120BB35CFFC295A20FA5BC327B4A5908DE6DDEAB8576B0FFD25C58039"
+    },
+    {
+      "name": "run-000000000000001a.records04.idx",
+      "bytes": 89121,
+      "sha256": "E0E4AEB7FF108E0460E924F958949240DD11E43B62D21D915030CB931FD48677"
+    },
+    {
+      "name": "run-000000000000001c.fdb",
+      "bytes": 54087247,
+      "sha256": "5A9FDCF1E0DF35BBF77BBC1B3305568CEEDB3DA2753EFE0729188CE5B21B6C86"
+    },
+    {
+      "name": "run-000000000000001c.idx",
+      "bytes": 16311854,
+      "sha256": "9EFA675CAFB0435549B60D13F0D4E507A46E9E9C2228F315713B7163805B11DD"
+    },
+    {
+      "name": "run-000000000000001c.records04.idx",
+      "bytes": 89121,
+      "sha256": "357136E6C57414B319BB239D40CE887FDB7C7BD0CE07C477E6AA54DC37319036"
+    },
+    {
+      "name": "run-000000000000001e.fdb",
+      "bytes": 54181341,
+      "sha256": "713AFAFFF8FF93628BAAE025F14B74B8B33C247934B25179B00C8E01A5308BB2"
+    },
+    {
+      "name": "run-000000000000001e.idx",
+      "bytes": 16390537,
+      "sha256": "A083F60B2F11D2F3BF4A393D2C76E29845F3620AD7039A4D431F3676C5FD3332"
+    },
+    {
+      "name": "run-000000000000001e.records04.idx",
+      "bytes": 89121,
+      "sha256": "609D58E3B32E530FB63EF463655A083A3B775FE365C96E748039086F1BB165F2"
+    }
+  ],
+  "source_hashes": {
+    "src\\index.rs": "68A5F4ABE66271864B478F8B2BE9797062BF4A3826C2F671D62BD65E09423CE2",
+    "src\\index\\intake_fold_tests.rs": "814005060E5A39EFA20E1622117EAD3FE5216BD8D027D70F6AB6F132BBDFCFD4",
+    "tools\\measure-intake-causal.py": "EE5912112A85266FF170EBBE8C59DA3C93F5FDD0F3EE83034DE466B09C2B998D",
+    "tools\\measure-write-stages.py": "3CEC173F68635CA31EEFA6DA86B5C32E48D9F878B052020BB6C5B73A13B2334B"
+  },
+  "open_work": "Mixed man/zx and CLI quixote tails;general RAM/caller/query;final maintenance;open/disk/temp space;concurrent/true-cold"
+}

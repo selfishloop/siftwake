@@ -1,0 +1,779 @@
+{
+  "design": {
+    "program": "output\\intake-fold-capacity-causal-20261022.exe",
+    "sha256": "6D3CAF2A8748CC308F5DC0B64CB2C011319531D5A104DAF00014E5B67D3BB1F3",
+    "same_executable": true,
+    "pairs": 4,
+    "modes": [
+      "scalar",
+      "fast",
+      "rounded"
+    ],
+    "affinity_mask": 4,
+    "affinity_verified": true,
+    "source_sha256": {
+      "src/index.rs": "68A5F4ABE66271864B478F8B2BE9797062BF4A3826C2F671D62BD65E09423CE2",
+      "src/index/intake_fold_tests.rs": "814005060E5A39EFA20E1622117EAD3FE5216BD8D027D70F6AB6F132BBDFCFD4",
+      "tools/measure-intake-causal.py": "EE5912112A85266FF170EBBE8C59DA3C93F5FDD0F3EE83034DE466B09C2B998D"
+    },
+    "orders": [
+      [
+        "scalar",
+        "fast",
+        "rounded"
+      ],
+      [
+        "rounded",
+        "fast",
+        "scalar"
+      ],
+      [
+        "fast",
+        "scalar",
+        "rounded"
+      ],
+      [
+        "rounded",
+        "scalar",
+        "fast"
+      ]
+    ],
+    "corpus": "same existing first1000 of permitted first10k;two500-row synced owned commits;no corpus generation",
+    "control": "test-only scalar/fast intake switch;one compiled search and serialization path;not a production runtime option",
+    "timing": "native search,page-to-Value,response wrapper,Value Display to fresh Vec separately;one warmup+200 samples/case/process;checks/CRC/drops outside brackets",
+    "validation": "independent total/key/version/page oracle;all encoded lengths/CRCs cross-mode identical;not an independent full-payload oracle",
+    "cache": "warm OS cache;no eviction or power/background isolation;query/serialization interleaved as in CLI preparation",
+    "limits": "release test binary,not normal release speed;no pipe/IPC/system-I/O in these timings;no RAM claim",
+    "storage": "only owned fixed FDB slot reset;no DB copies;restore10k after this probe"
+  },
+  "protected_unchanged": true,
+  "writer_core_byte_equal": true,
+  "queries": [
+    {
+      "text": "the",
+      "stages": {
+        "search": {
+          "points": {
+            "scalar": {
+              "n": 800,
+              "p50_ms": 0.4113,
+              "p95_ms": 0.7112
+            },
+            "fast": {
+              "n": 800,
+              "p50_ms": 0.40775,
+              "p95_ms": 0.6859999999999999
+            },
+            "rounded": {
+              "n": 800,
+              "p50_ms": 0.38705,
+              "p95_ms": 0.6369
+            }
+          },
+          "comparisons": {
+            "fast": {
+              "change_percent": -3.543307086614189,
+              "faster_pairs": 3
+            },
+            "rounded": {
+              "change_percent": -10.447131608548933,
+              "faster_pairs": 3
+            }
+          }
+        },
+        "page_to_value": {
+          "points": {
+            "scalar": {
+              "n": 800,
+              "p50_ms": 0.19369999999999998,
+              "p95_ms": 0.31930000000000003
+            },
+            "fast": {
+              "n": 800,
+              "p50_ms": 0.19695,
+              "p95_ms": 0.325
+            },
+            "rounded": {
+              "n": 800,
+              "p50_ms": 0.18995,
+              "p95_ms": 0.3051
+            }
+          },
+          "comparisons": {
+            "fast": {
+              "change_percent": 1.7851550266207328,
+              "faster_pairs": 3
+            },
+            "rounded": {
+              "change_percent": -4.447228311932361,
+              "faster_pairs": 3
+            }
+          }
+        },
+        "response_value": {
+          "points": {
+            "scalar": {
+              "n": 800,
+              "p50_ms": 0.1777,
+              "p95_ms": 0.3035
+            },
+            "fast": {
+              "n": 800,
+              "p50_ms": 0.17635,
+              "p95_ms": 0.2832
+            },
+            "rounded": {
+              "n": 800,
+              "p50_ms": 0.1694,
+              "p95_ms": 0.29500000000000004
+            }
+          },
+          "comparisons": {
+            "fast": {
+              "change_percent": -6.68863261943986,
+              "faster_pairs": 3
+            },
+            "rounded": {
+              "change_percent": -2.8006589785831815,
+              "faster_pairs": 2
+            }
+          }
+        },
+        "format_to_vec": {
+          "points": {
+            "scalar": {
+              "n": 800,
+              "p50_ms": 1.4267500000000002,
+              "p95_ms": 1.9869
+            },
+            "fast": {
+              "n": 800,
+              "p50_ms": 1.3947,
+              "p95_ms": 1.9002
+            },
+            "rounded": {
+              "n": 800,
+              "p50_ms": 1.3480499999999997,
+              "p95_ms": 1.7635999999999998
+            }
+          },
+          "comparisons": {
+            "fast": {
+              "change_percent": -4.363581458553534,
+              "faster_pairs": 2
+            },
+            "rounded": {
+              "change_percent": -11.238612914590584,
+              "faster_pairs": 4
+            }
+          }
+        }
+      }
+    },
+    {
+      "text": "quixote",
+      "stages": {
+        "search": {
+          "points": {
+            "scalar": {
+              "n": 800,
+              "p50_ms": 0.09365000000000001,
+              "p95_ms": 0.1681
+            },
+            "fast": {
+              "n": 800,
+              "p50_ms": 0.0849,
+              "p95_ms": 0.14809999999999998
+            },
+            "rounded": {
+              "n": 800,
+              "p50_ms": 0.09625,
+              "p95_ms": 0.1606
+            }
+          },
+          "comparisons": {
+            "fast": {
+              "change_percent": -11.897679952409291,
+              "faster_pairs": 3
+            },
+            "rounded": {
+              "change_percent": -4.461629982153481,
+              "faster_pairs": 3
+            }
+          }
+        },
+        "page_to_value": {
+          "points": {
+            "scalar": {
+              "n": 800,
+              "p50_ms": 0.027549999999999998,
+              "p95_ms": 0.047299999999999995
+            },
+            "fast": {
+              "n": 800,
+              "p50_ms": 0.02735,
+              "p95_ms": 0.0445
+            },
+            "rounded": {
+              "n": 800,
+              "p50_ms": 0.0281,
+              "p95_ms": 0.0453
+            }
+          },
+          "comparisons": {
+            "fast": {
+              "change_percent": -5.919661733615211,
+              "faster_pairs": 3
+            },
+            "rounded": {
+              "change_percent": -4.228329809725151,
+              "faster_pairs": 3
+            }
+          }
+        },
+        "response_value": {
+          "points": {
+            "scalar": {
+              "n": 800,
+              "p50_ms": 0.0216,
+              "p95_ms": 0.0371
+            },
+            "fast": {
+              "n": 800,
+              "p50_ms": 0.0222,
+              "p95_ms": 0.0382
+            },
+            "rounded": {
+              "n": 800,
+              "p50_ms": 0.022099999999999998,
+              "p95_ms": 0.037200000000000004
+            }
+          },
+          "comparisons": {
+            "fast": {
+              "change_percent": 2.96495956873315,
+              "faster_pairs": 3
+            },
+            "rounded": {
+              "change_percent": 0.26954177897575704,
+              "faster_pairs": 1
+            }
+          }
+        },
+        "format_to_vec": {
+          "points": {
+            "scalar": {
+              "n": 800,
+              "p50_ms": 0.16695,
+              "p95_ms": 0.2438
+            },
+            "fast": {
+              "n": 800,
+              "p50_ms": 0.1656,
+              "p95_ms": 0.2401
+            },
+            "rounded": {
+              "n": 800,
+              "p50_ms": 0.16770000000000002,
+              "p95_ms": 0.2308
+            }
+          },
+          "comparisons": {
+            "fast": {
+              "change_percent": -1.5176374077112365,
+              "faster_pairs": 3
+            },
+            "rounded": {
+              "change_percent": -5.332239540607054,
+              "faster_pairs": 3
+            }
+          }
+        }
+      }
+    },
+    {
+      "text": "he",
+      "stages": {
+        "search": {
+          "points": {
+            "scalar": {
+              "n": 800,
+              "p50_ms": 0.38275,
+              "p95_ms": 0.6698000000000001
+            },
+            "fast": {
+              "n": 800,
+              "p50_ms": 0.3901,
+              "p95_ms": 0.6433
+            },
+            "rounded": {
+              "n": 800,
+              "p50_ms": 0.36415000000000003,
+              "p95_ms": 0.5847
+            }
+          },
+          "comparisons": {
+            "fast": {
+              "change_percent": -3.956404896984189,
+              "faster_pairs": 3
+            },
+            "rounded": {
+              "change_percent": -12.705285159749192,
+              "faster_pairs": 3
+            }
+          }
+        },
+        "page_to_value": {
+          "points": {
+            "scalar": {
+              "n": 800,
+              "p50_ms": 0.18075000000000002,
+              "p95_ms": 0.33349999999999996
+            },
+            "fast": {
+              "n": 800,
+              "p50_ms": 0.19235,
+              "p95_ms": 0.3191
+            },
+            "rounded": {
+              "n": 800,
+              "p50_ms": 0.17545,
+              "p95_ms": 0.30029999999999996
+            }
+          },
+          "comparisons": {
+            "fast": {
+              "change_percent": -4.31784107946026,
+              "faster_pairs": 3
+            },
+            "rounded": {
+              "change_percent": -9.955022488755628,
+              "faster_pairs": 3
+            }
+          }
+        },
+        "response_value": {
+          "points": {
+            "scalar": {
+              "n": 800,
+              "p50_ms": 0.17149999999999999,
+              "p95_ms": 0.2802
+            },
+            "fast": {
+              "n": 800,
+              "p50_ms": 0.17454999999999998,
+              "p95_ms": 0.30019999999999997
+            },
+            "rounded": {
+              "n": 800,
+              "p50_ms": 0.16215000000000002,
+              "p95_ms": 0.2578
+            }
+          },
+          "comparisons": {
+            "fast": {
+              "change_percent": 7.137758743754441,
+              "faster_pairs": 3
+            },
+            "rounded": {
+              "change_percent": -7.994289793005005,
+              "faster_pairs": 2
+            }
+          }
+        },
+        "format_to_vec": {
+          "points": {
+            "scalar": {
+              "n": 800,
+              "p50_ms": 1.43275,
+              "p95_ms": 1.9710999999999999
+            },
+            "fast": {
+              "n": 800,
+              "p50_ms": 1.3850000000000002,
+              "p95_ms": 1.9438000000000002
+            },
+            "rounded": {
+              "n": 800,
+              "p50_ms": 1.3459,
+              "p95_ms": 1.7273
+            }
+          },
+          "comparisons": {
+            "fast": {
+              "change_percent": -1.3850134442696782,
+              "faster_pairs": 2
+            },
+            "rounded": {
+              "change_percent": -12.368728121353545,
+              "faster_pairs": 3
+            }
+          }
+        }
+      }
+    },
+    {
+      "text": "the man",
+      "stages": {
+        "search": {
+          "points": {
+            "scalar": {
+              "n": 800,
+              "p50_ms": 0.70055,
+              "p95_ms": 1.0045
+            },
+            "fast": {
+              "n": 800,
+              "p50_ms": 0.69615,
+              "p95_ms": 0.9675
+            },
+            "rounded": {
+              "n": 800,
+              "p50_ms": 0.68745,
+              "p95_ms": 0.9792
+            }
+          },
+          "comparisons": {
+            "fast": {
+              "change_percent": -3.683424589347928,
+              "faster_pairs": 2
+            },
+            "rounded": {
+              "change_percent": -2.518666002986558,
+              "faster_pairs": 2
+            }
+          }
+        },
+        "page_to_value": {
+          "points": {
+            "scalar": {
+              "n": 800,
+              "p50_ms": 0.237,
+              "p95_ms": 0.3404
+            },
+            "fast": {
+              "n": 800,
+              "p50_ms": 0.2376,
+              "p95_ms": 0.3453
+            },
+            "rounded": {
+              "n": 800,
+              "p50_ms": 0.2268,
+              "p95_ms": 0.3215
+            }
+          },
+          "comparisons": {
+            "fast": {
+              "change_percent": 1.4394829612220938,
+              "faster_pairs": 3
+            },
+            "rounded": {
+              "change_percent": -5.552291421856637,
+              "faster_pairs": 3
+            }
+          }
+        },
+        "response_value": {
+          "points": {
+            "scalar": {
+              "n": 800,
+              "p50_ms": 0.1994,
+              "p95_ms": 0.31320000000000003
+            },
+            "fast": {
+              "n": 800,
+              "p50_ms": 0.195,
+              "p95_ms": 0.2968
+            },
+            "rounded": {
+              "n": 800,
+              "p50_ms": 0.1945,
+              "p95_ms": 0.2948
+            }
+          },
+          "comparisons": {
+            "fast": {
+              "change_percent": -5.23627075351214,
+              "faster_pairs": 3
+            },
+            "rounded": {
+              "change_percent": -5.874840357598988,
+              "faster_pairs": 3
+            }
+          }
+        },
+        "format_to_vec": {
+          "points": {
+            "scalar": {
+              "n": 800,
+              "p50_ms": 1.4465999999999999,
+              "p95_ms": 1.9808000000000001
+            },
+            "fast": {
+              "n": 800,
+              "p50_ms": 1.41395,
+              "p95_ms": 1.9523
+            },
+            "rounded": {
+              "n": 800,
+              "p50_ms": 1.36635,
+              "p95_ms": 1.7476
+            }
+          },
+          "comparisons": {
+            "fast": {
+              "change_percent": -1.4388126009693192,
+              "faster_pairs": 2
+            },
+            "rounded": {
+              "change_percent": -11.773021001615513,
+              "faster_pairs": 4
+            }
+          }
+        }
+      }
+    },
+    {
+      "text": "zx",
+      "stages": {
+        "search": {
+          "points": {
+            "scalar": {
+              "n": 800,
+              "p50_ms": 1.7308,
+              "p95_ms": 2.1994
+            },
+            "fast": {
+              "n": 800,
+              "p50_ms": 1.70285,
+              "p95_ms": 2.1633
+            },
+            "rounded": {
+              "n": 800,
+              "p50_ms": 1.6809500000000002,
+              "p95_ms": 2.1300999999999997
+            }
+          },
+          "comparisons": {
+            "fast": {
+              "change_percent": -1.6413567336546198,
+              "faster_pairs": 3
+            },
+            "rounded": {
+              "change_percent": -3.1508593252705386,
+              "faster_pairs": 4
+            }
+          }
+        },
+        "page_to_value": {
+          "points": {
+            "scalar": {
+              "n": 800,
+              "p50_ms": 0.0033,
+              "p95_ms": 0.005699999999999999
+            },
+            "fast": {
+              "n": 800,
+              "p50_ms": 0.0031999999999999997,
+              "p95_ms": 0.0055
+            },
+            "rounded": {
+              "n": 800,
+              "p50_ms": 0.0029000000000000002,
+              "p95_ms": 0.0054
+            }
+          },
+          "comparisons": {
+            "fast": {
+              "change_percent": -3.508771929824561,
+              "faster_pairs": 4
+            },
+            "rounded": {
+              "change_percent": -5.263157894736825,
+              "faster_pairs": 3
+            }
+          }
+        },
+        "response_value": {
+          "points": {
+            "scalar": {
+              "n": 800,
+              "p50_ms": 0.0019,
+              "p95_ms": 0.003
+            },
+            "fast": {
+              "n": 800,
+              "p50_ms": 0.0019,
+              "p95_ms": 0.0028
+            },
+            "rounded": {
+              "n": 800,
+              "p50_ms": 0.0019,
+              "p95_ms": 0.0027
+            }
+          },
+          "comparisons": {
+            "fast": {
+              "change_percent": -6.666666666666665,
+              "faster_pairs": 4
+            },
+            "rounded": {
+              "change_percent": -9.999999999999998,
+              "faster_pairs": 3
+            }
+          }
+        },
+        "format_to_vec": {
+          "points": {
+            "scalar": {
+              "n": 800,
+              "p50_ms": 0.0042,
+              "p95_ms": 0.0069
+            },
+            "fast": {
+              "n": 800,
+              "p50_ms": 0.0045000000000000005,
+              "p95_ms": 0.0067
+            },
+            "rounded": {
+              "n": 800,
+              "p50_ms": 0.0040999999999999995,
+              "p95_ms": 0.0065
+            }
+          },
+          "comparisons": {
+            "fast": {
+              "change_percent": -2.898550724637672,
+              "faster_pairs": 2
+            },
+            "rounded": {
+              "change_percent": -5.797101449275366,
+              "faster_pairs": 3
+            }
+          }
+        }
+      }
+    },
+    {
+      "text": "transubstantiation",
+      "stages": {
+        "search": {
+          "points": {
+            "scalar": {
+              "n": 800,
+              "p50_ms": 0.5509,
+              "p95_ms": 0.7422000000000001
+            },
+            "fast": {
+              "n": 800,
+              "p50_ms": 0.5552999999999999,
+              "p95_ms": 0.7302
+            },
+            "rounded": {
+              "n": 800,
+              "p50_ms": 0.5435,
+              "p95_ms": 0.7097
+            }
+          },
+          "comparisons": {
+            "fast": {
+              "change_percent": -1.6168148746968591,
+              "faster_pairs": 2
+            },
+            "rounded": {
+              "change_percent": -4.378873618970635,
+              "faster_pairs": 2
+            }
+          }
+        },
+        "page_to_value": {
+          "points": {
+            "scalar": {
+              "n": 800,
+              "p50_ms": 0.0007999999999999999,
+              "p95_ms": 0.0029000000000000002
+            },
+            "fast": {
+              "n": 800,
+              "p50_ms": 0.0007999999999999999,
+              "p95_ms": 0.0025
+            },
+            "rounded": {
+              "n": 800,
+              "p50_ms": 0.0007,
+              "p95_ms": 0.002
+            }
+          },
+          "comparisons": {
+            "fast": {
+              "change_percent": -13.793103448275868,
+              "faster_pairs": 3
+            },
+            "rounded": {
+              "change_percent": -31.034482758620697,
+              "faster_pairs": 4
+            }
+          }
+        },
+        "response_value": {
+          "points": {
+            "scalar": {
+              "n": 800,
+              "p50_ms": 0.0007999999999999999,
+              "p95_ms": 0.0018
+            },
+            "fast": {
+              "n": 800,
+              "p50_ms": 0.0007999999999999999,
+              "p95_ms": 0.0015999999999999999
+            },
+            "rounded": {
+              "n": 800,
+              "p50_ms": 0.0007999999999999999,
+              "p95_ms": 0.0015
+            }
+          },
+          "comparisons": {
+            "fast": {
+              "change_percent": -11.111111111111116,
+              "faster_pairs": 3
+            },
+            "rounded": {
+              "change_percent": -16.666666666666664,
+              "faster_pairs": 3
+            }
+          }
+        },
+        "format_to_vec": {
+          "points": {
+            "scalar": {
+              "n": 800,
+              "p50_ms": 0.0013,
+              "p95_ms": 0.0037
+            },
+            "fast": {
+              "n": 800,
+              "p50_ms": 0.0013,
+              "p95_ms": 0.0033
+            },
+            "rounded": {
+              "n": 800,
+              "p50_ms": 0.0013,
+              "p95_ms": 0.003
+            }
+          },
+          "comparisons": {
+            "fast": {
+              "change_percent": -10.81081081081081,
+              "faster_pairs": 3
+            },
+            "rounded": {
+              "change_percent": -18.918918918918926,
+              "faster_pairs": 3
+            }
+          }
+        }
+      }
+    }
+  ]
+}
