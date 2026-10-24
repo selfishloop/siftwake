@@ -1,0 +1,273 @@
+{
+  "design": {
+    "programs": {
+      "control": {
+        "path": "output\\intake-fold-recovery-candidate-write-20261022.exe",
+        "sha256": "B687A98DBF7B0ABF63F69129926329900CAEC11ADE92052CD7AA99AB0A95A8FF"
+      },
+      "candidate": {
+        "path": "output\\maintenance-candidate-write-20261024.exe",
+        "sha256": "AC9AAC92A7497DF623FCCEF21CAFEA16E9F043C2CBFE701DAAC86E1371A13810"
+      },
+      "sqlite": {
+        "path": "tools\\native_sqlite\\target\\release\\content_memory.exe",
+        "sha256": "49910656D4F1CF2642DFFA9E37D69645F76CBE1A1DCCDB96E9238EB01E64DCEB"
+      }
+    },
+    "streamed_pairs": 2,
+    "owned_pairs": 2,
+    "sqlite_remeasured": true,
+    "corpus": "same existing first10000;264842858 text bytes;no corpus generation/download",
+    "transactions": "500 records/batch;20 acknowledged synced WAL commits;unchanged normal durability",
+    "timing": "normal release;no diagnostic features;input CRC/JSON and40 boundary gets included in ingest",
+    "maintenance": "final flush/drain for FDB;FTS optimize+WAL checkpoint for SQLite;not identical algorithms",
+    "api": "FDB APIs: streamed,owned;SQLite input remains streaming",
+    "sqlite": "bundled FTS5 trigram;FULL WAL;cache2MiB;mmap0;tempFILE;not all FDB field/link/guard features",
+    "cache": "warm OS cache;no eviction;sequential processes;no power/hardware isolation",
+    "memory": "OS lifetime private commit/working set;not physical RAM/system RAM;phase samples may miss peaks",
+    "storage": "only fixed FDB/SQLite slots reset through benchmark-workspace.ps1;no DB copies",
+    "verification": "all10000 payloads after every run outside timing;FDB also4 full contains page oracles",
+    "orders": [
+      {
+        "api": "streamed",
+        "pair": 0,
+        "engines": [
+          "control",
+          "candidate",
+          "sqlite"
+        ]
+      },
+      {
+        "api": "streamed",
+        "pair": 1,
+        "engines": [
+          "sqlite",
+          "candidate",
+          "control"
+        ]
+      },
+      {
+        "api": "owned",
+        "pair": 0,
+        "engines": [
+          "control",
+          "candidate",
+          "sqlite"
+        ]
+      },
+      {
+        "api": "owned",
+        "pair": 1,
+        "engines": [
+          "sqlite",
+          "candidate",
+          "control"
+        ]
+      }
+    ]
+  },
+  "protected_unchanged": true,
+  "fdb_sources_indexes_ready_byte_equal": true,
+  "apis": {
+    "streamed": {
+      "write_ms": {
+        "medians": {
+          "control": 16825.2747,
+          "candidate": 14359.958050000001,
+          "sqlite": 31220.856
+        },
+        "candidate_change_percent": -14.65246002788888,
+        "candidate_lower_pairs": 2,
+        "pairs": 2,
+        "paired_changes_percent": [
+          -14.769942428570637,
+          -14.535717093403678
+        ]
+      },
+      "maintenance_ms": {
+        "medians": {
+          "control": 560.4158,
+          "candidate": 584.33005,
+          "sqlite": 1066.06965
+        },
+        "candidate_change_percent": 4.2672333649408145,
+        "candidate_lower_pairs": 0,
+        "pairs": 2,
+        "paired_changes_percent": [
+          6.844680500884626,
+          1.4704481645767986
+        ]
+      },
+      "total_ms": {
+        "medians": {
+          "control": 17385.6905,
+          "candidate": 14944.2881,
+          "sqlite": 32286.925649999997
+        },
+        "candidate_change_percent": -14.042596697554233,
+        "candidate_lower_pairs": 2,
+        "pairs": 2,
+        "paired_changes_percent": [
+          -14.043510416423166,
+          -14.04168615241137
+        ]
+      },
+      "cpu_ms": {
+        "medians": {
+          "control": 15835.9375,
+          "candidate": 13195.3125,
+          "sqlite": 31007.8125
+        },
+        "candidate_change_percent": -16.674888998519975,
+        "candidate_lower_pairs": 2,
+        "pairs": 2,
+        "paired_changes_percent": [
+          -17.878192534381142,
+          -15.460852329038655
+        ]
+      },
+      "peak_private_bytes": {
+        "medians": {
+          "control": 10625024.0,
+          "candidate": 10647552.0,
+          "sqlite": 8826880.0
+        },
+        "candidate_change_percent": 0.21202775636082194,
+        "candidate_lower_pairs": 1,
+        "pairs": 2,
+        "paired_changes_percent": [
+          -0.34655371582594796,
+          0.7719027402547374
+        ]
+      },
+      "peak_working_set_bytes": {
+        "medians": {
+          "control": 14542848.0,
+          "candidate": 14755840.0,
+          "sqlite": 13774848.0
+        },
+        "candidate_change_percent": 1.4645824531756002,
+        "candidate_lower_pairs": 0,
+        "pairs": 2,
+        "paired_changes_percent": [
+          1.2679628064243387,
+          1.6610360360360454
+        ]
+      },
+      "disk_bytes": {
+        "medians": {
+          "control": 349805698.0,
+          "candidate": 349805698.0,
+          "sqlite": 583860224.0
+        },
+        "candidate_change_percent": 0.0,
+        "candidate_lower_pairs": 0,
+        "pairs": 2,
+        "paired_changes_percent": [
+          0.0,
+          0.0
+        ]
+      }
+    },
+    "owned": {
+      "write_ms": {
+        "medians": {
+          "control": 12061.017950000001,
+          "candidate": 9425.8851,
+          "sqlite": 31021.997649999998
+        },
+        "candidate_change_percent": -21.848345313174843,
+        "candidate_lower_pairs": 2,
+        "pairs": 2,
+        "paired_changes_percent": [
+          -21.660804488423867,
+          -22.02915424538594
+        ]
+      },
+      "maintenance_ms": {
+        "medians": {
+          "control": 2730.44945,
+          "candidate": 2862.9619000000002,
+          "sqlite": 1028.27525
+        },
+        "candidate_change_percent": 4.85313690755198,
+        "candidate_lower_pairs": 0,
+        "pairs": 2,
+        "paired_changes_percent": [
+          6.965928361549456,
+          2.6691153118056254
+        ]
+      },
+      "total_ms": {
+        "medians": {
+          "control": 14791.467400000001,
+          "candidate": 12288.846999999998,
+          "sqlite": 32050.2729
+        },
+        "candidate_change_percent": -16.91935176086724,
+        "candidate_lower_pairs": 2,
+        "pairs": 2,
+        "paired_changes_percent": [
+          -16.224437633740628,
+          -17.598000110712984
+        ]
+      },
+      "cpu_ms": {
+        "medians": {
+          "control": 13617.1875,
+          "candidate": 11140.625,
+          "sqlite": 31000.0
+        },
+        "candidate_change_percent": -18.187033849684454,
+        "candidate_lower_pairs": 2,
+        "pairs": 2,
+        "paired_changes_percent": [
+          -18.91580161476355,
+          -17.46575342465754
+        ]
+      },
+      "peak_private_bytes": {
+        "medians": {
+          "control": 83916800.0,
+          "candidate": 83838976.0,
+          "sqlite": 8792064.0
+        },
+        "candidate_change_percent": -0.09273947528981585,
+        "candidate_lower_pairs": 2,
+        "pairs": 2,
+        "paired_changes_percent": [
+          -0.1413530902710125,
+          -0.043990419864115005
+        ]
+      },
+      "peak_working_set_bytes": {
+        "medians": {
+          "control": 87531520.0,
+          "candidate": 87459840.0,
+          "sqlite": 13355008.0
+        },
+        "candidate_change_percent": -0.08189050070191994,
+        "candidate_lower_pairs": 1,
+        "pairs": 2,
+        "paired_changes_percent": [
+          -0.24772143024071047,
+          0.08432888264231497
+        ]
+      },
+      "disk_bytes": {
+        "medians": {
+          "control": 349805698.0,
+          "candidate": 349805698.0,
+          "sqlite": 583860224.0
+        },
+        "candidate_change_percent": 0.0,
+        "candidate_lower_pairs": 0,
+        "pairs": 2,
+        "paired_changes_percent": [
+          0.0,
+          0.0
+        ]
+      }
+    }
+  }
+}

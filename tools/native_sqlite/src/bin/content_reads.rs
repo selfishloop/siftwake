@@ -62,6 +62,20 @@ fn main() -> input::Result<()> {
         .map(|args| args[1].parse::<u64>())
         .transpose()?
     {
+        let args: Vec<_> = std::env::args().collect();
+        if let Some(at) = args.iter().position(|arg| arg == "--matrix-repeats") {
+            let repeats: usize = args.get(at + 1).ok_or("missing matrix repeats")?.parse()?;
+            if !(1..=200).contains(&repeats) {
+                return Err("matrix repeats must be 1..=200".into());
+            }
+            return matrix::Matrix::load()?.measure_rounds(
+                seed,
+                repeats,
+                args.iter().any(|arg| arg == "--matrix-all-rounds"),
+                |key| get(&db, key),
+                |text, offset, limit| search(&db, text, offset, limit),
+            );
+        }
         return matrix::Matrix::load()?.measure(
             seed,
             |key| get(&db, key),

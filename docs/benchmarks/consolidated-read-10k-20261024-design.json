@@ -1,0 +1,87 @@
+{
+  "pairs": 2,
+  "blocks_per_pair": 2,
+  "repeats_per_block": 25,
+  "samples_per_case_per_engine": 100,
+  "affinity_mask": 4,
+  "programs": {
+    "baseline": {
+      "path": "output\\intake-fold-recovery-candidate-read-20261022.exe",
+      "sha256": "0BE3F4112FA58E9656B58B15551618A307CFF09A5E45B94D956BCC295B2E7612"
+    },
+    "current": {
+      "path": "output\\maintenance-candidate-read-20261024.exe",
+      "sha256": "804DE1E24812DF7606ACFFA8697AE046C84F2935AAE6D9620974EB75CF8BB4E6"
+    },
+    "sqlite": {
+      "path": "tools\\native_sqlite\\target\\release\\content_reads.exe",
+      "sha256": "32DBB090B6519C9AF14830FA904EB4BED4FAA38473B5A15C1E4840EA96165A15"
+    }
+  },
+  "cache": "warm OS cache; no eviction; untimed per-case/key warmup each block",
+  "corpus": "same existing first10000; no generation/reset/copy",
+  "oracle": "same shared read_matrix.rs; all38 full pages/order/versions and256 gets; checks outside timing",
+  "workload": "all38 cases each round including8 pages; same seeded query/get shuffle per matching block",
+  "timing": "count and full owned payload result; get interleaved; no CLI JSON roundtrip",
+  "source_validation": "FDB strict open full source/index checks before queries; SQLite no full integrity on open",
+  "process": "two resident FDB oracle workers; per-block exclusive DB open; fresh SQLite process per block; no overlapping queries",
+  "limits": "no power/hardware isolation; two process pairs; no significance claim; query OS RAM and true cold/concurrent unmeasured",
+  "orders": [
+    {
+      "pair": 0,
+      "block": 0,
+      "engines": [
+        "baseline",
+        "current",
+        "sqlite"
+      ],
+      "command": {
+        "id": 0,
+        "seed": 0,
+        "repeats": 25
+      }
+    },
+    {
+      "pair": 0,
+      "block": 1,
+      "engines": [
+        "sqlite",
+        "current",
+        "baseline"
+      ],
+      "command": {
+        "id": 1,
+        "seed": 1,
+        "repeats": 25
+      }
+    },
+    {
+      "pair": 1,
+      "block": 0,
+      "engines": [
+        "sqlite",
+        "current",
+        "baseline"
+      ],
+      "command": {
+        "id": 2,
+        "seed": 10000,
+        "repeats": 25
+      }
+    },
+    {
+      "pair": 1,
+      "block": 1,
+      "engines": [
+        "baseline",
+        "current",
+        "sqlite"
+      ],
+      "command": {
+        "id": 3,
+        "seed": 10001,
+        "repeats": 25
+      }
+    }
+  ]
+}

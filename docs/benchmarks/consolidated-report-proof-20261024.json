@@ -1,0 +1,49 @@
+{
+  "query_cases": 38,
+  "engines": 3,
+  "samples_per_case_per_engine": 100,
+  "query_p50_p95_recomputed_from_all_raw_samples": true,
+  "get_p50_p95_recomputed_from_all_raw_samples": true,
+  "get_samples_per_engine": [
+    1600,
+    6600,
+    8300,
+    9100,
+    300
+  ],
+  "csv_rows": 38,
+  "all_query_names_match_summary_and_csv": true,
+  "write_verification_processes": 12,
+  "full_documents_verified_per_write_process": 10000,
+  "write_verification_logs": [
+    "consolidated-write-10k-20261024-owned-candidate-0-verify.jsonl",
+    "consolidated-write-10k-20261024-owned-candidate-1-verify.jsonl",
+    "consolidated-write-10k-20261024-owned-control-0-verify.jsonl",
+    "consolidated-write-10k-20261024-owned-control-1-verify.jsonl",
+    "consolidated-write-10k-20261024-owned-sqlite-0-verify.jsonl",
+    "consolidated-write-10k-20261024-owned-sqlite-1-verify.jsonl",
+    "consolidated-write-10k-20261024-streamed-candidate-0-verify.jsonl",
+    "consolidated-write-10k-20261024-streamed-candidate-1-verify.jsonl",
+    "consolidated-write-10k-20261024-streamed-control-0-verify.jsonl",
+    "consolidated-write-10k-20261024-streamed-control-1-verify.jsonl",
+    "consolidated-write-10k-20261024-streamed-sqlite-0-verify.jsonl",
+    "consolidated-write-10k-20261024-streamed-sqlite-1-verify.jsonl"
+  ],
+  "live_binaries_match_identity_manifest": true,
+  "shared_workload_source_unchanged_between_commits": [
+    "tools/bench_support/read_matrix.rs",
+    "tools/bench_support/content_reads.rs",
+    "examples/measure_interleaved_reads.rs"
+  ],
+  "query_p95_current_vs_baseline": {
+    "lower": 29,
+    "higher": 8,
+    "equal": 1
+  },
+  "query_p95_current_vs_sqlite": {
+    "lower": 38,
+    "higher": 0,
+    "equal": 0
+  },
+  "scope": "Independent report-only arithmetic/identity/oracle validation; no benchmark or corpus/DB write. Source/corpus/fixture hash proof is in recovery-audit.json."
+}

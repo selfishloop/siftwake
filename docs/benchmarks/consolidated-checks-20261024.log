@@ -1,0 +1,9 @@
+Root cargo fmt --check
+Native SQLite cargo fmt --check
+Root cargo clippy --all-targets -- -D warnings
+    Finished `dev` profile [unoptimized + debuginfo] target(s) in 1.92s
+Native SQLite cargo clippy --all-targets -- -D warnings
+    Checking fdb v0.3.1 (C:\Users\Serkan\Documents\ChatGPT\fdb)
+    Checking fdb-native-sqlite-bench v0.1.0 (C:\Users\Serkan\Documents\ChatGPT\fdb\tools\native_sqlite)
+    Finished `dev` profile [unoptimized + debuginfo] target(s) in 3.67s
+All four checks passed

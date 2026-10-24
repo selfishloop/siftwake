@@ -1,0 +1,3126 @@
+{
+  "design": {
+    "pairs": 2,
+    "blocks_per_pair": 2,
+    "repeats_per_block": 25,
+    "samples_per_case_per_engine": 100,
+    "affinity_mask": 4,
+    "programs": {
+      "baseline": {
+        "path": "output\\intake-fold-recovery-candidate-read-20261022.exe",
+        "sha256": "0BE3F4112FA58E9656B58B15551618A307CFF09A5E45B94D956BCC295B2E7612"
+      },
+      "current": {
+        "path": "output\\maintenance-candidate-read-20261024.exe",
+        "sha256": "804DE1E24812DF7606ACFFA8697AE046C84F2935AAE6D9620974EB75CF8BB4E6"
+      },
+      "sqlite": {
+        "path": "tools\\native_sqlite\\target\\release\\content_reads.exe",
+        "sha256": "32DBB090B6519C9AF14830FA904EB4BED4FAA38473B5A15C1E4840EA96165A15"
+      }
+    },
+    "cache": "warm OS cache; no eviction; untimed per-case/key warmup each block",
+    "corpus": "same existing first10000; no generation/reset/copy",
+    "oracle": "same shared read_matrix.rs; all38 full pages/order/versions and256 gets; checks outside timing",
+    "workload": "all38 cases each round including8 pages; same seeded query/get shuffle per matching block",
+    "timing": "count and full owned payload result; get interleaved; no CLI JSON roundtrip",
+    "source_validation": "FDB strict open full source/index checks before queries; SQLite no full integrity on open",
+    "process": "two resident FDB oracle workers; per-block exclusive DB open; fresh SQLite process per block; no overlapping queries",
+    "limits": "no power/hardware isolation; two process pairs; no significance claim; query OS RAM and true cold/concurrent unmeasured",
+    "orders": [
+      {
+        "pair": 0,
+        "block": 0,
+        "engines": [
+          "baseline",
+          "current",
+          "sqlite"
+        ],
+        "command": {
+          "id": 0,
+          "seed": 0,
+          "repeats": 25
+        }
+      },
+      {
+        "pair": 0,
+        "block": 1,
+        "engines": [
+          "sqlite",
+          "current",
+          "baseline"
+        ],
+        "command": {
+          "id": 1,
+          "seed": 1,
+          "repeats": 25
+        }
+      },
+      {
+        "pair": 1,
+        "block": 0,
+        "engines": [
+          "sqlite",
+          "current",
+          "baseline"
+        ],
+        "command": {
+          "id": 2,
+          "seed": 10000,
+          "repeats": 25
+        }
+      },
+      {
+        "pair": 1,
+        "block": 1,
+        "engines": [
+          "baseline",
+          "current",
+          "sqlite"
+        ],
+        "command": {
+          "id": 3,
+          "seed": 10001,
+          "repeats": 25
+        }
+      }
+    ]
+  },
+  "files_unchanged": true,
+  "queries": [
+    {
+      "kind": "word",
+      "late_matches": 8,
+      "limit": 50,
+      "offset": 0,
+      "text": "quixote",
+      "total": 56,
+      "baseline": {
+        "n": 100,
+        "p50_ms": 2.0060000000000002,
+        "p95_ms": 3.3463,
+        "pair_p95_ms": [
+          2.3674999999999997,
+          3.7352000000000003
+        ],
+        "block_median_ms": [
+          1.7196,
+          1.7726,
+          2.3583,
+          2.4082
+        ]
+      },
+      "current": {
+        "n": 100,
+        "p50_ms": 2.0362999999999998,
+        "p95_ms": 3.2272,
+        "pair_p95_ms": [
+          2.8505000000000003,
+          3.5698000000000003
+        ],
+        "block_median_ms": [
+          1.888,
+          1.8317999999999999,
+          2.2729999999999997,
+          2.1026000000000002
+        ]
+      },
+      "sqlite": {
+        "n": 100,
+        "p50_ms": 12.90285,
+        "p95_ms": 19.525399999999998,
+        "pair_p95_ms": [
+          19.6135,
+          19.525399999999998
+        ],
+        "block_median_ms": [
+          12.934700000000001,
+          11.4963,
+          14.3573,
+          11.4234
+        ]
+      },
+      "current_vs_baseline": {
+        "p95_change_percent": -3.55915488748767,
+        "faster_pairs": 1,
+        "paired_p95_changes_percent": [
+          20.40126715945092,
+          -4.428143071321477
+        ],
+        "median_block_change_percent": -0.13864264991722552
+      },
+      "current_vs_sqlite": {
+        "p95_change_percent": -83.47178546918373,
+        "faster_pairs": 2,
+        "paired_p95_changes_percent": [
+          -85.46664287353099,
+          -81.71714792014504
+        ],
+        "median_block_change_percent": -84.11725514982223
+      }
+    },
+    {
+      "kind": "word",
+      "late_matches": 6,
+      "limit": 50,
+      "offset": 0,
+      "text": "zeuglodon",
+      "total": 32,
+      "baseline": {
+        "n": 100,
+        "p50_ms": 2.3035500000000004,
+        "p95_ms": 3.5179,
+        "pair_p95_ms": [
+          3.0466,
+          4.0985
+        ],
+        "block_median_ms": [
+          2.0324,
+          2.1012,
+          2.5038,
+          2.562
+        ]
+      },
+      "current": {
+        "n": 100,
+        "p50_ms": 2.26395,
+        "p95_ms": 3.2434,
+        "pair_p95_ms": [
+          2.7805,
+          3.4447
+        ],
+        "block_median_ms": [
+          2.0052999999999996,
+          2.0354,
+          2.7188,
+          2.4042
+        ]
+      },
+      "sqlite": {
+        "n": 100,
+        "p50_ms": 7.5265,
+        "p95_ms": 11.200899999999999,
+        "pair_p95_ms": [
+          11.200899999999999,
+          11.4757
+        ],
+        "block_median_ms": [
+          7.572299999999999,
+          6.9531,
+          7.8127,
+          6.3458000000000006
+        ]
+      },
+      "current_vs_baseline": {
+        "p95_change_percent": -7.802950623951799,
+        "faster_pairs": 2,
+        "paired_p95_changes_percent": [
+          -8.734326790520585,
+          -15.952177625960706
+        ],
+        "median_block_change_percent": -2.2324714084524464
+      },
+      "current_vs_sqlite": {
+        "p95_change_percent": -71.04339829835102,
+        "faster_pairs": 2,
+        "paired_p95_changes_percent": [
+          -75.1761019203814,
+          -69.98265900990789
+        ],
+        "median_block_change_percent": -67.9634885410157
+      }
+    },
+    {
+      "kind": "word",
+      "late_matches": 9,
+      "limit": 50,
+      "offset": 0,
+      "text": "beagle",
+      "total": 46,
+      "baseline": {
+        "n": 100,
+        "p50_ms": 19.129400000000004,
+        "p95_ms": 28.406000000000002,
+        "pair_p95_ms": [
+          20.148699999999998,
+          29.549599999999998
+        ],
+        "block_median_ms": [
+          16.431500000000003,
+          16.301099999999998,
+          20.9495,
+          21.8367
+        ]
+      },
+      "current": {
+        "n": 100,
+        "p50_ms": 19.0452,
+        "p95_ms": 28.055500000000002,
+        "pair_p95_ms": [
+          17.718700000000002,
+          28.633200000000002
+        ],
+        "block_median_ms": [
+          16.438100000000002,
+          16.3466,
+          23.9666,
+          20.1434
+        ]
+      },
+      "sqlite": {
+        "n": 100,
+        "p50_ms": 134.5762,
+        "p95_ms": 173.6782,
+        "pair_p95_ms": [
+          167.9346,
+          178.4204
+        ],
+        "block_median_ms": [
+          135.4084,
+          121.11030000000001,
+          142.1469,
+          111.9813
+        ]
+      },
+      "current_vs_baseline": {
+        "p95_change_percent": -1.233894247694145,
+        "faster_pairs": 2,
+        "paired_p95_changes_percent": [
+          -12.060331435774996,
+          -3.101226412540259
+        ],
+        "median_block_change_percent": 0.1596445103527966
+      },
+      "current_vs_sqlite": {
+        "p95_change_percent": -83.84627431652332,
+        "faster_pairs": 2,
+        "paired_p95_changes_percent": [
+          -89.4490474267959,
+          -83.95183510405761
+        ],
+        "median_block_change_percent": -84.82113593501165
+      }
+    },
+    {
+      "kind": "word",
+      "late_matches": 7,
+      "limit": 50,
+      "offset": 0,
+      "text": "mesopotamia",
+      "total": 31,
+      "baseline": {
+        "n": 100,
+        "p50_ms": 2.56815,
+        "p95_ms": 4.013400000000001,
+        "pair_p95_ms": [
+          3.1914000000000002,
+          4.336600000000001
+        ],
+        "block_median_ms": [
+          2.2298999999999998,
+          2.4328000000000003,
+          2.7823,
+          2.8452
+        ]
+      },
+      "current": {
+        "n": 100,
+        "p50_ms": 2.5978499999999998,
+        "p95_ms": 3.997,
+        "pair_p95_ms": [
+          2.78,
+          4.096
+        ],
+        "block_median_ms": [
+          2.2588,
+          2.4084000000000003,
+          3.155,
+          2.9121
+        ]
+      },
+      "sqlite": {
+        "n": 100,
+        "p50_ms": 9.817450000000001,
+        "p95_ms": 14.9927,
+        "pair_p95_ms": [
+          15.1228,
+          14.9927
+        ],
+        "block_median_ms": [
+          10.5811,
+          8.776900000000001,
+          10.41,
+          8.4575
+        ]
+      },
+      "current_vs_baseline": {
+        "p95_change_percent": -0.4086310858623876,
+        "faster_pairs": 2,
+        "paired_p95_changes_percent": [
+          -12.890894278373144,
+          -5.548125259419834
+        ],
+        "median_block_change_percent": 1.8236753982514675
+      },
+      "current_vs_sqlite": {
+        "p95_change_percent": -73.34035897470102,
+        "faster_pairs": 2,
+        "paired_p95_changes_percent": [
+          -81.6171608432301,
+          -72.68003761830757
+        ],
+        "median_block_change_percent": -71.12619544521118
+      }
+    },
+    {
+      "kind": "word",
+      "late_matches": 0,
+      "limit": 50,
+      "offset": 0,
+      "text": "transubstantiation",
+      "total": 0,
+      "baseline": {
+        "n": 100,
+        "p50_ms": 49.041799999999995,
+        "p95_ms": 68.4181,
+        "pair_p95_ms": [
+          47.8909,
+          70.7209
+        ],
+        "block_median_ms": [
+          42.0632,
+          42.3431,
+          54.129599999999996,
+          59.5044
+        ]
+      },
+      "current": {
+        "n": 100,
+        "p50_ms": 49.35175,
+        "p95_ms": 68.34740000000001,
+        "pair_p95_ms": [
+          53.4737,
+          69.7204
+        ],
+        "block_median_ms": [
+          42.647999999999996,
+          41.8217,
+          57.262,
+          52.936499999999995
+        ]
+      },
+      "sqlite": {
+        "n": 100,
+        "p50_ms": 507.60465,
+        "p95_ms": 644.043,
+        "pair_p95_ms": [
+          663.4987,
+          628.6567
+        ],
+        "block_median_ms": [
+          515.1364000000001,
+          458.597,
+          521.2757,
+          421.7529
+        ]
+      },
+      "current_vs_baseline": {
+        "p95_change_percent": -0.1033352285433109,
+        "faster_pairs": 1,
+        "paired_p95_changes_percent": [
+          11.657329471778555,
+          -1.41471615887242
+        ],
+        "median_block_change_percent": 0.07945972145072533
+      },
+      "current_vs_sqlite": {
+        "p95_change_percent": -89.38775827079868,
+        "faster_pairs": 2,
+        "paired_p95_changes_percent": [
+          -91.94064735921864,
+          -88.90962269232158
+        ],
+        "median_block_change_percent": -89.94776883460997
+      }
+    },
+    {
+      "kind": "word",
+      "late_matches": 78,
+      "limit": 50,
+      "offset": 0,
+      "text": "harpoon",
+      "total": 1006,
+      "baseline": {
+        "n": 100,
+        "p50_ms": 56.193650000000005,
+        "p95_ms": 81.8402,
+        "pair_p95_ms": [
+          53.551899999999996,
+          88.8097
+        ],
+        "block_median_ms": [
+          49.1156,
+          49.0844,
+          62.364999999999995,
+          62.985
+        ]
+      },
+      "current": {
+        "n": 100,
+        "p50_ms": 57.4769,
+        "p95_ms": 79.8563,
+        "pair_p95_ms": [
+          56.649,
+          82.2128
+        ],
+        "block_median_ms": [
+          49.8727,
+          49.6271,
+          64.49340000000001,
+          62.032
+        ]
+      },
+      "sqlite": {
+        "n": 100,
+        "p50_ms": 474.9058,
+        "p95_ms": 600.0064000000001,
+        "pair_p95_ms": [
+          649.7257,
+          565.8697000000001
+        ],
+        "block_median_ms": [
+          486.6827,
+          404.76370000000003,
+          485.8094,
+          397.8449
+        ]
+      },
+      "current_vs_baseline": {
+        "p95_change_percent": -2.4241143105710794,
+        "faster_pairs": 1,
+        "paired_p95_changes_percent": [
+          5.783361561401201,
+          -7.428130035345248
+        ],
+        "median_block_change_percent": 1.3235560206323216
+      },
+      "current_vs_sqlite": {
+        "p95_change_percent": -86.69075863190793,
+        "faster_pairs": 2,
+        "paired_p95_changes_percent": [
+          -91.28108985068621,
+          -85.4714256656612
+        ],
+        "median_block_change_percent": -87.23189407191808
+      }
+    },
+    {
+      "kind": "word",
+      "late_matches": 39,
+      "limit": 50,
+      "offset": 0,
+      "text": "ishmael",
+      "total": 260,
+      "baseline": {
+        "n": 100,
+        "p50_ms": 6.2358,
+        "p95_ms": 9.1518,
+        "pair_p95_ms": [
+          6.3056,
+          9.5158
+        ],
+        "block_median_ms": [
+          5.6512,
+          5.684,
+          6.7584,
+          7.1438999999999995
+        ]
+      },
+      "current": {
+        "n": 100,
+        "p50_ms": 6.359450000000001,
+        "p95_ms": 8.9369,
+        "pair_p95_ms": [
+          7.2213,
+          9.6708
+        ],
+        "block_median_ms": [
+          5.7735,
+          5.569,
+          7.1465,
+          7.1551
+        ]
+      },
+      "sqlite": {
+        "n": 100,
+        "p50_ms": 51.04515,
+        "p95_ms": 66.38380000000001,
+        "pair_p95_ms": [
+          70.0345,
+          66.38380000000001
+        ],
+        "block_median_ms": [
+          52.5848,
+          46.7646,
+          54.0909,
+          42.7473
+        ]
+      },
+      "current_vs_baseline": {
+        "p95_change_percent": -2.348171944316968,
+        "faster_pairs": 0,
+        "paired_p95_changes_percent": [
+          14.522012179649835,
+          1.6288698795687173
+        ],
+        "median_block_change_percent": 1.160459619823595
+      },
+      "current_vs_sqlite": {
+        "p95_change_percent": -86.53752873442015,
+        "faster_pairs": 2,
+        "paired_p95_changes_percent": [
+          -89.68893902291013,
+          -85.43198792476478
+        ],
+        "median_block_change_percent": -87.4397002754134
+      }
+    },
+    {
+      "kind": "word",
+      "late_matches": 12,
+      "limit": 50,
+      "offset": 0,
+      "text": "invertebrata",
+      "total": 43,
+      "baseline": {
+        "n": 100,
+        "p50_ms": 10.41575,
+        "p95_ms": 16.7825,
+        "pair_p95_ms": [
+          11.5026,
+          18.358800000000002
+        ],
+        "block_median_ms": [
+          9.1879,
+          9.1221,
+          11.7833,
+          11.958699999999999
+        ]
+      },
+      "current": {
+        "n": 100,
+        "p50_ms": 10.80695,
+        "p95_ms": 16.4694,
+        "pair_p95_ms": [
+          12.9143,
+          16.488300000000002
+        ],
+        "block_median_ms": [
+          9.4177,
+          9.4506,
+          12.3121,
+          12.0786
+        ]
+      },
+      "sqlite": {
+        "n": 100,
+        "p50_ms": 91.6323,
+        "p95_ms": 124.2911,
+        "pair_p95_ms": [
+          127.2008,
+          120.65990000000001
+        ],
+        "block_median_ms": [
+          94.01320000000001,
+          86.676,
+          93.6918,
+          80.5346
+        ]
+      },
+      "current_vs_baseline": {
+        "p95_change_percent": -1.8656338447787801,
+        "faster_pairs": 1,
+        "paired_p95_changes_percent": [
+          12.272877436405704,
+          -10.188574416628537
+        ],
+        "median_block_change_percent": 3.0511300355001603
+      },
+      "current_vs_sqlite": {
+        "p95_change_percent": -86.74933281626762,
+        "faster_pairs": 2,
+        "paired_p95_changes_percent": [
+          -89.84731228105484,
+          -86.33489668067021
+        ],
+        "median_block_change_percent": -87.97778555366232
+      }
+    },
+    {
+      "kind": "word",
+      "late_matches": 34,
+      "limit": 50,
+      "offset": 0,
+      "text": "darcy",
+      "total": 1220,
+      "baseline": {
+        "n": 100,
+        "p50_ms": 47.2265,
+        "p95_ms": 62.4834,
+        "pair_p95_ms": [
+          46.8716,
+          72.16839999999999
+        ],
+        "block_median_ms": [
+          40.7953,
+          41.073,
+          51.4952,
+          51.5274
+        ]
+      },
+      "current": {
+        "n": 100,
+        "p50_ms": 48.416,
+        "p95_ms": 62.4223,
+        "pair_p95_ms": [
+          48.2847,
+          63.76279999999999
+        ],
+        "block_median_ms": [
+          41.5801,
+          41.643,
+          54.3753,
+          51.4765
+        ]
+      },
+      "sqlite": {
+        "n": 100,
+        "p50_ms": 394.46135000000004,
+        "p95_ms": 522.4309999999999,
+        "pair_p95_ms": [
+          523.358,
+          488.5895
+        ],
+        "block_median_ms": [
+          407.1035,
+          342.1095,
+          407.90549999999996,
+          334.79179999999997
+        ]
+      },
+      "current_vs_baseline": {
+        "p95_change_percent": -0.09778597195415628,
+        "faster_pairs": 1,
+        "paired_p95_changes_percent": [
+          3.014832009148405,
+          -11.647202930922674
+        ],
+        "median_block_change_percent": 1.6557620049466593
+      },
+      "current_vs_sqlite": {
+        "p95_change_percent": -88.05157044662357,
+        "faster_pairs": 2,
+        "paired_p95_changes_percent": [
+          -90.77405905708903,
+          -86.94961721445098
+        ],
+        "median_block_change_percent": -87.24860727997877
+      }
+    },
+    {
+      "kind": "word",
+      "late_matches": 98,
+      "limit": 50,
+      "offset": 0,
+      "text": "elizabeth",
+      "total": 2280,
+      "baseline": {
+        "n": 100,
+        "p50_ms": 45.340599999999995,
+        "p95_ms": 61.7339,
+        "pair_p95_ms": [
+          45.733799999999995,
+          64.2889
+        ],
+        "block_median_ms": [
+          39.0276,
+          38.9515,
+          49.567,
+          48.270599999999995
+        ]
+      },
+      "current": {
+        "n": 100,
+        "p50_ms": 45.97005,
+        "p95_ms": 62.0655,
+        "pair_p95_ms": [
+          46.618100000000005,
+          62.503699999999995
+        ],
+        "block_median_ms": [
+          39.4206,
+          39.2502,
+          51.0096,
+          49.2034
+        ]
+      },
+      "sqlite": {
+        "n": 100,
+        "p50_ms": 349.78880000000004,
+        "p95_ms": 494.4418,
+        "pair_p95_ms": [
+          740.3456000000001,
+          449.1099
+        ],
+        "block_median_ms": [
+          360.29670000000004,
+          305.00739999999996,
+          367.5109,
+          291.8034
+        ]
+      },
+      "current_vs_baseline": {
+        "p95_change_percent": 0.5371440974893948,
+        "faster_pairs": 1,
+        "paired_p95_changes_percent": [
+          1.9335808526735443,
+          -2.7768401699204692
+        ],
+        "median_block_change_percent": 1.4697094416119105
+      },
+      "current_vs_sqlite": {
+        "p95_change_percent": -87.44735983082337,
+        "faster_pairs": 2,
+        "paired_p95_changes_percent": [
+          -93.70319753369238,
+          -86.0827605893346
+        ],
+        "median_block_change_percent": -86.62582129768117
+      }
+    },
+    {
+      "kind": "word",
+      "late_matches": 191,
+      "limit": 50,
+      "offset": 0,
+      "text": "watson",
+      "total": 1707,
+      "baseline": {
+        "n": 100,
+        "p50_ms": 43.2287,
+        "p95_ms": 61.9257,
+        "pair_p95_ms": [
+          43.538199999999996,
+          71.8852
+        ],
+        "block_median_ms": [
+          37.4795,
+          37.6321,
+          50.5477,
+          45.290200000000006
+        ]
+      },
+      "current": {
+        "n": 100,
+        "p50_ms": 43.1439,
+        "p95_ms": 60.049400000000006,
+        "pair_p95_ms": [
+          48.414,
+          60.5335
+        ],
+        "block_median_ms": [
+          37.935700000000004,
+          37.5537,
+          46.1258,
+          46.2554
+        ]
+      },
+      "sqlite": {
+        "n": 100,
+        "p50_ms": 316.3736,
+        "p95_ms": 442.5059,
+        "pair_p95_ms": [
+          462.7332,
+          442.5059
+        ],
+        "block_median_ms": [
+          318.20619999999997,
+          316.3042,
+          328.41290000000004,
+          266.70070000000004
+        ]
+      },
+      "current_vs_baseline": {
+        "p95_change_percent": -3.0299213412201986,
+        "faster_pairs": 1,
+        "paired_p95_changes_percent": [
+          11.198901194812837,
+          -15.791428555530207
+        ],
+        "median_block_change_percent": 0.5044329777903422
+      },
+      "current_vs_sqlite": {
+        "p95_change_percent": -86.42969506169295,
+        "faster_pairs": 2,
+        "paired_p95_changes_percent": [
+          -89.53738352899684,
+          -86.32029539041174
+        ],
+        "median_block_change_percent": -87.0166007899067
+      }
+    },
+    {
+      "kind": "word",
+      "late_matches": 7,
+      "limit": 50,
+      "offset": 0,
+      "text": "holmes",
+      "total": 1222,
+      "baseline": {
+        "n": 100,
+        "p50_ms": 25.30605,
+        "p95_ms": 36.0584,
+        "pair_p95_ms": [
+          24.1658,
+          36.851299999999995
+        ],
+        "block_median_ms": [
+          21.8595,
+          21.843700000000002,
+          28.3079,
+          28.009900000000002
+        ]
+      },
+      "current": {
+        "n": 100,
+        "p50_ms": 25.3782,
+        "p95_ms": 34.961600000000004,
+        "pair_p95_ms": [
+          27.132900000000003,
+          35.639700000000005
+        ],
+        "block_median_ms": [
+          22.155,
+          22.2276,
+          28.270599999999998,
+          27.377399999999998
+        ]
+      },
+      "sqlite": {
+        "n": 100,
+        "p50_ms": 171.0043,
+        "p95_ms": 213.7346,
+        "pair_p95_ms": [
+          217.1566,
+          212.7023
+        ],
+        "block_median_ms": [
+          174.58689999999999,
+          150.4865,
+          178.4722,
+          141.1482
+        ]
+      },
+      "current_vs_baseline": {
+        "p95_change_percent": -3.0417323009340302,
+        "faster_pairs": 1,
+        "paired_p95_changes_percent": [
+          12.27809549032104,
+          -3.287808028482009
+        ],
+        "median_block_change_percent": 0.6100248313759049
+      },
+      "current_vs_sqlite": {
+        "p95_change_percent": -83.64251740242338,
+        "faster_pairs": 2,
+        "paired_p95_changes_percent": [
+          -87.50537630447336,
+          -83.24432787045556
+        ],
+        "median_block_change_percent": -84.694583738805
+      }
+    },
+    {
+      "kind": "word",
+      "late_matches": 88,
+      "limit": 50,
+      "offset": 0,
+      "text": "frankenstein",
+      "total": 607,
+      "baseline": {
+        "n": 100,
+        "p50_ms": 14.208850000000002,
+        "p95_ms": 20.754,
+        "pair_p95_ms": [
+          14.1958,
+          22.496100000000002
+        ],
+        "block_median_ms": [
+          12.5298,
+          12.4198,
+          17.053700000000003,
+          15.771400000000002
+        ]
+      },
+      "current": {
+        "n": 100,
+        "p50_ms": 14.4758,
+        "p95_ms": 21.150499999999997,
+        "pair_p95_ms": [
+          19.6997,
+          21.2919
+        ],
+        "block_median_ms": [
+          12.754100000000001,
+          12.511,
+          17.3549,
+          15.765899999999998
+        ]
+      },
+      "sqlite": {
+        "n": 100,
+        "p50_ms": 109.99255,
+        "p95_ms": 148.4855,
+        "pair_p95_ms": [
+          149.1876,
+          148.0506
+        ],
+        "block_median_ms": [
+          110.6696,
+          106.6165,
+          113.0171,
+          91.4148
+        ]
+      },
+      "current_vs_baseline": {
+        "p95_change_percent": 1.9104750891394184,
+        "faster_pairs": 1,
+        "paired_p95_changes_percent": [
+          38.77132673044139,
+          -5.35292784082576
+        ],
+        "median_block_change_percent": 1.250248489350969
+      },
+      "current_vs_sqlite": {
+        "p95_change_percent": -85.75584821413538,
+        "faster_pairs": 2,
+        "paired_p95_changes_percent": [
+          -86.79535028380376,
+          -85.6184980000081
+        ],
+        "median_block_change_percent": -86.45471188944448
+      }
+    },
+    {
+      "kind": "word",
+      "late_matches": 34,
+      "limit": 50,
+      "offset": 0,
+      "text": "galapagos",
+      "total": 179,
+      "baseline": {
+        "n": 100,
+        "p50_ms": 9.30385,
+        "p95_ms": 14.1199,
+        "pair_p95_ms": [
+          9.8639,
+          14.5374
+        ],
+        "block_median_ms": [
+          8.0848,
+          8.1167,
+          10.1996,
+          10.6366
+        ]
+      },
+      "current": {
+        "n": 100,
+        "p50_ms": 9.1086,
+        "p95_ms": 13.713700000000001,
+        "pair_p95_ms": [
+          9.1052,
+          14.220699999999999
+        ],
+        "block_median_ms": [
+          8.1801,
+          8.6508,
+          10.732800000000001,
+          10.613600000000002
+        ]
+      },
+      "sqlite": {
+        "n": 100,
+        "p50_ms": 60.8227,
+        "p95_ms": 87.1009,
+        "pair_p95_ms": [
+          90.3094,
+          87.1009
+        ],
+        "block_median_ms": [
+          60.349399999999996,
+          52.5067,
+          65.19659999999999,
+          48.925200000000004
+        ]
+      },
+      "current_vs_baseline": {
+        "p95_change_percent": -2.8767909121169333,
+        "faster_pairs": 2,
+        "paired_p95_changes_percent": [
+          -7.691683816745909,
+          -2.1785188548158585
+        ],
+        "median_block_change_percent": 3.203205590721492
+      },
+      "current_vs_sqlite": {
+        "p95_change_percent": -84.25538656891031,
+        "faster_pairs": 2,
+        "paired_p95_changes_percent": [
+          -89.91777157195153,
+          -83.67330303131196
+        ],
+        "median_block_change_percent": -83.53109008209945
+      }
+    },
+    {
+      "kind": "word",
+      "late_matches": 85,
+      "limit": 50,
+      "offset": 0,
+      "text": "fossil",
+      "total": 595,
+      "baseline": {
+        "n": 100,
+        "p50_ms": 26.8147,
+        "p95_ms": 37.3166,
+        "pair_p95_ms": [
+          29.0177,
+          39.0987
+        ],
+        "block_median_ms": [
+          23.412599999999998,
+          23.6065,
+          30.025,
+          29.055899999999998
+        ]
+      },
+      "current": {
+        "n": 100,
+        "p50_ms": 27.5764,
+        "p95_ms": 37.991200000000006,
+        "pair_p95_ms": [
+          32.4926,
+          38.4278
+        ],
+        "block_median_ms": [
+          23.5792,
+          23.687099999999997,
+          30.0089,
+          30.0263
+        ]
+      },
+      "sqlite": {
+        "n": 100,
+        "p50_ms": 243.1289,
+        "p95_ms": 321.1212,
+        "pair_p95_ms": [
+          326.19910000000004,
+          321.1212
+        ],
+        "block_median_ms": [
+          244.5301,
+          233.7671,
+          266.7426,
+          199.22799999999998
+        ]
+      },
+      "current_vs_baseline": {
+        "p95_change_percent": 1.807774556095687,
+        "faster_pairs": 1,
+        "paired_p95_changes_percent": [
+          11.97510484979858,
+          -1.7159138283370123
+        ],
+        "median_block_change_percent": 0.5265070187498666
+      },
+      "current_vs_sqlite": {
+        "p95_change_percent": -88.16920215793913,
+        "faster_pairs": 2,
+        "paired_p95_changes_percent": [
+          -90.03902831123692,
+          -88.03324103173506
+        ],
+        "median_block_change_percent": -89.30854426161662
+      }
+    },
+    {
+      "kind": "word",
+      "late_matches": 62,
+      "limit": 50,
+      "offset": 0,
+      "text": "geologist",
+      "total": 306,
+      "baseline": {
+        "n": 100,
+        "p50_ms": 16.0373,
+        "p95_ms": 23.6801,
+        "pair_p95_ms": [
+          17.7134,
+          26.799
+        ],
+        "block_median_ms": [
+          13.7641,
+          13.924000000000001,
+          17.4161,
+          18.2226
+        ]
+      },
+      "current": {
+        "n": 100,
+        "p50_ms": 16.18745,
+        "p95_ms": 21.6056,
+        "pair_p95_ms": [
+          17.563,
+          22.1525
+        ],
+        "block_median_ms": [
+          14.020100000000001,
+          14.0495,
+          17.001700000000003,
+          17.2531
+        ]
+      },
+      "sqlite": {
+        "n": 100,
+        "p50_ms": 123.46095,
+        "p95_ms": 162.7371,
+        "pair_p95_ms": [
+          185.07850000000002,
+          154.4083
+        ],
+        "block_median_ms": [
+          126.70329999999998,
+          114.2704,
+          130.5433,
+          103.8879
+        ]
+      },
+      "current_vs_baseline": {
+        "p95_change_percent": -8.760520436991403,
+        "faster_pairs": 2,
+        "paired_p95_changes_percent": [
+          -0.849074711800113,
+          -17.338333519907458
+        ],
+        "median_block_change_percent": -0.7390430501605094
+      },
+      "current_vs_sqlite": {
+        "p95_change_percent": -86.72361741729452,
+        "faster_pairs": 2,
+        "paired_p95_changes_percent": [
+          -90.51051310660071,
+          -85.65329713493381
+        ],
+        "median_block_change_percent": -87.34061933862168
+      }
+    },
+    {
+      "kind": "common",
+      "late_matches": 0,
+      "limit": 50,
+      "offset": 0,
+      "text": "the",
+      "total": 10000,
+      "baseline": {
+        "n": 100,
+        "p50_ms": 0.9386,
+        "p95_ms": 1.6094,
+        "pair_p95_ms": [
+          1.4346,
+          2.2599
+        ],
+        "block_median_ms": [
+          0.8342,
+          0.8605,
+          1.1333,
+          1.0911
+        ]
+      },
+      "current": {
+        "n": 100,
+        "p50_ms": 0.99105,
+        "p95_ms": 1.5141,
+        "pair_p95_ms": [
+          1.331,
+          1.5327
+        ],
+        "block_median_ms": [
+          0.8622000000000001,
+          0.897,
+          1.1594000000000002,
+          1.036
+        ]
+      },
+      "sqlite": {
+        "n": 100,
+        "p50_ms": 1078.98155,
+        "p95_ms": 1343.9993000000002,
+        "pair_p95_ms": [
+          1343.9993000000002,
+          1405.6932
+        ],
+        "block_median_ms": [
+          1135.9135,
+          914.7939,
+          1112.9769000000001,
+          877.7570000000001
+        ]
+      },
+      "current_vs_baseline": {
+        "p95_change_percent": -5.92146141419162,
+        "faster_pairs": 2,
+        "paired_p95_changes_percent": [
+          -7.22152516380874,
+          -32.1784149741139
+        ],
+        "median_block_change_percent": 2.829759071213611
+      },
+      "current_vs_sqlite": {
+        "p95_change_percent": -99.88734369132484,
+        "faster_pairs": 2,
+        "paired_p95_changes_percent": [
+          -99.90096721032519,
+          -99.89096482788705
+        ],
+        "median_block_change_percent": -99.89888702588354
+      }
+    },
+    {
+      "kind": "common",
+      "late_matches": 61,
+      "limit": 50,
+      "offset": 0,
+      "text": "man",
+      "total": 9932,
+      "baseline": {
+        "n": 100,
+        "p50_ms": 1.1569500000000001,
+        "p95_ms": 1.7634,
+        "pair_p95_ms": [
+          1.2975,
+          2.0069
+        ],
+        "block_median_ms": [
+          1.0832000000000002,
+          1.0203,
+          1.2988,
+          1.3552
+        ]
+      },
+      "current": {
+        "n": 100,
+        "p50_ms": 1.20755,
+        "p95_ms": 1.8603,
+        "pair_p95_ms": [
+          1.4717,
+          2.0523
+        ],
+        "block_median_ms": [
+          1.0797,
+          0.9993999999999998,
+          1.266,
+          1.3800999999999999
+        ]
+      },
+      "sqlite": {
+        "n": 100,
+        "p50_ms": 1085.04655,
+        "p95_ms": 1325.9942,
+        "pair_p95_ms": [
+          1406.2643,
+          1291.8410000000001
+        ],
+        "block_median_ms": [
+          1116.0281,
+          919.1889,
+          1132.0615,
+          911.4647
+        ]
+      },
+      "current_vs_baseline": {
+        "p95_change_percent": 5.495066349098332,
+        "faster_pairs": 0,
+        "paired_p95_changes_percent": [
+          13.425818882466277,
+          2.262195425781055
+        ],
+        "median_block_change_percent": -1.1857669117505576
+      },
+      "current_vs_sqlite": {
+        "p95_change_percent": -99.85970526869575,
+        "faster_pairs": 2,
+        "paired_p95_changes_percent": [
+          -99.89534684198411,
+          -99.84113369989032
+        ],
+        "median_block_change_percent": -99.8897211643122
+      }
+    },
+    {
+      "kind": "short",
+      "late_matches": 0,
+      "limit": 50,
+      "offset": 0,
+      "text": "he",
+      "total": 10000,
+      "baseline": {
+        "n": 100,
+        "p50_ms": 0.90015,
+        "p95_ms": 1.3711000000000002,
+        "pair_p95_ms": [
+          0.9795999999999999,
+          1.55
+        ],
+        "block_median_ms": [
+          0.8101999999999999,
+          0.8130999999999999,
+          1.0365000000000002,
+          1.0266
+        ]
+      },
+      "current": {
+        "n": 100,
+        "p50_ms": 0.9350499999999999,
+        "p95_ms": 1.3625,
+        "pair_p95_ms": [
+          1.3221,
+          1.3992
+        ],
+        "block_median_ms": [
+          0.8399,
+          0.805,
+          1.0165,
+          1.0215999999999998
+        ]
+      },
+      "sqlite": {
+        "n": 100,
+        "p50_ms": 1052.0671499999999,
+        "p95_ms": 1340.4067,
+        "pair_p95_ms": [
+          1354.9318,
+          1338.9457
+        ],
+        "block_median_ms": [
+          1090.941,
+          913.2456,
+          1099.3701,
+          854.8816
+        ]
+      },
+      "current_vs_baseline": {
+        "p95_change_percent": -0.6272336080519358,
+        "faster_pairs": 1,
+        "paired_p95_changes_percent": [
+          34.963250306247474,
+          -9.729032258064517
+        ],
+        "median_block_change_percent": -0.7416160220534485
+      },
+      "current_vs_sqlite": {
+        "p95_change_percent": -99.89835174652588,
+        "faster_pairs": 2,
+        "paired_p95_changes_percent": [
+          -99.90242313303149,
+          -99.89549986978561
+        ],
+        "median_block_change_percent": -99.90969540428014
+      }
+    },
+    {
+      "kind": "absent",
+      "late_matches": 0,
+      "limit": 50,
+      "offset": 0,
+      "text": "zzxqnever",
+      "total": 0,
+      "baseline": {
+        "n": 100,
+        "p50_ms": 0.034699999999999995,
+        "p95_ms": 0.0515,
+        "pair_p95_ms": [
+          0.0424,
+          0.0533
+        ],
+        "block_median_ms": [
+          0.0306,
+          0.0323,
+          0.0385,
+          0.0378
+        ]
+      },
+      "current": {
+        "n": 100,
+        "p50_ms": 0.03415,
+        "p95_ms": 0.0533,
+        "pair_p95_ms": [
+          0.0439,
+          0.0547
+        ],
+        "block_median_ms": [
+          0.0324,
+          0.0312,
+          0.0371,
+          0.0342
+        ]
+      },
+      "sqlite": {
+        "n": 100,
+        "p50_ms": 0.34430000000000005,
+        "p95_ms": 1.5595999999999999,
+        "pair_p95_ms": [
+          1.3144,
+          1.9516
+        ],
+        "block_median_ms": [
+          0.35169999999999996,
+          0.32689999999999997,
+          0.3658,
+          0.29100000000000004
+        ]
+      },
+      "current_vs_baseline": {
+        "p95_change_percent": 3.495145631067964,
+        "faster_pairs": 0,
+        "paired_p95_changes_percent": [
+          3.5377358490566113,
+          2.6266416510319024
+        ],
+        "median_block_change_percent": -3.5209681958908003
+      },
+      "current_vs_sqlite": {
+        "p95_change_percent": -96.58245704026673,
+        "faster_pairs": 2,
+        "paired_p95_changes_percent": [
+          -96.6600730371272,
+          -97.19717155154744
+        ],
+        "median_block_change_percent": -90.15682134858315
+      }
+    },
+    {
+      "kind": "short-negative",
+      "late_matches": 0,
+      "limit": 50,
+      "offset": 0,
+      "text": "zx",
+      "total": 0,
+      "baseline": {
+        "n": 100,
+        "p50_ms": 136.64294999999998,
+        "p95_ms": 185.61759999999998,
+        "pair_p95_ms": [
+          149.1507,
+          203.6104
+        ],
+        "block_median_ms": [
+          118.4533,
+          118.9582,
+          147.7287,
+          146.0534
+        ]
+      },
+      "current": {
+        "n": 100,
+        "p50_ms": 140.99855,
+        "p95_ms": 185.35920000000002,
+        "pair_p95_ms": [
+          165.7808,
+          187.9887
+        ],
+        "block_median_ms": [
+          119.9521,
+          121.91409999999999,
+          153.66479999999999,
+          149.4734
+        ]
+      },
+      "sqlite": {
+        "n": 100,
+        "p50_ms": 1471.4686000000002,
+        "p95_ms": 1869.3331,
+        "pair_p95_ms": [
+          1857.9967,
+          1886.1982
+        ],
+        "block_median_ms": [
+          1517.9537,
+          1268.5017,
+          1538.1011999999998,
+          1182.0318
+        ]
+      },
+      "current_vs_baseline": {
+        "p95_change_percent": -0.13921093689389652,
+        "faster_pairs": 1,
+        "paired_p95_changes_percent": [
+          11.149863862522945,
+          -7.6723487601812135
+        ],
+        "median_block_change_percent": 2.4132158508021084
+      },
+      "current_vs_sqlite": {
+        "p95_change_percent": -90.08420703618847,
+        "faster_pairs": 2,
+        "paired_p95_changes_percent": [
+          -91.07744378663321,
+          -90.03345989832881
+        ],
+        "median_block_change_percent": -90.19928700940744
+      }
+    },
+    {
+      "kind": "negative-and",
+      "late_matches": 0,
+      "limit": 50,
+      "offset": 0,
+      "text": "the zx",
+      "total": 0,
+      "baseline": {
+        "n": 100,
+        "p50_ms": 136.00755,
+        "p95_ms": 200.2768,
+        "pair_p95_ms": [
+          127.13260000000001,
+          212.0599
+        ],
+        "block_median_ms": [
+          118.312,
+          118.551,
+          152.6645,
+          143.1487
+        ]
+      },
+      "current": {
+        "n": 100,
+        "p50_ms": 138.692,
+        "p95_ms": 189.27550000000002,
+        "pair_p95_ms": [
+          141.4469,
+          196.609
+        ],
+        "block_median_ms": [
+          120.2186,
+          120.3873,
+          163.31300000000002,
+          152.1134
+        ]
+      },
+      "sqlite": {
+        "n": 100,
+        "p50_ms": 1542.6847,
+        "p95_ms": 2051.6106999999997,
+        "pair_p95_ms": [
+          2011.0693999999999,
+          2193.6439
+        ],
+        "block_median_ms": [
+          1579.4041000000002,
+          1277.4508,
+          1623.7445,
+          1252.8396
+        ]
+      },
+      "current_vs_baseline": {
+        "p95_change_percent": -5.4930476220910185,
+        "faster_pairs": 1,
+        "paired_p95_changes_percent": [
+          11.259346540541127,
+          -7.286101709941384
+        ],
+        "median_block_change_percent": 3.937005318784581
+      },
+      "current_vs_sqlite": {
+        "p95_change_percent": -90.77429748246098,
+        "faster_pairs": 2,
+        "paired_p95_changes_percent": [
+          -92.96658285387865,
+          -91.03733290530883
+        ],
+        "median_block_change_percent": -90.25908603427717
+      }
+    },
+    {
+      "kind": "and",
+      "late_matches": 8,
+      "limit": 50,
+      "offset": 0,
+      "text": "quixote whale",
+      "total": 44,
+      "baseline": {
+        "n": 100,
+        "p50_ms": 2.3098,
+        "p95_ms": 3.7553,
+        "pair_p95_ms": [
+          2.8532,
+          4.1190999999999995
+        ],
+        "block_median_ms": [
+          1.9765,
+          2.1656,
+          2.6159,
+          2.4708
+        ]
+      },
+      "current": {
+        "n": 100,
+        "p50_ms": 2.30185,
+        "p95_ms": 3.6138,
+        "pair_p95_ms": [
+          3.1478,
+          4.1576
+        ],
+        "block_median_ms": [
+          1.967,
+          2.2662,
+          2.4598,
+          2.6014
+        ]
+      },
+      "sqlite": {
+        "n": 100,
+        "p50_ms": 12.6766,
+        "p95_ms": 20.2872,
+        "pair_p95_ms": [
+          19.7495,
+          21.0994
+        ],
+        "block_median_ms": [
+          13.1768,
+          11.257299999999999,
+          13.093300000000001,
+          10.6786
+        ]
+      },
+      "current_vs_baseline": {
+        "p95_change_percent": -3.7680078821931695,
+        "faster_pairs": 0,
+        "paired_p95_changes_percent": [
+          10.32524884340389,
+          0.9346701949455083
+        ],
+        "median_block_change_percent": 2.08235813101692
+      },
+      "current_vs_sqlite": {
+        "p95_change_percent": -82.18679758665563,
+        "faster_pairs": 2,
+        "paired_p95_changes_percent": [
+          -84.0613686422441,
+          -80.29517427035839
+        ],
+        "median_block_change_percent": -80.54117751802113
+      }
+    },
+    {
+      "kind": "and",
+      "late_matches": 17,
+      "limit": 50,
+      "offset": 0,
+      "text": "holmes elementary",
+      "total": 65,
+      "baseline": {
+        "n": 100,
+        "p50_ms": 34.72185,
+        "p95_ms": 48.0309,
+        "pair_p95_ms": [
+          32.0111,
+          51.3217
+        ],
+        "block_median_ms": [
+          29.311,
+          29.1086,
+          38.111,
+          37.206500000000005
+        ]
+      },
+      "current": {
+        "n": 100,
+        "p50_ms": 34.522800000000004,
+        "p95_ms": 45.7588,
+        "pair_p95_ms": [
+          37.7298,
+          48.3081
+        ],
+        "block_median_ms": [
+          29.4672,
+          29.6127,
+          36.9201,
+          36.8447
+        ]
+      },
+      "sqlite": {
+        "n": 100,
+        "p50_ms": 312.16165,
+        "p95_ms": 417.1567,
+        "pair_p95_ms": [
+          420.3779,
+          380.729
+        ],
+        "block_median_ms": [
+          317.82779999999997,
+          262.571,
+          319.89,
+          253.84980000000002
+        ]
+      },
+      "current_vs_baseline": {
+        "p95_change_percent": -4.730496409602991,
+        "faster_pairs": 1,
+        "paired_p95_changes_percent": [
+          17.86474066808075,
+          -5.871980078602224
+        ],
+        "median_block_change_percent": -0.2197524998175937
+      },
+      "current_vs_sqlite": {
+        "p95_change_percent": -89.03078867006091,
+        "faster_pairs": 2,
+        "paired_p95_changes_percent": [
+          -91.02478983790537,
+          -87.31168363849352
+        ],
+        "median_block_change_percent": -88.59026160648966
+      }
+    },
+    {
+      "kind": "and",
+      "late_matches": 64,
+      "limit": 50,
+      "offset": 0,
+      "text": "fossil geologist",
+      "total": 293,
+      "baseline": {
+        "n": 100,
+        "p50_ms": 10.94095,
+        "p95_ms": 16.3886,
+        "pair_p95_ms": [
+          11.3485,
+          20.8827
+        ],
+        "block_median_ms": [
+          9.7211,
+          9.726,
+          12.411,
+          12.187899999999999
+        ]
+      },
+      "current": {
+        "n": 100,
+        "p50_ms": 10.922,
+        "p95_ms": 16.3231,
+        "pair_p95_ms": [
+          11.345600000000001,
+          16.5821
+        ],
+        "block_median_ms": [
+          9.758,
+          10.0417,
+          12.5253,
+          12.471400000000001
+        ]
+      },
+      "sqlite": {
+        "n": 100,
+        "p50_ms": 92.8057,
+        "p95_ms": 130.0155,
+        "pair_p95_ms": [
+          138.0936,
+          124.1734
+        ],
+        "block_median_ms": [
+          95.74770000000001,
+          81.6257,
+          97.7721,
+          76.158
+        ]
+      },
+      "current_vs_baseline": {
+        "p95_change_percent": -0.39966806194550175,
+        "faster_pairs": 2,
+        "paired_p95_changes_percent": [
+          -0.025554037978570143,
+          -20.594080267398375
+        ],
+        "median_block_change_percent": 1.6235173592354046
+      },
+      "current_vs_sqlite": {
+        "p95_change_percent": -87.44526614134469,
+        "faster_pairs": 2,
+        "paired_p95_changes_percent": [
+          -91.78412323235834,
+          -86.64601275313393
+        ],
+        "median_block_change_percent": -87.44357993116589
+      }
+    },
+    {
+      "kind": "and",
+      "late_matches": 81,
+      "limit": 50,
+      "offset": 0,
+      "text": "whale harpoon",
+      "total": 995,
+      "baseline": {
+        "n": 100,
+        "p50_ms": 57.007000000000005,
+        "p95_ms": 80.6453,
+        "pair_p95_ms": [
+          52.5458,
+          84.7541
+        ],
+        "block_median_ms": [
+          48.196999999999996,
+          48.3686,
+          61.132600000000004,
+          63.150600000000004
+        ]
+      },
+      "current": {
+        "n": 100,
+        "p50_ms": 58.09275,
+        "p95_ms": 76.1514,
+        "pair_p95_ms": [
+          57.575,
+          83.29050000000001
+        ],
+        "block_median_ms": [
+          48.8252,
+          49.5744,
+          63.4257,
+          61.7773
+        ]
+      },
+      "sqlite": {
+        "n": 100,
+        "p50_ms": 406.98205,
+        "p95_ms": 512.7509,
+        "pair_p95_ms": [
+          511.7699999999999,
+          517.7709
+        ],
+        "block_median_ms": [
+          412.5359,
+          373.2969,
+          429.50899999999996,
+          333.8334
+        ]
+      },
+      "current_vs_baseline": {
+        "p95_change_percent": -5.572426415426579,
+        "faster_pairs": 1,
+        "paired_p95_changes_percent": [
+          9.571078944463697,
+          -1.7268781097315444
+        ],
+        "median_block_change_percent": 1.89817013049296
+      },
+      "current_vs_sqlite": {
+        "p95_change_percent": -85.14846097783544,
+        "faster_pairs": 2,
+        "paired_p95_changes_percent": [
+          -88.7498290247572,
+          -83.91363825197593
+        ],
+        "median_block_change_percent": -85.97641109206248
+      }
+    },
+    {
+      "kind": "fold",
+      "late_matches": 8,
+      "limit": 50,
+      "offset": 0,
+      "text": "QUİXOTE",
+      "total": 56,
+      "baseline": {
+        "n": 100,
+        "p50_ms": 2.1347,
+        "p95_ms": 3.6844,
+        "pair_p95_ms": [
+          2.9637000000000002,
+          3.8545
+        ],
+        "block_median_ms": [
+          1.8511,
+          1.7934999999999999,
+          2.4061,
+          2.5288
+        ]
+      },
+      "current": {
+        "n": 100,
+        "p50_ms": 2.1516,
+        "p95_ms": 3.1205,
+        "pair_p95_ms": [
+          2.7032,
+          3.6676
+        ],
+        "block_median_ms": [
+          1.9346999999999999,
+          2.0358,
+          2.3887,
+          2.2452
+        ]
+      },
+      "sqlite": {
+        "n": 100,
+        "p50_ms": 12.96235,
+        "p95_ms": 20.7701,
+        "pair_p95_ms": [
+          21.9683,
+          19.447699999999998
+        ],
+        "block_median_ms": [
+          13.5179,
+          12.2607,
+          13.9862,
+          11.1129
+        ]
+      },
+      "current_vs_baseline": {
+        "p95_change_percent": -15.305070024970146,
+        "faster_pairs": 2,
+        "paired_p95_changes_percent": [
+          -8.789688564969477,
+          -4.848877934881301
+        ],
+        "median_block_change_percent": 1.8965358137473576
+      },
+      "current_vs_sqlite": {
+        "p95_change_percent": -84.97599915262806,
+        "faster_pairs": 2,
+        "paired_p95_changes_percent": [
+          -87.69499688187071,
+          -81.14121464234844
+        ],
+        "median_block_change_percent": -83.1583749818312
+      }
+    },
+    {
+      "kind": "fold",
+      "late_matches": 39,
+      "limit": 50,
+      "offset": 0,
+      "text": "İSHMAEL",
+      "total": 260,
+      "baseline": {
+        "n": 100,
+        "p50_ms": 6.114599999999999,
+        "p95_ms": 9.662600000000001,
+        "pair_p95_ms": [
+          6.4994,
+          10.421700000000001
+        ],
+        "block_median_ms": [
+          5.4032,
+          5.4458,
+          7.7149,
+          7.2519
+        ]
+      },
+      "current": {
+        "n": 100,
+        "p50_ms": 6.3669,
+        "p95_ms": 8.936,
+        "pair_p95_ms": [
+          6.8916,
+          9.4567
+        ],
+        "block_median_ms": [
+          5.4199,
+          5.6277,
+          7.0020999999999995,
+          7.1557
+        ]
+      },
+      "sqlite": {
+        "n": 100,
+        "p50_ms": 51.2754,
+        "p95_ms": 69.3621,
+        "pair_p95_ms": [
+          70.92909999999999,
+          69.3621
+        ],
+        "block_median_ms": [
+          53.4295,
+          44.3238,
+          54.0223,
+          42.9331
+        ]
+      },
+      "current_vs_baseline": {
+        "p95_change_percent": -7.5197151905284425,
+        "faster_pairs": 1,
+        "paired_p95_changes_percent": [
+          6.0344031756777605,
+          -9.259525797134838
+        ],
+        "median_block_change_percent": -0.5087364006874984
+      },
+      "current_vs_sqlite": {
+        "p95_change_percent": -87.11688371603512,
+        "faster_pairs": 2,
+        "paired_p95_changes_percent": [
+          -90.2838186301532,
+          -86.36618556819936
+        ],
+        "median_block_change_percent": -87.17085516481637
+      }
+    },
+    {
+      "kind": "long-negative",
+      "late_matches": 0,
+      "limit": 50,
+      "offset": 0,
+      "text": "zxzxzxzxzxzxzxzxzxzxzxzxzxzxzxzxzxzxzxzxzxzxzxzxzxzxzxzxzxzxzxzxzxzxzxzxzxzxzxzxzxzxzxzxzxzxzxzxzxzxzxzxzxzxzxzxzxzxzxzxzxzxzxzxzxzxzxzxzxzxzxzxzxzxzxzxzxzxzxzxzxzxzxzxzxzxzxzxzxzxzxzxzxzxzxzxzxzxzxzxzxzxzxzxzxzxzxzxzxzxzxzxzxzxzxzxzxzxzxzxzxzxzxzxzxzxzxzxzxzxzxzxzxzxzxzxzxzxzxzxzxzxzxzxzxzxzxzxzxzx",
+      "total": 0,
+      "baseline": {
+        "n": 100,
+        "p50_ms": 0.02725,
+        "p95_ms": 0.0462,
+        "pair_p95_ms": [
+          0.0346,
+          0.0553
+        ],
+        "block_median_ms": [
+          0.022500000000000003,
+          0.0261,
+          0.0314,
+          0.0313
+        ]
+      },
+      "current": {
+        "n": 100,
+        "p50_ms": 0.02905,
+        "p95_ms": 0.0462,
+        "pair_p95_ms": [
+          0.0334,
+          0.058699999999999995
+        ],
+        "block_median_ms": [
+          0.026,
+          0.027399999999999997,
+          0.0334,
+          0.0303
+        ]
+      },
+      "sqlite": {
+        "n": 100,
+        "p50_ms": 1.4512999999999998,
+        "p95_ms": 2.4484,
+        "pair_p95_ms": [
+          2.4168000000000003,
+          2.5049
+        ],
+        "block_median_ms": [
+          1.4951999999999999,
+          1.2812,
+          1.536,
+          1.2524000000000002
+        ]
+      },
+      "current_vs_baseline": {
+        "p95_change_percent": 0.0,
+        "faster_pairs": 1,
+        "paired_p95_changes_percent": [
+          -3.4682080924855474,
+          6.148282097649171
+        ],
+        "median_block_change_percent": 5.675134831734862
+      },
+      "current_vs_sqlite": {
+        "p95_change_percent": -98.11305342264336,
+        "faster_pairs": 2,
+        "paired_p95_changes_percent": [
+          -98.61800728235683,
+          -97.65659307756796
+        ],
+        "median_block_change_percent": -97.84345039481215
+      }
+    },
+    {
+      "kind": "tail-token",
+      "late_matches": 196,
+      "limit": 50,
+      "offset": 0,
+      "text": "presumption",
+      "total": 883,
+      "baseline": {
+        "n": 100,
+        "p50_ms": 73.9316,
+        "p95_ms": 111.4338,
+        "pair_p95_ms": [
+          79.60879999999999,
+          118.3111
+        ],
+        "block_median_ms": [
+          62.1182,
+          63.310500000000005,
+          83.3724,
+          77.2782
+        ]
+      },
+      "current": {
+        "n": 100,
+        "p50_ms": 72.90815,
+        "p95_ms": 98.65509999999999,
+        "pair_p95_ms": [
+          75.17229999999999,
+          105.5085
+        ],
+        "block_median_ms": [
+          63.0444,
+          63.4309,
+          81.52289999999999,
+          79.484
+        ]
+      },
+      "sqlite": {
+        "n": 100,
+        "p50_ms": 550.9247,
+        "p95_ms": 703.1575,
+        "pair_p95_ms": [
+          760.8362,
+          684.5426
+        ],
+        "block_median_ms": [
+          560.4136,
+          466.6264,
+          577.2511999999999,
+          448.2023
+        ]
+      },
+      "current_vs_baseline": {
+        "p95_change_percent": -11.467526010958984,
+        "faster_pairs": 2,
+        "paired_p95_changes_percent": [
+          -5.5728763654269375,
+          -10.821131745034906
+        ],
+        "median_block_change_percent": 0.8406011100407507
+      },
+      "current_vs_sqlite": {
+        "p95_change_percent": -85.9697009560447,
+        "faster_pairs": 2,
+        "paired_p95_changes_percent": [
+          -90.11977873818307,
+          -84.58700744117313
+        ],
+        "median_block_change_percent": -86.14194377197836
+      }
+    },
+    {
+      "kind": "page",
+      "late_matches": 0,
+      "limit": 1,
+      "offset": 0,
+      "text": "the",
+      "total": 10000,
+      "baseline": {
+        "n": 100,
+        "p50_ms": 0.1648,
+        "p95_ms": 0.2944,
+        "pair_p95_ms": [
+          0.2817,
+          0.3734
+        ],
+        "block_median_ms": [
+          0.1462,
+          0.158,
+          0.19440000000000002,
+          0.1881
+        ]
+      },
+      "current": {
+        "n": 100,
+        "p50_ms": 0.16494999999999999,
+        "p95_ms": 0.3166,
+        "pair_p95_ms": [
+          0.2953,
+          0.3173
+        ],
+        "block_median_ms": [
+          0.15080000000000002,
+          0.1553,
+          0.2042,
+          0.1772
+        ]
+      },
+      "sqlite": {
+        "n": 100,
+        "p50_ms": 1069.3038000000001,
+        "p95_ms": 1432.7577,
+        "pair_p95_ms": [
+          1510.2323,
+          1432.7577
+        ],
+        "block_median_ms": [
+          1097.0146,
+          1001.9824,
+          1148.0965,
+          891.7302000000001
+        ]
+      },
+      "current_vs_baseline": {
+        "p95_change_percent": 7.540760869565211,
+        "faster_pairs": 1,
+        "paired_p95_changes_percent": [
+          4.827831025914087,
+          -15.024102838778786
+        ],
+        "median_block_change_percent": 0.7187570347538474
+      },
+      "current_vs_sqlite": {
+        "p95_change_percent": -99.97790275355003,
+        "faster_pairs": 2,
+        "paired_p95_changes_percent": [
+          -99.98044671670709,
+          -99.9778538967196
+        ],
+        "median_block_change_percent": -99.98335738219477
+      }
+    },
+    {
+      "kind": "page",
+      "late_matches": 0,
+      "limit": 200,
+      "offset": 0,
+      "text": "the",
+      "total": 10000,
+      "baseline": {
+        "n": 100,
+        "p50_ms": 3.90015,
+        "p95_ms": 6.360099999999999,
+        "pair_p95_ms": [
+          4.6801,
+          6.9203
+        ],
+        "block_median_ms": [
+          3.7226,
+          3.5511000000000004,
+          4.3543,
+          4.1943
+        ]
+      },
+      "current": {
+        "n": 100,
+        "p50_ms": 4.013349999999999,
+        "p95_ms": 5.9861,
+        "pair_p95_ms": [
+          5.3102,
+          6.2753000000000005
+        ],
+        "block_median_ms": [
+          3.8149,
+          3.598,
+          4.5,
+          4.2354
+        ]
+      },
+      "sqlite": {
+        "n": 100,
+        "p50_ms": 1071.36635,
+        "p95_ms": 1366.739,
+        "pair_p95_ms": [
+          1366.739,
+          1375.3688
+        ],
+        "block_median_ms": [
+          1078.422,
+          933.4238,
+          1126.2576,
+          881.0972
+        ]
+      },
+      "current_vs_baseline": {
+        "p95_change_percent": -5.8804106853665665,
+        "faster_pairs": 1,
+        "paired_p95_changes_percent": [
+          13.463387534454373,
+          -9.320405184746317
+        ],
+        "median_block_change_percent": 1.900083685514331
+      },
+      "current_vs_sqlite": {
+        "p95_change_percent": -99.56201586403841,
+        "faster_pairs": 2,
+        "paired_p95_changes_percent": [
+          -99.61146934418349,
+          -99.54373692350735
+        ],
+        "median_block_change_percent": -99.60749200485863
+      }
+    },
+    {
+      "kind": "page",
+      "late_matches": 0,
+      "limit": 50,
+      "offset": 5000,
+      "text": "the",
+      "total": 10000,
+      "baseline": {
+        "n": 100,
+        "p50_ms": 1.2546,
+        "p95_ms": 2.0963000000000003,
+        "pair_p95_ms": [
+          1.3216,
+          2.3674999999999997
+        ],
+        "block_median_ms": [
+          1.1131,
+          1.1743999999999999,
+          1.4439,
+          1.42
+        ]
+      },
+      "current": {
+        "n": 100,
+        "p50_ms": 1.298,
+        "p95_ms": 1.9632,
+        "pair_p95_ms": [
+          1.7118,
+          2.0463999999999998
+        ],
+        "block_median_ms": [
+          1.1668,
+          1.1869,
+          1.6841,
+          1.503
+        ]
+      },
+      "sqlite": {
+        "n": 100,
+        "p50_ms": 1081.2298,
+        "p95_ms": 1400.9622,
+        "pair_p95_ms": [
+          1478.8182000000002,
+          1343.5079
+        ],
+        "block_median_ms": [
+          1084.3392000000001,
+          1056.752,
+          1111.1605,
+          881.6655
+        ]
+      },
+      "current_vs_baseline": {
+        "p95_change_percent": -6.349282068406248,
+        "faster_pairs": 1,
+        "paired_p95_changes_percent": [
+          29.524818401937036,
+          -13.562829989440338
+        ],
+        "median_block_change_percent": 5.334717405140577
+      },
+      "current_vs_sqlite": {
+        "p95_change_percent": -99.8598677394722,
+        "faster_pairs": 2,
+        "paired_p95_changes_percent": [
+          -99.88424540623046,
+          -99.84768232475597
+        ],
+        "median_block_change_percent": -99.86806094305456
+      }
+    },
+    {
+      "kind": "page",
+      "late_matches": 0,
+      "limit": 50,
+      "offset": 9950,
+      "text": "the",
+      "total": 10000,
+      "baseline": {
+        "n": 100,
+        "p50_ms": 1.1147999999999998,
+        "p95_ms": 1.8320999999999998,
+        "pair_p95_ms": [
+          1.2666000000000002,
+          1.8703999999999998
+        ],
+        "block_median_ms": [
+          0.9608000000000001,
+          1.0501,
+          1.2988,
+          1.3538999999999999
+        ]
+      },
+      "current": {
+        "n": 100,
+        "p50_ms": 1.1201,
+        "p95_ms": 1.8305,
+        "pair_p95_ms": [
+          1.6067,
+          1.9696000000000002
+        ],
+        "block_median_ms": [
+          1.0053,
+          1.0697,
+          1.2679,
+          1.2176
+        ]
+      },
+      "sqlite": {
+        "n": 100,
+        "p50_ms": 1072.0828999999999,
+        "p95_ms": 1448.6194,
+        "pair_p95_ms": [
+          1495.3107,
+          1382.5662
+        ],
+        "block_median_ms": [
+          1125.1192999999998,
+          1044.0629,
+          1132.8503,
+          884.0101
+        ]
+      },
+      "current_vs_baseline": {
+        "p95_change_percent": -0.08733147753942072,
+        "faster_pairs": 0,
+        "paired_p95_changes_percent": [
+          26.851413232275355,
+          5.303678357570596
+        ],
+        "median_block_change_percent": -0.2563151405616415
+      },
+      "current_vs_sqlite": {
+        "p95_change_percent": -99.87363830692864,
+        "faster_pairs": 2,
+        "paired_p95_changes_percent": [
+          -99.89255075884898,
+          -99.85754027546746
+        ],
+        "median_block_change_percent": -99.89281162806202
+      }
+    },
+    {
+      "kind": "page",
+      "late_matches": 39,
+      "limit": 1,
+      "offset": 130,
+      "text": "ishmael",
+      "total": 260,
+      "baseline": {
+        "n": 100,
+        "p50_ms": 5.6562,
+        "p95_ms": 8.246099999999998,
+        "pair_p95_ms": [
+          5.901400000000001,
+          9.671199999999999
+        ],
+        "block_median_ms": [
+          5.0809999999999995,
+          5.3235,
+          6.4676,
+          6.4399
+        ]
+      },
+      "current": {
+        "n": 100,
+        "p50_ms": 5.7759,
+        "p95_ms": 8.6959,
+        "pair_p95_ms": [
+          6.505000000000001,
+          9.2117
+        ],
+        "block_median_ms": [
+          5.1406,
+          5.339,
+          6.9138,
+          6.5092
+        ]
+      },
+      "sqlite": {
+        "n": 100,
+        "p50_ms": 47.8343,
+        "p95_ms": 64.0107,
+        "pair_p95_ms": [
+          66.5016,
+          63.267100000000006
+        ],
+        "block_median_ms": [
+          50.6603,
+          46.3703,
+          52.1854,
+          42.009100000000004
+        ]
+      },
+      "current_vs_baseline": {
+        "p95_change_percent": 5.454699797480034,
+        "faster_pairs": 1,
+        "paired_p95_changes_percent": [
+          10.228081472193029,
+          -4.7512201174621405
+        ],
+        "median_block_change_percent": 1.1245505538272749
+      },
+      "current_vs_sqlite": {
+        "p95_change_percent": -86.41492750430787,
+        "faster_pairs": 2,
+        "paired_p95_changes_percent": [
+          -90.21828046242496,
+          -85.43998381465248
+        ],
+        "median_block_change_percent": -87.61881576046372
+      }
+    },
+    {
+      "kind": "page",
+      "late_matches": 39,
+      "limit": 200,
+      "offset": 60,
+      "text": "ishmael",
+      "total": 260,
+      "baseline": {
+        "n": 100,
+        "p50_ms": 11.213,
+        "p95_ms": 17.769299999999998,
+        "pair_p95_ms": [
+          12.5587,
+          19.548
+        ],
+        "block_median_ms": [
+          10.5736,
+          9.9862,
+          14.7299,
+          11.8375
+        ]
+      },
+      "current": {
+        "n": 100,
+        "p50_ms": 11.41225,
+        "p95_ms": 16.2845,
+        "pair_p95_ms": [
+          11.935400000000001,
+          17.4284
+        ],
+        "block_median_ms": [
+          10.336599999999999,
+          10.3022,
+          13.7351,
+          12.8197
+        ]
+      },
+      "sqlite": {
+        "n": 100,
+        "p50_ms": 61.7605,
+        "p95_ms": 88.0162,
+        "pair_p95_ms": [
+          104.382,
+          86.4728
+        ],
+        "block_median_ms": [
+          62.32,
+          61.1939,
+          64.22200000000001,
+          53.563399999999994
+        ]
+      },
+      "current_vs_baseline": {
+        "p95_change_percent": -8.355984760232516,
+        "faster_pairs": 2,
+        "paired_p95_changes_percent": [
+          -4.963093313798394,
+          -10.843052997749126
+        ],
+        "median_block_change_percent": 0.46146766823604857
+      },
+      "current_vs_sqlite": {
+        "p95_change_percent": -81.49829235981558,
+        "faster_pairs": 2,
+        "paired_p95_changes_percent": [
+          -88.565653081949,
+          -79.84522300654079
+        ],
+        "median_block_change_percent": -80.88887696201655
+      }
+    },
+    {
+      "kind": "page",
+      "late_matches": 8,
+      "limit": 10,
+      "offset": 28,
+      "text": "quixote",
+      "total": 56,
+      "baseline": {
+        "n": 100,
+        "p50_ms": 1.75755,
+        "p95_ms": 2.7933,
+        "pair_p95_ms": [
+          2.1869,
+          3.3606000000000003
+        ],
+        "block_median_ms": [
+          1.5024000000000002,
+          1.5876,
+          2.064,
+          1.7593999999999999
+        ]
+      },
+      "current": {
+        "n": 100,
+        "p50_ms": 1.73255,
+        "p95_ms": 3.1388000000000003,
+        "pair_p95_ms": [
+          2.3749000000000002,
+          3.549
+        ],
+        "block_median_ms": [
+          1.5607,
+          1.5758,
+          1.875,
+          1.949
+        ]
+      },
+      "sqlite": {
+        "n": 100,
+        "p50_ms": 10.564900000000002,
+        "p95_ms": 15.154900000000001,
+        "pair_p95_ms": [
+          25.4694,
+          14.389000000000001
+        ],
+        "block_median_ms": [
+          11.153500000000001,
+          9.785200000000001,
+          11.172400000000001,
+          8.9161
+        ]
+      },
+      "current_vs_baseline": {
+        "p95_change_percent": 12.368882683564264,
+        "faster_pairs": 0,
+        "paired_p95_changes_percent": [
+          8.59664365082995,
+          5.6061417603999075
+        ],
+        "median_block_change_percent": 1.5685988334512568
+      },
+      "current_vs_sqlite": {
+        "p95_change_percent": -79.28854693861392,
+        "faster_pairs": 2,
+        "paired_p95_changes_percent": [
+          -90.6754772393539,
+          -75.33532559594136
+        ],
+        "median_block_change_percent": -83.55682992156612
+      }
+    },
+    {
+      "kind": "page",
+      "late_matches": 8,
+      "limit": 50,
+      "offset": 57,
+      "text": "quixote",
+      "total": 56,
+      "baseline": {
+        "n": 100,
+        "p50_ms": 1.5483500000000001,
+        "p95_ms": 2.7625,
+        "pair_p95_ms": [
+          2.0363,
+          2.9091
+        ],
+        "block_median_ms": [
+          1.4233,
+          1.3401,
+          1.8597,
+          1.9844
+        ]
+      },
+      "current": {
+        "n": 100,
+        "p50_ms": 1.5823,
+        "p95_ms": 2.6784,
+        "pair_p95_ms": [
+          2.2019,
+          2.7853
+        ],
+        "block_median_ms": [
+          1.4066,
+          1.4453999999999998,
+          1.6891,
+          1.6881000000000002
+        ]
+      },
+      "sqlite": {
+        "n": 100,
+        "p50_ms": 9.7347,
+        "p95_ms": 14.4307,
+        "pair_p95_ms": [
+          13.729800000000001,
+          15.1696
+        ],
+        "block_median_ms": [
+          9.9436,
+          8.927100000000001,
+          10.248,
+          8.3351
+        ]
+      },
+      "current_vs_baseline": {
+        "p95_change_percent": -3.044343891402723,
+        "faster_pairs": 1,
+        "paired_p95_changes_percent": [
+          8.13239699454893,
+          -4.255611701213436
+        ],
+        "median_block_change_percent": -5.1734260986734055
+      },
+      "current_vs_sqlite": {
+        "p95_change_percent": -81.43956980603852,
+        "faster_pairs": 2,
+        "paired_p95_changes_percent": [
+          -83.96262145115006,
+          -81.63893576626938
+        ],
+        "median_block_change_percent": -83.66330563080075
+      }
+    }
+  ],
+  "gets": [
+    {
+      "bin": 0,
+      "baseline": {
+        "n": 1600,
+        "p50_ms": 0.013900000000000001,
+        "p95_ms": 0.028399999999999998,
+        "pair_p95_ms": [
+          0.0208,
+          0.0342
+        ],
+        "block_median_ms": [
+          0.0126,
+          0.0125,
+          0.016,
+          0.0162
+        ]
+      },
+      "current": {
+        "n": 1600,
+        "p50_ms": 0.0146,
+        "p95_ms": 0.0295,
+        "pair_p95_ms": [
+          0.0257,
+          0.0329
+        ],
+        "block_median_ms": [
+          0.01315,
+          0.0134,
+          0.0166,
+          0.0155
+        ]
+      },
+      "sqlite": {
+        "n": 1600,
+        "p50_ms": 0.0276,
+        "p95_ms": 0.0617,
+        "pair_p95_ms": [
+          0.062,
+          0.0614
+        ],
+        "block_median_ms": [
+          0.030199999999999998,
+          0.0255,
+          0.0305,
+          0.0244
+        ]
+      },
+      "current_vs_baseline": {
+        "p95_change_percent": 3.8732394366197243,
+        "faster_pairs": 1,
+        "paired_p95_changes_percent": [
+          23.557692307692314,
+          -3.801169590643283
+        ],
+        "median_block_change_percent": 4.057539682539691
+      },
+      "current_vs_sqlite": {
+        "p95_change_percent": -52.188006482982175,
+        "faster_pairs": 2,
+        "paired_p95_changes_percent": [
+          -58.54838709677419,
+          -46.41693811074919
+        ],
+        "median_block_change_percent": -46.51237544198007
+      }
+    },
+    {
+      "bin": 1,
+      "baseline": {
+        "n": 6600,
+        "p50_ms": 0.0168,
+        "p95_ms": 0.0336,
+        "pair_p95_ms": [
+          0.0252,
+          0.0383
+        ],
+        "block_median_ms": [
+          0.015000000000000001,
+          0.015050000000000001,
+          0.019,
+          0.019549999999999998
+        ]
+      },
+      "current": {
+        "n": 6600,
+        "p50_ms": 0.0177,
+        "p95_ms": 0.0346,
+        "pair_p95_ms": [
+          0.0299,
+          0.0376
+        ],
+        "block_median_ms": [
+          0.0159,
+          0.016,
+          0.0201,
+          0.0193
+        ]
+      },
+      "sqlite": {
+        "n": 6600,
+        "p50_ms": 0.041100000000000005,
+        "p95_ms": 0.0843,
+        "pair_p95_ms": [
+          0.0851,
+          0.0832
+        ],
+        "block_median_ms": [
+          0.0444,
+          0.0389,
+          0.04554999999999999,
+          0.037
+        ]
+      },
+      "current_vs_baseline": {
+        "p95_change_percent": 2.976190476190488,
+        "faster_pairs": 1,
+        "paired_p95_changes_percent": [
+          18.650793650793652,
+          -1.8276762402088753
+        ],
+        "median_block_change_percent": 5.894736842105264
+      },
+      "current_vs_sqlite": {
+        "p95_change_percent": -58.95610913404508,
+        "faster_pairs": 2,
+        "paired_p95_changes_percent": [
+          -64.86486486486487,
+          -54.8076923076923
+        ],
+        "median_block_change_percent": -57.37078100000281
+      }
+    },
+    {
+      "bin": 2,
+      "baseline": {
+        "n": 8300,
+        "p50_ms": 0.0219,
+        "p95_ms": 0.0421,
+        "pair_p95_ms": [
+          0.032100000000000004,
+          0.047599999999999996
+        ],
+        "block_median_ms": [
+          0.0194,
+          0.0195,
+          0.0246,
+          0.0251
+        ]
+      },
+      "current": {
+        "n": 8300,
+        "p50_ms": 0.022699999999999998,
+        "p95_ms": 0.0423,
+        "pair_p95_ms": [
+          0.036699999999999997,
+          0.045899999999999996
+        ],
+        "block_median_ms": [
+          0.0204,
+          0.0205,
+          0.0258,
+          0.0246
+        ]
+      },
+      "sqlite": {
+        "n": 8300,
+        "p50_ms": 0.0641,
+        "p95_ms": 0.1234,
+        "pair_p95_ms": [
+          0.1261,
+          0.1207
+        ],
+        "block_median_ms": [
+          0.06899999999999999,
+          0.061,
+          0.0711,
+          0.0574
+        ]
+      },
+      "current_vs_baseline": {
+        "p95_change_percent": 0.47505938242280443,
+        "faster_pairs": 1,
+        "paired_p95_changes_percent": [
+          14.330218068535805,
+          -3.57142857142857
+        ],
+        "median_block_change_percent": 5.00312695434647
+      },
+      "current_vs_sqlite": {
+        "p95_change_percent": -65.72123176661265,
+        "faster_pairs": 2,
+        "paired_p95_changes_percent": [
+          -70.89611419508326,
+          -61.9718309859155
+        ],
+        "median_block_change_percent": -65.05326139586359
+      }
+    },
+    {
+      "bin": 3,
+      "baseline": {
+        "n": 9100,
+        "p50_ms": 0.0265,
+        "p95_ms": 0.047,
+        "pair_p95_ms": [
+          0.0365,
+          0.053
+        ],
+        "block_median_ms": [
+          0.0241,
+          0.0241,
+          0.0293,
+          0.030199999999999998
+        ]
+      },
+      "current": {
+        "n": 9100,
+        "p50_ms": 0.027800000000000002,
+        "p95_ms": 0.0497,
+        "pair_p95_ms": [
+          0.0436,
+          0.0539
+        ],
+        "block_median_ms": [
+          0.0247,
+          0.0264,
+          0.031099999999999996,
+          0.0299
+        ]
+      },
+      "sqlite": {
+        "n": 9100,
+        "p50_ms": 0.0885,
+        "p95_ms": 0.161,
+        "pair_p95_ms": [
+          0.1617,
+          0.1604
+        ],
+        "block_median_ms": [
+          0.09509999999999999,
+          0.08399999999999999,
+          0.0976,
+          0.07930000000000001
+        ]
+      },
+      "current_vs_baseline": {
+        "p95_change_percent": 5.7446808510638325,
+        "faster_pairs": 0,
+        "paired_p95_changes_percent": [
+          19.452054794520546,
+          1.6981132075471805
+        ],
+        "median_block_change_percent": 4.3164856329570895
+      },
+      "current_vs_sqlite": {
+        "p95_change_percent": -69.1304347826087,
+        "faster_pairs": 2,
+        "paired_p95_changes_percent": [
+          -73.03648732220161,
+          -66.39650872817955
+        ],
+        "median_block_change_percent": -68.35333723653396
+      }
+    },
+    {
+      "bin": 4,
+      "baseline": {
+        "n": 300,
+        "p50_ms": 0.0003,
+        "p95_ms": 0.001,
+        "pair_p95_ms": [
+          0.0007,
+          0.0013
+        ],
+        "block_median_ms": [
+          0.0003,
+          0.0003,
+          0.00039999999999999996,
+          0.00039999999999999996
+        ]
+      },
+      "current": {
+        "n": 300,
+        "p50_ms": 0.00039999999999999996,
+        "p95_ms": 0.001,
+        "pair_p95_ms": [
+          0.0007,
+          0.0011
+        ],
+        "block_median_ms": [
+          0.0003,
+          0.0003,
+          0.00039999999999999996,
+          0.00039999999999999996
+        ]
+      },
+      "sqlite": {
+        "n": 300,
+        "p50_ms": 0.006,
+        "p95_ms": 0.0123,
+        "pair_p95_ms": [
+          0.0133,
+          0.012
+        ],
+        "block_median_ms": [
+          0.0065,
+          0.005699999999999999,
+          0.0062,
+          0.0056
+        ]
+      },
+      "current_vs_baseline": {
+        "p95_change_percent": 0.0,
+        "faster_pairs": 1,
+        "paired_p95_changes_percent": [
+          0.0,
+          -15.384615384615374
+        ],
+        "median_block_change_percent": 0.0
+      },
+      "current_vs_sqlite": {
+        "p95_change_percent": -91.869918699187,
+        "faster_pairs": 2,
+        "paired_p95_changes_percent": [
+          -94.73684210526315,
+          -90.83333333333333
+        ],
+        "median_block_change_percent": -94.14261460101868
+      }
+    }
+  ],
+  "lower_p95_cases": {
+    "baseline": 29,
+    "sqlite": 38
+  }
+}

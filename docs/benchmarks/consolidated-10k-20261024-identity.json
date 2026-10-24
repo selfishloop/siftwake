@@ -1,0 +1,26 @@
+{
+  "baseline_commit": "8a92384ee52f2337d004960d7bc4dcb6d43e1d24",
+  "current_commit": "2a9fc2c4a9fb1ff029992e86dfbb182c5f370926",
+  "baseline_scope": "before24October gram-sort+posting+merge-cursor;fast intake fold already active;not first engine",
+  "features": "normal release default bounded-engine;no diagnostics",
+  "current_rebuild": "cargo build --release --example measure_content_memory --example measure_interleaved_reads;both byte-identical to frozen manifest",
+  "historical_manifests": [
+    "intake-fold-recovery-write-10k-20261022-design.json",
+    "intake-fold-recovery-read-oracle-10k-20261022-design.json",
+    "gram-sort-write-10k-20261024-design.json"
+  ],
+  "current_frozen_manifest": "maintenance-frozen-20261024.json",
+  "shared_workload_source_unchanged_since_baseline": [
+    "tools/bench_support/read_matrix.rs",
+    "tools/bench_support/content_reads.rs",
+    "examples/measure_interleaved_reads.rs"
+  ],
+  "programs": {
+    "output/intake-fold-recovery-candidate-write-20261022.exe": "B687A98DBF7B0ABF63F69129926329900CAEC11ADE92052CD7AA99AB0A95A8FF",
+    "output/intake-fold-recovery-candidate-read-20261022.exe": "0BE3F4112FA58E9656B58B15551618A307CFF09A5E45B94D956BCC295B2E7612",
+    "output/maintenance-candidate-write-20261024.exe": "AC9AAC92A7497DF623FCCEF21CAFEA16E9F043C2CBFE701DAAC86E1371A13810",
+    "output/maintenance-candidate-read-20261024.exe": "804DE1E24812DF7606ACFFA8697AE046C84F2935AAE6D9620974EB75CF8BB4E6",
+    "tools/native_sqlite/target/release/content_memory.exe": "49910656D4F1CF2642DFFA9E37D69645F76CBE1A1DCCDB96E9238EB01E64DCEB",
+    "tools/native_sqlite/target/release/content_reads.exe": "32DBB090B6519C9AF14830FA904EB4BED4FAA38473B5A15C1E4840EA96165A15"
+  }
+}

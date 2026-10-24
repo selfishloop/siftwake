@@ -1,5 +1,21 @@
 # FDB
 
+[Eski FDB / güncel FDB / native SQLite aynı10k karşılaştırması](docs/CONSOLIDATED-COMPARISON-10K-20261024.md):
+24 Ekim üç dar optimizasyondan önceki `8a92384` ile güncel `2a9fc2c`,
+aynı oturum/iki çift/API. Akışlı yazma+bakım17,386→14,944s(-%14,04),
+owned14,791→12,289s(-%16,92),ikisinde2/2 düşük;SQLite streaming32,287/32,050s.
+**Ayrı bakım+%4,27/+%4,85 ve ikisinde2/2 yüksek**;bakım işi açık.
+OS private akışlı10,133→10,154MiB/SQLite8,418MiB;
+owned80,029→79,955MiB/SQLite8,385MiB:owned input maliyeti simetrik değildir.
+DiskFDB349.805.698B/SQLite583.860.224B. İlk motor kıyası değildir;
+önceki yüzdeler toplanmadı. Aynı sıcak DB’de 38 durum×100 örnek/motor:
+güncel/eski p95 29 düşük/8 yüksek/1 eşit, güncel/SQLite 38/38 düşük.
+quixote /28/10 +%12,37, man +%5,50, zzxqnever +%3,50 iki çiftte yüksek;
+genel arama kapısı açık. SQLite UTF-8 rapor okumasındaki 8 ad alanı ham
+loglardan denetlenerek kurtarıldı; ölçüm tekrarlanmadı, özgün kayıt korundu.
+Genel arama/RAM,açılış,geçici disk ve
+eşzamanlı/gerçek-soğuk işler [açık](docs/OPEN-WORK.md).
+
 [Merge posting tamponunu yeniden kullanma](docs/MAINTENANCE-WORKSPACE-10K-20261024.md):
 aynı ilk10k/iki çift/API normal release'te akışlı yazma+bakım-%3,01,
 owned-%2,54;ikisinde2/2 düşük. Son bakım yalnız1/2 çiftte düşük;önceki

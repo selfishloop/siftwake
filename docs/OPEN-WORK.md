@@ -1,5 +1,29 @@
 # FDB açık işler
 
+2026-10-24 toplu kıyas: `8a92384` (24 Ekim gram-sort/posting/cursor
+öncesi,hızlı intake fold dahil) / `2a9fc2c` / native SQLite aynı ilk10k,
+iki ters sıralı çift/API. Güncel akışlı toplam17,386→14,944s(-%14,04),
+owned14,791→12,289s(-%16,92),ikisinde2/2 düşük;CPU-%16,67/-%18,19.
+**Ayrı son bakım+%4,27/+%4,85 ve iki API’de2/2 çift yüksek**; sonraki
+yazma/bakım hedefidir,toplam kazanç bunu kapatmaz. Akışlı OS private
+10,133→10,154MiB/SQLite8,418MiB,WS+208KiB;owned80,029→79,955MiB/
+SQLite8,385MiB. Owned caller Vec / SQLite streaming aynı input RAM işi
+değildir;genel RAM açık. DiskFDB349.805.698B/SQLite583.860.224B;
+dinamik geçici alan/sıkıştırma açık.12 süreçte full10k oracle,API içi
+source/index/ready byte eşitliği,corpus/0.1 SHA koruması geçti.
+Sıcak okuma 38 durum×100 örnek/motor: güncel/eski p95 29 düşük/8 yüksek/
+1 eşit; güncel/SQLite 38/38 düşük. quixote /28/10 +%12,37, man +%5,50,
+zzxqnever +%3,50 iki çiftte yüksek. Diğer artışlar the /0/1 +%7,54,
+ishmael /130/1 +%5,45, frankenstein +%1,91, fossil +%1,81,
+elizabeth +%0,54 (hepsi1/2 çift düşük). Uzun zx pooled p95 eşit ama
+tipik blok +%5,68; arama işi açık. Get p95 dört dolu boyut grubunda eskiye
+göre yüksek, eksik key’de eşit; SQLite’a göre beş grupta düşük.
+SQLite JSONL’nin UTF-8/cp1252 rapor
+okuma hatası yalnız 8 sorgu adı alanındaydı; ham UTF-8 ile diğer tüm
+alanlar/süreler eşit doğrulandı, özgün kayıt korundu, benchmark tekrarı yok.
+Önceki arama/CLI regresyonları,açılış ve eşzamanlı/gerçek-soğuk yük
+bu sonuçla kapanmaz. [Birleşik sonuç ve kanıtlar](CONSOLIDATED-COMPARISON-10K-20261024.md).
+
 2026-10-24 merge posting cursor tekrar kullanımı dar toplam kazancı için
 korundu. Input başına mevcut8KiB tampon merge ömrünce tutulur;terim
 değişiminde tüketim/pencere/sıra durumları sıfırlanır. Normal aynı ilk10k/

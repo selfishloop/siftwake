@@ -1,0 +1,104 @@
+{
+  "cause": "SQLite UTF-8 JSONL was read with Windows cp1252 by log.read_text(); only two query text fields per block were misdecoded.",
+  "original_records_unchanged": true,
+  "original_records_sha256": "0F10C2D9553EB6A6DF29F50258BD3B4E2AC06308C010FFC8FDB1CC5548FFE5BB",
+  "recovered_records_sha256": "8F247CD25F17C4B7B7D605A59B715E173C8ECA7DC1550835F5616C55EA3A6B18",
+  "corrections": [
+    {
+      "pair": 0,
+      "block": 0,
+      "query_index": 26,
+      "captured": "QUÄ°XOTE",
+      "utf8_source": "QUİXOTE"
+    },
+    {
+      "pair": 0,
+      "block": 0,
+      "query_index": 27,
+      "captured": "Ä°SHMAEL",
+      "utf8_source": "İSHMAEL"
+    },
+    {
+      "pair": 0,
+      "block": 1,
+      "query_index": 26,
+      "captured": "QUÄ°XOTE",
+      "utf8_source": "QUİXOTE"
+    },
+    {
+      "pair": 0,
+      "block": 1,
+      "query_index": 27,
+      "captured": "Ä°SHMAEL",
+      "utf8_source": "İSHMAEL"
+    },
+    {
+      "pair": 1,
+      "block": 0,
+      "query_index": 26,
+      "captured": "QUÄ°XOTE",
+      "utf8_source": "QUİXOTE"
+    },
+    {
+      "pair": 1,
+      "block": 0,
+      "query_index": 27,
+      "captured": "Ä°SHMAEL",
+      "utf8_source": "İSHMAEL"
+    },
+    {
+      "pair": 1,
+      "block": 1,
+      "query_index": 26,
+      "captured": "QUÄ°XOTE",
+      "utf8_source": "QUİXOTE"
+    },
+    {
+      "pair": 1,
+      "block": 1,
+      "query_index": 27,
+      "captured": "Ä°SHMAEL",
+      "utf8_source": "İSHMAEL"
+    }
+  ],
+  "raw_logs": [
+    {
+      "path": "docs\\benchmarks\\consolidated-read-10k-20261024-baseline-0.jsonl",
+      "sha256": "0BF9A46B556B55DE81E55086CF6EB75529ED8F16084364EA16A1B0AA2CE510DC"
+    },
+    {
+      "path": "docs\\benchmarks\\consolidated-read-10k-20261024-baseline-1.jsonl",
+      "sha256": "4FD97EE8D74382AC57610C30D7E387B3E02FA3BDF9719FB6A91CE827B5923A65"
+    },
+    {
+      "path": "docs\\benchmarks\\consolidated-read-10k-20261024-current-0.jsonl",
+      "sha256": "B5F11A53295083DA346284C4A3A53B133C7F4702B7248BCF2B1023404DED1F07"
+    },
+    {
+      "path": "docs\\benchmarks\\consolidated-read-10k-20261024-current-1.jsonl",
+      "sha256": "581E5EEBCAF19D434D640F26BC1B0AC64658C58EDFFCE19D7F07A6945011EEC8"
+    },
+    {
+      "path": "docs\\benchmarks\\consolidated-read-10k-20261024-sqlite-0-0.jsonl",
+      "sha256": "B94D1D72E6DDB511E59A799ED63E757A766E06A2BD4903F78404B635D32F4A9E"
+    },
+    {
+      "path": "docs\\benchmarks\\consolidated-read-10k-20261024-sqlite-0-1.jsonl",
+      "sha256": "9BDA55E138C697807268AE98796B2E21BB11F773190A968A270FC0B91A42FF83"
+    },
+    {
+      "path": "docs\\benchmarks\\consolidated-read-10k-20261024-sqlite-1-0.jsonl",
+      "sha256": "A3F9CC8B0910ABAD1F6E34F9E1DAAAC91DE9209A7BB709FC13C4B6D90AE86518"
+    },
+    {
+      "path": "docs\\benchmarks\\consolidated-read-10k-20261024-sqlite-1-1.jsonl",
+      "sha256": "67DBC0AB0D71A739E622BB7D42A684E3CD059B1A8A60A94B79FB3EE5FFC05C24"
+    }
+  ],
+  "all_other_fields_equal": true,
+  "saved_and_live_manifests_equal": true,
+  "protected_corpus_and_v01_fixtures_equal": true,
+  "query_rows": 456,
+  "samples_per_case_per_engine": 100,
+  "method": "Read raw JSONL explicitly as UTF-8; assert each changed text reverses cp1252 misdecoding; deep-compare every other field and timing; retain original records. No benchmark rerun."
+}
