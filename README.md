@@ -1,5 +1,17 @@
 # FDB
 
+[RAM gram posting eklemede dar kazanç](docs/POSTING-MERGE-10K-20261024.md):
+aynı ilk10k/iki çift/API normal release'te akışlı yazma+bakım-%4,16,
+CPU-%6,21;owned CPU-%4,96 fakat toplam+%0,19/1 çift düşük,genel yazma
+kazancı değildir. Normal bounded yolunda64 gramlık sınırlı sözlük taraması
+ve exact fallback korunur;önceki fold/sıralama kazanımları aynı. Son bakım
+akışlı+%26,07/owned+%11,97,ikisi2/2 yüksek;akışlı private+166KiB/WS+396KiB,
+ikisi2/2 yüksek. Disk349.805.698B/API içi byte'lar aynı,sekiz full10k
+oracle başarılı. İlk38-case23 düşük/15 yüksek;yoğun100 örnekte the/1
++%11,56/the200+%3,95/quixote28/10+%8,53 pooled p95 açık. Genel RAM/arama,
+owned gecikmesi,bakım,açılış,disk/geçici alan ve eşzamanlı/soğuk yük kapanmadı.
+Yeni corpus/format/feature/bağımlılık yok.
+
 [Sınırlı gram sıralama normal motorda](docs/GRAM-SORT-10K-20261024.md):
 aynı10k/iki çift/API normal release'te akışlı yazma+bakım-%10,24,owned-%19,16;
 CPU-%14,86/-%18,05,ikisinde2/2 düşük. Owned çiftler-%13,17/-%24,51:

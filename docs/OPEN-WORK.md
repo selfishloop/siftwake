@@ -1,5 +1,25 @@
 # FDB açık işler
 
+2026-10-24 RAM gram posting ekleme dar adımı normal bounded profilde tutuldu.
+64 referanslı sınırlı sözlük taraması/exact fallback;önceki fold ve gram
+sıralama kazanımları korunur. Normal aynı ilk10k/iki çift/API akışlı toplam
+14,381→13,783s(-%4,16),CPU-%6,21;ikisi2/2 düşük. Owned CPU-%4,96/2 çift
+düşük fakat toplam12,779→12,803s(+%0,19),yalnız1/2 düşük:owned gecikmesi
+açık. Son bakım akışlı+%26,07/owned+%11,97,ikisi2/2 yüksek;worker/yerleşim/
+bellek nedenleri kanıtlanmadı,bakım işi kapanmadı. Akışlı private+166KiB ve
+WS+396KiB,ikisi2/2 yüksek;owned private-4KiB/1 çift düşük,WS-190KiB/2 çift
+düşük;genel RAM kapısı geçmedi. Disk349.805.698B ve API içi source/index/
+ready byte'ları aynı;sekiz full10k/dört contains oracle geçti. Corpus/0.1
+SHA'ları diagnostic öncesinden normal seri sonrasına eşit. İlk38-case20
+örnek/yol23 düşük/15 yüksek. Yoğun100 örnek/yol beagle-%2,14/1 çift hızlı,
+frankenstein-%2,01 pooled ama0/2 çift hızlı;eski açıklar otomatik kapanmaz.
+The/1+%11,56 iki çiftte yüksek;the200+%3,95/quixote28/10+%8,53 pooled,
+ikisi1/2 çift hızlı;tipik blok kazancı tail artışını silmez. Genel arama,
+önceki CLI kuyrukları,caller/query/genel RAM,owned latency,son bakım,açılış,
+disk sıkıştırma/geçici alan ve eşzamanlı/gerçek-soğuk yük açık. Yeni corpus,
+DB kopyası,format,feature veya bağımlılık yok. Yeni SQLite/açılış/cold/
+concurrent ölçümü yapılmadı. [Sonuç ve sınırlar](POSTING-MERGE-10K-20261024.md).
+
 2026-10-24 gram sıralamanın dar yazma adımı normal bounded profilde etkin.
 Önceki hızlı intake fold korunur;uzun gövdede aynı packed anahtarlar en fazla
 8192 pending girdide sort/dedup,taşmada sayısal ağaç kullanır. Normal iki

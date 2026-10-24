@@ -1,5 +1,22 @@
 # FDB mimarisi — 0.3.1
 
+2026-10-24 RAM gram posting eklemesinde normal bounded yol sıralı başlık/
+gövde birleşimini64 referanslı parçalarla mevcut sözlükte tarar. Parça başına
+en fazla8×input sözlük girdisi ziyaret edilir;eksik ve cap sonrası anahtarlar
+exact lookup'a döner. Gram üst sınırı<64 veya sözlük>16×üst sınırsa scalar
+yol korunur. Posting temsilleri,slot geri kullanımı,builder byte muhasebesi,
+sorgu,kalıcı biçim/feature/bağımlılık/WAL aynı;önceki fold ve gram sıralama
+korunur. Normal iki çift/API akışlı toplam-%4,16/CPU-%6,21,owned CPU-%4,96
+fakat toplam+%0,19/1 çift düşük:yalnız dar CPU/akışlı toplam adımı tutulur.
+Son bakım akışlı+%26,07/owned+%11,97,ikisi2/2 yüksek;neden ayrıştırılmadı.
+Akışlı private+166KiB/WS+396KiB,ikisi2/2 yüksek;owned RAM yaklaşık aynı.
+Disk349.805.698B ve API içi source/index/ready byte'ları aynı,sekiz full10k
+oracle geçti. İlk38-case23 düşük/15 yüksek;yoğun100 örnek/yol the/1+%11,56
+(0/2 hızlı),the200+%3,95/quixote28/10+%8,53(1/2 hızlı) pooled p95 açık.
+Frankenstein pooled-%2,01 ama çiftler0/2 hızlı;tipik/p95 farkları kapatılmaz.
+Genel RAM/arama,owned latency,bakım,açılış/disk/eşzamanlı/gerçek-soğuk açık.
+[Tasarım,teşhis ve sınırlı sonuç](POSTING-MERGE-10K-20261024.md).
+
 2026-10-24 uzun gövde gram çıkarımı normal bounded profilde sınırlı sayısal
 sıralama kullanır. Önceki tam-anahtarlı1024 giriş cache ve scalar packing
 aynı;cache miss'ler en fazla8192 u64 pending tamponda sort/dedup olur.

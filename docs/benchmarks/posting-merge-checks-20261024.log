@@ -1,0 +1,101 @@
+cargo test --lib index::
+    Finished `test` profile [unoptimized + debuginfo] target(s) in 0.05s
+     Running unittests src\lib.rs (target\debug\deps\fdb-647b6e7626a49143.exe)
+
+running 21 tests
+test index::gram_insert::tests::existing_corpus_posting_probe ... ignored, read-only posting insertion replay over the permitted existing first10k
+test index::intake_fold_tests::existing_corpus_normalization_probe ... ignored, read-only normalization benchmark over the existing first 10k corpus
+test index::intake_fold_tests::existing_corpus_postwrite_control ... ignored, same-binary post-write attribution;requires the owned fixed FDB slot reset
+test index::packed_grams::tests::existing_corpus_gram_probe ... ignored, read-only gram extraction probe over the permitted existing first10k
+test index::checkpoint_ids::tests::checkpoint_ids_reject_duplicate_ids_and_release_empty_input ... ok
+test index::compact_tests::capacity_and_duplicate_checks_leave_index_unchanged ... ok
+test index::packed_grams::tests::hash_collision_eviction_never_drops_a_distinct_or_repeated_gram ... ok
+test index::checkpoint_ids::tests::checkpoint_ids_match_key_lookup_after_deletes_recycling_and_unsorted_intake ... ok
+test index::intake_fold_tests::body_cache_preserves_unicode_expansion_grams_and_cached_results ... ok
+test index::scratch_fold_tests::unchanged_unicode_runs_keep_ascii_lowering_and_changed_scalar_boundaries ... ok
+test index::gram_insert::tests::capped_ranges_missing_grams_duplicates_and_reused_ids_match_lookup ... ok
+test index::posting::tests::representations_and_distant_ids_match_ordered_set ... ok
+test index::posting::tests::randomized_reuse_union_and_deletion_match_set ... ok
+test index::packed_grams::tests::packed_grams_preserve_unicode_whitespace_nulls_and_sorted_strings ... ok
+test index::scratch_fold_tests::wide_ascii_prefix_handles_each_lane_and_unaligned_tails ... ok
+test index::gram_insert::tests::posting_representation_transitions_preserve_heap_accounting ... ok
+test index::compact_tests::slots_recycle_without_stale_terms_or_growth_across_updates ... ok
+test index::packed_grams::tests::bounded_pending_spills_preserve_unique_and_repeated_unicode_grams ... ok
+test index::intake_fold_tests::intake_capacity_matches_scalar_for_expansion_shrink_and_small_texts ... ok
+test index::scratch_fold_tests::query_scratch_fold_matches_every_unicode_scalar_and_reuse ... ok
+test index::scratch_fold_tests::ascii_prefix_matches_byte_scan_at_every_alignment_and_boundary ... ok
+
+test result: ok. 17 passed; 0 failed; 4 ignored; 0 measured; 94 filtered out; finished in 1.20s
+
+cargo test --all-features --lib index::
+   Compiling fdb v0.3.1 (C:\Users\Serkan\Documents\ChatGPT\fdb)
+    Finished `test` profile [unoptimized + debuginfo] target(s) in 7.55s
+     Running unittests src\lib.rs (target\debug\deps\fdb-5fa571d3bb97520e.exe)
+
+running 23 tests
+test index::gram_insert::tests::existing_corpus_posting_probe ... ignored, read-only posting insertion replay over the permitted existing first10k
+test index::intake_fold_tests::existing_corpus_normalization_probe ... ignored, read-only normalization benchmark over the existing first 10k corpus
+test index::intake_fold_tests::existing_corpus_postwrite_control ... ignored, same-binary post-write attribution;requires the owned fixed FDB slot reset
+test index::packed_grams::tests::existing_corpus_gram_probe ... ignored, read-only gram extraction probe over the permitted existing first10k
+test index::checkpoint_ids::tests::checkpoint_ids_reject_duplicate_ids_and_release_empty_input ... ok
+test index::compact_tests::capacity_and_duplicate_checks_leave_index_unchanged ... ok
+test index::packed_grams::tests::hash_collision_eviction_never_drops_a_distinct_or_repeated_gram ... ok
+test index::shared_tests::shared_bodies_preserve_titles_unicode_and_removal ... ok
+test index::checkpoint_ids::tests::checkpoint_ids_match_key_lookup_after_deletes_recycling_and_unsorted_intake ... ok
+test index::intake_fold_tests::body_cache_preserves_unicode_expansion_grams_and_cached_results ... ok
+test index::scratch_fold_tests::unchanged_unicode_runs_keep_ascii_lowering_and_changed_scalar_boundaries ... ok
+test index::gram_insert::tests::capped_ranges_missing_grams_duplicates_and_reused_ids_match_lookup ... ok
+test index::posting::tests::randomized_reuse_union_and_deletion_match_set ... ok
+test index::shared_tests::uncached_large_distinct_bodies_are_owned_and_searchable ... ok
+test index::posting::tests::representations_and_distant_ids_match_ordered_set ... ok
+test index::packed_grams::tests::packed_grams_preserve_unicode_whitespace_nulls_and_sorted_strings ... ok
+test index::scratch_fold_tests::wide_ascii_prefix_handles_each_lane_and_unaligned_tails ... ok
+test index::gram_insert::tests::posting_representation_transitions_preserve_heap_accounting ... ok
+test index::compact_tests::slots_recycle_without_stale_terms_or_growth_across_updates ... ok
+test index::packed_grams::tests::bounded_pending_spills_preserve_unique_and_repeated_unicode_grams ... ok
+test index::intake_fold_tests::intake_capacity_matches_scalar_for_expansion_shrink_and_small_texts ... ok
+test index::scratch_fold_tests::query_scratch_fold_matches_every_unicode_scalar_and_reuse ... ok
+test index::scratch_fold_tests::ascii_prefix_matches_byte_scan_at_every_alignment_and_boundary ... ok
+
+test result: ok. 19 passed; 0 failed; 4 ignored; 0 measured; 100 filtered out; finished in 1.23s
+
+cargo test --no-default-features --lib index::
+   Compiling fdb v0.3.1 (C:\Users\Serkan\Documents\ChatGPT\fdb)
+    Finished `test` profile [unoptimized + debuginfo] target(s) in 1.80s
+     Running unittests src\lib.rs (target\debug\deps\fdb-8f293fd6eea9cb91.exe)
+
+running 5 tests
+test index::scratch_fold_tests::unchanged_unicode_runs_keep_ascii_lowering_and_changed_scalar_boundaries ... ok
+test index::intake_fold_tests::body_cache_preserves_unicode_expansion_grams_and_cached_results ... ok
+test index::scratch_fold_tests::wide_ascii_prefix_handles_each_lane_and_unaligned_tails ... ok
+test index::scratch_fold_tests::query_scratch_fold_matches_every_unicode_scalar_and_reuse ... ok
+test index::scratch_fold_tests::ascii_prefix_matches_byte_scan_at_every_alignment_and_boundary ... ok
+
+test result: ok. 5 passed; 0 failed; 0 ignored; 0 measured; 38 filtered out; finished in 0.89s
+
+cargo test --test streamed_transactions covered_grams
+   Compiling fdb v0.3.1 (C:\Users\Serkan\Documents\ChatGPT\fdb)
+    Finished `test` profile [unoptimized + debuginfo] target(s) in 7.05s
+     Running tests\streamed_transactions.rs (target\debug\deps\streamed_transactions-69458a63c3438466.exe)
+
+running 1 test
+test covered_grams_preserve_unicode_mixed_terms_visibility_and_numbered_pages ... ok
+
+test result: ok. 1 passed; 0 failed; 0 ignored; 0 measured; 9 filtered out; finished in 0.19s
+
+cargo fmt --check
+cargo clippy --all-targets -- -D warnings
+    Checking fdb v0.3.1 (C:\Users\Serkan\Documents\ChatGPT\fdb)
+    Finished `dev` profile [unoptimized + debuginfo] target(s) in 2.68s
+cargo clippy --all-features --all-targets -- -D warnings
+    Checking fdb v0.3.1 (C:\Users\Serkan\Documents\ChatGPT\fdb)
+    Finished `dev` profile [unoptimized + debuginfo] target(s) in 3.50s
+cargo clippy --no-default-features --all-targets -- -D warnings
+    Checking fdb v0.3.1 (C:\Users\Serkan\Documents\ChatGPT\fdb)
+    Finished `dev` profile [unoptimized + debuginfo] target(s) in 2.38s
+git diff --check
+warning: in the working copy of 'src/index.rs', LF will be replaced by CRLF the next time Git touches it
+warning: in the working copy of 'src/timing.rs', LF will be replaced by CRLF the next time Git touches it
+cargo build --release --bin fdb --example measure_content_memory --example measure_interleaved_reads
+   Compiling fdb v0.3.1 (C:\Users\Serkan\Documents\ChatGPT\fdb)
+    Finished `release` profile [optimized] target(s) in 39.36s

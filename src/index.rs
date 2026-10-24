@@ -248,6 +248,8 @@ pub(crate) fn grams(text: &str) -> BTreeSet<String> {
 }
 
 #[cfg(feature = "bounded-engine")]
+mod gram_insert;
+#[cfg(feature = "bounded-engine")]
 mod packed_grams;
 
 #[cfg(feature = "experimental-compact-delta-postings")]
@@ -642,40 +644,103 @@ impl Index {
         } else {
             self.grams.get_mut(&key.scope)
         };
+        #[cfg(all(feature = "diagnostic-timing", feature = "bounded-engine"))]
+        let mut gram_work = crate::timing::GramInsertWork::default();
+        #[cfg(feature = "diagnostic-timing")]
+        let gram_loop = crate::timing::span("index.gram_posting_loop");
         if let Some(scope_grams) = scope_grams {
-            for gram in title_grams.union(&body.grams) {
-                if add {
-                    if let Some(posting) = scope_grams.get_mut(gram) {
-                        #[cfg(feature = "bounded-engine")]
-                        let before = posting.heap_bytes();
-                        #[cfg(feature = "experimental-compact-delta-postings")]
-                        posting.insert(posting_key);
-                        #[cfg(not(feature = "experimental-compact-delta-postings"))]
-                        posting.insert(posting_key.clone());
-                        #[cfg(feature = "bounded-engine")]
-                        if !retain_text {
-                            let after = posting.heap_bytes();
-                            if after >= before {
-                                self.builder_gram_bytes += after - before;
-                            } else {
-                                self.builder_gram_bytes -= before - after;
+            #[cfg(feature = "bounded-engine")]
+            let batched = add
+                && gram_insert::try_add(
+                    scope_grams,
+                    &title_grams,
+                    &body.grams,
+                    posting_key,
+                    retain_text,
+                    &mut self.builder_gram_bytes,
+                );
+            #[cfg(not(feature = "bounded-engine"))]
+            let batched = false;
+            if !batched {
+                for gram in title_grams.union(&body.grams) {
+                    if add {
+                        #[cfg(all(feature = "diagnostic-timing", feature = "bounded-engine"))]
+                        let sampled = {
+                            gram_work.grams += 1;
+                            (gram_work.grams + u64::from(posting_key)).is_multiple_of(1024)
+                        };
+                        #[cfg(all(feature = "diagnostic-timing", feature = "bounded-engine"))]
+                        let lookup_start = sampled.then(std::time::Instant::now);
+                        let posting = scope_grams.get_mut(gram);
+                        #[cfg(all(feature = "diagnostic-timing", feature = "bounded-engine"))]
+                        if let Some(start) = lookup_start {
+                            gram_work.samples += 1;
+                            gram_work.lookup_ns += start.elapsed().as_nanos() as u64;
+                        }
+                        if let Some(posting) = posting {
+                            #[cfg(all(feature = "diagnostic-timing", feature = "bounded-engine"))]
+                            if sampled {
+                                match posting {
+                                    Posting::Tiny { ids, len } => {
+                                        gram_work.tiny += 1;
+                                        gram_work.append += u64::from(
+                                            *len == 0 || ids[*len as usize - 1] < posting_key,
+                                        );
+                                    }
+                                    Posting::Sparse(ids) => {
+                                        gram_work.sparse += 1;
+                                        gram_work.append += u64::from(
+                                            ids.last().is_none_or(|id| *id < posting_key),
+                                        );
+                                    }
+                                    Posting::Dense { .. } => gram_work.dense += 1,
+                                }
+                            }
+                            #[cfg(feature = "bounded-engine")]
+                            let before = posting.heap_bytes();
+                            #[cfg(all(feature = "diagnostic-timing", feature = "bounded-engine"))]
+                            let insert_start = sampled.then(std::time::Instant::now);
+                            #[cfg(feature = "experimental-compact-delta-postings")]
+                            posting.insert(posting_key);
+                            #[cfg(not(feature = "experimental-compact-delta-postings"))]
+                            posting.insert(posting_key.clone());
+                            #[cfg(all(feature = "diagnostic-timing", feature = "bounded-engine"))]
+                            if let Some(start) = insert_start {
+                                gram_work.insert_ns += start.elapsed().as_nanos() as u64;
+                            }
+                            #[cfg(feature = "bounded-engine")]
+                            if !retain_text {
+                                let after = posting.heap_bytes();
+                                if after >= before {
+                                    self.builder_gram_bytes += after - before;
+                                } else {
+                                    self.builder_gram_bytes -= before - after;
+                                }
+                            }
+                        } else {
+                            #[cfg(all(feature = "diagnostic-timing", feature = "bounded-engine"))]
+                            if sampled {
+                                gram_work.missing += 1;
+                            }
+                            change(scope_grams, gram.clone(), &posting_key, true);
+                            #[cfg(feature = "bounded-engine")]
+                            if !retain_text {
+                                self.builder_gram_bytes += 96 + gram.len();
                             }
                         }
-                    } else {
-                        change(scope_grams, gram.clone(), &posting_key, true);
-                        #[cfg(feature = "bounded-engine")]
-                        if !retain_text {
-                            self.builder_gram_bytes += 96 + gram.len();
+                    } else if let Some(posting) = scope_grams.get_mut(gram) {
+                        posting.remove(&posting_key);
+                        if posting.is_empty() {
+                            scope_grams.remove(gram);
                         }
-                    }
-                } else if let Some(posting) = scope_grams.get_mut(gram) {
-                    posting.remove(&posting_key);
-                    if posting.is_empty() {
-                        scope_grams.remove(gram);
                     }
                 }
             }
         }
+        #[cfg(feature = "diagnostic-timing")]
+        drop(gram_loop);
+        #[cfg(feature = "diagnostic-timing")]
+        let _text = crate::timing::span("index.retain_folded_text");
         if !add && self.grams.get(&key.scope).is_some_and(BTreeMap::is_empty) {
             self.grams.remove(&key.scope);
         }

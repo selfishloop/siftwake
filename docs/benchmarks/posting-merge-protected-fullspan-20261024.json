@@ -1,0 +1,23 @@
+{
+  "scope": "Comparison of already captured SHA256 manifests; no corpus hashing or benchmark run",
+  "before": "posting-profile-20261024-protected-before.json",
+  "after": "posting-merge-write-10k-20261024-protected-after.json",
+  "all_equal": true,
+  "files": [
+    {
+      "path": "data\\rkyv-corpus-20261009\\json.payload-bench",
+      "sha256": "11F826FCE3F4AE790FEB9FC6DF9B1169F52C2FD699E89FC4A8A4B77AAA41731B",
+      "diagnostic_before_matches_normal_after": true
+    },
+    {
+      "path": "tests\\fixtures\\v1\\checkpoint.fdb",
+      "sha256": "E87667C0FABE64D5A1F59EF86B99F7E612DB755D239B41677DA2ADC24BE7BF57",
+      "diagnostic_before_matches_normal_after": true
+    },
+    {
+      "path": "tests\\fixtures\\v1\\checkpoint.ready",
+      "sha256": "BC82C18F8D5C3A209328BD59B12D828D8922BEC4D26CB4D557FD4A493A4A9C2F",
+      "diagnostic_before_matches_normal_after": true
+    }
+  ]
+}

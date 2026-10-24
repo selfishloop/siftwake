@@ -45,6 +45,46 @@ pub(crate) fn count(name: &'static str, calls: usize) {
     value.calls = value.calls.saturating_add(calls as u64);
 }
 
+/// Sparse samples of the existing per-document gram loop. These are wall time
+/// samples, not CPU attribution or an extrapolated whole-loop duration.
+#[cfg(feature = "bounded-engine")]
+#[derive(Default)]
+pub(crate) struct GramInsertWork {
+    pub grams: u64,
+    pub samples: u64,
+    pub lookup_ns: u64,
+    pub insert_ns: u64,
+    pub tiny: u64,
+    pub sparse: u64,
+    pub dense: u64,
+    pub missing: u64,
+    pub append: u64,
+}
+#[cfg(feature = "bounded-engine")]
+impl Drop for GramInsertWork {
+    fn drop(&mut self) {
+        let mut values = counters().lock().expect("timing mutex poisoned");
+        for (name, calls, elapsed_ns) in [
+            ("index.gram_insert_inputs", self.grams, 0),
+            ("index.sample_gram_lookup", self.samples, self.lookup_ns),
+            (
+                "index.sample_posting_insert",
+                self.samples - self.missing,
+                self.insert_ns,
+            ),
+            ("index.sample_posting_tiny", self.tiny, 0),
+            ("index.sample_posting_sparse", self.sparse, 0),
+            ("index.sample_posting_dense", self.dense, 0),
+            ("index.sample_posting_missing", self.missing, 0),
+            ("index.sample_posting_append", self.append, 0),
+        ] {
+            let value = values.entry(name).or_default();
+            value.calls = value.calls.saturating_add(calls);
+            value.elapsed_ns = value.elapsed_ns.saturating_add(elapsed_ns);
+        }
+    }
+}
+
 /// One aggregate publication per long-text extraction, never per scalar.
 #[cfg(feature = "bounded-engine")]
 #[derive(Default)]
