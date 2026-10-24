@@ -1,5 +1,24 @@
 # FDB mimarisi — 0.3.1
 
+2026-10-24 uzun gövde gram çıkarımı normal bounded profilde sınırlı sayısal
+sıralama kullanır. Önceki tam-anahtarlı1024 giriş cache ve scalar packing
+aynı;cache miss'ler en fazla8192 u64 pending tamponda sort/dedup olur.
+Taşmada eşsiz parça mevcut sayısal ağaca eklenir;sonuç aynı sıralı String
+kümesidir. Pending eleman alanı en fazla64KiB;fallback ağaç/sonuç/proses RAM
+sınırı değildir. Bağlama yalnız folded>=1024 byte BodyCache yolu;query/kısa
+gövde ve önceki hızlı fold aynı. Diagnostic tree-probes artık ağaca sunulan
+parça anahtarlarını,cache-misses ayrı bütün miss'leri sayar. Yeni format,
+feature,dependency veya WAL/kalıcılık değişikliği yoktur.
+Normal iki çift/API akışlı toplam-%10,24/CPU-%14,86,owned toplam-%19,16/
+CPU-%18,05;hepsi2/2 düşük. Owned çift farkları-%13,17/-%24,51,genel tahmin
+değildir. Sekiz full10k oracle ve API içi source/index/ready byte-eşitliği
+geçti;disk aynı. Son bakım karma,akışlı WS+400KiB/2 çift yüksek;genel RAM,
+arama,açılış ve concurrent/cold açık. İlk38-case13 düşük/25 yüksek p95;
+100 örnek/durum yoğun tekrarda beagle+%6,38,frankenstein+%8,96,the200+%1,96
+p95 iki çiftte yüksek kaldı;man-%15,93/son sayfa-%0,58 iki çiftte düşük.
+Genel sorgu kapısı geçmedi,artışlar kapatılmadı;normal yazma kazanımı tutuldu.
+[Tasarım,dar ön test ve normal yazma kanıtı](GRAM-SORT-10K-20261024.md).
+
 2026-10-22 yazma kazanımı yeni uygulamayla normal bounded profilde korundu.
 `BodyCache` miss'i ayrı call sınırındaki `fold_for_intake` üzerinden mevcut
 `fold_into`yu kullanır;String kapasitesi scalar sınıfıyla eşlenir,Unicode

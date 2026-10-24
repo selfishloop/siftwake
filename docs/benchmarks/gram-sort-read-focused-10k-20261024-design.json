@@ -1,0 +1,88 @@
+{
+  "pairs": 2,
+  "blocks_per_pair": 2,
+  "repeats_per_block": 25,
+  "affinity_mask": 4,
+  "pages_only": false,
+  "case_indices": [
+    2,
+    12,
+    17,
+    20,
+    31,
+    33
+  ],
+  "dense_selected_cases": true,
+  "cache": "warm OS cache; every block opens and verifies/warmups before query timing; no eviction",
+  "corpus": "same existing first10000; no generation/reset/copy",
+  "source_validation": "complete source check before timed search; unchanged CRC/schema/key/version checks",
+  "same_executable": false,
+  "programs": {
+    "control": {
+      "path": "output\\intake-fold-recovery-candidate-read-20261022.exe",
+      "sha256": "0BE3F4112FA58E9656B58B15551618A307CFF09A5E45B94D956BCC295B2E7612"
+    },
+    "fdb": {
+      "path": "output\\gram-sort-candidate-read-20261024.exe",
+      "sha256": "E35B76A28516D23CA9C618B12B4A1779C2753E4C6EA69726125974C927F4D50C"
+    }
+  },
+  "balanced_block_first_position": true,
+  "orders": [
+    {
+      "pair": 0,
+      "block": 0,
+      "engines": [
+        "control",
+        "fdb"
+      ],
+      "command": {
+        "id": 0,
+        "seed": 0,
+        "repeats": 25
+      }
+    },
+    {
+      "pair": 0,
+      "block": 1,
+      "engines": [
+        "fdb",
+        "control"
+      ],
+      "command": {
+        "id": 1,
+        "seed": 1,
+        "repeats": 25
+      }
+    },
+    {
+      "pair": 1,
+      "block": 0,
+      "engines": [
+        "fdb",
+        "control"
+      ],
+      "command": {
+        "id": 2,
+        "seed": 10000,
+        "repeats": 25
+      }
+    },
+    {
+      "pair": 1,
+      "block": 1,
+      "engines": [
+        "control",
+        "fdb"
+      ],
+      "command": {
+        "id": 3,
+        "seed": 10001,
+        "repeats": 25
+      }
+    }
+  ],
+  "observe_thread": false,
+  "candidate_reuse_results": false,
+  "fresh_caller_results": false
+}

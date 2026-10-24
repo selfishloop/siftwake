@@ -1,0 +1,58 @@
+{
+  "kind": "Completed evidence index; not a raw command transcript",
+  "base_commit": "8a92384",
+  "decision": "Keep bounded numeric gram sorting in the normal default; retain previous intake-fold gains; general RAM/search gates remain open",
+  "normal_programs_and_checks": "docs/benchmarks/gram-sort-10k-20261024-checks.json",
+  "micro_probe": {
+    "raw_output": "docs/benchmarks/gram-sort-probe-10k-20261024-run0.log",
+    "documents": 10000,
+    "all_gram_sets_equal": true,
+    "two_pass_extraction_seconds": { "tree": 10.5958937, "bounded_sort": 6.8191632 },
+    "faster_paired_blocks": 100,
+    "paired_blocks": 100,
+    "not_database_total_or_process_ram": true
+  },
+  "normal_write": {
+    "summary": "docs/benchmarks/gram-sort-write-10k-20261024-summary.json",
+    "records": "docs/benchmarks/gram-sort-write-10k-20261024-records.json",
+    "pairs_per_api": 2,
+    "processes": 8,
+    "all_processes_full_10000_payload_and_four_contains_oracles_passed": true,
+    "sources_indexes_ready_equal_within_api": true,
+    "corpus_and_v01_sources_unchanged": true,
+    "core_disk_bytes": 349805698,
+    "sqlite_remeasured": false,
+    "streamed_total_change_percent": -10.237742553330452,
+    "owned_total_change_percent": -19.156116577289506,
+    "streamed_cpu_change_percent": -14.856681469519584,
+    "owned_cpu_change_percent": -18.051242236024844,
+    "maintenance_mixed": true,
+    "working_set_increases_not_closed": true
+  },
+  "normal_reads": {
+    "broad_summary": "docs/benchmarks/gram-sort-read-10k-20261024-summary.json",
+    "focused_summary": "docs/benchmarks/gram-sort-read-focused-10k-20261024-summary.json",
+    "pairs": 2,
+    "broad_samples_per_case_per_reader": 20,
+    "broad_lower_p95_cases": 13,
+    "broad_higher_p95_cases": 25,
+    "focused_samples_per_case_per_reader": 100,
+    "full_payload_order_version_oracles_passed": true,
+    "tracked_files_unchanged": true,
+    "unresolved_focused_p95_percent": {
+      "beagle_0_50": 6.379451348516363,
+      "frankenstein_0_50": 8.961820022126489,
+      "the_0_200": 1.9640761801606565
+    },
+    "general_search_gate_passed": false
+  },
+  "boundaries": {
+    "same_existing_first_10000_corpus": true,
+    "new_corpus_or_database_copies": false,
+    "fixed_owned_benchmark_slots_only": true,
+    "no_persistent_format_feature_dependency_wal_protocol_changes": true,
+    "pending_key_element_bytes_bound": 65536,
+    "pending_bound_is_not_total_process_ram": true,
+    "cold_concurrent_open_and_full_sqlite_performance_not_remeasured": true
+  }
+}

@@ -1,5 +1,26 @@
 # FDB açık işler
 
+2026-10-24 gram sıralamanın dar yazma adımı normal bounded profilde etkin.
+Önceki hızlı intake fold korunur;uzun gövdede aynı packed anahtarlar en fazla
+8192 pending girdide sort/dedup,taşmada sayısal ağaç kullanır. Normal iki
+çift/API:akışlı toplam21,410→19,218s (-%10,24),owned22,436→18,138s
+(-%19,16);CPU-%14,86/-%18,05,toplam/CPU her iki API'de2/2 düşük.
+Owned toplam çiftleri-%13,17/-%24,51;genel veya evrensel hız tahmini yoktur.
+Akışlı son bakım+%9,36/1 çift düşük,owned-%6,08/1 çift düşük:ayrı bakım
+işi açık. Private yaklaşık aynı,owned yaklaşık80MiB;akışlı WS+400KiB/2 çift
+yüksek,owned+170KiB/1 çift yüksek;genel RAM kapısı geçmedi. Disk349.805.698B
+aynı,geçici alan tepesi ölçülmedi. Sekiz süreç full10k+dört contains oracle
+ve API içi source/index/ready byte eşitliği geçti;corpus/0.1 kaynakları aynı.
+Yeni corpus/DB kopyası/format/feature/WAL/protokol yok. İlk38-case durum başı
+20 örnekte13 düşük/25 yüksek p95. Altı seçilmiş durumda100 örnek/yol yoğun
+tekrarda beagle+%6,38,frankenstein+%8,96,the200+%1,96 p95 iki çiftte de
+yüksek kaldı. Man-%15,93/son sayfa-%0,58 iki çiftte düşük,zx-%1,36/1 çift
+düşük. Genel sorgu kapısı geçmedi;artışlar ve önceki p95/CLI kuyrukları
+kapatılmadı. Bu tur yeni açılış/soğuk/eşzamanlı yük/tam SQLite kıyası yok.
+Caller/query RAM,son bakım,
+arama,açılış,disk sıkıştırma/geçici alan ve eşzamanlı/gerçek-soğuk yük açık.
+[Tasarım,ölçüler ve sınırlar](GRAM-SORT-10K-20261024.md).
+
 2026-10-22 yazma kazanımı korunarak normal bounded profilde etkinleştirildi.
 Yeni `fold_for_intake`,hızlı normalleştirme+scalar ile son kapasite eşlemesi+
 write-only call sınırı kullanır. Referans scalar,normal API/format/feature/

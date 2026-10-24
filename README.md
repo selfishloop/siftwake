@@ -1,5 +1,16 @@
 # FDB
 
+[Sınırlı gram sıralama normal motorda](docs/GRAM-SORT-10K-20261024.md):
+aynı10k/iki çift/API normal release'te akışlı yazma+bakım-%10,24,owned-%19,16;
+CPU-%14,86/-%18,05,ikisinde2/2 düşük. Owned çiftler-%13,17/-%24,51:
+genel hız garantisi değildir. Önceki hızlı intake fold korunur;8192 anahtarlı
+geçici tampon,taşmada sayısal ağaç. Sekiz süreçte tam10k oracle ve API içi
+kaynak/indeks/ready byte eşitliği geçti;disk349.805.698B aynı. Son bakım
+karma,akışlı WS+400KiB/2 çift yüksek;genel RAM/arama kapısı açık. İlk38-case
+13 düşük/25 yüksek;yoğun tekrarda beagle+%6,38,frankenstein+%8,96,the200
++%1,96 p95 iki çiftte de yüksek kaldı. Açılış/soğuk/eşzamanlı yük ölçülmedi;
+yeni corpus/format/feature/WAL/protokol yok.
+
 [Yazma kazanımı varsayılanda korundu](docs/INTAKE-FOLD-RECOVERY-10K-20261022.md):
 aynı10k/4 çiftte yeni normal akışlı yazma+bakım-%4,51,owned-%4,81;
 CPU iki API'de de4/4 düşük. Scalar ile kapasitesi eşlenen hızlı intake

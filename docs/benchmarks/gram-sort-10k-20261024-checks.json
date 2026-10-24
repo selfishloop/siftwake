@@ -1,0 +1,65 @@
+{
+  "source": "Summary of completed tool executions in this implementation session; not a captured stdout transcript",
+  "scope": "Final focused correctness, formatting, lint and build checks before normal production measurements",
+  "checks": [
+    {
+      "command": "cargo test --release --lib index::packed_grams::tests::existing_corpus_gram_probe -- --ignored --exact --nocapture",
+      "exit_code": 0,
+      "passed": 1,
+      "raw_output": "docs/benchmarks/gram-sort-probe-10k-20261024-run0.log"
+    },
+    {
+      "command": "cargo test --lib index::",
+      "exit_code": 0,
+      "passed": 15,
+      "ignored": 3
+    },
+    {
+      "command": "cargo test --test streamed_transactions covered_grams",
+      "exit_code": 0,
+      "passed": 1
+    },
+    {
+      "command": "cargo test --all-features --lib index::packed_grams",
+      "exit_code": 0,
+      "passed": 3,
+      "ignored": 1
+    },
+    {
+      "command": "cargo fmt --check",
+      "exit_code": 0,
+      "note": "Final check after cargo fmt corrected the initial formatting diff"
+    },
+    {
+      "command": "cargo clippy --all-targets -- -D warnings",
+      "exit_code": 0
+    },
+    {
+      "command": "cargo clippy --all-features --all-targets -- -D warnings",
+      "exit_code": 0
+    },
+    {
+      "command": "cargo build --release --bin fdb --example measure_content_memory --example measure_interleaved_reads",
+      "exit_code": 0,
+      "features": "normal defaults; no diagnostics"
+    },
+    {
+      "command": "git diff --check",
+      "exit_code": 0
+    }
+  ],
+  "frozen_normal_programs": [
+    {
+      "path": "output/gram-sort-candidate-write-20261024.exe",
+      "sha256": "CA902434BD5C60F0F35CD1A0BE513FE24FCE02DD85F696900FF32BEE3CFE8D62"
+    },
+    {
+      "path": "output/gram-sort-candidate-read-20261024.exe",
+      "sha256": "E35B76A28516D23CA9C618B12B4A1779C2753E4C6EA69726125974C927F4D50C"
+    },
+    {
+      "path": "output/gram-sort-candidate-cli-20261024.exe",
+      "sha256": "B9402B23B3E845104184925A9FD86E2CB5447B60DC39B8183327A42662A79745"
+    }
+  ]
+}

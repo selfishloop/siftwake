@@ -1,0 +1,59 @@
+{
+  "programs": {
+    "control": {
+      "path": "output\\intake-fold-recovery-candidate-write-20261022.exe",
+      "sha256": "B687A98DBF7B0ABF63F69129926329900CAEC11ADE92052CD7AA99AB0A95A8FF"
+    },
+    "candidate": {
+      "path": "output\\gram-sort-candidate-write-20261024.exe",
+      "sha256": "CA902434BD5C60F0F35CD1A0BE513FE24FCE02DD85F696900FF32BEE3CFE8D62"
+    }
+  },
+  "streamed_pairs": 2,
+  "owned_pairs": 2,
+  "sqlite_remeasured": false,
+  "corpus": "same existing first10000;264842858 text bytes;no corpus generation/download",
+  "transactions": "500 records/batch;20 acknowledged synced WAL commits;unchanged normal durability",
+  "timing": "normal release;no diagnostic features;input CRC/JSON and40 boundary gets included in ingest",
+  "maintenance": "final flush/drain for FDB;FTS optimize+WAL checkpoint for SQLite;not identical algorithms",
+  "api": "FDB APIs: streamed,owned;SQLite not remeasured",
+  "sqlite": "bundled FTS5 trigram;FULL WAL;cache2MiB;mmap0;tempFILE;not all FDB field/link/guard features",
+  "cache": "warm OS cache;no eviction;sequential processes;no power/hardware isolation",
+  "memory": "OS lifetime private commit/working set;not physical RAM/system RAM;phase samples may miss peaks",
+  "storage": "only fixed FDB/SQLite slots reset through benchmark-workspace.ps1;no DB copies",
+  "verification": "all10000 payloads after every run outside timing;FDB also4 full contains page oracles",
+  "orders": [
+    {
+      "api": "streamed",
+      "pair": 0,
+      "engines": [
+        "control",
+        "candidate"
+      ]
+    },
+    {
+      "api": "streamed",
+      "pair": 1,
+      "engines": [
+        "candidate",
+        "control"
+      ]
+    },
+    {
+      "api": "owned",
+      "pair": 0,
+      "engines": [
+        "control",
+        "candidate"
+      ]
+    },
+    {
+      "api": "owned",
+      "pair": 1,
+      "engines": [
+        "candidate",
+        "control"
+      ]
+    }
+  ]
+}

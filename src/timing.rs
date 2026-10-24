@@ -52,6 +52,7 @@ pub(crate) struct GramWork {
     pub windows: u64,
     pub hits: u64,
     pub distinct: u64,
+    pub tree_probes: u64,
 }
 #[cfg(feature = "bounded-engine")]
 impl Drop for GramWork {
@@ -60,7 +61,8 @@ impl Drop for GramWork {
         for (name, calls) in [
             ("index.gram_windows", self.windows),
             ("index.gram_cache_hits", self.hits),
-            ("index.gram_tree_probes", self.windows - self.hits),
+            ("index.gram_cache_misses", self.windows - self.hits),
+            ("index.gram_tree_probes", self.tree_probes),
             ("index.distinct_grams", self.distinct),
         ] {
             let value = values.entry(name).or_default();
