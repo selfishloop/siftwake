@@ -1,5 +1,19 @@
 # FDB
 
+[Merge posting tamponunu yeniden kullanma](docs/MAINTENANCE-WORKSPACE-10K-20261024.md):
+aynı ilk10k/iki çift/API normal release'te akışlı yazma+bakım-%3,01,
+owned-%2,54;ikisinde2/2 düşük. Son bakım yalnız1/2 çiftte düşük;önceki
+owned+%11,97 artışın nedeni kanıtlanmadı,bakım işi açık. Input başına
+8KiB cursor merge boyunca tutulur;terim değişiminde bütün okuma/sıra
+durumları sıfırlanır. Dar aynı-program probe-%6,09/4 blok düşük;DB drain
+kazancı değildir. OS private/WS medyanları akışlı+2/+244KiB,
+owned+136/+304KiB;genel RAM kapısı açık. Disk349.805.698B/API içi byte'lar
+aynı,sekiz full10k oracle geçti;kesik/bozulma/kill testleri geçti. Önceki
+yazma kazanımları korunur. Geniş38-case12 düşük/26 yüksek;yoğun100 örnekli
+yedi durumda QUİXOTE+%12,60(0/2 hızlı),the1+%5,68(1/2) p95 açık.
+Genel arama/CLI,caller/query RAM,açılış,disk ve
+eşzamanlı/soğuk yük işleri açık. Yeni corpus/format/feature/bağımlılık yok.
+
 [RAM gram posting eklemede dar kazanç](docs/POSTING-MERGE-10K-20261024.md):
 aynı ilk10k/iki çift/API normal release'te akışlı yazma+bakım-%4,16,
 CPU-%6,21;owned CPU-%4,96 fakat toplam+%0,19/1 çift düşük,genel yazma

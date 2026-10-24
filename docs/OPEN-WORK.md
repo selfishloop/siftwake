@@ -1,5 +1,31 @@
 # FDB açık işler
 
+2026-10-24 merge posting cursor tekrar kullanımı dar toplam kazancı için
+korundu. Input başına mevcut8KiB tampon merge ömrünce tutulur;terim
+değişiminde tüketim/pencere/sıra durumları sıfırlanır. Normal aynı ilk10k/
+iki çift/API akışlı toplam19,841→19,243s(-%3,01),owned14,903→14,525s
+(-%2,54),ikisi2/2 düşük. Akışlı CPU-%1,75 ama1/2 çift düşük;owned-%3,19/
+2 çift düşük. Ayrı son bakım akışlı-%4,45/owned-%0,69,ikisinde yalnız1/2
+çift düşük;owned çiftleri+%6,18/-%6,88. Bakım işi ve önceki+%11,97 artışın
+kesin nedeni açık. Tek diagnostic owned koşusunda drain öncesi9run+
+1000resident/compactionfalse,ingest merge0;beş merge drain'de tamamlanır:
+bu koşuda çalışan worker carryover yoktur,genel nedensellik kanıtı değildir.
+Dar read-only aynı-program posting probe-%6,09/4 blok düşük;gerçek DB
+drain/OS RAM sonucu sayılmaz. Akışlı private/WS+2/+244KiB,owned+136/
++304KiB,bütün çift yönleri karma;genel RAM kapısı geçmedi. Disk349.805.698B
+ve API içi source/index/ready byte'ları aynı;sekiz full10k/dört contains
+oracle,corpus/0.1 SHA eşitliği ve kesik/bozulma/kill kontrolleri geçti.
+Geniş38-case20 örnek/yol12 düşük/26 yüksek p95;seçilmiş yedi durumda
+100 örnek/yol QUİXOTE+%12,60(iki çift yüksek),the1+%5,68(1 çift yüksek)
+p95 ve tipik blok artışları açık. The200-%13,32/iki çift düşük olsa da
+önceki farklı oturum artışları otomatik kapanmaz;uzun negatif/son sayfa/
+quixote28/10 düşük p95 yanında tipik blok artışları korunur. Oracle ve
+iki okuma serisinde21 dosya SHA eşitliği geçti. Önceki arama p95/CLI
+kuyrukları,caller/query/genel RAM,kaynak encode/yazma,
+açılış,disk sıkıştırma/geçici alan ve eşzamanlı/gerçek-soğuk işler açık.
+Yeni corpus/DB kopyası/format/feature/dependency/WAL/protokol yok.
+[Sonuç ve sınırlar](MAINTENANCE-WORKSPACE-10K-20261024.md).
+
 2026-10-24 RAM gram posting ekleme dar adımı normal bounded profilde tutuldu.
 64 referanslı sınırlı sözlük taraması/exact fallback;önceki fold ve gram
 sıralama kazanımları korunur. Normal aynı ilk10k/iki çift/API akışlı toplam

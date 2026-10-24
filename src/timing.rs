@@ -8,6 +8,20 @@ use std::time::Instant;
 pub struct Counter {
     pub calls: u64,
     pub elapsed_ns: u64,
+    pub before_drain_ns: u64,
+    pub after_drain_ns: u64,
+    pub started_before_drain: u64,
+}
+fn drain_boundary() -> &'static Mutex<Option<Instant>> {
+    static BOUNDARY: OnceLock<Mutex<Option<Instant>>> = OnceLock::new();
+    BOUNDARY.get_or_init(Mutex::default)
+}
+/// A single ingest/drain boundary for an isolated diagnostic process. Completed
+/// spans may arrive in a later snapshot; their wall portions remain explicit.
+pub fn mark_drain() {
+    let mut boundary = drain_boundary().lock().expect("timing boundary poisoned");
+    assert!(boundary.is_none(), "drain boundary already marked");
+    *boundary = Some(Instant::now());
 }
 fn counters() -> &'static Mutex<BTreeMap<&'static str, Counter>> {
     static VALUES: OnceLock<Mutex<BTreeMap<&'static str, Counter>>> = OnceLock::new();
@@ -25,11 +39,27 @@ pub fn span(name: &'static str) -> Span {
 }
 impl Drop for Span {
     fn drop(&mut self) {
-        let elapsed = self.start.elapsed().as_nanos().min(u64::MAX as u128) as u64;
+        let end = Instant::now();
+        let elapsed = end
+            .duration_since(self.start)
+            .as_nanos()
+            .min(u64::MAX as u128) as u64;
+        let boundary = *drain_boundary().lock().expect("timing boundary poisoned");
+        let before = boundary.map_or(elapsed, |boundary| {
+            boundary
+                .min(end)
+                .saturating_duration_since(self.start)
+                .as_nanos()
+                .min(u64::MAX as u128) as u64
+        });
         let mut values = counters().lock().expect("timing mutex poisoned");
         let value = values.entry(self.name).or_default();
         value.calls = value.calls.saturating_add(1);
         value.elapsed_ns = value.elapsed_ns.saturating_add(elapsed);
+        value.before_drain_ns = value.before_drain_ns.saturating_add(before);
+        value.after_drain_ns = value.after_drain_ns.saturating_add(elapsed - before);
+        value.started_before_drain +=
+            u64::from(boundary.is_none_or(|boundary| self.start < boundary));
     }
 }
 /// Call after workers finish for a complete phase. Taking a snapshot while a
@@ -38,7 +68,6 @@ pub fn take() -> BTreeMap<&'static str, Counter> {
     std::mem::take(&mut *counters().lock().expect("timing mutex poisoned"))
 }
 
-#[cfg(feature = "bounded-engine")]
 pub(crate) fn count(name: &'static str, calls: usize) {
     let mut values = counters().lock().expect("timing mutex poisoned");
     let value = values.entry(name).or_default();

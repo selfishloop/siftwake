@@ -125,6 +125,11 @@ fn main() -> input::Result<()> {
     }
     let ingest_ms = start.elapsed().as_secs_f64() * 1000.;
     #[cfg(feature = "diagnostic-timing")]
+    {
+        fdb::timing::mark_drain();
+        println!("{}", json!({"phase":"before_drain","stats":db.stats()?}));
+    }
+    #[cfg(feature = "diagnostic-timing")]
     println!(
         "{}",
         json!({"phase":"profile_ingest","counters":fdb::timing::take(),"instrumented":true,"overlapping_spans_do_not_sum":true})

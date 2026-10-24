@@ -54,6 +54,15 @@ struct Cursor<'a> {
     mapped_previous: Option<u32>,
 }
 impl Cursor<'_> {
+    fn reset(&mut self, posting: Posting) {
+        self.posting = posting;
+        self.consumed = 0;
+        self.available = 0;
+        self.position = 0;
+        self.previous = None;
+        self.mapped_previous = None;
+        // Old bytes are inaccessible until next() refills the current posting.
+    }
     fn next(&mut self) -> Result<Option<u32>> {
         while self.consumed < self.posting.count {
             if self.position == self.available {
@@ -111,13 +120,54 @@ pub(super) fn merge_with(
     inputs: &[(&DiskIndex, &[u32])],
     writer: &mut impl Write,
     offset: &mut u64,
+    emit: impl FnMut(Term, Posting) -> Result<()>,
+) -> Result<()> {
+    merge_workspace::<true>(inputs, writer, offset, emit)
+}
+
+fn merge_workspace<const REUSE: bool>(
+    inputs: &[(&DiskIndex, &[u32])],
+    writer: &mut impl Write,
+    offset: &mut u64,
     mut emit: impl FnMut(Term, Posting) -> Result<()>,
 ) -> Result<()> {
+    #[cfg(feature = "diagnostic-timing")]
+    let _merge = crate::timing::span("merge.posting_streams");
+    #[cfg(feature = "diagnostic-timing")]
+    let (mut input_entries, mut output_entries, mut output_terms) = (0usize, 0usize, 0usize);
     let mut iterators: Vec<_> = inputs
         .iter()
         .map(|(index, _)| index.term_cursor())
         .collect();
     let mut terms = BinaryHeap::new();
+    let make_cursor = |n: usize, posting| Cursor {
+        index: inputs[n].0,
+        map: inputs[n].1,
+        posting,
+        consumed: 0,
+        buffer: [0; 8192],
+        available: 0,
+        position: 0,
+        previous: None,
+        mapped_previous: None,
+    };
+    // One bounded buffer per input stream for this merge only. The selected
+    // streams, maps and validation rules stay identical across terms.
+    let mut cursors: Vec<_> = if REUSE {
+        (0..inputs.len())
+            .map(|n| {
+                make_cursor(
+                    n,
+                    Posting {
+                        offset: 0,
+                        count: 0,
+                    },
+                )
+            })
+            .collect()
+    } else {
+        Vec::new()
+    };
     for (n, iterator) in iterators.iter_mut().enumerate() {
         if let Some((term, posting)) = iterator.next()? {
             terms.push(Reverse((term, n, posting.offset, posting.count)));
@@ -144,23 +194,21 @@ pub(super) fn merge_with(
                 },
             ));
         }
-        let mut cursors: Vec<_> = same
-            .iter()
-            .map(|(n, posting)| Cursor {
-                index: inputs[*n].0,
-                map: inputs[*n].1,
-                posting: *posting,
-                consumed: 0,
-                buffer: [0; 8192],
-                available: 0,
-                position: 0,
-                previous: None,
-                mapped_previous: None,
-            })
-            .collect();
+        if REUSE {
+            for (n, posting) in &same {
+                cursors[*n].reset(*posting);
+            }
+        } else {
+            cursors = same.iter().map(|(n, p)| make_cursor(*n, *p)).collect();
+        }
+        #[cfg(feature = "diagnostic-timing")]
+        {
+            input_entries += same.iter().map(|(_, p)| p.count as usize).sum::<usize>();
+        }
         let mut ids = BinaryHeap::new();
-        for (n, cursor) in cursors.iter_mut().enumerate() {
-            if let Some(id) = cursor.next()? {
+        for (local, (input, _)) in same.iter().enumerate() {
+            let n = if REUSE { *input } else { local };
+            if let Some(id) = cursors[n].next()? {
                 ids.push(Reverse((id, n)));
             }
         }
@@ -182,6 +230,11 @@ pub(super) fn merge_with(
             }
         }
         if count != 0 {
+            #[cfg(feature = "diagnostic-timing")]
+            {
+                output_entries += count as usize;
+                output_terms += 1;
+            }
             emit(
                 term.clone(),
                 Posting {
@@ -195,6 +248,16 @@ pub(super) fn merge_with(
                 terms.push(Reverse((next, n, posting.offset, posting.count)));
             }
         }
+        if !REUSE {
+            // Match the reference loop's end-of-term allocation lifetime.
+            cursors = Vec::new();
+        }
+    }
+    #[cfg(feature = "diagnostic-timing")]
+    {
+        crate::timing::count("merge.posting_input_entries", input_entries);
+        crate::timing::count("merge.posting_output_entries", output_entries);
+        crate::timing::count("merge.posting_output_terms", output_terms);
     }
     Ok(())
 }
@@ -203,6 +266,217 @@ pub(super) fn merge_with(
 mod tests {
     use super::*;
     use crate::Document;
+    type DirectoryEntries = Vec<(Term, Posting)>;
+    fn merged<const REUSE: bool>(
+        inputs: &[(&DiskIndex, &[u32])],
+    ) -> Result<(Vec<u8>, DirectoryEntries)> {
+        let mut bytes = Vec::new();
+        let mut directory = Vec::new();
+        merge_workspace::<REUSE>(inputs, &mut bytes, &mut 0, |t, p| {
+            directory.push((t, p));
+            Ok(())
+        })?;
+        Ok((bytes, directory))
+    }
+
+    #[test]
+    fn cursor_reset_discards_partial_buffers_and_validation_state() {
+        let dir = Temp(std::env::temp_dir().join(format!(
+            "fdb-reuse-{}-{}",
+            std::process::id(),
+            TEMP.fetch_add(1, Ordering::Relaxed)
+        )));
+        std::fs::create_dir(&dir.0).unwrap();
+        let path = dir.0.join("cursor.idx");
+        let index = Builder::new(&path, 1, 0, 0).unwrap().finish().unwrap();
+        let mut file = OpenOptions::new().append(true).open(&path).unwrap();
+        let start = file.metadata().unwrap().len();
+        for id in 0u32..2052 {
+            file.write_all(&id.to_le_bytes()).unwrap();
+        }
+        let small = start + 2052 * 4;
+        for id in [3u32, 7, 7, 3, 7, 8, 2052] {
+            file.write_all(&id.to_le_bytes()).unwrap();
+        }
+        file.flush().unwrap();
+        let mut map: Vec<u32> = (10..2062).collect();
+        map[3] = u32::MAX;
+        map[8] = 5;
+        let mut cursor = Cursor {
+            index: &index,
+            map: &map,
+            posting: Posting {
+                offset: start,
+                count: 2052,
+            },
+            consumed: 0,
+            buffer: [0; 8192],
+            available: 0,
+            position: 0,
+            previous: None,
+            mapped_previous: None,
+        };
+        assert_eq!(cursor.next().unwrap(), Some(10));
+        // A smaller posting follows an unfinished 8192-byte window.
+        cursor.reset(Posting {
+            offset: small,
+            count: 2,
+        });
+        assert_eq!(cursor.next().unwrap(), Some(17));
+        assert_eq!(cursor.next().unwrap(), None);
+        cursor.reset(Posting {
+            offset: small,
+            count: 0,
+        });
+        assert_eq!(cursor.next().unwrap(), None);
+        // Input order, destination order, map bounds and truncated reads still fail.
+        for (offset, count) in [
+            (small + 8, 2),
+            (small + 16, 2),
+            (small + 24, 1),
+            (small + 24, 2),
+        ] {
+            cursor.reset(Posting { offset, count });
+            let result = (|| -> Result<()> {
+                while cursor.next()?.is_some() {}
+                Ok(())
+            })();
+            assert!(result.is_err(), "offset {offset}, count {count}");
+        }
+        // A reset after each error clears both previous-ID checks.
+        cursor.reset(Posting {
+            offset: start,
+            count: 3,
+        });
+        assert_eq!(
+            (
+                cursor.next().unwrap(),
+                cursor.next().unwrap(),
+                cursor.next().unwrap(),
+                cursor.next().unwrap()
+            ),
+            (Some(10), Some(11), Some(12), None)
+        );
+        // Refill past the 2048-ID boundary, with a fresh monotone mapping.
+        let identity: Vec<_> = (0..2052).collect();
+        cursor.map = &identity;
+        cursor.reset(Posting {
+            offset: start,
+            count: 2052,
+        });
+        for id in 0..2052 {
+            assert_eq!(cursor.next().unwrap(), Some(id));
+        }
+        assert_eq!(cursor.next().unwrap(), None);
+    }
+
+    #[test]
+    #[ignore = "read-only probe of the existing fixed 10k indexes, never generates a corpus"]
+    fn posting_workspace_existing_10k_probe() {
+        use std::time::Instant;
+        struct Sink {
+            hash: crc32fast::Hasher,
+        }
+        impl Write for Sink {
+            fn write(&mut self, bytes: &[u8]) -> std::io::Result<usize> {
+                self.hash.update(bytes);
+                Ok(bytes.len())
+            }
+            fn flush(&mut self) -> std::io::Result<()> {
+                Ok(())
+            }
+        }
+        fn run<const REUSE: bool>(
+            inputs: &[(&DiskIndex, &[u32])],
+        ) -> (u128, u64, u32, DirectoryEntries) {
+            let mut sink = Sink {
+                hash: crc32fast::Hasher::new(),
+            };
+            let mut offset = 0;
+            let mut directory = Vec::new();
+            let start = Instant::now();
+            merge_workspace::<REUSE>(inputs, &mut sink, &mut offset, |t, p| {
+                directory.push((t, p));
+                Ok(())
+            })
+            .unwrap();
+            let ns = start.elapsed().as_nanos();
+            (ns, offset, sink.hash.finalize(), directory)
+        }
+        let dir = PathBuf::from(env!("CARGO_MANIFEST_DIR")).join("data/benchmark-work/fdb");
+        let mut paths: Vec<_> = std::fs::read_dir(&dir)
+            .unwrap()
+            .map(|p| p.unwrap().path())
+            .filter(|p| {
+                p.extension().is_some_and(|e| e == "idx")
+                    && !p
+                        .file_name()
+                        .unwrap()
+                        .to_string_lossy()
+                        .contains(".records")
+            })
+            .collect();
+        paths.sort();
+        assert_eq!(paths.len(), 5, "requires completed current 10k DB");
+        let indexes: Vec<_> = paths
+            .iter()
+            .map(|p| {
+                let i = DiskIndex::open(p, None).unwrap();
+                i.verify_reuse().unwrap();
+                i
+            })
+            .collect();
+        let mut keys = BTreeMap::new();
+        for index in &indexes {
+            for id in 0..index.len() as u32 {
+                assert!(keys.insert(index.key(id).unwrap(), 0u32).is_none());
+            }
+        }
+        assert_eq!(keys.len(), 10000);
+        for (id, slot) in keys.values_mut().enumerate() {
+            *slot = id as u32;
+        }
+        let maps: Vec<Vec<_>> = indexes
+            .iter()
+            .map(|index| {
+                (0..index.len() as u32)
+                    .map(|id| keys[&index.key(id).unwrap()])
+                    .collect()
+            })
+            .collect();
+        let inputs: Vec<_> = indexes
+            .iter()
+            .zip(&maps)
+            .map(|(i, m)| (i, m.as_slice()))
+            .collect();
+        let cursor_initializations: usize = indexes
+            .iter()
+            .map(|index| {
+                let mut cursor = index.term_cursor();
+                let mut count = 0;
+                while cursor.next().unwrap().is_some() {
+                    count += 1;
+                }
+                count
+            })
+            .sum();
+        for block in 0..4 {
+            let (before, after) = if block % 2 == 0 {
+                (run::<false>(&inputs), run::<true>(&inputs))
+            } else {
+                let a = run::<true>(&inputs);
+                (run::<false>(&inputs), a)
+            };
+            assert_eq!(
+                (&before.1, &before.2, &before.3),
+                (&after.1, &after.2, &after.3)
+            );
+            println!(
+                "{}",
+                serde_json::json!({"block":block,"allocated_ns":before.0,"reused_ns":after.0,"bytes":before.1,"terms":before.3.len(),"input_streams":inputs.len(),"cursor_buffer_bytes_per_stream":8192,"reference_cursor_initializations":cursor_initializations,"reused_cursor_initializations":inputs.len(),"initializations_are_code_counts_not_measured_memory_transfers":true,"read_only":true,"not_database_ingest_or_drain":true})
+            );
+        }
+    }
     struct Temp(PathBuf);
     impl Drop for Temp {
         fn drop(&mut self) {
@@ -304,6 +578,22 @@ mod tests {
             (&first, first_map.as_slice()),
             (&second, second_map.as_slice()),
         ];
+        assert_eq!(
+            merged::<false>(&paired).unwrap(),
+            merged::<true>(&paired).unwrap()
+        );
+        assert_eq!(merged::<false>(&[]).unwrap(), merged::<true>(&[]).unwrap());
+        let all_deleted = [u32::MAX; 3];
+        assert_eq!(
+            merged::<false>(&[(&first, &all_deleted)]).unwrap(),
+            merged::<true>(&[(&first, &all_deleted)]).unwrap()
+        );
+        assert!(merged::<false>(&[(&first, &[])]).is_err());
+        assert!(merged::<true>(&[(&first, &[])]).is_err());
+        // Duplicate destination across independent streams remains an error.
+        let duplicate = [0, 1, 2];
+        assert!(merged::<false>(&[(&first, &duplicate), (&first, &duplicate)]).is_err());
+        assert!(merged::<true>(&[(&first, &duplicate), (&first, &duplicate)]).is_err());
         for reuse in [false, true] {
             let name = if reuse { "reused.idx" } else { "reference.idx" };
             let mut builder = Builder::new(&dir.0.join(name), 2, 0, 0).unwrap();

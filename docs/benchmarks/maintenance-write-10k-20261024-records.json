@@ -1,0 +1,1226 @@
+[
+  {
+    "api": "streamed",
+    "pair": 0,
+    "engine": "control",
+    "result": {
+      "all_input_crc_verified": true,
+      "database": "C:\\Users\\Serkan\\Documents\\ChatGPT\\fdb\\data\\benchmark-work\\fdb",
+      "from": 0,
+      "ingest_ms": 19321.9489,
+      "maintenance_ms": 836.6297000000001,
+      "phase": "result",
+      "sampled_full_document_checks": 40,
+      "stats": {
+        "compaction_running": false,
+        "delta_keys": 0,
+        "disk_index_bytes": 81904473,
+        "disk_posting_entries": 19221340,
+        "documents": 10000,
+        "generation": 51,
+        "log_bytes": 45,
+        "resident_documents": 0,
+        "resident_text_bytes": 0,
+        "segments": 5,
+        "sequence": 20,
+        "source_bytes": 267900709
+      },
+      "text_bytes": 264842858,
+      "to": 10000
+    },
+    "memory": {
+      "engine": "fdb",
+      "mode": "ingest",
+      "from": 0,
+      "to": 10000,
+      "run": 0,
+      "exit_code": 0,
+      "low_disk_stop": false,
+      "phases": {
+        "runtime_baseline": {
+          "sampled_peak_private_bytes": 606208,
+          "sampled_peak_working_set_bytes": 4018176,
+          "samples": 29
+        },
+        "startup": {
+          "sampled_peak_private_bytes": 462848,
+          "sampled_peak_working_set_bytes": 2711552,
+          "samples": 1
+        },
+        "maintenance": {
+          "sampled_peak_private_bytes": 8675328,
+          "sampled_peak_working_set_bytes": 12750848,
+          "samples": 16
+        },
+        "indexing": {
+          "sampled_peak_private_bytes": 10301440,
+          "sampled_peak_working_set_bytes": 14467072,
+          "samples": 502
+        }
+      },
+      "idle": null,
+      "os_peak_working_set_bytes": 14467072,
+      "samples": 548,
+      "sample_interval_ms": 20,
+      "phase_poll_ms": 100,
+      "elapsed_s": 21.385066,
+      "cpu_ms": 18218.75,
+      "retained_disk_bytes": 349805698,
+      "files": [
+        {
+          "name": "generation-0000000000000031.fdb",
+          "bytes": 45
+        },
+        {
+          "name": "generation-0000000000000033.ready",
+          "bytes": 516
+        },
+        {
+          "name": "run-000000000000000a.fdb",
+          "bytes": 53746407
+        },
+        {
+          "name": "run-000000000000000a.idx",
+          "bytes": 16350784
+        },
+        {
+          "name": "run-000000000000000a.records04.idx",
+          "bytes": 89121
+        },
+        {
+          "name": "run-0000000000000014.fdb",
+          "bytes": 52970692
+        },
+        {
+          "name": "run-0000000000000014.idx",
+          "bytes": 16203819
+        },
+        {
+          "name": "run-0000000000000014.records04.idx",
+          "bytes": 89121
+        },
+        {
+          "name": "run-000000000000001e.fdb",
+          "bytes": 52914977
+        },
+        {
+          "name": "run-000000000000001e.idx",
+          "bytes": 16201874
+        },
+        {
+          "name": "run-000000000000001e.records04.idx",
+          "bytes": 89121
+        },
+        {
+          "name": "run-0000000000000028.fdb",
+          "bytes": 54087247
+        },
+        {
+          "name": "run-0000000000000028.idx",
+          "bytes": 16311854
+        },
+        {
+          "name": "run-0000000000000028.records04.idx",
+          "bytes": 89121
+        },
+        {
+          "name": "run-0000000000000032.fdb",
+          "bytes": 54181341
+        },
+        {
+          "name": "run-0000000000000032.idx",
+          "bytes": 16390537
+        },
+        {
+          "name": "run-0000000000000032.records04.idx",
+          "bytes": 89121
+        }
+      ],
+      "features": "normal bounded-engine;no diagnostics",
+      "cache": "OS cache, no eviction, no search warmup",
+      "includes_os_file_cache": false,
+      "input": "streamed CRC-checked JSON corpus, batch500; no books/oracle resident",
+      "executable": "C:\\Users\\Serkan\\Documents\\ChatGPT\\fdb\\output\\posting-merge-candidate-write-20261024.exe",
+      "database": "C:\\Users\\Serkan\\Documents\\ChatGPT\\fdb\\data\\benchmark-work\\fdb",
+      "os_lifetime_peaks": {
+        "peak_private_commit_bytes": 10457088,
+        "peak_working_set_bytes": 14467072,
+        "scope": "entire process lifetime, read after exit with retained handle; not phase-specific",
+        "private_counter": "PeakPagefileUsage: private committed bytes, not physical RAM",
+        "working_set_counter": "PeakWorkingSetSize: resident pages including shared image pages",
+        "sample_gaps": false
+      }
+    }
+  },
+  {
+    "api": "streamed",
+    "pair": 0,
+    "engine": "candidate",
+    "result": {
+      "all_input_crc_verified": true,
+      "database": "C:\\Users\\Serkan\\Documents\\ChatGPT\\fdb\\data\\benchmark-work\\fdb",
+      "from": 0,
+      "ingest_ms": 18449.8694,
+      "maintenance_ms": 764.4946,
+      "phase": "result",
+      "sampled_full_document_checks": 40,
+      "stats": {
+        "compaction_running": false,
+        "delta_keys": 0,
+        "disk_index_bytes": 81904473,
+        "disk_posting_entries": 19221340,
+        "documents": 10000,
+        "generation": 51,
+        "log_bytes": 45,
+        "resident_documents": 0,
+        "resident_text_bytes": 0,
+        "segments": 5,
+        "sequence": 20,
+        "source_bytes": 267900709
+      },
+      "text_bytes": 264842858,
+      "to": 10000
+    },
+    "memory": {
+      "engine": "fdb",
+      "mode": "ingest",
+      "from": 0,
+      "to": 10000,
+      "run": 0,
+      "exit_code": 0,
+      "low_disk_stop": false,
+      "phases": {
+        "runtime_baseline": {
+          "sampled_peak_private_bytes": 4042752,
+          "sampled_peak_working_set_bytes": 8257536,
+          "samples": 23
+        },
+        "startup": {
+          "sampled_peak_private_bytes": 462848,
+          "sampled_peak_working_set_bytes": 2707456,
+          "samples": 1
+        },
+        "maintenance": {
+          "sampled_peak_private_bytes": 8982528,
+          "sampled_peak_working_set_bytes": 13058048,
+          "samples": 16
+        },
+        "indexing": {
+          "sampled_peak_private_bytes": 10448896,
+          "sampled_peak_working_set_bytes": 14913536,
+          "samples": 485
+        }
+      },
+      "idle": null,
+      "os_peak_working_set_bytes": 15048704,
+      "samples": 525,
+      "sample_interval_ms": 20,
+      "phase_poll_ms": 100,
+      "elapsed_s": 20.4210065,
+      "cpu_ms": 17437.5,
+      "retained_disk_bytes": 349805698,
+      "files": [
+        {
+          "name": "generation-0000000000000031.fdb",
+          "bytes": 45
+        },
+        {
+          "name": "generation-0000000000000033.ready",
+          "bytes": 516
+        },
+        {
+          "name": "run-000000000000000a.fdb",
+          "bytes": 53746407
+        },
+        {
+          "name": "run-000000000000000a.idx",
+          "bytes": 16350784
+        },
+        {
+          "name": "run-000000000000000a.records04.idx",
+          "bytes": 89121
+        },
+        {
+          "name": "run-0000000000000014.fdb",
+          "bytes": 52970692
+        },
+        {
+          "name": "run-0000000000000014.idx",
+          "bytes": 16203819
+        },
+        {
+          "name": "run-0000000000000014.records04.idx",
+          "bytes": 89121
+        },
+        {
+          "name": "run-000000000000001e.fdb",
+          "bytes": 52914977
+        },
+        {
+          "name": "run-000000000000001e.idx",
+          "bytes": 16201874
+        },
+        {
+          "name": "run-000000000000001e.records04.idx",
+          "bytes": 89121
+        },
+        {
+          "name": "run-0000000000000028.fdb",
+          "bytes": 54087247
+        },
+        {
+          "name": "run-0000000000000028.idx",
+          "bytes": 16311854
+        },
+        {
+          "name": "run-0000000000000028.records04.idx",
+          "bytes": 89121
+        },
+        {
+          "name": "run-0000000000000032.fdb",
+          "bytes": 54181341
+        },
+        {
+          "name": "run-0000000000000032.idx",
+          "bytes": 16390537
+        },
+        {
+          "name": "run-0000000000000032.records04.idx",
+          "bytes": 89121
+        }
+      ],
+      "features": "normal bounded-engine;no diagnostics",
+      "cache": "OS cache, no eviction, no search warmup",
+      "includes_os_file_cache": false,
+      "input": "streamed CRC-checked JSON corpus, batch500; no books/oracle resident",
+      "executable": "C:\\Users\\Serkan\\Documents\\ChatGPT\\fdb\\output\\maintenance-candidate-write-20261024.exe",
+      "database": "C:\\Users\\Serkan\\Documents\\ChatGPT\\fdb\\data\\benchmark-work\\fdb",
+      "os_lifetime_peaks": {
+        "peak_private_commit_bytes": 10514432,
+        "peak_working_set_bytes": 15048704,
+        "scope": "entire process lifetime, read after exit with retained handle; not phase-specific",
+        "private_counter": "PeakPagefileUsage: private committed bytes, not physical RAM",
+        "working_set_counter": "PeakWorkingSetSize: resident pages including shared image pages",
+        "sample_gaps": false
+      }
+    }
+  },
+  {
+    "api": "streamed",
+    "pair": 1,
+    "engine": "candidate",
+    "result": {
+      "all_input_crc_verified": true,
+      "database": "C:\\Users\\Serkan\\Documents\\ChatGPT\\fdb\\data\\benchmark-work\\fdb",
+      "from": 0,
+      "ingest_ms": 18490.015,
+      "maintenance_ms": 782.2387,
+      "phase": "result",
+      "sampled_full_document_checks": 40,
+      "stats": {
+        "compaction_running": false,
+        "delta_keys": 0,
+        "disk_index_bytes": 81904473,
+        "disk_posting_entries": 19221340,
+        "documents": 10000,
+        "generation": 51,
+        "log_bytes": 45,
+        "resident_documents": 0,
+        "resident_text_bytes": 0,
+        "segments": 5,
+        "sequence": 20,
+        "source_bytes": 267900709
+      },
+      "text_bytes": 264842858,
+      "to": 10000
+    },
+    "memory": {
+      "engine": "fdb",
+      "mode": "ingest",
+      "from": 0,
+      "to": 10000,
+      "run": 0,
+      "exit_code": 0,
+      "low_disk_stop": false,
+      "phases": {
+        "runtime_baseline": {
+          "sampled_peak_private_bytes": 651264,
+          "sampled_peak_working_set_bytes": 4046848,
+          "samples": 29
+        },
+        "startup": {
+          "sampled_peak_private_bytes": 651264,
+          "sampled_peak_working_set_bytes": 4034560,
+          "samples": 2
+        },
+        "maintenance": {
+          "sampled_peak_private_bytes": 9080832,
+          "sampled_peak_working_set_bytes": 12881920,
+          "samples": 19
+        },
+        "indexing": {
+          "sampled_peak_private_bytes": 9560064,
+          "sampled_peak_working_set_bytes": 13561856,
+          "samples": 493
+        }
+      },
+      "idle": null,
+      "os_peak_working_set_bytes": 14438400,
+      "samples": 543,
+      "sample_interval_ms": 20,
+      "phase_poll_ms": 100,
+      "elapsed_s": 20.4061035,
+      "cpu_ms": 17687.5,
+      "retained_disk_bytes": 349805698,
+      "files": [
+        {
+          "name": "generation-0000000000000031.fdb",
+          "bytes": 45
+        },
+        {
+          "name": "generation-0000000000000033.ready",
+          "bytes": 516
+        },
+        {
+          "name": "run-000000000000000a.fdb",
+          "bytes": 53746407
+        },
+        {
+          "name": "run-000000000000000a.idx",
+          "bytes": 16350784
+        },
+        {
+          "name": "run-000000000000000a.records04.idx",
+          "bytes": 89121
+        },
+        {
+          "name": "run-0000000000000014.fdb",
+          "bytes": 52970692
+        },
+        {
+          "name": "run-0000000000000014.idx",
+          "bytes": 16203819
+        },
+        {
+          "name": "run-0000000000000014.records04.idx",
+          "bytes": 89121
+        },
+        {
+          "name": "run-000000000000001e.fdb",
+          "bytes": 52914977
+        },
+        {
+          "name": "run-000000000000001e.idx",
+          "bytes": 16201874
+        },
+        {
+          "name": "run-000000000000001e.records04.idx",
+          "bytes": 89121
+        },
+        {
+          "name": "run-0000000000000028.fdb",
+          "bytes": 54087247
+        },
+        {
+          "name": "run-0000000000000028.idx",
+          "bytes": 16311854
+        },
+        {
+          "name": "run-0000000000000028.records04.idx",
+          "bytes": 89121
+        },
+        {
+          "name": "run-0000000000000032.fdb",
+          "bytes": 54181341
+        },
+        {
+          "name": "run-0000000000000032.idx",
+          "bytes": 16390537
+        },
+        {
+          "name": "run-0000000000000032.records04.idx",
+          "bytes": 89121
+        }
+      ],
+      "features": "normal bounded-engine;no diagnostics",
+      "cache": "OS cache, no eviction, no search warmup",
+      "includes_os_file_cache": false,
+      "input": "streamed CRC-checked JSON corpus, batch500; no books/oracle resident",
+      "executable": "C:\\Users\\Serkan\\Documents\\ChatGPT\\fdb\\output\\maintenance-candidate-write-20261024.exe",
+      "database": "C:\\Users\\Serkan\\Documents\\ChatGPT\\fdb\\data\\benchmark-work\\fdb",
+      "os_lifetime_peaks": {
+        "peak_private_commit_bytes": 10375168,
+        "peak_working_set_bytes": 14438400,
+        "scope": "entire process lifetime, read after exit with retained handle; not phase-specific",
+        "private_counter": "PeakPagefileUsage: private committed bytes, not physical RAM",
+        "working_set_counter": "PeakWorkingSetSize: resident pages including shared image pages",
+        "sample_gaps": false
+      }
+    }
+  },
+  {
+    "api": "streamed",
+    "pair": 1,
+    "engine": "control",
+    "result": {
+      "all_input_crc_verified": true,
+      "database": "C:\\Users\\Serkan\\Documents\\ChatGPT\\fdb\\data\\benchmark-work\\fdb",
+      "from": 0,
+      "ingest_ms": 18741.668400000002,
+      "maintenance_ms": 782.1771,
+      "phase": "result",
+      "sampled_full_document_checks": 40,
+      "stats": {
+        "compaction_running": false,
+        "delta_keys": 0,
+        "disk_index_bytes": 81904473,
+        "disk_posting_entries": 19221340,
+        "documents": 10000,
+        "generation": 51,
+        "log_bytes": 45,
+        "resident_documents": 0,
+        "resident_text_bytes": 0,
+        "segments": 5,
+        "sequence": 20,
+        "source_bytes": 267900709
+      },
+      "text_bytes": 264842858,
+      "to": 10000
+    },
+    "memory": {
+      "engine": "fdb",
+      "mode": "ingest",
+      "from": 0,
+      "to": 10000,
+      "run": 0,
+      "exit_code": 0,
+      "low_disk_stop": false,
+      "phases": {
+        "runtime_baseline": {
+          "sampled_peak_private_bytes": 634880,
+          "sampled_peak_working_set_bytes": 4009984,
+          "samples": 26
+        },
+        "startup": {
+          "sampled_peak_private_bytes": 634880,
+          "sampled_peak_working_set_bytes": 4009984,
+          "samples": 2
+        },
+        "maintenance": {
+          "sampled_peak_private_bytes": 9207808,
+          "sampled_peak_working_set_bytes": 13021184,
+          "samples": 21
+        },
+        "indexing": {
+          "sampled_peak_private_bytes": 10330112,
+          "sampled_peak_working_set_bytes": 14409728,
+          "samples": 563
+        }
+      },
+      "idle": null,
+      "os_peak_working_set_bytes": 14520320,
+      "samples": 612,
+      "sample_interval_ms": 20,
+      "phase_poll_ms": 100,
+      "elapsed_s": 20.654771399999998,
+      "cpu_ms": 17531.25,
+      "retained_disk_bytes": 349805698,
+      "files": [
+        {
+          "name": "generation-0000000000000031.fdb",
+          "bytes": 45
+        },
+        {
+          "name": "generation-0000000000000033.ready",
+          "bytes": 516
+        },
+        {
+          "name": "run-000000000000000a.fdb",
+          "bytes": 53746407
+        },
+        {
+          "name": "run-000000000000000a.idx",
+          "bytes": 16350784
+        },
+        {
+          "name": "run-000000000000000a.records04.idx",
+          "bytes": 89121
+        },
+        {
+          "name": "run-0000000000000014.fdb",
+          "bytes": 52970692
+        },
+        {
+          "name": "run-0000000000000014.idx",
+          "bytes": 16203819
+        },
+        {
+          "name": "run-0000000000000014.records04.idx",
+          "bytes": 89121
+        },
+        {
+          "name": "run-000000000000001e.fdb",
+          "bytes": 52914977
+        },
+        {
+          "name": "run-000000000000001e.idx",
+          "bytes": 16201874
+        },
+        {
+          "name": "run-000000000000001e.records04.idx",
+          "bytes": 89121
+        },
+        {
+          "name": "run-0000000000000028.fdb",
+          "bytes": 54087247
+        },
+        {
+          "name": "run-0000000000000028.idx",
+          "bytes": 16311854
+        },
+        {
+          "name": "run-0000000000000028.records04.idx",
+          "bytes": 89121
+        },
+        {
+          "name": "run-0000000000000032.fdb",
+          "bytes": 54181341
+        },
+        {
+          "name": "run-0000000000000032.idx",
+          "bytes": 16390537
+        },
+        {
+          "name": "run-0000000000000032.records04.idx",
+          "bytes": 89121
+        }
+      ],
+      "features": "normal bounded-engine;no diagnostics",
+      "cache": "OS cache, no eviction, no search warmup",
+      "includes_os_file_cache": false,
+      "input": "streamed CRC-checked JSON corpus, batch500; no books/oracle resident",
+      "executable": "C:\\Users\\Serkan\\Documents\\ChatGPT\\fdb\\output\\posting-merge-candidate-write-20261024.exe",
+      "database": "C:\\Users\\Serkan\\Documents\\ChatGPT\\fdb\\data\\benchmark-work\\fdb",
+      "os_lifetime_peaks": {
+        "peak_private_commit_bytes": 10428416,
+        "peak_working_set_bytes": 14520320,
+        "scope": "entire process lifetime, read after exit with retained handle; not phase-specific",
+        "private_counter": "PeakPagefileUsage: private committed bytes, not physical RAM",
+        "working_set_counter": "PeakWorkingSetSize: resident pages including shared image pages",
+        "sample_gaps": false
+      }
+    }
+  },
+  {
+    "api": "owned",
+    "pair": 0,
+    "engine": "control",
+    "result": {
+      "all_input_crc_verified": true,
+      "database": "C:\\Users\\Serkan\\Documents\\ChatGPT\\fdb\\data\\benchmark-work\\fdb",
+      "from": 0,
+      "ingest_ms": 10982.741300000002,
+      "maintenance_ms": 3688.0856,
+      "phase": "result",
+      "sampled_full_document_checks": 40,
+      "stats": {
+        "compaction_running": false,
+        "delta_keys": 0,
+        "disk_index_bytes": 81904473,
+        "disk_posting_entries": 19221340,
+        "documents": 10000,
+        "generation": 31,
+        "log_bytes": 45,
+        "resident_documents": 0,
+        "resident_text_bytes": 0,
+        "segments": 5,
+        "sequence": 20,
+        "source_bytes": 267900709
+      },
+      "text_bytes": 264842858,
+      "to": 10000
+    },
+    "memory": {
+      "engine": "fdb",
+      "mode": "ingest",
+      "from": 0,
+      "to": 10000,
+      "run": 0,
+      "exit_code": 0,
+      "low_disk_stop": false,
+      "phases": {
+        "runtime_baseline": {
+          "sampled_peak_private_bytes": 638976,
+          "sampled_peak_working_set_bytes": 4009984,
+          "samples": 21
+        },
+        "startup": {
+          "sampled_peak_private_bytes": 638976,
+          "sampled_peak_working_set_bytes": 4009984,
+          "samples": 2
+        },
+        "maintenance": {
+          "sampled_peak_private_bytes": 70037504,
+          "sampled_peak_working_set_bytes": 72683520,
+          "samples": 91
+        },
+        "indexing": {
+          "sampled_peak_private_bytes": 83148800,
+          "sampled_peak_working_set_bytes": 86581248,
+          "samples": 278
+        }
+      },
+      "idle": null,
+      "os_peak_working_set_bytes": 87515136,
+      "samples": 392,
+      "sample_interval_ms": 20,
+      "phase_poll_ms": 100,
+      "elapsed_s": 15.804236699999999,
+      "cpu_ms": 13343.75,
+      "retained_disk_bytes": 349805698,
+      "files": [
+        {
+          "name": "generation-0000000000000015.fdb",
+          "bytes": 45
+        },
+        {
+          "name": "generation-000000000000001f.ready",
+          "bytes": 516
+        },
+        {
+          "name": "run-0000000000000016.fdb",
+          "bytes": 53746407
+        },
+        {
+          "name": "run-0000000000000016.idx",
+          "bytes": 16350784
+        },
+        {
+          "name": "run-0000000000000016.records04.idx",
+          "bytes": 89121
+        },
+        {
+          "name": "run-0000000000000018.fdb",
+          "bytes": 52970692
+        },
+        {
+          "name": "run-0000000000000018.idx",
+          "bytes": 16203819
+        },
+        {
+          "name": "run-0000000000000018.records04.idx",
+          "bytes": 89121
+        },
+        {
+          "name": "run-000000000000001a.fdb",
+          "bytes": 52914977
+        },
+        {
+          "name": "run-000000000000001a.idx",
+          "bytes": 16201874
+        },
+        {
+          "name": "run-000000000000001a.records04.idx",
+          "bytes": 89121
+        },
+        {
+          "name": "run-000000000000001c.fdb",
+          "bytes": 54087247
+        },
+        {
+          "name": "run-000000000000001c.idx",
+          "bytes": 16311854
+        },
+        {
+          "name": "run-000000000000001c.records04.idx",
+          "bytes": 89121
+        },
+        {
+          "name": "run-000000000000001e.fdb",
+          "bytes": 54181341
+        },
+        {
+          "name": "run-000000000000001e.idx",
+          "bytes": 16390537
+        },
+        {
+          "name": "run-000000000000001e.records04.idx",
+          "bytes": 89121
+        }
+      ],
+      "features": "normal bounded-engine;no diagnostics",
+      "cache": "OS cache, no eviction, no search warmup",
+      "includes_os_file_cache": false,
+      "input": "streamed CRC-checked JSON corpus, batch500; no books/oracle resident",
+      "executable": "C:\\Users\\Serkan\\Documents\\ChatGPT\\fdb\\output\\posting-merge-candidate-write-20261024.exe",
+      "database": "C:\\Users\\Serkan\\Documents\\ChatGPT\\fdb\\data\\benchmark-work\\fdb",
+      "os_lifetime_peaks": {
+        "peak_private_commit_bytes": 84144128,
+        "peak_working_set_bytes": 87515136,
+        "scope": "entire process lifetime, read after exit with retained handle; not phase-specific",
+        "private_counter": "PeakPagefileUsage: private committed bytes, not physical RAM",
+        "working_set_counter": "PeakWorkingSetSize: resident pages including shared image pages",
+        "sample_gaps": false
+      }
+    }
+  },
+  {
+    "api": "owned",
+    "pair": 0,
+    "engine": "candidate",
+    "result": {
+      "all_input_crc_verified": true,
+      "database": "C:\\Users\\Serkan\\Documents\\ChatGPT\\fdb\\data\\benchmark-work\\fdb",
+      "from": 0,
+      "ingest_ms": 10680.2811,
+      "maintenance_ms": 3915.8768999999998,
+      "phase": "result",
+      "sampled_full_document_checks": 40,
+      "stats": {
+        "compaction_running": false,
+        "delta_keys": 0,
+        "disk_index_bytes": 81904473,
+        "disk_posting_entries": 19221340,
+        "documents": 10000,
+        "generation": 31,
+        "log_bytes": 45,
+        "resident_documents": 0,
+        "resident_text_bytes": 0,
+        "segments": 5,
+        "sequence": 20,
+        "source_bytes": 267900709
+      },
+      "text_bytes": 264842858,
+      "to": 10000
+    },
+    "memory": {
+      "engine": "fdb",
+      "mode": "ingest",
+      "from": 0,
+      "to": 10000,
+      "run": 0,
+      "exit_code": 0,
+      "low_disk_stop": false,
+      "phases": {
+        "runtime_baseline": {
+          "sampled_peak_private_bytes": 6221824,
+          "sampled_peak_working_set_bytes": 9859072,
+          "samples": 30
+        },
+        "startup": {
+          "sampled_peak_private_bytes": 638976,
+          "sampled_peak_working_set_bytes": 4022272,
+          "samples": 2
+        },
+        "maintenance": {
+          "sampled_peak_private_bytes": 71757824,
+          "sampled_peak_working_set_bytes": 72626176,
+          "samples": 113
+        },
+        "indexing": {
+          "sampled_peak_private_bytes": 82915328,
+          "sampled_peak_working_set_bytes": 86487040,
+          "samples": 265
+        }
+      },
+      "idle": null,
+      "os_peak_working_set_bytes": 87441408,
+      "samples": 410,
+      "sample_interval_ms": 20,
+      "phase_poll_ms": 100,
+      "elapsed_s": 15.7247151,
+      "cpu_ms": 13015.625,
+      "retained_disk_bytes": 349805698,
+      "files": [
+        {
+          "name": "generation-0000000000000015.fdb",
+          "bytes": 45
+        },
+        {
+          "name": "generation-000000000000001f.ready",
+          "bytes": 516
+        },
+        {
+          "name": "run-0000000000000016.fdb",
+          "bytes": 53746407
+        },
+        {
+          "name": "run-0000000000000016.idx",
+          "bytes": 16350784
+        },
+        {
+          "name": "run-0000000000000016.records04.idx",
+          "bytes": 89121
+        },
+        {
+          "name": "run-0000000000000018.fdb",
+          "bytes": 52970692
+        },
+        {
+          "name": "run-0000000000000018.idx",
+          "bytes": 16203819
+        },
+        {
+          "name": "run-0000000000000018.records04.idx",
+          "bytes": 89121
+        },
+        {
+          "name": "run-000000000000001a.fdb",
+          "bytes": 52914977
+        },
+        {
+          "name": "run-000000000000001a.idx",
+          "bytes": 16201874
+        },
+        {
+          "name": "run-000000000000001a.records04.idx",
+          "bytes": 89121
+        },
+        {
+          "name": "run-000000000000001c.fdb",
+          "bytes": 54087247
+        },
+        {
+          "name": "run-000000000000001c.idx",
+          "bytes": 16311854
+        },
+        {
+          "name": "run-000000000000001c.records04.idx",
+          "bytes": 89121
+        },
+        {
+          "name": "run-000000000000001e.fdb",
+          "bytes": 54181341
+        },
+        {
+          "name": "run-000000000000001e.idx",
+          "bytes": 16390537
+        },
+        {
+          "name": "run-000000000000001e.records04.idx",
+          "bytes": 89121
+        }
+      ],
+      "features": "normal bounded-engine;no diagnostics",
+      "cache": "OS cache, no eviction, no search warmup",
+      "includes_os_file_cache": false,
+      "input": "streamed CRC-checked JSON corpus, batch500; no books/oracle resident",
+      "executable": "C:\\Users\\Serkan\\Documents\\ChatGPT\\fdb\\output\\maintenance-candidate-write-20261024.exe",
+      "database": "C:\\Users\\Serkan\\Documents\\ChatGPT\\fdb\\data\\benchmark-work\\fdb",
+      "os_lifetime_peaks": {
+        "peak_private_commit_bytes": 83927040,
+        "peak_working_set_bytes": 87441408,
+        "scope": "entire process lifetime, read after exit with retained handle; not phase-specific",
+        "private_counter": "PeakPagefileUsage: private committed bytes, not physical RAM",
+        "working_set_counter": "PeakWorkingSetSize: resident pages including shared image pages",
+        "sample_gaps": false
+      }
+    }
+  },
+  {
+    "api": "owned",
+    "pair": 1,
+    "engine": "candidate",
+    "result": {
+      "all_input_crc_verified": true,
+      "database": "C:\\Users\\Serkan\\Documents\\ChatGPT\\fdb\\data\\benchmark-work\\fdb",
+      "from": 0,
+      "ingest_ms": 10641.8869,
+      "maintenance_ms": 3811.8321,
+      "phase": "result",
+      "sampled_full_document_checks": 40,
+      "stats": {
+        "compaction_running": false,
+        "delta_keys": 0,
+        "disk_index_bytes": 81904473,
+        "disk_posting_entries": 19221340,
+        "documents": 10000,
+        "generation": 31,
+        "log_bytes": 45,
+        "resident_documents": 0,
+        "resident_text_bytes": 0,
+        "segments": 5,
+        "sequence": 20,
+        "source_bytes": 267900709
+      },
+      "text_bytes": 264842858,
+      "to": 10000
+    },
+    "memory": {
+      "engine": "fdb",
+      "mode": "ingest",
+      "from": 0,
+      "to": 10000,
+      "run": 0,
+      "exit_code": 0,
+      "low_disk_stop": false,
+      "phases": {
+        "runtime_baseline": {
+          "sampled_peak_private_bytes": 958464,
+          "sampled_peak_working_set_bytes": 4792320,
+          "samples": 30
+        },
+        "startup": {
+          "sampled_peak_private_bytes": 643072,
+          "sampled_peak_working_set_bytes": 4022272,
+          "samples": 2
+        },
+        "maintenance": {
+          "sampled_peak_private_bytes": 72552448,
+          "sampled_peak_working_set_bytes": 72687616,
+          "samples": 97
+        },
+        "indexing": {
+          "sampled_peak_private_bytes": 83218432,
+          "sampled_peak_working_set_bytes": 86978560,
+          "samples": 312
+        }
+      },
+      "idle": null,
+      "os_peak_working_set_bytes": 87928832,
+      "samples": 441,
+      "sample_interval_ms": 20,
+      "phase_poll_ms": 100,
+      "elapsed_s": 15.618296599999999,
+      "cpu_ms": 13046.875,
+      "retained_disk_bytes": 349805698,
+      "files": [
+        {
+          "name": "generation-0000000000000015.fdb",
+          "bytes": 45
+        },
+        {
+          "name": "generation-000000000000001f.ready",
+          "bytes": 516
+        },
+        {
+          "name": "run-0000000000000016.fdb",
+          "bytes": 53746407
+        },
+        {
+          "name": "run-0000000000000016.idx",
+          "bytes": 16350784
+        },
+        {
+          "name": "run-0000000000000016.records04.idx",
+          "bytes": 89121
+        },
+        {
+          "name": "run-0000000000000018.fdb",
+          "bytes": 52970692
+        },
+        {
+          "name": "run-0000000000000018.idx",
+          "bytes": 16203819
+        },
+        {
+          "name": "run-0000000000000018.records04.idx",
+          "bytes": 89121
+        },
+        {
+          "name": "run-000000000000001a.fdb",
+          "bytes": 52914977
+        },
+        {
+          "name": "run-000000000000001a.idx",
+          "bytes": 16201874
+        },
+        {
+          "name": "run-000000000000001a.records04.idx",
+          "bytes": 89121
+        },
+        {
+          "name": "run-000000000000001c.fdb",
+          "bytes": 54087247
+        },
+        {
+          "name": "run-000000000000001c.idx",
+          "bytes": 16311854
+        },
+        {
+          "name": "run-000000000000001c.records04.idx",
+          "bytes": 89121
+        },
+        {
+          "name": "run-000000000000001e.fdb",
+          "bytes": 54181341
+        },
+        {
+          "name": "run-000000000000001e.idx",
+          "bytes": 16390537
+        },
+        {
+          "name": "run-000000000000001e.records04.idx",
+          "bytes": 89121
+        }
+      ],
+      "features": "normal bounded-engine;no diagnostics",
+      "cache": "OS cache, no eviction, no search warmup",
+      "includes_os_file_cache": false,
+      "input": "streamed CRC-checked JSON corpus, batch500; no books/oracle resident",
+      "executable": "C:\\Users\\Serkan\\Documents\\ChatGPT\\fdb\\output\\maintenance-candidate-write-20261024.exe",
+      "database": "C:\\Users\\Serkan\\Documents\\ChatGPT\\fdb\\data\\benchmark-work\\fdb",
+      "os_lifetime_peaks": {
+        "peak_private_commit_bytes": 84234240,
+        "peak_working_set_bytes": 87928832,
+        "scope": "entire process lifetime, read after exit with retained handle; not phase-specific",
+        "private_counter": "PeakPagefileUsage: private committed bytes, not physical RAM",
+        "working_set_counter": "PeakWorkingSetSize: resident pages including shared image pages",
+        "sample_gaps": false
+      }
+    }
+  },
+  {
+    "api": "owned",
+    "pair": 1,
+    "engine": "control",
+    "result": {
+      "all_input_crc_verified": true,
+      "database": "C:\\Users\\Serkan\\Documents\\ChatGPT\\fdb\\data\\benchmark-work\\fdb",
+      "from": 0,
+      "ingest_ms": 11042.223699999999,
+      "maintenance_ms": 4093.6346,
+      "phase": "result",
+      "sampled_full_document_checks": 40,
+      "stats": {
+        "compaction_running": false,
+        "delta_keys": 0,
+        "disk_index_bytes": 81904473,
+        "disk_posting_entries": 19221340,
+        "documents": 10000,
+        "generation": 31,
+        "log_bytes": 45,
+        "resident_documents": 0,
+        "resident_text_bytes": 0,
+        "segments": 5,
+        "sequence": 20,
+        "source_bytes": 267900709
+      },
+      "text_bytes": 264842858,
+      "to": 10000
+    },
+    "memory": {
+      "engine": "fdb",
+      "mode": "ingest",
+      "from": 0,
+      "to": 10000,
+      "run": 0,
+      "exit_code": 0,
+      "low_disk_stop": false,
+      "phases": {
+        "runtime_baseline": {
+          "sampled_peak_private_bytes": 32968704,
+          "sampled_peak_working_set_bytes": 36028416,
+          "samples": 26
+        },
+        "startup": {
+          "sampled_peak_private_bytes": 643072,
+          "sampled_peak_working_set_bytes": 4018176,
+          "samples": 2
+        },
+        "maintenance": {
+          "sampled_peak_private_bytes": 73322496,
+          "sampled_peak_working_set_bytes": 73535488,
+          "samples": 103
+        },
+        "indexing": {
+          "sampled_peak_private_bytes": 82751488,
+          "sampled_peak_working_set_bytes": 86265856,
+          "samples": 327
+        }
+      },
+      "idle": null,
+      "os_peak_working_set_bytes": 87232512,
+      "samples": 458,
+      "sample_interval_ms": 20,
+      "phase_poll_ms": 100,
+      "elapsed_s": 16.3004312,
+      "cpu_ms": 13578.125,
+      "retained_disk_bytes": 349805698,
+      "files": [
+        {
+          "name": "generation-0000000000000015.fdb",
+          "bytes": 45
+        },
+        {
+          "name": "generation-000000000000001f.ready",
+          "bytes": 516
+        },
+        {
+          "name": "run-0000000000000016.fdb",
+          "bytes": 53746407
+        },
+        {
+          "name": "run-0000000000000016.idx",
+          "bytes": 16350784
+        },
+        {
+          "name": "run-0000000000000016.records04.idx",
+          "bytes": 89121
+        },
+        {
+          "name": "run-0000000000000018.fdb",
+          "bytes": 52970692
+        },
+        {
+          "name": "run-0000000000000018.idx",
+          "bytes": 16203819
+        },
+        {
+          "name": "run-0000000000000018.records04.idx",
+          "bytes": 89121
+        },
+        {
+          "name": "run-000000000000001a.fdb",
+          "bytes": 52914977
+        },
+        {
+          "name": "run-000000000000001a.idx",
+          "bytes": 16201874
+        },
+        {
+          "name": "run-000000000000001a.records04.idx",
+          "bytes": 89121
+        },
+        {
+          "name": "run-000000000000001c.fdb",
+          "bytes": 54087247
+        },
+        {
+          "name": "run-000000000000001c.idx",
+          "bytes": 16311854
+        },
+        {
+          "name": "run-000000000000001c.records04.idx",
+          "bytes": 89121
+        },
+        {
+          "name": "run-000000000000001e.fdb",
+          "bytes": 54181341
+        },
+        {
+          "name": "run-000000000000001e.idx",
+          "bytes": 16390537
+        },
+        {
+          "name": "run-000000000000001e.records04.idx",
+          "bytes": 89121
+        }
+      ],
+      "features": "normal bounded-engine;no diagnostics",
+      "cache": "OS cache, no eviction, no search warmup",
+      "includes_os_file_cache": false,
+      "input": "streamed CRC-checked JSON corpus, batch500; no books/oracle resident",
+      "executable": "C:\\Users\\Serkan\\Documents\\ChatGPT\\fdb\\output\\posting-merge-candidate-write-20261024.exe",
+      "database": "C:\\Users\\Serkan\\Documents\\ChatGPT\\fdb\\data\\benchmark-work\\fdb",
+      "os_lifetime_peaks": {
+        "peak_private_commit_bytes": 83738624,
+        "peak_working_set_bytes": 87232512,
+        "scope": "entire process lifetime, read after exit with retained handle; not phase-specific",
+        "private_counter": "PeakPagefileUsage: private committed bytes, not physical RAM",
+        "working_set_counter": "PeakWorkingSetSize: resident pages including shared image pages",
+        "sample_gaps": false
+      }
+    }
+  }
+]

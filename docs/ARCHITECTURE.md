@@ -1,5 +1,24 @@
 # FDB mimarisi — 0.3.1
 
+2026-10-24 merge posting cursor'u input başına bir kez kurulur;mevcut
+8KiB tampon merge ömrünce tekrar kullanılır. Her terimde posting,
+consumed/available/position ve previous/mapped_previous sıfırlanır;
+eski byte'lara yeni positional read olmadan erişilmez. Kaynak/indeks CRC,
+sıralı ID/map/bounds/duplicate kontrolleri ve çıktı codec'i aynı. Cursor
+Vec'i input sayısına bağlıdır;bu tüm merge/proses RAM sınırı değildir.
+Normal ilk10k/iki çift/API akışlı toplam-%3,01,owned-%2,54,ikisi2/2 düşük;
+ayrı bakım yalnız1/2 çiftte düşük ve önceki+%11,97 nedeni kanıtlanmadı.
+CPU akışlı-%1,75/1 çift düşük,owned-%3,19/2 çift düşük. OS private/WS
+medyanları akışlı+2/+244KiB,owned+136/+304KiB;genel RAM kapısı açık.
+Disk349.805.698B/API içi byte eşitliği ve sekiz full10k oracle geçti.
+Diagnostic span'ler tek ingest/drain sınırına göre wall sürelerini ayırır;
+iç içe/worker span'leri toplanamaz. Önceki fold/gram/posting kazanımları,
+kalıcı format/feature/dependency/WAL/protokol aynı;kesik/bozulma/kill
+kontrolleri geçti. Geniş38-case12 düşük/26 yüksek;yoğun100 örnekte
+QUİXOTE+%12,60/0 çift hızlı,the1+%5,68/1 çift hızlı p95 açık. Önceki
+farklı oturum artışları kapanmaz. Genel arama/CLI,RAM,bakım,açılış,disk ve eşzamanlı/
+soğuk işler açık. [Kanıt ve sınırlar](MAINTENANCE-WORKSPACE-10K-20261024.md).
+
 2026-10-24 RAM gram posting eklemesinde normal bounded yol sıralı başlık/
 gövde birleşimini64 referanslı parçalarla mevcut sözlükte tarar. Parça başına
 en fazla8×input sözlük girdisi ziyaret edilir;eksik ve cap sonrası anahtarlar

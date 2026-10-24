@@ -90,6 +90,8 @@ struct Job {
 
 #[cfg(feature = "experimental-write-maintenance-slots")]
 fn maintenance_workspace() -> Result<std::sync::MutexGuard<'static, ()>> {
+    #[cfg(feature = "diagnostic-timing")]
+    let _wait = crate::timing::span("maintenance.source_workspace_wait");
     // One source-frame staging workspace across foreground and merge workers.
     static WORKSPACE: std::sync::Mutex<()> = std::sync::Mutex::new(());
     WORKSPACE
@@ -99,6 +101,8 @@ fn maintenance_workspace() -> Result<std::sync::MutexGuard<'static, ()>> {
 
 #[cfg(feature = "experimental-write-maintenance-slots")]
 fn builder_workspace() -> Result<std::sync::MutexGuard<'static, ()>> {
+    #[cfg(feature = "diagnostic-timing")]
+    let _wait = crate::timing::span("maintenance.builder_workspace_wait");
     static WORKSPACE: std::sync::Mutex<()> = std::sync::Mutex::new(());
     WORKSPACE
         .lock()
@@ -2268,6 +2272,14 @@ impl Database {
             return Ok(false);
         };
         let inputs = self.runs[start..end].to_vec();
+        #[cfg(feature = "diagnostic-timing")]
+        {
+            crate::timing::count("merge.scheduled_jobs", 1);
+            crate::timing::count(
+                "merge.scheduled_input_records",
+                inputs.iter().map(|r| r.source.keys).sum(),
+            );
+        }
         let descriptors = inputs.iter().map(|r| r.source.clone()).collect();
         let dir = self.dir.clone();
         let id = self.allocate()?;
@@ -2277,6 +2289,8 @@ impl Database {
             let sequence = inputs.last().unwrap().source.sequence;
             #[cfg(feature = "experimental-merge-postings")]
             let maps = {
+                #[cfg(feature = "diagnostic-timing")]
+                let verify = crate::timing::span("merge.verify_sources_indexes");
                 for run in &inputs {
                     let mut file = File::open(run.source.path(&dir, "fdb"))?;
                     let actual = file.metadata()?.len();
@@ -2288,6 +2302,10 @@ impl Database {
                     }
                     run.index.verify_reuse()?;
                 }
+                #[cfg(feature = "diagnostic-timing")]
+                drop(verify);
+                #[cfg(feature = "diagnostic-timing")]
+                let _maps = crate::timing::span("merge.build_id_maps");
                 let mut maps: Vec<_> = inputs
                     .iter()
                     .map(|run| vec![u32::MAX; run.index.len()])
@@ -2347,10 +2365,14 @@ impl Database {
         Ok(true)
     }
     fn install(&mut self, job: Job) -> Result<bool> {
+        #[cfg(feature = "diagnostic-timing")]
+        let join = crate::timing::span("merge.join_wait");
         let run = job
             .handle
             .join()
             .map_err(|_| Error::Invalid("compaction worker panicked".into()))??;
+        #[cfg(feature = "diagnostic-timing")]
+        drop(join);
         let Some(start) = self
             .runs
             .windows(job.inputs.len())
