@@ -1,0 +1,153 @@
+{
+  "ordinary_worker_processes": 92,
+  "recovery_verification_processes": 4,
+  "latency_groups": 64,
+  "churn_rounds": 40,
+  "delta_matrices": 8,
+  "concurrent_runs": 8,
+  "cases_per_concurrent_run": 38,
+  "samples_per_concurrent_case": 10,
+  "all_quantiles_and_wait_ratios_recomputed": true,
+  "fdb_merge_completed_while_reader_loop_active": true,
+  "all_four_process_kill_windows_observed": true,
+  "recovered_full_payload_matrix_and_revision_oracles_passed": true,
+  "cache_repair_did_not_change_authoritative_sources": true,
+  "live_binary_sha_matches_design": true,
+  "protected_files_rehashed": [
+    {
+      "path": "data\\rkyv-corpus-20261009\\json.payload-bench",
+      "bytes": 2740862279,
+      "sha256": "11F826FCE3F4AE790FEB9FC6DF9B1169F52C2FD699E89FC4A8A4B77AAA41731B"
+    },
+    {
+      "path": "tests\\fixtures\\v1\\checkpoint.fdb",
+      "bytes": 1507,
+      "sha256": "E87667C0FABE64D5A1F59EF86B99F7E612DB755D239B41677DA2ADC24BE7BF57"
+    },
+    {
+      "path": "tests\\fixtures\\v1\\checkpoint.ready",
+      "bytes": 28,
+      "sha256": "BC82C18F8D5C3A209328BD59B12D828D8922BEC4D26CB4D557FD4A493A4A9C2F"
+    }
+  ],
+  "production_source_and_root_cargo_unchanged_from": "828d637",
+  "checks": [
+    {
+      "name": "process-kill",
+      "command": [
+        "C:\\Users\\Serkan\\.cache\\codex-runtimes\\codex-primary-runtime\\dependencies\\python\\python.exe",
+        "-X",
+        "utf8",
+        "tools/measure-churn-kill.py"
+      ],
+      "exit_code": 0,
+      "wall_s": 34.328000000008615,
+      "log": "churn-finalizer-20261025-process-kill.log"
+    },
+    {
+      "name": "summary",
+      "command": [
+        "C:\\Users\\Serkan\\.cache\\codex-runtimes\\codex-primary-runtime\\dependencies\\python\\python.exe",
+        "-X",
+        "utf8",
+        "tools/summarize-churn.py"
+      ],
+      "exit_code": 0,
+      "wall_s": 2.4070000000065193,
+      "log": "churn-finalizer-20261025-summary.log"
+    },
+    {
+      "name": "report",
+      "command": [
+        "C:\\Users\\Serkan\\.cache\\codex-runtimes\\codex-primary-runtime\\dependencies\\python\\python.exe",
+        "-X",
+        "utf8",
+        "tools/report-churn.py"
+      ],
+      "exit_code": 0,
+      "wall_s": 0.3120000000053551,
+      "log": "churn-finalizer-20261025-report.log"
+    },
+    {
+      "name": "root-fmt",
+      "command": [
+        "cargo",
+        "fmt",
+        "--check"
+      ],
+      "exit_code": 0,
+      "wall_s": 2.390999999974156,
+      "log": "churn-finalizer-20261025-root-fmt.log"
+    },
+    {
+      "name": "sqlite-fmt",
+      "command": [
+        "cargo",
+        "fmt",
+        "--manifest-path",
+        "tools/native_sqlite/Cargo.toml",
+        "--check"
+      ],
+      "exit_code": 0,
+      "wall_s": 0.28100000001722947,
+      "log": "churn-finalizer-20261025-sqlite-fmt.log"
+    },
+    {
+      "name": "root-clippy",
+      "command": [
+        "cargo",
+        "clippy",
+        "--all-targets",
+        "--",
+        "-D",
+        "warnings"
+      ],
+      "exit_code": 0,
+      "wall_s": 2.25,
+      "log": "churn-finalizer-20261025-root-clippy.log"
+    },
+    {
+      "name": "sqlite-clippy",
+      "command": [
+        "cargo",
+        "clippy",
+        "--manifest-path",
+        "tools/native_sqlite/Cargo.toml",
+        "--all-targets",
+        "--",
+        "-D",
+        "warnings"
+      ],
+      "exit_code": 0,
+      "wall_s": 1.8429999999934807,
+      "log": "churn-finalizer-20261025-sqlite-clippy.log"
+    },
+    {
+      "name": "fdb-harness-test",
+      "command": [
+        "cargo",
+        "test",
+        "--example",
+        "measure_churn"
+      ],
+      "exit_code": 0,
+      "wall_s": 3.23499999998603,
+      "log": "churn-finalizer-20261025-fdb-harness-test.log"
+    },
+    {
+      "name": "sqlite-harness-test",
+      "command": [
+        "cargo",
+        "test",
+        "--manifest-path",
+        "tools/native_sqlite/Cargo.toml",
+        "--bin",
+        "content_churn"
+      ],
+      "exit_code": 0,
+      "wall_s": 2.312999999994645,
+      "log": "churn-finalizer-20261025-sqlite-harness-test.log"
+    }
+  ],
+  "scope": "Saved normal-engine observations; no new benchmark, power-loss, cold-cache or native SQLite independent-connection claim"
+}

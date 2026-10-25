@@ -1,0 +1,1866 @@
+{
+  "files": [
+    {
+      "path": "docs/benchmarks/churn-10k-20261024-corpus-index.json",
+      "bytes": 837776,
+      "git_blob": "bf685ab72b0d4d832e27a93289b27fb8206cf326"
+    },
+    {
+      "path": "docs/benchmarks/churn-burst-search-20261025.csv",
+      "bytes": 22738,
+      "git_blob": "20b5c8029329bc7dc71ba0e9f7a58ff5221d3bd3"
+    },
+    {
+      "path": "docs/benchmarks/churn-concurrent-10k-20261024-all-design.json",
+      "bytes": 25085,
+      "git_blob": "1bf077b49b6fd169c5b9d1e1f9a42b293c9cad6e"
+    },
+    {
+      "path": "docs/benchmarks/churn-concurrent-10k-20261024-churn-r0-main-fdb-final-disk.json",
+      "bytes": 4617,
+      "git_blob": "a65be7820fa474de450c28f8c41921a0bac630ee"
+    },
+    {
+      "path": "docs/benchmarks/churn-concurrent-10k-20261024-churn-r0-main-fdb-state.json",
+      "bytes": 720253,
+      "git_blob": "6e9aaef523d3bfb6db86bfd04ab77cf3a0bc7219"
+    },
+    {
+      "path": "docs/benchmarks/churn-concurrent-10k-20261024-churn-r0-main-fdb-streamed-burst.jsonl",
+      "bytes": 13807,
+      "git_blob": "948a1e9a4b50b1ceee40d04ca60dbe8aae18753f"
+    },
+    {
+      "path": "docs/benchmarks/churn-concurrent-10k-20261024-churn-r0-main-fdb-streamed-burst.process.json",
+      "bytes": 199,
+      "git_blob": "53d59f2ecf77a1a849c04705ebd377e4f6562ff1"
+    },
+    {
+      "path": "docs/benchmarks/churn-concurrent-10k-20261024-churn-r0-main-fdb-streamed-burst.stderr",
+      "bytes": 0,
+      "git_blob": "e69de29bb2d1d6434b8b29ae775ad8c2e48c5391"
+    },
+    {
+      "path": "docs/benchmarks/churn-concurrent-10k-20261024-churn-r0-main-fdb-streamed-churn.jsonl",
+      "bytes": 1814511,
+      "git_blob": "dcdc0ee18e4d4dbeacbc2c401cee1d04c3d10a59"
+    },
+    {
+      "path": "docs/benchmarks/churn-concurrent-10k-20261024-churn-r0-main-fdb-streamed-churn.process.json",
+      "bytes": 198,
+      "git_blob": "e355eb688e05054f12341972c6527432c4460f74"
+    },
+    {
+      "path": "docs/benchmarks/churn-concurrent-10k-20261024-churn-r0-main-fdb-streamed-churn.stderr",
+      "bytes": 0,
+      "git_blob": "e69de29bb2d1d6434b8b29ae775ad8c2e48c5391"
+    },
+    {
+      "path": "docs/benchmarks/churn-concurrent-10k-20261024-churn-r0-main-fdb-streamed-dirty.jsonl",
+      "bytes": 4612,
+      "git_blob": "bd33c0b8e47e4dc965fc6d970f4c29e508df1819"
+    },
+    {
+      "path": "docs/benchmarks/churn-concurrent-10k-20261024-churn-r0-main-fdb-streamed-dirty.process.json",
+      "bytes": 199,
+      "git_blob": "a0069234692353bcb632e51b054a4c56b1b89062"
+    },
+    {
+      "path": "docs/benchmarks/churn-concurrent-10k-20261024-churn-r0-main-fdb-streamed-dirty.stderr",
+      "bytes": 0,
+      "git_blob": "e69de29bb2d1d6434b8b29ae775ad8c2e48c5391"
+    },
+    {
+      "path": "docs/benchmarks/churn-concurrent-10k-20261024-churn-r0-main-fdb-streamed-idle.jsonl",
+      "bytes": 2309,
+      "git_blob": "b1b6b3ceb0f8e9829f4cb93f555ee0fdf36f55a0"
+    },
+    {
+      "path": "docs/benchmarks/churn-concurrent-10k-20261024-churn-r0-main-fdb-streamed-idle.process.json",
+      "bytes": 182,
+      "git_blob": "f282528478bc8dcbe1504450c4d6f2945ded651a"
+    },
+    {
+      "path": "docs/benchmarks/churn-concurrent-10k-20261024-churn-r0-main-fdb-streamed-idle.stderr",
+      "bytes": 0,
+      "git_blob": "e69de29bb2d1d6434b8b29ae775ad8c2e48c5391"
+    },
+    {
+      "path": "docs/benchmarks/churn-concurrent-10k-20261024-churn-r0-main-fdb-streamed-open.jsonl",
+      "bytes": 4693,
+      "git_blob": "2a4656df918e36fed26f044cdd3df1ffc9a18b86"
+    },
+    {
+      "path": "docs/benchmarks/churn-concurrent-10k-20261024-churn-r0-main-fdb-streamed-open.process.json",
+      "bytes": 196,
+      "git_blob": "5438cb2300b59cf6a8b718e5e3c52e359cc2d224"
+    },
+    {
+      "path": "docs/benchmarks/churn-concurrent-10k-20261024-churn-r0-main-fdb-streamed-open.stderr",
+      "bytes": 0,
+      "git_blob": "e69de29bb2d1d6434b8b29ae775ad8c2e48c5391"
+    },
+    {
+      "path": "docs/benchmarks/churn-concurrent-10k-20261024-churn-r0-main-fdb-streamed-seed.jsonl",
+      "bytes": 1168,
+      "git_blob": "465786328cb2f6d6e0fb267cfee6448912d6fba7"
+    },
+    {
+      "path": "docs/benchmarks/churn-concurrent-10k-20261024-churn-r0-main-fdb-streamed-seed.process.json",
+      "bytes": 196,
+      "git_blob": "2fb086324427e1b776c4f2e6279c8a2bd8c01dfa"
+    },
+    {
+      "path": "docs/benchmarks/churn-concurrent-10k-20261024-churn-r0-main-fdb-streamed-seed.stderr",
+      "bytes": 0,
+      "git_blob": "e69de29bb2d1d6434b8b29ae775ad8c2e48c5391"
+    },
+    {
+      "path": "docs/benchmarks/churn-concurrent-10k-20261024-churn-r0-main-sqlite-final-disk.json",
+      "bytes": 64,
+      "git_blob": "9dfb39ba11f37b208519f3fa53ffdd0c89e8cb75"
+    },
+    {
+      "path": "docs/benchmarks/churn-concurrent-10k-20261024-churn-r0-main-sqlite-state.json",
+      "bytes": 720253,
+      "git_blob": "5dfb663e3ee2d5fdb2953e4250523d974b69e60d"
+    },
+    {
+      "path": "docs/benchmarks/churn-concurrent-10k-20261024-churn-r0-main-sqlite-streamed-burst.jsonl",
+      "bytes": 429064,
+      "git_blob": "ddd02e97867432026e49d9b5dadda05c13159f14"
+    },
+    {
+      "path": "docs/benchmarks/churn-concurrent-10k-20261024-churn-r0-main-sqlite-streamed-burst.process.json",
+      "bytes": 204,
+      "git_blob": "55f51491fdfdf7aadd519cdac4b0eb39e6ad074d"
+    },
+    {
+      "path": "docs/benchmarks/churn-concurrent-10k-20261024-churn-r0-main-sqlite-streamed-burst.stderr",
+      "bytes": 0,
+      "git_blob": "e69de29bb2d1d6434b8b29ae775ad8c2e48c5391"
+    },
+    {
+      "path": "docs/benchmarks/churn-concurrent-10k-20261024-churn-r0-main-sqlite-streamed-churn.jsonl",
+      "bytes": 1771111,
+      "git_blob": "f1dda06d218038defb9d7d9d17ac3ea97b8a728c"
+    },
+    {
+      "path": "docs/benchmarks/churn-concurrent-10k-20261024-churn-r0-main-sqlite-streamed-churn.process.json",
+      "bytes": 204,
+      "git_blob": "082c5e75aa412cc003049d0194f8207a3e05a27a"
+    },
+    {
+      "path": "docs/benchmarks/churn-concurrent-10k-20261024-churn-r0-main-sqlite-streamed-churn.stderr",
+      "bytes": 0,
+      "git_blob": "e69de29bb2d1d6434b8b29ae775ad8c2e48c5391"
+    },
+    {
+      "path": "docs/benchmarks/churn-concurrent-10k-20261024-churn-r0-main-sqlite-streamed-dirty.jsonl",
+      "bytes": 1288,
+      "git_blob": "1a908c2cf50555b7de522588cc48b9fd03b0781a"
+    },
+    {
+      "path": "docs/benchmarks/churn-concurrent-10k-20261024-churn-r0-main-sqlite-streamed-dirty.process.json",
+      "bytes": 205,
+      "git_blob": "1d4adb34d4c9b33e7c981d51665798090c7f3e2d"
+    },
+    {
+      "path": "docs/benchmarks/churn-concurrent-10k-20261024-churn-r0-main-sqlite-streamed-dirty.stderr",
+      "bytes": 0,
+      "git_blob": "e69de29bb2d1d6434b8b29ae775ad8c2e48c5391"
+    },
+    {
+      "path": "docs/benchmarks/churn-concurrent-10k-20261024-churn-r0-main-sqlite-streamed-idle.jsonl",
+      "bytes": 1340,
+      "git_blob": "d60752cc4f28b1e89f2c9ddb1d852dac6064fe72"
+    },
+    {
+      "path": "docs/benchmarks/churn-concurrent-10k-20261024-churn-r0-main-sqlite-streamed-idle.process.json",
+      "bytes": 201,
+      "git_blob": "e70604a3ae5ba8e08c7632a71be535a996dbab58"
+    },
+    {
+      "path": "docs/benchmarks/churn-concurrent-10k-20261024-churn-r0-main-sqlite-streamed-idle.stderr",
+      "bytes": 0,
+      "git_blob": "e69de29bb2d1d6434b8b29ae775ad8c2e48c5391"
+    },
+    {
+      "path": "docs/benchmarks/churn-concurrent-10k-20261024-churn-r0-main-sqlite-streamed-open.jsonl",
+      "bytes": 1335,
+      "git_blob": "8867b125382b6b50c5952e9c733dbd734e68658e"
+    },
+    {
+      "path": "docs/benchmarks/churn-concurrent-10k-20261024-churn-r0-main-sqlite-streamed-open.process.json",
+      "bytes": 202,
+      "git_blob": "ea35da51a8ab8a09c48747c824c22dcd11293225"
+    },
+    {
+      "path": "docs/benchmarks/churn-concurrent-10k-20261024-churn-r0-main-sqlite-streamed-open.stderr",
+      "bytes": 0,
+      "git_blob": "e69de29bb2d1d6434b8b29ae775ad8c2e48c5391"
+    },
+    {
+      "path": "docs/benchmarks/churn-concurrent-10k-20261024-churn-r0-main-sqlite-streamed-seed.jsonl",
+      "bytes": 1080,
+      "git_blob": "4cd54205633c843883d298995dc91993e1c8c8f8"
+    },
+    {
+      "path": "docs/benchmarks/churn-concurrent-10k-20261024-churn-r0-main-sqlite-streamed-seed.process.json",
+      "bytes": 203,
+      "git_blob": "6cf4fe37256b3bfed3e54b0114dc0c3e01f88ea5"
+    },
+    {
+      "path": "docs/benchmarks/churn-concurrent-10k-20261024-churn-r0-main-sqlite-streamed-seed.stderr",
+      "bytes": 0,
+      "git_blob": "e69de29bb2d1d6434b8b29ae775ad8c2e48c5391"
+    },
+    {
+      "path": "docs/benchmarks/churn-concurrent-10k-20261024-churn-r1-main-fdb-final-disk.json",
+      "bytes": 4617,
+      "git_blob": "a65be7820fa474de450c28f8c41921a0bac630ee"
+    },
+    {
+      "path": "docs/benchmarks/churn-concurrent-10k-20261024-churn-r1-main-fdb-state.json",
+      "bytes": 720253,
+      "git_blob": "6e9aaef523d3bfb6db86bfd04ab77cf3a0bc7219"
+    },
+    {
+      "path": "docs/benchmarks/churn-concurrent-10k-20261024-churn-r1-main-fdb-streamed-burst.jsonl",
+      "bytes": 14037,
+      "git_blob": "ec4e59747895d7e98bffdfac2086784c08186978"
+    },
+    {
+      "path": "docs/benchmarks/churn-concurrent-10k-20261024-churn-r1-main-fdb-streamed-burst.process.json",
+      "bytes": 199,
+      "git_blob": "0d36c52071ee07601018b9e63e1ba1de280c2f05"
+    },
+    {
+      "path": "docs/benchmarks/churn-concurrent-10k-20261024-churn-r1-main-fdb-streamed-burst.stderr",
+      "bytes": 0,
+      "git_blob": "e69de29bb2d1d6434b8b29ae775ad8c2e48c5391"
+    },
+    {
+      "path": "docs/benchmarks/churn-concurrent-10k-20261024-churn-r1-main-fdb-streamed-churn.jsonl",
+      "bytes": 1815361,
+      "git_blob": "e2ae7c6c20ea08adab522cc78f4e7aeefa8370b7"
+    },
+    {
+      "path": "docs/benchmarks/churn-concurrent-10k-20261024-churn-r1-main-fdb-streamed-churn.process.json",
+      "bytes": 198,
+      "git_blob": "37f970ad1c3662b141082bbd87befcc2274c70ca"
+    },
+    {
+      "path": "docs/benchmarks/churn-concurrent-10k-20261024-churn-r1-main-fdb-streamed-churn.stderr",
+      "bytes": 0,
+      "git_blob": "e69de29bb2d1d6434b8b29ae775ad8c2e48c5391"
+    },
+    {
+      "path": "docs/benchmarks/churn-concurrent-10k-20261024-churn-r1-main-fdb-streamed-dirty.jsonl",
+      "bytes": 4612,
+      "git_blob": "94f2ed722a453e13dff3e8f6cc1c5d113b0f8d04"
+    },
+    {
+      "path": "docs/benchmarks/churn-concurrent-10k-20261024-churn-r1-main-fdb-streamed-dirty.process.json",
+      "bytes": 198,
+      "git_blob": "21fa49ad9f912da8c249f77057fc65144f6f6367"
+    },
+    {
+      "path": "docs/benchmarks/churn-concurrent-10k-20261024-churn-r1-main-fdb-streamed-dirty.stderr",
+      "bytes": 0,
+      "git_blob": "e69de29bb2d1d6434b8b29ae775ad8c2e48c5391"
+    },
+    {
+      "path": "docs/benchmarks/churn-concurrent-10k-20261024-churn-r1-main-fdb-streamed-idle.jsonl",
+      "bytes": 2309,
+      "git_blob": "b6ccb18235924666746c7511dfb93e0acb1555ca"
+    },
+    {
+      "path": "docs/benchmarks/churn-concurrent-10k-20261024-churn-r1-main-fdb-streamed-idle.process.json",
+      "bytes": 196,
+      "git_blob": "16c7ab511a6bfe6896831da3edc90b5666fa2a28"
+    },
+    {
+      "path": "docs/benchmarks/churn-concurrent-10k-20261024-churn-r1-main-fdb-streamed-idle.stderr",
+      "bytes": 0,
+      "git_blob": "e69de29bb2d1d6434b8b29ae775ad8c2e48c5391"
+    },
+    {
+      "path": "docs/benchmarks/churn-concurrent-10k-20261024-churn-r1-main-fdb-streamed-open.jsonl",
+      "bytes": 4702,
+      "git_blob": "ebe404fb54b7b5296bfb3375aba80bc40fb5a5cc"
+    },
+    {
+      "path": "docs/benchmarks/churn-concurrent-10k-20261024-churn-r1-main-fdb-streamed-open.process.json",
+      "bytes": 196,
+      "git_blob": "b45b2c1c4118a5f6686c6a07b782da26e20f9e87"
+    },
+    {
+      "path": "docs/benchmarks/churn-concurrent-10k-20261024-churn-r1-main-fdb-streamed-open.stderr",
+      "bytes": 0,
+      "git_blob": "e69de29bb2d1d6434b8b29ae775ad8c2e48c5391"
+    },
+    {
+      "path": "docs/benchmarks/churn-concurrent-10k-20261024-churn-r1-main-fdb-streamed-seed.jsonl",
+      "bytes": 1169,
+      "git_blob": "fd65057ed9f02a452818dd6e3f4e7592dbfabb9e"
+    },
+    {
+      "path": "docs/benchmarks/churn-concurrent-10k-20261024-churn-r1-main-fdb-streamed-seed.process.json",
+      "bytes": 197,
+      "git_blob": "aac49129b6b679774f6e576537dab7ac8cba0d8d"
+    },
+    {
+      "path": "docs/benchmarks/churn-concurrent-10k-20261024-churn-r1-main-fdb-streamed-seed.stderr",
+      "bytes": 0,
+      "git_blob": "e69de29bb2d1d6434b8b29ae775ad8c2e48c5391"
+    },
+    {
+      "path": "docs/benchmarks/churn-concurrent-10k-20261024-churn-r1-main-sqlite-final-disk.json",
+      "bytes": 64,
+      "git_blob": "9dfb39ba11f37b208519f3fa53ffdd0c89e8cb75"
+    },
+    {
+      "path": "docs/benchmarks/churn-concurrent-10k-20261024-churn-r1-main-sqlite-state.json",
+      "bytes": 720253,
+      "git_blob": "5dfb663e3ee2d5fdb2953e4250523d974b69e60d"
+    },
+    {
+      "path": "docs/benchmarks/churn-concurrent-10k-20261024-churn-r1-main-sqlite-streamed-burst.jsonl",
+      "bytes": 429054,
+      "git_blob": "9ccce33d1aef954eb28dd032c10186e381eebb6c"
+    },
+    {
+      "path": "docs/benchmarks/churn-concurrent-10k-20261024-churn-r1-main-sqlite-streamed-burst.process.json",
+      "bytes": 193,
+      "git_blob": "ba534c24f449b58693373f012637c8d5150bbf86"
+    },
+    {
+      "path": "docs/benchmarks/churn-concurrent-10k-20261024-churn-r1-main-sqlite-streamed-burst.stderr",
+      "bytes": 0,
+      "git_blob": "e69de29bb2d1d6434b8b29ae775ad8c2e48c5391"
+    },
+    {
+      "path": "docs/benchmarks/churn-concurrent-10k-20261024-churn-r1-main-sqlite-streamed-churn.jsonl",
+      "bytes": 1768583,
+      "git_blob": "a461253649d67845d86ed5ccec049df01b2efd60"
+    },
+    {
+      "path": "docs/benchmarks/churn-concurrent-10k-20261024-churn-r1-main-sqlite-streamed-churn.process.json",
+      "bytes": 205,
+      "git_blob": "d7fd96a1f8aef339d99ab176b73379e576bc7488"
+    },
+    {
+      "path": "docs/benchmarks/churn-concurrent-10k-20261024-churn-r1-main-sqlite-streamed-churn.stderr",
+      "bytes": 0,
+      "git_blob": "e69de29bb2d1d6434b8b29ae775ad8c2e48c5391"
+    },
+    {
+      "path": "docs/benchmarks/churn-concurrent-10k-20261024-churn-r1-main-sqlite-streamed-dirty.jsonl",
+      "bytes": 1288,
+      "git_blob": "f4f86339fee962f6b494b06b2774756de6beee41"
+    },
+    {
+      "path": "docs/benchmarks/churn-concurrent-10k-20261024-churn-r1-main-sqlite-streamed-dirty.process.json",
+      "bytes": 204,
+      "git_blob": "5e56d9e492b7af964e1bc6ff5acc0a65fc0ae289"
+    },
+    {
+      "path": "docs/benchmarks/churn-concurrent-10k-20261024-churn-r1-main-sqlite-streamed-dirty.stderr",
+      "bytes": 0,
+      "git_blob": "e69de29bb2d1d6434b8b29ae775ad8c2e48c5391"
+    },
+    {
+      "path": "docs/benchmarks/churn-concurrent-10k-20261024-churn-r1-main-sqlite-streamed-idle.jsonl",
+      "bytes": 1340,
+      "git_blob": "378dcc3d1797d367052e92b7f3b2985c575c8f4f"
+    },
+    {
+      "path": "docs/benchmarks/churn-concurrent-10k-20261024-churn-r1-main-sqlite-streamed-idle.process.json",
+      "bytes": 202,
+      "git_blob": "9fb318bb2428f04d21bdaf5eb3c9f4de0f79f3b7"
+    },
+    {
+      "path": "docs/benchmarks/churn-concurrent-10k-20261024-churn-r1-main-sqlite-streamed-idle.stderr",
+      "bytes": 0,
+      "git_blob": "e69de29bb2d1d6434b8b29ae775ad8c2e48c5391"
+    },
+    {
+      "path": "docs/benchmarks/churn-concurrent-10k-20261024-churn-r1-main-sqlite-streamed-open.jsonl",
+      "bytes": 1334,
+      "git_blob": "d996467e543ef0eaeed0dc414341b00ffd0130bb"
+    },
+    {
+      "path": "docs/benchmarks/churn-concurrent-10k-20261024-churn-r1-main-sqlite-streamed-open.process.json",
+      "bytes": 202,
+      "git_blob": "a8b8e3c525b7833eee9804ffc59e83817ec246e0"
+    },
+    {
+      "path": "docs/benchmarks/churn-concurrent-10k-20261024-churn-r1-main-sqlite-streamed-open.stderr",
+      "bytes": 0,
+      "git_blob": "e69de29bb2d1d6434b8b29ae775ad8c2e48c5391"
+    },
+    {
+      "path": "docs/benchmarks/churn-concurrent-10k-20261024-churn-r1-main-sqlite-streamed-seed.jsonl",
+      "bytes": 1066,
+      "git_blob": "e26ad527c5d1d277f209d3ff7139393ed4fa89ca"
+    },
+    {
+      "path": "docs/benchmarks/churn-concurrent-10k-20261024-churn-r1-main-sqlite-streamed-seed.process.json",
+      "bytes": 189,
+      "git_blob": "11ccccff5545300da1b6f5785a24695b92807423"
+    },
+    {
+      "path": "docs/benchmarks/churn-concurrent-10k-20261024-churn-r1-main-sqlite-streamed-seed.stderr",
+      "bytes": 0,
+      "git_blob": "e69de29bb2d1d6434b8b29ae775ad8c2e48c5391"
+    },
+    {
+      "path": "docs/benchmarks/churn-concurrent-10k-20261024-concurrent-r0-100-fdb-final-disk.json",
+      "bytes": 4616,
+      "git_blob": "f20b7d5fb59b14966aa74ef05550a93d76eca8c9"
+    },
+    {
+      "path": "docs/benchmarks/churn-concurrent-10k-20261024-concurrent-r0-100-fdb-state.json",
+      "bytes": 477782,
+      "git_blob": "af48e2982202e0f007cc5706db51fde05c0d0e21"
+    },
+    {
+      "path": "docs/benchmarks/churn-concurrent-10k-20261024-concurrent-r0-100-fdb-streamed-concurrent-100.jsonl",
+      "bytes": 200623,
+      "git_blob": "64c43088b27e95dca116d9c6ebedc0f64ec8fcd6"
+    },
+    {
+      "path": "docs/benchmarks/churn-concurrent-10k-20261024-concurrent-r0-100-fdb-streamed-concurrent-100.process.json",
+      "bytes": 221,
+      "git_blob": "96a90136a3ac8c3cf82ae1681fd37746646f3c49"
+    },
+    {
+      "path": "docs/benchmarks/churn-concurrent-10k-20261024-concurrent-r0-100-fdb-streamed-concurrent-100.stderr",
+      "bytes": 0,
+      "git_blob": "e69de29bb2d1d6434b8b29ae775ad8c2e48c5391"
+    },
+    {
+      "path": "docs/benchmarks/churn-concurrent-10k-20261024-concurrent-r0-100-fdb-streamed-seed.jsonl",
+      "bytes": 1180,
+      "git_blob": "9306a1f8f5a1b37b31aeb80d41062852e149a7db"
+    },
+    {
+      "path": "docs/benchmarks/churn-concurrent-10k-20261024-concurrent-r0-100-fdb-streamed-seed.process.json",
+      "bytes": 201,
+      "git_blob": "10b84ac18c13fb501e44d325ee6ecbab9dae1194"
+    },
+    {
+      "path": "docs/benchmarks/churn-concurrent-10k-20261024-concurrent-r0-100-fdb-streamed-seed.stderr",
+      "bytes": 0,
+      "git_blob": "e69de29bb2d1d6434b8b29ae775ad8c2e48c5391"
+    },
+    {
+      "path": "docs/benchmarks/churn-concurrent-10k-20261024-concurrent-r0-100-fdb-streamed-verify.jsonl",
+      "bytes": 7407,
+      "git_blob": "29dd331bde78da50949987bb0831b37d8b7006a5"
+    },
+    {
+      "path": "docs/benchmarks/churn-concurrent-10k-20261024-concurrent-r0-100-fdb-streamed-verify.process.json",
+      "bytes": 190,
+      "git_blob": "36c9d613cfb6a55cbafada353d066d3c441303df"
+    },
+    {
+      "path": "docs/benchmarks/churn-concurrent-10k-20261024-concurrent-r0-100-fdb-streamed-verify.stderr",
+      "bytes": 0,
+      "git_blob": "e69de29bb2d1d6434b8b29ae775ad8c2e48c5391"
+    },
+    {
+      "path": "docs/benchmarks/churn-concurrent-10k-20261024-concurrent-r0-100-sqlite-final-disk.json",
+      "bytes": 64,
+      "git_blob": "30111f52f775d5b0ef750ae373a32c2f46e46bd1"
+    },
+    {
+      "path": "docs/benchmarks/churn-concurrent-10k-20261024-concurrent-r0-100-sqlite-state.json",
+      "bytes": 477782,
+      "git_blob": "af48e2982202e0f007cc5706db51fde05c0d0e21"
+    },
+    {
+      "path": "docs/benchmarks/churn-concurrent-10k-20261024-concurrent-r0-100-sqlite-streamed-concurrent-100.jsonl",
+      "bytes": 181986,
+      "git_blob": "f8d3251f2da88324ce78271d953f31fd261512ce"
+    },
+    {
+      "path": "docs/benchmarks/churn-concurrent-10k-20261024-concurrent-r0-100-sqlite-streamed-concurrent-100.process.json",
+      "bytes": 226,
+      "git_blob": "f6a09d24ba8ce4570167956f95c129cab1799ceb"
+    },
+    {
+      "path": "docs/benchmarks/churn-concurrent-10k-20261024-concurrent-r0-100-sqlite-streamed-concurrent-100.stderr",
+      "bytes": 0,
+      "git_blob": "e69de29bb2d1d6434b8b29ae775ad8c2e48c5391"
+    },
+    {
+      "path": "docs/benchmarks/churn-concurrent-10k-20261024-concurrent-r0-100-sqlite-streamed-seed.jsonl",
+      "bytes": 1065,
+      "git_blob": "1c50fe541586ed2d49d6294984e2a4ee58c1c304"
+    },
+    {
+      "path": "docs/benchmarks/churn-concurrent-10k-20261024-concurrent-r0-100-sqlite-streamed-seed.process.json",
+      "bytes": 206,
+      "git_blob": "d59ed373c3cd147c623a7411959ec7ebaf6e26a5"
+    },
+    {
+      "path": "docs/benchmarks/churn-concurrent-10k-20261024-concurrent-r0-100-sqlite-streamed-seed.stderr",
+      "bytes": 0,
+      "git_blob": "e69de29bb2d1d6434b8b29ae775ad8c2e48c5391"
+    },
+    {
+      "path": "docs/benchmarks/churn-concurrent-10k-20261024-concurrent-r0-100-sqlite-streamed-verify.jsonl",
+      "bytes": 7415,
+      "git_blob": "2b2d455172d651cfbdbd881cbff3d5c8d7cc2960"
+    },
+    {
+      "path": "docs/benchmarks/churn-concurrent-10k-20261024-concurrent-r0-100-sqlite-streamed-verify.process.json",
+      "bytes": 210,
+      "git_blob": "ebd8b5fc519b94fac7901f3501142c52a7cd362a"
+    },
+    {
+      "path": "docs/benchmarks/churn-concurrent-10k-20261024-concurrent-r0-100-sqlite-streamed-verify.stderr",
+      "bytes": 0,
+      "git_blob": "e69de29bb2d1d6434b8b29ae775ad8c2e48c5391"
+    },
+    {
+      "path": "docs/benchmarks/churn-concurrent-10k-20261024-concurrent-r0-one-fdb-final-disk.json",
+      "bytes": 1596,
+      "git_blob": "926cb8de63f0178cf66b7a9328f0cdc878fd994e"
+    },
+    {
+      "path": "docs/benchmarks/churn-concurrent-10k-20261024-concurrent-r0-one-fdb-state.json",
+      "bytes": 463805,
+      "git_blob": "e16228d994795715c5909021de0332442cb6c518"
+    },
+    {
+      "path": "docs/benchmarks/churn-concurrent-10k-20261024-concurrent-r0-one-fdb-streamed-concurrent-one.jsonl",
+      "bytes": 276135,
+      "git_blob": "f0edd2da9bee22cdfb81bf4749e483a71fb06129"
+    },
+    {
+      "path": "docs/benchmarks/churn-concurrent-10k-20261024-concurrent-r0-one-fdb-streamed-concurrent-one.process.json",
+      "bytes": 220,
+      "git_blob": "c1ead614503cfc50d95617ec1b596c9d2dbbd9b9"
+    },
+    {
+      "path": "docs/benchmarks/churn-concurrent-10k-20261024-concurrent-r0-one-fdb-streamed-concurrent-one.stderr",
+      "bytes": 0,
+      "git_blob": "e69de29bb2d1d6434b8b29ae775ad8c2e48c5391"
+    },
+    {
+      "path": "docs/benchmarks/churn-concurrent-10k-20261024-concurrent-r0-one-fdb-streamed-seed.jsonl",
+      "bytes": 1180,
+      "git_blob": "2a8312db8d81b5a348edbfeaa8f81af6626ad4d1"
+    },
+    {
+      "path": "docs/benchmarks/churn-concurrent-10k-20261024-concurrent-r0-one-fdb-streamed-seed.process.json",
+      "bytes": 201,
+      "git_blob": "9ea6418a161e6a0d3a0b29cc7b975dd37168dc75"
+    },
+    {
+      "path": "docs/benchmarks/churn-concurrent-10k-20261024-concurrent-r0-one-fdb-streamed-seed.stderr",
+      "bytes": 0,
+      "git_blob": "e69de29bb2d1d6434b8b29ae775ad8c2e48c5391"
+    },
+    {
+      "path": "docs/benchmarks/churn-concurrent-10k-20261024-concurrent-r0-one-fdb-streamed-verify.jsonl",
+      "bytes": 7049,
+      "git_blob": "fbd90dbf3e76edd138a3e7dc46641d1696397ad7"
+    },
+    {
+      "path": "docs/benchmarks/churn-concurrent-10k-20261024-concurrent-r0-one-fdb-streamed-verify.process.json",
+      "bytes": 205,
+      "git_blob": "950325b57224c5b828d1131a0461a0ac6e3ebf7b"
+    },
+    {
+      "path": "docs/benchmarks/churn-concurrent-10k-20261024-concurrent-r0-one-fdb-streamed-verify.stderr",
+      "bytes": 0,
+      "git_blob": "e69de29bb2d1d6434b8b29ae775ad8c2e48c5391"
+    },
+    {
+      "path": "docs/benchmarks/churn-concurrent-10k-20261024-concurrent-r0-one-sqlite-final-disk.json",
+      "bytes": 64,
+      "git_blob": "6170e71ef5ca4c8227e0831b0ec30c4a09cf9e52"
+    },
+    {
+      "path": "docs/benchmarks/churn-concurrent-10k-20261024-concurrent-r0-one-sqlite-state.json",
+      "bytes": 463843,
+      "git_blob": "6016577ec01552271bb64b16ea39276040c3cd7c"
+    },
+    {
+      "path": "docs/benchmarks/churn-concurrent-10k-20261024-concurrent-r0-one-sqlite-streamed-concurrent-one.jsonl",
+      "bytes": 256146,
+      "git_blob": "0c476c849039f37b7a2994c7421d172021362f42"
+    },
+    {
+      "path": "docs/benchmarks/churn-concurrent-10k-20261024-concurrent-r0-one-sqlite-streamed-concurrent-one.process.json",
+      "bytes": 227,
+      "git_blob": "ee6c60b1a367532ab17bf9a33dc42b49750678d4"
+    },
+    {
+      "path": "docs/benchmarks/churn-concurrent-10k-20261024-concurrent-r0-one-sqlite-streamed-concurrent-one.stderr",
+      "bytes": 0,
+      "git_blob": "e69de29bb2d1d6434b8b29ae775ad8c2e48c5391"
+    },
+    {
+      "path": "docs/benchmarks/churn-concurrent-10k-20261024-concurrent-r0-one-sqlite-streamed-seed.jsonl",
+      "bytes": 1066,
+      "git_blob": "4bbbd7b4c9b32c886f8dc7ae51400ca2d25fc9c4"
+    },
+    {
+      "path": "docs/benchmarks/churn-concurrent-10k-20261024-concurrent-r0-one-sqlite-streamed-seed.process.json",
+      "bytes": 206,
+      "git_blob": "abd84f9df65360e1dd389dae95853ac63b98283d"
+    },
+    {
+      "path": "docs/benchmarks/churn-concurrent-10k-20261024-concurrent-r0-one-sqlite-streamed-seed.stderr",
+      "bytes": 0,
+      "git_blob": "e69de29bb2d1d6434b8b29ae775ad8c2e48c5391"
+    },
+    {
+      "path": "docs/benchmarks/churn-concurrent-10k-20261024-concurrent-r0-one-sqlite-streamed-verify.jsonl",
+      "bytes": 7333,
+      "git_blob": "fe899c6c000424b534e5e7d21d33e69adb8d91a1"
+    },
+    {
+      "path": "docs/benchmarks/churn-concurrent-10k-20261024-concurrent-r0-one-sqlite-streamed-verify.process.json",
+      "bytes": 211,
+      "git_blob": "75f28074ec7cfebd71659b0ed94ae1bf8ddca346"
+    },
+    {
+      "path": "docs/benchmarks/churn-concurrent-10k-20261024-concurrent-r0-one-sqlite-streamed-verify.stderr",
+      "bytes": 0,
+      "git_blob": "e69de29bb2d1d6434b8b29ae775ad8c2e48c5391"
+    },
+    {
+      "path": "docs/benchmarks/churn-concurrent-10k-20261024-concurrent-r1-100-fdb-final-disk.json",
+      "bytes": 4616,
+      "git_blob": "f20b7d5fb59b14966aa74ef05550a93d76eca8c9"
+    },
+    {
+      "path": "docs/benchmarks/churn-concurrent-10k-20261024-concurrent-r1-100-fdb-state.json",
+      "bytes": 477782,
+      "git_blob": "af48e2982202e0f007cc5706db51fde05c0d0e21"
+    },
+    {
+      "path": "docs/benchmarks/churn-concurrent-10k-20261024-concurrent-r1-100-fdb-streamed-concurrent-100.jsonl",
+      "bytes": 201101,
+      "git_blob": "0c59564083cd5d9e7ccfd55945a88b9b1bddce46"
+    },
+    {
+      "path": "docs/benchmarks/churn-concurrent-10k-20261024-concurrent-r1-100-fdb-streamed-concurrent-100.process.json",
+      "bytes": 221,
+      "git_blob": "3f1ac74dee557499ded0bb89ae43d5f1a14a7bc4"
+    },
+    {
+      "path": "docs/benchmarks/churn-concurrent-10k-20261024-concurrent-r1-100-fdb-streamed-concurrent-100.stderr",
+      "bytes": 0,
+      "git_blob": "e69de29bb2d1d6434b8b29ae775ad8c2e48c5391"
+    },
+    {
+      "path": "docs/benchmarks/churn-concurrent-10k-20261024-concurrent-r1-100-fdb-streamed-seed.jsonl",
+      "bytes": 1179,
+      "git_blob": "18e9a57628ecfebd6cb7234abe59ba0dc068a5b7"
+    },
+    {
+      "path": "docs/benchmarks/churn-concurrent-10k-20261024-concurrent-r1-100-fdb-streamed-seed.process.json",
+      "bytes": 200,
+      "git_blob": "d9bcd78c7dc872eca74c42ee029ea9b5fd038ce7"
+    },
+    {
+      "path": "docs/benchmarks/churn-concurrent-10k-20261024-concurrent-r1-100-fdb-streamed-seed.stderr",
+      "bytes": 0,
+      "git_blob": "e69de29bb2d1d6434b8b29ae775ad8c2e48c5391"
+    },
+    {
+      "path": "docs/benchmarks/churn-concurrent-10k-20261024-concurrent-r1-100-fdb-streamed-verify.jsonl",
+      "bytes": 7371,
+      "git_blob": "530f16b8f592f65db029a2c657c1fc74d2ea3bb8"
+    },
+    {
+      "path": "docs/benchmarks/churn-concurrent-10k-20261024-concurrent-r1-100-fdb-streamed-verify.process.json",
+      "bytes": 204,
+      "git_blob": "24c746546da0cf3675313e51e3f817885e49a6a3"
+    },
+    {
+      "path": "docs/benchmarks/churn-concurrent-10k-20261024-concurrent-r1-100-fdb-streamed-verify.stderr",
+      "bytes": 0,
+      "git_blob": "e69de29bb2d1d6434b8b29ae775ad8c2e48c5391"
+    },
+    {
+      "path": "docs/benchmarks/churn-concurrent-10k-20261024-concurrent-r1-100-sqlite-final-disk.json",
+      "bytes": 64,
+      "git_blob": "30111f52f775d5b0ef750ae373a32c2f46e46bd1"
+    },
+    {
+      "path": "docs/benchmarks/churn-concurrent-10k-20261024-concurrent-r1-100-sqlite-state.json",
+      "bytes": 477782,
+      "git_blob": "af48e2982202e0f007cc5706db51fde05c0d0e21"
+    },
+    {
+      "path": "docs/benchmarks/churn-concurrent-10k-20261024-concurrent-r1-100-sqlite-streamed-concurrent-100.jsonl",
+      "bytes": 181330,
+      "git_blob": "ccfd52bd3c627096e91aa34ee6d2dfec566e3cbc"
+    },
+    {
+      "path": "docs/benchmarks/churn-concurrent-10k-20261024-concurrent-r1-100-sqlite-streamed-concurrent-100.process.json",
+      "bytes": 215,
+      "git_blob": "3fc1ec86383c3ed74060e177409b60284821fb3c"
+    },
+    {
+      "path": "docs/benchmarks/churn-concurrent-10k-20261024-concurrent-r1-100-sqlite-streamed-concurrent-100.stderr",
+      "bytes": 0,
+      "git_blob": "e69de29bb2d1d6434b8b29ae775ad8c2e48c5391"
+    },
+    {
+      "path": "docs/benchmarks/churn-concurrent-10k-20261024-concurrent-r1-100-sqlite-streamed-seed.jsonl",
+      "bytes": 1080,
+      "git_blob": "22ff0e68ac641bf8a4d7220e672505aa77943e53"
+    },
+    {
+      "path": "docs/benchmarks/churn-concurrent-10k-20261024-concurrent-r1-100-sqlite-streamed-seed.process.json",
+      "bytes": 207,
+      "git_blob": "5d5782d217d61c393f7939a5b0d7288586f6e866"
+    },
+    {
+      "path": "docs/benchmarks/churn-concurrent-10k-20261024-concurrent-r1-100-sqlite-streamed-seed.stderr",
+      "bytes": 0,
+      "git_blob": "e69de29bb2d1d6434b8b29ae775ad8c2e48c5391"
+    },
+    {
+      "path": "docs/benchmarks/churn-concurrent-10k-20261024-concurrent-r1-100-sqlite-streamed-verify.jsonl",
+      "bytes": 7395,
+      "git_blob": "2d47c8cd6cb9deadfa6343ab50b708d1d4b70d2f"
+    },
+    {
+      "path": "docs/benchmarks/churn-concurrent-10k-20261024-concurrent-r1-100-sqlite-streamed-verify.process.json",
+      "bytes": 211,
+      "git_blob": "1abd5ed7995dce834c4ddfe3fcf018a044ea3e26"
+    },
+    {
+      "path": "docs/benchmarks/churn-concurrent-10k-20261024-concurrent-r1-100-sqlite-streamed-verify.stderr",
+      "bytes": 0,
+      "git_blob": "e69de29bb2d1d6434b8b29ae775ad8c2e48c5391"
+    },
+    {
+      "path": "docs/benchmarks/churn-concurrent-10k-20261024-concurrent-r1-one-fdb-final-disk.json",
+      "bytes": 1820,
+      "git_blob": "48390b133fc6941e977a546fcf972815b532dae3"
+    },
+    {
+      "path": "docs/benchmarks/churn-concurrent-10k-20261024-concurrent-r1-one-fdb-state.json",
+      "bytes": 463797,
+      "git_blob": "f9fb094a489908e1d8f358880e46ad8daef52fbc"
+    },
+    {
+      "path": "docs/benchmarks/churn-concurrent-10k-20261024-concurrent-r1-one-fdb-streamed-concurrent-one.jsonl",
+      "bytes": 273960,
+      "git_blob": "f7165701a7d429288b5f10bad43279ec74f22567"
+    },
+    {
+      "path": "docs/benchmarks/churn-concurrent-10k-20261024-concurrent-r1-one-fdb-streamed-concurrent-one.process.json",
+      "bytes": 220,
+      "git_blob": "9d9f7df23f91f373db9ab1342578391d8ba7f9da"
+    },
+    {
+      "path": "docs/benchmarks/churn-concurrent-10k-20261024-concurrent-r1-one-fdb-streamed-concurrent-one.stderr",
+      "bytes": 0,
+      "git_blob": "e69de29bb2d1d6434b8b29ae775ad8c2e48c5391"
+    },
+    {
+      "path": "docs/benchmarks/churn-concurrent-10k-20261024-concurrent-r1-one-fdb-streamed-seed.jsonl",
+      "bytes": 1169,
+      "git_blob": "54fec913762357bf979cf14e731b560bbb553351"
+    },
+    {
+      "path": "docs/benchmarks/churn-concurrent-10k-20261024-concurrent-r1-one-fdb-streamed-seed.process.json",
+      "bytes": 201,
+      "git_blob": "645f11b7d0883805bf4117f6e91f0617d99464fe"
+    },
+    {
+      "path": "docs/benchmarks/churn-concurrent-10k-20261024-concurrent-r1-one-fdb-streamed-seed.stderr",
+      "bytes": 0,
+      "git_blob": "e69de29bb2d1d6434b8b29ae775ad8c2e48c5391"
+    },
+    {
+      "path": "docs/benchmarks/churn-concurrent-10k-20261024-concurrent-r1-one-fdb-streamed-verify.jsonl",
+      "bytes": 7339,
+      "git_blob": "9c3db59adc8b944e2c63aeb1023d7e2833f0eae0"
+    },
+    {
+      "path": "docs/benchmarks/churn-concurrent-10k-20261024-concurrent-r1-one-fdb-streamed-verify.process.json",
+      "bytes": 191,
+      "git_blob": "0099420095d6e31c7a5ba20fc7bbf2372eae4370"
+    },
+    {
+      "path": "docs/benchmarks/churn-concurrent-10k-20261024-concurrent-r1-one-fdb-streamed-verify.stderr",
+      "bytes": 0,
+      "git_blob": "e69de29bb2d1d6434b8b29ae775ad8c2e48c5391"
+    },
+    {
+      "path": "docs/benchmarks/churn-concurrent-10k-20261024-concurrent-r1-one-sqlite-final-disk.json",
+      "bytes": 64,
+      "git_blob": "76fb7e31ce311714b19e7f422a817a855cda0fad"
+    },
+    {
+      "path": "docs/benchmarks/churn-concurrent-10k-20261024-concurrent-r1-one-sqlite-state.json",
+      "bytes": 463846,
+      "git_blob": "12bd06483da95d160306afc425d9259ba39d4694"
+    },
+    {
+      "path": "docs/benchmarks/churn-concurrent-10k-20261024-concurrent-r1-one-sqlite-streamed-concurrent-one.jsonl",
+      "bytes": 258304,
+      "git_blob": "98a41f73c692818157dd892adc55b6555a145fe7"
+    },
+    {
+      "path": "docs/benchmarks/churn-concurrent-10k-20261024-concurrent-r1-one-sqlite-streamed-concurrent-one.process.json",
+      "bytes": 227,
+      "git_blob": "561bea4a32dd99bba2ac08bdbef574e525afed44"
+    },
+    {
+      "path": "docs/benchmarks/churn-concurrent-10k-20261024-concurrent-r1-one-sqlite-streamed-concurrent-one.stderr",
+      "bytes": 0,
+      "git_blob": "e69de29bb2d1d6434b8b29ae775ad8c2e48c5391"
+    },
+    {
+      "path": "docs/benchmarks/churn-concurrent-10k-20261024-concurrent-r1-one-sqlite-streamed-seed.jsonl",
+      "bytes": 1080,
+      "git_blob": "c5d2dcffd825bdb1ae92ea8137737a81770e28ee"
+    },
+    {
+      "path": "docs/benchmarks/churn-concurrent-10k-20261024-concurrent-r1-one-sqlite-streamed-seed.process.json",
+      "bytes": 206,
+      "git_blob": "89361d7367962ee59e1935575ee9ece88546b48d"
+    },
+    {
+      "path": "docs/benchmarks/churn-concurrent-10k-20261024-concurrent-r1-one-sqlite-streamed-seed.stderr",
+      "bytes": 0,
+      "git_blob": "e69de29bb2d1d6434b8b29ae775ad8c2e48c5391"
+    },
+    {
+      "path": "docs/benchmarks/churn-concurrent-10k-20261024-concurrent-r1-one-sqlite-streamed-verify.jsonl",
+      "bytes": 7485,
+      "git_blob": "bafabf52fc513c87150308590493f2365ce9fb74"
+    },
+    {
+      "path": "docs/benchmarks/churn-concurrent-10k-20261024-concurrent-r1-one-sqlite-streamed-verify.process.json",
+      "bytes": 199,
+      "git_blob": "0ea6cf9a727d7069ca843cb8fed751c6218ec6ee"
+    },
+    {
+      "path": "docs/benchmarks/churn-concurrent-10k-20261024-concurrent-r1-one-sqlite-streamed-verify.stderr",
+      "bytes": 0,
+      "git_blob": "e69de29bb2d1d6434b8b29ae775ad8c2e48c5391"
+    },
+    {
+      "path": "docs/benchmarks/churn-concurrent-10k-20261024-kill-cache-fdb-owned-verify.jsonl",
+      "bytes": 7547,
+      "git_blob": "f7f10a071aae8bfa2ea0bf687d7b483dcc905988"
+    },
+    {
+      "path": "docs/benchmarks/churn-concurrent-10k-20261024-kill-cache-fdb-owned-verify.process.json",
+      "bytes": 177,
+      "git_blob": "5f32484d31cf420e50f6026a62113a7efe0969bb"
+    },
+    {
+      "path": "docs/benchmarks/churn-concurrent-10k-20261024-kill-cache-fdb-owned-verify.stderr",
+      "bytes": 0,
+      "git_blob": "e69de29bb2d1d6434b8b29ae775ad8c2e48c5391"
+    },
+    {
+      "path": "docs/benchmarks/churn-concurrent-10k-20261024-kill-flush-fdb-owned-verify.jsonl",
+      "bytes": 7210,
+      "git_blob": "2a4e5745c4509ccab1ea7485f66ad634ce7dd4f5"
+    },
+    {
+      "path": "docs/benchmarks/churn-concurrent-10k-20261024-kill-flush-fdb-owned-verify.process.json",
+      "bytes": 190,
+      "git_blob": "8d6ad6b86b61872dd18f1f6adf98c924fceedb1d"
+    },
+    {
+      "path": "docs/benchmarks/churn-concurrent-10k-20261024-kill-flush-fdb-owned-verify.stderr",
+      "bytes": 0,
+      "git_blob": "e69de29bb2d1d6434b8b29ae775ad8c2e48c5391"
+    },
+    {
+      "path": "docs/benchmarks/churn-concurrent-10k-20261024-kill-iterator-fdb-owned-verify.jsonl",
+      "bytes": 7372,
+      "git_blob": "7ec2b584ee88986836039a24f36ceb4bfef83f77"
+    },
+    {
+      "path": "docs/benchmarks/churn-concurrent-10k-20261024-kill-iterator-fdb-owned-verify.process.json",
+      "bytes": 193,
+      "git_blob": "4723f0b7235a3290610dea716f4a09c4c6df5999"
+    },
+    {
+      "path": "docs/benchmarks/churn-concurrent-10k-20261024-kill-iterator-fdb-owned-verify.stderr",
+      "bytes": 0,
+      "git_blob": "e69de29bb2d1d6434b8b29ae775ad8c2e48c5391"
+    },
+    {
+      "path": "docs/benchmarks/churn-concurrent-10k-20261024-kill-merge-fdb-owned-verify.jsonl",
+      "bytes": 7192,
+      "git_blob": "378704734aef3eecd87041b784d498f6f77cb0ab"
+    },
+    {
+      "path": "docs/benchmarks/churn-concurrent-10k-20261024-kill-merge-fdb-owned-verify.process.json",
+      "bytes": 177,
+      "git_blob": "6d1762595172de958cbe6fd59b712a8bb9a580d2"
+    },
+    {
+      "path": "docs/benchmarks/churn-concurrent-10k-20261024-kill-merge-fdb-owned-verify.stderr",
+      "bytes": 0,
+      "git_blob": "e69de29bb2d1d6434b8b29ae775ad8c2e48c5391"
+    },
+    {
+      "path": "docs/benchmarks/churn-concurrent-10k-20261024-latency-r0-main-fdb-final-disk.json",
+      "bytes": 2060,
+      "git_blob": "90551aa229b019bea78aaa1cbea537bfbd9c4250"
+    },
+    {
+      "path": "docs/benchmarks/churn-concurrent-10k-20261024-latency-r0-main-fdb-state.json",
+      "bytes": 698152,
+      "git_blob": "db630079d3ed9683d84592448e9ee0276a73fd16"
+    },
+    {
+      "path": "docs/benchmarks/churn-concurrent-10k-20261024-latency-r0-main-fdb-streamed-delta.jsonl",
+      "bytes": 26244,
+      "git_blob": "6ed9756a66a954549f0dc6a0cbae0c710d682323"
+    },
+    {
+      "path": "docs/benchmarks/churn-concurrent-10k-20261024-latency-r0-main-fdb-streamed-delta.process.json",
+      "bytes": 201,
+      "git_blob": "eedda9a44da8d97f47d78b5971fa7775f55e995c"
+    },
+    {
+      "path": "docs/benchmarks/churn-concurrent-10k-20261024-latency-r0-main-fdb-streamed-delta.stderr",
+      "bytes": 0,
+      "git_blob": "e69de29bb2d1d6434b8b29ae775ad8c2e48c5391"
+    },
+    {
+      "path": "docs/benchmarks/churn-concurrent-10k-20261024-latency-r0-main-fdb-streamed-idle.jsonl",
+      "bytes": 2309,
+      "git_blob": "f339f3a9e3f5624c4183c5cf4f168f36d0fe27ed"
+    },
+    {
+      "path": "docs/benchmarks/churn-concurrent-10k-20261024-latency-r0-main-fdb-streamed-idle.process.json",
+      "bytes": 198,
+      "git_blob": "59140ab77548a20ec14b675b894391956532119e"
+    },
+    {
+      "path": "docs/benchmarks/churn-concurrent-10k-20261024-latency-r0-main-fdb-streamed-idle.stderr",
+      "bytes": 0,
+      "git_blob": "e69de29bb2d1d6434b8b29ae775ad8c2e48c5391"
+    },
+    {
+      "path": "docs/benchmarks/churn-concurrent-10k-20261024-latency-r0-main-fdb-streamed-latency.jsonl",
+      "bytes": 1350899,
+      "git_blob": "701041d10f4d0acc5e2919bfcb052fb53903d694"
+    },
+    {
+      "path": "docs/benchmarks/churn-concurrent-10k-20261024-latency-r0-main-fdb-streamed-latency.process.json",
+      "bytes": 204,
+      "git_blob": "bfa2bd1c8399e30192dc945665230fd252d7f1fd"
+    },
+    {
+      "path": "docs/benchmarks/churn-concurrent-10k-20261024-latency-r0-main-fdb-streamed-latency.stderr",
+      "bytes": 0,
+      "git_blob": "e69de29bb2d1d6434b8b29ae775ad8c2e48c5391"
+    },
+    {
+      "path": "docs/benchmarks/churn-concurrent-10k-20261024-latency-r0-main-fdb-streamed-seed.jsonl",
+      "bytes": 1180,
+      "git_blob": "fd8d949b1525dd7d437abe9f4216eb08c509053d"
+    },
+    {
+      "path": "docs/benchmarks/churn-concurrent-10k-20261024-latency-r0-main-fdb-streamed-seed.process.json",
+      "bytes": 186,
+      "git_blob": "628d6fe03c594727833112fe1898d768424cac4a"
+    },
+    {
+      "path": "docs/benchmarks/churn-concurrent-10k-20261024-latency-r0-main-fdb-streamed-seed.stderr",
+      "bytes": 0,
+      "git_blob": "e69de29bb2d1d6434b8b29ae775ad8c2e48c5391"
+    },
+    {
+      "path": "docs/benchmarks/churn-concurrent-10k-20261024-latency-r0-main-sqlite-final-disk.json",
+      "bytes": 64,
+      "git_blob": "edb43046405bb2e946cc2c95253f36f2ac6d34fa"
+    },
+    {
+      "path": "docs/benchmarks/churn-concurrent-10k-20261024-latency-r0-main-sqlite-state.json",
+      "bytes": 698152,
+      "git_blob": "db630079d3ed9683d84592448e9ee0276a73fd16"
+    },
+    {
+      "path": "docs/benchmarks/churn-concurrent-10k-20261024-latency-r0-main-sqlite-streamed-delta.jsonl",
+      "bytes": 26275,
+      "git_blob": "f4475cae0df6cb4990bce816f34ac1f950fb3d39"
+    },
+    {
+      "path": "docs/benchmarks/churn-concurrent-10k-20261024-latency-r0-main-sqlite-streamed-delta.process.json",
+      "bytes": 207,
+      "git_blob": "e38479af4b5983c2e1d47ea1012bea799b935079"
+    },
+    {
+      "path": "docs/benchmarks/churn-concurrent-10k-20261024-latency-r0-main-sqlite-streamed-delta.stderr",
+      "bytes": 0,
+      "git_blob": "e69de29bb2d1d6434b8b29ae775ad8c2e48c5391"
+    },
+    {
+      "path": "docs/benchmarks/churn-concurrent-10k-20261024-latency-r0-main-sqlite-streamed-idle.jsonl",
+      "bytes": 1340,
+      "git_blob": "8021177bab823224e1345ebd14f0a460ae90fb99"
+    },
+    {
+      "path": "docs/benchmarks/churn-concurrent-10k-20261024-latency-r0-main-sqlite-streamed-idle.process.json",
+      "bytes": 204,
+      "git_blob": "0529ec3c94bfd24e19ef3854cf606e83137e1d8b"
+    },
+    {
+      "path": "docs/benchmarks/churn-concurrent-10k-20261024-latency-r0-main-sqlite-streamed-idle.stderr",
+      "bytes": 0,
+      "git_blob": "e69de29bb2d1d6434b8b29ae775ad8c2e48c5391"
+    },
+    {
+      "path": "docs/benchmarks/churn-concurrent-10k-20261024-latency-r0-main-sqlite-streamed-latency.jsonl",
+      "bytes": 1359831,
+      "git_blob": "e78f8ddb3831fb348e8c42d7210735990cd0992b"
+    },
+    {
+      "path": "docs/benchmarks/churn-concurrent-10k-20261024-latency-r0-main-sqlite-streamed-latency.process.json",
+      "bytes": 210,
+      "git_blob": "033c96e695ae0bb26cc4ed2920ac1374fc28c153"
+    },
+    {
+      "path": "docs/benchmarks/churn-concurrent-10k-20261024-latency-r0-main-sqlite-streamed-latency.stderr",
+      "bytes": 0,
+      "git_blob": "e69de29bb2d1d6434b8b29ae775ad8c2e48c5391"
+    },
+    {
+      "path": "docs/benchmarks/churn-concurrent-10k-20261024-latency-r0-main-sqlite-streamed-seed.jsonl",
+      "bytes": 1066,
+      "git_blob": "a0c267a298ef1b27bfd327894f26b46f0242de3e"
+    },
+    {
+      "path": "docs/benchmarks/churn-concurrent-10k-20261024-latency-r0-main-sqlite-streamed-seed.process.json",
+      "bytes": 193,
+      "git_blob": "604522836f7e2d9247d1a5d9ae0e77c281d606c8"
+    },
+    {
+      "path": "docs/benchmarks/churn-concurrent-10k-20261024-latency-r0-main-sqlite-streamed-seed.stderr",
+      "bytes": 0,
+      "git_blob": "e69de29bb2d1d6434b8b29ae775ad8c2e48c5391"
+    },
+    {
+      "path": "docs/benchmarks/churn-concurrent-10k-20261024-latency-r1-main-fdb-final-disk.json",
+      "bytes": 2060,
+      "git_blob": "90551aa229b019bea78aaa1cbea537bfbd9c4250"
+    },
+    {
+      "path": "docs/benchmarks/churn-concurrent-10k-20261024-latency-r1-main-fdb-state.json",
+      "bytes": 698152,
+      "git_blob": "db630079d3ed9683d84592448e9ee0276a73fd16"
+    },
+    {
+      "path": "docs/benchmarks/churn-concurrent-10k-20261024-latency-r1-main-fdb-streamed-delta.jsonl",
+      "bytes": 26099,
+      "git_blob": "8041c9d0a4ebbf74bba664a051d85b8fdc57c9de"
+    },
+    {
+      "path": "docs/benchmarks/churn-concurrent-10k-20261024-latency-r1-main-fdb-streamed-delta.process.json",
+      "bytes": 201,
+      "git_blob": "0f2721a6b25f3b324ec52070da33c3525a6aaadd"
+    },
+    {
+      "path": "docs/benchmarks/churn-concurrent-10k-20261024-latency-r1-main-fdb-streamed-delta.stderr",
+      "bytes": 0,
+      "git_blob": "e69de29bb2d1d6434b8b29ae775ad8c2e48c5391"
+    },
+    {
+      "path": "docs/benchmarks/churn-concurrent-10k-20261024-latency-r1-main-fdb-streamed-idle.jsonl",
+      "bytes": 2309,
+      "git_blob": "2503114192260a5d54576b1a77304b199ab92c3b"
+    },
+    {
+      "path": "docs/benchmarks/churn-concurrent-10k-20261024-latency-r1-main-fdb-streamed-idle.process.json",
+      "bytes": 199,
+      "git_blob": "c2971f264463add099fa0e684bcc9117796efcc2"
+    },
+    {
+      "path": "docs/benchmarks/churn-concurrent-10k-20261024-latency-r1-main-fdb-streamed-idle.stderr",
+      "bytes": 0,
+      "git_blob": "e69de29bb2d1d6434b8b29ae775ad8c2e48c5391"
+    },
+    {
+      "path": "docs/benchmarks/churn-concurrent-10k-20261024-latency-r1-main-fdb-streamed-latency.jsonl",
+      "bytes": 1354500,
+      "git_blob": "aa55cc0b836999240badced74a95993afc772d7c"
+    },
+    {
+      "path": "docs/benchmarks/churn-concurrent-10k-20261024-latency-r1-main-fdb-streamed-latency.process.json",
+      "bytes": 204,
+      "git_blob": "d135955975667f2279800b72bdc8cfe2a66df10a"
+    },
+    {
+      "path": "docs/benchmarks/churn-concurrent-10k-20261024-latency-r1-main-fdb-streamed-latency.stderr",
+      "bytes": 0,
+      "git_blob": "e69de29bb2d1d6434b8b29ae775ad8c2e48c5391"
+    },
+    {
+      "path": "docs/benchmarks/churn-concurrent-10k-20261024-latency-r1-main-fdb-streamed-seed.jsonl",
+      "bytes": 1168,
+      "git_blob": "a53728ea12fcf06d9026b6edd9184317d645da48"
+    },
+    {
+      "path": "docs/benchmarks/churn-concurrent-10k-20261024-latency-r1-main-fdb-streamed-seed.process.json",
+      "bytes": 199,
+      "git_blob": "2186a782972ac0ab95b4a56ed0f8cb721d0068e9"
+    },
+    {
+      "path": "docs/benchmarks/churn-concurrent-10k-20261024-latency-r1-main-fdb-streamed-seed.stderr",
+      "bytes": 0,
+      "git_blob": "e69de29bb2d1d6434b8b29ae775ad8c2e48c5391"
+    },
+    {
+      "path": "docs/benchmarks/churn-concurrent-10k-20261024-latency-r1-main-sqlite-final-disk.json",
+      "bytes": 64,
+      "git_blob": "edb43046405bb2e946cc2c95253f36f2ac6d34fa"
+    },
+    {
+      "path": "docs/benchmarks/churn-concurrent-10k-20261024-latency-r1-main-sqlite-state.json",
+      "bytes": 698152,
+      "git_blob": "db630079d3ed9683d84592448e9ee0276a73fd16"
+    },
+    {
+      "path": "docs/benchmarks/churn-concurrent-10k-20261024-latency-r1-main-sqlite-streamed-delta.jsonl",
+      "bytes": 26273,
+      "git_blob": "b7594153f39ea215d56095017478aada55ad7073"
+    },
+    {
+      "path": "docs/benchmarks/churn-concurrent-10k-20261024-latency-r1-main-sqlite-streamed-delta.process.json",
+      "bytes": 207,
+      "git_blob": "a406ed51dc1a03cbe848a321a096b194e5fe85c9"
+    },
+    {
+      "path": "docs/benchmarks/churn-concurrent-10k-20261024-latency-r1-main-sqlite-streamed-delta.stderr",
+      "bytes": 0,
+      "git_blob": "e69de29bb2d1d6434b8b29ae775ad8c2e48c5391"
+    },
+    {
+      "path": "docs/benchmarks/churn-concurrent-10k-20261024-latency-r1-main-sqlite-streamed-idle.jsonl",
+      "bytes": 1328,
+      "git_blob": "70f98c62447a27d81cdc0a660e95836292ce5190"
+    },
+    {
+      "path": "docs/benchmarks/churn-concurrent-10k-20261024-latency-r1-main-sqlite-streamed-idle.process.json",
+      "bytes": 205,
+      "git_blob": "87a5dbca41e17e503f02ec2d96e83a9a27c64317"
+    },
+    {
+      "path": "docs/benchmarks/churn-concurrent-10k-20261024-latency-r1-main-sqlite-streamed-idle.stderr",
+      "bytes": 0,
+      "git_blob": "e69de29bb2d1d6434b8b29ae775ad8c2e48c5391"
+    },
+    {
+      "path": "docs/benchmarks/churn-concurrent-10k-20261024-latency-r1-main-sqlite-streamed-latency.jsonl",
+      "bytes": 1363587,
+      "git_blob": "8bf08abe8a4ad2de7796f024dcdd564a52bd2919"
+    },
+    {
+      "path": "docs/benchmarks/churn-concurrent-10k-20261024-latency-r1-main-sqlite-streamed-latency.process.json",
+      "bytes": 210,
+      "git_blob": "0cf7484772471f483d57840a8ff3a7f6f782e968"
+    },
+    {
+      "path": "docs/benchmarks/churn-concurrent-10k-20261024-latency-r1-main-sqlite-streamed-latency.stderr",
+      "bytes": 0,
+      "git_blob": "e69de29bb2d1d6434b8b29ae775ad8c2e48c5391"
+    },
+    {
+      "path": "docs/benchmarks/churn-concurrent-10k-20261024-latency-r1-main-sqlite-streamed-seed.jsonl",
+      "bytes": 1077,
+      "git_blob": "161b7e896ed69ad66232e752af91d26c58666abd"
+    },
+    {
+      "path": "docs/benchmarks/churn-concurrent-10k-20261024-latency-r1-main-sqlite-streamed-seed.process.json",
+      "bytes": 205,
+      "git_blob": "ee2a268e7a6e9cd2c12c9d04d72d6bf8897f997a"
+    },
+    {
+      "path": "docs/benchmarks/churn-concurrent-10k-20261024-latency-r1-main-sqlite-streamed-seed.stderr",
+      "bytes": 0,
+      "git_blob": "e69de29bb2d1d6434b8b29ae775ad8c2e48c5391"
+    },
+    {
+      "path": "docs/benchmarks/churn-concurrent-10k-20261024-owned-r0-main-fdb-final-disk.json",
+      "bytes": 3455,
+      "git_blob": "c38b024ac39df81e0daad0ef91612f2dae9b05b7"
+    },
+    {
+      "path": "docs/benchmarks/churn-concurrent-10k-20261024-owned-r0-main-fdb-owned-burst.jsonl",
+      "bytes": 12860,
+      "git_blob": "7081472a39df1021b2a631189546a65009d5ff77"
+    },
+    {
+      "path": "docs/benchmarks/churn-concurrent-10k-20261024-owned-r0-main-fdb-owned-burst.process.json",
+      "bytes": 193,
+      "git_blob": "79a822039d770d19d97008f921608042bb790ddd"
+    },
+    {
+      "path": "docs/benchmarks/churn-concurrent-10k-20261024-owned-r0-main-fdb-owned-burst.stderr",
+      "bytes": 0,
+      "git_blob": "e69de29bb2d1d6434b8b29ae775ad8c2e48c5391"
+    },
+    {
+      "path": "docs/benchmarks/churn-concurrent-10k-20261024-owned-r0-main-fdb-owned-delta.jsonl",
+      "bytes": 25867,
+      "git_blob": "68cc1db51cad0afaa8a737891d10c6a4b18a7c9d"
+    },
+    {
+      "path": "docs/benchmarks/churn-concurrent-10k-20261024-owned-r0-main-fdb-owned-delta.process.json",
+      "bytes": 193,
+      "git_blob": "41bc54c6b8d5727da8e886957cd2ccf09c7b30fc"
+    },
+    {
+      "path": "docs/benchmarks/churn-concurrent-10k-20261024-owned-r0-main-fdb-owned-delta.stderr",
+      "bytes": 0,
+      "git_blob": "e69de29bb2d1d6434b8b29ae775ad8c2e48c5391"
+    },
+    {
+      "path": "docs/benchmarks/churn-concurrent-10k-20261024-owned-r0-main-fdb-owned-dirty.jsonl",
+      "bytes": 3787,
+      "git_blob": "1197990bdd9a804567a87e063cc738ef04df8709"
+    },
+    {
+      "path": "docs/benchmarks/churn-concurrent-10k-20261024-owned-r0-main-fdb-owned-dirty.process.json",
+      "bytes": 193,
+      "git_blob": "134de8e5e38fc43ba8f54cecdc76eba3f452918e"
+    },
+    {
+      "path": "docs/benchmarks/churn-concurrent-10k-20261024-owned-r0-main-fdb-owned-dirty.stderr",
+      "bytes": 0,
+      "git_blob": "e69de29bb2d1d6434b8b29ae775ad8c2e48c5391"
+    },
+    {
+      "path": "docs/benchmarks/churn-concurrent-10k-20261024-owned-r0-main-fdb-owned-idle.jsonl",
+      "bytes": 2316,
+      "git_blob": "394ae905695ce07862838a1f4af15af55e43318b"
+    },
+    {
+      "path": "docs/benchmarks/churn-concurrent-10k-20261024-owned-r0-main-fdb-owned-idle.process.json",
+      "bytes": 189,
+      "git_blob": "4d578aeaac3e2c93ba867be769aadaf359ea34df"
+    },
+    {
+      "path": "docs/benchmarks/churn-concurrent-10k-20261024-owned-r0-main-fdb-owned-idle.stderr",
+      "bytes": 0,
+      "git_blob": "e69de29bb2d1d6434b8b29ae775ad8c2e48c5391"
+    },
+    {
+      "path": "docs/benchmarks/churn-concurrent-10k-20261024-owned-r0-main-fdb-owned-latency.jsonl",
+      "bytes": 1363012,
+      "git_blob": "c09cc4af6ed66ddf3fd448b86e9e029c4e8b445c"
+    },
+    {
+      "path": "docs/benchmarks/churn-concurrent-10k-20261024-owned-r0-main-fdb-owned-latency.process.json",
+      "bytes": 196,
+      "git_blob": "cea4ac54f6ea498269125f56aea26f4d462ec8ac"
+    },
+    {
+      "path": "docs/benchmarks/churn-concurrent-10k-20261024-owned-r0-main-fdb-owned-latency.stderr",
+      "bytes": 0,
+      "git_blob": "e69de29bb2d1d6434b8b29ae775ad8c2e48c5391"
+    },
+    {
+      "path": "docs/benchmarks/churn-concurrent-10k-20261024-owned-r0-main-fdb-owned-open.jsonl",
+      "bytes": 3859,
+      "git_blob": "5cf37d06ba2e8d1bb29a04bfdf6a2d57046a43f0"
+    },
+    {
+      "path": "docs/benchmarks/churn-concurrent-10k-20261024-owned-r0-main-fdb-owned-open.process.json",
+      "bytes": 190,
+      "git_blob": "c99161490763dc588057e661f72f2fc2d387a6cb"
+    },
+    {
+      "path": "docs/benchmarks/churn-concurrent-10k-20261024-owned-r0-main-fdb-owned-open.stderr",
+      "bytes": 0,
+      "git_blob": "e69de29bb2d1d6434b8b29ae775ad8c2e48c5391"
+    },
+    {
+      "path": "docs/benchmarks/churn-concurrent-10k-20261024-owned-r0-main-fdb-state.json",
+      "bytes": 710379,
+      "git_blob": "6207374349f24544e37eaa58f542232dc6d25030"
+    },
+    {
+      "path": "docs/benchmarks/churn-concurrent-10k-20261024-owned-r0-main-fdb-streamed-seed.jsonl",
+      "bytes": 1168,
+      "git_blob": "d6b4f436bfa14a8a2ad58c0047d434188244cf15"
+    },
+    {
+      "path": "docs/benchmarks/churn-concurrent-10k-20261024-owned-r0-main-fdb-streamed-seed.process.json",
+      "bytes": 197,
+      "git_blob": "127960676eed9bb3615cc3df25a689c9bda301e7"
+    },
+    {
+      "path": "docs/benchmarks/churn-concurrent-10k-20261024-owned-r0-main-fdb-streamed-seed.stderr",
+      "bytes": 0,
+      "git_blob": "e69de29bb2d1d6434b8b29ae775ad8c2e48c5391"
+    },
+    {
+      "path": "docs/benchmarks/churn-concurrent-10k-20261024-owned-r0-main-sqlite-final-disk.json",
+      "bytes": 64,
+      "git_blob": "edb43046405bb2e946cc2c95253f36f2ac6d34fa"
+    },
+    {
+      "path": "docs/benchmarks/churn-concurrent-10k-20261024-owned-r0-main-sqlite-owned-burst.jsonl",
+      "bytes": 429509,
+      "git_blob": "1dd312b11fcac2de518d7425b88e029d001a4584"
+    },
+    {
+      "path": "docs/benchmarks/churn-concurrent-10k-20261024-owned-r0-main-sqlite-owned-burst.process.json",
+      "bytes": 198,
+      "git_blob": "d39a8ba2330ca48a1b627917d9fcdd4c253ca6ae"
+    },
+    {
+      "path": "docs/benchmarks/churn-concurrent-10k-20261024-owned-r0-main-sqlite-owned-burst.stderr",
+      "bytes": 0,
+      "git_blob": "e69de29bb2d1d6434b8b29ae775ad8c2e48c5391"
+    },
+    {
+      "path": "docs/benchmarks/churn-concurrent-10k-20261024-owned-r0-main-sqlite-owned-delta.jsonl",
+      "bytes": 26370,
+      "git_blob": "40a0a167979c548dfa8c6ecc130da94a4f3ffe5e"
+    },
+    {
+      "path": "docs/benchmarks/churn-concurrent-10k-20261024-owned-r0-main-sqlite-owned-delta.process.json",
+      "bytes": 199,
+      "git_blob": "bd74b3625b1bfd23ddbcfe0b516dca2aee521a11"
+    },
+    {
+      "path": "docs/benchmarks/churn-concurrent-10k-20261024-owned-r0-main-sqlite-owned-delta.stderr",
+      "bytes": 0,
+      "git_blob": "e69de29bb2d1d6434b8b29ae775ad8c2e48c5391"
+    },
+    {
+      "path": "docs/benchmarks/churn-concurrent-10k-20261024-owned-r0-main-sqlite-owned-dirty.jsonl",
+      "bytes": 1299,
+      "git_blob": "e5c0e936b62a213675ee862d64e0faa0e298939e"
+    },
+    {
+      "path": "docs/benchmarks/churn-concurrent-10k-20261024-owned-r0-main-sqlite-owned-dirty.process.json",
+      "bytes": 186,
+      "git_blob": "f7d00b6bc80b8c31314274693c596facd7701dd5"
+    },
+    {
+      "path": "docs/benchmarks/churn-concurrent-10k-20261024-owned-r0-main-sqlite-owned-dirty.stderr",
+      "bytes": 0,
+      "git_blob": "e69de29bb2d1d6434b8b29ae775ad8c2e48c5391"
+    },
+    {
+      "path": "docs/benchmarks/churn-concurrent-10k-20261024-owned-r0-main-sqlite-owned-idle.jsonl",
+      "bytes": 1340,
+      "git_blob": "caec239814400341ed63548b46cb94760589c342"
+    },
+    {
+      "path": "docs/benchmarks/churn-concurrent-10k-20261024-owned-r0-main-sqlite-owned-idle.process.json",
+      "bytes": 183,
+      "git_blob": "1c16e0567fb09ae34c79489fe7c5e7265f7140bc"
+    },
+    {
+      "path": "docs/benchmarks/churn-concurrent-10k-20261024-owned-r0-main-sqlite-owned-idle.stderr",
+      "bytes": 0,
+      "git_blob": "e69de29bb2d1d6434b8b29ae775ad8c2e48c5391"
+    },
+    {
+      "path": "docs/benchmarks/churn-concurrent-10k-20261024-owned-r0-main-sqlite-owned-latency.jsonl",
+      "bytes": 1363557,
+      "git_blob": "b0cc2e345584f83eec6d598061849bf60e56923c"
+    },
+    {
+      "path": "docs/benchmarks/churn-concurrent-10k-20261024-owned-r0-main-sqlite-owned-latency.process.json",
+      "bytes": 190,
+      "git_blob": "d3cce9f57e50b186e9790f53f8872844849e2088"
+    },
+    {
+      "path": "docs/benchmarks/churn-concurrent-10k-20261024-owned-r0-main-sqlite-owned-latency.stderr",
+      "bytes": 0,
+      "git_blob": "e69de29bb2d1d6434b8b29ae775ad8c2e48c5391"
+    },
+    {
+      "path": "docs/benchmarks/churn-concurrent-10k-20261024-owned-r0-main-sqlite-owned-open.jsonl",
+      "bytes": 1335,
+      "git_blob": "985c55250106755217f2c3750de4977e382989e0"
+    },
+    {
+      "path": "docs/benchmarks/churn-concurrent-10k-20261024-owned-r0-main-sqlite-owned-open.process.json",
+      "bytes": 196,
+      "git_blob": "b6ed711c6cdc994108638d49ae4623b1a0981c08"
+    },
+    {
+      "path": "docs/benchmarks/churn-concurrent-10k-20261024-owned-r0-main-sqlite-owned-open.stderr",
+      "bytes": 0,
+      "git_blob": "e69de29bb2d1d6434b8b29ae775ad8c2e48c5391"
+    },
+    {
+      "path": "docs/benchmarks/churn-concurrent-10k-20261024-owned-r0-main-sqlite-state.json",
+      "bytes": 710379,
+      "git_blob": "a7b8d95d56b65d4252aa51e84fde68c1122af730"
+    },
+    {
+      "path": "docs/benchmarks/churn-concurrent-10k-20261024-owned-r0-main-sqlite-streamed-seed.jsonl",
+      "bytes": 1077,
+      "git_blob": "399413f04cd3186555e55bbed2b2f4990192342f"
+    },
+    {
+      "path": "docs/benchmarks/churn-concurrent-10k-20261024-owned-r0-main-sqlite-streamed-seed.process.json",
+      "bytes": 203,
+      "git_blob": "f748dc2444ed2d0b6a90862de02096802f741ef3"
+    },
+    {
+      "path": "docs/benchmarks/churn-concurrent-10k-20261024-owned-r0-main-sqlite-streamed-seed.stderr",
+      "bytes": 0,
+      "git_blob": "e69de29bb2d1d6434b8b29ae775ad8c2e48c5391"
+    },
+    {
+      "path": "docs/benchmarks/churn-concurrent-10k-20261024-owned-r1-main-fdb-final-disk.json",
+      "bytes": 3455,
+      "git_blob": "c38b024ac39df81e0daad0ef91612f2dae9b05b7"
+    },
+    {
+      "path": "docs/benchmarks/churn-concurrent-10k-20261024-owned-r1-main-fdb-owned-burst.jsonl",
+      "bytes": 12822,
+      "git_blob": "d5196a2fe263ffa898ebc32d32ae627f9ad5ec2a"
+    },
+    {
+      "path": "docs/benchmarks/churn-concurrent-10k-20261024-owned-r1-main-fdb-owned-burst.process.json",
+      "bytes": 193,
+      "git_blob": "f6a04f828b2f68392ae13eef9229471b44406e9c"
+    },
+    {
+      "path": "docs/benchmarks/churn-concurrent-10k-20261024-owned-r1-main-fdb-owned-burst.stderr",
+      "bytes": 0,
+      "git_blob": "e69de29bb2d1d6434b8b29ae775ad8c2e48c5391"
+    },
+    {
+      "path": "docs/benchmarks/churn-concurrent-10k-20261024-owned-r1-main-fdb-owned-delta.jsonl",
+      "bytes": 26022,
+      "git_blob": "becd7b066269a6f730179625ddb5c7da87b431b4"
+    },
+    {
+      "path": "docs/benchmarks/churn-concurrent-10k-20261024-owned-r1-main-fdb-owned-delta.process.json",
+      "bytes": 193,
+      "git_blob": "76c375585a44eb345accd0de60fc4967036af77e"
+    },
+    {
+      "path": "docs/benchmarks/churn-concurrent-10k-20261024-owned-r1-main-fdb-owned-delta.stderr",
+      "bytes": 0,
+      "git_blob": "e69de29bb2d1d6434b8b29ae775ad8c2e48c5391"
+    },
+    {
+      "path": "docs/benchmarks/churn-concurrent-10k-20261024-owned-r1-main-fdb-owned-dirty.jsonl",
+      "bytes": 3777,
+      "git_blob": "830a8e98b49cd910c915a1c9680ea870ba5cf46f"
+    },
+    {
+      "path": "docs/benchmarks/churn-concurrent-10k-20261024-owned-r1-main-fdb-owned-dirty.process.json",
+      "bytes": 193,
+      "git_blob": "61dc3ce31b045ffd72949c0205a85a050d27337c"
+    },
+    {
+      "path": "docs/benchmarks/churn-concurrent-10k-20261024-owned-r1-main-fdb-owned-dirty.stderr",
+      "bytes": 0,
+      "git_blob": "e69de29bb2d1d6434b8b29ae775ad8c2e48c5391"
+    },
+    {
+      "path": "docs/benchmarks/churn-concurrent-10k-20261024-owned-r1-main-fdb-owned-idle.jsonl",
+      "bytes": 2305,
+      "git_blob": "36c462b422624e27d4a567726a8ff4bb25cbddba"
+    },
+    {
+      "path": "docs/benchmarks/churn-concurrent-10k-20261024-owned-r1-main-fdb-owned-idle.process.json",
+      "bytes": 190,
+      "git_blob": "2bc9f1e9bc8f8477fbdd8d7994d84bc0b1d39b89"
+    },
+    {
+      "path": "docs/benchmarks/churn-concurrent-10k-20261024-owned-r1-main-fdb-owned-idle.stderr",
+      "bytes": 0,
+      "git_blob": "e69de29bb2d1d6434b8b29ae775ad8c2e48c5391"
+    },
+    {
+      "path": "docs/benchmarks/churn-concurrent-10k-20261024-owned-r1-main-fdb-owned-latency.jsonl",
+      "bytes": 1363520,
+      "git_blob": "af63fdbc66de2530cd6d457aa629075c80be80c2"
+    },
+    {
+      "path": "docs/benchmarks/churn-concurrent-10k-20261024-owned-r1-main-fdb-owned-latency.process.json",
+      "bytes": 196,
+      "git_blob": "f06c42995122f11660927c038312a9994e626302"
+    },
+    {
+      "path": "docs/benchmarks/churn-concurrent-10k-20261024-owned-r1-main-fdb-owned-latency.stderr",
+      "bytes": 0,
+      "git_blob": "e69de29bb2d1d6434b8b29ae775ad8c2e48c5391"
+    },
+    {
+      "path": "docs/benchmarks/churn-concurrent-10k-20261024-owned-r1-main-fdb-owned-open.jsonl",
+      "bytes": 3859,
+      "git_blob": "2685ac902fae431222c57208754256aac52a2011"
+    },
+    {
+      "path": "docs/benchmarks/churn-concurrent-10k-20261024-owned-r1-main-fdb-owned-open.process.json",
+      "bytes": 190,
+      "git_blob": "59bbe90958d4106c72e87194e91ef4601da37958"
+    },
+    {
+      "path": "docs/benchmarks/churn-concurrent-10k-20261024-owned-r1-main-fdb-owned-open.stderr",
+      "bytes": 0,
+      "git_blob": "e69de29bb2d1d6434b8b29ae775ad8c2e48c5391"
+    },
+    {
+      "path": "docs/benchmarks/churn-concurrent-10k-20261024-owned-r1-main-fdb-state.json",
+      "bytes": 712824,
+      "git_blob": "e1585916ba8e6fe69fac32a81a7a97f83dd44e4a"
+    },
+    {
+      "path": "docs/benchmarks/churn-concurrent-10k-20261024-owned-r1-main-fdb-state.json.pending",
+      "bytes": 10273,
+      "git_blob": "00358d20f3abcd365f802171c1a00fc591e224a0"
+    },
+    {
+      "path": "docs/benchmarks/churn-concurrent-10k-20261024-owned-r1-main-fdb-streamed-seed.jsonl",
+      "bytes": 1168,
+      "git_blob": "950cb531a8a0a8fb300a4f697dce510e338f31a7"
+    },
+    {
+      "path": "docs/benchmarks/churn-concurrent-10k-20261024-owned-r1-main-fdb-streamed-seed.process.json",
+      "bytes": 196,
+      "git_blob": "7197c6619b4f97f956e30be1bff0f321a67174be"
+    },
+    {
+      "path": "docs/benchmarks/churn-concurrent-10k-20261024-owned-r1-main-fdb-streamed-seed.stderr",
+      "bytes": 0,
+      "git_blob": "e69de29bb2d1d6434b8b29ae775ad8c2e48c5391"
+    },
+    {
+      "path": "docs/benchmarks/churn-concurrent-10k-20261024-owned-r1-main-sqlite-final-disk.json",
+      "bytes": 64,
+      "git_blob": "edb43046405bb2e946cc2c95253f36f2ac6d34fa"
+    },
+    {
+      "path": "docs/benchmarks/churn-concurrent-10k-20261024-owned-r1-main-sqlite-owned-burst.jsonl",
+      "bytes": 428570,
+      "git_blob": "a824574fb11f6d5bd89f5460f32b28fa69c47ca6"
+    },
+    {
+      "path": "docs/benchmarks/churn-concurrent-10k-20261024-owned-r1-main-sqlite-owned-burst.process.json",
+      "bytes": 198,
+      "git_blob": "7e6afcc363179cf99f96252a1f32b48f7d15b0fa"
+    },
+    {
+      "path": "docs/benchmarks/churn-concurrent-10k-20261024-owned-r1-main-sqlite-owned-burst.stderr",
+      "bytes": 0,
+      "git_blob": "e69de29bb2d1d6434b8b29ae775ad8c2e48c5391"
+    },
+    {
+      "path": "docs/benchmarks/churn-concurrent-10k-20261024-owned-r1-main-sqlite-owned-delta.jsonl",
+      "bytes": 26400,
+      "git_blob": "962312c002a064b32b4eeb5ac57739e0665bdcdf"
+    },
+    {
+      "path": "docs/benchmarks/churn-concurrent-10k-20261024-owned-r1-main-sqlite-owned-delta.process.json",
+      "bytes": 199,
+      "git_blob": "58e5624505f6da5002ae2ad608ed6d5c9d44c8ec"
+    },
+    {
+      "path": "docs/benchmarks/churn-concurrent-10k-20261024-owned-r1-main-sqlite-owned-delta.stderr",
+      "bytes": 0,
+      "git_blob": "e69de29bb2d1d6434b8b29ae775ad8c2e48c5391"
+    },
+    {
+      "path": "docs/benchmarks/churn-concurrent-10k-20261024-owned-r1-main-sqlite-owned-dirty.jsonl",
+      "bytes": 1287,
+      "git_blob": "9df5aad2b00329114e3c9d14c2c2a56736316188"
+    },
+    {
+      "path": "docs/benchmarks/churn-concurrent-10k-20261024-owned-r1-main-sqlite-owned-dirty.process.json",
+      "bytes": 186,
+      "git_blob": "7d3bce34536b906edcb61c94d106b577fdbe8361"
+    },
+    {
+      "path": "docs/benchmarks/churn-concurrent-10k-20261024-owned-r1-main-sqlite-owned-dirty.stderr",
+      "bytes": 0,
+      "git_blob": "e69de29bb2d1d6434b8b29ae775ad8c2e48c5391"
+    },
+    {
+      "path": "docs/benchmarks/churn-concurrent-10k-20261024-owned-r1-main-sqlite-owned-idle.jsonl",
+      "bytes": 1340,
+      "git_blob": "f5dc18b3e46d6733560a7b20c28cb56f1568e80f"
+    },
+    {
+      "path": "docs/benchmarks/churn-concurrent-10k-20261024-owned-r1-main-sqlite-owned-idle.process.json",
+      "bytes": 195,
+      "git_blob": "7de8835d3f4d6099e56d5abaf8c8cf4ee154632b"
+    },
+    {
+      "path": "docs/benchmarks/churn-concurrent-10k-20261024-owned-r1-main-sqlite-owned-idle.stderr",
+      "bytes": 0,
+      "git_blob": "e69de29bb2d1d6434b8b29ae775ad8c2e48c5391"
+    },
+    {
+      "path": "docs/benchmarks/churn-concurrent-10k-20261024-owned-r1-main-sqlite-owned-latency.jsonl",
+      "bytes": 1362078,
+      "git_blob": "28f5175894d60293970a091f1ac6d9d0b6e451f3"
+    },
+    {
+      "path": "docs/benchmarks/churn-concurrent-10k-20261024-owned-r1-main-sqlite-owned-latency.process.json",
+      "bytes": 203,
+      "git_blob": "29421a58d4f276f3513589852d5e467c1a521698"
+    },
+    {
+      "path": "docs/benchmarks/churn-concurrent-10k-20261024-owned-r1-main-sqlite-owned-latency.stderr",
+      "bytes": 0,
+      "git_blob": "e69de29bb2d1d6434b8b29ae775ad8c2e48c5391"
+    },
+    {
+      "path": "docs/benchmarks/churn-concurrent-10k-20261024-owned-r1-main-sqlite-owned-open.jsonl",
+      "bytes": 1335,
+      "git_blob": "701f5b89cff084c9351e0a1f2f19a6f4a8a8e8b5"
+    },
+    {
+      "path": "docs/benchmarks/churn-concurrent-10k-20261024-owned-r1-main-sqlite-owned-open.process.json",
+      "bytes": 195,
+      "git_blob": "9ca7c3c454602dd0cb0672abaa48e2944d6bd7f7"
+    },
+    {
+      "path": "docs/benchmarks/churn-concurrent-10k-20261024-owned-r1-main-sqlite-owned-open.stderr",
+      "bytes": 0,
+      "git_blob": "e69de29bb2d1d6434b8b29ae775ad8c2e48c5391"
+    },
+    {
+      "path": "docs/benchmarks/churn-concurrent-10k-20261024-owned-r1-main-sqlite-state.json",
+      "bytes": 710379,
+      "git_blob": "a7b8d95d56b65d4252aa51e84fde68c1122af730"
+    },
+    {
+      "path": "docs/benchmarks/churn-concurrent-10k-20261024-owned-r1-main-sqlite-streamed-seed.jsonl",
+      "bytes": 1068,
+      "git_blob": "f7a0ee74766ece62fcf000eff87ed1ff3a045476"
+    },
+    {
+      "path": "docs/benchmarks/churn-concurrent-10k-20261024-owned-r1-main-sqlite-streamed-seed.process.json",
+      "bytes": 203,
+      "git_blob": "c73387d0183a0ed8c96cc4a87891f983c62a50b8"
+    },
+    {
+      "path": "docs/benchmarks/churn-concurrent-10k-20261024-owned-r1-main-sqlite-streamed-seed.stderr",
+      "bytes": 0,
+      "git_blob": "e69de29bb2d1d6434b8b29ae775ad8c2e48c5391"
+    },
+    {
+      "path": "docs/benchmarks/churn-concurrent-10k-20261024-runner.log",
+      "bytes": 16715,
+      "git_blob": "c20027fb091e008651c69f9b3b2552c57c0e996c"
+    },
+    {
+      "path": "docs/benchmarks/churn-concurrent-10k-20261024-runner.stderr",
+      "bytes": 0,
+      "git_blob": "e69de29bb2d1d6434b8b29ae775ad8c2e48c5391"
+    },
+    {
+      "path": "docs/benchmarks/churn-concurrent-10k-20261024-slot-fdb.json",
+      "bytes": 168,
+      "git_blob": "91a7a31d4b0d653224c4557cddb70e65b14ee5a4"
+    },
+    {
+      "path": "docs/benchmarks/churn-concurrent-10k-20261024-slot-sqlite.json",
+      "bytes": 171,
+      "git_blob": "6bbdb6ed0597fe1b1fb2f90c049906162dc719c3"
+    },
+    {
+      "path": "docs/benchmarks/churn-concurrent-10k-20261024-summary.json",
+      "bytes": 4513265,
+      "git_blob": "8f8c36fc7989acef71333fd69f89b3bb0463e2db"
+    },
+    {
+      "path": "docs/benchmarks/churn-concurrent-20261025.csv",
+      "bytes": 53501,
+      "git_blob": "956ee722978abd8025e46898c03b48822c5cb3ca"
+    },
+    {
+      "path": "docs/benchmarks/churn-finalizer-20261025-fdb-harness-test.log",
+      "bytes": 430,
+      "git_blob": "8bf721bc59d97a1457c904d613fb9af18ce6c3c5"
+    },
+    {
+      "path": "docs/benchmarks/churn-finalizer-20261025-process-kill.log",
+      "bytes": 1052,
+      "git_blob": "775ef65da41bd7a4011783677fb55332602b3679"
+    },
+    {
+      "path": "docs/benchmarks/churn-finalizer-20261025-report.log",
+      "bytes": 95,
+      "git_blob": "2078739289cb421566af0c4bb1c941fd58532abc"
+    },
+    {
+      "path": "docs/benchmarks/churn-finalizer-20261025-root-clippy.log",
+      "bytes": 72,
+      "git_blob": "89a8cce8833e4b0ead7f5fe05d3a01759b7beccd"
+    },
+    {
+      "path": "docs/benchmarks/churn-finalizer-20261025-root-fmt.log",
+      "bytes": 0,
+      "git_blob": "e69de29bb2d1d6434b8b29ae775ad8c2e48c5391"
+    },
+    {
+      "path": "docs/benchmarks/churn-finalizer-20261025-runner.log",
+      "bytes": 0,
+      "git_blob": "e69de29bb2d1d6434b8b29ae775ad8c2e48c5391"
+    },
+    {
+      "path": "docs/benchmarks/churn-finalizer-20261025-runner.stderr",
+      "bytes": 0,
+      "git_blob": "e69de29bb2d1d6434b8b29ae775ad8c2e48c5391"
+    },
+    {
+      "path": "docs/benchmarks/churn-finalizer-20261025-sqlite-clippy.log",
+      "bytes": 72,
+      "git_blob": "52c76db6506a9b0425d98783db3248631bb7d385"
+    },
+    {
+      "path": "docs/benchmarks/churn-finalizer-20261025-sqlite-fmt.log",
+      "bytes": 0,
+      "git_blob": "e69de29bb2d1d6434b8b29ae775ad8c2e48c5391"
+    },
+    {
+      "path": "docs/benchmarks/churn-finalizer-20261025-sqlite-harness-test.log",
+      "bytes": 485,
+      "git_blob": "bea7010687378066aa3d3320646da0b13e2a3dcb"
+    },
+    {
+      "path": "docs/benchmarks/churn-finalizer-20261025-summary.log",
+      "bytes": 102,
+      "git_blob": "ea6d885bba5e8dafc2a2c14c75c5f909f2ecdc60"
+    },
+    {
+      "path": "docs/benchmarks/churn-finalizer-20261025.json",
+      "bytes": 3179,
+      "git_blob": "e0ceabd6482189bd8319a9cd59548a0599c91feb"
+    },
+    {
+      "path": "docs/benchmarks/churn-kill-10k-20261025-cache-attempt.json",
+      "bytes": 15895,
+      "git_blob": "d8b0769cf64d80732f757ee1ae9d798d2d0a6a10"
+    },
+    {
+      "path": "docs/benchmarks/churn-kill-10k-20261025-cache-marker-oracle.json",
+      "bytes": 15371,
+      "git_blob": "b7509f7b1a284cde749e9aeae85ca4b6f9212ebd"
+    },
+    {
+      "path": "docs/benchmarks/churn-kill-10k-20261025-cache.jsonl",
+      "bytes": 0,
+      "git_blob": "e69de29bb2d1d6434b8b29ae775ad8c2e48c5391"
+    },
+    {
+      "path": "docs/benchmarks/churn-kill-10k-20261025-cache.stderr",
+      "bytes": 0,
+      "git_blob": "e69de29bb2d1d6434b8b29ae775ad8c2e48c5391"
+    },
+    {
+      "path": "docs/benchmarks/churn-kill-10k-20261025-flush-attempt.json",
+      "bytes": 14430,
+      "git_blob": "dd34f4894d85e57a688ae96568d17ec9f60507e9"
+    },
+    {
+      "path": "docs/benchmarks/churn-kill-10k-20261025-flush-marker-oracle.json",
+      "bytes": 15371,
+      "git_blob": "d8c99f833d9d838330c6b73ac4e64973a6a10a83"
+    },
+    {
+      "path": "docs/benchmarks/churn-kill-10k-20261025-flush.jsonl",
+      "bytes": 737,
+      "git_blob": "213d1b5d488d07634df149fd482ae510201cba0b"
+    },
+    {
+      "path": "docs/benchmarks/churn-kill-10k-20261025-flush.stderr",
+      "bytes": 0,
+      "git_blob": "e69de29bb2d1d6434b8b29ae775ad8c2e48c5391"
+    },
+    {
+      "path": "docs/benchmarks/churn-kill-10k-20261025-iterator-attempt.json",
+      "bytes": 12898,
+      "git_blob": "d689d057c08e944bbfc3755c845cb541a99fdd22"
+    },
+    {
+      "path": "docs/benchmarks/churn-kill-10k-20261025-iterator-marker-oracle.json",
+      "bytes": 15371,
+      "git_blob": "d468aa922857ab3c61275cdfcc0f31b7593fba39"
+    },
+    {
+      "path": "docs/benchmarks/churn-kill-10k-20261025-iterator.jsonl",
+      "bytes": 729,
+      "git_blob": "932dd9f4936d1bf5bc76d3b1e9363ebc1900ab74"
+    },
+    {
+      "path": "docs/benchmarks/churn-kill-10k-20261025-iterator.stderr",
+      "bytes": 0,
+      "git_blob": "e69de29bb2d1d6434b8b29ae775ad8c2e48c5391"
+    },
+    {
+      "path": "docs/benchmarks/churn-kill-10k-20261025-merge-attempt.json",
+      "bytes": 15100,
+      "git_blob": "f6409cbb05953e4c207215a1e9c134f1ce03e0c2"
+    },
+    {
+      "path": "docs/benchmarks/churn-kill-10k-20261025-merge-marker-oracle.json",
+      "bytes": 15371,
+      "git_blob": "b7509f7b1a284cde749e9aeae85ca4b6f9212ebd"
+    },
+    {
+      "path": "docs/benchmarks/churn-kill-10k-20261025-merge.jsonl",
+      "bytes": 1014,
+      "git_blob": "2da78c5703a17c3f79e4628e9807e0018a4639ca"
+    },
+    {
+      "path": "docs/benchmarks/churn-kill-10k-20261025-merge.stderr",
+      "bytes": 0,
+      "git_blob": "e69de29bb2d1d6434b8b29ae775ad8c2e48c5391"
+    },
+    {
+      "path": "docs/benchmarks/churn-kill-10k-20261025-summary.json",
+      "bytes": 63158,
+      "git_blob": "5b3ea3fcbe272c2524296cf3667ea9554ee54a0e"
+    },
+    {
+      "path": "docs/benchmarks/churn-postprocessor-review-20261025.json",
+      "bytes": 1001,
+      "git_blob": "70598a993f8c1aa3f79256ae75891f5f1630b689"
+    },
+    {
+      "path": "docs/benchmarks/churn-report-proof-20261025.json",
+      "bytes": 4348,
+      "git_blob": "4fef6927c58dddba6094eaf28bf3c48738282c32"
+    },
+    {
+      "path": "docs/benchmarks/churn-smoke-mutations.jsonl",
+      "bytes": 8274,
+      "git_blob": "53c54386cd00857ac1f04481d44c5ea84437f8fd"
+    },
+    {
+      "path": "docs/benchmarks/churn-smoke-seed.jsonl",
+      "bytes": 1180,
+      "git_blob": "1dd7c75b4de328ff301909f7f97f897602e2edf3"
+    },
+    {
+      "path": "docs/benchmarks/churn-smoke-state.json",
+      "bytes": 463375,
+      "git_blob": "1db4870cf613faf3ba7e2fb642d77e67785fd3fb"
+    }
+  ],
+  "all_staged_bytes_equal_to_disk": true,
+  "scope": "Captured observations before this proof file was staged"
+}

@@ -1,0 +1,126 @@
+{
+  "main_pid": 52928,
+  "status": "complete",
+  "steps": [
+    {
+      "name": "process-kill",
+      "command": [
+        "C:\\Users\\Serkan\\.cache\\codex-runtimes\\codex-primary-runtime\\dependencies\\python\\python.exe",
+        "-X",
+        "utf8",
+        "tools/measure-churn-kill.py"
+      ],
+      "exit_code": 0,
+      "wall_s": 34.328000000008615,
+      "log": "churn-finalizer-20261025-process-kill.log"
+    },
+    {
+      "name": "summary",
+      "command": [
+        "C:\\Users\\Serkan\\.cache\\codex-runtimes\\codex-primary-runtime\\dependencies\\python\\python.exe",
+        "-X",
+        "utf8",
+        "tools/summarize-churn.py"
+      ],
+      "exit_code": 0,
+      "wall_s": 2.4070000000065193,
+      "log": "churn-finalizer-20261025-summary.log"
+    },
+    {
+      "name": "report",
+      "command": [
+        "C:\\Users\\Serkan\\.cache\\codex-runtimes\\codex-primary-runtime\\dependencies\\python\\python.exe",
+        "-X",
+        "utf8",
+        "tools/report-churn.py"
+      ],
+      "exit_code": 0,
+      "wall_s": 0.3120000000053551,
+      "log": "churn-finalizer-20261025-report.log"
+    },
+    {
+      "name": "root-fmt",
+      "command": [
+        "cargo",
+        "fmt",
+        "--check"
+      ],
+      "exit_code": 0,
+      "wall_s": 2.390999999974156,
+      "log": "churn-finalizer-20261025-root-fmt.log"
+    },
+    {
+      "name": "sqlite-fmt",
+      "command": [
+        "cargo",
+        "fmt",
+        "--manifest-path",
+        "tools/native_sqlite/Cargo.toml",
+        "--check"
+      ],
+      "exit_code": 0,
+      "wall_s": 0.28100000001722947,
+      "log": "churn-finalizer-20261025-sqlite-fmt.log"
+    },
+    {
+      "name": "root-clippy",
+      "command": [
+        "cargo",
+        "clippy",
+        "--all-targets",
+        "--",
+        "-D",
+        "warnings"
+      ],
+      "exit_code": 0,
+      "wall_s": 2.25,
+      "log": "churn-finalizer-20261025-root-clippy.log"
+    },
+    {
+      "name": "sqlite-clippy",
+      "command": [
+        "cargo",
+        "clippy",
+        "--manifest-path",
+        "tools/native_sqlite/Cargo.toml",
+        "--all-targets",
+        "--",
+        "-D",
+        "warnings"
+      ],
+      "exit_code": 0,
+      "wall_s": 1.8429999999934807,
+      "log": "churn-finalizer-20261025-sqlite-clippy.log"
+    },
+    {
+      "name": "fdb-harness-test",
+      "command": [
+        "cargo",
+        "test",
+        "--example",
+        "measure_churn"
+      ],
+      "exit_code": 0,
+      "wall_s": 3.23499999998603,
+      "log": "churn-finalizer-20261025-fdb-harness-test.log"
+    },
+    {
+      "name": "sqlite-harness-test",
+      "command": [
+        "cargo",
+        "test",
+        "--manifest-path",
+        "tools/native_sqlite/Cargo.toml",
+        "--bin",
+        "content_churn"
+      ],
+      "exit_code": 0,
+      "wall_s": 2.312999999994645,
+      "log": "churn-finalizer-20261025-sqlite-harness-test.log"
+    }
+  ],
+  "new_benchmark_runs": false,
+  "main_exit_code": 0,
+  "ordinary_measurements_complete": true,
+  "no_engine_optimization_or_format_change": true
+}

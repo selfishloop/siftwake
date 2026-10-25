@@ -1,5 +1,24 @@
 # FDB açık işler
 
+<!-- churn-concurrent-20261025 -->
+2026-10-25 churn/concurrent ölçümü [yeni raporda](CHURN-CONCURRENT-10K-20261025.md).
+92 ana worker bölümü ve dört process-kill/reopen denemesi tamamlandı; bütün
+oracle'lar geçti. Motor/format değişmedi. Solo streamed tek belge görünürlük
+üst sınırı184,919ms ve stream tepe private47,079MB/WS45,978MB gözlenen kapıları
+tuttu. Kirli500 owned delta ile private31,003MB/WS34,800MB:15MB kapısı kaldı.
+Churn bakım sonrası350,413→876,347MB(2,501×) iki koşuda da tekrarlandı;
+alanın neredeyse tamamı15 manifest-live segmentte, eski nesil temizliği değil
+güncel segmentlerde superseded kayıtların tutulması araştırılmalı.
+OrtakMutex ile concurrency2× kapısı kaldı; en kötü FDB read1,364s,
+kısa negatif sorgu örnek-p95 oranı84464,6× (5/10 örnekte p95=max).
+Öncelik okunabilir snapshot/admission ve ardından churn merge politikası;
+bu tur optimizasyon yok. Stream her commit sonunda delta0 bırakır; owned
+active delta ayrı ölçüldü. Atomik5000 her iki API'de reddedildi;100'lük
+fallback ayrı ve atomik değil. Kill sonrası input/build artıkları da açık.
+C ABI/DLL/opaque handle/stream/panic-catch sonraki aşama notudur, uygulanmadı.
+Önceki yazma/son bakım, arama regresyonları, RAM/disk, gerçek-soğuk ve çok-okuyucu
+başlıkları yalnız bu raporun kanıtladığı kapsamda kapanabilir.
+
 2026-10-24 toplu kıyas: `8a92384` (24 Ekim gram-sort/posting/cursor
 öncesi,hızlı intake fold dahil) / `2a9fc2c` / native SQLite aynı ilk10k,
 iki ters sıralı çift/API. Güncel akışlı toplam17,386→14,944s(-%14,04),

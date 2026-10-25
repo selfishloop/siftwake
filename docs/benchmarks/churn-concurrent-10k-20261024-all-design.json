@@ -1,0 +1,864 @@
+{
+  "sections": [
+    "latency",
+    "churn",
+    "concurrent",
+    "owned"
+  ],
+  "pairs": 2,
+  "programs": {
+    "fdb": {
+      "path": "output\\churn-fdb-20261024.exe",
+      "sha256": "89B3E295C782E61C5B14C57354EB47E531C4C12721D50155DB2FBD6651C36A69"
+    },
+    "sqlite": {
+      "path": "output\\churn-sqlite-20261024.exe",
+      "sha256": "95E62D60C7D123E32A1ACE2F122A79B4C41E624DBCE807F6EEA1FC71FD4CAD30"
+    }
+  },
+  "corpus": "same existing first10000; bodies cap51140 UTF8bytes plus unique revision marker<=51200; metadata index only",
+  "cache": "warm OS cache; no eviction or power/background isolation",
+  "source": "unchanged normal FDB strict/synced engine; SQLite FTS5trigram detailnone FULLWAL cache2MiB mmap0 tempFILE",
+  "concurrency": "same external Mutex per backend; one reader,one writer; full payload oracle outside mutex; small model capture overhead separately recorded",
+  "sample_counts": "latency32/12/6/3 per type at batch1/10/100/1000; matrix5 samples/case; concurrent10/case; two balanced engine pairs",
+  "memory": "Windows private/WS plus OS lifetime peaks;10ms phase sample may miss spikes; harness descriptor model included",
+  "orders": [
+    {
+      "section": "latency",
+      "pair": 0,
+      "engines": [
+        "fdb",
+        "sqlite"
+      ]
+    },
+    {
+      "section": "latency",
+      "pair": 1,
+      "engines": [
+        "sqlite",
+        "fdb"
+      ]
+    },
+    {
+      "section": "churn",
+      "pair": 0,
+      "engines": [
+        "fdb",
+        "sqlite"
+      ]
+    },
+    {
+      "section": "churn",
+      "pair": 1,
+      "engines": [
+        "sqlite",
+        "fdb"
+      ]
+    },
+    {
+      "section": "concurrent",
+      "pair": 0,
+      "engines": [
+        "fdb",
+        "sqlite"
+      ]
+    },
+    {
+      "section": "concurrent",
+      "pair": 1,
+      "engines": [
+        "sqlite",
+        "fdb"
+      ]
+    },
+    {
+      "section": "owned",
+      "pair": 0,
+      "engines": [
+        "fdb",
+        "sqlite"
+      ]
+    },
+    {
+      "section": "owned",
+      "pair": 1,
+      "engines": [
+        "sqlite",
+        "fdb"
+      ]
+    }
+  ],
+  "completed": [
+    {
+      "engine": "fdb",
+      "mode": "seed",
+      "api": "streamed",
+      "log": "churn-concurrent-10k-20261024-latency-r0-main-fdb-streamed-seed.jsonl",
+      "exit_code": 0,
+      "wall_s": 16.25
+    },
+    {
+      "engine": "fdb",
+      "mode": "idle",
+      "api": "streamed",
+      "log": "churn-concurrent-10k-20261024-latency-r0-main-fdb-streamed-idle.jsonl",
+      "exit_code": 0,
+      "wall_s": 6.062000000005355
+    },
+    {
+      "engine": "fdb",
+      "mode": "latency",
+      "api": "streamed",
+      "log": "churn-concurrent-10k-20261024-latency-r0-main-fdb-streamed-latency.jsonl",
+      "exit_code": 0,
+      "wall_s": 51.09399999998277
+    },
+    {
+      "engine": "fdb",
+      "mode": "delta",
+      "api": "streamed",
+      "log": "churn-concurrent-10k-20261024-latency-r0-main-fdb-streamed-delta.jsonl",
+      "exit_code": 0,
+      "wall_s": 11.187000000005355
+    },
+    {
+      "engine": "sqlite",
+      "mode": "seed",
+      "api": "streamed",
+      "log": "churn-concurrent-10k-20261024-latency-r0-main-sqlite-streamed-seed.jsonl",
+      "exit_code": 0,
+      "wall_s": 33.375
+    },
+    {
+      "engine": "sqlite",
+      "mode": "idle",
+      "api": "streamed",
+      "log": "churn-concurrent-10k-20261024-latency-r0-main-sqlite-streamed-idle.jsonl",
+      "exit_code": 0,
+      "wall_s": 5.985000000015134
+    },
+    {
+      "engine": "sqlite",
+      "mode": "latency",
+      "api": "streamed",
+      "log": "churn-concurrent-10k-20261024-latency-r0-main-sqlite-streamed-latency.jsonl",
+      "exit_code": 0,
+      "wall_s": 261.6720000000205
+    },
+    {
+      "engine": "sqlite",
+      "mode": "delta",
+      "api": "streamed",
+      "log": "churn-concurrent-10k-20261024-latency-r0-main-sqlite-streamed-delta.jsonl",
+      "exit_code": 0,
+      "wall_s": 205.54699999999139
+    },
+    {
+      "engine": "sqlite",
+      "mode": "seed",
+      "api": "streamed",
+      "log": "churn-concurrent-10k-20261024-latency-r1-main-sqlite-streamed-seed.jsonl",
+      "exit_code": 0,
+      "wall_s": 36.655999999988126
+    },
+    {
+      "engine": "sqlite",
+      "mode": "idle",
+      "api": "streamed",
+      "log": "churn-concurrent-10k-20261024-latency-r1-main-sqlite-streamed-idle.jsonl",
+      "exit_code": 0,
+      "wall_s": 6.0310000000172295
+    },
+    {
+      "engine": "sqlite",
+      "mode": "latency",
+      "api": "streamed",
+      "log": "churn-concurrent-10k-20261024-latency-r1-main-sqlite-streamed-latency.jsonl",
+      "exit_code": 0,
+      "wall_s": 371.4529999999795
+    },
+    {
+      "engine": "sqlite",
+      "mode": "delta",
+      "api": "streamed",
+      "log": "churn-concurrent-10k-20261024-latency-r1-main-sqlite-streamed-delta.jsonl",
+      "exit_code": 0,
+      "wall_s": 189.40700000000652
+    },
+    {
+      "engine": "fdb",
+      "mode": "seed",
+      "api": "streamed",
+      "log": "churn-concurrent-10k-20261024-latency-r1-main-fdb-streamed-seed.jsonl",
+      "exit_code": 0,
+      "wall_s": 19.062999999994645
+    },
+    {
+      "engine": "fdb",
+      "mode": "idle",
+      "api": "streamed",
+      "log": "churn-concurrent-10k-20261024-latency-r1-main-fdb-streamed-idle.jsonl",
+      "exit_code": 0,
+      "wall_s": 6.0310000000172295
+    },
+    {
+      "engine": "fdb",
+      "mode": "latency",
+      "api": "streamed",
+      "log": "churn-concurrent-10k-20261024-latency-r1-main-fdb-streamed-latency.jsonl",
+      "exit_code": 0,
+      "wall_s": 59.73399999999674
+    },
+    {
+      "engine": "fdb",
+      "mode": "delta",
+      "api": "streamed",
+      "log": "churn-concurrent-10k-20261024-latency-r1-main-fdb-streamed-delta.jsonl",
+      "exit_code": 0,
+      "wall_s": 12.796999999991385
+    },
+    {
+      "engine": "fdb",
+      "mode": "seed",
+      "api": "streamed",
+      "log": "churn-concurrent-10k-20261024-churn-r0-main-fdb-streamed-seed.jsonl",
+      "exit_code": 0,
+      "wall_s": 18.71899999998277
+    },
+    {
+      "engine": "fdb",
+      "mode": "idle",
+      "api": "streamed",
+      "log": "churn-concurrent-10k-20261024-churn-r0-main-fdb-streamed-idle.jsonl",
+      "exit_code": 0,
+      "wall_s": 6.0
+    },
+    {
+      "engine": "fdb",
+      "mode": "churn",
+      "api": "streamed",
+      "log": "churn-concurrent-10k-20261024-churn-r0-main-fdb-streamed-churn.jsonl",
+      "exit_code": 0,
+      "wall_s": 92.51500000001397
+    },
+    {
+      "engine": "fdb",
+      "mode": "burst",
+      "api": "streamed",
+      "log": "churn-concurrent-10k-20261024-churn-r0-main-fdb-streamed-burst.jsonl",
+      "exit_code": 0,
+      "wall_s": 163.45300000000861
+    },
+    {
+      "engine": "fdb",
+      "mode": "dirty",
+      "api": "streamed",
+      "log": "churn-concurrent-10k-20261024-churn-r0-main-fdb-streamed-dirty.jsonl",
+      "exit_code": 0,
+      "wall_s": 23.530999999988126
+    },
+    {
+      "engine": "fdb",
+      "mode": "open",
+      "api": "streamed",
+      "log": "churn-concurrent-10k-20261024-churn-r0-main-fdb-streamed-open.jsonl",
+      "exit_code": 0,
+      "wall_s": 6.562999999994645
+    },
+    {
+      "engine": "sqlite",
+      "mode": "seed",
+      "api": "streamed",
+      "log": "churn-concurrent-10k-20261024-churn-r0-main-sqlite-streamed-seed.jsonl",
+      "exit_code": 0,
+      "wall_s": 39.062999999994645
+    },
+    {
+      "engine": "sqlite",
+      "mode": "idle",
+      "api": "streamed",
+      "log": "churn-concurrent-10k-20261024-churn-r0-main-sqlite-streamed-idle.jsonl",
+      "exit_code": 0,
+      "wall_s": 6.26600000000326
+    },
+    {
+      "engine": "sqlite",
+      "mode": "churn",
+      "api": "streamed",
+      "log": "churn-concurrent-10k-20261024-churn-r0-main-sqlite-streamed-churn.jsonl",
+      "exit_code": 0,
+      "wall_s": 343.9210000000021
+    },
+    {
+      "engine": "sqlite",
+      "mode": "burst",
+      "api": "streamed",
+      "log": "churn-concurrent-10k-20261024-churn-r0-main-sqlite-streamed-burst.jsonl",
+      "exit_code": 0,
+      "wall_s": 258.3440000000119
+    },
+    {
+      "engine": "sqlite",
+      "mode": "dirty",
+      "api": "streamed",
+      "log": "churn-concurrent-10k-20261024-churn-r0-main-sqlite-streamed-dirty.jsonl",
+      "exit_code": 0,
+      "wall_s": 4.9689999999827705
+    },
+    {
+      "engine": "sqlite",
+      "mode": "open",
+      "api": "streamed",
+      "log": "churn-concurrent-10k-20261024-churn-r0-main-sqlite-streamed-open.jsonl",
+      "exit_code": 0,
+      "wall_s": 6.937000000005355
+    },
+    {
+      "engine": "sqlite",
+      "mode": "seed",
+      "api": "streamed",
+      "log": "churn-concurrent-10k-20261024-churn-r1-main-sqlite-streamed-seed.jsonl",
+      "exit_code": 0,
+      "wall_s": 39.0
+    },
+    {
+      "engine": "sqlite",
+      "mode": "idle",
+      "api": "streamed",
+      "log": "churn-concurrent-10k-20261024-churn-r1-main-sqlite-streamed-idle.jsonl",
+      "exit_code": 0,
+      "wall_s": 6.219000000011874
+    },
+    {
+      "engine": "sqlite",
+      "mode": "churn",
+      "api": "streamed",
+      "log": "churn-concurrent-10k-20261024-churn-r1-main-sqlite-streamed-churn.jsonl",
+      "exit_code": 0,
+      "wall_s": 340.51500000001397
+    },
+    {
+      "engine": "sqlite",
+      "mode": "burst",
+      "api": "streamed",
+      "log": "churn-concurrent-10k-20261024-churn-r1-main-sqlite-streamed-burst.jsonl",
+      "exit_code": 0,
+      "wall_s": 257.25
+    },
+    {
+      "engine": "sqlite",
+      "mode": "dirty",
+      "api": "streamed",
+      "log": "churn-concurrent-10k-20261024-churn-r1-main-sqlite-streamed-dirty.jsonl",
+      "exit_code": 0,
+      "wall_s": 4.969000000011874
+    },
+    {
+      "engine": "sqlite",
+      "mode": "open",
+      "api": "streamed",
+      "log": "churn-concurrent-10k-20261024-churn-r1-main-sqlite-streamed-open.jsonl",
+      "exit_code": 0,
+      "wall_s": 6.265999999974156
+    },
+    {
+      "engine": "fdb",
+      "mode": "seed",
+      "api": "streamed",
+      "log": "churn-concurrent-10k-20261024-churn-r1-main-fdb-streamed-seed.jsonl",
+      "exit_code": 0,
+      "wall_s": 18.703000000008615
+    },
+    {
+      "engine": "fdb",
+      "mode": "idle",
+      "api": "streamed",
+      "log": "churn-concurrent-10k-20261024-churn-r1-main-fdb-streamed-idle.jsonl",
+      "exit_code": 0,
+      "wall_s": 6.030999999988126
+    },
+    {
+      "engine": "fdb",
+      "mode": "churn",
+      "api": "streamed",
+      "log": "churn-concurrent-10k-20261024-churn-r1-main-fdb-streamed-churn.jsonl",
+      "exit_code": 0,
+      "wall_s": 89.03100000001723
+    },
+    {
+      "engine": "fdb",
+      "mode": "burst",
+      "api": "streamed",
+      "log": "churn-concurrent-10k-20261024-churn-r1-main-fdb-streamed-burst.jsonl",
+      "exit_code": 0,
+      "wall_s": 162.56299999999464
+    },
+    {
+      "engine": "fdb",
+      "mode": "dirty",
+      "api": "streamed",
+      "log": "churn-concurrent-10k-20261024-churn-r1-main-fdb-streamed-dirty.jsonl",
+      "exit_code": 0,
+      "wall_s": 24.10899999999674
+    },
+    {
+      "engine": "fdb",
+      "mode": "open",
+      "api": "streamed",
+      "log": "churn-concurrent-10k-20261024-churn-r1-main-fdb-streamed-open.jsonl",
+      "exit_code": 0,
+      "wall_s": 6.562999999994645
+    },
+    {
+      "engine": "fdb",
+      "mode": "seed",
+      "api": "streamed",
+      "log": "churn-concurrent-10k-20261024-concurrent-r0-one-fdb-streamed-seed.jsonl",
+      "exit_code": 0,
+      "wall_s": 18.639999999984866
+    },
+    {
+      "engine": "fdb",
+      "mode": "concurrent-one",
+      "api": "streamed",
+      "log": "churn-concurrent-10k-20261024-concurrent-r0-one-fdb-streamed-concurrent-one.jsonl",
+      "exit_code": 0,
+      "wall_s": 48.51600000000326
+    },
+    {
+      "engine": "fdb",
+      "mode": "verify",
+      "api": "streamed",
+      "log": "churn-concurrent-10k-20261024-concurrent-r0-one-fdb-streamed-verify.jsonl",
+      "exit_code": 0,
+      "wall_s": 2.7339999999967404
+    },
+    {
+      "engine": "fdb",
+      "mode": "seed",
+      "api": "streamed",
+      "log": "churn-concurrent-10k-20261024-concurrent-r0-100-fdb-streamed-seed.jsonl",
+      "exit_code": 0,
+      "wall_s": 18.187000000005355
+    },
+    {
+      "engine": "fdb",
+      "mode": "concurrent-100",
+      "api": "streamed",
+      "log": "churn-concurrent-10k-20261024-concurrent-r0-100-fdb-streamed-concurrent-100.jsonl",
+      "exit_code": 0,
+      "wall_s": 104.73499999998603
+    },
+    {
+      "engine": "fdb",
+      "mode": "verify",
+      "api": "streamed",
+      "log": "churn-concurrent-10k-20261024-concurrent-r0-100-fdb-streamed-verify.jsonl",
+      "exit_code": 0,
+      "wall_s": 5.5
+    },
+    {
+      "engine": "sqlite",
+      "mode": "seed",
+      "api": "streamed",
+      "log": "churn-concurrent-10k-20261024-concurrent-r0-one-sqlite-streamed-seed.jsonl",
+      "exit_code": 0,
+      "wall_s": 39.46899999998277
+    },
+    {
+      "engine": "sqlite",
+      "mode": "concurrent-one",
+      "api": "streamed",
+      "log": "churn-concurrent-10k-20261024-concurrent-r0-one-sqlite-streamed-concurrent-one.jsonl",
+      "exit_code": 0,
+      "wall_s": 254.64100000000326
+    },
+    {
+      "engine": "sqlite",
+      "mode": "verify",
+      "api": "streamed",
+      "log": "churn-concurrent-10k-20261024-concurrent-r0-one-sqlite-streamed-verify.jsonl",
+      "exit_code": 0,
+      "wall_s": 31.671000000002095
+    },
+    {
+      "engine": "sqlite",
+      "mode": "seed",
+      "api": "streamed",
+      "log": "churn-concurrent-10k-20261024-concurrent-r0-100-sqlite-streamed-seed.jsonl",
+      "exit_code": 0,
+      "wall_s": 38.64100000000326
+    },
+    {
+      "engine": "sqlite",
+      "mode": "concurrent-100",
+      "api": "streamed",
+      "log": "churn-concurrent-10k-20261024-concurrent-r0-100-sqlite-streamed-concurrent-100.jsonl",
+      "exit_code": 0,
+      "wall_s": 422.5779999999795
+    },
+    {
+      "engine": "sqlite",
+      "mode": "verify",
+      "api": "streamed",
+      "log": "churn-concurrent-10k-20261024-concurrent-r0-100-sqlite-streamed-verify.jsonl",
+      "exit_code": 0,
+      "wall_s": 35.17200000002049
+    },
+    {
+      "engine": "sqlite",
+      "mode": "seed",
+      "api": "streamed",
+      "log": "churn-concurrent-10k-20261024-concurrent-r1-one-sqlite-streamed-seed.jsonl",
+      "exit_code": 0,
+      "wall_s": 38.21799999999348
+    },
+    {
+      "engine": "sqlite",
+      "mode": "concurrent-one",
+      "api": "streamed",
+      "log": "churn-concurrent-10k-20261024-concurrent-r1-one-sqlite-streamed-concurrent-one.jsonl",
+      "exit_code": 0,
+      "wall_s": 262.18799999999464
+    },
+    {
+      "engine": "sqlite",
+      "mode": "verify",
+      "api": "streamed",
+      "log": "churn-concurrent-10k-20261024-concurrent-r1-one-sqlite-streamed-verify.jsonl",
+      "exit_code": 0,
+      "wall_s": 31.125
+    },
+    {
+      "engine": "sqlite",
+      "mode": "seed",
+      "api": "streamed",
+      "log": "churn-concurrent-10k-20261024-concurrent-r1-100-sqlite-streamed-seed.jsonl",
+      "exit_code": 0,
+      "wall_s": 39.562999999994645
+    },
+    {
+      "engine": "sqlite",
+      "mode": "concurrent-100",
+      "api": "streamed",
+      "log": "churn-concurrent-10k-20261024-concurrent-r1-100-sqlite-streamed-concurrent-100.jsonl",
+      "exit_code": 0,
+      "wall_s": 423.75
+    },
+    {
+      "engine": "sqlite",
+      "mode": "verify",
+      "api": "streamed",
+      "log": "churn-concurrent-10k-20261024-concurrent-r1-100-sqlite-streamed-verify.jsonl",
+      "exit_code": 0,
+      "wall_s": 34.562000000005355
+    },
+    {
+      "engine": "fdb",
+      "mode": "seed",
+      "api": "streamed",
+      "log": "churn-concurrent-10k-20261024-concurrent-r1-one-fdb-streamed-seed.jsonl",
+      "exit_code": 0,
+      "wall_s": 18.530999999988126
+    },
+    {
+      "engine": "fdb",
+      "mode": "concurrent-one",
+      "api": "streamed",
+      "log": "churn-concurrent-10k-20261024-concurrent-r1-one-fdb-streamed-concurrent-one.jsonl",
+      "exit_code": 0,
+      "wall_s": 45.79700000002049
+    },
+    {
+      "engine": "fdb",
+      "mode": "verify",
+      "api": "streamed",
+      "log": "churn-concurrent-10k-20261024-concurrent-r1-one-fdb-streamed-verify.jsonl",
+      "exit_code": 0,
+      "wall_s": 2.75
+    },
+    {
+      "engine": "fdb",
+      "mode": "seed",
+      "api": "streamed",
+      "log": "churn-concurrent-10k-20261024-concurrent-r1-100-fdb-streamed-seed.jsonl",
+      "exit_code": 0,
+      "wall_s": 18.29700000002049
+    },
+    {
+      "engine": "fdb",
+      "mode": "concurrent-100",
+      "api": "streamed",
+      "log": "churn-concurrent-10k-20261024-concurrent-r1-100-fdb-streamed-concurrent-100.jsonl",
+      "exit_code": 0,
+      "wall_s": 104.26600000000326
+    },
+    {
+      "engine": "fdb",
+      "mode": "verify",
+      "api": "streamed",
+      "log": "churn-concurrent-10k-20261024-concurrent-r1-100-fdb-streamed-verify.jsonl",
+      "exit_code": 0,
+      "wall_s": 5.453000000008615
+    },
+    {
+      "engine": "fdb",
+      "mode": "seed",
+      "api": "streamed",
+      "log": "churn-concurrent-10k-20261024-owned-r0-main-fdb-streamed-seed.jsonl",
+      "exit_code": 0,
+      "wall_s": 18.530999999988126
+    },
+    {
+      "engine": "fdb",
+      "mode": "idle",
+      "api": "owned",
+      "log": "churn-concurrent-10k-20261024-owned-r0-main-fdb-owned-idle.jsonl",
+      "exit_code": 0,
+      "wall_s": 5.98499999998603
+    },
+    {
+      "engine": "fdb",
+      "mode": "latency",
+      "api": "owned",
+      "log": "churn-concurrent-10k-20261024-owned-r0-main-fdb-owned-latency.jsonl",
+      "exit_code": 0,
+      "wall_s": 84.04700000002049
+    },
+    {
+      "engine": "fdb",
+      "mode": "delta",
+      "api": "owned",
+      "log": "churn-concurrent-10k-20261024-owned-r0-main-fdb-owned-delta.jsonl",
+      "exit_code": 0,
+      "wall_s": 12.687000000005355
+    },
+    {
+      "engine": "fdb",
+      "mode": "burst",
+      "api": "owned",
+      "log": "churn-concurrent-10k-20261024-owned-r0-main-fdb-owned-burst.jsonl",
+      "exit_code": 0,
+      "wall_s": 34.687999999994645
+    },
+    {
+      "engine": "fdb",
+      "mode": "dirty",
+      "api": "owned",
+      "log": "churn-concurrent-10k-20261024-owned-r0-main-fdb-owned-dirty.jsonl",
+      "exit_code": 0,
+      "wall_s": 1.9059999999881256
+    },
+    {
+      "engine": "fdb",
+      "mode": "open",
+      "api": "owned",
+      "log": "churn-concurrent-10k-20261024-owned-r0-main-fdb-owned-open.jsonl",
+      "exit_code": 0,
+      "wall_s": 6.453000000008615
+    },
+    {
+      "engine": "sqlite",
+      "mode": "seed",
+      "api": "streamed",
+      "log": "churn-concurrent-10k-20261024-owned-r0-main-sqlite-streamed-seed.jsonl",
+      "exit_code": 0,
+      "wall_s": 38.578999999997905
+    },
+    {
+      "engine": "sqlite",
+      "mode": "idle",
+      "api": "owned",
+      "log": "churn-concurrent-10k-20261024-owned-r0-main-sqlite-owned-idle.jsonl",
+      "exit_code": 0,
+      "wall_s": 6.25
+    },
+    {
+      "engine": "sqlite",
+      "mode": "latency",
+      "api": "owned",
+      "log": "churn-concurrent-10k-20261024-owned-r0-main-sqlite-owned-latency.jsonl",
+      "exit_code": 0,
+      "wall_s": 322.5
+    },
+    {
+      "engine": "sqlite",
+      "mode": "delta",
+      "api": "owned",
+      "log": "churn-concurrent-10k-20261024-owned-r0-main-sqlite-owned-delta.jsonl",
+      "exit_code": 0,
+      "wall_s": 189.85999999998603
+    },
+    {
+      "engine": "sqlite",
+      "mode": "burst",
+      "api": "owned",
+      "log": "churn-concurrent-10k-20261024-owned-r0-main-sqlite-owned-burst.jsonl",
+      "exit_code": 0,
+      "wall_s": 309.9530000000086
+    },
+    {
+      "engine": "sqlite",
+      "mode": "dirty",
+      "api": "owned",
+      "log": "churn-concurrent-10k-20261024-owned-r0-main-sqlite-owned-dirty.jsonl",
+      "exit_code": 0,
+      "wall_s": 4.375
+    },
+    {
+      "engine": "sqlite",
+      "mode": "open",
+      "api": "owned",
+      "log": "churn-concurrent-10k-20261024-owned-r0-main-sqlite-owned-open.jsonl",
+      "exit_code": 0,
+      "wall_s": 6.389999999984866
+    },
+    {
+      "engine": "sqlite",
+      "mode": "seed",
+      "api": "streamed",
+      "log": "churn-concurrent-10k-20261024-owned-r1-main-sqlite-streamed-seed.jsonl",
+      "exit_code": 0,
+      "wall_s": 39.405999999988126
+    },
+    {
+      "engine": "sqlite",
+      "mode": "idle",
+      "api": "owned",
+      "log": "churn-concurrent-10k-20261024-owned-r1-main-sqlite-owned-idle.jsonl",
+      "exit_code": 0,
+      "wall_s": 6.26600000000326
+    },
+    {
+      "engine": "sqlite",
+      "mode": "latency",
+      "api": "owned",
+      "log": "churn-concurrent-10k-20261024-owned-r1-main-sqlite-owned-latency.jsonl",
+      "exit_code": 0,
+      "wall_s": 319.43700000000536
+    },
+    {
+      "engine": "sqlite",
+      "mode": "delta",
+      "api": "owned",
+      "log": "churn-concurrent-10k-20261024-owned-r1-main-sqlite-owned-delta.jsonl",
+      "exit_code": 0,
+      "wall_s": 190.48399999999674
+    },
+    {
+      "engine": "sqlite",
+      "mode": "burst",
+      "api": "owned",
+      "log": "churn-concurrent-10k-20261024-owned-r1-main-sqlite-owned-burst.jsonl",
+      "exit_code": 0,
+      "wall_s": 307.9059999999881
+    },
+    {
+      "engine": "sqlite",
+      "mode": "dirty",
+      "api": "owned",
+      "log": "churn-concurrent-10k-20261024-owned-r1-main-sqlite-owned-dirty.jsonl",
+      "exit_code": 0,
+      "wall_s": 4.375
+    },
+    {
+      "engine": "sqlite",
+      "mode": "open",
+      "api": "owned",
+      "log": "churn-concurrent-10k-20261024-owned-r1-main-sqlite-owned-open.jsonl",
+      "exit_code": 0,
+      "wall_s": 6.39100000000326
+    },
+    {
+      "engine": "fdb",
+      "mode": "seed",
+      "api": "streamed",
+      "log": "churn-concurrent-10k-20261024-owned-r1-main-fdb-streamed-seed.jsonl",
+      "exit_code": 0,
+      "wall_s": 18.07799999997951
+    },
+    {
+      "engine": "fdb",
+      "mode": "idle",
+      "api": "owned",
+      "log": "churn-concurrent-10k-20261024-owned-r1-main-fdb-owned-idle.jsonl",
+      "exit_code": 0,
+      "wall_s": 6.234000000025844
+    },
+    {
+      "engine": "fdb",
+      "mode": "latency",
+      "api": "owned",
+      "log": "churn-concurrent-10k-20261024-owned-r1-main-fdb-owned-latency.jsonl",
+      "exit_code": 0,
+      "wall_s": 82.95299999997951
+    },
+    {
+      "engine": "fdb",
+      "mode": "delta",
+      "api": "owned",
+      "log": "churn-concurrent-10k-20261024-owned-r1-main-fdb-owned-delta.jsonl",
+      "exit_code": 0,
+      "wall_s": 12.672000000020489
+    },
+    {
+      "engine": "fdb",
+      "mode": "burst",
+      "api": "owned",
+      "log": "churn-concurrent-10k-20261024-owned-r1-main-fdb-owned-burst.jsonl",
+      "exit_code": 0,
+      "wall_s": 34.703000000008615
+    },
+    {
+      "engine": "fdb",
+      "mode": "dirty",
+      "api": "owned",
+      "log": "churn-concurrent-10k-20261024-owned-r1-main-fdb-owned-dirty.jsonl",
+      "exit_code": 0,
+      "wall_s": 1.9839999999967404
+    },
+    {
+      "engine": "fdb",
+      "mode": "open",
+      "api": "owned",
+      "log": "churn-concurrent-10k-20261024-owned-r1-main-fdb-owned-open.jsonl",
+      "exit_code": 0,
+      "wall_s": 6.328000000008615
+    }
+  ],
+  "protected_before": [
+    {
+      "path": "data\\rkyv-corpus-20261009\\json.payload-bench",
+      "bytes": 2740862279,
+      "sha256": "11F826FCE3F4AE790FEB9FC6DF9B1169F52C2FD699E89FC4A8A4B77AAA41731B"
+    },
+    {
+      "path": "tests\\fixtures\\v1\\checkpoint.fdb",
+      "bytes": 1507,
+      "sha256": "E87667C0FABE64D5A1F59EF86B99F7E612DB755D239B41677DA2ADC24BE7BF57"
+    },
+    {
+      "path": "tests\\fixtures\\v1\\checkpoint.ready",
+      "bytes": 28,
+      "sha256": "BC82C18F8D5C3A209328BD59B12D828D8922BEC4D26CB4D557FD4A493A4A9C2F"
+    }
+  ],
+  "protected_after": [
+    {
+      "path": "data\\rkyv-corpus-20261009\\json.payload-bench",
+      "bytes": 2740862279,
+      "sha256": "11F826FCE3F4AE790FEB9FC6DF9B1169F52C2FD699E89FC4A8A4B77AAA41731B"
+    },
+    {
+      "path": "tests\\fixtures\\v1\\checkpoint.fdb",
+      "bytes": 1507,
+      "sha256": "E87667C0FABE64D5A1F59EF86B99F7E612DB755D239B41677DA2ADC24BE7BF57"
+    },
+    {
+      "path": "tests\\fixtures\\v1\\checkpoint.ready",
+      "bytes": 28,
+      "sha256": "BC82C18F8D5C3A209328BD59B12D828D8922BEC4D26CB4D557FD4A493A4A9C2F"
+    }
+  ],
+  "protected_unchanged": true
+}

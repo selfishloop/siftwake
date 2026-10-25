@@ -1,5 +1,12 @@
 # FDB
 
+[Churn ve eşzamanlı yük ölçümü](docs/CHURN-CONCURRENT-10K-20261025.md):
+tek belge görünürlük üst sınırı185ms ve akışlı tepe bellek60MB kapısı tutuldu.
+Kirli500 delta ile boşta private31,0MB/WS34,8MB, churn sonrası disk2,501×
+ve eşzamanlı sorgu p95/idle2× kapıları geçmedi. Dört process-kill/reopen
+oracle'ı geçti; motor/format değişmedi. Frunner için kalan kapılar ve sınırlar
+[açık işlerde](docs/OPEN-WORK.md); C ABI yalnız sonraki aşama notudur.
+
 [Eski FDB / güncel FDB / native SQLite aynı10k karşılaştırması](docs/CONSOLIDATED-COMPARISON-10K-20261024.md):
 24 Ekim üç dar optimizasyondan önceki `8a92384` ile güncel `2a9fc2c`,
 aynı oturum/iki çift/API. Akışlı yazma+bakım17,386→14,944s(-%14,04),

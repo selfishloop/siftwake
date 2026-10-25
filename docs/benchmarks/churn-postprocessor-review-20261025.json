@@ -1,0 +1,17 @@
+{
+  "date": "2026-10-25",
+  "scope": "postprocessor-only supervision fixes while ordinary measurement continues",
+  "ordinary_runtime_binaries_unchanged": true,
+  "files": {
+    "tools/measure-churn-kill.py": "E50BDCF7A535AE94E4539BFAAE383597CB9D7E310540179B9641D1D352900F13",
+    "tools/report-churn.py": "D4FB2F35533896091B8BBECB52B621D000BA9E97CDA6459ECE4689B213E2C2FD"
+  },
+  "changes": [
+    "flush coverage uses suspended unsealed footer or absent from checked latest manifest; delayed stdout cannot certify coverage",
+    "private and working-set gate verdicts separate; no overall RAM pass from private only",
+    "dirty500 state always constructed through owned API despite streamed scenario label",
+    "retained-minus-live churn accounting distinguishes live superseded records from obsolete generations",
+    "most expensive observed churn and read rows selected after final data; proposal conditional on measured gate failures"
+  ],
+  "no_new_benchmark_or_compile": true
+}
