@@ -68,6 +68,15 @@ pub(super) fn write_posting(output: &mut impl Write, term: &Term, p: Posting) ->
 }
 
 impl Builder {
+    /// Posting reuse: fully checked record boundaries without term extraction.
+    pub(crate) fn from_native_records(
+        target: &Path,
+        file: &mut File,
+        end: u64,
+        checksum: u32,
+    ) -> Result<(Self, u64)> {
+        Self::from_native(target, file, end, checksum, false)
+    }
     /// Build references only from checked native entry boundaries. Nothing is
     /// published until the visitor has checked the complete source/frame CRCs.
     pub(crate) fn from_native(

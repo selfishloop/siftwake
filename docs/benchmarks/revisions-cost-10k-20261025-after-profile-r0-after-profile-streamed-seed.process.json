@@ -1,0 +1,18 @@
+{
+  "label": "after-profile",
+  "engine": "fdb",
+  "pair": 0,
+  "mode": "seed",
+  "api": "streamed",
+  "exit_code": 0,
+  "wall_s": 20.20300000000134,
+  "disk_sampling_interval_ms": 5,
+  "sampled_disk": {
+    "peak_retained_bytes": 423550973,
+    "samples": 1268
+  },
+  "per_round_peak_retained_bytes": {
+    "0": 423550973
+  },
+  "limitation": "sampled disk peak can miss sub-5ms files; oracle/matrix work included in process lifetime"
+}

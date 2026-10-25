@@ -1,5 +1,7 @@
 #[path = "../tools/bench_support/churn.rs"]
 mod churn;
+#[path = "../tools/bench_support/revision_cost.rs"]
+mod revision_cost;
 use churn::{Backend, Change, Corpus, Result};
 use fdb::{Database, Query, SearchPage, StoredDocument};
 use serde_json::{Value, json};
@@ -26,13 +28,24 @@ impl Backend for Engine {
         })
     }
     fn maintain(&mut self) -> Result<Value> {
+        #[cfg(feature = "diagnostic-timing")]
+        let window = fdb::timing::maintenance::window();
+        #[cfg(feature = "diagnostic-timing")]
+        let _discard = fdb::timing::take();
         let before = serde_json::to_value(self.0.stats()?)?;
         self.0.flush()?;
         let mut completed = usize::from(self.0.wait_for_compaction()?);
         while self.0.start_compaction()? {
             completed += usize::from(self.0.wait_for_compaction()?);
         }
-        Ok(json!({"before":before,"after":self.0.stats()?,"merge_completions":completed}))
+        let mut result =
+            json!({"before":before,"after":self.0.stats()?,"merge_completions":completed});
+        #[cfg(feature = "diagnostic-timing")]
+        {
+            result["cost_profile"] = window.finish();
+            result["cost_timing_counters"] = serde_json::to_value(fdb::timing::take())?;
+        }
+        Ok(result.take())
     }
     fn start_merge(&mut self) -> Result<bool> {
         Ok(self.0.start_compaction()?)
@@ -45,6 +58,8 @@ impl Backend for Engine {
     }
 }
 fn main() -> Result<()> {
+    #[cfg(feature = "diagnostic-timing")]
+    fdb::timing::maintenance::enable();
     churn::start_memory_sampler();
     let args: Vec<_> = std::env::args().skip(1).collect();
     if args.first().is_some_and(|a| a == "prepare") {
@@ -66,6 +81,9 @@ fn main() -> Result<()> {
     engine
         .0
         .set_revision_reclamation(std::env::var_os("FDB_RECLAMATION_CONTROL").is_none());
+    engine
+        .0
+        .set_revision_maintenance_responsive(std::env::var_os("FDB_COST_LEGACY").is_none());
     churn::emit(
         json!({"phase":"opened","engine":"fdb","mode":mode,"api":api,"open_ms":start.elapsed().as_secs_f64()*1000.,"strict":true,"memory":churn::memory(),"stats":engine.stats()?}),
     );
@@ -74,6 +92,12 @@ fn main() -> Result<()> {
             json!({"phase":"liveness","segments":engine.liveness()?,"stats":engine.stats()?}),
         );
         return Ok(());
+    }
+    if mode == "cost-load" {
+        return revision_cost::run(&mut engine, state, path);
+    }
+    if mode.starts_with("kill-retire") || mode == "kill-cancel" {
+        return revision_cost::kill(&mut engine, mode, state, path);
     }
     if mode == "revision-reads" || mode == "revision-write" {
         let mut corpus = Corpus::open()?;

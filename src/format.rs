@@ -163,6 +163,7 @@ pub(crate) fn prefix_crc(file: &mut File, end: u64) -> Result<u32> {
     let mut state = !0;
     let mut size = 0u64;
     loop {
+        crate::engine::maintenance::check()?;
         let n = input.read(&mut buffer)?;
         if n == 0 {
             break;
@@ -216,6 +217,8 @@ pub(crate) fn append_with_sync(file: &mut File, bytes: &[u8], sync: bool) -> Res
     if sync {
         #[cfg(feature = "diagnostic-timing")]
         let _sync = crate::timing::span("wal.sync");
+        #[cfg(feature = "diagnostic-timing")]
+        let _stage = crate::timing::maintenance::span("fsync_publish");
         file.sync_all()?;
     }
     Ok(())
@@ -266,6 +269,7 @@ pub(crate) fn append_checkpoint_changes(
     use std::io::BufWriter;
     let mut changes = changes.peekable();
     loop {
+        crate::engine::maintenance::check()?;
         let lease = crate::write_budget::reserve(64 * 1024, 8 * 1024)?;
         let start = file.seek(SeekFrom::End(0))?;
         file.write_all(&[0; HEADER])?;
@@ -301,6 +305,8 @@ pub(crate) fn append_checkpoint_changes(
             writer.flush()?;
         }
         // Count is known only after streaming. Patch it, then checksum in 64 KiB blocks.
+        #[cfg(feature = "diagnostic-timing")]
+        let frame_crc = crate::timing::maintenance::span("source_crc_verify");
         file.seek(SeekFrom::Start(start + HEADER as u64 + 1))?;
         file.write_all(&count.to_le_bytes())?;
         file.seek(SeekFrom::Start(start + HEADER as u64))?;
@@ -308,11 +314,14 @@ pub(crate) fn append_checkpoint_changes(
         let mut remaining = len;
         let mut buffer = [0; 64 * 1024];
         while remaining != 0 {
+            crate::engine::maintenance::check()?;
             let n = remaining.min(buffer.len());
             file.read_exact(&mut buffer[..n])?;
             state = crc_extend(state, &buffer[..n]);
             remaining -= n;
         }
+        #[cfg(feature = "diagnostic-timing")]
+        drop(frame_crc);
         file.write_all(FOOTER)?;
         let mut header = [0; HEADER];
         header[..4].copy_from_slice(b"TXN2");
@@ -324,7 +333,11 @@ pub(crate) fn append_checkpoint_changes(
         file.seek(SeekFrom::Start(start))?;
         file.write_all(&header)?;
         file.seek(SeekFrom::Start(start + (HEADER + len + 8) as u64))?;
-        file.sync_all()?;
+        {
+            #[cfg(feature = "diagnostic-timing")]
+            let _stage = crate::timing::maintenance::span("fsync_publish");
+            file.sync_all()?;
+        }
         drop(lease);
         if changes.peek().is_none() {
             return Ok(());
@@ -413,6 +426,8 @@ pub(crate) fn replay_prefix_changes(
     end: u64,
     mut emit: impl FnMut(u64, Option<Change>) -> Result<()>,
 ) -> Result<u64> {
+    #[cfg(feature = "diagnostic-timing")]
+    let _stage = crate::timing::maintenance::span("source_validate_replay");
     use std::io::BufReader;
     file.seek(SeekFrom::Start(0))?;
     if end < 8 || file.metadata()?.len() < end {

@@ -178,6 +178,7 @@ impl Database {
         &mut self,
         mutations: impl IntoIterator<Item = Result<Mutation>>,
     ) -> Result<u64> {
+        self.preempt_revision_work()?;
         #[cfg(feature = "diagnostic-timing")]
         let _total = crate::timing::span("stream.commit_total");
         self.healthy()?;

@@ -1,11 +1,14 @@
 # FDB
 
-[Ölü revizyon geri kazanımı — sıralı kapı Adım 1](docs/REVISION-RECLAIM-10K-20261025.md):
-iki dengeli 10 turda disk876,3→358,0MB; ayrı30 tur sonunda365,6MB.
-Oracle ve beş process-kill/reopen geçti. Ancak ishmael offset130/limit1
-birleşik p95+%9,77, bakım toplamı5,77×: **Adım1 KALDI**.
-Prototip korunur, varsayılan kapalı; snapshot/küçük commit adımları bekler.
-Ölçümler, sınırlar ve açık işler rapordadır.
+[Revizyon geri kazanımı bakım maliyeti](docs/REVISION-RECLAIM-COST-10K-20261026.md):
+disk adımı kullanıcı tarafından kabul edildi; case34 izleniyor.
+Yeni maliyet adayı iki dengeli koşuda bakımı 35,35/36,68 saniyeden
+13,95/13,50 saniyeye indirdi; **12 saniye kapısı geçmedi**. Ayrıca 38 sorgunun
+24'ünde p95 kontrolün %5 üzerinde. Kaynak kopyası sırasında 64 tek belge
+commit'inin en kötüsü 82,59ms; bu bütün bakım evreleri için üst sınır değildir.
+Politika varsayılan kapalı; snapshot ve küçük commit adımları başlatılmadı.
+Önceki disk çalışması [ilk raporda](docs/REVISION-RECLAIM-10K-20261025.md),
+güncel kapılar ve sınırlar yeni rapor ile [açık işlerde](docs/OPEN-WORK.md).
 
 [Churn ve eşzamanlı yük ölçümü](docs/CHURN-CONCURRENT-10K-20261025.md):
 tek belge görünürlük üst sınırı185ms ve akışlı tepe bellek60MB kapısı tutuldu.

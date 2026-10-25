@@ -1,0 +1,365 @@
+{
+  "phase": "compare",
+  "baseline_commit": "f7788ca",
+  "protected_before": [
+    {
+      "path": "data\\rkyv-corpus-20261009\\json.payload-bench",
+      "bytes": 2740862279,
+      "sha256": "11F826FCE3F4AE790FEB9FC6DF9B1169F52C2FD699E89FC4A8A4B77AAA41731B"
+    },
+    {
+      "path": "tests\\fixtures\\v1\\checkpoint.fdb",
+      "bytes": 1507,
+      "sha256": "E87667C0FABE64D5A1F59EF86B99F7E612DB755D239B41677DA2ADC24BE7BF57"
+    },
+    {
+      "path": "tests\\fixtures\\v1\\checkpoint.ready",
+      "bytes": 28,
+      "sha256": "BC82C18F8D5C3A209328BD59B12D828D8922BEC4D26CB4D557FD4A493A4A9C2F"
+    }
+  ],
+  "corpus": "same first10000, original churn donor/revision rules; fixed FDB/SQLite slots",
+  "cache": "warm OS; no background/power isolation",
+  "completed": [
+    {
+      "label": "reference",
+      "engine": "fdb",
+      "pair": 0,
+      "mode": "seed",
+      "api": "streamed",
+      "exit_code": 0,
+      "wall_s": 16.5,
+      "disk_sampling_interval_ms": 5,
+      "sampled_disk": {
+        "peak_retained_bytes": 423378971,
+        "samples": 1026
+      },
+      "per_round_peak_retained_bytes": {
+        "0": 423378971
+      },
+      "limitation": "sampled disk peak can miss sub-5ms files; oracle/matrix work included in process lifetime"
+    },
+    {
+      "label": "reference",
+      "engine": "fdb",
+      "pair": 0,
+      "mode": "revisions-10",
+      "api": "streamed",
+      "exit_code": 0,
+      "wall_s": 109.68800000000192,
+      "disk_sampling_interval_ms": 5,
+      "sampled_disk": {
+        "peak_retained_bytes": 466066986,
+        "samples": 6968
+      },
+      "per_round_peak_retained_bytes": {
+        "0": 350412679,
+        "1": 455346810,
+        "2": 454079684,
+        "3": 456357095,
+        "4": 455700279,
+        "5": 457501257,
+        "6": 466066986,
+        "7": 459042856,
+        "8": 458255022,
+        "9": 456471830,
+        "10": 456745582,
+        "11": 357954015
+      },
+      "limitation": "sampled disk peak can miss sub-5ms files; oracle/matrix work included in process lifetime"
+    },
+    {
+      "label": "reference",
+      "engine": "fdb",
+      "pair": 0,
+      "mode": "verify",
+      "api": "streamed",
+      "exit_code": 0,
+      "wall_s": 3.811999999998079,
+      "disk_sampling_interval_ms": 5,
+      "sampled_disk": {
+        "peak_retained_bytes": 379022792,
+        "samples": 121
+      },
+      "per_round_peak_retained_bytes": {
+        "0": 379022792
+      },
+      "limitation": "sampled disk peak can miss sub-5ms files; oracle/matrix work included in process lifetime"
+    },
+    {
+      "label": "candidate",
+      "engine": "fdb",
+      "pair": 0,
+      "mode": "seed",
+      "api": "streamed",
+      "exit_code": 0,
+      "wall_s": 16.71799999999712,
+      "disk_sampling_interval_ms": 5,
+      "sampled_disk": {
+        "peak_retained_bytes": 423297075,
+        "samples": 1047
+      },
+      "per_round_peak_retained_bytes": {
+        "0": 423297075
+      },
+      "limitation": "sampled disk peak can miss sub-5ms files; oracle/matrix work included in process lifetime"
+    },
+    {
+      "label": "candidate",
+      "engine": "fdb",
+      "pair": 0,
+      "mode": "revisions-10",
+      "api": "streamed",
+      "exit_code": 0,
+      "wall_s": 120.45400000000154,
+      "disk_sampling_interval_ms": 5,
+      "sampled_disk": {
+        "peak_retained_bytes": 527738563,
+        "samples": 7531
+      },
+      "per_round_peak_retained_bytes": {
+        "0": 350412679,
+        "1": 456010779,
+        "2": 454104257,
+        "3": 507375370,
+        "4": 478226887,
+        "5": 490767279,
+        "6": 510696798,
+        "7": 527738563,
+        "8": 526044164,
+        "9": 524309196,
+        "10": 513678381,
+        "11": 420644151
+      },
+      "limitation": "sampled disk peak can miss sub-5ms files; oracle/matrix work included in process lifetime"
+    },
+    {
+      "label": "candidate",
+      "engine": "fdb",
+      "pair": 0,
+      "mode": "cost-load",
+      "api": "streamed",
+      "exit_code": 0,
+      "wall_s": 161.375,
+      "disk_sampling_interval_ms": 5,
+      "sampled_disk": {
+        "peak_retained_bytes": 510835633,
+        "samples": 10083
+      },
+      "per_round_peak_retained_bytes": {
+        "0": 510835633
+      },
+      "limitation": "sampled disk peak can miss sub-5ms files; oracle/matrix work included in process lifetime"
+    },
+    {
+      "label": "candidate",
+      "engine": "fdb",
+      "pair": 0,
+      "mode": "verify",
+      "api": "streamed",
+      "exit_code": 0,
+      "wall_s": 3.0,
+      "disk_sampling_interval_ms": 5,
+      "sampled_disk": {
+        "peak_retained_bytes": 490647754,
+        "samples": 190
+      },
+      "per_round_peak_retained_bytes": {
+        "0": 490647754
+      },
+      "limitation": "sampled disk peak can miss sub-5ms files; oracle/matrix work included in process lifetime"
+    },
+    {
+      "label": "sqlite",
+      "engine": "sqlite",
+      "pair": 0,
+      "mode": "seed",
+      "api": "streamed",
+      "exit_code": 0,
+      "wall_s": 44.70300000000134,
+      "disk_sampling_interval_ms": 5,
+      "sampled_disk": {
+        "peak_retained_bytes": 623540024,
+        "samples": 2768
+      },
+      "per_round_peak_retained_bytes": {
+        "0": 623540024
+      },
+      "limitation": "sampled disk peak can miss sub-5ms files; oracle/matrix work included in process lifetime"
+    },
+    {
+      "label": "sqlite",
+      "engine": "sqlite",
+      "pair": 0,
+      "mode": "churn",
+      "api": "streamed",
+      "exit_code": 0,
+      "wall_s": 317.3590000000004,
+      "disk_sampling_interval_ms": 5,
+      "sampled_disk": {
+        "peak_retained_bytes": 693162584,
+        "samples": 20080
+      },
+      "per_round_peak_retained_bytes": {
+        "0": 584396800,
+        "1": 634338704,
+        "2": 642464552,
+        "3": 648449368,
+        "4": 654494136,
+        "5": 661732160,
+        "6": 668399520,
+        "7": 674363472,
+        "8": 679967960,
+        "9": 686876816,
+        "10": 693162584
+      },
+      "limitation": "sampled disk peak can miss sub-5ms files; oracle/matrix work included in process lifetime"
+    },
+    {
+      "label": "sqlite",
+      "engine": "sqlite",
+      "pair": 0,
+      "mode": "verify",
+      "api": "streamed",
+      "exit_code": 0,
+      "wall_s": 32.60899999999674,
+      "disk_sampling_interval_ms": 5,
+      "sampled_disk": {
+        "peak_retained_bytes": 630386688,
+        "samples": 2078
+      },
+      "per_round_peak_retained_bytes": {
+        "0": 630386688
+      },
+      "limitation": "sampled disk peak can miss sub-5ms files; oracle/matrix work included in process lifetime"
+    },
+    {
+      "label": "sqlite",
+      "engine": "sqlite",
+      "pair": 1,
+      "mode": "seed",
+      "api": "streamed",
+      "exit_code": 0,
+      "wall_s": 46.43800000000192,
+      "disk_sampling_interval_ms": 5,
+      "sampled_disk": {
+        "peak_retained_bytes": 624150328,
+        "samples": 2917
+      },
+      "per_round_peak_retained_bytes": {
+        "0": 624150328
+      },
+      "limitation": "sampled disk peak can miss sub-5ms files; oracle/matrix work included in process lifetime"
+    },
+    {
+      "label": "sqlite",
+      "engine": "sqlite",
+      "pair": 1,
+      "mode": "churn",
+      "api": "streamed",
+      "exit_code": 0,
+      "wall_s": 329.07800000000134,
+      "disk_sampling_interval_ms": 5,
+      "sampled_disk": {
+        "peak_retained_bytes": 693162584,
+        "samples": 20816
+      },
+      "per_round_peak_retained_bytes": {
+        "0": 584364032,
+        "1": 634338704,
+        "2": 642464552,
+        "3": 648449368,
+        "4": 654494136,
+        "5": 661732160,
+        "6": 668399520,
+        "7": 674363472,
+        "8": 679386328,
+        "9": 686876816,
+        "10": 693162584
+      },
+      "limitation": "sampled disk peak can miss sub-5ms files; oracle/matrix work included in process lifetime"
+    },
+    {
+      "label": "sqlite",
+      "engine": "sqlite",
+      "pair": 1,
+      "mode": "verify",
+      "api": "streamed",
+      "exit_code": 0,
+      "wall_s": 33.06299999999828,
+      "disk_sampling_interval_ms": 5,
+      "sampled_disk": {
+        "peak_retained_bytes": 630386688,
+        "samples": 2110
+      },
+      "per_round_peak_retained_bytes": {
+        "0": 630386688
+      },
+      "limitation": "sampled disk peak can miss sub-5ms files; oracle/matrix work included in process lifetime"
+    },
+    {
+      "label": "candidate",
+      "engine": "fdb",
+      "pair": 1,
+      "mode": "seed",
+      "api": "streamed",
+      "exit_code": 0,
+      "wall_s": 18.531999999999243,
+      "disk_sampling_interval_ms": 5,
+      "sampled_disk": {
+        "peak_retained_bytes": 423624677,
+        "samples": 1171
+      },
+      "per_round_peak_retained_bytes": {
+        "0": 423624677
+      },
+      "limitation": "sampled disk peak can miss sub-5ms files; oracle/matrix work included in process lifetime"
+    },
+    {
+      "label": "candidate",
+      "engine": "fdb",
+      "pair": 1,
+      "mode": "revisions-10",
+      "api": "streamed",
+      "exit_code": 0,
+      "wall_s": 149.95300000000134,
+      "disk_sampling_interval_ms": 5,
+      "sampled_disk": {
+        "peak_retained_bytes": 527648477,
+        "samples": 9249
+      },
+      "per_round_peak_retained_bytes": {
+        "0": 350412679,
+        "1": 455806031,
+        "2": 454292634,
+        "3": 507522794,
+        "4": 478447971,
+        "5": 491045739,
+        "6": 510901560,
+        "7": 527648477,
+        "8": 525970459,
+        "9": 524546693,
+        "10": 513915899,
+        "11": 420644151
+      },
+      "limitation": "sampled disk peak can miss sub-5ms files; oracle/matrix work included in process lifetime"
+    }
+  ],
+  "programs": {
+    "reference": {
+      "path": "output\\revision-cost-candidate-20261025-v4.exe",
+      "sha256": "28671BA60E21CC3ADE82E33429B5C97A75DA4FD37DC100BB249A525894CEEE19"
+    },
+    "candidate": {
+      "path": "output\\revision-cost-candidate-20261025-v4.exe",
+      "sha256": "28671BA60E21CC3ADE82E33429B5C97A75DA4FD37DC100BB249A525894CEEE19"
+    },
+    "sqlite": {
+      "path": "output\\revisions-sqlite-20261025-v2.exe",
+      "sha256": "6BF817010F59996BB6B1E25D9F79115E4B87A8E40F2AAC8C6A6AF35CA9F1D058"
+    }
+  },
+  "reference_load_limit": "Only legacy writer32 retained, interrupted reference read calibration at saved model/manifest commit boundary; required candidate read/idle probe remains full38x10 per pair.",
+  "status": "candidate_v4_superseded",
+  "reason": "Validated-object prototype accidentally passed index_terms=true, then reused postings. All candidate-v4 timings retained as failed implementation; candidate-fixed gates will use a new frozen v5 binary. Completed legacy and two SQLite runs remain valid references."
+}

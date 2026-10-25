@@ -13,6 +13,7 @@ pub(super) fn check(file: &mut File, end: u64, expected: u32) -> Result<()> {
     let mut remaining = end;
     let mut state = !0;
     while remaining > 0 {
+        crate::engine::maintenance::check()?;
         let n = remaining.min(buffer.len() as u64) as usize;
         {
             #[cfg(feature = "diagnostic-timing")]

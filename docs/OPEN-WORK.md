@@ -1,8 +1,44 @@
 # FDB açık işler
 
+<!-- revision-reclaim-cost-20261025 -->
+2026-10-26 maliyet kapısı **KALDI; varsayılan kapalı, Adım2/3 başlatılmadı**.
+İki dengeli normal koşuda eski reclaim bakım toplamı35,351/36,679s;
+aday13,950/13,500s:12s hedefi tutulmadı. Disk10. turda420,644MB (1,2004×),
+önceki daha agresif reclaim357,954MB idi. Kaynak kopyası sırasında64 tek belge
+commit örneğinde en kötü82,594ms; bu bütün CRC/posting/fsync/install evrelerine
+varış üst sınırı değildir. Eşlenmiş sıcak yük okumalarında38/38 p95≤2×idle,
+en kötü oran1,533×. Normal38 sorgunun24'ünde kontrol+%5 aşıldı; bu arama işi
+kapanmaz. Case34 bu kez+%2,83; kullanıcı kararıyla **izlenen** kalır.
+[Aşama profili, ham örnekler ve bütün kapılar](REVISION-RECLAIM-COST-10K-20261026.md).
+Son diagnostic profilde pacing0; posting remap/akış yazımı4,127s (%32,78),
+indeks yazma/açma2,051s (%16,29) en büyük kalan işler. Bakım pencerelerinde
+29 posting stream /82,638 milyon giriş ID'si var; bu salt map lookup süresi
+değildir. Sonraki öneri arama kapısını koruyarak bu işi azaltmak; eşik gevşetme
+tek başına kabul edilmedi. 30 tur400,074MB (1,1417×), en yüksek bakım sonrası
+1,2036×; son10 tur399,542–419,329MB aralığında. Süresiz plato garantisi yok.
+90 normal/SQLite/uzun tur oracle'ı, yedi gözlenen kill/reopen ve eski okuyucu
+geçti. İlk retirement-after hazırlığı hedefi normal merge'e kaptırdı; bu deneme
+geçti sayılmadı, ayrı retry loguyla kapsandı. Kalıcı codec/0.1 fixture aynı.
+Maliyet düşüşü daha az rewrite ve idle pacing kaldırılmasıyla geldi; tam ölü
+tombstone0 kaynaklar çıktı yazmadan emekli edilir, writer yayımlanmamış işi
+iptal ettirir. Sürekli writer altında bakım ilerlemesi/disk ve kaynak kopyası
+dışındaki evrelerde en kötü yazma gecikmesi ayrıca açık. Yeni kalıcı biçim yok.
+
+2026-10-25 kullanıcı kararı: önceki Adım1'in disk/30tur/oracle/kill kazanımları
+**kabul edildi**. Case34 (ishmael offset130/limit1, önceki pooled p95+%9,77)
+**izlenen** madde; tek başına snapshot'a geçiş engeli sayılmıyor.
+Adım2'den önce yeni bağımsız kapı: 10tur bakım≤12s, disk≤1,3×;
+rewrite altında tek commit p95≤100ms/max≤250ms, okuma p95≤2×idle,
+38-case kontrol±%5, oracle/kill/eski okuyucu uyumluluğu.
+Önce aşama profili, sonra ölçüme göre iyileştirme; politika varsayılan kapalı.
+Snapshot/küçük commit ve dirty open/RAM, çok okuyucu, soğuk yük ve uzun vadeli
+tombstone/geçici dosya temizliği açık kalıyor. C ABI uygulanmayacak.
+
 <!-- revision-reclaim-20261025 -->
 2026-10-25 sıralı kapı çalışması [revizyon raporunda](REVISION-RECLAIM-10K-20261025.md).
-**Adım 1 KALDI; Adım 2 ve 3 başlatılmadı.** Ölü payload teşhisi kesinleşti:
+**Tarihsel ilk rapor kararı: Adım 1 KALDI; Adım 2 ve 3 başlatılmadı.**
+Kullanıcı disk/oracle/kill kısmını sonradan kabul etti; yeni maliyet kapısı
+yukarıdadır. Ölü payload teşhisi kesinleşti:
 kontrolün ilk beş ~53–54MB segmentinde payload %100 ölü; ikili toplamları
 64MiB merge sınırını aşıyor. Seçim ölü ağırlığına bakmıyordu.
 Tek segment rewrite prototipi mevcut codec/posting ve Weak/pin yollarını kullanır.

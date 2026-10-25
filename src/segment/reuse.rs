@@ -4,6 +4,8 @@ use std::cmp::Reverse;
 
 impl DiskIndex {
     pub(crate) fn verify_reuse(&self) -> Result<()> {
+        #[cfg(feature = "diagnostic-timing")]
+        let _verify = crate::timing::maintenance::span("index_crc_verify");
         let size = self.file.metadata()?.len();
         if size < HEADER_SIZE + FOOTER_SIZE {
             return Err(Error::Corrupt("short reuse segment".into()));
@@ -30,6 +32,7 @@ impl DiskIndex {
         let mut offset = 0;
         let mut state = !0;
         while offset < size - FOOTER_SIZE {
+            crate::engine::maintenance::check()?;
             let n = ((size - FOOTER_SIZE - offset) as usize).min(buffer.len());
             read_at(&self.file, offset, &mut buffer[..n])?;
             state = crate::format::crc_extend(state, &buffer[..n]);
@@ -66,6 +69,7 @@ impl Cursor<'_> {
     fn next(&mut self) -> Result<Option<u32>> {
         while self.consumed < self.posting.count {
             if self.position == self.available {
+                crate::engine::maintenance::check()?;
                 self.available =
                     ((self.posting.count - self.consumed) as usize * 4).min(self.buffer.len());
                 read_at(
@@ -174,6 +178,7 @@ fn merge_workspace<const REUSE: bool>(
         }
     }
     while let Some(Reverse((term, n, start, count))) = terms.pop() {
+        crate::engine::maintenance::check()?;
         let mut same = vec![(
             n,
             Posting {

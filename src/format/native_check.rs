@@ -23,6 +23,8 @@ pub(crate) fn visit_native_prefix(
     mut accept: impl FnMut(u64, u64, u8, &[u8]) -> Result<()>,
 ) -> Result<(u64, usize)> {
     #[cfg(feature = "diagnostic-timing")]
+    let _stage = crate::timing::maintenance::span("source_validate_replay");
+    #[cfg(feature = "diagnostic-timing")]
     let _span = crate::timing::span("open.source_native_check");
     file.seek(SeekFrom::Start(0))?;
     if end < 8 || file.metadata()?.len() < end {
@@ -67,6 +69,7 @@ pub(crate) fn visit_native_prefix(
         let mut state = crc_extend(!0, &head);
         let mut remaining = len - 5;
         for _ in 0..count {
+            crate::engine::maintenance::check()?;
             if remaining < 5 {
                 return Err(Error::Corrupt("binary checkpoint entry header".into()));
             }

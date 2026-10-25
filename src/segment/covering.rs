@@ -10,6 +10,9 @@ pub(crate) struct SourceLease {
     pinned: bool,
 }
 impl SourceLease {
+    pub(crate) fn immutable(path: &Path) -> Result<Self> {
+        Self::open(path, true)
+    }
     pub(crate) fn open(path: &Path, immutable: bool) -> Result<Self> {
         #[cfg(windows)]
         if immutable && plain_path(path)? {

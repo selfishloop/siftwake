@@ -829,6 +829,8 @@ impl Builder {
     #[cfg(feature = "experimental-merge-postings")]
     pub(crate) fn finish_reused(mut self, inputs: &[(&DiskIndex, &[u32])]) -> Result<DiskIndex> {
         #[cfg(feature = "diagnostic-timing")]
+        let posting_stage = crate::timing::maintenance::span("posting_remap_write");
+        #[cfg(feature = "diagnostic-timing")]
         let _span = crate::timing::span("builder.finish_reused");
         #[cfg(not(feature = "bounded-engine"))]
         let postings = reuse::merge(inputs, self.writer.as_mut().unwrap(), &mut self.offset)?;
@@ -843,6 +845,8 @@ impl Builder {
             )?;
             postings
         };
+        #[cfg(feature = "diagnostic-timing")]
+        drop(posting_stage);
         self.finish_directory(postings)
     }
 
@@ -907,6 +911,8 @@ impl Builder {
 
     fn finish_directory(mut self, postings: PostingOutput) -> Result<DiskIndex> {
         #[cfg(feature = "diagnostic-timing")]
+        let _index_stage = crate::timing::maintenance::span("index_rewrite_open");
+        #[cfg(feature = "diagnostic-timing")]
         let _directory = crate::timing::span("builder.finish_directory");
         #[cfg(feature = "bounded-engine")]
         let mut postings = postings;
@@ -958,7 +964,11 @@ impl Builder {
         drop(postings);
         writer.flush()?;
         let end = directory_offset + directory_len;
-        let checksum = prefix_crc(writer.get_mut(), end)?;
+        let checksum = {
+            #[cfg(feature = "diagnostic-timing")]
+            let _crc = crate::timing::maintenance::span("index_crc_verify");
+            prefix_crc(writer.get_mut(), end)?
+        };
         // prefix_crc changed the file position; flush already completed above.
         writer.get_mut().seek(SeekFrom::Start(end))?;
         #[cfg(feature = "bounded-engine")]
@@ -976,7 +986,11 @@ impl Builder {
         footer.extend_from_slice(&crc(&footer).to_le_bytes());
         writer.write_all(&footer)?;
         writer.flush()?;
-        writer.get_ref().sync_all()?;
+        {
+            #[cfg(feature = "diagnostic-timing")]
+            let _sync = crate::timing::maintenance::span("fsync_publish");
+            writer.get_ref().sync_all()?;
+        }
         self.writer.take();
         #[cfg(all(feature = "bounded-engine", test))]
         compact::builder_stage("prepared");
@@ -1237,6 +1251,8 @@ impl DiskIndex {
         } else {
             #[cfg(feature = "diagnostic-timing")]
             let _span = crate::timing::span("open.index_crc");
+            #[cfg(feature = "diagnostic-timing")]
+            let _verify = crate::timing::maintenance::span("index_crc_verify");
             checksum::check(&mut file, size - FOOTER_SIZE, expected)?;
         }
         #[cfg(feature = "experimental-streaming-metadata")]

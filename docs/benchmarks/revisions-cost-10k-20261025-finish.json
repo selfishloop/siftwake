@@ -1,0 +1,249 @@
+{
+  "status": "complete",
+  "steps": [
+    {
+      "label": "long",
+      "args": [
+        "C:\\Users\\Serkan\\.cache\\codex-runtimes\\codex-primary-runtime\\dependencies\\python\\python.exe",
+        "-X",
+        "utf8",
+        "tools/measure-revision-cost.py",
+        "--phase",
+        "long"
+      ],
+      "exit_code": 0,
+      "wall_s": 446.1570000000029,
+      "log": "revisions-cost-10k-20261025-long.log",
+      "sha256": "3A9C67E42A26BC9FD80296C9AEDC41F5C2D8C74F9A8FEB104607134588687FA1"
+    },
+    {
+      "label": "old-reader",
+      "args": [
+        "C:\\Users\\Serkan\\Documents\\ChatGPT\\fdb\\output\\churn-fdb-20261024.exe",
+        "verify",
+        "streamed",
+        "C:\\Users\\Serkan\\Documents\\ChatGPT\\fdb\\docs\\benchmarks\\revisions-cost-10k-20261025-long-r0-long-state.json"
+      ],
+      "exit_code": 0,
+      "wall_s": 4.5,
+      "log": "revisions-cost-10k-20261025-old-reader.log",
+      "sha256": "9B7B71163228A09C8DF126D70EA4BA3F6D5A3076E55B3ACA2955561CD36E71A4"
+    },
+    {
+      "label": "fmt-apply",
+      "args": [
+        "cargo",
+        "fmt"
+      ],
+      "exit_code": 0,
+      "wall_s": 2.3909999999996217,
+      "log": "revisions-cost-10k-20261025-fmt-apply.log",
+      "sha256": "E3B0C44298FC1C149AFBF4C8996FB92427AE41E4649B934CA495991B7852B855"
+    },
+    {
+      "label": "kill-build",
+      "args": [
+        "cargo",
+        "build",
+        "--release",
+        "--example",
+        "measure_churn",
+        "--bin",
+        "fdb"
+      ],
+      "exit_code": 0,
+      "wall_s": 58.63999999999942,
+      "log": "revisions-cost-10k-20261025-kill-build.log",
+      "sha256": "9FDC84FB6571A20FB89C9631EA5DF890FC7B286BF0E4C1126D2B0B496A8053C0"
+    },
+    {
+      "label": "kills",
+      "args": [
+        "C:\\Users\\Serkan\\.cache\\codex-runtimes\\codex-primary-runtime\\dependencies\\python\\python.exe",
+        "-X",
+        "utf8",
+        "tools/kill-revision-cost.py"
+      ],
+      "exit_code": 1,
+      "wall_s": 9.03099999999904,
+      "log": "revisions-cost-10k-20261025-kills.log",
+      "sha256": "62ECC4DD933B0F8F9203BEFA72CD3F2B20C7958FEF69997DC3C0F3177FC88995",
+      "superseded_by": "kills-retry1"
+    },
+    {
+      "label": "kill-build-v2",
+      "args": [
+        "cargo",
+        "build",
+        "--release",
+        "--example",
+        "measure_churn",
+        "--bin",
+        "fdb"
+      ],
+      "exit_code": 0,
+      "wall_s": 28.89099999999962,
+      "log": "revisions-cost-10k-20261025-kill-build-v2.log",
+      "sha256": "C55B607F0140B12327306A85BFF10AC2B37685734ED562CC1E4E478EEB4CC2FA"
+    },
+    {
+      "label": "kills-retry1",
+      "args": [
+        "C:\\Users\\Serkan\\.cache\\codex-runtimes\\codex-primary-runtime\\dependencies\\python\\python.exe",
+        "-X",
+        "utf8",
+        "tools/kill-revision-cost.py"
+      ],
+      "exit_code": 0,
+      "wall_s": 44.96900000000096,
+      "log": "revisions-cost-10k-20261025-kills-retry1.log",
+      "sha256": "FEEF275F7616F661A9D29BC128B4EC8FBF321CD532AF5BEC99E411557732B309"
+    },
+    {
+      "label": "profile-build",
+      "args": [
+        "cargo",
+        "build",
+        "--release",
+        "--example",
+        "measure_churn",
+        "--features",
+        "diagnostic-timing"
+      ],
+      "exit_code": 0,
+      "wall_s": 54.73400000000038,
+      "log": "revisions-cost-10k-20261025-profile-build.log",
+      "sha256": "9579241C6AAE482344DB865A2BBC7AB9C82A98A667EBF03EFD340456B448E99D"
+    },
+    {
+      "label": "after-profile",
+      "args": [
+        "C:\\Users\\Serkan\\.cache\\codex-runtimes\\codex-primary-runtime\\dependencies\\python\\python.exe",
+        "-X",
+        "utf8",
+        "tools/measure-revision-cost.py",
+        "--phase",
+        "after-profile"
+      ],
+      "exit_code": 0,
+      "wall_s": 115.73400000000038,
+      "log": "revisions-cost-10k-20261025-after-profile.log",
+      "sha256": "D06384001A504DADE7F25678380A81F173A338D74D23F548C1F83CD54D722151"
+    },
+    {
+      "label": "fmt",
+      "args": [
+        "cargo",
+        "fmt",
+        "--check"
+      ],
+      "exit_code": 0,
+      "wall_s": 1.125,
+      "log": "revisions-cost-10k-20261025-fmt.log",
+      "sha256": "E3B0C44298FC1C149AFBF4C8996FB92427AE41E4649B934CA495991B7852B855"
+    },
+    {
+      "label": "clippy",
+      "args": [
+        "cargo",
+        "clippy",
+        "--all-targets",
+        "--",
+        "-D",
+        "warnings"
+      ],
+      "exit_code": 0,
+      "wall_s": 4.6560000000026776,
+      "log": "revisions-cost-10k-20261025-clippy.log",
+      "sha256": "AFCC5359DC512E987C3DE1FCBF6CB696A34F95C30DF83D7F8A58EBB0798E011C"
+    },
+    {
+      "label": "profile-clippy",
+      "args": [
+        "cargo",
+        "clippy",
+        "--all-targets",
+        "--features",
+        "diagnostic-timing",
+        "--",
+        "-D",
+        "warnings"
+      ],
+      "exit_code": 0,
+      "wall_s": 4.592999999997119,
+      "log": "revisions-cost-10k-20261025-profile-clippy.log",
+      "sha256": "AFB6A67D194C5B54B214B053D159F3E5ABE675143D26774469A5A89EFDD9E6BB"
+    },
+    {
+      "label": "tests",
+      "args": [
+        "cargo",
+        "test"
+      ],
+      "exit_code": 0,
+      "wall_s": 133.75,
+      "log": "revisions-cost-10k-20261025-tests.log",
+      "sha256": "F3B40DF5C2EEEEED22C105E8D8B088D09FC46BB1B16D2B1E3B00EC9FCD3655AF"
+    },
+    {
+      "label": "reference-tests",
+      "args": [
+        "cargo",
+        "test",
+        "--no-default-features",
+        "--lib"
+      ],
+      "exit_code": 0,
+      "wall_s": 33.96799999999712,
+      "log": "revisions-cost-10k-20261025-reference-tests.log",
+      "sha256": "4FCCD988E0A991DC3D9743E20A475DA8875E3CB8FB68FC4CD812E2A70BA17862"
+    },
+    {
+      "label": "harness-tests",
+      "args": [
+        "cargo",
+        "test",
+        "--example",
+        "measure_churn"
+      ],
+      "exit_code": 0,
+      "wall_s": 1.5470000000022992,
+      "log": "revisions-cost-10k-20261025-harness-tests.log",
+      "sha256": "3E1102AD1494E589D46C89E414303AD8F09D76D33E70DBB1D854F8D4AC0E1C90"
+    }
+  ],
+  "protected_before": [
+    {
+      "path": "data\\rkyv-corpus-20261009\\json.payload-bench",
+      "bytes": 2740862279,
+      "sha256": "11F826FCE3F4AE790FEB9FC6DF9B1169F52C2FD699E89FC4A8A4B77AAA41731B"
+    },
+    {
+      "path": "tests\\fixtures\\v1\\checkpoint.fdb",
+      "bytes": 1507,
+      "sha256": "E87667C0FABE64D5A1F59EF86B99F7E612DB755D239B41677DA2ADC24BE7BF57"
+    },
+    {
+      "path": "tests\\fixtures\\v1\\checkpoint.ready",
+      "bytes": 28,
+      "sha256": "BC82C18F8D5C3A209328BD59B12D828D8922BEC4D26CB4D557FD4A493A4A9C2F"
+    }
+  ],
+  "protected_after": [
+    {
+      "path": "data\\rkyv-corpus-20261009\\json.payload-bench",
+      "bytes": 2740862279,
+      "sha256": "11F826FCE3F4AE790FEB9FC6DF9B1169F52C2FD699E89FC4A8A4B77AAA41731B"
+    },
+    {
+      "path": "tests\\fixtures\\v1\\checkpoint.fdb",
+      "bytes": 1507,
+      "sha256": "E87667C0FABE64D5A1F59EF86B99F7E612DB755D239B41677DA2ADC24BE7BF57"
+    },
+    {
+      "path": "tests\\fixtures\\v1\\checkpoint.ready",
+      "bytes": 28,
+      "sha256": "BC82C18F8D5C3A209328BD59B12D828D8922BEC4D26CB4D557FD4A493A4A9C2F"
+    }
+  ]
+}

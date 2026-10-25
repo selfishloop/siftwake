@@ -6,6 +6,7 @@ use crate::{
     Error, Guard, Key, Mutation, Options, Query, Result, SearchPage, Stats, StoredDocument,
     validate_doc, validate_key,
 };
+pub(crate) mod maintenance;
 mod revisions;
 #[cfg(feature = "bounded-engine")]
 mod streamed;
@@ -86,7 +87,14 @@ struct Run {
 struct Job {
     inputs: Vec<Source>,
     output_id: u64,
-    handle: JoinHandle<Result<Run>>,
+    handle: JoinHandle<Result<JobOutput>>,
+    cancel: Option<Arc<maintenance::Control>>,
+    revision: bool,
+}
+enum JobOutput {
+    Replace(Run),
+    Retire,
+    Cancelled,
 }
 
 #[cfg(feature = "experimental-write-maintenance-slots")]
@@ -252,6 +260,8 @@ pub struct Database {
     options: Options,
     job: Option<Job>,
     revision_reclamation: bool,
+    revision_responsive: bool,
+    maintenance_activity: Arc<maintenance::Activity>,
     poisoned: bool,
     #[cfg(feature = "experimental-wal-sync-control")]
     sync_wal: bool,
@@ -260,6 +270,8 @@ pub struct Database {
 }
 
 fn open_source(dir: &Path, mut source: Source, legacy_unknown: bool) -> Result<Run> {
+    #[cfg(feature = "diagnostic-timing")]
+    let _open = crate::timing::maintenance::span("index_rewrite_open");
     #[cfg(feature = "bounded-engine")]
     let mut file =
         crate::segment::SourceLease::open(&source.path(dir, "fdb"), source.kind == Kind::Run)?;
@@ -293,6 +305,8 @@ fn open_source(dir: &Path, mut source: Source, legacy_unknown: bool) -> Result<R
         if !already_checked && (legacy_unknown || cfg!(feature = "experimental-streaming-open")) {
             #[cfg(feature = "diagnostic-timing")]
             let _span = crate::timing::span("open.source_crc");
+            #[cfg(feature = "diagnostic-timing")]
+            let _stage = crate::timing::maintenance::span("source_crc_verify");
             let checksum = format::prefix_crc(&mut file, source.end)?;
             if !legacy_unknown && checksum != source.checksum {
                 return Err(Error::Corrupt("source checkpoint checksum mismatch".into()));
@@ -655,6 +669,8 @@ fn write_run(
     sequence: u64,
     changes: impl Iterator<Item = Result<Change>>,
 ) -> Result<Run> {
+    #[cfg(feature = "diagnostic-timing")]
+    let _run_stage = crate::timing::maintenance::span("index_rewrite_open");
     write_run_prepared(dir, id, sequence, changes, |_| Ok(()))
 }
 
@@ -717,6 +733,21 @@ fn write_run_prepared(
     changes: impl Iterator<Item = Result<Change>>,
     prepare: impl FnOnce(&Source) -> Result<()>,
 ) -> Result<Run> {
+    write_run_ready(dir, id, sequence, changes, |source| {
+        prepare(source)?;
+        Ok(None)
+    })
+}
+
+fn write_run_ready(
+    dir: &Path,
+    id: u64,
+    sequence: u64,
+    changes: impl Iterator<Item = Result<Change>>,
+    prepare: impl FnOnce(&Source) -> Result<Option<Run>>,
+) -> Result<Run> {
+    #[cfg(feature = "diagnostic-timing")]
+    let _run_stage = crate::timing::maintenance::span("index_rewrite_open");
     #[cfg(feature = "experimental-write-maintenance-slots")]
     let _workspace = maintenance_workspace()?;
     #[cfg(feature = "diagnostic-timing")]
@@ -735,6 +766,8 @@ fn write_run_prepared(
         .create_new(true)
         .open(source.path(dir, "fdb"))?;
     file.write_all(format::MAGIC_V4)?;
+    #[cfg(feature = "diagnostic-timing")]
+    let copy = crate::timing::maintenance::span("source_copy_encode");
     #[cfg(feature = "diagnostic-memory")]
     let _origin = crate::memory::Scope::new(4);
     #[cfg(feature = "experimental-write-buffer-budget")]
@@ -772,8 +805,14 @@ fn write_run_prepared(
             )?,
         )?;
     }
+    #[cfg(feature = "diagnostic-timing")]
+    drop(copy);
     source.end = file.metadata()?.len();
-    source.checksum = format::prefix_crc(&mut file, source.end)?;
+    source.checksum = {
+        #[cfg(feature = "diagnostic-timing")]
+        let _crc = crate::timing::maintenance::span("source_crc_verify");
+        format::prefix_crc(&mut file, source.end)?
+    };
     // Finish the writer lifetime before binding the immutable source fingerprint.
     #[cfg(feature = "bounded-engine")]
     drop(file);
@@ -786,7 +825,9 @@ fn write_run_prepared(
     #[cfg(feature = "experimental-write-maintenance-slots")]
     let _builder_workspace = builder_workspace()?;
     // Authoritative source is complete before its derived index is constructed.
-    prepare(&source)?;
+    if let Some(run) = prepare(&source)? {
+        return Ok(run);
+    }
     open_source(dir, source, true)
 }
 
@@ -1153,6 +1194,8 @@ impl Database {
             // The measured prototype retains its disk win, but its read-p95
             // acceptance gate is still open. Explicit opt-in until resolved.
             revision_reclamation: false,
+            revision_responsive: true,
+            maintenance_activity: Arc::default(),
             poisoned: false,
             #[cfg(feature = "experimental-wal-sync-control")]
             sync_wal: true,
@@ -1323,6 +1366,7 @@ impl Database {
         Ok(None)
     }
     pub fn get(&self, key: &Key) -> Result<Option<StoredDocument>> {
+        let _reader = self.maintenance_activity.read();
         self.healthy()?;
         validate_key(key)?;
         if let Some(s) = self.docs.get(key) {
@@ -1363,6 +1407,7 @@ impl Database {
             || self.delta_bytes >= self.options.max_delta_bytes
     }
     pub fn commit(&mut self, mutations: Vec<Mutation>) -> Result<u64> {
+        self.preempt_revision_work()?;
         #[cfg(feature = "diagnostic-timing")]
         let _total = crate::timing::span("commit.total");
         #[cfg(feature = "diagnostic-timing")]
@@ -1787,6 +1832,7 @@ impl Database {
         _hydration: u8,
         pool: &mut std::vec::IntoIter<String>,
     ) -> Result<SearchPage> {
+        let _reader = self.maintenance_activity.read();
         #[cfg(feature = "diagnostic-timing")]
         let _search = crate::timing::span("search.total");
         #[cfg(feature = "diagnostic-timing")]
@@ -2240,6 +2286,8 @@ impl Database {
         self.start_compaction_mode(false)
     }
     fn start_compaction_mode(&mut self, _automatic: bool) -> Result<bool> {
+        #[cfg(feature = "diagnostic-timing")]
+        let _plan = crate::timing::maintenance::span("planning_metadata");
         self.healthy()?;
         self.ensure_sources()?;
         if self.job.is_some() {
@@ -2296,6 +2344,8 @@ impl Database {
         let id = self.allocate()?;
         let handle = std::thread::spawn(move || {
             #[cfg(feature = "diagnostic-timing")]
+            let _worker = crate::timing::maintenance::worker();
+            #[cfg(feature = "diagnostic-timing")]
             let _span = crate::timing::span("merge.worker");
             let sequence = inputs.last().unwrap().source.sequence;
             #[cfg(feature = "experimental-merge-postings")]
@@ -2350,40 +2400,54 @@ impl Database {
                     Ok(Change::Put { stored })
                 }
             });
-            #[cfg(not(feature = "experimental-merge-postings"))]
-            {
-                write_run(&dir, id, sequence, changes)
-            }
-            #[cfg(feature = "experimental-merge-postings")]
-            {
-                write_run_prepared(&dir, id, sequence, changes, |source| {
-                    let builder = reused_builder(&dir, source)?;
-                    let paired: Vec<_> = inputs
-                        .iter()
-                        .zip(&maps)
-                        .map(|(run, map)| (run.index.as_ref(), map.as_slice()))
-                        .collect();
-                    builder.finish_reused(&paired)?;
-                    Ok(())
-                })
-            }
+            let result = {
+                #[cfg(not(feature = "experimental-merge-postings"))]
+                {
+                    write_run(&dir, id, sequence, changes)
+                }
+                #[cfg(feature = "experimental-merge-postings")]
+                {
+                    write_run_prepared(&dir, id, sequence, changes, |source| {
+                        let builder = reused_builder(&dir, source)?;
+                        let paired: Vec<_> = inputs
+                            .iter()
+                            .zip(&maps)
+                            .map(|(run, map)| (run.index.as_ref(), map.as_slice()))
+                            .collect();
+                        builder.finish_reused(&paired)?;
+                        Ok(())
+                    })
+                }
+            };
+            result.map(JobOutput::Replace)
         });
         self.job = Some(Job {
             inputs: descriptors,
             output_id: id,
             handle,
+            cancel: None,
+            revision: false,
         });
         Ok(true)
     }
     fn install(&mut self, job: Job) -> Result<bool> {
         #[cfg(feature = "diagnostic-timing")]
+        let _install = crate::timing::maintenance::span("publication_reclaim");
+        #[cfg(feature = "diagnostic-timing")]
+        let join_stage = crate::timing::maintenance::span("join_wait");
+        #[cfg(feature = "diagnostic-timing")]
         let join = crate::timing::span("merge.join_wait");
-        let run = job
+        let output = job
             .handle
             .join()
             .map_err(|_| Error::Invalid("compaction worker panicked".into()))??;
         #[cfg(feature = "diagnostic-timing")]
         drop(join);
+        #[cfg(feature = "diagnostic-timing")]
+        drop(join_stage);
+        if matches!(output, JobOutput::Cancelled) {
+            return Ok(false);
+        }
         let Some(start) = self
             .runs
             .windows(job.inputs.len())
@@ -2391,8 +2455,16 @@ impl Database {
         else {
             return Err(Error::Corrupt("compaction inputs changed".into()));
         };
+        let replacement = match output {
+            JobOutput::Replace(run) => vec![run],
+            JobOutput::Retire => vec![],
+            JobOutput::Cancelled => unreachable!(),
+        };
         let mut descriptors = self.descriptors();
-        descriptors.splice(start..start + job.inputs.len(), [run.source.clone()]);
+        descriptors.splice(
+            start..start + job.inputs.len(),
+            replacement.iter().map(|r| r.source.clone()),
+        );
         let id = self.allocate()?;
         self.publish(
             id,
@@ -2402,7 +2474,10 @@ impl Database {
                 active: self.active.clone(),
             },
         )?;
-        for old in self.runs.splice(start..start + job.inputs.len(), [run]) {
+        for old in self
+            .runs
+            .splice(start..start + job.inputs.len(), replacement)
+        {
             self.retired.push((old.source, Arc::downgrade(&old.index)));
         }
         #[cfg(feature = "experimental-paged-metadata")]

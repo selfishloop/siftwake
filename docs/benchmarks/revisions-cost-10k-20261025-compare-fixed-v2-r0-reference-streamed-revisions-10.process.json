@@ -1,0 +1,29 @@
+{
+  "label": "reference",
+  "engine": "fdb",
+  "pair": 0,
+  "mode": "revisions-10",
+  "api": "streamed",
+  "exit_code": 0,
+  "wall_s": 142.21800000000076,
+  "disk_sampling_interval_ms": 5,
+  "sampled_disk": {
+    "peak_retained_bytes": 466810834,
+    "samples": 8974
+  },
+  "per_round_peak_retained_bytes": {
+    "0": 350412679,
+    "1": 455584894,
+    "2": 454169771,
+    "3": 456193294,
+    "4": 455470960,
+    "5": 457975584,
+    "6": 466810834,
+    "7": 459484132,
+    "8": 458921418,
+    "9": 457569047,
+    "10": 457453765,
+    "11": 357954015
+  },
+  "limitation": "sampled disk peak can miss sub-5ms files; oracle/matrix work included in process lifetime"
+}

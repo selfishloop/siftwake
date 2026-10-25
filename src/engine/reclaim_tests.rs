@@ -54,12 +54,14 @@ fn unpublished_worker_output_below_a_newer_root_is_pinned_until_install() {
         let run = write_run_prepared(&root, id, sequence, changes.into_iter().map(Ok), |_| Ok(()))?;
         ready_tx.send(()).unwrap();
         release_rx.recv().unwrap();
-        Ok(run)
+        Ok(JobOutput::Replace(run))
     });
     db.job = Some(Job {
         inputs: db.descriptors(),
         output_id: id,
         handle,
+        cancel: None,
+        revision: false,
     });
     ready_rx.recv_timeout(Duration::from_secs(20)).unwrap();
     db.commit(vec![put("c")]).unwrap();
@@ -95,6 +97,8 @@ fn drop_keeps_database_lock_until_worker_has_stopped() {
         inputs: db.descriptors(),
         output_id: id,
         handle,
+        cancel: None,
+        revision: false,
     });
     let (start_tx, start_rx) = mpsc::channel();
     let (done_tx, done_rx) = mpsc::channel();

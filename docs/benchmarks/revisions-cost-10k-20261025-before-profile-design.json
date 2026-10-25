@@ -1,0 +1,114 @@
+{
+  "phase": "before-profile",
+  "baseline_commit": "f7788ca",
+  "protected_before": [
+    {
+      "path": "data\\rkyv-corpus-20261009\\json.payload-bench",
+      "bytes": 2740862279,
+      "sha256": "11F826FCE3F4AE790FEB9FC6DF9B1169F52C2FD699E89FC4A8A4B77AAA41731B"
+    },
+    {
+      "path": "tests\\fixtures\\v1\\checkpoint.fdb",
+      "bytes": 1507,
+      "sha256": "E87667C0FABE64D5A1F59EF86B99F7E612DB755D239B41677DA2ADC24BE7BF57"
+    },
+    {
+      "path": "tests\\fixtures\\v1\\checkpoint.ready",
+      "bytes": 28,
+      "sha256": "BC82C18F8D5C3A209328BD59B12D828D8922BEC4D26CB4D557FD4A493A4A9C2F"
+    }
+  ],
+  "corpus": "same first10000, original churn donor/revision rules; fixed FDB/SQLite slots",
+  "cache": "warm OS; no background/power isolation",
+  "completed": [
+    {
+      "label": "before-profile",
+      "engine": "fdb",
+      "pair": 0,
+      "mode": "seed",
+      "api": "streamed",
+      "exit_code": 0,
+      "wall_s": 21.45300000000134,
+      "disk_sampling_interval_ms": 5,
+      "sampled_disk": {
+        "peak_retained_bytes": 423591920,
+        "samples": 1349
+      },
+      "per_round_peak_retained_bytes": {
+        "0": 423591920
+      },
+      "limitation": "sampled disk peak can miss sub-5ms files; oracle/matrix work included in process lifetime"
+    },
+    {
+      "label": "before-profile",
+      "engine": "fdb",
+      "pair": 0,
+      "mode": "churn",
+      "api": "streamed",
+      "exit_code": 0,
+      "wall_s": 123.59299999999712,
+      "disk_sampling_interval_ms": 5,
+      "sampled_disk": {
+        "peak_retained_bytes": 467007380,
+        "samples": 7774
+      },
+      "per_round_peak_retained_bytes": {
+        "0": 350412679,
+        "1": 456141805,
+        "2": 454390897,
+        "3": 456041754,
+        "4": 455087325,
+        "5": 457869104,
+        "6": 467007380,
+        "7": 458993716,
+        "8": 458872278,
+        "9": 457151363,
+        "10": 457216249,
+        "11": 357954015
+      },
+      "limitation": "sampled disk peak can miss sub-5ms files; oracle/matrix work included in process lifetime"
+    },
+    {
+      "label": "before-profile",
+      "engine": "fdb",
+      "pair": 0,
+      "mode": "verify",
+      "api": "streamed",
+      "exit_code": 0,
+      "wall_s": 2.875,
+      "disk_sampling_interval_ms": 5,
+      "sampled_disk": {
+        "peak_retained_bytes": 357954015,
+        "samples": 184
+      },
+      "per_round_peak_retained_bytes": {
+        "0": 357954015
+      },
+      "limitation": "sampled disk peak can miss sub-5ms files; oracle/matrix work included in process lifetime"
+    }
+  ],
+  "programs": {
+    "before-profile": {
+      "path": "output\\revision-cost-before-profile-20261025.exe",
+      "sha256": "54626B452501253A7D348D2F1FD54DF34AACE807DDA71AAD02999B4C65497EFA"
+    }
+  },
+  "protected_after": [
+    {
+      "path": "data\\rkyv-corpus-20261009\\json.payload-bench",
+      "bytes": 2740862279,
+      "sha256": "11F826FCE3F4AE790FEB9FC6DF9B1169F52C2FD699E89FC4A8A4B77AAA41731B"
+    },
+    {
+      "path": "tests\\fixtures\\v1\\checkpoint.fdb",
+      "bytes": 1507,
+      "sha256": "E87667C0FABE64D5A1F59EF86B99F7E612DB755D239B41677DA2ADC24BE7BF57"
+    },
+    {
+      "path": "tests\\fixtures\\v1\\checkpoint.ready",
+      "bytes": 28,
+      "sha256": "BC82C18F8D5C3A209328BD59B12D828D8922BEC4D26CB4D557FD4A493A4A9C2F"
+    }
+  ],
+  "complete": true
+}

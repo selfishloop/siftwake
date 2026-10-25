@@ -1,0 +1,51 @@
+{
+  "phase": "compare",
+  "baseline_commit": "f7788ca",
+  "protected_before": [
+    {
+      "path": "data\\rkyv-corpus-20261009\\json.payload-bench",
+      "bytes": 2740862279,
+      "sha256": "11F826FCE3F4AE790FEB9FC6DF9B1169F52C2FD699E89FC4A8A4B77AAA41731B"
+    },
+    {
+      "path": "tests\\fixtures\\v1\\checkpoint.fdb",
+      "bytes": 1507,
+      "sha256": "E87667C0FABE64D5A1F59EF86B99F7E612DB755D239B41677DA2ADC24BE7BF57"
+    },
+    {
+      "path": "tests\\fixtures\\v1\\checkpoint.ready",
+      "bytes": 28,
+      "sha256": "BC82C18F8D5C3A209328BD59B12D828D8922BEC4D26CB4D557FD4A493A4A9C2F"
+    }
+  ],
+  "corpus": "same first10000, original churn donor/revision rules; fixed FDB/SQLite slots",
+  "cache": "warm OS; no background/power isolation",
+  "completed": [
+    {
+      "label": "reference",
+      "engine": "fdb",
+      "pair": 0,
+      "mode": "seed",
+      "api": "streamed",
+      "exit_code": 0,
+      "wall_s": 16.65700000000288,
+      "disk_sampling_interval_ms": 5,
+      "sampled_disk": {
+        "peak_retained_bytes": 423215181,
+        "samples": 1042
+      },
+      "per_round_peak_retained_bytes": {
+        "0": 423215181
+      },
+      "limitation": "sampled disk peak can miss sub-5ms files; oracle/matrix work included in process lifetime"
+    }
+  ],
+  "programs": {
+    "reference": {
+      "path": "output\\revision-cost-candidate-20261025-v3.exe",
+      "sha256": "BD2423828733F7806799D22464C289B4A37CFD91FE571F3A853E99B2A27180D7"
+    }
+  },
+  "status": "calibration_interrupted_before_load",
+  "reason": "A cold visibility-cache query was an unfair idle control in the smoke load probe. Preserve partial run, rerun balanced acceptance with equal untimed warmup."
+}

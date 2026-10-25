@@ -1,0 +1,31 @@
+{
+  "status": "complete",
+  "protected_unchanged": true,
+  "designs": [
+    "before-profile",
+    "compare-fixed-v2",
+    "long",
+    "after-profile"
+  ],
+  "frozen_programs_verified": true,
+  "sqlite_frozen_two_runs_verified": true,
+  "source_magic_changes": [],
+  "dependencies_unchanged": true,
+  "default_enabled": false,
+  "gates": {
+    "maintenance_12s": false,
+    "disk_1_3": true,
+    "write_p95_100": true,
+    "write_max_250": true,
+    "reads_twice_idle": true,
+    "search_5percent": false,
+    "oracle": true,
+    "kill": true,
+    "old_reader": true
+  },
+  "case34": "tracked",
+  "kill_cases": 7,
+  "active_write_samples": 64,
+  "loaded_read_samples": 760,
+  "raw_profiles": 20
+}

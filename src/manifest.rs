@@ -175,6 +175,8 @@ fn publish_ready(pending: &Path, ready: &Path) -> Result<()> {
 }
 
 pub(crate) fn publish(dir: &Path, id: u64, manifest: &Manifest) -> Result<()> {
+    #[cfg(feature = "diagnostic-timing")]
+    let _publish = crate::timing::maintenance::span("fsync_publish");
     let payload = serde_json::to_vec(manifest)?;
     if payload.len() > 16 * 1024 * 1024 - 24 {
         return Err(Error::Invalid("manifest exceeds 16 MiB".into()));

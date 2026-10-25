@@ -1,0 +1,134 @@
+{
+  "phase": "long",
+  "baseline_commit": "f7788ca",
+  "protected_before": [
+    {
+      "path": "data\\rkyv-corpus-20261009\\json.payload-bench",
+      "bytes": 2740862279,
+      "sha256": "11F826FCE3F4AE790FEB9FC6DF9B1169F52C2FD699E89FC4A8A4B77AAA41731B"
+    },
+    {
+      "path": "tests\\fixtures\\v1\\checkpoint.fdb",
+      "bytes": 1507,
+      "sha256": "E87667C0FABE64D5A1F59EF86B99F7E612DB755D239B41677DA2ADC24BE7BF57"
+    },
+    {
+      "path": "tests\\fixtures\\v1\\checkpoint.ready",
+      "bytes": 28,
+      "sha256": "BC82C18F8D5C3A209328BD59B12D828D8922BEC4D26CB4D557FD4A493A4A9C2F"
+    }
+  ],
+  "corpus": "same first10000, original churn donor/revision rules; fixed FDB/SQLite slots",
+  "cache": "warm OS; no background/power isolation",
+  "completed": [
+    {
+      "label": "long",
+      "engine": "fdb",
+      "pair": 0,
+      "mode": "seed",
+      "api": "streamed",
+      "exit_code": 0,
+      "wall_s": 19.985000000000582,
+      "disk_sampling_interval_ms": 5,
+      "sampled_disk": {
+        "peak_retained_bytes": 423501833,
+        "samples": 1256
+      },
+      "per_round_peak_retained_bytes": {
+        "0": 423501833
+      },
+      "limitation": "sampled disk peak can miss sub-5ms files; oracle/matrix work included in process lifetime"
+    },
+    {
+      "label": "long",
+      "engine": "fdb",
+      "pair": 0,
+      "mode": "revisions-30",
+      "api": "streamed",
+      "exit_code": 0,
+      "wall_s": 416.96900000000096,
+      "disk_sampling_interval_ms": 5,
+      "sampled_disk": {
+        "peak_retained_bytes": 530267292,
+        "samples": 26188
+      },
+      "per_round_peak_retained_bytes": {
+        "0": 350412679,
+        "1": 456215510,
+        "2": 454546505,
+        "3": 507424517,
+        "4": 477210287,
+        "5": 490832799,
+        "6": 511032605,
+        "7": 514930054,
+        "8": 526019599,
+        "9": 524186342,
+        "10": 514177975,
+        "11": 529044615,
+        "12": 530267292,
+        "13": 520736610,
+        "14": 517991675,
+        "15": 510029082,
+        "16": 515851430,
+        "17": 506656500,
+        "18": 501896464,
+        "19": 510908456,
+        "20": 521041296,
+        "21": 519434036,
+        "22": 512590869,
+        "23": 525076712,
+        "24": 525996344,
+        "25": 515583421,
+        "26": 511583033,
+        "27": 526976566,
+        "28": 520153939,
+        "29": 506332294,
+        "30": 506512280,
+        "31": 400074268
+      },
+      "limitation": "sampled disk peak can miss sub-5ms files; oracle/matrix work included in process lifetime"
+    },
+    {
+      "label": "long",
+      "engine": "fdb",
+      "pair": 0,
+      "mode": "verify",
+      "api": "streamed",
+      "exit_code": 0,
+      "wall_s": 2.7030000000013388,
+      "disk_sampling_interval_ms": 5,
+      "sampled_disk": {
+        "peak_retained_bytes": 400074268,
+        "samples": 174
+      },
+      "per_round_peak_retained_bytes": {
+        "0": 400074268
+      },
+      "limitation": "sampled disk peak can miss sub-5ms files; oracle/matrix work included in process lifetime"
+    }
+  ],
+  "programs": {
+    "long": {
+      "path": "output\\revision-cost-candidate-20261025-v6.exe",
+      "sha256": "B2CFEEFE42D5AE6CED0A8AA24A23C23E20BE3ACB132226C2A1126D0FABC6033C"
+    }
+  },
+  "protected_after": [
+    {
+      "path": "data\\rkyv-corpus-20261009\\json.payload-bench",
+      "bytes": 2740862279,
+      "sha256": "11F826FCE3F4AE790FEB9FC6DF9B1169F52C2FD699E89FC4A8A4B77AAA41731B"
+    },
+    {
+      "path": "tests\\fixtures\\v1\\checkpoint.fdb",
+      "bytes": 1507,
+      "sha256": "E87667C0FABE64D5A1F59EF86B99F7E612DB755D239B41677DA2ADC24BE7BF57"
+    },
+    {
+      "path": "tests\\fixtures\\v1\\checkpoint.ready",
+      "bytes": 28,
+      "sha256": "BC82C18F8D5C3A209328BD59B12D828D8922BEC4D26CB4D557FD4A493A4A9C2F"
+    }
+  ],
+  "complete": true
+}

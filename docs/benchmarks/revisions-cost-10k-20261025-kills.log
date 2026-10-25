@@ -1,0 +1,12 @@
+{"engine": "fdb", "mode": "verify", "api": "streamed", "log": "revisions-cost-kill-10k-20261025-kill-retire-before-fdb-streamed-verify.jsonl", "exit_code": 0, "wall_s": 3.9219999999986612}
+Traceback (most recent call last):
+  File "C:\Users\Serkan\Documents\ChatGPT\fdb\tools\kill-revision-cost.py", line 45, in <module>
+    if __name__=='__main__':main()
+                            ^^^^^^
+  File "C:\Users\Serkan\Documents\ChatGPT\fdb\tools\kill-revision-cost.py", line 39, in main
+    for mode in ['kill-retire-before','kill-retire-after','kill-cancel']:results.append(barrier(mode,state))
+                                                                                        ^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Serkan\Documents\ChatGPT\fdb\tools\kill-revision-cost.py", line 20, in barrier
+    assert phase is not None,(mode,child.poll())
+           ^^^^^^^^^^^^^^^^^
+AssertionError: ('kill-retire-after', None)

@@ -1,0 +1,351 @@
+{
+  "phase": "compare-fixed",
+  "baseline_commit": "f7788ca",
+  "protected_before": [
+    {
+      "path": "data\\rkyv-corpus-20261009\\json.payload-bench",
+      "bytes": 2740862279,
+      "sha256": "11F826FCE3F4AE790FEB9FC6DF9B1169F52C2FD699E89FC4A8A4B77AAA41731B"
+    },
+    {
+      "path": "tests\\fixtures\\v1\\checkpoint.fdb",
+      "bytes": 1507,
+      "sha256": "E87667C0FABE64D5A1F59EF86B99F7E612DB755D239B41677DA2ADC24BE7BF57"
+    },
+    {
+      "path": "tests\\fixtures\\v1\\checkpoint.ready",
+      "bytes": 28,
+      "sha256": "BC82C18F8D5C3A209328BD59B12D828D8922BEC4D26CB4D557FD4A493A4A9C2F"
+    }
+  ],
+  "corpus": "same first10000, original churn donor/revision rules; fixed FDB/SQLite slots",
+  "cache": "warm OS; no background/power isolation",
+  "completed": [
+    {
+      "label": "reference",
+      "engine": "fdb",
+      "pair": 0,
+      "mode": "seed",
+      "api": "streamed",
+      "exit_code": 0,
+      "wall_s": 19.406999999999243,
+      "disk_sampling_interval_ms": 5,
+      "sampled_disk": {
+        "peak_retained_bytes": 423378971,
+        "samples": 1215
+      },
+      "per_round_peak_retained_bytes": {
+        "0": 423378971
+      },
+      "limitation": "sampled disk peak can miss sub-5ms files; oracle/matrix work included in process lifetime"
+    },
+    {
+      "label": "reference",
+      "engine": "fdb",
+      "pair": 0,
+      "mode": "revisions-10",
+      "api": "streamed",
+      "exit_code": 0,
+      "wall_s": 142.21800000000076,
+      "disk_sampling_interval_ms": 5,
+      "sampled_disk": {
+        "peak_retained_bytes": 466810834,
+        "samples": 8974
+      },
+      "per_round_peak_retained_bytes": {
+        "0": 350412679,
+        "1": 455584894,
+        "2": 454169771,
+        "3": 456193294,
+        "4": 455470960,
+        "5": 457975584,
+        "6": 466810834,
+        "7": 459484132,
+        "8": 458921418,
+        "9": 457569047,
+        "10": 457453765,
+        "11": 357954015
+      },
+      "limitation": "sampled disk peak can miss sub-5ms files; oracle/matrix work included in process lifetime"
+    },
+    {
+      "label": "reference",
+      "engine": "fdb",
+      "pair": 0,
+      "mode": "verify",
+      "api": "streamed",
+      "exit_code": 0,
+      "wall_s": 2.610000000000582,
+      "disk_sampling_interval_ms": 5,
+      "sampled_disk": {
+        "peak_retained_bytes": 357954015,
+        "samples": 166
+      },
+      "per_round_peak_retained_bytes": {
+        "0": 357954015
+      },
+      "limitation": "sampled disk peak can miss sub-5ms files; oracle/matrix work included in process lifetime"
+    },
+    {
+      "label": "candidate-fixed",
+      "engine": "fdb",
+      "pair": 0,
+      "mode": "seed",
+      "api": "streamed",
+      "exit_code": 0,
+      "wall_s": 21.59299999999712,
+      "disk_sampling_interval_ms": 5,
+      "sampled_disk": {
+        "peak_retained_bytes": 423739347,
+        "samples": 1342
+      },
+      "per_round_peak_retained_bytes": {
+        "0": 423739347
+      },
+      "limitation": "sampled disk peak can miss sub-5ms files; oracle/matrix work included in process lifetime"
+    },
+    {
+      "label": "candidate-fixed",
+      "engine": "fdb",
+      "pair": 0,
+      "mode": "revisions-10",
+      "api": "streamed",
+      "exit_code": 0,
+      "wall_s": 143.07900000000154,
+      "disk_sampling_interval_ms": 5,
+      "sampled_disk": {
+        "peak_retained_bytes": 525749341,
+        "samples": 8943
+      },
+      "per_round_peak_retained_bytes": {
+        "0": 350412679,
+        "1": 455814218,
+        "2": 454546505,
+        "3": 507301655,
+        "4": 477284002,
+        "5": 491111254,
+        "6": 510506222,
+        "7": 514512366,
+        "8": 525749341,
+        "9": 524276429,
+        "10": 513891331,
+        "11": 420644151
+      },
+      "limitation": "sampled disk peak can miss sub-5ms files; oracle/matrix work included in process lifetime"
+    },
+    {
+      "label": "candidate-fixed",
+      "engine": "fdb",
+      "pair": 0,
+      "mode": "cost-load",
+      "api": "streamed",
+      "exit_code": 0,
+      "wall_s": 156.73400000000038,
+      "disk_sampling_interval_ms": 5,
+      "sampled_disk": {
+        "peak_retained_bytes": 511491581,
+        "samples": 9853
+      },
+      "per_round_peak_retained_bytes": {
+        "0": 511491581
+      },
+      "limitation": "sampled disk peak can miss sub-5ms files; oracle/matrix work included in process lifetime"
+    },
+    {
+      "label": "candidate-fixed",
+      "engine": "fdb",
+      "pair": 0,
+      "mode": "verify",
+      "api": "streamed",
+      "exit_code": 0,
+      "wall_s": 3.061999999998079,
+      "disk_sampling_interval_ms": 5,
+      "sampled_disk": {
+        "peak_retained_bytes": 490647754,
+        "samples": 195
+      },
+      "per_round_peak_retained_bytes": {
+        "0": 490647754
+      },
+      "limitation": "sampled disk peak can miss sub-5ms files; oracle/matrix work included in process lifetime"
+    },
+    {
+      "label": "candidate-fixed",
+      "engine": "fdb",
+      "pair": 1,
+      "mode": "seed",
+      "api": "streamed",
+      "exit_code": 0,
+      "wall_s": 23.06199999999808,
+      "disk_sampling_interval_ms": 5,
+      "sampled_disk": {
+        "peak_retained_bytes": 423297075,
+        "samples": 1432
+      },
+      "per_round_peak_retained_bytes": {
+        "0": 423297075
+      },
+      "limitation": "sampled disk peak can miss sub-5ms files; oracle/matrix work included in process lifetime"
+    },
+    {
+      "label": "candidate-fixed",
+      "engine": "fdb",
+      "pair": 1,
+      "mode": "revisions-10",
+      "api": "streamed",
+      "exit_code": 0,
+      "wall_s": 132.21900000000096,
+      "disk_sampling_interval_ms": 5,
+      "sampled_disk": {
+        "peak_retained_bytes": 526027788,
+        "samples": 8331
+      },
+      "per_round_peak_retained_bytes": {
+        "0": 350412679,
+        "1": 456199130,
+        "2": 454595645,
+        "3": 506912606,
+        "4": 477513328,
+        "5": 490873751,
+        "6": 510852424,
+        "7": 514995571,
+        "8": 526027788,
+        "9": 523798132,
+        "10": 514202543,
+        "11": 420644151
+      },
+      "limitation": "sampled disk peak can miss sub-5ms files; oracle/matrix work included in process lifetime"
+    },
+    {
+      "label": "candidate-fixed",
+      "engine": "fdb",
+      "pair": 1,
+      "mode": "cost-load",
+      "api": "streamed",
+      "exit_code": 0,
+      "wall_s": 166.04699999999866,
+      "disk_sampling_interval_ms": 5,
+      "sampled_disk": {
+        "peak_retained_bytes": 510753777,
+        "samples": 10318
+      },
+      "per_round_peak_retained_bytes": {
+        "0": 510753777
+      },
+      "limitation": "sampled disk peak can miss sub-5ms files; oracle/matrix work included in process lifetime"
+    },
+    {
+      "label": "candidate-fixed",
+      "engine": "fdb",
+      "pair": 1,
+      "mode": "verify",
+      "api": "streamed",
+      "exit_code": 0,
+      "wall_s": 2.937000000001717,
+      "disk_sampling_interval_ms": 5,
+      "sampled_disk": {
+        "peak_retained_bytes": 490647754,
+        "samples": 187
+      },
+      "per_round_peak_retained_bytes": {
+        "0": 490647754
+      },
+      "limitation": "sampled disk peak can miss sub-5ms files; oracle/matrix work included in process lifetime"
+    },
+    {
+      "label": "reference",
+      "engine": "fdb",
+      "pair": 1,
+      "mode": "seed",
+      "api": "streamed",
+      "exit_code": 0,
+      "wall_s": 19.76599999999962,
+      "disk_sampling_interval_ms": 5,
+      "sampled_disk": {
+        "peak_retained_bytes": 423935911,
+        "samples": 1244
+      },
+      "per_round_peak_retained_bytes": {
+        "0": 423935911
+      },
+      "limitation": "sampled disk peak can miss sub-5ms files; oracle/matrix work included in process lifetime"
+    },
+    {
+      "label": "reference",
+      "engine": "fdb",
+      "pair": 1,
+      "mode": "revisions-10",
+      "api": "streamed",
+      "exit_code": 0,
+      "wall_s": 150.54599999999846,
+      "disk_sampling_interval_ms": 5,
+      "sampled_disk": {
+        "peak_retained_bytes": 466638842,
+        "samples": 9397
+      },
+      "per_round_peak_retained_bytes": {
+        "0": 350412679,
+        "1": 455953456,
+        "2": 454186154,
+        "3": 455976241,
+        "4": 455610191,
+        "5": 458286799,
+        "6": 466638842,
+        "7": 459074629,
+        "8": 458913227,
+        "9": 456995745,
+        "10": 457412816,
+        "11": 357954015
+      },
+      "limitation": "sampled disk peak can miss sub-5ms files; oracle/matrix work included in process lifetime"
+    },
+    {
+      "label": "reference",
+      "engine": "fdb",
+      "pair": 1,
+      "mode": "verify",
+      "api": "streamed",
+      "exit_code": 0,
+      "wall_s": 2.610000000000582,
+      "disk_sampling_interval_ms": 5,
+      "sampled_disk": {
+        "peak_retained_bytes": 357954015,
+        "samples": 167
+      },
+      "per_round_peak_retained_bytes": {
+        "0": 357954015
+      },
+      "limitation": "sampled disk peak can miss sub-5ms files; oracle/matrix work included in process lifetime"
+    }
+  ],
+  "sqlite_reference": "Fresh two SQLite churn10/verify runs in compare-v2, unchanged frozen executable. No SQLite database is regenerated for a Rust-only construction-flag correction.",
+  "superseded_candidate": "compare-v2/v4 indexed terms before posting reuse; compare-fixed/v5 changed the wrong bool at SourceLease. Both preserved and excluded. Fixed v6 uses named immutable and records-only constructors, with an output write-denial regression test.",
+  "programs": {
+    "reference": {
+      "path": "output\\revision-cost-candidate-20261025-v6.exe",
+      "sha256": "B2CFEEFE42D5AE6CED0A8AA24A23C23E20BE3ACB132226C2A1126D0FABC6033C"
+    },
+    "candidate-fixed": {
+      "path": "output\\revision-cost-candidate-20261025-v6.exe",
+      "sha256": "B2CFEEFE42D5AE6CED0A8AA24A23C23E20BE3ACB132226C2A1126D0FABC6033C"
+    }
+  },
+  "protected_after": [
+    {
+      "path": "data\\rkyv-corpus-20261009\\json.payload-bench",
+      "bytes": 2740862279,
+      "sha256": "11F826FCE3F4AE790FEB9FC6DF9B1169F52C2FD699E89FC4A8A4B77AAA41731B"
+    },
+    {
+      "path": "tests\\fixtures\\v1\\checkpoint.fdb",
+      "bytes": 1507,
+      "sha256": "E87667C0FABE64D5A1F59EF86B99F7E612DB755D239B41677DA2ADC24BE7BF57"
+    },
+    {
+      "path": "tests\\fixtures\\v1\\checkpoint.ready",
+      "bytes": 28,
+      "sha256": "BC82C18F8D5C3A209328BD59B12D828D8922BEC4D26CB4D557FD4A493A4A9C2F"
+    }
+  ],
+  "complete": true
+}

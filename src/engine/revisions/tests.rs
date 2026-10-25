@@ -54,7 +54,28 @@ fn rewrite_preserves_barriers_pins_pending_delta_and_reused_postings() {
     db.commit(vec![put(79, "latestrevision")]).unwrap();
     let sequence = db.sequence;
     db.wait_for_compaction().unwrap();
+    // Responsive work may have been cancelled by that writer. Complete its
+    // retry while the new delta is still resident, then test pin retirement.
+    if db.runs.iter().any(|r| r.source.path(&t.0, "fdb") == path) {
+        assert!(db.start_revision_reclamation().unwrap());
+        db.wait_for_compaction().unwrap();
+    }
     assert_eq!(db.sequence, sequence);
+    #[cfg(all(windows, feature = "bounded-engine"))]
+    {
+        let rewritten = db
+            .runs
+            .iter()
+            .find(|r| r.source.id != old.source.id && r.source.sequence == old.source.sequence)
+            .unwrap();
+        assert!(
+            OpenOptions::new()
+                .write(true)
+                .open(rewritten.source.path(&t.0, "fdb"))
+                .is_err(),
+            "validated output must retain an immutable source lease"
+        );
+    }
     assert_eq!(db.count, 60);
     assert!(path.exists());
     assert!(
@@ -85,6 +106,98 @@ fn rewrite_preserves_barriers_pins_pending_delta_and_reused_postings() {
     let db = Database::open(&t.0).unwrap();
     assert_eq!(db.search(&query).unwrap().total, 39);
     db.check_integrity().unwrap();
+}
+
+#[test]
+fn fully_dead_sources_retire_without_an_output_and_respect_reader_pin() {
+    let t = Temp::new();
+    let mut db = Database::open(&t.0).unwrap();
+    db.commit((0..80).map(|id| put(id, "original")).collect())
+        .unwrap();
+    db.flush().unwrap();
+    let pinned = db.runs[0].clone();
+    let old = pinned.source.path(&t.0, "fdb");
+    db.commit((0..80).map(|id| put(id, "replacement")).collect())
+        .unwrap();
+    db.flush().unwrap();
+    let sequence = db.sequence;
+    assert_eq!(db.segment_liveness().unwrap()[0].live_records, 0);
+    assert!(db.start_revision_reclamation().unwrap());
+    let output = db.job.as_ref().unwrap().output_id;
+    assert!(db.wait_for_compaction().unwrap());
+    assert!(!t.0.join(format!("run-{output:016x}.fdb")).exists());
+    assert_eq!(db.runs.len(), 1);
+    assert_eq!(db.sequence, sequence);
+    assert!(old.exists());
+    assert!(
+        pinned
+            .index
+            .get(&doc("0000").key)
+            .unwrap()
+            .unwrap()
+            .document
+            .text
+            .starts_with("original")
+    );
+    drop(pinned);
+    db.reclaim_obsolete().unwrap();
+    assert!(!old.exists());
+    db.check_integrity().unwrap();
+    drop(db);
+    assert!(
+        Database::open(&t.0)
+            .unwrap()
+            .get(&doc("0000").key)
+            .unwrap()
+            .unwrap()
+            .document
+            .text
+            .starts_with("replacement")
+    );
+}
+
+#[test]
+fn cancellation_never_publishes_or_discards_acknowledged_revisions() {
+    let t = Temp::new();
+    let mut db = seed(&t);
+    let generation = db.generation;
+    #[cfg(feature = "experimental-write-maintenance-slots")]
+    let block = maintenance_workspace().unwrap();
+    assert!(db.start_revision_reclamation().unwrap());
+    db.job.as_ref().unwrap().cancel.as_ref().unwrap().cancel();
+    #[cfg(feature = "experimental-write-maintenance-slots")]
+    drop(block);
+    let installed = db.wait_for_compaction().unwrap();
+    #[cfg(feature = "experimental-write-maintenance-slots")]
+    assert!(!installed);
+    if !installed {
+        assert_eq!(db.generation, generation);
+    }
+    assert!(
+        db.get(&doc("0000").key)
+            .unwrap()
+            .unwrap()
+            .document
+            .text
+            .starts_with("newrevision")
+    );
+    assert!(db.get(&doc("0020").key).unwrap().is_none());
+    #[cfg(feature = "bounded-engine")]
+    db.commit_streamed([Ok(put(79, "aftercancel"))]).unwrap();
+    #[cfg(not(feature = "bounded-engine"))]
+    db.commit(vec![put(79, "aftercancel")]).unwrap();
+    db.check_integrity().unwrap();
+    drop(db);
+    assert!(
+        Database::open(&t.0)
+            .unwrap()
+            .get(&doc("0079").key)
+            .unwrap()
+            .unwrap()
+            .document
+            .text
+            .starts_with("aftercancel")
+    );
 }
 
 #[test]
