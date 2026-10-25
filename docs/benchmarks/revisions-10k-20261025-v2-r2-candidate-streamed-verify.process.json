@@ -1,0 +1,18 @@
+{
+  "label": "candidate",
+  "engine": "fdb",
+  "pair": 2,
+  "mode": "verify",
+  "api": "streamed",
+  "exit_code": 0,
+  "wall_s": 2.610000000000582,
+  "disk_sampling_interval_ms": 5,
+  "sampled_disk": {
+    "peak_retained_bytes": 365632810,
+    "samples": 167
+  },
+  "per_round_peak_retained_bytes": {
+    "0": 365632810
+  },
+  "limitation": "sampled disk peak can miss sub-5ms files; oracle/matrix work included in process lifetime"
+}

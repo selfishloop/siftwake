@@ -1,0 +1,132 @@
+use super::*;
+use crate::reclaim::tests::{Temp, doc};
+
+fn put(id: usize, revision: &str) -> Mutation {
+    let mut document = doc(&format!("{id:04}"));
+    document.text = format!("{revision} {}", "payload ".repeat(256));
+    Mutation::Put {
+        document,
+        guard: Guard::Any,
+    }
+}
+
+fn seed(t: &Temp) -> Database {
+    let mut db = Database::open(&t.0).unwrap();
+    db.commit((0..80).map(|id| put(id, "oldrevision")).collect())
+        .unwrap();
+    db.flush().unwrap();
+    db.commit(
+        (0..40)
+            .map(|id| {
+                if id < 20 {
+                    put(id, "newrevision")
+                } else {
+                    Mutation::Delete {
+                        key: doc(&format!("{id:04}")).key,
+                        guard: Guard::Any,
+                    }
+                }
+            })
+            .collect(),
+    )
+    .unwrap();
+    db.flush().unwrap();
+    db
+}
+
+#[test]
+fn rewrite_preserves_barriers_pins_pending_delta_and_reused_postings() {
+    let t = Temp::new();
+    let mut db = seed(&t);
+    let old = db.runs[0].clone();
+    let path = old.source.path(&t.0, "fdb");
+    let before = db.segment_liveness().unwrap();
+    assert_eq!(before[0].dead_records, 40);
+    assert!(before[0].dead_payload_bytes >= 64 * 1024);
+    assert!(db.start_revision_reclamation().unwrap());
+    // Query the published view while its replacement is being constructed.
+    let mut query = Query::new("shared");
+    query.text = "newrevision".into();
+    assert_eq!(db.search(&query).unwrap().total, 20);
+    query.text = "oldrevision".into();
+    assert_eq!(db.search(&query).unwrap().total, 40);
+    // A later unflushed update must win even if worker completion races it.
+    db.commit(vec![put(79, "latestrevision")]).unwrap();
+    let sequence = db.sequence;
+    db.wait_for_compaction().unwrap();
+    assert_eq!(db.sequence, sequence);
+    assert_eq!(db.count, 60);
+    assert!(path.exists());
+    assert!(
+        old.index
+            .get(&doc("0000").key)
+            .unwrap()
+            .unwrap()
+            .document
+            .text
+            .starts_with("oldrevision")
+    );
+    for id in 20..40 {
+        assert!(db.get(&doc(&format!("{id:04}")).key).unwrap().is_none());
+    }
+    assert!(
+        db.get(&doc("0079").key)
+            .unwrap()
+            .unwrap()
+            .document
+            .text
+            .starts_with("latestrevision")
+    );
+    db.check_integrity().unwrap();
+    drop(old);
+    db.reclaim_obsolete().unwrap();
+    assert!(!path.exists());
+    drop(db);
+    let db = Database::open(&t.0).unwrap();
+    assert_eq!(db.search(&query).unwrap().total, 39);
+    db.check_integrity().unwrap();
+}
+
+#[test]
+fn reopen_rejects_truncated_and_single_byte_corrupt_source_with_good_cache() {
+    use std::io::{Read, Seek, SeekFrom, Write};
+    for truncate in [false, true] {
+        let t = Temp::new();
+        let db = seed(&t);
+        let path = db.runs[0].source.path(&t.0, "fdb");
+        drop(db); // immutable Windows source leases deny concurrent mutation
+        let mut file = OpenOptions::new()
+            .read(true)
+            .write(true)
+            .open(&path)
+            .unwrap();
+        if truncate {
+            file.set_len(40).unwrap();
+        } else {
+            file.seek(SeekFrom::Start(60)).unwrap();
+            let mut b = [0];
+            file.read_exact(&mut b).unwrap();
+            b[0] ^= 1;
+            file.seek(SeekFrom::Start(60)).unwrap();
+            file.write_all(&b).unwrap();
+        }
+        file.sync_all().unwrap();
+        drop(file);
+        assert!(Database::open(&t.0).is_err());
+    }
+}
+
+#[test]
+fn worker_rechecks_source_binding_before_publishing_replacement() {
+    let t = Temp::new();
+    let mut db = seed(&t);
+    let generation = db.generation;
+    // No live source can be mutated through its Windows immutable lease. An
+    // incorrect worker binding still must fail before publication.
+    db.runs[0].source.checksum ^= 1;
+    assert!(db.start_revision_reclamation().unwrap());
+    assert!(db.wait_for_compaction().is_err());
+    assert_eq!(db.generation, generation);
+    drop(db);
+    Database::open(&t.0).unwrap().check_integrity().unwrap();
+}

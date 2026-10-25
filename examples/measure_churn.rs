@@ -40,6 +40,9 @@ impl Backend for Engine {
     fn stats(&self) -> Result<Value> {
         Ok(serde_json::to_value(self.0.stats()?)?)
     }
+    fn liveness(&self) -> Result<Value> {
+        Ok(serde_json::to_value(self.0.segment_liveness()?)?)
+    }
 }
 fn main() -> Result<()> {
     churn::start_memory_sampler();
@@ -59,9 +62,117 @@ fn main() -> Result<()> {
     }
     let start = Instant::now();
     let mut engine = Engine(Database::open(path)?);
+    // Benchmark policy A/B is explicit, independent of product defaults.
+    engine
+        .0
+        .set_revision_reclamation(std::env::var_os("FDB_RECLAMATION_CONTROL").is_none());
     churn::emit(
         json!({"phase":"opened","engine":"fdb","mode":mode,"api":api,"open_ms":start.elapsed().as_secs_f64()*1000.,"strict":true,"memory":churn::memory(),"stats":engine.stats()?}),
     );
+    if mode == "liveness" {
+        churn::emit(
+            json!({"phase":"liveness","segments":engine.liveness()?,"stats":engine.stats()?}),
+        );
+        return Ok(());
+    }
+    if mode == "revision-reads" || mode == "revision-write" {
+        let mut corpus = Corpus::open()?;
+        let mut model = churn::Model::load(state)?;
+        let changes = churn::plan(&mut model, "mixed", 2000, 337);
+        for chunk in changes.chunks(100) {
+            let result = churn::measured_commit(&mut engine, &mut corpus, &mut model, chunk, true)?;
+            assert_eq!(result["ok"], true);
+        }
+        model.save(state)?;
+        engine.0.wait_for_compaction()?;
+        if mode == "revision-write" {
+            let one = churn::plan(&mut model, "update", 1, 991);
+            let baseline =
+                churn::measured_commit(&mut engine, &mut corpus, &mut model, &one, true)?;
+            engine.0.wait_for_compaction()?;
+            let at = Instant::now();
+            assert!(engine.0.start_revision_reclamation()?);
+            let scheduled = at.elapsed().as_secs_f64() * 1000.;
+            let one = churn::plan(&mut model, "update", 1, 993);
+            let under_worker =
+                churn::measured_commit(&mut engine, &mut corpus, &mut model, &one, true)?;
+            model.save(state)?;
+            churn::verify_all(&engine, &mut corpus, &model)?;
+            churn::emit(
+                json!({"phase":"rewrite_write","baseline":baseline,"schedule_ms":scheduled,"under_worker":under_worker,"oracle":true}),
+            );
+            return Ok(());
+        }
+        churn::emit(churn::matrix(
+            &engine,
+            &mut corpus,
+            &model,
+            30,
+            "before_worker",
+        )?);
+        let at = Instant::now();
+        assert!(
+            engine.0.start_revision_reclamation()?,
+            "need eligible stale segment"
+        );
+        churn::emit(
+            json!({"phase":"rewrite_admitted","schedule_ms":at.elapsed().as_secs_f64()*1000.,"liveness":engine.liveness()?}),
+        );
+        let mut active = true;
+        let mut samples = Vec::new();
+        let mut completions = 0;
+        let cases = corpus.index.cases.clone();
+        for repeat in 0..30 {
+            for (case_id, case) in cases.iter().enumerate() {
+                let at = Instant::now();
+                let page = engine.search(&case.text, case.offset, case.limit)?;
+                let ms = at.elapsed().as_secs_f64() * 1000.;
+                // Publication only between queries. Every page must match the
+                // same unchanged model, on either side of worker installation.
+                samples.push(json!({"case_id":case_id,"repeat":repeat,"ms":ms,"job_pending_at_start":active}));
+                churn::check_page(&mut corpus, &model, case, &page)?;
+                if active && engine.0.poll_compaction()? {
+                    completions += 1;
+                    active = engine.0.start_revision_reclamation()?;
+                }
+            }
+        }
+        if active {
+            completions += usize::from(engine.0.wait_for_compaction()?);
+        }
+        churn::verify_all(&engine, &mut corpus, &model)?;
+        churn::emit(
+            json!({"phase":"rewrite_reads","samples":samples,"completions":completions,"oracle":true,"memory":churn::memory()}),
+        );
+        churn::emit(churn::matrix(
+            &engine,
+            &mut corpus,
+            &model,
+            30,
+            "after_worker",
+        )?);
+        return Ok(());
+    }
+    if mode == "kill-revisions" {
+        let mut corpus = Corpus::open()?;
+        let mut model = churn::Model::load(state)?;
+        let changes = churn::plan(&mut model, "mixed", 2000, 337);
+        std::fs::write(format!("{state}.pending"), serde_json::to_vec(&changes)?)?;
+        for chunk in changes.chunks(100) {
+            let sequence = engine.commit(&mut corpus, chunk, true)?;
+            churn::apply(&mut model, chunk, sequence);
+            model.save(state)?;
+        }
+        engine.0.wait_for_compaction()?;
+        churn::emit(json!({"phase":"kill_acknowledged","sequence":model.sequence,"mode":mode}));
+        if !engine.0.start_revision_reclamation()? {
+            return Err("kill coverage requires an eligible stale segment".into());
+        }
+        churn::emit(json!({"phase":"merge_scheduled","stats":engine.stats()?,"reclamation":true}));
+        loop {
+            std::thread::park();
+        }
+    }
     if mode.starts_with("kill-") {
         let mut corpus = Corpus::open()?;
         let mut model = churn::Model::load(state)?;

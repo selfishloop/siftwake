@@ -17,7 +17,16 @@ PREFIX = 'churn-kill-10k-20261025'
 
 
 def snapshot():
-    return {p.name: p.stat().st_size for p in DB.iterdir() if p.is_file()}
+    files = {}
+    for path in DB.iterdir():
+        try:
+            if path.is_file():
+                files[path.name] = path.stat().st_size
+        except FileNotFoundError:
+            # A pending publication/build file can disappear between directory
+            # enumeration and stat. It is not evidence of a failed engine write.
+            continue
+    return files
 
 
 def published_sources():
@@ -86,7 +95,7 @@ def kill_stage(stage, state):
         assert chosen.resolve().parent == DB.resolve() and chosen.suffix == '.idx'
         removed_cache = dict(name=chosen.name, bytes=chosen.stat().st_size, sha256=bench.sha(chosen))
         chosen.unlink()
-    mode = 'open' if stage == 'cache' else f'kill-{stage}'
+    mode = 'open' if stage == 'cache' else ('kill-revisions' if stage == 'revisions' else f'kill-{stage}')
     log = LOGS / f'{PREFIX}-{stage}.jsonl'
     if log.exists():
         raise RuntimeError('Do not overwrite a kill attempt')
@@ -120,14 +129,14 @@ def kill_stage(stage, state):
                     witness = row
                 if stage == 'flush' and row['phase'] == 'flush_start':
                     phase = True
-                if stage == 'merge' and row['phase'] == 'merge_scheduled':
+                if stage in ('merge', 'revisions') and row['phase'] == 'merge_scheduled':
                     phase = row['stats']['compaction_running'] is True
             files = snapshot()
             building = [n for n in files if f'.build-{child.pid}-' in n]
             if stage == 'cache' and building:
                 phase = True
                 witness = dict(temporary_files={n: files[n] for n in building}, cache=removed_cache)
-            if stage in ('flush', 'merge') and phase:
+            if stage in ('flush', 'merge', 'revisions') and phase:
                 new_sources = {n: size for n, size in files.items() if n not in before and n.endswith('.fdb')}
                 if building or (stage == 'flush' and new_sources):
                     witness = dict(new_sources=new_sources, temporary_files={n: files[n] for n in building})

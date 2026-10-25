@@ -1,0 +1,18 @@
+{
+  "label": "candidate",
+  "engine": "fdb",
+  "pair": 0,
+  "mode": "latency-single",
+  "api": "owned",
+  "exit_code": 0,
+  "wall_s": 1.4369999999998981,
+  "disk_sampling_interval_ms": 5,
+  "sampled_disk": {
+    "peak_retained_bytes": 366081666,
+    "samples": 92
+  },
+  "per_round_peak_retained_bytes": {
+    "0": 366081666
+  },
+  "limitation": "sampled disk peak can miss sub-5ms files; oracle/matrix work included in process lifetime"
+}

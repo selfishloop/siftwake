@@ -1,5 +1,26 @@
 # FDB mimarisi — 0.3.1
 
+2026-10-25 ölü revizyon geri kazanma prototipi `engine/revisions.rs` içindedir.
+`segment_liveness()` immutable segmentlerin key/metadata akışlarını birleştirip
+gölgelenmiş kayıt ve encoded payload uzunluklarını sayar; en yeni tombstone
+görünür bariyer sayılır. Kaynak/indeks framing ve sözlük byte'ları kayıtlara
+tam atfedilmez. Bu diagnostik tarama toplam kaynak kayıt sayısına bağlıdır.
+`set_revision_reclamation(true)` açık bakımın boyut katmanı merge'leri bitince
+≥%20/≥64KiB ölü payload taşıyan tek segmenti schedule etmesini sağlar;
+`start_revision_reclamation()` doğrudan bir işi başlatır. Varsayılan kapalıdır:
+disk kapısı tuttu fakat birleşik arama p95 kapısında bir sayfa +%9,77 kaldı.
+İş başına kaynak≤256MiB, remap≤1MiB, mevcut tek worker/builder/source bütçeleri;
+kaynak kopyası1MiB aralıklarla32MiB/s pace edilir. CRC doğrulama ve indeks I/O'su
+bant genişliğiyle kısıtlanmaz; metadata maskeleri/map/sonuç/caller tahsisleri bu
+tek limitlerin dışındadır. Bunlar tüm proses RAM'i garantisi değildir.
+Yalnız daha yeni immutable kaynağın örttüğü kayıt atılır; aktif delta yetki
+vermez. Yeni tombstone ve version korunur, posting map u32::MAX ile filtrelenir.
+Kaynak CRC/index doğrulaması, mevcut FDBLOG04/TXN2/OFF1/SEG04/manifest03,
+manifest yayımı ve Weak/pin emekliliği aynıdır. Başka reader açıkken kaynak
+silinmez; son pin bırakıldıktan sonraki reclaim eski dosyaları toplar.
+Foreground stream hâlâ önceki job'ı drain eder; bu bir snapshot/yazıcı çözümü
+değildir. [Kapı sonucu, maliyet ve kurtarma kanıtı](REVISION-RECLAIM-10K-20261025.md).
+
 2026-10-24 merge posting cursor'u input başına bir kez kurulur;mevcut
 8KiB tampon merge ömrünce tekrar kullanılır. Her terimde posting,
 consumed/available/position ve previous/mapped_previous sıfırlanır;

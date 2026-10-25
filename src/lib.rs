@@ -109,6 +109,22 @@ pub struct Stats {
     pub source_bytes: u64,
 }
 
+/// Immutable-segment liveness at the current published source boundary.
+/// Payload bytes are exact encoded payload lengths, not an attribution of
+/// dictionary/posting bytes. Newest tombstones remain necessary barriers.
+#[derive(Debug, serde::Serialize)]
+pub struct SegmentLiveness {
+    pub source_id: u64,
+    pub source_bytes: u64,
+    pub index_bytes: u64,
+    pub records: usize,
+    pub live_records: usize,
+    pub tombstones: usize,
+    pub payload_bytes: u64,
+    pub dead_payload_bytes: u64,
+    pub dead_records: usize,
+}
+
 /// Selected index allocation capacities for diagnostics. Not RSS or a total
 /// heap estimate: BTreeMap nodes, allocator overhead, delta and transient work
 /// are deliberately not included. Querying this does not change cache state.

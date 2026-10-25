@@ -6,6 +6,7 @@ use crate::{
     Error, Guard, Key, Mutation, Options, Query, Result, SearchPage, Stats, StoredDocument,
     validate_doc, validate_key,
 };
+mod revisions;
 #[cfg(feature = "bounded-engine")]
 mod streamed;
 use std::cmp::Reverse;
@@ -250,6 +251,7 @@ pub struct Database {
     delta_bytes: usize,
     options: Options,
     job: Option<Job>,
+    revision_reclamation: bool,
     poisoned: bool,
     #[cfg(feature = "experimental-wal-sync-control")]
     sync_wal: bool,
@@ -1148,6 +1150,9 @@ impl Database {
             delta_bytes,
             options,
             job: None,
+            // The measured prototype retains its disk win, but its read-p95
+            // acceptance gate is still open. Explicit opt-in until resolved.
+            revision_reclamation: false,
             poisoned: false,
             #[cfg(feature = "experimental-wal-sync-control")]
             sync_wal: true,
@@ -2269,7 +2274,13 @@ impl Database {
             selected
         };
         let Some((start, end)) = selected else {
-            return Ok(false);
+            // Size-tier merging alone cannot reclaim revisions in large or
+            // dissimilar runs. Explicit maintenance also drains one stale run.
+            return if _automatic || !self.revision_reclamation {
+                Ok(false)
+            } else {
+                self.start_revision_reclamation()
+            };
         };
         let inputs = self.runs[start..end].to_vec();
         #[cfg(feature = "diagnostic-timing")]

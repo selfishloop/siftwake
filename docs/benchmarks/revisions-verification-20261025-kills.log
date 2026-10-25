@@ -1,0 +1,22 @@
+{"engine": "fdb", "mode": "verify", "api": "owned", "log": "revisions-kill-10k-20261025-kill-iterator-fdb-owned-verify.jsonl", "exit_code": 0, "wall_s": 3.1099999999996726}
+{"stage": "iterator", "coverage_observed": true, "reopen_full_payload_matrix_oracle_exit_code": 0}
+{"engine": "fdb", "mode": "verify", "api": "owned", "log": "revisions-kill-10k-20261025-kill-flush-fdb-owned-verify.jsonl", "exit_code": 0, "wall_s": 2.75}
+{"stage": "flush", "coverage_observed": true, "reopen_full_payload_matrix_oracle_exit_code": 0}
+{"engine": "fdb", "mode": "verify", "api": "owned", "log": "revisions-kill-10k-20261025-kill-merge-fdb-owned-verify.jsonl", "exit_code": 0, "wall_s": 2.780999999999949}
+{"stage": "merge", "coverage_observed": true, "reopen_full_payload_matrix_oracle_exit_code": 0}
+Traceback (most recent call last):
+  File "C:\Users\Serkan\Documents\ChatGPT\fdb\tools\kill-revisions.py", line 30, in <module>
+    main()
+  File "C:\Users\Serkan\Documents\ChatGPT\fdb\tools\kill-revisions.py", line 21, in main
+    result = kill.kill_stage(stage,state)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Serkan\Documents\ChatGPT\fdb\tools\measure-churn-kill.py", line 125, in kill_stage
+    files = snapshot()
+            ^^^^^^^^^^
+  File "C:\Users\Serkan\Documents\ChatGPT\fdb\tools\measure-churn-kill.py", line 20, in snapshot
+    return {p.name: p.stat().st_size for p in DB.iterdir() if p.is_file()}
+                    ^^^^^^^^
+  File "C:\Users\Serkan\.cache\codex-runtimes\codex-primary-runtime\dependencies\python\Lib\pathlib.py", line 840, in stat
+    return os.stat(self, follow_symlinks=follow_symlinks)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+FileNotFoundError: [WinError 2] The system cannot find the file specified: 'C:\\Users\\Serkan\\Documents\\ChatGPT\\fdb\\data\\benchmark-work\\fdb\\generation-00000000000007c1.pending'

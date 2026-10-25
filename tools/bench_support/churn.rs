@@ -260,6 +260,9 @@ pub trait Backend: Send {
     #[allow(dead_code)]
     fn start_merge(&mut self) -> Result<bool>;
     fn stats(&self) -> Result<Value>;
+    fn liveness(&self) -> Result<Value> {
+        Ok(Value::Null)
+    }
 }
 #[allow(dead_code)] // SQLite consumes the same descriptors directly.
 pub fn mutation(corpus: &mut Corpus, c: &Change) -> fdb::Result<Mutation> {
@@ -625,8 +628,12 @@ pub fn run<B: Backend + 'static>(
         model.save(state)?;
         return Ok(());
     }
-    if mode == "latency" {
-        for n in [1, 10, 100, 1000] {
+    if mode == "latency" || mode == "latency-single" {
+        for &n in if mode == "latency-single" {
+            &[1][..]
+        } else {
+            &[1, 10, 100, 1000][..]
+        } {
             db.maintain()?;
             for kind in ["update", "delete", "insert", "mixed"] {
                 let samples = match n {
@@ -682,12 +689,12 @@ pub fn run<B: Backend + 'static>(
         emit(matrix(&db, &mut corpus, &model, 5, "active")?);
         return Ok(());
     }
-    if mode == "churn" {
+    if mode == "churn" || mode == "revisions-30" || mode == "revisions-10" {
         db.maintain()?;
         emit(
-            json!({"phase":"churn_baseline","disk":disk(path)?,"stats":db.stats()?,"memory":memory()}),
+            json!({"phase":"churn_baseline","disk":disk(path)?,"stats":db.stats()?,"memory":memory(),"liveness":db.liveness()?}),
         );
-        for round in 0..10 {
+        for round in 0..if mode == "revisions-30" { 30 } else { 10 } {
             reset_memory_sampler();
             let ids: Vec<_> = model.rows.keys().copied().collect();
             assert_eq!(ids.len(), 10000);
@@ -734,14 +741,24 @@ pub fn run<B: Backend + 'static>(
             }
             let write_ms = at.elapsed().as_secs_f64() * 1000.;
             let before = disk(path)?;
+            let liveness_before = db.liveness()?;
             let at = Instant::now();
             let maintenance = db.maintain()?;
             let maintenance_ms = at.elapsed().as_secs_f64() * 1000.;
             verify_all(&db, &mut corpus, &model)?;
             emit(
-                json!({"phase":"churn_round","round":round+1,"attempts":attempts,"write_including_oracle_ms":write_ms,"maintenance_ms":maintenance_ms,"maintenance":maintenance,"before":before,"after":disk(path)?,"stats":db.stats()?,"memory":memory(),"full_oracle":true}),
+                json!({"phase":"churn_round","round":round+1,"attempts":attempts,"write_including_oracle_ms":write_ms,"maintenance_ms":maintenance_ms,"maintenance":maintenance,"before":before,"after":disk(path)?,"stats":db.stats()?,"memory":memory(),"full_oracle":true,"liveness_before":liveness_before,"liveness_after":db.liveness()?}),
             );
             model.save(state)?;
+            if mode.starts_with("revisions-") && [9, 29].contains(&round) {
+                emit(matrix(
+                    &db,
+                    &mut corpus,
+                    &model,
+                    30,
+                    &format!("round{}", round + 1),
+                )?);
+            }
         }
         return Ok(());
     }

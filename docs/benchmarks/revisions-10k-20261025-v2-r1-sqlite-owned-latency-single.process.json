@@ -1,0 +1,18 @@
+{
+  "label": "sqlite",
+  "engine": "sqlite",
+  "pair": 1,
+  "mode": "latency-single",
+  "api": "owned",
+  "exit_code": 0,
+  "wall_s": 3.9530000000004293,
+  "disk_sampling_interval_ms": 5,
+  "sampled_disk": {
+    "peak_retained_bytes": 695745824,
+    "samples": 244
+  },
+  "per_round_peak_retained_bytes": {
+    "0": 695745824
+  },
+  "limitation": "sampled disk peak can miss sub-5ms files; oracle/matrix work included in process lifetime"
+}

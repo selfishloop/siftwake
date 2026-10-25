@@ -1,5 +1,12 @@
 # FDB
 
+[Ölü revizyon geri kazanımı — sıralı kapı Adım 1](docs/REVISION-RECLAIM-10K-20261025.md):
+iki dengeli 10 turda disk876,3→358,0MB; ayrı30 tur sonunda365,6MB.
+Oracle ve beş process-kill/reopen geçti. Ancak ishmael offset130/limit1
+birleşik p95+%9,77, bakım toplamı5,77×: **Adım1 KALDI**.
+Prototip korunur, varsayılan kapalı; snapshot/küçük commit adımları bekler.
+Ölçümler, sınırlar ve açık işler rapordadır.
+
 [Churn ve eşzamanlı yük ölçümü](docs/CHURN-CONCURRENT-10K-20261025.md):
 tek belge görünürlük üst sınırı185ms ve akışlı tepe bellek60MB kapısı tutuldu.
 Kirli500 delta ile boşta private31,0MB/WS34,8MB, churn sonrası disk2,501×

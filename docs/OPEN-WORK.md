@@ -1,5 +1,36 @@
 # FDB açık işler
 
+<!-- revision-reclaim-20261025 -->
+2026-10-25 sıralı kapı çalışması [revizyon raporunda](REVISION-RECLAIM-10K-20261025.md).
+**Adım 1 KALDI; Adım 2 ve 3 başlatılmadı.** Ölü payload teşhisi kesinleşti:
+kontrolün ilk beş ~53–54MB segmentinde payload %100 ölü; ikili toplamları
+64MiB merge sınırını aşıyor. Seçim ölü ağırlığına bakmıyordu.
+Tek segment rewrite prototipi mevcut codec/posting ve Weak/pin yollarını kullanır.
+İki dengeli 10 tur kıyasında retained 876,347→357,954MB (1,0215× başlangıç),
+SQLite 630,485MB. Ayrı 30 tur adayı 365,633MB (1,0434×), en yüksek bakım sonrası
+375,357MB; örneklenen geçici tepe 483,678MB ve görünür payload alt sınırına göre
+en kötü 1,900×. Akışlı churn OS lifetime tepe private 28,111MB.
+90 tur oracle, 38×30 background query, beş gözlenmiş kill/reopen ve eski frozen
+okuyucu kontrolleri geçti; fixture/corpus SHA ve kalıcı biçimler aynı.
+**Açık arama kapısı:** 60 örnekli birleşik p95, ishmael offset130/limit1
+6,098→6,694ms (+%9,77). Ayrı çiftlerde 5/76 +%5 artış var; aynı sorguda iki
+çiftte tekrar etmiyor. Bu nedenle bütün artışları dalgalanma sayıp kapatmadık.
+Prototip kodu korunur, varsayılan kapalı; `set_revision_reclamation(true)` veya
+doğrudan `start_revision_reclamation()` ile açıkça denenebilir.
+**Yazma/bakım bedeli:** 10 tur ortalama commit toplamı 34,734→37,461s (+%7,85),
+bakım 5,617→32,415s (5,77×), ikisi toplam 40,351→69,876s (+%73,17).
+Bakım sonrasında solo görünürlük kapısı tutuldu; aktif rewrite sırasında tek
+akışlı yazı 751,524ms, görünürlük804,227ms (tek gözlem, p95 değil).
+Önce kalan ishmael sayfasını okuma/doğrulama/normalleştirme/sonuç aşamalarına
+ayırmak ve bakımın pahalı aşamasını profillemek gerekir; bunlar bu tur yapılmadı.
+En yeni tombstone'lar korunuyor; 30 tur gözlemi süresiz sabit alan garantisi değil.
+Snapshot/4 okuyucu+1 yazıcı, küçük commit p95≤10ms, dirty500 açılış/RAM,
+genel arama, soğuk yük ve kill sonrası geçici dosya temizliği açık.
+Background query probu bağımsız foreground writer içermez; Adım 2 kapısı sayılmaz.
+Gözlemci bir geçici `.pending` stat yarışında durdu; hata logu korundu, gözlemci
+düzeltildi ve kalan iki kill ayrı kayıtla geçti. Güç kesintisi iddiası yok.
+C ABI/DLL tasarımı yalnız sonraki aşama notudur.
+
 <!-- churn-concurrent-20261025 -->
 2026-10-25 churn/concurrent ölçümü [yeni raporda](CHURN-CONCURRENT-10K-20261025.md).
 92 ana worker bölümü ve dört process-kill/reopen denemesi tamamlandı; bütün

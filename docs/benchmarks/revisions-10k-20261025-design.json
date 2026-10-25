@@ -1,0 +1,60 @@
+{
+  "baseline_commit": "3e4559d",
+  "source": "508563792C7F8CDFE9952B5F55F90BA35F2EC6755B13D6ED42F23806ED647ED8",
+  "programs": {
+    "output\\revisions-fdb-20261025.exe": "445B78F64FFFF6C5028EBB1147DDD10DF0C91B5CB31C4850653639C5CEEA0A31",
+    "output\\revisions-sqlite-20261025.exe": "B02A406239837E8A4A5938A848FA9BE9DD7048A966E31B8E852B54C773114E5F"
+  },
+  "protected_before": [
+    {
+      "path": "data\\rkyv-corpus-20261009\\json.payload-bench",
+      "bytes": 2740862279,
+      "sha256": "11F826FCE3F4AE790FEB9FC6DF9B1169F52C2FD699E89FC4A8A4B77AAA41731B"
+    },
+    {
+      "path": "tests\\fixtures\\v1\\checkpoint.fdb",
+      "bytes": 1507,
+      "sha256": "E87667C0FABE64D5A1F59EF86B99F7E612DB755D239B41677DA2ADC24BE7BF57"
+    },
+    {
+      "path": "tests\\fixtures\\v1\\checkpoint.ready",
+      "bytes": 28,
+      "sha256": "BC82C18F8D5C3A209328BD59B12D828D8922BEC4D26CB4D557FD4A493A4A9C2F"
+    }
+  ],
+  "orders": [
+    [
+      "control",
+      "candidate",
+      "sqlite"
+    ],
+    [
+      "sqlite",
+      "candidate",
+      "control"
+    ]
+  ],
+  "same_program_AB": "control disables only explicit stale revision reclamation; all previous optimizations retained",
+  "corpus": "same existing first10000, same marker/donor workload as prior churn",
+  "cache": "warm OS, no cold eviction, no background isolation",
+  "completed": [
+    {
+      "label": "control",
+      "engine": "fdb",
+      "pair": 0,
+      "mode": "seed",
+      "api": "streamed",
+      "exit_code": 0,
+      "wall_s": 16.437000000000126,
+      "disk_sampling_interval_ms": 5,
+      "sampled_disk": {
+        "peak_retained_bytes": 423174232,
+        "samples": 1038
+      },
+      "per_round_peak_retained_bytes": {
+        "0": 423174232
+      },
+      "limitation": "sampled disk peak can miss sub-5ms files; oracle/matrix work included in process lifetime"
+    }
+  ]
+}

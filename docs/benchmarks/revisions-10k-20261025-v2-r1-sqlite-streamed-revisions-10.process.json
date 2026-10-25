@@ -1,0 +1,29 @@
+{
+  "label": "sqlite",
+  "engine": "sqlite",
+  "pair": 1,
+  "mode": "revisions-10",
+  "api": "streamed",
+  "exit_code": 0,
+  "wall_s": 693.8900000000003,
+  "disk_sampling_interval_ms": 5,
+  "sampled_disk": {
+    "peak_retained_bytes": 693162584,
+    "samples": 43998
+  },
+  "per_round_peak_retained_bytes": {
+    "0": 584364032,
+    "1": 631242128,
+    "2": 642464552,
+    "3": 648449368,
+    "4": 654494136,
+    "5": 661732160,
+    "6": 668399520,
+    "7": 674363472,
+    "8": 679967960,
+    "9": 686876816,
+    "10": 693162584,
+    "11": 630484992
+  },
+  "limitation": "sampled disk peak can miss sub-5ms files; oracle/matrix work included in process lifetime"
+}

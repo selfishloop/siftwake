@@ -1,0 +1,761 @@
+{
+  "baseline_commit": "3e4559d",
+  "source": "508563792C7F8CDFE9952B5F55F90BA35F2EC6755B13D6ED42F23806ED647ED8",
+  "programs": {
+    "output\\revisions-fdb-20261025-v2.exe": "798111DEAAAC44031EC9412F8232D120E645FB96F00258AF9B5736F9076E99B9",
+    "output\\revisions-sqlite-20261025-v2.exe": "6BF817010F59996BB6B1E25D9F79115E4B87A8E40F2AAC8C6A6AF35CA9F1D058"
+  },
+  "protected_before": [
+    {
+      "path": "data\\rkyv-corpus-20261009\\json.payload-bench",
+      "bytes": 2740862279,
+      "sha256": "11F826FCE3F4AE790FEB9FC6DF9B1169F52C2FD699E89FC4A8A4B77AAA41731B"
+    },
+    {
+      "path": "tests\\fixtures\\v1\\checkpoint.fdb",
+      "bytes": 1507,
+      "sha256": "E87667C0FABE64D5A1F59EF86B99F7E612DB755D239B41677DA2ADC24BE7BF57"
+    },
+    {
+      "path": "tests\\fixtures\\v1\\checkpoint.ready",
+      "bytes": 28,
+      "sha256": "BC82C18F8D5C3A209328BD59B12D828D8922BEC4D26CB4D557FD4A493A4A9C2F"
+    }
+  ],
+  "orders": [
+    [
+      "control",
+      "candidate",
+      "sqlite"
+    ],
+    [
+      "sqlite",
+      "candidate",
+      "control"
+    ]
+  ],
+  "same_program_AB": "control disables only explicit stale revision reclamation; all previous optimizations retained",
+  "corpus": "same existing first10000, same marker/donor workload as prior churn",
+  "cache": "warm OS, no cold eviction, no background isolation",
+  "completed": [
+    {
+      "label": "control",
+      "engine": "fdb",
+      "pair": 0,
+      "mode": "seed",
+      "api": "streamed",
+      "exit_code": 0,
+      "wall_s": 16.391000000000076,
+      "disk_sampling_interval_ms": 5,
+      "sampled_disk": {
+        "peak_retained_bytes": 423297075,
+        "samples": 1034
+      },
+      "per_round_peak_retained_bytes": {
+        "0": 423297075
+      },
+      "limitation": "sampled disk peak can miss sub-5ms files; oracle/matrix work included in process lifetime"
+    },
+    {
+      "label": "control",
+      "engine": "fdb",
+      "pair": 0,
+      "mode": "revisions-10",
+      "api": "streamed",
+      "exit_code": 0,
+      "wall_s": 110.10899999999992,
+      "disk_sampling_interval_ms": 5,
+      "sampled_disk": {
+        "peak_retained_bytes": 929873873,
+        "samples": 6956
+      },
+      "per_round_peak_retained_bytes": {
+        "0": 350412679,
+        "1": 455355002,
+        "2": 507248488,
+        "3": 560048650,
+        "4": 611960379,
+        "5": 666265493,
+        "6": 720085672,
+        "7": 773260948,
+        "8": 825865751,
+        "9": 878365135,
+        "10": 929873873,
+        "11": 876347336
+      },
+      "limitation": "sampled disk peak can miss sub-5ms files; oracle/matrix work included in process lifetime"
+    },
+    {
+      "label": "control",
+      "engine": "fdb",
+      "pair": 0,
+      "mode": "latency-single",
+      "api": "streamed",
+      "exit_code": 0,
+      "wall_s": 30.608999999999924,
+      "disk_sampling_interval_ms": 5,
+      "sampled_disk": {
+        "peak_retained_bytes": 881587487,
+        "samples": 1933
+      },
+      "per_round_peak_retained_bytes": {
+        "0": 881587487
+      },
+      "limitation": "sampled disk peak can miss sub-5ms files; oracle/matrix work included in process lifetime"
+    },
+    {
+      "label": "control",
+      "engine": "fdb",
+      "pair": 0,
+      "mode": "verify",
+      "api": "streamed",
+      "exit_code": 0,
+      "wall_s": 3.219000000000051,
+      "disk_sampling_interval_ms": 5,
+      "sampled_disk": {
+        "peak_retained_bytes": 878436041,
+        "samples": 205
+      },
+      "per_round_peak_retained_bytes": {
+        "0": 878436041
+      },
+      "limitation": "sampled disk peak can miss sub-5ms files; oracle/matrix work included in process lifetime"
+    },
+    {
+      "label": "control",
+      "engine": "fdb",
+      "pair": 0,
+      "mode": "latency-single",
+      "api": "owned",
+      "exit_code": 0,
+      "wall_s": 1.8279999999999745,
+      "disk_sampling_interval_ms": 5,
+      "sampled_disk": {
+        "peak_retained_bytes": 884458666,
+        "samples": 116
+      },
+      "per_round_peak_retained_bytes": {
+        "0": 884458666
+      },
+      "limitation": "sampled disk peak can miss sub-5ms files; oracle/matrix work included in process lifetime"
+    },
+    {
+      "label": "candidate",
+      "engine": "fdb",
+      "pair": 0,
+      "mode": "seed",
+      "api": "streamed",
+      "exit_code": 0,
+      "wall_s": 16.452999999999975,
+      "disk_sampling_interval_ms": 5,
+      "sampled_disk": {
+        "peak_retained_bytes": 423624677,
+        "samples": 1036
+      },
+      "per_round_peak_retained_bytes": {
+        "0": 423624677
+      },
+      "limitation": "sampled disk peak can miss sub-5ms files; oracle/matrix work included in process lifetime"
+    },
+    {
+      "label": "candidate",
+      "engine": "fdb",
+      "pair": 0,
+      "mode": "revisions-10",
+      "api": "streamed",
+      "exit_code": 0,
+      "wall_s": 122.40599999999995,
+      "disk_sampling_interval_ms": 5,
+      "sampled_disk": {
+        "peak_retained_bytes": 466671603,
+        "samples": 7749
+      },
+      "per_round_peak_retained_bytes": {
+        "0": 350412679,
+        "1": 456149995,
+        "2": 454276253,
+        "3": 456479948,
+        "4": 455054568,
+        "5": 458057487,
+        "6": 466671603,
+        "7": 459566034,
+        "8": 458986935,
+        "9": 457552665,
+        "10": 457322714,
+        "11": 357954015
+      },
+      "limitation": "sampled disk peak can miss sub-5ms files; oracle/matrix work included in process lifetime"
+    },
+    {
+      "label": "candidate",
+      "engine": "fdb",
+      "pair": 0,
+      "mode": "latency-single",
+      "api": "streamed",
+      "exit_code": 0,
+      "wall_s": 16.047000000000025,
+      "disk_sampling_interval_ms": 5,
+      "sampled_disk": {
+        "peak_retained_bytes": 363243235,
+        "samples": 1011
+      },
+      "per_round_peak_retained_bytes": {
+        "0": 363243235
+      },
+      "limitation": "sampled disk peak can miss sub-5ms files; oracle/matrix work included in process lifetime"
+    },
+    {
+      "label": "candidate",
+      "engine": "fdb",
+      "pair": 0,
+      "mode": "verify",
+      "api": "streamed",
+      "exit_code": 0,
+      "wall_s": 2.719000000000051,
+      "disk_sampling_interval_ms": 5,
+      "sampled_disk": {
+        "peak_retained_bytes": 360042720,
+        "samples": 174
+      },
+      "per_round_peak_retained_bytes": {
+        "0": 360042720
+      },
+      "limitation": "sampled disk peak can miss sub-5ms files; oracle/matrix work included in process lifetime"
+    },
+    {
+      "label": "candidate",
+      "engine": "fdb",
+      "pair": 0,
+      "mode": "latency-single",
+      "api": "owned",
+      "exit_code": 0,
+      "wall_s": 1.4369999999998981,
+      "disk_sampling_interval_ms": 5,
+      "sampled_disk": {
+        "peak_retained_bytes": 366081666,
+        "samples": 92
+      },
+      "per_round_peak_retained_bytes": {
+        "0": 366081666
+      },
+      "limitation": "sampled disk peak can miss sub-5ms files; oracle/matrix work included in process lifetime"
+    },
+    {
+      "mode": "old-reader-verify",
+      "pair": 0,
+      "exit_code": 0
+    },
+    {
+      "label": "sqlite",
+      "engine": "sqlite",
+      "pair": 0,
+      "mode": "seed",
+      "api": "streamed",
+      "exit_code": 0,
+      "wall_s": 36.5619999999999,
+      "disk_sampling_interval_ms": 5,
+      "sampled_disk": {
+        "peak_retained_bytes": 624150328,
+        "samples": 2265
+      },
+      "per_round_peak_retained_bytes": {
+        "0": 624150328
+      },
+      "limitation": "sampled disk peak can miss sub-5ms files; oracle/matrix work included in process lifetime"
+    },
+    {
+      "label": "sqlite",
+      "engine": "sqlite",
+      "pair": 0,
+      "mode": "revisions-10",
+      "api": "streamed",
+      "exit_code": 0,
+      "wall_s": 715.375,
+      "disk_sampling_interval_ms": 5,
+      "sampled_disk": {
+        "peak_retained_bytes": 692171352,
+        "samples": 45236
+      },
+      "per_round_peak_retained_bytes": {
+        "0": 584364032,
+        "1": 634338704,
+        "2": 642464552,
+        "3": 648449368,
+        "4": 654494136,
+        "5": 661732160,
+        "6": 668399520,
+        "7": 674363472,
+        "8": 679967960,
+        "9": 686876816,
+        "10": 692171352,
+        "11": 630484992
+      },
+      "limitation": "sampled disk peak can miss sub-5ms files; oracle/matrix work included in process lifetime"
+    },
+    {
+      "label": "sqlite",
+      "engine": "sqlite",
+      "pair": 0,
+      "mode": "latency-single",
+      "api": "streamed",
+      "exit_code": 0,
+      "wall_s": 4.358999999999924,
+      "disk_sampling_interval_ms": 5,
+      "sampled_disk": {
+        "peak_retained_bytes": 696310264,
+        "samples": 263
+      },
+      "per_round_peak_retained_bytes": {
+        "0": 696310264
+      },
+      "limitation": "sampled disk peak can miss sub-5ms files; oracle/matrix work included in process lifetime"
+    },
+    {
+      "label": "sqlite",
+      "engine": "sqlite",
+      "pair": 0,
+      "mode": "verify",
+      "api": "streamed",
+      "exit_code": 0,
+      "wall_s": 27.34400000000005,
+      "disk_sampling_interval_ms": 5,
+      "sampled_disk": {
+        "peak_retained_bytes": 630386688,
+        "samples": 1741
+      },
+      "per_round_peak_retained_bytes": {
+        "0": 630386688
+      },
+      "limitation": "sampled disk peak can miss sub-5ms files; oracle/matrix work included in process lifetime"
+    },
+    {
+      "label": "sqlite",
+      "engine": "sqlite",
+      "pair": 0,
+      "mode": "latency-single",
+      "api": "owned",
+      "exit_code": 0,
+      "wall_s": 4.094000000000051,
+      "disk_sampling_interval_ms": 5,
+      "sampled_disk": {
+        "peak_retained_bytes": 695745824,
+        "samples": 251
+      },
+      "per_round_peak_retained_bytes": {
+        "0": 695745824
+      },
+      "limitation": "sampled disk peak can miss sub-5ms files; oracle/matrix work included in process lifetime"
+    },
+    {
+      "label": "sqlite",
+      "engine": "sqlite",
+      "pair": 1,
+      "mode": "seed",
+      "api": "streamed",
+      "exit_code": 0,
+      "wall_s": 37.766000000000076,
+      "disk_sampling_interval_ms": 5,
+      "sampled_disk": {
+        "peak_retained_bytes": 621594424,
+        "samples": 2326
+      },
+      "per_round_peak_retained_bytes": {
+        "0": 621594424
+      },
+      "limitation": "sampled disk peak can miss sub-5ms files; oracle/matrix work included in process lifetime"
+    },
+    {
+      "label": "sqlite",
+      "engine": "sqlite",
+      "pair": 1,
+      "mode": "revisions-10",
+      "api": "streamed",
+      "exit_code": 0,
+      "wall_s": 693.8900000000003,
+      "disk_sampling_interval_ms": 5,
+      "sampled_disk": {
+        "peak_retained_bytes": 693162584,
+        "samples": 43998
+      },
+      "per_round_peak_retained_bytes": {
+        "0": 584364032,
+        "1": 631242128,
+        "2": 642464552,
+        "3": 648449368,
+        "4": 654494136,
+        "5": 661732160,
+        "6": 668399520,
+        "7": 674363472,
+        "8": 679967960,
+        "9": 686876816,
+        "10": 693162584,
+        "11": 630484992
+      },
+      "limitation": "sampled disk peak can miss sub-5ms files; oracle/matrix work included in process lifetime"
+    },
+    {
+      "label": "sqlite",
+      "engine": "sqlite",
+      "pair": 1,
+      "mode": "latency-single",
+      "api": "streamed",
+      "exit_code": 0,
+      "wall_s": 4.04700000000048,
+      "disk_sampling_interval_ms": 5,
+      "sampled_disk": {
+        "peak_retained_bytes": 696310264,
+        "samples": 252
+      },
+      "per_round_peak_retained_bytes": {
+        "0": 696310264
+      },
+      "limitation": "sampled disk peak can miss sub-5ms files; oracle/matrix work included in process lifetime"
+    },
+    {
+      "label": "sqlite",
+      "engine": "sqlite",
+      "pair": 1,
+      "mode": "verify",
+      "api": "streamed",
+      "exit_code": 0,
+      "wall_s": 26.73399999999947,
+      "disk_sampling_interval_ms": 5,
+      "sampled_disk": {
+        "peak_retained_bytes": 630386688,
+        "samples": 1703
+      },
+      "per_round_peak_retained_bytes": {
+        "0": 630386688
+      },
+      "limitation": "sampled disk peak can miss sub-5ms files; oracle/matrix work included in process lifetime"
+    },
+    {
+      "label": "sqlite",
+      "engine": "sqlite",
+      "pair": 1,
+      "mode": "latency-single",
+      "api": "owned",
+      "exit_code": 0,
+      "wall_s": 3.9530000000004293,
+      "disk_sampling_interval_ms": 5,
+      "sampled_disk": {
+        "peak_retained_bytes": 695745824,
+        "samples": 244
+      },
+      "per_round_peak_retained_bytes": {
+        "0": 695745824
+      },
+      "limitation": "sampled disk peak can miss sub-5ms files; oracle/matrix work included in process lifetime"
+    },
+    {
+      "label": "candidate",
+      "engine": "fdb",
+      "pair": 1,
+      "mode": "seed",
+      "api": "streamed",
+      "exit_code": 0,
+      "wall_s": 16.92199999999957,
+      "disk_sampling_interval_ms": 5,
+      "sampled_disk": {
+        "peak_retained_bytes": 423247940,
+        "samples": 1048
+      },
+      "per_round_peak_retained_bytes": {
+        "0": 423247940
+      },
+      "limitation": "sampled disk peak can miss sub-5ms files; oracle/matrix work included in process lifetime"
+    },
+    {
+      "label": "candidate",
+      "engine": "fdb",
+      "pair": 1,
+      "mode": "revisions-10",
+      "api": "streamed",
+      "exit_code": 0,
+      "wall_s": 123.0,
+      "disk_sampling_interval_ms": 5,
+      "sampled_disk": {
+        "peak_retained_bytes": 466819024,
+        "samples": 7782
+      },
+      "per_round_peak_retained_bytes": {
+        "0": 350412679,
+        "1": 456117244,
+        "2": 454341767,
+        "3": 456209676,
+        "4": 454993133,
+        "5": 457991964,
+        "6": 466819024,
+        "7": 459500514,
+        "8": 458692101,
+        "9": 457225073,
+        "10": 457470147,
+        "11": 357954015
+      },
+      "limitation": "sampled disk peak can miss sub-5ms files; oracle/matrix work included in process lifetime"
+    },
+    {
+      "label": "candidate",
+      "engine": "fdb",
+      "pair": 1,
+      "mode": "latency-single",
+      "api": "streamed",
+      "exit_code": 0,
+      "wall_s": 15.67199999999957,
+      "disk_sampling_interval_ms": 5,
+      "sampled_disk": {
+        "peak_retained_bytes": 363424008,
+        "samples": 990
+      },
+      "per_round_peak_retained_bytes": {
+        "0": 363424008
+      },
+      "limitation": "sampled disk peak can miss sub-5ms files; oracle/matrix work included in process lifetime"
+    },
+    {
+      "label": "candidate",
+      "engine": "fdb",
+      "pair": 1,
+      "mode": "verify",
+      "api": "streamed",
+      "exit_code": 0,
+      "wall_s": 2.7650000000003274,
+      "disk_sampling_interval_ms": 5,
+      "sampled_disk": {
+        "peak_retained_bytes": 360042720,
+        "samples": 176
+      },
+      "per_round_peak_retained_bytes": {
+        "0": 360042720
+      },
+      "limitation": "sampled disk peak can miss sub-5ms files; oracle/matrix work included in process lifetime"
+    },
+    {
+      "label": "candidate",
+      "engine": "fdb",
+      "pair": 1,
+      "mode": "latency-single",
+      "api": "owned",
+      "exit_code": 0,
+      "wall_s": 1.469000000000051,
+      "disk_sampling_interval_ms": 5,
+      "sampled_disk": {
+        "peak_retained_bytes": 366198381,
+        "samples": 95
+      },
+      "per_round_peak_retained_bytes": {
+        "0": 366198381
+      },
+      "limitation": "sampled disk peak can miss sub-5ms files; oracle/matrix work included in process lifetime"
+    },
+    {
+      "mode": "old-reader-verify",
+      "pair": 1,
+      "exit_code": 0
+    },
+    {
+      "label": "control",
+      "engine": "fdb",
+      "pair": 1,
+      "mode": "seed",
+      "api": "streamed",
+      "exit_code": 0,
+      "wall_s": 16.35899999999947,
+      "disk_sampling_interval_ms": 5,
+      "sampled_disk": {
+        "peak_retained_bytes": 423411734,
+        "samples": 1030
+      },
+      "per_round_peak_retained_bytes": {
+        "0": 423411734
+      },
+      "limitation": "sampled disk peak can miss sub-5ms files; oracle/matrix work included in process lifetime"
+    },
+    {
+      "label": "control",
+      "engine": "fdb",
+      "pair": 1,
+      "mode": "revisions-10",
+      "api": "streamed",
+      "exit_code": 0,
+      "wall_s": 108.23400000000038,
+      "disk_sampling_interval_ms": 5,
+      "sampled_disk": {
+        "peak_retained_bytes": 930373469,
+        "samples": 6854
+      },
+      "per_round_peak_retained_bytes": {
+        "0": 350412679,
+        "1": 455887930,
+        "2": 507485997,
+        "3": 560257520,
+        "4": 612378065,
+        "5": 666298251,
+        "6": 720233082,
+        "7": 773383789,
+        "8": 825960208,
+        "9": 878045726,
+        "10": 930373469,
+        "11": 876347336
+      },
+      "limitation": "sampled disk peak can miss sub-5ms files; oracle/matrix work included in process lifetime"
+    },
+    {
+      "label": "control",
+      "engine": "fdb",
+      "pair": 1,
+      "mode": "latency-single",
+      "api": "streamed",
+      "exit_code": 0,
+      "wall_s": 28.04700000000048,
+      "disk_sampling_interval_ms": 5,
+      "sampled_disk": {
+        "peak_retained_bytes": 881997497,
+        "samples": 1771
+      },
+      "per_round_peak_retained_bytes": {
+        "0": 881997497
+      },
+      "limitation": "sampled disk peak can miss sub-5ms files; oracle/matrix work included in process lifetime"
+    },
+    {
+      "label": "control",
+      "engine": "fdb",
+      "pair": 1,
+      "mode": "verify",
+      "api": "streamed",
+      "exit_code": 0,
+      "wall_s": 3.219000000000051,
+      "disk_sampling_interval_ms": 5,
+      "sampled_disk": {
+        "peak_retained_bytes": 878436041,
+        "samples": 206
+      },
+      "per_round_peak_retained_bytes": {
+        "0": 878436041
+      },
+      "limitation": "sampled disk peak can miss sub-5ms files; oracle/matrix work included in process lifetime"
+    },
+    {
+      "label": "control",
+      "engine": "fdb",
+      "pair": 1,
+      "mode": "latency-single",
+      "api": "owned",
+      "exit_code": 0,
+      "wall_s": 1.8279999999995198,
+      "disk_sampling_interval_ms": 5,
+      "sampled_disk": {
+        "peak_retained_bytes": 884624464,
+        "samples": 116
+      },
+      "per_round_peak_retained_bytes": {
+        "0": 884624464
+      },
+      "limitation": "sampled disk peak can miss sub-5ms files; oracle/matrix work included in process lifetime"
+    },
+    {
+      "label": "candidate",
+      "engine": "fdb",
+      "pair": 2,
+      "mode": "seed",
+      "api": "streamed",
+      "exit_code": 0,
+      "wall_s": 16.73399999999947,
+      "disk_sampling_interval_ms": 5,
+      "sampled_disk": {
+        "peak_retained_bytes": 423739347,
+        "samples": 1046
+      },
+      "per_round_peak_retained_bytes": {
+        "0": 423739347
+      },
+      "limitation": "sampled disk peak can miss sub-5ms files; oracle/matrix work included in process lifetime"
+    },
+    {
+      "label": "candidate",
+      "engine": "fdb",
+      "pair": 2,
+      "mode": "revisions-30",
+      "api": "streamed",
+      "exit_code": 0,
+      "wall_s": 369.65599999999995,
+      "disk_sampling_interval_ms": 5,
+      "sampled_disk": {
+        "peak_retained_bytes": 483678088,
+        "samples": 23370
+      },
+      "per_round_peak_retained_bytes": {
+        "0": 350412679,
+        "1": 455871549,
+        "2": 454010569,
+        "3": 455939394,
+        "4": 455528292,
+        "5": 457983773,
+        "6": 467040139,
+        "7": 459238438,
+        "8": 458349433,
+        "9": 457126792,
+        "10": 457830493,
+        "11": 466075999,
+        "12": 474229248,
+        "13": 469461547,
+        "14": 464607226,
+        "15": 470564783,
+        "16": 473074412,
+        "17": 473584772,
+        "18": 473813864,
+        "19": 471224574,
+        "20": 470387279,
+        "21": 459084148,
+        "22": 468323099,
+        "23": 458797616,
+        "24": 465449081,
+        "25": 460216342,
+        "26": 466515114,
+        "27": 476106259,
+        "28": 483678088,
+        "29": 471923602,
+        "30": 472193666,
+        "31": 365632810
+      },
+      "limitation": "sampled disk peak can miss sub-5ms files; oracle/matrix work included in process lifetime"
+    },
+    {
+      "label": "candidate",
+      "engine": "fdb",
+      "pair": 2,
+      "mode": "verify",
+      "api": "streamed",
+      "exit_code": 0,
+      "wall_s": 2.610000000000582,
+      "disk_sampling_interval_ms": 5,
+      "sampled_disk": {
+        "peak_retained_bytes": 365632810,
+        "samples": 167
+      },
+      "per_round_peak_retained_bytes": {
+        "0": 365632810
+      },
+      "limitation": "sampled disk peak can miss sub-5ms files; oracle/matrix work included in process lifetime"
+    }
+  ],
+  "protected_after": [
+    {
+      "path": "data\\rkyv-corpus-20261009\\json.payload-bench",
+      "bytes": 2740862279,
+      "sha256": "11F826FCE3F4AE790FEB9FC6DF9B1169F52C2FD699E89FC4A8A4B77AAA41731B"
+    },
+    {
+      "path": "tests\\fixtures\\v1\\checkpoint.fdb",
+      "bytes": 1507,
+      "sha256": "E87667C0FABE64D5A1F59EF86B99F7E612DB755D239B41677DA2ADC24BE7BF57"
+    },
+    {
+      "path": "tests\\fixtures\\v1\\checkpoint.ready",
+      "bytes": 28,
+      "sha256": "BC82C18F8D5C3A209328BD59B12D828D8922BEC4D26CB4D557FD4A493A4A9C2F"
+    }
+  ],
+  "complete": true
+}

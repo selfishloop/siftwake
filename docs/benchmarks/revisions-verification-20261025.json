@@ -1,0 +1,91 @@
+{
+  "status": "failed_observer_resumed",
+  "steps": [
+    {
+      "label": "fmt-apply",
+      "args": [
+        "cargo",
+        "fmt"
+      ],
+      "exit_code": 0,
+      "wall_s": 2.4530000000004293,
+      "log": "revisions-verification-20261025-fmt-apply.log",
+      "sha256": "E3B0C44298FC1C149AFBF4C8996FB92427AE41E4649B934CA495991B7852B855"
+    },
+    {
+      "label": "probe-build",
+      "args": [
+        "cargo",
+        "build",
+        "--release",
+        "--example",
+        "measure_churn",
+        "--bin",
+        "fdb"
+      ],
+      "exit_code": 0,
+      "wall_s": 23.64100000000053,
+      "log": "revisions-verification-20261025-probe-build.log",
+      "sha256": "76AA2B4E752FF5ACB41875BF5497E30CF5BCAD32457396CB8E03148B057B0348"
+    },
+    {
+      "engine": "fdb",
+      "mode": "revision-reads",
+      "api": "streamed",
+      "log": "revisions-probes-10k-20261025-background-fdb-streamed-revision-reads.jsonl",
+      "exit_code": 0,
+      "wall_s": 87.76500000000033
+    },
+    {
+      "engine": "fdb",
+      "mode": "revision-write",
+      "api": "streamed",
+      "log": "revisions-probes-10k-20261025-background-fdb-streamed-revision-write.jsonl",
+      "exit_code": 0,
+      "wall_s": 8.813000000000102
+    },
+    {
+      "engine": "fdb",
+      "mode": "verify",
+      "api": "streamed",
+      "log": "revisions-probes-10k-20261025-background-fdb-streamed-verify.jsonl",
+      "exit_code": 0,
+      "wall_s": 2.75
+    },
+    {
+      "label": "kills",
+      "args": [
+        "C:\\Users\\Serkan\\.cache\\codex-runtimes\\codex-primary-runtime\\dependencies\\python\\python.exe",
+        "-X",
+        "utf8",
+        "tools/kill-revisions.py"
+      ],
+      "exit_code": 1,
+      "wall_s": 17.51600000000053,
+      "log": "revisions-verification-20261025-kills.log",
+      "sha256": "5C39BD00E2C67C9D946B28711655F1550080C9F4AA8C7650C7E67E338CB4686D"
+    }
+  ],
+  "protected_before": [
+    {
+      "path": "data\\rkyv-corpus-20261009\\json.payload-bench",
+      "bytes": 2740862279,
+      "sha256": "11F826FCE3F4AE790FEB9FC6DF9B1169F52C2FD699E89FC4A8A4B77AAA41731B"
+    },
+    {
+      "path": "tests\\fixtures\\v1\\checkpoint.fdb",
+      "bytes": 1507,
+      "sha256": "E87667C0FABE64D5A1F59EF86B99F7E612DB755D239B41677DA2ADC24BE7BF57"
+    },
+    {
+      "path": "tests\\fixtures\\v1\\checkpoint.ready",
+      "bytes": 28,
+      "sha256": "BC82C18F8D5C3A209328BD59B12D828D8922BEC4D26CB4D557FD4A493A4A9C2F"
+    }
+  ],
+  "probe_program": {
+    "path": "output\\revisions-probe-20261025.exe",
+    "sha256": "50A8D5AB05E96465571EEFE5D288BACEC1EE763CAD43B4D457B8769D432B1BEA"
+  },
+  "resumed_in": "revisions-verification-resume-20261025.json"
+}

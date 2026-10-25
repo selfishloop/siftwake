@@ -1,0 +1,174 @@
+{
+  "status": "complete",
+  "steps": [
+    {
+      "label": "fmt-apply",
+      "args": [
+        "cargo",
+        "fmt"
+      ],
+      "exit_code": 0,
+      "wall_s": 0.9849999999996726,
+      "log": "revisions-verification-resume-20261025-fmt-apply.log",
+      "sha256": "E3B0C44298FC1C149AFBF4C8996FB92427AE41E4649B934CA495991B7852B855"
+    },
+    {
+      "label": "fmt",
+      "args": [
+        "cargo",
+        "fmt",
+        "--check"
+      ],
+      "exit_code": 0,
+      "wall_s": 0.6869999999998981,
+      "log": "revisions-verification-resume-20261025-fmt.log",
+      "sha256": "E3B0C44298FC1C149AFBF4C8996FB92427AE41E4649B934CA495991B7852B855"
+    },
+    {
+      "label": "clippy",
+      "args": [
+        "cargo",
+        "clippy",
+        "--all-targets",
+        "--",
+        "-D",
+        "warnings"
+      ],
+      "exit_code": 0,
+      "wall_s": 4.655999999999949,
+      "log": "revisions-verification-resume-20261025-clippy.log",
+      "sha256": "4E46F034A1DABBF1FA5BC21051509213E7151B65686BBB4E0F3DBA5A8A38CDD5"
+    },
+    {
+      "label": "tests",
+      "args": [
+        "cargo",
+        "test"
+      ],
+      "exit_code": 0,
+      "wall_s": 111.57799999999952,
+      "log": "revisions-verification-resume-20261025-tests.log",
+      "sha256": "BE330D881C5776AD445CD446C4AE6792B3CD32C18E857CA23BA964E5BAECBC8C"
+    },
+    {
+      "label": "reference-lib",
+      "args": [
+        "cargo",
+        "test",
+        "--no-default-features",
+        "--lib"
+      ],
+      "exit_code": 0,
+      "wall_s": 28.639999999999418,
+      "log": "revisions-verification-resume-20261025-reference-lib.log",
+      "sha256": "4393084572B96CADD03D5F5DD6100D406E2E56B5A13DCA7FF12283CB4CC13F4F"
+    },
+    {
+      "label": "harness",
+      "args": [
+        "cargo",
+        "test",
+        "--example",
+        "measure_churn"
+      ],
+      "exit_code": 0,
+      "wall_s": 1.4530000000004293,
+      "log": "revisions-verification-resume-20261025-harness.log",
+      "sha256": "70AAC17D367F240A3BB10C0C20917FE4CD656B2D5F654DEF7AB62F13179F380E"
+    },
+    {
+      "label": "sqlite-fmt",
+      "args": [
+        "cargo",
+        "fmt",
+        "--manifest-path",
+        "tools/native_sqlite/Cargo.toml",
+        "--check"
+      ],
+      "exit_code": 0,
+      "wall_s": 0.43800000000010186,
+      "log": "revisions-verification-resume-20261025-sqlite-fmt.log",
+      "sha256": "E3B0C44298FC1C149AFBF4C8996FB92427AE41E4649B934CA495991B7852B855"
+    },
+    {
+      "label": "sqlite-clippy",
+      "args": [
+        "cargo",
+        "clippy",
+        "--manifest-path",
+        "tools/native_sqlite/Cargo.toml",
+        "--all-targets",
+        "--",
+        "-D",
+        "warnings"
+      ],
+      "exit_code": 0,
+      "wall_s": 3.07799999999952,
+      "log": "revisions-verification-resume-20261025-sqlite-clippy.log",
+      "sha256": "995D15BB72C343F99A0F10BB1AD93FFB8C0A37911858AE018C0444D022C3E469"
+    },
+    {
+      "label": "sqlite-harness",
+      "args": [
+        "cargo",
+        "test",
+        "--manifest-path",
+        "tools/native_sqlite/Cargo.toml",
+        "--bin",
+        "content_churn"
+      ],
+      "exit_code": 0,
+      "wall_s": 5.95299999999952,
+      "log": "revisions-verification-resume-20261025-sqlite-harness.log",
+      "sha256": "60458AAA32C7837783211D46BD36AAE111C3EFA243AE87BF3A499E69E3AF981F"
+    },
+    {
+      "label": "report",
+      "args": [
+        "C:\\Users\\Serkan\\.cache\\codex-runtimes\\codex-primary-runtime\\dependencies\\python\\python.exe",
+        "-X",
+        "utf8",
+        "tools/report-revisions.py"
+      ],
+      "exit_code": 0,
+      "wall_s": 4.844000000000051,
+      "log": "revisions-verification-resume-20261025-report.log",
+      "sha256": "4203EC7BA314282070BDAA6646FBF28AE1EA950D238921825A456AE4E3E368E2"
+    }
+  ],
+  "protected_before": [
+    {
+      "path": "data\\rkyv-corpus-20261009\\json.payload-bench",
+      "bytes": 2740862279,
+      "sha256": "11F826FCE3F4AE790FEB9FC6DF9B1169F52C2FD699E89FC4A8A4B77AAA41731B"
+    },
+    {
+      "path": "tests\\fixtures\\v1\\checkpoint.fdb",
+      "bytes": 1507,
+      "sha256": "E87667C0FABE64D5A1F59EF86B99F7E612DB755D239B41677DA2ADC24BE7BF57"
+    },
+    {
+      "path": "tests\\fixtures\\v1\\checkpoint.ready",
+      "bytes": 28,
+      "sha256": "BC82C18F8D5C3A209328BD59B12D828D8922BEC4D26CB4D557FD4A493A4A9C2F"
+    }
+  ],
+  "continuation_of": "revisions-verification-20261025.json",
+  "protected_after": [
+    {
+      "path": "data\\rkyv-corpus-20261009\\json.payload-bench",
+      "bytes": 2740862279,
+      "sha256": "11F826FCE3F4AE790FEB9FC6DF9B1169F52C2FD699E89FC4A8A4B77AAA41731B"
+    },
+    {
+      "path": "tests\\fixtures\\v1\\checkpoint.fdb",
+      "bytes": 1507,
+      "sha256": "E87667C0FABE64D5A1F59EF86B99F7E612DB755D239B41677DA2ADC24BE7BF57"
+    },
+    {
+      "path": "tests\\fixtures\\v1\\checkpoint.ready",
+      "bytes": 28,
+      "sha256": "BC82C18F8D5C3A209328BD59B12D828D8922BEC4D26CB4D557FD4A493A4A9C2F"
+    }
+  ]
+}
