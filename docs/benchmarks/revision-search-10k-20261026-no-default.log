@@ -1,0 +1,57 @@
+   Compiling fdb v0.3.1 (C:\Users\Serkan\Documents\ChatGPT\fdb)
+    Finished `test` profile [unoptimized + debuginfo] target(s) in 4.07s
+     Running unittests src\lib.rs (target\debug\deps\fdb-8f293fd6eea9cb91.exe)
+
+running 49 tests
+test bounded::tests::short_writes_count_exactly_and_limits_stop_before_forwarding ... ok
+test bounded::tests::serialization_preserves_original_destination_error ... ok
+test binary_batch_tests::binary_batch_prefix_offsets_sizes_and_every_cut ... ok
+test format::crc_tests::binary_frame_has_versioned_header_and_expected_crc ... ok
+test format::crc_tests::borrowed_native_validation_matches_replay_on_cuts_and_corruption ... ok
+test format::crc_tests::native_validation_handles_large_small_growing_and_empty_frames ... ok
+test format::crc_tests::ieee_crc_and_streaming_boundaries_remain_compatible ... ok
+test index::intake_fold_tests::body_cache_preserves_unicode_expansion_grams_and_cached_results ... ok
+test format::crc_tests::whole_source_crc_is_checked_even_when_each_frame_is_valid ... ok
+test engine::deferred_validation_tests::borrowed_check_rejects_crc_valid_invalid_documents_and_manifest_identity ... ok
+test engine::reclaim_tests::locked_obsolete_file_can_be_retried_without_poisoning_writes ... ok
+test index::scratch_fold_tests::unchanged_unicode_runs_keep_ascii_lowering_and_changed_scalar_boundaries ... ok
+test engine::reclaim_tests::active_wal_tail_updates_and_deletes_survive_reclamation ... ok
+test engine::reclaim_tests::pinned_retired_reader_survives_merge_then_releases_all_owned_files ... ok
+test engine::reclaim_tests::future_orphan_id_is_not_reused_and_is_collected_after_next_publication ... ok
+test payload::document_limit_tests::borrowed_limits_match_owned_validation ... ok
+test engine::reclaim_tests::drop_keeps_database_lock_until_worker_has_stopped ... ok
+test index::scratch_fold_tests::wide_ascii_prefix_handles_each_lane_and_unaligned_tails ... ok
+test engine::revisions::tests::worker_rechecks_source_binding_before_publishing_replacement ... ok
+test engine::revisions::tests::cancellation_never_publishes_or_discards_acknowledged_revisions ... ok
+test engine::reclaim_tests::unpublished_worker_output_below_a_newer_root_is_pinned_until_install ... ok
+test reclaim::tests::reclaim_child ... ignored, subprocess helper for reclaim process kill
+test engine::revisions::tests::fully_dead_sources_retire_without_an_output_and_respect_reader_pin ... ok
+test segment::block_check::tests::prepare_child ... ignored, process helper
+test reclaim::tests::filename_allowlist_live_future_links_and_directories_are_preserved ... ok
+test reclaim::tests::deferred_open_preserves_old_files_until_explicit_full_check ... ok
+test segment::query_scratch_tests::cached_body_never_reuses_title_and_oversize_text_does_not_escape_budget ... ok
+test engine::revisions::tests::query_visibility_pruning_keeps_updates_deletes_and_empty_segment_totals ... ok
+test engine::revisions::tests::rewrite_preserves_barriers_pins_pending_delta_and_reused_postings ... ok
+test source_records::tests::prepare_child ... ignored, process helper
+test segment::block_check::tests::process_kill_before_publication_keeps_previous_checksum_cache ... ok
+test engine::revisions::tests::reopen_rejects_truncated_and_single_byte_corrupt_source_with_good_cache ... ok
+test segment::checksum::tests::exact_crc_reads_preserve_prefix_position_truncation_and_corruption ... ok
+test spill::tests::chunk_boundaries_preserve_bytes_and_reject_duplicate_ids ... ok
+test reclaim::tests::corrupt_active_wal_or_changed_root_rejects_explicit_reclaim_without_unlinks ... ok
+test reclaim::tests::corrupt_latest_marker_or_source_prevents_any_reclamation ... ok
+test spill::tests::empty_and_complete_term_boundary_truncation_are_rejected ... ok
+test spill::tests::corrupt_spill_header_term_and_postings_fail_closed ... ok
+test spill::tests::spilled_groups_merge_in_term_and_id_order_and_are_removed ... ok
+test source_records::tests::interrupted_address_publication_preserves_prior_map_and_source ... ok
+test reclaim::tests::kill_during_marker_and_data_phases_keeps_current_sources_byte_equal ... ok
+test reclaim::tests::interruption_after_each_unlink_is_safe_and_retryable ... ok
+test index::scratch_fold_tests::query_scratch_fold_matches_every_unicode_scalar_and_reuse ... ok
+test reclaim::tests::automatic_reclaim_kill_after_publication_preserves_newly_published_write ... ok
+test segment::block_check::tests::lazy_blocks_check_boundaries_corruption_cuts_and_table_root ... ok
+test index::scratch_fold_tests::ascii_prefix_matches_byte_scan_at_every_alignment_and_boundary ... ok
+test segment::query_scratch_tests::chunked_scan_matches_full_fold_at_utf8_and_term_boundaries ... ok
+test format::crc_tests::accelerated_ieee_matches_tables_for_offsets_lengths_states_and_chaining ... ok
+test payload::document_limit_tests::utf8_validation_matches_std_including_boundaries_and_invalid_bytes ... ok
+
+test result: ok. 46 passed; 0 failed; 3 ignored; 0 measured; 0 filtered out; finished in 22.01s
+

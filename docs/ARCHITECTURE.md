@@ -1,6 +1,16 @@
 # FDB mimarisi — 0.3.1
 
-2026-10-26 geri kazanma maliyeti adayı hâlâ varsayılan kapalıdır:
+2026-10-26 bakım maliyeti sonucu kullanıcı tarafından kabul edildi; reclaim
+varsayılan kapalı kalır. Ayrı sorgu profili, seed maskesinin posting kesişimi
+ve payload doğrulamasından önce uygulandığını doğruladı. Query-only
+`set_query_visibility_pruning(true)` deneyi görünür kaydı0 segmentleri ve
+küçük secondary posting cache'lerindeki görünmez ID'leri daha önce eler.
+Cache aynı256KiB sınırda, retain yerinde; source/CRC/schema/sıralı ID kontrolleri
+aynı. 37 sorgu kapısı geçmediği için bu da varsayılan kapalıdır. Disk/bakım
+politikası değiştirilmedi; snapshot Adım2 başlatılmadı.
+[Profil ve sınırlar](REVISION-VISIBILITY-SEARCH-10K-20261026.md).
+
+Önceki maliyet ölçümünde aday varsayılan kapalıydı:
 iki normal koşuda 10 tur bakım 13,95/13,50s ile 12s kapısının üstünde,
 38 sorgunun 24'ünde p95 kontrol +%5 sınırı aşıldı. Case34 kullanıcı kararıyla
 izleniyor. Snapshot ve küçük commit/dirty open adımlarına geçilmedi.

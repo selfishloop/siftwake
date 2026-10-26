@@ -2,6 +2,8 @@
 mod churn;
 #[path = "../tools/bench_support/revision_cost.rs"]
 mod revision_cost;
+#[path = "../tools/bench_support/revision_search.rs"]
+mod revision_search;
 use churn::{Backend, Change, Corpus, Result};
 use fdb::{Database, Query, SearchPage, StoredDocument};
 use serde_json::{Value, json};
@@ -84,6 +86,9 @@ fn main() -> Result<()> {
     engine
         .0
         .set_revision_maintenance_responsive(std::env::var_os("FDB_COST_LEGACY").is_none());
+    engine
+        .0
+        .set_query_visibility_pruning(std::env::var_os("FDB_QUERY_VISIBILITY_PRUNING").is_some());
     churn::emit(
         json!({"phase":"opened","engine":"fdb","mode":mode,"api":api,"open_ms":start.elapsed().as_secs_f64()*1000.,"strict":true,"memory":churn::memory(),"stats":engine.stats()?}),
     );
@@ -92,6 +97,9 @@ fn main() -> Result<()> {
             json!({"phase":"liveness","segments":engine.liveness()?,"stats":engine.stats()?}),
         );
         return Ok(());
+    }
+    if mode == "search-profile" || mode == "search-matrix" {
+        return revision_search::run(&engine, state, mode);
     }
     if mode == "cost-load" {
         return revision_cost::run(&mut engine, state, path);

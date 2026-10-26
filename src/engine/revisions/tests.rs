@@ -201,6 +201,51 @@ fn cancellation_never_publishes_or_discards_acknowledged_revisions() {
 }
 
 #[test]
+fn query_visibility_pruning_keeps_updates_deletes_and_empty_segment_totals() {
+    let t = Temp::new();
+    let mut db = seed(&t);
+    db.set_query_visibility_pruning(true);
+    for (text, total) in [
+        ("oldrevision", 40),
+        ("newrevision", 20),
+        ("oldrevision payload", 40),
+        ("newrevision payload", 20),
+        ("oldrevision newrevision", 0),
+        ("payload", 60),
+    ] {
+        let mut query = Query::new("shared");
+        query.text = text.into();
+        let page = db.search(&query).unwrap();
+        assert_eq!(page.total, total, "{text}");
+        assert!(
+            page.hits
+                .iter()
+                .all(|d| !(20..40).contains(&d.document.key.id.parse::<usize>().unwrap()))
+        );
+    }
+    // Every prior segment is now masked, including its tombstones. The new
+    // complete revision must be the sole visible result set, before and after
+    // flush. This exercises the empty-run shortcut as well as cached AND lists.
+    db.commit((0..80).map(|id| put(id, "finalrevision")).collect())
+        .unwrap();
+    for flush in [false, true] {
+        if flush {
+            db.flush().unwrap();
+        }
+        for (text, total) in [
+            ("oldrevision", 0),
+            ("newrevision", 0),
+            ("finalrevision payload", 80),
+        ] {
+            let mut q = Query::new("shared");
+            q.text = text.into();
+            assert_eq!(db.search(&q).unwrap().total, total);
+        }
+    }
+    db.check_integrity().unwrap();
+}
+
+#[test]
 fn reopen_rejects_truncated_and_single_byte_corrupt_source_with_good_cache() {
     use std::io::{Read, Seek, SeekFrom, Write};
     for truncate in [false, true] {

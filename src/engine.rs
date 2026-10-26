@@ -261,6 +261,7 @@ pub struct Database {
     job: Option<Job>,
     revision_reclamation: bool,
     revision_responsive: bool,
+    query_visibility_pruning: bool,
     maintenance_activity: Arc<maintenance::Activity>,
     poisoned: bool,
     #[cfg(feature = "experimental-wal-sync-control")]
@@ -1195,6 +1196,7 @@ impl Database {
             // acceptance gate is still open. Explicit opt-in until resolved.
             revision_reclamation: false,
             revision_responsive: true,
+            query_visibility_pruning: false,
             maintenance_activity: Arc::default(),
             poisoned: false,
             #[cfg(feature = "experimental-wal-sync-control")]
@@ -1723,6 +1725,10 @@ impl Database {
         Ok(seq)
     }
 
+    /// Opt-in query-only experiment. No source/index mutation or format change.
+    pub fn set_query_visibility_pruning(&mut self, enabled: bool) {
+        self.query_visibility_pruning = enabled;
+    }
     pub fn search(&self, query: &Query) -> Result<SearchPage> {
         #[cfg(feature = "experimental-paged-metadata")]
         {
@@ -1876,6 +1882,8 @@ impl Database {
         #[cfg(feature = "bounded-engine")]
         let mut fallback_positions = Vec::new();
         for (n, run) in self.runs.iter().enumerate() {
+            #[cfg(feature = "diagnostic-timing")]
+            let visibility = crate::timing::span("query.visibility_mask");
             let mut mask = vec![0u64; run.index.len().div_ceil(64)];
             #[cfg(feature = "experimental-paged-metadata")]
             let cached = self
@@ -1901,20 +1909,33 @@ impl Database {
                 }
             }
             let hidden = |id: u32| mask[id as usize / 64] & (1u64 << (id % 64)) != 0;
+            #[cfg(feature = "diagnostic-timing")]
+            drop(visibility);
             let ids = if let Some(limit) = prefix_limit {
                 #[cfg(feature = "bounded-engine")]
                 let (count, ids) = if reuse_checked {
-                    run.index
-                        .prefix_matches_checked(query, &mask, limit, n, &mut checked_page)?
+                    run.index.prefix_matches_checked(
+                        query,
+                        &mask,
+                        limit,
+                        n,
+                        &mut checked_page,
+                        self.query_visibility_pruning,
+                    )?
                 } else {
-                    run.index.prefix_matches(query, &mask, limit)?
+                    run.index
+                        .prefix_matches(query, &mask, limit, self.query_visibility_pruning)?
                 };
                 #[cfg(not(feature = "bounded-engine"))]
-                let (count, ids) = run.index.prefix_matches(query, &mask, limit)?;
+                let (count, ids) =
+                    run.index
+                        .prefix_matches(query, &mask, limit, self.query_visibility_pruning)?;
                 total += count;
                 ids
             } else {
-                let ids = run.index.matches(query, hidden)?;
+                let ids = run
+                    .index
+                    .matches(query, hidden, self.query_visibility_pruning)?;
                 total += ids.len();
                 ids
             };

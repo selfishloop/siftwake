@@ -1,0 +1,138 @@
+{
+  "status": "complete",
+  "steps": [
+    {
+      "label": "measure",
+      "args": [
+        "C:\\Users\\Serkan\\.cache\\codex-runtimes\\codex-primary-runtime\\dependencies\\python\\python.exe",
+        "-X",
+        "utf8",
+        "tools/measure-revision-search.py"
+      ],
+      "exit_code": 0,
+      "log": "revision-search-10k-20261026-measure.log",
+      "sha256": "7D301226983BB7570226B57CA976F861A85989C1DF343426358E5277744C33A8"
+    },
+    {
+      "label": "kill",
+      "args": [
+        "C:\\Users\\Serkan\\.cache\\codex-runtimes\\codex-primary-runtime\\dependencies\\python\\python.exe",
+        "-X",
+        "utf8",
+        "tools/kill-revision-search.py"
+      ],
+      "exit_code": 0,
+      "log": "revision-search-10k-20261026-kill.log",
+      "sha256": "F0C739887DF98AFC382DEEEC66C0F0AB35430D9570692EF232F90A32919D6BF8"
+    },
+    {
+      "label": "fmt",
+      "args": [
+        "cargo",
+        "fmt",
+        "--check"
+      ],
+      "exit_code": 0,
+      "log": "revision-search-10k-20261026-fmt.log",
+      "sha256": "E3B0C44298FC1C149AFBF4C8996FB92427AE41E4649B934CA495991B7852B855"
+    },
+    {
+      "label": "clippy",
+      "args": [
+        "cargo",
+        "clippy",
+        "--all-targets",
+        "--",
+        "-D",
+        "warnings"
+      ],
+      "exit_code": 0,
+      "log": "revision-search-10k-20261026-clippy.log",
+      "sha256": "B6BADE17BF6D6F6CBE7CC528ECC15BA539E41921C6662C6BF70299BDE030B17A"
+    },
+    {
+      "label": "profile-clippy",
+      "args": [
+        "cargo",
+        "clippy",
+        "--all-targets",
+        "--features",
+        "diagnostic-timing",
+        "--",
+        "-D",
+        "warnings"
+      ],
+      "exit_code": 0,
+      "log": "revision-search-10k-20261026-profile-clippy.log",
+      "sha256": "4FD47DC1DFC6FFC149C7CF8E0D42B68E8B6BABE58C16A02FB93EC6214B5F828D"
+    },
+    {
+      "label": "tests",
+      "args": [
+        "cargo",
+        "test"
+      ],
+      "exit_code": 0,
+      "log": "revision-search-10k-20261026-tests.log",
+      "sha256": "373C06454C6429DC40F44049886EBDFF42CC95EEC303C01781065E2947D3618B"
+    },
+    {
+      "label": "no-default",
+      "args": [
+        "cargo",
+        "test",
+        "--no-default-features",
+        "--lib"
+      ],
+      "exit_code": 0,
+      "log": "revision-search-10k-20261026-no-default.log",
+      "sha256": "FFBF2EDEE73BBD0BC36EF61C8D252088D3108AEEC1DD18E9D2A987DCABFEBBA4"
+    },
+    {
+      "label": "harness-tests",
+      "args": [
+        "cargo",
+        "test",
+        "--example",
+        "measure_churn"
+      ],
+      "exit_code": 0,
+      "log": "revision-search-10k-20261026-harness-tests.log",
+      "sha256": "97CF75A466415F5E8997EF0869DEFE23ECAEB03A1415E83CAF39AF185E29F146"
+    }
+  ],
+  "protected_before": [
+    {
+      "path": "data\\rkyv-corpus-20261009\\json.payload-bench",
+      "bytes": 2740862279,
+      "sha256": "11F826FCE3F4AE790FEB9FC6DF9B1169F52C2FD699E89FC4A8A4B77AAA41731B"
+    },
+    {
+      "path": "tests\\fixtures\\v1\\checkpoint.fdb",
+      "bytes": 1507,
+      "sha256": "E87667C0FABE64D5A1F59EF86B99F7E612DB755D239B41677DA2ADC24BE7BF57"
+    },
+    {
+      "path": "tests\\fixtures\\v1\\checkpoint.ready",
+      "bytes": 28,
+      "sha256": "BC82C18F8D5C3A209328BD59B12D828D8922BEC4D26CB4D557FD4A493A4A9C2F"
+    }
+  ],
+  "protected_after": [
+    {
+      "path": "data\\rkyv-corpus-20261009\\json.payload-bench",
+      "bytes": 2740862279,
+      "sha256": "11F826FCE3F4AE790FEB9FC6DF9B1169F52C2FD699E89FC4A8A4B77AAA41731B"
+    },
+    {
+      "path": "tests\\fixtures\\v1\\checkpoint.fdb",
+      "bytes": 1507,
+      "sha256": "E87667C0FABE64D5A1F59EF86B99F7E612DB755D239B41677DA2ADC24BE7BF57"
+    },
+    {
+      "path": "tests\\fixtures\\v1\\checkpoint.ready",
+      "bytes": 28,
+      "sha256": "BC82C18F8D5C3A209328BD59B12D828D8922BEC4D26CB4D557FD4A493A4A9C2F"
+    }
+  ]
+}

@@ -90,12 +90,12 @@ fn window_matches_exact_reads_across_boundaries_and_sparse_order() {
     let mut query = Query::new("shared");
     query.text = "needle istanbul".into();
     assert_eq!(
-        index.matches(&query, |_| false).unwrap(),
+        index.matches(&query, |_| false, false).unwrap(),
         (0..64).collect::<Vec<_>>()
     );
     let mask = [0u64; 1];
     assert_eq!(
-        index.prefix_matches(&query, &mask, 5).unwrap(),
+        index.prefix_matches(&query, &mask, 5, false).unwrap(),
         (64, (0..5).collect())
     );
 }
@@ -322,7 +322,7 @@ fn covering_needs_source_authorization_and_rejects_modified_unselected_payload()
     query.scope = "shared".into();
     query.text = "nee".into();
     assert_eq!(
-        index.prefix_matches(&query, &[0], 1).unwrap(),
+        index.prefix_matches(&query, &[0], 1, false).unwrap(),
         (64, vec![0])
     );
     let target = index.metadata(63).unwrap();
@@ -332,12 +332,12 @@ fn covering_needs_source_authorization_and_rejects_modified_unselected_payload()
     file.flush().unwrap();
     drop(file);
     assert!(matches!(
-        index.prefix_matches(&query, &[0], 1),
+        index.prefix_matches(&query, &[0], 1, false),
         Err(Error::Corrupt(_))
     ));
     query.text = "ne".into();
     assert!(matches!(
-        index.prefix_matches(&query, &[0], 1),
+        index.prefix_matches(&query, &[0], 1, false),
         Err(Error::Corrupt(_))
     ));
 }

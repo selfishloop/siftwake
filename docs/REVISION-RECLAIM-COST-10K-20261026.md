@@ -1,5 +1,11 @@
 # Revizyon geri kazanma maliyeti — 10k / 26 Ekim 2026
 
+26 Ekim kullanıcı kararı: aşağıdaki maliyet sonucu **kabul edildi**; 12s ölçüm
+kapısının 13,5–13,95s ile tutulmamış olması bu kabulün açık parçasıdır.
+Ham kapı sonuçları geçmiş ölçümü korur. Geri kazanım varsayılan kapalı kalır.
+Arama için [ayrı görünürlük çalışması](REVISION-VISIBILITY-SEARCH-10K-20261026.md)
+yapıldı; case34 izleniyor.
+
 **Bakım ek kapısı: KALDI.** Politika varsayılan kapalıdır. Kullanıcı önceki disk/oracle/kill sonucunu kabul etti; case34 izleniyor. Bu rapor yeni bakım/yük kapısını ayrı ölçer.
 
 | Kapı | Gözlem | Karar |

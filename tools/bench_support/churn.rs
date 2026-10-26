@@ -618,6 +618,10 @@ pub fn run<B: Backend + 'static>(
         emit(matrix(&db, &mut corpus, &model, 1, "verify")?);
         return Ok(());
     }
+    if mode == "search-matrix" {
+        emit(matrix(&db, &mut corpus, &model, 30, "revision-search")?);
+        return Ok(());
+    }
     if mode == "smoke" {
         let changes = plan(&mut model, "mixed", 4, 4);
         let result = measured_commit(&mut db, &mut corpus, &mut model, &changes, streamed)?;

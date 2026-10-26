@@ -166,6 +166,10 @@ impl Drop for PayloadReads {
 
 #[derive(Default)]
 pub(crate) struct QueryWork {
+    pub seed_ids: u64,
+    pub hidden_skipped: u64,
+    pub deleted_skipped: u64,
+    pub cached_hidden_skipped: u64,
     pub visible: u64,
     pub covered: u64,
     pub candidates: u64,
@@ -176,6 +180,10 @@ impl Drop for QueryWork {
     fn drop(&mut self) {
         let mut values = counters().lock().expect("timing mutex poisoned");
         for (name, calls, elapsed_ns) in [
+            ("query.seed_ids", self.seed_ids, 0),
+            ("query.hidden_skipped", self.hidden_skipped, 0),
+            ("query.deleted_skipped", self.deleted_skipped, 0),
+            ("query.cached_hidden_skipped", self.cached_hidden_skipped, 0),
             ("query.visible_seed_ids", self.visible, 0),
             ("query.covered_candidates", self.covered, 0),
             ("query.payload_candidates", self.candidates, 0),

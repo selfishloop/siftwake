@@ -1,0 +1,48 @@
+{
+  "program": "C:\\Users\\Serkan\\Documents\\ChatGPT\\fdb\\output\\revision-search-before-profile-20261026.exe",
+  "program_sha256": "B433F4BDAB3044B93E322C20EAC858A0258CB8E48863E7F9E6BDF85A81F2A7C8",
+  "state": "C:\\Users\\Serkan\\Documents\\ChatGPT\\fdb\\docs\\benchmarks\\revisions-cost-10k-20261025-after-profile-r0-after-profile-state.json",
+  "protected_before": [
+    {
+      "path": "data\\rkyv-corpus-20261009\\json.payload-bench",
+      "bytes": 2740862279,
+      "sha256": "11F826FCE3F4AE790FEB9FC6DF9B1169F52C2FD699E89FC4A8A4B77AAA41731B"
+    },
+    {
+      "path": "tests\\fixtures\\v1\\checkpoint.fdb",
+      "bytes": 1507,
+      "sha256": "E87667C0FABE64D5A1F59EF86B99F7E612DB755D239B41677DA2ADC24BE7BF57"
+    },
+    {
+      "path": "tests\\fixtures\\v1\\checkpoint.ready",
+      "bytes": 28,
+      "sha256": "BC82C18F8D5C3A209328BD59B12D828D8922BEC4D26CB4D557FD4A493A4A9C2F"
+    }
+  ],
+  "protected_after": [
+    {
+      "path": "data\\rkyv-corpus-20261009\\json.payload-bench",
+      "bytes": 2740862279,
+      "sha256": "11F826FCE3F4AE790FEB9FC6DF9B1169F52C2FD699E89FC4A8A4B77AAA41731B"
+    },
+    {
+      "path": "tests\\fixtures\\v1\\checkpoint.fdb",
+      "bytes": 1507,
+      "sha256": "E87667C0FABE64D5A1F59EF86B99F7E612DB755D239B41677DA2ADC24BE7BF57"
+    },
+    {
+      "path": "tests\\fixtures\\v1\\checkpoint.ready",
+      "bytes": 28,
+      "sha256": "BC82C18F8D5C3A209328BD59B12D828D8922BEC4D26CB4D557FD4A493A4A9C2F"
+    }
+  ],
+  "result": {
+    "engine": "fdb",
+    "mode": "search-profile",
+    "api": "streamed",
+    "log": "revision-search-10k-20261026-candidate-before-r1-fdb-streamed-search-profile.jsonl",
+    "exit_code": 0,
+    "wall_s": 8.5
+  },
+  "cache": "warm; 1 warmup and 5 timed observations/case; oracle outside timer; diagnostic only"
+}

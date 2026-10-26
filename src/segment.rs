@@ -2306,7 +2306,14 @@ impl DiskIndex {
             })
         })
     }
-    pub fn matches(&self, q: &Query, hidden: impl Fn(u32) -> bool) -> Result<Vec<u32>> {
+    pub fn matches(
+        &self,
+        q: &Query,
+        hidden: impl Fn(u32) -> bool,
+        prune: bool,
+    ) -> Result<Vec<u32>> {
+        #[cfg(feature = "diagnostic-timing")]
+        let setup = crate::timing::span("query.posting_setup");
         let terms = Self::query_terms(q);
         let verification_terms = self.verification_terms(q, &terms)?;
         #[cfg(feature = "experimental-streaming-open")]
@@ -2369,12 +2376,27 @@ impl DiskIndex {
         for group in &groups[1..] {
             let count = group.iter().map(|p| p.count as usize).sum::<usize>();
             if count <= 4096 && count * 4 <= cache_budget && count < self.len() {
-                cached.push(Some(self.read_small_group(group)?));
+                let mut ids = self.read_small_group(group)?;
+                if prune {
+                    #[cfg(feature = "diagnostic-timing")]
+                    let original = ids.len();
+                    ids.retain(|&id| !hidden(id) && !self.deleted(id));
+                    #[cfg(feature = "diagnostic-timing")]
+                    {
+                        work.cached_hidden_skipped += (original - ids.len()) as u64;
+                    }
+                    if ids.is_empty() {
+                        return Ok(vec![]);
+                    }
+                }
+                cached.push(Some(ids));
                 cache_budget -= count * 4;
             } else {
                 cached.push(None);
             }
         }
+        #[cfg(feature = "diagnostic-timing")]
+        drop(setup);
         // Query-local reuse of identical content; bounded to 256 KiB. Titles
         // remain independently verified so cross-record text cannot leak.
         let mut folded_content = BTreeMap::<String, String>::new();
@@ -2406,7 +2428,22 @@ impl DiskIndex {
                         return Err(Error::Corrupt("invalid sorted posting list".into()));
                     }
                     previous = Some(id);
-                    if hidden(id) || self.deleted(id) {
+                    #[cfg(feature = "diagnostic-timing")]
+                    {
+                        work.seed_ids += 1;
+                    }
+                    if hidden(id) {
+                        #[cfg(feature = "diagnostic-timing")]
+                        {
+                            work.hidden_skipped += 1;
+                        }
+                        continue;
+                    }
+                    if self.deleted(id) {
+                        #[cfg(feature = "diagnostic-timing")]
+                        {
+                            work.deleted_skipped += 1;
+                        }
                         continue;
                     }
                     #[cfg(feature = "diagnostic-timing")]
@@ -2435,6 +2472,8 @@ impl DiskIndex {
                         }
                     }
                     if include && !verification_terms.is_empty() {
+                        #[cfg(feature = "diagnostic-timing")]
+                        let _candidate = crate::timing::span("query.candidate_verify");
                         #[cfg(feature = "diagnostic-timing")]
                         {
                             work.candidates += 1;
@@ -2512,8 +2551,9 @@ impl DiskIndex {
         q: &Query,
         mask: &[u64],
         limit: usize,
+        prune: bool,
     ) -> Result<(usize, Vec<u32>)> {
-        self.prefix_matches_with_capture(q, mask, limit, &mut |_, _, _| {})
+        self.prefix_matches_with_capture(q, mask, limit, prune, &mut |_, _, _| {})
     }
 
     #[cfg(feature = "bounded-engine")]
@@ -2524,8 +2564,9 @@ impl DiskIndex {
         limit: usize,
         run: usize,
         page: &mut CheckedPage,
+        prune: bool,
     ) -> Result<(usize, Vec<u32>)> {
-        self.prefix_matches_with_capture(q, mask, limit, &mut |id, view, bytes| {
+        self.prefix_matches_with_capture(q, mask, limit, prune, &mut |id, view, bytes| {
             page.retain(run, id, view, bytes);
         })
     }
@@ -2535,9 +2576,13 @@ impl DiskIndex {
         q: &Query,
         mask: &[u64],
         limit: usize,
+        prune: bool,
         capture: &mut impl FnMut(u32, &crate::payload::View<'_>, &[u8]),
     ) -> Result<(usize, Vec<u32>)> {
         let visible = self.visible_count(mask)?;
+        if prune && visible == 0 {
+            return Ok((0, vec![]));
+        }
         let hidden = |id: u32| mask[id as usize / 64] & (1u64 << (id % 64)) != 0;
         let mut ids = BinaryHeap::with_capacity(limit.min(self.len()));
         let mut group = None;
@@ -2548,7 +2593,7 @@ impl DiskIndex {
         let total = self.visit_matches_with_capture::<true>(
             q,
             hidden,
-            Some(visible),
+            (Some(visible), prune),
             limit,
             |id, n| {
                 if group != Some(n) {
@@ -2575,11 +2620,14 @@ impl DiskIndex {
         &self,
         q: &Query,
         hidden: impl Fn(u32) -> bool,
-        visible_total: Option<usize>,
+        visibility: (Option<usize>, bool),
         capture_limit: usize,
         mut emit: impl FnMut(u32, usize),
         capture: &mut impl FnMut(u32, &crate::payload::View<'_>, &[u8]),
     ) -> Result<usize> {
+        #[cfg(feature = "diagnostic-timing")]
+        let setup = crate::timing::span("query.posting_setup");
+        let (visible_total, prune) = visibility;
         let terms = Self::query_terms(q);
         let verification_terms = self.verification_terms(q, &terms)?;
         #[cfg(feature = "experimental-streaming-open")]
@@ -2656,12 +2704,27 @@ impl DiskIndex {
         for group in &groups[1..] {
             let count = group.iter().map(|p| p.count as usize).sum::<usize>();
             if count <= 4096 && count * 4 <= cache_budget && count < self.len() {
-                cached.push(Some(self.read_small_group(group)?));
+                let mut ids = self.read_small_group(group)?;
+                if prune && visible_total.is_none_or(|n| n < self.live_records) {
+                    #[cfg(feature = "diagnostic-timing")]
+                    let original = ids.len();
+                    ids.retain(|&id| !hidden(id) && !self.deleted(id));
+                    #[cfg(feature = "diagnostic-timing")]
+                    {
+                        work.cached_hidden_skipped += (original - ids.len()) as u64;
+                    }
+                    if ids.is_empty() {
+                        return Ok(0);
+                    }
+                }
+                cached.push(Some(ids));
                 cache_budget -= count * 4;
             } else {
                 cached.push(None);
             }
         }
+        #[cfg(feature = "diagnostic-timing")]
+        drop(setup);
         // Query-local reuse of identical content; bounded to 256 KiB. Titles
         // remain independently verified so cross-record text cannot leak.
         let mut folded_content = BTreeMap::<String, String>::new();
@@ -2693,7 +2756,22 @@ impl DiskIndex {
                         return Err(Error::Corrupt("invalid sorted posting list".into()));
                     }
                     previous = Some(id);
-                    if hidden(id) || self.deleted(id) {
+                    #[cfg(feature = "diagnostic-timing")]
+                    {
+                        work.seed_ids += 1;
+                    }
+                    if hidden(id) {
+                        #[cfg(feature = "diagnostic-timing")]
+                        {
+                            work.hidden_skipped += 1;
+                        }
+                        continue;
+                    }
+                    if self.deleted(id) {
+                        #[cfg(feature = "diagnostic-timing")]
+                        {
+                            work.deleted_skipped += 1;
+                        }
                         continue;
                     }
                     #[cfg(feature = "diagnostic-timing")]
@@ -2722,6 +2800,8 @@ impl DiskIndex {
                         }
                     }
                     if include && !verification_terms.is_empty() {
+                        #[cfg(feature = "diagnostic-timing")]
+                        let _candidate = crate::timing::span("query.candidate_verify");
                         #[cfg(feature = "diagnostic-timing")]
                         {
                             work.candidates += 1;

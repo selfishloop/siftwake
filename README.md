@@ -1,7 +1,15 @@
 # FDB
 
+[Görünürlük maskesi / arama profili](docs/REVISION-VISIBILITY-SEARCH-10K-20261026.md):
+maskenin ölü ID'leri zaten payload doğrulamasından önce elediği ölçüldü.
+Ek küçük posting-cache eleme deneyi 37 sorgunun 6'sında +%5 sınırını aşmaya
+devam etti; deney reddedildi, varsayılan kapalı. Kendi eski adayına göre14/37
+durumda +%5 üstünde çıktı; kararlı hızlanma iddiası yok.
+Maliyet sonucu kullanıcı tarafından kabul edildi,
+geri kazanım da kapalı kalır. Snapshot öncesindeki arama kapısı henüz geçmedi.
+
 [Revizyon geri kazanımı bakım maliyeti](docs/REVISION-RECLAIM-COST-10K-20261026.md):
-disk adımı kullanıcı tarafından kabul edildi; case34 izleniyor.
+disk ve maliyet sonuçları kullanıcı tarafından kabul edildi; case34 izleniyor.
 Yeni maliyet adayı iki dengeli koşuda bakımı 35,35/36,68 saniyeden
 13,95/13,50 saniyeye indirdi; **12 saniye kapısı geçmedi**. Ayrıca 38 sorgunun
 24'ünde p95 kontrolün %5 üzerinde. Kaynak kopyası sırasında 64 tek belge

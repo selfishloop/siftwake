@@ -1,0 +1,356 @@
+{
+  "protected_before": [
+    {
+      "path": "data\\rkyv-corpus-20261009\\json.payload-bench",
+      "bytes": 2740862279,
+      "sha256": "11F826FCE3F4AE790FEB9FC6DF9B1169F52C2FD699E89FC4A8A4B77AAA41731B"
+    },
+    {
+      "path": "tests\\fixtures\\v1\\checkpoint.fdb",
+      "bytes": 1507,
+      "sha256": "E87667C0FABE64D5A1F59EF86B99F7E612DB755D239B41677DA2ADC24BE7BF57"
+    },
+    {
+      "path": "tests\\fixtures\\v1\\checkpoint.ready",
+      "bytes": 28,
+      "sha256": "BC82C18F8D5C3A209328BD59B12D828D8922BEC4D26CB4D557FD4A493A4A9C2F"
+    }
+  ],
+  "cache": "warm OS; 1 warmup +30 timed samples/case; full page oracle outside timer",
+  "orders": [
+    {
+      "label": "candidate-r0-before",
+      "mode": "search-matrix",
+      "variant": "before",
+      "legacy": false,
+      "engine": "fdb",
+      "state": "C:\\Users\\Serkan\\Documents\\ChatGPT\\fdb\\docs\\benchmarks\\revisions-cost-10k-20261025-after-profile-r0-after-profile-state.json"
+    },
+    {
+      "label": "candidate-r0-after",
+      "mode": "search-matrix",
+      "variant": "after",
+      "legacy": false,
+      "engine": "fdb",
+      "state": "C:\\Users\\Serkan\\Documents\\ChatGPT\\fdb\\docs\\benchmarks\\revisions-cost-10k-20261025-after-profile-r0-after-profile-state.json"
+    },
+    {
+      "label": "candidate-profile-after",
+      "mode": "search-profile",
+      "variant": "after-profile",
+      "legacy": false,
+      "engine": "fdb",
+      "state": "C:\\Users\\Serkan\\Documents\\ChatGPT\\fdb\\docs\\benchmarks\\revisions-cost-10k-20261025-after-profile-r0-after-profile-state.json"
+    },
+    {
+      "label": "reference-prepare",
+      "mode": "seed",
+      "variant": "after",
+      "legacy": true,
+      "engine": "fdb",
+      "state": "C:\\Users\\Serkan\\Documents\\ChatGPT\\fdb\\docs\\benchmarks\\revision-search-10k-20261026-reference-state.json"
+    },
+    {
+      "label": "reference-prepare",
+      "mode": "churn",
+      "variant": "after",
+      "legacy": true,
+      "engine": "fdb",
+      "state": "C:\\Users\\Serkan\\Documents\\ChatGPT\\fdb\\docs\\benchmarks\\revision-search-10k-20261026-reference-state.json"
+    },
+    {
+      "label": "reference-prepare",
+      "mode": "verify",
+      "variant": "after",
+      "legacy": true,
+      "engine": "fdb",
+      "state": "C:\\Users\\Serkan\\Documents\\ChatGPT\\fdb\\docs\\benchmarks\\revision-search-10k-20261026-reference-state.json"
+    },
+    {
+      "label": "reference-profile",
+      "mode": "search-profile",
+      "variant": "before-profile",
+      "legacy": true,
+      "engine": "fdb",
+      "state": "C:\\Users\\Serkan\\Documents\\ChatGPT\\fdb\\docs\\benchmarks\\revision-search-10k-20261026-reference-state.json"
+    },
+    {
+      "label": "reference-r0-before",
+      "mode": "search-matrix",
+      "variant": "before",
+      "legacy": true,
+      "engine": "fdb",
+      "state": "C:\\Users\\Serkan\\Documents\\ChatGPT\\fdb\\docs\\benchmarks\\revision-search-10k-20261026-reference-state.json"
+    },
+    {
+      "label": "reference-r0-after",
+      "mode": "search-matrix",
+      "variant": "after",
+      "legacy": true,
+      "engine": "fdb",
+      "state": "C:\\Users\\Serkan\\Documents\\ChatGPT\\fdb\\docs\\benchmarks\\revision-search-10k-20261026-reference-state.json"
+    },
+    {
+      "label": "reference-r1-after",
+      "mode": "search-matrix",
+      "variant": "after",
+      "legacy": true,
+      "engine": "fdb",
+      "state": "C:\\Users\\Serkan\\Documents\\ChatGPT\\fdb\\docs\\benchmarks\\revision-search-10k-20261026-reference-state.json"
+    },
+    {
+      "label": "reference-r1-before",
+      "mode": "search-matrix",
+      "variant": "before",
+      "legacy": true,
+      "engine": "fdb",
+      "state": "C:\\Users\\Serkan\\Documents\\ChatGPT\\fdb\\docs\\benchmarks\\revision-search-10k-20261026-reference-state.json"
+    },
+    {
+      "label": "candidate-prepare",
+      "mode": "seed",
+      "variant": "after",
+      "legacy": false,
+      "engine": "fdb",
+      "state": "C:\\Users\\Serkan\\Documents\\ChatGPT\\fdb\\docs\\benchmarks\\revision-search-10k-20261026-candidate-state.json"
+    },
+    {
+      "label": "candidate-prepare",
+      "mode": "churn",
+      "variant": "after",
+      "legacy": false,
+      "engine": "fdb",
+      "state": "C:\\Users\\Serkan\\Documents\\ChatGPT\\fdb\\docs\\benchmarks\\revision-search-10k-20261026-candidate-state.json"
+    },
+    {
+      "label": "candidate-prepare",
+      "mode": "verify",
+      "variant": "after",
+      "legacy": false,
+      "engine": "fdb",
+      "state": "C:\\Users\\Serkan\\Documents\\ChatGPT\\fdb\\docs\\benchmarks\\revision-search-10k-20261026-candidate-state.json"
+    },
+    {
+      "label": "candidate-r1-after",
+      "mode": "search-matrix",
+      "variant": "after",
+      "legacy": false,
+      "engine": "fdb",
+      "state": "C:\\Users\\Serkan\\Documents\\ChatGPT\\fdb\\docs\\benchmarks\\revision-search-10k-20261026-candidate-state.json"
+    },
+    {
+      "label": "candidate-r1-before",
+      "mode": "search-matrix",
+      "variant": "before",
+      "legacy": false,
+      "engine": "fdb",
+      "state": "C:\\Users\\Serkan\\Documents\\ChatGPT\\fdb\\docs\\benchmarks\\revision-search-10k-20261026-candidate-state.json"
+    },
+    {
+      "label": "sqlite-r0",
+      "mode": "search-matrix",
+      "variant": "before",
+      "legacy": false,
+      "engine": "sqlite",
+      "state": "C:\\Users\\Serkan\\Documents\\ChatGPT\\fdb\\docs\\benchmarks\\revisions-cost-10k-20261025-compare-v2-r1-sqlite-state.json"
+    },
+    {
+      "label": "sqlite-r1",
+      "mode": "search-matrix",
+      "variant": "before",
+      "legacy": false,
+      "engine": "sqlite",
+      "state": "C:\\Users\\Serkan\\Documents\\ChatGPT\\fdb\\docs\\benchmarks\\revisions-cost-10k-20261025-compare-v2-r1-sqlite-state.json"
+    },
+    {
+      "label": "sqlite-oracle",
+      "mode": "verify",
+      "variant": "before",
+      "legacy": false,
+      "engine": "sqlite",
+      "state": "C:\\Users\\Serkan\\Documents\\ChatGPT\\fdb\\docs\\benchmarks\\revisions-cost-10k-20261025-compare-v2-r1-sqlite-state.json"
+    }
+  ],
+  "completed": [
+    {
+      "engine": "fdb",
+      "mode": "search-matrix",
+      "api": "streamed",
+      "log": "revision-search-10k-20261026-candidate-r0-before-fdb-streamed-search-matrix.jsonl",
+      "exit_code": 0,
+      "wall_s": 31.156000000002678
+    },
+    {
+      "engine": "fdb",
+      "mode": "search-matrix",
+      "api": "streamed",
+      "log": "revision-search-10k-20261026-candidate-r0-after-fdb-streamed-search-matrix.jsonl",
+      "exit_code": 0,
+      "wall_s": 31.26600000000326
+    },
+    {
+      "engine": "fdb",
+      "mode": "search-profile",
+      "api": "streamed",
+      "log": "revision-search-10k-20261026-candidate-profile-after-fdb-streamed-search-profile.jsonl",
+      "exit_code": 0,
+      "wall_s": 7.203000000008615
+    },
+    {
+      "engine": "fdb",
+      "mode": "seed",
+      "api": "streamed",
+      "log": "revision-search-10k-20261026-reference-prepare-fdb-streamed-seed.jsonl",
+      "exit_code": 0,
+      "wall_s": 19.23399999999674
+    },
+    {
+      "engine": "fdb",
+      "mode": "churn",
+      "api": "streamed",
+      "log": "revision-search-10k-20261026-reference-prepare-fdb-streamed-churn.jsonl",
+      "exit_code": 0,
+      "wall_s": 107.0789999999979
+    },
+    {
+      "engine": "fdb",
+      "mode": "verify",
+      "api": "streamed",
+      "log": "revision-search-10k-20261026-reference-prepare-fdb-streamed-verify.jsonl",
+      "exit_code": 0,
+      "wall_s": 2.702999999994063
+    },
+    {
+      "engine": "fdb",
+      "mode": "search-profile",
+      "api": "streamed",
+      "log": "revision-search-10k-20261026-reference-profile-fdb-streamed-search-profile.jsonl",
+      "exit_code": 0,
+      "wall_s": 7.157000000006519
+    },
+    {
+      "engine": "fdb",
+      "mode": "search-matrix",
+      "api": "streamed",
+      "log": "revision-search-10k-20261026-reference-r0-before-fdb-streamed-search-matrix.jsonl",
+      "exit_code": 0,
+      "wall_s": 30.139999999999418
+    },
+    {
+      "engine": "fdb",
+      "mode": "search-matrix",
+      "api": "streamed",
+      "log": "revision-search-10k-20261026-reference-r0-after-fdb-streamed-search-matrix.jsonl",
+      "exit_code": 0,
+      "wall_s": 35.14100000000326
+    },
+    {
+      "engine": "fdb",
+      "mode": "search-matrix",
+      "api": "streamed",
+      "log": "revision-search-10k-20261026-reference-r1-after-fdb-streamed-search-matrix.jsonl",
+      "exit_code": 0,
+      "wall_s": 34.9369999999908
+    },
+    {
+      "engine": "fdb",
+      "mode": "search-matrix",
+      "api": "streamed",
+      "log": "revision-search-10k-20261026-reference-r1-before-fdb-streamed-search-matrix.jsonl",
+      "exit_code": 0,
+      "wall_s": 35.10899999999674
+    },
+    {
+      "engine": "fdb",
+      "mode": "seed",
+      "api": "streamed",
+      "log": "revision-search-10k-20261026-candidate-prepare-fdb-streamed-seed.jsonl",
+      "exit_code": 0,
+      "wall_s": 19.593999999997322
+    },
+    {
+      "engine": "fdb",
+      "mode": "churn",
+      "api": "streamed",
+      "log": "revision-search-10k-20261026-candidate-prepare-fdb-streamed-churn.jsonl",
+      "exit_code": 0,
+      "wall_s": 96.57800000000861
+    },
+    {
+      "engine": "fdb",
+      "mode": "verify",
+      "api": "streamed",
+      "log": "revision-search-10k-20261026-candidate-prepare-fdb-streamed-verify.jsonl",
+      "exit_code": 0,
+      "wall_s": 2.6719999999913853
+    },
+    {
+      "engine": "fdb",
+      "mode": "search-matrix",
+      "api": "streamed",
+      "log": "revision-search-10k-20261026-candidate-r1-after-fdb-streamed-search-matrix.jsonl",
+      "exit_code": 0,
+      "wall_s": 32.71799999999348
+    },
+    {
+      "engine": "fdb",
+      "mode": "search-matrix",
+      "api": "streamed",
+      "log": "revision-search-10k-20261026-candidate-r1-before-fdb-streamed-search-matrix.jsonl",
+      "exit_code": 0,
+      "wall_s": 32.703000000008615
+    },
+    {
+      "engine": "sqlite",
+      "mode": "search-matrix",
+      "api": "streamed",
+      "log": "revision-search-10k-20261026-sqlite-r0-sqlite-streamed-search-matrix.jsonl",
+      "exit_code": 0,
+      "wall_s": 554.6399999999994
+    },
+    {
+      "engine": "sqlite",
+      "mode": "search-matrix",
+      "api": "streamed",
+      "log": "revision-search-10k-20261026-sqlite-r1-sqlite-streamed-search-matrix.jsonl",
+      "exit_code": 0,
+      "wall_s": 514.5940000000119
+    },
+    {
+      "engine": "sqlite",
+      "mode": "verify",
+      "api": "streamed",
+      "log": "revision-search-10k-20261026-sqlite-oracle-sqlite-streamed-verify.jsonl",
+      "exit_code": 0,
+      "wall_s": 35.13999999999942
+    }
+  ],
+  "programs": {
+    "output\\revision-search-before-20261026.exe": "E63ADEFFB6DC69CDD9019F1D79A35B7A5BE1CDEEC98D87D676FA791A3B850F02",
+    "output\\revision-search-after-20261026.exe": "7F65C05FE8DBBB2D4DAAC1CC3100DD029B0AF5156248BA7F3E591F1F07E0794D",
+    "output\\revision-search-after-profile-20261026.exe": "20C06950B54F275BDE5EC3A6334A49D5A5D6F12F0565AC2D40709DDB1E5ECE9A",
+    "output\\revision-search-before-profile-20261026.exe": "B433F4BDAB3044B93E322C20EAC858A0258CB8E48863E7F9E6BDF85A81F2A7C8",
+    "output\\revision-search-sqlite-20261026.exe": "31C8F2150E8F4BA7CEBEFB2954EBF5DF5D7D4580176BA1C0F7C20E38F98C5DA5"
+  },
+  "scope": "case34 tracked; per-case pooled60; no absolute-ms waiver for tiny queries",
+  "candidate_read_sources_unchanged": true,
+  "candidate_model_equal": true,
+  "protected_after": [
+    {
+      "path": "data\\rkyv-corpus-20261009\\json.payload-bench",
+      "bytes": 2740862279,
+      "sha256": "11F826FCE3F4AE790FEB9FC6DF9B1169F52C2FD699E89FC4A8A4B77AAA41731B"
+    },
+    {
+      "path": "tests\\fixtures\\v1\\checkpoint.fdb",
+      "bytes": 1507,
+      "sha256": "E87667C0FABE64D5A1F59EF86B99F7E612DB755D239B41677DA2ADC24BE7BF57"
+    },
+    {
+      "path": "tests\\fixtures\\v1\\checkpoint.ready",
+      "bytes": 28,
+      "sha256": "BC82C18F8D5C3A209328BD59B12D828D8922BEC4D26CB4D557FD4A493A4A9C2F"
+    }
+  ],
+  "complete": true
+}

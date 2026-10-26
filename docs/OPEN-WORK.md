@@ -1,5 +1,39 @@
 # FDB açık işler
 
+2026-10-26 ayrı arama kapısı **KALDI: 6/37 pooled p95 +%5 sınırının üstünde**.
+Maske zaten seed döngüsünde ölü ID'yi payload doğrulamasından önce eliyordu;
+`the zx`: aday11.951 ID→1.951 hidden skip→10.000 canlı doğrulama;
+referans10.183→183→aynı10.000. İstenen268,304MB aynı, ama aday2.013 read /
+7.987 window hit; referans1.112 /8.888: yerleşim okuma pencerelerini parçalıyor.
+Dar deney (boş segmenti önce atla, secondary küçük posting cache'ini maskeyle
+temizle) canlı payload sayısını değiştirmedi; varsayılan kapalı kalır.
+**Ek pruning deneyi reddedildi.** Aynı oturumda eski aday da referansa göre
+6/37 sınır üstündeydi; yeni deney kendi eski adayına göre14/37 durumda
+pooled p95+%5 üstünde çıktı. Başarı veya kararlı hızlanma diye kapatılmadı.
+`zx`157,564→173,816ms (+16,252ms); diğer kalanlar zeuglodon+0,167ms,
+mesopotamia+0,227ms, invertebrata+2,079ms, quixote whale+0,287ms ve uzun
+negatif zx+0,0293ms. Küçük farklara kapı istisnası tanınmadı. Önceki24→6
+değişimi tek başına deney kazancı sayılmadı; kontrol zamanları da değişti.
+Ek10tur bakım13,111s, retained420,644MB (1,2004×); politika/eşik/kalıcı biçim
+aynı. Case34 izleniyor. Arama kapısı geçmeden snapshot Adım2 başlatılmadı.
+Snapshot'ın100ms mutlak maksimum kapısı için boşta başlangıç engeli de var:
+bu matriste zx en kötü197,378ms. Kilit beklemesini kaldırmak bu tarama
+maliyetini tek başına çözmez; 4 okuyucu+1 yazıcı koşusuyla geçilmiş sayılmadı.
+[Yeni profil, mutlak farklar ve kanıtlar](REVISION-VISIBILITY-SEARCH-10K-20261026.md).
+
+2026-10-26 kullanıcı kararı: bakım maliyeti adımı **kabul edildi** (12s hedefi
+13,5–13,95s ile ölçümde tutulmadı; kabul bu farkı açıkça kapsıyor).
+Revizyon geri kazanımı varsayılan **kapalı** kalır. Snapshot öncesi ayrı kapı:
+case34 dışında 37 sorguda referansa göre pooled p95 +%5 sınırı; küçük sürelerde
+mutlak ms farkı da raporlanacak. Önce posting/görünürlük/payload profili,
+sonra görünürlük maskesiyle erken elemenin ölçülebilen ek imkânı araştırılır.
+Kod zaten seed ID'sini payload doğrulamasından önce maskede eliyor; daha geç
+eleme varmış gibi varsayılmayacak. Case34 izlenen maddede kalır.
+Adım3 raporuna bilinen sınır: sürekli yazma, revision worker'larını iptal edip
+bakımı boşta zamana erteleyebilir; bu koşulda kalıcı disk üst sınırı kanıtlanmadı.
+Arama kapısından sonra Adım2 snapshot/4 okuyucu+1 yazıcı ölçülecek. Genel RAM,
+küçük commit/dirty open ve gerçek-soğuk yük işleri açık; C ABI henüz kapsam dışı.
+
 <!-- revision-reclaim-cost-20261025 -->
 2026-10-26 maliyet kapısı **KALDI; varsayılan kapalı, Adım2/3 başlatılmadı**.
 İki dengeli normal koşuda eski reclaim bakım toplamı35,351/36,679s;
