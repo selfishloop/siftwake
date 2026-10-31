@@ -1,0 +1,90 @@
+{
+  "protected_before": [
+    {
+      "path": "data\\rkyv-corpus-20261009\\json.payload-bench",
+      "bytes": 2740862279,
+      "sha256": "11F826FCE3F4AE790FEB9FC6DF9B1169F52C2FD699E89FC4A8A4B77AAA41731B"
+    },
+    {
+      "path": "tests\\fixtures\\v1\\checkpoint.fdb",
+      "bytes": 1507,
+      "sha256": "E87667C0FABE64D5A1F59EF86B99F7E612DB755D239B41677DA2ADC24BE7BF57"
+    },
+    {
+      "path": "tests\\fixtures\\v1\\checkpoint.ready",
+      "bytes": 28,
+      "sha256": "BC82C18F8D5C3A209328BD59B12D828D8922BEC4D26CB4D557FD4A493A4A9C2F"
+    }
+  ],
+  "program": "output\\snapshot-fdb-20261026-v3.exe",
+  "sha256": "4D76C589AC40A8D68145AB7E193CE4EA8BF97B024B826943EC9232E736F3E82F",
+  "completed": [
+    {
+      "engine": "fdb",
+      "mode": "seed",
+      "api": "streamed",
+      "log": "snapshot-waits-10k-20261026-one-fdb-streamed-seed.jsonl",
+      "exit_code": 0,
+      "wall_s": 18.735000000000582
+    },
+    {
+      "engine": "fdb",
+      "mode": "snapshot-one",
+      "api": "streamed",
+      "log": "snapshot-waits-10k-20261026-one-fdb-streamed-snapshot-one.jsonl",
+      "exit_code": 0,
+      "wall_s": 41.546999999991385
+    },
+    {
+      "engine": "fdb",
+      "mode": "verify",
+      "api": "streamed",
+      "log": "snapshot-waits-10k-20261026-one-fdb-streamed-verify.jsonl",
+      "exit_code": 0,
+      "wall_s": 2.687000000005355
+    },
+    {
+      "engine": "fdb",
+      "mode": "seed",
+      "api": "streamed",
+      "log": "snapshot-waits-10k-20261026-100-fdb-streamed-seed.jsonl",
+      "exit_code": 0,
+      "wall_s": 18.968999999997322
+    },
+    {
+      "engine": "fdb",
+      "mode": "snapshot-100",
+      "api": "streamed",
+      "log": "snapshot-waits-10k-20261026-100-fdb-streamed-snapshot-100.jsonl",
+      "exit_code": 0,
+      "wall_s": 41.48399999999674
+    },
+    {
+      "engine": "fdb",
+      "mode": "verify",
+      "api": "streamed",
+      "log": "snapshot-waits-10k-20261026-100-fdb-streamed-verify.jsonl",
+      "exit_code": 0,
+      "wall_s": 2.5939999999973224
+    }
+  ],
+  "scope": "same first10k, streamed4 readers, counter fix only; NOT a new balanced throughput gate",
+  "protected_after": [
+    {
+      "path": "data\\rkyv-corpus-20261009\\json.payload-bench",
+      "bytes": 2740862279,
+      "sha256": "11F826FCE3F4AE790FEB9FC6DF9B1169F52C2FD699E89FC4A8A4B77AAA41731B"
+    },
+    {
+      "path": "tests\\fixtures\\v1\\checkpoint.fdb",
+      "bytes": 1507,
+      "sha256": "E87667C0FABE64D5A1F59EF86B99F7E612DB755D239B41677DA2ADC24BE7BF57"
+    },
+    {
+      "path": "tests\\fixtures\\v1\\checkpoint.ready",
+      "bytes": 28,
+      "sha256": "BC82C18F8D5C3A209328BD59B12D828D8922BEC4D26CB4D557FD4A493A4A9C2F"
+    }
+  ],
+  "complete": true
+}

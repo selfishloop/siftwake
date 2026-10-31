@@ -124,6 +124,47 @@ pub struct SearchPage {
     pub sequence: u64,
     pub hits: Vec<StoredDocument>,
 }
+
+/// Exact when exhausted; otherwise a proved lower bound, never an estimate.
+#[derive(Debug, Clone, PartialEq, Eq, Serialize, Deserialize)]
+#[serde(rename_all = "snake_case")]
+pub enum MatchTotal {
+    Exact(usize),
+    AtLeast(usize),
+}
+#[derive(Debug, Clone, Copy, PartialEq, Eq, Serialize, Deserialize)]
+#[serde(rename_all = "snake_case")]
+pub enum ValidationStatus {
+    Verified,
+    Pending,
+    RebuildRequired,
+}
+#[derive(Debug, Clone, Serialize, Deserialize)]
+pub struct FirstPage {
+    pub total: MatchTotal,
+    pub sequence: u64,
+    pub hits: Vec<StoredDocument>,
+    pub validation: ValidationStatus,
+}
+/// Opt-in, query-local experiments. Ordinary search retains checked serial execution.
+#[derive(Debug, Clone, Copy)]
+pub struct SearchExecution {
+    pub verification_workers: usize,
+    /// Join only candidate ranges separated by at most this many bytes (0 disables).
+    pub coalesce_gap_bytes: usize,
+    /// Candidate CRC may be reused ONLY for validated, immutable, pinned native sources.
+    /// Returned documents still receive their ordinary CRC/schema/identity checks.
+    pub reuse_validated_source_crc: bool,
+}
+impl Default for SearchExecution {
+    fn default() -> Self {
+        Self {
+            verification_workers: 1,
+            coalesce_gap_bytes: 0,
+            reuse_validated_source_crc: false,
+        }
+    }
+}
 /// Successfully unlinked engine-owned obsolete files. This is logical file
 /// space, not a measurement of physical disk blocks or total process memory.
 #[derive(Clone, Debug, Default, PartialEq, Eq, Serialize)]

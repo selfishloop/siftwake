@@ -1,0 +1,700 @@
+{
+  "arms": [
+    {
+      "role": "control",
+      "arm": 0,
+      "log": "mask-stage1-20261030-same-arm0-control-snapshot-control-1.jsonl",
+      "publication": {
+        "mask_full_rebuilds": 21,
+        "mask_incremental_publications": 16446,
+        "mask_keys_scanned": 1121496,
+        "mask_prepare_ns": 2009654900,
+        "max_prepare_ns": 148189000,
+        "old_view_release_ns": 621437200,
+        "pointer_ns": 881800,
+        "prepare_ns": 4153862400,
+        "publications": 16467,
+        "state_clone_ns": 1326730000,
+        "wal_reader_open_ns": 750428200
+      },
+      "p95": 3.8033,
+      "p99": 13.4017,
+      "p999": 46.707499999999996,
+      "max": 239.7192,
+      "over50": [
+        {
+          "commit_ms": 52.9452,
+          "cpu": {
+            "cpu_clock": "GetThreadTimes; coarse at short intervals; residual is I/O+wait+deschedule, not pure scheduler",
+            "thread_cpu_ms": 46.875,
+            "thread_cycles": 170587521
+          },
+          "elapsed_ms": 3314.8336999999997,
+          "sequence": 1465
+        },
+        {
+          "commit_ms": 53.9544,
+          "cpu": {
+            "cpu_clock": "GetThreadTimes; coarse at short intervals; residual is I/O+wait+deschedule, not pure scheduler",
+            "thread_cpu_ms": 46.875,
+            "thread_cycles": 197823538
+          },
+          "elapsed_ms": 6005.5551,
+          "sequence": 2480
+        },
+        {
+          "commit_ms": 84.0399,
+          "cpu": {
+            "cpu_clock": "GetThreadTimes; coarse at short intervals; residual is I/O+wait+deschedule, not pure scheduler",
+            "thread_cpu_ms": 46.875,
+            "thread_cycles": 194773199
+          },
+          "elapsed_ms": 9896.3846,
+          "sequence": 3915
+        },
+        {
+          "commit_ms": 53.0451,
+          "cpu": {
+            "cpu_clock": "GetThreadTimes; coarse at short intervals; residual is I/O+wait+deschedule, not pure scheduler",
+            "thread_cpu_ms": 46.875,
+            "thread_cycles": 192979880
+          },
+          "elapsed_ms": 17373.0133,
+          "sequence": 6600
+        },
+        {
+          "commit_ms": 53.5341,
+          "cpu": {
+            "cpu_clock": "GetThreadTimes; coarse at short intervals; residual is I/O+wait+deschedule, not pure scheduler",
+            "thread_cpu_ms": 46.875,
+            "thread_cycles": 196025653
+          },
+          "elapsed_ms": 23243.8923,
+          "sequence": 8654
+        },
+        {
+          "commit_ms": 52.7573,
+          "cpu": {
+            "cpu_clock": "GetThreadTimes; coarse at short intervals; residual is I/O+wait+deschedule, not pure scheduler",
+            "thread_cpu_ms": 46.875,
+            "thread_cycles": 186633053
+          },
+          "elapsed_ms": 26153.4657,
+          "sequence": 9685
+        },
+        {
+          "commit_ms": 51.476800000000004,
+          "cpu": {
+            "cpu_clock": "GetThreadTimes; coarse at short intervals; residual is I/O+wait+deschedule, not pure scheduler",
+            "thread_cpu_ms": 46.875,
+            "thread_cycles": 177188102
+          },
+          "elapsed_ms": 34769.9031,
+          "sequence": 12796
+        },
+        {
+          "commit_ms": 67.88520000000001,
+          "cpu": {
+            "cpu_clock": "GetThreadTimes; coarse at short intervals; residual is I/O+wait+deschedule, not pure scheduler",
+            "thread_cpu_ms": 31.25,
+            "thread_cycles": 189156156
+          },
+          "elapsed_ms": 36036.299900000005,
+          "sequence": 13212
+        },
+        {
+          "commit_ms": 51.005500000000005,
+          "cpu": {
+            "cpu_clock": "GetThreadTimes; coarse at short intervals; residual is I/O+wait+deschedule, not pure scheduler",
+            "thread_cpu_ms": 46.875,
+            "thread_cycles": 173463746
+          },
+          "elapsed_ms": 37942.9573,
+          "sequence": 13874
+        },
+        {
+          "commit_ms": 155.9991,
+          "cpu": {
+            "cpu_clock": "GetThreadTimes; coarse at short intervals; residual is I/O+wait+deschedule, not pure scheduler",
+            "thread_cpu_ms": 15.625,
+            "thread_cycles": 30791196
+          },
+          "elapsed_ms": 42315.8922,
+          "sequence": 15448
+        },
+        {
+          "commit_ms": 239.7192,
+          "cpu": {
+            "cpu_clock": "GetThreadTimes; coarse at short intervals; residual is I/O+wait+deschedule, not pure scheduler",
+            "thread_cpu_ms": 0.0,
+            "thread_cycles": 12558245
+          },
+          "elapsed_ms": 42918.558300000004,
+          "sequence": 15602
+        },
+        {
+          "commit_ms": 50.9027,
+          "cpu": {
+            "cpu_clock": "GetThreadTimes; coarse at short intervals; residual is I/O+wait+deschedule, not pure scheduler",
+            "thread_cpu_ms": 46.875,
+            "thread_cycles": 183892230
+          },
+          "elapsed_ms": 45012.1644,
+          "sequence": 16328
+        }
+      ],
+      "over100": 2
+    },
+    {
+      "role": "candidate",
+      "arm": 1,
+      "log": "mask-stage1-20261030-same-arm1-candidate-snapshot-control-1.jsonl",
+      "publication": {
+        "mask_full_rebuilds": 1,
+        "mask_incremental_publications": 16465,
+        "mask_keys_scanned": 124800,
+        "mask_prepare_ns": 1403714900,
+        "max_prepare_ns": 28143900,
+        "old_view_release_ns": 623997500,
+        "pointer_ns": 826200,
+        "prepare_ns": 3400937500,
+        "publications": 16466,
+        "state_clone_ns": 1346383800,
+        "wal_reader_open_ns": 583642900
+      },
+      "p95": 3.5692,
+      "p99": 12.1335,
+      "p999": 23.4818,
+      "max": 209.0348,
+      "over50": [
+        {
+          "commit_ms": 209.0348,
+          "cpu": {
+            "cpu_clock": "GetThreadTimes; coarse at short intervals; residual is I/O+wait+deschedule, not pure scheduler",
+            "thread_cpu_ms": 0.0,
+            "thread_cycles": 36718899
+          },
+          "elapsed_ms": 18753.4947,
+          "sequence": 7148
+        },
+        {
+          "commit_ms": 52.4093,
+          "cpu": {
+            "cpu_clock": "GetThreadTimes; coarse at short intervals; residual is I/O+wait+deschedule, not pure scheduler",
+            "thread_cpu_ms": 31.25,
+            "thread_cycles": 71748384
+          },
+          "elapsed_ms": 25653.5373,
+          "sequence": 9776
+        }
+      ],
+      "over100": 1
+    },
+    {
+      "role": "candidate",
+      "arm": 2,
+      "log": "mask-stage1-20261030-same-arm2-candidate-snapshot-control-1.jsonl",
+      "publication": {
+        "mask_full_rebuilds": 1,
+        "mask_incremental_publications": 16465,
+        "mask_keys_scanned": 124652,
+        "mask_prepare_ns": 1417437000,
+        "max_prepare_ns": 19826500,
+        "old_view_release_ns": 630716400,
+        "pointer_ns": 903400,
+        "prepare_ns": 3446320100,
+        "publications": 16466,
+        "state_clone_ns": 1363749000,
+        "wal_reader_open_ns": 594616600
+      },
+      "p95": 3.6828999999999996,
+      "p99": 12.9331,
+      "p999": 22.3431,
+      "max": 44.3256,
+      "over50": [],
+      "over100": 0
+    },
+    {
+      "role": "control",
+      "arm": 3,
+      "log": "mask-stage1-20261030-same-arm3-control-snapshot-control-1.jsonl",
+      "publication": {
+        "mask_full_rebuilds": 21,
+        "mask_incremental_publications": 16446,
+        "mask_keys_scanned": 1121640,
+        "mask_prepare_ns": 1989112300,
+        "max_prepare_ns": 50580800,
+        "old_view_release_ns": 629285200,
+        "pointer_ns": 882400,
+        "prepare_ns": 4014538700,
+        "publications": 16467,
+        "state_clone_ns": 1345758400,
+        "wal_reader_open_ns": 608658000
+      },
+      "p95": 3.6174000000000004,
+      "p99": 13.4243,
+      "p999": 41.415,
+      "max": 66.98320000000001,
+      "over50": [
+        {
+          "commit_ms": 50.2923,
+          "cpu": {
+            "cpu_clock": "GetThreadTimes; coarse at short intervals; residual is I/O+wait+deschedule, not pure scheduler",
+            "thread_cpu_ms": 46.875,
+            "thread_cycles": 183910434
+          },
+          "elapsed_ms": 6113.592500000001,
+          "sequence": 2492
+        },
+        {
+          "commit_ms": 50.6106,
+          "cpu": {
+            "cpu_clock": "GetThreadTimes; coarse at short intervals; residual is I/O+wait+deschedule, not pure scheduler",
+            "thread_cpu_ms": 46.875,
+            "thread_cycles": 180630629
+          },
+          "elapsed_ms": 11949.378400000001,
+          "sequence": 4577
+        },
+        {
+          "commit_ms": 50.3063,
+          "cpu": {
+            "cpu_clock": "GetThreadTimes; coarse at short intervals; residual is I/O+wait+deschedule, not pure scheduler",
+            "thread_cpu_ms": 46.875,
+            "thread_cycles": 184483938
+          },
+          "elapsed_ms": 17229.7246,
+          "sequence": 6627
+        },
+        {
+          "commit_ms": 61.3587,
+          "cpu": {
+            "cpu_clock": "GetThreadTimes; coarse at short intervals; residual is I/O+wait+deschedule, not pure scheduler",
+            "thread_cpu_ms": 46.875,
+            "thread_cycles": 165265565
+          },
+          "elapsed_ms": 20238.3224,
+          "sequence": 7697
+        },
+        {
+          "commit_ms": 50.2952,
+          "cpu": {
+            "cpu_clock": "GetThreadTimes; coarse at short intervals; residual is I/O+wait+deschedule, not pure scheduler",
+            "thread_cpu_ms": 46.875,
+            "thread_cycles": 180034754
+          },
+          "elapsed_ms": 26720.9452,
+          "sequence": 10129
+        },
+        {
+          "commit_ms": 51.742999999999995,
+          "cpu": {
+            "cpu_clock": "GetThreadTimes; coarse at short intervals; residual is I/O+wait+deschedule, not pure scheduler",
+            "thread_cpu_ms": 46.875,
+            "thread_cycles": 189258180
+          },
+          "elapsed_ms": 31384.5365,
+          "sequence": 11829
+        },
+        {
+          "commit_ms": 66.98320000000001,
+          "cpu": {
+            "cpu_clock": "GetThreadTimes; coarse at short intervals; residual is I/O+wait+deschedule, not pure scheduler",
+            "thread_cpu_ms": 15.625,
+            "thread_cycles": 187341964
+          },
+          "elapsed_ms": 35454.3614,
+          "sequence": 13254
+        },
+        {
+          "commit_ms": 66.755,
+          "cpu": {
+            "cpu_clock": "GetThreadTimes; coarse at short intervals; residual is I/O+wait+deschedule, not pure scheduler",
+            "thread_cpu_ms": 62.5,
+            "thread_cycles": 185995443
+          },
+          "elapsed_ms": 42954.841799999995,
+          "sequence": 15969
+        },
+        {
+          "commit_ms": 51.8793,
+          "cpu": {
+            "cpu_clock": "GetThreadTimes; coarse at short intervals; residual is I/O+wait+deschedule, not pure scheduler",
+            "thread_cpu_ms": 46.875,
+            "thread_cycles": 186963035
+          },
+          "elapsed_ms": 44089.767100000005,
+          "sequence": 16366
+        }
+      ],
+      "over100": 0
+    }
+  ],
+  "pooled": {
+    "control": {
+      "p95": 3.7051,
+      "p99": 13.4017,
+      "p999": 45.998999999999995,
+      "max": 239.7192,
+      "over50": 21,
+      "over100": 2
+    },
+    "candidate": {
+      "p95": 3.6294999999999997,
+      "p99": 12.4995,
+      "p999": 22.6294,
+      "max": 209.0348,
+      "over50": 2,
+      "over100": 1
+    }
+  },
+  "reads": [
+    {
+      "role": "control",
+      "arm": 0,
+      "memory": {
+        "os_lifetime_peak_private_commit_bytes": 78204928,
+        "os_lifetime_peak_working_set_bytes": 70578176,
+        "private_bytes": 32436224,
+        "sample_interval_ms": 10,
+        "sampled_phase_peak_private_bytes": 65482752,
+        "sampled_phase_peak_working_set_bytes": 68677632,
+        "working_set_bytes": 36388864
+      },
+      "log": "mask-stage1-20261030-same-read0-control-snapshot-one.jsonl"
+    },
+    {
+      "role": "candidate",
+      "arm": 1,
+      "memory": {
+        "os_lifetime_peak_private_commit_bytes": 77742080,
+        "os_lifetime_peak_working_set_bytes": 69226496,
+        "private_bytes": 23457792,
+        "sample_interval_ms": 10,
+        "sampled_phase_peak_private_bytes": 59314176,
+        "sampled_phase_peak_working_set_bytes": 63492096,
+        "working_set_bytes": 27664384
+      },
+      "log": "mask-stage1-20261030-same-read1-candidate-snapshot-one.jsonl"
+    },
+    {
+      "role": "candidate",
+      "arm": 2,
+      "memory": {
+        "os_lifetime_peak_private_commit_bytes": 81903616,
+        "os_lifetime_peak_working_set_bytes": 71417856,
+        "private_bytes": 18575360,
+        "sample_interval_ms": 10,
+        "sampled_phase_peak_private_bytes": 60833792,
+        "sampled_phase_peak_working_set_bytes": 63512576,
+        "working_set_bytes": 23810048
+      },
+      "log": "mask-stage1-20261030-same-read2-candidate-snapshot-one.jsonl"
+    },
+    {
+      "role": "control",
+      "arm": 3,
+      "memory": {
+        "os_lifetime_peak_private_commit_bytes": 76783616,
+        "os_lifetime_peak_working_set_bytes": 68902912,
+        "private_bytes": 21458944,
+        "sample_interval_ms": 10,
+        "sampled_phase_peak_private_bytes": 58343424,
+        "sampled_phase_peak_working_set_bytes": 62332928,
+        "working_set_bytes": 25587712
+      },
+      "log": "mask-stage1-20261030-same-read3-control-snapshot-one.jsonl"
+    }
+  ],
+  "cases": [
+    {
+      "case_id": 0,
+      "control_p95": 14.8886,
+      "candidate_p95": 15.0907,
+      "control_samples": 40,
+      "candidate_samples": 40
+    },
+    {
+      "case_id": 1,
+      "control_p95": 13.2533,
+      "candidate_p95": 12.1236,
+      "control_samples": 40,
+      "candidate_samples": 40
+    },
+    {
+      "case_id": 2,
+      "control_p95": 13.1406,
+      "candidate_p95": 13.2552,
+      "control_samples": 40,
+      "candidate_samples": 40
+    },
+    {
+      "case_id": 3,
+      "control_p95": 18.5961,
+      "candidate_p95": 18.1406,
+      "control_samples": 40,
+      "candidate_samples": 40
+    },
+    {
+      "case_id": 4,
+      "control_p95": 14.1813,
+      "candidate_p95": 14.5477,
+      "control_samples": 40,
+      "candidate_samples": 40
+    },
+    {
+      "case_id": 5,
+      "control_p95": 13.0494,
+      "candidate_p95": 12.9121,
+      "control_samples": 40,
+      "candidate_samples": 40
+    },
+    {
+      "case_id": 6,
+      "control_p95": 19.5252,
+      "candidate_p95": 18.6135,
+      "control_samples": 40,
+      "candidate_samples": 40
+    },
+    {
+      "case_id": 7,
+      "control_p95": 7.8314,
+      "candidate_p95": 7.7309,
+      "control_samples": 40,
+      "candidate_samples": 40
+    },
+    {
+      "case_id": 8,
+      "control_p95": 13.162,
+      "candidate_p95": 13.092,
+      "control_samples": 40,
+      "candidate_samples": 40
+    },
+    {
+      "case_id": 9,
+      "control_p95": 12.0075,
+      "candidate_p95": 11.0187,
+      "control_samples": 40,
+      "candidate_samples": 40
+    },
+    {
+      "case_id": 10,
+      "control_p95": 16.7727,
+      "candidate_p95": 16.6196,
+      "control_samples": 40,
+      "candidate_samples": 40
+    },
+    {
+      "case_id": 11,
+      "control_p95": 213.3155,
+      "candidate_p95": 135.0052,
+      "control_samples": 40,
+      "candidate_samples": 40
+    },
+    {
+      "case_id": 12,
+      "control_p95": 14.7029,
+      "candidate_p95": 14.04,
+      "control_samples": 40,
+      "candidate_samples": 40
+    },
+    {
+      "case_id": 13,
+      "control_p95": 19.4747,
+      "candidate_p95": 19.8608,
+      "control_samples": 40,
+      "candidate_samples": 40
+    },
+    {
+      "case_id": 14,
+      "control_p95": 8.7537,
+      "candidate_p95": 7.4855,
+      "control_samples": 40,
+      "candidate_samples": 40
+    },
+    {
+      "case_id": 15,
+      "control_p95": 294.1355,
+      "candidate_p95": 295.5156,
+      "control_samples": 40,
+      "candidate_samples": 40
+    },
+    {
+      "case_id": 16,
+      "control_p95": 472.8252,
+      "candidate_p95": 208.018,
+      "control_samples": 40,
+      "candidate_samples": 40
+    },
+    {
+      "case_id": 17,
+      "control_p95": 4.6653,
+      "candidate_p95": 5.6688,
+      "control_samples": 40,
+      "candidate_samples": 40
+    },
+    {
+      "case_id": 18,
+      "control_p95": 213.7094,
+      "candidate_p95": 227.1748,
+      "control_samples": 40,
+      "candidate_samples": 40
+    },
+    {
+      "case_id": 19,
+      "control_p95": 11.4308,
+      "candidate_p95": 11.312,
+      "control_samples": 40,
+      "candidate_samples": 40
+    },
+    {
+      "case_id": 20,
+      "control_p95": 11.2092,
+      "candidate_p95": 11.4757,
+      "control_samples": 40,
+      "candidate_samples": 40
+    },
+    {
+      "case_id": 21,
+      "control_p95": 40.8848,
+      "candidate_p95": 39.3617,
+      "control_samples": 40,
+      "candidate_samples": 40
+    },
+    {
+      "case_id": 22,
+      "control_p95": 488.8066,
+      "candidate_p95": 384.4833,
+      "control_samples": 40,
+      "candidate_samples": 40
+    },
+    {
+      "case_id": 23,
+      "control_p95": 428.539,
+      "candidate_p95": 403.1154,
+      "control_samples": 40,
+      "candidate_samples": 40
+    },
+    {
+      "case_id": 24,
+      "control_p95": 354.7361,
+      "candidate_p95": 341.9176,
+      "control_samples": 40,
+      "candidate_samples": 40
+    },
+    {
+      "case_id": 25,
+      "control_p95": 134.8597,
+      "candidate_p95": 151.5738,
+      "control_samples": 40,
+      "candidate_samples": 40
+    },
+    {
+      "case_id": 26,
+      "control_p95": 133.607,
+      "candidate_p95": 131.9112,
+      "control_samples": 40,
+      "candidate_samples": 40
+    },
+    {
+      "case_id": 27,
+      "control_p95": 11.2473,
+      "candidate_p95": 11.7942,
+      "control_samples": 40,
+      "candidate_samples": 40
+    },
+    {
+      "case_id": 28,
+      "control_p95": 265.1581,
+      "candidate_p95": 136.3841,
+      "control_samples": 40,
+      "candidate_samples": 40
+    },
+    {
+      "case_id": 29,
+      "control_p95": 12.4089,
+      "candidate_p95": 12.0995,
+      "control_samples": 40,
+      "candidate_samples": 40
+    },
+    {
+      "case_id": 30,
+      "control_p95": 434.501,
+      "candidate_p95": 550.1868,
+      "control_samples": 40,
+      "candidate_samples": 40
+    },
+    {
+      "case_id": 31,
+      "control_p95": 180.7757,
+      "candidate_p95": 178.0915,
+      "control_samples": 40,
+      "candidate_samples": 40
+    },
+    {
+      "case_id": 32,
+      "control_p95": 210.8401,
+      "candidate_p95": 236.8771,
+      "control_samples": 40,
+      "candidate_samples": 40
+    },
+    {
+      "case_id": 33,
+      "control_p95": 138.2541,
+      "candidate_p95": 240.5668,
+      "control_samples": 40,
+      "candidate_samples": 40
+    },
+    {
+      "case_id": 34,
+      "control_p95": 355.3436,
+      "candidate_p95": 298.6031,
+      "control_samples": 40,
+      "candidate_samples": 40
+    },
+    {
+      "case_id": 35,
+      "control_p95": 2.9456,
+      "candidate_p95": 2.6883,
+      "control_samples": 40,
+      "candidate_samples": 40
+    },
+    {
+      "case_id": 36,
+      "control_p95": 5.0612,
+      "candidate_p95": 4.5174,
+      "control_samples": 40,
+      "candidate_samples": 40
+    },
+    {
+      "case_id": 37,
+      "control_p95": 3.4989,
+      "candidate_p95": 3.1578,
+      "control_samples": 40,
+      "candidate_samples": 40
+    },
+    {
+      "case_id": 38,
+      "control_p95": 712.3936,
+      "candidate_p95": 581.0426,
+      "control_samples": 40,
+      "candidate_samples": 40
+    },
+    {
+      "case_id": 39,
+      "control_p95": 1.4107,
+      "candidate_p95": 1.601,
+      "control_samples": 40,
+      "candidate_samples": 40
+    },
+    {
+      "case_id": 40,
+      "control_p95": 5.3711,
+      "candidate_p95": 5.7223,
+      "control_samples": 40,
+      "candidate_samples": 40
+    }
+  ],
+  "reader_ram_decision": "INCONCLUSIVE; identical executable/path no-op controls also vary; no non-regression pass claimed",
+  "engine_ram_gate": "not measured by this model/oracle/profile harness"
+}

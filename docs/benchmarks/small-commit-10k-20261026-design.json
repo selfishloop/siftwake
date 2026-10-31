@@ -1,0 +1,275 @@
+{
+  "protected_before": [
+    {
+      "path": "data\\rkyv-corpus-20261009\\json.payload-bench",
+      "bytes": 2740862279,
+      "sha256": "11F826FCE3F4AE790FEB9FC6DF9B1169F52C2FD699E89FC4A8A4B77AAA41731B"
+    },
+    {
+      "path": "tests\\fixtures\\v1\\checkpoint.fdb",
+      "bytes": 1507,
+      "sha256": "E87667C0FABE64D5A1F59EF86B99F7E612DB755D239B41677DA2ADC24BE7BF57"
+    },
+    {
+      "path": "tests\\fixtures\\v1\\checkpoint.ready",
+      "bytes": 28,
+      "sha256": "BC82C18F8D5C3A209328BD59B12D828D8922BEC4D26CB4D557FD4A493A4A9C2F"
+    }
+  ],
+  "programs": {
+    "fdb": {
+      "path": "output\\small-commit-fdb-20261026-v1.exe",
+      "sha256": "444EF62BE293989FF05E84A695E9E59CAF22B8CCC467C98E0EA68711DFD77BB9"
+    },
+    "sqlite": {
+      "path": "output\\small-commit-sqlite-20261026-v1.exe",
+      "sha256": "71B5462153F3150D327A4F043F8D35F16EAEDD4F7F1C48ED676D3C86611A9709"
+    }
+  },
+  "completed": [
+    {
+      "engine": "fdb",
+      "mode": "seed",
+      "api": "streamed",
+      "log": "small-commit-10k-20261026-r0-fdb-streamed-seed.jsonl",
+      "exit_code": 0,
+      "wall_s": 12.39100000000326
+    },
+    {
+      "engine": "fdb",
+      "mode": "small-open",
+      "api": "streamed",
+      "log": "small-commit-10k-20261026-r0-fdb-streamed-small-open.jsonl",
+      "exit_code": 0,
+      "wall_s": 5.812000000005355
+    },
+    {
+      "engine": "fdb",
+      "mode": "small-latency",
+      "api": "streamed",
+      "log": "small-commit-10k-20261026-r0-fdb-streamed-small-latency.jsonl",
+      "exit_code": 0,
+      "wall_s": 1.9059999999881256
+    },
+    {
+      "engine": "fdb",
+      "mode": "verify",
+      "api": "streamed",
+      "log": "small-commit-10k-20261026-r0-fdb-streamed-verify.jsonl",
+      "exit_code": 0,
+      "wall_s": 2.7190000000118744
+    },
+    {
+      "engine": "fdb",
+      "mode": "small-dirty",
+      "api": "streamed",
+      "log": "small-commit-10k-20261026-r0-fdb-streamed-small-dirty.jsonl",
+      "exit_code": 0,
+      "wall_s": 6.937000000005355
+    },
+    {
+      "engine": "fdb",
+      "mode": "small-open",
+      "api": "streamed",
+      "log": "small-commit-10k-20261026-r0-dirty-fdb-streamed-small-open.jsonl",
+      "exit_code": 0,
+      "wall_s": 5.860000000000582
+    },
+    {
+      "engine": "fdb",
+      "mode": "verify",
+      "api": "streamed",
+      "log": "small-commit-10k-20261026-r0-final-fdb-streamed-verify.jsonl",
+      "exit_code": 0,
+      "wall_s": 3.452999999994063
+    },
+    {
+      "engine": "sqlite",
+      "mode": "seed",
+      "api": "streamed",
+      "log": "small-commit-10k-20261026-r0-sqlite-streamed-seed.jsonl",
+      "exit_code": 0,
+      "wall_s": 30.671999999991385
+    },
+    {
+      "engine": "sqlite",
+      "mode": "small-open",
+      "api": "streamed",
+      "log": "small-commit-10k-20261026-r0-sqlite-streamed-small-open.jsonl",
+      "exit_code": 0,
+      "wall_s": 5.952999999994063
+    },
+    {
+      "engine": "sqlite",
+      "mode": "small-latency",
+      "api": "streamed",
+      "log": "small-commit-10k-20261026-r0-sqlite-streamed-small-latency.jsonl",
+      "exit_code": 0,
+      "wall_s": 2.2180000000080327
+    },
+    {
+      "engine": "sqlite",
+      "mode": "verify",
+      "api": "streamed",
+      "log": "small-commit-10k-20261026-r0-sqlite-streamed-verify.jsonl",
+      "exit_code": 0,
+      "wall_s": 25.985000000000582
+    },
+    {
+      "engine": "sqlite",
+      "mode": "small-dirty",
+      "api": "streamed",
+      "log": "small-commit-10k-20261026-r0-sqlite-streamed-small-dirty.jsonl",
+      "exit_code": 0,
+      "wall_s": 9.718999999997322
+    },
+    {
+      "engine": "sqlite",
+      "mode": "small-open",
+      "api": "streamed",
+      "log": "small-commit-10k-20261026-r0-dirty-sqlite-streamed-small-open.jsonl",
+      "exit_code": 0,
+      "wall_s": 6.0
+    },
+    {
+      "engine": "sqlite",
+      "mode": "verify",
+      "api": "streamed",
+      "log": "small-commit-10k-20261026-r0-final-sqlite-streamed-verify.jsonl",
+      "exit_code": 0,
+      "wall_s": 27.0
+    },
+    {
+      "engine": "sqlite",
+      "mode": "seed",
+      "api": "streamed",
+      "log": "small-commit-10k-20261026-r1-sqlite-streamed-seed.jsonl",
+      "exit_code": 0,
+      "wall_s": 31.937999999994645
+    },
+    {
+      "engine": "sqlite",
+      "mode": "small-open",
+      "api": "streamed",
+      "log": "small-commit-10k-20261026-r1-sqlite-streamed-small-open.jsonl",
+      "exit_code": 0,
+      "wall_s": 6.125
+    },
+    {
+      "engine": "sqlite",
+      "mode": "small-latency",
+      "api": "streamed",
+      "log": "small-commit-10k-20261026-r1-sqlite-streamed-small-latency.jsonl",
+      "exit_code": 0,
+      "wall_s": 2.5
+    },
+    {
+      "engine": "sqlite",
+      "mode": "verify",
+      "api": "streamed",
+      "log": "small-commit-10k-20261026-r1-sqlite-streamed-verify.jsonl",
+      "exit_code": 0,
+      "wall_s": 27.234000000011292
+    },
+    {
+      "engine": "sqlite",
+      "mode": "small-dirty",
+      "api": "streamed",
+      "log": "small-commit-10k-20261026-r1-sqlite-streamed-small-dirty.jsonl",
+      "exit_code": 0,
+      "wall_s": 13.343999999997322
+    },
+    {
+      "engine": "sqlite",
+      "mode": "small-open",
+      "api": "streamed",
+      "log": "small-commit-10k-20261026-r1-dirty-sqlite-streamed-small-open.jsonl",
+      "exit_code": 0,
+      "wall_s": 8.48399999999674
+    },
+    {
+      "engine": "sqlite",
+      "mode": "verify",
+      "api": "streamed",
+      "log": "small-commit-10k-20261026-r1-final-sqlite-streamed-verify.jsonl",
+      "exit_code": 0,
+      "wall_s": 35.375
+    },
+    {
+      "engine": "fdb",
+      "mode": "seed",
+      "api": "streamed",
+      "log": "small-commit-10k-20261026-r1-fdb-streamed-seed.jsonl",
+      "exit_code": 0,
+      "wall_s": 17.422000000005937
+    },
+    {
+      "engine": "fdb",
+      "mode": "small-open",
+      "api": "streamed",
+      "log": "small-commit-10k-20261026-r1-fdb-streamed-small-open.jsonl",
+      "exit_code": 0,
+      "wall_s": 6.26600000000326
+    },
+    {
+      "engine": "fdb",
+      "mode": "small-latency",
+      "api": "streamed",
+      "log": "small-commit-10k-20261026-r1-fdb-streamed-small-latency.jsonl",
+      "exit_code": 0,
+      "wall_s": 2.25
+    },
+    {
+      "engine": "fdb",
+      "mode": "verify",
+      "api": "streamed",
+      "log": "small-commit-10k-20261026-r1-fdb-streamed-verify.jsonl",
+      "exit_code": 0,
+      "wall_s": 2.827999999994063
+    },
+    {
+      "engine": "fdb",
+      "mode": "small-dirty",
+      "api": "streamed",
+      "log": "small-commit-10k-20261026-r1-fdb-streamed-small-dirty.jsonl",
+      "exit_code": 0,
+      "wall_s": 10.187000000005355
+    },
+    {
+      "engine": "fdb",
+      "mode": "small-open",
+      "api": "streamed",
+      "log": "small-commit-10k-20261026-r1-dirty-fdb-streamed-small-open.jsonl",
+      "exit_code": 0,
+      "wall_s": 6.187000000005355
+    },
+    {
+      "engine": "fdb",
+      "mode": "verify",
+      "api": "streamed",
+      "log": "small-commit-10k-20261026-r1-final-fdb-streamed-verify.jsonl",
+      "exit_code": 0,
+      "wall_s": 3.9689999999973224
+    }
+  ],
+  "cache": "warm OS,strict FDB,SQLite FULLWAL/FTS5trigram same config",
+  "scope": "existing first10k,balanced engine order,96 mixed single changes;dirty500 in20-op chunks;no DB copies",
+  "protected_after": [
+    {
+      "path": "data\\rkyv-corpus-20261009\\json.payload-bench",
+      "bytes": 2740862279,
+      "sha256": "11F826FCE3F4AE790FEB9FC6DF9B1169F52C2FD699E89FC4A8A4B77AAA41731B"
+    },
+    {
+      "path": "tests\\fixtures\\v1\\checkpoint.fdb",
+      "bytes": 1507,
+      "sha256": "E87667C0FABE64D5A1F59EF86B99F7E612DB755D239B41677DA2ADC24BE7BF57"
+    },
+    {
+      "path": "tests\\fixtures\\v1\\checkpoint.ready",
+      "bytes": 28,
+      "sha256": "BC82C18F8D5C3A209328BD59B12D828D8922BEC4D26CB4D557FD4A493A4A9C2F"
+    }
+  ],
+  "complete": true
+}

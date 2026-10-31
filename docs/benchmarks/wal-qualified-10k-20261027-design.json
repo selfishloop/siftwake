@@ -1,0 +1,135 @@
+{
+  "program": "C:\\Users\\Serkan\\Documents\\ChatGPT\\fdb\\output\\wal-profile-fdb-20261027-v1.exe",
+  "sha256": "168AF77D8FF4AFEBE91CE795A2CB57CAE49A864BBE49855D12AC573914CD6609",
+  "protected_before": [
+    {
+      "path": "data\\rkyv-corpus-20261009\\json.payload-bench",
+      "bytes": 2740862279,
+      "sha256": "11F826FCE3F4AE790FEB9FC6DF9B1169F52C2FD699E89FC4A8A4B77AAA41731B"
+    },
+    {
+      "path": "tests\\fixtures\\v1\\checkpoint.fdb",
+      "bytes": 1507,
+      "sha256": "E87667C0FABE64D5A1F59EF86B99F7E612DB755D239B41677DA2ADC24BE7BF57"
+    },
+    {
+      "path": "tests\\fixtures\\v1\\checkpoint.ready",
+      "bytes": 28,
+      "sha256": "BC82C18F8D5C3A209328BD59B12D828D8922BEC4D26CB4D557FD4A493A4A9C2F"
+    }
+  ],
+  "completed": [
+    {
+      "engine": "fdb",
+      "mode": "seed",
+      "api": "streamed",
+      "log": "wal-qualified-10k-20261027-r0-fdb-streamed-seed.jsonl",
+      "exit_code": 0,
+      "wall_s": 14.35899999999674
+    },
+    {
+      "engine": "fdb",
+      "mode": "snapshot-one",
+      "api": "streamed",
+      "log": "wal-qualified-10k-20261027-r0-fdb-streamed-snapshot-one.jsonl",
+      "exit_code": 0,
+      "wall_s": 28.03200000000652
+    },
+    {
+      "engine": "fdb",
+      "mode": "verify",
+      "api": "streamed",
+      "log": "wal-qualified-10k-20261027-r0-fdb-streamed-verify.jsonl",
+      "exit_code": 0,
+      "wall_s": 2.827999999979511
+    },
+    {
+      "engine": "fdb",
+      "mode": "seed",
+      "api": "streamed",
+      "log": "wal-qualified-10k-20261027-r1-fdb-streamed-seed.jsonl",
+      "exit_code": 0,
+      "wall_s": 14.172000000020489
+    },
+    {
+      "engine": "fdb",
+      "mode": "snapshot-one",
+      "api": "streamed",
+      "log": "wal-qualified-10k-20261027-r1-fdb-streamed-snapshot-one.jsonl",
+      "exit_code": 0,
+      "wall_s": 27.98399999999674
+    },
+    {
+      "engine": "fdb",
+      "mode": "verify",
+      "api": "streamed",
+      "log": "wal-qualified-10k-20261027-r1-fdb-streamed-verify.jsonl",
+      "exit_code": 0,
+      "wall_s": 2.8439999999827705
+    },
+    {
+      "engine": "fdb",
+      "mode": "seed",
+      "api": "streamed",
+      "log": "wal-qualified-10k-20261027-r2-fdb-streamed-seed.jsonl",
+      "exit_code": 0,
+      "wall_s": 13.812999999994645
+    },
+    {
+      "engine": "fdb",
+      "mode": "snapshot-one",
+      "api": "streamed",
+      "log": "wal-qualified-10k-20261027-r2-fdb-streamed-snapshot-one.jsonl",
+      "exit_code": 0,
+      "wall_s": 27.875
+    },
+    {
+      "engine": "fdb",
+      "mode": "verify",
+      "api": "streamed",
+      "log": "wal-qualified-10k-20261027-r2-fdb-streamed-verify.jsonl",
+      "exit_code": 0,
+      "wall_s": 2.812000000005355
+    }
+  ],
+  "scope": "three long4096single-write4R runs;38case full model oracle;trace disabled;no handle optimization because historical419ms was not reproduced in correlated traces;warmOS,no CPU/power isolation",
+  "trials": [
+    {
+      "trial": 0,
+      "max_ms": 29.022,
+      "over50": 0,
+      "slow": []
+    },
+    {
+      "trial": 1,
+      "max_ms": 21.6879,
+      "over50": 0,
+      "slow": []
+    },
+    {
+      "trial": 2,
+      "max_ms": 26.6412,
+      "over50": 0,
+      "slow": []
+    }
+  ],
+  "gate_pass": true,
+  "protected_after": [
+    {
+      "path": "data\\rkyv-corpus-20261009\\json.payload-bench",
+      "bytes": 2740862279,
+      "sha256": "11F826FCE3F4AE790FEB9FC6DF9B1169F52C2FD699E89FC4A8A4B77AAA41731B"
+    },
+    {
+      "path": "tests\\fixtures\\v1\\checkpoint.fdb",
+      "bytes": 1507,
+      "sha256": "E87667C0FABE64D5A1F59EF86B99F7E612DB755D239B41677DA2ADC24BE7BF57"
+    },
+    {
+      "path": "tests\\fixtures\\v1\\checkpoint.ready",
+      "bytes": 28,
+      "sha256": "BC82C18F8D5C3A209328BD59B12D828D8922BEC4D26CB4D557FD4A493A4A9C2F"
+    }
+  ],
+  "complete": true
+}

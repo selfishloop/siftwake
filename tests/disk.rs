@@ -330,7 +330,10 @@ fn delta_byte_watermark_bounds_resident_long_content_after_next_write() {
     let db = Database::open(&temp.0).unwrap();
     assert_eq!(
         db.stats().unwrap().resident_documents,
-        usize::from(!cfg!(feature = "experimental-wal-delta"))
+        usize::from(!cfg!(any(
+            feature = "experimental-wal-delta",
+            feature = "bounded-engine"
+        )))
     );
 }
 
@@ -378,6 +381,19 @@ fn v01_checkpoint_fixture_opens_without_rewriting_authoritative_bytes() {
     assert_eq!(db.search(&q).unwrap().total, 2);
     #[cfg(feature = "bounded-engine")]
     {
+        assert_eq!(
+            db.search_first(&q).unwrap().hits,
+            db.search(&q).unwrap().hits
+        );
+        let e = fdb::SearchExecution {
+            verification_workers: 4,
+            coalesce_gap_bytes: 8192,
+            reuse_validated_source_crc: true,
+        };
+        assert_eq!(
+            db.search_with_execution(&q, e).unwrap().hits,
+            db.search(&q).unwrap().hits
+        );
         q.limit = 51;
         let mut page = db.search(&q).unwrap();
         let expected = page.hits.clone();

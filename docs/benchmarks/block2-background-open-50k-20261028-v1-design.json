@@ -1,0 +1,897 @@
+{
+  "programs": {
+    "normal": {
+      "path": "output\\block2-background-open-50k-20261028-v1-normal.exe",
+      "sha256": "C77F78CDFF9617A19E368CA0D8E54C79579433DD720766AECCA0781FAF320AAD"
+    },
+    "diagnostic": {
+      "path": "output\\block2-background-open-50k-20261028-v1-diagnostic.exe",
+      "sha256": "F2364E08965E111A01B64AD25B3FC8DE21F1F16AEE4FB248AAD89C24C3749DEC"
+    },
+    "sqlite": {
+      "path": "output\\block2-background-open-50k-20261028-v1-sqlite.exe",
+      "sha256": "C27779F0D107C680D07C2F35697F98A1315F94FC890BBAEFBBDDB30127D3794A"
+    }
+  },
+  "sources_before": {
+    "generation-0000000000000100.fdb": "F3C664444D3CBF780C7CC2FC7C43D0D4F6E0BEF66AB94DA9A227E4C24F18083D",
+    "generation-0000000000000104.ready": "16874EA51FFE888A2823FD7944798FC96FA7459EA87D7BC965B54846643A56FD",
+    "run-000000000000000a.fdb": "E92DE1F0A1A03528C54DF758F0F876A69F6A86AC112FF08AE2E00E0D34DC5672",
+    "run-0000000000000014.fdb": "585094C62FECB731B68CBD3571E1FAF05304C64459D527C20BB2D4182F341E23",
+    "run-000000000000001e.fdb": "86F1BD3AAF74E2F44E548AE6557A6B1BA45576EE9B68653E44B81704876FC2B0",
+    "run-0000000000000028.fdb": "A452943E53CA6AE94CCD725BA467AFEBBAD428B0620696A4CE814F4790010496",
+    "run-0000000000000032.fdb": "551EBCD4913C99B96A3B4DAC60EB0DC72D5149E00B7F5491C8B58BAFC9F5D885",
+    "run-000000000000003c.fdb": "11ED0923D68E7E771C054C679581AFF853A3886DD401C28E058BDC671E8A2039",
+    "run-0000000000000046.fdb": "7149565EA1162B78F596378EF634333C924CDD735F41C69DFE3FF492AD197E5D",
+    "run-0000000000000050.fdb": "BBA4766989A03CFA4949C8575DA78E2CB53F09C3BE2EE8E4F7AA22AA9E95B222",
+    "run-000000000000005a.fdb": "CFA020E272588C1C2B7AE36204CB59250E70169983D03D0BFF60F331C5D7748F",
+    "run-0000000000000064.fdb": "F87CDA3D9897C456B3BDA980EECE038FD19FA8EB9AED325A152E0E02E9A71366",
+    "run-000000000000006e.fdb": "452CE3AE12F16733635617D5664184514726D64A8EF919F0CEF944AD1DBE35EB",
+    "run-0000000000000078.fdb": "CEE1AE2061DDC809FD89E82022975A7ABABE3D879CB6DEDEF75767129AED783A",
+    "run-0000000000000082.fdb": "EB68B3492830E9EF22399876492D11670961DB3C9B7840560DA797D4F4F3C1B1",
+    "run-000000000000008c.fdb": "C5466CE94070BBF1C4256D8E2A83C12B4F99498A1BBE116FED93EE011CE9DCFF",
+    "run-0000000000000096.fdb": "17BE414976AC79D25BEAB66AD4F95A9CFB0FD5A4ED47C1495F9478FD272937A3",
+    "run-00000000000000a0.fdb": "66FFB2D2CECCC370B40857482E0581F1EA50023DB84ABA3479E0A5D55CF45CE8",
+    "run-00000000000000aa.fdb": "6F7BADF47D3D8726A5D1AC61310A764B7A0F6378EFCE67488ACF69119C966334",
+    "run-00000000000000b4.fdb": "7D1C9E2286EA117CE375884DCEA79FA440A99F98C977A0E0D2D21A589F215951",
+    "run-00000000000000be.fdb": "ECA6CD576F9A6673EBB0605B4B5D88D544FEBA55F49543629D3D9B70D5C1344D",
+    "run-00000000000000c8.fdb": "DFDBBFFEE50D364C51DC4D9C88E12E821DEAC18D330ACF545B8943FEA3FA6C49",
+    "run-00000000000000d2.fdb": "C1D45E9AC3256C09FE1212AC0DB280115829F2B8B9AD6371A7AAC39E271AA959",
+    "run-00000000000000dc.fdb": "0AE99AB840E2F69A659A507DB65109758F8CB9B33A5D5CC12AD9164CBC0D4905",
+    "run-00000000000000e6.fdb": "981B23ECF017A30ABC1382F0D5D46D4FB48E02DCEC5ABCD659320EBCC314AD76",
+    "run-00000000000000f0.fdb": "56A0F3D9A6B335468F8513AE520CAF287991086CD64FF6CCE140377DFD2C00F7",
+    "run-00000000000000fa.fdb": "926970422C75C2C15F34D3DDB53477A6738248EE32C7BE9517833E005EDBC645",
+    "run-0000000000000102.fdb": "B00E60160D3DBE09111A78C3FEF6830DCC0A3396678467F2C24C25E5475215DB"
+  },
+  "protected_before": [
+    {
+      "path": "data\\rkyv-corpus-20261009\\json.payload-bench",
+      "bytes": 2740862279,
+      "sha256": "11F826FCE3F4AE790FEB9FC6DF9B1169F52C2FD699E89FC4A8A4B77AAA41731B"
+    },
+    {
+      "path": "tests\\fixtures\\v1\\checkpoint.fdb",
+      "bytes": 1507,
+      "sha256": "E87667C0FABE64D5A1F59EF86B99F7E612DB755D239B41677DA2ADC24BE7BF57"
+    },
+    {
+      "path": "tests\\fixtures\\v1\\checkpoint.ready",
+      "bytes": 28,
+      "sha256": "BC82C18F8D5C3A209328BD59B12D828D8922BEC4D26CB4D557FD4A493A4A9C2F"
+    }
+  ],
+  "model_sha256": "B9F05ED4C0A5B2BB85306A35632293DCB93668A5EC08A4FAB1236B5B14060DFA",
+  "cache": "Warm OS procedure; source/hash and prior full oracle; no forced eviction",
+  "order": [
+    "strict/background/sqlite",
+    "sqlite/background/strict",
+    "strict/background/sqlite",
+    "sqlite/background/strict"
+  ],
+  "queries": [
+    "harpoon",
+    "presumption",
+    "darcy",
+    "transubstantiation",
+    "holmes elementary"
+  ],
+  "samples_per_query_arm": 4,
+  "first_result": "elapsed since API invocation; includes validation wait and N50 hydration",
+  "prototype": "all source, SEG05 directory and index CRC checks in <=4 worker background; no result before ALL strict validation",
+  "source_format_changed": false,
+  "completed": [
+    {
+      "log": "block2-background-open-50k-20261028-v1-r0-q0-normal-first-strict.jsonl",
+      "program": "normal",
+      "mode": "first-strict",
+      "label": "r0-q0",
+      "exit_code": 0,
+      "wall_s": 5.7189999999827705
+    },
+    {
+      "log": "block2-background-open-50k-20261028-v1-r0-q0-normal-first-background.jsonl",
+      "program": "normal",
+      "mode": "first-background",
+      "label": "r0-q0",
+      "exit_code": 0,
+      "wall_s": 3.5
+    },
+    {
+      "log": "block2-background-open-50k-20261028-v1-r0-q0-sqlite-first-sqlite.jsonl",
+      "program": "sqlite",
+      "mode": "first-sqlite",
+      "label": "r0-q0",
+      "exit_code": 0,
+      "wall_s": 10.327999999979511
+    },
+    {
+      "log": "block2-background-open-50k-20261028-v1-r0-q1-normal-first-strict.jsonl",
+      "program": "normal",
+      "mode": "first-strict",
+      "label": "r0-q1",
+      "exit_code": 0,
+      "wall_s": 5.5
+    },
+    {
+      "log": "block2-background-open-50k-20261028-v1-r0-q1-normal-first-background.jsonl",
+      "program": "normal",
+      "mode": "first-background",
+      "label": "r0-q1",
+      "exit_code": 0,
+      "wall_s": 3.7189999999827705
+    },
+    {
+      "log": "block2-background-open-50k-20261028-v1-r0-q1-sqlite-first-sqlite.jsonl",
+      "program": "sqlite",
+      "mode": "first-sqlite",
+      "label": "r0-q1",
+      "exit_code": 0,
+      "wall_s": 11.01500000001397
+    },
+    {
+      "log": "block2-background-open-50k-20261028-v1-r0-q2-normal-first-strict.jsonl",
+      "program": "normal",
+      "mode": "first-strict",
+      "label": "r0-q2",
+      "exit_code": 0,
+      "wall_s": 5.26600000000326
+    },
+    {
+      "log": "block2-background-open-50k-20261028-v1-r0-q2-normal-first-background.jsonl",
+      "program": "normal",
+      "mode": "first-background",
+      "label": "r0-q2",
+      "exit_code": 0,
+      "wall_s": 3.6709999999729916
+    },
+    {
+      "log": "block2-background-open-50k-20261028-v1-r0-q2-sqlite-first-sqlite.jsonl",
+      "program": "sqlite",
+      "mode": "first-sqlite",
+      "label": "r0-q2",
+      "exit_code": 0,
+      "wall_s": 9.28100000001723
+    },
+    {
+      "log": "block2-background-open-50k-20261028-v1-r0-q3-normal-first-strict.jsonl",
+      "program": "normal",
+      "mode": "first-strict",
+      "label": "r0-q3",
+      "exit_code": 0,
+      "wall_s": 5.375
+    },
+    {
+      "log": "block2-background-open-50k-20261028-v1-r0-q3-normal-first-background.jsonl",
+      "program": "normal",
+      "mode": "first-background",
+      "label": "r0-q3",
+      "exit_code": 0,
+      "wall_s": 3.827999999979511
+    },
+    {
+      "log": "block2-background-open-50k-20261028-v1-r0-q3-sqlite-first-sqlite.jsonl",
+      "program": "sqlite",
+      "mode": "first-sqlite",
+      "label": "r0-q3",
+      "exit_code": 0,
+      "wall_s": 9.094000000040978
+    },
+    {
+      "log": "block2-background-open-50k-20261028-v1-r0-q4-normal-first-strict.jsonl",
+      "program": "normal",
+      "mode": "first-strict",
+      "label": "r0-q4",
+      "exit_code": 0,
+      "wall_s": 4.75
+    },
+    {
+      "log": "block2-background-open-50k-20261028-v1-r0-q4-normal-first-background.jsonl",
+      "program": "normal",
+      "mode": "first-background",
+      "label": "r0-q4",
+      "exit_code": 0,
+      "wall_s": 3.530999999959022
+    },
+    {
+      "log": "block2-background-open-50k-20261028-v1-r0-q4-sqlite-first-sqlite.jsonl",
+      "program": "sqlite",
+      "mode": "first-sqlite",
+      "label": "r0-q4",
+      "exit_code": 0,
+      "wall_s": 6.157000000006519
+    },
+    {
+      "log": "block2-background-open-50k-20261028-v1-r1-q1-sqlite-first-sqlite.jsonl",
+      "program": "sqlite",
+      "mode": "first-sqlite",
+      "label": "r1-q1",
+      "exit_code": 0,
+      "wall_s": 8.953000000037719
+    },
+    {
+      "log": "block2-background-open-50k-20261028-v1-r1-q1-normal-first-background.jsonl",
+      "program": "normal",
+      "mode": "first-background",
+      "label": "r1-q1",
+      "exit_code": 0,
+      "wall_s": 4.202999999979511
+    },
+    {
+      "log": "block2-background-open-50k-20261028-v1-r1-q1-normal-first-strict.jsonl",
+      "program": "normal",
+      "mode": "first-strict",
+      "label": "r1-q1",
+      "exit_code": 0,
+      "wall_s": 4.4689999999827705
+    },
+    {
+      "log": "block2-background-open-50k-20261028-v1-r1-q2-sqlite-first-sqlite.jsonl",
+      "program": "sqlite",
+      "mode": "first-sqlite",
+      "label": "r1-q2",
+      "exit_code": 0,
+      "wall_s": 9.453000000037719
+    },
+    {
+      "log": "block2-background-open-50k-20261028-v1-r1-q2-normal-first-background.jsonl",
+      "program": "normal",
+      "mode": "first-background",
+      "label": "r1-q2",
+      "exit_code": 0,
+      "wall_s": 3.7339999999967404
+    },
+    {
+      "log": "block2-background-open-50k-20261028-v1-r1-q2-normal-first-strict.jsonl",
+      "program": "normal",
+      "mode": "first-strict",
+      "label": "r1-q2",
+      "exit_code": 0,
+      "wall_s": 4.25
+    },
+    {
+      "log": "block2-background-open-50k-20261028-v1-r1-q3-sqlite-first-sqlite.jsonl",
+      "program": "sqlite",
+      "mode": "first-sqlite",
+      "label": "r1-q3",
+      "exit_code": 0,
+      "wall_s": 9.09399999998277
+    },
+    {
+      "log": "block2-background-open-50k-20261028-v1-r1-q3-normal-first-background.jsonl",
+      "program": "normal",
+      "mode": "first-background",
+      "label": "r1-q3",
+      "exit_code": 0,
+      "wall_s": 4.0310000000172295
+    },
+    {
+      "log": "block2-background-open-50k-20261028-v1-r1-q3-normal-first-strict.jsonl",
+      "program": "normal",
+      "mode": "first-strict",
+      "label": "r1-q3",
+      "exit_code": 0,
+      "wall_s": 4.48499999998603
+    },
+    {
+      "log": "block2-background-open-50k-20261028-v1-r1-q4-sqlite-first-sqlite.jsonl",
+      "program": "sqlite",
+      "mode": "first-sqlite",
+      "label": "r1-q4",
+      "exit_code": 0,
+      "wall_s": 6.10899999999674
+    },
+    {
+      "log": "block2-background-open-50k-20261028-v1-r1-q4-normal-first-background.jsonl",
+      "program": "normal",
+      "mode": "first-background",
+      "label": "r1-q4",
+      "exit_code": 0,
+      "wall_s": 3.452999999979511
+    },
+    {
+      "log": "block2-background-open-50k-20261028-v1-r1-q4-normal-first-strict.jsonl",
+      "program": "normal",
+      "mode": "first-strict",
+      "label": "r1-q4",
+      "exit_code": 0,
+      "wall_s": 4.1560000000172295
+    },
+    {
+      "log": "block2-background-open-50k-20261028-v1-r1-q0-sqlite-first-sqlite.jsonl",
+      "program": "sqlite",
+      "mode": "first-sqlite",
+      "label": "r1-q0",
+      "exit_code": 0,
+      "wall_s": 9.78100000001723
+    },
+    {
+      "log": "block2-background-open-50k-20261028-v1-r1-q0-normal-first-background.jsonl",
+      "program": "normal",
+      "mode": "first-background",
+      "label": "r1-q0",
+      "exit_code": 0,
+      "wall_s": 3.9689999999827705
+    },
+    {
+      "log": "block2-background-open-50k-20261028-v1-r1-q0-normal-first-strict.jsonl",
+      "program": "normal",
+      "mode": "first-strict",
+      "label": "r1-q0",
+      "exit_code": 0,
+      "wall_s": 4.311999999976251
+    },
+    {
+      "log": "block2-background-open-50k-20261028-v1-r2-q2-normal-first-strict.jsonl",
+      "program": "normal",
+      "mode": "first-strict",
+      "label": "r2-q2",
+      "exit_code": 0,
+      "wall_s": 4.23399999999674
+    },
+    {
+      "log": "block2-background-open-50k-20261028-v1-r2-q2-normal-first-background.jsonl",
+      "program": "normal",
+      "mode": "first-background",
+      "label": "r2-q2",
+      "exit_code": 0,
+      "wall_s": 3.5160000000032596
+    },
+    {
+      "log": "block2-background-open-50k-20261028-v1-r2-q2-sqlite-first-sqlite.jsonl",
+      "program": "sqlite",
+      "mode": "first-sqlite",
+      "label": "r2-q2",
+      "exit_code": 0,
+      "wall_s": 9.297000000020489
+    },
+    {
+      "log": "block2-background-open-50k-20261028-v1-r2-q3-normal-first-strict.jsonl",
+      "program": "normal",
+      "mode": "first-strict",
+      "label": "r2-q3",
+      "exit_code": 0,
+      "wall_s": 5.452999999979511
+    },
+    {
+      "log": "block2-background-open-50k-20261028-v1-r2-q3-normal-first-background.jsonl",
+      "program": "normal",
+      "mode": "first-background",
+      "label": "r2-q3",
+      "exit_code": 0,
+      "wall_s": 4.01600000000326
+    },
+    {
+      "log": "block2-background-open-50k-20261028-v1-r2-q3-sqlite-first-sqlite.jsonl",
+      "program": "sqlite",
+      "mode": "first-sqlite",
+      "label": "r2-q3",
+      "exit_code": 0,
+      "wall_s": 9.312000000034459
+    },
+    {
+      "log": "block2-background-open-50k-20261028-v1-r2-q4-normal-first-strict.jsonl",
+      "program": "normal",
+      "mode": "first-strict",
+      "label": "r2-q4",
+      "exit_code": 0,
+      "wall_s": 4.875
+    },
+    {
+      "log": "block2-background-open-50k-20261028-v1-r2-q4-normal-first-background.jsonl",
+      "program": "normal",
+      "mode": "first-background",
+      "label": "r2-q4",
+      "exit_code": 0,
+      "wall_s": 3.3290000000270084
+    },
+    {
+      "log": "block2-background-open-50k-20261028-v1-r2-q4-sqlite-first-sqlite.jsonl",
+      "program": "sqlite",
+      "mode": "first-sqlite",
+      "label": "r2-q4",
+      "exit_code": 0,
+      "wall_s": 6.0939999999827705
+    },
+    {
+      "log": "block2-background-open-50k-20261028-v1-r2-q0-normal-first-strict.jsonl",
+      "program": "normal",
+      "mode": "first-strict",
+      "label": "r2-q0",
+      "exit_code": 0,
+      "wall_s": 4.48399999999674
+    },
+    {
+      "log": "block2-background-open-50k-20261028-v1-r2-q0-normal-first-background.jsonl",
+      "program": "normal",
+      "mode": "first-background",
+      "label": "r2-q0",
+      "exit_code": 0,
+      "wall_s": 3.6410000000032596
+    },
+    {
+      "log": "block2-background-open-50k-20261028-v1-r2-q0-sqlite-first-sqlite.jsonl",
+      "program": "sqlite",
+      "mode": "first-sqlite",
+      "label": "r2-q0",
+      "exit_code": 0,
+      "wall_s": 9.60899999999674
+    },
+    {
+      "log": "block2-background-open-50k-20261028-v1-r2-q1-normal-first-strict.jsonl",
+      "program": "normal",
+      "mode": "first-strict",
+      "label": "r2-q1",
+      "exit_code": 0,
+      "wall_s": 5.077999999979511
+    },
+    {
+      "log": "block2-background-open-50k-20261028-v1-r2-q1-normal-first-background.jsonl",
+      "program": "normal",
+      "mode": "first-background",
+      "label": "r2-q1",
+      "exit_code": 0,
+      "wall_s": 3.610000000044238
+    },
+    {
+      "log": "block2-background-open-50k-20261028-v1-r2-q1-sqlite-first-sqlite.jsonl",
+      "program": "sqlite",
+      "mode": "first-sqlite",
+      "label": "r2-q1",
+      "exit_code": 0,
+      "wall_s": 11.077999999979511
+    },
+    {
+      "log": "block2-background-open-50k-20261028-v1-r3-q3-sqlite-first-sqlite.jsonl",
+      "program": "sqlite",
+      "mode": "first-sqlite",
+      "label": "r3-q3",
+      "exit_code": 0,
+      "wall_s": 4.967999999993481
+    },
+    {
+      "log": "block2-background-open-50k-20261028-v1-r3-q3-normal-first-background.jsonl",
+      "program": "normal",
+      "mode": "first-background",
+      "label": "r3-q3",
+      "exit_code": 0,
+      "wall_s": 4.26600000000326
+    },
+    {
+      "log": "block2-background-open-50k-20261028-v1-r3-q3-normal-first-strict.jsonl",
+      "program": "normal",
+      "mode": "first-strict",
+      "label": "r3-q3",
+      "exit_code": 0,
+      "wall_s": 4.452999999979511
+    },
+    {
+      "log": "block2-background-open-50k-20261028-v1-r3-q4-sqlite-first-sqlite.jsonl",
+      "program": "sqlite",
+      "mode": "first-sqlite",
+      "label": "r3-q4",
+      "exit_code": 0,
+      "wall_s": 6.0
+    },
+    {
+      "log": "block2-background-open-50k-20261028-v1-r3-q4-normal-first-background.jsonl",
+      "program": "normal",
+      "mode": "first-background",
+      "label": "r3-q4",
+      "exit_code": 0,
+      "wall_s": 3.6880000000237487
+    },
+    {
+      "log": "block2-background-open-50k-20261028-v1-r3-q4-normal-first-strict.jsonl",
+      "program": "normal",
+      "mode": "first-strict",
+      "label": "r3-q4",
+      "exit_code": 0,
+      "wall_s": 4.186999999976251
+    },
+    {
+      "log": "block2-background-open-50k-20261028-v1-r3-q0-sqlite-first-sqlite.jsonl",
+      "program": "sqlite",
+      "mode": "first-sqlite",
+      "label": "r3-q0",
+      "exit_code": 0,
+      "wall_s": 9.53100000001723
+    },
+    {
+      "log": "block2-background-open-50k-20261028-v1-r3-q0-normal-first-background.jsonl",
+      "program": "normal",
+      "mode": "first-background",
+      "label": "r3-q0",
+      "exit_code": 0,
+      "wall_s": 3.827999999979511
+    },
+    {
+      "log": "block2-background-open-50k-20261028-v1-r3-q0-normal-first-strict.jsonl",
+      "program": "normal",
+      "mode": "first-strict",
+      "label": "r3-q0",
+      "exit_code": 0,
+      "wall_s": 4.2810000000172295
+    },
+    {
+      "log": "block2-background-open-50k-20261028-v1-r3-q1-sqlite-first-sqlite.jsonl",
+      "program": "sqlite",
+      "mode": "first-sqlite",
+      "label": "r3-q1",
+      "exit_code": 0,
+      "wall_s": 11.047000000020489
+    },
+    {
+      "log": "block2-background-open-50k-20261028-v1-r3-q1-normal-first-background.jsonl",
+      "program": "normal",
+      "mode": "first-background",
+      "label": "r3-q1",
+      "exit_code": 0,
+      "wall_s": 4.077999999979511
+    },
+    {
+      "log": "block2-background-open-50k-20261028-v1-r3-q1-normal-first-strict.jsonl",
+      "program": "normal",
+      "mode": "first-strict",
+      "label": "r3-q1",
+      "exit_code": 0,
+      "wall_s": 4.39100000000326
+    },
+    {
+      "log": "block2-background-open-50k-20261028-v1-r3-q2-sqlite-first-sqlite.jsonl",
+      "program": "sqlite",
+      "mode": "first-sqlite",
+      "label": "r3-q2",
+      "exit_code": 0,
+      "wall_s": 9.296999999962281
+    },
+    {
+      "log": "block2-background-open-50k-20261028-v1-r3-q2-normal-first-background.jsonl",
+      "program": "normal",
+      "mode": "first-background",
+      "label": "r3-q2",
+      "exit_code": 0,
+      "wall_s": 3.8280000000377186
+    },
+    {
+      "log": "block2-background-open-50k-20261028-v1-r3-q2-normal-first-strict.jsonl",
+      "program": "normal",
+      "mode": "first-strict",
+      "label": "r3-q2",
+      "exit_code": 0,
+      "wall_s": 4.125
+    },
+    {
+      "log": "block2-background-open-50k-20261028-v1-profile-diagnostic-first-background.jsonl",
+      "program": "diagnostic",
+      "mode": "first-background",
+      "label": "profile",
+      "exit_code": 0,
+      "wall_s": 4.10899999999674
+    },
+    {
+      "log": "block2-background-open-50k-20261028-v1-profile-diagnostic-first-strict.jsonl",
+      "program": "diagnostic",
+      "mode": "first-strict",
+      "label": "profile",
+      "exit_code": 0,
+      "wall_s": 4.530999999959022
+    },
+    {
+      "log": "block2-background-open-50k-20261028-v1-all38-normal-scale-first-oracle.jsonl",
+      "program": "normal",
+      "mode": "scale-first-oracle",
+      "label": "all38",
+      "exit_code": 0,
+      "wall_s": 15.51600000000326
+    },
+    {
+      "log": "block2-background-open-50k-20261028-v1-after-kill-normal-scale-first-oracle.jsonl",
+      "program": "normal",
+      "mode": "scale-first-oracle",
+      "label": "after-kill",
+      "exit_code": 0,
+      "wall_s": 15.311999999976251
+    }
+  ],
+  "opening_kill": {
+    "phase": "kill_opening",
+    "exit_code": 1,
+    "witness": {
+      "phase": "session_return",
+      "session_ms": 16.5107,
+      "status": "pending"
+    },
+    "coverage_observed": true,
+    "power_loss_claim": false
+  },
+  "old_reader": {
+    "binary": "output\\maintenance-candidate-cli-20261024.exe",
+    "binary_sha256": "B7845966E330624407D66416225F9395ED20272DD0065BAA996E4CC26D93D939",
+    "full_payload_version_gets": 50000,
+    "deleted_gets": 100,
+    "cases": [
+      {
+        "case_id": 0,
+        "total": 273,
+        "page": 50,
+        "oracle": true
+      },
+      {
+        "case_id": 1,
+        "total": 151,
+        "page": 50,
+        "oracle": true
+      },
+      {
+        "case_id": 2,
+        "total": 265,
+        "page": 50,
+        "oracle": true
+      },
+      {
+        "case_id": 3,
+        "total": 131,
+        "page": 50,
+        "oracle": true
+      },
+      {
+        "case_id": 4,
+        "total": 0,
+        "page": 0,
+        "oracle": true
+      },
+      {
+        "case_id": 5,
+        "total": 5212,
+        "page": 50,
+        "oracle": true
+      },
+      {
+        "case_id": 6,
+        "total": 1310,
+        "page": 50,
+        "oracle": true
+      },
+      {
+        "case_id": 7,
+        "total": 190,
+        "page": 50,
+        "oracle": true
+      },
+      {
+        "case_id": 8,
+        "total": 5983,
+        "page": 50,
+        "oracle": true
+      },
+      {
+        "case_id": 9,
+        "total": 11208,
+        "page": 50,
+        "oracle": true
+      },
+      {
+        "case_id": 10,
+        "total": 8646,
+        "page": 50,
+        "oracle": true
+      },
+      {
+        "case_id": 11,
+        "total": 6186,
+        "page": 50,
+        "oracle": true
+      },
+      {
+        "case_id": 12,
+        "total": 3023,
+        "page": 50,
+        "oracle": true
+      },
+      {
+        "case_id": 13,
+        "total": 834,
+        "page": 50,
+        "oracle": true
+      },
+      {
+        "case_id": 14,
+        "total": 2849,
+        "page": 50,
+        "oracle": true
+      },
+      {
+        "case_id": 15,
+        "total": 1406,
+        "page": 50,
+        "oracle": true
+      },
+      {
+        "case_id": 16,
+        "total": 50000,
+        "page": 50,
+        "oracle": true
+      },
+      {
+        "case_id": 17,
+        "total": 49629,
+        "page": 50,
+        "oracle": true
+      },
+      {
+        "case_id": 18,
+        "total": 50000,
+        "page": 50,
+        "oracle": true
+      },
+      {
+        "case_id": 19,
+        "total": 0,
+        "page": 0,
+        "oracle": true
+      },
+      {
+        "case_id": 20,
+        "total": 0,
+        "page": 0,
+        "oracle": true
+      },
+      {
+        "case_id": 21,
+        "total": 0,
+        "page": 0,
+        "oracle": true
+      },
+      {
+        "case_id": 22,
+        "total": 235,
+        "page": 50,
+        "oracle": true
+      },
+      {
+        "case_id": 23,
+        "total": 282,
+        "page": 50,
+        "oracle": true
+      },
+      {
+        "case_id": 24,
+        "total": 1342,
+        "page": 50,
+        "oracle": true
+      },
+      {
+        "case_id": 25,
+        "total": 5171,
+        "page": 50,
+        "oracle": true
+      },
+      {
+        "case_id": 26,
+        "total": 273,
+        "page": 50,
+        "oracle": true
+      },
+      {
+        "case_id": 27,
+        "total": 1310,
+        "page": 50,
+        "oracle": true
+      },
+      {
+        "case_id": 28,
+        "total": 0,
+        "page": 0,
+        "oracle": true
+      },
+      {
+        "case_id": 29,
+        "total": 4318,
+        "page": 50,
+        "oracle": true
+      },
+      {
+        "case_id": 30,
+        "total": 50000,
+        "page": 1,
+        "oracle": true
+      },
+      {
+        "case_id": 31,
+        "total": 50000,
+        "page": 200,
+        "oracle": true
+      },
+      {
+        "case_id": 32,
+        "total": 50000,
+        "page": 50,
+        "oracle": true
+      },
+      {
+        "case_id": 33,
+        "total": 50000,
+        "page": 50,
+        "oracle": true
+      },
+      {
+        "case_id": 34,
+        "total": 1310,
+        "page": 1,
+        "oracle": true
+      },
+      {
+        "case_id": 35,
+        "total": 1310,
+        "page": 200,
+        "oracle": true
+      },
+      {
+        "case_id": 36,
+        "total": 273,
+        "page": 10,
+        "oracle": true
+      },
+      {
+        "case_id": 37,
+        "total": 273,
+        "page": 50,
+        "oracle": true
+      }
+    ],
+    "response_stream_sha256": "7EDA6BDD03CC6C53566DACB405043D0A3E930DE7CC8891AE885CFF1BEDC02B36",
+    "authoritative_sources_unchanged": true,
+    "oracle": true,
+    "payload_output_saved": false
+  },
+  "protected_after": [
+    {
+      "path": "data\\rkyv-corpus-20261009\\json.payload-bench",
+      "bytes": 2740862279,
+      "sha256": "11F826FCE3F4AE790FEB9FC6DF9B1169F52C2FD699E89FC4A8A4B77AAA41731B"
+    },
+    {
+      "path": "tests\\fixtures\\v1\\checkpoint.fdb",
+      "bytes": 1507,
+      "sha256": "E87667C0FABE64D5A1F59EF86B99F7E612DB755D239B41677DA2ADC24BE7BF57"
+    },
+    {
+      "path": "tests\\fixtures\\v1\\checkpoint.ready",
+      "bytes": 28,
+      "sha256": "BC82C18F8D5C3A209328BD59B12D828D8922BEC4D26CB4D557FD4A493A4A9C2F"
+    }
+  ],
+  "sources_after": {
+    "generation-0000000000000100.fdb": "F3C664444D3CBF780C7CC2FC7C43D0D4F6E0BEF66AB94DA9A227E4C24F18083D",
+    "generation-0000000000000104.ready": "16874EA51FFE888A2823FD7944798FC96FA7459EA87D7BC965B54846643A56FD",
+    "run-000000000000000a.fdb": "E92DE1F0A1A03528C54DF758F0F876A69F6A86AC112FF08AE2E00E0D34DC5672",
+    "run-0000000000000014.fdb": "585094C62FECB731B68CBD3571E1FAF05304C64459D527C20BB2D4182F341E23",
+    "run-000000000000001e.fdb": "86F1BD3AAF74E2F44E548AE6557A6B1BA45576EE9B68653E44B81704876FC2B0",
+    "run-0000000000000028.fdb": "A452943E53CA6AE94CCD725BA467AFEBBAD428B0620696A4CE814F4790010496",
+    "run-0000000000000032.fdb": "551EBCD4913C99B96A3B4DAC60EB0DC72D5149E00B7F5491C8B58BAFC9F5D885",
+    "run-000000000000003c.fdb": "11ED0923D68E7E771C054C679581AFF853A3886DD401C28E058BDC671E8A2039",
+    "run-0000000000000046.fdb": "7149565EA1162B78F596378EF634333C924CDD735F41C69DFE3FF492AD197E5D",
+    "run-0000000000000050.fdb": "BBA4766989A03CFA4949C8575DA78E2CB53F09C3BE2EE8E4F7AA22AA9E95B222",
+    "run-000000000000005a.fdb": "CFA020E272588C1C2B7AE36204CB59250E70169983D03D0BFF60F331C5D7748F",
+    "run-0000000000000064.fdb": "F87CDA3D9897C456B3BDA980EECE038FD19FA8EB9AED325A152E0E02E9A71366",
+    "run-000000000000006e.fdb": "452CE3AE12F16733635617D5664184514726D64A8EF919F0CEF944AD1DBE35EB",
+    "run-0000000000000078.fdb": "CEE1AE2061DDC809FD89E82022975A7ABABE3D879CB6DEDEF75767129AED783A",
+    "run-0000000000000082.fdb": "EB68B3492830E9EF22399876492D11670961DB3C9B7840560DA797D4F4F3C1B1",
+    "run-000000000000008c.fdb": "C5466CE94070BBF1C4256D8E2A83C12B4F99498A1BBE116FED93EE011CE9DCFF",
+    "run-0000000000000096.fdb": "17BE414976AC79D25BEAB66AD4F95A9CFB0FD5A4ED47C1495F9478FD272937A3",
+    "run-00000000000000a0.fdb": "66FFB2D2CECCC370B40857482E0581F1EA50023DB84ABA3479E0A5D55CF45CE8",
+    "run-00000000000000aa.fdb": "6F7BADF47D3D8726A5D1AC61310A764B7A0F6378EFCE67488ACF69119C966334",
+    "run-00000000000000b4.fdb": "7D1C9E2286EA117CE375884DCEA79FA440A99F98C977A0E0D2D21A589F215951",
+    "run-00000000000000be.fdb": "ECA6CD576F9A6673EBB0605B4B5D88D544FEBA55F49543629D3D9B70D5C1344D",
+    "run-00000000000000c8.fdb": "DFDBBFFEE50D364C51DC4D9C88E12E821DEAC18D330ACF545B8943FEA3FA6C49",
+    "run-00000000000000d2.fdb": "C1D45E9AC3256C09FE1212AC0DB280115829F2B8B9AD6371A7AAC39E271AA959",
+    "run-00000000000000dc.fdb": "0AE99AB840E2F69A659A507DB65109758F8CB9B33A5D5CC12AD9164CBC0D4905",
+    "run-00000000000000e6.fdb": "981B23ECF017A30ABC1382F0D5D46D4FB48E02DCEC5ABCD659320EBCC314AD76",
+    "run-00000000000000f0.fdb": "56A0F3D9A6B335468F8513AE520CAF287991086CD64FF6CCE140377DFD2C00F7",
+    "run-00000000000000fa.fdb": "926970422C75C2C15F34D3DDB53477A6738248EE32C7BE9517833E005EDBC645",
+    "run-0000000000000102.fdb": "B00E60160D3DBE09111A78C3FEF6830DCC0A3396678467F2C24C25E5475215DB"
+  },
+  "protected_unchanged": true,
+  "sources_unchanged": true,
+  "model_unchanged": true
+}

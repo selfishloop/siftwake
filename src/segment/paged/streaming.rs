@@ -318,14 +318,7 @@ pub(in crate::segment) fn prepare(
     let _span = crate::timing::span("open.index_metadata_prepare");
     let target = path.with_extension("records04.idx");
     let binding = (size, footer_crc, sequence);
-    let validate = |file: &mut File| -> Result<_> {
-        let mut validator = Validator::open(&target, binding)?;
-        let parsed = super::super::streaming::read_with(file, offset, len, sequence, |record| {
-            validator.push(record)
-        })?;
-        Ok((validator.finish()?, parsed))
-    };
-    match validate(file) {
+    match existing(path, file, size, footer_crc, sequence, offset, len) {
         Ok(result) => return Ok(result),
         Err(Error::Corrupt(_)) => {}
         Err(Error::Io(e)) if e.kind() == std::io::ErrorKind::NotFound => {}
@@ -338,7 +331,27 @@ pub(in crate::segment) fn prepare(
     drop(parsed);
     writer.finish()?;
     // Independently re-read SEG03 and the emitted pages before using any cache.
-    validate(file)
+    existing(path, file, size, footer_crc, sequence, offset, len)
+}
+
+/// Same complete validation, but never create/repair a sidecar in a read session.
+pub(in crate::segment) fn existing(
+    path: &Path,
+    file: &mut File,
+    size: u64,
+    footer_crc: u32,
+    sequence: u64,
+    offset: u64,
+    len: u64,
+) -> Result<(PagedRecords, super::super::streaming::Parsed)> {
+    let mut validator = Validator::open(
+        &path.with_extension("records04.idx"),
+        (size, footer_crc, sequence),
+    )?;
+    let parsed = super::super::streaming::read_with(file, offset, len, sequence, |record| {
+        validator.push(record)
+    })?;
+    Ok((validator.finish()?, parsed))
 }
 
 #[cfg(test)]

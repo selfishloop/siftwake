@@ -1,0 +1,291 @@
+{
+  "programs": {
+    "fdb": {
+      "path": "output\\block2-fdb-20261028-v1.exe",
+      "sha256": "CC6B5D10F715F4630B7D225ECB4F81AC6E843408175DC8E9CF31B280E48A175C"
+    },
+    "sqlite": {
+      "path": "output\\block2-sqlite-20261028-v1.exe",
+      "sha256": "069C4B446B5522119E4A87D656957CC59684F093A6A7D378EFFA93C59AD02880"
+    }
+  },
+  "protected_before": [
+    {
+      "path": "data\\rkyv-corpus-20261009\\json.payload-bench",
+      "bytes": 2740862279,
+      "sha256": "11F826FCE3F4AE790FEB9FC6DF9B1169F52C2FD699E89FC4A8A4B77AAA41731B"
+    },
+    {
+      "path": "tests\\fixtures\\v1\\checkpoint.fdb",
+      "bytes": 1507,
+      "sha256": "E87667C0FABE64D5A1F59EF86B99F7E612DB755D239B41677DA2ADC24BE7BF57"
+    },
+    {
+      "path": "tests\\fixtures\\v1\\checkpoint.ready",
+      "bytes": 28,
+      "sha256": "BC82C18F8D5C3A209328BD59B12D828D8922BEC4D26CB4D557FD4A493A4A9C2F"
+    }
+  ],
+  "metadata_only_catalog": "docs\\benchmarks\\block2-scale-20261028-v1-corpus-index.json",
+  "corpus": "same existing first N, no duplicates or new documents; 8 books, overlapping windows",
+  "cache": "warm OS cache: full model get/oracle before query warmup, one unmeasured warmup/case; no eviction",
+  "api": "streamed, 500 entries/commit for ingest; active-WAL opt-in ON, revision reclaim OFF",
+  "sqlite": "FTS5 trigram detail=none, external content, FULL WAL, 2MiB cache, mmap0, tempFILE",
+  "samples": "10 measured samples/case/pair, 2 balanced pairs (20 pooled)",
+  "memory": "fresh-process idle before oracle/model; ingest full-process peak including catalog/model; Windows private and WS reported separately",
+  "checkpoint": "50k core gates first; do not proceed to 100k, 2b or 2c automatically",
+  "order": [
+    {
+      "pair": 0,
+      "count": 10000,
+      "engine": "fdb"
+    },
+    {
+      "pair": 0,
+      "count": 10000,
+      "engine": "sqlite"
+    },
+    {
+      "pair": 1,
+      "count": 10000,
+      "engine": "sqlite"
+    },
+    {
+      "pair": 1,
+      "count": 10000,
+      "engine": "fdb"
+    },
+    {
+      "pair": 0,
+      "count": 50000,
+      "engine": "fdb"
+    },
+    {
+      "pair": 0,
+      "count": 50000,
+      "engine": "sqlite"
+    },
+    {
+      "pair": 1,
+      "count": 50000,
+      "engine": "sqlite"
+    },
+    {
+      "pair": 1,
+      "count": 50000,
+      "engine": "fdb"
+    }
+  ],
+  "completed": [
+    {
+      "engine": "fdb",
+      "count": 10000,
+      "mode": "scale-seed",
+      "log": "block2-scale-20261028-v1-n10000-r0-fdb-scale-seed.jsonl",
+      "exit_code": 0,
+      "wall_s": 16.844000000011874
+    },
+    {
+      "engine": "fdb",
+      "count": 10000,
+      "mode": "scale-idle",
+      "log": "block2-scale-20261028-v1-n10000-r0-fdb-scale-idle.jsonl",
+      "exit_code": 0,
+      "wall_s": 2.187999999994645
+    },
+    {
+      "engine": "fdb",
+      "count": 10000,
+      "mode": "scale-matrix",
+      "log": "block2-scale-20261028-v1-n10000-r0-fdb-scale-matrix.jsonl",
+      "exit_code": 0,
+      "wall_s": 11.859000000025844
+    },
+    {
+      "engine": "sqlite",
+      "count": 10000,
+      "mode": "scale-seed",
+      "log": "block2-scale-20261028-v1-n10000-r0-sqlite-scale-seed.jsonl",
+      "exit_code": 0,
+      "wall_s": 40.0
+    },
+    {
+      "engine": "sqlite",
+      "count": 10000,
+      "mode": "scale-idle",
+      "log": "block2-scale-20261028-v1-n10000-r0-sqlite-scale-idle.jsonl",
+      "exit_code": 0,
+      "wall_s": 2.0469999999913853
+    },
+    {
+      "engine": "sqlite",
+      "count": 10000,
+      "mode": "scale-matrix",
+      "log": "block2-scale-20261028-v1-n10000-r0-sqlite-scale-matrix.jsonl",
+      "exit_code": 0,
+      "wall_s": 178.59400000001187
+    },
+    {
+      "engine": "sqlite",
+      "count": 10000,
+      "mode": "scale-seed",
+      "log": "block2-scale-20261028-v1-n10000-r1-sqlite-scale-seed.jsonl",
+      "exit_code": 0,
+      "wall_s": 40.078000000008615
+    },
+    {
+      "engine": "sqlite",
+      "count": 10000,
+      "mode": "scale-idle",
+      "log": "block2-scale-20261028-v1-n10000-r1-sqlite-scale-idle.jsonl",
+      "exit_code": 0,
+      "wall_s": 2.062999999994645
+    },
+    {
+      "engine": "sqlite",
+      "count": 10000,
+      "mode": "scale-matrix",
+      "log": "block2-scale-20261028-v1-n10000-r1-sqlite-scale-matrix.jsonl",
+      "exit_code": 0,
+      "wall_s": 172.56200000000536
+    },
+    {
+      "engine": "fdb",
+      "count": 10000,
+      "mode": "scale-seed",
+      "log": "block2-scale-20261028-v1-n10000-r1-fdb-scale-seed.jsonl",
+      "exit_code": 0,
+      "wall_s": 15.98399999999674
+    },
+    {
+      "engine": "fdb",
+      "count": 10000,
+      "mode": "scale-idle",
+      "log": "block2-scale-20261028-v1-n10000-r1-fdb-scale-idle.jsonl",
+      "exit_code": 0,
+      "wall_s": 2.234000000025844
+    },
+    {
+      "engine": "fdb",
+      "count": 10000,
+      "mode": "scale-matrix",
+      "log": "block2-scale-20261028-v1-n10000-r1-fdb-scale-matrix.jsonl",
+      "exit_code": 0,
+      "wall_s": 11.28100000001723
+    },
+    {
+      "engine": "fdb",
+      "count": 50000,
+      "mode": "scale-seed",
+      "log": "block2-scale-20261028-v1-n50000-r0-fdb-scale-seed.jsonl",
+      "exit_code": 0,
+      "wall_s": 80.76500000001397
+    },
+    {
+      "engine": "fdb",
+      "count": 50000,
+      "mode": "scale-idle",
+      "log": "block2-scale-20261028-v1-n50000-r0-fdb-scale-idle.jsonl",
+      "exit_code": 0,
+      "wall_s": 2.8439999999827705
+    },
+    {
+      "engine": "fdb",
+      "count": 50000,
+      "mode": "scale-matrix",
+      "log": "block2-scale-20261028-v1-n50000-r0-fdb-scale-matrix.jsonl",
+      "exit_code": 0,
+      "wall_s": 58.234000000025844
+    },
+    {
+      "engine": "sqlite",
+      "count": 50000,
+      "mode": "scale-seed",
+      "log": "block2-scale-20261028-v1-n50000-r0-sqlite-scale-seed.jsonl",
+      "exit_code": 0,
+      "wall_s": 218.85899999999674
+    },
+    {
+      "engine": "sqlite",
+      "count": 50000,
+      "mode": "scale-idle",
+      "log": "block2-scale-20261028-v1-n50000-r0-sqlite-scale-idle.jsonl",
+      "exit_code": 0,
+      "wall_s": 2.0469999999913853
+    },
+    {
+      "engine": "sqlite",
+      "count": 50000,
+      "mode": "scale-matrix",
+      "log": "block2-scale-20261028-v1-n50000-r0-sqlite-scale-matrix.jsonl",
+      "exit_code": 0,
+      "wall_s": 745.3280000000086
+    },
+    {
+      "engine": "sqlite",
+      "count": 50000,
+      "mode": "scale-seed",
+      "log": "block2-scale-20261028-v1-n50000-r1-sqlite-scale-seed.jsonl",
+      "exit_code": 0,
+      "wall_s": 175.48399999999674
+    },
+    {
+      "engine": "sqlite",
+      "count": 50000,
+      "mode": "scale-idle",
+      "log": "block2-scale-20261028-v1-n50000-r1-sqlite-scale-idle.jsonl",
+      "exit_code": 0,
+      "wall_s": 2.047000000020489
+    },
+    {
+      "engine": "sqlite",
+      "count": 50000,
+      "mode": "scale-matrix",
+      "log": "block2-scale-20261028-v1-n50000-r1-sqlite-scale-matrix.jsonl",
+      "exit_code": 0,
+      "wall_s": 1020.2969999999914
+    },
+    {
+      "engine": "fdb",
+      "count": 50000,
+      "mode": "scale-seed",
+      "log": "block2-scale-20261028-v1-n50000-r1-fdb-scale-seed.jsonl",
+      "exit_code": 0,
+      "wall_s": 68.78100000001723
+    },
+    {
+      "engine": "fdb",
+      "count": 50000,
+      "mode": "scale-idle",
+      "log": "block2-scale-20261028-v1-n50000-r1-fdb-scale-idle.jsonl",
+      "exit_code": 0,
+      "wall_s": 2.8439999999827705
+    },
+    {
+      "engine": "fdb",
+      "count": 50000,
+      "mode": "scale-matrix",
+      "log": "block2-scale-20261028-v1-n50000-r1-fdb-scale-matrix.jsonl",
+      "exit_code": 0,
+      "wall_s": 45.90700000000652
+    }
+  ],
+  "protected_after": [
+    {
+      "path": "data\\rkyv-corpus-20261009\\json.payload-bench",
+      "bytes": 2740862279,
+      "sha256": "11F826FCE3F4AE790FEB9FC6DF9B1169F52C2FD699E89FC4A8A4B77AAA41731B"
+    },
+    {
+      "path": "tests\\fixtures\\v1\\checkpoint.fdb",
+      "bytes": 1507,
+      "sha256": "E87667C0FABE64D5A1F59EF86B99F7E612DB755D239B41677DA2ADC24BE7BF57"
+    },
+    {
+      "path": "tests\\fixtures\\v1\\checkpoint.ready",
+      "bytes": 28,
+      "sha256": "BC82C18F8D5C3A209328BD59B12D828D8922BEC4D26CB4D557FD4A493A4A9C2F"
+    }
+  ],
+  "protected_unchanged": true
+}

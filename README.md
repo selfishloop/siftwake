@@ -1,12 +1,145 @@
 # FDB
 
+31 Ekim yan maliyet ölçümü: yazma paired throughput A/B farkları
++%15,44/+%4,16/+%2,16/+%0,87; altılı4R zx p95 1055,26→1386,81ms;
+full41+writer zx diagnostic CPU 559,65→602,09ms/query. D ingest/idle60/15MiB
+geçti; paired loaded peak private farkları +1,53/+2,14/+4,18/+3,33MiB.
+Motor kodu/varsayılan değişmedi; `REFERENCE_WAIT=true`, prototip diagnostics
+opt-in. Maske+capped delta korunuyor; 2ms bekleme uygulanmadı.
+251+159 test/fmt/clippy/oracle/kill/eski okuyucu geçti.
+[41 sorgu ve maliyetler:tek sayfa](docs/SIDE-COST-SUMMARY-50K-20261031.md) ·
+[Bütün paired tablolar ve ham kanıt](docs/SIDE-COST-50K-20261031.md).
+
+Aşağıdaki kayıtlar önceki turların tarihsel sonuçlarıdır.
+
+31 Ekim ölçüm kapanışı: **N60+ örnek kalitesi GEÇTİ; A kapısı KALDI.**
+Dört dengeli çiftte FDB kontrol 39/40/41/41, diagnostics aday 41/41/40/40,
+SQLite 41/40/40/40. 1476 faz satırında 60–85 gerçek örnek; p95=max olan satır 0.
+Eşikler ve motor kodu aynı; `REFERENCE_WAIT=true` varsayılan, maske+capped
+delta korunuyor. 251 test/fmt/clippy/oracle/kill/eski okuyucu geçti.
+2 ms bekleme yalnız tasarım notu, uygulama yok; sonraki aşamaya geçilmedi.
+[Bütün ham örnekler, p50/p95/max ve eski/yeni tablolar](docs/ESTIMATOR-50K-20261031.md).
+
+Aşağıdaki kayıtlar önceki turların tarihsel sonuçlarıdır.
+
+30 Ekim kapanış: **hibrit200 sonrası tek try/aynı caller seri prototipi KALDI,
+varsayılan yapılmadı.** Dört dengeli çiftte aday34/36/38/36 (kontrol38/37/38/40);
+yazma331,78→297,29işlem/sn, geniş zx4R895→994ms. İzin beklemesi kalkıp
+üreticisi/timmy hızlansa da kapı kapanmadı. D ingest≤15,44MiB/temiz idle≤2,30MiB
+geçti; loaded motor peak private iki eşte+3,87/+2,73MiB arttı.251+159 test,
+fmt/clippy/oracle/kill/eski okuyucu geçti. Kabul edilmiş maske/delta korunuyor;
+4R+100lü/B/C/2,6sn/WAL ve kapsam dışı işler başlamadı.
+[Kapanış, kapılar ve ham tablolar](docs/HYBRID-SERIAL-50K-20261030.md).
+
+Aşağıdaki kayıtlar önceki turların tarihsel sonuçlarıdır.
+
+30 Ekim son durum: **Adım1/2 KABUL; A kapısı KALDI; D motor-only RAM GEÇTİ.** Dört no-reset çiftte FDB40/41,37/41,39/41,36/41. Idle üreticisi50,69–397,12ms(medyan227,18),timmy110,58–435,11ms(231,06); kaynağı yalnız gürültüye bağlanmadı. Gerçek profile p95 örneklerinde üreticisi326msnin290msi,timmy177msnin148msi ortak hibrit işçi izni Condvar beklemesi; term mutex≈0,003–0,007ms.1R/4R/few ve gerçek cache hit/miss/CPU/sequence tablosu var. Motor prosesinde aday ingest peak private15,18–15,39MiB,fresh idle2,30MiB(60/15kapıları geçti);runtime+tek giriş buffer dahil,model/oracle/history/profil/katalog dışarıda. RAM yük altıquery kapsamını kapatmıyor. Optimizasyon uygulanmadı;izin beklerken caller serial devam yalnız öneri.100lü/B/C/2,6sn/WAL handle başlamadı. Reclaim default kapalı;case34/geniş negatif yerleşim,signed-zero,yazma/bakım vequeryRAM/disk açık. [Kapı tablosu,kanıt ve tek öneri](docs/READ-ADMISSION-RAM-50K-20261030.md).
+
+Aşağıdaki kayıtlar tarihsel sonuç/kararlardır.
+
+30 Ekim güncel: **Adım1 kullanıcı kabulü korundu; capped delta uygulandı ve ayrı ölçüldü. A4R+tekli sorgu kapısı KALDI (39/41 geçti); duruldu.** Üreticisi idle79,98→loaded288,70ms (sınır159,97); timmy86,67→199,13ms (173,34). FDB throughput%91,40 /SQLite%71,10 ve commit4,90/16,02/23,26ms p95/p99/p99,9 GEÇTİ; max48,48ms,>100ms0.249 test/fmt/default+diagnostic clippy,oracle/kill/eski okuyucu geçti. Yazmasız maske sayıları gerileme/gürültü diye sınıflanmıyor: neden atfı kanıtlanmadı. Yeni yazmasız maske kapı koşusu yapılmadı; delta-only 1R/4R ayrı ölçüldü. Motor-only RAM D ölçülmedi; benchmark process RAM o kapı değildir.100lü/D/B/C/E/WAL düzeltmesi başlamadı. Biçim/256KiB/default exact/serial,full shadow/pin/CRC aynı; yeni100k yok. Reclaim default kapalı. Yazma/bakım, arama regresyonları/case34, disk/RAM/eşzamanlı yük,signed-zero,500 drain ve eski2,6sn uç açık. [Güncel kapılar ve kötü sonuçlar](docs/CONCURRENT-DELTA-1-50K-20261030.md).
+
+Aşağıdaki kayıtlar önceki kararların tarihsel kaydıdır.
+
+29 Ekim güncel — **SONRADAN REVİZE:** kullanıcı eski sonuçları gördükten sonra sorgu/uzun-tekli kapılarını değiştirdi. Mevcut ham veride sorgu41/41 GEÇTİ; uzun tekli p99,9 kontrol43,68/yüklü44,30ms, >100ms3/4 adet (%0,00916/%0,01221). Eski KALDI tabloları aynen korunuyor. Throughput FDB%80,11 /SQLite%73,97; Dirty500291–292ms,4,32–4,44MiB geçti. 1–4 profil tamamlandı: hızlı case0/3 aktif delta taraması,case39/40 posting/cache beklemesi; büyük yeni commit uçlarında WAL handle açma çağrısı baskın. Eski74,84/125–200ms uçlarla aynı neden oldukları bilinmiyor. [Eski/yeni kapılar ve bütün ölçülen profiller](docs/WRITE-REVISED-PROFILE-50K-20261029.md). **4R+100lü yeni arama kapısı KALDI:16/41.** Tamamlanan tek dengeli çiftte case0 74,36/case3 84,76ms; throughput FDB%100,17 /SQLite%72,18 geçti.100lü p95 35,49–37,72ms ama max2,60–2,67sn;4R process peak private162,41MiB(model/oracle/history dahil). Durma kuralıyla ek SQL kolu amaçlı sonlandırıldı; sonuçlara katılmadı ve slot aborted_requires_owner_reset işaretlendi.100lü ayrı profil/500lü drain ve Frunner anahtarı BAŞLAMADI.3 kill/reopen+eski okuyucu ve testler geçti. Raporda capped delta ilkN erken durma tasarımı yalnız öneri; uygulama yok. Optimizasyon yok; snapshot.mask düzeltmesi ayrı onay bekliyor. Aynı881756DA ilk50k,sabit slotlar; source/private/,kalıcı biçim,256KiB ve varsayılan exact/serial aynı. 100k/ön filtre/Blok3/4/C ABI/gerçek-soğuk/uzun snapshot yok. Önceki sonuçlar aşağıda tarihseldir.
+
+29 Ekim [posting cursor ölçümü](docs/POSTING-PAGES-50K-20261029.md):
+melez N50 arama 37/37 kapısı geçti. Yanıklarda 751,6→133,5ms,
+çalışmalarıyla 768,3→78,3ms; kaynak/indeks CRC ve bütçeler korundu.
+[Paralel test deadlock'u](docs/PARALLEL-TEST-DEADLOCK-20261029.md) çözüldü;
+243 default-paralel+149 diagnostic test/fmt/clippy/oracle/kill/eski okuyucu geçti.
+Bir pozitif CPU kapısı KALDI: büyük +%6,06 /+0,094ms; gizlenmedi.
+256KiB entry aynı;100k yeni max200KB kullanıcı corpus'unu bekliyor.
+Varsayılan exact/serial; melez/cancel opt-in. [Açık işler](docs/OPEN-WORK.md).
+Önceki sonuçlar tarihseldir.
+
+28 Ekim [Türkçe50k/100k raporu](docs/TRWIKI-SCALE-20261028.md):
+50k ingest 38,44–39,13sn, disk 300,84MB, idle private≤2,23MiB,
+ingest peak≤19,95MiB, strict-open p95 281,83 ms. RAM/açılış geçti;
+melez N50 arama 37 kapılı sorgunun 9'unda kaldı.100k ingest,444KB belgeyi
+tek-entry 256 KiB sınırında reddetti; FDB 66000 commit'te, SQLite 100k referansı
+tamam. Bağımlı aşamalar durdu; uzun-belge cancel/100k FDB query ölçülmedi.
+Varsayılan exact/serial, kalıcı biçimler ve motor kaynakları değişmedi.
+Melez/cancel opt-in; [güncel kapılar/açık işler](docs/OPEN-WORK.md),
+[aktif slot kimliği](docs/benchmarks/active-benchmark-slots.json).
+İlk paralel test takılması açık; seri tekrar ve fmt/clippy geçti.
+Aşağıdaki eski karar ve sonuçlar tarihsel kayıttır.
+
+
+28 Ekim son durum: [melez200 deneyi kaldı, duruldu](docs/HYBRID-CANCEL-50K-20261028.md).
+Negatif p95 4 işçi84,41→melez89,90ms; cancel240/240, pooled p950,411ms /
+max1,437ms ölçüldü. Normal exact/serial ve opt-in serial first-page korunur;
+join/CRC reuse default değil.239test/fmt/clippy/kill/eski okuyucu geçti.
+[Yeni Türkçe100k corpus offline doğrulandı](docs/TRWIKI-OFFLINE-20261028.md);
+DB slotları eski50k'da, yeni ingest/open ölçülmedi. Yeni açılış kapısı50k≤1s,
+100k≤2s; kaynak başına lazy ve ön filtre uygulanmayacak. [Güncel açık işler](docs/OPEN-WORK.md).
+Aşağıdaki önceki durumlar tarihsel kayıttır.
+
+
+28 Ekim son durum: [capped/exact50k ölçümü](docs/CAPPED-EXACT-50K-20261028.md)
+CRC korunan4 işçili exact p95≤141,77ms ve capped N50≤99,84ms ile150ms
+kapısını geçti. Serial capped pozitiflerde daha az CPU/I/O, negatifte288,64ms.
+Varsayılan exact/strict ve kalıcı biçimler aynı; yeni Rust API'ler opt-in.
+[Hızlı oturum](docs/CAPPED-SEARCH-FAST-OPEN-DESIGN-50K-20261028.md) ilk arama≤300ms
+kapısı [306–757ms ile KALDI](docs/BACKGROUND-OPEN-50K-20261028.md), duruldu.
+237test/fmt/clippy, kill ve eski okuyucu geçti. Default yapılmadı.
+[Ön filtreler yalnız tahmin](docs/PREFILTER-OPTIONS-50K-20261028.md);
+[anahtar sırası/sınırları](docs/KEY-ORDER-FIRST-N-20261028.md).
+100k gerçek corpus'u bekler; Blok3/4/C ABI başlamaz. [Güncel sıra](docs/OPEN-WORK.md).
+Aşağıdaki önceki kapılar tarihsel kayıttır.
+
+28 Ekim: Blok1 kabul edildi. [Blok2 ilk50k kapısında KALDI](docs/BLOCK2-SCALE-50K-20261028.md):
+idle private4,20MiB, ingest tepe20,25MiB ve ortak p95≤7,40ms geçti;
+15/38 sorgu 10k süresinin5 katını aştı. Motor kaynakları/biçim değişmedi.
+100k, soğuk cache, uzun snapshot, kalan50k yazma profili ve Blok3/4/C ABI'ye
+geçilmedi. [OPEN-WORK](docs/OPEN-WORK.md) güncel durma kapısını korur.
+
+[27 Ekim Blok1 kapanış kapıları](docs/WRITE-HARDENING-GATES-10K-20261027.md): yeni
+ölçütte100'lü throughput%76,59/SQLite%61,23;30tur disk son1,107×/max1,199×;
+üç uzun4R koşuda0 adet>50ms.419ms yeniden üretilmedi,nedeni açık.100'lü4R
+arama/RAM ve büyük commit uçları açık;233test/21kill/eski okuyucu geçti.
+Küçük aktif-WAL katmanı/reclaim varsayılan kapalı; kalıcı WAL/sync değişmedi.
+Blok2/3/4,C ABI için onay beklenir.
+
+[27 Ekim Blok1 sonucu](docs/WRITE-HARDENING-10K-20261027.md): normal4×768
+tekli testte0 aşım/max26,4ms; fakat4R yükte throughput%77,22 ve bir419,6ms
+commit nedeniyle **Blok1 KALDI**.100'lük throughput/gerçek30tur ertelendi;
+sonraki blok/C ABI'ye geçilmedi. Küçük WAL ve reclaim varsayılan kapalı kalır.
+Son doğruluk/kurtarma kanıtı ve açık RAM/arama işleri yeni rapordadır.
+
+[Adım3 ölçümü](docs/SMALL-COMMIT-DIRTY-OPEN-10K-20261026.md): opt-in küçük
+streamed commit p95 yaklaşık1,1–2,0ms; dirty500 strict open285–295ms,
+idle private5,9–6,2MiB. Son4R sorguları38/38 sınırında; throughput≥%80 ve
+513. işlemdeki379ms flush görünürlüğü **açık**. Yeni küçük WAL yolu varsayılan
+kapalı (`set_streamed_wal_layer(true)`); maskeler/read-handle/recovery kazanımları
+korunur.226 test/fmt/clippy, kill ve eski okuyucu geçti; C ABI yapılmadı.
+Güncel kapılar ve sınırlar [açık işlerde](docs/OPEN-WORK.md).
+
+
+26 Ekim son kullanıcı kararı: Adım2 **kabul edildi**, o adımın kapısı kapatıldı.
+Ölçülen throughput ve iki arama artışı açık izleme maddesi olarak korunur.
+Adım3 artımlı maske/küçük commit/dirty açılış çalışması başladı; aşağıdaki
+KALDI sonuçları önceki ölçümün tarihsel kanıtıdır. Reclaim varsayılan kapalı.
+
+
+26 Ekim güncel karar: önceki görünürlük adımının ±%5 pooled p95 kapısı
+kullanıcı tarafından ortam gürültüsü nedeniyle bu adım için kapatıldı.
+Geniş tarama parçalanması ve case34 izleniyor; geri kazanım varsayılan kapalı.
+[Okunabilir snapshot prototipi](docs/SNAPSHOT-CONCURRENT-10K-20261026.md)
+`Database::snapshot_reader()` ile isteğe bağlıdır. Tutarlılık/pin/kill geçti;
+writer throughput%75,96/%78,68 ile%80'i tutmadı, son ek100'lü aramada iki sorgu
+2× sınırını aştı. **Adım2 KALDI; Adım3 başlamadı.**216 test/fmt/clippy geçti.
+Küçük commit/dirty open ve C ABI sonraki aşamalardır. Aşağıdaki eski ölçüm
+sonuçları tarihsel kanıttır.
+
 [Görünürlük maskesi / arama profili](docs/REVISION-VISIBILITY-SEARCH-10K-20261026.md):
 maskenin ölü ID'leri zaten payload doğrulamasından önce elediği ölçüldü.
 Ek küçük posting-cache eleme deneyi 37 sorgunun 6'sında +%5 sınırını aşmaya
 devam etti; deney reddedildi, varsayılan kapalı. Kendi eski adayına göre14/37
 durumda +%5 üstünde çıktı; kararlı hızlanma iddiası yok.
 Maliyet sonucu kullanıcı tarafından kabul edildi,
-geri kazanım da kapalı kalır. Snapshot öncesindeki arama kapısı henüz geçmedi.
+geri kazanım da kapalı kalır. Bu arama kapısı son kullanıcı kararıyla kapatıldı;
+genel arama işleri açık kalır.
 
 [Revizyon geri kazanımı bakım maliyeti](docs/REVISION-RECLAIM-COST-10K-20261026.md):
 disk ve maliyet sonuçları kullanıcı tarafından kabul edildi; case34 izleniyor.

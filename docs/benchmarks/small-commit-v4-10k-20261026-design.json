@@ -1,0 +1,155 @@
+{
+  "protected_before": [
+    {
+      "path": "data\\rkyv-corpus-20261009\\json.payload-bench",
+      "bytes": 2740862279,
+      "sha256": "11F826FCE3F4AE790FEB9FC6DF9B1169F52C2FD699E89FC4A8A4B77AAA41731B"
+    },
+    {
+      "path": "tests\\fixtures\\v1\\checkpoint.fdb",
+      "bytes": 1507,
+      "sha256": "E87667C0FABE64D5A1F59EF86B99F7E612DB755D239B41677DA2ADC24BE7BF57"
+    },
+    {
+      "path": "tests\\fixtures\\v1\\checkpoint.ready",
+      "bytes": 28,
+      "sha256": "BC82C18F8D5C3A209328BD59B12D828D8922BEC4D26CB4D557FD4A493A4A9C2F"
+    }
+  ],
+  "program": "output\\small-commit-fdb-20261026-v4.exe",
+  "sha256": "320BC3C5F49139F70CE6BC2AE3D32ECC513F9945F886E623DCCD47591D7B91C1",
+  "completed": [
+    {
+      "engine": "fdb",
+      "mode": "seed",
+      "api": "streamed",
+      "log": "small-commit-v4-10k-20261026-r0-fdb-streamed-seed.jsonl",
+      "exit_code": 0,
+      "wall_s": 15.687999999994645
+    },
+    {
+      "engine": "fdb",
+      "mode": "small-open",
+      "api": "streamed",
+      "log": "small-commit-v4-10k-20261026-r0-fdb-streamed-small-open.jsonl",
+      "exit_code": 0,
+      "wall_s": 6.0310000000026776
+    },
+    {
+      "engine": "fdb",
+      "mode": "small-latency",
+      "api": "streamed",
+      "log": "small-commit-v4-10k-20261026-r0-fdb-streamed-small-latency.jsonl",
+      "exit_code": 0,
+      "wall_s": 0.9689999999973224
+    },
+    {
+      "engine": "fdb",
+      "mode": "verify",
+      "api": "streamed",
+      "log": "small-commit-v4-10k-20261026-r0-fdb-streamed-verify.jsonl",
+      "exit_code": 0,
+      "wall_s": 2.812000000005355
+    },
+    {
+      "engine": "fdb",
+      "mode": "small-dirty",
+      "api": "streamed",
+      "log": "small-commit-v4-10k-20261026-r0-fdb-streamed-small-dirty.jsonl",
+      "exit_code": 0,
+      "wall_s": 1.2189999999973224
+    },
+    {
+      "engine": "fdb",
+      "mode": "small-open",
+      "api": "streamed",
+      "log": "small-commit-v4-10k-20261026-r0-dirty-fdb-streamed-small-open.jsonl",
+      "exit_code": 0,
+      "wall_s": 6.14100000000326
+    },
+    {
+      "engine": "fdb",
+      "mode": "verify",
+      "api": "streamed",
+      "log": "small-commit-v4-10k-20261026-r0-final-fdb-streamed-verify.jsonl",
+      "exit_code": 0,
+      "wall_s": 2.936999999990803
+    },
+    {
+      "engine": "fdb",
+      "mode": "seed",
+      "api": "streamed",
+      "log": "small-commit-v4-10k-20261026-r1-fdb-streamed-seed.jsonl",
+      "exit_code": 0,
+      "wall_s": 14.828999999997905
+    },
+    {
+      "engine": "fdb",
+      "mode": "small-open",
+      "api": "streamed",
+      "log": "small-commit-v4-10k-20261026-r1-fdb-streamed-small-open.jsonl",
+      "exit_code": 0,
+      "wall_s": 6.0
+    },
+    {
+      "engine": "fdb",
+      "mode": "small-latency",
+      "api": "streamed",
+      "log": "small-commit-v4-10k-20261026-r1-fdb-streamed-small-latency.jsonl",
+      "exit_code": 0,
+      "wall_s": 0.9529999999940628
+    },
+    {
+      "engine": "fdb",
+      "mode": "verify",
+      "api": "streamed",
+      "log": "small-commit-v4-10k-20261026-r1-fdb-streamed-verify.jsonl",
+      "exit_code": 0,
+      "wall_s": 2.7030000000086147
+    },
+    {
+      "engine": "fdb",
+      "mode": "small-dirty",
+      "api": "streamed",
+      "log": "small-commit-v4-10k-20261026-r1-fdb-streamed-small-dirty.jsonl",
+      "exit_code": 0,
+      "wall_s": 1.2189999999973224
+    },
+    {
+      "engine": "fdb",
+      "mode": "small-open",
+      "api": "streamed",
+      "log": "small-commit-v4-10k-20261026-r1-dirty-fdb-streamed-small-open.jsonl",
+      "exit_code": 0,
+      "wall_s": 6.0789999999979045
+    },
+    {
+      "engine": "fdb",
+      "mode": "verify",
+      "api": "streamed",
+      "log": "small-commit-v4-10k-20261026-r1-final-fdb-streamed-verify.jsonl",
+      "exit_code": 0,
+      "wall_s": 2.9060000000026776
+    }
+  ],
+  "sqlite_reference": "small-commit-v2-10k-20261026 two unchanged native SQLite runs;not a fresh same-order FDB-v4/SQLite A/B",
+  "cache": "warm OS,strict FDB;no CPU/power/background isolation",
+  "protected_after": [
+    {
+      "path": "data\\rkyv-corpus-20261009\\json.payload-bench",
+      "bytes": 2740862279,
+      "sha256": "11F826FCE3F4AE790FEB9FC6DF9B1169F52C2FD699E89FC4A8A4B77AAA41731B"
+    },
+    {
+      "path": "tests\\fixtures\\v1\\checkpoint.fdb",
+      "bytes": 1507,
+      "sha256": "E87667C0FABE64D5A1F59EF86B99F7E612DB755D239B41677DA2ADC24BE7BF57"
+    },
+    {
+      "path": "tests\\fixtures\\v1\\checkpoint.ready",
+      "bytes": 28,
+      "sha256": "BC82C18F8D5C3A209328BD59B12D828D8922BEC4D26CB4D557FD4A493A4A9C2F"
+    }
+  ],
+  "complete": true
+}

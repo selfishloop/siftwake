@@ -129,6 +129,7 @@ pub struct CorpusIndex {
 pub struct Corpus {
     pub index: CorpusIndex,
     file: File,
+    original_bodies: bool,
 }
 #[allow(dead_code)] // Only the FDB executable prepares shared metadata.
 fn word(b: &[u8]) -> u32 {
@@ -144,18 +145,26 @@ fn trimmed(text: &str) -> &str {
 impl Corpus {
     #[allow(dead_code)]
     pub fn prepare() -> Result<()> {
+        Self::catalog(10000, INDEX)
+    }
+    /// Metadata only; reads existing payloads, never generates document data.
+    pub fn catalog(count: usize, destination: &str) -> Result<()> {
+        if std::path::Path::new(destination).exists() {
+            return Err("metadata destination already exists".into());
+        }
         let mut file = File::open("data/rkyv-corpus-20261009/json.payload-bench")?;
         let mut header = [0; 20];
         file.read_exact(&mut header)?;
         assert_eq!(&header[..8], b"PLOADB01");
         assert_eq!(crc32fast::hash(&header[..16]), word(&header[16..]));
+        assert!((1..=word(&header[12..16]) as usize).contains(&count));
         let cases = cases();
         let terms: Vec<Vec<String>> = cases[..30]
             .iter()
             .map(|c| c.text.split_whitespace().map(fold).collect())
             .collect();
         let mut entries = Vec::new();
-        for id in 0..10000 {
+        for id in 0..count {
             let mut h = [0; 16];
             file.read_exact(&mut h)?;
             assert_eq!(word(&h[8..12]) as usize, id);
@@ -183,14 +192,30 @@ impl Corpus {
                 text_bytes: row.document.text.len(),
             });
         }
-        fs::write(INDEX, serde_json::to_vec(&CorpusIndex { entries, cases })?)?;
-        emit(json!({"phase":"prepared","documents":10000,"new_corpus":false,"metadata_only":true}));
+        fs::write(
+            destination,
+            serde_json::to_vec(&CorpusIndex { entries, cases })?,
+        )?;
+        emit(json!({"phase":"prepared","documents":count,"new_corpus":false,"metadata_only":true}));
         Ok(())
     }
     pub fn open() -> Result<Self> {
+        let mut index: CorpusIndex = serde_json::from_slice(&fs::read(
+            std::env::var("FDB_BENCH_CORPUS_INDEX").unwrap_or_else(|_| INDEX.into()),
+        )?)?;
+        if let Ok(count) = std::env::var("FDB_SCALE_DOCUMENTS") {
+            let count = count.parse::<usize>()?;
+            assert!(count <= index.entries.len());
+            index.entries.truncate(count);
+            index.entries.shrink_to_fit();
+        }
         Ok(Self {
-            index: serde_json::from_slice(&fs::read(INDEX)?)?,
-            file: File::open("data/rkyv-corpus-20261009/json.payload-bench")?,
+            index,
+            file: File::open(
+                std::env::var("FDB_BENCH_CORPUS_PATH")
+                    .unwrap_or_else(|_| "data/rkyv-corpus-20261009/json.payload-bench".into()),
+            )?,
+            original_bodies: std::env::var_os("FDB_BENCH_ORIGINAL_BODIES").is_some(),
         })
     }
     pub fn document(&mut self, id: usize, row: &Row) -> Result<Document> {
@@ -201,6 +226,24 @@ impl Corpus {
         assert_eq!(crc32fast::hash(&bytes), e.crc);
         let mut doc: StoredDocument = serde_json::from_slice(&bytes)?;
         doc.document.key = key(id);
+        if self.original_bodies {
+            if row.revision != 0 {
+                if std::env::var_os("FDB_BENCH_50K_WRITE").is_some() {
+                    let token = marker(id, row.revision);
+                    let mut end = doc.document.text.len().min(200_000 - token.len() - 1);
+                    while !doc.document.text.is_char_boundary(end) {
+                        end -= 1;
+                    }
+                    doc.document.text.truncate(end);
+                    doc.document.text.push(' ');
+                    doc.document.text.push_str(&token);
+                    assert!((2048..=200_000).contains(&doc.document.text.len()));
+                    return Ok(doc.document);
+                }
+                return Err("provided-corpus stage is read/seed only; revision mutation needs a separate oracle".into());
+            }
+            return Ok(doc.document);
+        }
         doc.document.text = format!(
             "{} {}",
             trimmed(&doc.document.text),
@@ -253,10 +296,29 @@ pub struct Change {
     pub kind: String,
 }
 pub trait Backend: Send {
+    fn query_variant(&self, text: &str, variant: &str) -> Result<fdb::FirstPage> {
+        if variant != "legacy" {
+            return Err("query experiments unsupported".into());
+        }
+        let p = self.search(text, 0, 50)?;
+        Ok(fdb::FirstPage {
+            total: fdb::MatchTotal::Exact(p.total),
+            sequence: p.sequence,
+            hits: p.hits,
+            validation: fdb::ValidationStatus::Verified,
+        })
+    }
+    fn query_profile_reset(&self) {}
+    fn query_profile_take(&self) -> Value {
+        Value::Null
+    }
     fn get(&self, id: usize) -> Result<Option<StoredDocument>>;
     fn search(&self, text: &str, offset: usize, limit: usize) -> Result<SearchPage>;
     fn commit(&mut self, corpus: &mut Corpus, changes: &[Change], streamed: bool) -> Result<u64>;
     fn maintain(&mut self) -> Result<Value>;
+    fn idle_notify(&mut self) -> Result<Value> {
+        self.maintain()
+    }
     #[allow(dead_code)]
     fn start_merge(&mut self) -> Result<bool>;
     fn stats(&self) -> Result<Value>;
@@ -484,6 +546,33 @@ pub fn memory() -> Value {
     v["sampled_phase_peak_working_set_bytes"] = json!(SAMPLE_WS.load(Ordering::Relaxed));
     v["sample_interval_ms"] = json!(10);
     v
+}
+/// Process kernel+user CPU, all query workers included; Windows accounting can
+/// be quantized. Aggregate repeats rather than interpreting a single zero.
+pub fn cpu_ms() -> Option<f64> {
+    #[cfg(windows)]
+    {
+        #[link(name = "kernel32")]
+        unsafe extern "system" {
+            fn GetCurrentProcess() -> *mut std::ffi::c_void;
+            fn GetProcessTimes(
+                p: *mut std::ffi::c_void,
+                c: *mut u64,
+                e: *mut u64,
+                k: *mut u64,
+                u: *mut u64,
+            ) -> i32;
+        }
+        let (mut c, mut e, mut k, mut u) = (0, 0, 0, 0);
+        if unsafe { GetProcessTimes(GetCurrentProcess(), &mut c, &mut e, &mut k, &mut u) } == 0 {
+            return None;
+        }
+        Some((k + u) as f64 / 10_000.)
+    }
+    #[cfg(not(windows))]
+    {
+        None
+    }
 }
 fn memory_raw() -> Value {
     #[cfg(windows)]

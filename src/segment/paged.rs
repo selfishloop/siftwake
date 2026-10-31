@@ -1,8 +1,9 @@
 //! Versioned derived metadata sidecar. The validated SEG03 remains its source.
 //! A process-wide cache is shared by foreground readers and merge workers.
 use super::*;
+use crate::access::TrackedMutex as Mutex;
 use std::collections::VecDeque;
-use std::sync::{Mutex, OnceLock};
+use std::sync::OnceLock;
 
 const MAGIC: &[u8; 8] = b"FDBMET04";
 const END: &[u8; 8] = b"FDBMEND4";
@@ -12,6 +13,8 @@ const BUDGET: usize = 256 * 1024;
 const HEADER: u64 = 32;
 #[cfg(feature = "experimental-streaming-metadata")]
 mod streaming;
+#[cfg(feature = "experimental-streaming-metadata")]
+pub(super) use streaming::existing as prepare_existing;
 #[cfg(feature = "experimental-streaming-metadata")]
 pub(super) use streaming::prepare;
 
@@ -50,6 +53,13 @@ pub(super) struct TextCursor {
     payload: Vec<u8>,
     #[cfg(test)]
     requests: usize,
+}
+/// A publication-local metadata cursor, bound to one validated directory owner.
+#[derive(Default)]
+pub(crate) struct KeyCursor {
+    owner: Option<u64>,
+    leaf: Option<u32>,
+    bytes: Vec<u8>,
 }
 
 pub(super) struct PagedRecords {
@@ -287,22 +297,34 @@ impl PagedRecords {
     }
 
     fn page<T>(&self, fence: &Fence, decode: impl FnOnce(&[u8]) -> Result<T>) -> Result<T> {
+        #[cfg(feature = "diagnostic-timing")]
+        let _span = crate::timing::span("query.metadata_page");
+        #[cfg(feature = "diagnostic-timing")]
+        let wait = crate::timing::span("query.metadata_cache_mutex_wait");
         let mut cache = cache().lock().map_err(|_| corrupt("cache lock poisoned"))?;
+        #[cfg(feature = "diagnostic-timing")]
+        drop(wait);
         if let Some(position) = cache
             .entries
             .iter()
             .position(|e| e.owner == self.owner && e.offset == fence.offset)
         {
+            #[cfg(feature = "diagnostic-timing")]
+            crate::timing::count("query.metadata_page_hits", 1);
             let entry = cache.entries.remove(position).unwrap();
             let result = decode(&entry.bytes);
             cache.entries.push_front(entry);
             return result;
         }
+        #[cfg(feature = "diagnostic-timing")]
+        crate::timing::count("query.metadata_page_misses", 1);
         // Evict before allocating the next buffer, so cache + pending read <= BUDGET.
         if fence.len as usize > BUDGET {
             return Err(corrupt("page exceeds budget"));
         }
         while cache.bytes + fence.len as usize > BUDGET {
+            #[cfg(feature = "diagnostic-timing")]
+            crate::timing::count("query.metadata_page_evictions", 1);
             let entry = cache
                 .entries
                 .pop_back()
@@ -318,6 +340,25 @@ impl PagedRecords {
             bytes,
         });
         result
+    }
+    pub(crate) fn cursor_key(&self, slot: u32, cursor: &mut KeyCursor) -> Result<Key> {
+        if slot as usize >= self.count {
+            return Err(corrupt("key cursor bounds"));
+        }
+        let leaf = slot / LEAF as u32;
+        if cursor.owner != Some(self.owner) || cursor.leaf != Some(leaf) {
+            let root = &self.roots[slot as usize / (LEAF * FANOUT)];
+            let fence = self.page(root, |bytes| {
+                Ok(as_fence(decode_leaf(
+                    bytes,
+                    (slot as usize % (LEAF * FANOUT)) / LEAF,
+                )?))
+            })?;
+            cursor.bytes = self.page(&fence, |bytes| Ok(bytes.to_vec()))?;
+            cursor.owner = Some(self.owner);
+            cursor.leaf = Some(leaf);
+        }
+        Ok(decode_leaf(&cursor.bytes, slot as usize % LEAF)?.key)
     }
     pub fn record(&self, slot: u32) -> Result<Record> {
         if slot as usize >= self.count {

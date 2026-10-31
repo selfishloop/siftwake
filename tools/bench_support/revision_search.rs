@@ -30,6 +30,9 @@ pub fn run(engine: &Engine, state: &str, mode: &str) -> Result<()> {
             json!({"phase":"search_profile_baseline","segments":engine.liveness()?,"stats":engine.stats()?}),
         );
         for (case_id, case) in corpus.index.cases.clone().iter().enumerate() {
+            if mode == "search-target-profile" && ![5, 29, 8, 4, 23].contains(&case_id) {
+                continue;
+            }
             let page = engine.search(&case.text, case.offset, case.limit)?;
             churn::check_page(&mut corpus, &model, case, &page)?;
             for repeat in 0..5 {
@@ -40,7 +43,7 @@ pub fn run(engine: &Engine, state: &str, mode: &str) -> Result<()> {
                 let counters = fdb::timing::take();
                 churn::check_page(&mut corpus, &model, case, &page)?;
                 churn::emit(
-                    json!({"phase":"search_profile","case_id":case_id,"case":case,"repeat":repeat,"elapsed_ms":elapsed_ms,"counters":counters,"oracle":true}),
+                    json!({"phase":"search_profile","case_id":case_id,"case":case,"repeat":repeat,"elapsed_ms":elapsed_ms,"total":page.total,"returned":page.hits.len(),"counters":counters,"oracle":true}),
                 );
             }
         }

@@ -8,6 +8,28 @@ use crate::{
 };
 pub(crate) mod maintenance;
 mod revisions;
+mod snapshot;
+#[cfg(test)]
+mod test_jobs;
+pub use snapshot::{
+    Snapshot, SnapshotAdmission, SnapshotPublication, SnapshotReader, SnapshotRelease,
+};
+#[cfg(feature = "bounded-engine")]
+mod light;
+#[cfg(feature = "bounded-engine")]
+mod light_flush;
+#[cfg(feature = "bounded-engine")]
+mod profile;
+#[cfg(feature = "bounded-engine")]
+pub use light::{ChunkedCommit, ChunkedCommitError};
+#[cfg(feature = "bounded-engine")]
+pub use profile::{WriteFrame, WritePhase, WriteTrace};
+#[cfg(feature = "bounded-engine")]
+mod first;
+#[cfg(feature = "bounded-engine")]
+mod opening;
+#[cfg(feature = "bounded-engine")]
+pub use opening::{OpeningDatabase, OpeningFailure};
 #[cfg(feature = "bounded-engine")]
 mod streamed;
 use std::cmp::Reverse;
@@ -103,9 +125,21 @@ fn maintenance_workspace() -> Result<std::sync::MutexGuard<'static, ()>> {
     let _wait = crate::timing::span("maintenance.source_workspace_wait");
     // One source-frame staging workspace across foreground and merge workers.
     static WORKSPACE: std::sync::Mutex<()> = std::sync::Mutex::new(());
-    WORKSPACE
+    #[cfg(test)]
+    if std::env::var_os("FDB_LOCK_TRACE").is_some() {
+        eprintln!("source-workspace request {:?}", std::thread::current().id());
+    }
+    let guard = WORKSPACE
         .lock()
-        .map_err(|_| Error::Invalid("maintenance workspace poisoned".into()))
+        .map_err(|_| Error::Invalid("maintenance workspace poisoned".into()))?;
+    #[cfg(test)]
+    if std::env::var_os("FDB_LOCK_TRACE").is_some() {
+        eprintln!(
+            "source-workspace acquired {:?}",
+            std::thread::current().id()
+        );
+    }
+    Ok(guard)
 }
 
 #[cfg(feature = "experimental-write-maintenance-slots")]
@@ -187,17 +221,40 @@ mod merge_selection_tests {
 }
 
 #[cfg(feature = "experimental-paged-metadata")]
-#[derive(Default)]
+#[derive(Default, Clone)]
 struct MaskCache {
-    entries: Vec<(u64, Box<[u32]>)>,
+    entries: Vec<(u64, HiddenMask)>,
     bytes: usize,
+    shadow_included: bool,
+}
+#[cfg(feature = "experimental-paged-metadata")]
+#[derive(Clone)]
+enum HiddenMask {
+    Sparse(Box<[u32]>),
+    Dense(Box<[u64]>),
 }
 #[cfg(feature = "experimental-paged-metadata")]
 impl MaskCache {
+    fn includes_shadow(&self, source: u64) -> bool {
+        self.shadow_included
+            && self
+                .entries
+                .iter()
+                .any(|(id, mask)| *id == source && matches!(mask, HiddenMask::Dense(_)))
+    }
     fn apply(&self, source: u64, mask: &mut [u64]) -> bool {
-        if let Some((_, ids)) = self.entries.iter().find(|(id, _)| *id == source) {
-            for &id in ids.iter() {
-                mask[id as usize / 64] |= 1 << (id % 64);
+        if let Some((_, entry)) = self.entries.iter().find(|(id, _)| *id == source) {
+            match entry {
+                HiddenMask::Sparse(ids) => {
+                    for &id in ids.iter() {
+                        mask[id as usize / 64] |= 1 << (id % 64);
+                    }
+                }
+                HiddenMask::Dense(bits) => {
+                    for (out, bits) in mask.iter_mut().zip(bits.iter()) {
+                        *out |= bits;
+                    }
+                }
             }
             true
         } else {
@@ -221,7 +278,16 @@ impl MaskCache {
             }
         }
         self.bytes += count * 4;
-        self.entries.push((source, ids.into_boxed_slice()));
+        self.entries
+            .push((source, HiddenMask::Sparse(ids.into_boxed_slice())));
+    }
+    fn remember_dense(&mut self, source: u64, mask: Vec<u64>) {
+        let bytes = mask.len() * 8;
+        if self.entries.len() < 256 && bytes <= 64 * 1024 - self.bytes {
+            self.bytes += bytes;
+            self.entries
+                .push((source, HiddenMask::Dense(mask.into_boxed_slice())));
+        }
     }
 }
 
@@ -268,9 +334,26 @@ pub struct Database {
     sync_wal: bool,
     #[cfg(feature = "experimental-paged-metadata")]
     mask_cache: std::sync::Mutex<MaskCache>,
+    snapshot_context: Option<Arc<snapshot::Context>>,
+    #[cfg(feature = "bounded-engine")]
+    light: BTreeMap<Arc<Key>, light::LightRow>,
+    #[cfg(feature = "bounded-engine")]
+    streamed_wal_layer: bool,
+    #[cfg(feature = "bounded-engine")]
+    light_flush: Option<light_flush::Pending>,
+    #[cfg(feature = "bounded-engine")]
+    write_profile: Option<profile::CaptureHandle>,
 }
 
-fn open_source(dir: &Path, mut source: Source, legacy_unknown: bool) -> Result<Run> {
+fn open_source(dir: &Path, source: Source, legacy_unknown: bool) -> Result<Run> {
+    open_source_policy(dir, source, legacy_unknown, true)
+}
+fn open_source_policy(
+    dir: &Path,
+    mut source: Source,
+    legacy_unknown: bool,
+    repair: bool,
+) -> Result<Run> {
     #[cfg(feature = "diagnostic-timing")]
     let _open = crate::timing::maintenance::span("index_rewrite_open");
     #[cfg(feature = "bounded-engine")]
@@ -321,10 +404,18 @@ fn open_source(dir: &Path, mut source: Source, legacy_unknown: bool) -> Result<R
     let opened_index = {
         #[cfg(feature = "diagnostic-timing")]
         let _span = crate::timing::span("open.index");
+        #[cfg(feature = "bounded-engine")]
+        if !repair {
+            DiskIndex::open_existing(&target, Some((source.end, checksum)))
+        } else {
+            DiskIndex::open(&target, Some((source.end, checksum)))
+        }
+        #[cfg(not(feature = "bounded-engine"))]
         DiskIndex::open(&target, Some((source.end, checksum)))
     };
     let mut index = match opened_index {
         Ok(index) => Some(index),
+        Err(e) if !repair => return Err(e),
         Err(Error::Corrupt(_)) => None,
         Err(Error::Io(e)) if e.kind() == std::io::ErrorKind::NotFound => None,
         Err(e) => return Err(e),
@@ -933,6 +1024,17 @@ impl Database {
         deferred: bool,
         record_reads: bool,
     ) -> Result<Self> {
+        Self::open_policy(dir, options, deferred, record_reads, 1, None)
+    }
+    fn open_policy(
+        dir: impl AsRef<Path>,
+        options: Options,
+        deferred: bool,
+        record_reads: bool,
+        workers: usize,
+        held_lock: Option<File>,
+    ) -> Result<Self> {
+        let cache_only = held_lock.is_some();
         #[cfg(feature = "diagnostic-timing")]
         let _open = crate::timing::span("open.total");
         if options.max_delta_keys == 0 || options.max_delta_bytes == 0 {
@@ -943,16 +1045,21 @@ impl Database {
         // Keep all publication/reclamation paths under the same resolved root
         // for which the database lock is acquired.
         let dir = dir.canonicalize()?;
-        let lock = OpenOptions::new()
-            .read(true)
-            .write(true)
-            .create(true)
-            .truncate(false)
-            .open(dir.join("LOCK"))?;
-        lock.try_lock().map_err(|e| match e {
-            std::fs::TryLockError::WouldBlock => Error::Locked,
-            std::fs::TryLockError::Error(e) => Error::Io(e),
-        })?;
+        let lock = if let Some(lock) = held_lock {
+            lock
+        } else {
+            let lock = OpenOptions::new()
+                .read(true)
+                .write(true)
+                .create(true)
+                .truncate(false)
+                .open(dir.join("LOCK"))?;
+            lock.try_lock().map_err(|e| match e {
+                std::fs::TryLockError::WouldBlock => Error::Locked,
+                std::fs::TryLockError::Error(e) => Error::Io(e),
+            })?;
+            lock
+        };
         let (latest, maximum) = manifest::inventory(&dir)?;
         let mut next_id = maximum
             .checked_add(1)
@@ -998,27 +1105,55 @@ impl Database {
                 (vec![run], active, true)
             }
             Publication::Current(m) => {
-                let runs = m
-                    .runs
-                    .into_iter()
-                    .map(|s| {
-                        if deferred {
-                            let mut run = open_source_deferred(&dir, s)?;
-                            if record_reads && run.deferred.is_some() {
-                                run.source_records = crate::source_records::Records::load(
-                                    &dir,
-                                    &run.source,
-                                    &run.index,
-                                )
-                                .ok()
-                                .map(Arc::new);
-                            }
-                            Ok(run)
-                        } else {
-                            open_source(&dir, s, false)
+                let load = |s: Source| {
+                    if deferred {
+                        let mut run = open_source_deferred(&dir, s)?;
+                        if record_reads && run.deferred.is_some() {
+                            run.source_records =
+                                crate::source_records::Records::load(&dir, &run.source, &run.index)
+                                    .ok()
+                                    .map(Arc::new);
                         }
-                    })
-                    .collect::<Result<Vec<_>>>()?;
+                        Ok(run)
+                    } else {
+                        open_source_policy(&dir, s, false, !cache_only)
+                    }
+                };
+                let runs = if workers == 1 {
+                    m.runs.into_iter().map(load).collect::<Result<Vec<_>>>()?
+                } else {
+                    let next = std::sync::atomic::AtomicUsize::new(0);
+                    let work = || -> Result<Vec<(usize, Run)>> {
+                        let mut result = Vec::new();
+                        loop {
+                            let n = next.fetch_add(1, std::sync::atomic::Ordering::Relaxed);
+                            let Some(source) = m.runs.get(n) else {
+                                break;
+                            };
+                            result.push((n, load(source.clone())?));
+                        }
+                        Ok(result)
+                    };
+                    let mut all = std::thread::scope(|scope| -> Result<Vec<(usize, Run)>> {
+                        let handles: Vec<_> = (1..workers).map(|_| scope.spawn(work)).collect();
+                        let mut all = work();
+                        // Always join every worker even when one source fails.
+                        for h in handles {
+                            match h.join() {
+                                Ok(Ok(values)) => {
+                                    if let Ok(all) = &mut all {
+                                        all.extend(values);
+                                    }
+                                }
+                                Ok(Err(e)) => all = Err(e),
+                                Err(_) => all = Err(Error::Poisoned),
+                            }
+                        }
+                        all
+                    })?;
+                    all.sort_by_key(|(n, _)| *n);
+                    all.into_iter().map(|(_, r)| r).collect()
+                };
                 (runs, m.active, false)
             }
         };
@@ -1030,11 +1165,13 @@ impl Database {
             feature = "experimental-shared-documents",
             not(feature = "experimental-wal-delta")
         )))]
+        #[allow(unused_mut)]
         let mut docs = BTreeMap::new();
         #[cfg(all(
             feature = "experimental-shared-documents",
             not(feature = "experimental-wal-delta")
         ))]
+        #[allow(unused_mut)]
         let mut docs = std::collections::HashMap::new();
         #[cfg(all(
             feature = "experimental-shared-documents",
@@ -1042,7 +1179,49 @@ impl Database {
         ))]
         let mut doc_cache = crate::shared_documents::Cache::default();
         let mut shadow = BTreeSet::new();
-        #[cfg(not(feature = "experimental-wal-delta"))]
+        #[cfg(feature = "bounded-engine")]
+        #[allow(unused_mut)]
+        let mut light: BTreeMap<Arc<Key>, light::LightRow> = BTreeMap::new();
+        #[cfg(all(feature = "bounded-engine", not(feature = "experimental-wal-delta")))]
+        let sequence = format::replay_located(&mut log, active.end, |seq, batch, locations| {
+            if batch.checkpoint {
+                if seq != active.sequence || (!legacy && !batch.changes.is_empty()) {
+                    return Err(Error::Corrupt("invalid active WAL checkpoint".into()));
+                }
+                return Ok(());
+            }
+            for (change, location) in batch.changes.into_iter().zip(locations) {
+                match change {
+                    Change::Put { stored } => {
+                        validate_doc(&stored.document)
+                            .map_err(|e| Error::Corrupt(e.to_string()))?;
+                        if stored.version != seq {
+                            return Err(Error::Corrupt("WAL document version".into()));
+                        }
+                        remember_delta_key(&mut shadow, &stored.document.key);
+                        let filter = light::LightFilter::new(&stored.document);
+                        light.insert(
+                            Arc::new(stored.document.key),
+                            light::LightRow {
+                                wal: crate::wal_delta::Row {
+                                    version: seq,
+                                    location: location
+                                        .ok_or_else(|| Error::Corrupt("WAL location".into()))?,
+                                },
+                                filter,
+                            },
+                        );
+                    }
+                    Change::Delete { key } => {
+                        validate_key(&key).map_err(|e| Error::Corrupt(e.to_string()))?;
+                        remember_delta_key(&mut shadow, &key);
+                        light.remove(&key);
+                    }
+                }
+            }
+            Ok(())
+        })?;
+        #[cfg(not(any(feature = "experimental-wal-delta", feature = "bounded-engine")))]
         let sequence = format::replay(&mut log, active.end, |seq, batch| {
             if batch.checkpoint {
                 if seq != active.sequence || (!legacy && !batch.changes.is_empty()) {
@@ -1146,7 +1325,16 @@ impl Database {
             count += run.index.visible_count(&mask)?;
         }
         let mut index = Index::default();
+        #[allow(unused_mut)]
         let mut delta_bytes = 0;
+        #[cfg(feature = "bounded-engine")]
+        {
+            delta_bytes += light
+                .values()
+                .map(|r| r.location.len as usize)
+                .sum::<usize>();
+            count += light.len();
+        }
         #[cfg(not(any(
             feature = "experimental-wal-delta",
             feature = "experimental-shared-documents"
@@ -1203,7 +1391,21 @@ impl Database {
             sync_wal: true,
             #[cfg(feature = "experimental-paged-metadata")]
             mask_cache: std::sync::Mutex::new(mask_cache),
+            snapshot_context: None,
+            #[cfg(feature = "bounded-engine")]
+            light,
+            #[cfg(feature = "bounded-engine")]
+            streamed_wal_layer: false,
+            #[cfg(feature = "bounded-engine")]
+            light_flush: None,
+            #[cfg(feature = "bounded-engine")]
+            write_profile: None,
         };
+        if !deferred {
+            crate::reclaim::collect_open_temporaries(&db.dir)?;
+        }
+        // Recovery can flush a full delta and spawn a new merge worker. Scratch
+        // scavenging must finish BEFORE that worker can create live build files.
         if db.needs_flush() {
             db.flush()?;
         }
@@ -1353,6 +1555,10 @@ impl Database {
         Ok(())
     }
     fn version(&self, key: &Key) -> Result<Option<u64>> {
+        #[cfg(feature = "bounded-engine")]
+        if let Some(row) = self.light.get(key) {
+            return Ok(Some(row.version));
+        }
         if let Some(s) = self.docs.get(key) {
             return Ok(Some(s.version));
         }
@@ -1371,6 +1577,10 @@ impl Database {
         let _reader = self.maintenance_activity.read();
         self.healthy()?;
         validate_key(key)?;
+        #[cfg(feature = "bounded-engine")]
+        if let Some(row) = self.light.get(key) {
+            return row.read(&self.log, key).map(Some);
+        }
         if let Some(s) = self.docs.get(key) {
             #[cfg(not(any(
                 feature = "experimental-wal-delta",
@@ -1409,6 +1619,11 @@ impl Database {
             || self.delta_bytes >= self.options.max_delta_bytes
     }
     pub fn commit(&mut self, mutations: Vec<Mutation>) -> Result<u64> {
+        let _writer = crate::access::WriterScope::enter();
+        #[cfg(feature = "bounded-engine")]
+        let _profile = profile::Scope::enter(&self.write_profile, self.sequence);
+        #[cfg(feature = "bounded-engine")]
+        self.light_flush_ready(true)?;
         self.preempt_revision_work()?;
         #[cfg(feature = "diagnostic-timing")]
         let _total = crate::timing::span("commit.total");
@@ -1639,6 +1854,10 @@ impl Database {
             };
             #[cfg(feature = "diagnostic-memory")]
             let _origin = crate::memory::Scope::new(3);
+            #[cfg(feature = "bounded-engine")]
+            if let Some(row) = self.light.remove(key) {
+                delta_bytes -= row.location.len as usize;
+            }
             let shared_key = remember_delta_key(&mut self.shadow, key);
             #[cfg(all(
                 feature = "experimental-shared-documents",
@@ -1722,6 +1941,7 @@ impl Database {
         self.sequence = seq;
         #[cfg(feature = "diagnostic-memory")]
         crate::memory::observe("commit.applied", seq);
+        self.refresh_snapshots()?;
         Ok(seq)
     }
 
@@ -1869,7 +2089,7 @@ impl Database {
                 return Err(Error::Invalid("linked_to scope mismatch".into()));
             }
         }
-        let delta = self.delta_matches(query);
+        let delta = self.delta_matches(query)?;
         let mut lists = vec![];
         let mut total = delta.len();
         // Keep ordinary numbered pages bounded. Very large offsets retain the
@@ -1886,13 +2106,20 @@ impl Database {
             let visibility = crate::timing::span("query.visibility_mask");
             let mut mask = vec![0u64; run.index.len().div_ceil(64)];
             #[cfg(feature = "experimental-paged-metadata")]
-            let cached = self
-                .mask_cache
-                .lock()
-                .map_err(|_| Error::Corrupt("visibility cache poisoned".into()))?
-                .apply(run.source.id, &mut mask);
+            let (cached, shadow_included) = {
+                let cache = self
+                    .mask_cache
+                    .lock()
+                    .map_err(|_| Error::Corrupt("visibility cache poisoned".into()))?;
+                (
+                    cache.apply(run.source.id, &mut mask),
+                    cache.includes_shadow(run.source.id),
+                )
+            };
             #[cfg(not(feature = "experimental-paged-metadata"))]
             let cached = false;
+            #[cfg(not(feature = "experimental-paged-metadata"))]
+            let shadow_included = false;
             if !cached {
                 for later in &self.runs[n + 1..] {
                     run.index.hide_keys(&later.index, &mut mask)?;
@@ -1903,7 +2130,7 @@ impl Database {
                     .map_err(|_| Error::Corrupt("visibility cache poisoned".into()))?
                     .remember(run.source.id, &mask);
             }
-            for key in &self.shadow {
+            for key in self.shadow.iter().filter(|_| !cached || !shadow_included) {
                 if let Some(id) = run.index.find(key)? {
                     mask[id as usize / 64] |= 1 << (id % 64);
                 }
@@ -2180,17 +2407,20 @@ impl Database {
             .map(|r| (r.source.kind, r.source.id))
             .collect();
         live.insert((Kind::Legacy, self.active.id));
+        #[cfg(feature = "bounded-engine")]
+        self.light_flush_live(&mut live);
         self.retired
             .retain(|(_, reader)| reader.strong_count() != 0);
-        live.extend(
-            self.retired
-                .iter()
-                .map(|(source, _)| (source.kind, source.id)),
-        );
         if let Some(job) = &self.job {
             live.insert((Kind::Run, job.output_id));
             live.extend(job.inputs.iter().map(|source| (source.kind, source.id)));
         }
+        if let Some(context) = &self.snapshot_context {
+            return context
+                .gc
+                .collect_writer(self.generation, live, self.retired.clone());
+        }
+        live.extend(self.retired.iter().map(|(s, _)| (s.kind, s.id)));
         crate::reclaim::collect(&self.dir, self.generation, &live)
     }
 
@@ -2201,6 +2431,15 @@ impl Database {
         let _ = self.collect_obsolete();
     }
     fn publish(&mut self, id: u64, m: &Manifest) -> Result<()> {
+        #[cfg(feature = "bounded-engine")]
+        let _phase = profile::phase(
+            self.write_profile.is_some(),
+            "manifest.publish",
+            self.sequence,
+            self.active.id,
+        );
+        let context = self.snapshot_context.clone();
+        let _snapshot_gc = context.as_ref().map(|c| c.gc.writer_guard()).transpose()?;
         if let Err(e) = manifest::publish(&self.dir, id, m) {
             self.poisoned = true;
             return Err(e);
@@ -2210,6 +2449,9 @@ impl Database {
     }
     /// Write only the resident delta and retain all prior immutable sources.
     pub fn flush(&mut self) -> Result<Stats> {
+        let _writer = crate::access::WriterScope::enter();
+        #[cfg(feature = "bounded-engine")]
+        self.light_flush_ready(true)?;
         #[cfg(feature = "diagnostic-timing")]
         let _flush = crate::timing::span("flush.total");
         self.healthy()?;
@@ -2219,6 +2461,20 @@ impl Database {
             self.try_reclaim();
             return self.stats();
         }
+        #[cfg(feature = "bounded-engine")]
+        let light_index = if self.light.is_empty() {
+            None
+        } else {
+            #[cfg(feature = "diagnostic-timing")]
+            let _span = crate::timing::span("flush.light_index_prepare");
+            let mut index = Index::default();
+            for key in &self.shadow {
+                if let Some(stored) = self.get(key)? {
+                    index.add_builder(&stored)?;
+                }
+            }
+            Some(index)
+        };
         let id = self.allocate()?;
         let changes = self.shadow.iter().map(|key| {
             Ok(match self.get(key)? {
@@ -2231,20 +2487,30 @@ impl Database {
         #[cfg(not(feature = "experimental-merge-postings"))]
         let run = write_run(&self.dir, id, self.sequence, changes)?;
         #[cfg(feature = "experimental-merge-postings")]
-        let run = write_run_prepared(&self.dir, id, self.sequence, changes, |source| {
-            let records = self
-                .shadow
-                .iter()
-                .enumerate()
-                .map(|(slot, key)| {
-                    let id = u32::try_from(slot)
-                        .map_err(|_| Error::Invalid("delta checkpoint exceeds u32".into()))?;
-                    Ok((own_delta_key(key), id))
-                })
-                .collect::<Result<std::collections::BTreeMap<_, _>>>()?;
-            reused_builder(&self.dir, source)?.finish_delta(&self.index, &records)?;
-            Ok(())
-        })?;
+        let run = {
+            #[cfg(feature = "diagnostic-timing")]
+            let _span = crate::timing::span("flush.source_index_prepare");
+            write_run_prepared(&self.dir, id, self.sequence, changes, |source| {
+                let records = self
+                    .shadow
+                    .iter()
+                    .enumerate()
+                    .map(|(slot, key)| {
+                        let id = u32::try_from(slot)
+                            .map_err(|_| Error::Invalid("delta checkpoint exceeds u32".into()))?;
+                        Ok((own_delta_key(key), id))
+                    })
+                    .collect::<Result<std::collections::BTreeMap<_, _>>>()?;
+                #[cfg(feature = "bounded-engine")]
+                let index = light_index.as_ref().unwrap_or(&self.index);
+                #[cfg(not(feature = "bounded-engine"))]
+                let index = &self.index;
+                reused_builder(&self.dir, source)?.finish_delta(index, &records)?;
+                Ok(())
+            })?
+        };
+        #[cfg(feature = "diagnostic-timing")]
+        let publication = crate::timing::span("flush.active_manifest_publish");
         let id = self.allocate()?;
         let (log, active) = manifest::new_active(&self.dir, id, self.sequence)?;
         let mut runs = self.descriptors();
@@ -2260,6 +2526,8 @@ impl Database {
         self.log = log;
         self.active = active;
         self.runs.push(run);
+        #[cfg(feature = "diagnostic-timing")]
+        drop(publication);
         #[cfg(feature = "experimental-paged-metadata")]
         {
             *self
@@ -2287,9 +2555,12 @@ impl Database {
         {
             self.doc_cache = crate::shared_documents::Cache::default();
         }
+        #[cfg(feature = "bounded-engine")]
+        self.light.clear();
         self.shadow.clear();
         self.index = Index::default();
         self.delta_bytes = 0;
+        self.refresh_snapshots()?;
         self.try_reclaim();
         if self.runs.len() >= 4 {
             self.start_compaction_mode(true)?;
@@ -2345,7 +2616,11 @@ impl Database {
         let Some((start, end)) = selected else {
             // Size-tier merging alone cannot reclaim revisions in large or
             // dissimilar runs. Explicit maintenance also drains one stale run.
-            return if _automatic || !self.revision_reclamation {
+            #[cfg(feature = "bounded-engine")]
+            let progressing = self.streamed_wal_layer;
+            #[cfg(not(feature = "bounded-engine"))]
+            let progressing = false;
+            return if (_automatic && !progressing) || !self.revision_reclamation {
                 Ok(false)
             } else {
                 self.start_revision_reclamation()
@@ -2364,6 +2639,9 @@ impl Database {
         let dir = self.dir.clone();
         let id = self.allocate()?;
         let handle = std::thread::spawn(move || {
+            #[cfg(test)]
+            test_jobs::wait(&dir);
+            let _writer = crate::access::WriterScope::enter();
             #[cfg(feature = "diagnostic-timing")]
             let _worker = crate::timing::maintenance::worker();
             #[cfg(feature = "diagnostic-timing")]
@@ -2452,16 +2730,33 @@ impl Database {
         Ok(true)
     }
     fn install(&mut self, job: Job) -> Result<bool> {
+        #[cfg(feature = "bounded-engine")]
+        let _profile = profile::phase(
+            self.write_profile.is_some(),
+            "merge.install",
+            self.sequence,
+            self.active.id,
+        );
+        let _writer = crate::access::WriterScope::enter();
         #[cfg(feature = "diagnostic-timing")]
         let _install = crate::timing::maintenance::span("publication_reclaim");
         #[cfg(feature = "diagnostic-timing")]
         let join_stage = crate::timing::maintenance::span("join_wait");
         #[cfg(feature = "diagnostic-timing")]
         let join = crate::timing::span("merge.join_wait");
+        #[cfg(feature = "bounded-engine")]
+        let join_profile = profile::phase(
+            self.write_profile.is_some(),
+            "merge.join",
+            self.sequence,
+            self.active.id,
+        );
         let output = job
             .handle
             .join()
             .map_err(|_| Error::Invalid("compaction worker panicked".into()))??;
+        #[cfg(feature = "bounded-engine")]
+        drop(join_profile);
         #[cfg(feature = "diagnostic-timing")]
         drop(join);
         #[cfg(feature = "diagnostic-timing")]
@@ -2509,6 +2804,7 @@ impl Database {
                 .map_err(|_| Error::Corrupt("visibility cache poisoned".into()))? =
                 MaskCache::default();
         }
+        self.refresh_snapshots()?;
         self.try_reclaim();
         Ok(true)
     }
@@ -2523,11 +2819,39 @@ impl Database {
     }
     pub fn wait_for_compaction(&mut self) -> Result<bool> {
         self.healthy()?;
+        #[cfg(feature = "bounded-engine")]
+        self.light_flush_ready(true)?;
         if let Some(job) = self.job.take() {
             self.install(job)
         } else {
             Ok(false)
         }
+    }
+    /// One synchronous idle notification drains flush/merge/revision jobs and
+    /// retries orphan collection. Revision rewrites still require explicit opt-in.
+    /// Readers retain their snapshots; a long-lived pin can retain disk space.
+    pub fn maintain_idle(&mut self) -> Result<Stats> {
+        self.flush()?;
+        self.wait_for_compaction()?;
+        while self.start_compaction()? {
+            self.wait_for_compaction()?;
+        }
+        // Advance above abandoned unpublished IDs before collecting their files.
+        // This preserves allocator high-water safety without a new disk counter.
+        let id = self.allocate()?;
+        self.publish(
+            id,
+            &Manifest {
+                version: 3,
+                runs: self.descriptors(),
+                active: self.active.clone(),
+            },
+        )?;
+        self.refresh_snapshots()?;
+        self.check_integrity()?;
+        crate::reclaim::collect_open_temporaries(&self.dir)?;
+        self.collect_obsolete()?;
+        self.stats()
     }
     pub fn stats(&self) -> Result<Stats> {
         self.healthy()?;
@@ -2575,6 +2899,10 @@ impl Database {
 }
 impl Drop for Database {
     fn drop(&mut self) {
+        #[cfg(feature = "bounded-engine")]
+        if let Some(pending) = self.light_flush.take() {
+            pending.finish();
+        }
         if let Some(job) = self.job.take() {
             let _ = job.handle.join();
         }

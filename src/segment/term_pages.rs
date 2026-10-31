@@ -1,8 +1,9 @@
 //! Sparse fences over SEG03/04 JSON or SEG05 binary directory pages.
 use super::*;
+use crate::access::TrackedMutex as Mutex;
 use std::collections::VecDeque;
 use std::hash::{Hash, Hasher};
-use std::sync::{Mutex, OnceLock};
+use std::sync::OnceLock;
 
 const PAGE_BYTES: usize = 16 * 1024;
 const PAGE_TERMS: usize = 128;
@@ -168,6 +169,13 @@ fn cache() -> &'static Mutex<Cache> {
     static CACHE: OnceLock<Mutex<Cache>> = OnceLock::new();
     CACHE.get_or_init(|| Mutex::new(Cache::default()))
 }
+fn query_cache_lock() -> Result<crate::access::TrackedGuard<'static, Cache>> {
+    #[cfg(feature = "diagnostic-timing")]
+    let _wait = crate::timing::span("query.term_cache_mutex_wait");
+    cache()
+        .lock()
+        .map_err(|_| Error::Corrupt("term cache poisoned".into()))
+}
 fn strings(term: &Term) -> usize {
     match term {
         Term::Scope(s) => s.capacity(),
@@ -288,9 +296,7 @@ impl Pages {
         Ok(values)
     }
     fn with_page<T>(&self, page: usize, f: impl FnOnce(&[(Term, Posting)]) -> T) -> Result<T> {
-        let mut cache = cache()
-            .lock()
-            .map_err(|_| Error::Corrupt("term cache poisoned".into()))?;
+        let mut cache = query_cache_lock()?;
         // The common working pool earmarks cache/scratch allowance at creation.
         // Never wait for workspace admission while holding this cache mutex.
         if let Some(pos) = cache
@@ -298,11 +304,15 @@ impl Pages {
             .iter()
             .position(|e| e.owner == self.owner && e.page == page)
         {
+            #[cfg(feature = "diagnostic-timing")]
+            crate::timing::count("query.term_page_hits", 1);
             let entry = cache.entries.remove(pos).unwrap();
             let result = f(&entry.values);
             cache.entries.push_front(entry);
             return Ok(result);
         }
+        #[cfg(feature = "diagnostic-timing")]
+        crate::timing::count("query.term_page_misses", 1);
         // A page's decoded Term enum/String overhead is larger than its JSON.
         // Release old pages before decoding. Oversized legacy scalars are uncached.
         let estimate = self.fences[page].len.saturating_mul(2)
@@ -338,15 +348,17 @@ impl Pages {
     }
     pub fn get(&self, term: &Term) -> Result<Option<Posting>> {
         if !self.bloom.contains(term) {
+            #[cfg(feature = "diagnostic-timing")]
+            crate::timing::count("query.term_bloom_rejects", 1);
             return Ok(None);
         }
-        if let Some(posting) = cache()
-            .lock()
-            .map_err(|_| Error::Corrupt("term cache poisoned".into()))?
-            .lookup(self.owner, term)
-        {
+        if let Some(posting) = query_cache_lock()?.lookup(self.owner, term) {
+            #[cfg(feature = "diagnostic-timing")]
+            crate::timing::count("query.term_lookup_hits", 1);
             return Ok(posting);
         }
+        #[cfg(feature = "diagnostic-timing")]
+        crate::timing::count("query.term_lookup_misses", 1);
         let end = self.fences.partition_point(|p| &p.first <= term);
         if end == 0 || term > &self.fences[end - 1].last {
             return Ok(None);
@@ -357,10 +369,7 @@ impl Pages {
                 .ok()
                 .map(|i| values[i].1)
         })?;
-        cache()
-            .lock()
-            .map_err(|_| Error::Corrupt("term cache poisoned".into()))?
-            .remember(self.owner, term, posting);
+        query_cache_lock()?.remember(self.owner, term, posting);
         Ok(posting)
     }
     pub fn range(&self, min: &Term, max: &Term) -> Result<Vec<Posting>> {
@@ -414,6 +423,22 @@ impl Cursor<'_> {
 
 #[cfg(test)]
 mod tests {
+    #[cfg(feature = "diagnostic-timing")]
+    #[test]
+    fn query_mutex_measurement_inherits_request_on_child_threads() {
+        let request = crate::timing::request::Request::new();
+        drop(super::query_cache_lock().unwrap());
+        let handle = crate::timing::request::current();
+        std::thread::spawn(move || {
+            let _request = crate::timing::request::attach(handle);
+            drop(super::query_cache_lock().unwrap());
+        })
+        .join()
+        .unwrap();
+        let sample = request.finish();
+        assert_eq!(sample.counters["query.term_cache_mutex_wait"].calls, 2);
+        assert_eq!(sample.threads.len(), 2);
+    }
     use super::*;
     #[test]
     fn hot_descriptors_are_bounded_and_bound_to_each_index_owner() {

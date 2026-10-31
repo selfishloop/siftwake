@@ -1,8 +1,8 @@
 //! Disposable VFY01 checksum cache; SEG04 and authoritative sources stay unchanged.
 use super::{Error, File, Path, Result, read_at};
+use crate::access::TrackedMutex as Mutex;
 use crate::format::{crc, crc_combine};
 use std::io::Write;
-use std::sync::Mutex;
 
 const MAGIC: &[u8; 8] = b"FDBVFY01";
 const BLOCK: u64 = 256 * 1024;

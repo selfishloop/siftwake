@@ -1,0 +1,92 @@
+{
+  "scope": "STEP1_ONLY_STOP_UNRESOLVED_READER_RAM",
+  "changed_existing_src": [
+    "src\\timing.rs",
+    "src\\engine\\snapshot.rs"
+  ],
+  "new_src": [
+    "src/engine/snapshot/mask_tests.rs",
+    "src/engine/snapshot/probe.rs",
+    "src/timing/mask.rs"
+  ],
+  "protected": [
+    {
+      "path": "data\\rkyv-corpus-20261009\\json.payload-bench",
+      "bytes": 2740862279,
+      "sha256": "11F826FCE3F4AE790FEB9FC6DF9B1169F52C2FD699E89FC4A8A4B77AAA41731B"
+    },
+    {
+      "path": "tests\\fixtures\\v1\\checkpoint.fdb",
+      "bytes": 1507,
+      "sha256": "E87667C0FABE64D5A1F59EF86B99F7E612DB755D239B41677DA2ADC24BE7BF57"
+    },
+    {
+      "path": "tests\\fixtures\\v1\\checkpoint.ready",
+      "bytes": 28,
+      "sha256": "BC82C18F8D5C3A209328BD59B12D828D8922BEC4D26CB4D557FD4A493A4A9C2F"
+    }
+  ],
+  "source_sha256": "881756DA400952500BA871F6C7BA8FF8D17E5348E5975420BC5CD90952A7CF12",
+  "passed": 247,
+  "ignored": 15,
+  "checks": {
+    "fmt": {
+      "log": "mask-stage1-20261030-final-fmt.log",
+      "sha256": "E3B0C44298FC1C149AFBF4C8996FB92427AE41E4649B934CA495991B7852B855"
+    },
+    "clippy": {
+      "log": "mask-stage1-20261030-final-clippy.log",
+      "sha256": "B2346E3C4BA4BB9C3E0B658C1288A2DE57A18DC4C92989B7EB9F4625CC45D723"
+    },
+    "diag-clippy": {
+      "log": "mask-stage1-20261030-final-diag-clippy.log",
+      "sha256": "E3052DB3B90C62CAE7CDEADDFEF39EE75FFAAA7DC07B1158A891960FF28ED067"
+    },
+    "test": {
+      "log": "mask-stage1-20261030-final-test.log",
+      "sha256": "0152B2E25AFEB6330605C547E2AD8DAA4FAC8295A8C0FF382EB389321D0D94EA"
+    },
+    "no-default": {
+      "log": "mask-stage1-20261030-final-no-default.log",
+      "sha256": "D09C94CD1A751D657D2EC6D457C6037F710250B1AE217401D9F2148C9C70526E",
+      "warning": "existing unused Pages::empty in unchanged posting_pages.rs; check exit0, not a no-default -Dwarnings claim"
+    },
+    "all-features": {
+      "log": "mask-stage1-20261030-final-all-features.log",
+      "sha256": "85E446ABEEC23CE4305CA8412039089E5A50C8299D4A8F2601E83A51EA2519CC"
+    }
+  },
+  "gate": "read latency/RAM non-regression NOT ESTABLISHED; no pass/threshold waiver",
+  "deferred": [
+    "step2 delta cap",
+    "optional WAL handles",
+    "A",
+    "B",
+    "C",
+    "D",
+    "E"
+  ],
+  "slots": {
+    "corpus": "trwiki-cap200k-hybrid4r50",
+    "source": "D:\\frunner-corpus\\trwiki-100k-cap200k\\corpus.payload-bench",
+    "sha256": "881756DA400952500BA871F6C7BA8FF8D17E5348E5975420BC5CD90952A7CF12",
+    "original_bodies": true,
+    "runtime_revision_mode": "FDB_BENCH_50K_WRITE=1",
+    "slots": {
+      "fdb": {
+        "documents": 100000,
+        "status": "mask_only_ready_requires_50k_reset_for_next_stage",
+        "state": null
+      },
+      "sqlite": {
+        "documents": 50000,
+        "status": "aborted_requires_owner_reset",
+        "state": "C:\\Users\\Serkan\\Documents\\ChatGPT\\fdb\\docs\\benchmarks\\hybrid4r50-20261029-v1-b100-pair1-loaded-sqlite-state.json",
+        "model_sha256": null,
+        "reason": "extra SQL arm stopped at failed FDB gate; this model must not be used as a ready DB oracle"
+      }
+    }
+  },
+  "diagnostic_guard_note": "After frozen A/B build, PhantomData<Rc<()>> made diagnostics guard thread-bound; no hot-path algorithm change; final checks after edit",
+  "no_step2_changes": true
+}

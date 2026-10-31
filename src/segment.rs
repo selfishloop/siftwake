@@ -22,6 +22,9 @@ mod compact;
 #[cfg(feature = "bounded-engine")]
 mod covering;
 #[cfg(feature = "bounded-engine")]
+pub(crate) mod first;
+mod posting_pages;
+#[cfg(feature = "bounded-engine")]
 mod short_ascii;
 #[cfg(feature = "bounded-engine")]
 pub(crate) use checked_page::CheckedPage;
@@ -69,6 +72,8 @@ const FOOTER_SIZE: u64 = 32;
 const MAX_DIRECTORY: u64 = 256 * 1024 * 1024;
 #[derive(Default)]
 struct QueryTextScratch {
+    #[cfg(feature = "bounded-engine")]
+    reuse_crc: bool,
     payload: Vec<u8>,
     #[cfg(feature = "experimental-paged-metadata")]
     record_cursor: paged::TextCursor,
@@ -100,6 +105,15 @@ struct QueryTextScratch {
     raw_hits: u8,
 }
 impl QueryTextScratch {
+    fn crc_matches(&self, bytes: &[u8], expected: u32) -> bool {
+        #[cfg(feature = "bounded-engine")]
+        if self.reuse_crc {
+            #[cfg(feature = "diagnostic-timing")]
+            crate::timing::count("query.payload_crc_reused", 1);
+            return true;
+        }
+        crc(bytes) == expected
+    }
     fn matches(
         &mut self,
         document: &crate::Document,
@@ -467,6 +481,8 @@ mod query_scratch_tests {
 mod grouped_tests;
 #[cfg(feature = "experimental-paged-metadata")]
 mod paged;
+#[cfg(feature = "experimental-paged-metadata")]
+pub(crate) use paged::KeyCursor;
 #[cfg(feature = "experimental-write-record-spool")]
 mod record_spool;
 #[cfg(feature = "experimental-merge-postings")]
@@ -988,6 +1004,8 @@ impl Builder {
         writer.flush()?;
         {
             #[cfg(feature = "diagnostic-timing")]
+            let _span = crate::timing::span("builder.index_sync");
+            #[cfg(feature = "diagnostic-timing")]
             let _sync = crate::timing::maintenance::span("fsync_publish");
             writer.get_ref().sync_all()?;
         }
@@ -1058,6 +1076,8 @@ pub(crate) struct DiskIndex {
 pub(crate) fn read_at(file: &File, mut offset: u64, mut buffer: &mut [u8]) -> Result<()> {
     #[cfg(feature = "diagnostic-timing")]
     let _read = crate::timing::span("disk.read_at");
+    #[cfg(feature = "diagnostic-timing")]
+    crate::timing::count("disk.requested_read_bytes", buffer.len());
     while !buffer.is_empty() {
         #[cfg(windows)]
         let n = {
@@ -1155,6 +1175,10 @@ impl DiskIndex {
             true,
         )
     }
+    #[cfg(feature = "bounded-engine")]
+    pub(crate) fn open_existing(path: &Path, binding: Option<(u64, u32)>) -> Result<Self> {
+        Self::open_checked(path, binding, false, true, true)
+    }
     fn open_with_mode(
         path: &Path,
         binding: Option<(u64, u32)>,
@@ -1163,6 +1187,7 @@ impl DiskIndex {
         Self::open_checked(
             path,
             binding,
+            false,
             false,
             #[cfg(feature = "experimental-streaming-metadata")]
             streamed,
@@ -1173,6 +1198,7 @@ impl DiskIndex {
             path,
             binding,
             true,
+            false,
             #[cfg(feature = "experimental-streaming-metadata")]
             false,
         )
@@ -1181,6 +1207,7 @@ impl DiskIndex {
         path: &Path,
         binding: Option<(u64, u32)>,
         blocks: bool,
+        cache_only: bool,
         #[cfg(feature = "experimental-streaming-metadata")] streamed: bool,
     ) -> Result<Self> {
         #[cfg(feature = "diagnostic-memory")]
@@ -1257,8 +1284,13 @@ impl DiskIndex {
         }
         #[cfg(feature = "experimental-streaming-metadata")]
         if streamed {
+            let prepare = if cache_only {
+                paged::prepare_existing
+            } else {
+                paged::prepare
+            };
             let (paged, parsed) =
-                paged::prepare(path, &mut file, size, crc(&footer), sequence, offset, len)?;
+                prepare(path, &mut file, size, crc(&footer), sequence, offset, len)?;
             let bytes = size
                 .checked_add(paged.bytes)
                 .ok_or_else(|| Error::Corrupt("index byte count overflow".into()))?;
@@ -1296,6 +1328,7 @@ impl DiskIndex {
         }
         #[cfg(feature = "experimental-streaming-open")]
         {
+            let _ = cache_only;
             let parsed = streaming::read(&mut file, offset, len, sequence)?;
             let term_pages = Some(term_pages::Pages::new(
                 &file,
@@ -1331,6 +1364,7 @@ impl DiskIndex {
         }
         #[cfg(not(feature = "experimental-streaming-open"))]
         {
+            let _ = cache_only;
             let mut bytes = vec![0; len as usize];
             read_at(&file, offset, &mut bytes)?;
             let directory: Directory =
@@ -1551,6 +1585,14 @@ impl DiskIndex {
             version: r.version,
             deleted: r.deleted,
         })
+    }
+    #[cfg(feature = "experimental-paged-metadata")]
+    pub(crate) fn snapshot_key(&self, id: u32, cursor: &mut KeyCursor) -> Result<Key> {
+        if let Some(paged) = &self.paged {
+            paged.cursor_key(id, cursor)
+        } else {
+            self.key(id)
+        }
     }
     pub fn key(&self, id: u32) -> Result<Key> {
         #[cfg(feature = "experimental-paged-metadata")]
@@ -1786,7 +1828,7 @@ impl DiskIndex {
         {
             #[cfg(feature = "diagnostic-timing")]
             let _crc = crate::timing::span("query.payload_crc");
-            if crc(&scratch.payload) != r.checksum {
+            if !scratch.crc_matches(&scratch.payload, r.checksum) {
                 return Err(Error::Corrupt("segment document checksum mismatch".into()));
             }
         }
@@ -1926,7 +1968,7 @@ impl DiskIndex {
         {
             #[cfg(feature = "diagnostic-timing")]
             let _crc = crate::timing::span("query.payload_crc");
-            if crc(&scratch.payload[payload_range.clone()]) != r.checksum {
+            if !scratch.crc_matches(&scratch.payload[payload_range.clone()], r.checksum) {
                 return Err(Error::Corrupt("segment document checksum mismatch".into()));
             }
         }
@@ -2372,6 +2414,8 @@ impl DiskIndex {
         #[cfg(feature = "diagnostic-timing")]
         let mut work = crate::timing::QueryWork::default();
         let mut cache_budget = 256 * 1024usize;
+        let mut posting_pages =
+            posting_pages::Pages::new(&groups[1..], &mut cache_budget, self.live_records);
         let mut cached = Vec::with_capacity(groups.len() - 1);
         for group in &groups[1..] {
             let count = group.iter().map(|p| p.count as usize).sum::<usize>();
@@ -2453,7 +2497,7 @@ impl DiskIndex {
                         let found = if let Some(ids) = cached {
                             ids.binary_search(&id).is_ok()
                         } else {
-                            self.group_contains(group, id)?
+                            posting_pages.contains_group(self, group, id)?
                         };
                         if !found {
                             include = false;
@@ -2700,6 +2744,8 @@ impl DiskIndex {
         #[cfg(feature = "diagnostic-timing")]
         let mut work = crate::timing::QueryWork::default();
         let mut cache_budget = 256 * 1024usize;
+        let mut posting_pages =
+            posting_pages::Pages::new(&groups[1..], &mut cache_budget, self.live_records);
         let mut cached = Vec::with_capacity(groups.len() - 1);
         for group in &groups[1..] {
             let count = group.iter().map(|p| p.count as usize).sum::<usize>();
@@ -2781,7 +2827,7 @@ impl DiskIndex {
                         let found = if let Some(ids) = cached {
                             ids.binary_search(&id).is_ok()
                         } else {
-                            self.group_contains(group, id)?
+                            posting_pages.contains_group(self, group, id)?
                         };
                         if !found {
                             include = false;

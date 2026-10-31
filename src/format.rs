@@ -224,7 +224,7 @@ pub(crate) fn append_with_sync(file: &mut File, bytes: &[u8], sync: bool) -> Res
     Ok(())
 }
 
-#[cfg(feature = "experimental-wal-delta")]
+#[cfg(any(test, feature = "experimental-wal-delta"))]
 pub(crate) fn encode_located(
     sequence: u64,
     batch: &Batch,
@@ -238,12 +238,14 @@ pub(crate) fn encode_located(
     Ok((bytes, locations))
 }
 
-#[cfg(feature = "experimental-wal-delta")]
+#[cfg(any(feature = "experimental-wal-delta", feature = "bounded-engine"))]
 pub(crate) fn replay_located(
     file: &mut File,
     checkpoint_end: u64,
     mut apply: impl FnMut(u64, Batch, Vec<Option<crate::wal_delta::Location>>) -> Result<()>,
 ) -> Result<u64> {
+    #[cfg(feature = "diagnostic-timing")]
+    let _span = crate::timing::span("open.active_wal_replay");
     replay_impl(
         file,
         checkpoint_end,
@@ -335,6 +337,8 @@ pub(crate) fn append_checkpoint_changes(
         file.seek(SeekFrom::Start(start + (HEADER + len + 8) as u64))?;
         {
             #[cfg(feature = "diagnostic-timing")]
+            let _sync = crate::timing::span("source.checkpoint_sync");
+            #[cfg(feature = "diagnostic-timing")]
             let _stage = crate::timing::maintenance::span("fsync_publish");
             file.sync_all()?;
         }
@@ -346,6 +350,10 @@ pub(crate) fn append_checkpoint_changes(
 }
 
 #[cfg(any(not(feature = "experimental-wal-delta"), test))]
+#[cfg(any(
+    test,
+    not(any(feature = "bounded-engine", feature = "experimental-wal-delta"))
+))]
 pub(crate) fn replay(
     file: &mut File,
     checkpoint_end: u64,
@@ -692,12 +700,12 @@ fn replay_impl(
         if native_validation {
             apply(seq, batch, &payload, valid_end + HEADER as u64)?;
         } else {
-            #[cfg(feature = "experimental-wal-delta")]
+            #[cfg(any(feature = "experimental-wal-delta", feature = "bounded-engine"))]
             {
                 apply(seq, batch, &payload, valid_end + HEADER as u64)?;
                 drop(payload);
             }
-            #[cfg(not(feature = "experimental-wal-delta"))]
+            #[cfg(not(any(feature = "experimental-wal-delta", feature = "bounded-engine")))]
             {
                 drop(payload);
                 apply(seq, batch, &[], valid_end + HEADER as u64)?;

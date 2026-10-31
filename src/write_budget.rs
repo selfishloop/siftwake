@@ -48,6 +48,16 @@ impl Pool {
             .lock()
             .map_err(|_| Error::Invalid("write budget poisoned".into()))?;
         while self.limit - state.used < minimum {
+            #[cfg(test)]
+            if std::env::var_os("FDB_LOCK_TRACE").is_some() {
+                eprintln!(
+                    "budget wait {:?} used={} minimum={} limit={}",
+                    std::thread::current().id(),
+                    state.used,
+                    minimum,
+                    self.limit
+                );
+            }
             state.waits += 1;
             state = self
                 .wake

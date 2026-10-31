@@ -1,0 +1,418 @@
+{
+  "engine": "fdb",
+  "batch": "one",
+  "pair": 1,
+  "protected_before": [
+    {
+      "path": "data\\rkyv-corpus-20261009\\json.payload-bench",
+      "bytes": 2740862279,
+      "sha256": "11F826FCE3F4AE790FEB9FC6DF9B1169F52C2FD699E89FC4A8A4B77AAA41731B"
+    },
+    {
+      "path": "tests\\fixtures\\v1\\checkpoint.fdb",
+      "bytes": 1507,
+      "sha256": "E87667C0FABE64D5A1F59EF86B99F7E612DB755D239B41677DA2ADC24BE7BF57"
+    },
+    {
+      "path": "tests\\fixtures\\v1\\checkpoint.ready",
+      "bytes": 28,
+      "sha256": "BC82C18F8D5C3A209328BD59B12D828D8922BEC4D26CB4D557FD4A493A4A9C2F"
+    }
+  ],
+  "program": "output\\small-commit-fdb-20261026-v6.exe",
+  "sha256": "93641EDE1659DFE762CDB07264EE22DFEDCFEFF3D6F5671DDE9BE474BC802ABD",
+  "corpus": "existing first10000 only; fixed slots, 1100 stable body donors updated in place",
+  "cache": "warm OS; strict reopen; no eviction/background or power isolation",
+  "readers": "4 threads, one snapshot per query, independent oracle outside engine timer",
+  "baselines": "single idle and four-reader idle; both shown, not silently interchangeable",
+  "samples_per_case": 20,
+  "sqlite_limit": "4 samples/case/phase/trial, p95 is max; informative reference",
+  "order": [
+    "control",
+    "load"
+  ],
+  "completed": [
+    {
+      "engine": "fdb",
+      "mode": "seed",
+      "api": "streamed",
+      "log": "small-commit-snapshot-v6-10k-20261026-fdb-one-r1-control-fdb-streamed-seed.jsonl",
+      "exit_code": 0,
+      "wall_s": 14.985000000000582
+    },
+    {
+      "engine": "fdb",
+      "mode": "snapshot-control-one",
+      "api": "streamed",
+      "log": "small-commit-snapshot-v6-10k-20261026-fdb-one-r1-control-fdb-streamed-snapshot-control-one.jsonl",
+      "exit_code": 0,
+      "wall_s": 10.264999999999418
+    },
+    {
+      "engine": "fdb",
+      "mode": "verify",
+      "api": "streamed",
+      "log": "small-commit-snapshot-v6-10k-20261026-fdb-one-r1-control-fdb-streamed-verify.jsonl",
+      "exit_code": 0,
+      "wall_s": 2.672000000005937
+    },
+    {
+      "engine": "fdb",
+      "mode": "seed",
+      "api": "streamed",
+      "log": "small-commit-snapshot-v6-10k-20261026-fdb-one-r1-load-fdb-streamed-seed.jsonl",
+      "exit_code": 0,
+      "wall_s": 14.952999999994063
+    },
+    {
+      "engine": "fdb",
+      "mode": "snapshot-one",
+      "api": "streamed",
+      "log": "small-commit-snapshot-v6-10k-20261026-fdb-one-r1-load-fdb-streamed-snapshot-one.jsonl",
+      "exit_code": 0,
+      "wall_s": 42.375
+    },
+    {
+      "engine": "fdb",
+      "mode": "verify",
+      "api": "streamed",
+      "log": "small-commit-snapshot-v6-10k-20261026-fdb-one-r1-load-fdb-streamed-verify.jsonl",
+      "exit_code": 0,
+      "wall_s": 2.5939999999973224
+    }
+  ],
+  "arms": {
+    "control": {
+      "commits": 1539,
+      "ops_s": 233.271542899819,
+      "maintenance": {
+        "details": {
+          "jobs": [
+            {
+              "after": [
+                {
+                  "dead_payload_bytes": 0,
+                  "dead_records": 0,
+                  "index_bytes": 7623166,
+                  "live_records": 900,
+                  "payload_bytes": 24121822,
+                  "records": 900,
+                  "source_bytes": 24126441,
+                  "source_id": 82,
+                  "tombstones": 0
+                },
+                {
+                  "dead_payload_bytes": 0,
+                  "dead_records": 0,
+                  "index_bytes": 16360420,
+                  "live_records": 2000,
+                  "payload_bytes": 53014387,
+                  "records": 2000,
+                  "source_bytes": 53024654,
+                  "source_id": 20,
+                  "tombstones": 0
+                },
+                {
+                  "dead_payload_bytes": 0,
+                  "dead_records": 0,
+                  "index_bytes": 16358467,
+                  "live_records": 2000,
+                  "payload_bytes": 52958664,
+                  "records": 2000,
+                  "source_bytes": 52968931,
+                  "source_id": 30,
+                  "tombstones": 0
+                },
+                {
+                  "dead_payload_bytes": 0,
+                  "dead_records": 0,
+                  "index_bytes": 16468447,
+                  "live_records": 2000,
+                  "payload_bytes": 54130910,
+                  "records": 2000,
+                  "source_bytes": 54141177,
+                  "source_id": 40,
+                  "tombstones": 0
+                },
+                {
+                  "dead_payload_bytes": 0,
+                  "dead_records": 0,
+                  "index_bytes": 16547138,
+                  "live_records": 2000,
+                  "payload_bytes": 54225036,
+                  "records": 2000,
+                  "source_bytes": 54235303,
+                  "source_id": 50,
+                  "tombstones": 0
+                },
+                {
+                  "dead_payload_bytes": 0,
+                  "dead_records": 0,
+                  "index_bytes": 9255844,
+                  "live_records": 1100,
+                  "payload_bytes": 29668115,
+                  "records": 1100,
+                  "source_bytes": 29673771,
+                  "source_id": 80,
+                  "tombstones": 0
+                }
+              ],
+              "before": [
+                {
+                  "dead_payload_bytes": 29668115,
+                  "dead_records": 1100,
+                  "index_bytes": 16507377,
+                  "live_records": 900,
+                  "payload_bytes": 53789937,
+                  "records": 2000,
+                  "source_bytes": 53800204,
+                  "source_id": 10,
+                  "tombstones": 0
+                },
+                {
+                  "dead_payload_bytes": 0,
+                  "dead_records": 0,
+                  "index_bytes": 16360420,
+                  "live_records": 2000,
+                  "payload_bytes": 53014387,
+                  "records": 2000,
+                  "source_bytes": 53024654,
+                  "source_id": 20,
+                  "tombstones": 0
+                },
+                {
+                  "dead_payload_bytes": 0,
+                  "dead_records": 0,
+                  "index_bytes": 16358467,
+                  "live_records": 2000,
+                  "payload_bytes": 52958664,
+                  "records": 2000,
+                  "source_bytes": 52968931,
+                  "source_id": 30,
+                  "tombstones": 0
+                },
+                {
+                  "dead_payload_bytes": 0,
+                  "dead_records": 0,
+                  "index_bytes": 16468447,
+                  "live_records": 2000,
+                  "payload_bytes": 54130910,
+                  "records": 2000,
+                  "source_bytes": 54141177,
+                  "source_id": 40,
+                  "tombstones": 0
+                },
+                {
+                  "dead_payload_bytes": 0,
+                  "dead_records": 0,
+                  "index_bytes": 16547138,
+                  "live_records": 2000,
+                  "payload_bytes": 54225036,
+                  "records": 2000,
+                  "source_bytes": 54235303,
+                  "source_id": 50,
+                  "tombstones": 0
+                },
+                {
+                  "dead_payload_bytes": 0,
+                  "dead_records": 0,
+                  "index_bytes": 9255844,
+                  "live_records": 1100,
+                  "payload_bytes": 29668115,
+                  "records": 1100,
+                  "source_bytes": 29673771,
+                  "source_id": 80,
+                  "tombstones": 0
+                }
+              ],
+              "installed": true,
+              "rewrite": true,
+              "running": true
+            }
+          ],
+          "normal_merges_completed": 2,
+          "retirements": 0,
+          "revision_rewrites_completed": 1
+        },
+        "end_ms": 1038.8916,
+        "start_ms": 13.8534
+      },
+      "oracle": true
+    },
+    "load": {
+      "commits": 1539,
+      "ops_s": 171.79985239054918,
+      "maintenance": {
+        "details": {
+          "jobs": [
+            {
+              "after": [
+                {
+                  "dead_payload_bytes": 0,
+                  "dead_records": 0,
+                  "index_bytes": 7623166,
+                  "live_records": 900,
+                  "payload_bytes": 24121822,
+                  "records": 900,
+                  "source_bytes": 24126441,
+                  "source_id": 82,
+                  "tombstones": 0
+                },
+                {
+                  "dead_payload_bytes": 0,
+                  "dead_records": 0,
+                  "index_bytes": 16360420,
+                  "live_records": 2000,
+                  "payload_bytes": 53014387,
+                  "records": 2000,
+                  "source_bytes": 53024654,
+                  "source_id": 20,
+                  "tombstones": 0
+                },
+                {
+                  "dead_payload_bytes": 0,
+                  "dead_records": 0,
+                  "index_bytes": 16358467,
+                  "live_records": 2000,
+                  "payload_bytes": 52958664,
+                  "records": 2000,
+                  "source_bytes": 52968931,
+                  "source_id": 30,
+                  "tombstones": 0
+                },
+                {
+                  "dead_payload_bytes": 0,
+                  "dead_records": 0,
+                  "index_bytes": 16468447,
+                  "live_records": 2000,
+                  "payload_bytes": 54130910,
+                  "records": 2000,
+                  "source_bytes": 54141177,
+                  "source_id": 40,
+                  "tombstones": 0
+                },
+                {
+                  "dead_payload_bytes": 0,
+                  "dead_records": 0,
+                  "index_bytes": 16547138,
+                  "live_records": 2000,
+                  "payload_bytes": 54225036,
+                  "records": 2000,
+                  "source_bytes": 54235303,
+                  "source_id": 50,
+                  "tombstones": 0
+                },
+                {
+                  "dead_payload_bytes": 0,
+                  "dead_records": 0,
+                  "index_bytes": 9255844,
+                  "live_records": 1100,
+                  "payload_bytes": 29668115,
+                  "records": 1100,
+                  "source_bytes": 29673771,
+                  "source_id": 80,
+                  "tombstones": 0
+                }
+              ],
+              "before": [
+                {
+                  "dead_payload_bytes": 29668115,
+                  "dead_records": 1100,
+                  "index_bytes": 16507377,
+                  "live_records": 900,
+                  "payload_bytes": 53789937,
+                  "records": 2000,
+                  "source_bytes": 53800204,
+                  "source_id": 10,
+                  "tombstones": 0
+                },
+                {
+                  "dead_payload_bytes": 0,
+                  "dead_records": 0,
+                  "index_bytes": 16360420,
+                  "live_records": 2000,
+                  "payload_bytes": 53014387,
+                  "records": 2000,
+                  "source_bytes": 53024654,
+                  "source_id": 20,
+                  "tombstones": 0
+                },
+                {
+                  "dead_payload_bytes": 0,
+                  "dead_records": 0,
+                  "index_bytes": 16358467,
+                  "live_records": 2000,
+                  "payload_bytes": 52958664,
+                  "records": 2000,
+                  "source_bytes": 52968931,
+                  "source_id": 30,
+                  "tombstones": 0
+                },
+                {
+                  "dead_payload_bytes": 0,
+                  "dead_records": 0,
+                  "index_bytes": 16468447,
+                  "live_records": 2000,
+                  "payload_bytes": 54130910,
+                  "records": 2000,
+                  "source_bytes": 54141177,
+                  "source_id": 40,
+                  "tombstones": 0
+                },
+                {
+                  "dead_payload_bytes": 0,
+                  "dead_records": 0,
+                  "index_bytes": 16547138,
+                  "live_records": 2000,
+                  "payload_bytes": 54225036,
+                  "records": 2000,
+                  "source_bytes": 54235303,
+                  "source_id": 50,
+                  "tombstones": 0
+                },
+                {
+                  "dead_payload_bytes": 0,
+                  "dead_records": 0,
+                  "index_bytes": 9255844,
+                  "live_records": 1100,
+                  "payload_bytes": 29668115,
+                  "records": 1100,
+                  "source_bytes": 29673771,
+                  "source_id": 80,
+                  "tombstones": 0
+                }
+              ],
+              "installed": true,
+              "rewrite": true,
+              "running": true
+            }
+          ],
+          "normal_merges_completed": 2,
+          "retirements": 0,
+          "revision_rewrites_completed": 1
+        },
+        "end_ms": 1935.9891999999998,
+        "start_ms": 30.1256
+      },
+      "oracle": true
+    }
+  },
+  "protected_after": [
+    {
+      "path": "data\\rkyv-corpus-20261009\\json.payload-bench",
+      "bytes": 2740862279,
+      "sha256": "11F826FCE3F4AE790FEB9FC6DF9B1169F52C2FD699E89FC4A8A4B77AAA41731B"
+    },
+    {
+      "path": "tests\\fixtures\\v1\\checkpoint.fdb",
+      "bytes": 1507,
+      "sha256": "E87667C0FABE64D5A1F59EF86B99F7E612DB755D239B41677DA2ADC24BE7BF57"
+    },
+    {
+      "path": "tests\\fixtures\\v1\\checkpoint.ready",
+      "bytes": 28,
+      "sha256": "BC82C18F8D5C3A209328BD59B12D828D8922BEC4D26CB4D557FD4A493A4A9C2F"
+    }
+  ],
+  "complete": true
+}

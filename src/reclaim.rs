@@ -29,6 +29,75 @@ fn owned(name: &str) -> Option<(Kind, u64, &str)> {
     Some((kind, id, suffix))
 }
 
+fn decimal(s: &str) -> bool {
+    !s.is_empty() && s.bytes().all(|b| b.is_ascii_digit())
+}
+fn temporary(name: &str) -> bool {
+    if let Some(input) = name
+        .strip_prefix("input-")
+        .and_then(|s| s.strip_suffix(".tmp"))
+    {
+        return input
+            .split_once('-')
+            .is_some_and(|(pid, n)| decimal(pid) && decimal(n));
+    }
+    let Some((stem, suffix)) = name.split_once('.') else {
+        return false;
+    };
+    // Reuse the exact lowercase engine source stem allowlist, never a prefix
+    // glob that could eat user notes or a real .fdb/.idx/.ready file.
+    if owned(&format!("{stem}.fdb")).is_none() {
+        return false;
+    }
+    let Some(build) = suffix.strip_prefix("build-") else {
+        return false;
+    };
+    let (build, spill) = build
+        .split_once('.')
+        .map_or((build, None), |(b, s)| (b, Some(s)));
+    let build = build
+        .strip_suffix("-records")
+        .or_else(|| build.strip_suffix("-postings"))
+        .unwrap_or(build);
+    let parts: Vec<_> = build.split('-').collect();
+    if parts.len() != 3 || !parts.iter().all(|s| decimal(s)) {
+        return false;
+    }
+    spill.is_none_or(|s| {
+        s.strip_prefix("spill-stage-")
+            .or_else(|| s.strip_prefix("spill-"))
+            .is_some_and(decimal)
+    })
+}
+
+/// Call only during fully validated strict open under the exclusive DB lock,
+/// before any worker/intake exists. A surviving snapshot holds that same lock,
+/// so this cannot remove another live handle's scratch files.
+pub(crate) fn collect_open_temporaries(dir: &Path) -> Result<ReclaimStats> {
+    let mut stats = ReclaimStats::default();
+    for entry in fs::read_dir(dir)? {
+        let entry = entry?;
+        if !entry.file_name().to_str().is_some_and(temporary) {
+            continue;
+        }
+        let metadata = fs::symlink_metadata(entry.path())?;
+        if !metadata.is_file() || metadata.file_type().is_symlink() {
+            continue;
+        }
+        #[cfg(windows)]
+        {
+            use std::os::windows::fs::MetadataExt;
+            if metadata.file_attributes() & 0x400 != 0 {
+                continue;
+            }
+        }
+        fs::remove_file(entry.path())?;
+        stats.removed_files += 1;
+        stats.reclaimed_bytes += metadata.len();
+    }
+    Ok(stats)
+}
+
 pub(crate) fn collect(
     dir: &Path,
     generation: u64,

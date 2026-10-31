@@ -1,0 +1,77 @@
+{
+  "source_sha256": "881756DA400952500BA871F6C7BA8FF8D17E5348E5975420BC5CD90952A7CF12",
+  "protected": [
+    {
+      "path": "data\\rkyv-corpus-20261009\\json.payload-bench",
+      "bytes": 2740862279,
+      "sha256": "11F826FCE3F4AE790FEB9FC6DF9B1169F52C2FD699E89FC4A8A4B77AAA41731B"
+    },
+    {
+      "path": "tests\\fixtures\\v1\\checkpoint.fdb",
+      "bytes": 1507,
+      "sha256": "E87667C0FABE64D5A1F59EF86B99F7E612DB755D239B41677DA2ADC24BE7BF57"
+    },
+    {
+      "path": "tests\\fixtures\\v1\\checkpoint.ready",
+      "bytes": 28,
+      "sha256": "BC82C18F8D5C3A209328BD59B12D828D8922BEC4D26CB4D557FD4A493A4A9C2F"
+    }
+  ],
+  "source_changes_since_pre_mask_baseline": [
+    "src\\timing.rs",
+    "src\\engine\\first.rs",
+    "src\\engine\\light.rs",
+    "src\\engine\\snapshot.rs",
+    "src\\segment\\paged.rs",
+    "src\\segment\\term_pages.rs"
+  ],
+  "format_wal_manifest_unchanged_since_pre_mask": true,
+  "frozen_programs_still_equal": true,
+  "readonly_sources_equal": true,
+  "prototype_default": false,
+  "recoveries": [
+    {
+      "log": "hybrid-serial-ram50-20261030-main-before-reset-recovery.json",
+      "kills": 3,
+      "old_reader": true,
+      "live_sources_unchanged": true,
+      "scope": "after strict open witnessed; no append-in-progress or power-loss claim"
+    },
+    {
+      "log": "hybrid-serial-ram50-20261030-final-recovery.json",
+      "kills": 3,
+      "old_reader": true,
+      "live_sources_unchanged": true,
+      "scope": "after strict open witnessed; no append-in-progress or power-loss claim"
+    }
+  ],
+  "tests": [
+    {
+      "log": "hybrid-serial-20261030-post-tests.log",
+      "passed": 251,
+      "ignored": 15
+    },
+    {
+      "log": "hybrid-serial-20261030-post-diag-tests.log",
+      "passed": 159,
+      "ignored": 13
+    }
+  ],
+  "lifecycles": [
+    {
+      "log": "hybrid-serial50-20261030-lifecycle.jsonl",
+      "children": 15,
+      "all_normal_exits": true
+    },
+    {
+      "log": "hybrid-serial-extra50-20261030-lifecycle.jsonl",
+      "children": 20,
+      "all_normal_exits": true
+    },
+    {
+      "log": "hybrid-serial-ram50-20261030-lifecycle.jsonl",
+      "children": 24,
+      "all_normal_exits": true
+    }
+  ]
+}

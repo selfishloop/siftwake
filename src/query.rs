@@ -4,7 +4,7 @@ use crate::{Key, Query};
 use std::borrow::Cow;
 use std::sync::Arc;
 impl Database {
-    pub(crate) fn delta_matches(&self, query: &Query) -> Vec<Arc<Key>> {
+    pub(crate) fn delta_matches(&self, query: &Query) -> crate::Result<Vec<Arc<Key>>> {
         let empty = Posting::default();
         let mut postings: Vec<Cow<'_, Posting>> = vec![Cow::Borrowed(
             match &query.collection {
@@ -86,16 +86,22 @@ impl Database {
                 self.index.posting_key(id)
             })
             .collect();
+        #[cfg(feature = "bounded-engine")]
+        let keys = {
+            let mut keys = keys;
+            keys.extend(self.light_matches(query)?);
+            keys
+        };
         #[cfg(feature = "experimental-compact-delta-postings")]
         {
             // Slot reuse and arbitrary ingest order cannot define public key order.
             let mut keys = keys;
             keys.sort_unstable();
-            keys
+            Ok(keys)
         }
         #[cfg(not(feature = "experimental-compact-delta-postings"))]
         {
-            keys
+            Ok(keys)
         }
     }
 }

@@ -4,6 +4,8 @@ use std::collections::BTreeMap;
 use std::sync::{Mutex, OnceLock};
 use std::time::Instant;
 pub mod maintenance;
+pub mod mask;
+pub mod request;
 
 #[derive(Clone, Debug, Default, serde::Serialize)]
 pub struct Counter {
@@ -45,6 +47,9 @@ impl Drop for Span {
             .duration_since(self.start)
             .as_nanos()
             .min(u64::MAX as u128) as u64;
+        if request::record(self.name, 1, elapsed) {
+            return;
+        }
         let boundary = *drain_boundary().lock().expect("timing boundary poisoned");
         let before = boundary.map_or(elapsed, |boundary| {
             boundary
@@ -70,6 +75,9 @@ pub fn take() -> BTreeMap<&'static str, Counter> {
 }
 
 pub(crate) fn count(name: &'static str, calls: usize) {
+    if request::record(name, calls as u64, 0) {
+        return;
+    }
     let mut values = counters().lock().expect("timing mutex poisoned");
     let value = values.entry(name).or_default();
     value.calls = value.calls.saturating_add(calls as u64);
@@ -158,6 +166,9 @@ impl Drop for PayloadReads {
             ("query.payload_read_bytes", self.read_bytes),
             ("query.payload_requested_bytes", self.requested_bytes),
         ] {
+            if request::record(name, count, 0) {
+                continue;
+            }
             let value = values.entry(name).or_default();
             value.calls = value.calls.saturating_add(count);
         }

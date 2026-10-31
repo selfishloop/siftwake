@@ -1,0 +1,140 @@
+{
+  "engine": "sqlite",
+  "batch": "100",
+  "pair": 0,
+  "protected_before": [
+    {
+      "path": "data\\rkyv-corpus-20261009\\json.payload-bench",
+      "bytes": 2740862279,
+      "sha256": "11F826FCE3F4AE790FEB9FC6DF9B1169F52C2FD699E89FC4A8A4B77AAA41731B"
+    },
+    {
+      "path": "tests\\fixtures\\v1\\checkpoint.fdb",
+      "bytes": 1507,
+      "sha256": "E87667C0FABE64D5A1F59EF86B99F7E612DB755D239B41677DA2ADC24BE7BF57"
+    },
+    {
+      "path": "tests\\fixtures\\v1\\checkpoint.ready",
+      "bytes": 28,
+      "sha256": "BC82C18F8D5C3A209328BD59B12D828D8922BEC4D26CB4D557FD4A493A4A9C2F"
+    }
+  ],
+  "program": "output\\snapshot-sqlite-20261026-v2.exe",
+  "sha256": "B53B42F979D45545EFCC68A998480DEA5BE046BAF3796049A90A5B21DBDD4EDF",
+  "corpus": "existing first10000 only; fixed slots, 1100 stable body donors updated in place",
+  "cache": "warm OS; strict reopen; no eviction/background or power isolation",
+  "readers": "4 threads, one snapshot per query, independent oracle outside engine timer",
+  "baselines": "single idle and four-reader idle; both shown, not silently interchangeable",
+  "samples_per_case": 4,
+  "sqlite_limit": "4 samples/case/phase/trial, p95 is max; informative reference",
+  "order": [
+    "load",
+    "control"
+  ],
+  "completed": [
+    {
+      "engine": "sqlite",
+      "mode": "seed",
+      "api": "streamed",
+      "log": "snapshot-10k-20261026-sqlite-100-r0-load-sqlite-streamed-seed.jsonl",
+      "exit_code": 0,
+      "wall_s": 37.703000000008615
+    },
+    {
+      "engine": "sqlite",
+      "mode": "snapshot-100",
+      "api": "streamed",
+      "log": "snapshot-10k-20261026-sqlite-100-r0-load-sqlite-streamed-snapshot-100.jsonl",
+      "exit_code": 0,
+      "wall_s": 124.40599999998813
+    },
+    {
+      "engine": "sqlite",
+      "mode": "verify",
+      "api": "streamed",
+      "log": "snapshot-10k-20261026-sqlite-100-r0-load-sqlite-streamed-verify.jsonl",
+      "exit_code": 0,
+      "wall_s": 30.406000000002678
+    },
+    {
+      "engine": "sqlite",
+      "mode": "seed",
+      "api": "streamed",
+      "log": "snapshot-10k-20261026-sqlite-100-r0-control-sqlite-streamed-seed.jsonl",
+      "exit_code": 0,
+      "wall_s": 37.25
+    },
+    {
+      "engine": "sqlite",
+      "mode": "snapshot-control-100",
+      "api": "streamed",
+      "log": "snapshot-10k-20261026-sqlite-100-r0-control-sqlite-streamed-snapshot-control-100.jsonl",
+      "exit_code": 0,
+      "wall_s": 25.139999999999418
+    },
+    {
+      "engine": "sqlite",
+      "mode": "verify",
+      "api": "streamed",
+      "log": "snapshot-10k-20261026-sqlite-100-r0-control-sqlite-streamed-verify.jsonl",
+      "exit_code": 0,
+      "wall_s": 31.186999999990803
+    }
+  ],
+  "arms": {
+    "load": {
+      "commits": 34,
+      "ops_s": 118.5032348542523,
+      "maintenance": {
+        "details": {
+          "fts_optimize_ms": 2566.0460000000003,
+          "passive_checkpoint": [
+            0,
+            19278,
+            9538
+          ],
+          "revision_rewrite": "not applicable to SQLite"
+        },
+        "end_ms": 8609.366899999999,
+        "start_ms": 6043.3179
+      },
+      "oracle": true
+    },
+    "control": {
+      "commits": 34,
+      "ops_s": 187.99781475763606,
+      "maintenance": {
+        "details": {
+          "fts_optimize_ms": 1643.0189,
+          "passive_checkpoint": [
+            0,
+            9740,
+            9740
+          ],
+          "revision_rewrite": "not applicable to SQLite"
+        },
+        "end_ms": 5504.6631,
+        "start_ms": 3861.6403999999998
+      },
+      "oracle": true
+    }
+  },
+  "protected_after": [
+    {
+      "path": "data\\rkyv-corpus-20261009\\json.payload-bench",
+      "bytes": 2740862279,
+      "sha256": "11F826FCE3F4AE790FEB9FC6DF9B1169F52C2FD699E89FC4A8A4B77AAA41731B"
+    },
+    {
+      "path": "tests\\fixtures\\v1\\checkpoint.fdb",
+      "bytes": 1507,
+      "sha256": "E87667C0FABE64D5A1F59EF86B99F7E612DB755D239B41677DA2ADC24BE7BF57"
+    },
+    {
+      "path": "tests\\fixtures\\v1\\checkpoint.ready",
+      "bytes": 28,
+      "sha256": "BC82C18F8D5C3A209328BD59B12D828D8922BEC4D26CB4D557FD4A493A4A9C2F"
+    }
+  ],
+  "complete": true
+}

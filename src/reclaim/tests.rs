@@ -65,6 +65,86 @@ fn seed(t: &Temp) -> Database {
     }
     db
 }
+#[test]
+fn strict_open_removes_only_exact_scratch_names_and_refuses_cleanup_on_corrupt_root() {
+    let t = Temp::new();
+    let db = seed(&t);
+    drop(db);
+    let removed = [
+        "input-123-0.tmp",
+        "run-0000000000000001.build-123-456-0",
+        "run-0000000000000001.build-123-456-0-records",
+        "generation-0000000000000001.build-123-456-0-postings",
+        "run-0000000000000001.build-123-456-0.spill-2",
+        "run-0000000000000001.build-123-456-0.spill-stage-3",
+    ];
+    let preserved = [
+        "input-12x-0.tmp",
+        "input-1-2-3.tmp",
+        "input-1-2.tmp.notes",
+        "run-1.build-123-456-0",
+        "run-0000000000000001.build-123-456-0.notes",
+        "run-0000000000000001.build-123-456-0-records.notes",
+        "notes.txt",
+    ];
+    for name in removed.into_iter().chain(preserved) {
+        fs::write(t.0.join(name), b"scratch").unwrap();
+    }
+    let root = t.0.join("generation-0000000000000005.ready");
+    let good = fs::read(&root).unwrap();
+    fs::write(&root, b"corrupt").unwrap();
+    assert!(Database::open(&t.0).is_err());
+    for name in removed {
+        assert!(t.0.join(name).exists());
+    }
+    fs::write(root, good).unwrap();
+    let db = Database::open(&t.0).unwrap();
+    for name in removed {
+        assert!(!t.0.join(name).exists(), "{name}");
+    }
+    for name in preserved {
+        assert_eq!(fs::read(t.0.join(name)).unwrap(), b"scratch", "{name}");
+    }
+    assert_eq!(db.stats().unwrap().documents, 2);
+}
+
+#[test]
+#[cfg(feature = "bounded-engine")]
+fn dirty_open_scavenges_before_recovery_flush_can_start_a_live_merge() {
+    let t = Temp::new();
+    let mut db = Database::open(&t.0).unwrap();
+    let mut next = 0;
+    for count in [1, 2, 4] {
+        db.commit(
+            (0..count)
+                .map(|_| {
+                    let mutation = put(&format!("{next:03}"));
+                    next += 1;
+                    mutation
+                })
+                .collect(),
+        )
+        .unwrap();
+        db.flush().unwrap();
+    }
+    db.commit(vec![put("last")]).unwrap();
+    drop(db);
+    let scratch = t.0.join("run-0000000000000001.build-999-123-0-records");
+    fs::write(&scratch, b"abandoned prior builder").unwrap();
+    let mut db = Database::open_with_options(
+        &t.0,
+        crate::Options {
+            max_delta_keys: 1,
+            max_delta_bytes: 16 * 1024 * 1024,
+        },
+    )
+    .unwrap();
+    assert!(!scratch.exists());
+    db.wait_for_compaction().unwrap();
+    assert_eq!(db.stats().unwrap().documents, 8);
+    assert!(db.get(&doc("last").key).unwrap().is_some());
+    db.check_integrity().unwrap();
+}
 fn garbage(root: &Path) {
     for name in [
         "generation-0000000000000001.ready",

@@ -1,0 +1,3048 @@
+{
+  "programs": {
+    "fdb": {
+      "path": "output\\trwiki-scale-20261028-v2-fdb.exe",
+      "sha256": "1AEABEF1CA469FFD32E714F1E8B68CC6DAD3E5B449BFD43B8ADE0515C61E2011"
+    },
+    "sqlite": {
+      "path": "output\\trwiki-scale-20261028-v2-sqlite.exe",
+      "sha256": "C5A5442E6A52893DA181AE5E2AE5ADC2E9E6E4330A8106C1AEFCD7F2A7D2E588"
+    }
+  },
+  "protected_before": [
+    {
+      "path": "data\\rkyv-corpus-20261009\\json.payload-bench",
+      "bytes": 2740862279,
+      "sha256": "11F826FCE3F4AE790FEB9FC6DF9B1169F52C2FD699E89FC4A8A4B77AAA41731B"
+    },
+    {
+      "path": "tests\\fixtures\\v1\\checkpoint.fdb",
+      "bytes": 1507,
+      "sha256": "E87667C0FABE64D5A1F59EF86B99F7E612DB755D239B41677DA2ADC24BE7BF57"
+    },
+    {
+      "path": "tests\\fixtures\\v1\\checkpoint.ready",
+      "bytes": 28,
+      "sha256": "BC82C18F8D5C3A209328BD59B12D828D8922BEC4D26CB4D557FD4A493A4A9C2F"
+    }
+  ],
+  "provided_source_sha256": "3D8BF5D4B8868C6C50644020B7998542E2589498BF99E3233DEDE8AD5613E91F",
+  "catalog_sha256": "AD4FADEE5A3188F067335D3D62FFBA5BAACCC9460C7E40E511231953A89287D7",
+  "corpus": "Provided firstN TR wiki articles; original title/text/fields/links; no trim/marker/new corpus/copies; private/ never read",
+  "fixed_slots": [
+    "data/benchmark-work/fdb",
+    "data/benchmark-work/sqlite"
+  ],
+  "ingest_order": [
+    "FDB/SQLite",
+    "SQLite/FDB"
+  ],
+  "query_order": [
+    "FDB/SQLite",
+    "SQLite/FDB"
+  ],
+  "samples_per_query_variant": 20,
+  "query_cases": [
+    {
+      "text": "olduğu",
+      "offset": 0,
+      "limit": 50,
+      "base": 0
+    },
+    {
+      "text": "büyük",
+      "offset": 0,
+      "limit": 50,
+      "base": 1
+    },
+    {
+      "text": "ayrıca",
+      "offset": 0,
+      "limit": 50,
+      "base": 2
+    },
+    {
+      "text": "arasında",
+      "offset": 0,
+      "limit": 50,
+      "base": 3
+    },
+    {
+      "text": "birlikte",
+      "offset": 0,
+      "limit": 50,
+      "base": 4
+    },
+    {
+      "text": "sanat",
+      "offset": 0,
+      "limit": 50,
+      "base": 5
+    },
+    {
+      "text": "görenler",
+      "offset": 0,
+      "limit": 50,
+      "base": 6
+    },
+    {
+      "text": "millî",
+      "offset": 0,
+      "limit": 50,
+      "base": 7
+    },
+    {
+      "text": "ikinci",
+      "offset": 0,
+      "limit": 50,
+      "base": 8
+    },
+    {
+      "text": "toplam",
+      "offset": 0,
+      "limit": 50,
+      "base": 9
+    },
+    {
+      "text": "isimli",
+      "offset": 0,
+      "limit": 50,
+      "base": 10
+    },
+    {
+      "text": "öldürür",
+      "offset": 0,
+      "limit": 50,
+      "base": 11
+    },
+    {
+      "text": "ölümü",
+      "offset": 0,
+      "limit": 50,
+      "base": 12
+    },
+    {
+      "text": "akarsu",
+      "offset": 0,
+      "limit": 50,
+      "base": 13
+    },
+    {
+      "text": "demokratik",
+      "offset": 0,
+      "limit": 50,
+      "base": 14
+    },
+    {
+      "text": "çalışmalarıyla",
+      "offset": 0,
+      "limit": 50,
+      "base": 15
+    },
+    {
+      "text": "üreticisi",
+      "offset": 0,
+      "limit": 50,
+      "base": 16
+    },
+    {
+      "text": "joseph",
+      "offset": 0,
+      "limit": 50,
+      "base": 17
+    },
+    {
+      "text": "leyla",
+      "offset": 0,
+      "limit": 50,
+      "base": 18
+    },
+    {
+      "text": "protest",
+      "offset": 0,
+      "limit": 50,
+      "base": 19
+    },
+    {
+      "text": "furlong",
+      "offset": 0,
+      "limit": 50,
+      "base": 20
+    },
+    {
+      "text": "korkaklığa",
+      "offset": 0,
+      "limit": 50,
+      "base": 21
+    },
+    {
+      "text": "ormanların",
+      "offset": 0,
+      "limit": 50,
+      "base": 22
+    },
+    {
+      "text": "yanıklarda",
+      "offset": 0,
+      "limit": 50,
+      "base": 23
+    },
+    {
+      "text": "külliyatı",
+      "offset": 0,
+      "limit": 50,
+      "base": 24
+    },
+    {
+      "text": "timmy",
+      "offset": 0,
+      "limit": 50,
+      "base": 25
+    },
+    {
+      "text": "yüklük",
+      "offset": 0,
+      "limit": 50,
+      "base": 26
+    },
+    {
+      "text": "ilçesine köyleri",
+      "offset": 0,
+      "limit": 50,
+      "base": 27
+    },
+    {
+      "text": "geldiği buldu",
+      "offset": 0,
+      "limit": 50,
+      "base": 28
+    },
+    {
+      "text": "chicago studio",
+      "offset": 0,
+      "limit": 50,
+      "base": 29
+    },
+    {
+      "text": "kısım dişli",
+      "offset": 0,
+      "limit": 50,
+      "base": 30
+    },
+    {
+      "text": "güzeli zafer",
+      "offset": 0,
+      "limit": 50,
+      "base": 31
+    },
+    {
+      "text": "İnternetten hazinem",
+      "offset": 0,
+      "limit": 50,
+      "base": 32
+    },
+    {
+      "text": "oyuncudur atlanta",
+      "offset": 0,
+      "limit": 50,
+      "base": 33
+    },
+    {
+      "text": "kendisine çıkacağını",
+      "offset": 0,
+      "limit": 50,
+      "base": 34
+    },
+    {
+      "text": "ve",
+      "offset": 0,
+      "limit": 50,
+      "base": 35
+    },
+    {
+      "text": "if",
+      "offset": 0,
+      "limit": 50,
+      "base": 36
+    },
+    {
+      "text": "id",
+      "offset": 0,
+      "limit": 50,
+      "base": 37
+    },
+    {
+      "text": "zx",
+      "offset": 0,
+      "limit": 50,
+      "base": 38
+    },
+    {
+      "text": "qzxkvwnever",
+      "offset": 0,
+      "limit": 50,
+      "base": 39
+    },
+    {
+      "text": "transubstantiationz",
+      "offset": 0,
+      "limit": 50,
+      "base": 40
+    }
+  ],
+  "variants": [
+    "legacy",
+    "exact-four",
+    "cap",
+    "cap-four",
+    "cap-hybrid"
+  ],
+  "cache": "warm OS/engine matrix: full payload/version oracle+one warmup each variant; first-call arms stream warm all of their DB files before API timing; no forced cold",
+  "strict_open_gate": {
+    "50000": 1000,
+    "100000": 2000
+  },
+  "search_gate": "N50 primary all capped modes; common30ms,mid/rare150ms@50k/300ms@100k; short ve/if/id/zx outside deadline",
+  "memory_gate": "clean idle private<=15MiB; streamed ingest OS lifetime peak private<=60MiB incl descriptor/model harness",
+  "failure_policy": "If gate fails, no following FDB search/cancel/write/snapshot/cold stage; finish independent nextN ingest/disk/RAM/SQLite and report all failures",
+  "first_queries": [
+    "olduğu",
+    "akarsu",
+    "furlong",
+    "ilçesine köyleri",
+    "zx",
+    "qzxkvwnever"
+  ],
+  "completed": [
+    {
+      "engine": "fdb",
+      "mode": "scale-seed",
+      "label": "n50000-pair0-seed",
+      "log": "trwiki-scale-20261028-v1-n50000-pair0-seed-fdb-scale-seed.jsonl",
+      "exit_code": 0,
+      "wall_s": 40.46899999998277
+    },
+    {
+      "engine": "sqlite",
+      "mode": "scale-seed",
+      "label": "n50000-pair0-seed",
+      "log": "trwiki-scale-20261028-v1-n50000-pair0-seed-sqlite-scale-seed.jsonl",
+      "exit_code": 0,
+      "wall_s": 37.96799999999348
+    },
+    {
+      "engine": "fdb",
+      "mode": "scale-idle",
+      "label": "n50000-pair0-idle0",
+      "log": "trwiki-scale-20261028-v1-n50000-pair0-idle0-fdb-scale-idle.jsonl",
+      "exit_code": 0,
+      "wall_s": 2.297000000020489
+    },
+    {
+      "engine": "sqlite",
+      "mode": "scale-idle",
+      "label": "n50000-pair0-idle0",
+      "log": "trwiki-scale-20261028-v1-n50000-pair0-idle0-sqlite-scale-idle.jsonl",
+      "exit_code": 0,
+      "wall_s": 2.030999999959022
+    },
+    {
+      "engine": "fdb",
+      "mode": "scale-idle",
+      "label": "n50000-pair0-idle1",
+      "log": "trwiki-scale-20261028-v1-n50000-pair0-idle1-fdb-scale-idle.jsonl",
+      "exit_code": 0,
+      "wall_s": 2.2820000000065193
+    },
+    {
+      "engine": "sqlite",
+      "mode": "scale-idle",
+      "label": "n50000-pair0-idle1",
+      "log": "trwiki-scale-20261028-v1-n50000-pair0-idle1-sqlite-scale-idle.jsonl",
+      "exit_code": 0,
+      "wall_s": 2.047000000020489
+    },
+    {
+      "engine": "fdb",
+      "mode": "scale-query-experiments",
+      "label": "n50000-pair0-matrix",
+      "log": "trwiki-scale-20261028-v1-n50000-pair0-matrix-fdb-scale-query-experiments.jsonl",
+      "exit_code": 0,
+      "wall_s": 639.890000000014
+    },
+    {
+      "engine": "sqlite",
+      "mode": "scale-query-experiments",
+      "label": "n50000-pair0-matrix",
+      "log": "trwiki-scale-20261028-v1-n50000-pair0-matrix-sqlite-scale-query-experiments.jsonl",
+      "exit_code": 0,
+      "wall_s": 254.43799999996554
+    },
+    {
+      "engine": "fdb",
+      "mode": "scale-query-cpu-blocks",
+      "label": "n50000-pair0-cpu",
+      "log": "trwiki-scale-20261028-v1-n50000-pair0-cpu-fdb-scale-query-cpu-blocks.jsonl",
+      "exit_code": 0,
+      "wall_s": 63.79700000002049
+    },
+    {
+      "engine": "fdb",
+      "mode": "first-strict",
+      "label": "n50000-pair0-first0",
+      "log": "trwiki-scale-20261028-v1-n50000-pair0-first0-fdb-first-strict.jsonl",
+      "exit_code": 0,
+      "wall_s": 2.687999999965541
+    },
+    {
+      "engine": "sqlite",
+      "mode": "first-sqlite",
+      "label": "n50000-pair0-first0",
+      "log": "trwiki-scale-20261028-v1-n50000-pair0-first0-sqlite-first-sqlite.jsonl",
+      "exit_code": 0,
+      "wall_s": 0.8589999999967404
+    },
+    {
+      "engine": "fdb",
+      "mode": "first-strict",
+      "label": "n50000-pair0-first1",
+      "log": "trwiki-scale-20261028-v1-n50000-pair0-first1-fdb-first-strict.jsonl",
+      "exit_code": 0,
+      "wall_s": 1.7030000000377186
+    },
+    {
+      "engine": "sqlite",
+      "mode": "first-sqlite",
+      "label": "n50000-pair0-first1",
+      "log": "trwiki-scale-20261028-v1-n50000-pair0-first1-sqlite-first-sqlite.jsonl",
+      "exit_code": 0,
+      "wall_s": 0.35999999998603016
+    },
+    {
+      "engine": "fdb",
+      "mode": "first-strict",
+      "label": "n50000-pair0-first2",
+      "log": "trwiki-scale-20261028-v1-n50000-pair0-first2-fdb-first-strict.jsonl",
+      "exit_code": 0,
+      "wall_s": 1.452999999979511
+    },
+    {
+      "engine": "sqlite",
+      "mode": "first-sqlite",
+      "label": "n50000-pair0-first2",
+      "log": "trwiki-scale-20261028-v1-n50000-pair0-first2-sqlite-first-sqlite.jsonl",
+      "exit_code": 0,
+      "wall_s": 0.0779999999795109
+    },
+    {
+      "engine": "fdb",
+      "mode": "first-strict",
+      "label": "n50000-pair0-first3",
+      "log": "trwiki-scale-20261028-v1-n50000-pair0-first3-fdb-first-strict.jsonl",
+      "exit_code": 0,
+      "wall_s": 1.8429999999934807
+    },
+    {
+      "engine": "sqlite",
+      "mode": "first-sqlite",
+      "label": "n50000-pair0-first3",
+      "log": "trwiki-scale-20261028-v1-n50000-pair0-first3-sqlite-first-sqlite.jsonl",
+      "exit_code": 0,
+      "wall_s": 0.2649999999557622
+    },
+    {
+      "engine": "fdb",
+      "mode": "first-strict",
+      "label": "n50000-pair0-first4",
+      "log": "trwiki-scale-20261028-v1-n50000-pair0-first4-fdb-first-strict.jsonl",
+      "exit_code": 0,
+      "wall_s": 1.7660000000032596
+    },
+    {
+      "engine": "sqlite",
+      "mode": "first-sqlite",
+      "label": "n50000-pair0-first4",
+      "log": "trwiki-scale-20261028-v1-n50000-pair0-first4-sqlite-first-sqlite.jsonl",
+      "exit_code": 0,
+      "wall_s": 1.422000000020489
+    },
+    {
+      "engine": "fdb",
+      "mode": "first-strict",
+      "label": "n50000-pair0-first5",
+      "log": "trwiki-scale-20261028-v1-n50000-pair0-first5-fdb-first-strict.jsonl",
+      "exit_code": 0,
+      "wall_s": 1.452999999979511
+    },
+    {
+      "engine": "sqlite",
+      "mode": "first-sqlite",
+      "label": "n50000-pair0-first5",
+      "log": "trwiki-scale-20261028-v1-n50000-pair0-first5-sqlite-first-sqlite.jsonl",
+      "exit_code": 0,
+      "wall_s": 0.062000000034458935
+    },
+    {
+      "engine": "sqlite",
+      "mode": "scale-seed",
+      "label": "n50000-pair1-seed",
+      "log": "trwiki-scale-20261028-v1-n50000-pair1-seed-sqlite-scale-seed.jsonl",
+      "exit_code": 0,
+      "wall_s": 38.04699999996228
+    },
+    {
+      "engine": "fdb",
+      "mode": "scale-seed",
+      "label": "n50000-pair1-seed",
+      "log": "trwiki-scale-20261028-v1-n50000-pair1-seed-fdb-scale-seed.jsonl",
+      "exit_code": 0,
+      "wall_s": 39.60899999999674
+    },
+    {
+      "engine": "sqlite",
+      "mode": "scale-idle",
+      "label": "n50000-pair1-idle0",
+      "log": "trwiki-scale-20261028-v1-n50000-pair1-idle0-sqlite-scale-idle.jsonl",
+      "exit_code": 0,
+      "wall_s": 2.0310000000172295
+    },
+    {
+      "engine": "fdb",
+      "mode": "scale-idle",
+      "label": "n50000-pair1-idle0",
+      "log": "trwiki-scale-20261028-v1-n50000-pair1-idle0-fdb-scale-idle.jsonl",
+      "exit_code": 0,
+      "wall_s": 2.297000000020489
+    },
+    {
+      "engine": "sqlite",
+      "mode": "scale-idle",
+      "label": "n50000-pair1-idle1",
+      "log": "trwiki-scale-20261028-v1-n50000-pair1-idle1-sqlite-scale-idle.jsonl",
+      "exit_code": 0,
+      "wall_s": 2.030999999959022
+    },
+    {
+      "engine": "fdb",
+      "mode": "scale-idle",
+      "label": "n50000-pair1-idle1",
+      "log": "trwiki-scale-20261028-v1-n50000-pair1-idle1-fdb-scale-idle.jsonl",
+      "exit_code": 0,
+      "wall_s": 2.297000000020489
+    },
+    {
+      "engine": "sqlite",
+      "mode": "scale-query-experiments",
+      "label": "n50000-pair1-matrix",
+      "log": "trwiki-scale-20261028-v1-n50000-pair1-matrix-sqlite-scale-query-experiments.jsonl",
+      "exit_code": 0,
+      "wall_s": 250.625
+    },
+    {
+      "engine": "fdb",
+      "mode": "scale-query-experiments",
+      "label": "n50000-pair1-matrix",
+      "log": "trwiki-scale-20261028-v1-n50000-pair1-matrix-fdb-scale-query-experiments.jsonl",
+      "exit_code": 0,
+      "wall_s": 647.7189999999828
+    },
+    {
+      "engine": "fdb",
+      "mode": "scale-query-cpu-blocks",
+      "label": "n50000-pair1-cpu",
+      "log": "trwiki-scale-20261028-v1-n50000-pair1-cpu-fdb-scale-query-cpu-blocks.jsonl",
+      "exit_code": 0,
+      "wall_s": 74.45300000003772
+    },
+    {
+      "engine": "sqlite",
+      "mode": "first-sqlite",
+      "label": "n50000-pair1-first0",
+      "log": "trwiki-scale-20261028-v1-n50000-pair1-first0-sqlite-first-sqlite.jsonl",
+      "exit_code": 0,
+      "wall_s": 0.8279999999795109
+    },
+    {
+      "engine": "fdb",
+      "mode": "first-strict",
+      "label": "n50000-pair1-first0",
+      "log": "trwiki-scale-20261028-v1-n50000-pair1-first0-fdb-first-strict.jsonl",
+      "exit_code": 0,
+      "wall_s": 2.702999999979511
+    },
+    {
+      "engine": "sqlite",
+      "mode": "first-sqlite",
+      "label": "n50000-pair1-first1",
+      "log": "trwiki-scale-20261028-v1-n50000-pair1-first1-sqlite-first-sqlite.jsonl",
+      "exit_code": 0,
+      "wall_s": 0.35899999999674037
+    },
+    {
+      "engine": "fdb",
+      "mode": "first-strict",
+      "label": "n50000-pair1-first1",
+      "log": "trwiki-scale-20261028-v1-n50000-pair1-first1-fdb-first-strict.jsonl",
+      "exit_code": 0,
+      "wall_s": 1.672000000020489
+    },
+    {
+      "engine": "sqlite",
+      "mode": "first-sqlite",
+      "label": "n50000-pair1-first2",
+      "log": "trwiki-scale-20261028-v1-n50000-pair1-first2-sqlite-first-sqlite.jsonl",
+      "exit_code": 0,
+      "wall_s": 0.0779999999795109
+    },
+    {
+      "engine": "fdb",
+      "mode": "first-strict",
+      "label": "n50000-pair1-first2",
+      "log": "trwiki-scale-20261028-v1-n50000-pair1-first2-fdb-first-strict.jsonl",
+      "exit_code": 0,
+      "wall_s": 1.422000000020489
+    },
+    {
+      "engine": "sqlite",
+      "mode": "first-sqlite",
+      "label": "n50000-pair1-first3",
+      "log": "trwiki-scale-20261028-v1-n50000-pair1-first3-sqlite-first-sqlite.jsonl",
+      "exit_code": 0,
+      "wall_s": 0.26600000000325963
+    },
+    {
+      "engine": "fdb",
+      "mode": "first-strict",
+      "label": "n50000-pair1-first3",
+      "log": "trwiki-scale-20261028-v1-n50000-pair1-first3-fdb-first-strict.jsonl",
+      "exit_code": 0,
+      "wall_s": 1.8589999999967404
+    },
+    {
+      "engine": "sqlite",
+      "mode": "first-sqlite",
+      "label": "n50000-pair1-first4",
+      "log": "trwiki-scale-20261028-v1-n50000-pair1-first4-sqlite-first-sqlite.jsonl",
+      "exit_code": 0,
+      "wall_s": 1.4060000000172295
+    },
+    {
+      "engine": "fdb",
+      "mode": "first-strict",
+      "label": "n50000-pair1-first4",
+      "log": "trwiki-scale-20261028-v1-n50000-pair1-first4-fdb-first-strict.jsonl",
+      "exit_code": 0,
+      "wall_s": 1.7339999999967404
+    },
+    {
+      "engine": "sqlite",
+      "mode": "first-sqlite",
+      "label": "n50000-pair1-first5",
+      "log": "trwiki-scale-20261028-v1-n50000-pair1-first5-sqlite-first-sqlite.jsonl",
+      "exit_code": 0,
+      "wall_s": 0.062000000034458935
+    },
+    {
+      "engine": "fdb",
+      "mode": "first-strict",
+      "label": "n50000-pair1-first5",
+      "log": "trwiki-scale-20261028-v1-n50000-pair1-first5-fdb-first-strict.jsonl",
+      "exit_code": 0,
+      "wall_s": 1.4689999999827705
+    },
+    {
+      "engine": "sqlite",
+      "mode": "scale-seed",
+      "label": "n100000-pair0-seed",
+      "log": "trwiki-scale-20261028-v1-n100000-pair0-seed-sqlite-scale-seed.jsonl",
+      "exit_code": 0,
+      "wall_s": 99.21899999998277
+    },
+    {
+      "engine": "sqlite",
+      "mode": "scale-idle",
+      "label": "n100000-pair0-idle0",
+      "log": "trwiki-scale-20261028-v1-n100000-pair0-idle0-sqlite-scale-idle.jsonl",
+      "exit_code": 0,
+      "wall_s": 2.0310000000172295
+    },
+    {
+      "engine": "sqlite",
+      "mode": "scale-idle",
+      "label": "n100000-pair0-idle1",
+      "log": "trwiki-scale-20261028-v1-n100000-pair0-idle1-sqlite-scale-idle.jsonl",
+      "exit_code": 0,
+      "wall_s": 2.0320000000065193
+    },
+    {
+      "engine": "sqlite",
+      "mode": "scale-query-experiments",
+      "label": "n100000-pair0-matrix",
+      "log": "trwiki-scale-20261028-v1-n100000-pair0-matrix-sqlite-scale-query-experiments.jsonl",
+      "exit_code": 0,
+      "wall_s": 601.2189999999828
+    },
+    {
+      "engine": "sqlite",
+      "mode": "scale-seed",
+      "label": "n100000-pair1-seed",
+      "log": "trwiki-scale-20261028-v1-n100000-pair1-seed-sqlite-scale-seed.jsonl",
+      "exit_code": 0,
+      "wall_s": 99.5
+    },
+    {
+      "engine": "sqlite",
+      "mode": "scale-idle",
+      "label": "n100000-pair1-idle0",
+      "log": "trwiki-scale-20261028-v1-n100000-pair1-idle0-sqlite-scale-idle.jsonl",
+      "exit_code": 0,
+      "wall_s": 2.047000000020489
+    },
+    {
+      "engine": "sqlite",
+      "mode": "scale-idle",
+      "label": "n100000-pair1-idle1",
+      "log": "trwiki-scale-20261028-v1-n100000-pair1-idle1-sqlite-scale-idle.jsonl",
+      "exit_code": 0,
+      "wall_s": 2.047000000020489
+    },
+    {
+      "engine": "sqlite",
+      "mode": "scale-query-experiments",
+      "label": "n100000-pair1-matrix",
+      "log": "trwiki-scale-20261028-v1-n100000-pair1-matrix-sqlite-scale-query-experiments.jsonl",
+      "exit_code": 0,
+      "wall_s": 598.2969999999623
+    }
+  ],
+  "levels": [
+    {
+      "documents": 50000,
+      "full_fdb_measurement": true,
+      "gate": {
+        "documents": 50000,
+        "strict_open_samples_ms": [
+          261.60850000000005,
+          254.2572,
+          255.22869999999998,
+          266.7641,
+          275.278,
+          257.532,
+          281.82649999999995,
+          258.7752,
+          261.7779,
+          266.97769999999997,
+          259.1773,
+          273.22950000000003,
+          260.31419999999997,
+          271.139,
+          254.4266,
+          263.01390000000004
+        ],
+        "idle_private_samples": [
+          2162688,
+          2322432,
+          2330624,
+          2162688
+        ],
+        "ingest_peak_private_samples": [
+          20914176,
+          20553728
+        ],
+        "per_case": [
+          {
+            "case_id": 0,
+            "text": "olduğu",
+            "group": "very_common_20pct_plus",
+            "variant": "cap",
+            "p95_ms": 5.6038,
+            "limit_ms": 30,
+            "passed": true,
+            "excluded_short": false
+          },
+          {
+            "case_id": 0,
+            "text": "olduğu",
+            "group": "very_common_20pct_plus",
+            "variant": "cap-four",
+            "p95_ms": 16.3312,
+            "limit_ms": 30,
+            "passed": true,
+            "excluded_short": false
+          },
+          {
+            "case_id": 0,
+            "text": "olduğu",
+            "group": "very_common_20pct_plus",
+            "variant": "cap-hybrid",
+            "p95_ms": 5.1303,
+            "limit_ms": 30,
+            "passed": true,
+            "excluded_short": false
+          },
+          {
+            "case_id": 1,
+            "text": "büyük",
+            "group": "very_common_20pct_plus",
+            "variant": "cap",
+            "p95_ms": 4.993799999999999,
+            "limit_ms": 30,
+            "passed": true,
+            "excluded_short": false
+          },
+          {
+            "case_id": 1,
+            "text": "büyük",
+            "group": "very_common_20pct_plus",
+            "variant": "cap-four",
+            "p95_ms": 11.0022,
+            "limit_ms": 30,
+            "passed": true,
+            "excluded_short": false
+          },
+          {
+            "case_id": 1,
+            "text": "büyük",
+            "group": "very_common_20pct_plus",
+            "variant": "cap-hybrid",
+            "p95_ms": 3.3952999999999998,
+            "limit_ms": 30,
+            "passed": true,
+            "excluded_short": false
+          },
+          {
+            "case_id": 2,
+            "text": "ayrıca",
+            "group": "very_common_20pct_plus",
+            "variant": "cap",
+            "p95_ms": 6.011,
+            "limit_ms": 30,
+            "passed": true,
+            "excluded_short": false
+          },
+          {
+            "case_id": 2,
+            "text": "ayrıca",
+            "group": "very_common_20pct_plus",
+            "variant": "cap-four",
+            "p95_ms": 18.169999999999998,
+            "limit_ms": 30,
+            "passed": true,
+            "excluded_short": false
+          },
+          {
+            "case_id": 2,
+            "text": "ayrıca",
+            "group": "very_common_20pct_plus",
+            "variant": "cap-hybrid",
+            "p95_ms": 5.8718,
+            "limit_ms": 30,
+            "passed": true,
+            "excluded_short": false
+          },
+          {
+            "case_id": 3,
+            "text": "arasında",
+            "group": "very_common_20pct_plus",
+            "variant": "cap",
+            "p95_ms": 12.7783,
+            "limit_ms": 30,
+            "passed": true,
+            "excluded_short": false
+          },
+          {
+            "case_id": 3,
+            "text": "arasında",
+            "group": "very_common_20pct_plus",
+            "variant": "cap-four",
+            "p95_ms": 24.9614,
+            "limit_ms": 30,
+            "passed": true,
+            "excluded_short": false
+          },
+          {
+            "case_id": 3,
+            "text": "arasında",
+            "group": "very_common_20pct_plus",
+            "variant": "cap-hybrid",
+            "p95_ms": 13.5915,
+            "limit_ms": 30,
+            "passed": true,
+            "excluded_short": false
+          },
+          {
+            "case_id": 4,
+            "text": "birlikte",
+            "group": "very_common_20pct_plus",
+            "variant": "cap",
+            "p95_ms": 10.652099999999999,
+            "limit_ms": 30,
+            "passed": true,
+            "excluded_short": false
+          },
+          {
+            "case_id": 4,
+            "text": "birlikte",
+            "group": "very_common_20pct_plus",
+            "variant": "cap-four",
+            "p95_ms": 26.4203,
+            "limit_ms": 30,
+            "passed": true,
+            "excluded_short": false
+          },
+          {
+            "case_id": 4,
+            "text": "birlikte",
+            "group": "very_common_20pct_plus",
+            "variant": "cap-hybrid",
+            "p95_ms": 9.6968,
+            "limit_ms": 30,
+            "passed": true,
+            "excluded_short": false
+          },
+          {
+            "case_id": 5,
+            "text": "sanat",
+            "group": "common_5_to_20pct",
+            "variant": "cap",
+            "p95_ms": 6.4403999999999995,
+            "limit_ms": 30,
+            "passed": true,
+            "excluded_short": false
+          },
+          {
+            "case_id": 5,
+            "text": "sanat",
+            "group": "common_5_to_20pct",
+            "variant": "cap-four",
+            "p95_ms": 13.4395,
+            "limit_ms": 30,
+            "passed": true,
+            "excluded_short": false
+          },
+          {
+            "case_id": 5,
+            "text": "sanat",
+            "group": "common_5_to_20pct",
+            "variant": "cap-hybrid",
+            "p95_ms": 6.413600000000001,
+            "limit_ms": 30,
+            "passed": true,
+            "excluded_short": false
+          },
+          {
+            "case_id": 6,
+            "text": "görenler",
+            "group": "common_5_to_20pct",
+            "variant": "cap",
+            "p95_ms": 24.972,
+            "limit_ms": 30,
+            "passed": true,
+            "excluded_short": false
+          },
+          {
+            "case_id": 6,
+            "text": "görenler",
+            "group": "common_5_to_20pct",
+            "variant": "cap-four",
+            "p95_ms": 64.65469999999999,
+            "limit_ms": 30,
+            "passed": false,
+            "excluded_short": false
+          },
+          {
+            "case_id": 6,
+            "text": "görenler",
+            "group": "common_5_to_20pct",
+            "variant": "cap-hybrid",
+            "p95_ms": 25.1824,
+            "limit_ms": 30,
+            "passed": true,
+            "excluded_short": false
+          },
+          {
+            "case_id": 7,
+            "text": "millî",
+            "group": "common_5_to_20pct",
+            "variant": "cap",
+            "p95_ms": 3.8266,
+            "limit_ms": 30,
+            "passed": true,
+            "excluded_short": false
+          },
+          {
+            "case_id": 7,
+            "text": "millî",
+            "group": "common_5_to_20pct",
+            "variant": "cap-four",
+            "p95_ms": 10.636,
+            "limit_ms": 30,
+            "passed": true,
+            "excluded_short": false
+          },
+          {
+            "case_id": 7,
+            "text": "millî",
+            "group": "common_5_to_20pct",
+            "variant": "cap-hybrid",
+            "p95_ms": 3.381,
+            "limit_ms": 30,
+            "passed": true,
+            "excluded_short": false
+          },
+          {
+            "case_id": 8,
+            "text": "ikinci",
+            "group": "common_5_to_20pct",
+            "variant": "cap",
+            "p95_ms": 10.095,
+            "limit_ms": 30,
+            "passed": true,
+            "excluded_short": false
+          },
+          {
+            "case_id": 8,
+            "text": "ikinci",
+            "group": "common_5_to_20pct",
+            "variant": "cap-four",
+            "p95_ms": 20.1992,
+            "limit_ms": 30,
+            "passed": true,
+            "excluded_short": false
+          },
+          {
+            "case_id": 8,
+            "text": "ikinci",
+            "group": "common_5_to_20pct",
+            "variant": "cap-hybrid",
+            "p95_ms": 8.656799999999999,
+            "limit_ms": 30,
+            "passed": true,
+            "excluded_short": false
+          },
+          {
+            "case_id": 9,
+            "text": "toplam",
+            "group": "common_5_to_20pct",
+            "variant": "cap",
+            "p95_ms": 6.6364,
+            "limit_ms": 30,
+            "passed": true,
+            "excluded_short": false
+          },
+          {
+            "case_id": 9,
+            "text": "toplam",
+            "group": "common_5_to_20pct",
+            "variant": "cap-four",
+            "p95_ms": 18.5168,
+            "limit_ms": 30,
+            "passed": true,
+            "excluded_short": false
+          },
+          {
+            "case_id": 9,
+            "text": "toplam",
+            "group": "common_5_to_20pct",
+            "variant": "cap-hybrid",
+            "p95_ms": 8.963000000000001,
+            "limit_ms": 30,
+            "passed": true,
+            "excluded_short": false
+          },
+          {
+            "case_id": 10,
+            "text": "isimli",
+            "group": "common_5_to_20pct",
+            "variant": "cap",
+            "p95_ms": 19.5308,
+            "limit_ms": 30,
+            "passed": true,
+            "excluded_short": false
+          },
+          {
+            "case_id": 10,
+            "text": "isimli",
+            "group": "common_5_to_20pct",
+            "variant": "cap-four",
+            "p95_ms": 39.6815,
+            "limit_ms": 30,
+            "passed": false,
+            "excluded_short": false
+          },
+          {
+            "case_id": 10,
+            "text": "isimli",
+            "group": "common_5_to_20pct",
+            "variant": "cap-hybrid",
+            "p95_ms": 21.286099999999998,
+            "limit_ms": 30,
+            "passed": true,
+            "excluded_short": false
+          },
+          {
+            "case_id": 11,
+            "text": "öldürür",
+            "group": "mid_0_5_to_5pct",
+            "variant": "cap",
+            "p95_ms": 69.3544,
+            "limit_ms": 150,
+            "passed": true,
+            "excluded_short": false
+          },
+          {
+            "case_id": 11,
+            "text": "öldürür",
+            "group": "mid_0_5_to_5pct",
+            "variant": "cap-four",
+            "p95_ms": 103.5151,
+            "limit_ms": 150,
+            "passed": true,
+            "excluded_short": false
+          },
+          {
+            "case_id": 11,
+            "text": "öldürür",
+            "group": "mid_0_5_to_5pct",
+            "variant": "cap-hybrid",
+            "p95_ms": 67.778,
+            "limit_ms": 150,
+            "passed": true,
+            "excluded_short": false
+          },
+          {
+            "case_id": 12,
+            "text": "ölümü",
+            "group": "mid_0_5_to_5pct",
+            "variant": "cap",
+            "p95_ms": 6.433999999999999,
+            "limit_ms": 150,
+            "passed": true,
+            "excluded_short": false
+          },
+          {
+            "case_id": 12,
+            "text": "ölümü",
+            "group": "mid_0_5_to_5pct",
+            "variant": "cap-four",
+            "p95_ms": 13.2103,
+            "limit_ms": 150,
+            "passed": true,
+            "excluded_short": false
+          },
+          {
+            "case_id": 12,
+            "text": "ölümü",
+            "group": "mid_0_5_to_5pct",
+            "variant": "cap-hybrid",
+            "p95_ms": 6.122800000000001,
+            "limit_ms": 150,
+            "passed": true,
+            "excluded_short": false
+          },
+          {
+            "case_id": 13,
+            "text": "akarsu",
+            "group": "mid_0_5_to_5pct",
+            "variant": "cap",
+            "p95_ms": 28.8023,
+            "limit_ms": 150,
+            "passed": true,
+            "excluded_short": false
+          },
+          {
+            "case_id": 13,
+            "text": "akarsu",
+            "group": "mid_0_5_to_5pct",
+            "variant": "cap-four",
+            "p95_ms": 47.056599999999996,
+            "limit_ms": 150,
+            "passed": true,
+            "excluded_short": false
+          },
+          {
+            "case_id": 13,
+            "text": "akarsu",
+            "group": "mid_0_5_to_5pct",
+            "variant": "cap-hybrid",
+            "p95_ms": 36.6262,
+            "limit_ms": 150,
+            "passed": true,
+            "excluded_short": false
+          },
+          {
+            "case_id": 14,
+            "text": "demokratik",
+            "group": "mid_0_5_to_5pct",
+            "variant": "cap",
+            "p95_ms": 12.553099999999999,
+            "limit_ms": 150,
+            "passed": true,
+            "excluded_short": false
+          },
+          {
+            "case_id": 14,
+            "text": "demokratik",
+            "group": "mid_0_5_to_5pct",
+            "variant": "cap-four",
+            "p95_ms": 31.953799999999998,
+            "limit_ms": 150,
+            "passed": true,
+            "excluded_short": false
+          },
+          {
+            "case_id": 14,
+            "text": "demokratik",
+            "group": "mid_0_5_to_5pct",
+            "variant": "cap-hybrid",
+            "p95_ms": 15.866600000000002,
+            "limit_ms": 150,
+            "passed": true,
+            "excluded_short": false
+          },
+          {
+            "case_id": 15,
+            "text": "çalışmalarıyla",
+            "group": "mid_0_5_to_5pct",
+            "variant": "cap",
+            "p95_ms": 345.1081,
+            "limit_ms": 150,
+            "passed": false,
+            "excluded_short": false
+          },
+          {
+            "case_id": 15,
+            "text": "çalışmalarıyla",
+            "group": "mid_0_5_to_5pct",
+            "variant": "cap-four",
+            "p95_ms": 680.9603,
+            "limit_ms": 150,
+            "passed": false,
+            "excluded_short": false
+          },
+          {
+            "case_id": 15,
+            "text": "çalışmalarıyla",
+            "group": "mid_0_5_to_5pct",
+            "variant": "cap-hybrid",
+            "p95_ms": 585.3624,
+            "limit_ms": 150,
+            "passed": false,
+            "excluded_short": false
+          },
+          {
+            "case_id": 16,
+            "text": "üreticisi",
+            "group": "mid_0_5_to_5pct",
+            "variant": "cap",
+            "p95_ms": 97.2238,
+            "limit_ms": 150,
+            "passed": true,
+            "excluded_short": false
+          },
+          {
+            "case_id": 16,
+            "text": "üreticisi",
+            "group": "mid_0_5_to_5pct",
+            "variant": "cap-four",
+            "p95_ms": 155.40709999999999,
+            "limit_ms": 150,
+            "passed": false,
+            "excluded_short": false
+          },
+          {
+            "case_id": 16,
+            "text": "üreticisi",
+            "group": "mid_0_5_to_5pct",
+            "variant": "cap-hybrid",
+            "p95_ms": 122.6798,
+            "limit_ms": 150,
+            "passed": true,
+            "excluded_short": false
+          },
+          {
+            "case_id": 17,
+            "text": "joseph",
+            "group": "mid_0_5_to_5pct",
+            "variant": "cap",
+            "p95_ms": 1.6361999999999999,
+            "limit_ms": 150,
+            "passed": true,
+            "excluded_short": false
+          },
+          {
+            "case_id": 17,
+            "text": "joseph",
+            "group": "mid_0_5_to_5pct",
+            "variant": "cap-four",
+            "p95_ms": 3.384,
+            "limit_ms": 150,
+            "passed": true,
+            "excluded_short": false
+          },
+          {
+            "case_id": 17,
+            "text": "joseph",
+            "group": "mid_0_5_to_5pct",
+            "variant": "cap-hybrid",
+            "p95_ms": 1.2568,
+            "limit_ms": 150,
+            "passed": true,
+            "excluded_short": false
+          },
+          {
+            "case_id": 18,
+            "text": "leyla",
+            "group": "mid_0_5_to_5pct",
+            "variant": "cap",
+            "p95_ms": 53.5964,
+            "limit_ms": 150,
+            "passed": true,
+            "excluded_short": false
+          },
+          {
+            "case_id": 18,
+            "text": "leyla",
+            "group": "mid_0_5_to_5pct",
+            "variant": "cap-four",
+            "p95_ms": 109.6246,
+            "limit_ms": 150,
+            "passed": true,
+            "excluded_short": false
+          },
+          {
+            "case_id": 18,
+            "text": "leyla",
+            "group": "mid_0_5_to_5pct",
+            "variant": "cap-hybrid",
+            "p95_ms": 85.99249999999999,
+            "limit_ms": 150,
+            "passed": true,
+            "excluded_short": false
+          },
+          {
+            "case_id": 19,
+            "text": "protest",
+            "group": "rare_under_0_5pct",
+            "variant": "cap",
+            "p95_ms": 13.6697,
+            "limit_ms": 150,
+            "passed": true,
+            "excluded_short": false
+          },
+          {
+            "case_id": 19,
+            "text": "protest",
+            "group": "rare_under_0_5pct",
+            "variant": "cap-four",
+            "p95_ms": 21.8475,
+            "limit_ms": 150,
+            "passed": true,
+            "excluded_short": false
+          },
+          {
+            "case_id": 19,
+            "text": "protest",
+            "group": "rare_under_0_5pct",
+            "variant": "cap-hybrid",
+            "p95_ms": 14.546999999999999,
+            "limit_ms": 150,
+            "passed": true,
+            "excluded_short": false
+          },
+          {
+            "case_id": 20,
+            "text": "furlong",
+            "group": "rare_under_0_5pct",
+            "variant": "cap",
+            "p95_ms": 5.4398,
+            "limit_ms": 150,
+            "passed": true,
+            "excluded_short": false
+          },
+          {
+            "case_id": 20,
+            "text": "furlong",
+            "group": "rare_under_0_5pct",
+            "variant": "cap-four",
+            "p95_ms": 3.5425999999999997,
+            "limit_ms": 150,
+            "passed": true,
+            "excluded_short": false
+          },
+          {
+            "case_id": 20,
+            "text": "furlong",
+            "group": "rare_under_0_5pct",
+            "variant": "cap-hybrid",
+            "p95_ms": 5.7574000000000005,
+            "limit_ms": 150,
+            "passed": true,
+            "excluded_short": false
+          },
+          {
+            "case_id": 21,
+            "text": "korkaklığa",
+            "group": "rare_under_0_5pct",
+            "variant": "cap",
+            "p95_ms": 34.2616,
+            "limit_ms": 150,
+            "passed": true,
+            "excluded_short": false
+          },
+          {
+            "case_id": 21,
+            "text": "korkaklığa",
+            "group": "rare_under_0_5pct",
+            "variant": "cap-four",
+            "p95_ms": 16.562299999999997,
+            "limit_ms": 150,
+            "passed": true,
+            "excluded_short": false
+          },
+          {
+            "case_id": 21,
+            "text": "korkaklığa",
+            "group": "rare_under_0_5pct",
+            "variant": "cap-hybrid",
+            "p95_ms": 33.1783,
+            "limit_ms": 150,
+            "passed": true,
+            "excluded_short": false
+          },
+          {
+            "case_id": 22,
+            "text": "ormanların",
+            "group": "rare_under_0_5pct",
+            "variant": "cap",
+            "p95_ms": 524.428,
+            "limit_ms": 150,
+            "passed": false,
+            "excluded_short": false
+          },
+          {
+            "case_id": 22,
+            "text": "ormanların",
+            "group": "rare_under_0_5pct",
+            "variant": "cap-four",
+            "p95_ms": 667.0949,
+            "limit_ms": 150,
+            "passed": false,
+            "excluded_short": false
+          },
+          {
+            "case_id": 22,
+            "text": "ormanların",
+            "group": "rare_under_0_5pct",
+            "variant": "cap-hybrid",
+            "p95_ms": 689.5688,
+            "limit_ms": 150,
+            "passed": false,
+            "excluded_short": false
+          },
+          {
+            "case_id": 23,
+            "text": "yanıklarda",
+            "group": "rare_under_0_5pct",
+            "variant": "cap",
+            "p95_ms": 1235.9034,
+            "limit_ms": 150,
+            "passed": false,
+            "excluded_short": false
+          },
+          {
+            "case_id": 23,
+            "text": "yanıklarda",
+            "group": "rare_under_0_5pct",
+            "variant": "cap-four",
+            "p95_ms": 546.4341000000001,
+            "limit_ms": 150,
+            "passed": false,
+            "excluded_short": false
+          },
+          {
+            "case_id": 23,
+            "text": "yanıklarda",
+            "group": "rare_under_0_5pct",
+            "variant": "cap-hybrid",
+            "p95_ms": 582.0494000000001,
+            "limit_ms": 150,
+            "passed": false,
+            "excluded_short": false
+          },
+          {
+            "case_id": 24,
+            "text": "külliyatı",
+            "group": "rare_under_0_5pct",
+            "variant": "cap",
+            "p95_ms": 907.1116999999999,
+            "limit_ms": 150,
+            "passed": false,
+            "excluded_short": false
+          },
+          {
+            "case_id": 24,
+            "text": "külliyatı",
+            "group": "rare_under_0_5pct",
+            "variant": "cap-four",
+            "p95_ms": 394.781,
+            "limit_ms": 150,
+            "passed": false,
+            "excluded_short": false
+          },
+          {
+            "case_id": 24,
+            "text": "külliyatı",
+            "group": "rare_under_0_5pct",
+            "variant": "cap-hybrid",
+            "p95_ms": 458.67629999999997,
+            "limit_ms": 150,
+            "passed": false,
+            "excluded_short": false
+          },
+          {
+            "case_id": 25,
+            "text": "timmy",
+            "group": "rare_under_0_5pct",
+            "variant": "cap",
+            "p95_ms": 22.787000000000003,
+            "limit_ms": 150,
+            "passed": true,
+            "excluded_short": false
+          },
+          {
+            "case_id": 25,
+            "text": "timmy",
+            "group": "rare_under_0_5pct",
+            "variant": "cap-four",
+            "p95_ms": 10.4594,
+            "limit_ms": 150,
+            "passed": true,
+            "excluded_short": false
+          },
+          {
+            "case_id": 25,
+            "text": "timmy",
+            "group": "rare_under_0_5pct",
+            "variant": "cap-hybrid",
+            "p95_ms": 19.9298,
+            "limit_ms": 150,
+            "passed": true,
+            "excluded_short": false
+          },
+          {
+            "case_id": 26,
+            "text": "yüklük",
+            "group": "rare_under_0_5pct",
+            "variant": "cap",
+            "p95_ms": 44.2044,
+            "limit_ms": 150,
+            "passed": true,
+            "excluded_short": false
+          },
+          {
+            "case_id": 26,
+            "text": "yüklük",
+            "group": "rare_under_0_5pct",
+            "variant": "cap-four",
+            "p95_ms": 72.9464,
+            "limit_ms": 150,
+            "passed": true,
+            "excluded_short": false
+          },
+          {
+            "case_id": 26,
+            "text": "yüklük",
+            "group": "rare_under_0_5pct",
+            "variant": "cap-hybrid",
+            "p95_ms": 53.1745,
+            "limit_ms": 150,
+            "passed": true,
+            "excluded_short": false
+          },
+          {
+            "case_id": 27,
+            "text": "ilçesine köyleri",
+            "group": "and_pairs_mid",
+            "variant": "cap",
+            "p95_ms": 16.840999999999998,
+            "limit_ms": 150,
+            "passed": true,
+            "excluded_short": false
+          },
+          {
+            "case_id": 27,
+            "text": "ilçesine köyleri",
+            "group": "and_pairs_mid",
+            "variant": "cap-four",
+            "p95_ms": 38.320800000000006,
+            "limit_ms": 150,
+            "passed": true,
+            "excluded_short": false
+          },
+          {
+            "case_id": 27,
+            "text": "ilçesine köyleri",
+            "group": "and_pairs_mid",
+            "variant": "cap-hybrid",
+            "p95_ms": 14.4328,
+            "limit_ms": 150,
+            "passed": true,
+            "excluded_short": false
+          },
+          {
+            "case_id": 28,
+            "text": "geldiği buldu",
+            "group": "and_pairs_mid",
+            "variant": "cap",
+            "p95_ms": 124.4704,
+            "limit_ms": 150,
+            "passed": true,
+            "excluded_short": false
+          },
+          {
+            "case_id": 28,
+            "text": "geldiği buldu",
+            "group": "and_pairs_mid",
+            "variant": "cap-four",
+            "p95_ms": 205.91660000000002,
+            "limit_ms": 150,
+            "passed": false,
+            "excluded_short": false
+          },
+          {
+            "case_id": 28,
+            "text": "geldiği buldu",
+            "group": "and_pairs_mid",
+            "variant": "cap-hybrid",
+            "p95_ms": 154.3951,
+            "limit_ms": 150,
+            "passed": false,
+            "excluded_short": false
+          },
+          {
+            "case_id": 29,
+            "text": "chicago studio",
+            "group": "and_pairs_mid",
+            "variant": "cap",
+            "p95_ms": 7.251600000000001,
+            "limit_ms": 150,
+            "passed": true,
+            "excluded_short": false
+          },
+          {
+            "case_id": 29,
+            "text": "chicago studio",
+            "group": "and_pairs_mid",
+            "variant": "cap-four",
+            "p95_ms": 3.8735000000000004,
+            "limit_ms": 150,
+            "passed": true,
+            "excluded_short": false
+          },
+          {
+            "case_id": 29,
+            "text": "chicago studio",
+            "group": "and_pairs_mid",
+            "variant": "cap-hybrid",
+            "p95_ms": 8.187800000000001,
+            "limit_ms": 150,
+            "passed": true,
+            "excluded_short": false
+          },
+          {
+            "case_id": 30,
+            "text": "kısım dişli",
+            "group": "and_pairs_mid",
+            "variant": "cap",
+            "p95_ms": 526.7937000000001,
+            "limit_ms": 150,
+            "passed": false,
+            "excluded_short": false
+          },
+          {
+            "case_id": 30,
+            "text": "kısım dişli",
+            "group": "and_pairs_mid",
+            "variant": "cap-four",
+            "p95_ms": 535.3459,
+            "limit_ms": 150,
+            "passed": false,
+            "excluded_short": false
+          },
+          {
+            "case_id": 30,
+            "text": "kısım dişli",
+            "group": "and_pairs_mid",
+            "variant": "cap-hybrid",
+            "p95_ms": 561.5992,
+            "limit_ms": 150,
+            "passed": false,
+            "excluded_short": false
+          },
+          {
+            "case_id": 31,
+            "text": "güzeli zafer",
+            "group": "and_pairs_mid",
+            "variant": "cap",
+            "p95_ms": 44.5401,
+            "limit_ms": 150,
+            "passed": true,
+            "excluded_short": false
+          },
+          {
+            "case_id": 31,
+            "text": "güzeli zafer",
+            "group": "and_pairs_mid",
+            "variant": "cap-four",
+            "p95_ms": 21.6388,
+            "limit_ms": 150,
+            "passed": true,
+            "excluded_short": false
+          },
+          {
+            "case_id": 31,
+            "text": "güzeli zafer",
+            "group": "and_pairs_mid",
+            "variant": "cap-hybrid",
+            "p95_ms": 42.1536,
+            "limit_ms": 150,
+            "passed": true,
+            "excluded_short": false
+          },
+          {
+            "case_id": 32,
+            "text": "İnternetten hazinem",
+            "group": "and_pairs_mid",
+            "variant": "cap",
+            "p95_ms": 226.4274,
+            "limit_ms": 150,
+            "passed": false,
+            "excluded_short": false
+          },
+          {
+            "case_id": 32,
+            "text": "İnternetten hazinem",
+            "group": "and_pairs_mid",
+            "variant": "cap-four",
+            "p95_ms": 118.62480000000001,
+            "limit_ms": 150,
+            "passed": true,
+            "excluded_short": false
+          },
+          {
+            "case_id": 32,
+            "text": "İnternetten hazinem",
+            "group": "and_pairs_mid",
+            "variant": "cap-hybrid",
+            "p95_ms": 189.1736,
+            "limit_ms": 150,
+            "passed": false,
+            "excluded_short": false
+          },
+          {
+            "case_id": 33,
+            "text": "oyuncudur atlanta",
+            "group": "and_pairs_mid",
+            "variant": "cap",
+            "p95_ms": 195.5764,
+            "limit_ms": 150,
+            "passed": false,
+            "excluded_short": false
+          },
+          {
+            "case_id": 33,
+            "text": "oyuncudur atlanta",
+            "group": "and_pairs_mid",
+            "variant": "cap-four",
+            "p95_ms": 97.0959,
+            "limit_ms": 150,
+            "passed": true,
+            "excluded_short": false
+          },
+          {
+            "case_id": 33,
+            "text": "oyuncudur atlanta",
+            "group": "and_pairs_mid",
+            "variant": "cap-hybrid",
+            "p95_ms": 175.6258,
+            "limit_ms": 150,
+            "passed": false,
+            "excluded_short": false
+          },
+          {
+            "case_id": 34,
+            "text": "kendisine çıkacağını",
+            "group": "and_pairs_mid",
+            "variant": "cap",
+            "p95_ms": 1006.8045999999999,
+            "limit_ms": 150,
+            "passed": false,
+            "excluded_short": false
+          },
+          {
+            "case_id": 34,
+            "text": "kendisine çıkacağını",
+            "group": "and_pairs_mid",
+            "variant": "cap-four",
+            "p95_ms": 460.56570000000005,
+            "limit_ms": 150,
+            "passed": false,
+            "excluded_short": false
+          },
+          {
+            "case_id": 34,
+            "text": "kendisine çıkacağını",
+            "group": "and_pairs_mid",
+            "variant": "cap-hybrid",
+            "p95_ms": 523.0534,
+            "limit_ms": 150,
+            "passed": false,
+            "excluded_short": false
+          },
+          {
+            "case_id": 35,
+            "text": "ve",
+            "group": "fixed_short",
+            "variant": "cap",
+            "p95_ms": 0.8725999999999999,
+            "limit_ms": null,
+            "passed": true,
+            "excluded_short": true
+          },
+          {
+            "case_id": 35,
+            "text": "ve",
+            "group": "fixed_short",
+            "variant": "cap-four",
+            "p95_ms": 1.6772,
+            "limit_ms": null,
+            "passed": true,
+            "excluded_short": true
+          },
+          {
+            "case_id": 35,
+            "text": "ve",
+            "group": "fixed_short",
+            "variant": "cap-hybrid",
+            "p95_ms": 0.6604,
+            "limit_ms": null,
+            "passed": true,
+            "excluded_short": true
+          },
+          {
+            "case_id": 36,
+            "text": "if",
+            "group": "fixed_short",
+            "variant": "cap",
+            "p95_ms": 1.7162,
+            "limit_ms": null,
+            "passed": true,
+            "excluded_short": true
+          },
+          {
+            "case_id": 36,
+            "text": "if",
+            "group": "fixed_short",
+            "variant": "cap-four",
+            "p95_ms": 2.6787,
+            "limit_ms": null,
+            "passed": true,
+            "excluded_short": true
+          },
+          {
+            "case_id": 36,
+            "text": "if",
+            "group": "fixed_short",
+            "variant": "cap-hybrid",
+            "p95_ms": 1.7053,
+            "limit_ms": null,
+            "passed": true,
+            "excluded_short": true
+          },
+          {
+            "case_id": 37,
+            "text": "id",
+            "group": "fixed_short",
+            "variant": "cap",
+            "p95_ms": 1.2691,
+            "limit_ms": null,
+            "passed": true,
+            "excluded_short": true
+          },
+          {
+            "case_id": 37,
+            "text": "id",
+            "group": "fixed_short",
+            "variant": "cap-four",
+            "p95_ms": 2.2287,
+            "limit_ms": null,
+            "passed": true,
+            "excluded_short": true
+          },
+          {
+            "case_id": 37,
+            "text": "id",
+            "group": "fixed_short",
+            "variant": "cap-hybrid",
+            "p95_ms": 0.9633,
+            "limit_ms": null,
+            "passed": true,
+            "excluded_short": true
+          },
+          {
+            "case_id": 38,
+            "text": "zx",
+            "group": "fixed_short",
+            "variant": "cap",
+            "p95_ms": 248.78910000000002,
+            "limit_ms": null,
+            "passed": true,
+            "excluded_short": true
+          },
+          {
+            "case_id": 38,
+            "text": "zx",
+            "group": "fixed_short",
+            "variant": "cap-four",
+            "p95_ms": 110.66,
+            "limit_ms": null,
+            "passed": true,
+            "excluded_short": true
+          },
+          {
+            "case_id": 38,
+            "text": "zx",
+            "group": "fixed_short",
+            "variant": "cap-hybrid",
+            "p95_ms": 111.6727,
+            "limit_ms": null,
+            "passed": true,
+            "excluded_short": true
+          },
+          {
+            "case_id": 39,
+            "text": "qzxkvwnever",
+            "group": "fixed_negative",
+            "variant": "cap",
+            "p95_ms": 0.0386,
+            "limit_ms": 150,
+            "passed": true,
+            "excluded_short": false
+          },
+          {
+            "case_id": 39,
+            "text": "qzxkvwnever",
+            "group": "fixed_negative",
+            "variant": "cap-four",
+            "p95_ms": 0.3685,
+            "limit_ms": 150,
+            "passed": true,
+            "excluded_short": false
+          },
+          {
+            "case_id": 39,
+            "text": "qzxkvwnever",
+            "group": "fixed_negative",
+            "variant": "cap-hybrid",
+            "p95_ms": 0.612,
+            "limit_ms": 150,
+            "passed": true,
+            "excluded_short": false
+          },
+          {
+            "case_id": 40,
+            "text": "transubstantiationz",
+            "group": "fixed_negative",
+            "variant": "cap",
+            "p95_ms": 0.621,
+            "limit_ms": 150,
+            "passed": true,
+            "excluded_short": false
+          },
+          {
+            "case_id": 40,
+            "text": "transubstantiationz",
+            "group": "fixed_negative",
+            "variant": "cap-four",
+            "p95_ms": 0.8681,
+            "limit_ms": 150,
+            "passed": true,
+            "excluded_short": false
+          },
+          {
+            "case_id": 40,
+            "text": "transubstantiationz",
+            "group": "fixed_negative",
+            "variant": "cap-hybrid",
+            "p95_ms": 0.579,
+            "limit_ms": 150,
+            "passed": true,
+            "excluded_short": false
+          }
+        ],
+        "relative_hybrid": [
+          {
+            "kind": "hybrid_negative",
+            "text": "qzxkvwnever",
+            "control_p95_ms": 0.3685,
+            "hybrid_p95_ms": 0.612,
+            "limit_ms": 0.40535000000000004,
+            "passed": false
+          },
+          {
+            "kind": "hybrid_negative",
+            "text": "transubstantiationz",
+            "control_p95_ms": 0.8681,
+            "hybrid_p95_ms": 0.579,
+            "limit_ms": 0.95491,
+            "passed": true
+          },
+          {
+            "kind": "hybrid_positive_cpu",
+            "text": "olduğu",
+            "serial_total_cpu_ms": 9937.5,
+            "hybrid_total_cpu_ms": 10281.25,
+            "limit_ms": 10434.375,
+            "passed": true
+          },
+          {
+            "kind": "hybrid_positive_cpu",
+            "text": "büyük",
+            "serial_total_cpu_ms": 6578.125,
+            "hybrid_total_cpu_ms": 6531.25,
+            "limit_ms": 6907.03125,
+            "passed": true
+          },
+          {
+            "kind": "hybrid_positive_cpu",
+            "text": "ayrıca",
+            "serial_total_cpu_ms": 9375.0,
+            "hybrid_total_cpu_ms": 9343.75,
+            "limit_ms": 9843.75,
+            "passed": true
+          }
+        ],
+        "failures": [
+          {
+            "kind": "capped_query",
+            "case_id": 6,
+            "text": "görenler",
+            "variant": "cap-four",
+            "p95_ms": 64.65469999999999,
+            "limit_ms": 30
+          },
+          {
+            "kind": "capped_query",
+            "case_id": 10,
+            "text": "isimli",
+            "variant": "cap-four",
+            "p95_ms": 39.6815,
+            "limit_ms": 30
+          },
+          {
+            "kind": "capped_query",
+            "case_id": 15,
+            "text": "çalışmalarıyla",
+            "variant": "cap",
+            "p95_ms": 345.1081,
+            "limit_ms": 150
+          },
+          {
+            "kind": "capped_query",
+            "case_id": 15,
+            "text": "çalışmalarıyla",
+            "variant": "cap-four",
+            "p95_ms": 680.9603,
+            "limit_ms": 150
+          },
+          {
+            "kind": "capped_query",
+            "case_id": 15,
+            "text": "çalışmalarıyla",
+            "variant": "cap-hybrid",
+            "p95_ms": 585.3624,
+            "limit_ms": 150
+          },
+          {
+            "kind": "capped_query",
+            "case_id": 16,
+            "text": "üreticisi",
+            "variant": "cap-four",
+            "p95_ms": 155.40709999999999,
+            "limit_ms": 150
+          },
+          {
+            "kind": "capped_query",
+            "case_id": 22,
+            "text": "ormanların",
+            "variant": "cap",
+            "p95_ms": 524.428,
+            "limit_ms": 150
+          },
+          {
+            "kind": "capped_query",
+            "case_id": 22,
+            "text": "ormanların",
+            "variant": "cap-four",
+            "p95_ms": 667.0949,
+            "limit_ms": 150
+          },
+          {
+            "kind": "capped_query",
+            "case_id": 22,
+            "text": "ormanların",
+            "variant": "cap-hybrid",
+            "p95_ms": 689.5688,
+            "limit_ms": 150
+          },
+          {
+            "kind": "capped_query",
+            "case_id": 23,
+            "text": "yanıklarda",
+            "variant": "cap",
+            "p95_ms": 1235.9034,
+            "limit_ms": 150
+          },
+          {
+            "kind": "capped_query",
+            "case_id": 23,
+            "text": "yanıklarda",
+            "variant": "cap-four",
+            "p95_ms": 546.4341000000001,
+            "limit_ms": 150
+          },
+          {
+            "kind": "capped_query",
+            "case_id": 23,
+            "text": "yanıklarda",
+            "variant": "cap-hybrid",
+            "p95_ms": 582.0494000000001,
+            "limit_ms": 150
+          },
+          {
+            "kind": "capped_query",
+            "case_id": 24,
+            "text": "külliyatı",
+            "variant": "cap",
+            "p95_ms": 907.1116999999999,
+            "limit_ms": 150
+          },
+          {
+            "kind": "capped_query",
+            "case_id": 24,
+            "text": "külliyatı",
+            "variant": "cap-four",
+            "p95_ms": 394.781,
+            "limit_ms": 150
+          },
+          {
+            "kind": "capped_query",
+            "case_id": 24,
+            "text": "külliyatı",
+            "variant": "cap-hybrid",
+            "p95_ms": 458.67629999999997,
+            "limit_ms": 150
+          },
+          {
+            "kind": "capped_query",
+            "case_id": 28,
+            "text": "geldiği buldu",
+            "variant": "cap-four",
+            "p95_ms": 205.91660000000002,
+            "limit_ms": 150
+          },
+          {
+            "kind": "capped_query",
+            "case_id": 28,
+            "text": "geldiği buldu",
+            "variant": "cap-hybrid",
+            "p95_ms": 154.3951,
+            "limit_ms": 150
+          },
+          {
+            "kind": "capped_query",
+            "case_id": 30,
+            "text": "kısım dişli",
+            "variant": "cap",
+            "p95_ms": 526.7937000000001,
+            "limit_ms": 150
+          },
+          {
+            "kind": "capped_query",
+            "case_id": 30,
+            "text": "kısım dişli",
+            "variant": "cap-four",
+            "p95_ms": 535.3459,
+            "limit_ms": 150
+          },
+          {
+            "kind": "capped_query",
+            "case_id": 30,
+            "text": "kısım dişli",
+            "variant": "cap-hybrid",
+            "p95_ms": 561.5992,
+            "limit_ms": 150
+          },
+          {
+            "kind": "capped_query",
+            "case_id": 32,
+            "text": "İnternetten hazinem",
+            "variant": "cap",
+            "p95_ms": 226.4274,
+            "limit_ms": 150
+          },
+          {
+            "kind": "capped_query",
+            "case_id": 32,
+            "text": "İnternetten hazinem",
+            "variant": "cap-hybrid",
+            "p95_ms": 189.1736,
+            "limit_ms": 150
+          },
+          {
+            "kind": "capped_query",
+            "case_id": 33,
+            "text": "oyuncudur atlanta",
+            "variant": "cap",
+            "p95_ms": 195.5764,
+            "limit_ms": 150
+          },
+          {
+            "kind": "capped_query",
+            "case_id": 33,
+            "text": "oyuncudur atlanta",
+            "variant": "cap-hybrid",
+            "p95_ms": 175.6258,
+            "limit_ms": 150
+          },
+          {
+            "kind": "capped_query",
+            "case_id": 34,
+            "text": "kendisine çıkacağını",
+            "variant": "cap",
+            "p95_ms": 1006.8045999999999,
+            "limit_ms": 150
+          },
+          {
+            "kind": "capped_query",
+            "case_id": 34,
+            "text": "kendisine çıkacağını",
+            "variant": "cap-four",
+            "p95_ms": 460.56570000000005,
+            "limit_ms": 150
+          },
+          {
+            "kind": "capped_query",
+            "case_id": 34,
+            "text": "kendisine çıkacağını",
+            "variant": "cap-hybrid",
+            "p95_ms": 523.0534,
+            "limit_ms": 150
+          },
+          {
+            "kind": "hybrid_negative",
+            "text": "qzxkvwnever",
+            "control_p95_ms": 0.3685,
+            "hybrid_p95_ms": 0.612,
+            "limit_ms": 0.40535000000000004,
+            "passed": false
+          }
+        ],
+        "passed": false,
+        "gate_scope": "Capped N50; exact serial/four informational per explicit user reply; fixed_short excluded from search deadline"
+      },
+      "completed": [
+        {
+          "engine": "fdb",
+          "mode": "scale-seed",
+          "label": "n50000-pair0-seed",
+          "log": "trwiki-scale-20261028-v1-n50000-pair0-seed-fdb-scale-seed.jsonl",
+          "exit_code": 0,
+          "wall_s": 40.46899999998277
+        },
+        {
+          "engine": "sqlite",
+          "mode": "scale-seed",
+          "label": "n50000-pair0-seed",
+          "log": "trwiki-scale-20261028-v1-n50000-pair0-seed-sqlite-scale-seed.jsonl",
+          "exit_code": 0,
+          "wall_s": 37.96799999999348
+        },
+        {
+          "engine": "fdb",
+          "mode": "scale-idle",
+          "label": "n50000-pair0-idle0",
+          "log": "trwiki-scale-20261028-v1-n50000-pair0-idle0-fdb-scale-idle.jsonl",
+          "exit_code": 0,
+          "wall_s": 2.297000000020489
+        },
+        {
+          "engine": "sqlite",
+          "mode": "scale-idle",
+          "label": "n50000-pair0-idle0",
+          "log": "trwiki-scale-20261028-v1-n50000-pair0-idle0-sqlite-scale-idle.jsonl",
+          "exit_code": 0,
+          "wall_s": 2.030999999959022
+        },
+        {
+          "engine": "fdb",
+          "mode": "scale-idle",
+          "label": "n50000-pair0-idle1",
+          "log": "trwiki-scale-20261028-v1-n50000-pair0-idle1-fdb-scale-idle.jsonl",
+          "exit_code": 0,
+          "wall_s": 2.2820000000065193
+        },
+        {
+          "engine": "sqlite",
+          "mode": "scale-idle",
+          "label": "n50000-pair0-idle1",
+          "log": "trwiki-scale-20261028-v1-n50000-pair0-idle1-sqlite-scale-idle.jsonl",
+          "exit_code": 0,
+          "wall_s": 2.047000000020489
+        },
+        {
+          "engine": "fdb",
+          "mode": "scale-query-experiments",
+          "label": "n50000-pair0-matrix",
+          "log": "trwiki-scale-20261028-v1-n50000-pair0-matrix-fdb-scale-query-experiments.jsonl",
+          "exit_code": 0,
+          "wall_s": 639.890000000014
+        },
+        {
+          "engine": "sqlite",
+          "mode": "scale-query-experiments",
+          "label": "n50000-pair0-matrix",
+          "log": "trwiki-scale-20261028-v1-n50000-pair0-matrix-sqlite-scale-query-experiments.jsonl",
+          "exit_code": 0,
+          "wall_s": 254.43799999996554
+        },
+        {
+          "engine": "fdb",
+          "mode": "scale-query-cpu-blocks",
+          "label": "n50000-pair0-cpu",
+          "log": "trwiki-scale-20261028-v1-n50000-pair0-cpu-fdb-scale-query-cpu-blocks.jsonl",
+          "exit_code": 0,
+          "wall_s": 63.79700000002049
+        },
+        {
+          "engine": "fdb",
+          "mode": "first-strict",
+          "label": "n50000-pair0-first0",
+          "log": "trwiki-scale-20261028-v1-n50000-pair0-first0-fdb-first-strict.jsonl",
+          "exit_code": 0,
+          "wall_s": 2.687999999965541
+        },
+        {
+          "engine": "sqlite",
+          "mode": "first-sqlite",
+          "label": "n50000-pair0-first0",
+          "log": "trwiki-scale-20261028-v1-n50000-pair0-first0-sqlite-first-sqlite.jsonl",
+          "exit_code": 0,
+          "wall_s": 0.8589999999967404
+        },
+        {
+          "engine": "fdb",
+          "mode": "first-strict",
+          "label": "n50000-pair0-first1",
+          "log": "trwiki-scale-20261028-v1-n50000-pair0-first1-fdb-first-strict.jsonl",
+          "exit_code": 0,
+          "wall_s": 1.7030000000377186
+        },
+        {
+          "engine": "sqlite",
+          "mode": "first-sqlite",
+          "label": "n50000-pair0-first1",
+          "log": "trwiki-scale-20261028-v1-n50000-pair0-first1-sqlite-first-sqlite.jsonl",
+          "exit_code": 0,
+          "wall_s": 0.35999999998603016
+        },
+        {
+          "engine": "fdb",
+          "mode": "first-strict",
+          "label": "n50000-pair0-first2",
+          "log": "trwiki-scale-20261028-v1-n50000-pair0-first2-fdb-first-strict.jsonl",
+          "exit_code": 0,
+          "wall_s": 1.452999999979511
+        },
+        {
+          "engine": "sqlite",
+          "mode": "first-sqlite",
+          "label": "n50000-pair0-first2",
+          "log": "trwiki-scale-20261028-v1-n50000-pair0-first2-sqlite-first-sqlite.jsonl",
+          "exit_code": 0,
+          "wall_s": 0.0779999999795109
+        },
+        {
+          "engine": "fdb",
+          "mode": "first-strict",
+          "label": "n50000-pair0-first3",
+          "log": "trwiki-scale-20261028-v1-n50000-pair0-first3-fdb-first-strict.jsonl",
+          "exit_code": 0,
+          "wall_s": 1.8429999999934807
+        },
+        {
+          "engine": "sqlite",
+          "mode": "first-sqlite",
+          "label": "n50000-pair0-first3",
+          "log": "trwiki-scale-20261028-v1-n50000-pair0-first3-sqlite-first-sqlite.jsonl",
+          "exit_code": 0,
+          "wall_s": 0.2649999999557622
+        },
+        {
+          "engine": "fdb",
+          "mode": "first-strict",
+          "label": "n50000-pair0-first4",
+          "log": "trwiki-scale-20261028-v1-n50000-pair0-first4-fdb-first-strict.jsonl",
+          "exit_code": 0,
+          "wall_s": 1.7660000000032596
+        },
+        {
+          "engine": "sqlite",
+          "mode": "first-sqlite",
+          "label": "n50000-pair0-first4",
+          "log": "trwiki-scale-20261028-v1-n50000-pair0-first4-sqlite-first-sqlite.jsonl",
+          "exit_code": 0,
+          "wall_s": 1.422000000020489
+        },
+        {
+          "engine": "fdb",
+          "mode": "first-strict",
+          "label": "n50000-pair0-first5",
+          "log": "trwiki-scale-20261028-v1-n50000-pair0-first5-fdb-first-strict.jsonl",
+          "exit_code": 0,
+          "wall_s": 1.452999999979511
+        },
+        {
+          "engine": "sqlite",
+          "mode": "first-sqlite",
+          "label": "n50000-pair0-first5",
+          "log": "trwiki-scale-20261028-v1-n50000-pair0-first5-sqlite-first-sqlite.jsonl",
+          "exit_code": 0,
+          "wall_s": 0.062000000034458935
+        },
+        {
+          "engine": "sqlite",
+          "mode": "scale-seed",
+          "label": "n50000-pair1-seed",
+          "log": "trwiki-scale-20261028-v1-n50000-pair1-seed-sqlite-scale-seed.jsonl",
+          "exit_code": 0,
+          "wall_s": 38.04699999996228
+        },
+        {
+          "engine": "fdb",
+          "mode": "scale-seed",
+          "label": "n50000-pair1-seed",
+          "log": "trwiki-scale-20261028-v1-n50000-pair1-seed-fdb-scale-seed.jsonl",
+          "exit_code": 0,
+          "wall_s": 39.60899999999674
+        },
+        {
+          "engine": "sqlite",
+          "mode": "scale-idle",
+          "label": "n50000-pair1-idle0",
+          "log": "trwiki-scale-20261028-v1-n50000-pair1-idle0-sqlite-scale-idle.jsonl",
+          "exit_code": 0,
+          "wall_s": 2.0310000000172295
+        },
+        {
+          "engine": "fdb",
+          "mode": "scale-idle",
+          "label": "n50000-pair1-idle0",
+          "log": "trwiki-scale-20261028-v1-n50000-pair1-idle0-fdb-scale-idle.jsonl",
+          "exit_code": 0,
+          "wall_s": 2.297000000020489
+        },
+        {
+          "engine": "sqlite",
+          "mode": "scale-idle",
+          "label": "n50000-pair1-idle1",
+          "log": "trwiki-scale-20261028-v1-n50000-pair1-idle1-sqlite-scale-idle.jsonl",
+          "exit_code": 0,
+          "wall_s": 2.030999999959022
+        },
+        {
+          "engine": "fdb",
+          "mode": "scale-idle",
+          "label": "n50000-pair1-idle1",
+          "log": "trwiki-scale-20261028-v1-n50000-pair1-idle1-fdb-scale-idle.jsonl",
+          "exit_code": 0,
+          "wall_s": 2.297000000020489
+        },
+        {
+          "engine": "sqlite",
+          "mode": "scale-query-experiments",
+          "label": "n50000-pair1-matrix",
+          "log": "trwiki-scale-20261028-v1-n50000-pair1-matrix-sqlite-scale-query-experiments.jsonl",
+          "exit_code": 0,
+          "wall_s": 250.625
+        },
+        {
+          "engine": "fdb",
+          "mode": "scale-query-experiments",
+          "label": "n50000-pair1-matrix",
+          "log": "trwiki-scale-20261028-v1-n50000-pair1-matrix-fdb-scale-query-experiments.jsonl",
+          "exit_code": 0,
+          "wall_s": 647.7189999999828
+        },
+        {
+          "engine": "fdb",
+          "mode": "scale-query-cpu-blocks",
+          "label": "n50000-pair1-cpu",
+          "log": "trwiki-scale-20261028-v1-n50000-pair1-cpu-fdb-scale-query-cpu-blocks.jsonl",
+          "exit_code": 0,
+          "wall_s": 74.45300000003772
+        },
+        {
+          "engine": "sqlite",
+          "mode": "first-sqlite",
+          "label": "n50000-pair1-first0",
+          "log": "trwiki-scale-20261028-v1-n50000-pair1-first0-sqlite-first-sqlite.jsonl",
+          "exit_code": 0,
+          "wall_s": 0.8279999999795109
+        },
+        {
+          "engine": "fdb",
+          "mode": "first-strict",
+          "label": "n50000-pair1-first0",
+          "log": "trwiki-scale-20261028-v1-n50000-pair1-first0-fdb-first-strict.jsonl",
+          "exit_code": 0,
+          "wall_s": 2.702999999979511
+        },
+        {
+          "engine": "sqlite",
+          "mode": "first-sqlite",
+          "label": "n50000-pair1-first1",
+          "log": "trwiki-scale-20261028-v1-n50000-pair1-first1-sqlite-first-sqlite.jsonl",
+          "exit_code": 0,
+          "wall_s": 0.35899999999674037
+        },
+        {
+          "engine": "fdb",
+          "mode": "first-strict",
+          "label": "n50000-pair1-first1",
+          "log": "trwiki-scale-20261028-v1-n50000-pair1-first1-fdb-first-strict.jsonl",
+          "exit_code": 0,
+          "wall_s": 1.672000000020489
+        },
+        {
+          "engine": "sqlite",
+          "mode": "first-sqlite",
+          "label": "n50000-pair1-first2",
+          "log": "trwiki-scale-20261028-v1-n50000-pair1-first2-sqlite-first-sqlite.jsonl",
+          "exit_code": 0,
+          "wall_s": 0.0779999999795109
+        },
+        {
+          "engine": "fdb",
+          "mode": "first-strict",
+          "label": "n50000-pair1-first2",
+          "log": "trwiki-scale-20261028-v1-n50000-pair1-first2-fdb-first-strict.jsonl",
+          "exit_code": 0,
+          "wall_s": 1.422000000020489
+        },
+        {
+          "engine": "sqlite",
+          "mode": "first-sqlite",
+          "label": "n50000-pair1-first3",
+          "log": "trwiki-scale-20261028-v1-n50000-pair1-first3-sqlite-first-sqlite.jsonl",
+          "exit_code": 0,
+          "wall_s": 0.26600000000325963
+        },
+        {
+          "engine": "fdb",
+          "mode": "first-strict",
+          "label": "n50000-pair1-first3",
+          "log": "trwiki-scale-20261028-v1-n50000-pair1-first3-fdb-first-strict.jsonl",
+          "exit_code": 0,
+          "wall_s": 1.8589999999967404
+        },
+        {
+          "engine": "sqlite",
+          "mode": "first-sqlite",
+          "label": "n50000-pair1-first4",
+          "log": "trwiki-scale-20261028-v1-n50000-pair1-first4-sqlite-first-sqlite.jsonl",
+          "exit_code": 0,
+          "wall_s": 1.4060000000172295
+        },
+        {
+          "engine": "fdb",
+          "mode": "first-strict",
+          "label": "n50000-pair1-first4",
+          "log": "trwiki-scale-20261028-v1-n50000-pair1-first4-fdb-first-strict.jsonl",
+          "exit_code": 0,
+          "wall_s": 1.7339999999967404
+        },
+        {
+          "engine": "sqlite",
+          "mode": "first-sqlite",
+          "label": "n50000-pair1-first5",
+          "log": "trwiki-scale-20261028-v1-n50000-pair1-first5-sqlite-first-sqlite.jsonl",
+          "exit_code": 0,
+          "wall_s": 0.062000000034458935
+        },
+        {
+          "engine": "fdb",
+          "mode": "first-strict",
+          "label": "n50000-pair1-first5",
+          "log": "trwiki-scale-20261028-v1-n50000-pair1-first5-fdb-first-strict.jsonl",
+          "exit_code": 0,
+          "wall_s": 1.4689999999827705
+        }
+      ]
+    },
+    {
+      "documents": 100000,
+      "full_fdb_measurement": false,
+      "gate": {
+        "documents": 100000,
+        "strict_open_samples_ms": [],
+        "idle_private_samples": [],
+        "ingest_peak_private_samples": [],
+        "per_case": [],
+        "relative_hybrid": [],
+        "failures": [
+          {
+            "kind": "streamed_entry_limit",
+            "error": "streamed transaction exceeds entry/frame allowance",
+            "attempted_documents": 100000,
+            "committed_documents": 66000,
+            "sequence": 132,
+            "rejected_batch": [
+              66000,
+              66499
+            ],
+            "offending_document": 66498,
+            "text_bytes": 444345,
+            "per_entry_limit_bytes": 262144,
+            "transaction_limit_bytes": 67108864,
+            "rejected_batch_json_bytes": 2308679,
+            "raw_process": "trwiki-scale-20261028-v1-n100000-pair0-seed-fdb-scale-seed.process.json",
+            "stats": {
+              "compaction_running": false,
+              "delta_keys": 0,
+              "disk_index_bytes": 178263877,
+              "disk_posting_entries": 37009038,
+              "documents": 66000,
+              "generation": 345,
+              "log_bytes": 45,
+              "resident_documents": 0,
+              "resident_text_bytes": 0,
+              "segments": 12,
+              "sequence": 132,
+              "source_bytes": 225615947
+            },
+            "partial_state": "C:\\Users\\Serkan\\Documents\\ChatGPT\\fdb\\docs\\benchmarks\\trwiki-scale-20261028-v1-partial66000-fdb-state.json",
+            "partial_state_sha256": "C404FA1551FCD1E8E5AE80418A824B39CEB118A4F1A5C55A9382DDD8E1FCD256",
+            "fdb_100k_ingest_succeeded": false,
+            "fdb_retry": false,
+            "truncate_or_owned_fallback": false
+          }
+        ],
+        "passed": false,
+        "gate_scope": "FDB ingest FAILED, no complete 100k DB; SQLite independent repeats only, no completed balanced 100k A/B"
+      },
+      "completed": [
+        {
+          "engine": "sqlite",
+          "mode": "scale-seed",
+          "label": "n100000-pair0-seed",
+          "log": "trwiki-scale-20261028-v1-n100000-pair0-seed-sqlite-scale-seed.jsonl",
+          "exit_code": 0,
+          "wall_s": 99.21899999998277
+        },
+        {
+          "engine": "sqlite",
+          "mode": "scale-idle",
+          "label": "n100000-pair0-idle0",
+          "log": "trwiki-scale-20261028-v1-n100000-pair0-idle0-sqlite-scale-idle.jsonl",
+          "exit_code": 0,
+          "wall_s": 2.0310000000172295
+        },
+        {
+          "engine": "sqlite",
+          "mode": "scale-idle",
+          "label": "n100000-pair0-idle1",
+          "log": "trwiki-scale-20261028-v1-n100000-pair0-idle1-sqlite-scale-idle.jsonl",
+          "exit_code": 0,
+          "wall_s": 2.0320000000065193
+        },
+        {
+          "engine": "sqlite",
+          "mode": "scale-query-experiments",
+          "label": "n100000-pair0-matrix",
+          "log": "trwiki-scale-20261028-v1-n100000-pair0-matrix-sqlite-scale-query-experiments.jsonl",
+          "exit_code": 0,
+          "wall_s": 601.2189999999828
+        },
+        {
+          "engine": "sqlite",
+          "mode": "scale-seed",
+          "label": "n100000-pair1-seed",
+          "log": "trwiki-scale-20261028-v1-n100000-pair1-seed-sqlite-scale-seed.jsonl",
+          "exit_code": 0,
+          "wall_s": 99.5
+        },
+        {
+          "engine": "sqlite",
+          "mode": "scale-idle",
+          "label": "n100000-pair1-idle0",
+          "log": "trwiki-scale-20261028-v1-n100000-pair1-idle0-sqlite-scale-idle.jsonl",
+          "exit_code": 0,
+          "wall_s": 2.047000000020489
+        },
+        {
+          "engine": "sqlite",
+          "mode": "scale-idle",
+          "label": "n100000-pair1-idle1",
+          "log": "trwiki-scale-20261028-v1-n100000-pair1-idle1-sqlite-scale-idle.jsonl",
+          "exit_code": 0,
+          "wall_s": 2.047000000020489
+        },
+        {
+          "engine": "sqlite",
+          "mode": "scale-query-experiments",
+          "label": "n100000-pair1-matrix",
+          "log": "trwiki-scale-20261028-v1-n100000-pair1-matrix-sqlite-scale-query-experiments.jsonl",
+          "exit_code": 0,
+          "wall_s": 598.2969999999623
+        }
+      ]
+    }
+  ],
+  "gate_failed_at": 50000,
+  "models": {
+    "50000": {
+      "count": 50000,
+      "states": {
+        "fdb": "C:\\Users\\Serkan\\Documents\\ChatGPT\\fdb\\docs\\benchmarks\\trwiki-scale-20261028-v1-n50000-pair1-fdb-state.json",
+        "sqlite": "C:\\Users\\Serkan\\Documents\\ChatGPT\\fdb\\docs\\benchmarks\\trwiki-scale-20261028-v1-n50000-pair1-sqlite-state.json"
+      },
+      "model_sha256": "5F4ABF37AA40CA54B1648D52EDF815527AD6609F5CB44FC70436A39FC474389B"
+    },
+    "100000": {
+      "count": 100000,
+      "states": {
+        "sqlite": "C:\\Users\\Serkan\\Documents\\ChatGPT\\fdb\\docs\\benchmarks\\trwiki-scale-20261028-v1-n100000-pair1-sqlite-state.json"
+      },
+      "model_sha256": "845ED30768CF3229A43AF1B2BE01677093300C6D6B1D48AA620E09BD10D116E7",
+      "fdb_partial_state": "C:\\Users\\Serkan\\Documents\\ChatGPT\\fdb\\docs\\benchmarks\\trwiki-scale-20261028-v1-partial66000-fdb-state.json"
+    }
+  },
+  "ingest_failure": {
+    "kind": "streamed_entry_limit",
+    "error": "streamed transaction exceeds entry/frame allowance",
+    "attempted_documents": 100000,
+    "committed_documents": 66000,
+    "sequence": 132,
+    "rejected_batch": [
+      66000,
+      66499
+    ],
+    "offending_document": 66498,
+    "text_bytes": 444345,
+    "per_entry_limit_bytes": 262144,
+    "transaction_limit_bytes": 67108864,
+    "rejected_batch_json_bytes": 2308679,
+    "raw_process": "trwiki-scale-20261028-v1-n100000-pair0-seed-fdb-scale-seed.process.json",
+    "stats": {
+      "compaction_running": false,
+      "delta_keys": 0,
+      "disk_index_bytes": 178263877,
+      "disk_posting_entries": 37009038,
+      "documents": 66000,
+      "generation": 345,
+      "log_bytes": 45,
+      "resident_documents": 0,
+      "resident_text_bytes": 0,
+      "segments": 12,
+      "sequence": 132,
+      "source_bytes": 225615947
+    },
+    "partial_state": "C:\\Users\\Serkan\\Documents\\ChatGPT\\fdb\\docs\\benchmarks\\trwiki-scale-20261028-v1-partial66000-fdb-state.json",
+    "partial_state_sha256": "C404FA1551FCD1E8E5AE80418A824B39CEB118A4F1A5C55A9382DDD8E1FCD256",
+    "fdb_100k_ingest_succeeded": false,
+    "fdb_retry": false,
+    "truncate_or_owned_fallback": false
+  },
+  "old_reader": {
+    "binary": "output\\maintenance-candidate-cli-20261024.exe",
+    "binary_sha256": "B7845966E330624407D66416225F9395ED20272DD0065BAA996E4CC26D93D939",
+    "full_payload_version_gets": 66000,
+    "deleted_gets": 500,
+    "cases": [
+      {
+        "case_id": 0,
+        "total": 18773,
+        "page": 50,
+        "oracle": true
+      },
+      {
+        "case_id": 1,
+        "total": 20190,
+        "page": 50,
+        "oracle": true
+      },
+      {
+        "case_id": 2,
+        "total": 19717,
+        "page": 50,
+        "oracle": true
+      },
+      {
+        "case_id": 3,
+        "total": 20998,
+        "page": 50,
+        "oracle": true
+      },
+      {
+        "case_id": 4,
+        "total": 13508,
+        "page": 50,
+        "oracle": true
+      },
+      {
+        "case_id": 5,
+        "total": 8152,
+        "page": 50,
+        "oracle": true
+      },
+      {
+        "case_id": 6,
+        "total": 4456,
+        "page": 50,
+        "oracle": true
+      },
+      {
+        "case_id": 7,
+        "total": 6093,
+        "page": 50,
+        "oracle": true
+      },
+      {
+        "case_id": 8,
+        "total": 11865,
+        "page": 50,
+        "oracle": true
+      },
+      {
+        "case_id": 9,
+        "total": 7547,
+        "page": 50,
+        "oracle": true
+      },
+      {
+        "case_id": 10,
+        "total": 3627,
+        "page": 50,
+        "oracle": true
+      },
+      {
+        "case_id": 11,
+        "total": 533,
+        "page": 50,
+        "oracle": true
+      },
+      {
+        "case_id": 12,
+        "total": 10452,
+        "page": 50,
+        "oracle": true
+      },
+      {
+        "case_id": 13,
+        "total": 664,
+        "page": 50,
+        "oracle": true
+      },
+      {
+        "case_id": 14,
+        "total": 1178,
+        "page": 50,
+        "oracle": true
+      },
+      {
+        "case_id": 15,
+        "total": 328,
+        "page": 50,
+        "oracle": true
+      },
+      {
+        "case_id": 16,
+        "total": 539,
+        "page": 50,
+        "oracle": true
+      },
+      {
+        "case_id": 17,
+        "total": 1335,
+        "page": 50,
+        "oracle": true
+      },
+      {
+        "case_id": 18,
+        "total": 387,
+        "page": 50,
+        "oracle": true
+      },
+      {
+        "case_id": 19,
+        "total": 1198,
+        "page": 50,
+        "oracle": true
+      },
+      {
+        "case_id": 20,
+        "total": 6,
+        "page": 6,
+        "oracle": true
+      },
+      {
+        "case_id": 21,
+        "total": 2,
+        "page": 2,
+        "oracle": true
+      },
+      {
+        "case_id": 22,
+        "total": 271,
+        "page": 50,
+        "oracle": true
+      },
+      {
+        "case_id": 23,
+        "total": 4,
+        "page": 4,
+        "oracle": true
+      },
+      {
+        "case_id": 24,
+        "total": 42,
+        "page": 42,
+        "oracle": true
+      },
+      {
+        "case_id": 25,
+        "total": 31,
+        "page": 31,
+        "oracle": true
+      },
+      {
+        "case_id": 26,
+        "total": 667,
+        "page": 50,
+        "oracle": true
+      },
+      {
+        "case_id": 27,
+        "total": 1709,
+        "page": 50,
+        "oracle": true
+      },
+      {
+        "case_id": 28,
+        "total": 489,
+        "page": 50,
+        "oracle": true
+      },
+      {
+        "case_id": 29,
+        "total": 40,
+        "page": 40,
+        "oracle": true
+      },
+      {
+        "case_id": 30,
+        "total": 141,
+        "page": 50,
+        "oracle": true
+      },
+      {
+        "case_id": 31,
+        "total": 28,
+        "page": 28,
+        "oracle": true
+      },
+      {
+        "case_id": 32,
+        "total": 1,
+        "page": 1,
+        "oracle": true
+      },
+      {
+        "case_id": 33,
+        "total": 13,
+        "page": 13,
+        "oracle": true
+      },
+      {
+        "case_id": 34,
+        "total": 23,
+        "page": 23,
+        "oracle": true
+      },
+      {
+        "case_id": 35,
+        "total": 62692,
+        "page": 50,
+        "oracle": true
+      },
+      {
+        "case_id": 36,
+        "total": 29862,
+        "page": 50,
+        "oracle": true
+      },
+      {
+        "case_id": 37,
+        "total": 50570,
+        "page": 50,
+        "oracle": true
+      },
+      {
+        "case_id": 38,
+        "total": 32,
+        "page": 32,
+        "oracle": true
+      },
+      {
+        "case_id": 39,
+        "total": 0,
+        "page": 0,
+        "oracle": true
+      },
+      {
+        "case_id": 40,
+        "total": 0,
+        "page": 0,
+        "oracle": true
+      }
+    ],
+    "response_stream_sha256": "236C3860E21DD478A108633CB408C9925600358863EEBDB1AE4BC7FD75669FBC",
+    "authoritative_sources_unchanged": true,
+    "oracle": true,
+    "payload_output_saved": false
+  },
+  "protected_after": [
+    {
+      "path": "data\\rkyv-corpus-20261009\\json.payload-bench",
+      "bytes": 2740862279,
+      "sha256": "11F826FCE3F4AE790FEB9FC6DF9B1169F52C2FD699E89FC4A8A4B77AAA41731B"
+    },
+    {
+      "path": "tests\\fixtures\\v1\\checkpoint.fdb",
+      "bytes": 1507,
+      "sha256": "E87667C0FABE64D5A1F59EF86B99F7E612DB755D239B41677DA2ADC24BE7BF57"
+    },
+    {
+      "path": "tests\\fixtures\\v1\\checkpoint.ready",
+      "bytes": 28,
+      "sha256": "BC82C18F8D5C3A209328BD59B12D828D8922BEC4D26CB4D557FD4A493A4A9C2F"
+    }
+  ],
+  "provided_source_after": "3D8BF5D4B8868C6C50644020B7998542E2589498BF99E3233DEDE8AD5613E91F",
+  "slot_pointer": "C:\\Users\\Serkan\\Documents\\ChatGPT\\fdb\\docs\\benchmarks\\active-benchmark-slots.json",
+  "independent_completion_after_ingest_failure": true,
+  "protected_unchanged": true,
+  "provided_source_unchanged": true
+}

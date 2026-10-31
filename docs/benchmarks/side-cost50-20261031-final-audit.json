@@ -1,0 +1,233 @@
+{
+  "gates": {
+    "write_retention_75_and_above_sqlite": true,
+    "single_commit_p95_p99_p999": true,
+    "ram_ingest60_idle15": true,
+    "ram_loaded_nonincrease": false,
+    "broad_pooled_nonincrease": false,
+    "cpu_pooled_nonincrease": false
+  },
+  "broad_checks": [
+    {
+      "context": "six-1R",
+      "case_id": 34,
+      "before": 115.8898,
+      "after": 113.8114,
+      "nonincrease": true
+    },
+    {
+      "context": "six-1R",
+      "case_id": 35,
+      "before": 1.7654,
+      "after": 1.7686,
+      "nonincrease": false
+    },
+    {
+      "context": "six-1R",
+      "case_id": 36,
+      "before": 2.9494,
+      "after": 2.8915,
+      "nonincrease": true
+    },
+    {
+      "context": "six-1R",
+      "case_id": 37,
+      "before": 2.133,
+      "after": 2.0413,
+      "nonincrease": true
+    },
+    {
+      "context": "six-1R",
+      "case_id": 38,
+      "before": 144.4123,
+      "after": 140.1512,
+      "nonincrease": true
+    },
+    {
+      "context": "six-4R",
+      "case_id": 34,
+      "before": 535.8788,
+      "after": 315.559,
+      "nonincrease": true
+    },
+    {
+      "context": "six-4R",
+      "case_id": 35,
+      "before": 4.1296,
+      "after": 4.0328,
+      "nonincrease": true
+    },
+    {
+      "context": "six-4R",
+      "case_id": 36,
+      "before": 6.0189,
+      "after": 6.3789,
+      "nonincrease": false
+    },
+    {
+      "context": "six-4R",
+      "case_id": 37,
+      "before": 4.7186,
+      "after": 4.4189,
+      "nonincrease": true
+    },
+    {
+      "context": "six-4R",
+      "case_id": 38,
+      "before": 1055.2559,
+      "after": 1386.8052,
+      "nonincrease": false
+    }
+  ],
+  "cpu_checks": [
+    {
+      "context": "full41-4R+W",
+      "case_id": 34,
+      "before": 268.29117063492066,
+      "after": 268.63766339869284,
+      "nonincrease": false
+    },
+    {
+      "context": "full41-4R+W",
+      "case_id": 35,
+      "before": 2.5421626984126986,
+      "after": 2.348856209150327,
+      "nonincrease": true
+    },
+    {
+      "context": "full41-4R+W",
+      "case_id": 36,
+      "before": 3.7202380952380953,
+      "after": 3.880718954248366,
+      "nonincrease": false
+    },
+    {
+      "context": "full41-4R+W",
+      "case_id": 37,
+      "before": 2.7901785714285716,
+      "after": 3.5786290322580645,
+      "nonincrease": false
+    },
+    {
+      "context": "full41-4R+W",
+      "case_id": 38,
+      "before": 559.6478174603175,
+      "after": 602.0934466019418,
+      "nonincrease": false
+    },
+    {
+      "context": "six-1R",
+      "case_id": 34,
+      "before": 226.62760416666666,
+      "after": 224.08854166666666,
+      "nonincrease": true
+    },
+    {
+      "context": "six-1R",
+      "case_id": 35,
+      "before": 1.3020833333333333,
+      "after": 1.4322916666666667,
+      "nonincrease": false
+    },
+    {
+      "context": "six-1R",
+      "case_id": 36,
+      "before": 2.8645833333333335,
+      "after": 2.2135416666666665,
+      "nonincrease": true
+    },
+    {
+      "context": "six-1R",
+      "case_id": 37,
+      "before": 1.5625,
+      "after": 1.8229166666666667,
+      "nonincrease": false
+    },
+    {
+      "context": "six-1R",
+      "case_id": 38,
+      "before": 422.7864583333333,
+      "after": 418.8802083333333,
+      "nonincrease": true
+    },
+    {
+      "context": "six-4R",
+      "case_id": 34,
+      "before": 243.48958333333334,
+      "after": 254.36197916666666,
+      "nonincrease": false
+    },
+    {
+      "context": "six-4R",
+      "case_id": 35,
+      "before": 2.5390625,
+      "after": 2.4739583333333335,
+      "nonincrease": true
+    },
+    {
+      "context": "six-4R",
+      "case_id": 36,
+      "before": 4.231770833333333,
+      "after": 2.734375,
+      "nonincrease": true
+    },
+    {
+      "context": "six-4R",
+      "case_id": 37,
+      "before": 3.3854166666666665,
+      "after": 3.0598958333333335,
+      "nonincrease": true
+    },
+    {
+      "context": "six-4R",
+      "case_id": 38,
+      "before": 504.296875,
+      "after": 607.1614583333334,
+      "nonincrease": false
+    }
+  ],
+  "engine_sources_unchanged": true,
+  "corpus_fixture_hashes_equal": true,
+  "read_only_sources_equal": true,
+  "frozen_programs_equal": true,
+  "prototype_default": false,
+  "bounded_wait_implemented": false,
+  "recoveries": [
+    {
+      "scope": "after strict open witnessed; no append-in-progress or power-loss claim",
+      "kills": 3,
+      "old_reader": true,
+      "live_sources_unchanged": true
+    },
+    {
+      "scope": "after strict open witnessed; no append-in-progress or power-loss claim",
+      "kills": 3,
+      "old_reader": true,
+      "live_sources_unchanged": true
+    }
+  ],
+  "lifecycles": [
+    {
+      "prefix": "side-cost-cpu50-20261031",
+      "children": 40,
+      "normal_exit": true
+    },
+    {
+      "prefix": "side-cost-broad50-20261031",
+      "children": 32,
+      "normal_exit": true
+    },
+    {
+      "prefix": "side-cost-ram50-20261031",
+      "children": 48,
+      "normal_exit": true
+    }
+  ],
+  "tests_passed": 251,
+  "tests_ignored": 15,
+  "original_normal_reader_gates": {
+    "before": "KALDI",
+    "after": "KALDI",
+    "sqlite": "KALDI"
+  }
+}

@@ -1,0 +1,344 @@
+{
+  "protected_before": [
+    {
+      "path": "data\\rkyv-corpus-20261009\\json.payload-bench",
+      "bytes": 2740862279,
+      "sha256": "11F826FCE3F4AE790FEB9FC6DF9B1169F52C2FD699E89FC4A8A4B77AAA41731B"
+    },
+    {
+      "path": "tests\\fixtures\\v1\\checkpoint.fdb",
+      "bytes": 1507,
+      "sha256": "E87667C0FABE64D5A1F59EF86B99F7E612DB755D239B41677DA2ADC24BE7BF57"
+    },
+    {
+      "path": "tests\\fixtures\\v1\\checkpoint.ready",
+      "bytes": 28,
+      "sha256": "BC82C18F8D5C3A209328BD59B12D828D8922BEC4D26CB4D557FD4A493A4A9C2F"
+    }
+  ],
+  "programs": {
+    "candidate": {
+      "path": "C:\\Users\\Serkan\\Documents\\ChatGPT\\fdb\\output\\write-hardening-fdb-20261027-v4.exe",
+      "sha256": "98BE45332EB72AC7D664556DEDA96197582D4FCA56875B7647C1D7B101296585"
+    },
+    "sqlite": {
+      "path": "C:\\Users\\Serkan\\Documents\\ChatGPT\\fdb\\output\\write-hardening-sqlite-20261027-v4.exe",
+      "sha256": "3B249636D5C1EF0FDB2DE8BB17EF62CC6F487365B1FC7C0F132C4F1AA317237C"
+    }
+  },
+  "workload": "fixed identical commit count per load/control arm, continuous4readers until writer completes; maintenance drained before arm; full oracle outside engine timer still consumes CPU",
+  "counts": "FDB4096 single/128hundred; SQLite512single/64hundred informative reference;4pairs each; reader minimum2rounds FDB/1SQLite, keeps looping under load",
+  "cache": "warmOS; no eviction/background or CPU/power isolation",
+  "completed": [
+    {
+      "engine": "fdb",
+      "mode": "seed",
+      "api": "streamed",
+      "log": "write-hardening-throughput-v4-10k-20261027-fdb-one-r0-control-fdb-streamed-seed.jsonl",
+      "exit_code": 0,
+      "wall_s": 15.625
+    },
+    {
+      "engine": "fdb",
+      "mode": "snapshot-control-one",
+      "api": "streamed",
+      "log": "write-hardening-throughput-v4-10k-20261027-fdb-one-r0-control-fdb-streamed-snapshot-control-one.jsonl",
+      "exit_code": 0,
+      "wall_s": 15.34299999999348
+    },
+    {
+      "engine": "fdb",
+      "mode": "verify",
+      "api": "streamed",
+      "log": "write-hardening-throughput-v4-10k-20261027-fdb-one-r0-control-fdb-streamed-verify.jsonl",
+      "exit_code": 0,
+      "wall_s": 2.9219999999913853
+    },
+    {
+      "engine": "fdb",
+      "mode": "seed",
+      "api": "streamed",
+      "log": "write-hardening-throughput-v4-10k-20261027-fdb-one-r0-load-fdb-streamed-seed.jsonl",
+      "exit_code": 0,
+      "wall_s": 15.53100000001723
+    },
+    {
+      "engine": "fdb",
+      "mode": "snapshot-one",
+      "api": "streamed",
+      "log": "write-hardening-throughput-v4-10k-20261027-fdb-one-r0-load-fdb-streamed-snapshot-one.jsonl",
+      "exit_code": 0,
+      "wall_s": 31.812999999994645
+    },
+    {
+      "engine": "fdb",
+      "mode": "verify",
+      "api": "streamed",
+      "log": "write-hardening-throughput-v4-10k-20261027-fdb-one-r0-load-fdb-streamed-verify.jsonl",
+      "exit_code": 0,
+      "wall_s": 2.8280000000086147
+    },
+    {
+      "engine": "sqlite",
+      "mode": "seed",
+      "api": "streamed",
+      "log": "write-hardening-throughput-v4-10k-20261027-sqlite-one-r0-control-sqlite-streamed-seed.jsonl",
+      "exit_code": 0,
+      "wall_s": 37.703000000008615
+    },
+    {
+      "engine": "sqlite",
+      "mode": "snapshot-control-one",
+      "api": "streamed",
+      "log": "write-hardening-throughput-v4-10k-20261027-sqlite-one-r0-control-sqlite-streamed-snapshot-control-one.jsonl",
+      "exit_code": 0,
+      "wall_s": 13.375
+    },
+    {
+      "engine": "sqlite",
+      "mode": "verify",
+      "api": "streamed",
+      "log": "write-hardening-throughput-v4-10k-20261027-sqlite-one-r0-control-sqlite-streamed-verify.jsonl",
+      "exit_code": 0,
+      "wall_s": 30.719000000011874
+    },
+    {
+      "engine": "sqlite",
+      "mode": "seed",
+      "api": "streamed",
+      "log": "write-hardening-throughput-v4-10k-20261027-sqlite-one-r0-load-sqlite-streamed-seed.jsonl",
+      "exit_code": 0,
+      "wall_s": 37.125
+    },
+    {
+      "engine": "sqlite",
+      "mode": "snapshot-one",
+      "api": "streamed",
+      "log": "write-hardening-throughput-v4-10k-20261027-sqlite-one-r0-load-sqlite-streamed-snapshot-one.jsonl",
+      "exit_code": 0,
+      "wall_s": 127.34400000001187
+    },
+    {
+      "engine": "sqlite",
+      "mode": "verify",
+      "api": "streamed",
+      "log": "write-hardening-throughput-v4-10k-20261027-sqlite-one-r0-load-sqlite-streamed-verify.jsonl",
+      "exit_code": 0,
+      "wall_s": 30.71799999999348
+    },
+    {
+      "engine": "sqlite",
+      "mode": "seed",
+      "api": "streamed",
+      "log": "write-hardening-throughput-v4-10k-20261027-sqlite-one-r1-load-sqlite-streamed-seed.jsonl",
+      "exit_code": 0,
+      "wall_s": 37.703000000008615
+    },
+    {
+      "engine": "sqlite",
+      "mode": "snapshot-one",
+      "api": "streamed",
+      "log": "write-hardening-throughput-v4-10k-20261027-sqlite-one-r1-load-sqlite-streamed-snapshot-one.jsonl",
+      "exit_code": 0,
+      "wall_s": 126.56299999999464
+    },
+    {
+      "engine": "sqlite",
+      "mode": "verify",
+      "api": "streamed",
+      "log": "write-hardening-throughput-v4-10k-20261027-sqlite-one-r1-load-sqlite-streamed-verify.jsonl",
+      "exit_code": 0,
+      "wall_s": 30.921000000002095
+    },
+    {
+      "engine": "sqlite",
+      "mode": "seed",
+      "api": "streamed",
+      "log": "write-hardening-throughput-v4-10k-20261027-sqlite-one-r1-control-sqlite-streamed-seed.jsonl",
+      "exit_code": 0,
+      "wall_s": 37.687999999994645
+    },
+    {
+      "engine": "sqlite",
+      "mode": "snapshot-control-one",
+      "api": "streamed",
+      "log": "write-hardening-throughput-v4-10k-20261027-sqlite-one-r1-control-sqlite-streamed-snapshot-control-one.jsonl",
+      "exit_code": 0,
+      "wall_s": 13.219000000011874
+    },
+    {
+      "engine": "sqlite",
+      "mode": "verify",
+      "api": "streamed",
+      "log": "write-hardening-throughput-v4-10k-20261027-sqlite-one-r1-control-sqlite-streamed-verify.jsonl",
+      "exit_code": 0,
+      "wall_s": 30.530999999988126
+    },
+    {
+      "engine": "fdb",
+      "mode": "seed",
+      "api": "streamed",
+      "log": "write-hardening-throughput-v4-10k-20261027-fdb-one-r1-load-fdb-streamed-seed.jsonl",
+      "exit_code": 0,
+      "wall_s": 15.578000000008615
+    },
+    {
+      "engine": "fdb",
+      "mode": "snapshot-one",
+      "api": "streamed",
+      "log": "write-hardening-throughput-v4-10k-20261027-fdb-one-r1-load-fdb-streamed-snapshot-one.jsonl",
+      "exit_code": 0,
+      "wall_s": 31.234000000025844
+    },
+    {
+      "engine": "fdb",
+      "mode": "verify",
+      "api": "streamed",
+      "log": "write-hardening-throughput-v4-10k-20261027-fdb-one-r1-load-fdb-streamed-verify.jsonl",
+      "exit_code": 0,
+      "wall_s": 2.7810000000172295
+    },
+    {
+      "engine": "fdb",
+      "mode": "seed",
+      "api": "streamed",
+      "log": "write-hardening-throughput-v4-10k-20261027-fdb-one-r1-control-fdb-streamed-seed.jsonl",
+      "exit_code": 0,
+      "wall_s": 15.78100000001723
+    },
+    {
+      "engine": "fdb",
+      "mode": "snapshot-control-one",
+      "api": "streamed",
+      "log": "write-hardening-throughput-v4-10k-20261027-fdb-one-r1-control-fdb-streamed-snapshot-control-one.jsonl",
+      "exit_code": 0,
+      "wall_s": 14.85899999999674
+    },
+    {
+      "engine": "fdb",
+      "mode": "verify",
+      "api": "streamed",
+      "log": "write-hardening-throughput-v4-10k-20261027-fdb-one-r1-control-fdb-streamed-verify.jsonl",
+      "exit_code": 0,
+      "wall_s": 2.9070000000065193
+    },
+    {
+      "engine": "fdb",
+      "mode": "seed",
+      "api": "streamed",
+      "log": "write-hardening-throughput-v4-10k-20261027-fdb-one-r2-load-fdb-streamed-seed.jsonl",
+      "exit_code": 0,
+      "wall_s": 15.546999999991385
+    },
+    {
+      "engine": "fdb",
+      "mode": "snapshot-one",
+      "api": "streamed",
+      "log": "write-hardening-throughput-v4-10k-20261027-fdb-one-r2-load-fdb-streamed-snapshot-one.jsonl",
+      "exit_code": 0,
+      "wall_s": 31.92200000002049
+    },
+    {
+      "engine": "fdb",
+      "mode": "verify",
+      "api": "streamed",
+      "log": "write-hardening-throughput-v4-10k-20261027-fdb-one-r2-load-fdb-streamed-verify.jsonl",
+      "exit_code": 0,
+      "wall_s": 2.8439999999827705
+    },
+    {
+      "engine": "fdb",
+      "mode": "seed",
+      "api": "streamed",
+      "log": "write-hardening-throughput-v4-10k-20261027-fdb-one-r2-control-fdb-streamed-seed.jsonl",
+      "exit_code": 0,
+      "wall_s": 15.780999999988126
+    },
+    {
+      "engine": "fdb",
+      "mode": "snapshot-control-one",
+      "api": "streamed",
+      "log": "write-hardening-throughput-v4-10k-20261027-fdb-one-r2-control-fdb-streamed-snapshot-control-one.jsonl",
+      "exit_code": 0,
+      "wall_s": 15.26600000000326
+    },
+    {
+      "engine": "fdb",
+      "mode": "verify",
+      "api": "streamed",
+      "log": "write-hardening-throughput-v4-10k-20261027-fdb-one-r2-control-fdb-streamed-verify.jsonl",
+      "exit_code": 0,
+      "wall_s": 2.89000000001397
+    },
+    {
+      "engine": "sqlite",
+      "mode": "seed",
+      "api": "streamed",
+      "log": "write-hardening-throughput-v4-10k-20261027-sqlite-one-r2-load-sqlite-streamed-seed.jsonl",
+      "exit_code": 0,
+      "wall_s": 37.969000000011874
+    }
+  ],
+  "orders": [
+    {
+      "engine": "fdb",
+      "batch": "one",
+      "pair": 0,
+      "order": [
+        "control",
+        "load"
+      ],
+      "commits": 4096
+    },
+    {
+      "engine": "sqlite",
+      "batch": "one",
+      "pair": 0,
+      "order": [
+        "control",
+        "load"
+      ],
+      "commits": 512
+    },
+    {
+      "engine": "sqlite",
+      "batch": "one",
+      "pair": 1,
+      "order": [
+        "load",
+        "control"
+      ],
+      "commits": 512
+    },
+    {
+      "engine": "fdb",
+      "batch": "one",
+      "pair": 1,
+      "order": [
+        "load",
+        "control"
+      ],
+      "commits": 4096
+    },
+    {
+      "engine": "fdb",
+      "batch": "one",
+      "pair": 2,
+      "order": [
+        "load",
+        "control"
+      ],
+      "commits": 4096
+    },
+    {
+      "engine": "sqlite",
+      "batch": "one",
+      "pair": 2,
+      "order": [
+        "load",
+        "control"
+      ],
+      "commits": 512
+    }
+  ]
+}

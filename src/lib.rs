@@ -5,11 +5,17 @@
 //! owned `Database::commit` API retains its existing limits and delta behavior;
 //! caller-owned batches and query results are not a total process memory cap.
 //! `--no-default-features` retains the reference implementation for comparison.
+mod access;
 pub mod adapters;
+pub use access::ReadWait as SnapshotReadWait;
 mod binary_batch;
 #[cfg(test)]
 mod binary_batch_tests;
 mod bounded;
+#[cfg(feature = "bounded-engine")]
+mod cancel;
+#[cfg(feature = "bounded-engine")]
+pub use cancel::CancelToken;
 mod engine;
 mod format;
 mod index;
@@ -34,11 +40,19 @@ mod source_records;
 mod spill;
 #[cfg(feature = "diagnostic-timing")]
 pub mod timing;
-#[cfg(feature = "experimental-wal-delta")]
+#[cfg(any(feature = "experimental-wal-delta", feature = "bounded-engine"))]
 mod wal_delta;
 #[cfg(feature = "experimental-write-buffer-budget")]
 pub mod write_budget;
-pub use engine::Database;
+#[cfg(feature = "bounded-engine")]
+pub use engine::{ChunkedCommit, ChunkedCommitError};
+pub use engine::{
+    Database, Snapshot, SnapshotAdmission, SnapshotPublication, SnapshotReader, SnapshotRelease,
+};
+#[cfg(feature = "bounded-engine")]
+pub use engine::{OpeningDatabase, OpeningFailure};
+#[cfg(feature = "bounded-engine")]
+pub use engine::{WriteFrame, WritePhase, WriteTrace};
 pub use model::*;
 pub type Result<T> = std::result::Result<T, Error>;
 
@@ -55,6 +69,7 @@ pub enum IndexCacheLayout {
 
 #[derive(Debug)]
 pub enum Error {
+    Cancelled,
     Io(std::io::Error),
     Json(serde_json::Error),
     Invalid(String),
@@ -66,6 +81,7 @@ pub enum Error {
 impl std::fmt::Display for Error {
     fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
         match self {
+            Self::Cancelled => write!(f, "query cancelled"),
             Self::Io(e) => write!(f, "I/O: {e}"),
             Self::Json(e) => write!(f, "JSON: {e}"),
             Self::Invalid(e) => write!(f, "invalid request: {e}"),

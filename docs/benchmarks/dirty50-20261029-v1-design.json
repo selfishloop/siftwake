@@ -1,0 +1,718 @@
+{
+  "documents": 50000,
+  "source_sha256": "881756DA400952500BA871F6C7BA8FF8D17E5348E5975420BC5CD90952A7CF12",
+  "programs": {
+    "fdb": {
+      "path": "output\\tail-dirty50-20261029-fdb.exe",
+      "sha256": "EE5548BA74068B0FD8A1FD69389CEB2264F5C3B59B0FF6C081D231B13CCB8380"
+    },
+    "sqlite": {
+      "path": "output\\tail-dirty50-20261029-sqlite.exe",
+      "sha256": "1469D74DAE80B1B326A8AC7C96A362684E7C55BADA39E5284ED34B882500F76C"
+    },
+    "diagnostic": {
+      "path": "output\\tail-dirty50-20261029-diagnostic.exe",
+      "sha256": "73F56DDB6DE800BA87FFB57DDFEC68CB0998060DCE33C3A2FEB8A67742FB10E4"
+    }
+  },
+  "implementation_sha256": {
+    "src\\access.rs": "B9ABB1447D11DAAAA2020E1B7E3B23C11251DF89AE233AF0EDB3E8ABEFB948FD",
+    "src\\adapters.rs": "52BC58797FCABCC75E1D283C5824D6B1C452AA2A804F9F01CA9C9BDE68755FD9",
+    "src\\bin\\fdb-import-sdb.rs": "8F50D34F9FEC3979DDBF14910FEF7B06DB633C222E8882FFBD083B4FBAB117B3",
+    "src\\binary_batch.rs": "F1025CF59B92B8A4FFC6957DCDE03E1A265ED8DF1F4E182B1DC43012FF4B5919",
+    "src\\binary_batch_tests.rs": "4DA6A284D15C41DDA7BEE195CB9B7374F58BBE38432563C64F84428B28B2F53E",
+    "src\\bounded.rs": "67AD5D3DFE4BC0956FD155277F42264BC57E0E9E768A9C3FFFF003BDC7796CF6",
+    "src\\cancel.rs": "690598AFBE11B37E7DE0E4DD254F008BBF3559C778BFD3AB1F5AAF6F2DC9F763",
+    "src\\engine\\first.rs": "7C4B83516CF008F1A9A9800E652159B42108C78F214DD41F1ADD958377D882E0",
+    "src\\engine\\light.rs": "9E35CC151342EC8931F49778E93865856EE7B2300B10A32303FB640A17EADB71",
+    "src\\engine\\light_flush\\tests.rs": "71D7C3D1F4163310F5F873156723B58BDF0F2CC51964E4B935EFD5F0CBDEB6F1",
+    "src\\engine\\light_flush.rs": "371FEC6370C713BC67FA98B6A0F5D49A096108C19D5CF7366F995ADC0D869EFE",
+    "src\\engine\\maintenance.rs": "EF58B41244FBEDE85AB5F5690A2ACA3BD7BF4E5E3D04E295C767C972277C1EB8",
+    "src\\engine\\opening.rs": "732186E0CD8DDADA5BFDEC98083312E69D960E893A0891043178EF4D0208B998",
+    "src\\engine\\profile.rs": "8497E8C2882742D759B3506A14578CC974D5FFA52B2A6EB0AA04D645A8423DE5",
+    "src\\engine\\reclaim_tests.rs": "687DB59310E4ADEEF57E0C26CE2E982B0C283E7E9B5B1ED3E42C37140D0559FC",
+    "src\\engine\\revisions\\tests.rs": "630B8B8EE03C8185EE2D16E1F43482DFE1C9B5672254BA905E33411FF08E021B",
+    "src\\engine\\revisions.rs": "7A791F55441D36F15ED6D1C82375CE2ABC61ECBED91B6B15F78D0651E6070CBF",
+    "src\\engine\\snapshot\\tests.rs": "66A0551646A759C6516C31168093D70AA5AC12B2D7322B35FD1507C6B583DAC8",
+    "src\\engine\\snapshot.rs": "FA8CB63BF4258C5846DE4381D8A2189DE557D01427688120BB9363C56ABB100E",
+    "src\\engine\\streamed.rs": "960E6FF463519F825E43F7A8FEF355A8A4978E97719D4C61F669F597AC08D0C4",
+    "src\\engine\\test_jobs.rs": "154ED7B3F721232EE5A604F93C008EA31C60267DD8A4B9F113D8AC55774D2B0B",
+    "src\\engine.rs": "D380588FD7E697E05DA269BE6FCABA7DD80DDC9B54B243015C938C04891F7570",
+    "src\\format\\native_check.rs": "60E24ABF509CA1220FAF17B020ED876E4DE75325607049E14EEB8A973D22F7B9",
+    "src\\format.rs": "4891C99A2730BF4F9C80EC1D98049440CA9F77C9F227202BD678D26412F90116",
+    "src\\index\\checkpoint_ids.rs": "AB8B3D3A2664FE64A7F34FD1FE3FA479C5686059425D71F256FA04F11EEFDFD9",
+    "src\\index\\gram_insert.rs": "620F88577AEA6D200046EF5B9ACBDD4A29C847BBFE334364575CB80810992CB9",
+    "src\\index\\intake_fold_tests.rs": "814005060E5A39EFA20E1622117EAD3FE5216BD8D027D70F6AB6F132BBDFCFD4",
+    "src\\index\\packed_grams.rs": "A6226239C0631603A937EB709B4504BABE6874A24A964C1FA7ACD7E811496DEA",
+    "src\\index\\posting.rs": "43A98EBBD515521D168004DE84CAE506691AABB9EECFDF8653B828C6D785DB60",
+    "src\\index.rs": "0DEA0B253D1E518E0B236CD6E31711B87740C46712E7963FC759AE4F66C03017",
+    "src\\json_stream.rs": "58842F0E6C76123BE8A89FEC2BC2D65F0508C26C74D1D3ED72AD6C0B6ACCFB92",
+    "src\\lib.rs": "3863F4298590B6B0B02313AFD68DBA1C80C5CFEA1E2B07B12E71CC5D91174F97",
+    "src\\main.rs": "EAC65B6AF172A12B4965E3A21134B71F46A1FF31E34F005B8877361502130097",
+    "src\\manifest.rs": "08E653178DE165AC6CCB4E4F87DFE25B7C5AAD56F43D3842D609BC2704A57A9D",
+    "src\\memory.rs": "5373B94A80143D8E7626A1E973DF86476CB2F84DC3A1BE953529799F20B242A7",
+    "src\\model.rs": "12D5C131594040746AF8F82D321E9FFC3F9659B02F52F070E0231168478CF511",
+    "src\\payload.rs": "EF3C9B13452A1D804D56FDA3E91B3BA6986E73E1DBAFEB1A55E6160AADFB1E95",
+    "src\\query.rs": "A0CBD5F85FC52734B253AEF8F2347913CCE09BFEA39BC661C65214C2ACFEEFBE",
+    "src\\reclaim\\tests.rs": "B294B441E4A2502E31771789FE0081698A20CFEA33BD965B19BD32F6D1063BF3",
+    "src\\reclaim.rs": "D7775CC7BA60B8D7CFAE64EB46CB5126E050303E4594557059C39FF3C3BF17FC",
+    "src\\rkyv_payload\\bench.rs": "ACD57E5FA12D35BCA7F2B33AE8DBBFC6F74EDE4B4BADE06A44158B5CD2EA65F2",
+    "src\\rkyv_payload\\binary.rs": "903B125F1D93955A2A0577630DF56C5617ECA55DF78EFDF14EEB1DE80AB8D9BA",
+    "src\\rkyv_payload.rs": "A3202508E5B019006FFEF56FEA640B3109A9A836EAEF831E28AF7E96F53E6503",
+    "src\\segment\\block_check.rs": "7BE93858C9A6F0132C10453F48661175DDBC9E49A63633B387B500838CDAA7FB",
+    "src\\segment\\checked_page.rs": "4895CD7735A82CF16DCB9F1D8843B89C2E26828AD6B8892B571ED2D44305563E",
+    "src\\segment\\checksum.rs": "A5E61E59D6853A2AE6946B3D24177FFEE16553119900BF3814A4B313F58E273D",
+    "src\\segment\\compact.rs": "753FE71327A3F40B8F6643565D71EFF41202432B02CD3571133619DE1723A7FD",
+    "src\\segment\\covering.rs": "6BBD02A850DEF163D94F3DA4B388899146A19BB9391EE6EC412C887DEA00E8D8",
+    "src\\segment\\first.rs": "F2488AB7B9EDC11D75911FE7BE8A34A1609C3E77CECAC03DE840B4939755B6A9",
+    "src\\segment\\grouped_tests.rs": "8D02416FCB08C579DE2E25577FCB41CC970655C649CA2AB9BD42364C9C124B06",
+    "src\\segment\\paged\\streaming.rs": "5DC7BFC569D746858381C49654B6D59F8F24A7977AEC70B17DFC7A1F65A0E68B",
+    "src\\segment\\paged.rs": "6A8347E9BA1587A492472A842C3D8D682486E30252099691E24BB19C9F72D249",
+    "src\\segment\\payload_bench.rs": "B73457298BAAAA6BDAB7A55F4B01715FF23FD959E0EB1891FBD597A70EB7DA12",
+    "src\\segment\\posting_pages.rs": "2A7B1EEE81264E5AA5C9DC60FA3B1DEBF01055EF9872CF34D11663BAB8B4231D",
+    "src\\segment\\posting_spool.rs": "9A362E4B1377593D94A835069207E2B6C562B87EF90F22700FA89FB59A339618",
+    "src\\segment\\record_spool.rs": "F6A1C49E7963676F8764202B8AF059573164AB6D85AE3FF533478A52E96ACC39",
+    "src\\segment\\reuse.rs": "BDAF40000400E33D36FF90EA42015549691B2CB1825340D909263E4094ED9BD6",
+    "src\\segment\\short_ascii.rs": "EC190CB755AADEC0C670DE9E59762529B95E7A19A256458A66D4D2F6645C68D2",
+    "src\\segment\\streaming.rs": "DEAE790C04D0E5F74FD7D8F19DF03B0142D9D7041A8D814F42B3564E83C8B74D",
+    "src\\segment\\term_pages.rs": "217CBBCAD3FC85AFDD3D6F5C4CD8B7287D1D67752AA516097B569D054657ADEF",
+    "src\\segment\\window_tests.rs": "A593A268F3F1EA0B887F425D6EA058C3B7A7D29C71FBE30B009B1EB484ECFDAD",
+    "src\\segment.rs": "39D9D54E8041377C36909A25EBE2B20AD2B0E752CCC7B4CF9652E022B7BE54BD",
+    "src\\shared_documents.rs": "94BA52AB4B14A0D6B79DAB29C4EA42C5CD96DAC9720542C0646478A335C42E13",
+    "src\\source_records.rs": "A30B85BDD433A37A1DB551BE8AF9BDA0280195A14B40FE627C855F9EA3793A3F",
+    "src\\spill\\bounded.rs": "BC71FBCA48ACDD1A5901A0B70FA7A5C439075F817FFD9C62191E04F27E5A9E41",
+    "src\\spill.rs": "6538EAEC49FF8E555B3754EFCC551BCF51D0383FF813B24C74678FE5187074A2",
+    "src\\timing\\maintenance.rs": "F7EFC62CCFADA52801E824DAE742D804C34724FE0175CE5035FB3778C927DBB0",
+    "src\\timing.rs": "9BFD33C5F3AB6DC22ECA9BAEB1D4C80361E82784A8E37EB881B892182E307582",
+    "src\\wal_delta.rs": "C8F55F95EB9A4D7371B0FD6334AA1A645FF5FDC4B763600ACBA0DCA2ED9D5B14",
+    "src\\write_budget.rs": "9ECEC7D0D2B53961F284C3C841B9500771139A4494904AB9BA8C6556AEA805B2"
+  },
+  "protected_before": [
+    {
+      "path": "data\\rkyv-corpus-20261009\\json.payload-bench",
+      "bytes": 2740862279,
+      "sha256": "11F826FCE3F4AE790FEB9FC6DF9B1169F52C2FD699E89FC4A8A4B77AAA41731B"
+    },
+    {
+      "path": "tests\\fixtures\\v1\\checkpoint.fdb",
+      "bytes": 1507,
+      "sha256": "E87667C0FABE64D5A1F59EF86B99F7E612DB755D239B41677DA2ADC24BE7BF57"
+    },
+    {
+      "path": "tests\\fixtures\\v1\\checkpoint.ready",
+      "bytes": 28,
+      "sha256": "BC82C18F8D5C3A209328BD59B12D828D8922BEC4D26CB4D557FD4A493A4A9C2F"
+    }
+  ],
+  "completed": [
+    {
+      "engine": "fdb",
+      "program": "fdb",
+      "mode": "scale-seed",
+      "label": "pair0-seed",
+      "log": "dirty50-20261029-v1-pair0-seed-fdb-scale-seed.jsonl",
+      "exit_code": 0,
+      "wall_s": 54.95299999997951
+    },
+    {
+      "engine": "sqlite",
+      "program": "sqlite",
+      "mode": "scale-seed",
+      "label": "pair0-seed",
+      "log": "dirty50-20261029-v1-pair0-seed-sqlite-scale-seed.jsonl",
+      "exit_code": 0,
+      "wall_s": 48.48399999999674
+    },
+    {
+      "engine": "fdb",
+      "program": "fdb",
+      "mode": "write50-dirty-part",
+      "label": "pair0-part0",
+      "log": "dirty50-20261029-v1-pair0-part0-fdb-write50-dirty-part.jsonl",
+      "exit_code": 0,
+      "wall_s": 1.4690000000409782
+    },
+    {
+      "engine": "fdb",
+      "program": "fdb",
+      "mode": "write50-dirty-part",
+      "label": "pair0-part1",
+      "log": "dirty50-20261029-v1-pair0-part1-fdb-write50-dirty-part.jsonl",
+      "exit_code": 0,
+      "wall_s": 1.5160000000032596
+    },
+    {
+      "engine": "fdb",
+      "program": "fdb",
+      "mode": "write50-dirty-part",
+      "label": "pair0-part2",
+      "log": "dirty50-20261029-v1-pair0-part2-fdb-write50-dirty-part.jsonl",
+      "exit_code": 0,
+      "wall_s": 1.5310000000172295
+    },
+    {
+      "engine": "fdb",
+      "program": "fdb",
+      "mode": "write50-dirty-part",
+      "label": "pair0-part3",
+      "log": "dirty50-20261029-v1-pair0-part3-fdb-write50-dirty-part.jsonl",
+      "exit_code": 0,
+      "wall_s": 1.5160000000032596
+    },
+    {
+      "engine": "fdb",
+      "program": "fdb",
+      "mode": "write50-dirty-part",
+      "label": "pair0-part4",
+      "log": "dirty50-20261029-v1-pair0-part4-fdb-write50-dirty-part.jsonl",
+      "exit_code": 0,
+      "wall_s": 1.5160000000032596
+    },
+    {
+      "engine": "fdb",
+      "program": "fdb",
+      "mode": "scale-idle",
+      "label": "pair0-dirty-open",
+      "log": "dirty50-20261029-v1-pair0-dirty-open-fdb-scale-idle.jsonl",
+      "exit_code": 0,
+      "wall_s": 2.3429999999934807
+    },
+    {
+      "engine": "fdb",
+      "program": "fdb",
+      "mode": "first-strict",
+      "label": "pair0-oracle",
+      "log": "dirty50-20261029-v1-pair0-oracle-fdb-first-strict.jsonl",
+      "exit_code": 0,
+      "wall_s": 1.7660000000032596
+    },
+    {
+      "engine": "fdb",
+      "program": "diagnostic",
+      "mode": "open-profile",
+      "label": "pair0-replay-profile",
+      "log": "dirty50-20261029-v1-pair0-replay-profile-diagnostic-open-profile.jsonl",
+      "exit_code": 0,
+      "wall_s": 0.48399999999674037
+    },
+    {
+      "engine": "sqlite",
+      "program": "sqlite",
+      "mode": "write50-dirty-part",
+      "label": "pair0-part0",
+      "log": "dirty50-20261029-v1-pair0-part0-sqlite-write50-dirty-part.jsonl",
+      "exit_code": 0,
+      "wall_s": 1.7660000000032596
+    },
+    {
+      "engine": "sqlite",
+      "program": "sqlite",
+      "mode": "write50-dirty-part",
+      "label": "pair0-part1",
+      "log": "dirty50-20261029-v1-pair0-part1-sqlite-write50-dirty-part.jsonl",
+      "exit_code": 0,
+      "wall_s": 1.7650000000139698
+    },
+    {
+      "engine": "sqlite",
+      "program": "sqlite",
+      "mode": "write50-dirty-part",
+      "label": "pair0-part2",
+      "log": "dirty50-20261029-v1-pair0-part2-sqlite-write50-dirty-part.jsonl",
+      "exit_code": 0,
+      "wall_s": 1.7809999999590218
+    },
+    {
+      "engine": "sqlite",
+      "program": "sqlite",
+      "mode": "write50-dirty-part",
+      "label": "pair0-part3",
+      "log": "dirty50-20261029-v1-pair0-part3-sqlite-write50-dirty-part.jsonl",
+      "exit_code": 0,
+      "wall_s": 1.7810000000172295
+    },
+    {
+      "engine": "sqlite",
+      "program": "sqlite",
+      "mode": "write50-dirty-part",
+      "label": "pair0-part4",
+      "log": "dirty50-20261029-v1-pair0-part4-sqlite-write50-dirty-part.jsonl",
+      "exit_code": 0,
+      "wall_s": 1.827999999979511
+    },
+    {
+      "engine": "sqlite",
+      "program": "sqlite",
+      "mode": "scale-idle",
+      "label": "pair0-dirty-open",
+      "log": "dirty50-20261029-v1-pair0-dirty-open-sqlite-scale-idle.jsonl",
+      "exit_code": 0,
+      "wall_s": 2.125
+    },
+    {
+      "engine": "sqlite",
+      "program": "sqlite",
+      "mode": "first-sqlite",
+      "label": "pair0-oracle",
+      "log": "dirty50-20261029-v1-pair0-oracle-sqlite-first-sqlite.jsonl",
+      "exit_code": 0,
+      "wall_s": 0.8279999999795109
+    },
+    {
+      "engine": "sqlite",
+      "program": "sqlite",
+      "mode": "scale-seed",
+      "label": "pair1-seed",
+      "log": "dirty50-20261029-v1-pair1-seed-sqlite-scale-seed.jsonl",
+      "exit_code": 0,
+      "wall_s": 48.26600000000326
+    },
+    {
+      "engine": "fdb",
+      "program": "fdb",
+      "mode": "scale-seed",
+      "label": "pair1-seed",
+      "log": "dirty50-20261029-v1-pair1-seed-fdb-scale-seed.jsonl",
+      "exit_code": 0,
+      "wall_s": 54.01600000000326
+    },
+    {
+      "engine": "sqlite",
+      "program": "sqlite",
+      "mode": "write50-dirty-part",
+      "label": "pair1-part0",
+      "log": "dirty50-20261029-v1-pair1-part0-sqlite-write50-dirty-part.jsonl",
+      "exit_code": 0,
+      "wall_s": 1.8900000000139698
+    },
+    {
+      "engine": "sqlite",
+      "program": "sqlite",
+      "mode": "write50-dirty-part",
+      "label": "pair1-part1",
+      "log": "dirty50-20261029-v1-pair1-part1-sqlite-write50-dirty-part.jsonl",
+      "exit_code": 0,
+      "wall_s": 1.827999999979511
+    },
+    {
+      "engine": "sqlite",
+      "program": "sqlite",
+      "mode": "write50-dirty-part",
+      "label": "pair1-part2",
+      "log": "dirty50-20261029-v1-pair1-part2-sqlite-write50-dirty-part.jsonl",
+      "exit_code": 0,
+      "wall_s": 1.7810000000172295
+    },
+    {
+      "engine": "sqlite",
+      "program": "sqlite",
+      "mode": "write50-dirty-part",
+      "label": "pair1-part3",
+      "log": "dirty50-20261029-v1-pair1-part3-sqlite-write50-dirty-part.jsonl",
+      "exit_code": 0,
+      "wall_s": 1.7649999999557622
+    },
+    {
+      "engine": "sqlite",
+      "program": "sqlite",
+      "mode": "write50-dirty-part",
+      "label": "pair1-part4",
+      "log": "dirty50-20261029-v1-pair1-part4-sqlite-write50-dirty-part.jsonl",
+      "exit_code": 0,
+      "wall_s": 1.797000000020489
+    },
+    {
+      "engine": "sqlite",
+      "program": "sqlite",
+      "mode": "scale-idle",
+      "label": "pair1-dirty-open",
+      "log": "dirty50-20261029-v1-pair1-dirty-open-sqlite-scale-idle.jsonl",
+      "exit_code": 0,
+      "wall_s": 2.10999999998603
+    },
+    {
+      "engine": "sqlite",
+      "program": "sqlite",
+      "mode": "first-sqlite",
+      "label": "pair1-oracle",
+      "log": "dirty50-20261029-v1-pair1-oracle-sqlite-first-sqlite.jsonl",
+      "exit_code": 0,
+      "wall_s": 0.8279999999795109
+    },
+    {
+      "engine": "fdb",
+      "program": "fdb",
+      "mode": "write50-dirty-part",
+      "label": "pair1-part0",
+      "log": "dirty50-20261029-v1-pair1-part0-fdb-write50-dirty-part.jsonl",
+      "exit_code": 0,
+      "wall_s": 1.5
+    },
+    {
+      "engine": "fdb",
+      "program": "fdb",
+      "mode": "write50-dirty-part",
+      "label": "pair1-part1",
+      "log": "dirty50-20261029-v1-pair1-part1-fdb-write50-dirty-part.jsonl",
+      "exit_code": 0,
+      "wall_s": 1.5
+    },
+    {
+      "engine": "fdb",
+      "program": "fdb",
+      "mode": "write50-dirty-part",
+      "label": "pair1-part2",
+      "log": "dirty50-20261029-v1-pair1-part2-fdb-write50-dirty-part.jsonl",
+      "exit_code": 0,
+      "wall_s": 1.5310000000172295
+    },
+    {
+      "engine": "fdb",
+      "program": "fdb",
+      "mode": "write50-dirty-part",
+      "label": "pair1-part3",
+      "log": "dirty50-20261029-v1-pair1-part3-fdb-write50-dirty-part.jsonl",
+      "exit_code": 0,
+      "wall_s": 1.5619999999762513
+    },
+    {
+      "engine": "fdb",
+      "program": "fdb",
+      "mode": "write50-dirty-part",
+      "label": "pair1-part4",
+      "log": "dirty50-20261029-v1-pair1-part4-fdb-write50-dirty-part.jsonl",
+      "exit_code": 0,
+      "wall_s": 1.5160000000032596
+    },
+    {
+      "engine": "fdb",
+      "program": "fdb",
+      "mode": "scale-idle",
+      "label": "pair1-dirty-open",
+      "log": "dirty50-20261029-v1-pair1-dirty-open-fdb-scale-idle.jsonl",
+      "exit_code": 0,
+      "wall_s": 2.327999999979511
+    },
+    {
+      "engine": "fdb",
+      "program": "fdb",
+      "mode": "first-strict",
+      "label": "pair1-oracle",
+      "log": "dirty50-20261029-v1-pair1-oracle-fdb-first-strict.jsonl",
+      "exit_code": 0,
+      "wall_s": 1.75
+    },
+    {
+      "engine": "fdb",
+      "program": "diagnostic",
+      "mode": "open-profile",
+      "label": "pair1-replay-profile",
+      "log": "dirty50-20261029-v1-pair1-replay-profile-diagnostic-open-profile.jsonl",
+      "exit_code": 0,
+      "wall_s": 0.35899999999674037
+    }
+  ],
+  "states": {
+    "fdb": "C:\\Users\\Serkan\\Documents\\ChatGPT\\fdb\\docs\\benchmarks\\dirty50-20261029-v1-pair1-fdb-state.json",
+    "sqlite": "C:\\Users\\Serkan\\Documents\\ChatGPT\\fdb\\docs\\benchmarks\\dirty50-20261029-v1-pair1-sqlite-state.json"
+  },
+  "stage": "dirty_passed",
+  "orders": [
+    [
+      "fdb",
+      "sqlite"
+    ],
+    [
+      "sqlite",
+      "fdb"
+    ]
+  ],
+  "preparation": "five independent100-op streamed commits; foreground never installs completed prefix between parts; each process closes normally; verify delta500, do not estimate it",
+  "sqlite_preparation": "short read transaction pins baseline during setup, then intentional process kill leaves acknowledged WAL; not a long-snapshot stress test",
+  "cache": "warm/uncontrolled OS; strict CRC/source checks retained; first fresh-process open and idle without oracle",
+  "optimization": false,
+  "persistent_format_changed": false,
+  "entry_limit_changed": false,
+  "before_open": [
+    {
+      "pair": 0,
+      "engine": "fdb",
+      "model_sha256": "E479E0F7655170514E068523D59D381E02751E25C78FC871D64E86AAF94E3569",
+      "disk": [
+        [
+          "LOCK",
+          0
+        ],
+        [
+          "generation-0000000000000105.fdb",
+          3714910
+        ],
+        [
+          "generation-000000000000010e.ready",
+          354
+        ],
+        [
+          "generation-0000000000000110.fdb",
+          45
+        ],
+        [
+          "generation-0000000000000112.fdb",
+          45
+        ],
+        [
+          "generation-0000000000000114.fdb",
+          45
+        ],
+        [
+          "run-0000000000000108.fdb",
+          62223588
+        ],
+        [
+          "run-0000000000000108.idx",
+          45783695
+        ],
+        [
+          "run-0000000000000108.records04.idx",
+          801620
+        ],
+        [
+          "run-000000000000010a.fdb",
+          55280368
+        ],
+        [
+          "run-000000000000010a.idx",
+          40956183
+        ],
+        [
+          "run-000000000000010a.records04.idx",
+          712600
+        ],
+        [
+          "run-000000000000010c.fdb",
+          53761457
+        ],
+        [
+          "run-000000000000010c.idx",
+          40603449
+        ],
+        [
+          "run-000000000000010c.records04.idx",
+          712603
+        ],
+        [
+          "run-000000000000010f.fdb",
+          2150973
+        ],
+        [
+          "run-000000000000010f.idx",
+          1755454
+        ],
+        [
+          "run-000000000000010f.records04.idx",
+          13661
+        ],
+        [
+          "run-0000000000000111.fdb",
+          2866557
+        ],
+        [
+          "run-0000000000000111.idx",
+          2251338
+        ],
+        [
+          "run-0000000000000111.records04.idx",
+          18186
+        ],
+        [
+          "run-0000000000000113.fdb",
+          3714725
+        ],
+        [
+          "run-0000000000000113.idx",
+          2755983
+        ],
+        [
+          "run-0000000000000113.records04.idx",
+          22691
+        ]
+      ]
+    },
+    {
+      "pair": 0,
+      "engine": "sqlite",
+      "model_sha256": "E479E0F7655170514E068523D59D381E02751E25C78FC871D64E86AAF94E3569",
+      "disk": [
+        [
+          "sqlite.db",
+          421638144
+        ],
+        [
+          "sqlite.db-shm",
+          32768
+        ],
+        [
+          "sqlite.db-wal",
+          16187512
+        ]
+      ]
+    },
+    {
+      "pair": 1,
+      "engine": "sqlite",
+      "model_sha256": "E479E0F7655170514E068523D59D381E02751E25C78FC871D64E86AAF94E3569",
+      "disk": [
+        [
+          "sqlite.db",
+          421638144
+        ],
+        [
+          "sqlite.db-shm",
+          32768
+        ],
+        [
+          "sqlite.db-wal",
+          16187512
+        ]
+      ]
+    },
+    {
+      "pair": 1,
+      "engine": "fdb",
+      "model_sha256": "E479E0F7655170514E068523D59D381E02751E25C78FC871D64E86AAF94E3569",
+      "disk": [
+        [
+          "LOCK",
+          0
+        ],
+        [
+          "generation-0000000000000105.fdb",
+          3714910
+        ],
+        [
+          "generation-000000000000010e.ready",
+          354
+        ],
+        [
+          "generation-0000000000000110.fdb",
+          45
+        ],
+        [
+          "generation-0000000000000112.fdb",
+          45
+        ],
+        [
+          "generation-0000000000000114.fdb",
+          45
+        ],
+        [
+          "run-0000000000000108.fdb",
+          62223588
+        ],
+        [
+          "run-0000000000000108.idx",
+          45783695
+        ],
+        [
+          "run-0000000000000108.records04.idx",
+          801620
+        ],
+        [
+          "run-000000000000010a.fdb",
+          55280368
+        ],
+        [
+          "run-000000000000010a.idx",
+          40956183
+        ],
+        [
+          "run-000000000000010a.records04.idx",
+          712600
+        ],
+        [
+          "run-000000000000010c.fdb",
+          53761457
+        ],
+        [
+          "run-000000000000010c.idx",
+          40603449
+        ],
+        [
+          "run-000000000000010c.records04.idx",
+          712603
+        ],
+        [
+          "run-000000000000010f.fdb",
+          2150973
+        ],
+        [
+          "run-000000000000010f.idx",
+          1755454
+        ],
+        [
+          "run-000000000000010f.records04.idx",
+          13661
+        ],
+        [
+          "run-0000000000000111.fdb",
+          2866557
+        ],
+        [
+          "run-0000000000000111.idx",
+          2251338
+        ],
+        [
+          "run-0000000000000111.records04.idx",
+          18186
+        ],
+        [
+          "run-0000000000000113.fdb",
+          3714725
+        ],
+        [
+          "run-0000000000000113.idx",
+          2755983
+        ],
+        [
+          "run-0000000000000113.records04.idx",
+          22691
+        ]
+      ]
+    }
+  ],
+  "gate": {
+    "stage": "dirty500",
+    "strict_open_ms": [
+      292.1017,
+      290.572
+    ],
+    "idle_private_bytes": [
+      4530176,
+      4653056
+    ],
+    "diagnostic_wal_replay_ms": [
+      34.7452,
+      35.0021
+    ],
+    "passed": true
+  },
+  "protected_after": [
+    {
+      "path": "data\\rkyv-corpus-20261009\\json.payload-bench",
+      "bytes": 2740862279,
+      "sha256": "11F826FCE3F4AE790FEB9FC6DF9B1169F52C2FD699E89FC4A8A4B77AAA41731B"
+    },
+    {
+      "path": "tests\\fixtures\\v1\\checkpoint.fdb",
+      "bytes": 1507,
+      "sha256": "E87667C0FABE64D5A1F59EF86B99F7E612DB755D239B41677DA2ADC24BE7BF57"
+    },
+    {
+      "path": "tests\\fixtures\\v1\\checkpoint.ready",
+      "bytes": 28,
+      "sha256": "BC82C18F8D5C3A209328BD59B12D828D8922BEC4D26CB4D557FD4A493A4A9C2F"
+    }
+  ],
+  "source_after": "881756DA400952500BA871F6C7BA8FF8D17E5348E5975420BC5CD90952A7CF12",
+  "protected_unchanged": true,
+  "source_unchanged": true
+}

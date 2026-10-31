@@ -74,6 +74,12 @@ pub(super) struct Covering {
     universal: Universal,
 }
 impl Covering {
+    pub(super) fn permits_crc_reuse(&self, file: &File) -> Result<bool> {
+        if self.source.as_ref().is_none_or(|s| s.pinned.is_none()) {
+            return Ok(false);
+        }
+        self.usable(file)
+    }
     pub fn new(metadata: &std::fs::Metadata) -> Self {
         Self {
             authorized: AtomicBool::new(false),

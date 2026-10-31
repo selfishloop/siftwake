@@ -6,14 +6,17 @@ use std::{collections::BTreeMap, sync::Arc};
 const BUDGET: usize = 128 * 1024;
 const ENTRIES: usize = 256;
 type Fields = BTreeMap<String, Value>;
+#[derive(Clone)]
 enum Body {
     Owned(String),
     Shared(Arc<str>),
 }
+#[derive(Clone)]
 enum FieldSet {
     Owned(Fields),
     Shared(Arc<Fields>),
 }
+#[derive(Clone)]
 pub(crate) struct Row {
     pub version: u64,
     pub serialized_len: usize,

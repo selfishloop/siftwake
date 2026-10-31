@@ -35,6 +35,52 @@ fn seed(t: &Temp) -> Database {
 }
 
 #[test]
+fn idle_notification_reclaims_thirty_rounds_of_obsolete_barriers_without_resurrection() {
+    let t = Temp::new();
+    let mut db = Database::open(&t.0).unwrap();
+    db.set_revision_reclamation(true);
+    let reader = db.snapshot_reader().unwrap();
+    let mut pin = None;
+    for round in 0..30 {
+        db.commit((0..160).map(|n| put(round * 160 + n, "alive")).collect())
+            .unwrap();
+        db.flush().unwrap();
+        if round == 0 {
+            pin = Some(reader.acquire().unwrap());
+        }
+        db.commit(
+            (0..160)
+                .map(|n| Mutation::Delete {
+                    key: doc(&format!("{:04}", round * 160 + n)).key,
+                    guard: Guard::Any,
+                })
+                .collect(),
+        )
+        .unwrap();
+        db.maintain_idle().unwrap();
+        assert_eq!(db.stats().unwrap().documents, 0);
+        assert_eq!(
+            db.segment_liveness()
+                .unwrap()
+                .iter()
+                .map(|s| s.tombstones)
+                .sum::<usize>(),
+            0
+        );
+        let mut q = Query::new("shared");
+        q.text = "alive".into();
+        assert_eq!(db.search(&q).unwrap().total, 0);
+        assert_eq!(pin.as_ref().unwrap().search(&q).unwrap().total, 160);
+    }
+    drop(pin);
+    drop(reader);
+    drop(db);
+    let db = Database::open(&t.0).unwrap();
+    assert_eq!(db.stats().unwrap().documents, 0);
+    db.check_integrity().unwrap();
+}
+
+#[test]
 fn rewrite_preserves_barriers_pins_pending_delta_and_reused_postings() {
     let t = Temp::new();
     let mut db = seed(&t);
@@ -162,8 +208,10 @@ fn cancellation_never_publishes_or_discards_acknowledged_revisions() {
     let mut db = seed(&t);
     let generation = db.generation;
     #[cfg(feature = "experimental-write-maintenance-slots")]
-    let block = maintenance_workspace().unwrap();
+    let block = test_jobs::pause(&t.0);
     assert!(db.start_revision_reclamation().unwrap());
+    #[cfg(feature = "experimental-write-maintenance-slots")]
+    block.wait_entered();
     db.job.as_ref().unwrap().cancel.as_ref().unwrap().cancel();
     #[cfg(feature = "experimental-write-maintenance-slots")]
     drop(block);

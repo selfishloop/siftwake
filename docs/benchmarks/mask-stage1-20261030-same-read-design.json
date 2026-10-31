@@ -1,0 +1,2057 @@
+{
+  "stage": "completed50k",
+  "documents": 50000,
+  "programs": {
+    "control": {
+      "path": "C:\\Users\\Serkan\\Documents\\ChatGPT\\fdb\\output\\mask-stage1-same-binary-20261030.exe",
+      "sha256": "CF35FCBCCDFC79E93F5FEF1802A2F99B5E8C07B9DBE240ECD9B7024FA06B58DF"
+    },
+    "candidate": {
+      "path": "C:\\Users\\Serkan\\Documents\\ChatGPT\\fdb\\output\\mask-stage1-same-binary-20261030.exe",
+      "sha256": "CF35FCBCCDFC79E93F5FEF1802A2F99B5E8C07B9DBE240ECD9B7024FA06B58DF"
+    }
+  },
+  "source_sha256": "881756DA400952500BA871F6C7BA8FF8D17E5348E5975420BC5CD90952A7CF12",
+  "protected_before": [
+    {
+      "path": "data\\rkyv-corpus-20261009\\json.payload-bench",
+      "bytes": 2740862279,
+      "sha256": "11F826FCE3F4AE790FEB9FC6DF9B1169F52C2FD699E89FC4A8A4B77AAA41731B"
+    },
+    {
+      "path": "tests\\fixtures\\v1\\checkpoint.fdb",
+      "bytes": 1507,
+      "sha256": "E87667C0FABE64D5A1F59EF86B99F7E612DB755D239B41677DA2ADC24BE7BF57"
+    },
+    {
+      "path": "tests\\fixtures\\v1\\checkpoint.ready",
+      "bytes": 28,
+      "sha256": "BC82C18F8D5C3A209328BD59B12D828D8922BEC4D26CB4D557FD4A493A4A9C2F"
+    }
+  ],
+  "completed": [
+    {
+      "log": "mask-stage1-20261030-same-read-read0-control-snapshot-one.jsonl",
+      "mode": "snapshot-one",
+      "exit_code": 0,
+      "wall_s": 16.59399999998277,
+      "pid": 76020,
+      "logical_processors": 16,
+      "thread_sample_interval_ms": 50,
+      "thread_peak": 11,
+      "thread_samples": [
+        {
+          "elapsed_s": 0.1720000000204891,
+          "threads": 1
+        },
+        {
+          "elapsed_s": 0.28100000001722947,
+          "threads": 5
+        },
+        {
+          "elapsed_s": 0.40600000001722947,
+          "threads": 5
+        },
+        {
+          "elapsed_s": 0.5310000000172295,
+          "threads": 5
+        },
+        {
+          "elapsed_s": 0.6560000000172295,
+          "threads": 5
+        },
+        {
+          "elapsed_s": 0.7810000000172295,
+          "threads": 5
+        },
+        {
+          "elapsed_s": 0.9060000000172295,
+          "threads": 5
+        },
+        {
+          "elapsed_s": 1.0310000000172295,
+          "threads": 5
+        },
+        {
+          "elapsed_s": 1.1560000000172295,
+          "threads": 5
+        },
+        {
+          "elapsed_s": 1.3119999999762513,
+          "threads": 5
+        },
+        {
+          "elapsed_s": 1.4369999999762513,
+          "threads": 5
+        },
+        {
+          "elapsed_s": 1.5619999999762513,
+          "threads": 5
+        },
+        {
+          "elapsed_s": 1.6869999999762513,
+          "threads": 5
+        },
+        {
+          "elapsed_s": 1.827999999979511,
+          "threads": 5
+        },
+        {
+          "elapsed_s": 1.9689999999827705,
+          "threads": 5
+        },
+        {
+          "elapsed_s": 2.1089999999967404,
+          "threads": 9
+        },
+        {
+          "elapsed_s": 2.25,
+          "threads": 11
+        },
+        {
+          "elapsed_s": 2.375,
+          "threads": 11
+        },
+        {
+          "elapsed_s": 2.5,
+          "threads": 10
+        },
+        {
+          "elapsed_s": 2.625,
+          "threads": 11
+        },
+        {
+          "elapsed_s": 2.7660000000032596,
+          "threads": 10
+        },
+        {
+          "elapsed_s": 2.922000000020489,
+          "threads": 11
+        },
+        {
+          "elapsed_s": 3.047000000020489,
+          "threads": 10
+        },
+        {
+          "elapsed_s": 3.172000000020489,
+          "threads": 11
+        },
+        {
+          "elapsed_s": 3.3119999999762513,
+          "threads": 11
+        },
+        {
+          "elapsed_s": 3.4369999999762513,
+          "threads": 10
+        },
+        {
+          "elapsed_s": 3.5619999999762513,
+          "threads": 9
+        },
+        {
+          "elapsed_s": 3.702999999979511,
+          "threads": 10
+        },
+        {
+          "elapsed_s": 3.8439999999827705,
+          "threads": 9
+        },
+        {
+          "elapsed_s": 3.9839999999967404,
+          "threads": 10
+        },
+        {
+          "elapsed_s": 4.125,
+          "threads": 10
+        },
+        {
+          "elapsed_s": 4.26600000000326,
+          "threads": 9
+        },
+        {
+          "elapsed_s": 4.4060000000172295,
+          "threads": 9
+        },
+        {
+          "elapsed_s": 4.547000000020489,
+          "threads": 10
+        },
+        {
+          "elapsed_s": 4.672000000020489,
+          "threads": 9
+        },
+        {
+          "elapsed_s": 4.797000000020489,
+          "threads": 11
+        },
+        {
+          "elapsed_s": 4.936999999976251,
+          "threads": 11
+        },
+        {
+          "elapsed_s": 5.077999999979511,
+          "threads": 10
+        },
+        {
+          "elapsed_s": 5.2189999999827705,
+          "threads": 10
+        },
+        {
+          "elapsed_s": 5.35899999999674,
+          "threads": 11
+        },
+        {
+          "elapsed_s": 5.48399999999674,
+          "threads": 11
+        },
+        {
+          "elapsed_s": 5.60899999999674,
+          "threads": 11
+        },
+        {
+          "elapsed_s": 5.73399999999674,
+          "threads": 10
+        },
+        {
+          "elapsed_s": 5.85899999999674,
+          "threads": 10
+        },
+        {
+          "elapsed_s": 5.98399999999674,
+          "threads": 10
+        },
+        {
+          "elapsed_s": 6.10899999999674,
+          "threads": 10
+        },
+        {
+          "elapsed_s": 6.25,
+          "threads": 9
+        },
+        {
+          "elapsed_s": 6.39100000000326,
+          "threads": 11
+        },
+        {
+          "elapsed_s": 6.51600000000326,
+          "threads": 10
+        },
+        {
+          "elapsed_s": 6.6560000000172295,
+          "threads": 11
+        },
+        {
+          "elapsed_s": 6.797000000020489,
+          "threads": 9
+        },
+        {
+          "elapsed_s": 6.922000000020489,
+          "threads": 11
+        },
+        {
+          "elapsed_s": 7.047000000020489,
+          "threads": 11
+        },
+        {
+          "elapsed_s": 7.186999999976251,
+          "threads": 11
+        },
+        {
+          "elapsed_s": 7.327999999979511,
+          "threads": 10
+        },
+        {
+          "elapsed_s": 7.452999999979511,
+          "threads": 10
+        },
+        {
+          "elapsed_s": 7.5939999999827705,
+          "threads": 9
+        },
+        {
+          "elapsed_s": 7.73399999999674,
+          "threads": 10
+        },
+        {
+          "elapsed_s": 7.875,
+          "threads": 11
+        },
+        {
+          "elapsed_s": 8.0,
+          "threads": 11
+        },
+        {
+          "elapsed_s": 8.14100000000326,
+          "threads": 9
+        },
+        {
+          "elapsed_s": 8.28100000001723,
+          "threads": 10
+        },
+        {
+          "elapsed_s": 8.40600000001723,
+          "threads": 10
+        },
+        {
+          "elapsed_s": 8.547000000020489,
+          "threads": 10
+        },
+        {
+          "elapsed_s": 8.686999999976251,
+          "threads": 10
+        },
+        {
+          "elapsed_s": 8.827999999979511,
+          "threads": 10
+        },
+        {
+          "elapsed_s": 8.96899999998277,
+          "threads": 9
+        },
+        {
+          "elapsed_s": 9.10899999999674,
+          "threads": 9
+        },
+        {
+          "elapsed_s": 9.25,
+          "threads": 9
+        },
+        {
+          "elapsed_s": 9.375,
+          "threads": 11
+        },
+        {
+          "elapsed_s": 9.51600000000326,
+          "threads": 11
+        },
+        {
+          "elapsed_s": 9.65600000001723,
+          "threads": 10
+        },
+        {
+          "elapsed_s": 9.797000000020489,
+          "threads": 10
+        },
+        {
+          "elapsed_s": 9.922000000020489,
+          "threads": 10
+        },
+        {
+          "elapsed_s": 10.047000000020489,
+          "threads": 9
+        },
+        {
+          "elapsed_s": 10.186999999976251,
+          "threads": 10
+        },
+        {
+          "elapsed_s": 10.327999999979511,
+          "threads": 9
+        },
+        {
+          "elapsed_s": 10.46899999998277,
+          "threads": 10
+        },
+        {
+          "elapsed_s": 10.59399999998277,
+          "threads": 10
+        },
+        {
+          "elapsed_s": 10.73399999999674,
+          "threads": 10
+        },
+        {
+          "elapsed_s": 10.875,
+          "threads": 9
+        },
+        {
+          "elapsed_s": 11.01600000000326,
+          "threads": 9
+        },
+        {
+          "elapsed_s": 11.15600000001723,
+          "threads": 9
+        },
+        {
+          "elapsed_s": 11.297000000020489,
+          "threads": 10
+        },
+        {
+          "elapsed_s": 11.436999999976251,
+          "threads": 9
+        },
+        {
+          "elapsed_s": 11.577999999979511,
+          "threads": 11
+        },
+        {
+          "elapsed_s": 11.71899999998277,
+          "threads": 11
+        },
+        {
+          "elapsed_s": 11.85899999999674,
+          "threads": 10
+        },
+        {
+          "elapsed_s": 12.0,
+          "threads": 10
+        },
+        {
+          "elapsed_s": 12.125,
+          "threads": 10
+        },
+        {
+          "elapsed_s": 12.26600000000326,
+          "threads": 9
+        },
+        {
+          "elapsed_s": 12.40600000001723,
+          "threads": 10
+        },
+        {
+          "elapsed_s": 12.547000000020489,
+          "threads": 9
+        },
+        {
+          "elapsed_s": 12.686999999976251,
+          "threads": 10
+        },
+        {
+          "elapsed_s": 12.827999999979511,
+          "threads": 11
+        },
+        {
+          "elapsed_s": 12.952999999979511,
+          "threads": 9
+        },
+        {
+          "elapsed_s": 13.077999999979511,
+          "threads": 9
+        },
+        {
+          "elapsed_s": 13.23399999999674,
+          "threads": 11
+        },
+        {
+          "elapsed_s": 13.375,
+          "threads": 11
+        },
+        {
+          "elapsed_s": 13.51600000000326,
+          "threads": 11
+        },
+        {
+          "elapsed_s": 13.65600000001723,
+          "threads": 11
+        },
+        {
+          "elapsed_s": 13.78100000001723,
+          "threads": 11
+        },
+        {
+          "elapsed_s": 13.936999999976251,
+          "threads": 9
+        },
+        {
+          "elapsed_s": 14.077999999979511,
+          "threads": 10
+        },
+        {
+          "elapsed_s": 14.202999999979511,
+          "threads": 9
+        },
+        {
+          "elapsed_s": 14.34399999998277,
+          "threads": 10
+        },
+        {
+          "elapsed_s": 14.46899999998277,
+          "threads": 10
+        },
+        {
+          "elapsed_s": 14.60899999999674,
+          "threads": 10
+        },
+        {
+          "elapsed_s": 14.73399999999674,
+          "threads": 10
+        },
+        {
+          "elapsed_s": 14.875,
+          "threads": 10
+        },
+        {
+          "elapsed_s": 15.01600000000326,
+          "threads": 9
+        },
+        {
+          "elapsed_s": 15.14100000000326,
+          "threads": 10
+        },
+        {
+          "elapsed_s": 15.26600000000326,
+          "threads": 11
+        },
+        {
+          "elapsed_s": 15.422000000020489,
+          "threads": 9
+        },
+        {
+          "elapsed_s": 15.547000000020489,
+          "threads": 10
+        },
+        {
+          "elapsed_s": 15.672000000020489,
+          "threads": 10
+        },
+        {
+          "elapsed_s": 15.811999999976251,
+          "threads": 11
+        },
+        {
+          "elapsed_s": 15.952999999979511,
+          "threads": 9
+        },
+        {
+          "elapsed_s": 16.07799999997951,
+          "threads": 7
+        },
+        {
+          "elapsed_s": 16.21899999998277,
+          "threads": 7
+        },
+        {
+          "elapsed_s": 16.35899999999674,
+          "threads": 6
+        },
+        {
+          "elapsed_s": 16.48399999999674,
+          "threads": 6
+        }
+      ],
+      "role": "control",
+      "label": "read0-control",
+      "state": "C:\\Users\\Serkan\\Documents\\ChatGPT\\fdb\\docs\\benchmarks\\mask-stage1-20261030-arm3-control-state.json"
+    },
+    {
+      "log": "mask-stage1-20261030-same-read-read1-candidate-snapshot-one.jsonl",
+      "mode": "snapshot-one",
+      "exit_code": 0,
+      "wall_s": 16.31300000002375,
+      "pid": 77976,
+      "logical_processors": 16,
+      "thread_sample_interval_ms": 50,
+      "thread_peak": 11,
+      "thread_samples": [
+        {
+          "elapsed_s": 0.01600000000325963,
+          "threads": 1
+        },
+        {
+          "elapsed_s": 0.15700000000651926,
+          "threads": 5
+        },
+        {
+          "elapsed_s": 0.28200000000651926,
+          "threads": 5
+        },
+        {
+          "elapsed_s": 0.40700000000651926,
+          "threads": 5
+        },
+        {
+          "elapsed_s": 0.5320000000065193,
+          "threads": 5
+        },
+        {
+          "elapsed_s": 0.6720000000204891,
+          "threads": 5
+        },
+        {
+          "elapsed_s": 0.7970000000204891,
+          "threads": 5
+        },
+        {
+          "elapsed_s": 0.9220000000204891,
+          "threads": 5
+        },
+        {
+          "elapsed_s": 1.047000000020489,
+          "threads": 5
+        },
+        {
+          "elapsed_s": 1.172000000020489,
+          "threads": 5
+        },
+        {
+          "elapsed_s": 1.3130000000237487,
+          "threads": 5
+        },
+        {
+          "elapsed_s": 1.4380000000237487,
+          "threads": 5
+        },
+        {
+          "elapsed_s": 1.577999999979511,
+          "threads": 9
+        },
+        {
+          "elapsed_s": 1.702999999979511,
+          "threads": 11
+        },
+        {
+          "elapsed_s": 1.827999999979511,
+          "threads": 11
+        },
+        {
+          "elapsed_s": 1.9380000000237487,
+          "threads": 9
+        },
+        {
+          "elapsed_s": 2.0630000000237487,
+          "threads": 9
+        },
+        {
+          "elapsed_s": 2.202999999979511,
+          "threads": 11
+        },
+        {
+          "elapsed_s": 2.327999999979511,
+          "threads": 10
+        },
+        {
+          "elapsed_s": 2.452999999979511,
+          "threads": 11
+        },
+        {
+          "elapsed_s": 2.577999999979511,
+          "threads": 10
+        },
+        {
+          "elapsed_s": 2.702999999979511,
+          "threads": 9
+        },
+        {
+          "elapsed_s": 2.827999999979511,
+          "threads": 10
+        },
+        {
+          "elapsed_s": 2.952999999979511,
+          "threads": 9
+        },
+        {
+          "elapsed_s": 3.077999999979511,
+          "threads": 10
+        },
+        {
+          "elapsed_s": 3.202999999979511,
+          "threads": 9
+        },
+        {
+          "elapsed_s": 3.3439999999827705,
+          "threads": 11
+        },
+        {
+          "elapsed_s": 3.48499999998603,
+          "threads": 10
+        },
+        {
+          "elapsed_s": 3.625,
+          "threads": 11
+        },
+        {
+          "elapsed_s": 3.75,
+          "threads": 10
+        },
+        {
+          "elapsed_s": 3.875,
+          "threads": 10
+        },
+        {
+          "elapsed_s": 4.01600000000326,
+          "threads": 10
+        },
+        {
+          "elapsed_s": 4.14100000000326,
+          "threads": 10
+        },
+        {
+          "elapsed_s": 4.282000000006519,
+          "threads": 11
+        },
+        {
+          "elapsed_s": 4.422000000020489,
+          "threads": 11
+        },
+        {
+          "elapsed_s": 4.547000000020489,
+          "threads": 9
+        },
+        {
+          "elapsed_s": 4.672000000020489,
+          "threads": 11
+        },
+        {
+          "elapsed_s": 4.797000000020489,
+          "threads": 11
+        },
+        {
+          "elapsed_s": 4.938000000023749,
+          "threads": 11
+        },
+        {
+          "elapsed_s": 5.077999999979511,
+          "threads": 11
+        },
+        {
+          "elapsed_s": 5.2189999999827705,
+          "threads": 11
+        },
+        {
+          "elapsed_s": 5.3439999999827705,
+          "threads": 9
+        },
+        {
+          "elapsed_s": 5.4689999999827705,
+          "threads": 11
+        },
+        {
+          "elapsed_s": 5.60999999998603,
+          "threads": 11
+        },
+        {
+          "elapsed_s": 5.75,
+          "threads": 9
+        },
+        {
+          "elapsed_s": 5.89100000000326,
+          "threads": 10
+        },
+        {
+          "elapsed_s": 6.032000000006519,
+          "threads": 10
+        },
+        {
+          "elapsed_s": 6.172000000020489,
+          "threads": 9
+        },
+        {
+          "elapsed_s": 6.313000000023749,
+          "threads": 10
+        },
+        {
+          "elapsed_s": 6.438000000023749,
+          "threads": 11
+        },
+        {
+          "elapsed_s": 6.563000000023749,
+          "threads": 11
+        },
+        {
+          "elapsed_s": 6.702999999979511,
+          "threads": 11
+        },
+        {
+          "elapsed_s": 6.827999999979511,
+          "threads": 10
+        },
+        {
+          "elapsed_s": 6.9689999999827705,
+          "threads": 10
+        },
+        {
+          "elapsed_s": 7.0939999999827705,
+          "threads": 11
+        },
+        {
+          "elapsed_s": 7.2189999999827705,
+          "threads": 10
+        },
+        {
+          "elapsed_s": 7.3439999999827705,
+          "threads": 9
+        },
+        {
+          "elapsed_s": 7.4689999999827705,
+          "threads": 9
+        },
+        {
+          "elapsed_s": 7.60999999998603,
+          "threads": 10
+        },
+        {
+          "elapsed_s": 7.75,
+          "threads": 11
+        },
+        {
+          "elapsed_s": 7.875,
+          "threads": 10
+        },
+        {
+          "elapsed_s": 8.01600000000326,
+          "threads": 11
+        },
+        {
+          "elapsed_s": 8.15700000000652,
+          "threads": 10
+        },
+        {
+          "elapsed_s": 8.297000000020489,
+          "threads": 10
+        },
+        {
+          "elapsed_s": 8.438000000023749,
+          "threads": 10
+        },
+        {
+          "elapsed_s": 8.563000000023749,
+          "threads": 10
+        },
+        {
+          "elapsed_s": 8.702999999979511,
+          "threads": 10
+        },
+        {
+          "elapsed_s": 8.84399999998277,
+          "threads": 9
+        },
+        {
+          "elapsed_s": 8.98499999998603,
+          "threads": 10
+        },
+        {
+          "elapsed_s": 9.125,
+          "threads": 9
+        },
+        {
+          "elapsed_s": 9.26600000000326,
+          "threads": 10
+        },
+        {
+          "elapsed_s": 9.40700000000652,
+          "threads": 11
+        },
+        {
+          "elapsed_s": 9.547000000020489,
+          "threads": 11
+        },
+        {
+          "elapsed_s": 9.688000000023749,
+          "threads": 11
+        },
+        {
+          "elapsed_s": 9.827999999979511,
+          "threads": 11
+        },
+        {
+          "elapsed_s": 9.96899999998277,
+          "threads": 11
+        },
+        {
+          "elapsed_s": 10.10999999998603,
+          "threads": 11
+        },
+        {
+          "elapsed_s": 10.23499999998603,
+          "threads": 10
+        },
+        {
+          "elapsed_s": 10.35999999998603,
+          "threads": 10
+        },
+        {
+          "elapsed_s": 10.48499999998603,
+          "threads": 9
+        },
+        {
+          "elapsed_s": 10.625,
+          "threads": 10
+        },
+        {
+          "elapsed_s": 10.76600000000326,
+          "threads": 9
+        },
+        {
+          "elapsed_s": 10.90700000000652,
+          "threads": 9
+        },
+        {
+          "elapsed_s": 11.047000000020489,
+          "threads": 9
+        },
+        {
+          "elapsed_s": 11.188000000023749,
+          "threads": 9
+        },
+        {
+          "elapsed_s": 11.327999999979511,
+          "threads": 10
+        },
+        {
+          "elapsed_s": 11.46899999998277,
+          "threads": 9
+        },
+        {
+          "elapsed_s": 11.60999999998603,
+          "threads": 9
+        },
+        {
+          "elapsed_s": 11.73499999998603,
+          "threads": 9
+        },
+        {
+          "elapsed_s": 11.85999999998603,
+          "threads": 9
+        },
+        {
+          "elapsed_s": 11.98499999998603,
+          "threads": 11
+        },
+        {
+          "elapsed_s": 12.125,
+          "threads": 11
+        },
+        {
+          "elapsed_s": 12.26600000000326,
+          "threads": 11
+        },
+        {
+          "elapsed_s": 12.375,
+          "threads": 11
+        },
+        {
+          "elapsed_s": 12.5,
+          "threads": 11
+        },
+        {
+          "elapsed_s": 12.64100000000326,
+          "threads": 10
+        },
+        {
+          "elapsed_s": 12.78200000000652,
+          "threads": 11
+        },
+        {
+          "elapsed_s": 12.922000000020489,
+          "threads": 10
+        },
+        {
+          "elapsed_s": 13.047000000020489,
+          "threads": 11
+        },
+        {
+          "elapsed_s": 13.172000000020489,
+          "threads": 11
+        },
+        {
+          "elapsed_s": 13.313000000023749,
+          "threads": 10
+        },
+        {
+          "elapsed_s": 13.438000000023749,
+          "threads": 9
+        },
+        {
+          "elapsed_s": 13.577999999979511,
+          "threads": 11
+        },
+        {
+          "elapsed_s": 13.702999999979511,
+          "threads": 9
+        },
+        {
+          "elapsed_s": 13.827999999979511,
+          "threads": 11
+        },
+        {
+          "elapsed_s": 13.96899999998277,
+          "threads": 11
+        },
+        {
+          "elapsed_s": 14.10999999998603,
+          "threads": 9
+        },
+        {
+          "elapsed_s": 14.23499999998603,
+          "threads": 9
+        },
+        {
+          "elapsed_s": 14.35999999998603,
+          "threads": 11
+        },
+        {
+          "elapsed_s": 14.5,
+          "threads": 9
+        },
+        {
+          "elapsed_s": 14.64100000000326,
+          "threads": 8
+        },
+        {
+          "elapsed_s": 14.78200000000652,
+          "threads": 10
+        },
+        {
+          "elapsed_s": 14.90700000000652,
+          "threads": 10
+        },
+        {
+          "elapsed_s": 15.047000000020489,
+          "threads": 10
+        },
+        {
+          "elapsed_s": 15.188000000023749,
+          "threads": 8
+        },
+        {
+          "elapsed_s": 15.313000000023749,
+          "threads": 8
+        },
+        {
+          "elapsed_s": 15.438000000023749,
+          "threads": 8
+        },
+        {
+          "elapsed_s": 15.563000000023749,
+          "threads": 9
+        },
+        {
+          "elapsed_s": 15.702999999979511,
+          "threads": 7
+        },
+        {
+          "elapsed_s": 15.813000000023749,
+          "threads": 8
+        },
+        {
+          "elapsed_s": 15.938000000023749,
+          "threads": 8
+        },
+        {
+          "elapsed_s": 16.07799999997951,
+          "threads": 7
+        },
+        {
+          "elapsed_s": 16.21899999998277,
+          "threads": 8
+        }
+      ],
+      "role": "candidate",
+      "label": "read1-candidate",
+      "state": "C:\\Users\\Serkan\\Documents\\ChatGPT\\fdb\\docs\\benchmarks\\mask-stage1-20261030-arm3-control-state.json"
+    },
+    {
+      "log": "mask-stage1-20261030-same-read-read2-candidate-snapshot-one.jsonl",
+      "mode": "snapshot-one",
+      "exit_code": 0,
+      "wall_s": 15.828000000037719,
+      "pid": 36752,
+      "logical_processors": 16,
+      "thread_sample_interval_ms": 50,
+      "thread_peak": 11,
+      "thread_samples": [
+        {
+          "elapsed_s": 0.0,
+          "threads": 1
+        },
+        {
+          "elapsed_s": 0.14100000000325963,
+          "threads": 5
+        },
+        {
+          "elapsed_s": 0.26600000000325963,
+          "threads": 5
+        },
+        {
+          "elapsed_s": 0.39100000000325963,
+          "threads": 5
+        },
+        {
+          "elapsed_s": 0.5,
+          "threads": 5
+        },
+        {
+          "elapsed_s": 0.6410000000032596,
+          "threads": 5
+        },
+        {
+          "elapsed_s": 0.75,
+          "threads": 5
+        },
+        {
+          "elapsed_s": 0.875,
+          "threads": 5
+        },
+        {
+          "elapsed_s": 1.0,
+          "threads": 5
+        },
+        {
+          "elapsed_s": 1.1410000000032596,
+          "threads": 5
+        },
+        {
+          "elapsed_s": 1.2660000000032596,
+          "threads": 5
+        },
+        {
+          "elapsed_s": 1.3910000000032596,
+          "threads": 5
+        },
+        {
+          "elapsed_s": 1.5310000000172295,
+          "threads": 5
+        },
+        {
+          "elapsed_s": 1.6560000000172295,
+          "threads": 9
+        },
+        {
+          "elapsed_s": 1.7810000000172295,
+          "threads": 11
+        },
+        {
+          "elapsed_s": 1.8910000000032596,
+          "threads": 11
+        },
+        {
+          "elapsed_s": 2.0160000000032596,
+          "threads": 11
+        },
+        {
+          "elapsed_s": 2.1410000000032596,
+          "threads": 11
+        },
+        {
+          "elapsed_s": 2.2660000000032596,
+          "threads": 9
+        },
+        {
+          "elapsed_s": 2.3910000000032596,
+          "threads": 9
+        },
+        {
+          "elapsed_s": 2.5160000000032596,
+          "threads": 9
+        },
+        {
+          "elapsed_s": 2.6410000000032596,
+          "threads": 10
+        },
+        {
+          "elapsed_s": 2.7660000000032596,
+          "threads": 11
+        },
+        {
+          "elapsed_s": 2.8910000000032596,
+          "threads": 9
+        },
+        {
+          "elapsed_s": 3.0160000000032596,
+          "threads": 9
+        },
+        {
+          "elapsed_s": 3.1560000000172295,
+          "threads": 11
+        },
+        {
+          "elapsed_s": 3.297000000020489,
+          "threads": 10
+        },
+        {
+          "elapsed_s": 3.4380000000237487,
+          "threads": 10
+        },
+        {
+          "elapsed_s": 3.5780000000377186,
+          "threads": 10
+        },
+        {
+          "elapsed_s": 3.7030000000377186,
+          "threads": 9
+        },
+        {
+          "elapsed_s": 3.844000000040978,
+          "threads": 10
+        },
+        {
+          "elapsed_s": 3.9839999999967404,
+          "threads": 10
+        },
+        {
+          "elapsed_s": 4.125,
+          "threads": 10
+        },
+        {
+          "elapsed_s": 4.26600000000326,
+          "threads": 9
+        },
+        {
+          "elapsed_s": 4.4060000000172295,
+          "threads": 10
+        },
+        {
+          "elapsed_s": 4.547000000020489,
+          "threads": 10
+        },
+        {
+          "elapsed_s": 4.688000000023749,
+          "threads": 11
+        },
+        {
+          "elapsed_s": 4.813000000023749,
+          "threads": 10
+        },
+        {
+          "elapsed_s": 4.953000000037719,
+          "threads": 11
+        },
+        {
+          "elapsed_s": 5.078000000037719,
+          "threads": 11
+        },
+        {
+          "elapsed_s": 5.203000000037719,
+          "threads": 11
+        },
+        {
+          "elapsed_s": 5.328000000037719,
+          "threads": 10
+        },
+        {
+          "elapsed_s": 5.469000000040978,
+          "threads": 11
+        },
+        {
+          "elapsed_s": 5.60899999999674,
+          "threads": 11
+        },
+        {
+          "elapsed_s": 5.75,
+          "threads": 10
+        },
+        {
+          "elapsed_s": 5.89100000000326,
+          "threads": 10
+        },
+        {
+          "elapsed_s": 6.0310000000172295,
+          "threads": 11
+        },
+        {
+          "elapsed_s": 6.1560000000172295,
+          "threads": 11
+        },
+        {
+          "elapsed_s": 6.2810000000172295,
+          "threads": 11
+        },
+        {
+          "elapsed_s": 6.4060000000172295,
+          "threads": 9
+        },
+        {
+          "elapsed_s": 6.547000000020489,
+          "threads": 9
+        },
+        {
+          "elapsed_s": 6.688000000023749,
+          "threads": 10
+        },
+        {
+          "elapsed_s": 6.828000000037719,
+          "threads": 9
+        },
+        {
+          "elapsed_s": 6.969000000040978,
+          "threads": 9
+        },
+        {
+          "elapsed_s": 7.10899999999674,
+          "threads": 11
+        },
+        {
+          "elapsed_s": 7.25,
+          "threads": 10
+        },
+        {
+          "elapsed_s": 7.39100000000326,
+          "threads": 11
+        },
+        {
+          "elapsed_s": 7.51600000000326,
+          "threads": 11
+        },
+        {
+          "elapsed_s": 7.6560000000172295,
+          "threads": 10
+        },
+        {
+          "elapsed_s": 7.797000000020489,
+          "threads": 9
+        },
+        {
+          "elapsed_s": 7.938000000023749,
+          "threads": 10
+        },
+        {
+          "elapsed_s": 8.063000000023749,
+          "threads": 10
+        },
+        {
+          "elapsed_s": 8.203000000037719,
+          "threads": 10
+        },
+        {
+          "elapsed_s": 8.344000000040978,
+          "threads": 10
+        },
+        {
+          "elapsed_s": 8.48399999999674,
+          "threads": 10
+        },
+        {
+          "elapsed_s": 8.625,
+          "threads": 11
+        },
+        {
+          "elapsed_s": 8.76600000000326,
+          "threads": 11
+        },
+        {
+          "elapsed_s": 8.90600000001723,
+          "threads": 10
+        },
+        {
+          "elapsed_s": 9.03100000001723,
+          "threads": 10
+        },
+        {
+          "elapsed_s": 9.15600000001723,
+          "threads": 9
+        },
+        {
+          "elapsed_s": 9.297000000020489,
+          "threads": 10
+        },
+        {
+          "elapsed_s": 9.422000000020489,
+          "threads": 9
+        },
+        {
+          "elapsed_s": 9.563000000023749,
+          "threads": 11
+        },
+        {
+          "elapsed_s": 9.703000000037719,
+          "threads": 11
+        },
+        {
+          "elapsed_s": 9.828000000037719,
+          "threads": 9
+        },
+        {
+          "elapsed_s": 9.969000000040978,
+          "threads": 11
+        },
+        {
+          "elapsed_s": 10.10899999999674,
+          "threads": 11
+        },
+        {
+          "elapsed_s": 10.25,
+          "threads": 9
+        },
+        {
+          "elapsed_s": 10.375,
+          "threads": 10
+        },
+        {
+          "elapsed_s": 10.5,
+          "threads": 9
+        },
+        {
+          "elapsed_s": 10.64100000000326,
+          "threads": 10
+        },
+        {
+          "elapsed_s": 10.76600000000326,
+          "threads": 10
+        },
+        {
+          "elapsed_s": 10.922000000020489,
+          "threads": 10
+        },
+        {
+          "elapsed_s": 11.063000000023749,
+          "threads": 9
+        },
+        {
+          "elapsed_s": 11.203000000037719,
+          "threads": 9
+        },
+        {
+          "elapsed_s": 11.344000000040978,
+          "threads": 9
+        },
+        {
+          "elapsed_s": 11.48399999999674,
+          "threads": 10
+        },
+        {
+          "elapsed_s": 11.60899999999674,
+          "threads": 10
+        },
+        {
+          "elapsed_s": 11.719000000040978,
+          "threads": 11
+        },
+        {
+          "elapsed_s": 11.85899999999674,
+          "threads": 11
+        },
+        {
+          "elapsed_s": 11.98399999999674,
+          "threads": 11
+        },
+        {
+          "elapsed_s": 12.10899999999674,
+          "threads": 11
+        },
+        {
+          "elapsed_s": 12.25,
+          "threads": 9
+        },
+        {
+          "elapsed_s": 12.39100000000326,
+          "threads": 9
+        },
+        {
+          "elapsed_s": 12.53100000001723,
+          "threads": 11
+        },
+        {
+          "elapsed_s": 12.65600000001723,
+          "threads": 11
+        },
+        {
+          "elapsed_s": 12.797000000020489,
+          "threads": 11
+        },
+        {
+          "elapsed_s": 12.938000000023749,
+          "threads": 11
+        },
+        {
+          "elapsed_s": 13.078000000037719,
+          "threads": 11
+        },
+        {
+          "elapsed_s": 13.219000000040978,
+          "threads": 11
+        },
+        {
+          "elapsed_s": 13.35899999999674,
+          "threads": 9
+        },
+        {
+          "elapsed_s": 13.5,
+          "threads": 11
+        },
+        {
+          "elapsed_s": 13.64100000000326,
+          "threads": 11
+        },
+        {
+          "elapsed_s": 13.78100000001723,
+          "threads": 11
+        },
+        {
+          "elapsed_s": 13.90600000001723,
+          "threads": 11
+        },
+        {
+          "elapsed_s": 14.047000000020489,
+          "threads": 9
+        },
+        {
+          "elapsed_s": 14.172000000020489,
+          "threads": 10
+        },
+        {
+          "elapsed_s": 14.313000000023749,
+          "threads": 10
+        },
+        {
+          "elapsed_s": 14.453000000037719,
+          "threads": 9
+        },
+        {
+          "elapsed_s": 14.594000000040978,
+          "threads": 9
+        },
+        {
+          "elapsed_s": 14.719000000040978,
+          "threads": 8
+        },
+        {
+          "elapsed_s": 14.844000000040978,
+          "threads": 9
+        },
+        {
+          "elapsed_s": 14.969000000040978,
+          "threads": 10
+        },
+        {
+          "elapsed_s": 15.10899999999674,
+          "threads": 9
+        },
+        {
+          "elapsed_s": 15.23399999999674,
+          "threads": 9
+        },
+        {
+          "elapsed_s": 15.375,
+          "threads": 9
+        },
+        {
+          "elapsed_s": 15.51600000000326,
+          "threads": 6
+        },
+        {
+          "elapsed_s": 15.64100000000326,
+          "threads": 8
+        },
+        {
+          "elapsed_s": 15.76600000000326,
+          "threads": 0
+        }
+      ],
+      "role": "candidate",
+      "label": "read2-candidate",
+      "state": "C:\\Users\\Serkan\\Documents\\ChatGPT\\fdb\\docs\\benchmarks\\mask-stage1-20261030-arm3-control-state.json"
+    },
+    {
+      "log": "mask-stage1-20261030-same-read-read3-control-snapshot-one.jsonl",
+      "mode": "snapshot-one",
+      "exit_code": 0,
+      "wall_s": 15.76600000000326,
+      "pid": 13852,
+      "logical_processors": 16,
+      "thread_sample_interval_ms": 50,
+      "thread_peak": 11,
+      "thread_samples": [
+        {
+          "elapsed_s": 0.01600000000325963,
+          "threads": 1
+        },
+        {
+          "elapsed_s": 0.14100000000325963,
+          "threads": 5
+        },
+        {
+          "elapsed_s": 0.26600000000325963,
+          "threads": 5
+        },
+        {
+          "elapsed_s": 0.39100000000325963,
+          "threads": 5
+        },
+        {
+          "elapsed_s": 0.5320000000065193,
+          "threads": 5
+        },
+        {
+          "elapsed_s": 0.6570000000065193,
+          "threads": 5
+        },
+        {
+          "elapsed_s": 0.7820000000065193,
+          "threads": 5
+        },
+        {
+          "elapsed_s": 0.9070000000065193,
+          "threads": 5
+        },
+        {
+          "elapsed_s": 1.0320000000065193,
+          "threads": 5
+        },
+        {
+          "elapsed_s": 1.1570000000065193,
+          "threads": 5
+        },
+        {
+          "elapsed_s": 1.297000000020489,
+          "threads": 5
+        },
+        {
+          "elapsed_s": 1.422000000020489,
+          "threads": 5
+        },
+        {
+          "elapsed_s": 1.547000000020489,
+          "threads": 9
+        },
+        {
+          "elapsed_s": 1.672000000020489,
+          "threads": 11
+        },
+        {
+          "elapsed_s": 1.7820000000065193,
+          "threads": 11
+        },
+        {
+          "elapsed_s": 1.9070000000065193,
+          "threads": 10
+        },
+        {
+          "elapsed_s": 2.0320000000065193,
+          "threads": 10
+        },
+        {
+          "elapsed_s": 2.1570000000065193,
+          "threads": 10
+        },
+        {
+          "elapsed_s": 2.2660000000032596,
+          "threads": 9
+        },
+        {
+          "elapsed_s": 2.3910000000032596,
+          "threads": 11
+        },
+        {
+          "elapsed_s": 2.5160000000032596,
+          "threads": 11
+        },
+        {
+          "elapsed_s": 2.625,
+          "threads": 10
+        },
+        {
+          "elapsed_s": 2.75,
+          "threads": 11
+        },
+        {
+          "elapsed_s": 2.860000000044238,
+          "threads": 9
+        },
+        {
+          "elapsed_s": 2.985000000044238,
+          "threads": 9
+        },
+        {
+          "elapsed_s": 3.110000000044238,
+          "threads": 10
+        },
+        {
+          "elapsed_s": 3.25,
+          "threads": 9
+        },
+        {
+          "elapsed_s": 3.3910000000032596,
+          "threads": 11
+        },
+        {
+          "elapsed_s": 3.5320000000065193,
+          "threads": 10
+        },
+        {
+          "elapsed_s": 3.6570000000065193,
+          "threads": 9
+        },
+        {
+          "elapsed_s": 3.797000000020489,
+          "threads": 9
+        },
+        {
+          "elapsed_s": 3.9380000000237487,
+          "threads": 11
+        },
+        {
+          "elapsed_s": 4.079000000027008,
+          "threads": 11
+        },
+        {
+          "elapsed_s": 4.204000000027008,
+          "threads": 11
+        },
+        {
+          "elapsed_s": 4.329000000027008,
+          "threads": 11
+        },
+        {
+          "elapsed_s": 4.454000000027008,
+          "threads": 11
+        },
+        {
+          "elapsed_s": 4.579000000027008,
+          "threads": 11
+        },
+        {
+          "elapsed_s": 4.704000000027008,
+          "threads": 10
+        },
+        {
+          "elapsed_s": 4.829000000027008,
+          "threads": 11
+        },
+        {
+          "elapsed_s": 4.954000000027008,
+          "threads": 10
+        },
+        {
+          "elapsed_s": 5.079000000027008,
+          "threads": 9
+        },
+        {
+          "elapsed_s": 5.219000000040978,
+          "threads": 9
+        },
+        {
+          "elapsed_s": 5.360000000044238,
+          "threads": 10
+        },
+        {
+          "elapsed_s": 5.5,
+          "threads": 10
+        },
+        {
+          "elapsed_s": 5.64100000000326,
+          "threads": 9
+        },
+        {
+          "elapsed_s": 5.782000000006519,
+          "threads": 10
+        },
+        {
+          "elapsed_s": 5.922000000020489,
+          "threads": 11
+        },
+        {
+          "elapsed_s": 6.047000000020489,
+          "threads": 9
+        },
+        {
+          "elapsed_s": 6.188000000023749,
+          "threads": 10
+        },
+        {
+          "elapsed_s": 6.329000000027008,
+          "threads": 9
+        },
+        {
+          "elapsed_s": 6.454000000027008,
+          "threads": 10
+        },
+        {
+          "elapsed_s": 6.594000000040978,
+          "threads": 10
+        },
+        {
+          "elapsed_s": 6.735000000044238,
+          "threads": 10
+        },
+        {
+          "elapsed_s": 6.860000000044238,
+          "threads": 9
+        },
+        {
+          "elapsed_s": 6.985000000044238,
+          "threads": 11
+        },
+        {
+          "elapsed_s": 7.14100000000326,
+          "threads": 9
+        },
+        {
+          "elapsed_s": 7.282000000006519,
+          "threads": 10
+        },
+        {
+          "elapsed_s": 7.407000000006519,
+          "threads": 10
+        },
+        {
+          "elapsed_s": 7.547000000020489,
+          "threads": 11
+        },
+        {
+          "elapsed_s": 7.672000000020489,
+          "threads": 10
+        },
+        {
+          "elapsed_s": 7.797000000020489,
+          "threads": 9
+        },
+        {
+          "elapsed_s": 7.938000000023749,
+          "threads": 9
+        },
+        {
+          "elapsed_s": 8.063000000023749,
+          "threads": 11
+        },
+        {
+          "elapsed_s": 8.188000000023749,
+          "threads": 11
+        },
+        {
+          "elapsed_s": 8.313000000023749,
+          "threads": 10
+        },
+        {
+          "elapsed_s": 8.469000000040978,
+          "threads": 11
+        },
+        {
+          "elapsed_s": 8.610000000044238,
+          "threads": 10
+        },
+        {
+          "elapsed_s": 8.735000000044238,
+          "threads": 9
+        },
+        {
+          "elapsed_s": 8.860000000044238,
+          "threads": 9
+        },
+        {
+          "elapsed_s": 9.01600000000326,
+          "threads": 11
+        },
+        {
+          "elapsed_s": 9.14100000000326,
+          "threads": 11
+        },
+        {
+          "elapsed_s": 9.26600000000326,
+          "threads": 11
+        },
+        {
+          "elapsed_s": 9.40700000000652,
+          "threads": 10
+        },
+        {
+          "elapsed_s": 9.547000000020489,
+          "threads": 9
+        },
+        {
+          "elapsed_s": 9.688000000023749,
+          "threads": 9
+        },
+        {
+          "elapsed_s": 9.829000000027008,
+          "threads": 10
+        },
+        {
+          "elapsed_s": 9.969000000040978,
+          "threads": 10
+        },
+        {
+          "elapsed_s": 10.110000000044238,
+          "threads": 10
+        },
+        {
+          "elapsed_s": 10.235000000044238,
+          "threads": 10
+        },
+        {
+          "elapsed_s": 10.375,
+          "threads": 9
+        },
+        {
+          "elapsed_s": 10.51600000000326,
+          "threads": 9
+        },
+        {
+          "elapsed_s": 10.64100000000326,
+          "threads": 11
+        },
+        {
+          "elapsed_s": 10.76600000000326,
+          "threads": 10
+        },
+        {
+          "elapsed_s": 10.90700000000652,
+          "threads": 10
+        },
+        {
+          "elapsed_s": 11.03200000000652,
+          "threads": 9
+        },
+        {
+          "elapsed_s": 11.172000000020489,
+          "threads": 10
+        },
+        {
+          "elapsed_s": 11.313000000023749,
+          "threads": 11
+        },
+        {
+          "elapsed_s": 11.438000000023749,
+          "threads": 9
+        },
+        {
+          "elapsed_s": 11.579000000027008,
+          "threads": 11
+        },
+        {
+          "elapsed_s": 11.719000000040978,
+          "threads": 9
+        },
+        {
+          "elapsed_s": 11.844000000040978,
+          "threads": 11
+        },
+        {
+          "elapsed_s": 11.985000000044238,
+          "threads": 10
+        },
+        {
+          "elapsed_s": 12.125,
+          "threads": 11
+        },
+        {
+          "elapsed_s": 12.26600000000326,
+          "threads": 11
+        },
+        {
+          "elapsed_s": 12.40700000000652,
+          "threads": 11
+        },
+        {
+          "elapsed_s": 12.53200000000652,
+          "threads": 9
+        },
+        {
+          "elapsed_s": 12.65700000000652,
+          "threads": 9
+        },
+        {
+          "elapsed_s": 12.78200000000652,
+          "threads": 10
+        },
+        {
+          "elapsed_s": 12.90700000000652,
+          "threads": 10
+        },
+        {
+          "elapsed_s": 13.047000000020489,
+          "threads": 11
+        },
+        {
+          "elapsed_s": 13.188000000023749,
+          "threads": 10
+        },
+        {
+          "elapsed_s": 13.313000000023749,
+          "threads": 9
+        },
+        {
+          "elapsed_s": 13.422000000020489,
+          "threads": 10
+        },
+        {
+          "elapsed_s": 13.547000000020489,
+          "threads": 10
+        },
+        {
+          "elapsed_s": 13.688000000023749,
+          "threads": 9
+        },
+        {
+          "elapsed_s": 13.829000000027008,
+          "threads": 10
+        },
+        {
+          "elapsed_s": 13.954000000027008,
+          "threads": 10
+        },
+        {
+          "elapsed_s": 14.094000000040978,
+          "threads": 10
+        },
+        {
+          "elapsed_s": 14.235000000044238,
+          "threads": 10
+        },
+        {
+          "elapsed_s": 14.375,
+          "threads": 9
+        },
+        {
+          "elapsed_s": 14.51600000000326,
+          "threads": 11
+        },
+        {
+          "elapsed_s": 14.65700000000652,
+          "threads": 9
+        },
+        {
+          "elapsed_s": 14.78200000000652,
+          "threads": 9
+        },
+        {
+          "elapsed_s": 14.90700000000652,
+          "threads": 9
+        },
+        {
+          "elapsed_s": 15.03200000000652,
+          "threads": 9
+        },
+        {
+          "elapsed_s": 15.172000000020489,
+          "threads": 8
+        },
+        {
+          "elapsed_s": 15.297000000020489,
+          "threads": 10
+        },
+        {
+          "elapsed_s": 15.438000000023749,
+          "threads": 8
+        },
+        {
+          "elapsed_s": 15.563000000023749,
+          "threads": 10
+        },
+        {
+          "elapsed_s": 15.688000000023749,
+          "threads": 5
+        }
+      ],
+      "role": "control",
+      "label": "read3-control",
+      "state": "C:\\Users\\Serkan\\Documents\\ChatGPT\\fdb\\docs\\benchmarks\\mask-stage1-20261030-arm3-control-state.json"
+    }
+  ],
+  "change": "replacement mask only; delta and WAL handles unchanged",
+  "cache": "warm OS; same-layout read-only probes; no eviction",
+  "sequence": [
+    "control",
+    "candidate",
+    "candidate",
+    "control"
+  ],
+  "state": "C:\\Users\\Serkan\\Documents\\ChatGPT\\fdb\\docs\\benchmarks\\mask-stage1-20261030-arm3-control-state.json",
+  "protected_after": [
+    {
+      "path": "data\\rkyv-corpus-20261009\\json.payload-bench",
+      "bytes": 2740862279,
+      "sha256": "11F826FCE3F4AE790FEB9FC6DF9B1169F52C2FD699E89FC4A8A4B77AAA41731B"
+    },
+    {
+      "path": "tests\\fixtures\\v1\\checkpoint.fdb",
+      "bytes": 1507,
+      "sha256": "E87667C0FABE64D5A1F59EF86B99F7E612DB755D239B41677DA2ADC24BE7BF57"
+    },
+    {
+      "path": "tests\\fixtures\\v1\\checkpoint.ready",
+      "bytes": 28,
+      "sha256": "BC82C18F8D5C3A209328BD59B12D828D8922BEC4D26CB4D557FD4A493A4A9C2F"
+    }
+  ],
+  "source_after": "881756DA400952500BA871F6C7BA8FF8D17E5348E5975420BC5CD90952A7CF12"
+}

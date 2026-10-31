@@ -1,0 +1,48 @@
+{
+  "documents": 100000,
+  "strict_open_samples_ms": [],
+  "idle_private_samples": [],
+  "ingest_peak_private_samples": [],
+  "per_case": [],
+  "relative_hybrid": [],
+  "failures": [
+    {
+      "kind": "streamed_entry_limit",
+      "error": "streamed transaction exceeds entry/frame allowance",
+      "attempted_documents": 100000,
+      "committed_documents": 66000,
+      "sequence": 132,
+      "rejected_batch": [
+        66000,
+        66499
+      ],
+      "offending_document": 66498,
+      "text_bytes": 444345,
+      "per_entry_limit_bytes": 262144,
+      "transaction_limit_bytes": 67108864,
+      "rejected_batch_json_bytes": 2308679,
+      "raw_process": "trwiki-scale-20261028-v1-n100000-pair0-seed-fdb-scale-seed.process.json",
+      "stats": {
+        "compaction_running": false,
+        "delta_keys": 0,
+        "disk_index_bytes": 178263877,
+        "disk_posting_entries": 37009038,
+        "documents": 66000,
+        "generation": 345,
+        "log_bytes": 45,
+        "resident_documents": 0,
+        "resident_text_bytes": 0,
+        "segments": 12,
+        "sequence": 132,
+        "source_bytes": 225615947
+      },
+      "partial_state": "C:\\Users\\Serkan\\Documents\\ChatGPT\\fdb\\docs\\benchmarks\\trwiki-scale-20261028-v1-partial66000-fdb-state.json",
+      "partial_state_sha256": "C404FA1551FCD1E8E5AE80418A824B39CEB118A4F1A5C55A9382DDD8E1FCD256",
+      "fdb_100k_ingest_succeeded": false,
+      "fdb_retry": false,
+      "truncate_or_owned_fallback": false
+    }
+  ],
+  "passed": false,
+  "gate_scope": "FDB ingest FAILED, no complete 100k DB; SQLite independent repeats only, no completed balanced 100k A/B"
+}

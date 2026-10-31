@@ -1,0 +1,406 @@
+{
+  "stage": "completed",
+  "program_sha256": "B3CBFD0510D6881C2900E590B7683FDFE058209425FCA18D09CAE3972C4FA5BB",
+  "source_sha256": "881756DA400952500BA871F6C7BA8FF8D17E5348E5975420BC5CD90952A7CF12",
+  "protected_before": [
+    {
+      "path": "data\\rkyv-corpus-20261009\\json.payload-bench",
+      "bytes": 2740862279,
+      "sha256": "11F826FCE3F4AE790FEB9FC6DF9B1169F52C2FD699E89FC4A8A4B77AAA41731B"
+    },
+    {
+      "path": "tests\\fixtures\\v1\\checkpoint.fdb",
+      "bytes": 1507,
+      "sha256": "E87667C0FABE64D5A1F59EF86B99F7E612DB755D239B41677DA2ADC24BE7BF57"
+    },
+    {
+      "path": "tests\\fixtures\\v1\\checkpoint.ready",
+      "bytes": 28,
+      "sha256": "BC82C18F8D5C3A209328BD59B12D828D8922BEC4D26CB4D557FD4A493A4A9C2F"
+    }
+  ],
+  "completed": [
+    {
+      "arm": 0,
+      "role": "before",
+      "mode": "ingest",
+      "log": "hybrid-serial-ram50-20261030-0-before-ingest.jsonl",
+      "measurement": {
+        "caller_input": "at most one bounded JSON document +8KiB stdin buffer; runtime included, no subtraction; loaded has41 small query definitions",
+        "documents": 50000,
+        "excluded": "corpus/catalog,model,oracle,history,profiling all outside process",
+        "memory": {
+          "peak_private_commit_bytes": 15867904,
+          "peak_working_set_bytes": 20865024,
+          "private_bytes": 12570624,
+          "working_set_bytes": 16994304
+        },
+        "phase": "ingest",
+        "query_counts": [],
+        "snapshot_reader": true,
+        "writer_mutations": 50000
+      }
+    },
+    {
+      "arm": 0,
+      "role": "before",
+      "mode": "idle",
+      "log": "hybrid-serial-ram50-20261030-0-before-idle.jsonl",
+      "measurement": {
+        "caller_input": "at most one bounded JSON document +8KiB stdin buffer; runtime included, no subtraction; loaded has41 small query definitions",
+        "documents": 50000,
+        "excluded": "corpus/catalog,model,oracle,history,profiling all outside process",
+        "memory": {
+          "peak_private_commit_bytes": 2723840,
+          "peak_working_set_bytes": 7270400,
+          "private_bytes": 2392064,
+          "working_set_bytes": 7139328
+        },
+        "phase": "idle",
+        "query_counts": [],
+        "snapshot_reader": true,
+        "writer_mutations": 0
+      }
+    },
+    {
+      "arm": 0,
+      "role": "before",
+      "mode": "loaded",
+      "log": "hybrid-serial-ram50-20261030-0-before-loaded.jsonl",
+      "measurement": {
+        "caller_input": "at most one bounded JSON document +8KiB stdin buffer; runtime included, no subtraction; loaded has41 small query definitions",
+        "documents": 50000,
+        "excluded": "corpus/catalog,model,oracle,history,profiling all outside process",
+        "memory": {
+          "peak_private_commit_bytes": 33943552,
+          "peak_working_set_bytes": 38899712,
+          "private_bytes": 23216128,
+          "working_set_bytes": 28164096
+        },
+        "phase": "loaded",
+        "query_counts": [
+          654,
+          676,
+          654,
+          682
+        ],
+        "snapshot_reader": true,
+        "writer_mutations": 16384
+      }
+    },
+    {
+      "arm": 0,
+      "role": "before",
+      "mode": "postloaded_idle",
+      "log": "hybrid-serial-ram50-20261030-0-before-postloaded_idle.jsonl",
+      "measurement": {
+        "caller_input": "at most one bounded JSON document +8KiB stdin buffer; runtime included, no subtraction; loaded has41 small query definitions",
+        "documents": 50000,
+        "excluded": "corpus/catalog,model,oracle,history,profiling all outside process",
+        "memory": {
+          "peak_private_commit_bytes": 3112960,
+          "peak_working_set_bytes": 7655424,
+          "private_bytes": 2670592,
+          "working_set_bytes": 7421952
+        },
+        "phase": "idle",
+        "query_counts": [],
+        "snapshot_reader": true,
+        "writer_mutations": 0
+      }
+    },
+    {
+      "arm": 1,
+      "role": "after",
+      "mode": "ingest",
+      "log": "hybrid-serial-ram50-20261030-1-after-ingest.jsonl",
+      "measurement": {
+        "caller_input": "at most one bounded JSON document +8KiB stdin buffer; runtime included, no subtraction; loaded has41 small query definitions",
+        "documents": 50000,
+        "excluded": "corpus/catalog,model,oracle,history,profiling all outside process",
+        "memory": {
+          "peak_private_commit_bytes": 16187392,
+          "peak_working_set_bytes": 21196800,
+          "private_bytes": 12410880,
+          "working_set_bytes": 17170432
+        },
+        "phase": "ingest",
+        "query_counts": [],
+        "snapshot_reader": true,
+        "writer_mutations": 50000
+      }
+    },
+    {
+      "arm": 1,
+      "role": "after",
+      "mode": "idle",
+      "log": "hybrid-serial-ram50-20261030-1-after-idle.jsonl",
+      "measurement": {
+        "caller_input": "at most one bounded JSON document +8KiB stdin buffer; runtime included, no subtraction; loaded has41 small query definitions",
+        "documents": 50000,
+        "excluded": "corpus/catalog,model,oracle,history,profiling all outside process",
+        "memory": {
+          "peak_private_commit_bytes": 2637824,
+          "peak_working_set_bytes": 7200768,
+          "private_bytes": 2408448,
+          "working_set_bytes": 7122944
+        },
+        "phase": "idle",
+        "query_counts": [],
+        "snapshot_reader": true,
+        "writer_mutations": 0
+      }
+    },
+    {
+      "arm": 1,
+      "role": "after",
+      "mode": "loaded",
+      "log": "hybrid-serial-ram50-20261030-1-after-loaded.jsonl",
+      "measurement": {
+        "caller_input": "at most one bounded JSON document +8KiB stdin buffer; runtime included, no subtraction; loaded has41 small query definitions",
+        "documents": 50000,
+        "excluded": "corpus/catalog,model,oracle,history,profiling all outside process",
+        "memory": {
+          "peak_private_commit_bytes": 37998592,
+          "peak_working_set_bytes": 43225088,
+          "private_bytes": 28614656,
+          "working_set_bytes": 33312768
+        },
+        "phase": "loaded",
+        "query_counts": [
+          896,
+          876,
+          841,
+          859
+        ],
+        "snapshot_reader": true,
+        "writer_mutations": 16384
+      }
+    },
+    {
+      "arm": 1,
+      "role": "after",
+      "mode": "postloaded_idle",
+      "log": "hybrid-serial-ram50-20261030-1-after-postloaded_idle.jsonl",
+      "measurement": {
+        "caller_input": "at most one bounded JSON document +8KiB stdin buffer; runtime included, no subtraction; loaded has41 small query definitions",
+        "documents": 50000,
+        "excluded": "corpus/catalog,model,oracle,history,profiling all outside process",
+        "memory": {
+          "peak_private_commit_bytes": 3084288,
+          "peak_working_set_bytes": 7622656,
+          "private_bytes": 2580480,
+          "working_set_bytes": 7331840
+        },
+        "phase": "idle",
+        "query_counts": [],
+        "snapshot_reader": true,
+        "writer_mutations": 0
+      }
+    },
+    {
+      "arm": 2,
+      "role": "after",
+      "mode": "ingest",
+      "log": "hybrid-serial-ram50-20261030-2-after-ingest.jsonl",
+      "measurement": {
+        "caller_input": "at most one bounded JSON document +8KiB stdin buffer; runtime included, no subtraction; loaded has41 small query definitions",
+        "documents": 50000,
+        "excluded": "corpus/catalog,model,oracle,history,profiling all outside process",
+        "memory": {
+          "peak_private_commit_bytes": 15228928,
+          "peak_working_set_bytes": 20299776,
+          "private_bytes": 8912896,
+          "working_set_bytes": 14159872
+        },
+        "phase": "ingest",
+        "query_counts": [],
+        "snapshot_reader": true,
+        "writer_mutations": 50000
+      }
+    },
+    {
+      "arm": 2,
+      "role": "after",
+      "mode": "idle",
+      "log": "hybrid-serial-ram50-20261030-2-after-idle.jsonl",
+      "measurement": {
+        "caller_input": "at most one bounded JSON document +8KiB stdin buffer; runtime included, no subtraction; loaded has41 small query definitions",
+        "documents": 50000,
+        "excluded": "corpus/catalog,model,oracle,history,profiling all outside process",
+        "memory": {
+          "peak_private_commit_bytes": 2654208,
+          "peak_working_set_bytes": 7200768,
+          "private_bytes": 2359296,
+          "working_set_bytes": 7122944
+        },
+        "phase": "idle",
+        "query_counts": [],
+        "snapshot_reader": true,
+        "writer_mutations": 0
+      }
+    },
+    {
+      "arm": 2,
+      "role": "after",
+      "mode": "loaded",
+      "log": "hybrid-serial-ram50-20261030-2-after-loaded.jsonl",
+      "measurement": {
+        "caller_input": "at most one bounded JSON document +8KiB stdin buffer; runtime included, no subtraction; loaded has41 small query definitions",
+        "documents": 50000,
+        "excluded": "corpus/catalog,model,oracle,history,profiling all outside process",
+        "memory": {
+          "peak_private_commit_bytes": 35131392,
+          "peak_working_set_bytes": 40075264,
+          "private_bytes": 25849856,
+          "working_set_bytes": 30502912
+        },
+        "phase": "loaded",
+        "query_counts": [
+          877,
+          876,
+          909,
+          882
+        ],
+        "snapshot_reader": true,
+        "writer_mutations": 16384
+      }
+    },
+    {
+      "arm": 2,
+      "role": "after",
+      "mode": "postloaded_idle",
+      "log": "hybrid-serial-ram50-20261030-2-after-postloaded_idle.jsonl",
+      "measurement": {
+        "caller_input": "at most one bounded JSON document +8KiB stdin buffer; runtime included, no subtraction; loaded has41 small query definitions",
+        "documents": 50000,
+        "excluded": "corpus/catalog,model,oracle,history,profiling all outside process",
+        "memory": {
+          "peak_private_commit_bytes": 3354624,
+          "peak_working_set_bytes": 7766016,
+          "private_bytes": 2555904,
+          "working_set_bytes": 7344128
+        },
+        "phase": "idle",
+        "query_counts": [],
+        "snapshot_reader": true,
+        "writer_mutations": 0
+      }
+    },
+    {
+      "arm": 3,
+      "role": "before",
+      "mode": "ingest",
+      "log": "hybrid-serial-ram50-20261030-3-before-ingest.jsonl",
+      "measurement": {
+        "caller_input": "at most one bounded JSON document +8KiB stdin buffer; runtime included, no subtraction; loaded has41 small query definitions",
+        "documents": 50000,
+        "excluded": "corpus/catalog,model,oracle,history,profiling all outside process",
+        "memory": {
+          "peak_private_commit_bytes": 16498688,
+          "peak_working_set_bytes": 21491712,
+          "private_bytes": 9928704,
+          "working_set_bytes": 15138816
+        },
+        "phase": "ingest",
+        "query_counts": [],
+        "snapshot_reader": true,
+        "writer_mutations": 50000
+      }
+    },
+    {
+      "arm": 3,
+      "role": "before",
+      "mode": "idle",
+      "log": "hybrid-serial-ram50-20261030-3-before-idle.jsonl",
+      "measurement": {
+        "caller_input": "at most one bounded JSON document +8KiB stdin buffer; runtime included, no subtraction; loaded has41 small query definitions",
+        "documents": 50000,
+        "excluded": "corpus/catalog,model,oracle,history,profiling all outside process",
+        "memory": {
+          "peak_private_commit_bytes": 2740224,
+          "peak_working_set_bytes": 7270400,
+          "private_bytes": 2383872,
+          "working_set_bytes": 7139328
+        },
+        "phase": "idle",
+        "query_counts": [],
+        "snapshot_reader": true,
+        "writer_mutations": 0
+      }
+    },
+    {
+      "arm": 3,
+      "role": "before",
+      "mode": "loaded",
+      "log": "hybrid-serial-ram50-20261030-3-before-loaded.jsonl",
+      "measurement": {
+        "caller_input": "at most one bounded JSON document +8KiB stdin buffer; runtime included, no subtraction; loaded has41 small query definitions",
+        "documents": 50000,
+        "excluded": "corpus/catalog,model,oracle,history,profiling all outside process",
+        "memory": {
+          "peak_private_commit_bytes": 32264192,
+          "peak_working_set_bytes": 37126144,
+          "private_bytes": 20828160,
+          "working_set_bytes": 25792512
+        },
+        "phase": "loaded",
+        "query_counts": [
+          654,
+          645,
+          702,
+          686
+        ],
+        "snapshot_reader": true,
+        "writer_mutations": 16384
+      }
+    },
+    {
+      "arm": 3,
+      "role": "before",
+      "mode": "postloaded_idle",
+      "log": "hybrid-serial-ram50-20261030-3-before-postloaded_idle.jsonl",
+      "measurement": {
+        "caller_input": "at most one bounded JSON document +8KiB stdin buffer; runtime included, no subtraction; loaded has41 small query definitions",
+        "documents": 50000,
+        "excluded": "corpus/catalog,model,oracle,history,profiling all outside process",
+        "memory": {
+          "peak_private_commit_bytes": 3166208,
+          "peak_working_set_bytes": 7712768,
+          "private_bytes": 2666496,
+          "working_set_bytes": 7417856
+        },
+        "phase": "idle",
+        "query_counts": [],
+        "snapshot_reader": true,
+        "writer_mutations": 0
+      }
+    }
+  ],
+  "roles": [
+    "before",
+    "after",
+    "after",
+    "before"
+  ],
+  "scope": "isolated engine+runtime+one input doc+8KiB stdin;4R mode adds41 query strings and API-owned results; no model/oracle/history/profiling inside; no subtraction",
+  "reset_reason": "ingest requires empty fixed owner slot; main acceptance/CPU run must finish first",
+  "protected_after": [
+    {
+      "path": "data\\rkyv-corpus-20261009\\json.payload-bench",
+      "bytes": 2740862279,
+      "sha256": "11F826FCE3F4AE790FEB9FC6DF9B1169F52C2FD699E89FC4A8A4B77AAA41731B"
+    },
+    {
+      "path": "tests\\fixtures\\v1\\checkpoint.fdb",
+      "bytes": 1507,
+      "sha256": "E87667C0FABE64D5A1F59EF86B99F7E612DB755D239B41677DA2ADC24BE7BF57"
+    },
+    {
+      "path": "tests\\fixtures\\v1\\checkpoint.ready",
+      "bytes": 28,
+      "sha256": "BC82C18F8D5C3A209328BD59B12D828D8922BEC4D26CB4D557FD4A493A4A9C2F"
+    }
+  ],
+  "source_after": "881756DA400952500BA871F6C7BA8FF8D17E5348E5975420BC5CD90952A7CF12"
+}

@@ -1,0 +1,270 @@
+{
+  "stage": "completed",
+  "program_sha256": "E4939705C5CD77258C72876194933EDBB45516FEA23817F99585552808F62D17",
+  "source_sha256": "881756DA400952500BA871F6C7BA8FF8D17E5348E5975420BC5CD90952A7CF12",
+  "protected_before": [
+    {
+      "path": "data\\rkyv-corpus-20261009\\json.payload-bench",
+      "bytes": 2740862279,
+      "sha256": "11F826FCE3F4AE790FEB9FC6DF9B1169F52C2FD699E89FC4A8A4B77AAA41731B"
+    },
+    {
+      "path": "tests\\fixtures\\v1\\checkpoint.fdb",
+      "bytes": 1507,
+      "sha256": "E87667C0FABE64D5A1F59EF86B99F7E612DB755D239B41677DA2ADC24BE7BF57"
+    },
+    {
+      "path": "tests\\fixtures\\v1\\checkpoint.ready",
+      "bytes": 28,
+      "sha256": "BC82C18F8D5C3A209328BD59B12D828D8922BEC4D26CB4D557FD4A493A4A9C2F"
+    }
+  ],
+  "completed": [
+    {
+      "arm": 0,
+      "role": "control",
+      "mode": "ingest",
+      "log": "engine-only50-20261030-0-control-ingest.jsonl",
+      "measurement": {
+        "caller_input": "at most one bounded JSON document +8KiB stdin buffer; runtime included, no subtraction",
+        "documents": 50000,
+        "excluded": "corpus/catalog,model,oracle,history,profiling all outside process",
+        "memory": {
+          "peak_private_commit_bytes": 16224256,
+          "peak_working_set_bytes": 21110784,
+          "private_bytes": 12144640,
+          "working_set_bytes": 16961536
+        },
+        "phase": "ingest",
+        "snapshot_reader": true
+      }
+    },
+    {
+      "arm": 0,
+      "role": "control",
+      "mode": "idle",
+      "log": "engine-only50-20261030-0-control-idle.jsonl",
+      "measurement": {
+        "caller_input": "at most one bounded JSON document +8KiB stdin buffer; runtime included, no subtraction",
+        "documents": 50000,
+        "excluded": "corpus/catalog,model,oracle,history,profiling all outside process",
+        "memory": {
+          "peak_private_commit_bytes": 2686976,
+          "peak_working_set_bytes": 7204864,
+          "private_bytes": 2379776,
+          "working_set_bytes": 7127040
+        },
+        "phase": "idle",
+        "snapshot_reader": true
+      }
+    },
+    {
+      "arm": 1,
+      "role": "candidate",
+      "mode": "ingest",
+      "log": "engine-only50-20261030-1-candidate-ingest.jsonl",
+      "measurement": {
+        "caller_input": "at most one bounded JSON document +8KiB stdin buffer; runtime included, no subtraction",
+        "documents": 50000,
+        "excluded": "corpus/catalog,model,oracle,history,profiling all outside process",
+        "memory": {
+          "peak_private_commit_bytes": 16134144,
+          "peak_working_set_bytes": 21020672,
+          "private_bytes": 13119488,
+          "working_set_bytes": 17485824
+        },
+        "phase": "ingest",
+        "snapshot_reader": true
+      }
+    },
+    {
+      "arm": 1,
+      "role": "candidate",
+      "mode": "idle",
+      "log": "engine-only50-20261030-1-candidate-idle.jsonl",
+      "measurement": {
+        "caller_input": "at most one bounded JSON document +8KiB stdin buffer; runtime included, no subtraction",
+        "documents": 50000,
+        "excluded": "corpus/catalog,model,oracle,history,profiling all outside process",
+        "memory": {
+          "peak_private_commit_bytes": 2678784,
+          "peak_working_set_bytes": 7225344,
+          "private_bytes": 2412544,
+          "working_set_bytes": 7147520
+        },
+        "phase": "idle",
+        "snapshot_reader": true
+      }
+    },
+    {
+      "arm": 2,
+      "role": "candidate",
+      "mode": "ingest",
+      "log": "engine-only50-20261030-2-candidate-ingest.jsonl",
+      "measurement": {
+        "caller_input": "at most one bounded JSON document +8KiB stdin buffer; runtime included, no subtraction",
+        "documents": 50000,
+        "excluded": "corpus/catalog,model,oracle,history,profiling all outside process",
+        "memory": {
+          "peak_private_commit_bytes": 15912960,
+          "peak_working_set_bytes": 20840448,
+          "private_bytes": 12124160,
+          "working_set_bytes": 16584704
+        },
+        "phase": "ingest",
+        "snapshot_reader": true
+      }
+    },
+    {
+      "arm": 2,
+      "role": "candidate",
+      "mode": "idle",
+      "log": "engine-only50-20261030-2-candidate-idle.jsonl",
+      "measurement": {
+        "caller_input": "at most one bounded JSON document +8KiB stdin buffer; runtime included, no subtraction",
+        "documents": 50000,
+        "excluded": "corpus/catalog,model,oracle,history,profiling all outside process",
+        "memory": {
+          "peak_private_commit_bytes": 2715648,
+          "peak_working_set_bytes": 7229440,
+          "private_bytes": 2412544,
+          "working_set_bytes": 7151616
+        },
+        "phase": "idle",
+        "snapshot_reader": true
+      }
+    },
+    {
+      "arm": 3,
+      "role": "control",
+      "mode": "ingest",
+      "log": "engine-only50-20261030-3-control-ingest.jsonl",
+      "measurement": {
+        "caller_input": "at most one bounded JSON document +8KiB stdin buffer; runtime included, no subtraction",
+        "documents": 50000,
+        "excluded": "corpus/catalog,model,oracle,history,profiling all outside process",
+        "memory": {
+          "peak_private_commit_bytes": 15593472,
+          "peak_working_set_bytes": 20410368,
+          "private_bytes": 9388032,
+          "working_set_bytes": 14012416
+        },
+        "phase": "ingest",
+        "snapshot_reader": true
+      }
+    },
+    {
+      "arm": 3,
+      "role": "control",
+      "mode": "idle",
+      "log": "engine-only50-20261030-3-control-idle.jsonl",
+      "measurement": {
+        "caller_input": "at most one bounded JSON document +8KiB stdin buffer; runtime included, no subtraction",
+        "documents": 50000,
+        "excluded": "corpus/catalog,model,oracle,history,profiling all outside process",
+        "memory": {
+          "peak_private_commit_bytes": 2682880,
+          "peak_working_set_bytes": 7188480,
+          "private_bytes": 2363392,
+          "working_set_bytes": 7106560
+        },
+        "phase": "idle",
+        "snapshot_reader": true
+      }
+    }
+  ],
+  "roles": [
+    "control",
+    "candidate",
+    "candidate",
+    "control"
+  ],
+  "scope": "dedicated engine process + runtime + one bounded input document; no model/oracle/catalog/history/profile in child; no baseline subtraction",
+  "control": "same binary, full replacement mask reference; candidate incremental masks; snapshot reader enabled, no retained snapshot",
+  "idle": "fresh strict-open child after maintained ingest, not allocator retained after ingest",
+  "protected_after": [
+    {
+      "path": "data\\rkyv-corpus-20261009\\json.payload-bench",
+      "bytes": 2740862279,
+      "sha256": "11F826FCE3F4AE790FEB9FC6DF9B1169F52C2FD699E89FC4A8A4B77AAA41731B"
+    },
+    {
+      "path": "tests\\fixtures\\v1\\checkpoint.fdb",
+      "bytes": 1507,
+      "sha256": "E87667C0FABE64D5A1F59EF86B99F7E612DB755D239B41677DA2ADC24BE7BF57"
+    },
+    {
+      "path": "tests\\fixtures\\v1\\checkpoint.ready",
+      "bytes": 28,
+      "sha256": "BC82C18F8D5C3A209328BD59B12D828D8922BEC4D26CB4D557FD4A493A4A9C2F"
+    }
+  ],
+  "source_after": "881756DA400952500BA871F6C7BA8FF8D17E5348E5975420BC5CD90952A7CF12",
+  "gates": [
+    {
+      "arm": 0,
+      "role": "control",
+      "mode": "ingest",
+      "mib": 15.47265625,
+      "limit_mib": 60,
+      "passed": true
+    },
+    {
+      "arm": 0,
+      "role": "control",
+      "mode": "idle",
+      "mib": 2.26953125,
+      "limit_mib": 15,
+      "passed": true
+    },
+    {
+      "arm": 1,
+      "role": "candidate",
+      "mode": "ingest",
+      "mib": 15.38671875,
+      "limit_mib": 60,
+      "passed": true
+    },
+    {
+      "arm": 1,
+      "role": "candidate",
+      "mode": "idle",
+      "mib": 2.30078125,
+      "limit_mib": 15,
+      "passed": true
+    },
+    {
+      "arm": 2,
+      "role": "candidate",
+      "mode": "ingest",
+      "mib": 15.17578125,
+      "limit_mib": 60,
+      "passed": true
+    },
+    {
+      "arm": 2,
+      "role": "candidate",
+      "mode": "idle",
+      "mib": 2.30078125,
+      "limit_mib": 15,
+      "passed": true
+    },
+    {
+      "arm": 3,
+      "role": "control",
+      "mode": "ingest",
+      "mib": 14.87109375,
+      "limit_mib": 60,
+      "passed": true
+    },
+    {
+      "arm": 3,
+      "role": "control",
+      "mode": "idle",
+      "mib": 2.25390625,
+      "limit_mib": 15,
+      "passed": true
+    }
+  ],
+  "passed": true
+}

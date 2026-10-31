@@ -1,0 +1,339 @@
+{
+  "protected_before": [
+    {
+      "path": "data\\rkyv-corpus-20261009\\json.payload-bench",
+      "bytes": 2740862279,
+      "sha256": "11F826FCE3F4AE790FEB9FC6DF9B1169F52C2FD699E89FC4A8A4B77AAA41731B"
+    },
+    {
+      "path": "tests\\fixtures\\v1\\checkpoint.fdb",
+      "bytes": 1507,
+      "sha256": "E87667C0FABE64D5A1F59EF86B99F7E612DB755D239B41677DA2ADC24BE7BF57"
+    },
+    {
+      "path": "tests\\fixtures\\v1\\checkpoint.ready",
+      "bytes": 28,
+      "sha256": "BC82C18F8D5C3A209328BD59B12D828D8922BEC4D26CB4D557FD4A493A4A9C2F"
+    }
+  ],
+  "program": "C:\\Users\\Serkan\\Documents\\ChatGPT\\fdb\\output\\wal-profile-fdb-20261027-v1.exe",
+  "sha256": "168AF77D8FF4AFEBE91CE795A2CB57CAE49A864BBE49855D12AC573914CD6609",
+  "completed": [
+    {
+      "engine": "fdb",
+      "mode": "seed",
+      "api": "streamed",
+      "log": "wal-sequence-profile-10k-20261027-a2-fdb-load-fdb-streamed-seed.jsonl",
+      "exit_code": 0,
+      "wall_s": 14.219000000011874
+    },
+    {
+      "engine": "fdb",
+      "mode": "snapshot-one",
+      "api": "streamed",
+      "log": "wal-sequence-profile-10k-20261027-a2-fdb-load-fdb-streamed-snapshot-one.jsonl",
+      "exit_code": 0,
+      "wall_s": 28.312999999994645
+    },
+    {
+      "engine": "fdb",
+      "mode": "verify",
+      "api": "streamed",
+      "log": "wal-sequence-profile-10k-20261027-a2-fdb-load-fdb-streamed-verify.jsonl",
+      "exit_code": 0,
+      "wall_s": 2.8439999999827705
+    }
+  ],
+  "scope": "profiling only;existing10k;one4R4096single-write run;bounded8192frame capture enabled solely during writer;no global diagnostic-timing feature;warmOS,not CPU/power isolated",
+  "query": "same38case matrix;reader min2rounds continues until writer done;model oracle excluded from query timer but consumes CPU",
+  "slow_commits": [],
+  "worst": {
+    "ordinal": 398,
+    "sequence": 429,
+    "commit_ms": 21.9181,
+    "profile_ms": 21.9173,
+    "phases": [
+      {
+        "active_wal_id": 60,
+        "elapsed_ns": 7000,
+        "name": "prefix.worker_join",
+        "visible_sequence": 428
+      },
+      {
+        "active_wal_id": 67,
+        "elapsed_ns": 534800,
+        "name": "snapshot.mask",
+        "visible_sequence": 428
+      },
+      {
+        "active_wal_id": 67,
+        "elapsed_ns": 12208100,
+        "name": "snapshot.wal_open",
+        "visible_sequence": 428
+      },
+      {
+        "active_wal_id": 67,
+        "elapsed_ns": 12208900,
+        "name": "snapshot.wal_prepare",
+        "visible_sequence": 428
+      },
+      {
+        "active_wal_id": 67,
+        "elapsed_ns": 121900,
+        "name": "snapshot.state_clone",
+        "visible_sequence": 428
+      },
+      {
+        "active_wal_id": 67,
+        "elapsed_ns": 12873200,
+        "name": "snapshot.prepare",
+        "visible_sequence": 428
+      },
+      {
+        "active_wal_id": 67,
+        "elapsed_ns": 100,
+        "name": "snapshot.pointer",
+        "visible_sequence": 428
+      },
+      {
+        "active_wal_id": 67,
+        "elapsed_ns": 100,
+        "name": "snapshot.old_release",
+        "visible_sequence": 428
+      },
+      {
+        "active_wal_id": 60,
+        "elapsed_ns": 17629100,
+        "name": "prefix.install",
+        "visible_sequence": 428
+      },
+      {
+        "active_wal_id": 67,
+        "elapsed_ns": 79500,
+        "name": "snapshot.mask",
+        "visible_sequence": 429
+      },
+      {
+        "active_wal_id": 67,
+        "elapsed_ns": 2900,
+        "name": "snapshot.wal_clone",
+        "visible_sequence": 429
+      },
+      {
+        "active_wal_id": 67,
+        "elapsed_ns": 3200,
+        "name": "snapshot.wal_prepare",
+        "visible_sequence": 429
+      },
+      {
+        "active_wal_id": 67,
+        "elapsed_ns": 61400,
+        "name": "snapshot.state_clone",
+        "visible_sequence": 429
+      },
+      {
+        "active_wal_id": 67,
+        "elapsed_ns": 150900,
+        "name": "snapshot.prepare",
+        "visible_sequence": 429
+      },
+      {
+        "active_wal_id": 67,
+        "elapsed_ns": 0,
+        "name": "snapshot.pointer",
+        "visible_sequence": 429
+      },
+      {
+        "active_wal_id": 67,
+        "elapsed_ns": 750000,
+        "name": "snapshot.old_release",
+        "visible_sequence": 429
+      }
+    ]
+  },
+  "wal_opens": [
+    {
+      "sequence": 429,
+      "ordinal": 398,
+      "commit_ms": 21.9181,
+      "phase": {
+        "active_wal_id": 67,
+        "elapsed_ns": 12208100,
+        "name": "snapshot.wal_open",
+        "visible_sequence": 428
+      }
+    },
+    {
+      "sequence": 681,
+      "ordinal": 650,
+      "commit_ms": 19.463,
+      "phase": {
+        "active_wal_id": 70,
+        "elapsed_ns": 11106900,
+        "name": "snapshot.wal_open",
+        "visible_sequence": 680
+      }
+    },
+    {
+      "sequence": 940,
+      "ordinal": 909,
+      "commit_ms": 15.659099999999999,
+      "phase": {
+        "active_wal_id": 73,
+        "elapsed_ns": 8118400,
+        "name": "snapshot.wal_open",
+        "visible_sequence": 939
+      }
+    },
+    {
+      "sequence": 1199,
+      "ordinal": 1168,
+      "commit_ms": 15.405000000000001,
+      "phase": {
+        "active_wal_id": 76,
+        "elapsed_ns": 7735600,
+        "name": "snapshot.wal_open",
+        "visible_sequence": 1198
+      }
+    },
+    {
+      "sequence": 1500,
+      "ordinal": 1469,
+      "commit_ms": 14.5232,
+      "phase": {
+        "active_wal_id": 80,
+        "elapsed_ns": 7044800,
+        "name": "snapshot.wal_open",
+        "visible_sequence": 1499
+      }
+    },
+    {
+      "sequence": 1702,
+      "ordinal": 1671,
+      "commit_ms": 13.9146,
+      "phase": {
+        "active_wal_id": 84,
+        "elapsed_ns": 6198500,
+        "name": "snapshot.wal_open",
+        "visible_sequence": 1701
+      }
+    },
+    {
+      "sequence": 1964,
+      "ordinal": 1933,
+      "commit_ms": 17.5017,
+      "phase": {
+        "active_wal_id": 87,
+        "elapsed_ns": 8983300,
+        "name": "snapshot.wal_open",
+        "visible_sequence": 1963
+      }
+    },
+    {
+      "sequence": 2237,
+      "ordinal": 2206,
+      "commit_ms": 21.709300000000002,
+      "phase": {
+        "active_wal_id": 90,
+        "elapsed_ns": 11077800,
+        "name": "snapshot.wal_open",
+        "visible_sequence": 2236
+      }
+    },
+    {
+      "sequence": 2540,
+      "ordinal": 2509,
+      "commit_ms": 19.683699999999998,
+      "phase": {
+        "active_wal_id": 94,
+        "elapsed_ns": 10085200,
+        "name": "snapshot.wal_open",
+        "visible_sequence": 2539
+      }
+    },
+    {
+      "sequence": 2727,
+      "ordinal": 2696,
+      "commit_ms": 20.2218,
+      "phase": {
+        "active_wal_id": 98,
+        "elapsed_ns": 10856900,
+        "name": "snapshot.wal_open",
+        "visible_sequence": 2726
+      }
+    },
+    {
+      "sequence": 2985,
+      "ordinal": 2954,
+      "commit_ms": 17.6504,
+      "phase": {
+        "active_wal_id": 101,
+        "elapsed_ns": 8281500,
+        "name": "snapshot.wal_open",
+        "visible_sequence": 2984
+      }
+    },
+    {
+      "sequence": 3243,
+      "ordinal": 3212,
+      "commit_ms": 17.8153,
+      "phase": {
+        "active_wal_id": 104,
+        "elapsed_ns": 8874600,
+        "name": "snapshot.wal_open",
+        "visible_sequence": 3242
+      }
+    },
+    {
+      "sequence": 3541,
+      "ordinal": 3510,
+      "commit_ms": 18.696,
+      "phase": {
+        "active_wal_id": 108,
+        "elapsed_ns": 9545200,
+        "name": "snapshot.wal_open",
+        "visible_sequence": 3540
+      }
+    },
+    {
+      "sequence": 3753,
+      "ordinal": 3722,
+      "commit_ms": 21.4025,
+      "phase": {
+        "active_wal_id": 112,
+        "elapsed_ns": 11684000,
+        "name": "snapshot.wal_open",
+        "visible_sequence": 3752
+      }
+    },
+    {
+      "sequence": 4002,
+      "ordinal": 3971,
+      "commit_ms": 18.1156,
+      "phase": {
+        "active_wal_id": 115,
+        "elapsed_ns": 9156800,
+        "name": "snapshot.wal_open",
+        "visible_sequence": 4001
+      }
+    }
+  ],
+  "protected_after": [
+    {
+      "path": "data\\rkyv-corpus-20261009\\json.payload-bench",
+      "bytes": 2740862279,
+      "sha256": "11F826FCE3F4AE790FEB9FC6DF9B1169F52C2FD699E89FC4A8A4B77AAA41731B"
+    },
+    {
+      "path": "tests\\fixtures\\v1\\checkpoint.fdb",
+      "bytes": 1507,
+      "sha256": "E87667C0FABE64D5A1F59EF86B99F7E612DB755D239B41677DA2ADC24BE7BF57"
+    },
+    {
+      "path": "tests\\fixtures\\v1\\checkpoint.ready",
+      "bytes": 28,
+      "sha256": "BC82C18F8D5C3A209328BD59B12D828D8922BEC4D26CB4D557FD4A493A4A9C2F"
+    }
+  ],
+  "complete": true
+}

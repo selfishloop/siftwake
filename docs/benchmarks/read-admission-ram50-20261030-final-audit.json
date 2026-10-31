@@ -1,0 +1,85 @@
+{
+  "status": "DONE_MEASUREMENT_ONLY_A_FAILED_D_PASSED",
+  "gate_unchanged": true,
+  "A_all_pairs_fdb41": false,
+  "D_passed": true,
+  "default_tests": 249,
+  "diagnostic_lib_tests": 157,
+  "accepted_binary_unchanged": true,
+  "source_sha256": "881756DA400952500BA871F6C7BA8FF8D17E5348E5975420BC5CD90952A7CF12",
+  "protected": [
+    {
+      "path": "data\\rkyv-corpus-20261009\\json.payload-bench",
+      "bytes": 2740862279,
+      "sha256": "11F826FCE3F4AE790FEB9FC6DF9B1169F52C2FD699E89FC4A8A4B77AAA41731B"
+    },
+    {
+      "path": "tests\\fixtures\\v1\\checkpoint.fdb",
+      "bytes": 1507,
+      "sha256": "E87667C0FABE64D5A1F59EF86B99F7E612DB755D239B41677DA2ADC24BE7BF57"
+    },
+    {
+      "path": "tests\\fixtures\\v1\\checkpoint.ready",
+      "bytes": 28,
+      "sha256": "BC82C18F8D5C3A209328BD59B12D828D8922BEC4D26CB4D557FD4A493A4A9C2F"
+    }
+  ],
+  "changed_existing_src_since_pre_stage1": [
+    "src\\timing.rs",
+    "src\\engine\\first.rs",
+    "src\\engine\\light.rs",
+    "src\\engine\\snapshot.rs",
+    "src\\segment\\paged.rs",
+    "src\\segment\\term_pages.rs"
+  ],
+  "changes_this_turn": "diagnostic-only spans and benchmark counters plus isolated memory child; no cache/search policy change",
+  "idle_source_layout_unchanged": true,
+  "profile_request_count": 2949,
+  "checks": {
+    "query-attribution50-20261030-final-fmt.log": "E3B0C44298FC1C149AFBF4C8996FB92427AE41E4649B934CA495991B7852B855",
+    "query-attribution50-20261030-final-clippy.log": "BEDEB558A2ED030DD17D19CD8B6F9C2355EE60EA4384208683A37617EB271775",
+    "query-attribution50-20261030-final-diag-clippy.log": "51BD09A760302521E31629CD0CEC06CC4C0F6FBDB2565434777D401613CF1F7B",
+    "query-attribution50-20261030-final-diag-tests.log": "B8A91B6857214024A6F85DED43A37BB93DA08FBBCBACF2F3E23144542B416933",
+    "query-attribution50-20261030-v2-tests.log": "02D4C8E6EBAEFCA366B83039B4A9E5ACA63266275264EF436E7B73802C814832",
+    "query-attribution50-20261030-counter-test.log": "FAA2AFEBC147E7B2EC7DB99FDB50098CFFC246876994E885ECE6994B39F1EEED"
+  },
+  "storage_and_WAL_files_unchanged_code": true,
+  "kill_reopen_and_old_reader_both_models": true,
+  "no_optimization_applied": true,
+  "deferred": [
+    "100 grouped",
+    "B Frunner keys",
+    "C500 drain",
+    "2.6s root",
+    "WAL handle",
+    "format",
+    "256KiB",
+    "prefilter",
+    "Block3/4",
+    "C ABI",
+    "cold cache",
+    "long snapshot",
+    "100k"
+  ],
+  "slots": {
+    "corpus": "trwiki-cap200k-hybrid4r50",
+    "source": "D:\\frunner-corpus\\trwiki-100k-cap200k\\corpus.payload-bench",
+    "sha256": "881756DA400952500BA871F6C7BA8FF8D17E5348E5975420BC5CD90952A7CF12",
+    "original_bodies": true,
+    "runtime_revision_mode": "FDB_BENCH_50K_WRITE=1",
+    "slots": {
+      "fdb": {
+        "documents": 50000,
+        "status": "ready",
+        "state": "C:\\Users\\Serkan\\Documents\\ChatGPT\\fdb\\docs\\benchmarks\\engine-only50-20261030-3-control-state.json",
+        "model_sha256": "FC718F7045CC9E35B2EDC7FDC47981A0B0CFE235D7BC3440F412AEE194A760E1"
+      },
+      "sqlite": {
+        "documents": 50000,
+        "status": "ready",
+        "state": "C:\\Users\\Serkan\\Documents\\ChatGPT\\fdb\\docs\\benchmarks\\idle-spread50-20261030-pair3-sqlite-state.json",
+        "model_sha256": "E861C2656C3715300E55752ED250B72EC4AF10970B2C7CB3A03AE912236DF4AD"
+      }
+    }
+  }
+}

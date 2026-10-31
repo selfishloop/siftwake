@@ -1,0 +1,406 @@
+{
+  "checks": [
+    {
+      "command": "cargo fmt --check",
+      "exit_code": 0,
+      "log": "docs/benchmarks/snapshot-10k-20261026-validation-hybrid-cancel-20261028-v3-fmt.log",
+      "name": "fmt",
+      "elapsed_s": 0.8046182
+    },
+    {
+      "command": "cargo clippy --all-targets -- -D warnings",
+      "exit_code": 0,
+      "log": "docs/benchmarks/snapshot-10k-20261026-validation-hybrid-cancel-20261028-v3-clippy.log",
+      "name": "clippy",
+      "elapsed_s": 2.5261878
+    },
+    {
+      "command": "cargo test --all-targets",
+      "exit_code": 0,
+      "log": "docs/benchmarks/snapshot-10k-20261026-validation-hybrid-cancel-20261028-v3-test.log",
+      "name": "test",
+      "elapsed_s": 115.3863754
+    },
+    {
+      "command": "cargo check --no-default-features --lib",
+      "exit_code": 0,
+      "log": "docs/benchmarks/snapshot-10k-20261026-validation-hybrid-cancel-20261028-v3-no-default.log",
+      "name": "no-default",
+      "elapsed_s": 0.5796144
+    },
+    {
+      "command": "cargo check --all-features --lib",
+      "exit_code": 0,
+      "log": "docs/benchmarks/snapshot-10k-20261026-validation-hybrid-cancel-20261028-v3-all-features.log",
+      "name": "all-features",
+      "elapsed_s": 1.0495833
+    },
+    {
+      "command": "cargo fmt --manifest-path tools/native_sqlite/Cargo.toml --check",
+      "exit_code": 0,
+      "log": "docs/benchmarks/snapshot-10k-20261026-validation-hybrid-cancel-20261028-v3-sqlite-fmt.log",
+      "name": "sqlite-fmt",
+      "elapsed_s": 0.2679576
+    },
+    {
+      "command": "cargo clippy --manifest-path tools/native_sqlite/Cargo.toml --all-targets -- -D warnings",
+      "exit_code": 0,
+      "log": "docs/benchmarks/snapshot-10k-20261026-validation-hybrid-cancel-20261028-v3-sqlite-clippy.log",
+      "name": "sqlite-clippy",
+      "elapsed_s": 0.4828405
+    },
+    {
+      "command": "cargo test --manifest-path tools/native_sqlite/Cargo.toml --bin content_churn",
+      "exit_code": 0,
+      "log": "docs/benchmarks/snapshot-10k-20261026-validation-hybrid-cancel-20261028-v3-sqlite-test.log",
+      "name": "sqlite-test",
+      "elapsed_s": 0.2677303
+    }
+  ],
+  "default_tests": {
+    "passed": 239,
+    "failed": 0,
+    "ignored_helpers": 14
+  },
+  "diagnostic_lib": {
+    "passed": 145,
+    "failed": 0,
+    "ignored_helpers": 12
+  },
+  "diagnostic_clippy_passed": true,
+  "hybrid_gate": "FAILED; negative p95+6.50%; no silent tolerance",
+  "cancellation_probes": {
+    "attempts": 240,
+    "cancelled": 240,
+    "pooled_p95_ms": 0.4108,
+    "max_ms": 1.4362
+  },
+  "new_corpus_sha256": "3D8BF5D4B8868C6C50644020B7998542E2589498BF99E3233DEDE8AD5613E91F",
+  "new_corpus_db_stage_started": false,
+  "new_corpus_bodies_generated_or_copied": false,
+  "new_corpus_read_only": true,
+  "source_formats_changed": false,
+  "default_search_changed": false,
+  "join_crc_defaults_changed": false,
+  "subagents_used": false,
+  "source_and_model_hash_equal": true,
+  "old_reader": {
+    "binary": "output\\maintenance-candidate-cli-20261024.exe",
+    "binary_sha256": "B7845966E330624407D66416225F9395ED20272DD0065BAA996E4CC26D93D939",
+    "full_payload_version_gets": 50000,
+    "deleted_gets": 100,
+    "cases": [
+      {
+        "case_id": 0,
+        "total": 273,
+        "page": 50,
+        "oracle": true
+      },
+      {
+        "case_id": 1,
+        "total": 151,
+        "page": 50,
+        "oracle": true
+      },
+      {
+        "case_id": 2,
+        "total": 265,
+        "page": 50,
+        "oracle": true
+      },
+      {
+        "case_id": 3,
+        "total": 131,
+        "page": 50,
+        "oracle": true
+      },
+      {
+        "case_id": 4,
+        "total": 0,
+        "page": 0,
+        "oracle": true
+      },
+      {
+        "case_id": 5,
+        "total": 5212,
+        "page": 50,
+        "oracle": true
+      },
+      {
+        "case_id": 6,
+        "total": 1310,
+        "page": 50,
+        "oracle": true
+      },
+      {
+        "case_id": 7,
+        "total": 190,
+        "page": 50,
+        "oracle": true
+      },
+      {
+        "case_id": 8,
+        "total": 5983,
+        "page": 50,
+        "oracle": true
+      },
+      {
+        "case_id": 9,
+        "total": 11208,
+        "page": 50,
+        "oracle": true
+      },
+      {
+        "case_id": 10,
+        "total": 8646,
+        "page": 50,
+        "oracle": true
+      },
+      {
+        "case_id": 11,
+        "total": 6186,
+        "page": 50,
+        "oracle": true
+      },
+      {
+        "case_id": 12,
+        "total": 3023,
+        "page": 50,
+        "oracle": true
+      },
+      {
+        "case_id": 13,
+        "total": 834,
+        "page": 50,
+        "oracle": true
+      },
+      {
+        "case_id": 14,
+        "total": 2849,
+        "page": 50,
+        "oracle": true
+      },
+      {
+        "case_id": 15,
+        "total": 1406,
+        "page": 50,
+        "oracle": true
+      },
+      {
+        "case_id": 16,
+        "total": 50000,
+        "page": 50,
+        "oracle": true
+      },
+      {
+        "case_id": 17,
+        "total": 49629,
+        "page": 50,
+        "oracle": true
+      },
+      {
+        "case_id": 18,
+        "total": 50000,
+        "page": 50,
+        "oracle": true
+      },
+      {
+        "case_id": 19,
+        "total": 0,
+        "page": 0,
+        "oracle": true
+      },
+      {
+        "case_id": 20,
+        "total": 0,
+        "page": 0,
+        "oracle": true
+      },
+      {
+        "case_id": 21,
+        "total": 0,
+        "page": 0,
+        "oracle": true
+      },
+      {
+        "case_id": 22,
+        "total": 235,
+        "page": 50,
+        "oracle": true
+      },
+      {
+        "case_id": 23,
+        "total": 282,
+        "page": 50,
+        "oracle": true
+      },
+      {
+        "case_id": 24,
+        "total": 1342,
+        "page": 50,
+        "oracle": true
+      },
+      {
+        "case_id": 25,
+        "total": 5171,
+        "page": 50,
+        "oracle": true
+      },
+      {
+        "case_id": 26,
+        "total": 273,
+        "page": 50,
+        "oracle": true
+      },
+      {
+        "case_id": 27,
+        "total": 1310,
+        "page": 50,
+        "oracle": true
+      },
+      {
+        "case_id": 28,
+        "total": 0,
+        "page": 0,
+        "oracle": true
+      },
+      {
+        "case_id": 29,
+        "total": 4318,
+        "page": 50,
+        "oracle": true
+      },
+      {
+        "case_id": 30,
+        "total": 50000,
+        "page": 1,
+        "oracle": true
+      },
+      {
+        "case_id": 31,
+        "total": 50000,
+        "page": 200,
+        "oracle": true
+      },
+      {
+        "case_id": 32,
+        "total": 50000,
+        "page": 50,
+        "oracle": true
+      },
+      {
+        "case_id": 33,
+        "total": 50000,
+        "page": 50,
+        "oracle": true
+      },
+      {
+        "case_id": 34,
+        "total": 1310,
+        "page": 1,
+        "oracle": true
+      },
+      {
+        "case_id": 35,
+        "total": 1310,
+        "page": 200,
+        "oracle": true
+      },
+      {
+        "case_id": 36,
+        "total": 273,
+        "page": 10,
+        "oracle": true
+      },
+      {
+        "case_id": 37,
+        "total": 273,
+        "page": 50,
+        "oracle": true
+      }
+    ],
+    "response_stream_sha256": "7EDA6BDD03CC6C53566DACB405043D0A3E930DE7CC8891AE885CFF1BEDC02B36",
+    "authoritative_sources_unchanged": true,
+    "oracle": true,
+    "payload_output_saved": false
+  },
+  "report_links_verified": true,
+  "reports": {
+    "docs/HYBRID-CANCEL-50K-20261028.md": "602F18FA7A688FDB318A76F9BB39E8E78CD3E53F2AE951DD6E13656B44A1D111",
+    "docs/HYBRID-CANCEL-DESIGN-20261028.md": "81738988C83579FF401A5721E880298F27872D9501091C8E69C7E5ABFDF88015",
+    "docs/TRWIKI-OFFLINE-20261028.md": "F59869303BC210ADC65D5538E8190BF44713229836A65F34C33F81B7B99A3088",
+    "docs/OPEN-WORK.md": "AF8E3358ACC688A672D414EFB2F769CF608D9C2DE15DB1E009AD06018764BF82"
+  },
+  "final_source_sha256": {
+    "src/access.rs": "B9ABB1447D11DAAAA2020E1B7E3B23C11251DF89AE233AF0EDB3E8ABEFB948FD",
+    "src/adapters.rs": "52BC58797FCABCC75E1D283C5824D6B1C452AA2A804F9F01CA9C9BDE68755FD9",
+    "src/bin/fdb-import-sdb.rs": "8F50D34F9FEC3979DDBF14910FEF7B06DB633C222E8882FFBD083B4FBAB117B3",
+    "src/binary_batch.rs": "F1025CF59B92B8A4FFC6957DCDE03E1A265ED8DF1F4E182B1DC43012FF4B5919",
+    "src/binary_batch_tests.rs": "4DA6A284D15C41DDA7BEE195CB9B7374F58BBE38432563C64F84428B28B2F53E",
+    "src/bounded.rs": "67AD5D3DFE4BC0956FD155277F42264BC57E0E9E768A9C3FFFF003BDC7796CF6",
+    "src/cancel.rs": "690598AFBE11B37E7DE0E4DD254F008BBF3559C778BFD3AB1F5AAF6F2DC9F763",
+    "src/engine/first.rs": "454CDBD12E09D858000897EA4C5A62CF41F6D2AAD9EED30AE70FB7ACF5A4A58F",
+    "src/engine/light.rs": "3EB6C8F5ED9085E51C6837758FBDD4B3CF428B239042190B147D77DC54C85BE3",
+    "src/engine/light_flush/tests.rs": "255F6CCF7CC37C4E427F1CA62B5A571E3F7D464D2267BF0197694B2CCAFDC764",
+    "src/engine/light_flush.rs": "7F7A627898AC192611C77C1CBCCD524A7360E649E90277942E41711331288F98",
+    "src/engine/maintenance.rs": "EF58B41244FBEDE85AB5F5690A2ACA3BD7BF4E5E3D04E295C767C972277C1EB8",
+    "src/engine/opening.rs": "732186E0CD8DDADA5BFDEC98083312E69D960E893A0891043178EF4D0208B998",
+    "src/engine/profile.rs": "6F11AC2CDD99628A856F268B3BF2D40D8E6D31B6375843786F1194BD2BF30931",
+    "src/engine/reclaim_tests.rs": "687DB59310E4ADEEF57E0C26CE2E982B0C283E7E9B5B1ED3E42C37140D0559FC",
+    "src/engine/revisions/tests.rs": "051E6842C79DB6BD2C32ACD07BA90CD59E3EFEDEFFD46C77C9FADCC5A7BF6F3C",
+    "src/engine/revisions.rs": "F08F2C5B5057EFD596E83792143D1D62B537AE247BCE0F98C4C78F13666DBE8B",
+    "src/engine/snapshot/tests.rs": "2ADFD4D99651953E898766D0DECD0D5C272DE790223BC007CF1FF324C0DB6F0E",
+    "src/engine/snapshot.rs": "FA8CB63BF4258C5846DE4381D8A2189DE557D01427688120BB9363C56ABB100E",
+    "src/engine/streamed.rs": "960E6FF463519F825E43F7A8FEF355A8A4978E97719D4C61F669F597AC08D0C4",
+    "src/engine.rs": "E71EABDE44D80203A1746D0B4454C99945161AAE5C0F49C9056512215FD2144C",
+    "src/format/native_check.rs": "60E24ABF509CA1220FAF17B020ED876E4DE75325607049E14EEB8A973D22F7B9",
+    "src/format.rs": "FB2F6FA05F03FADF9F128CF04F2571F9E9B93B50B30801929C7F6634CEFDD9B6",
+    "src/index/checkpoint_ids.rs": "AB8B3D3A2664FE64A7F34FD1FE3FA479C5686059425D71F256FA04F11EEFDFD9",
+    "src/index/gram_insert.rs": "620F88577AEA6D200046EF5B9ACBDD4A29C847BBFE334364575CB80810992CB9",
+    "src/index/intake_fold_tests.rs": "814005060E5A39EFA20E1622117EAD3FE5216BD8D027D70F6AB6F132BBDFCFD4",
+    "src/index/packed_grams.rs": "A6226239C0631603A937EB709B4504BABE6874A24A964C1FA7ACD7E811496DEA",
+    "src/index/posting.rs": "43A98EBBD515521D168004DE84CAE506691AABB9EECFDF8653B828C6D785DB60",
+    "src/index.rs": "0DEA0B253D1E518E0B236CD6E31711B87740C46712E7963FC759AE4F66C03017",
+    "src/json_stream.rs": "58842F0E6C76123BE8A89FEC2BC2D65F0508C26C74D1D3ED72AD6C0B6ACCFB92",
+    "src/lib.rs": "3863F4298590B6B0B02313AFD68DBA1C80C5CFEA1E2B07B12E71CC5D91174F97",
+    "src/main.rs": "EAC65B6AF172A12B4965E3A21134B71F46A1FF31E34F005B8877361502130097",
+    "src/manifest.rs": "08E653178DE165AC6CCB4E4F87DFE25B7C5AAD56F43D3842D609BC2704A57A9D",
+    "src/memory.rs": "5373B94A80143D8E7626A1E973DF86476CB2F84DC3A1BE953529799F20B242A7",
+    "src/model.rs": "12D5C131594040746AF8F82D321E9FFC3F9659B02F52F070E0231168478CF511",
+    "src/payload.rs": "EF3C9B13452A1D804D56FDA3E91B3BA6986E73E1DBAFEB1A55E6160AADFB1E95",
+    "src/query.rs": "A0CBD5F85FC52734B253AEF8F2347913CCE09BFEA39BC661C65214C2ACFEEFBE",
+    "src/reclaim/tests.rs": "B294B441E4A2502E31771789FE0081698A20CFEA33BD965B19BD32F6D1063BF3",
+    "src/reclaim.rs": "D7775CC7BA60B8D7CFAE64EB46CB5126E050303E4594557059C39FF3C3BF17FC",
+    "src/rkyv_payload/bench.rs": "ACD57E5FA12D35BCA7F2B33AE8DBBFC6F74EDE4B4BADE06A44158B5CD2EA65F2",
+    "src/rkyv_payload/binary.rs": "903B125F1D93955A2A0577630DF56C5617ECA55DF78EFDF14EEB1DE80AB8D9BA",
+    "src/rkyv_payload.rs": "A3202508E5B019006FFEF56FEA640B3109A9A836EAEF831E28AF7E96F53E6503",
+    "src/segment/block_check.rs": "7BE93858C9A6F0132C10453F48661175DDBC9E49A63633B387B500838CDAA7FB",
+    "src/segment/checked_page.rs": "4895CD7735A82CF16DCB9F1D8843B89C2E26828AD6B8892B571ED2D44305563E",
+    "src/segment/checksum.rs": "A5E61E59D6853A2AE6946B3D24177FFEE16553119900BF3814A4B313F58E273D",
+    "src/segment/compact.rs": "753FE71327A3F40B8F6643565D71EFF41202432B02CD3571133619DE1723A7FD",
+    "src/segment/covering.rs": "6BBD02A850DEF163D94F3DA4B388899146A19BB9391EE6EC412C887DEA00E8D8",
+    "src/segment/first.rs": "2F866A2C0A31402C4AEA76831F96D79DD365B5296CC04DEA653DE932CDB194EE",
+    "src/segment/grouped_tests.rs": "8D02416FCB08C579DE2E25577FCB41CC970655C649CA2AB9BD42364C9C124B06",
+    "src/segment/paged/streaming.rs": "5DC7BFC569D746858381C49654B6D59F8F24A7977AEC70B17DFC7A1F65A0E68B",
+    "src/segment/paged.rs": "6A8347E9BA1587A492472A842C3D8D682486E30252099691E24BB19C9F72D249",
+    "src/segment/payload_bench.rs": "B73457298BAAAA6BDAB7A55F4B01715FF23FD959E0EB1891FBD597A70EB7DA12",
+    "src/segment/posting_spool.rs": "9A362E4B1377593D94A835069207E2B6C562B87EF90F22700FA89FB59A339618",
+    "src/segment/record_spool.rs": "F6A1C49E7963676F8764202B8AF059573164AB6D85AE3FF533478A52E96ACC39",
+    "src/segment/reuse.rs": "BDAF40000400E33D36FF90EA42015549691B2CB1825340D909263E4094ED9BD6",
+    "src/segment/short_ascii.rs": "EC190CB755AADEC0C670DE9E59762529B95E7A19A256458A66D4D2F6645C68D2",
+    "src/segment/streaming.rs": "DEAE790C04D0E5F74FD7D8F19DF03B0142D9D7041A8D814F42B3564E83C8B74D",
+    "src/segment/term_pages.rs": "217CBBCAD3FC85AFDD3D6F5C4CD8B7287D1D67752AA516097B569D054657ADEF",
+    "src/segment/window_tests.rs": "A593A268F3F1EA0B887F425D6EA058C3B7A7D29C71FBE30B009B1EB484ECFDAD",
+    "src/segment.rs": "5C11E50F2ECA8407082CA93C42770381D0E4455E1C4167FED6D8F22A0CEB9DFC",
+    "src/shared_documents.rs": "94BA52AB4B14A0D6B79DAB29C4EA42C5CD96DAC9720542C0646478A335C42E13",
+    "src/source_records.rs": "A30B85BDD433A37A1DB551BE8AF9BDA0280195A14B40FE627C855F9EA3793A3F",
+    "src/spill/bounded.rs": "BC71FBCA48ACDD1A5901A0B70FA7A5C439075F817FFD9C62191E04F27E5A9E41",
+    "src/spill.rs": "6538EAEC49FF8E555B3754EFCC551BCF51D0383FF813B24C74678FE5187074A2",
+    "src/timing/maintenance.rs": "F7EFC62CCFADA52801E824DAE742D804C34724FE0175CE5035FB3778C927DBB0",
+    "src/timing.rs": "9BFD33C5F3AB6DC22ECA9BAEB1D4C80361E82784A8E37EB881B892182E307582",
+    "src/wal_delta.rs": "C8F55F95EB9A4D7371B0FD6334AA1A645FF5FDC4B763600ACBA0DCA2ED9D5B14",
+    "src/write_budget.rs": "97BB2DC99CD3719F7498BA230D7773310B80BC87145976CF2D1A869BEF9A48C9"
+  },
+  "post_benchmark_fix": "Only token+active delta+exact scalar lookup signed-zero parity fixed after frozen timing build; measured DB had delta0, text-only queries. Default search unchanged. Initial failed test preserved.",
+  "stop": "No smaller budget tuning, no TR DB reset/ingest/open, no lazy opening, no filter, no block3/4 or C ABI"
+}

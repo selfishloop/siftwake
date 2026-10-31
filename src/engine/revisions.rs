@@ -32,7 +32,7 @@ impl Database {
         }
         Ok(())
     }
-    fn revision_masks(&self) -> Result<Vec<Vec<bool>>> {
+    pub(super) fn revision_masks(&self) -> Result<Vec<Vec<bool>>> {
         let mut visible: Vec<_> = self
             .runs
             .iter()
@@ -93,6 +93,7 @@ impl Database {
     /// is foreground work. A writer cooperatively cancels unpublished work.
     /// The old source stays readable/pinned until normal manifest publication.
     pub fn start_revision_reclamation(&mut self) -> Result<bool> {
+        let _writer = crate::access::WriterScope::enter();
         #[cfg(feature = "diagnostic-timing")]
         let _plan = crate::timing::maintenance::span("planning_metadata");
         self.healthy()?;
@@ -101,11 +102,35 @@ impl Database {
             return Ok(false);
         }
         let responsive = self.revision_responsive;
-        let visible = if responsive {
+        let mut visible = if responsive {
             self.revision_masks()?
         } else {
             Vec::new()
         };
+        // A newest tombstone is dispensable only when no older immutable
+        // source contains its key. Pending WAL state never proves this.
+        let mut barriers = vec![0usize; self.runs.len()];
+        if responsive {
+            for (n, mask) in visible.iter_mut().enumerate() {
+                for (slot, keep) in mask.iter_mut().enumerate() {
+                    if !*keep || !self.runs[n].index.deleted(slot as u32) {
+                        continue;
+                    }
+                    let key = self.runs[n].index.key(slot as u32)?;
+                    let mut older = false;
+                    for run in &self.runs[..n] {
+                        if run.index.find(&key)?.is_some() {
+                            older = true;
+                            break;
+                        }
+                    }
+                    if !older {
+                        *keep = false;
+                        barriers[n] += 1;
+                    }
+                }
+            }
+        }
         let stats = if responsive {
             self.liveness_with(&visible)?
         } else {
@@ -120,22 +145,21 @@ impl Database {
         let Some((selected, _)) = stats
             .iter()
             .enumerate()
-            .filter(|(_, s)| {
+            .filter(|(n, s)| {
                 s.records <= MAP_LIMIT / 4
                     && s.source_bytes <= SOURCE_LIMIT
-                    && s.dead_payload_bytes >= 64 * 1024
-                    && s.dead_payload_bytes.saturating_mul(5) >= s.payload_bytes
-                    && (!responsive
-                        || over_budget
-                        || s.dead_payload_bytes.saturating_mul(2) >= s.payload_bytes)
+                    && ((responsive && s.live_records == 0)
+                        || (barriers[*n] >= 128 && barriers[*n] * 5 >= s.records)
+                        || (s.dead_payload_bytes >= 64 * 1024
+                            && s.dead_payload_bytes.saturating_mul(5) >= s.payload_bytes
+                            && (!responsive
+                                || over_budget
+                                || s.dead_payload_bytes.saturating_mul(2) >= s.payload_bytes)))
             })
             .max_by(|(a, x), (b, y)| {
                 if responsive {
                     // An all-dead prefix can retire together without any output.
-                    match (
-                        x.live_records == 0 && x.tombstones == 0,
-                        y.live_records == 0 && y.tombstones == 0,
-                    ) {
+                    match (x.live_records == 0, y.live_records == 0) {
                         (true, true) => b.cmp(a),
                         (true, false) => std::cmp::Ordering::Greater,
                         (false, true) => std::cmp::Ordering::Less,
@@ -163,14 +187,12 @@ impl Database {
                 .map(|slot| hidden[slot / 64] & (1 << (slot % 64)) == 0)
                 .collect()
         };
-        let retire =
-            responsive && stats[selected].live_records == 0 && stats[selected].tombstones == 0;
+        let retire = responsive && stats[selected].live_records == 0;
         let mut end = selected + 1;
         let mut bytes = stats[selected].source_bytes;
         if retire {
             while end < stats.len()
                 && stats[end].live_records == 0
-                && stats[end].tombstones == 0
                 && bytes + stats[end].source_bytes <= SOURCE_LIMIT
             {
                 bytes += stats[end].source_bytes;
@@ -186,6 +208,9 @@ impl Database {
             .then(|| Arc::new(maintenance::Control::new(self.maintenance_activity.clone())));
         let worker_cancel = cancel.clone();
         let handle = std::thread::spawn(move || {
+            #[cfg(test)]
+            test_jobs::wait(&dir);
+            let _writer = crate::access::WriterScope::enter();
             let _scope = maintenance::Scope::enter(worker_cancel.clone());
             let result = (|| -> Result<JobOutput> {
                 #[cfg(feature = "diagnostic-timing")]

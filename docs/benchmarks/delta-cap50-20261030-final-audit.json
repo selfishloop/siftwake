@@ -1,0 +1,75 @@
+{
+  "status": "STOP_A_SINGLE_QUERY_GATE_FAILED",
+  "accepted_step1": true,
+  "passed_tests": 249,
+  "ignored_tests": 15,
+  "diagnostic_first_tests": 6,
+  "source_sha256": "881756DA400952500BA871F6C7BA8FF8D17E5348E5975420BC5CD90952A7CF12",
+  "protected": [
+    {
+      "path": "data\\rkyv-corpus-20261009\\json.payload-bench",
+      "bytes": 2740862279,
+      "sha256": "11F826FCE3F4AE790FEB9FC6DF9B1169F52C2FD699E89FC4A8A4B77AAA41731B"
+    },
+    {
+      "path": "tests\\fixtures\\v1\\checkpoint.fdb",
+      "bytes": 1507,
+      "sha256": "E87667C0FABE64D5A1F59EF86B99F7E612DB755D239B41677DA2ADC24BE7BF57"
+    },
+    {
+      "path": "tests\\fixtures\\v1\\checkpoint.ready",
+      "bytes": 28,
+      "sha256": "BC82C18F8D5C3A209328BD59B12D828D8922BEC4D26CB4D557FD4A493A4A9C2F"
+    }
+  ],
+  "changed_existing_src_since_pre_step1": [
+    "src\\timing.rs",
+    "src\\engine\\first.rs",
+    "src\\engine\\light.rs",
+    "src\\engine\\snapshot.rs"
+  ],
+  "checks": {
+    "delta-cap-20261030-v2-fmt.log": "E3B0C44298FC1C149AFBF4C8996FB92427AE41E4649B934CA495991B7852B855",
+    "delta-cap-20261030-v2-clippy.log": "F267F163EDCD4B6D085136B88C691D63FE479F38BDC6FD391033B9150A8602D2",
+    "delta-cap-20261030-v2-all-tests.log": "B06FDF41A491CDBC32F30D8F7EC32AC0C810D53D62A2A35F05E6D1D38908E869",
+    "delta-cap-20261030-diag-clippy.log": "08604E4086A34C814AB82461E4E78EA95EB43A87C5A493E8EDB66576BC49871C",
+    "delta-cap-20261030-diag-tests.log": "2DC79A63576A1450FE7D9CF28488DA76BB190CDE588AB68D8A6B2675A38E31BC",
+    "delta-cap-20261030-all-features.log": "6C3864D93C715C0AB14068262801523E563BBCCABFCDBE41E9C623D1C3C7A69F",
+    "delta-cap-20261030-no-default.log": "361AB370470901BAA6E7A57D7927D1E63564264C82A893073FC05D6B7E48C930"
+  },
+  "recovery_both_steps": true,
+  "deferred": [
+    "4R+100 and profile",
+    "motor-only RAM D",
+    "Frunner keys B",
+    "500 drain C",
+    "timmy cache41vs4 E",
+    "File::open"
+  ],
+  "no_new_100k": true,
+  "no_source_format_change": true,
+  "old_reader": true,
+  "normal_control_and_candidate_model_equal": true,
+  "mask_reference_and_candidate_model_equal": true,
+  "slots": {
+    "corpus": "trwiki-cap200k-hybrid4r50",
+    "source": "D:\\frunner-corpus\\trwiki-100k-cap200k\\corpus.payload-bench",
+    "sha256": "881756DA400952500BA871F6C7BA8FF8D17E5348E5975420BC5CD90952A7CF12",
+    "original_bodies": true,
+    "runtime_revision_mode": "FDB_BENCH_50K_WRITE=1",
+    "slots": {
+      "fdb": {
+        "documents": 50000,
+        "status": "ready",
+        "state": "C:\\Users\\Serkan\\Documents\\ChatGPT\\fdb\\docs\\benchmarks\\delta-load50-20261030-b1-mask-reference-fdb-state.json",
+        "model_sha256": "EBC77BCE7810CB43BF884D3C9F4298D1C845294D924A5AF5C53319ABDA70485A"
+      },
+      "sqlite": {
+        "documents": 50000,
+        "status": "ready",
+        "state": "C:\\Users\\Serkan\\Documents\\ChatGPT\\fdb\\docs\\benchmarks\\delta-load50-20261030-b1-pair0-loaded-sqlite-state.json",
+        "model_sha256": "EBC77BCE7810CB43BF884D3C9F4298D1C845294D924A5AF5C53319ABDA70485A"
+      }
+    }
+  }
+}

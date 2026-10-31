@@ -277,6 +277,7 @@ type FoldedBody = Arc<str>;
 type FoldedBody = String;
 
 #[cfg(feature = "experimental-shared-delta-text")]
+#[derive(Clone)]
 pub(crate) struct FoldedText {
     title: String,
     body: Arc<str>,
@@ -376,6 +377,7 @@ impl BodyCache {
 }
 
 #[cfg(feature = "experimental-compact-delta-postings")]
+#[derive(Clone)]
 struct Slot {
     key: Arc<Key>,
     text: FoldedText,
@@ -419,6 +421,27 @@ fn change<K: Ord>(map: &mut BTreeMap<K, Posting>, index_key: K, key: &PostingKey
 }
 
 impl Index {
+    pub(crate) fn snapshot_clone(&self) -> Self {
+        Self {
+            scopes: self.scopes.clone(),
+            collections: self.collections.clone(),
+            exact: self.exact.clone(),
+            numeric: self.numeric.clone(),
+            grams: self.grams.clone(),
+            links: self.links.clone(),
+            #[cfg(not(feature = "experimental-compact-delta-postings"))]
+            folded: self.folded.clone(),
+            #[cfg(feature = "experimental-compact-delta-postings")]
+            key_ids: self.key_ids.clone(),
+            #[cfg(feature = "experimental-compact-delta-postings")]
+            slots: self.slots.clone(),
+            #[cfg(feature = "experimental-compact-delta-postings")]
+            free: self.free.clone(),
+            body_cache: BodyCache::default(),
+            #[cfg(feature = "bounded-engine")]
+            builder_gram_bytes: self.builder_gram_bytes,
+        }
+    }
     // Export the already-built delta dictionary without scanning document text.
     #[cfg(feature = "experimental-merge-postings")]
     pub(crate) fn visit_terms(

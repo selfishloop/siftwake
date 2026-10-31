@@ -1,0 +1,1970 @@
+{
+  "trials": [
+    {
+      "batch": "one",
+      "pair": 0,
+      "ratio": 0.7966052162789109,
+      "load_ops_s": 171.73494925617229,
+      "control_ops_s": 215.58351081151307,
+      "load_commits": 1539,
+      "control_commits": 1539,
+      "memory": {
+        "os_lifetime_peak_private_commit_bytes": 53698560,
+        "os_lifetime_peak_working_set_bytes": 56655872,
+        "private_bytes": 43675648,
+        "sample_interval_ms": 10,
+        "sampled_phase_peak_private_bytes": 53694464,
+        "sampled_phase_peak_working_set_bytes": 56651776,
+        "working_set_bytes": 45588480
+      },
+      "maintenance": {
+        "details": {
+          "jobs": [
+            {
+              "after": [
+                {
+                  "dead_payload_bytes": 0,
+                  "dead_records": 0,
+                  "index_bytes": 7623166,
+                  "live_records": 900,
+                  "payload_bytes": 24121822,
+                  "records": 900,
+                  "source_bytes": 24126441,
+                  "source_id": 82,
+                  "tombstones": 0
+                },
+                {
+                  "dead_payload_bytes": 0,
+                  "dead_records": 0,
+                  "index_bytes": 16360420,
+                  "live_records": 2000,
+                  "payload_bytes": 53014387,
+                  "records": 2000,
+                  "source_bytes": 53024654,
+                  "source_id": 20,
+                  "tombstones": 0
+                },
+                {
+                  "dead_payload_bytes": 0,
+                  "dead_records": 0,
+                  "index_bytes": 16358467,
+                  "live_records": 2000,
+                  "payload_bytes": 52958664,
+                  "records": 2000,
+                  "source_bytes": 52968931,
+                  "source_id": 30,
+                  "tombstones": 0
+                },
+                {
+                  "dead_payload_bytes": 0,
+                  "dead_records": 0,
+                  "index_bytes": 16468447,
+                  "live_records": 2000,
+                  "payload_bytes": 54130910,
+                  "records": 2000,
+                  "source_bytes": 54141177,
+                  "source_id": 40,
+                  "tombstones": 0
+                },
+                {
+                  "dead_payload_bytes": 0,
+                  "dead_records": 0,
+                  "index_bytes": 16547138,
+                  "live_records": 2000,
+                  "payload_bytes": 54225036,
+                  "records": 2000,
+                  "source_bytes": 54235303,
+                  "source_id": 50,
+                  "tombstones": 0
+                },
+                {
+                  "dead_payload_bytes": 0,
+                  "dead_records": 0,
+                  "index_bytes": 9255844,
+                  "live_records": 1100,
+                  "payload_bytes": 29668115,
+                  "records": 1100,
+                  "source_bytes": 29673771,
+                  "source_id": 80,
+                  "tombstones": 0
+                }
+              ],
+              "before": [
+                {
+                  "dead_payload_bytes": 29668115,
+                  "dead_records": 1100,
+                  "index_bytes": 16507377,
+                  "live_records": 900,
+                  "payload_bytes": 53789937,
+                  "records": 2000,
+                  "source_bytes": 53800204,
+                  "source_id": 10,
+                  "tombstones": 0
+                },
+                {
+                  "dead_payload_bytes": 0,
+                  "dead_records": 0,
+                  "index_bytes": 16360420,
+                  "live_records": 2000,
+                  "payload_bytes": 53014387,
+                  "records": 2000,
+                  "source_bytes": 53024654,
+                  "source_id": 20,
+                  "tombstones": 0
+                },
+                {
+                  "dead_payload_bytes": 0,
+                  "dead_records": 0,
+                  "index_bytes": 16358467,
+                  "live_records": 2000,
+                  "payload_bytes": 52958664,
+                  "records": 2000,
+                  "source_bytes": 52968931,
+                  "source_id": 30,
+                  "tombstones": 0
+                },
+                {
+                  "dead_payload_bytes": 0,
+                  "dead_records": 0,
+                  "index_bytes": 16468447,
+                  "live_records": 2000,
+                  "payload_bytes": 54130910,
+                  "records": 2000,
+                  "source_bytes": 54141177,
+                  "source_id": 40,
+                  "tombstones": 0
+                },
+                {
+                  "dead_payload_bytes": 0,
+                  "dead_records": 0,
+                  "index_bytes": 16547138,
+                  "live_records": 2000,
+                  "payload_bytes": 54225036,
+                  "records": 2000,
+                  "source_bytes": 54235303,
+                  "source_id": 50,
+                  "tombstones": 0
+                },
+                {
+                  "dead_payload_bytes": 0,
+                  "dead_records": 0,
+                  "index_bytes": 9255844,
+                  "live_records": 1100,
+                  "payload_bytes": 29668115,
+                  "records": 1100,
+                  "source_bytes": 29673771,
+                  "source_id": 80,
+                  "tombstones": 0
+                }
+              ],
+              "installed": true,
+              "rewrite": true,
+              "running": true
+            }
+          ],
+          "normal_merges_completed": 2,
+          "retirements": 0,
+          "revision_rewrites_completed": 1
+        },
+        "end_ms": 1944.3198000000002,
+        "start_ms": 35.410900000000005
+      },
+      "publication": {
+        "mask_full_rebuilds": 4,
+        "mask_incremental_publications": 1542,
+        "mask_keys_scanned": 44839,
+        "mask_prepare_ns": 146916800,
+        "max_prepare_ns": 14861200,
+        "old_view_release_ns": 112230300,
+        "pointer_ns": 159900,
+        "prepare_ns": 359860900,
+        "publications": 1546,
+        "state_clone_ns": 137160400,
+        "wal_reader_open_ns": 64684200
+      },
+      "writer_waited": 179,
+      "max_writer_wait_ms": 0.0676,
+      "read_fails": {
+        "four": [],
+        "single": [
+          {
+            "case_id": 0,
+            "idle_ms": 2.4575,
+            "loaded_ms": 5.0673,
+            "delta_ms": 2.6098000000000003
+          },
+          {
+            "case_id": 2,
+            "idle_ms": 23.5088,
+            "loaded_ms": 47.2816,
+            "delta_ms": 23.772799999999997
+          },
+          {
+            "case_id": 5,
+            "idle_ms": 66.9711,
+            "loaded_ms": 138.23,
+            "delta_ms": 71.25889999999998
+          },
+          {
+            "case_id": 7,
+            "idle_ms": 14.4813,
+            "loaded_ms": 38.994,
+            "delta_ms": 24.512700000000002
+          },
+          {
+            "case_id": 8,
+            "idle_ms": 57.1241,
+            "loaded_ms": 120.5448,
+            "delta_ms": 63.4207
+          },
+          {
+            "case_id": 9,
+            "idle_ms": 56.8327,
+            "loaded_ms": 119.6426,
+            "delta_ms": 62.8099
+          },
+          {
+            "case_id": 10,
+            "idle_ms": 47.4621,
+            "loaded_ms": 111.2508,
+            "delta_ms": 63.7887
+          },
+          {
+            "case_id": 12,
+            "idle_ms": 19.091,
+            "loaded_ms": 44.0165,
+            "delta_ms": 24.9255
+          },
+          {
+            "case_id": 15,
+            "idle_ms": 21.6542,
+            "loaded_ms": 43.8156,
+            "delta_ms": 22.161400000000004
+          },
+          {
+            "case_id": 24,
+            "idle_ms": 16.5611,
+            "loaded_ms": 39.9365,
+            "delta_ms": 23.375400000000003
+          },
+          {
+            "case_id": 29,
+            "idle_ms": 83.3908,
+            "loaded_ms": 184.5317,
+            "delta_ms": 101.1409
+          },
+          {
+            "case_id": 32,
+            "idle_ms": 2.5484,
+            "loaded_ms": 9.1239,
+            "delta_ms": 6.575500000000001
+          },
+          {
+            "case_id": 37,
+            "idle_ms": 1.5071,
+            "loaded_ms": 3.9708,
+            "delta_ms": 2.4637000000000002
+          }
+        ]
+      }
+    },
+    {
+      "batch": "one",
+      "pair": 1,
+      "ratio": 0.7364801134973008,
+      "load_ops_s": 171.79985239054918,
+      "control_ops_s": 233.271542899819,
+      "load_commits": 1539,
+      "control_commits": 1539,
+      "memory": {
+        "os_lifetime_peak_private_commit_bytes": 50094080,
+        "os_lifetime_peak_working_set_bytes": 52887552,
+        "private_bytes": 40157184,
+        "sample_interval_ms": 10,
+        "sampled_phase_peak_private_bytes": 49090560,
+        "sampled_phase_peak_working_set_bytes": 52121600,
+        "working_set_bytes": 42246144
+      },
+      "maintenance": {
+        "details": {
+          "jobs": [
+            {
+              "after": [
+                {
+                  "dead_payload_bytes": 0,
+                  "dead_records": 0,
+                  "index_bytes": 7623166,
+                  "live_records": 900,
+                  "payload_bytes": 24121822,
+                  "records": 900,
+                  "source_bytes": 24126441,
+                  "source_id": 82,
+                  "tombstones": 0
+                },
+                {
+                  "dead_payload_bytes": 0,
+                  "dead_records": 0,
+                  "index_bytes": 16360420,
+                  "live_records": 2000,
+                  "payload_bytes": 53014387,
+                  "records": 2000,
+                  "source_bytes": 53024654,
+                  "source_id": 20,
+                  "tombstones": 0
+                },
+                {
+                  "dead_payload_bytes": 0,
+                  "dead_records": 0,
+                  "index_bytes": 16358467,
+                  "live_records": 2000,
+                  "payload_bytes": 52958664,
+                  "records": 2000,
+                  "source_bytes": 52968931,
+                  "source_id": 30,
+                  "tombstones": 0
+                },
+                {
+                  "dead_payload_bytes": 0,
+                  "dead_records": 0,
+                  "index_bytes": 16468447,
+                  "live_records": 2000,
+                  "payload_bytes": 54130910,
+                  "records": 2000,
+                  "source_bytes": 54141177,
+                  "source_id": 40,
+                  "tombstones": 0
+                },
+                {
+                  "dead_payload_bytes": 0,
+                  "dead_records": 0,
+                  "index_bytes": 16547138,
+                  "live_records": 2000,
+                  "payload_bytes": 54225036,
+                  "records": 2000,
+                  "source_bytes": 54235303,
+                  "source_id": 50,
+                  "tombstones": 0
+                },
+                {
+                  "dead_payload_bytes": 0,
+                  "dead_records": 0,
+                  "index_bytes": 9255844,
+                  "live_records": 1100,
+                  "payload_bytes": 29668115,
+                  "records": 1100,
+                  "source_bytes": 29673771,
+                  "source_id": 80,
+                  "tombstones": 0
+                }
+              ],
+              "before": [
+                {
+                  "dead_payload_bytes": 29668115,
+                  "dead_records": 1100,
+                  "index_bytes": 16507377,
+                  "live_records": 900,
+                  "payload_bytes": 53789937,
+                  "records": 2000,
+                  "source_bytes": 53800204,
+                  "source_id": 10,
+                  "tombstones": 0
+                },
+                {
+                  "dead_payload_bytes": 0,
+                  "dead_records": 0,
+                  "index_bytes": 16360420,
+                  "live_records": 2000,
+                  "payload_bytes": 53014387,
+                  "records": 2000,
+                  "source_bytes": 53024654,
+                  "source_id": 20,
+                  "tombstones": 0
+                },
+                {
+                  "dead_payload_bytes": 0,
+                  "dead_records": 0,
+                  "index_bytes": 16358467,
+                  "live_records": 2000,
+                  "payload_bytes": 52958664,
+                  "records": 2000,
+                  "source_bytes": 52968931,
+                  "source_id": 30,
+                  "tombstones": 0
+                },
+                {
+                  "dead_payload_bytes": 0,
+                  "dead_records": 0,
+                  "index_bytes": 16468447,
+                  "live_records": 2000,
+                  "payload_bytes": 54130910,
+                  "records": 2000,
+                  "source_bytes": 54141177,
+                  "source_id": 40,
+                  "tombstones": 0
+                },
+                {
+                  "dead_payload_bytes": 0,
+                  "dead_records": 0,
+                  "index_bytes": 16547138,
+                  "live_records": 2000,
+                  "payload_bytes": 54225036,
+                  "records": 2000,
+                  "source_bytes": 54235303,
+                  "source_id": 50,
+                  "tombstones": 0
+                },
+                {
+                  "dead_payload_bytes": 0,
+                  "dead_records": 0,
+                  "index_bytes": 9255844,
+                  "live_records": 1100,
+                  "payload_bytes": 29668115,
+                  "records": 1100,
+                  "source_bytes": 29673771,
+                  "source_id": 80,
+                  "tombstones": 0
+                }
+              ],
+              "installed": true,
+              "rewrite": true,
+              "running": true
+            }
+          ],
+          "normal_merges_completed": 2,
+          "retirements": 0,
+          "revision_rewrites_completed": 1
+        },
+        "end_ms": 1935.9891999999998,
+        "start_ms": 30.1256
+      },
+      "publication": {
+        "mask_full_rebuilds": 4,
+        "mask_incremental_publications": 1542,
+        "mask_keys_scanned": 44839,
+        "mask_prepare_ns": 157020800,
+        "max_prepare_ns": 7974800,
+        "old_view_release_ns": 118641000,
+        "pointer_ns": 201100,
+        "prepare_ns": 322480100,
+        "publications": 1546,
+        "state_clone_ns": 140353600,
+        "wal_reader_open_ns": 11757600
+      },
+      "writer_waited": 189,
+      "max_writer_wait_ms": 0.0764,
+      "read_fails": {
+        "four": [],
+        "single": [
+          {
+            "case_id": 5,
+            "idle_ms": 68.6592,
+            "loaded_ms": 137.7788,
+            "delta_ms": 69.11959999999999
+          },
+          {
+            "case_id": 8,
+            "idle_ms": 56.5832,
+            "loaded_ms": 130.3311,
+            "delta_ms": 73.74789999999999
+          },
+          {
+            "case_id": 9,
+            "idle_ms": 55.5742,
+            "loaded_ms": 137.2218,
+            "delta_ms": 81.64760000000001
+          },
+          {
+            "case_id": 10,
+            "idle_ms": 48.3726,
+            "loaded_ms": 108.4536,
+            "delta_ms": 60.080999999999996
+          },
+          {
+            "case_id": 11,
+            "idle_ms": 28.885,
+            "loaded_ms": 68.1509,
+            "delta_ms": 39.26589999999999
+          },
+          {
+            "case_id": 14,
+            "idle_ms": 30.9426,
+            "loaded_ms": 66.1041,
+            "delta_ms": 35.161500000000004
+          },
+          {
+            "case_id": 15,
+            "idle_ms": 20.7721,
+            "loaded_ms": 42.2086,
+            "delta_ms": 21.4365
+          },
+          {
+            "case_id": 29,
+            "idle_ms": 88.9943,
+            "loaded_ms": 203.9715,
+            "delta_ms": 114.9772
+          },
+          {
+            "case_id": 33,
+            "idle_ms": 1.937,
+            "loaded_ms": 4.0724,
+            "delta_ms": 2.1353999999999997
+          },
+          {
+            "case_id": 34,
+            "idle_ms": 8.5425,
+            "loaded_ms": 18.2336,
+            "delta_ms": 9.691099999999999
+          },
+          {
+            "case_id": 35,
+            "idle_ms": 17.3589,
+            "loaded_ms": 38.0011,
+            "delta_ms": 20.642200000000003
+          },
+          {
+            "case_id": 37,
+            "idle_ms": 1.5421,
+            "loaded_ms": 3.9455,
+            "delta_ms": 2.4034
+          }
+        ]
+      }
+    },
+    {
+      "batch": "100",
+      "pair": 0,
+      "ratio": 0.7384026402491454,
+      "load_ops_s": 232.08086254245052,
+      "control_ops_s": 314.30123606294774,
+      "load_commits": 21,
+      "control_commits": 21,
+      "memory": {
+        "os_lifetime_peak_private_commit_bytes": 49876992,
+        "os_lifetime_peak_working_set_bytes": 52445184,
+        "private_bytes": 38924288,
+        "sample_interval_ms": 10,
+        "sampled_phase_peak_private_bytes": 49868800,
+        "sampled_phase_peak_working_set_bytes": 52436992,
+        "working_set_bytes": 41758720
+      },
+      "maintenance": {
+        "details": {
+          "jobs": [
+            {
+              "after": [
+                {
+                  "dead_payload_bytes": 0,
+                  "dead_records": 0,
+                  "index_bytes": 7623166,
+                  "live_records": 900,
+                  "payload_bytes": 24121822,
+                  "records": 900,
+                  "source_bytes": 24126441,
+                  "source_id": 104,
+                  "tombstones": 0
+                },
+                {
+                  "dead_payload_bytes": 0,
+                  "dead_records": 0,
+                  "index_bytes": 16360420,
+                  "live_records": 2000,
+                  "payload_bytes": 53014387,
+                  "records": 2000,
+                  "source_bytes": 53024654,
+                  "source_id": 20,
+                  "tombstones": 0
+                },
+                {
+                  "dead_payload_bytes": 0,
+                  "dead_records": 0,
+                  "index_bytes": 16358467,
+                  "live_records": 2000,
+                  "payload_bytes": 52958664,
+                  "records": 2000,
+                  "source_bytes": 52968931,
+                  "source_id": 30,
+                  "tombstones": 0
+                },
+                {
+                  "dead_payload_bytes": 0,
+                  "dead_records": 0,
+                  "index_bytes": 16468447,
+                  "live_records": 2000,
+                  "payload_bytes": 54130910,
+                  "records": 2000,
+                  "source_bytes": 54141177,
+                  "source_id": 40,
+                  "tombstones": 0
+                },
+                {
+                  "dead_payload_bytes": 0,
+                  "dead_records": 0,
+                  "index_bytes": 16547138,
+                  "live_records": 2000,
+                  "payload_bytes": 54225036,
+                  "records": 2000,
+                  "source_bytes": 54235303,
+                  "source_id": 50,
+                  "tombstones": 0
+                },
+                {
+                  "dead_payload_bytes": 0,
+                  "dead_records": 0,
+                  "index_bytes": 9255904,
+                  "live_records": 1100,
+                  "payload_bytes": 29668115,
+                  "records": 1100,
+                  "source_bytes": 29673771,
+                  "source_id": 102,
+                  "tombstones": 0
+                }
+              ],
+              "before": [
+                {
+                  "dead_payload_bytes": 29668115,
+                  "dead_records": 1100,
+                  "index_bytes": 16507377,
+                  "live_records": 900,
+                  "payload_bytes": 53789937,
+                  "records": 2000,
+                  "source_bytes": 53800204,
+                  "source_id": 10,
+                  "tombstones": 0
+                },
+                {
+                  "dead_payload_bytes": 0,
+                  "dead_records": 0,
+                  "index_bytes": 16360420,
+                  "live_records": 2000,
+                  "payload_bytes": 53014387,
+                  "records": 2000,
+                  "source_bytes": 53024654,
+                  "source_id": 20,
+                  "tombstones": 0
+                },
+                {
+                  "dead_payload_bytes": 0,
+                  "dead_records": 0,
+                  "index_bytes": 16358467,
+                  "live_records": 2000,
+                  "payload_bytes": 52958664,
+                  "records": 2000,
+                  "source_bytes": 52968931,
+                  "source_id": 30,
+                  "tombstones": 0
+                },
+                {
+                  "dead_payload_bytes": 0,
+                  "dead_records": 0,
+                  "index_bytes": 16468447,
+                  "live_records": 2000,
+                  "payload_bytes": 54130910,
+                  "records": 2000,
+                  "source_bytes": 54141177,
+                  "source_id": 40,
+                  "tombstones": 0
+                },
+                {
+                  "dead_payload_bytes": 0,
+                  "dead_records": 0,
+                  "index_bytes": 16547138,
+                  "live_records": 2000,
+                  "payload_bytes": 54225036,
+                  "records": 2000,
+                  "source_bytes": 54235303,
+                  "source_id": 50,
+                  "tombstones": 0
+                },
+                {
+                  "dead_payload_bytes": 0,
+                  "dead_records": 0,
+                  "index_bytes": 9255904,
+                  "live_records": 1100,
+                  "payload_bytes": 29668115,
+                  "records": 1100,
+                  "source_bytes": 29673771,
+                  "source_id": 102,
+                  "tombstones": 0
+                }
+              ],
+              "installed": true,
+              "rewrite": true,
+              "running": true
+            }
+          ],
+          "normal_merges_completed": 2,
+          "retirements": 0,
+          "revision_rewrites_completed": 1
+        },
+        "end_ms": 4883.405,
+        "start_ms": 2906.3316
+      },
+      "publication": {
+        "mask_full_rebuilds": 10,
+        "mask_incremental_publications": 21,
+        "mask_keys_scanned": 112100,
+        "mask_prepare_ns": 80440900,
+        "max_prepare_ns": 10935800,
+        "old_view_release_ns": 247600,
+        "pointer_ns": 5500,
+        "prepare_ns": 240905200,
+        "publications": 31,
+        "state_clone_ns": 176900,
+        "wal_reader_open_ns": 160128800
+      },
+      "writer_waited": 191,
+      "max_writer_wait_ms": 0.0645,
+      "read_fails": {
+        "four": [],
+        "single": [
+          {
+            "case_id": 9,
+            "idle_ms": 53.2061,
+            "loaded_ms": 121.4851,
+            "delta_ms": 68.279
+          },
+          {
+            "case_id": 10,
+            "idle_ms": 47.6822,
+            "loaded_ms": 98.4176,
+            "delta_ms": 50.73539999999999
+          },
+          {
+            "case_id": 11,
+            "idle_ms": 30.1463,
+            "loaded_ms": 72.9648,
+            "delta_ms": 42.8185
+          },
+          {
+            "case_id": 14,
+            "idle_ms": 30.7279,
+            "loaded_ms": 67.7943,
+            "delta_ms": 37.0664
+          },
+          {
+            "case_id": 18,
+            "idle_ms": 1.3283,
+            "loaded_ms": 3.0035,
+            "delta_ms": 1.6751999999999998
+          },
+          {
+            "case_id": 24,
+            "idle_ms": 16.7997,
+            "loaded_ms": 36.814,
+            "delta_ms": 20.0143
+          },
+          {
+            "case_id": 29,
+            "idle_ms": 86.1179,
+            "loaded_ms": 186.5853,
+            "delta_ms": 100.46739999999998
+          },
+          {
+            "case_id": 36,
+            "idle_ms": 3.437,
+            "loaded_ms": 6.999,
+            "delta_ms": 3.562
+          },
+          {
+            "case_id": 37,
+            "idle_ms": 1.5235,
+            "loaded_ms": 4.9645,
+            "delta_ms": 3.441
+          }
+        ]
+      }
+    },
+    {
+      "batch": "100",
+      "pair": 1,
+      "ratio": 0.7593717707543184,
+      "load_ops_s": 241.1691423994602,
+      "control_ops_s": 317.59034466068704,
+      "load_commits": 22,
+      "control_commits": 21,
+      "memory": {
+        "os_lifetime_peak_private_commit_bytes": 47210496,
+        "os_lifetime_peak_working_set_bytes": 49868800,
+        "private_bytes": 38825984,
+        "sample_interval_ms": 10,
+        "sampled_phase_peak_private_bytes": 47210496,
+        "sampled_phase_peak_working_set_bytes": 49860608,
+        "working_set_bytes": 41951232
+      },
+      "maintenance": {
+        "details": {
+          "jobs": [
+            {
+              "after": [
+                {
+                  "dead_payload_bytes": 0,
+                  "dead_records": 0,
+                  "index_bytes": 7623166,
+                  "live_records": 900,
+                  "payload_bytes": 24121822,
+                  "records": 900,
+                  "source_bytes": 24126441,
+                  "source_id": 104,
+                  "tombstones": 0
+                },
+                {
+                  "dead_payload_bytes": 0,
+                  "dead_records": 0,
+                  "index_bytes": 16360420,
+                  "live_records": 2000,
+                  "payload_bytes": 53014387,
+                  "records": 2000,
+                  "source_bytes": 53024654,
+                  "source_id": 20,
+                  "tombstones": 0
+                },
+                {
+                  "dead_payload_bytes": 0,
+                  "dead_records": 0,
+                  "index_bytes": 16358467,
+                  "live_records": 2000,
+                  "payload_bytes": 52958664,
+                  "records": 2000,
+                  "source_bytes": 52968931,
+                  "source_id": 30,
+                  "tombstones": 0
+                },
+                {
+                  "dead_payload_bytes": 0,
+                  "dead_records": 0,
+                  "index_bytes": 16468447,
+                  "live_records": 2000,
+                  "payload_bytes": 54130910,
+                  "records": 2000,
+                  "source_bytes": 54141177,
+                  "source_id": 40,
+                  "tombstones": 0
+                },
+                {
+                  "dead_payload_bytes": 0,
+                  "dead_records": 0,
+                  "index_bytes": 16547138,
+                  "live_records": 2000,
+                  "payload_bytes": 54225036,
+                  "records": 2000,
+                  "source_bytes": 54235303,
+                  "source_id": 50,
+                  "tombstones": 0
+                },
+                {
+                  "dead_payload_bytes": 0,
+                  "dead_records": 0,
+                  "index_bytes": 9255904,
+                  "live_records": 1100,
+                  "payload_bytes": 29668115,
+                  "records": 1100,
+                  "source_bytes": 29673771,
+                  "source_id": 102,
+                  "tombstones": 0
+                }
+              ],
+              "before": [
+                {
+                  "dead_payload_bytes": 29668115,
+                  "dead_records": 1100,
+                  "index_bytes": 16507377,
+                  "live_records": 900,
+                  "payload_bytes": 53789937,
+                  "records": 2000,
+                  "source_bytes": 53800204,
+                  "source_id": 10,
+                  "tombstones": 0
+                },
+                {
+                  "dead_payload_bytes": 0,
+                  "dead_records": 0,
+                  "index_bytes": 16360420,
+                  "live_records": 2000,
+                  "payload_bytes": 53014387,
+                  "records": 2000,
+                  "source_bytes": 53024654,
+                  "source_id": 20,
+                  "tombstones": 0
+                },
+                {
+                  "dead_payload_bytes": 0,
+                  "dead_records": 0,
+                  "index_bytes": 16358467,
+                  "live_records": 2000,
+                  "payload_bytes": 52958664,
+                  "records": 2000,
+                  "source_bytes": 52968931,
+                  "source_id": 30,
+                  "tombstones": 0
+                },
+                {
+                  "dead_payload_bytes": 0,
+                  "dead_records": 0,
+                  "index_bytes": 16468447,
+                  "live_records": 2000,
+                  "payload_bytes": 54130910,
+                  "records": 2000,
+                  "source_bytes": 54141177,
+                  "source_id": 40,
+                  "tombstones": 0
+                },
+                {
+                  "dead_payload_bytes": 0,
+                  "dead_records": 0,
+                  "index_bytes": 16547138,
+                  "live_records": 2000,
+                  "payload_bytes": 54225036,
+                  "records": 2000,
+                  "source_bytes": 54235303,
+                  "source_id": 50,
+                  "tombstones": 0
+                },
+                {
+                  "dead_payload_bytes": 0,
+                  "dead_records": 0,
+                  "index_bytes": 9255904,
+                  "live_records": 1100,
+                  "payload_bytes": 29668115,
+                  "records": 1100,
+                  "source_bytes": 29673771,
+                  "source_id": 102,
+                  "tombstones": 0
+                }
+              ],
+              "installed": true,
+              "rewrite": true,
+              "running": true
+            }
+          ],
+          "normal_merges_completed": 2,
+          "retirements": 0,
+          "revision_rewrites_completed": 1
+        },
+        "end_ms": 4848.8988,
+        "start_ms": 2923.9685
+      },
+      "publication": {
+        "mask_full_rebuilds": 10,
+        "mask_incremental_publications": 22,
+        "mask_keys_scanned": 112200,
+        "mask_prepare_ns": 85097900,
+        "max_prepare_ns": 9026000,
+        "old_view_release_ns": 188600,
+        "pointer_ns": 5800,
+        "prepare_ns": 128444500,
+        "publications": 32,
+        "state_clone_ns": 176400,
+        "wal_reader_open_ns": 43010000
+      },
+      "writer_waited": 219,
+      "max_writer_wait_ms": 0.2014,
+      "read_fails": {
+        "four": [],
+        "single": [
+          {
+            "case_id": 0,
+            "idle_ms": 2.4184,
+            "loaded_ms": 4.9485,
+            "delta_ms": 2.5301
+          },
+          {
+            "case_id": 5,
+            "idle_ms": 66.3539,
+            "loaded_ms": 138.2898,
+            "delta_ms": 71.93590000000002
+          },
+          {
+            "case_id": 8,
+            "idle_ms": 57.1078,
+            "loaded_ms": 124.0821,
+            "delta_ms": 66.9743
+          },
+          {
+            "case_id": 9,
+            "idle_ms": 53.8653,
+            "loaded_ms": 143.0637,
+            "delta_ms": 89.19840000000002
+          },
+          {
+            "case_id": 10,
+            "idle_ms": 47.4032,
+            "loaded_ms": 125.2261,
+            "delta_ms": 77.8229
+          },
+          {
+            "case_id": 11,
+            "idle_ms": 29.5678,
+            "loaded_ms": 65.9478,
+            "delta_ms": 36.38
+          },
+          {
+            "case_id": 14,
+            "idle_ms": 30.7134,
+            "loaded_ms": 68.3399,
+            "delta_ms": 37.6265
+          },
+          {
+            "case_id": 17,
+            "idle_ms": 1.8826,
+            "loaded_ms": 3.8641,
+            "delta_ms": 1.9815
+          },
+          {
+            "case_id": 18,
+            "idle_ms": 1.362,
+            "loaded_ms": 2.7427,
+            "delta_ms": 1.3807
+          },
+          {
+            "case_id": 29,
+            "idle_ms": 88.8661,
+            "loaded_ms": 188.9423,
+            "delta_ms": 100.07619999999999
+          },
+          {
+            "case_id": 34,
+            "idle_ms": 7.4842,
+            "loaded_ms": 15.4934,
+            "delta_ms": 8.0092
+          },
+          {
+            "case_id": 35,
+            "idle_ms": 15.281,
+            "loaded_ms": 35.0714,
+            "delta_ms": 19.790399999999998
+          },
+          {
+            "case_id": 36,
+            "idle_ms": 3.2009,
+            "loaded_ms": 7.3829,
+            "delta_ms": 4.182
+          },
+          {
+            "case_id": 37,
+            "idle_ms": 1.5054,
+            "loaded_ms": 4.2757,
+            "delta_ms": 2.7702999999999998
+          }
+        ]
+      }
+    }
+  ],
+  "matrices": {
+    "one": [
+      {
+        "case_id": 0,
+        "p95": 4.7588,
+        "max": 9.7041,
+        "p50": 4.1538,
+        "four_idle": 5.6133,
+        "four_delta": -0.8544999999999998,
+        "four_pass": true,
+        "single_idle": 2.7099,
+        "single_delta": 2.0488999999999997,
+        "single_pass": true
+      },
+      {
+        "case_id": 1,
+        "p95": 6.2614,
+        "max": 8.221,
+        "p50": 4.9045,
+        "four_idle": 5.8382,
+        "four_delta": 0.42320000000000046,
+        "four_pass": true,
+        "single_idle": 3.6288,
+        "single_delta": 2.6326,
+        "single_pass": true
+      },
+      {
+        "case_id": 2,
+        "p95": 47.2816,
+        "max": 61.8556,
+        "p50": 35.8216,
+        "four_idle": 37.5343,
+        "four_delta": 9.747299999999996,
+        "four_pass": true,
+        "single_idle": 23.5088,
+        "single_delta": 23.772799999999997,
+        "single_pass": false
+      },
+      {
+        "case_id": 3,
+        "p95": 7.1033,
+        "max": 7.2612,
+        "p50": 6.2064,
+        "four_idle": 8.4697,
+        "four_delta": -1.3663999999999996,
+        "four_pass": true,
+        "single_idle": 5.0737,
+        "single_delta": 2.0296000000000003,
+        "single_pass": true
+      },
+      {
+        "case_id": 4,
+        "p95": 108.6864,
+        "max": 117.0566,
+        "p50": 85.9062,
+        "four_idle": 100.2732,
+        "four_delta": 8.413200000000003,
+        "four_pass": true,
+        "single_idle": 61.854,
+        "single_delta": 46.83240000000001,
+        "single_pass": true
+      },
+      {
+        "case_id": 5,
+        "p95": 138.23,
+        "max": 150.3249,
+        "p50": 107.871,
+        "four_idle": 125.5516,
+        "four_delta": 12.678399999999996,
+        "four_pass": true,
+        "single_idle": 68.4951,
+        "single_delta": 69.7349,
+        "single_pass": false
+      },
+      {
+        "case_id": 6,
+        "p95": 17.0157,
+        "max": 17.2244,
+        "p50": 13.7055,
+        "four_idle": 14.9808,
+        "four_delta": 2.0348999999999986,
+        "four_pass": true,
+        "single_idle": 10.6742,
+        "single_delta": 6.341499999999998,
+        "single_pass": true
+      },
+      {
+        "case_id": 7,
+        "p95": 35.1208,
+        "max": 42.9705,
+        "p50": 21.2459,
+        "four_idle": 23.0601,
+        "four_delta": 12.060700000000004,
+        "four_pass": true,
+        "single_idle": 16.6022,
+        "single_delta": 18.518600000000003,
+        "single_pass": false
+      },
+      {
+        "case_id": 8,
+        "p95": 130.3311,
+        "max": 142.7053,
+        "p50": 92.2528,
+        "four_idle": 99.1589,
+        "four_delta": 31.17219999999999,
+        "four_pass": true,
+        "single_idle": 57.1241,
+        "single_delta": 73.207,
+        "single_pass": false
+      },
+      {
+        "case_id": 9,
+        "p95": 124.609,
+        "max": 144.5577,
+        "p50": 90.3663,
+        "four_idle": 103.0336,
+        "four_delta": 21.575399999999988,
+        "four_pass": true,
+        "single_idle": 56.8327,
+        "single_delta": 67.77629999999999,
+        "single_pass": false
+      },
+      {
+        "case_id": 10,
+        "p95": 111.2508,
+        "max": 132.0102,
+        "p50": 84.6688,
+        "four_idle": 89.0082,
+        "four_delta": 22.242599999999996,
+        "four_pass": true,
+        "single_idle": 48.3726,
+        "single_delta": 62.8782,
+        "single_pass": false
+      },
+      {
+        "case_id": 11,
+        "p95": 62.1446,
+        "max": 77.9945,
+        "p50": 49.4022,
+        "four_idle": 52.674,
+        "four_delta": 9.470599999999997,
+        "four_pass": true,
+        "single_idle": 29.2377,
+        "single_delta": 32.90689999999999,
+        "single_pass": false
+      },
+      {
+        "case_id": 12,
+        "p95": 36.5773,
+        "max": 55.2195,
+        "p50": 29.8496,
+        "four_idle": 31.2501,
+        "four_delta": 5.327200000000001,
+        "four_pass": true,
+        "single_idle": 19.512,
+        "single_delta": 17.0653,
+        "single_pass": true
+      },
+      {
+        "case_id": 13,
+        "p95": 21.1642,
+        "max": 28.6328,
+        "p50": 18.2841,
+        "four_idle": 19.9865,
+        "four_delta": 1.1777000000000015,
+        "four_pass": true,
+        "single_idle": 14.4507,
+        "single_delta": 6.713500000000002,
+        "single_pass": true
+      },
+      {
+        "case_id": 14,
+        "p95": 66.0932,
+        "max": 66.9886,
+        "p50": 50.5585,
+        "four_idle": 58.0671,
+        "four_delta": 8.026099999999992,
+        "four_pass": true,
+        "single_idle": 34.4435,
+        "single_delta": 31.649699999999996,
+        "single_pass": true
+      },
+      {
+        "case_id": 15,
+        "p95": 43.2524,
+        "max": 50.6751,
+        "p50": 31.9856,
+        "four_idle": 33.4613,
+        "four_delta": 9.7911,
+        "four_pass": true,
+        "single_idle": 21.6542,
+        "single_delta": 21.598200000000002,
+        "single_pass": true
+      },
+      {
+        "case_id": 16,
+        "p95": 3.4356,
+        "max": 5.3387,
+        "p50": 2.1238,
+        "four_idle": 2.5603,
+        "four_delta": 0.8753000000000002,
+        "four_pass": true,
+        "single_idle": 2.1393,
+        "single_delta": 1.2963,
+        "single_pass": true
+      },
+      {
+        "case_id": 17,
+        "p95": 3.5467,
+        "max": 3.7493,
+        "p50": 2.574,
+        "four_idle": 3.4099,
+        "four_delta": 0.13680000000000003,
+        "four_pass": true,
+        "single_idle": 2.4239,
+        "single_delta": 1.1227999999999998,
+        "single_pass": true
+      },
+      {
+        "case_id": 18,
+        "p95": 2.5563,
+        "max": 3.3362,
+        "p50": 1.7588,
+        "four_idle": 2.2779,
+        "four_delta": 0.2784,
+        "four_pass": true,
+        "single_idle": 1.7568,
+        "single_delta": 0.7994999999999999,
+        "single_pass": true
+      },
+      {
+        "case_id": 19,
+        "p95": 0.2137,
+        "max": 0.2261,
+        "p50": 0.1093,
+        "four_idle": 0.0878,
+        "four_delta": 0.1259,
+        "four_pass": true,
+        "single_idle": 0.0662,
+        "single_delta": 0.14750000000000002,
+        "single_pass": true
+      },
+      {
+        "case_id": 20,
+        "p95": 246.1198,
+        "max": 260.385,
+        "p50": 216.2695,
+        "four_idle": 214.7644,
+        "four_delta": 31.355400000000003,
+        "four_pass": true,
+        "single_idle": 156.7593,
+        "single_delta": 89.3605,
+        "single_pass": true
+      },
+      {
+        "case_id": 21,
+        "p95": 234.5114,
+        "max": 253.6564,
+        "p50": 211.4905,
+        "four_idle": 217.9481,
+        "four_delta": 16.563299999999998,
+        "four_pass": true,
+        "single_idle": 161.3902,
+        "single_delta": 73.12120000000002,
+        "single_pass": true
+      },
+      {
+        "case_id": 22,
+        "p95": 8.1466,
+        "max": 12.6178,
+        "p50": 6.0027,
+        "four_idle": 7.4785,
+        "four_delta": 0.668099999999999,
+        "four_pass": true,
+        "single_idle": 5.5906,
+        "single_delta": 2.555999999999999,
+        "single_pass": true
+      },
+      {
+        "case_id": 23,
+        "p95": 84.0107,
+        "max": 90.4059,
+        "p50": 62.0463,
+        "four_idle": 65.8397,
+        "four_delta": 18.171000000000006,
+        "four_pass": true,
+        "single_idle": 45.3378,
+        "single_delta": 38.6729,
+        "single_pass": true
+      },
+      {
+        "case_id": 24,
+        "p95": 38.2788,
+        "max": 46.184,
+        "p50": 22.4959,
+        "four_idle": 24.8119,
+        "four_delta": 13.466899999999995,
+        "four_pass": true,
+        "single_idle": 16.7044,
+        "single_delta": 21.574399999999997,
+        "single_pass": false
+      },
+      {
+        "case_id": 25,
+        "p95": 124.3264,
+        "max": 159.7335,
+        "p50": 99.1413,
+        "four_idle": 104.3852,
+        "four_delta": 19.94120000000001,
+        "four_pass": true,
+        "single_idle": 67.3563,
+        "single_delta": 56.9701,
+        "single_pass": true
+      },
+      {
+        "case_id": 26,
+        "p95": 8.1241,
+        "max": 8.1612,
+        "p50": 5.9671,
+        "four_idle": 7.1304,
+        "four_delta": 0.9937000000000005,
+        "four_pass": true,
+        "single_idle": 4.5822,
+        "single_delta": 3.5419,
+        "single_pass": true
+      },
+      {
+        "case_id": 27,
+        "p95": 15.4663,
+        "max": 33.9018,
+        "p50": 13.7996,
+        "four_idle": 15.9497,
+        "four_delta": -0.4833999999999996,
+        "four_pass": true,
+        "single_idle": 9.9647,
+        "single_delta": 5.5016,
+        "single_pass": true
+      },
+      {
+        "case_id": 28,
+        "p95": 0.2133,
+        "max": 0.3598,
+        "p50": 0.104,
+        "four_idle": 0.0786,
+        "four_delta": 0.1347,
+        "four_pass": true,
+        "single_idle": 0.0709,
+        "single_delta": 0.14239999999999997,
+        "single_pass": true
+      },
+      {
+        "case_id": 29,
+        "p95": 203.9715,
+        "max": 216.1874,
+        "p50": 139.5124,
+        "four_idle": 155.3404,
+        "four_delta": 48.6311,
+        "four_pass": true,
+        "single_idle": 88.9943,
+        "single_delta": 114.9772,
+        "single_pass": false
+      },
+      {
+        "case_id": 30,
+        "p95": 0.9632,
+        "max": 1.4857,
+        "p50": 0.5802,
+        "four_idle": 1.1852,
+        "four_delta": -0.2220000000000001,
+        "four_pass": true,
+        "single_idle": 0.5521,
+        "single_delta": 0.4110999999999999,
+        "single_pass": true
+      },
+      {
+        "case_id": 31,
+        "p95": 9.2194,
+        "max": 15.9894,
+        "p50": 6.4099,
+        "four_idle": 7.911,
+        "four_delta": 1.3084000000000007,
+        "four_pass": true,
+        "single_idle": 5.9686,
+        "single_delta": 3.2508,
+        "single_pass": true
+      },
+      {
+        "case_id": 32,
+        "p95": 6.1401,
+        "max": 9.1289,
+        "p50": 2.8312,
+        "four_idle": 4.9485,
+        "four_delta": 1.1916000000000002,
+        "four_pass": true,
+        "single_idle": 2.5975,
+        "single_delta": 3.5426,
+        "single_pass": false
+      },
+      {
+        "case_id": 33,
+        "p95": 4.0724,
+        "max": 6.2698,
+        "p50": 2.5747,
+        "four_idle": 2.9251,
+        "four_delta": 1.1473,
+        "four_pass": true,
+        "single_idle": 1.8955,
+        "single_delta": 2.1769,
+        "single_pass": false
+      },
+      {
+        "case_id": 34,
+        "p95": 18.2336,
+        "max": 24.8986,
+        "p50": 12.7846,
+        "four_idle": 13.4174,
+        "four_delta": 4.8161999999999985,
+        "four_pass": true,
+        "single_idle": 8.518,
+        "single_delta": 9.715599999999998,
+        "single_pass": false
+      },
+      {
+        "case_id": 35,
+        "p95": 28.8213,
+        "max": 59.8307,
+        "p50": 22.267,
+        "four_idle": 23.7059,
+        "four_delta": 5.115400000000001,
+        "four_pass": true,
+        "single_idle": 16.8009,
+        "single_delta": 12.020400000000002,
+        "single_pass": true
+      },
+      {
+        "case_id": 36,
+        "p95": 6.4653,
+        "max": 8.7896,
+        "p50": 5.0263,
+        "four_idle": 5.983,
+        "four_delta": 0.4823000000000004,
+        "four_pass": true,
+        "single_idle": 3.3637,
+        "single_delta": 3.1016,
+        "single_pass": true
+      },
+      {
+        "case_id": 37,
+        "p95": 3.9708,
+        "max": 5.7445,
+        "p50": 3.1253,
+        "four_idle": 3.7831,
+        "four_delta": 0.18769999999999998,
+        "four_pass": true,
+        "single_idle": 1.5421,
+        "single_delta": 2.4287,
+        "single_pass": false
+      }
+    ],
+    "100": [
+      {
+        "case_id": 0,
+        "p95": 4.9485,
+        "max": 7.0248,
+        "p50": 4.0551,
+        "four_idle": 5.5575,
+        "four_delta": -0.609,
+        "four_pass": true,
+        "single_idle": 3.1766,
+        "single_delta": 1.7719,
+        "single_pass": true
+      },
+      {
+        "case_id": 1,
+        "p95": 6.0801,
+        "max": 9.4518,
+        "p50": 5.0378,
+        "four_idle": 6.0578,
+        "four_delta": 0.022299999999999542,
+        "four_pass": true,
+        "single_idle": 3.9412,
+        "single_delta": 2.1389,
+        "single_pass": true
+      },
+      {
+        "case_id": 2,
+        "p95": 41.4273,
+        "max": 57.1476,
+        "p50": 35.0229,
+        "four_idle": 38.6611,
+        "four_delta": 2.766200000000005,
+        "four_pass": true,
+        "single_idle": 24.7304,
+        "single_delta": 16.696900000000003,
+        "single_pass": true
+      },
+      {
+        "case_id": 3,
+        "p95": 8.5321,
+        "max": 18.0417,
+        "p50": 6.8843,
+        "four_idle": 8.5968,
+        "four_delta": -0.0647000000000002,
+        "four_pass": true,
+        "single_idle": 5.4944,
+        "single_delta": 3.0377,
+        "single_pass": true
+      },
+      {
+        "case_id": 4,
+        "p95": 108.5117,
+        "max": 129.173,
+        "p50": 88.7618,
+        "four_idle": 98.0617,
+        "four_delta": 10.450000000000003,
+        "four_pass": true,
+        "single_idle": 60.7483,
+        "single_delta": 47.763400000000004,
+        "single_pass": true
+      },
+      {
+        "case_id": 5,
+        "p95": 138.2898,
+        "max": 205.234,
+        "p50": 99.4394,
+        "four_idle": 120.4698,
+        "four_delta": 17.820000000000007,
+        "four_pass": true,
+        "single_idle": 67.5512,
+        "single_delta": 70.73860000000002,
+        "single_pass": false
+      },
+      {
+        "case_id": 6,
+        "p95": 18.3562,
+        "max": 30.5924,
+        "p50": 13.5679,
+        "four_idle": 15.2639,
+        "four_delta": 3.0923000000000016,
+        "four_pass": true,
+        "single_idle": 9.8984,
+        "single_delta": 8.4578,
+        "single_pass": true
+      },
+      {
+        "case_id": 7,
+        "p95": 25.6839,
+        "max": 28.6017,
+        "p50": 21.7801,
+        "four_idle": 23.757,
+        "four_delta": 1.9268999999999998,
+        "four_pass": true,
+        "single_idle": 15.8702,
+        "single_delta": 9.8137,
+        "single_pass": true
+      },
+      {
+        "case_id": 8,
+        "p95": 118.8872,
+        "max": 148.2099,
+        "p50": 86.7013,
+        "four_idle": 100.973,
+        "four_delta": 17.914200000000008,
+        "four_pass": true,
+        "single_idle": 55.0944,
+        "single_delta": 63.79280000000001,
+        "single_pass": false
+      },
+      {
+        "case_id": 9,
+        "p95": 143.0637,
+        "max": 166.6505,
+        "p50": 83.9648,
+        "four_idle": 105.715,
+        "four_delta": 37.34870000000001,
+        "four_pass": true,
+        "single_idle": 53.8653,
+        "single_delta": 89.19840000000002,
+        "single_pass": false
+      },
+      {
+        "case_id": 10,
+        "p95": 125.2261,
+        "max": 155.9656,
+        "p50": 80.001,
+        "four_idle": 97.6009,
+        "four_delta": 27.625200000000007,
+        "four_pass": true,
+        "single_idle": 47.6822,
+        "single_delta": 77.54390000000001,
+        "single_pass": false
+      },
+      {
+        "case_id": 11,
+        "p95": 72.9648,
+        "max": 83.4756,
+        "p50": 48.8763,
+        "four_idle": 55.5977,
+        "four_delta": 17.367099999999994,
+        "four_pass": true,
+        "single_idle": 30.1463,
+        "single_delta": 42.8185,
+        "single_pass": false
+      },
+      {
+        "case_id": 12,
+        "p95": 34.9278,
+        "max": 42.9422,
+        "p50": 29.8034,
+        "four_idle": 31.3136,
+        "four_delta": 3.6141999999999967,
+        "four_pass": true,
+        "single_idle": 19.3532,
+        "single_delta": 15.574599999999997,
+        "single_pass": true
+      },
+      {
+        "case_id": 13,
+        "p95": 21.0807,
+        "max": 28.9934,
+        "p50": 19.2515,
+        "four_idle": 20.5151,
+        "four_delta": 0.5655999999999999,
+        "four_pass": true,
+        "single_idle": 13.9733,
+        "single_delta": 7.1074,
+        "single_pass": true
+      },
+      {
+        "case_id": 14,
+        "p95": 68.3399,
+        "max": 74.7138,
+        "p50": 53.2045,
+        "four_idle": 53.629,
+        "four_delta": 14.710900000000002,
+        "four_pass": true,
+        "single_idle": 30.7279,
+        "single_delta": 37.611999999999995,
+        "single_pass": false
+      },
+      {
+        "case_id": 15,
+        "p95": 35.124,
+        "max": 39.9904,
+        "p50": 30.028,
+        "four_idle": 32.9398,
+        "four_delta": 2.184200000000004,
+        "four_pass": true,
+        "single_idle": 19.8759,
+        "single_delta": 15.2481,
+        "single_pass": true
+      },
+      {
+        "case_id": 16,
+        "p95": 2.997,
+        "max": 6.9728,
+        "p50": 2.0674,
+        "four_idle": 2.5418,
+        "four_delta": 0.45520000000000005,
+        "four_pass": true,
+        "single_idle": 1.8984,
+        "single_delta": 1.0985999999999998,
+        "single_pass": true
+      },
+      {
+        "case_id": 17,
+        "p95": 3.7958,
+        "max": 5.8431,
+        "p50": 2.2789,
+        "four_idle": 2.7689,
+        "four_delta": 1.0269,
+        "four_pass": true,
+        "single_idle": 1.937,
+        "single_delta": 1.8587999999999998,
+        "single_pass": true
+      },
+      {
+        "case_id": 18,
+        "p95": 2.9542,
+        "max": 12.4995,
+        "p50": 1.4794,
+        "four_idle": 2.0335,
+        "four_delta": 0.9207000000000001,
+        "four_pass": true,
+        "single_idle": 1.362,
+        "single_delta": 1.5922,
+        "single_pass": false
+      },
+      {
+        "case_id": 19,
+        "p95": 0.1313,
+        "max": 0.1866,
+        "p50": 0.0749,
+        "four_idle": 0.0803,
+        "four_delta": 0.051000000000000004,
+        "four_pass": true,
+        "single_idle": 0.0668,
+        "single_delta": 0.0645,
+        "single_pass": true
+      },
+      {
+        "case_id": 20,
+        "p95": 249.8885,
+        "max": 256.4952,
+        "p50": 216.7436,
+        "four_idle": 222.8143,
+        "four_delta": 27.07419999999999,
+        "four_pass": true,
+        "single_idle": 154.6134,
+        "single_delta": 95.27509999999998,
+        "single_pass": true
+      },
+      {
+        "case_id": 21,
+        "p95": 246.5301,
+        "max": 272.649,
+        "p50": 219.2289,
+        "four_idle": 223.3109,
+        "four_delta": 23.2192,
+        "four_pass": true,
+        "single_idle": 163.3368,
+        "single_delta": 83.1933,
+        "single_pass": true
+      },
+      {
+        "case_id": 22,
+        "p95": 8.3943,
+        "max": 9.324,
+        "p50": 6.775,
+        "four_idle": 8.4086,
+        "four_delta": -0.014300000000000423,
+        "four_pass": true,
+        "single_idle": 4.9292,
+        "single_delta": 3.4650999999999996,
+        "single_pass": true
+      },
+      {
+        "case_id": 23,
+        "p95": 73.7111,
+        "max": 85.3006,
+        "p50": 62.1805,
+        "four_idle": 66.1103,
+        "four_delta": 7.600800000000007,
+        "four_pass": true,
+        "single_idle": 42.3002,
+        "single_delta": 31.410900000000005,
+        "single_pass": true
+      },
+      {
+        "case_id": 24,
+        "p95": 32.8083,
+        "max": 40.4408,
+        "p50": 23.0083,
+        "four_idle": 25.3552,
+        "four_delta": 7.453100000000003,
+        "four_pass": true,
+        "single_idle": 16.4241,
+        "single_delta": 16.384200000000003,
+        "single_pass": true
+      },
+      {
+        "case_id": 25,
+        "p95": 117.6543,
+        "max": 137.9724,
+        "p50": 97.7798,
+        "four_idle": 107.9672,
+        "four_delta": 9.687100000000001,
+        "four_pass": true,
+        "single_idle": 70.8604,
+        "single_delta": 46.79390000000001,
+        "single_pass": true
+      },
+      {
+        "case_id": 26,
+        "p95": 7.6664,
+        "max": 9.8935,
+        "p50": 5.8045,
+        "four_idle": 7.2266,
+        "four_delta": 0.43979999999999997,
+        "four_pass": true,
+        "single_idle": 4.1542,
+        "single_delta": 3.5122,
+        "single_pass": true
+      },
+      {
+        "case_id": 27,
+        "p95": 16.6843,
+        "max": 17.9956,
+        "p50": 13.2181,
+        "four_idle": 15.0513,
+        "four_delta": 1.633000000000001,
+        "four_pass": true,
+        "single_idle": 10.3862,
+        "single_delta": 6.2981,
+        "single_pass": true
+      },
+      {
+        "case_id": 28,
+        "p95": 0.0831,
+        "max": 0.0984,
+        "p50": 0.0703,
+        "four_idle": 0.078,
+        "four_delta": 0.005099999999999993,
+        "four_pass": true,
+        "single_idle": 0.0922,
+        "single_delta": -0.00910000000000001,
+        "single_pass": true
+      },
+      {
+        "case_id": 29,
+        "p95": 188.9423,
+        "max": 247.7748,
+        "p50": 128.0402,
+        "four_idle": 168.9794,
+        "four_delta": 19.96289999999999,
+        "four_pass": true,
+        "single_idle": 88.8661,
+        "single_delta": 100.07619999999999,
+        "single_pass": false
+      },
+      {
+        "case_id": 30,
+        "p95": 1.3119,
+        "max": 2.5999,
+        "p50": 0.5653,
+        "four_idle": 1.0304,
+        "four_delta": 0.2815000000000001,
+        "four_pass": true,
+        "single_idle": 0.5621,
+        "single_delta": 0.7498,
+        "single_pass": true
+      },
+      {
+        "case_id": 31,
+        "p95": 7.8346,
+        "max": 11.8404,
+        "p50": 5.8796,
+        "four_idle": 7.5402,
+        "four_delta": 0.29440000000000044,
+        "four_pass": true,
+        "single_idle": 5.9998,
+        "single_delta": 1.8348000000000004,
+        "single_pass": true
+      },
+      {
+        "case_id": 32,
+        "p95": 3.8163,
+        "max": 5.0715,
+        "p50": 2.5056,
+        "four_idle": 4.7733,
+        "four_delta": -0.9569999999999999,
+        "four_pass": true,
+        "single_idle": 2.6138,
+        "single_delta": 1.2025000000000001,
+        "single_pass": true
+      },
+      {
+        "case_id": 33,
+        "p95": 3.2073,
+        "max": 3.8227,
+        "p50": 2.1269,
+        "four_idle": 3.3473,
+        "four_delta": -0.14000000000000012,
+        "four_pass": true,
+        "single_idle": 1.7154,
+        "single_delta": 1.4919,
+        "single_pass": true
+      },
+      {
+        "case_id": 34,
+        "p95": 15.607,
+        "max": 17.5212,
+        "p50": 13.194,
+        "four_idle": 14.4518,
+        "four_delta": 1.155199999999999,
+        "four_pass": true,
+        "single_idle": 8.5449,
+        "single_delta": 7.062099999999999,
+        "single_pass": true
+      },
+      {
+        "case_id": 35,
+        "p95": 35.0714,
+        "max": 42.2621,
+        "p50": 21.009,
+        "four_idle": 23.6206,
+        "four_delta": 11.450799999999997,
+        "four_pass": true,
+        "single_idle": 15.281,
+        "single_delta": 19.790399999999998,
+        "single_pass": false
+      },
+      {
+        "case_id": 36,
+        "p95": 7.3087,
+        "max": 7.6124,
+        "p50": 5.4523,
+        "four_idle": 6.2261,
+        "four_delta": 1.0826000000000002,
+        "four_pass": true,
+        "single_idle": 3.3484,
+        "single_delta": 3.9603,
+        "single_pass": false
+      },
+      {
+        "case_id": 37,
+        "p95": 4.5861,
+        "max": 6.0485,
+        "p50": 3.0037,
+        "four_idle": 4.3908,
+        "four_delta": 0.19530000000000047,
+        "four_pass": true,
+        "single_idle": 1.5235,
+        "single_delta": 3.0625999999999998,
+        "single_pass": false
+      }
+    ]
+  }
+}

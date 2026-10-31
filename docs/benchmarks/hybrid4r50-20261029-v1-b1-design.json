@@ -1,0 +1,1684 @@
+{
+  "batch": 1,
+  "documents": 50000,
+  "source_sha256": "881756DA400952500BA871F6C7BA8FF8D17E5348E5975420BC5CD90952A7CF12",
+  "programs": {
+    "fdb": {
+      "path": "output\\hybrid4r50-20261029-v2-fdb.exe",
+      "sha256": "01E3932139A351C5E8CFB91EAC697226298CCD70D58CAF8E7C0B16D9F34DDAFF"
+    },
+    "sqlite": {
+      "path": "output\\hybrid4r50-20261029-v2-sqlite.exe",
+      "sha256": "ED35DE64F035416E3C98A4E8AB3C40F1AE3669814B94CBC1755821F658DA7A6A"
+    }
+  },
+  "protected_before": [
+    {
+      "path": "data\\rkyv-corpus-20261009\\json.payload-bench",
+      "bytes": 2740862279,
+      "sha256": "11F826FCE3F4AE790FEB9FC6DF9B1169F52C2FD699E89FC4A8A4B77AAA41731B"
+    },
+    {
+      "path": "tests\\fixtures\\v1\\checkpoint.fdb",
+      "bytes": 1507,
+      "sha256": "E87667C0FABE64D5A1F59EF86B99F7E612DB755D239B41677DA2ADC24BE7BF57"
+    },
+    {
+      "path": "tests\\fixtures\\v1\\checkpoint.ready",
+      "bytes": 28,
+      "sha256": "BC82C18F8D5C3A209328BD59B12D828D8922BEC4D26CB4D557FD4A493A4A9C2F"
+    }
+  ],
+  "completed": [
+    {
+      "engine": "fdb",
+      "mode": "scale-seed",
+      "label": "pair0-control-seed",
+      "state": "C:\\Users\\Serkan\\Documents\\ChatGPT\\fdb\\docs\\benchmarks\\hybrid4r50-20261029-v1-b1-pair0-control-fdb-state.json",
+      "log": "hybrid4r50-20261029-v1-b1-pair0-control-seed-fdb-scale-seed.jsonl",
+      "exit_code": 0,
+      "wall_s": 55.34299999999348
+    },
+    {
+      "engine": "fdb",
+      "mode": "snapshot-control-1",
+      "label": "pair0-control",
+      "state": "C:\\Users\\Serkan\\Documents\\ChatGPT\\fdb\\docs\\benchmarks\\hybrid4r50-20261029-v1-b1-pair0-control-fdb-state.json",
+      "log": "hybrid4r50-20261029-v1-b1-pair0-control-fdb-snapshot-control-1.jsonl",
+      "exit_code": 0,
+      "wall_s": 46.76600000000326
+    },
+    {
+      "engine": "sqlite",
+      "mode": "scale-seed",
+      "label": "pair0-control-seed",
+      "state": "C:\\Users\\Serkan\\Documents\\ChatGPT\\fdb\\docs\\benchmarks\\hybrid4r50-20261029-v1-b1-pair0-control-sqlite-state.json",
+      "log": "hybrid4r50-20261029-v1-b1-pair0-control-seed-sqlite-scale-seed.jsonl",
+      "exit_code": 0,
+      "wall_s": 52.43699999997625
+    },
+    {
+      "engine": "sqlite",
+      "mode": "snapshot-control-1",
+      "label": "pair0-control",
+      "state": "C:\\Users\\Serkan\\Documents\\ChatGPT\\fdb\\docs\\benchmarks\\hybrid4r50-20261029-v1-b1-pair0-control-sqlite-state.json",
+      "log": "hybrid4r50-20261029-v1-b1-pair0-control-sqlite-snapshot-control-1.jsonl",
+      "exit_code": 0,
+      "wall_s": 68.64100000000326
+    },
+    {
+      "engine": "sqlite",
+      "mode": "scale-seed",
+      "label": "pair0-loaded-seed",
+      "state": "C:\\Users\\Serkan\\Documents\\ChatGPT\\fdb\\docs\\benchmarks\\hybrid4r50-20261029-v1-b1-pair0-loaded-sqlite-state.json",
+      "log": "hybrid4r50-20261029-v1-b1-pair0-loaded-seed-sqlite-scale-seed.jsonl",
+      "exit_code": 0,
+      "wall_s": 52.39100000000326
+    },
+    {
+      "engine": "sqlite",
+      "mode": "snapshot-one",
+      "label": "pair0-loaded",
+      "state": "C:\\Users\\Serkan\\Documents\\ChatGPT\\fdb\\docs\\benchmarks\\hybrid4r50-20261029-v1-b1-pair0-loaded-sqlite-state.json",
+      "log": "hybrid4r50-20261029-v1-b1-pair0-loaded-sqlite-snapshot-one.jsonl",
+      "exit_code": 0,
+      "wall_s": 275.8429999999935
+    },
+    {
+      "engine": "fdb",
+      "mode": "scale-seed",
+      "label": "pair0-loaded-seed",
+      "state": "C:\\Users\\Serkan\\Documents\\ChatGPT\\fdb\\docs\\benchmarks\\hybrid4r50-20261029-v1-b1-pair0-loaded-fdb-state.json",
+      "log": "hybrid4r50-20261029-v1-b1-pair0-loaded-seed-fdb-scale-seed.jsonl",
+      "exit_code": 0,
+      "wall_s": 58.54700000002049
+    },
+    {
+      "engine": "fdb",
+      "mode": "snapshot-one",
+      "label": "pair0-loaded",
+      "state": "C:\\Users\\Serkan\\Documents\\ChatGPT\\fdb\\docs\\benchmarks\\hybrid4r50-20261029-v1-b1-pair0-loaded-fdb-state.json",
+      "log": "hybrid4r50-20261029-v1-b1-pair0-loaded-fdb-snapshot-one.jsonl",
+      "exit_code": 0,
+      "wall_s": 84.98399999999674
+    },
+    {
+      "engine": "sqlite",
+      "mode": "scale-seed",
+      "label": "pair1-loaded-seed",
+      "state": "C:\\Users\\Serkan\\Documents\\ChatGPT\\fdb\\docs\\benchmarks\\hybrid4r50-20261029-v1-b1-pair1-loaded-sqlite-state.json",
+      "log": "hybrid4r50-20261029-v1-b1-pair1-loaded-seed-sqlite-scale-seed.jsonl",
+      "exit_code": 0,
+      "wall_s": 56.375
+    },
+    {
+      "engine": "sqlite",
+      "mode": "snapshot-one",
+      "label": "pair1-loaded",
+      "state": "C:\\Users\\Serkan\\Documents\\ChatGPT\\fdb\\docs\\benchmarks\\hybrid4r50-20261029-v1-b1-pair1-loaded-sqlite-state.json",
+      "log": "hybrid4r50-20261029-v1-b1-pair1-loaded-sqlite-snapshot-one.jsonl",
+      "exit_code": 0,
+      "wall_s": 267.3279999999795
+    },
+    {
+      "engine": "fdb",
+      "mode": "scale-seed",
+      "label": "pair1-loaded-seed",
+      "state": "C:\\Users\\Serkan\\Documents\\ChatGPT\\fdb\\docs\\benchmarks\\hybrid4r50-20261029-v1-b1-pair1-loaded-fdb-state.json",
+      "log": "hybrid4r50-20261029-v1-b1-pair1-loaded-seed-fdb-scale-seed.jsonl",
+      "exit_code": 0,
+      "wall_s": 53.25
+    },
+    {
+      "engine": "fdb",
+      "mode": "snapshot-one",
+      "label": "pair1-loaded",
+      "state": "C:\\Users\\Serkan\\Documents\\ChatGPT\\fdb\\docs\\benchmarks\\hybrid4r50-20261029-v1-b1-pair1-loaded-fdb-state.json",
+      "log": "hybrid4r50-20261029-v1-b1-pair1-loaded-fdb-snapshot-one.jsonl",
+      "exit_code": 0,
+      "wall_s": 82.96799999999348
+    },
+    {
+      "engine": "fdb",
+      "mode": "scale-seed",
+      "label": "pair1-control-seed",
+      "state": "C:\\Users\\Serkan\\Documents\\ChatGPT\\fdb\\docs\\benchmarks\\hybrid4r50-20261029-v1-b1-pair1-control-fdb-state.json",
+      "log": "hybrid4r50-20261029-v1-b1-pair1-control-seed-fdb-scale-seed.jsonl",
+      "exit_code": 0,
+      "wall_s": 54.5
+    },
+    {
+      "engine": "fdb",
+      "mode": "snapshot-control-1",
+      "label": "pair1-control",
+      "state": "C:\\Users\\Serkan\\Documents\\ChatGPT\\fdb\\docs\\benchmarks\\hybrid4r50-20261029-v1-b1-pair1-control-fdb-state.json",
+      "log": "hybrid4r50-20261029-v1-b1-pair1-control-fdb-snapshot-control-1.jsonl",
+      "exit_code": 0,
+      "wall_s": 46.25
+    },
+    {
+      "engine": "sqlite",
+      "mode": "scale-seed",
+      "label": "pair1-control-seed",
+      "state": "C:\\Users\\Serkan\\Documents\\ChatGPT\\fdb\\docs\\benchmarks\\hybrid4r50-20261029-v1-b1-pair1-control-sqlite-state.json",
+      "log": "hybrid4r50-20261029-v1-b1-pair1-control-seed-sqlite-scale-seed.jsonl",
+      "exit_code": 0,
+      "wall_s": 48.625
+    },
+    {
+      "engine": "sqlite",
+      "mode": "snapshot-control-1",
+      "label": "pair1-control",
+      "state": "C:\\Users\\Serkan\\Documents\\ChatGPT\\fdb\\docs\\benchmarks\\hybrid4r50-20261029-v1-b1-pair1-control-sqlite-state.json",
+      "log": "hybrid4r50-20261029-v1-b1-pair1-control-sqlite-snapshot-control-1.jsonl",
+      "exit_code": 0,
+      "wall_s": 64.35899999999674
+    }
+  ],
+  "states": {
+    "fdb": "C:\\Users\\Serkan\\Documents\\ChatGPT\\fdb\\docs\\benchmarks\\hybrid4r50-20261029-v1-b1-pair1-control-fdb-state.json",
+    "sqlite": "C:\\Users\\Serkan\\Documents\\ChatGPT\\fdb\\docs\\benchmarks\\hybrid4r50-20261029-v1-b1-pair1-control-sqlite-state.json"
+  },
+  "stage": "STOP_failed",
+  "commits": 16384,
+  "rounds": 3,
+  "sequence": [
+    [
+      "fdb",
+      "control"
+    ],
+    [
+      "sqlite",
+      "control"
+    ],
+    [
+      "sqlite",
+      "loaded"
+    ],
+    [
+      "fdb",
+      "loaded"
+    ],
+    [
+      "sqlite",
+      "loaded"
+    ],
+    [
+      "fdb",
+      "loaded"
+    ],
+    [
+      "fdb",
+      "control"
+    ],
+    [
+      "sqlite",
+      "control"
+    ]
+  ],
+  "query": "FDB Snapshot.search_first_hybrid budget200/N50; SQLite capped N50; exact totals not requested",
+  "latency": "admission+search+release; full payload/model oracle outside interval; oracle CPU/I/O still competes",
+  "waits": "hybrid internal read/permit waits not independently instrumented; total latency includes them; admission/release measured",
+  "body": "1100 eligible first50k donors2..199960B; same body, unique revision token changes; stable41 query ID sets",
+  "throughput": "pooled equal-op control and loaded, same fixed commit count and interlude; two counterbalanced arm orders",
+  "cache": "warm OS/engine after full payload oracle + idle queries; no cold eviction",
+  "optimization": false,
+  "gate": {
+    "batch": 1,
+    "cases": [
+      {
+        "engine": "fdb",
+        "case_id": 0,
+        "idle_n": 24,
+        "loaded_n": 121,
+        "idle_p95_ms": 4.6712,
+        "loaded_p95_ms": 21.0396,
+        "loaded_max_ms": 62.389,
+        "limit_ms": 9.3424,
+        "passed": false
+      },
+      {
+        "engine": "fdb",
+        "case_id": 1,
+        "idle_n": 24,
+        "loaded_n": 121,
+        "idle_p95_ms": 3.8994,
+        "loaded_p95_ms": 19.4706,
+        "loaded_max_ms": 35.7703,
+        "limit_ms": 7.7988,
+        "passed": false
+      },
+      {
+        "engine": "fdb",
+        "case_id": 2,
+        "idle_n": 24,
+        "loaded_n": 121,
+        "idle_p95_ms": 4.5632,
+        "loaded_p95_ms": 18.8136,
+        "loaded_max_ms": 49.9241,
+        "limit_ms": 9.1264,
+        "passed": false
+      },
+      {
+        "engine": "fdb",
+        "case_id": 3,
+        "idle_n": 24,
+        "loaded_n": 121,
+        "idle_p95_ms": 5.2885,
+        "loaded_p95_ms": 28.2393,
+        "loaded_max_ms": 51.7023,
+        "limit_ms": 10.577,
+        "passed": false
+      },
+      {
+        "engine": "fdb",
+        "case_id": 4,
+        "idle_n": 24,
+        "loaded_n": 121,
+        "idle_p95_ms": 4.1168,
+        "loaded_p95_ms": 19.7017,
+        "loaded_max_ms": 44.1815,
+        "limit_ms": 8.2336,
+        "passed": false
+      },
+      {
+        "engine": "fdb",
+        "case_id": 5,
+        "idle_n": 24,
+        "loaded_n": 121,
+        "idle_p95_ms": 4.7363,
+        "loaded_p95_ms": 18.4019,
+        "loaded_max_ms": 41.791,
+        "limit_ms": 9.4726,
+        "passed": false
+      },
+      {
+        "engine": "fdb",
+        "case_id": 6,
+        "idle_n": 24,
+        "loaded_n": 121,
+        "idle_p95_ms": 10.7113,
+        "loaded_p95_ms": 24.7163,
+        "loaded_max_ms": 42.2277,
+        "limit_ms": 21.4226,
+        "passed": false
+      },
+      {
+        "engine": "fdb",
+        "case_id": 7,
+        "idle_n": 24,
+        "loaded_n": 121,
+        "idle_p95_ms": 4.5493,
+        "loaded_p95_ms": 9.527,
+        "loaded_max_ms": 37.4784,
+        "limit_ms": 9.0986,
+        "passed": false
+      },
+      {
+        "engine": "fdb",
+        "case_id": 8,
+        "idle_n": 24,
+        "loaded_n": 121,
+        "idle_p95_ms": 4.0084,
+        "loaded_p95_ms": 16.5449,
+        "loaded_max_ms": 24.5665,
+        "limit_ms": 8.0168,
+        "passed": false
+      },
+      {
+        "engine": "fdb",
+        "case_id": 9,
+        "idle_n": 24,
+        "loaded_n": 123,
+        "idle_p95_ms": 5.5055,
+        "loaded_p95_ms": 18.5874,
+        "loaded_max_ms": 34.0522,
+        "limit_ms": 11.011,
+        "passed": false
+      },
+      {
+        "engine": "fdb",
+        "case_id": 10,
+        "idle_n": 24,
+        "loaded_n": 123,
+        "idle_p95_ms": 10.3196,
+        "loaded_p95_ms": 26.2358,
+        "loaded_max_ms": 70.4763,
+        "limit_ms": 20.6392,
+        "passed": false
+      },
+      {
+        "engine": "fdb",
+        "case_id": 11,
+        "idle_n": 24,
+        "loaded_n": 123,
+        "idle_p95_ms": 180.9782,
+        "loaded_p95_ms": 271.0214,
+        "loaded_max_ms": 570.8262,
+        "limit_ms": 361.9564,
+        "passed": true
+      },
+      {
+        "engine": "fdb",
+        "case_id": 12,
+        "idle_n": 24,
+        "loaded_n": 122,
+        "idle_p95_ms": 5.0654,
+        "loaded_p95_ms": 25.2642,
+        "loaded_max_ms": 40.7853,
+        "limit_ms": 10.1308,
+        "passed": false
+      },
+      {
+        "engine": "fdb",
+        "case_id": 13,
+        "idle_n": 24,
+        "loaded_n": 122,
+        "idle_p95_ms": 197.6721,
+        "loaded_p95_ms": 101.7422,
+        "loaded_max_ms": 277.3358,
+        "limit_ms": 395.3442,
+        "passed": true
+      },
+      {
+        "engine": "fdb",
+        "case_id": 14,
+        "idle_n": 24,
+        "loaded_n": 122,
+        "idle_p95_ms": 7.8431,
+        "loaded_p95_ms": 15.3991,
+        "loaded_max_ms": 30.8487,
+        "limit_ms": 15.6862,
+        "passed": true
+      },
+      {
+        "engine": "fdb",
+        "case_id": 15,
+        "idle_n": 24,
+        "loaded_n": 122,
+        "idle_p95_ms": 297.767,
+        "loaded_p95_ms": 371.3418,
+        "loaded_max_ms": 720.0269,
+        "limit_ms": 595.534,
+        "passed": true
+      },
+      {
+        "engine": "fdb",
+        "case_id": 16,
+        "idle_n": 24,
+        "loaded_n": 121,
+        "idle_p95_ms": 208.8002,
+        "loaded_p95_ms": 263.1991,
+        "loaded_max_ms": 346.383,
+        "limit_ms": 417.6004,
+        "passed": true
+      },
+      {
+        "engine": "fdb",
+        "case_id": 17,
+        "idle_n": 24,
+        "loaded_n": 121,
+        "idle_p95_ms": 3.5516,
+        "loaded_p95_ms": 9.3351,
+        "loaded_max_ms": 24.2079,
+        "limit_ms": 7.1032,
+        "passed": false
+      },
+      {
+        "engine": "fdb",
+        "case_id": 18,
+        "idle_n": 24,
+        "loaded_n": 121,
+        "idle_p95_ms": 202.5383,
+        "loaded_p95_ms": 224.6754,
+        "loaded_max_ms": 422.9589,
+        "limit_ms": 405.0766,
+        "passed": true
+      },
+      {
+        "engine": "fdb",
+        "case_id": 19,
+        "idle_n": 24,
+        "loaded_n": 121,
+        "idle_p95_ms": 9.2992,
+        "loaded_p95_ms": 16.0432,
+        "loaded_max_ms": 34.4339,
+        "limit_ms": 18.5984,
+        "passed": true
+      },
+      {
+        "engine": "fdb",
+        "case_id": 20,
+        "idle_n": 24,
+        "loaded_n": 121,
+        "idle_p95_ms": 10.9158,
+        "loaded_p95_ms": 15.7306,
+        "loaded_max_ms": 28.2873,
+        "limit_ms": 21.8316,
+        "passed": true
+      },
+      {
+        "engine": "fdb",
+        "case_id": 21,
+        "idle_n": 24,
+        "loaded_n": 121,
+        "idle_p95_ms": 40.0193,
+        "loaded_p95_ms": 64.6657,
+        "loaded_max_ms": 74.5102,
+        "limit_ms": 80.0386,
+        "passed": true
+      },
+      {
+        "engine": "fdb",
+        "case_id": 22,
+        "idle_n": 24,
+        "loaded_n": 121,
+        "idle_p95_ms": 436.3052,
+        "loaded_p95_ms": 544.4587,
+        "loaded_max_ms": 712.7052,
+        "limit_ms": 872.6104,
+        "passed": true
+      },
+      {
+        "engine": "fdb",
+        "case_id": 23,
+        "idle_n": 24,
+        "loaded_n": 123,
+        "idle_p95_ms": 668.905,
+        "loaded_p95_ms": 471.3046,
+        "loaded_max_ms": 729.455,
+        "limit_ms": 1337.81,
+        "passed": true
+      },
+      {
+        "engine": "fdb",
+        "case_id": 24,
+        "idle_n": 24,
+        "loaded_n": 123,
+        "idle_p95_ms": 291.6145,
+        "loaded_p95_ms": 382.4223,
+        "loaded_max_ms": 791.2343,
+        "limit_ms": 583.229,
+        "passed": true
+      },
+      {
+        "engine": "fdb",
+        "case_id": 25,
+        "idle_n": 24,
+        "loaded_n": 122,
+        "idle_p95_ms": 160.1914,
+        "loaded_p95_ms": 161.6629,
+        "loaded_max_ms": 366.8903,
+        "limit_ms": 320.3828,
+        "passed": true
+      },
+      {
+        "engine": "fdb",
+        "case_id": 26,
+        "idle_n": 24,
+        "loaded_n": 122,
+        "idle_p95_ms": 121.3679,
+        "loaded_p95_ms": 228.5902,
+        "loaded_max_ms": 389.8882,
+        "limit_ms": 242.7358,
+        "passed": true
+      },
+      {
+        "engine": "fdb",
+        "case_id": 27,
+        "idle_n": 24,
+        "loaded_n": 122,
+        "idle_p95_ms": 9.2859,
+        "loaded_p95_ms": 18.0462,
+        "loaded_max_ms": 35.67,
+        "limit_ms": 18.5718,
+        "passed": true
+      },
+      {
+        "engine": "fdb",
+        "case_id": 28,
+        "idle_n": 24,
+        "loaded_n": 122,
+        "idle_p95_ms": 250.1379,
+        "loaded_p95_ms": 254.0502,
+        "loaded_max_ms": 843.1971,
+        "limit_ms": 500.2758,
+        "passed": true
+      },
+      {
+        "engine": "fdb",
+        "case_id": 29,
+        "idle_n": 24,
+        "loaded_n": 122,
+        "idle_p95_ms": 10.8824,
+        "loaded_p95_ms": 19.0708,
+        "loaded_max_ms": 32.422,
+        "limit_ms": 21.7648,
+        "passed": true
+      },
+      {
+        "engine": "fdb",
+        "case_id": 30,
+        "idle_n": 24,
+        "loaded_n": 122,
+        "idle_p95_ms": 412.005,
+        "loaded_p95_ms": 557.5142,
+        "loaded_max_ms": 929.8801,
+        "limit_ms": 824.01,
+        "passed": true
+      },
+      {
+        "engine": "fdb",
+        "case_id": 31,
+        "idle_n": 24,
+        "loaded_n": 121,
+        "idle_p95_ms": 183.1229,
+        "loaded_p95_ms": 260.0565,
+        "loaded_max_ms": 574.738,
+        "limit_ms": 366.2458,
+        "passed": true
+      },
+      {
+        "engine": "fdb",
+        "case_id": 32,
+        "idle_n": 24,
+        "loaded_n": 122,
+        "idle_p95_ms": 166.4478,
+        "loaded_p95_ms": 308.0326,
+        "loaded_max_ms": 590.8104,
+        "limit_ms": 332.8956,
+        "passed": true
+      },
+      {
+        "engine": "fdb",
+        "case_id": 33,
+        "idle_n": 24,
+        "loaded_n": 122,
+        "idle_p95_ms": 203.7373,
+        "loaded_p95_ms": 307.9569,
+        "loaded_max_ms": 452.066,
+        "limit_ms": 407.4746,
+        "passed": true
+      },
+      {
+        "engine": "fdb",
+        "case_id": 34,
+        "idle_n": 24,
+        "loaded_n": 122,
+        "idle_p95_ms": 509.6798,
+        "loaded_p95_ms": 396.5017,
+        "loaded_max_ms": 1020.0703,
+        "limit_ms": 1019.3596,
+        "passed": true
+      },
+      {
+        "engine": "fdb",
+        "case_id": 35,
+        "idle_n": 24,
+        "loaded_n": 121,
+        "idle_p95_ms": 2.1887,
+        "loaded_p95_ms": 4.4471,
+        "loaded_max_ms": 5.397,
+        "limit_ms": 4.3774,
+        "passed": false
+      },
+      {
+        "engine": "fdb",
+        "case_id": 36,
+        "idle_n": 24,
+        "loaded_n": 121,
+        "idle_p95_ms": 3.8002,
+        "loaded_p95_ms": 6.1032,
+        "loaded_max_ms": 15.1119,
+        "limit_ms": 7.6004,
+        "passed": true
+      },
+      {
+        "engine": "fdb",
+        "case_id": 37,
+        "idle_n": 24,
+        "loaded_n": 121,
+        "idle_p95_ms": 2.5902,
+        "loaded_p95_ms": 4.567,
+        "loaded_max_ms": 10.3136,
+        "limit_ms": 5.1804,
+        "passed": true
+      },
+      {
+        "engine": "fdb",
+        "case_id": 38,
+        "idle_n": 24,
+        "loaded_n": 121,
+        "idle_p95_ms": 677.2238,
+        "loaded_p95_ms": 759.7102,
+        "loaded_max_ms": 1018.0836,
+        "limit_ms": 1354.4476,
+        "passed": true
+      },
+      {
+        "engine": "fdb",
+        "case_id": 39,
+        "idle_n": 24,
+        "loaded_n": 120,
+        "idle_p95_ms": 0.9685,
+        "loaded_p95_ms": 4.143,
+        "loaded_max_ms": 7.6966,
+        "limit_ms": 2.9685,
+        "passed": false
+      },
+      {
+        "engine": "fdb",
+        "case_id": 40,
+        "idle_n": 24,
+        "loaded_n": 120,
+        "idle_p95_ms": 4.285,
+        "loaded_p95_ms": 16.4518,
+        "loaded_max_ms": 31.1503,
+        "limit_ms": 8.57,
+        "passed": false
+      },
+      {
+        "engine": "sqlite",
+        "case_id": 0,
+        "idle_n": 24,
+        "loaded_n": 32,
+        "idle_p95_ms": 657.3638,
+        "loaded_p95_ms": 807.4357,
+        "loaded_max_ms": 840.6905,
+        "limit_ms": 1314.7276,
+        "passed": true
+      },
+      {
+        "engine": "sqlite",
+        "case_id": 1,
+        "idle_n": 24,
+        "loaded_n": 32,
+        "idle_p95_ms": 598.214,
+        "loaded_p95_ms": 777.8483,
+        "loaded_max_ms": 786.3457,
+        "limit_ms": 1196.428,
+        "passed": true
+      },
+      {
+        "engine": "sqlite",
+        "case_id": 2,
+        "idle_n": 24,
+        "loaded_n": 32,
+        "idle_p95_ms": 709.0666,
+        "loaded_p95_ms": 863.4264,
+        "loaded_max_ms": 921.455,
+        "limit_ms": 1418.1332,
+        "passed": true
+      },
+      {
+        "engine": "sqlite",
+        "case_id": 3,
+        "idle_n": 24,
+        "loaded_n": 32,
+        "idle_p95_ms": 980.4968,
+        "loaded_p95_ms": 1206.0131,
+        "loaded_max_ms": 1227.119,
+        "limit_ms": 1960.9936,
+        "passed": true
+      },
+      {
+        "engine": "sqlite",
+        "case_id": 4,
+        "idle_n": 24,
+        "loaded_n": 32,
+        "idle_p95_ms": 632.372,
+        "loaded_p95_ms": 768.8401,
+        "loaded_max_ms": 785.438,
+        "limit_ms": 1264.744,
+        "passed": true
+      },
+      {
+        "engine": "sqlite",
+        "case_id": 5,
+        "idle_n": 24,
+        "loaded_n": 34,
+        "idle_p95_ms": 571.0719,
+        "loaded_p95_ms": 701.0942,
+        "loaded_max_ms": 705.421,
+        "limit_ms": 1142.1438,
+        "passed": true
+      },
+      {
+        "engine": "sqlite",
+        "case_id": 6,
+        "idle_n": 24,
+        "loaded_n": 33,
+        "idle_p95_ms": 618.7313,
+        "loaded_p95_ms": 742.1687,
+        "loaded_max_ms": 742.3042,
+        "limit_ms": 1237.4626,
+        "passed": true
+      },
+      {
+        "engine": "sqlite",
+        "case_id": 7,
+        "idle_n": 24,
+        "loaded_n": 32,
+        "idle_p95_ms": 176.7574,
+        "loaded_p95_ms": 219.8174,
+        "loaded_max_ms": 261.8404,
+        "limit_ms": 353.5148,
+        "passed": true
+      },
+      {
+        "engine": "sqlite",
+        "case_id": 8,
+        "idle_n": 24,
+        "loaded_n": 32,
+        "idle_p95_ms": 677.6008,
+        "loaded_p95_ms": 828.1519,
+        "loaded_max_ms": 845.1151,
+        "limit_ms": 1355.2016,
+        "passed": true
+      },
+      {
+        "engine": "sqlite",
+        "case_id": 9,
+        "idle_n": 24,
+        "loaded_n": 32,
+        "idle_p95_ms": 515.7612,
+        "loaded_p95_ms": 636.0394,
+        "loaded_max_ms": 644.6685,
+        "limit_ms": 1031.5224,
+        "passed": true
+      },
+      {
+        "engine": "sqlite",
+        "case_id": 10,
+        "idle_n": 24,
+        "loaded_n": 32,
+        "idle_p95_ms": 687.3031,
+        "loaded_p95_ms": 838.9688,
+        "loaded_max_ms": 886.3455,
+        "limit_ms": 1374.6062,
+        "passed": true
+      },
+      {
+        "engine": "sqlite",
+        "case_id": 11,
+        "idle_n": 24,
+        "loaded_n": 32,
+        "idle_p95_ms": 301.0822,
+        "loaded_p95_ms": 374.6526,
+        "loaded_max_ms": 404.2165,
+        "limit_ms": 602.1644,
+        "passed": true
+      },
+      {
+        "engine": "sqlite",
+        "case_id": 12,
+        "idle_n": 24,
+        "loaded_n": 32,
+        "idle_p95_ms": 558.5657,
+        "loaded_p95_ms": 675.0094,
+        "loaded_max_ms": 690.7921,
+        "limit_ms": 1117.1314,
+        "passed": true
+      },
+      {
+        "engine": "sqlite",
+        "case_id": 13,
+        "idle_n": 24,
+        "loaded_n": 32,
+        "idle_p95_ms": 220.4429,
+        "loaded_p95_ms": 259.589,
+        "loaded_max_ms": 262.388,
+        "limit_ms": 440.8858,
+        "passed": true
+      },
+      {
+        "engine": "sqlite",
+        "case_id": 14,
+        "idle_n": 24,
+        "loaded_n": 34,
+        "idle_p95_ms": 115.0989,
+        "loaded_p95_ms": 143.8541,
+        "loaded_max_ms": 153.7538,
+        "limit_ms": 230.1978,
+        "passed": true
+      },
+      {
+        "engine": "sqlite",
+        "case_id": 15,
+        "idle_n": 24,
+        "loaded_n": 33,
+        "idle_p95_ms": 464.9436,
+        "loaded_p95_ms": 560.1771,
+        "loaded_max_ms": 591.0387,
+        "limit_ms": 929.8872,
+        "passed": true
+      },
+      {
+        "engine": "sqlite",
+        "case_id": 16,
+        "idle_n": 24,
+        "loaded_n": 33,
+        "idle_p95_ms": 350.5933,
+        "loaded_p95_ms": 475.9333,
+        "loaded_max_ms": 545.1012,
+        "limit_ms": 701.1866,
+        "passed": true
+      },
+      {
+        "engine": "sqlite",
+        "case_id": 17,
+        "idle_n": 24,
+        "loaded_n": 32,
+        "idle_p95_ms": 74.981,
+        "loaded_p95_ms": 108.3502,
+        "loaded_max_ms": 123.7695,
+        "limit_ms": 149.962,
+        "passed": true
+      },
+      {
+        "engine": "sqlite",
+        "case_id": 18,
+        "idle_n": 24,
+        "loaded_n": 32,
+        "idle_p95_ms": 442.7668,
+        "loaded_p95_ms": 528.5523,
+        "loaded_max_ms": 539.262,
+        "limit_ms": 885.5336,
+        "passed": true
+      },
+      {
+        "engine": "sqlite",
+        "case_id": 19,
+        "idle_n": 24,
+        "loaded_n": 32,
+        "idle_p95_ms": 174.6423,
+        "loaded_p95_ms": 212.1085,
+        "loaded_max_ms": 215.5164,
+        "limit_ms": 349.2846,
+        "passed": true
+      },
+      {
+        "engine": "sqlite",
+        "case_id": 20,
+        "idle_n": 24,
+        "loaded_n": 32,
+        "idle_p95_ms": 14.204,
+        "loaded_p95_ms": 19.5719,
+        "loaded_max_ms": 19.7211,
+        "limit_ms": 28.408,
+        "passed": true
+      },
+      {
+        "engine": "sqlite",
+        "case_id": 21,
+        "idle_n": 24,
+        "loaded_n": 32,
+        "idle_p95_ms": 49.2798,
+        "loaded_p95_ms": 73.2266,
+        "loaded_max_ms": 85.9903,
+        "limit_ms": 98.5596,
+        "passed": true
+      },
+      {
+        "engine": "sqlite",
+        "case_id": 22,
+        "idle_n": 24,
+        "loaded_n": 32,
+        "idle_p95_ms": 588.6975,
+        "loaded_p95_ms": 683.0565,
+        "loaded_max_ms": 736.0728,
+        "limit_ms": 1177.395,
+        "passed": true
+      },
+      {
+        "engine": "sqlite",
+        "case_id": 23,
+        "idle_n": 24,
+        "loaded_n": 32,
+        "idle_p95_ms": 434.0521,
+        "loaded_p95_ms": 527.8299,
+        "loaded_max_ms": 542.158,
+        "limit_ms": 868.1042,
+        "passed": true
+      },
+      {
+        "engine": "sqlite",
+        "case_id": 24,
+        "idle_n": 24,
+        "loaded_n": 32,
+        "idle_p95_ms": 363.4305,
+        "loaded_p95_ms": 431.7496,
+        "loaded_max_ms": 439.7311,
+        "limit_ms": 726.861,
+        "passed": true
+      },
+      {
+        "engine": "sqlite",
+        "case_id": 25,
+        "idle_n": 24,
+        "loaded_n": 32,
+        "idle_p95_ms": 31.4407,
+        "loaded_p95_ms": 38.1609,
+        "loaded_max_ms": 43.4572,
+        "limit_ms": 62.8814,
+        "passed": true
+      },
+      {
+        "engine": "sqlite",
+        "case_id": 26,
+        "idle_n": 24,
+        "loaded_n": 32,
+        "idle_p95_ms": 300.673,
+        "loaded_p95_ms": 381.5409,
+        "loaded_max_ms": 402.0565,
+        "limit_ms": 601.346,
+        "passed": true
+      },
+      {
+        "engine": "sqlite",
+        "case_id": 27,
+        "idle_n": 24,
+        "loaded_n": 32,
+        "idle_p95_ms": 156.9417,
+        "loaded_p95_ms": 185.2045,
+        "loaded_max_ms": 187.5479,
+        "limit_ms": 313.8834,
+        "passed": true
+      },
+      {
+        "engine": "sqlite",
+        "case_id": 28,
+        "idle_n": 24,
+        "loaded_n": 34,
+        "idle_p95_ms": 372.3868,
+        "loaded_p95_ms": 448.4764,
+        "loaded_max_ms": 458.2702,
+        "limit_ms": 744.7736,
+        "passed": true
+      },
+      {
+        "engine": "sqlite",
+        "case_id": 29,
+        "idle_n": 24,
+        "loaded_n": 34,
+        "idle_p95_ms": 18.6665,
+        "loaded_p95_ms": 25.2924,
+        "loaded_max_ms": 33.6296,
+        "limit_ms": 37.333,
+        "passed": true
+      },
+      {
+        "engine": "sqlite",
+        "case_id": 30,
+        "idle_n": 24,
+        "loaded_n": 34,
+        "idle_p95_ms": 502.5739,
+        "loaded_p95_ms": 598.8095,
+        "loaded_max_ms": 600.8571,
+        "limit_ms": 1005.1478,
+        "passed": true
+      },
+      {
+        "engine": "sqlite",
+        "case_id": 31,
+        "idle_n": 24,
+        "loaded_n": 33,
+        "idle_p95_ms": 54.5264,
+        "loaded_p95_ms": 86.686,
+        "loaded_max_ms": 87.9891,
+        "limit_ms": 109.0528,
+        "passed": true
+      },
+      {
+        "engine": "sqlite",
+        "case_id": 32,
+        "idle_n": 24,
+        "loaded_n": 33,
+        "idle_p95_ms": 190.8301,
+        "loaded_p95_ms": 229.3021,
+        "loaded_max_ms": 233.9961,
+        "limit_ms": 381.6602,
+        "passed": true
+      },
+      {
+        "engine": "sqlite",
+        "case_id": 33,
+        "idle_n": 24,
+        "loaded_n": 32,
+        "idle_p95_ms": 110.1336,
+        "loaded_p95_ms": 145.4147,
+        "loaded_max_ms": 169.5159,
+        "limit_ms": 220.2672,
+        "passed": true
+      },
+      {
+        "engine": "sqlite",
+        "case_id": 34,
+        "idle_n": 24,
+        "loaded_n": 32,
+        "idle_p95_ms": 346.3335,
+        "loaded_p95_ms": 424.2647,
+        "loaded_max_ms": 439.0987,
+        "limit_ms": 692.667,
+        "passed": true
+      },
+      {
+        "engine": "sqlite",
+        "case_id": 35,
+        "idle_n": 24,
+        "loaded_n": 32,
+        "idle_p95_ms": 928.8939,
+        "loaded_p95_ms": 1160.6364,
+        "loaded_max_ms": 1217.7769,
+        "limit_ms": 1857.7878,
+        "passed": true
+      },
+      {
+        "engine": "sqlite",
+        "case_id": 36,
+        "idle_n": 24,
+        "loaded_n": 32,
+        "idle_p95_ms": 1182.1315,
+        "loaded_p95_ms": 1425.6999,
+        "loaded_max_ms": 1521.2992,
+        "limit_ms": 2364.263,
+        "passed": true
+      },
+      {
+        "engine": "sqlite",
+        "case_id": 37,
+        "idle_n": 24,
+        "loaded_n": 34,
+        "idle_p95_ms": 1061.0023,
+        "loaded_p95_ms": 1289.3137,
+        "loaded_max_ms": 1295.34,
+        "limit_ms": 2122.0046,
+        "passed": true
+      },
+      {
+        "engine": "sqlite",
+        "case_id": 38,
+        "idle_n": 24,
+        "loaded_n": 32,
+        "idle_p95_ms": 1110.354,
+        "loaded_p95_ms": 1384.9188,
+        "loaded_max_ms": 1403.5313,
+        "limit_ms": 2220.708,
+        "passed": true
+      },
+      {
+        "engine": "sqlite",
+        "case_id": 39,
+        "idle_n": 24,
+        "loaded_n": 32,
+        "idle_p95_ms": 0.8016,
+        "loaded_p95_ms": 9.5127,
+        "loaded_max_ms": 17.2559,
+        "limit_ms": 2.8016,
+        "passed": false
+      },
+      {
+        "engine": "sqlite",
+        "case_id": 40,
+        "idle_n": 24,
+        "loaded_n": 32,
+        "idle_p95_ms": 6.5636,
+        "loaded_p95_ms": 18.7432,
+        "loaded_max_ms": 23.2396,
+        "limit_ms": 13.1272,
+        "passed": false
+      }
+    ],
+    "throughput": [
+      {
+        "engine": "fdb",
+        "rates": {
+          "control": 387.1831675785548,
+          "loaded": 310.1667369881966
+        },
+        "loaded_control_ratio": 0.80108528200743,
+        "samples": {
+          "control": [
+            {
+              "ops": 16384,
+              "elapsed_ms": 42658.3654,
+              "ops_s": 384.07472593874866
+            },
+            {
+              "ops": 16384,
+              "elapsed_ms": 41973.4129,
+              "ops_s": 390.3423350165552
+            }
+          ],
+          "loaded": [
+            {
+              "ops": 16384,
+              "elapsed_ms": 53457.922699999996,
+              "ops_s": 306.4840377720102
+            },
+            {
+              "ops": 16384,
+              "elapsed_ms": 52188.479999999996,
+              "ops_s": 313.93901489370836
+            }
+          ]
+        }
+      },
+      {
+        "engine": "sqlite",
+        "rates": {
+          "control": 281.47050067821993,
+          "loaded": 208.2125111845441
+        },
+        "loaded_control_ratio": 0.7397311998338855,
+        "samples": {
+          "control": [
+            {
+              "ops": 16384,
+              "elapsed_ms": 59505.9263,
+              "ops_s": 275.3339208165557
+            },
+            {
+              "ops": 16384,
+              "elapsed_ms": 56911.2468,
+              "ops_s": 287.88685754113544
+            }
+          ],
+          "loaded": [
+            {
+              "ops": 16384,
+              "elapsed_ms": 80698.9715,
+              "ops_s": 203.02613150404278
+            },
+            {
+              "ops": 16384,
+              "elapsed_ms": 76678.6991,
+              "ops_s": 213.6708133067427
+            }
+          ]
+        }
+      }
+    ],
+    "failures": [
+      {
+        "kind": "query",
+        "engine": "fdb",
+        "case_id": 0,
+        "idle_n": 24,
+        "loaded_n": 121,
+        "idle_p95_ms": 4.6712,
+        "loaded_p95_ms": 21.0396,
+        "loaded_max_ms": 62.389,
+        "limit_ms": 9.3424,
+        "passed": false
+      },
+      {
+        "kind": "query",
+        "engine": "fdb",
+        "case_id": 1,
+        "idle_n": 24,
+        "loaded_n": 121,
+        "idle_p95_ms": 3.8994,
+        "loaded_p95_ms": 19.4706,
+        "loaded_max_ms": 35.7703,
+        "limit_ms": 7.7988,
+        "passed": false
+      },
+      {
+        "kind": "query",
+        "engine": "fdb",
+        "case_id": 2,
+        "idle_n": 24,
+        "loaded_n": 121,
+        "idle_p95_ms": 4.5632,
+        "loaded_p95_ms": 18.8136,
+        "loaded_max_ms": 49.9241,
+        "limit_ms": 9.1264,
+        "passed": false
+      },
+      {
+        "kind": "query",
+        "engine": "fdb",
+        "case_id": 3,
+        "idle_n": 24,
+        "loaded_n": 121,
+        "idle_p95_ms": 5.2885,
+        "loaded_p95_ms": 28.2393,
+        "loaded_max_ms": 51.7023,
+        "limit_ms": 10.577,
+        "passed": false
+      },
+      {
+        "kind": "query",
+        "engine": "fdb",
+        "case_id": 4,
+        "idle_n": 24,
+        "loaded_n": 121,
+        "idle_p95_ms": 4.1168,
+        "loaded_p95_ms": 19.7017,
+        "loaded_max_ms": 44.1815,
+        "limit_ms": 8.2336,
+        "passed": false
+      },
+      {
+        "kind": "query",
+        "engine": "fdb",
+        "case_id": 5,
+        "idle_n": 24,
+        "loaded_n": 121,
+        "idle_p95_ms": 4.7363,
+        "loaded_p95_ms": 18.4019,
+        "loaded_max_ms": 41.791,
+        "limit_ms": 9.4726,
+        "passed": false
+      },
+      {
+        "kind": "query",
+        "engine": "fdb",
+        "case_id": 6,
+        "idle_n": 24,
+        "loaded_n": 121,
+        "idle_p95_ms": 10.7113,
+        "loaded_p95_ms": 24.7163,
+        "loaded_max_ms": 42.2277,
+        "limit_ms": 21.4226,
+        "passed": false
+      },
+      {
+        "kind": "query",
+        "engine": "fdb",
+        "case_id": 7,
+        "idle_n": 24,
+        "loaded_n": 121,
+        "idle_p95_ms": 4.5493,
+        "loaded_p95_ms": 9.527,
+        "loaded_max_ms": 37.4784,
+        "limit_ms": 9.0986,
+        "passed": false
+      },
+      {
+        "kind": "query",
+        "engine": "fdb",
+        "case_id": 8,
+        "idle_n": 24,
+        "loaded_n": 121,
+        "idle_p95_ms": 4.0084,
+        "loaded_p95_ms": 16.5449,
+        "loaded_max_ms": 24.5665,
+        "limit_ms": 8.0168,
+        "passed": false
+      },
+      {
+        "kind": "query",
+        "engine": "fdb",
+        "case_id": 9,
+        "idle_n": 24,
+        "loaded_n": 123,
+        "idle_p95_ms": 5.5055,
+        "loaded_p95_ms": 18.5874,
+        "loaded_max_ms": 34.0522,
+        "limit_ms": 11.011,
+        "passed": false
+      },
+      {
+        "kind": "query",
+        "engine": "fdb",
+        "case_id": 10,
+        "idle_n": 24,
+        "loaded_n": 123,
+        "idle_p95_ms": 10.3196,
+        "loaded_p95_ms": 26.2358,
+        "loaded_max_ms": 70.4763,
+        "limit_ms": 20.6392,
+        "passed": false
+      },
+      {
+        "kind": "query",
+        "engine": "fdb",
+        "case_id": 12,
+        "idle_n": 24,
+        "loaded_n": 122,
+        "idle_p95_ms": 5.0654,
+        "loaded_p95_ms": 25.2642,
+        "loaded_max_ms": 40.7853,
+        "limit_ms": 10.1308,
+        "passed": false
+      },
+      {
+        "kind": "query",
+        "engine": "fdb",
+        "case_id": 17,
+        "idle_n": 24,
+        "loaded_n": 121,
+        "idle_p95_ms": 3.5516,
+        "loaded_p95_ms": 9.3351,
+        "loaded_max_ms": 24.2079,
+        "limit_ms": 7.1032,
+        "passed": false
+      },
+      {
+        "kind": "query",
+        "engine": "fdb",
+        "case_id": 35,
+        "idle_n": 24,
+        "loaded_n": 121,
+        "idle_p95_ms": 2.1887,
+        "loaded_p95_ms": 4.4471,
+        "loaded_max_ms": 5.397,
+        "limit_ms": 4.3774,
+        "passed": false
+      },
+      {
+        "kind": "query",
+        "engine": "fdb",
+        "case_id": 39,
+        "idle_n": 24,
+        "loaded_n": 120,
+        "idle_p95_ms": 0.9685,
+        "loaded_p95_ms": 4.143,
+        "loaded_max_ms": 7.6966,
+        "limit_ms": 2.9685,
+        "passed": false
+      },
+      {
+        "kind": "query",
+        "engine": "fdb",
+        "case_id": 40,
+        "idle_n": 24,
+        "loaded_n": 120,
+        "idle_p95_ms": 4.285,
+        "loaded_p95_ms": 16.4518,
+        "loaded_max_ms": 31.1503,
+        "limit_ms": 8.57,
+        "passed": false
+      },
+      {
+        "kind": "single_writer_tail",
+        "p95_ms": 4.4463,
+        "p99_ms": 14.9416,
+        "max_ms": 199.9291
+      }
+    ],
+    "passed": false,
+    "writer_tail": {
+      "sqlite": {
+        "p95_ms": 10.6996,
+        "p99_ms": 23.5274,
+        "max_ms": 358.86859999999996
+      },
+      "fdb": {
+        "p95_ms": 4.4463,
+        "p99_ms": 14.9416,
+        "max_ms": 199.9291
+      }
+    }
+  },
+  "memory": [
+    {
+      "engine": "fdb",
+      "arm": "control",
+      "label": "pair0-control",
+      "memory": {
+        "os_lifetime_peak_private_commit_bytes": 52162560,
+        "os_lifetime_peak_working_set_bytes": 57282560,
+        "private_bytes": 52162560,
+        "sample_interval_ms": 10,
+        "sampled_phase_peak_private_bytes": 43638784,
+        "sampled_phase_peak_working_set_bytes": 48766976,
+        "working_set_bytes": 57282560
+      }
+    },
+    {
+      "engine": "sqlite",
+      "arm": "control",
+      "label": "pair0-control",
+      "memory": {
+        "os_lifetime_peak_private_commit_bytes": 44810240,
+        "os_lifetime_peak_working_set_bytes": 49954816,
+        "private_bytes": 44810240,
+        "sample_interval_ms": 10,
+        "sampled_phase_peak_private_bytes": 38215680,
+        "sampled_phase_peak_working_set_bytes": 43552768,
+        "working_set_bytes": 49954816
+      }
+    },
+    {
+      "engine": "sqlite",
+      "arm": "loaded",
+      "label": "pair0-loaded",
+      "memory": {
+        "os_lifetime_peak_private_commit_bytes": 102141952,
+        "os_lifetime_peak_working_set_bytes": 105443328,
+        "private_bytes": 66813952,
+        "sample_interval_ms": 10,
+        "sampled_phase_peak_private_bytes": 96849920,
+        "sampled_phase_peak_working_set_bytes": 102133760,
+        "working_set_bytes": 71770112
+      }
+    },
+    {
+      "engine": "fdb",
+      "arm": "loaded",
+      "label": "pair0-loaded",
+      "memory": {
+        "os_lifetime_peak_private_commit_bytes": 120463360,
+        "os_lifetime_peak_working_set_bytes": 123461632,
+        "private_bytes": 120463360,
+        "sample_interval_ms": 10,
+        "sampled_phase_peak_private_bytes": 116649984,
+        "sampled_phase_peak_working_set_bytes": 119992320,
+        "working_set_bytes": 123461632
+      }
+    },
+    {
+      "engine": "sqlite",
+      "arm": "loaded",
+      "label": "pair1-loaded",
+      "memory": {
+        "os_lifetime_peak_private_commit_bytes": 105558016,
+        "os_lifetime_peak_working_set_bytes": 109191168,
+        "private_bytes": 72650752,
+        "sample_interval_ms": 10,
+        "sampled_phase_peak_private_bytes": 100286464,
+        "sampled_phase_peak_working_set_bytes": 105943040,
+        "working_set_bytes": 75575296
+      }
+    },
+    {
+      "engine": "fdb",
+      "arm": "loaded",
+      "label": "pair1-loaded",
+      "memory": {
+        "os_lifetime_peak_private_commit_bytes": 118108160,
+        "os_lifetime_peak_working_set_bytes": 120963072,
+        "private_bytes": 118108160,
+        "sample_interval_ms": 10,
+        "sampled_phase_peak_private_bytes": 117280768,
+        "sampled_phase_peak_working_set_bytes": 120172544,
+        "working_set_bytes": 120958976
+      }
+    },
+    {
+      "engine": "fdb",
+      "arm": "control",
+      "label": "pair1-control",
+      "memory": {
+        "os_lifetime_peak_private_commit_bytes": 52809728,
+        "os_lifetime_peak_working_set_bytes": 58003456,
+        "private_bytes": 52809728,
+        "sample_interval_ms": 10,
+        "sampled_phase_peak_private_bytes": 52535296,
+        "sampled_phase_peak_working_set_bytes": 57737216,
+        "working_set_bytes": 58003456
+      }
+    },
+    {
+      "engine": "sqlite",
+      "arm": "control",
+      "label": "pair1-control",
+      "memory": {
+        "os_lifetime_peak_private_commit_bytes": 44507136,
+        "os_lifetime_peak_working_set_bytes": 49696768,
+        "private_bytes": 44507136,
+        "sample_interval_ms": 10,
+        "sampled_phase_peak_private_bytes": 37638144,
+        "sampled_phase_peak_working_set_bytes": 41402368,
+        "working_set_bytes": 49696768
+      }
+    }
+  ],
+  "maintenance": [
+    {
+      "engine": "fdb",
+      "arm": "control",
+      "label": "pair0-control",
+      "maintenance": {
+        "details": {
+          "jobs": [],
+          "normal_merges_completed": 0,
+          "retirements": 0,
+          "revision_rewrites_completed": 0
+        },
+        "end_ms": 132.63340000000002,
+        "start_ms": 13.5871
+      }
+    },
+    {
+      "engine": "sqlite",
+      "arm": "control",
+      "label": "pair0-control",
+      "maintenance": {
+        "details": {
+          "fts_optimize_ms": 2755.9607,
+          "passive_checkpoint": [
+            0,
+            13081,
+            13081
+          ],
+          "revision_rewrite": "not applicable to SQLite"
+        },
+        "end_ms": 2792.432,
+        "start_ms": 36.4687
+      }
+    },
+    {
+      "engine": "sqlite",
+      "arm": "loaded",
+      "label": "pair0-loaded",
+      "maintenance": {
+        "details": {
+          "fts_optimize_ms": 3033.9094,
+          "passive_checkpoint": [
+            0,
+            13081,
+            118
+          ],
+          "revision_rewrite": "not applicable to SQLite"
+        },
+        "end_ms": 3092.077,
+        "start_ms": 58.163399999999996
+      }
+    },
+    {
+      "engine": "fdb",
+      "arm": "loaded",
+      "label": "pair0-loaded",
+      "maintenance": {
+        "details": {
+          "jobs": [],
+          "normal_merges_completed": 0,
+          "retirements": 0,
+          "revision_rewrites_completed": 0
+        },
+        "end_ms": 278.4371,
+        "start_ms": 23.9388
+      }
+    },
+    {
+      "engine": "sqlite",
+      "arm": "loaded",
+      "label": "pair1-loaded",
+      "maintenance": {
+        "details": {
+          "fts_optimize_ms": 2924.4477,
+          "passive_checkpoint": [
+            0,
+            13081,
+            118
+          ],
+          "revision_rewrite": "not applicable to SQLite"
+        },
+        "end_ms": 2984.2688000000003,
+        "start_ms": 59.818799999999996
+      }
+    },
+    {
+      "engine": "fdb",
+      "arm": "loaded",
+      "label": "pair1-loaded",
+      "maintenance": {
+        "details": {
+          "jobs": [],
+          "normal_merges_completed": 0,
+          "retirements": 0,
+          "revision_rewrites_completed": 0
+        },
+        "end_ms": 277.23969999999997,
+        "start_ms": 18.9803
+      }
+    },
+    {
+      "engine": "fdb",
+      "arm": "control",
+      "label": "pair1-control",
+      "maintenance": {
+        "details": {
+          "jobs": [],
+          "normal_merges_completed": 0,
+          "retirements": 0,
+          "revision_rewrites_completed": 0
+        },
+        "end_ms": 127.1386,
+        "start_ms": 12.4449
+      }
+    },
+    {
+      "engine": "sqlite",
+      "arm": "control",
+      "label": "pair1-control",
+      "maintenance": {
+        "details": {
+          "fts_optimize_ms": 2055.3867999999998,
+          "passive_checkpoint": [
+            0,
+            13081,
+            13081
+          ],
+          "revision_rewrite": "not applicable to SQLite"
+        },
+        "end_ms": 2096.4152999999997,
+        "start_ms": 41.025
+      }
+    }
+  ],
+  "protected_after": [
+    {
+      "path": "data\\rkyv-corpus-20261009\\json.payload-bench",
+      "bytes": 2740862279,
+      "sha256": "11F826FCE3F4AE790FEB9FC6DF9B1169F52C2FD699E89FC4A8A4B77AAA41731B"
+    },
+    {
+      "path": "tests\\fixtures\\v1\\checkpoint.fdb",
+      "bytes": 1507,
+      "sha256": "E87667C0FABE64D5A1F59EF86B99F7E612DB755D239B41677DA2ADC24BE7BF57"
+    },
+    {
+      "path": "tests\\fixtures\\v1\\checkpoint.ready",
+      "bytes": 28,
+      "sha256": "BC82C18F8D5C3A209328BD59B12D828D8922BEC4D26CB4D557FD4A493A4A9C2F"
+    }
+  ],
+  "source_after": "881756DA400952500BA871F6C7BA8FF8D17E5348E5975420BC5CD90952A7CF12",
+  "protected_unchanged": true,
+  "source_unchanged": true
+}

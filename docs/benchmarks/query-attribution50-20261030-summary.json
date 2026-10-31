@@ -1,0 +1,1732 @@
+[
+  {
+    "group": "idle-1R-41",
+    "case_id": 16,
+    "n": 40,
+    "wall_p50": 24.2424,
+    "wall_p95": 25.0757,
+    "cpu_p50": 46.875,
+    "cpu_p95": 62.5,
+    "stages": {
+      "first.delta_filter": {
+        "mean": 2.031735,
+        "p95": 2.2087
+      },
+      "first.posting_setup": {
+        "mean": 1.371095,
+        "p95": 1.4829
+      },
+      "first.posting_intersection": {
+        "mean": 1.4760625,
+        "p95": 1.652
+      },
+      "first.candidate_verify": {
+        "mean": 32.16174,
+        "p95": 33.1786
+      },
+      "query.posting_page_read": {
+        "mean": 0.361755,
+        "p95": 0.4432
+      },
+      "query.posting_cache_read": {
+        "mean": 0.112355,
+        "p95": 0.1254
+      },
+      "query.payload_read": {
+        "mean": 4.00788,
+        "p95": 4.2745
+      },
+      "query.payload_crc": {
+        "mean": 0.809965,
+        "p95": 0.8476
+      },
+      "query.payload_validation": {
+        "mean": 1.10675,
+        "p95": 1.1631
+      },
+      "payload.decode_crc_identity": {
+        "mean": 0.0,
+        "p95": 0.0
+      },
+      "first.permit_acquire": {
+        "mean": 0.000845,
+        "p95": 0.0014
+      },
+      "first.permit_mutex_wait": {
+        "mean": 5.25e-05,
+        "p95": 0.0001
+      },
+      "first.permit_condvar_wait": {
+        "mean": 0.0,
+        "p95": 0.0
+      },
+      "query.term_cache_mutex_wait": {
+        "mean": 0.006565,
+        "p95": 0.0074
+      },
+      "query.metadata_cache_mutex_wait": {
+        "mean": 0.060755,
+        "p95": 0.1297
+      },
+      "lock.cache_wait": {
+        "mean": 0.03049,
+        "p95": 0.0975
+      },
+      "disk.read_at": {
+        "mean": 5.358755,
+        "p95": 5.7159
+      },
+      "first.total": {
+        "mean": 24.239755,
+        "p95": 25.0141
+      },
+      "first.visibility_mask": {
+        "mean": 0.0107775,
+        "p95": 0.0131
+      },
+      "payload.copy_key": {
+        "mean": 0.01577,
+        "p95": 0.0172
+      },
+      "payload.copy_text": {
+        "mean": 0.0785025,
+        "p95": 0.0942
+      },
+      "payload.copy_title": {
+        "mean": 0.00673,
+        "p95": 0.0076
+      },
+      "payload.materialize": {
+        "mean": 0.303165,
+        "p95": 0.3309
+      },
+      "payload.materialize_fields": {
+        "mean": 0.13508,
+        "p95": 0.1487
+      },
+      "payload.materialize_links": {
+        "mean": 0.0287175,
+        "p95": 0.0314
+      },
+      "payload.read_document": {
+        "mean": 0.5596775,
+        "p95": 0.6257
+      },
+      "payload.schema_utf8": {
+        "mean": 1.14367,
+        "p95": 1.1968
+      },
+      "query.fold.body": {
+        "mean": 22.79281,
+        "p95": 23.4776
+      },
+      "query.fold.title": {
+        "mean": 0.09296,
+        "p95": 0.099
+      },
+      "query.metadata_page": {
+        "mean": 1.0633875,
+        "p95": 1.2339
+      },
+      "query.raw_ascii_probe": {
+        "mean": 0.209685,
+        "p95": 0.2277
+      },
+      "query.raw_ascii_proven": {
+        "mean": 0.0,
+        "p95": 0.0
+      },
+      "query.record_identity": {
+        "mean": 0.0556525,
+        "p95": 0.0652
+      },
+      "query.record_metadata": {
+        "mean": 0.8464575,
+        "p95": 1.0203
+      },
+      "query.scan.body": {
+        "mean": 0.818925,
+        "p95": 0.8567
+      },
+      "query.term_page_decode": {
+        "mean": 0.74226,
+        "p95": 0.8164
+      },
+      "query.verify_text": {
+        "mean": 24.73643,
+        "p95": 25.473
+      }
+    },
+    "counts": {
+      "query.term_lookup_hits": 7.85,
+      "query.term_lookup_misses": 48.15,
+      "query.term_page_hits": 3.8,
+      "query.term_page_misses": 44.35,
+      "query.posting_page_hits": 10801.0,
+      "query.posting_page_read": 69.0,
+      "first.hybrid_handoffs": 1.0,
+      "first.permits_granted": 3.0,
+      "query.metadata_page_evictions": 170.225,
+      "query.metadata_page_hits": 387.25,
+      "query.metadata_page_misses": 166.75,
+      "query.payload_window_hits": 0.0
+    }
+  },
+  {
+    "group": "idle-1R-41",
+    "case_id": 25,
+    "n": 40,
+    "wall_p50": 12.78115,
+    "wall_p95": 13.9026,
+    "cpu_p50": 15.625,
+    "cpu_p95": 15.625,
+    "stages": {
+      "first.delta_filter": {
+        "mean": 0.313565,
+        "p95": 0.3507
+      },
+      "first.posting_setup": {
+        "mean": 0.72767,
+        "p95": 0.8348
+      },
+      "first.posting_intersection": {
+        "mean": 0.3604175,
+        "p95": 0.405
+      },
+      "first.candidate_verify": {
+        "mean": 10.18723,
+        "p95": 10.7858
+      },
+      "query.posting_page_read": {
+        "mean": 0.1341525,
+        "p95": 0.1473
+      },
+      "query.posting_cache_read": {
+        "mean": 0.05486,
+        "p95": 0.0654
+      },
+      "query.payload_read": {
+        "mean": 1.7011125,
+        "p95": 1.9671
+      },
+      "query.payload_crc": {
+        "mean": 0.2962175,
+        "p95": 0.3152
+      },
+      "query.payload_validation": {
+        "mean": 0.4150875,
+        "p95": 0.4461
+      },
+      "payload.decode_crc_identity": {
+        "mean": 0.0,
+        "p95": 0.0
+      },
+      "first.permit_acquire": {
+        "mean": 0.00085,
+        "p95": 0.0011
+      },
+      "first.permit_mutex_wait": {
+        "mean": 5e-05,
+        "p95": 0.0001
+      },
+      "first.permit_condvar_wait": {
+        "mean": 0.0,
+        "p95": 0.0
+      },
+      "query.term_cache_mutex_wait": {
+        "mean": 0.003175,
+        "p95": 0.0037
+      },
+      "query.metadata_cache_mutex_wait": {
+        "mean": 0.034245,
+        "p95": 0.0383
+      },
+      "lock.cache_wait": {
+        "mean": 0.0,
+        "p95": 0.0
+      },
+      "disk.read_at": {
+        "mean": 2.6040425,
+        "p95": 2.9804
+      },
+      "first.total": {
+        "mean": 12.86029,
+        "p95": 13.8533
+      },
+      "first.visibility_mask": {
+        "mean": 0.0100925,
+        "p95": 0.0128
+      },
+      "payload.copy_key": {
+        "mean": 0.0049924999999999995,
+        "p95": 0.0064
+      },
+      "payload.copy_text": {
+        "mean": 0.02339,
+        "p95": 0.0362
+      },
+      "payload.copy_title": {
+        "mean": 0.0021825,
+        "p95": 0.0027
+      },
+      "payload.materialize": {
+        "mean": 0.0982175,
+        "p95": 0.1245
+      },
+      "payload.materialize_fields": {
+        "mean": 0.044385,
+        "p95": 0.0557
+      },
+      "payload.materialize_links": {
+        "mean": 0.0099875,
+        "p95": 0.0125
+      },
+      "payload.read_document": {
+        "mean": 0.201535,
+        "p95": 0.2517
+      },
+      "payload.schema_utf8": {
+        "mean": 0.4185325,
+        "p95": 0.4471
+      },
+      "query.fold.body": {
+        "mean": 6.71974,
+        "p95": 6.9495
+      },
+      "query.fold.title": {
+        "mean": 0.029155,
+        "p95": 0.0341
+      },
+      "query.metadata_page": {
+        "mean": 1.088395,
+        "p95": 1.2918
+      },
+      "query.raw_ascii_probe": {
+        "mean": 0.047525,
+        "p95": 0.0522
+      },
+      "query.raw_ascii_proven": {
+        "mean": 0.0002025,
+        "p95": 0.0004
+      },
+      "query.record_identity": {
+        "mean": 0.0188725,
+        "p95": 0.0272
+      },
+      "query.record_metadata": {
+        "mean": 0.314005,
+        "p95": 0.3608
+      },
+      "query.scan.body": {
+        "mean": 0.17226249999999999,
+        "p95": 0.185
+      },
+      "query.term_page_decode": {
+        "mean": 0.3900225,
+        "p95": 0.4474
+      },
+      "query.verify_text": {
+        "mean": 7.2553175,
+        "p95": 7.5116
+      }
+    },
+    "counts": {
+      "query.term_lookup_hits": 7.0,
+      "query.term_lookup_misses": 21.0,
+      "query.term_page_hits": 0.0,
+      "query.term_page_misses": 21.0,
+      "query.posting_page_hits": 841.0,
+      "query.posting_page_read": 19.0,
+      "first.hybrid_handoffs": 1.0,
+      "first.permits_granted": 1.0,
+      "query.metadata_page_evictions": 218.0,
+      "query.metadata_page_hits": 559.0,
+      "query.metadata_page_misses": 215.0,
+      "query.payload_window_hits": 0.0
+    }
+  },
+  {
+    "group": "idle-4R-41",
+    "case_id": 16,
+    "n": 40,
+    "wall_p50": 46.675650000000005,
+    "wall_p95": 124.5167,
+    "cpu_p50": 46.875,
+    "cpu_p95": 62.5,
+    "stages": {
+      "first.delta_filter": {
+        "mean": 2.115705,
+        "p95": 2.5754
+      },
+      "first.posting_setup": {
+        "mean": 1.42521,
+        "p95": 2.3387
+      },
+      "first.posting_intersection": {
+        "mean": 1.75684,
+        "p95": 2.2237
+      },
+      "first.candidate_verify": {
+        "mean": 34.60052,
+        "p95": 37.8867
+      },
+      "query.posting_page_read": {
+        "mean": 0.43023,
+        "p95": 0.7612
+      },
+      "query.posting_cache_read": {
+        "mean": 0.1262075,
+        "p95": 0.1673
+      },
+      "query.payload_read": {
+        "mean": 5.4166625,
+        "p95": 7.209
+      },
+      "query.payload_crc": {
+        "mean": 0.839695,
+        "p95": 0.906
+      },
+      "query.payload_validation": {
+        "mean": 1.1652525,
+        "p95": 1.2649
+      },
+      "payload.decode_crc_identity": {
+        "mean": 0.0,
+        "p95": 0.0
+      },
+      "first.permit_acquire": {
+        "mean": 28.0830575,
+        "p95": 93.7785
+      },
+      "first.permit_mutex_wait": {
+        "mean": 5.25e-05,
+        "p95": 0.0001
+      },
+      "first.permit_condvar_wait": {
+        "mean": 28.081065,
+        "p95": 93.7751
+      },
+      "query.term_cache_mutex_wait": {
+        "mean": 0.09290999999999999,
+        "p95": 0.5786
+      },
+      "query.metadata_cache_mutex_wait": {
+        "mean": 0.243735,
+        "p95": 0.3838
+      },
+      "lock.cache_wait": {
+        "mean": 0.2901175,
+        "p95": 0.7807
+      },
+      "disk.read_at": {
+        "mean": 7.087835,
+        "p95": 9.254
+      },
+      "first.total": {
+        "mean": 60.742295,
+        "p95": 124.4714
+      },
+      "first.visibility_mask": {
+        "mean": 0.010555,
+        "p95": 0.0146
+      },
+      "payload.copy_key": {
+        "mean": 0.01973,
+        "p95": 0.0265
+      },
+      "payload.copy_text": {
+        "mean": 0.07857,
+        "p95": 0.1018
+      },
+      "payload.copy_title": {
+        "mean": 0.007305,
+        "p95": 0.0085
+      },
+      "payload.materialize": {
+        "mean": 0.3312475,
+        "p95": 0.3945
+      },
+      "payload.materialize_fields": {
+        "mean": 0.150045,
+        "p95": 0.1804
+      },
+      "payload.materialize_links": {
+        "mean": 0.03392,
+        "p95": 0.0397
+      },
+      "payload.read_document": {
+        "mean": 0.8191525,
+        "p95": 1.1651
+      },
+      "payload.schema_utf8": {
+        "mean": 1.2023625,
+        "p95": 1.3226
+      },
+      "query.fold.body": {
+        "mean": 23.38685,
+        "p95": 24.7915
+      },
+      "query.fold.title": {
+        "mean": 0.10048750000000001,
+        "p95": 0.1124
+      },
+      "query.metadata_page": {
+        "mean": 1.4014025,
+        "p95": 1.8527
+      },
+      "query.raw_ascii_probe": {
+        "mean": 0.2072825,
+        "p95": 0.2335
+      },
+      "query.raw_ascii_proven": {
+        "mean": 0.0,
+        "p95": 0.0
+      },
+      "query.record_identity": {
+        "mean": 0.065245,
+        "p95": 0.079
+      },
+      "query.record_metadata": {
+        "mean": 1.0540975,
+        "p95": 1.293
+      },
+      "query.scan.body": {
+        "mean": 0.8557175,
+        "p95": 0.9216
+      },
+      "query.term_page_decode": {
+        "mean": 0.70877,
+        "p95": 1.0349
+      },
+      "query.verify_text": {
+        "mean": 25.43706,
+        "p95": 26.9548
+      }
+    },
+    "counts": {
+      "query.term_lookup_hits": 16.025,
+      "query.term_lookup_misses": 39.975,
+      "query.term_page_hits": 2.725,
+      "query.term_page_misses": 37.25,
+      "query.posting_page_hits": 10801.0,
+      "query.posting_page_read": 69.0,
+      "first.hybrid_handoffs": 1.0,
+      "first.permits_granted": 2.075,
+      "query.metadata_page_evictions": 170.5,
+      "query.metadata_page_hits": 382.375,
+      "query.metadata_page_misses": 171.625,
+      "query.payload_window_hits": 0.0
+    }
+  },
+  {
+    "group": "idle-4R-41",
+    "case_id": 25,
+    "n": 40,
+    "wall_p50": 24.73185,
+    "wall_p95": 112.5583,
+    "cpu_p50": 15.625,
+    "cpu_p95": 15.625,
+    "stages": {
+      "first.delta_filter": {
+        "mean": 0.2924775,
+        "p95": 0.3354
+      },
+      "first.posting_setup": {
+        "mean": 0.64792,
+        "p95": 0.8735
+      },
+      "first.posting_intersection": {
+        "mean": 0.3855075,
+        "p95": 0.4439
+      },
+      "first.candidate_verify": {
+        "mean": 11.79715,
+        "p95": 12.9576
+      },
+      "query.posting_page_read": {
+        "mean": 0.1316725,
+        "p95": 0.1597
+      },
+      "query.posting_cache_read": {
+        "mean": 0.05515,
+        "p95": 0.0624
+      },
+      "query.payload_read": {
+        "mean": 2.6593975,
+        "p95": 3.3131
+      },
+      "query.payload_crc": {
+        "mean": 0.312285,
+        "p95": 0.3459
+      },
+      "query.payload_validation": {
+        "mean": 0.44791,
+        "p95": 0.489
+      },
+      "payload.decode_crc_identity": {
+        "mean": 0.0,
+        "p95": 0.0
+      },
+      "first.permit_acquire": {
+        "mean": 25.7443625,
+        "p95": 97.8514
+      },
+      "first.permit_mutex_wait": {
+        "mean": 4.5e-05,
+        "p95": 0.0001
+      },
+      "first.permit_condvar_wait": {
+        "mean": 25.742655,
+        "p95": 97.8442
+      },
+      "query.term_cache_mutex_wait": {
+        "mean": 0.03267,
+        "p95": 0.0041
+      },
+      "query.metadata_cache_mutex_wait": {
+        "mean": 0.290825,
+        "p95": 0.498
+      },
+      "lock.cache_wait": {
+        "mean": 0.2735825,
+        "p95": 0.53
+      },
+      "disk.read_at": {
+        "mean": 3.6090975,
+        "p95": 4.3158
+      },
+      "first.total": {
+        "mean": 40.466875,
+        "p95": 112.5052
+      },
+      "first.visibility_mask": {
+        "mean": 0.00979,
+        "p95": 0.0117
+      },
+      "payload.copy_key": {
+        "mean": 0.0065575,
+        "p95": 0.0084
+      },
+      "payload.copy_text": {
+        "mean": 0.0221125,
+        "p95": 0.0281
+      },
+      "payload.copy_title": {
+        "mean": 0.0025575,
+        "p95": 0.0033
+      },
+      "payload.materialize": {
+        "mean": 0.1103825,
+        "p95": 0.1282
+      },
+      "payload.materialize_fields": {
+        "mean": 0.052539999999999996,
+        "p95": 0.061
+      },
+      "payload.materialize_links": {
+        "mean": 0.0125375,
+        "p95": 0.0152
+      },
+      "payload.read_document": {
+        "mean": 0.2960775,
+        "p95": 0.4016
+      },
+      "payload.schema_utf8": {
+        "mean": 0.4486875,
+        "p95": 0.4924
+      },
+      "query.fold.body": {
+        "mean": 7.0372325,
+        "p95": 7.4036
+      },
+      "query.fold.title": {
+        "mean": 0.03215,
+        "p95": 0.0377
+      },
+      "query.metadata_page": {
+        "mean": 1.4996725,
+        "p95": 1.8605
+      },
+      "query.raw_ascii_probe": {
+        "mean": 0.051065,
+        "p95": 0.064
+      },
+      "query.raw_ascii_proven": {
+        "mean": 0.0002475,
+        "p95": 0.0005
+      },
+      "query.record_identity": {
+        "mean": 0.022805,
+        "p95": 0.029
+      },
+      "query.record_metadata": {
+        "mean": 0.51469,
+        "p95": 0.6548
+      },
+      "query.scan.body": {
+        "mean": 0.1829825,
+        "p95": 0.1979
+      },
+      "query.term_page_decode": {
+        "mean": 0.3119425,
+        "p95": 0.4401
+      },
+      "query.verify_text": {
+        "mean": 7.618755,
+        "p95": 8.0346
+      }
+    },
+    "counts": {
+      "query.term_lookup_hits": 8.575,
+      "query.term_lookup_misses": 19.425,
+      "query.term_page_hits": 3.525,
+      "query.term_page_misses": 15.9,
+      "query.posting_page_hits": 841.0,
+      "query.posting_page_read": 19.0,
+      "first.hybrid_handoffs": 1.0,
+      "first.permits_granted": 1.0,
+      "query.metadata_page_evictions": 199.7,
+      "query.metadata_page_hits": 573.525,
+      "query.metadata_page_misses": 200.475,
+      "query.payload_window_hits": 0.0
+    }
+  },
+  {
+    "group": "idle-4R-few",
+    "case_id": 16,
+    "n": 400,
+    "wall_p50": 29.6941,
+    "wall_p95": 43.1284,
+    "cpu_p50": 46.875,
+    "cpu_p95": 62.5,
+    "stages": {
+      "first.delta_filter": {
+        "mean": 2.084774,
+        "p95": 2.4072
+      },
+      "first.posting_setup": {
+        "mean": 0.327251,
+        "p95": 0.413
+      },
+      "first.posting_intersection": {
+        "mean": 1.83030575,
+        "p95": 2.0735
+      },
+      "first.candidate_verify": {
+        "mean": 33.87860375,
+        "p95": 36.4686
+      },
+      "query.posting_page_read": {
+        "mean": 0.37781775,
+        "p95": 0.4998
+      },
+      "query.posting_cache_read": {
+        "mean": 0.12004875,
+        "p95": 0.1671
+      },
+      "query.payload_read": {
+        "mean": 5.01920225,
+        "p95": 6.1083
+      },
+      "query.payload_crc": {
+        "mean": 0.83241125,
+        "p95": 0.9123
+      },
+      "query.payload_validation": {
+        "mean": 1.15402825,
+        "p95": 1.2508
+      },
+      "payload.decode_crc_identity": {
+        "mean": 0.0,
+        "p95": 0.0
+      },
+      "first.permit_acquire": {
+        "mean": 1.0498805,
+        "p95": 7.6032
+      },
+      "first.permit_mutex_wait": {
+        "mean": 4.85e-05,
+        "p95": 0.0001
+      },
+      "first.permit_condvar_wait": {
+        "mean": 1.0492325,
+        "p95": 7.6015
+      },
+      "query.term_cache_mutex_wait": {
+        "mean": 0.01563225,
+        "p95": 0.0034
+      },
+      "query.metadata_cache_mutex_wait": {
+        "mean": 0.363353,
+        "p95": 0.5873
+      },
+      "lock.cache_wait": {
+        "mean": 0.334593,
+        "p95": 0.5659
+      },
+      "disk.read_at": {
+        "mean": 6.33566125,
+        "p95": 7.462
+      },
+      "first.total": {
+        "mean": 31.27208225,
+        "p95": 43.0773
+      },
+      "first.visibility_mask": {
+        "mean": 0.00941025,
+        "p95": 0.0131
+      },
+      "payload.copy_key": {
+        "mean": 0.017765,
+        "p95": 0.0213
+      },
+      "payload.copy_text": {
+        "mean": 0.07998475,
+        "p95": 0.124
+      },
+      "payload.copy_title": {
+        "mean": 0.007144,
+        "p95": 0.0085
+      },
+      "payload.materialize": {
+        "mean": 0.3267765,
+        "p95": 0.3893
+      },
+      "payload.materialize_fields": {
+        "mean": 0.148518,
+        "p95": 0.1732
+      },
+      "payload.materialize_links": {
+        "mean": 0.032819,
+        "p95": 0.0378
+      },
+      "payload.read_document": {
+        "mean": 0.722485,
+        "p95": 0.9187
+      },
+      "payload.schema_utf8": {
+        "mean": 1.1911995,
+        "p95": 1.2915
+      },
+      "query.fold.body": {
+        "mean": 23.116654,
+        "p95": 24.2296
+      },
+      "query.fold.title": {
+        "mean": 0.099439,
+        "p95": 0.109
+      },
+      "query.metadata_page": {
+        "mean": 1.5122915,
+        "p95": 1.9561
+      },
+      "query.raw_ascii_probe": {
+        "mean": 0.2057865,
+        "p95": 0.2325
+      },
+      "query.raw_ascii_proven": {
+        "mean": 0.0,
+        "p95": 0.0
+      },
+      "query.record_identity": {
+        "mean": 0.0639675,
+        "p95": 0.0786
+      },
+      "query.record_metadata": {
+        "mean": 1.13362625,
+        "p95": 1.4647
+      },
+      "query.scan.body": {
+        "mean": 0.841424,
+        "p95": 0.8987
+      },
+      "query.term_page_decode": {
+        "mean": 0.0045015,
+        "p95": 0.0
+      },
+      "query.verify_text": {
+        "mean": 25.103722,
+        "p95": 26.3839
+      }
+    },
+    "counts": {
+      "query.term_lookup_hits": 55.755,
+      "query.term_lookup_misses": 0.245,
+      "query.term_page_hits": 0.0275,
+      "query.term_page_misses": 0.2175,
+      "query.posting_page_hits": 10801.0,
+      "query.posting_page_read": 69.0,
+      "first.hybrid_handoffs": 1.0,
+      "first.permits_granted": 2.1675,
+      "query.metadata_page_evictions": 169.4325,
+      "query.metadata_page_hits": 385.1,
+      "query.metadata_page_misses": 168.9,
+      "query.payload_window_hits": 0.0
+    }
+  },
+  {
+    "group": "idle-4R-few",
+    "case_id": 25,
+    "n": 400,
+    "wall_p50": 14.02535,
+    "wall_p95": 23.7539,
+    "cpu_p50": 15.625,
+    "cpu_p95": 15.625,
+    "stages": {
+      "first.delta_filter": {
+        "mean": 0.293206,
+        "p95": 0.3759
+      },
+      "first.posting_setup": {
+        "mean": 0.1896295,
+        "p95": 0.2199
+      },
+      "first.posting_intersection": {
+        "mean": 0.38037975,
+        "p95": 0.4355
+      },
+      "first.candidate_verify": {
+        "mean": 11.530457,
+        "p95": 12.5632
+      },
+      "query.posting_page_read": {
+        "mean": 0.1151155,
+        "p95": 0.1468
+      },
+      "query.posting_cache_read": {
+        "mean": 0.05043875,
+        "p95": 0.0692
+      },
+      "query.payload_read": {
+        "mean": 2.3785915,
+        "p95": 3.0495
+      },
+      "query.payload_crc": {
+        "mean": 0.310098,
+        "p95": 0.3326
+      },
+      "query.payload_validation": {
+        "mean": 0.4478985,
+        "p95": 0.4896
+      },
+      "payload.decode_crc_identity": {
+        "mean": 0.0,
+        "p95": 0.0
+      },
+      "first.permit_acquire": {
+        "mean": 1.31557325,
+        "p95": 8.8162
+      },
+      "first.permit_mutex_wait": {
+        "mean": 4.975e-05,
+        "p95": 0.0001
+      },
+      "first.permit_condvar_wait": {
+        "mean": 1.3148994999999999,
+        "p95": 8.8141
+      },
+      "query.term_cache_mutex_wait": {
+        "mean": 0.01614075,
+        "p95": 0.0019
+      },
+      "query.metadata_cache_mutex_wait": {
+        "mean": 0.46580775,
+        "p95": 0.7409
+      },
+      "lock.cache_wait": {
+        "mean": 0.42706025,
+        "p95": 0.6944
+      },
+      "disk.read_at": {
+        "mean": 3.16472625,
+        "p95": 3.8559
+      },
+      "first.total": {
+        "mean": 15.3184705,
+        "p95": 23.7081
+      },
+      "first.visibility_mask": {
+        "mean": 0.009046,
+        "p95": 0.0118
+      },
+      "payload.copy_key": {
+        "mean": 0.00670825,
+        "p95": 0.0077
+      },
+      "payload.copy_text": {
+        "mean": 0.02063225,
+        "p95": 0.0265
+      },
+      "payload.copy_title": {
+        "mean": 0.0025205,
+        "p95": 0.0031
+      },
+      "payload.materialize": {
+        "mean": 0.10936975,
+        "p95": 0.1263
+      },
+      "payload.materialize_fields": {
+        "mean": 0.0526635,
+        "p95": 0.0623
+      },
+      "payload.materialize_links": {
+        "mean": 0.012232,
+        "p95": 0.0144
+      },
+      "payload.read_document": {
+        "mean": 0.306349,
+        "p95": 0.4124
+      },
+      "payload.schema_utf8": {
+        "mean": 0.4500175,
+        "p95": 0.4893
+      },
+      "query.fold.body": {
+        "mean": 6.9730955,
+        "p95": 7.3299
+      },
+      "query.fold.title": {
+        "mean": 0.03188675,
+        "p95": 0.0367
+      },
+      "query.metadata_page": {
+        "mean": 1.624403,
+        "p95": 2.0716
+      },
+      "query.raw_ascii_probe": {
+        "mean": 0.0496775,
+        "p95": 0.0555
+      },
+      "query.raw_ascii_proven": {
+        "mean": 0.00020275,
+        "p95": 0.0004
+      },
+      "query.record_identity": {
+        "mean": 0.02319275,
+        "p95": 0.0296
+      },
+      "query.record_metadata": {
+        "mean": 0.6207165,
+        "p95": 0.8449
+      },
+      "query.scan.body": {
+        "mean": 0.18108225,
+        "p95": 0.1943
+      },
+      "query.term_page_decode": {
+        "mean": 0.0033652499999999998,
+        "p95": 0.0
+      },
+      "query.verify_text": {
+        "mean": 7.5364695,
+        "p95": 7.9411
+      }
+    },
+    "counts": {
+      "query.term_lookup_hits": 27.8725,
+      "query.term_lookup_misses": 0.1275,
+      "query.term_page_hits": 0.0025,
+      "query.term_page_misses": 0.125,
+      "query.posting_page_hits": 841.0,
+      "query.posting_page_read": 19.0,
+      "first.hybrid_handoffs": 1.0,
+      "first.permits_granted": 1.0,
+      "query.metadata_page_evictions": 179.5375,
+      "query.metadata_page_hits": 592.6275,
+      "query.metadata_page_misses": 181.3725,
+      "query.payload_window_hits": 0.0
+    }
+  },
+  {
+    "group": "loaded-4R-41",
+    "case_id": 16,
+    "n": 58,
+    "wall_p50": 72.1858,
+    "wall_p95": 326.0405,
+    "cpu_p50": 46.875,
+    "cpu_p95": 78.125,
+    "stages": {
+      "first.delta_filter": {
+        "mean": 3.6865810344827588,
+        "p95": 6.0196
+      },
+      "first.posting_setup": {
+        "mean": 2.420456896551724,
+        "p95": 6.1249
+      },
+      "first.posting_intersection": {
+        "mean": 2.9192568965517243,
+        "p95": 3.7873
+      },
+      "first.candidate_verify": {
+        "mean": 46.578822413793105,
+        "p95": 60.3175
+      },
+      "query.posting_page_read": {
+        "mean": 0.608348275862069,
+        "p95": 0.8314
+      },
+      "query.posting_cache_read": {
+        "mean": 0.2588258620689655,
+        "p95": 0.4547
+      },
+      "query.payload_read": {
+        "mean": 8.88185,
+        "p95": 13.3635
+      },
+      "query.payload_crc": {
+        "mean": 1.2123413793103448,
+        "p95": 1.3868
+      },
+      "query.payload_validation": {
+        "mean": 1.5861120689655173,
+        "p95": 1.8427
+      },
+      "payload.decode_crc_identity": {
+        "mean": 0.0,
+        "p95": 0.0
+      },
+      "first.permit_acquire": {
+        "mean": 53.71173448275862,
+        "p95": 289.8538
+      },
+      "first.permit_mutex_wait": {
+        "mean": 6.379310344827587e-05,
+        "p95": 0.0001
+      },
+      "first.permit_condvar_wait": {
+        "mean": 53.70948103448276,
+        "p95": 289.8474
+      },
+      "query.term_cache_mutex_wait": {
+        "mean": 0.2297741379310345,
+        "p95": 1.9796
+      },
+      "query.metadata_cache_mutex_wait": {
+        "mean": 0.9109655172413793,
+        "p95": 1.6433
+      },
+      "lock.cache_wait": {
+        "mean": 1.0716948275862068,
+        "p95": 4.6231
+      },
+      "disk.read_at": {
+        "mean": 11.661586206896551,
+        "p95": 17.1049
+      },
+      "first.total": {
+        "mean": 100.87221206896552,
+        "p95": 325.9576
+      },
+      "first.visibility_mask": {
+        "mean": 0.014756896551724139,
+        "p95": 0.0223
+      },
+      "payload.copy_key": {
+        "mean": 0.031901724137931034,
+        "p95": 0.0443
+      },
+      "payload.copy_text": {
+        "mean": 0.14568793103448277,
+        "p95": 0.2069
+      },
+      "payload.copy_title": {
+        "mean": 0.011839655172413793,
+        "p95": 0.0157
+      },
+      "payload.materialize": {
+        "mean": 0.5485465517241379,
+        "p95": 0.6993
+      },
+      "payload.materialize_fields": {
+        "mean": 0.2436706896551724,
+        "p95": 0.2919
+      },
+      "payload.materialize_links": {
+        "mean": 0.05321551724137931,
+        "p95": 0.0678
+      },
+      "payload.read_document": {
+        "mean": 1.2953637931034483,
+        "p95": 2.1272
+      },
+      "payload.schema_utf8": {
+        "mean": 1.6450896551724137,
+        "p95": 1.8698
+      },
+      "query.fold.body": {
+        "mean": 28.771074137931034,
+        "p95": 34.5054
+      },
+      "query.fold.title": {
+        "mean": 0.14674137931034484,
+        "p95": 0.1734
+      },
+      "query.metadata_page": {
+        "mean": 2.84738275862069,
+        "p95": 5.7072
+      },
+      "query.raw_ascii_probe": {
+        "mean": 0.2691362068965517,
+        "p95": 0.3292
+      },
+      "query.raw_ascii_proven": {
+        "mean": 0.0,
+        "p95": 0.0
+      },
+      "query.record_identity": {
+        "mean": 0.1179948275862069,
+        "p95": 0.1498
+      },
+      "query.record_metadata": {
+        "mean": 2.0495275862068967,
+        "p95": 3.0655
+      },
+      "query.scan.body": {
+        "mean": 1.1605810344827585,
+        "p95": 1.3177
+      },
+      "query.term_page_decode": {
+        "mean": 1.1083758620689654,
+        "p95": 1.9308
+      },
+      "query.verify_text": {
+        "mean": 31.76921724137931,
+        "p95": 37.787
+      }
+    },
+    "counts": {
+      "query.term_lookup_hits": 18.06896551724138,
+      "query.term_lookup_misses": 41.10344827586207,
+      "query.term_page_hits": 1.8103448275862069,
+      "query.term_page_misses": 39.293103448275865,
+      "query.posting_page_hits": 10460.362068965518,
+      "query.posting_page_read": 68.96551724137932,
+      "first.hybrid_handoffs": 1.0,
+      "first.permits_granted": 2.1206896551724137,
+      "query.metadata_page_evictions": 160.75862068965517,
+      "query.metadata_page_hits": 388.37931034482756,
+      "query.metadata_page_misses": 159.6551724137931,
+      "query.payload_window_hits": 0.0
+    }
+  },
+  {
+    "group": "loaded-4R-41",
+    "case_id": 25,
+    "n": 58,
+    "wall_p50": 29.87755,
+    "wall_p95": 177.3663,
+    "cpu_p50": 15.625,
+    "cpu_p95": 46.875,
+    "stages": {
+      "first.delta_filter": {
+        "mean": 0.3326344827586207,
+        "p95": 0.6622
+      },
+      "first.posting_setup": {
+        "mean": 1.1919258620689654,
+        "p95": 2.3609
+      },
+      "first.posting_intersection": {
+        "mean": 0.7158586206896552,
+        "p95": 1.2541
+      },
+      "first.candidate_verify": {
+        "mean": 18.33293275862069,
+        "p95": 36.7821
+      },
+      "query.posting_page_read": {
+        "mean": 0.24059827586206897,
+        "p95": 0.3869
+      },
+      "query.posting_cache_read": {
+        "mean": 0.10510862068965517,
+        "p95": 0.1758
+      },
+      "query.payload_read": {
+        "mean": 4.947293103448276,
+        "p95": 16.5364
+      },
+      "query.payload_crc": {
+        "mean": 0.4914948275862069,
+        "p95": 0.5619
+      },
+      "query.payload_validation": {
+        "mean": 0.6680051724137931,
+        "p95": 1.1113
+      },
+      "payload.decode_crc_identity": {
+        "mean": 0.0,
+        "p95": 0.0
+      },
+      "first.permit_acquire": {
+        "mean": 27.148706896551726,
+        "p95": 148.2966
+      },
+      "first.permit_mutex_wait": {
+        "mean": 6.551724137931034e-05,
+        "p95": 0.0001
+      },
+      "first.permit_condvar_wait": {
+        "mean": 27.146941379310345,
+        "p95": 148.2948
+      },
+      "query.term_cache_mutex_wait": {
+        "mean": 0.06698620689655173,
+        "p95": 0.7143
+      },
+      "query.metadata_cache_mutex_wait": {
+        "mean": 1.0828689655172414,
+        "p95": 4.0017
+      },
+      "lock.cache_wait": {
+        "mean": 1.0711931034482758,
+        "p95": 3.9136
+      },
+      "disk.read_at": {
+        "mean": 6.70498275862069,
+        "p95": 19.4344
+      },
+      "first.total": {
+        "mean": 50.88231206896552,
+        "p95": 177.2927
+      },
+      "first.visibility_mask": {
+        "mean": 0.013056896551724139,
+        "p95": 0.0221
+      },
+      "payload.copy_key": {
+        "mean": 0.010660344827586207,
+        "p95": 0.0153
+      },
+      "payload.copy_text": {
+        "mean": 0.032543103448275865,
+        "p95": 0.0427
+      },
+      "payload.copy_title": {
+        "mean": 0.0037844827586206897,
+        "p95": 0.0054
+      },
+      "payload.materialize": {
+        "mean": 0.16476206896551723,
+        "p95": 0.2085
+      },
+      "payload.materialize_fields": {
+        "mean": 0.07891896551724138,
+        "p95": 0.1056
+      },
+      "payload.materialize_links": {
+        "mean": 0.01940344827586207,
+        "p95": 0.0232
+      },
+      "payload.read_document": {
+        "mean": 0.5515034482758621,
+        "p95": 0.7806
+      },
+      "payload.schema_utf8": {
+        "mean": 0.6613224137931034,
+        "p95": 1.0733
+      },
+      "query.fold.body": {
+        "mean": 9.567213793103448,
+        "p95": 13.0478
+      },
+      "query.fold.title": {
+        "mean": 0.050624137931034485,
+        "p95": 0.069
+      },
+      "query.metadata_page": {
+        "mean": 3.3232896551724136,
+        "p95": 7.5944
+      },
+      "query.raw_ascii_probe": {
+        "mean": 0.08017241379310344,
+        "p95": 0.0981
+      },
+      "query.raw_ascii_proven": {
+        "mean": 0.0002413793103448276,
+        "p95": 0.0005
+      },
+      "query.record_identity": {
+        "mean": 0.045855172413793104,
+        "p95": 0.0618
+      },
+      "query.record_metadata": {
+        "mean": 1.2333155172413792,
+        "p95": 3.636
+      },
+      "query.scan.body": {
+        "mean": 0.28960517241379313,
+        "p95": 0.3097
+      },
+      "query.term_page_decode": {
+        "mean": 0.5757741379310345,
+        "p95": 0.8847
+      },
+      "query.verify_text": {
+        "mean": 10.547279310344827,
+        "p95": 14.0329
+      }
+    },
+    "counts": {
+      "query.term_lookup_hits": 8.793103448275861,
+      "query.term_lookup_misses": 19.689655172413794,
+      "query.term_page_hits": 2.0689655172413794,
+      "query.term_page_misses": 17.620689655172413,
+      "query.posting_page_hits": 841.0,
+      "query.posting_page_read": 19.0,
+      "first.hybrid_handoffs": 1.0,
+      "first.permits_granted": 1.0,
+      "query.metadata_page_evictions": 200.81034482758622,
+      "query.metadata_page_hits": 577.5689655172414,
+      "query.metadata_page_misses": 201.91379310344828,
+      "query.payload_window_hits": 0.0
+    }
+  },
+  {
+    "group": "loaded-4R-few",
+    "case_id": 16,
+    "n": 937,
+    "wall_p50": 44.1334,
+    "wall_p95": 70.7701,
+    "cpu_p50": 46.875,
+    "cpu_p95": 78.125,
+    "stages": {
+      "first.delta_filter": {
+        "mean": 4.245011099252935,
+        "p95": 7.3298
+      },
+      "first.posting_setup": {
+        "mean": 0.9750647812166489,
+        "p95": 3.3593
+      },
+      "first.posting_intersection": {
+        "mean": 2.853249946638207,
+        "p95": 3.7257
+      },
+      "first.candidate_verify": {
+        "mean": 46.4939083244397,
+        "p95": 63.1693
+      },
+      "query.posting_page_read": {
+        "mean": 0.6139448239060833,
+        "p95": 1.1739
+      },
+      "query.posting_cache_read": {
+        "mean": 0.2726505869797225,
+        "p95": 0.5206
+      },
+      "query.payload_read": {
+        "mean": 8.458972678762006,
+        "p95": 13.8617
+      },
+      "query.payload_crc": {
+        "mean": 1.235272145144077,
+        "p95": 1.4744
+      },
+      "query.payload_validation": {
+        "mean": 1.5982946638207043,
+        "p95": 1.8852
+      },
+      "payload.decode_crc_identity": {
+        "mean": 0.0,
+        "p95": 0.0
+      },
+      "first.permit_acquire": {
+        "mean": 2.6824044823906084,
+        "p95": 12.9931
+      },
+      "first.permit_mutex_wait": {
+        "mean": 5.44290288153682e-05,
+        "p95": 0.0001
+      },
+      "first.permit_condvar_wait": {
+        "mean": 2.6811066168623268,
+        "p95": 12.9896
+      },
+      "query.term_cache_mutex_wait": {
+        "mean": 0.04377598719316969,
+        "p95": 0.0257
+      },
+      "query.metadata_cache_mutex_wait": {
+        "mean": 1.2261707577374599,
+        "p95": 2.9302
+      },
+      "lock.cache_wait": {
+        "mean": 1.1960612593383138,
+        "p95": 2.9008
+      },
+      "disk.read_at": {
+        "mean": 11.076088900747065,
+        "p95": 18.567
+      },
+      "first.total": {
+        "mean": 46.91099295624333,
+        "p95": 70.6967
+      },
+      "first.visibility_mask": {
+        "mean": 0.01616040554962647,
+        "p95": 0.0247
+      },
+      "payload.copy_key": {
+        "mean": 0.03305101387406617,
+        "p95": 0.0482
+      },
+      "payload.copy_text": {
+        "mean": 0.16032518676627536,
+        "p95": 0.2462
+      },
+      "payload.copy_title": {
+        "mean": 0.012958697972251867,
+        "p95": 0.017
+      },
+      "payload.materialize": {
+        "mean": 0.5830839914621131,
+        "p95": 0.8256
+      },
+      "payload.materialize_fields": {
+        "mean": 0.2555094983991462,
+        "p95": 0.3279
+      },
+      "payload.materialize_links": {
+        "mean": 0.05392998932764141,
+        "p95": 0.0694
+      },
+      "payload.read_document": {
+        "mean": 1.2811440768409819,
+        "p95": 1.869
+      },
+      "payload.schema_utf8": {
+        "mean": 1.6829929562433297,
+        "p95": 2.0598
+      },
+      "query.fold.body": {
+        "mean": 28.788469263607258,
+        "p95": 34.7677
+      },
+      "query.fold.title": {
+        "mean": 0.14043724653148346,
+        "p95": 0.1693
+      },
+      "query.metadata_page": {
+        "mean": 3.1597595517609394,
+        "p95": 5.7245
+      },
+      "query.raw_ascii_probe": {
+        "mean": 0.27612262540021343,
+        "p95": 0.3421
+      },
+      "query.raw_ascii_proven": {
+        "mean": 0.0,
+        "p95": 0.0
+      },
+      "query.record_identity": {
+        "mean": 0.121917075773746,
+        "p95": 0.1509
+      },
+      "query.record_metadata": {
+        "mean": 2.305980896478122,
+        "p95": 4.1317
+      },
+      "query.scan.body": {
+        "mean": 1.147353575240128,
+        "p95": 1.3592
+      },
+      "query.term_page_decode": {
+        "mean": 0.23715026680896478,
+        "p95": 1.6806
+      },
+      "query.verify_text": {
+        "mean": 31.79318954108858,
+        "p95": 38.7762
+      }
+    },
+    "counts": {
+      "query.term_lookup_hits": 52.092849519743865,
+      "query.term_lookup_misses": 6.852721451440768,
+      "query.term_page_hits": 0.15581643543223053,
+      "query.term_page_misses": 6.696905016008538,
+      "query.posting_page_hits": 10430.001067235858,
+      "query.posting_page_read": 68.8537886872999,
+      "first.hybrid_handoffs": 1.0,
+      "first.permits_granted": 2.165421558164354,
+      "query.metadata_page_evictions": 155.11526147278548,
+      "query.metadata_page_hits": 394.26787620064033,
+      "query.metadata_page_misses": 153.68729989327642,
+      "query.payload_window_hits": 0.0
+    }
+  },
+  {
+    "group": "loaded-4R-few",
+    "case_id": 25,
+    "n": 936,
+    "wall_p50": 20.749650000000003,
+    "wall_p95": 33.3388,
+    "cpu_p50": 15.625,
+    "cpu_p95": 31.25,
+    "stages": {
+      "first.delta_filter": {
+        "mean": 0.3233384615384615,
+        "p95": 0.5665
+      },
+      "first.posting_setup": {
+        "mean": 0.45142286324786324,
+        "p95": 1.3917
+      },
+      "first.posting_intersection": {
+        "mean": 0.6373528846153846,
+        "p95": 0.7501
+      },
+      "first.candidate_verify": {
+        "mean": 16.76678098290598,
+        "p95": 21.5645
+      },
+      "query.posting_page_read": {
+        "mean": 0.1934162393162393,
+        "p95": 0.244
+      },
+      "query.posting_cache_read": {
+        "mean": 0.09778365384615384,
+        "p95": 0.1579
+      },
+      "query.payload_read": {
+        "mean": 3.7920188034188036,
+        "p95": 5.4381
+      },
+      "query.payload_crc": {
+        "mean": 0.48504935897435897,
+        "p95": 0.5263
+      },
+      "query.payload_validation": {
+        "mean": 0.6267025641025641,
+        "p95": 0.6942
+      },
+      "payload.decode_crc_identity": {
+        "mean": 0.0,
+        "p95": 0.0
+      },
+      "first.permit_acquire": {
+        "mean": 0.9216530982905983,
+        "p95": 6.3415
+      },
+      "first.permit_mutex_wait": {
+        "mean": 5.480769230769231e-05,
+        "p95": 0.0001
+      },
+      "first.permit_condvar_wait": {
+        "mean": 0.9207320512820513,
+        "p95": 6.339
+      },
+      "query.term_cache_mutex_wait": {
+        "mean": 0.038949679487179485,
+        "p95": 0.2323
+      },
+      "query.metadata_cache_mutex_wait": {
+        "mean": 1.5573241452991453,
+        "p95": 3.9651
+      },
+      "lock.cache_wait": {
+        "mean": 1.504707799145299,
+        "p95": 3.9502
+      },
+      "disk.read_at": {
+        "mean": 5.12885438034188,
+        "p95": 7.4873
+      },
+      "first.total": {
+        "mean": 22.38191121794872,
+        "p95": 33.2725
+      },
+      "first.visibility_mask": {
+        "mean": 0.012530662393162393,
+        "p95": 0.0206
+      },
+      "payload.copy_key": {
+        "mean": 0.009525641025641025,
+        "p95": 0.0127
+      },
+      "payload.copy_text": {
+        "mean": 0.03378301282051282,
+        "p95": 0.0455
+      },
+      "payload.copy_title": {
+        "mean": 0.0037807692307692308,
+        "p95": 0.0049
+      },
+      "payload.materialize": {
+        "mean": 0.1679909188034188,
+        "p95": 0.2043
+      },
+      "payload.materialize_fields": {
+        "mean": 0.07955502136752136,
+        "p95": 0.0969
+      },
+      "payload.materialize_links": {
+        "mean": 0.02064465811965812,
+        "p95": 0.0242
+      },
+      "payload.read_document": {
+        "mean": 0.5779354700854701,
+        "p95": 0.8818
+      },
+      "payload.schema_utf8": {
+        "mean": 0.6220826923076923,
+        "p95": 0.6906
+      },
+      "query.fold.body": {
+        "mean": 9.142355235042736,
+        "p95": 10.1791
+      },
+      "query.fold.title": {
+        "mean": 0.05051100427350427,
+        "p95": 0.0598
+      },
+      "query.metadata_page": {
+        "mean": 3.5896097222222223,
+        "p95": 6.7957
+      },
+      "query.raw_ascii_probe": {
+        "mean": 0.07969262820512821,
+        "p95": 0.09
+      },
+      "query.raw_ascii_proven": {
+        "mean": 0.00023547008547008546,
+        "p95": 0.0005
+      },
+      "query.record_identity": {
+        "mean": 0.046185576923076926,
+        "p95": 0.0609
+      },
+      "query.record_metadata": {
+        "mean": 1.3497122863247863,
+        "p95": 2.6601
+      },
+      "query.scan.body": {
+        "mean": 0.28488856837606835,
+        "p95": 0.3039
+      },
+      "query.term_page_decode": {
+        "mean": 0.0818909188034188,
+        "p95": 0.6633
+      },
+      "query.verify_text": {
+        "mean": 10.092482478632478,
+        "p95": 11.3946
+      }
+    },
+    "counts": {
+      "query.term_lookup_hits": 26.33440170940171,
+      "query.term_lookup_misses": 3.127136752136752,
+      "query.term_page_hits": 0.6068376068376068,
+      "query.term_page_misses": 2.5202991452991452,
+      "query.posting_page_hits": 841.0,
+      "query.posting_page_read": 19.0,
+      "first.hybrid_handoffs": 1.0,
+      "first.permits_granted": 1.0,
+      "query.metadata_page_evictions": 174.02029914529913,
+      "query.metadata_page_hits": 603.1944444444445,
+      "query.metadata_page_misses": 175.33333333333334,
+      "query.payload_window_hits": 0.0
+    }
+  }
+]

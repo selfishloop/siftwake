@@ -1,0 +1,189 @@
+{
+  "checks": [
+    {
+      "elapsed_s": 1.0390575,
+      "exit_code": 0,
+      "name": "fmt",
+      "command": "cargo fmt --check",
+      "log": "docs/benchmarks/snapshot-10k-20261026-validation-posting-pages-20261029-v3-fmt.log"
+    },
+    {
+      "elapsed_s": 0.4719816,
+      "exit_code": 0,
+      "name": "clippy",
+      "command": "cargo clippy --all-targets -- -D warnings",
+      "log": "docs/benchmarks/snapshot-10k-20261026-validation-posting-pages-20261029-v3-clippy.log"
+    },
+    {
+      "elapsed_s": 150.0678191,
+      "exit_code": 0,
+      "name": "test",
+      "command": "cargo test --all-targets",
+      "log": "docs/benchmarks/snapshot-10k-20261026-validation-posting-pages-20261029-v3-test.log"
+    },
+    {
+      "elapsed_s": 2.2363791,
+      "exit_code": 0,
+      "name": "no-default",
+      "command": "cargo check --no-default-features --lib",
+      "log": "docs/benchmarks/snapshot-10k-20261026-validation-posting-pages-20261029-v3-no-default.log"
+    },
+    {
+      "elapsed_s": 2.4393373,
+      "exit_code": 0,
+      "name": "all-features",
+      "command": "cargo check --all-features --lib",
+      "log": "docs/benchmarks/snapshot-10k-20261026-validation-posting-pages-20261029-v3-all-features.log"
+    },
+    {
+      "elapsed_s": 0.3030706,
+      "exit_code": 0,
+      "name": "sqlite-fmt",
+      "command": "cargo fmt --manifest-path tools/native_sqlite/Cargo.toml --check",
+      "log": "docs/benchmarks/snapshot-10k-20261026-validation-posting-pages-20261029-v3-sqlite-fmt.log"
+    },
+    {
+      "elapsed_s": 2.9151077,
+      "exit_code": 0,
+      "name": "sqlite-clippy",
+      "command": "cargo clippy --manifest-path tools/native_sqlite/Cargo.toml --all-targets -- -D warnings",
+      "log": "docs/benchmarks/snapshot-10k-20261026-validation-posting-pages-20261029-v3-sqlite-clippy.log"
+    },
+    {
+      "elapsed_s": 8.9115915,
+      "exit_code": 0,
+      "name": "sqlite-test",
+      "command": "cargo test --manifest-path tools/native_sqlite/Cargo.toml --bin content_churn",
+      "log": "docs/benchmarks/snapshot-10k-20261026-validation-posting-pages-20261029-v3-sqlite-test.log"
+    }
+  ],
+  "parallel_tests": 243,
+  "diagnostic_tests": 149,
+  "query_gate_passed": true,
+  "all_gates_passed": false,
+  "positive_cpu_gate": [
+    {
+      "text": "olduğu",
+      "serial_cpu_ms": 3453.125,
+      "hybrid_cpu_ms": 3515.625,
+      "delta_pct": 1.8099547511312153,
+      "passed": true
+    },
+    {
+      "text": "büyük",
+      "serial_cpu_ms": 3093.75,
+      "hybrid_cpu_ms": 3281.25,
+      "delta_pct": 6.060606060606055,
+      "passed": false
+    },
+    {
+      "text": "ayrıca",
+      "serial_cpu_ms": 3562.5,
+      "hybrid_cpu_ms": 3703.125,
+      "delta_pct": 3.9473684210526327,
+      "passed": true
+    }
+  ],
+  "negative_gate": [
+    {
+      "text": "qzxkvwnever",
+      "control_p95_ms": 0.296,
+      "hybrid_p95_ms": 0.031900000000000005,
+      "delta_ms": -0.2641,
+      "limit_ms": 2.296,
+      "passed": true
+    },
+    {
+      "text": "transubstantiationz",
+      "control_p95_ms": 0.5406,
+      "hybrid_p95_ms": 0.4994,
+      "delta_ms": -0.04119999999999996,
+      "limit_ms": 2.5406,
+      "passed": true
+    }
+  ],
+  "entry_limit_changed": false,
+  "persistent_format_changed": false,
+  "default_search_changed": false,
+  "subagents_used": false,
+  "corpus_generated": false,
+  "corpus_100k_started": false,
+  "source_sha256": {
+    "src\\access.rs": "B9ABB1447D11DAAAA2020E1B7E3B23C11251DF89AE233AF0EDB3E8ABEFB948FD",
+    "src\\adapters.rs": "52BC58797FCABCC75E1D283C5824D6B1C452AA2A804F9F01CA9C9BDE68755FD9",
+    "src\\bin\\fdb-import-sdb.rs": "8F50D34F9FEC3979DDBF14910FEF7B06DB633C222E8882FFBD083B4FBAB117B3",
+    "src\\binary_batch.rs": "F1025CF59B92B8A4FFC6957DCDE03E1A265ED8DF1F4E182B1DC43012FF4B5919",
+    "src\\binary_batch_tests.rs": "4DA6A284D15C41DDA7BEE195CB9B7374F58BBE38432563C64F84428B28B2F53E",
+    "src\\bounded.rs": "67AD5D3DFE4BC0956FD155277F42264BC57E0E9E768A9C3FFFF003BDC7796CF6",
+    "src\\cancel.rs": "690598AFBE11B37E7DE0E4DD254F008BBF3559C778BFD3AB1F5AAF6F2DC9F763",
+    "src\\engine\\first.rs": "7C4B83516CF008F1A9A9800E652159B42108C78F214DD41F1ADD958377D882E0",
+    "src\\engine\\light.rs": "9E35CC151342EC8931F49778E93865856EE7B2300B10A32303FB640A17EADB71",
+    "src\\engine\\light_flush\\tests.rs": "71D7C3D1F4163310F5F873156723B58BDF0F2CC51964E4B935EFD5F0CBDEB6F1",
+    "src\\engine\\light_flush.rs": "371FEC6370C713BC67FA98B6A0F5D49A096108C19D5CF7366F995ADC0D869EFE",
+    "src\\engine\\maintenance.rs": "EF58B41244FBEDE85AB5F5690A2ACA3BD7BF4E5E3D04E295C767C972277C1EB8",
+    "src\\engine\\opening.rs": "732186E0CD8DDADA5BFDEC98083312E69D960E893A0891043178EF4D0208B998",
+    "src\\engine\\profile.rs": "8497E8C2882742D759B3506A14578CC974D5FFA52B2A6EB0AA04D645A8423DE5",
+    "src\\engine\\reclaim_tests.rs": "687DB59310E4ADEEF57E0C26CE2E982B0C283E7E9B5B1ED3E42C37140D0559FC",
+    "src\\engine\\revisions\\tests.rs": "630B8B8EE03C8185EE2D16E1F43482DFE1C9B5672254BA905E33411FF08E021B",
+    "src\\engine\\revisions.rs": "7A791F55441D36F15ED6D1C82375CE2ABC61ECBED91B6B15F78D0651E6070CBF",
+    "src\\engine\\snapshot\\tests.rs": "66A0551646A759C6516C31168093D70AA5AC12B2D7322B35FD1507C6B583DAC8",
+    "src\\engine\\snapshot.rs": "FA8CB63BF4258C5846DE4381D8A2189DE557D01427688120BB9363C56ABB100E",
+    "src\\engine\\streamed.rs": "960E6FF463519F825E43F7A8FEF355A8A4978E97719D4C61F669F597AC08D0C4",
+    "src\\engine\\test_jobs.rs": "154ED7B3F721232EE5A604F93C008EA31C60267DD8A4B9F113D8AC55774D2B0B",
+    "src\\engine.rs": "D380588FD7E697E05DA269BE6FCABA7DD80DDC9B54B243015C938C04891F7570",
+    "src\\format\\native_check.rs": "60E24ABF509CA1220FAF17B020ED876E4DE75325607049E14EEB8A973D22F7B9",
+    "src\\format.rs": "FB2F6FA05F03FADF9F128CF04F2571F9E9B93B50B30801929C7F6634CEFDD9B6",
+    "src\\index\\checkpoint_ids.rs": "AB8B3D3A2664FE64A7F34FD1FE3FA479C5686059425D71F256FA04F11EEFDFD9",
+    "src\\index\\gram_insert.rs": "620F88577AEA6D200046EF5B9ACBDD4A29C847BBFE334364575CB80810992CB9",
+    "src\\index\\intake_fold_tests.rs": "814005060E5A39EFA20E1622117EAD3FE5216BD8D027D70F6AB6F132BBDFCFD4",
+    "src\\index\\packed_grams.rs": "A6226239C0631603A937EB709B4504BABE6874A24A964C1FA7ACD7E811496DEA",
+    "src\\index\\posting.rs": "43A98EBBD515521D168004DE84CAE506691AABB9EECFDF8653B828C6D785DB60",
+    "src\\index.rs": "0DEA0B253D1E518E0B236CD6E31711B87740C46712E7963FC759AE4F66C03017",
+    "src\\json_stream.rs": "58842F0E6C76123BE8A89FEC2BC2D65F0508C26C74D1D3ED72AD6C0B6ACCFB92",
+    "src\\lib.rs": "3863F4298590B6B0B02313AFD68DBA1C80C5CFEA1E2B07B12E71CC5D91174F97",
+    "src\\main.rs": "EAC65B6AF172A12B4965E3A21134B71F46A1FF31E34F005B8877361502130097",
+    "src\\manifest.rs": "08E653178DE165AC6CCB4E4F87DFE25B7C5AAD56F43D3842D609BC2704A57A9D",
+    "src\\memory.rs": "5373B94A80143D8E7626A1E973DF86476CB2F84DC3A1BE953529799F20B242A7",
+    "src\\model.rs": "12D5C131594040746AF8F82D321E9FFC3F9659B02F52F070E0231168478CF511",
+    "src\\payload.rs": "EF3C9B13452A1D804D56FDA3E91B3BA6986E73E1DBAFEB1A55E6160AADFB1E95",
+    "src\\query.rs": "A0CBD5F85FC52734B253AEF8F2347913CCE09BFEA39BC661C65214C2ACFEEFBE",
+    "src\\reclaim\\tests.rs": "B294B441E4A2502E31771789FE0081698A20CFEA33BD965B19BD32F6D1063BF3",
+    "src\\reclaim.rs": "D7775CC7BA60B8D7CFAE64EB46CB5126E050303E4594557059C39FF3C3BF17FC",
+    "src\\rkyv_payload\\bench.rs": "ACD57E5FA12D35BCA7F2B33AE8DBBFC6F74EDE4B4BADE06A44158B5CD2EA65F2",
+    "src\\rkyv_payload\\binary.rs": "903B125F1D93955A2A0577630DF56C5617ECA55DF78EFDF14EEB1DE80AB8D9BA",
+    "src\\rkyv_payload.rs": "A3202508E5B019006FFEF56FEA640B3109A9A836EAEF831E28AF7E96F53E6503",
+    "src\\segment\\block_check.rs": "7BE93858C9A6F0132C10453F48661175DDBC9E49A63633B387B500838CDAA7FB",
+    "src\\segment\\checked_page.rs": "4895CD7735A82CF16DCB9F1D8843B89C2E26828AD6B8892B571ED2D44305563E",
+    "src\\segment\\checksum.rs": "A5E61E59D6853A2AE6946B3D24177FFEE16553119900BF3814A4B313F58E273D",
+    "src\\segment\\compact.rs": "753FE71327A3F40B8F6643565D71EFF41202432B02CD3571133619DE1723A7FD",
+    "src\\segment\\covering.rs": "6BBD02A850DEF163D94F3DA4B388899146A19BB9391EE6EC412C887DEA00E8D8",
+    "src\\segment\\first.rs": "F2488AB7B9EDC11D75911FE7BE8A34A1609C3E77CECAC03DE840B4939755B6A9",
+    "src\\segment\\grouped_tests.rs": "8D02416FCB08C579DE2E25577FCB41CC970655C649CA2AB9BD42364C9C124B06",
+    "src\\segment\\paged\\streaming.rs": "5DC7BFC569D746858381C49654B6D59F8F24A7977AEC70B17DFC7A1F65A0E68B",
+    "src\\segment\\paged.rs": "6A8347E9BA1587A492472A842C3D8D682486E30252099691E24BB19C9F72D249",
+    "src\\segment\\payload_bench.rs": "B73457298BAAAA6BDAB7A55F4B01715FF23FD959E0EB1891FBD597A70EB7DA12",
+    "src\\segment\\posting_pages.rs": "2A7B1EEE81264E5AA5C9DC60FA3B1DEBF01055EF9872CF34D11663BAB8B4231D",
+    "src\\segment\\posting_spool.rs": "9A362E4B1377593D94A835069207E2B6C562B87EF90F22700FA89FB59A339618",
+    "src\\segment\\record_spool.rs": "F6A1C49E7963676F8764202B8AF059573164AB6D85AE3FF533478A52E96ACC39",
+    "src\\segment\\reuse.rs": "BDAF40000400E33D36FF90EA42015549691B2CB1825340D909263E4094ED9BD6",
+    "src\\segment\\short_ascii.rs": "EC190CB755AADEC0C670DE9E59762529B95E7A19A256458A66D4D2F6645C68D2",
+    "src\\segment\\streaming.rs": "DEAE790C04D0E5F74FD7D8F19DF03B0142D9D7041A8D814F42B3564E83C8B74D",
+    "src\\segment\\term_pages.rs": "217CBBCAD3FC85AFDD3D6F5C4CD8B7287D1D67752AA516097B569D054657ADEF",
+    "src\\segment\\window_tests.rs": "A593A268F3F1EA0B887F425D6EA058C3B7A7D29C71FBE30B009B1EB484ECFDAD",
+    "src\\segment.rs": "39D9D54E8041377C36909A25EBE2B20AD2B0E752CCC7B4CF9652E022B7BE54BD",
+    "src\\shared_documents.rs": "94BA52AB4B14A0D6B79DAB29C4EA42C5CD96DAC9720542C0646478A335C42E13",
+    "src\\source_records.rs": "A30B85BDD433A37A1DB551BE8AF9BDA0280195A14B40FE627C855F9EA3793A3F",
+    "src\\spill\\bounded.rs": "BC71FBCA48ACDD1A5901A0B70FA7A5C439075F817FFD9C62191E04F27E5A9E41",
+    "src\\spill.rs": "6538EAEC49FF8E555B3754EFCC551BCF51D0383FF813B24C74678FE5187074A2",
+    "src\\timing\\maintenance.rs": "F7EFC62CCFADA52801E824DAE742D804C34724FE0175CE5035FB3778C927DBB0",
+    "src\\timing.rs": "9BFD33C5F3AB6DC22ECA9BAEB1D4C80361E82784A8E37EB881B892182E307582",
+    "src\\wal_delta.rs": "C8F55F95EB9A4D7371B0FD6334AA1A645FF5FDC4B763600ACBA0DCA2ED9D5B14",
+    "src\\write_budget.rs": "9ECEC7D0D2B53961F284C3C841B9500771139A4494904AB9BA8C6556AEA805B2"
+  },
+  "protected_unchanged": true,
+  "provided_source_unchanged": true,
+  "report_sha256": "4475102B5A69A753391371FF7B3CFA272DC5FB98F28D9672BD8D1149B786C3F0",
+  "links_verified": 21,
+  "reused_controls": "Completed oracle-passing pair0 baseline/SQLite only; same frozen binaries/models/maintained DB; build gap disclosed. V2 candidate never pooled.",
+  "page_only_bad_results_preserved": true
+}

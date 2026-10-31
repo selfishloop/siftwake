@@ -1,0 +1,55 @@
+{
+  "complete": true,
+  "protected": [
+    {
+      "path": "data\\rkyv-corpus-20261009\\json.payload-bench",
+      "bytes": 2740862279,
+      "sha256": "11F826FCE3F4AE790FEB9FC6DF9B1169F52C2FD699E89FC4A8A4B77AAA41731B"
+    },
+    {
+      "path": "tests\\fixtures\\v1\\checkpoint.fdb",
+      "bytes": 1507,
+      "sha256": "E87667C0FABE64D5A1F59EF86B99F7E612DB755D239B41677DA2ADC24BE7BF57"
+    },
+    {
+      "path": "tests\\fixtures\\v1\\checkpoint.ready",
+      "bytes": 28,
+      "sha256": "BC82C18F8D5C3A209328BD59B12D828D8922BEC4D26CB4D557FD4A493A4A9C2F"
+    }
+  ],
+  "runs": [
+    {
+      "engine": "fdb",
+      "mode": "snapshot-pilot",
+      "api": "streamed",
+      "log": "small-commit-mask-10k-20261026-r0-before-fdb-streamed-snapshot-pilot.jsonl",
+      "exit_code": 0,
+      "wall_s": 5.844000000011874
+    },
+    {
+      "engine": "fdb",
+      "mode": "snapshot-pilot",
+      "api": "streamed",
+      "log": "small-commit-mask-10k-20261026-r1-after-fdb-streamed-snapshot-pilot.jsonl",
+      "exit_code": 0,
+      "wall_s": 5.437999999994645
+    },
+    {
+      "engine": "fdb",
+      "mode": "snapshot-pilot",
+      "api": "streamed",
+      "log": "small-commit-mask-10k-20261026-r2-after-fdb-streamed-snapshot-pilot.jsonl",
+      "exit_code": 0,
+      "wall_s": 5.217999999993481
+    },
+    {
+      "engine": "fdb",
+      "mode": "snapshot-pilot",
+      "api": "streamed",
+      "log": "small-commit-mask-10k-20261026-r3-before-fdb-streamed-snapshot-pilot.jsonl",
+      "exit_code": 0,
+      "wall_s": 5.297000000005937
+    }
+  ],
+  "scope": "same fixed DB,64 updates/arm,balanced before/after/after/before;calibration only;publisher32 subset"
+}

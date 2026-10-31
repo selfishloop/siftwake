@@ -1,0 +1,170 @@
+{
+  "programs": {
+    "fdb": {
+      "path": "C:\\Users\\Serkan\\Documents\\ChatGPT\\fdb\\output\\wal-profile-fdb-20261027-v1.exe",
+      "sha256": "168AF77D8FF4AFEBE91CE795A2CB57CAE49A864BBE49855D12AC573914CD6609"
+    },
+    "sqlite": {
+      "path": "C:\\Users\\Serkan\\Documents\\ChatGPT\\fdb\\output\\wal-profile-sqlite-20261027-v1.exe",
+      "sha256": "FC10B05BB9F3F51E53FD466AA3E0BD1C06210EA35BE3561EB1FC7EADD42C6ABF"
+    }
+  },
+  "protected_before": [
+    {
+      "path": "data\\rkyv-corpus-20261009\\json.payload-bench",
+      "bytes": 2740862279,
+      "sha256": "11F826FCE3F4AE790FEB9FC6DF9B1169F52C2FD699E89FC4A8A4B77AAA41731B"
+    },
+    {
+      "path": "tests\\fixtures\\v1\\checkpoint.fdb",
+      "bytes": 1507,
+      "sha256": "E87667C0FABE64D5A1F59EF86B99F7E612DB755D239B41677DA2ADC24BE7BF57"
+    },
+    {
+      "path": "tests\\fixtures\\v1\\checkpoint.ready",
+      "bytes": 28,
+      "sha256": "BC82C18F8D5C3A209328BD59B12D828D8922BEC4D26CB4D557FD4A493A4A9C2F"
+    }
+  ],
+  "completed": [
+    {
+      "engine": "fdb",
+      "mode": "seed",
+      "api": "streamed",
+      "log": "hundred-pair-10k-20261027-fdb-control-fdb-streamed-seed.jsonl",
+      "exit_code": 0,
+      "wall_s": 14.359000000025844
+    },
+    {
+      "engine": "fdb",
+      "mode": "snapshot-control-100",
+      "api": "streamed",
+      "log": "hundred-pair-10k-20261027-fdb-control-fdb-streamed-snapshot-control-100.jsonl",
+      "exit_code": 0,
+      "wall_s": 21.015999999974156
+    },
+    {
+      "engine": "fdb",
+      "mode": "verify",
+      "api": "streamed",
+      "log": "hundred-pair-10k-20261027-fdb-control-fdb-streamed-verify.jsonl",
+      "exit_code": 0,
+      "wall_s": 3.687000000005355
+    },
+    {
+      "engine": "sqlite",
+      "mode": "seed",
+      "api": "streamed",
+      "log": "hundred-pair-10k-20261027-sqlite-load-sqlite-streamed-seed.jsonl",
+      "exit_code": 0,
+      "wall_s": 31.515999999974156
+    },
+    {
+      "engine": "sqlite",
+      "mode": "snapshot-100",
+      "api": "streamed",
+      "log": "hundred-pair-10k-20261027-sqlite-load-sqlite-streamed-snapshot-100.jsonl",
+      "exit_code": 0,
+      "wall_s": 182.18700000000536
+    },
+    {
+      "engine": "sqlite",
+      "mode": "verify",
+      "api": "streamed",
+      "log": "hundred-pair-10k-20261027-sqlite-load-sqlite-streamed-verify.jsonl",
+      "exit_code": 0,
+      "wall_s": 26.42200000002049
+    },
+    {
+      "engine": "sqlite",
+      "mode": "seed",
+      "api": "streamed",
+      "log": "hundred-pair-10k-20261027-sqlite-control-sqlite-streamed-seed.jsonl",
+      "exit_code": 0,
+      "wall_s": 31.25
+    },
+    {
+      "engine": "sqlite",
+      "mode": "snapshot-control-100",
+      "api": "streamed",
+      "log": "hundred-pair-10k-20261027-sqlite-control-sqlite-streamed-snapshot-control-100.jsonl",
+      "exit_code": 0,
+      "wall_s": 60.5
+    },
+    {
+      "engine": "sqlite",
+      "mode": "verify",
+      "api": "streamed",
+      "log": "hundred-pair-10k-20261027-sqlite-control-sqlite-streamed-verify.jsonl",
+      "exit_code": 0,
+      "wall_s": 27.078000000008615
+    },
+    {
+      "engine": "fdb",
+      "mode": "seed",
+      "api": "streamed",
+      "log": "hundred-pair-10k-20261027-fdb-load-fdb-streamed-seed.jsonl",
+      "exit_code": 0,
+      "wall_s": 14.03100000001723
+    },
+    {
+      "engine": "fdb",
+      "mode": "snapshot-100",
+      "api": "streamed",
+      "log": "hundred-pair-10k-20261027-fdb-load-fdb-streamed-snapshot-100.jsonl",
+      "exit_code": 0,
+      "wall_s": 37.84399999998277
+    },
+    {
+      "engine": "fdb",
+      "mode": "verify",
+      "api": "streamed",
+      "log": "hundred-pair-10k-20261027-fdb-load-fdb-streamed-verify.jsonl",
+      "exit_code": 0,
+      "wall_s": 3.5780000000086147
+    }
+  ],
+  "order": [
+    "FDB control",
+    "SQLite load",
+    "SQLite control",
+    "FDB load"
+  ],
+  "gate": "one pair each;FDB loaded/control>=75% and greater than SQLite ratio",
+  "count": "128commits x100 =12800updates in EACH arm/backend; initial1100stable body donors;continuous4readers/38cases until writer finishes;normal/revision interlude",
+  "cache": "warm OS; no eviction/CPU/power isolation; oracle outside engine timer still consumes CPU; reader minimum2rounds FDB/1SQLite",
+  "scope": "streamed primary, product WAL/reclaim defaults unchangedOFF;full oracle both arms;source/WAL/manifest formats unchanged",
+  "results": {
+    "fdb": {
+      "ratio": 0.7658895083191969,
+      "control_ops_s": 724.1370164993715,
+      "loaded_ops_s": 554.6089435224338,
+      "oracle": true
+    },
+    "sqlite": {
+      "ratio": 0.6123344927828088,
+      "control_ops_s": 242.72292493564098,
+      "loaded_ops_s": 148.6276191272255,
+      "oracle": true
+    }
+  },
+  "gate_pass": true,
+  "protected_after": [
+    {
+      "path": "data\\rkyv-corpus-20261009\\json.payload-bench",
+      "bytes": 2740862279,
+      "sha256": "11F826FCE3F4AE790FEB9FC6DF9B1169F52C2FD699E89FC4A8A4B77AAA41731B"
+    },
+    {
+      "path": "tests\\fixtures\\v1\\checkpoint.fdb",
+      "bytes": 1507,
+      "sha256": "E87667C0FABE64D5A1F59EF86B99F7E612DB755D239B41677DA2ADC24BE7BF57"
+    },
+    {
+      "path": "tests\\fixtures\\v1\\checkpoint.ready",
+      "bytes": 28,
+      "sha256": "BC82C18F8D5C3A209328BD59B12D828D8922BEC4D26CB4D557FD4A493A4A9C2F"
+    }
+  ],
+  "complete": true
+}

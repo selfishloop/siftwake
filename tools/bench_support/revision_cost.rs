@@ -158,6 +158,11 @@ pub fn kill(engine: &mut Engine, mode: &str, state: &str, path: &str) -> Result<
         while engine.0.start_compaction()? {
             engine.0.wait_for_compaction()?;
         }
+        // Retirement coverage requires two IMMUTABLE sources. The opt-in
+        //128-entry WAL path intentionally keeps100-entry calls active, so use
+        //the existing segment path for setup rather than asserting a dead run
+        //must appear from two overwrites of the same active WAL keys.
+        engine.0.set_streamed_wal_layer(false)?;
         let first = churn::plan(&mut model, "update", 100, 337);
         let seq = engine.commit(&mut corpus, &first, true)?;
         churn::apply(&mut model, &first, seq);
@@ -180,6 +185,9 @@ pub fn kill(engine: &mut Engine, mode: &str, state: &str, path: &str) -> Result<
         let seq = engine.commit(&mut corpus, &second, true)?;
         churn::apply(&mut model, &second, seq);
         model.save(state)?;
+        engine
+            .0
+            .set_streamed_wal_layer(std::env::var_os("FDB_STREAMED_WAL_LAYER").is_some())?;
         engine.0.wait_for_compaction()?;
         let eligible: Vec<_> = engine
             .0

@@ -10,10 +10,12 @@ static TEMP: std::sync::atomic::AtomicU64 = std::sync::atomic::AtomicU64::new(0)
 struct Stage {
     path: PathBuf,
     file: Option<File>,
-    rows: BTreeMap<Key, (u64, usize, u32)>,
+    rows: BTreeMap<Key, (u64, usize, u32, bool, u32)>,
     key_bytes: usize,
     length: usize,
     index: Index,
+    filters: BTreeMap<Key, Arc<super::light::LightFilter>>,
+    build_filters: bool,
 }
 impl Stage {
     fn new(dir: &Path) -> Result<Self> {
@@ -35,6 +37,8 @@ impl Stage {
             key_bytes: 0,
             length: 5,
             index: Index::default(),
+            filters: BTreeMap::new(),
+            build_filters: false,
         })
     }
     fn push(&mut self, change: Change) -> Result<()> {
@@ -64,7 +68,30 @@ impl Stage {
             let _encode = crate::timing::span("stream.encode_entry");
             crate::binary_batch::entry(&change)?
         };
-        if let Change::Put { stored } = &change {
+        let deferred = if self.build_filters { 128 } else { 32 };
+        if self.build_filters
+            && self.rows.len() < deferred
+            && let Change::Put { stored } = &change
+        {
+            self.filters.insert(
+                key.clone(),
+                super::light::LightFilter::new(&stored.document),
+            );
+        }
+        // Small transactions need no inverted index until explicit flush.
+        // When the small allowance is exceeded, build its earlier entries once.
+        if self.rows.len() == deferred {
+            let mut index = std::mem::take(&mut self.index);
+            for previous in self.changes()? {
+                if let Change::Put { stored } = previous? {
+                    index.add_builder(&stored)?;
+                }
+            }
+            self.index = index;
+        }
+        if self.rows.len() >= deferred
+            && let Change::Put { stored } = &change
+        {
             self.index.add_builder(stored)?;
         }
         if self.index.builder_memory_bytes() > 4 * 1024 * 1024 {
@@ -73,9 +100,20 @@ impl Stage {
             ));
         }
         let start = (HEADER + self.length) as u64;
+        // Windows seek_read on a cloned staging handle may move its shared
+        // cursor. Earlier-entry indexing must never change the append offset.
+        self.file.as_mut().unwrap().seek(SeekFrom::Start(start))?;
         self.file.as_mut().unwrap().write_all(&bytes)?;
-        self.rows
-            .insert(key.clone(), (start, bytes.len(), format::crc(&bytes)));
+        self.rows.insert(
+            key.clone(),
+            (
+                start,
+                bytes.len(),
+                format::crc(&bytes),
+                matches!(change, Change::Delete { .. }),
+                format::crc(&bytes[5..]),
+            ),
+        );
         self.length += bytes.len();
         self.key_bytes += cost;
         Ok(())
@@ -135,7 +173,7 @@ impl Stage {
         Ok(self
             .rows
             .iter()
-            .map(move |(key, &(offset, len, checksum))| {
+            .map(move |(key, &(offset, len, checksum, _, _))| {
                 #[cfg(feature = "diagnostic-timing")]
                 let _span = crate::timing::span("stream.read_decode_entry");
                 let mut bytes = vec![0; len];
@@ -171,29 +209,55 @@ impl Database {
     /// <=1 MiB key admission,
     /// <=4 MiB estimated index admission (not an exact heap measurement);
     /// at most 10k mutations and the existing 64 MiB frame limit. A complete
-    /// synced WAL frame precedes source/manifest publication. Each successful
-    /// call leaves an empty delta, and drains the previous merge before intake.
+    /// synced WAL frame is the commit boundary. With set_streamed_wal_layer(true),
+    /// small <=128-entry/8MiB calls with no owned delta retain checked WAL
+    /// addresses. A background prefix flush starts at256 keys/8MiB;2048 keys,
+    ///64MiB WAL and Options watermarks bound backpressure. Larger calls drain
+    /// the prefix worker and flush/build a run.
     /// These workspace allowances do not cap caller allocations or process RSS.
     pub fn commit_streamed(
         &mut self,
         mutations: impl IntoIterator<Item = Result<Mutation>>,
     ) -> Result<u64> {
-        self.preempt_revision_work()?;
+        let _writer = crate::access::WriterScope::enter();
+        let _profile = super::profile::Scope::enter(&self.write_profile, self.sequence);
         #[cfg(feature = "diagnostic-timing")]
         let _total = crate::timing::span("stream.commit_total");
         self.healthy()?;
         self.ensure_sources()?;
+        {
+            let _phase = super::profile::phase(
+                self.write_profile.is_some(),
+                "stream.prefix_poll",
+                self.sequence,
+                self.active.id,
+            );
+            self.light_flush_ready(false)?;
+        }
+        {
+            let _phase = super::profile::phase(
+                self.write_profile.is_some(),
+                "stream.merge_poll",
+                self.sequence,
+                self.active.id,
+            );
+            self.poll_compaction()?;
+        }
         let sequence = self
             .sequence
             .checked_add(1)
             .ok_or_else(|| Error::Invalid("sequence overflow".into()))?;
-        // Drain before reserving intake: a worker must not wait for a workspace
-        // held by the foreground thread waiting for that same worker.
-        self.wait_for_compaction()?;
-        self.flush()?;
-        self.wait_for_compaction()?;
-        let intake = crate::write_budget::WorkingScope::streamed()?;
+        // Six MiB intake can coexist with one eight MiB worker. Release it
+        // before a fallback joins a worker or reserves the full builder scope.
+        let stage_profile = super::profile::phase(
+            self.write_profile.is_some(),
+            "stream.stage_frame",
+            self.sequence,
+            self.active.id,
+        );
+        let intake = crate::write_budget::reserve_working(6 * 1024 * 1024)?;
         let mut stage = Stage::new(&self.dir)?;
+        stage.build_filters = self.streamed_wal_layer;
         let mut count = self.count;
         for mutation in mutations {
             if stage.rows.len() == 10_000 {
@@ -241,6 +305,147 @@ impl Database {
             ));
         }
         stage.finish(sequence)?;
+        drop(stage_profile);
+        if self.streamed_wal_layer
+            && stage.rows.len() <= 128
+            && stage.length <= 8 * 1024 * 1024
+            && self.docs.is_empty()
+            && self.shadow.len() + stage.rows.len() <= 2048
+            && self.log.metadata()?.len() + stage.length as u64 <= 64 * 1024 * 1024
+            && !self.needs_flush()
+        {
+            // A synced existing-codec WAL frame is the commit boundary. No
+            // manifest/index/worker drain is needed to expose this active layer.
+            use std::io::Seek;
+            let base = self.log.seek(SeekFrom::End(0))?;
+            let wal_profile = super::profile::phase(
+                self.write_profile.is_some(),
+                "stream.wal_authoritative_sync",
+                self.sequence,
+                self.active.id,
+            );
+            if let Err(error) = stage.append(&mut self.log) {
+                self.poisoned = true;
+                return Err(error);
+            }
+            drop(wal_profile);
+            if let Some(pending) = &mut self.light_flush {
+                let _phase = super::profile::phase(
+                    self.write_profile.is_some(),
+                    "stream.wal_tail_sync",
+                    self.sequence,
+                    self.active.id,
+                );
+                let keys: Vec<_> = stage.rows.keys().cloned().collect();
+                if let Err(error) = pending.append(|log| stage.append(log), keys.into_iter()) {
+                    self.poisoned = true;
+                    return Err(error);
+                }
+            }
+            #[cfg(test)]
+            if let Some(marker) = std::env::var_os("FDB_LIGHT_AFTER_SYNC") {
+                std::fs::write(marker, b"synced-before-apply")?;
+                loop {
+                    std::thread::park();
+                }
+            }
+            for (key, (offset, len, _, deleted, checksum)) in &stage.rows {
+                remember_delta_key(&mut self.shadow, key);
+                if let Some(old) = self.light.remove(key) {
+                    self.delta_bytes -= old.location.len as usize;
+                }
+                if !deleted {
+                    let location = crate::wal_delta::Location {
+                        offset: base + offset + 5,
+                        len: (len - 5) as u32,
+                        checksum: *checksum,
+                    };
+                    self.delta_bytes += location.len as usize;
+                    self.light.insert(
+                        Arc::new(key.clone()),
+                        super::light::LightRow {
+                            wal: crate::wal_delta::Row {
+                                location,
+                                version: sequence,
+                            },
+                            filter: stage.filters.get(key).expect("small staged proof").clone(),
+                        },
+                    );
+                }
+            }
+            self.sequence = sequence;
+            self.count = count;
+            drop(stage);
+            drop(intake);
+            {
+                let _phase = super::profile::phase(
+                    self.write_profile.is_some(),
+                    "stream.publish_active_snapshot",
+                    self.sequence,
+                    self.active.id,
+                );
+                self.refresh_snapshots()?;
+            }
+            let _phase = super::profile::phase(
+                self.write_profile.is_some(),
+                "stream.prefix_start",
+                self.sequence,
+                self.active.id,
+            );
+            if (self.shadow.len() >= 256 || self.log.metadata()?.len() >= 8 * 1024 * 1024)
+                && let Err(error) = self.start_light_flush()
+            {
+                self.poisoned = true;
+                return Err(error);
+            }
+            return Ok(sequence);
+        }
+        drop(intake);
+        {
+            let _phase = super::profile::phase(
+                self.write_profile.is_some(),
+                "stream.worker_drain",
+                self.sequence,
+                self.active.id,
+            );
+            #[cfg(feature = "diagnostic-timing")]
+            let _span = crate::timing::span("stream.fallback_worker_drain");
+            self.preempt_revision_work()?;
+            self.wait_for_compaction()?;
+        }
+        {
+            let _phase = super::profile::phase(
+                self.write_profile.is_some(),
+                "stream.delta_flush",
+                self.sequence,
+                self.active.id,
+            );
+            #[cfg(feature = "diagnostic-timing")]
+            let _span = crate::timing::span("stream.fallback_delta_flush");
+            self.flush()?;
+        }
+        {
+            let _phase = super::profile::phase(
+                self.write_profile.is_some(),
+                "stream.post_flush_drain",
+                self.sequence,
+                self.active.id,
+            );
+            #[cfg(feature = "diagnostic-timing")]
+            let _span = crate::timing::span("stream.fallback_post_flush_drain");
+            self.wait_for_compaction()?;
+        }
+        let intake = crate::write_budget::WorkingScope::streamed()?;
+        // Large/fallback transactions still reuse the staged inverted index.
+        if stage.rows.len() <= if stage.build_filters { 128 } else { 32 } {
+            let mut index = std::mem::take(&mut stage.index);
+            for change in stage.changes()? {
+                if let Change::Put { stored } = change? {
+                    index.add_builder(&stored)?;
+                }
+            }
+            stage.index = index;
+        }
         // Intake is complete; only key/location and index-only metadata remain.
         // The same working scope includes the following source/builder phase.
         // Existing normal commits may have populated a delta. Publish that delta
@@ -248,6 +453,8 @@ impl Database {
         self.flush()?;
         self.wait_for_compaction()?;
         let result = (|| {
+            #[cfg(feature = "diagnostic-timing")]
+            let _span = crate::timing::span("stream.fallback_transaction_publish");
             stage.append(&mut self.log)?;
             let id = self.allocate()?;
             let run = write_run_prepared(&self.dir, id, sequence, stage.changes()?, |source| {
@@ -293,6 +500,7 @@ impl Database {
         drop(stage);
         drop(intake);
         if result.is_ok() {
+            self.refresh_snapshots()?;
             self.try_reclaim();
         }
         if result.is_ok() && self.runs.len() >= 4 {

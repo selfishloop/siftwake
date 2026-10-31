@@ -1,0 +1,1546 @@
+{
+  "arms": [
+    {
+      "engine": "fdb",
+      "arm": "control",
+      "ops_s": 724.1370164993715,
+      "commit_p50_ms": 40.012699999999995,
+      "commit_p95_ms": 750.6723,
+      "commit_max_ms": 944.4706000000001,
+      "memory": {
+        "os_lifetime_peak_private_commit_bytes": 26615808,
+        "os_lifetime_peak_working_set_bytes": 31129600,
+        "private_bytes": 22564864,
+        "sample_interval_ms": 10,
+        "sampled_phase_peak_private_bytes": 25497600,
+        "sampled_phase_peak_working_set_bytes": 30081024,
+        "working_set_bytes": 26968064
+      },
+      "maintenance": {
+        "details": {
+          "jobs": [
+            {
+              "after": [
+                {
+                  "dead_payload_bytes": 0,
+                  "dead_records": 0,
+                  "index_bytes": 7623166,
+                  "live_records": 900,
+                  "payload_bytes": 24121822,
+                  "records": 900,
+                  "source_bytes": 24126441,
+                  "source_id": 75,
+                  "tombstones": 0
+                },
+                {
+                  "dead_payload_bytes": 0,
+                  "dead_records": 0,
+                  "index_bytes": 16360420,
+                  "live_records": 2000,
+                  "payload_bytes": 53014387,
+                  "records": 2000,
+                  "source_bytes": 53024654,
+                  "source_id": 20,
+                  "tombstones": 0
+                },
+                {
+                  "dead_payload_bytes": 0,
+                  "dead_records": 0,
+                  "index_bytes": 16358467,
+                  "live_records": 2000,
+                  "payload_bytes": 52958664,
+                  "records": 2000,
+                  "source_bytes": 52968931,
+                  "source_id": 30,
+                  "tombstones": 0
+                },
+                {
+                  "dead_payload_bytes": 0,
+                  "dead_records": 0,
+                  "index_bytes": 16468447,
+                  "live_records": 2000,
+                  "payload_bytes": 54130910,
+                  "records": 2000,
+                  "source_bytes": 54141177,
+                  "source_id": 40,
+                  "tombstones": 0
+                },
+                {
+                  "dead_payload_bytes": 0,
+                  "dead_records": 0,
+                  "index_bytes": 16547138,
+                  "live_records": 2000,
+                  "payload_bytes": 54225036,
+                  "records": 2000,
+                  "source_bytes": 54235303,
+                  "source_id": 50,
+                  "tombstones": 0
+                },
+                {
+                  "dead_payload_bytes": 0,
+                  "dead_records": 0,
+                  "index_bytes": 9255904,
+                  "live_records": 1100,
+                  "payload_bytes": 29668115,
+                  "records": 1100,
+                  "source_bytes": 29673771,
+                  "source_id": 73,
+                  "tombstones": 0
+                }
+              ],
+              "before": [
+                {
+                  "dead_payload_bytes": 29668115,
+                  "dead_records": 1100,
+                  "index_bytes": 16507377,
+                  "live_records": 900,
+                  "payload_bytes": 53789937,
+                  "records": 2000,
+                  "source_bytes": 53800204,
+                  "source_id": 10,
+                  "tombstones": 0
+                },
+                {
+                  "dead_payload_bytes": 0,
+                  "dead_records": 0,
+                  "index_bytes": 16360420,
+                  "live_records": 2000,
+                  "payload_bytes": 53014387,
+                  "records": 2000,
+                  "source_bytes": 53024654,
+                  "source_id": 20,
+                  "tombstones": 0
+                },
+                {
+                  "dead_payload_bytes": 0,
+                  "dead_records": 0,
+                  "index_bytes": 16358467,
+                  "live_records": 2000,
+                  "payload_bytes": 52958664,
+                  "records": 2000,
+                  "source_bytes": 52968931,
+                  "source_id": 30,
+                  "tombstones": 0
+                },
+                {
+                  "dead_payload_bytes": 0,
+                  "dead_records": 0,
+                  "index_bytes": 16468447,
+                  "live_records": 2000,
+                  "payload_bytes": 54130910,
+                  "records": 2000,
+                  "source_bytes": 54141177,
+                  "source_id": 40,
+                  "tombstones": 0
+                },
+                {
+                  "dead_payload_bytes": 0,
+                  "dead_records": 0,
+                  "index_bytes": 16547138,
+                  "live_records": 2000,
+                  "payload_bytes": 54225036,
+                  "records": 2000,
+                  "source_bytes": 54235303,
+                  "source_id": 50,
+                  "tombstones": 0
+                },
+                {
+                  "dead_payload_bytes": 0,
+                  "dead_records": 0,
+                  "index_bytes": 9255904,
+                  "live_records": 1100,
+                  "payload_bytes": 29668115,
+                  "records": 1100,
+                  "source_bytes": 29673771,
+                  "source_id": 73,
+                  "tombstones": 0
+                }
+              ],
+              "installed": true,
+              "rewrite": true,
+              "running": true
+            }
+          ],
+          "normal_merges_completed": 2,
+          "retirements": 0,
+          "revision_rewrites_completed": 1
+        },
+        "end_ms": 2103.7434,
+        "start_ms": 1024.4148
+      },
+      "publication": {
+        "mask_full_rebuilds": 4,
+        "mask_incremental_publications": 160,
+        "mask_keys_scanned": 56900,
+        "mask_prepare_ns": 230794800,
+        "max_prepare_ns": 17405400,
+        "old_view_release_ns": 30216700,
+        "pointer_ns": 9700,
+        "prepare_ns": 585602200,
+        "publications": 164,
+        "state_clone_ns": 13478400,
+        "wal_reader_open_ns": 340372600
+      }
+    },
+    {
+      "engine": "fdb",
+      "arm": "load",
+      "ops_s": 554.6089435224338,
+      "commit_p50_ms": 45.3489,
+      "commit_p95_ms": 1003.7834999999999,
+      "commit_max_ms": 1109.9924,
+      "memory": {
+        "os_lifetime_peak_private_commit_bytes": 81723392,
+        "os_lifetime_peak_working_set_bytes": 84631552,
+        "private_bytes": 81723392,
+        "sample_interval_ms": 10,
+        "sampled_phase_peak_private_bytes": 78983168,
+        "sampled_phase_peak_working_set_bytes": 82296832,
+        "working_set_bytes": 84627456
+      },
+      "maintenance": {
+        "details": {
+          "jobs": [
+            {
+              "after": [
+                {
+                  "dead_payload_bytes": 0,
+                  "dead_records": 0,
+                  "index_bytes": 7623166,
+                  "live_records": 900,
+                  "payload_bytes": 24121822,
+                  "records": 900,
+                  "source_bytes": 24126441,
+                  "source_id": 75,
+                  "tombstones": 0
+                },
+                {
+                  "dead_payload_bytes": 0,
+                  "dead_records": 0,
+                  "index_bytes": 16360420,
+                  "live_records": 2000,
+                  "payload_bytes": 53014387,
+                  "records": 2000,
+                  "source_bytes": 53024654,
+                  "source_id": 20,
+                  "tombstones": 0
+                },
+                {
+                  "dead_payload_bytes": 0,
+                  "dead_records": 0,
+                  "index_bytes": 16358467,
+                  "live_records": 2000,
+                  "payload_bytes": 52958664,
+                  "records": 2000,
+                  "source_bytes": 52968931,
+                  "source_id": 30,
+                  "tombstones": 0
+                },
+                {
+                  "dead_payload_bytes": 0,
+                  "dead_records": 0,
+                  "index_bytes": 16468447,
+                  "live_records": 2000,
+                  "payload_bytes": 54130910,
+                  "records": 2000,
+                  "source_bytes": 54141177,
+                  "source_id": 40,
+                  "tombstones": 0
+                },
+                {
+                  "dead_payload_bytes": 0,
+                  "dead_records": 0,
+                  "index_bytes": 16547138,
+                  "live_records": 2000,
+                  "payload_bytes": 54225036,
+                  "records": 2000,
+                  "source_bytes": 54235303,
+                  "source_id": 50,
+                  "tombstones": 0
+                },
+                {
+                  "dead_payload_bytes": 0,
+                  "dead_records": 0,
+                  "index_bytes": 9255904,
+                  "live_records": 1100,
+                  "payload_bytes": 29668115,
+                  "records": 1100,
+                  "source_bytes": 29673771,
+                  "source_id": 73,
+                  "tombstones": 0
+                }
+              ],
+              "before": [
+                {
+                  "dead_payload_bytes": 29668115,
+                  "dead_records": 1100,
+                  "index_bytes": 16507377,
+                  "live_records": 900,
+                  "payload_bytes": 53789937,
+                  "records": 2000,
+                  "source_bytes": 53800204,
+                  "source_id": 10,
+                  "tombstones": 0
+                },
+                {
+                  "dead_payload_bytes": 0,
+                  "dead_records": 0,
+                  "index_bytes": 16360420,
+                  "live_records": 2000,
+                  "payload_bytes": 53014387,
+                  "records": 2000,
+                  "source_bytes": 53024654,
+                  "source_id": 20,
+                  "tombstones": 0
+                },
+                {
+                  "dead_payload_bytes": 0,
+                  "dead_records": 0,
+                  "index_bytes": 16358467,
+                  "live_records": 2000,
+                  "payload_bytes": 52958664,
+                  "records": 2000,
+                  "source_bytes": 52968931,
+                  "source_id": 30,
+                  "tombstones": 0
+                },
+                {
+                  "dead_payload_bytes": 0,
+                  "dead_records": 0,
+                  "index_bytes": 16468447,
+                  "live_records": 2000,
+                  "payload_bytes": 54130910,
+                  "records": 2000,
+                  "source_bytes": 54141177,
+                  "source_id": 40,
+                  "tombstones": 0
+                },
+                {
+                  "dead_payload_bytes": 0,
+                  "dead_records": 0,
+                  "index_bytes": 16547138,
+                  "live_records": 2000,
+                  "payload_bytes": 54225036,
+                  "records": 2000,
+                  "source_bytes": 54235303,
+                  "source_id": 50,
+                  "tombstones": 0
+                },
+                {
+                  "dead_payload_bytes": 0,
+                  "dead_records": 0,
+                  "index_bytes": 9255904,
+                  "live_records": 1100,
+                  "payload_bytes": 29668115,
+                  "records": 1100,
+                  "source_bytes": 29673771,
+                  "source_id": 73,
+                  "tombstones": 0
+                }
+              ],
+              "installed": true,
+              "rewrite": true,
+              "running": true
+            }
+          ],
+          "normal_merges_completed": 2,
+          "retirements": 0,
+          "revision_rewrites_completed": 1
+        },
+        "end_ms": 3249.9832,
+        "start_ms": 1322.4678000000001
+      },
+      "publication": {
+        "mask_full_rebuilds": 4,
+        "mask_incremental_publications": 160,
+        "mask_keys_scanned": 56900,
+        "mask_prepare_ns": 282705300,
+        "max_prepare_ns": 16350700,
+        "old_view_release_ns": 1348400,
+        "pointer_ns": 16600,
+        "prepare_ns": 513126500,
+        "publications": 164,
+        "state_clone_ns": 15199600,
+        "wal_reader_open_ns": 205240100
+      }
+    },
+    {
+      "engine": "sqlite",
+      "arm": "control",
+      "ops_s": 242.72292493564098,
+      "commit_p50_ms": 383.392,
+      "commit_p95_ms": 499.8345,
+      "commit_max_ms": 1322.9519,
+      "memory": {
+        "os_lifetime_peak_private_commit_bytes": 11591680,
+        "os_lifetime_peak_working_set_bytes": 16285696,
+        "private_bytes": 11591680,
+        "sample_interval_ms": 10,
+        "sampled_phase_peak_private_bytes": 11591680,
+        "sampled_phase_peak_working_set_bytes": 16240640,
+        "working_set_bytes": 15949824
+      },
+      "maintenance": {
+        "details": {
+          "fts_optimize_ms": 1210.9857,
+          "passive_checkpoint": [
+            0,
+            10465,
+            10465
+          ],
+          "revision_rewrite": "not applicable to SQLite"
+        },
+        "end_ms": 4226.968699999999,
+        "start_ms": 3015.9798
+      },
+      "publication": {
+        "busy_wait": "busy-handler retry time, source not individually classified",
+        "kind": "SQLite WAL read transaction; meta sequence and rows from same BEGIN snapshot"
+      }
+    },
+    {
+      "engine": "sqlite",
+      "arm": "load",
+      "ops_s": 148.6276191272255,
+      "commit_p50_ms": 621.5079,
+      "commit_p95_ms": 805.3312000000001,
+      "commit_max_ms": 2035.3935000000001,
+      "memory": {
+        "os_lifetime_peak_private_commit_bytes": 72355840,
+        "os_lifetime_peak_working_set_bytes": 74563584,
+        "private_bytes": 28712960,
+        "sample_interval_ms": 10,
+        "sampled_phase_peak_private_bytes": 72355840,
+        "sampled_phase_peak_working_set_bytes": 74559488,
+        "working_set_bytes": 32800768
+      },
+      "maintenance": {
+        "details": {
+          "fts_optimize_ms": 1937.2033,
+          "passive_checkpoint": [
+            0,
+            17710,
+            8066
+          ],
+          "revision_rewrite": "not applicable to SQLite"
+        },
+        "end_ms": 6936.8081999999995,
+        "start_ms": 4999.6013
+      },
+      "publication": {
+        "busy_wait": "busy-handler retry time, source not individually classified",
+        "kind": "SQLite WAL read transaction; meta sequence and rows from same BEGIN snapshot"
+      }
+    }
+  ],
+  "matrices": {
+    "fdb": [
+      {
+        "case_id": 0,
+        "case": {
+          "text": "quixote",
+          "offset": 0,
+          "limit": 50,
+          "base": 0
+        },
+        "idle_p95_ms": 4.1429,
+        "active_n": 56,
+        "loaded_p95_ms": 22.9115,
+        "loaded_max_ms": 27.6772,
+        "pass_old_bound": false
+      },
+      {
+        "case_id": 1,
+        "case": {
+          "text": "zeuglodon",
+          "offset": 0,
+          "limit": 50,
+          "base": 1
+        },
+        "idle_p95_ms": 5.0911,
+        "active_n": 56,
+        "loaded_p95_ms": 20.2751,
+        "loaded_max_ms": 25.8585,
+        "pass_old_bound": false
+      },
+      {
+        "case_id": 2,
+        "case": {
+          "text": "beagle",
+          "offset": 0,
+          "limit": 50,
+          "base": 2
+        },
+        "idle_p95_ms": 29.9154,
+        "active_n": 57,
+        "loaded_p95_ms": 46.6784,
+        "loaded_max_ms": 47.6198,
+        "pass_old_bound": true
+      },
+      {
+        "case_id": 3,
+        "case": {
+          "text": "mesopotamia",
+          "offset": 0,
+          "limit": 50,
+          "base": 3
+        },
+        "idle_p95_ms": 4.9731,
+        "active_n": 57,
+        "loaded_p95_ms": 29.8164,
+        "loaded_max_ms": 37.9783,
+        "pass_old_bound": false
+      },
+      {
+        "case_id": 4,
+        "case": {
+          "text": "transubstantiation",
+          "offset": 0,
+          "limit": 50,
+          "base": 4
+        },
+        "idle_p95_ms": 92.2528,
+        "active_n": 56,
+        "loaded_p95_ms": 108.3681,
+        "loaded_max_ms": 115.1394,
+        "pass_old_bound": true
+      },
+      {
+        "case_id": 5,
+        "case": {
+          "text": "harpoon",
+          "offset": 0,
+          "limit": 50,
+          "base": 5
+        },
+        "idle_p95_ms": 103.9849,
+        "active_n": 56,
+        "loaded_p95_ms": 111.9778,
+        "loaded_max_ms": 149.4466,
+        "pass_old_bound": true
+      },
+      {
+        "case_id": 6,
+        "case": {
+          "text": "ishmael",
+          "offset": 0,
+          "limit": 50,
+          "base": 6
+        },
+        "idle_p95_ms": 11.661,
+        "active_n": 56,
+        "loaded_p95_ms": 29.3782,
+        "loaded_max_ms": 32.6076,
+        "pass_old_bound": false
+      },
+      {
+        "case_id": 7,
+        "case": {
+          "text": "invertebrata",
+          "offset": 0,
+          "limit": 50,
+          "base": 7
+        },
+        "idle_p95_ms": 18.4221,
+        "active_n": 56,
+        "loaded_p95_ms": 46.4903,
+        "loaded_max_ms": 64.8226,
+        "pass_old_bound": false
+      },
+      {
+        "case_id": 8,
+        "case": {
+          "text": "darcy",
+          "offset": 0,
+          "limit": 50,
+          "base": 8
+        },
+        "idle_p95_ms": 91.9358,
+        "active_n": 56,
+        "loaded_p95_ms": 97.732,
+        "loaded_max_ms": 107.6759,
+        "pass_old_bound": true
+      },
+      {
+        "case_id": 9,
+        "case": {
+          "text": "elizabeth",
+          "offset": 0,
+          "limit": 50,
+          "base": 9
+        },
+        "idle_p95_ms": 91.9293,
+        "active_n": 56,
+        "loaded_p95_ms": 102.5094,
+        "loaded_max_ms": 109.7826,
+        "pass_old_bound": true
+      },
+      {
+        "case_id": 10,
+        "case": {
+          "text": "watson",
+          "offset": 0,
+          "limit": 50,
+          "base": 10
+        },
+        "idle_p95_ms": 74.8614,
+        "active_n": 56,
+        "loaded_p95_ms": 94.9205,
+        "loaded_max_ms": 101.256,
+        "pass_old_bound": true
+      },
+      {
+        "case_id": 11,
+        "case": {
+          "text": "holmes",
+          "offset": 0,
+          "limit": 50,
+          "base": 11
+        },
+        "idle_p95_ms": 43.6234,
+        "active_n": 57,
+        "loaded_p95_ms": 58.1065,
+        "loaded_max_ms": 66.6899,
+        "pass_old_bound": true
+      },
+      {
+        "case_id": 12,
+        "case": {
+          "text": "frankenstein",
+          "offset": 0,
+          "limit": 50,
+          "base": 12
+        },
+        "idle_p95_ms": 27.3652,
+        "active_n": 56,
+        "loaded_p95_ms": 56.5927,
+        "loaded_max_ms": 67.3632,
+        "pass_old_bound": false
+      },
+      {
+        "case_id": 13,
+        "case": {
+          "text": "galapagos",
+          "offset": 0,
+          "limit": 50,
+          "base": 13
+        },
+        "idle_p95_ms": 15.3494,
+        "active_n": 56,
+        "loaded_p95_ms": 40.195,
+        "loaded_max_ms": 47.2523,
+        "pass_old_bound": false
+      },
+      {
+        "case_id": 14,
+        "case": {
+          "text": "fossil",
+          "offset": 0,
+          "limit": 50,
+          "base": 14
+        },
+        "idle_p95_ms": 51.8148,
+        "active_n": 55,
+        "loaded_p95_ms": 56.5242,
+        "loaded_max_ms": 66.1434,
+        "pass_old_bound": true
+      },
+      {
+        "case_id": 15,
+        "case": {
+          "text": "geologist",
+          "offset": 0,
+          "limit": 50,
+          "base": 15
+        },
+        "idle_p95_ms": 26.2366,
+        "active_n": 56,
+        "loaded_p95_ms": 51.3035,
+        "loaded_max_ms": 54.7995,
+        "pass_old_bound": true
+      },
+      {
+        "case_id": 16,
+        "case": {
+          "text": "the",
+          "offset": 0,
+          "limit": 50,
+          "base": 16
+        },
+        "idle_p95_ms": 3.1567,
+        "active_n": 56,
+        "loaded_p95_ms": 15.597,
+        "loaded_max_ms": 19.5205,
+        "pass_old_bound": false
+      },
+      {
+        "case_id": 17,
+        "case": {
+          "text": "man",
+          "offset": 0,
+          "limit": 50,
+          "base": 17
+        },
+        "idle_p95_ms": 2.3186,
+        "active_n": 56,
+        "loaded_p95_ms": 11.6098,
+        "loaded_max_ms": 16.8309,
+        "pass_old_bound": false
+      },
+      {
+        "case_id": 18,
+        "case": {
+          "text": "he",
+          "offset": 0,
+          "limit": 50,
+          "base": 18
+        },
+        "idle_p95_ms": 1.8817,
+        "active_n": 56,
+        "loaded_p95_ms": 6.4385,
+        "loaded_max_ms": 8.6101,
+        "pass_old_bound": false
+      },
+      {
+        "case_id": 19,
+        "case": {
+          "text": "zzxqnever",
+          "offset": 0,
+          "limit": 50,
+          "base": 19
+        },
+        "idle_p95_ms": 0.0503,
+        "active_n": 56,
+        "loaded_p95_ms": 0.4808,
+        "loaded_max_ms": 0.5306,
+        "pass_old_bound": true
+      },
+      {
+        "case_id": 20,
+        "case": {
+          "text": "zx",
+          "offset": 0,
+          "limit": 50,
+          "base": 20
+        },
+        "idle_p95_ms": 185.2312,
+        "active_n": 56,
+        "loaded_p95_ms": 200.7717,
+        "loaded_max_ms": 224.2393,
+        "pass_old_bound": true
+      },
+      {
+        "case_id": 21,
+        "case": {
+          "text": "the zx",
+          "offset": 0,
+          "limit": 50,
+          "base": 21
+        },
+        "idle_p95_ms": 187.837,
+        "active_n": 56,
+        "loaded_p95_ms": 200.9179,
+        "loaded_max_ms": 212.5613,
+        "pass_old_bound": true
+      },
+      {
+        "case_id": 22,
+        "case": {
+          "text": "quixote whale",
+          "offset": 0,
+          "limit": 50,
+          "base": 22
+        },
+        "idle_p95_ms": 5.2603,
+        "active_n": 55,
+        "loaded_p95_ms": 32.3638,
+        "loaded_max_ms": 38.9444,
+        "pass_old_bound": false
+      },
+      {
+        "case_id": 23,
+        "case": {
+          "text": "holmes elementary",
+          "offset": 0,
+          "limit": 50,
+          "base": 23
+        },
+        "idle_p95_ms": 56.4443,
+        "active_n": 55,
+        "loaded_p95_ms": 83.2787,
+        "loaded_max_ms": 87.5516,
+        "pass_old_bound": true
+      },
+      {
+        "case_id": 24,
+        "case": {
+          "text": "fossil geologist",
+          "offset": 0,
+          "limit": 50,
+          "base": 24
+        },
+        "idle_p95_ms": 20.1295,
+        "active_n": 56,
+        "loaded_p95_ms": 53.3046,
+        "loaded_max_ms": 65.1961,
+        "pass_old_bound": false
+      },
+      {
+        "case_id": 25,
+        "case": {
+          "text": "whale harpoon",
+          "offset": 0,
+          "limit": 50,
+          "base": 25
+        },
+        "idle_p95_ms": 93.3542,
+        "active_n": 56,
+        "loaded_p95_ms": 109.8701,
+        "loaded_max_ms": 141.5377,
+        "pass_old_bound": true
+      },
+      {
+        "case_id": 26,
+        "case": {
+          "text": "QUİXOTE",
+          "offset": 0,
+          "limit": 50,
+          "base": 26
+        },
+        "idle_p95_ms": 5.2237,
+        "active_n": 56,
+        "loaded_p95_ms": 23.6681,
+        "loaded_max_ms": 27.6522,
+        "pass_old_bound": false
+      },
+      {
+        "case_id": 27,
+        "case": {
+          "text": "İSHMAEL",
+          "offset": 0,
+          "limit": 50,
+          "base": 27
+        },
+        "idle_p95_ms": 10.895,
+        "active_n": 56,
+        "loaded_p95_ms": 31.2803,
+        "loaded_max_ms": 39.2217,
+        "pass_old_bound": false
+      },
+      {
+        "case_id": 28,
+        "case": {
+          "text": "zxzxzxzxzxzxzxzxzxzxzxzxzxzxzxzxzxzxzxzxzxzxzxzxzxzxzxzxzxzxzxzxzxzxzxzxzxzxzxzxzxzxzxzxzxzxzxzxzxzxzxzxzxzxzxzxzxzxzxzxzxzxzxzxzxzxzxzxzxzxzxzxzxzxzxzxzxzxzxzxzxzxzxzxzxzxzxzxzxzxzxzxzxzxzxzxzxzxzxzxzxzxzxzxzxzxzxzxzxzxzxzxzxzxzxzxzxzxzxzxzxzxzxzxzxzxzxzxzxzxzxzxzxzxzxzxzxzxzxzxzxzxzxzxzxzxzxzxzxzx",
+          "offset": 0,
+          "limit": 50,
+          "base": 28
+        },
+        "idle_p95_ms": 0.0542,
+        "active_n": 56,
+        "loaded_p95_ms": 0.3699,
+        "loaded_max_ms": 0.3949,
+        "pass_old_bound": true
+      },
+      {
+        "case_id": 29,
+        "case": {
+          "text": "presumption",
+          "offset": 0,
+          "limit": 50,
+          "base": 29
+        },
+        "idle_p95_ms": 171.8379,
+        "active_n": 56,
+        "loaded_p95_ms": 160.4384,
+        "loaded_max_ms": 181.4438,
+        "pass_old_bound": true
+      },
+      {
+        "case_id": 30,
+        "case": {
+          "text": "the",
+          "offset": 0,
+          "limit": 1,
+          "base": 16
+        },
+        "idle_p95_ms": 0.4177,
+        "active_n": 56,
+        "loaded_p95_ms": 13.7337,
+        "loaded_max_ms": 17.1496,
+        "pass_old_bound": false
+      },
+      {
+        "case_id": 31,
+        "case": {
+          "text": "the",
+          "offset": 0,
+          "limit": 200,
+          "base": 16
+        },
+        "idle_p95_ms": 9.2398,
+        "active_n": 56,
+        "loaded_p95_ms": 8.8821,
+        "loaded_max_ms": 17.8624,
+        "pass_old_bound": true
+      },
+      {
+        "case_id": 32,
+        "case": {
+          "text": "the",
+          "offset": 5000,
+          "limit": 50,
+          "base": 16
+        },
+        "idle_p95_ms": 2.6449,
+        "active_n": 56,
+        "loaded_p95_ms": 11.4549,
+        "loaded_max_ms": 13.7963,
+        "pass_old_bound": false
+      },
+      {
+        "case_id": 33,
+        "case": {
+          "text": "the",
+          "offset": 9950,
+          "limit": 50,
+          "base": 16
+        },
+        "idle_p95_ms": 2.3721,
+        "active_n": 56,
+        "loaded_p95_ms": 12.2391,
+        "loaded_max_ms": 19.5675,
+        "pass_old_bound": false
+      },
+      {
+        "case_id": 34,
+        "case": {
+          "text": "ishmael",
+          "offset": 130,
+          "limit": 1,
+          "base": 6
+        },
+        "idle_p95_ms": 11.5978,
+        "active_n": 56,
+        "loaded_p95_ms": 28.4524,
+        "loaded_max_ms": 36.1643,
+        "pass_old_bound": false
+      },
+      {
+        "case_id": 35,
+        "case": {
+          "text": "ishmael",
+          "offset": 60,
+          "limit": 200,
+          "base": 6
+        },
+        "idle_p95_ms": 20.6506,
+        "active_n": 56,
+        "loaded_p95_ms": 39.2197,
+        "loaded_max_ms": 42.6413,
+        "pass_old_bound": true
+      },
+      {
+        "case_id": 36,
+        "case": {
+          "text": "quixote",
+          "offset": 28,
+          "limit": 10,
+          "base": 0
+        },
+        "idle_p95_ms": 5.077,
+        "active_n": 56,
+        "loaded_p95_ms": 22.5995,
+        "loaded_max_ms": 27.2029,
+        "pass_old_bound": false
+      },
+      {
+        "case_id": 37,
+        "case": {
+          "text": "quixote",
+          "offset": 57,
+          "limit": 50,
+          "base": 0
+        },
+        "idle_p95_ms": 2.622,
+        "active_n": 56,
+        "loaded_p95_ms": 23.2154,
+        "loaded_max_ms": 30.1378,
+        "pass_old_bound": false
+      }
+    ],
+    "sqlite": [
+      {
+        "case_id": 0,
+        "case": {
+          "text": "quixote",
+          "offset": 0,
+          "limit": 50,
+          "base": 0
+        },
+        "idle_p95_ms": 27.6309,
+        "active_n": 14,
+        "loaded_p95_ms": 24.228,
+        "loaded_max_ms": 24.228,
+        "pass_old_bound": true
+      },
+      {
+        "case_id": 1,
+        "case": {
+          "text": "zeuglodon",
+          "offset": 0,
+          "limit": 50,
+          "base": 1
+        },
+        "idle_p95_ms": 14.2922,
+        "active_n": 15,
+        "loaded_p95_ms": 16.851,
+        "loaded_max_ms": 16.851,
+        "pass_old_bound": true
+      },
+      {
+        "case_id": 2,
+        "case": {
+          "text": "beagle",
+          "offset": 0,
+          "limit": 50,
+          "base": 2
+        },
+        "idle_p95_ms": 213.0432,
+        "active_n": 15,
+        "loaded_p95_ms": 228.638,
+        "loaded_max_ms": 228.638,
+        "pass_old_bound": true
+      },
+      {
+        "case_id": 3,
+        "case": {
+          "text": "mesopotamia",
+          "offset": 0,
+          "limit": 50,
+          "base": 3
+        },
+        "idle_p95_ms": 16.6549,
+        "active_n": 15,
+        "loaded_p95_ms": 24.1334,
+        "loaded_max_ms": 24.1334,
+        "pass_old_bound": true
+      },
+      {
+        "case_id": 4,
+        "case": {
+          "text": "transubstantiation",
+          "offset": 0,
+          "limit": 50,
+          "base": 4
+        },
+        "idle_p95_ms": 696.3198,
+        "active_n": 15,
+        "loaded_p95_ms": 721.136,
+        "loaded_max_ms": 721.136,
+        "pass_old_bound": true
+      },
+      {
+        "case_id": 5,
+        "case": {
+          "text": "harpoon",
+          "offset": 0,
+          "limit": 50,
+          "base": 5
+        },
+        "idle_p95_ms": 699.6087,
+        "active_n": 14,
+        "loaded_p95_ms": 718.0199,
+        "loaded_max_ms": 718.0199,
+        "pass_old_bound": true
+      },
+      {
+        "case_id": 6,
+        "case": {
+          "text": "ishmael",
+          "offset": 0,
+          "limit": 50,
+          "base": 6
+        },
+        "idle_p95_ms": 82.3657,
+        "active_n": 14,
+        "loaded_p95_ms": 90.3764,
+        "loaded_max_ms": 90.3764,
+        "pass_old_bound": true
+      },
+      {
+        "case_id": 7,
+        "case": {
+          "text": "invertebrata",
+          "offset": 0,
+          "limit": 50,
+          "base": 7
+        },
+        "idle_p95_ms": 131.3639,
+        "active_n": 14,
+        "loaded_p95_ms": 143.6022,
+        "loaded_max_ms": 143.6022,
+        "pass_old_bound": true
+      },
+      {
+        "case_id": 8,
+        "case": {
+          "text": "darcy",
+          "offset": 0,
+          "limit": 50,
+          "base": 8
+        },
+        "idle_p95_ms": 614.0073,
+        "active_n": 14,
+        "loaded_p95_ms": 652.9914,
+        "loaded_max_ms": 652.9914,
+        "pass_old_bound": true
+      },
+      {
+        "case_id": 9,
+        "case": {
+          "text": "elizabeth",
+          "offset": 0,
+          "limit": 50,
+          "base": 9
+        },
+        "idle_p95_ms": 560.7355,
+        "active_n": 14,
+        "loaded_p95_ms": 595.9968,
+        "loaded_max_ms": 595.9968,
+        "pass_old_bound": true
+      },
+      {
+        "case_id": 10,
+        "case": {
+          "text": "watson",
+          "offset": 0,
+          "limit": 50,
+          "base": 10
+        },
+        "idle_p95_ms": 521.2103,
+        "active_n": 15,
+        "loaded_p95_ms": 543.2219,
+        "loaded_max_ms": 543.2219,
+        "pass_old_bound": true
+      },
+      {
+        "case_id": 11,
+        "case": {
+          "text": "holmes",
+          "offset": 0,
+          "limit": 50,
+          "base": 11
+        },
+        "idle_p95_ms": 286.8908,
+        "active_n": 15,
+        "loaded_p95_ms": 311.4539,
+        "loaded_max_ms": 311.4539,
+        "pass_old_bound": true
+      },
+      {
+        "case_id": 12,
+        "case": {
+          "text": "frankenstein",
+          "offset": 0,
+          "limit": 50,
+          "base": 12
+        },
+        "idle_p95_ms": 181.4283,
+        "active_n": 15,
+        "loaded_p95_ms": 206.5477,
+        "loaded_max_ms": 206.5477,
+        "pass_old_bound": true
+      },
+      {
+        "case_id": 13,
+        "case": {
+          "text": "galapagos",
+          "offset": 0,
+          "limit": 50,
+          "base": 13
+        },
+        "idle_p95_ms": 96.844,
+        "active_n": 15,
+        "loaded_p95_ms": 110.578,
+        "loaded_max_ms": 110.578,
+        "pass_old_bound": true
+      },
+      {
+        "case_id": 14,
+        "case": {
+          "text": "fossil",
+          "offset": 0,
+          "limit": 50,
+          "base": 14
+        },
+        "idle_p95_ms": 371.9584,
+        "active_n": 15,
+        "loaded_p95_ms": 396.3019,
+        "loaded_max_ms": 396.3019,
+        "pass_old_bound": true
+      },
+      {
+        "case_id": 15,
+        "case": {
+          "text": "geologist",
+          "offset": 0,
+          "limit": 50,
+          "base": 15
+        },
+        "idle_p95_ms": 195.3162,
+        "active_n": 15,
+        "loaded_p95_ms": 223.6247,
+        "loaded_max_ms": 223.6247,
+        "pass_old_bound": true
+      },
+      {
+        "case_id": 16,
+        "case": {
+          "text": "the",
+          "offset": 0,
+          "limit": 50,
+          "base": 16
+        },
+        "idle_p95_ms": 1846.5123,
+        "active_n": 15,
+        "loaded_p95_ms": 1831.7856,
+        "loaded_max_ms": 1831.7856,
+        "pass_old_bound": true
+      },
+      {
+        "case_id": 17,
+        "case": {
+          "text": "man",
+          "offset": 0,
+          "limit": 50,
+          "base": 17
+        },
+        "idle_p95_ms": 1824.0948,
+        "active_n": 14,
+        "loaded_p95_ms": 1874.8619,
+        "loaded_max_ms": 1874.8619,
+        "pass_old_bound": true
+      },
+      {
+        "case_id": 18,
+        "case": {
+          "text": "he",
+          "offset": 0,
+          "limit": 50,
+          "base": 18
+        },
+        "idle_p95_ms": 1735.4122,
+        "active_n": 14,
+        "loaded_p95_ms": 1837.6771,
+        "loaded_max_ms": 1837.6771,
+        "pass_old_bound": true
+      },
+      {
+        "case_id": 19,
+        "case": {
+          "text": "zzxqnever",
+          "offset": 0,
+          "limit": 50,
+          "base": 19
+        },
+        "idle_p95_ms": 0.851,
+        "active_n": 14,
+        "loaded_p95_ms": 3.1845,
+        "loaded_max_ms": 3.1845,
+        "pass_old_bound": false
+      },
+      {
+        "case_id": 20,
+        "case": {
+          "text": "zx",
+          "offset": 0,
+          "limit": 50,
+          "base": 20
+        },
+        "idle_p95_ms": 2337.0837,
+        "active_n": 14,
+        "loaded_p95_ms": 2355.2824,
+        "loaded_max_ms": 2355.2824,
+        "pass_old_bound": true
+      },
+      {
+        "case_id": 21,
+        "case": {
+          "text": "the zx",
+          "offset": 0,
+          "limit": 50,
+          "base": 21
+        },
+        "idle_p95_ms": 2483.9316,
+        "active_n": 15,
+        "loaded_p95_ms": 2531.3925,
+        "loaded_max_ms": 2531.3925,
+        "pass_old_bound": true
+      },
+      {
+        "case_id": 22,
+        "case": {
+          "text": "quixote whale",
+          "offset": 0,
+          "limit": 50,
+          "base": 22
+        },
+        "idle_p95_ms": 21.2425,
+        "active_n": 14,
+        "loaded_p95_ms": 31.031,
+        "loaded_max_ms": 31.031,
+        "pass_old_bound": true
+      },
+      {
+        "case_id": 23,
+        "case": {
+          "text": "holmes elementary",
+          "offset": 0,
+          "limit": 50,
+          "base": 23
+        },
+        "idle_p95_ms": 424.8526,
+        "active_n": 14,
+        "loaded_p95_ms": 447.7174,
+        "loaded_max_ms": 447.7174,
+        "pass_old_bound": true
+      },
+      {
+        "case_id": 24,
+        "case": {
+          "text": "fossil geologist",
+          "offset": 0,
+          "limit": 50,
+          "base": 24
+        },
+        "idle_p95_ms": 146.1459,
+        "active_n": 14,
+        "loaded_p95_ms": 160.4722,
+        "loaded_max_ms": 160.4722,
+        "pass_old_bound": true
+      },
+      {
+        "case_id": 25,
+        "case": {
+          "text": "whale harpoon",
+          "offset": 0,
+          "limit": 50,
+          "base": 25
+        },
+        "idle_p95_ms": 636.6099,
+        "active_n": 14,
+        "loaded_p95_ms": 645.9257,
+        "loaded_max_ms": 645.9257,
+        "pass_old_bound": true
+      },
+      {
+        "case_id": 26,
+        "case": {
+          "text": "QUİXOTE",
+          "offset": 0,
+          "limit": 50,
+          "base": 26
+        },
+        "idle_p95_ms": 19.1653,
+        "active_n": 14,
+        "loaded_p95_ms": 25.4481,
+        "loaded_max_ms": 25.4481,
+        "pass_old_bound": true
+      },
+      {
+        "case_id": 27,
+        "case": {
+          "text": "İSHMAEL",
+          "offset": 0,
+          "limit": 50,
+          "base": 27
+        },
+        "idle_p95_ms": 89.8027,
+        "active_n": 14,
+        "loaded_p95_ms": 92.648,
+        "loaded_max_ms": 92.648,
+        "pass_old_bound": true
+      },
+      {
+        "case_id": 28,
+        "case": {
+          "text": "zxzxzxzxzxzxzxzxzxzxzxzxzxzxzxzxzxzxzxzxzxzxzxzxzxzxzxzxzxzxzxzxzxzxzxzxzxzxzxzxzxzxzxzxzxzxzxzxzxzxzxzxzxzxzxzxzxzxzxzxzxzxzxzxzxzxzxzxzxzxzxzxzxzxzxzxzxzxzxzxzxzxzxzxzxzxzxzxzxzxzxzxzxzxzxzxzxzxzxzxzxzxzxzxzxzxzxzxzxzxzxzxzxzxzxzxzxzxzxzxzxzxzxzxzxzxzxzxzxzxzxzxzxzxzxzxzxzxzxzxzxzxzxzxzxzxzxzxzxzx",
+          "offset": 0,
+          "limit": 50,
+          "base": 28
+        },
+        "idle_p95_ms": 2.7477,
+        "active_n": 14,
+        "loaded_p95_ms": 28.7636,
+        "loaded_max_ms": 28.7636,
+        "pass_old_bound": false
+      },
+      {
+        "case_id": 29,
+        "case": {
+          "text": "presumption",
+          "offset": 0,
+          "limit": 50,
+          "base": 29
+        },
+        "idle_p95_ms": 853.4472,
+        "active_n": 14,
+        "loaded_p95_ms": 878.609,
+        "loaded_max_ms": 878.609,
+        "pass_old_bound": true
+      },
+      {
+        "case_id": 30,
+        "case": {
+          "text": "the",
+          "offset": 0,
+          "limit": 1,
+          "base": 16
+        },
+        "idle_p95_ms": 1801.9635,
+        "active_n": 14,
+        "loaded_p95_ms": 1855.368,
+        "loaded_max_ms": 1855.368,
+        "pass_old_bound": true
+      },
+      {
+        "case_id": 31,
+        "case": {
+          "text": "the",
+          "offset": 0,
+          "limit": 200,
+          "base": 16
+        },
+        "idle_p95_ms": 1827.85,
+        "active_n": 14,
+        "loaded_p95_ms": 1851.7766,
+        "loaded_max_ms": 1851.7766,
+        "pass_old_bound": true
+      },
+      {
+        "case_id": 32,
+        "case": {
+          "text": "the",
+          "offset": 5000,
+          "limit": 50,
+          "base": 16
+        },
+        "idle_p95_ms": 1856.9129,
+        "active_n": 14,
+        "loaded_p95_ms": 1824.5679,
+        "loaded_max_ms": 1824.5679,
+        "pass_old_bound": true
+      },
+      {
+        "case_id": 33,
+        "case": {
+          "text": "the",
+          "offset": 9950,
+          "limit": 50,
+          "base": 16
+        },
+        "idle_p95_ms": 1854.9293,
+        "active_n": 14,
+        "loaded_p95_ms": 1847.8436,
+        "loaded_max_ms": 1847.8436,
+        "pass_old_bound": true
+      },
+      {
+        "case_id": 34,
+        "case": {
+          "text": "ishmael",
+          "offset": 130,
+          "limit": 1,
+          "base": 6
+        },
+        "idle_p95_ms": 79.4475,
+        "active_n": 14,
+        "loaded_p95_ms": 83.1098,
+        "loaded_max_ms": 83.1098,
+        "pass_old_bound": true
+      },
+      {
+        "case_id": 35,
+        "case": {
+          "text": "ishmael",
+          "offset": 60,
+          "limit": 200,
+          "base": 6
+        },
+        "idle_p95_ms": 100.4989,
+        "active_n": 14,
+        "loaded_p95_ms": 113.5191,
+        "loaded_max_ms": 113.5191,
+        "pass_old_bound": true
+      },
+      {
+        "case_id": 36,
+        "case": {
+          "text": "quixote",
+          "offset": 28,
+          "limit": 10,
+          "base": 0
+        },
+        "idle_p95_ms": 15.2571,
+        "active_n": 14,
+        "loaded_p95_ms": 20.4255,
+        "loaded_max_ms": 20.4255,
+        "pass_old_bound": true
+      },
+      {
+        "case_id": 37,
+        "case": {
+          "text": "quixote",
+          "offset": 57,
+          "limit": 50,
+          "base": 0
+        },
+        "idle_p95_ms": 9.4769,
+        "active_n": 14,
+        "loaded_p95_ms": 16.4596,
+        "loaded_max_ms": 16.4596,
+        "pass_old_bound": true
+      }
+    ]
+  },
+  "waits": {
+    "fdb": {
+      "writer_waiting_reads": 517,
+      "longest_single_writer_wait_ms": 0.6515,
+      "max_query_sum_writer_wait_ms": 0.6566,
+      "active_reads": 2128,
+      "failed_cases": [
+        0,
+        1,
+        3,
+        6,
+        7,
+        12,
+        13,
+        16,
+        17,
+        18,
+        22,
+        24,
+        26,
+        27,
+        30,
+        32,
+        33,
+        34,
+        36,
+        37
+      ]
+    },
+    "sqlite": {
+      "writer_waiting_reads": 0,
+      "longest_single_writer_wait_ms": 0.0,
+      "max_query_sum_writer_wait_ms": 0.0,
+      "active_reads": 544,
+      "failed_cases": [
+        19,
+        28
+      ]
+    }
+  }
+}

@@ -1,0 +1,306 @@
+{
+  "trials": [
+    {
+      "engine": "fdb",
+      "pair": 0,
+      "kinds": {
+        "update": {
+          "n": 48,
+          "p50": 1.3893,
+          "p95": 1.8104,
+          "max": 2.5179,
+          "visibility_p95": 2.0888999999999998,
+          "visibility_max": 3.7334
+        },
+        "delete": {
+          "n": 24,
+          "p50": 0.9579,
+          "p95": 1.1491,
+          "max": 1.3581999999999999,
+          "visibility_p95": 1.5243,
+          "visibility_max": 1.6086
+        },
+        "insert": {
+          "n": 24,
+          "p50": 1.4369999999999998,
+          "p95": 1.9497,
+          "max": 11.1711,
+          "visibility_p95": 2.0674,
+          "visibility_max": 11.334
+        }
+      },
+      "publication": {
+        "mask_full_rebuilds": 1,
+        "mask_incremental_publications": 96,
+        "mask_keys_scanned": 10000,
+        "mask_prepare_ns": 4438900,
+        "max_prepare_ns": 3517900,
+        "old_view_release_ns": 730600,
+        "pointer_ns": 9400,
+        "prepare_ns": 5669400,
+        "publications": 97,
+        "state_clone_ns": 904200,
+        "wal_reader_open_ns": 182800
+      },
+      "memory": {
+        "os_lifetime_peak_private_commit_bytes": 9789440,
+        "os_lifetime_peak_working_set_bytes": 13492224,
+        "private_bytes": 9322496,
+        "sample_interval_ms": 10,
+        "sampled_phase_peak_private_bytes": 9515008,
+        "sampled_phase_peak_working_set_bytes": 13307904,
+        "working_set_bytes": 12951552
+      },
+      "clean_open_ms": 205.6452,
+      "dirty_open_ms": 294.5758,
+      "clean_private_mib": 3.5703125,
+      "dirty_private_mib": 5.90625,
+      "clean_ws_mib": 7.39453125,
+      "dirty_ws_mib": 9.4453125,
+      "seed_peak_private_mib": 12.84765625,
+      "seed_peak_ws_mib": 16.9921875,
+      "dirty_write_peak_private_mib": 11.66796875,
+      "dirty_open_peak_private_mib": 6.0546875
+    },
+    {
+      "engine": "fdb",
+      "pair": 1,
+      "kinds": {
+        "update": {
+          "n": 48,
+          "p50": 1.3377000000000001,
+          "p95": 1.792,
+          "max": 2.3873,
+          "visibility_p95": 2.0631,
+          "visibility_max": 3.7157
+        },
+        "delete": {
+          "n": 24,
+          "p50": 0.9736,
+          "p95": 1.1096000000000001,
+          "max": 1.1537,
+          "visibility_p95": 1.3039,
+          "visibility_max": 1.3193000000000001
+        },
+        "insert": {
+          "n": 24,
+          "p50": 1.4355,
+          "p95": 1.7457,
+          "max": 11.8529,
+          "visibility_p95": 1.8492,
+          "visibility_max": 11.9918
+        }
+      },
+      "publication": {
+        "mask_full_rebuilds": 1,
+        "mask_incremental_publications": 96,
+        "mask_keys_scanned": 10000,
+        "mask_prepare_ns": 4335200,
+        "max_prepare_ns": 3471500,
+        "old_view_release_ns": 643300,
+        "pointer_ns": 7400,
+        "prepare_ns": 5496100,
+        "publications": 97,
+        "state_clone_ns": 849200,
+        "wal_reader_open_ns": 174000
+      },
+      "memory": {
+        "os_lifetime_peak_private_commit_bytes": 9592832,
+        "os_lifetime_peak_working_set_bytes": 13676544,
+        "private_bytes": 9064448,
+        "sample_interval_ms": 10,
+        "sampled_phase_peak_private_bytes": 9588736,
+        "sampled_phase_peak_working_set_bytes": 13553664,
+        "working_set_bytes": 12861440
+      },
+      "clean_open_ms": 216.23329999999999,
+      "dirty_open_ms": 285.1465,
+      "clean_private_mib": 3.51953125,
+      "dirty_private_mib": 6.19140625,
+      "clean_ws_mib": 7.37109375,
+      "dirty_ws_mib": 9.45703125,
+      "seed_peak_private_mib": 12.28515625,
+      "seed_peak_ws_mib": 16.2890625,
+      "dirty_write_peak_private_mib": 11.33203125,
+      "dirty_open_peak_private_mib": 6.62109375
+    },
+    {
+      "engine": "sqlite",
+      "pair": 0,
+      "kinds": {
+        "update": {
+          "n": 48,
+          "p50": 4.6081,
+          "p95": 13.5227,
+          "max": 17.475,
+          "visibility_p95": 25.2284,
+          "visibility_max": 26.9658
+        },
+        "delete": {
+          "n": 24,
+          "p50": 3.2858,
+          "p95": 7.0439,
+          "max": 15.1992,
+          "visibility_p95": 22.9791,
+          "visibility_max": 24.1912
+        },
+        "insert": {
+          "n": 24,
+          "p50": 3.9581,
+          "p95": 15.1765,
+          "max": 22.9097,
+          "visibility_p95": 20.879,
+          "visibility_max": 29.8655
+        }
+      },
+      "publication": {
+        "busy_wait": "busy-handler retry time, source not individually classified",
+        "kind": "SQLite WAL read transaction; meta sequence and rows from same BEGIN snapshot"
+      },
+      "memory": {
+        "os_lifetime_peak_private_commit_bytes": 10694656,
+        "os_lifetime_peak_working_set_bytes": 15138816,
+        "private_bytes": 10682368,
+        "sample_interval_ms": 10,
+        "sampled_phase_peak_private_bytes": 10694656,
+        "sampled_phase_peak_working_set_bytes": 15020032,
+        "working_set_bytes": 14692352
+      },
+      "clean_open_ms": 1.8225,
+      "dirty_open_ms": 1.8113000000000001,
+      "clean_private_mib": 2.61328125,
+      "dirty_private_mib": 2.59765625,
+      "clean_ws_mib": 6.75390625,
+      "dirty_ws_mib": 6.734375,
+      "seed_peak_private_mib": 9.53515625,
+      "seed_peak_ws_mib": 13.875,
+      "dirty_write_peak_private_mib": 12.28125,
+      "dirty_open_peak_private_mib": 3.34765625
+    },
+    {
+      "engine": "sqlite",
+      "pair": 1,
+      "kinds": {
+        "update": {
+          "n": 48,
+          "p50": 4.094399999999999,
+          "p95": 12.0025,
+          "max": 18.3585,
+          "visibility_p95": 23.4846,
+          "visibility_max": 28.5289
+        },
+        "delete": {
+          "n": 24,
+          "p50": 2.8452,
+          "p95": 6.6289,
+          "max": 14.1407,
+          "visibility_p95": 14.1364,
+          "visibility_max": 20.3922
+        },
+        "insert": {
+          "n": 24,
+          "p50": 3.4255,
+          "p95": 8.3514,
+          "max": 11.288499999999999,
+          "visibility_p95": 13.3588,
+          "visibility_max": 18.4033
+        }
+      },
+      "publication": {
+        "busy_wait": "busy-handler retry time, source not individually classified",
+        "kind": "SQLite WAL read transaction; meta sequence and rows from same BEGIN snapshot"
+      },
+      "memory": {
+        "os_lifetime_peak_private_commit_bytes": 10514432,
+        "os_lifetime_peak_working_set_bytes": 15126528,
+        "private_bytes": 10514432,
+        "sample_interval_ms": 10,
+        "sampled_phase_peak_private_bytes": 10514432,
+        "sampled_phase_peak_working_set_bytes": 15126528,
+        "working_set_bytes": 14696448
+      },
+      "clean_open_ms": 1.8651,
+      "dirty_open_ms": 3.3519,
+      "clean_private_mib": 2.61328125,
+      "dirty_private_mib": 2.6015625,
+      "clean_ws_mib": 6.73046875,
+      "dirty_ws_mib": 6.7421875,
+      "seed_peak_private_mib": 9.484375,
+      "seed_peak_ws_mib": 13.91796875,
+      "dirty_write_peak_private_mib": 12.41015625,
+      "dirty_open_peak_private_mib": 3.3515625
+    }
+  ],
+  "pooled": {
+    "fdb": {
+      "update": {
+        "n": 96,
+        "p50": 1.3851,
+        "p95": 1.8098,
+        "max": 2.5179,
+        "visibility_p95": 2.0888999999999998,
+        "visibility_max": 3.7334
+      },
+      "delete": {
+        "n": 48,
+        "p50": 0.9736,
+        "p95": 1.1491,
+        "max": 1.3581999999999999,
+        "visibility_p95": 1.3628,
+        "visibility_max": 1.6086
+      },
+      "insert": {
+        "n": 48,
+        "p50": 1.4369999999999998,
+        "p95": 1.9497,
+        "max": 11.8529,
+        "visibility_p95": 2.0674,
+        "visibility_max": 11.9918
+      }
+    },
+    "sqlite": {
+      "update": {
+        "n": 96,
+        "p50": 4.4243,
+        "p95": 13.5227,
+        "max": 18.3585,
+        "visibility_p95": 24.9357,
+        "visibility_max": 28.5289
+      },
+      "delete": {
+        "n": 48,
+        "p50": 3.1468,
+        "p95": 7.0439,
+        "max": 15.1992,
+        "visibility_p95": 20.3922,
+        "visibility_max": 24.1912
+      },
+      "insert": {
+        "n": 48,
+        "p50": 3.6670000000000003,
+        "p95": 11.288499999999999,
+        "max": 22.9097,
+        "visibility_p95": 18.4033,
+        "visibility_max": 29.8655
+      }
+    }
+  },
+  "corpus": [
+    {
+      "path": "data\\rkyv-corpus-20261009\\json.payload-bench",
+      "bytes": 2740862279,
+      "sha256": "11F826FCE3F4AE790FEB9FC6DF9B1169F52C2FD699E89FC4A8A4B77AAA41731B"
+    },
+    {
+      "path": "tests\\fixtures\\v1\\checkpoint.fdb",
+      "bytes": 1507,
+      "sha256": "E87667C0FABE64D5A1F59EF86B99F7E612DB755D239B41677DA2ADC24BE7BF57"
+    },
+    {
+      "path": "tests\\fixtures\\v1\\checkpoint.ready",
+      "bytes": 28,
+      "sha256": "BC82C18F8D5C3A209328BD59B12D828D8922BEC4D26CB4D557FD4A493A4A9C2F"
+    }
+  ],
+  "cache": "warm OS,strict FDB;no CPU/power/background isolation"
+}

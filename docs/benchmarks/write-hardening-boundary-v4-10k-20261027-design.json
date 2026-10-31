@@ -1,0 +1,359 @@
+{
+  "section": "boundary",
+  "protected_before": [
+    {
+      "path": "data\\rkyv-corpus-20261009\\json.payload-bench",
+      "bytes": 2740862279,
+      "sha256": "11F826FCE3F4AE790FEB9FC6DF9B1169F52C2FD699E89FC4A8A4B77AAA41731B"
+    },
+    {
+      "path": "tests\\fixtures\\v1\\checkpoint.fdb",
+      "bytes": 1507,
+      "sha256": "E87667C0FABE64D5A1F59EF86B99F7E612DB755D239B41677DA2ADC24BE7BF57"
+    },
+    {
+      "path": "tests\\fixtures\\v1\\checkpoint.ready",
+      "bytes": 28,
+      "sha256": "BC82C18F8D5C3A209328BD59B12D828D8922BEC4D26CB4D557FD4A493A4A9C2F"
+    }
+  ],
+  "programs": {
+    "candidate": {
+      "path": "C:\\Users\\Serkan\\Documents\\ChatGPT\\fdb\\output\\write-hardening-fdb-20261027-v4.exe",
+      "sha256": "98BE45332EB72AC7D664556DEDA96197582D4FCA56875B7647C1D7B101296585"
+    },
+    "control": {
+      "path": "C:\\Users\\Serkan\\Documents\\ChatGPT\\fdb\\output\\small-commit-fdb-20261026-v7.exe",
+      "sha256": "2C703E05DA3D9A6F5B82C933022B388F24C7652B7BC1241B6FED1A0B6FC42522"
+    },
+    "sqlite": {
+      "path": "C:\\Users\\Serkan\\Documents\\ChatGPT\\fdb\\output\\write-hardening-sqlite-20261027-v4.exe",
+      "sha256": "3B249636D5C1EF0FDB2DE8BB17EF62CC6F487365B1FC7C0F132C4F1AA317237C"
+    }
+  },
+  "completed": [
+    {
+      "engine": "fdb",
+      "mode": "seed",
+      "api": "streamed",
+      "log": "write-hardening-boundary-v4-10k-20261027-r0-control-fdb-streamed-seed.jsonl",
+      "exit_code": 0,
+      "wall_s": 16.14100000000326
+    },
+    {
+      "engine": "fdb",
+      "mode": "small-boundary",
+      "api": "streamed",
+      "log": "write-hardening-boundary-v4-10k-20261027-r0-control-fdb-streamed-small-boundary.jsonl",
+      "exit_code": 0,
+      "wall_s": 3.234000000025844
+    },
+    {
+      "engine": "fdb",
+      "mode": "verify",
+      "api": "streamed",
+      "log": "write-hardening-boundary-v4-10k-20261027-r0-control-fdb-streamed-verify.jsonl",
+      "exit_code": 0,
+      "wall_s": 2.7660000000032596
+    },
+    {
+      "engine": "fdb",
+      "mode": "seed",
+      "api": "streamed",
+      "log": "write-hardening-boundary-v4-10k-20261027-r0-candidate-fdb-streamed-seed.jsonl",
+      "exit_code": 0,
+      "wall_s": 16.344000000011874
+    },
+    {
+      "engine": "fdb",
+      "mode": "small-boundary",
+      "api": "streamed",
+      "log": "write-hardening-boundary-v4-10k-20261027-r0-candidate-fdb-streamed-small-boundary.jsonl",
+      "exit_code": 0,
+      "wall_s": 2.937999999994645
+    },
+    {
+      "engine": "fdb",
+      "mode": "verify",
+      "api": "streamed",
+      "log": "write-hardening-boundary-v4-10k-20261027-r0-candidate-fdb-streamed-verify.jsonl",
+      "exit_code": 0,
+      "wall_s": 2.875
+    },
+    {
+      "engine": "sqlite",
+      "mode": "seed",
+      "api": "streamed",
+      "log": "write-hardening-boundary-v4-10k-20261027-r0-sqlite-sqlite-streamed-seed.jsonl",
+      "exit_code": 0,
+      "wall_s": 39.89100000000326
+    },
+    {
+      "engine": "sqlite",
+      "mode": "small-boundary",
+      "api": "streamed",
+      "log": "write-hardening-boundary-v4-10k-20261027-r0-sqlite-sqlite-streamed-small-boundary.jsonl",
+      "exit_code": 0,
+      "wall_s": 14.062999999994645
+    },
+    {
+      "engine": "sqlite",
+      "mode": "verify",
+      "api": "streamed",
+      "log": "write-hardening-boundary-v4-10k-20261027-r0-sqlite-sqlite-streamed-verify.jsonl",
+      "exit_code": 0,
+      "wall_s": 31.203000000008615
+    },
+    {
+      "engine": "sqlite",
+      "mode": "seed",
+      "api": "streamed",
+      "log": "write-hardening-boundary-v4-10k-20261027-r1-sqlite-sqlite-streamed-seed.jsonl",
+      "exit_code": 0,
+      "wall_s": 37.796999999991385
+    },
+    {
+      "engine": "sqlite",
+      "mode": "small-boundary",
+      "api": "streamed",
+      "log": "write-hardening-boundary-v4-10k-20261027-r1-sqlite-sqlite-streamed-small-boundary.jsonl",
+      "exit_code": 0,
+      "wall_s": 14.328000000008615
+    },
+    {
+      "engine": "sqlite",
+      "mode": "verify",
+      "api": "streamed",
+      "log": "write-hardening-boundary-v4-10k-20261027-r1-sqlite-sqlite-streamed-verify.jsonl",
+      "exit_code": 0,
+      "wall_s": 30.75
+    },
+    {
+      "engine": "fdb",
+      "mode": "seed",
+      "api": "streamed",
+      "log": "write-hardening-boundary-v4-10k-20261027-r1-candidate-fdb-streamed-seed.jsonl",
+      "exit_code": 0,
+      "wall_s": 16.64100000000326
+    },
+    {
+      "engine": "fdb",
+      "mode": "small-boundary",
+      "api": "streamed",
+      "log": "write-hardening-boundary-v4-10k-20261027-r1-candidate-fdb-streamed-small-boundary.jsonl",
+      "exit_code": 0,
+      "wall_s": 3.077999999979511
+    },
+    {
+      "engine": "fdb",
+      "mode": "verify",
+      "api": "streamed",
+      "log": "write-hardening-boundary-v4-10k-20261027-r1-candidate-fdb-streamed-verify.jsonl",
+      "exit_code": 0,
+      "wall_s": 2.76500000001397
+    },
+    {
+      "engine": "fdb",
+      "mode": "seed",
+      "api": "streamed",
+      "log": "write-hardening-boundary-v4-10k-20261027-r1-control-fdb-streamed-seed.jsonl",
+      "exit_code": 0,
+      "wall_s": 15.34399999998277
+    },
+    {
+      "engine": "fdb",
+      "mode": "small-boundary",
+      "api": "streamed",
+      "log": "write-hardening-boundary-v4-10k-20261027-r1-control-fdb-streamed-small-boundary.jsonl",
+      "exit_code": 0,
+      "wall_s": 3.0469999999913853
+    },
+    {
+      "engine": "fdb",
+      "mode": "verify",
+      "api": "streamed",
+      "log": "write-hardening-boundary-v4-10k-20261027-r1-control-fdb-streamed-verify.jsonl",
+      "exit_code": 0,
+      "wall_s": 2.859000000025844
+    },
+    {
+      "engine": "fdb",
+      "mode": "seed",
+      "api": "streamed",
+      "log": "write-hardening-boundary-v4-10k-20261027-r2-candidate-fdb-streamed-seed.jsonl",
+      "exit_code": 0,
+      "wall_s": 16.155999999988126
+    },
+    {
+      "engine": "fdb",
+      "mode": "small-boundary",
+      "api": "streamed",
+      "log": "write-hardening-boundary-v4-10k-20261027-r2-candidate-fdb-streamed-small-boundary.jsonl",
+      "exit_code": 0,
+      "wall_s": 2.76500000001397
+    },
+    {
+      "engine": "fdb",
+      "mode": "verify",
+      "api": "streamed",
+      "log": "write-hardening-boundary-v4-10k-20261027-r2-candidate-fdb-streamed-verify.jsonl",
+      "exit_code": 0,
+      "wall_s": 2.7820000000065193
+    },
+    {
+      "engine": "fdb",
+      "mode": "seed",
+      "api": "streamed",
+      "log": "write-hardening-boundary-v4-10k-20261027-r2-control-fdb-streamed-seed.jsonl",
+      "exit_code": 0,
+      "wall_s": 15.39100000000326
+    },
+    {
+      "engine": "fdb",
+      "mode": "small-boundary",
+      "api": "streamed",
+      "log": "write-hardening-boundary-v4-10k-20261027-r2-control-fdb-streamed-small-boundary.jsonl",
+      "exit_code": 0,
+      "wall_s": 2.952999999979511
+    },
+    {
+      "engine": "fdb",
+      "mode": "verify",
+      "api": "streamed",
+      "log": "write-hardening-boundary-v4-10k-20261027-r2-control-fdb-streamed-verify.jsonl",
+      "exit_code": 0,
+      "wall_s": 2.8440000000118744
+    },
+    {
+      "engine": "sqlite",
+      "mode": "seed",
+      "api": "streamed",
+      "log": "write-hardening-boundary-v4-10k-20261027-r2-sqlite-sqlite-streamed-seed.jsonl",
+      "exit_code": 0,
+      "wall_s": 38.01600000000326
+    },
+    {
+      "engine": "sqlite",
+      "mode": "small-boundary",
+      "api": "streamed",
+      "log": "write-hardening-boundary-v4-10k-20261027-r2-sqlite-sqlite-streamed-small-boundary.jsonl",
+      "exit_code": 0,
+      "wall_s": 13.655999999988126
+    },
+    {
+      "engine": "sqlite",
+      "mode": "verify",
+      "api": "streamed",
+      "log": "write-hardening-boundary-v4-10k-20261027-r2-sqlite-sqlite-streamed-verify.jsonl",
+      "exit_code": 0,
+      "wall_s": 29.984000000025844
+    },
+    {
+      "engine": "sqlite",
+      "mode": "seed",
+      "api": "streamed",
+      "log": "write-hardening-boundary-v4-10k-20261027-r3-sqlite-sqlite-streamed-seed.jsonl",
+      "exit_code": 0,
+      "wall_s": 37.39100000000326
+    },
+    {
+      "engine": "sqlite",
+      "mode": "small-boundary",
+      "api": "streamed",
+      "log": "write-hardening-boundary-v4-10k-20261027-r3-sqlite-sqlite-streamed-small-boundary.jsonl",
+      "exit_code": 0,
+      "wall_s": 13.71799999999348
+    },
+    {
+      "engine": "sqlite",
+      "mode": "verify",
+      "api": "streamed",
+      "log": "write-hardening-boundary-v4-10k-20261027-r3-sqlite-sqlite-streamed-verify.jsonl",
+      "exit_code": 0,
+      "wall_s": 31.0
+    },
+    {
+      "engine": "fdb",
+      "mode": "seed",
+      "api": "streamed",
+      "log": "write-hardening-boundary-v4-10k-20261027-r3-control-fdb-streamed-seed.jsonl",
+      "exit_code": 0,
+      "wall_s": 14.905999999988126
+    },
+    {
+      "engine": "fdb",
+      "mode": "small-boundary",
+      "api": "streamed",
+      "log": "write-hardening-boundary-v4-10k-20261027-r3-control-fdb-streamed-small-boundary.jsonl",
+      "exit_code": 0,
+      "wall_s": 2.7660000000032596
+    },
+    {
+      "engine": "fdb",
+      "mode": "verify",
+      "api": "streamed",
+      "log": "write-hardening-boundary-v4-10k-20261027-r3-control-fdb-streamed-verify.jsonl",
+      "exit_code": 0,
+      "wall_s": 2.75
+    },
+    {
+      "engine": "fdb",
+      "mode": "seed",
+      "api": "streamed",
+      "log": "write-hardening-boundary-v4-10k-20261027-r3-candidate-fdb-streamed-seed.jsonl",
+      "exit_code": 0,
+      "wall_s": 15.922000000020489
+    },
+    {
+      "engine": "fdb",
+      "mode": "small-boundary",
+      "api": "streamed",
+      "log": "write-hardening-boundary-v4-10k-20261027-r3-candidate-fdb-streamed-small-boundary.jsonl",
+      "exit_code": 0,
+      "wall_s": 2.515999999974156
+    },
+    {
+      "engine": "fdb",
+      "mode": "verify",
+      "api": "streamed",
+      "log": "write-hardening-boundary-v4-10k-20261027-r3-candidate-fdb-streamed-verify.jsonl",
+      "exit_code": 0,
+      "wall_s": 2.7030000000086147
+    }
+  ],
+  "corpus": "same existing first10000, no corpus preparation; ownership checked fixed slots",
+  "cache": "warm OS; no eviction/background or CPU/power isolation",
+  "scope": "streamed primary; no persistent format changes; full model oracle",
+  "orders": [
+    "r0-control",
+    "r0-candidate",
+    "r0-sqlite",
+    "r1-sqlite",
+    "r1-candidate",
+    "r1-control",
+    "r2-candidate",
+    "r2-control",
+    "r2-sqlite",
+    "r3-sqlite",
+    "r3-control",
+    "r3-candidate"
+  ],
+  "protected_after": [
+    {
+      "path": "data\\rkyv-corpus-20261009\\json.payload-bench",
+      "bytes": 2740862279,
+      "sha256": "11F826FCE3F4AE790FEB9FC6DF9B1169F52C2FD699E89FC4A8A4B77AAA41731B"
+    },
+    {
+      "path": "tests\\fixtures\\v1\\checkpoint.fdb",
+      "bytes": 1507,
+      "sha256": "E87667C0FABE64D5A1F59EF86B99F7E612DB755D239B41677DA2ADC24BE7BF57"
+    },
+    {
+      "path": "tests\\fixtures\\v1\\checkpoint.ready",
+      "bytes": 28,
+      "sha256": "BC82C18F8D5C3A209328BD59B12D828D8922BEC4D26CB4D557FD4A493A4A9C2F"
+    }
+  ],
+  "complete": true
+}

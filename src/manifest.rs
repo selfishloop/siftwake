@@ -176,6 +176,8 @@ fn publish_ready(pending: &Path, ready: &Path) -> Result<()> {
 
 pub(crate) fn publish(dir: &Path, id: u64, manifest: &Manifest) -> Result<()> {
     #[cfg(feature = "diagnostic-timing")]
+    let _span = crate::timing::span("manifest.publish");
+    #[cfg(feature = "diagnostic-timing")]
     let _publish = crate::timing::maintenance::span("fsync_publish");
     let payload = serde_json::to_vec(manifest)?;
     if payload.len() > 16 * 1024 * 1024 - 24 {
@@ -192,7 +194,11 @@ pub(crate) fn publish(dir: &Path, id: u64, manifest: &Manifest) -> Result<()> {
         .create_new(true)
         .open(&pending)?;
     f.write_all(&bytes)?;
-    f.sync_all()?;
+    {
+        #[cfg(feature = "diagnostic-timing")]
+        let _sync = crate::timing::span("manifest.sync");
+        f.sync_all()?;
+    }
     drop(f);
     publish_ready(&pending, &path(dir, id, "ready"))?;
     sync_dir(dir)

@@ -1,0 +1,590 @@
+{
+  "protected": [
+    {
+      "path": "data\\rkyv-corpus-20261009\\json.payload-bench",
+      "bytes": 2740862279,
+      "sha256": "11F826FCE3F4AE790FEB9FC6DF9B1169F52C2FD699E89FC4A8A4B77AAA41731B"
+    },
+    {
+      "path": "tests\\fixtures\\v1\\checkpoint.fdb",
+      "bytes": 1507,
+      "sha256": "E87667C0FABE64D5A1F59EF86B99F7E612DB755D239B41677DA2ADC24BE7BF57"
+    },
+    {
+      "path": "tests\\fixtures\\v1\\checkpoint.ready",
+      "bytes": 28,
+      "sha256": "BC82C18F8D5C3A209328BD59B12D828D8922BEC4D26CB4D557FD4A493A4A9C2F"
+    }
+  ],
+  "oracle": true,
+  "kill_windows_per_version": 7,
+  "total_kill_windows": 14,
+  "old_reader": true,
+  "versions_with_separate_kill_windows": [
+    "v2",
+    "v3"
+  ],
+  "validation_commands": 8,
+  "validation_versions": [
+    "v2",
+    "v3"
+  ],
+  "power_loss_claim": false,
+  "evidence": [
+    {
+      "path": "snapshot-10k-20261026-fdb-one-r0-load-fdb-streamed-seed.jsonl",
+      "bytes": 1180,
+      "sha256": "F625EE82803BDFA0F4DF94E8E22EA518C58943FF11170309D71526B7CCB51670"
+    },
+    {
+      "path": "snapshot-10k-20261026-fdb-one-r0-load-fdb-streamed-snapshot-one.jsonl",
+      "bytes": 1800152,
+      "sha256": "1F5562F1ECB62B274F8B537FC94C860ED51BD8A83489068382ED2A0A59A88419"
+    },
+    {
+      "path": "snapshot-10k-20261026-fdb-one-r0-load-fdb-streamed-verify.jsonl",
+      "bytes": 7340,
+      "sha256": "C7FC5F81CAFF2B21EDC1E25EF02C8CD2DCB4BD56248FC95EAD5B396AFFBEFB28"
+    },
+    {
+      "path": "snapshot-10k-20261026-fdb-one-r0-control-fdb-streamed-seed.jsonl",
+      "bytes": 1168,
+      "sha256": "00DD47CA58336FC8BACFFFCB82082B0563D2562E9853574C0CBC4EE92FF537F7"
+    },
+    {
+      "path": "snapshot-10k-20261026-fdb-one-r0-control-fdb-streamed-snapshot-control-one.jsonl",
+      "bytes": 7868,
+      "sha256": "78572B66EA4E427AA780F9F6CA012153C4DA88DD8FD604ABD90378434DEFBDE8"
+    },
+    {
+      "path": "snapshot-10k-20261026-fdb-one-r0-control-fdb-streamed-verify.jsonl",
+      "bytes": 7447,
+      "sha256": "2FF2BA1D662A45A7D5A4D9051FADACF5915122AE1D7C69BA9E2043D71C55DB5A"
+    },
+    {
+      "path": "snapshot-10k-20261026-fdb-one-r0-design.json",
+      "bytes": 15830,
+      "sha256": "3871C63184C4F59E37872FB9A62E288FC91F6007F7B91C101250BD6CB351B64D"
+    },
+    {
+      "path": "snapshot-10k-20261026-fdb-one-r1-control-fdb-streamed-seed.jsonl",
+      "bytes": 1168,
+      "sha256": "2ECD3A0404F1EFA4DBA3B7FF4D98241103463B15452F36E7172AED6C3D362AC8"
+    },
+    {
+      "path": "snapshot-10k-20261026-fdb-one-r1-control-fdb-streamed-snapshot-control-one.jsonl",
+      "bytes": 7839,
+      "sha256": "7F6158132327FF536E79544E061B6C4F799BB640908E19119BA91E6B62E046F5"
+    },
+    {
+      "path": "snapshot-10k-20261026-fdb-one-r1-control-fdb-streamed-verify.jsonl",
+      "bytes": 7383,
+      "sha256": "DD8FA77BF6814B313735DB56C704DCC6DF8C2E51678A7590BDE76188D292E4EF"
+    },
+    {
+      "path": "snapshot-10k-20261026-fdb-one-r1-load-fdb-streamed-seed.jsonl",
+      "bytes": 1180,
+      "sha256": "0F868ADE4B6C403B49BBB377FFAECECD56D0153E6B23B7FC83A7E2BE593E4C96"
+    },
+    {
+      "path": "snapshot-10k-20261026-fdb-one-r1-load-fdb-streamed-snapshot-one.jsonl",
+      "bytes": 1800623,
+      "sha256": "A4C9075D533B665FA48D30096AF365D3F6D1A0F89C3070F5D9B8414637CBE4D6"
+    },
+    {
+      "path": "snapshot-10k-20261026-fdb-one-r1-load-fdb-streamed-verify.jsonl",
+      "bytes": 7339,
+      "sha256": "F6F0550277C9EED1F6D8DE7A538BF75605D251879DEA810C01DB60B6C9B5BBD2"
+    },
+    {
+      "path": "snapshot-10k-20261026-fdb-one-r1-design.json",
+      "bytes": 15805,
+      "sha256": "AF5640BCF7B2DEF3FAE35C9D12ED625C95CBE4B7C47AC825F99A5C03868E14E9"
+    },
+    {
+      "path": "snapshot-10k-20261026-fdb-100-r0-load-fdb-streamed-seed.jsonl",
+      "bytes": 1180,
+      "sha256": "FEB318478EFA375124E13CC4D5089A07A5518CE3FC021402AB52CAD6DA7CD18B"
+    },
+    {
+      "path": "snapshot-10k-20261026-fdb-100-r0-load-fdb-streamed-snapshot-100.jsonl",
+      "bytes": 1795342,
+      "sha256": "8709E817B1A71C5B7E168BF3AF1B49A320056E1B2F2EC8AEB86998A0FC475566"
+    },
+    {
+      "path": "snapshot-10k-20261026-fdb-100-r0-load-fdb-streamed-verify.jsonl",
+      "bytes": 7371,
+      "sha256": "55AFF5A1C8A5982FD1F454DBB3B3BE520A360B4EB35943A8A256A0A6D5A32B82"
+    },
+    {
+      "path": "snapshot-10k-20261026-fdb-100-r0-control-fdb-streamed-seed.jsonl",
+      "bytes": 1180,
+      "sha256": "3C48E1E2315A30B770706336599DD4C207AD3C6AAF37A24F99927E10D4C08ECD"
+    },
+    {
+      "path": "snapshot-10k-20261026-fdb-100-r0-control-fdb-streamed-snapshot-control-100.jsonl",
+      "bytes": 4972,
+      "sha256": "3563E20A18A70DDA86A5B7D00565FF191579975EE5F4F12465EC84AC01D7529C"
+    },
+    {
+      "path": "snapshot-10k-20261026-fdb-100-r0-control-fdb-streamed-verify.jsonl",
+      "bytes": 7295,
+      "sha256": "B070A74C63D3A403E7338491C3A439DB86C3003F755A1D5CC5180AE3CF1E0895"
+    },
+    {
+      "path": "snapshot-10k-20261026-fdb-100-r0-design.json",
+      "bytes": 14233,
+      "sha256": "12EF1B5A90FDB1935178D4ADBC153896B7764984E38B9CBBEA44B0C1054B6532"
+    },
+    {
+      "path": "snapshot-10k-20261026-fdb-100-r1-control-fdb-streamed-seed.jsonl",
+      "bytes": 1168,
+      "sha256": "9C5A60545F0451C4DF35FBA6BAF70EBDC82B892AC2229FE7F72CF2AFF329FDF4"
+    },
+    {
+      "path": "snapshot-10k-20261026-fdb-100-r1-control-fdb-streamed-snapshot-control-100.jsonl",
+      "bytes": 4996,
+      "sha256": "62C07A0C34FBF0F99A9226534B6C8948B0F61E2D8F9AE1002B77F7A02B685DFF"
+    },
+    {
+      "path": "snapshot-10k-20261026-fdb-100-r1-control-fdb-streamed-verify.jsonl",
+      "bytes": 7331,
+      "sha256": "8329042A90B3728757780D27704FA3A2F0675231F2CF4196DE30D9F151C05983"
+    },
+    {
+      "path": "snapshot-10k-20261026-fdb-100-r1-load-fdb-streamed-seed.jsonl",
+      "bytes": 1169,
+      "sha256": "27F2801D3C494A2198BF1FDD681B70EBC5A0B42CD4F428AE9C9A70AB15068613"
+    },
+    {
+      "path": "snapshot-10k-20261026-fdb-100-r1-load-fdb-streamed-snapshot-100.jsonl",
+      "bytes": 1795572,
+      "sha256": "F7D761140F9CF439F26949F14D87FE26EF62215CB7A9091D8A9D266A4BA65A96"
+    },
+    {
+      "path": "snapshot-10k-20261026-fdb-100-r1-load-fdb-streamed-verify.jsonl",
+      "bytes": 7583,
+      "sha256": "A8472D9B6D0C2DB165C92B53E75391E3AF7E21F6E8535B1F6453E73965F15CDA"
+    },
+    {
+      "path": "snapshot-10k-20261026-fdb-100-r1-design.json",
+      "bytes": 14247,
+      "sha256": "1C142B531E56D760E5D9874F9233D5A711BBC52497F4A7CA0DC46451CBE4A7FE"
+    },
+    {
+      "path": "snapshot-10k-20261026-sqlite-one-r0-load-sqlite-streamed-seed.jsonl",
+      "bytes": 1067,
+      "sha256": "21E5880A3D7E6F813DC7A55063A0A3E2C78B34DD6486B5260624B89A5F0D1FB7"
+    },
+    {
+      "path": "snapshot-10k-20261026-sqlite-one-r0-load-sqlite-streamed-snapshot-one.jsonl",
+      "bytes": 552777,
+      "sha256": "379FB03680EE33711E10205D9F15B69CC2110C9E93D4DAFB74F8E1E5A137713B"
+    },
+    {
+      "path": "snapshot-10k-20261026-sqlite-one-r0-load-sqlite-streamed-verify.jsonl",
+      "bytes": 7159,
+      "sha256": "8C46440C711BFC5B8373AE764B7C7389300BDA62803E8751B73634F6DAF11ADA"
+    },
+    {
+      "path": "snapshot-10k-20261026-sqlite-one-r0-control-sqlite-streamed-seed.jsonl",
+      "bytes": 1068,
+      "sha256": "3FAE946C96B5302814A8C5F402F91CB5ACE460262065D9A6A69573A22F7F9FEB"
+    },
+    {
+      "path": "snapshot-10k-20261026-sqlite-one-r0-control-sqlite-streamed-snapshot-control-one.jsonl",
+      "bytes": 190104,
+      "sha256": "EA99B8250340253D59065DE4DBC30C38570F7F897F541A88F5BB0FA4A1CDC9E1"
+    },
+    {
+      "path": "snapshot-10k-20261026-sqlite-one-r0-control-sqlite-streamed-verify.jsonl",
+      "bytes": 7386,
+      "sha256": "4940D0F687D5313173A153367EACBCA5CEF7AFDA1885C412D6DC19A0AAA8DA9D"
+    },
+    {
+      "path": "snapshot-10k-20261026-sqlite-one-r0-design.json",
+      "bytes": 4282,
+      "sha256": "70F2C9A3724393AF9C24FA27713DAE0AF8A8B57D660BB6B8FBD20D85F5757EB8"
+    },
+    {
+      "path": "snapshot-10k-20261026-sqlite-one-r1-control-sqlite-streamed-seed.jsonl",
+      "bytes": 1080,
+      "sha256": "8C1FC5F6369183DC8C925864672CE82E14142E9F2A175BE2C77A30BCF27F09C2"
+    },
+    {
+      "path": "snapshot-10k-20261026-sqlite-one-r1-control-sqlite-streamed-snapshot-control-one.jsonl",
+      "bytes": 190338,
+      "sha256": "8BE3342A69706711C417FBB906E27EC6E0E2B89C2BE7ED4E4221ED93C2D71F74"
+    },
+    {
+      "path": "snapshot-10k-20261026-sqlite-one-r1-control-sqlite-streamed-verify.jsonl",
+      "bytes": 7163,
+      "sha256": "AB350CD4C4102B51C8712E8F82A825711724A6643C79A5B0C26F534DE7423253"
+    },
+    {
+      "path": "snapshot-10k-20261026-sqlite-one-r1-load-sqlite-streamed-seed.jsonl",
+      "bytes": 1068,
+      "sha256": "68587475F351AC04AC7B1C170DCDAB0B4D54FE0B43BE93FE8D77693B21707573"
+    },
+    {
+      "path": "snapshot-10k-20261026-sqlite-one-r1-load-sqlite-streamed-snapshot-one.jsonl",
+      "bytes": 552338,
+      "sha256": "DD69C427ECF4732B412692A9556384F4C25E05168BE43A467BF936BE24D42ADD"
+    },
+    {
+      "path": "snapshot-10k-20261026-sqlite-one-r1-load-sqlite-streamed-verify.jsonl",
+      "bytes": 7359,
+      "sha256": "843E7C87E4C34919FCD0E49EF8B17F87211294B8E91B101DA1CC9FA8B1E9D811"
+    },
+    {
+      "path": "snapshot-10k-20261026-sqlite-one-r1-design.json",
+      "bytes": 4281,
+      "sha256": "1B20B064DC7200E45B0F6813015316A6E6F8058D978015435B92E4704480C282"
+    },
+    {
+      "path": "snapshot-10k-20261026-sqlite-100-r0-load-sqlite-streamed-seed.jsonl",
+      "bytes": 1069,
+      "sha256": "35C11F86EF27593948222DE3FD5F11C47DB937C0B9381A55142C8DA7748B85F2"
+    },
+    {
+      "path": "snapshot-10k-20261026-sqlite-100-r0-load-sqlite-streamed-snapshot-100.jsonl",
+      "bytes": 365277,
+      "sha256": "B754BF5CCC277602AA8AB4E923AC716544170C82AFC2453FCB988A15692E3FE6"
+    },
+    {
+      "path": "snapshot-10k-20261026-sqlite-100-r0-load-sqlite-streamed-verify.jsonl",
+      "bytes": 7475,
+      "sha256": "2598BB2B7EB99C11E28361B85E82005A6AF40A9927239ACD31F6DEA0CB610DC9"
+    },
+    {
+      "path": "snapshot-10k-20261026-sqlite-100-r0-control-sqlite-streamed-seed.jsonl",
+      "bytes": 1066,
+      "sha256": "9D99FFC2A52D7734CD36261C83F6D0103985A7E03DEE7D47CD23098B236F71B1"
+    },
+    {
+      "path": "snapshot-10k-20261026-sqlite-100-r0-control-sqlite-streamed-snapshot-control-100.jsonl",
+      "bytes": 3858,
+      "sha256": "1A548F6D91E89C6B4433804E131AAAE0D33015CDE1B9549756917BEAE44EB46C"
+    },
+    {
+      "path": "snapshot-10k-20261026-sqlite-100-r0-control-sqlite-streamed-verify.jsonl",
+      "bytes": 7375,
+      "sha256": "115702562A27230F7745038AB88AC61EBCB84E675FF2B079B5C8C393D48D4F04"
+    },
+    {
+      "path": "snapshot-10k-20261026-sqlite-100-r0-design.json",
+      "bytes": 4280,
+      "sha256": "B169FB1BEF8C1048F96C8D95B5AD1EB3A95E2F053DDA477C2A3303BF5FA47AC3"
+    },
+    {
+      "path": "snapshot-10k-20261026-sqlite-100-r1-control-sqlite-streamed-seed.jsonl",
+      "bytes": 1066,
+      "sha256": "A799C6E9A24F30A0A0E697D12323DC0EE34EB34A9221AA41FA83774EAD138DF7"
+    },
+    {
+      "path": "snapshot-10k-20261026-sqlite-100-r1-control-sqlite-streamed-snapshot-control-100.jsonl",
+      "bytes": 3951,
+      "sha256": "E359C43DB0E4D650DF3318619FBBE8693D55DADDA4452E03400D3A5F89338A4E"
+    },
+    {
+      "path": "snapshot-10k-20261026-sqlite-100-r1-control-sqlite-streamed-verify.jsonl",
+      "bytes": 7503,
+      "sha256": "E4C49DBB16F4DCBB31A1208346B5F8F1A3B39F199B2513D33D81E59E44D63D8D"
+    },
+    {
+      "path": "snapshot-10k-20261026-sqlite-100-r1-load-sqlite-streamed-seed.jsonl",
+      "bytes": 1070,
+      "sha256": "A6BDB1EC8623AD36AE90B3E7C1D2CEFE07C2752D2279A901150E6345F3B4CBA0"
+    },
+    {
+      "path": "snapshot-10k-20261026-sqlite-100-r1-load-sqlite-streamed-snapshot-100.jsonl",
+      "bytes": 365252,
+      "sha256": "2A05953E8CB78A20B861ECB761D3188B77BB89B7ECFB0DA4B263197AF264E283"
+    },
+    {
+      "path": "snapshot-10k-20261026-sqlite-100-r1-load-sqlite-streamed-verify.jsonl",
+      "bytes": 7319,
+      "sha256": "077BF87ED4A6E587D109C3F7BB61857EC74569AB5DA9E5A344B216DF52905A20"
+    },
+    {
+      "path": "snapshot-10k-20261026-sqlite-100-r1-design.json",
+      "bytes": 4247,
+      "sha256": "23A1B55C1BCF6428371673BFD13C2D040D74C35544F316E18B0FF00ED8B744BE"
+    },
+    {
+      "path": "snapshot-kill-10k-20261026-cache.jsonl",
+      "bytes": 0,
+      "sha256": "E3B0C44298FC1C149AFBF4C8996FB92427AE41E4649B934CA495991B7852B855"
+    },
+    {
+      "path": "snapshot-kill-10k-20261026-flush.jsonl",
+      "bytes": 726,
+      "sha256": "857DEA17908EC057008CE9580686ED6CBE724A651F5CB9061C1ADC8CD064EF20"
+    },
+    {
+      "path": "snapshot-kill-10k-20261026-iterator.jsonl",
+      "bytes": 705,
+      "sha256": "9B338A8865AFF56CDFD736F0DB8E2A55BEC77BC0EC8A0E14B7FF3D45685F4573"
+    },
+    {
+      "path": "snapshot-kill-10k-20261026-kill-cache-fdb-owned-verify.jsonl",
+      "bytes": 7414,
+      "sha256": "CD8E3E8DFA1003D8CB5E8C5608869FF291A113B3ADA939AD6ADA2CEF10E3A6A4"
+    },
+    {
+      "path": "snapshot-kill-10k-20261026-kill-cancel-fdb-streamed-verify.jsonl",
+      "bytes": 7383,
+      "sha256": "150F774264B44194E46D65C83448E381091544B9C522CA18FD04DF6228002666"
+    },
+    {
+      "path": "snapshot-kill-10k-20261026-kill-cancel.jsonl",
+      "bytes": 845,
+      "sha256": "4C99B18795C270F90C3A6EF267ED7BA24C3C7AFFA99DEAC250D8A4EE3C5A768A"
+    },
+    {
+      "path": "snapshot-kill-10k-20261026-kill-flush-fdb-owned-verify.jsonl",
+      "bytes": 7263,
+      "sha256": "094F2861FDEC951D189BF4D0615819313FD234BD21F322C7445B98F8F5E77260"
+    },
+    {
+      "path": "snapshot-kill-10k-20261026-kill-iterator-fdb-owned-verify.jsonl",
+      "bytes": 7286,
+      "sha256": "32D59636546249EF51923B74501B3D07DF451005C233245EB646157A9B61D05B"
+    },
+    {
+      "path": "snapshot-kill-10k-20261026-kill-merge-fdb-owned-verify.jsonl",
+      "bytes": 7326,
+      "sha256": "D4243D81BF2C8C19F1B075FA20817CD2A017C4A435B8420566DC90650C943FBD"
+    },
+    {
+      "path": "snapshot-kill-10k-20261026-kill-retire-after-fdb-streamed-verify.jsonl",
+      "bytes": 7593,
+      "sha256": "BAFF37CBA18C2D5ABAFE663A5202FA09967FE3AAADDB65BEF0C3D90D9B654292"
+    },
+    {
+      "path": "snapshot-kill-10k-20261026-kill-retire-after.jsonl",
+      "bytes": 1494,
+      "sha256": "B4FA130E40DD65EF7E0855C5D085F6A748BB79DB504656C001C2A23BB29473D2"
+    },
+    {
+      "path": "snapshot-kill-10k-20261026-kill-retire-before-fdb-streamed-verify.jsonl",
+      "bytes": 7361,
+      "sha256": "E5A809AE19A24D47C61FC248E14231532EB144C0A767B774FE81AC0105D56F59"
+    },
+    {
+      "path": "snapshot-kill-10k-20261026-kill-retire-before.jsonl",
+      "bytes": 1494,
+      "sha256": "0E050130C140EB443401E408E788970D530131EF381DDD075D63C3C696C72B3A"
+    },
+    {
+      "path": "snapshot-kill-10k-20261026-merge.jsonl",
+      "bytes": 1012,
+      "sha256": "3DBBF835EA91AB35AA67DC0A2B2D261DAACA581AC65DF03C98F8AAF05346FDB7"
+    },
+    {
+      "path": "snapshot-kill-10k-20261026-old-reader-fdb-streamed-verify.jsonl",
+      "bytes": 7281,
+      "sha256": "D17CAA549741EB14DA5B2A9273D655E661EEF35904A433679B88CB654E2477C5"
+    },
+    {
+      "path": "snapshot-kill-10k-20261026-summary.json",
+      "bytes": 68220,
+      "sha256": "858D67C92F5469D5FA4F873055294A05861D8E2FEC50AE0D751B74DC78D0171C"
+    },
+    {
+      "path": "snapshot-10k-20261026-validation-v2-fmt.log",
+      "bytes": 0,
+      "sha256": "E3B0C44298FC1C149AFBF4C8996FB92427AE41E4649B934CA495991B7852B855"
+    },
+    {
+      "path": "snapshot-10k-20261026-validation-v2-clippy.log",
+      "bytes": 138,
+      "sha256": "0778F7BDB75296499FB964E78CBD6FC40DEC91CD2BA64CF35C46DACFE9D9D93E"
+    },
+    {
+      "path": "snapshot-10k-20261026-validation-v2-test.log",
+      "bytes": 29093,
+      "sha256": "EEF3E866EFA87281D392AEE806F124D9F70A17BA237B7ACB3E34A9C02E87751C"
+    },
+    {
+      "path": "snapshot-10k-20261026-validation-v2-no-default.log",
+      "bytes": 73,
+      "sha256": "DAB4E4707B2E6FDBDEAD361B4487BE475974A047EDEA846DD92BAC44F319F872"
+    },
+    {
+      "path": "snapshot-10k-20261026-validation-v2-all-features.log",
+      "bytes": 138,
+      "sha256": "74B0ECF89ECA48493423326D2CB52691D654E222EF0638AEB5846AA652F5DC15"
+    },
+    {
+      "path": "snapshot-10k-20261026-validation-v2-sqlite-fmt.log",
+      "bytes": 0,
+      "sha256": "E3B0C44298FC1C149AFBF4C8996FB92427AE41E4649B934CA495991B7852B855"
+    },
+    {
+      "path": "snapshot-10k-20261026-validation-v2-sqlite-clippy.log",
+      "bytes": 243,
+      "sha256": "C1D641E43894E51B478DB340118D84B0A702015BC211257292B4B182928AFCB4"
+    },
+    {
+      "path": "snapshot-10k-20261026-validation-v2-sqlite-test.log",
+      "bytes": 559,
+      "sha256": "EF83F7C4B34C306C2EB10A3CE099F2127445B3C0E112BDEB322103A87BB63BD2"
+    },
+    {
+      "path": "snapshot-waits-10k-20261026-design.json",
+      "bytes": 2785,
+      "sha256": "802FBD62459B97840B14FC2627365C2789CA8AAA6910FCA07E77B5842C028C17"
+    },
+    {
+      "path": "snapshot-waits-10k-20261026-one-fdb-streamed-seed.jsonl",
+      "bytes": 1169,
+      "sha256": "8E14D8B3FD4541A1F1CB87B7172E31338554EB9F68F9C237A8EE4E642BD7F607"
+    },
+    {
+      "path": "snapshot-waits-10k-20261026-one-fdb-streamed-snapshot-one.jsonl",
+      "bytes": 1799918,
+      "sha256": "FF2ED4F58511EB99B43F850BB7BEB2CD7511F451E5E74267D96F6607881B198D"
+    },
+    {
+      "path": "snapshot-waits-10k-20261026-one-fdb-streamed-verify.jsonl",
+      "bytes": 7415,
+      "sha256": "0CA4207C6C31AFCA6F117432BADDF444D36FAFD6B5DA11FCBC16BBACAFED166B"
+    },
+    {
+      "path": "snapshot-waits-10k-20261026-100-fdb-streamed-seed.jsonl",
+      "bytes": 1168,
+      "sha256": "CB96B92B75EBDB94BAB4B7DD91221180FBE527AE3E2B7FC85B97C5A757278681"
+    },
+    {
+      "path": "snapshot-waits-10k-20261026-100-fdb-streamed-snapshot-100.jsonl",
+      "bytes": 1795587,
+      "sha256": "47597993896A62839D1F9B256815BAB2A815471A33D5725999AC71DA8457EB0D"
+    },
+    {
+      "path": "snapshot-waits-10k-20261026-100-fdb-streamed-verify.jsonl",
+      "bytes": 7201,
+      "sha256": "A58B8CE88E82E77C479D35BC73EF81AF5AE565456E3054E3D5DB04C7A5010A50"
+    },
+    {
+      "path": "snapshot-kill-v3-10k-20261026-cache.jsonl",
+      "bytes": 0,
+      "sha256": "E3B0C44298FC1C149AFBF4C8996FB92427AE41E4649B934CA495991B7852B855"
+    },
+    {
+      "path": "snapshot-kill-v3-10k-20261026-flush.jsonl",
+      "bytes": 723,
+      "sha256": "F28F2810B337BBF3AC25F1B4DBE18B5D89A2CE63A95EE8F7BA6DF1DD8E83FE20"
+    },
+    {
+      "path": "snapshot-kill-v3-10k-20261026-iterator.jsonl",
+      "bytes": 702,
+      "sha256": "43AEA9D49A6FC19152A84773B42362C9FC9DB352A455DFBB8238AA6C9EE489D5"
+    },
+    {
+      "path": "snapshot-kill-v3-10k-20261026-kill-cache-fdb-owned-verify.jsonl",
+      "bytes": 7487,
+      "sha256": "AAA25C2400701B0648D6A05F2E2FFED9D015AFF8FBE5B9200830EC3E62B6E4E4"
+    },
+    {
+      "path": "snapshot-kill-v3-10k-20261026-kill-cancel-fdb-streamed-verify.jsonl",
+      "bytes": 7453,
+      "sha256": "546C4F65226CC3C21CF2EB17C4A4F87F63974A0F9F0600B14F781FB6AADE765A"
+    },
+    {
+      "path": "snapshot-kill-v3-10k-20261026-kill-cancel.jsonl",
+      "bytes": 854,
+      "sha256": "8FF3B8F8F2425CCFDCE85162BB8091587FC83DBAB0D594BC9F8E7BA19D81600C"
+    },
+    {
+      "path": "snapshot-kill-v3-10k-20261026-kill-flush-fdb-owned-verify.jsonl",
+      "bytes": 7305,
+      "sha256": "69C3CF9F01CC9B08D14FDBDA7D70623FF87E541784ADECE2B86E2B50D6930CCE"
+    },
+    {
+      "path": "snapshot-kill-v3-10k-20261026-kill-iterator-fdb-owned-verify.jsonl",
+      "bytes": 7341,
+      "sha256": "C298C10B72169C75904BECA512E85184536BB9991DB028DDED39EE8AFB73AE00"
+    },
+    {
+      "path": "snapshot-kill-v3-10k-20261026-kill-merge-fdb-owned-verify.jsonl",
+      "bytes": 7328,
+      "sha256": "AD14670C7BEF7DE5CB773677E691EF792F04B7E984FA4F09E84F2EE9CA84FD59"
+    },
+    {
+      "path": "snapshot-kill-v3-10k-20261026-kill-retire-after-fdb-streamed-verify.jsonl",
+      "bytes": 7275,
+      "sha256": "C1CD0A3BFAC3DCA2447FEA6E6962DE543E499D24A7C510BE0ABCF85244C01CCF"
+    },
+    {
+      "path": "snapshot-kill-v3-10k-20261026-kill-retire-after.jsonl",
+      "bytes": 1673,
+      "sha256": "0619C260651098379D3005FE6075491A5E1E57172CB2623521DAEA2FF8D4C65D"
+    },
+    {
+      "path": "snapshot-kill-v3-10k-20261026-kill-retire-before-fdb-streamed-verify.jsonl",
+      "bytes": 7333,
+      "sha256": "998423267C1CC52F9AFA7E163B5DE4A14DC566A36CD89F88A6FD3DC5FC9BFF33"
+    },
+    {
+      "path": "snapshot-kill-v3-10k-20261026-kill-retire-before.jsonl",
+      "bytes": 1504,
+      "sha256": "0A8C5C7A50A65E9ABBCF1F468CC7685A6566C71E906C4A077835E0911B8844BA"
+    },
+    {
+      "path": "snapshot-kill-v3-10k-20261026-merge.jsonl",
+      "bytes": 1007,
+      "sha256": "F85B6539BC17405D4EDE6CB3043F24E622EB38626A07BF82A9BD67C4A7CEFE79"
+    },
+    {
+      "path": "snapshot-kill-v3-10k-20261026-old-reader-fdb-streamed-verify.jsonl",
+      "bytes": 7323,
+      "sha256": "C03E26BB2BE0CDA3A2D3379BD6C7CADDF9B1EAD54D98489333274F7407348BD5"
+    },
+    {
+      "path": "snapshot-kill-v3-10k-20261026-summary.json",
+      "bytes": 63380,
+      "sha256": "F9D5E5B925C2680D4AC5DEF90511AFB37F23D9DF21498552C43FDC4C5B25899F"
+    },
+    {
+      "path": "snapshot-10k-20261026-validation-v3-fmt.log",
+      "bytes": 0,
+      "sha256": "E3B0C44298FC1C149AFBF4C8996FB92427AE41E4649B934CA495991B7852B855"
+    },
+    {
+      "path": "snapshot-10k-20261026-validation-v3-clippy.log",
+      "bytes": 138,
+      "sha256": "8B9408EF262AC473DE648E0EFB7F2DE4ECBC000D82EED89DAE0C8329242C0DC8"
+    },
+    {
+      "path": "snapshot-10k-20261026-validation-v3-test.log",
+      "bytes": 29188,
+      "sha256": "AC62FA2797C10C1D8975D00857F45BA10929633C6C8AB11CCAAE623C18041514"
+    },
+    {
+      "path": "snapshot-10k-20261026-validation-v3-no-default.log",
+      "bytes": 138,
+      "sha256": "39E2EEC9759EA06CD67D0AE51A459E9D4CFFB6A3D0E986E0A1A8A8D563091EB3"
+    },
+    {
+      "path": "snapshot-10k-20261026-validation-v3-all-features.log",
+      "bytes": 138,
+      "sha256": "BBE4C9F6ECC666CEB43F48A5EFA1218E5335AB80C9C6271FB91D7EA127AD7A8F"
+    },
+    {
+      "path": "snapshot-10k-20261026-validation-v3-sqlite-fmt.log",
+      "bytes": 0,
+      "sha256": "E3B0C44298FC1C149AFBF4C8996FB92427AE41E4649B934CA495991B7852B855"
+    },
+    {
+      "path": "snapshot-10k-20261026-validation-v3-sqlite-clippy.log",
+      "bytes": 243,
+      "sha256": "24A113A19BA84C325E1AE335D4CDBBEDC4C5353BE251045E835E7F460DCE4516"
+    },
+    {
+      "path": "snapshot-10k-20261026-validation-v3-sqlite-test.log",
+      "bytes": 559,
+      "sha256": "CE10F8D57AD0FBB4AD0A06DD39791EEC9CCA8EAE1CEE36250FF009C4D764E02F"
+    }
+  ]
+}

@@ -1,0 +1,7411 @@
+{
+  "queries": [
+    {
+      "documents": 50000,
+      "engine": "fdb",
+      "case_id": 0,
+      "variant": "cap",
+      "n": 20,
+      "p50_ms": 4.9584,
+      "p95_ms": 5.6038,
+      "max_ms": 6.3993,
+      "cpu_total_ms": 156.25,
+      "cpu_mean_ms": 7.8125
+    },
+    {
+      "documents": 50000,
+      "engine": "fdb",
+      "case_id": 0,
+      "variant": "cap-four",
+      "n": 20,
+      "p50_ms": 15.5545,
+      "p95_ms": 16.3312,
+      "max_ms": 16.369600000000002,
+      "cpu_total_ms": 781.25,
+      "cpu_mean_ms": 39.0625
+    },
+    {
+      "documents": 50000,
+      "engine": "fdb",
+      "case_id": 0,
+      "variant": "cap-hybrid",
+      "n": 20,
+      "p50_ms": 4.8087,
+      "p95_ms": 5.1303,
+      "max_ms": 5.1814,
+      "cpu_total_ms": 62.5,
+      "cpu_mean_ms": 3.125
+    },
+    {
+      "documents": 50000,
+      "engine": "fdb",
+      "case_id": 0,
+      "variant": "exact-four",
+      "n": 20,
+      "p50_ms": 576.6487999999999,
+      "p95_ms": 600.4205000000001,
+      "max_ms": 601.5689,
+      "cpu_total_ms": 32578.125,
+      "cpu_mean_ms": 1628.90625
+    },
+    {
+      "documents": 50000,
+      "engine": "fdb",
+      "case_id": 0,
+      "variant": "legacy",
+      "n": 20,
+      "p50_ms": 1276.2812999999999,
+      "p95_ms": 1343.6623000000002,
+      "max_ms": 1369.1423,
+      "cpu_total_ms": 25781.25,
+      "cpu_mean_ms": 1289.0625
+    },
+    {
+      "documents": 50000,
+      "engine": "fdb",
+      "case_id": 1,
+      "variant": "cap",
+      "n": 20,
+      "p50_ms": 3.6603999999999997,
+      "p95_ms": 4.993799999999999,
+      "max_ms": 5.277200000000001,
+      "cpu_total_ms": 46.875,
+      "cpu_mean_ms": 2.34375
+    },
+    {
+      "documents": 50000,
+      "engine": "fdb",
+      "case_id": 1,
+      "variant": "cap-four",
+      "n": 20,
+      "p50_ms": 10.668800000000001,
+      "p95_ms": 11.0022,
+      "max_ms": 11.0332,
+      "cpu_total_ms": 609.375,
+      "cpu_mean_ms": 30.46875
+    },
+    {
+      "documents": 50000,
+      "engine": "fdb",
+      "case_id": 1,
+      "variant": "cap-hybrid",
+      "n": 20,
+      "p50_ms": 3.2523,
+      "p95_ms": 3.3952999999999998,
+      "max_ms": 4.2303999999999995,
+      "cpu_total_ms": 15.625,
+      "cpu_mean_ms": 0.78125
+    },
+    {
+      "documents": 50000,
+      "engine": "fdb",
+      "case_id": 1,
+      "variant": "exact-four",
+      "n": 20,
+      "p50_ms": 385.8606,
+      "p95_ms": 413.9778,
+      "max_ms": 420.6781,
+      "cpu_total_ms": 21000.0,
+      "cpu_mean_ms": 1050.0
+    },
+    {
+      "documents": 50000,
+      "engine": "fdb",
+      "case_id": 1,
+      "variant": "legacy",
+      "n": 20,
+      "p50_ms": 841.2420999999999,
+      "p95_ms": 977.29,
+      "max_ms": 1050.0182,
+      "cpu_total_ms": 17312.5,
+      "cpu_mean_ms": 865.625
+    },
+    {
+      "documents": 50000,
+      "engine": "fdb",
+      "case_id": 2,
+      "variant": "cap",
+      "n": 20,
+      "p50_ms": 4.8869,
+      "p95_ms": 6.011,
+      "max_ms": 9.2873,
+      "cpu_total_ms": 109.375,
+      "cpu_mean_ms": 5.46875
+    },
+    {
+      "documents": 50000,
+      "engine": "fdb",
+      "case_id": 2,
+      "variant": "cap-four",
+      "n": 20,
+      "p50_ms": 17.5212,
+      "p95_ms": 18.169999999999998,
+      "max_ms": 18.8465,
+      "cpu_total_ms": 843.75,
+      "cpu_mean_ms": 42.1875
+    },
+    {
+      "documents": 50000,
+      "engine": "fdb",
+      "case_id": 2,
+      "variant": "cap-hybrid",
+      "n": 20,
+      "p50_ms": 4.6193,
+      "p95_ms": 5.8718,
+      "max_ms": 6.591600000000001,
+      "cpu_total_ms": 78.125,
+      "cpu_mean_ms": 3.90625
+    },
+    {
+      "documents": 50000,
+      "engine": "fdb",
+      "case_id": 2,
+      "variant": "exact-four",
+      "n": 20,
+      "p50_ms": 594.9141,
+      "p95_ms": 634.4991,
+      "max_ms": 640.9448,
+      "cpu_total_ms": 32937.5,
+      "cpu_mean_ms": 1646.875
+    },
+    {
+      "documents": 50000,
+      "engine": "fdb",
+      "case_id": 2,
+      "variant": "legacy",
+      "n": 20,
+      "p50_ms": 1313.323,
+      "p95_ms": 1397.0720999999999,
+      "max_ms": 1563.191,
+      "cpu_total_ms": 26703.125,
+      "cpu_mean_ms": 1335.15625
+    },
+    {
+      "documents": 50000,
+      "engine": "fdb",
+      "case_id": 3,
+      "variant": "cap",
+      "n": 20,
+      "p50_ms": 10.1237,
+      "p95_ms": 12.7783,
+      "max_ms": 13.738,
+      "cpu_total_ms": 171.875,
+      "cpu_mean_ms": 8.59375
+    },
+    {
+      "documents": 50000,
+      "engine": "fdb",
+      "case_id": 3,
+      "variant": "cap-four",
+      "n": 20,
+      "p50_ms": 24.316399999999998,
+      "p95_ms": 24.9614,
+      "max_ms": 25.5821,
+      "cpu_total_ms": 1343.75,
+      "cpu_mean_ms": 67.1875
+    },
+    {
+      "documents": 50000,
+      "engine": "fdb",
+      "case_id": 3,
+      "variant": "cap-hybrid",
+      "n": 20,
+      "p50_ms": 10.5586,
+      "p95_ms": 13.5915,
+      "max_ms": 13.6603,
+      "cpu_total_ms": 234.375,
+      "cpu_mean_ms": 11.71875
+    },
+    {
+      "documents": 50000,
+      "engine": "fdb",
+      "case_id": 3,
+      "variant": "exact-four",
+      "n": 20,
+      "p50_ms": 1457.077,
+      "p95_ms": 1503.3973999999998,
+      "max_ms": 1503.8323999999998,
+      "cpu_total_ms": 80828.125,
+      "cpu_mean_ms": 4041.40625
+    },
+    {
+      "documents": 50000,
+      "engine": "fdb",
+      "case_id": 3,
+      "variant": "legacy",
+      "n": 20,
+      "p50_ms": 3165.6415,
+      "p95_ms": 3293.1620000000003,
+      "max_ms": 3376.5377,
+      "cpu_total_ms": 63296.875,
+      "cpu_mean_ms": 3164.84375
+    },
+    {
+      "documents": 50000,
+      "engine": "fdb",
+      "case_id": 4,
+      "variant": "cap",
+      "n": 20,
+      "p50_ms": 8.7615,
+      "p95_ms": 10.652099999999999,
+      "max_ms": 10.992099999999999,
+      "cpu_total_ms": 218.75,
+      "cpu_mean_ms": 10.9375
+    },
+    {
+      "documents": 50000,
+      "engine": "fdb",
+      "case_id": 4,
+      "variant": "cap-four",
+      "n": 20,
+      "p50_ms": 25.7776,
+      "p95_ms": 26.4203,
+      "max_ms": 26.9382,
+      "cpu_total_ms": 1281.25,
+      "cpu_mean_ms": 64.0625
+    },
+    {
+      "documents": 50000,
+      "engine": "fdb",
+      "case_id": 4,
+      "variant": "cap-hybrid",
+      "n": 20,
+      "p50_ms": 8.724400000000001,
+      "p95_ms": 9.6968,
+      "max_ms": 10.0687,
+      "cpu_total_ms": 156.25,
+      "cpu_mean_ms": 7.8125
+    },
+    {
+      "documents": 50000,
+      "engine": "fdb",
+      "case_id": 4,
+      "variant": "exact-four",
+      "n": 20,
+      "p50_ms": 835.0803999999999,
+      "p95_ms": 881.202,
+      "max_ms": 893.5939000000001,
+      "cpu_total_ms": 47078.125,
+      "cpu_mean_ms": 2353.90625
+    },
+    {
+      "documents": 50000,
+      "engine": "fdb",
+      "case_id": 4,
+      "variant": "legacy",
+      "n": 20,
+      "p50_ms": 1853.4136,
+      "p95_ms": 1982.8133,
+      "max_ms": 2027.5221999999999,
+      "cpu_total_ms": 37265.625,
+      "cpu_mean_ms": 1863.28125
+    },
+    {
+      "documents": 50000,
+      "engine": "fdb",
+      "case_id": 5,
+      "variant": "cap",
+      "n": 20,
+      "p50_ms": 6.1541,
+      "p95_ms": 6.4403999999999995,
+      "max_ms": 7.7077,
+      "cpu_total_ms": 62.5,
+      "cpu_mean_ms": 3.125
+    },
+    {
+      "documents": 50000,
+      "engine": "fdb",
+      "case_id": 5,
+      "variant": "cap-four",
+      "n": 20,
+      "p50_ms": 13.0531,
+      "p95_ms": 13.4395,
+      "max_ms": 13.5702,
+      "cpu_total_ms": 734.375,
+      "cpu_mean_ms": 36.71875
+    },
+    {
+      "documents": 50000,
+      "engine": "fdb",
+      "case_id": 5,
+      "variant": "cap-hybrid",
+      "n": 20,
+      "p50_ms": 6.0211,
+      "p95_ms": 6.413600000000001,
+      "max_ms": 6.9723,
+      "cpu_total_ms": 125.0,
+      "cpu_mean_ms": 6.25
+    },
+    {
+      "documents": 50000,
+      "engine": "fdb",
+      "case_id": 5,
+      "variant": "exact-four",
+      "n": 20,
+      "p50_ms": 339.2525,
+      "p95_ms": 367.0987,
+      "max_ms": 367.3245,
+      "cpu_total_ms": 18671.875,
+      "cpu_mean_ms": 933.59375
+    },
+    {
+      "documents": 50000,
+      "engine": "fdb",
+      "case_id": 5,
+      "variant": "legacy",
+      "n": 20,
+      "p50_ms": 746.0001000000001,
+      "p95_ms": 820.4371,
+      "max_ms": 825.394,
+      "cpu_total_ms": 15203.125,
+      "cpu_mean_ms": 760.15625
+    },
+    {
+      "documents": 50000,
+      "engine": "fdb",
+      "case_id": 6,
+      "variant": "cap",
+      "n": 20,
+      "p50_ms": 24.5627,
+      "p95_ms": 24.972,
+      "max_ms": 29.848,
+      "cpu_total_ms": 500.0,
+      "cpu_mean_ms": 25.0
+    },
+    {
+      "documents": 50000,
+      "engine": "fdb",
+      "case_id": 6,
+      "variant": "cap-four",
+      "n": 20,
+      "p50_ms": 59.4987,
+      "p95_ms": 64.65469999999999,
+      "max_ms": 64.68939999999999,
+      "cpu_total_ms": 3218.75,
+      "cpu_mean_ms": 160.9375
+    },
+    {
+      "documents": 50000,
+      "engine": "fdb",
+      "case_id": 6,
+      "variant": "cap-hybrid",
+      "n": 20,
+      "p50_ms": 24.3108,
+      "p95_ms": 25.1824,
+      "max_ms": 25.5469,
+      "cpu_total_ms": 468.75,
+      "cpu_mean_ms": 23.4375
+    },
+    {
+      "documents": 50000,
+      "engine": "fdb",
+      "case_id": 6,
+      "variant": "exact-four",
+      "n": 20,
+      "p50_ms": 830.0475,
+      "p95_ms": 890.5514,
+      "max_ms": 898.4533,
+      "cpu_total_ms": 45578.125,
+      "cpu_mean_ms": 2278.90625
+    },
+    {
+      "documents": 50000,
+      "engine": "fdb",
+      "case_id": 6,
+      "variant": "legacy",
+      "n": 20,
+      "p50_ms": 1811.0680000000002,
+      "p95_ms": 1873.0373,
+      "max_ms": 1938.4437,
+      "cpu_total_ms": 36234.375,
+      "cpu_mean_ms": 1811.71875
+    },
+    {
+      "documents": 50000,
+      "engine": "fdb",
+      "case_id": 7,
+      "variant": "cap",
+      "n": 20,
+      "p50_ms": 3.4492,
+      "p95_ms": 3.8266,
+      "max_ms": 3.8614,
+      "cpu_total_ms": 78.125,
+      "cpu_mean_ms": 3.90625
+    },
+    {
+      "documents": 50000,
+      "engine": "fdb",
+      "case_id": 7,
+      "variant": "cap-four",
+      "n": 20,
+      "p50_ms": 10.272699999999999,
+      "p95_ms": 10.636,
+      "max_ms": 10.7002,
+      "cpu_total_ms": 468.75,
+      "cpu_mean_ms": 23.4375
+    },
+    {
+      "documents": 50000,
+      "engine": "fdb",
+      "case_id": 7,
+      "variant": "cap-hybrid",
+      "n": 20,
+      "p50_ms": 3.1020000000000003,
+      "p95_ms": 3.381,
+      "max_ms": 4.2668,
+      "cpu_total_ms": 62.5,
+      "cpu_mean_ms": 3.125
+    },
+    {
+      "documents": 50000,
+      "engine": "fdb",
+      "case_id": 7,
+      "variant": "exact-four",
+      "n": 20,
+      "p50_ms": 107.50460000000001,
+      "p95_ms": 119.2591,
+      "max_ms": 124.2496,
+      "cpu_total_ms": 5890.625,
+      "cpu_mean_ms": 294.53125
+    },
+    {
+      "documents": 50000,
+      "engine": "fdb",
+      "case_id": 7,
+      "variant": "legacy",
+      "n": 20,
+      "p50_ms": 237.5801,
+      "p95_ms": 255.6023,
+      "max_ms": 265.8124,
+      "cpu_total_ms": 4796.875,
+      "cpu_mean_ms": 239.84375
+    },
+    {
+      "documents": 50000,
+      "engine": "fdb",
+      "case_id": 8,
+      "variant": "cap",
+      "n": 20,
+      "p50_ms": 7.4049,
+      "p95_ms": 10.095,
+      "max_ms": 10.5084,
+      "cpu_total_ms": 93.75,
+      "cpu_mean_ms": 4.6875
+    },
+    {
+      "documents": 50000,
+      "engine": "fdb",
+      "case_id": 8,
+      "variant": "cap-four",
+      "n": 20,
+      "p50_ms": 19.705199999999998,
+      "p95_ms": 20.1992,
+      "max_ms": 20.2911,
+      "cpu_total_ms": 984.375,
+      "cpu_mean_ms": 49.21875
+    },
+    {
+      "documents": 50000,
+      "engine": "fdb",
+      "case_id": 8,
+      "variant": "cap-hybrid",
+      "n": 20,
+      "p50_ms": 7.3373,
+      "p95_ms": 8.656799999999999,
+      "max_ms": 9.792399999999999,
+      "cpu_total_ms": 109.375,
+      "cpu_mean_ms": 5.46875
+    },
+    {
+      "documents": 50000,
+      "engine": "fdb",
+      "case_id": 8,
+      "variant": "exact-four",
+      "n": 20,
+      "p50_ms": 512.5695999999999,
+      "p95_ms": 547.449,
+      "max_ms": 550.0138999999999,
+      "cpu_total_ms": 29281.25,
+      "cpu_mean_ms": 1464.0625
+    },
+    {
+      "documents": 50000,
+      "engine": "fdb",
+      "case_id": 8,
+      "variant": "legacy",
+      "n": 20,
+      "p50_ms": 1155.7813999999998,
+      "p95_ms": 1203.2505,
+      "max_ms": 1227.7555,
+      "cpu_total_ms": 23234.375,
+      "cpu_mean_ms": 1161.71875
+    },
+    {
+      "documents": 50000,
+      "engine": "fdb",
+      "case_id": 9,
+      "variant": "cap",
+      "n": 20,
+      "p50_ms": 6.2432,
+      "p95_ms": 6.6364,
+      "max_ms": 6.7277,
+      "cpu_total_ms": 93.75,
+      "cpu_mean_ms": 4.6875
+    },
+    {
+      "documents": 50000,
+      "engine": "fdb",
+      "case_id": 9,
+      "variant": "cap-four",
+      "n": 20,
+      "p50_ms": 18.0263,
+      "p95_ms": 18.5168,
+      "max_ms": 18.7044,
+      "cpu_total_ms": 953.125,
+      "cpu_mean_ms": 47.65625
+    },
+    {
+      "documents": 50000,
+      "engine": "fdb",
+      "case_id": 9,
+      "variant": "cap-hybrid",
+      "n": 20,
+      "p50_ms": 6.5397,
+      "p95_ms": 8.963000000000001,
+      "max_ms": 8.963799999999999,
+      "cpu_total_ms": 234.375,
+      "cpu_mean_ms": 11.71875
+    },
+    {
+      "documents": 50000,
+      "engine": "fdb",
+      "case_id": 9,
+      "variant": "exact-four",
+      "n": 20,
+      "p50_ms": 387.4617,
+      "p95_ms": 407.8175,
+      "max_ms": 419.115,
+      "cpu_total_ms": 21187.5,
+      "cpu_mean_ms": 1059.375
+    },
+    {
+      "documents": 50000,
+      "engine": "fdb",
+      "case_id": 9,
+      "variant": "legacy",
+      "n": 20,
+      "p50_ms": 848.4742,
+      "p95_ms": 908.3204000000001,
+      "max_ms": 935.9054,
+      "cpu_total_ms": 17031.25,
+      "cpu_mean_ms": 851.5625
+    },
+    {
+      "documents": 50000,
+      "engine": "fdb",
+      "case_id": 10,
+      "variant": "cap",
+      "n": 20,
+      "p50_ms": 17.6191,
+      "p95_ms": 19.5308,
+      "max_ms": 20.4196,
+      "cpu_total_ms": 375.0,
+      "cpu_mean_ms": 18.75
+    },
+    {
+      "documents": 50000,
+      "engine": "fdb",
+      "case_id": 10,
+      "variant": "cap-four",
+      "n": 20,
+      "p50_ms": 38.9705,
+      "p95_ms": 39.6815,
+      "max_ms": 39.866899999999994,
+      "cpu_total_ms": 2062.5,
+      "cpu_mean_ms": 103.125
+    },
+    {
+      "documents": 50000,
+      "engine": "fdb",
+      "case_id": 10,
+      "variant": "cap-hybrid",
+      "n": 20,
+      "p50_ms": 17.326999999999998,
+      "p95_ms": 21.286099999999998,
+      "max_ms": 22.2241,
+      "cpu_total_ms": 375.0,
+      "cpu_mean_ms": 18.75
+    },
+    {
+      "documents": 50000,
+      "engine": "fdb",
+      "case_id": 10,
+      "variant": "exact-four",
+      "n": 20,
+      "p50_ms": 434.181,
+      "p95_ms": 454.6005,
+      "max_ms": 454.6469,
+      "cpu_total_ms": 23718.75,
+      "cpu_mean_ms": 1185.9375
+    },
+    {
+      "documents": 50000,
+      "engine": "fdb",
+      "case_id": 10,
+      "variant": "legacy",
+      "n": 20,
+      "p50_ms": 945.658,
+      "p95_ms": 1008.1298999999999,
+      "max_ms": 1041.3687,
+      "cpu_total_ms": 19093.75,
+      "cpu_mean_ms": 954.6875
+    },
+    {
+      "documents": 50000,
+      "engine": "fdb",
+      "case_id": 11,
+      "variant": "cap",
+      "n": 20,
+      "p50_ms": 56.0336,
+      "p95_ms": 69.3544,
+      "max_ms": 72.64959999999999,
+      "cpu_total_ms": 1218.75,
+      "cpu_mean_ms": 60.9375
+    },
+    {
+      "documents": 50000,
+      "engine": "fdb",
+      "case_id": 11,
+      "variant": "cap-four",
+      "n": 20,
+      "p50_ms": 98.45439999999999,
+      "p95_ms": 103.5151,
+      "max_ms": 104.5364,
+      "cpu_total_ms": 5359.375,
+      "cpu_mean_ms": 267.96875
+    },
+    {
+      "documents": 50000,
+      "engine": "fdb",
+      "case_id": 11,
+      "variant": "cap-hybrid",
+      "n": 20,
+      "p50_ms": 63.942,
+      "p95_ms": 67.778,
+      "max_ms": 67.7968,
+      "cpu_total_ms": 2328.125,
+      "cpu_mean_ms": 116.40625
+    },
+    {
+      "documents": 50000,
+      "engine": "fdb",
+      "case_id": 11,
+      "variant": "exact-four",
+      "n": 20,
+      "p50_ms": 203.47680000000003,
+      "p95_ms": 218.3427,
+      "max_ms": 221.2812,
+      "cpu_total_ms": 10937.5,
+      "cpu_mean_ms": 546.875
+    },
+    {
+      "documents": 50000,
+      "engine": "fdb",
+      "case_id": 11,
+      "variant": "legacy",
+      "n": 20,
+      "p50_ms": 439.5466,
+      "p95_ms": 531.9438,
+      "max_ms": 562.2192,
+      "cpu_total_ms": 8921.875,
+      "cpu_mean_ms": 446.09375
+    },
+    {
+      "documents": 50000,
+      "engine": "fdb",
+      "case_id": 12,
+      "variant": "cap",
+      "n": 20,
+      "p50_ms": 6.1401,
+      "p95_ms": 6.433999999999999,
+      "max_ms": 6.7546,
+      "cpu_total_ms": 140.625,
+      "cpu_mean_ms": 7.03125
+    },
+    {
+      "documents": 50000,
+      "engine": "fdb",
+      "case_id": 12,
+      "variant": "cap-four",
+      "n": 20,
+      "p50_ms": 12.8482,
+      "p95_ms": 13.2103,
+      "max_ms": 13.3185,
+      "cpu_total_ms": 718.75,
+      "cpu_mean_ms": 35.9375
+    },
+    {
+      "documents": 50000,
+      "engine": "fdb",
+      "case_id": 12,
+      "variant": "cap-hybrid",
+      "n": 20,
+      "p50_ms": 5.6303,
+      "p95_ms": 6.122800000000001,
+      "max_ms": 7.8285,
+      "cpu_total_ms": 109.375,
+      "cpu_mean_ms": 5.46875
+    },
+    {
+      "documents": 50000,
+      "engine": "fdb",
+      "case_id": 12,
+      "variant": "exact-four",
+      "n": 20,
+      "p50_ms": 342.5406,
+      "p95_ms": 358.94359999999995,
+      "max_ms": 364.27389999999997,
+      "cpu_total_ms": 18484.375,
+      "cpu_mean_ms": 924.21875
+    },
+    {
+      "documents": 50000,
+      "engine": "fdb",
+      "case_id": 12,
+      "variant": "legacy",
+      "n": 20,
+      "p50_ms": 744.2893,
+      "p95_ms": 792.3188,
+      "max_ms": 842.4122000000001,
+      "cpu_total_ms": 15062.5,
+      "cpu_mean_ms": 753.125
+    },
+    {
+      "documents": 50000,
+      "engine": "fdb",
+      "case_id": 13,
+      "variant": "cap",
+      "n": 20,
+      "p50_ms": 25.8784,
+      "p95_ms": 28.8023,
+      "max_ms": 35.798700000000004,
+      "cpu_total_ms": 531.25,
+      "cpu_mean_ms": 26.5625
+    },
+    {
+      "documents": 50000,
+      "engine": "fdb",
+      "case_id": 13,
+      "variant": "cap-four",
+      "n": 20,
+      "p50_ms": 42.587399999999995,
+      "p95_ms": 47.056599999999996,
+      "max_ms": 48.2809,
+      "cpu_total_ms": 2328.125,
+      "cpu_mean_ms": 116.40625
+    },
+    {
+      "documents": 50000,
+      "engine": "fdb",
+      "case_id": 13,
+      "variant": "cap-hybrid",
+      "n": 20,
+      "p50_ms": 28.237000000000002,
+      "p95_ms": 36.6262,
+      "max_ms": 36.76,
+      "cpu_total_ms": 703.125,
+      "cpu_mean_ms": 35.15625
+    },
+    {
+      "documents": 50000,
+      "engine": "fdb",
+      "case_id": 13,
+      "variant": "exact-four",
+      "n": 20,
+      "p50_ms": 100.6409,
+      "p95_ms": 107.9371,
+      "max_ms": 109.7682,
+      "cpu_total_ms": 5578.125,
+      "cpu_mean_ms": 278.90625
+    },
+    {
+      "documents": 50000,
+      "engine": "fdb",
+      "case_id": 13,
+      "variant": "legacy",
+      "n": 20,
+      "p50_ms": 220.0162,
+      "p95_ms": 250.44290000000004,
+      "max_ms": 263.5974,
+      "cpu_total_ms": 4421.875,
+      "cpu_mean_ms": 221.09375
+    },
+    {
+      "documents": 50000,
+      "engine": "fdb",
+      "case_id": 14,
+      "variant": "cap",
+      "n": 20,
+      "p50_ms": 11.6183,
+      "p95_ms": 12.553099999999999,
+      "max_ms": 13.1241,
+      "cpu_total_ms": 218.75,
+      "cpu_mean_ms": 10.9375
+    },
+    {
+      "documents": 50000,
+      "engine": "fdb",
+      "case_id": 14,
+      "variant": "cap-four",
+      "n": 20,
+      "p50_ms": 30.8948,
+      "p95_ms": 31.953799999999998,
+      "max_ms": 32.4205,
+      "cpu_total_ms": 1640.625,
+      "cpu_mean_ms": 82.03125
+    },
+    {
+      "documents": 50000,
+      "engine": "fdb",
+      "case_id": 14,
+      "variant": "cap-hybrid",
+      "n": 20,
+      "p50_ms": 12.2144,
+      "p95_ms": 15.866600000000002,
+      "max_ms": 17.198700000000002,
+      "cpu_total_ms": 265.625,
+      "cpu_mean_ms": 13.28125
+    },
+    {
+      "documents": 50000,
+      "engine": "fdb",
+      "case_id": 14,
+      "variant": "exact-four",
+      "n": 20,
+      "p50_ms": 98.3323,
+      "p95_ms": 111.6939,
+      "max_ms": 121.4702,
+      "cpu_total_ms": 5515.625,
+      "cpu_mean_ms": 275.78125
+    },
+    {
+      "documents": 50000,
+      "engine": "fdb",
+      "case_id": 14,
+      "variant": "legacy",
+      "n": 20,
+      "p50_ms": 209.0805,
+      "p95_ms": 222.9825,
+      "max_ms": 226.12560000000002,
+      "cpu_total_ms": 4171.875,
+      "cpu_mean_ms": 208.59375
+    },
+    {
+      "documents": 50000,
+      "engine": "fdb",
+      "case_id": 15,
+      "variant": "cap",
+      "n": 20,
+      "p50_ms": 337.8074,
+      "p95_ms": 345.1081,
+      "max_ms": 369.4771,
+      "cpu_total_ms": 6781.25,
+      "cpu_mean_ms": 339.0625
+    },
+    {
+      "documents": 50000,
+      "engine": "fdb",
+      "case_id": 15,
+      "variant": "cap-four",
+      "n": 20,
+      "p50_ms": 633.6066000000001,
+      "p95_ms": 680.9603,
+      "max_ms": 686.6893,
+      "cpu_total_ms": 33015.625,
+      "cpu_mean_ms": 1650.78125
+    },
+    {
+      "documents": 50000,
+      "engine": "fdb",
+      "case_id": 15,
+      "variant": "cap-hybrid",
+      "n": 20,
+      "p50_ms": 558.7416,
+      "p95_ms": 585.3624,
+      "max_ms": 586.3355,
+      "cpu_total_ms": 26531.25,
+      "cpu_mean_ms": 1326.5625
+    },
+    {
+      "documents": 50000,
+      "engine": "fdb",
+      "case_id": 15,
+      "variant": "exact-four",
+      "n": 20,
+      "p50_ms": 962.2058999999999,
+      "p95_ms": 1002.1404,
+      "max_ms": 1011.3571,
+      "cpu_total_ms": 52140.625,
+      "cpu_mean_ms": 2607.03125
+    },
+    {
+      "documents": 50000,
+      "engine": "fdb",
+      "case_id": 15,
+      "variant": "legacy",
+      "n": 20,
+      "p50_ms": 2063.3747,
+      "p95_ms": 2179.4282,
+      "max_ms": 2201.8893,
+      "cpu_total_ms": 41531.25,
+      "cpu_mean_ms": 2076.5625
+    },
+    {
+      "documents": 50000,
+      "engine": "fdb",
+      "case_id": 16,
+      "variant": "cap",
+      "n": 20,
+      "p50_ms": 93.784,
+      "p95_ms": 97.2238,
+      "max_ms": 105.1314,
+      "cpu_total_ms": 1875.0,
+      "cpu_mean_ms": 93.75
+    },
+    {
+      "documents": 50000,
+      "engine": "fdb",
+      "case_id": 16,
+      "variant": "cap-four",
+      "n": 20,
+      "p50_ms": 137.553,
+      "p95_ms": 155.40709999999999,
+      "max_ms": 157.3958,
+      "cpu_total_ms": 7546.875,
+      "cpu_mean_ms": 377.34375
+    },
+    {
+      "documents": 50000,
+      "engine": "fdb",
+      "case_id": 16,
+      "variant": "cap-hybrid",
+      "n": 20,
+      "p50_ms": 117.19789999999999,
+      "p95_ms": 122.6798,
+      "max_ms": 124.6173,
+      "cpu_total_ms": 4328.125,
+      "cpu_mean_ms": 216.40625
+    },
+    {
+      "documents": 50000,
+      "engine": "fdb",
+      "case_id": 16,
+      "variant": "exact-four",
+      "n": 20,
+      "p50_ms": 339.3965,
+      "p95_ms": 370.3377,
+      "max_ms": 373.2741,
+      "cpu_total_ms": 18984.375,
+      "cpu_mean_ms": 949.21875
+    },
+    {
+      "documents": 50000,
+      "engine": "fdb",
+      "case_id": 16,
+      "variant": "legacy",
+      "n": 20,
+      "p50_ms": 754.2493000000001,
+      "p95_ms": 817.4192,
+      "max_ms": 871.3181,
+      "cpu_total_ms": 15390.625,
+      "cpu_mean_ms": 769.53125
+    },
+    {
+      "documents": 50000,
+      "engine": "fdb",
+      "case_id": 17,
+      "variant": "cap",
+      "n": 20,
+      "p50_ms": 1.5204000000000002,
+      "p95_ms": 1.6361999999999999,
+      "max_ms": 2.1498,
+      "cpu_total_ms": 0.0,
+      "cpu_mean_ms": 0.0
+    },
+    {
+      "documents": 50000,
+      "engine": "fdb",
+      "case_id": 17,
+      "variant": "cap-four",
+      "n": 20,
+      "p50_ms": 2.9286,
+      "p95_ms": 3.384,
+      "max_ms": 3.3864,
+      "cpu_total_ms": 218.75,
+      "cpu_mean_ms": 10.9375
+    },
+    {
+      "documents": 50000,
+      "engine": "fdb",
+      "case_id": 17,
+      "variant": "cap-hybrid",
+      "n": 20,
+      "p50_ms": 0.9828,
+      "p95_ms": 1.2568,
+      "max_ms": 1.5292999999999999,
+      "cpu_total_ms": 46.875,
+      "cpu_mean_ms": 2.34375
+    },
+    {
+      "documents": 50000,
+      "engine": "fdb",
+      "case_id": 17,
+      "variant": "exact-four",
+      "n": 20,
+      "p50_ms": 9.200099999999999,
+      "p95_ms": 10.3697,
+      "max_ms": 10.5229,
+      "cpu_total_ms": 453.125,
+      "cpu_mean_ms": 22.65625
+    },
+    {
+      "documents": 50000,
+      "engine": "fdb",
+      "case_id": 17,
+      "variant": "legacy",
+      "n": 20,
+      "p50_ms": 13.7347,
+      "p95_ms": 14.9714,
+      "max_ms": 15.577,
+      "cpu_total_ms": 250.0,
+      "cpu_mean_ms": 12.5
+    },
+    {
+      "documents": 50000,
+      "engine": "fdb",
+      "case_id": 18,
+      "variant": "cap",
+      "n": 20,
+      "p50_ms": 49.772400000000005,
+      "p95_ms": 53.5964,
+      "max_ms": 55.597,
+      "cpu_total_ms": 984.375,
+      "cpu_mean_ms": 49.21875
+    },
+    {
+      "documents": 50000,
+      "engine": "fdb",
+      "case_id": 18,
+      "variant": "cap-four",
+      "n": 20,
+      "p50_ms": 103.0565,
+      "p95_ms": 109.6246,
+      "max_ms": 118.2382,
+      "cpu_total_ms": 4375.0,
+      "cpu_mean_ms": 218.75
+    },
+    {
+      "documents": 50000,
+      "engine": "fdb",
+      "case_id": 18,
+      "variant": "cap-hybrid",
+      "n": 20,
+      "p50_ms": 75.31920000000001,
+      "p95_ms": 85.99249999999999,
+      "max_ms": 95.75210000000001,
+      "cpu_total_ms": 2843.75,
+      "cpu_mean_ms": 142.1875
+    },
+    {
+      "documents": 50000,
+      "engine": "fdb",
+      "case_id": 18,
+      "variant": "exact-four",
+      "n": 20,
+      "p50_ms": 197.9411,
+      "p95_ms": 215.9086,
+      "max_ms": 225.8536,
+      "cpu_total_ms": 8046.875,
+      "cpu_mean_ms": 402.34375
+    },
+    {
+      "documents": 50000,
+      "engine": "fdb",
+      "case_id": 18,
+      "variant": "legacy",
+      "n": 20,
+      "p50_ms": 345.94350000000003,
+      "p95_ms": 403.70840000000004,
+      "max_ms": 414.8337,
+      "cpu_total_ms": 7093.75,
+      "cpu_mean_ms": 354.6875
+    },
+    {
+      "documents": 50000,
+      "engine": "fdb",
+      "case_id": 19,
+      "variant": "cap",
+      "n": 20,
+      "p50_ms": 11.1456,
+      "p95_ms": 13.6697,
+      "max_ms": 15.701900000000002,
+      "cpu_total_ms": 218.75,
+      "cpu_mean_ms": 10.9375
+    },
+    {
+      "documents": 50000,
+      "engine": "fdb",
+      "case_id": 19,
+      "variant": "cap-four",
+      "n": 20,
+      "p50_ms": 21.465600000000002,
+      "p95_ms": 21.8475,
+      "max_ms": 21.9794,
+      "cpu_total_ms": 1171.875,
+      "cpu_mean_ms": 58.59375
+    },
+    {
+      "documents": 50000,
+      "engine": "fdb",
+      "case_id": 19,
+      "variant": "cap-hybrid",
+      "n": 20,
+      "p50_ms": 11.827900000000001,
+      "p95_ms": 14.546999999999999,
+      "max_ms": 15.5703,
+      "cpu_total_ms": 281.25,
+      "cpu_mean_ms": 14.0625
+    },
+    {
+      "documents": 50000,
+      "engine": "fdb",
+      "case_id": 19,
+      "variant": "exact-four",
+      "n": 20,
+      "p50_ms": 87.87259999999999,
+      "p95_ms": 95.9483,
+      "max_ms": 98.2963,
+      "cpu_total_ms": 4875.0,
+      "cpu_mean_ms": 243.75
+    },
+    {
+      "documents": 50000,
+      "engine": "fdb",
+      "case_id": 19,
+      "variant": "legacy",
+      "n": 20,
+      "p50_ms": 191.008,
+      "p95_ms": 215.8057,
+      "max_ms": 216.21689999999998,
+      "cpu_total_ms": 3828.125,
+      "cpu_mean_ms": 191.40625
+    },
+    {
+      "documents": 50000,
+      "engine": "fdb",
+      "case_id": 20,
+      "variant": "cap",
+      "n": 20,
+      "p50_ms": 4.7268,
+      "p95_ms": 5.4398,
+      "max_ms": 5.622699999999999,
+      "cpu_total_ms": 93.75,
+      "cpu_mean_ms": 4.6875
+    },
+    {
+      "documents": 50000,
+      "engine": "fdb",
+      "case_id": 20,
+      "variant": "cap-four",
+      "n": 20,
+      "p50_ms": 3.1944,
+      "p95_ms": 3.5425999999999997,
+      "max_ms": 3.6719,
+      "cpu_total_ms": 156.25,
+      "cpu_mean_ms": 7.8125
+    },
+    {
+      "documents": 50000,
+      "engine": "fdb",
+      "case_id": 20,
+      "variant": "cap-hybrid",
+      "n": 20,
+      "p50_ms": 4.7614,
+      "p95_ms": 5.7574000000000005,
+      "max_ms": 6.14,
+      "cpu_total_ms": 109.375,
+      "cpu_mean_ms": 5.46875
+    },
+    {
+      "documents": 50000,
+      "engine": "fdb",
+      "case_id": 20,
+      "variant": "exact-four",
+      "n": 20,
+      "p50_ms": 3.2382,
+      "p95_ms": 3.4985,
+      "max_ms": 3.5189000000000004,
+      "cpu_total_ms": 46.875,
+      "cpu_mean_ms": 2.34375
+    },
+    {
+      "documents": 50000,
+      "engine": "fdb",
+      "case_id": 20,
+      "variant": "legacy",
+      "n": 20,
+      "p50_ms": 5.5579,
+      "p95_ms": 5.9030000000000005,
+      "max_ms": 6.4121999999999995,
+      "cpu_total_ms": 109.375,
+      "cpu_mean_ms": 5.46875
+    },
+    {
+      "documents": 50000,
+      "engine": "fdb",
+      "case_id": 21,
+      "variant": "cap",
+      "n": 20,
+      "p50_ms": 31.8094,
+      "p95_ms": 34.2616,
+      "max_ms": 36.656099999999995,
+      "cpu_total_ms": 625.0,
+      "cpu_mean_ms": 31.25
+    },
+    {
+      "documents": 50000,
+      "engine": "fdb",
+      "case_id": 21,
+      "variant": "cap-four",
+      "n": 20,
+      "p50_ms": 14.8372,
+      "p95_ms": 16.562299999999997,
+      "max_ms": 16.944,
+      "cpu_total_ms": 796.875,
+      "cpu_mean_ms": 39.84375
+    },
+    {
+      "documents": 50000,
+      "engine": "fdb",
+      "case_id": 21,
+      "variant": "cap-hybrid",
+      "n": 20,
+      "p50_ms": 31.8273,
+      "p95_ms": 33.1783,
+      "max_ms": 36.0277,
+      "cpu_total_ms": 625.0,
+      "cpu_mean_ms": 31.25
+    },
+    {
+      "documents": 50000,
+      "engine": "fdb",
+      "case_id": 21,
+      "variant": "exact-four",
+      "n": 20,
+      "p50_ms": 16.1343,
+      "p95_ms": 17.2927,
+      "max_ms": 17.5321,
+      "cpu_total_ms": 859.375,
+      "cpu_mean_ms": 42.96875
+    },
+    {
+      "documents": 50000,
+      "engine": "fdb",
+      "case_id": 21,
+      "variant": "legacy",
+      "n": 20,
+      "p50_ms": 31.924899999999997,
+      "p95_ms": 36.9091,
+      "max_ms": 41.7569,
+      "cpu_total_ms": 671.875,
+      "cpu_mean_ms": 33.59375
+    },
+    {
+      "documents": 50000,
+      "engine": "fdb",
+      "case_id": 22,
+      "variant": "cap",
+      "n": 20,
+      "p50_ms": 471.7915,
+      "p95_ms": 524.428,
+      "max_ms": 582.6161,
+      "cpu_total_ms": 9593.75,
+      "cpu_mean_ms": 479.6875
+    },
+    {
+      "documents": 50000,
+      "engine": "fdb",
+      "case_id": 22,
+      "variant": "cap-four",
+      "n": 20,
+      "p50_ms": 645.7271999999999,
+      "p95_ms": 667.0949,
+      "max_ms": 667.8366,
+      "cpu_total_ms": 36328.125,
+      "cpu_mean_ms": 1816.40625
+    },
+    {
+      "documents": 50000,
+      "engine": "fdb",
+      "case_id": 22,
+      "variant": "cap-hybrid",
+      "n": 20,
+      "p50_ms": 660.5741,
+      "p95_ms": 689.5688,
+      "max_ms": 694.0087000000001,
+      "cpu_total_ms": 35328.125,
+      "cpu_mean_ms": 1766.40625
+    },
+    {
+      "documents": 50000,
+      "engine": "fdb",
+      "case_id": 22,
+      "variant": "exact-four",
+      "n": 20,
+      "p50_ms": 822.5904,
+      "p95_ms": 861.2524999999999,
+      "max_ms": 882.1805,
+      "cpu_total_ms": 45484.375,
+      "cpu_mean_ms": 2274.21875
+    },
+    {
+      "documents": 50000,
+      "engine": "fdb",
+      "case_id": 22,
+      "variant": "legacy",
+      "n": 20,
+      "p50_ms": 1807.2004000000002,
+      "p95_ms": 1867.5102,
+      "max_ms": 1937.362,
+      "cpu_total_ms": 36109.375,
+      "cpu_mean_ms": 1805.46875
+    },
+    {
+      "documents": 50000,
+      "engine": "fdb",
+      "case_id": 23,
+      "variant": "cap",
+      "n": 20,
+      "p50_ms": 1138.0612999999998,
+      "p95_ms": 1235.9034,
+      "max_ms": 1365.5438,
+      "cpu_total_ms": 23140.625,
+      "cpu_mean_ms": 1157.03125
+    },
+    {
+      "documents": 50000,
+      "engine": "fdb",
+      "case_id": 23,
+      "variant": "cap-four",
+      "n": 20,
+      "p50_ms": 523.8032000000001,
+      "p95_ms": 546.4341000000001,
+      "max_ms": 548.6983,
+      "cpu_total_ms": 28671.875,
+      "cpu_mean_ms": 1433.59375
+    },
+    {
+      "documents": 50000,
+      "engine": "fdb",
+      "case_id": 23,
+      "variant": "cap-hybrid",
+      "n": 20,
+      "p50_ms": 555.1595,
+      "p95_ms": 582.0494000000001,
+      "max_ms": 588.4961,
+      "cpu_total_ms": 28203.125,
+      "cpu_mean_ms": 1410.15625
+    },
+    {
+      "documents": 50000,
+      "engine": "fdb",
+      "case_id": 23,
+      "variant": "exact-four",
+      "n": 20,
+      "p50_ms": 528.9327999999999,
+      "p95_ms": 555.3363,
+      "max_ms": 563.4833,
+      "cpu_total_ms": 28968.75,
+      "cpu_mean_ms": 1448.4375
+    },
+    {
+      "documents": 50000,
+      "engine": "fdb",
+      "case_id": 23,
+      "variant": "legacy",
+      "n": 20,
+      "p50_ms": 1136.0087,
+      "p95_ms": 1261.0865,
+      "max_ms": 1339.9325,
+      "cpu_total_ms": 23093.75,
+      "cpu_mean_ms": 1154.6875
+    },
+    {
+      "documents": 50000,
+      "engine": "fdb",
+      "case_id": 24,
+      "variant": "cap",
+      "n": 20,
+      "p50_ms": 803.0385,
+      "p95_ms": 907.1116999999999,
+      "max_ms": 935.2987,
+      "cpu_total_ms": 16328.125,
+      "cpu_mean_ms": 816.40625
+    },
+    {
+      "documents": 50000,
+      "engine": "fdb",
+      "case_id": 24,
+      "variant": "cap-four",
+      "n": 20,
+      "p50_ms": 368.0781,
+      "p95_ms": 394.781,
+      "max_ms": 406.76820000000004,
+      "cpu_total_ms": 20000.0,
+      "cpu_mean_ms": 1000.0
+    },
+    {
+      "documents": 50000,
+      "engine": "fdb",
+      "case_id": 24,
+      "variant": "cap-hybrid",
+      "n": 20,
+      "p50_ms": 413.4177,
+      "p95_ms": 458.67629999999997,
+      "max_ms": 469.7019,
+      "cpu_total_ms": 19843.75,
+      "cpu_mean_ms": 992.1875
+    },
+    {
+      "documents": 50000,
+      "engine": "fdb",
+      "case_id": 24,
+      "variant": "exact-four",
+      "n": 20,
+      "p50_ms": 371.53049999999996,
+      "p95_ms": 401.0924,
+      "max_ms": 414.98429999999996,
+      "cpu_total_ms": 20281.25,
+      "cpu_mean_ms": 1014.0625
+    },
+    {
+      "documents": 50000,
+      "engine": "fdb",
+      "case_id": 24,
+      "variant": "legacy",
+      "n": 20,
+      "p50_ms": 802.4819,
+      "p95_ms": 847.5752,
+      "max_ms": 868.3353000000001,
+      "cpu_total_ms": 16218.75,
+      "cpu_mean_ms": 810.9375
+    },
+    {
+      "documents": 50000,
+      "engine": "fdb",
+      "case_id": 25,
+      "variant": "cap",
+      "n": 20,
+      "p50_ms": 18.6345,
+      "p95_ms": 22.787000000000003,
+      "max_ms": 24.3617,
+      "cpu_total_ms": 390.625,
+      "cpu_mean_ms": 19.53125
+    },
+    {
+      "documents": 50000,
+      "engine": "fdb",
+      "case_id": 25,
+      "variant": "cap-four",
+      "n": 20,
+      "p50_ms": 9.114600000000001,
+      "p95_ms": 10.4594,
+      "max_ms": 10.7622,
+      "cpu_total_ms": 593.75,
+      "cpu_mean_ms": 29.6875
+    },
+    {
+      "documents": 50000,
+      "engine": "fdb",
+      "case_id": 25,
+      "variant": "cap-hybrid",
+      "n": 20,
+      "p50_ms": 18.4877,
+      "p95_ms": 19.9298,
+      "max_ms": 25.261300000000002,
+      "cpu_total_ms": 328.125,
+      "cpu_mean_ms": 16.40625
+    },
+    {
+      "documents": 50000,
+      "engine": "fdb",
+      "case_id": 25,
+      "variant": "exact-four",
+      "n": 20,
+      "p50_ms": 9.8156,
+      "p95_ms": 10.2608,
+      "max_ms": 10.8416,
+      "cpu_total_ms": 390.625,
+      "cpu_mean_ms": 19.53125
+    },
+    {
+      "documents": 50000,
+      "engine": "fdb",
+      "case_id": 25,
+      "variant": "legacy",
+      "n": 20,
+      "p50_ms": 19.3322,
+      "p95_ms": 24.9166,
+      "max_ms": 25.189,
+      "cpu_total_ms": 406.25,
+      "cpu_mean_ms": 20.3125
+    },
+    {
+      "documents": 50000,
+      "engine": "fdb",
+      "case_id": 26,
+      "variant": "cap",
+      "n": 20,
+      "p50_ms": 40.903299999999994,
+      "p95_ms": 44.2044,
+      "max_ms": 44.998999999999995,
+      "cpu_total_ms": 859.375,
+      "cpu_mean_ms": 42.96875
+    },
+    {
+      "documents": 50000,
+      "engine": "fdb",
+      "case_id": 26,
+      "variant": "cap-four",
+      "n": 20,
+      "p50_ms": 70.9982,
+      "p95_ms": 72.9464,
+      "max_ms": 74.0889,
+      "cpu_total_ms": 3687.5,
+      "cpu_mean_ms": 184.375
+    },
+    {
+      "documents": 50000,
+      "engine": "fdb",
+      "case_id": 26,
+      "variant": "cap-hybrid",
+      "n": 20,
+      "p50_ms": 49.607699999999994,
+      "p95_ms": 53.1745,
+      "max_ms": 53.5856,
+      "cpu_total_ms": 1750.0,
+      "cpu_mean_ms": 87.5
+    },
+    {
+      "documents": 50000,
+      "engine": "fdb",
+      "case_id": 26,
+      "variant": "exact-four",
+      "n": 20,
+      "p50_ms": 188.37529999999998,
+      "p95_ms": 207.0469,
+      "max_ms": 221.4458,
+      "cpu_total_ms": 10390.625,
+      "cpu_mean_ms": 519.53125
+    },
+    {
+      "documents": 50000,
+      "engine": "fdb",
+      "case_id": 26,
+      "variant": "legacy",
+      "n": 20,
+      "p50_ms": 411.6687,
+      "p95_ms": 443.1967,
+      "max_ms": 443.4191,
+      "cpu_total_ms": 8406.25,
+      "cpu_mean_ms": 420.3125
+    },
+    {
+      "documents": 50000,
+      "engine": "fdb",
+      "case_id": 27,
+      "variant": "cap",
+      "n": 20,
+      "p50_ms": 14.8612,
+      "p95_ms": 16.840999999999998,
+      "max_ms": 18.587,
+      "cpu_total_ms": 296.875,
+      "cpu_mean_ms": 14.84375
+    },
+    {
+      "documents": 50000,
+      "engine": "fdb",
+      "case_id": 27,
+      "variant": "cap-four",
+      "n": 20,
+      "p50_ms": 33.9701,
+      "p95_ms": 38.320800000000006,
+      "max_ms": 38.607099999999996,
+      "cpu_total_ms": 1781.25,
+      "cpu_mean_ms": 89.0625
+    },
+    {
+      "documents": 50000,
+      "engine": "fdb",
+      "case_id": 27,
+      "variant": "cap-hybrid",
+      "n": 20,
+      "p50_ms": 13.8415,
+      "p95_ms": 14.4328,
+      "max_ms": 15.174999999999999,
+      "cpu_total_ms": 296.875,
+      "cpu_mean_ms": 14.84375
+    },
+    {
+      "documents": 50000,
+      "engine": "fdb",
+      "case_id": 27,
+      "variant": "exact-four",
+      "n": 20,
+      "p50_ms": 199.3799,
+      "p95_ms": 221.3075,
+      "max_ms": 222.6267,
+      "cpu_total_ms": 10593.75,
+      "cpu_mean_ms": 529.6875
+    },
+    {
+      "documents": 50000,
+      "engine": "fdb",
+      "case_id": 27,
+      "variant": "legacy",
+      "n": 20,
+      "p50_ms": 413.3388,
+      "p95_ms": 431.9027,
+      "max_ms": 457.5711,
+      "cpu_total_ms": 8328.125,
+      "cpu_mean_ms": 416.40625
+    },
+    {
+      "documents": 50000,
+      "engine": "fdb",
+      "case_id": 28,
+      "variant": "cap",
+      "n": 20,
+      "p50_ms": 111.86930000000001,
+      "p95_ms": 124.4704,
+      "max_ms": 126.65350000000001,
+      "cpu_total_ms": 2328.125,
+      "cpu_mean_ms": 116.40625
+    },
+    {
+      "documents": 50000,
+      "engine": "fdb",
+      "case_id": 28,
+      "variant": "cap-four",
+      "n": 20,
+      "p50_ms": 181.2956,
+      "p95_ms": 205.91660000000002,
+      "max_ms": 208.4376,
+      "cpu_total_ms": 9718.75,
+      "cpu_mean_ms": 485.9375
+    },
+    {
+      "documents": 50000,
+      "engine": "fdb",
+      "case_id": 28,
+      "variant": "cap-hybrid",
+      "n": 20,
+      "p50_ms": 148.41879999999998,
+      "p95_ms": 154.3951,
+      "max_ms": 161.0353,
+      "cpu_total_ms": 5781.25,
+      "cpu_mean_ms": 289.0625
+    },
+    {
+      "documents": 50000,
+      "engine": "fdb",
+      "case_id": 28,
+      "variant": "exact-four",
+      "n": 20,
+      "p50_ms": 399.5027,
+      "p95_ms": 417.4308,
+      "max_ms": 419.3355,
+      "cpu_total_ms": 21671.875,
+      "cpu_mean_ms": 1083.59375
+    },
+    {
+      "documents": 50000,
+      "engine": "fdb",
+      "case_id": 28,
+      "variant": "legacy",
+      "n": 20,
+      "p50_ms": 860.4786,
+      "p95_ms": 888.572,
+      "max_ms": 982.5811,
+      "cpu_total_ms": 17281.25,
+      "cpu_mean_ms": 864.0625
+    },
+    {
+      "documents": 50000,
+      "engine": "fdb",
+      "case_id": 29,
+      "variant": "cap",
+      "n": 20,
+      "p50_ms": 6.2043,
+      "p95_ms": 7.251600000000001,
+      "max_ms": 7.7726999999999995,
+      "cpu_total_ms": 109.375,
+      "cpu_mean_ms": 5.46875
+    },
+    {
+      "documents": 50000,
+      "engine": "fdb",
+      "case_id": 29,
+      "variant": "cap-four",
+      "n": 20,
+      "p50_ms": 3.42,
+      "p95_ms": 3.8735000000000004,
+      "max_ms": 4.3426,
+      "cpu_total_ms": 187.5,
+      "cpu_mean_ms": 9.375
+    },
+    {
+      "documents": 50000,
+      "engine": "fdb",
+      "case_id": 29,
+      "variant": "cap-hybrid",
+      "n": 20,
+      "p50_ms": 7.4682,
+      "p95_ms": 8.187800000000001,
+      "max_ms": 8.541699999999999,
+      "cpu_total_ms": 125.0,
+      "cpu_mean_ms": 6.25
+    },
+    {
+      "documents": 50000,
+      "engine": "fdb",
+      "case_id": 29,
+      "variant": "exact-four",
+      "n": 20,
+      "p50_ms": 3.5044999999999997,
+      "p95_ms": 3.9696000000000002,
+      "max_ms": 4.0524000000000004,
+      "cpu_total_ms": 140.625,
+      "cpu_mean_ms": 7.03125
+    },
+    {
+      "documents": 50000,
+      "engine": "fdb",
+      "case_id": 29,
+      "variant": "legacy",
+      "n": 20,
+      "p50_ms": 6.0252,
+      "p95_ms": 7.0282,
+      "max_ms": 7.3239,
+      "cpu_total_ms": 125.0,
+      "cpu_mean_ms": 6.25
+    },
+    {
+      "documents": 50000,
+      "engine": "fdb",
+      "case_id": 30,
+      "variant": "cap",
+      "n": 20,
+      "p50_ms": 487.8397,
+      "p95_ms": 526.7937000000001,
+      "max_ms": 533.9758999999999,
+      "cpu_total_ms": 9859.375,
+      "cpu_mean_ms": 492.96875
+    },
+    {
+      "documents": 50000,
+      "engine": "fdb",
+      "case_id": 30,
+      "variant": "cap-four",
+      "n": 20,
+      "p50_ms": 505.95500000000004,
+      "p95_ms": 535.3459,
+      "max_ms": 540.59,
+      "cpu_total_ms": 27796.875,
+      "cpu_mean_ms": 1389.84375
+    },
+    {
+      "documents": 50000,
+      "engine": "fdb",
+      "case_id": 30,
+      "variant": "cap-hybrid",
+      "n": 20,
+      "p50_ms": 535.2696,
+      "p95_ms": 561.5992,
+      "max_ms": 587.0434,
+      "cpu_total_ms": 27296.875,
+      "cpu_mean_ms": 1364.84375
+    },
+    {
+      "documents": 50000,
+      "engine": "fdb",
+      "case_id": 30,
+      "variant": "exact-four",
+      "n": 20,
+      "p50_ms": 513.1569000000001,
+      "p95_ms": 530.1728,
+      "max_ms": 538.5906,
+      "cpu_total_ms": 27906.25,
+      "cpu_mean_ms": 1395.3125
+    },
+    {
+      "documents": 50000,
+      "engine": "fdb",
+      "case_id": 30,
+      "variant": "legacy",
+      "n": 20,
+      "p50_ms": 1100.8192999999999,
+      "p95_ms": 1148.8165999999999,
+      "max_ms": 1286.2757,
+      "cpu_total_ms": 22359.375,
+      "cpu_mean_ms": 1117.96875
+    },
+    {
+      "documents": 50000,
+      "engine": "fdb",
+      "case_id": 31,
+      "variant": "cap",
+      "n": 20,
+      "p50_ms": 41.2517,
+      "p95_ms": 44.5401,
+      "max_ms": 52.7595,
+      "cpu_total_ms": 781.25,
+      "cpu_mean_ms": 39.0625
+    },
+    {
+      "documents": 50000,
+      "engine": "fdb",
+      "case_id": 31,
+      "variant": "cap-four",
+      "n": 20,
+      "p50_ms": 18.6154,
+      "p95_ms": 21.6388,
+      "max_ms": 21.9579,
+      "cpu_total_ms": 1093.75,
+      "cpu_mean_ms": 54.6875
+    },
+    {
+      "documents": 50000,
+      "engine": "fdb",
+      "case_id": 31,
+      "variant": "cap-hybrid",
+      "n": 20,
+      "p50_ms": 40.818,
+      "p95_ms": 42.1536,
+      "max_ms": 46.8299,
+      "cpu_total_ms": 812.5,
+      "cpu_mean_ms": 40.625
+    },
+    {
+      "documents": 50000,
+      "engine": "fdb",
+      "case_id": 31,
+      "variant": "exact-four",
+      "n": 20,
+      "p50_ms": 21.9344,
+      "p95_ms": 22.951,
+      "max_ms": 23.3317,
+      "cpu_total_ms": 1109.375,
+      "cpu_mean_ms": 55.46875
+    },
+    {
+      "documents": 50000,
+      "engine": "fdb",
+      "case_id": 31,
+      "variant": "legacy",
+      "n": 20,
+      "p50_ms": 40.8173,
+      "p95_ms": 43.5905,
+      "max_ms": 45.3517,
+      "cpu_total_ms": 843.75,
+      "cpu_mean_ms": 42.1875
+    },
+    {
+      "documents": 50000,
+      "engine": "fdb",
+      "case_id": 32,
+      "variant": "cap",
+      "n": 20,
+      "p50_ms": 217.66279999999998,
+      "p95_ms": 226.4274,
+      "max_ms": 229.4879,
+      "cpu_total_ms": 4421.875,
+      "cpu_mean_ms": 221.09375
+    },
+    {
+      "documents": 50000,
+      "engine": "fdb",
+      "case_id": 32,
+      "variant": "cap-four",
+      "n": 20,
+      "p50_ms": 109.4405,
+      "p95_ms": 118.62480000000001,
+      "max_ms": 119.057,
+      "cpu_total_ms": 5234.375,
+      "cpu_mean_ms": 261.71875
+    },
+    {
+      "documents": 50000,
+      "engine": "fdb",
+      "case_id": 32,
+      "variant": "cap-hybrid",
+      "n": 20,
+      "p50_ms": 178.3848,
+      "p95_ms": 189.1736,
+      "max_ms": 191.3064,
+      "cpu_total_ms": 4937.5,
+      "cpu_mean_ms": 246.875
+    },
+    {
+      "documents": 50000,
+      "engine": "fdb",
+      "case_id": 32,
+      "variant": "exact-four",
+      "n": 20,
+      "p50_ms": 104.447,
+      "p95_ms": 118.6229,
+      "max_ms": 121.2222,
+      "cpu_total_ms": 5390.625,
+      "cpu_mean_ms": 269.53125
+    },
+    {
+      "documents": 50000,
+      "engine": "fdb",
+      "case_id": 32,
+      "variant": "legacy",
+      "n": 20,
+      "p50_ms": 216.4888,
+      "p95_ms": 229.8081,
+      "max_ms": 254.36950000000002,
+      "cpu_total_ms": 4296.875,
+      "cpu_mean_ms": 214.84375
+    },
+    {
+      "documents": 50000,
+      "engine": "fdb",
+      "case_id": 33,
+      "variant": "cap",
+      "n": 20,
+      "p50_ms": 186.03900000000002,
+      "p95_ms": 195.5764,
+      "max_ms": 205.789,
+      "cpu_total_ms": 3765.625,
+      "cpu_mean_ms": 188.28125
+    },
+    {
+      "documents": 50000,
+      "engine": "fdb",
+      "case_id": 33,
+      "variant": "cap-four",
+      "n": 20,
+      "p50_ms": 92.8302,
+      "p95_ms": 97.0959,
+      "max_ms": 98.8642,
+      "cpu_total_ms": 4765.625,
+      "cpu_mean_ms": 238.28125
+    },
+    {
+      "documents": 50000,
+      "engine": "fdb",
+      "case_id": 33,
+      "variant": "cap-hybrid",
+      "n": 20,
+      "p50_ms": 162.5011,
+      "p95_ms": 175.6258,
+      "max_ms": 180.6381,
+      "cpu_total_ms": 4218.75,
+      "cpu_mean_ms": 210.9375
+    },
+    {
+      "documents": 50000,
+      "engine": "fdb",
+      "case_id": 33,
+      "variant": "exact-four",
+      "n": 20,
+      "p50_ms": 88.20880000000001,
+      "p95_ms": 94.0748,
+      "max_ms": 97.9168,
+      "cpu_total_ms": 4609.375,
+      "cpu_mean_ms": 230.46875
+    },
+    {
+      "documents": 50000,
+      "engine": "fdb",
+      "case_id": 33,
+      "variant": "legacy",
+      "n": 20,
+      "p50_ms": 187.5002,
+      "p95_ms": 199.281,
+      "max_ms": 213.49190000000002,
+      "cpu_total_ms": 3828.125,
+      "cpu_mean_ms": 191.40625
+    },
+    {
+      "documents": 50000,
+      "engine": "fdb",
+      "case_id": 34,
+      "variant": "cap",
+      "n": 20,
+      "p50_ms": 952.3706,
+      "p95_ms": 1006.8045999999999,
+      "max_ms": 1055.7304000000001,
+      "cpu_total_ms": 19156.25,
+      "cpu_mean_ms": 957.8125
+    },
+    {
+      "documents": 50000,
+      "engine": "fdb",
+      "case_id": 34,
+      "variant": "cap-four",
+      "n": 20,
+      "p50_ms": 419.5688,
+      "p95_ms": 460.56570000000005,
+      "max_ms": 478.6435,
+      "cpu_total_ms": 24125.0,
+      "cpu_mean_ms": 1206.25
+    },
+    {
+      "documents": 50000,
+      "engine": "fdb",
+      "case_id": 34,
+      "variant": "cap-hybrid",
+      "n": 20,
+      "p50_ms": 501.865,
+      "p95_ms": 523.0534,
+      "max_ms": 531.5685,
+      "cpu_total_ms": 23250.0,
+      "cpu_mean_ms": 1162.5
+    },
+    {
+      "documents": 50000,
+      "engine": "fdb",
+      "case_id": 34,
+      "variant": "exact-four",
+      "n": 20,
+      "p50_ms": 428.57230000000004,
+      "p95_ms": 452.1673,
+      "max_ms": 453.82860000000005,
+      "cpu_total_ms": 23828.125,
+      "cpu_mean_ms": 1191.40625
+    },
+    {
+      "documents": 50000,
+      "engine": "fdb",
+      "case_id": 34,
+      "variant": "legacy",
+      "n": 20,
+      "p50_ms": 942.8613,
+      "p95_ms": 1035.8899999999999,
+      "max_ms": 1061.1321,
+      "cpu_total_ms": 19078.125,
+      "cpu_mean_ms": 953.90625
+    },
+    {
+      "documents": 50000,
+      "engine": "fdb",
+      "case_id": 35,
+      "variant": "cap",
+      "n": 20,
+      "p50_ms": 0.6021000000000001,
+      "p95_ms": 0.8725999999999999,
+      "max_ms": 0.9102,
+      "cpu_total_ms": 15.625,
+      "cpu_mean_ms": 0.78125
+    },
+    {
+      "documents": 50000,
+      "engine": "fdb",
+      "case_id": 35,
+      "variant": "cap-four",
+      "n": 20,
+      "p50_ms": 1.4117000000000002,
+      "p95_ms": 1.6772,
+      "max_ms": 1.7226,
+      "cpu_total_ms": 62.5,
+      "cpu_mean_ms": 3.125
+    },
+    {
+      "documents": 50000,
+      "engine": "fdb",
+      "case_id": 35,
+      "variant": "cap-hybrid",
+      "n": 20,
+      "p50_ms": 0.5639,
+      "p95_ms": 0.6604,
+      "max_ms": 0.7052999999999999,
+      "cpu_total_ms": 15.625,
+      "cpu_mean_ms": 0.78125
+    },
+    {
+      "documents": 50000,
+      "engine": "fdb",
+      "case_id": 35,
+      "variant": "exact-four",
+      "n": 20,
+      "p50_ms": 90.2019,
+      "p95_ms": 99.6498,
+      "max_ms": 99.68549999999999,
+      "cpu_total_ms": 4937.5,
+      "cpu_mean_ms": 246.875
+    },
+    {
+      "documents": 50000,
+      "engine": "fdb",
+      "case_id": 35,
+      "variant": "legacy",
+      "n": 20,
+      "p50_ms": 187.5702,
+      "p95_ms": 203.1134,
+      "max_ms": 256.522,
+      "cpu_total_ms": 3875.0,
+      "cpu_mean_ms": 193.75
+    },
+    {
+      "documents": 50000,
+      "engine": "fdb",
+      "case_id": 36,
+      "variant": "cap",
+      "n": 20,
+      "p50_ms": 1.2799,
+      "p95_ms": 1.7162,
+      "max_ms": 1.7559,
+      "cpu_total_ms": 31.25,
+      "cpu_mean_ms": 1.5625
+    },
+    {
+      "documents": 50000,
+      "engine": "fdb",
+      "case_id": 36,
+      "variant": "cap-four",
+      "n": 20,
+      "p50_ms": 2.226,
+      "p95_ms": 2.6787,
+      "max_ms": 3.7188999999999997,
+      "cpu_total_ms": 203.125,
+      "cpu_mean_ms": 10.15625
+    },
+    {
+      "documents": 50000,
+      "engine": "fdb",
+      "case_id": 36,
+      "variant": "cap-hybrid",
+      "n": 20,
+      "p50_ms": 1.1969999999999998,
+      "p95_ms": 1.7053,
+      "max_ms": 1.7382,
+      "cpu_total_ms": 0.0,
+      "cpu_mean_ms": 0.0
+    },
+    {
+      "documents": 50000,
+      "engine": "fdb",
+      "case_id": 36,
+      "variant": "exact-four",
+      "n": 20,
+      "p50_ms": 184.5525,
+      "p95_ms": 198.65169999999998,
+      "max_ms": 202.15279999999998,
+      "cpu_total_ms": 9953.125,
+      "cpu_mean_ms": 497.65625
+    },
+    {
+      "documents": 50000,
+      "engine": "fdb",
+      "case_id": 36,
+      "variant": "legacy",
+      "n": 20,
+      "p50_ms": 416.4034,
+      "p95_ms": 482.117,
+      "max_ms": 505.5473,
+      "cpu_total_ms": 8578.125,
+      "cpu_mean_ms": 428.90625
+    },
+    {
+      "documents": 50000,
+      "engine": "fdb",
+      "case_id": 37,
+      "variant": "cap",
+      "n": 20,
+      "p50_ms": 0.892,
+      "p95_ms": 1.2691,
+      "max_ms": 1.693,
+      "cpu_total_ms": 31.25,
+      "cpu_mean_ms": 1.5625
+    },
+    {
+      "documents": 50000,
+      "engine": "fdb",
+      "case_id": 37,
+      "variant": "cap-four",
+      "n": 20,
+      "p50_ms": 1.9400000000000002,
+      "p95_ms": 2.2287,
+      "max_ms": 2.3389,
+      "cpu_total_ms": 46.875,
+      "cpu_mean_ms": 2.34375
+    },
+    {
+      "documents": 50000,
+      "engine": "fdb",
+      "case_id": 37,
+      "variant": "cap-hybrid",
+      "n": 20,
+      "p50_ms": 0.8281000000000001,
+      "p95_ms": 0.9633,
+      "max_ms": 1.1224,
+      "cpu_total_ms": 0.0,
+      "cpu_mean_ms": 0.0
+    },
+    {
+      "documents": 50000,
+      "engine": "fdb",
+      "case_id": 37,
+      "variant": "exact-four",
+      "n": 20,
+      "p50_ms": 153.2616,
+      "p95_ms": 167.9222,
+      "max_ms": 170.7184,
+      "cpu_total_ms": 8484.375,
+      "cpu_mean_ms": 424.21875
+    },
+    {
+      "documents": 50000,
+      "engine": "fdb",
+      "case_id": 37,
+      "variant": "legacy",
+      "n": 20,
+      "p50_ms": 349.343,
+      "p95_ms": 389.58680000000004,
+      "max_ms": 423.7941,
+      "cpu_total_ms": 7187.5,
+      "cpu_mean_ms": 359.375
+    },
+    {
+      "documents": 50000,
+      "engine": "fdb",
+      "case_id": 38,
+      "variant": "cap",
+      "n": 20,
+      "p50_ms": 239.531,
+      "p95_ms": 248.78910000000002,
+      "max_ms": 305.2414,
+      "cpu_total_ms": 4828.125,
+      "cpu_mean_ms": 241.40625
+    },
+    {
+      "documents": 50000,
+      "engine": "fdb",
+      "case_id": 38,
+      "variant": "cap-four",
+      "n": 20,
+      "p50_ms": 101.03049999999999,
+      "p95_ms": 110.66,
+      "max_ms": 124.17,
+      "cpu_total_ms": 5718.75,
+      "cpu_mean_ms": 285.9375
+    },
+    {
+      "documents": 50000,
+      "engine": "fdb",
+      "case_id": 38,
+      "variant": "cap-hybrid",
+      "n": 20,
+      "p50_ms": 101.4773,
+      "p95_ms": 111.6727,
+      "max_ms": 112.6947,
+      "cpu_total_ms": 5578.125,
+      "cpu_mean_ms": 278.90625
+    },
+    {
+      "documents": 50000,
+      "engine": "fdb",
+      "case_id": 38,
+      "variant": "exact-four",
+      "n": 20,
+      "p50_ms": 100.1764,
+      "p95_ms": 105.812,
+      "max_ms": 109.72030000000001,
+      "cpu_total_ms": 5484.375,
+      "cpu_mean_ms": 274.21875
+    },
+    {
+      "documents": 50000,
+      "engine": "fdb",
+      "case_id": 38,
+      "variant": "legacy",
+      "n": 20,
+      "p50_ms": 207.7858,
+      "p95_ms": 223.43759999999997,
+      "max_ms": 239.7426,
+      "cpu_total_ms": 4203.125,
+      "cpu_mean_ms": 210.15625
+    },
+    {
+      "documents": 50000,
+      "engine": "fdb",
+      "case_id": 39,
+      "variant": "cap",
+      "n": 20,
+      "p50_ms": 0.0329,
+      "p95_ms": 0.0386,
+      "max_ms": 0.043300000000000005,
+      "cpu_total_ms": 0.0,
+      "cpu_mean_ms": 0.0
+    },
+    {
+      "documents": 50000,
+      "engine": "fdb",
+      "case_id": 39,
+      "variant": "cap-four",
+      "n": 20,
+      "p50_ms": 0.3192,
+      "p95_ms": 0.3685,
+      "max_ms": 0.3925,
+      "cpu_total_ms": 15.625,
+      "cpu_mean_ms": 0.78125
+    },
+    {
+      "documents": 50000,
+      "engine": "fdb",
+      "case_id": 39,
+      "variant": "cap-hybrid",
+      "n": 20,
+      "p50_ms": 0.3831,
+      "p95_ms": 0.612,
+      "max_ms": 0.6835,
+      "cpu_total_ms": 0.0,
+      "cpu_mean_ms": 0.0
+    },
+    {
+      "documents": 50000,
+      "engine": "fdb",
+      "case_id": 39,
+      "variant": "exact-four",
+      "n": 20,
+      "p50_ms": 0.4077,
+      "p95_ms": 0.6777000000000001,
+      "max_ms": 0.8328,
+      "cpu_total_ms": 93.75,
+      "cpu_mean_ms": 4.6875
+    },
+    {
+      "documents": 50000,
+      "engine": "fdb",
+      "case_id": 39,
+      "variant": "legacy",
+      "n": 20,
+      "p50_ms": 0.013,
+      "p95_ms": 0.018600000000000002,
+      "max_ms": 0.0189,
+      "cpu_total_ms": 0.0,
+      "cpu_mean_ms": 0.0
+    },
+    {
+      "documents": 50000,
+      "engine": "fdb",
+      "case_id": 40,
+      "variant": "cap",
+      "n": 20,
+      "p50_ms": 0.5597,
+      "p95_ms": 0.621,
+      "max_ms": 0.6995,
+      "cpu_total_ms": 0.0,
+      "cpu_mean_ms": 0.0
+    },
+    {
+      "documents": 50000,
+      "engine": "fdb",
+      "case_id": 40,
+      "variant": "cap-four",
+      "n": 20,
+      "p50_ms": 0.6537999999999999,
+      "p95_ms": 0.8681,
+      "max_ms": 1.0795,
+      "cpu_total_ms": 0.0,
+      "cpu_mean_ms": 0.0
+    },
+    {
+      "documents": 50000,
+      "engine": "fdb",
+      "case_id": 40,
+      "variant": "cap-hybrid",
+      "n": 20,
+      "p50_ms": 0.4751,
+      "p95_ms": 0.579,
+      "max_ms": 0.6126,
+      "cpu_total_ms": 0.0,
+      "cpu_mean_ms": 0.0
+    },
+    {
+      "documents": 50000,
+      "engine": "fdb",
+      "case_id": 40,
+      "variant": "exact-four",
+      "n": 20,
+      "p50_ms": 0.69,
+      "p95_ms": 0.7961999999999999,
+      "max_ms": 0.8928,
+      "cpu_total_ms": 0.0,
+      "cpu_mean_ms": 0.0
+    },
+    {
+      "documents": 50000,
+      "engine": "fdb",
+      "case_id": 40,
+      "variant": "legacy",
+      "n": 20,
+      "p50_ms": 1.7389000000000001,
+      "p95_ms": 1.9654999999999998,
+      "max_ms": 2.0043,
+      "cpu_total_ms": 31.25,
+      "cpu_mean_ms": 1.5625
+    },
+    {
+      "documents": 50000,
+      "engine": "sqlite",
+      "case_id": 0,
+      "variant": "cap",
+      "n": 20,
+      "p50_ms": 251.9538,
+      "p95_ms": 279.5508,
+      "max_ms": 296.6089,
+      "cpu_total_ms": 5109.375,
+      "cpu_mean_ms": 255.46875
+    },
+    {
+      "documents": 50000,
+      "engine": "sqlite",
+      "case_id": 0,
+      "variant": "legacy",
+      "n": 20,
+      "p50_ms": 495.2213,
+      "p95_ms": 526.3555,
+      "max_ms": 534.1886000000001,
+      "cpu_total_ms": 9953.125,
+      "cpu_mean_ms": 497.65625
+    },
+    {
+      "documents": 50000,
+      "engine": "sqlite",
+      "case_id": 1,
+      "variant": "cap",
+      "n": 20,
+      "p50_ms": 227.3477,
+      "p95_ms": 253.982,
+      "max_ms": 254.89450000000002,
+      "cpu_total_ms": 4640.625,
+      "cpu_mean_ms": 232.03125
+    },
+    {
+      "documents": 50000,
+      "engine": "sqlite",
+      "case_id": 1,
+      "variant": "legacy",
+      "n": 20,
+      "p50_ms": 454.42519999999996,
+      "p95_ms": 490.8159,
+      "max_ms": 514.5114,
+      "cpu_total_ms": 9218.75,
+      "cpu_mean_ms": 460.9375
+    },
+    {
+      "documents": 50000,
+      "engine": "sqlite",
+      "case_id": 2,
+      "variant": "cap",
+      "n": 20,
+      "p50_ms": 296.68240000000003,
+      "p95_ms": 324.9812,
+      "max_ms": 325.45849999999996,
+      "cpu_total_ms": 6078.125,
+      "cpu_mean_ms": 303.90625
+    },
+    {
+      "documents": 50000,
+      "engine": "sqlite",
+      "case_id": 2,
+      "variant": "legacy",
+      "n": 20,
+      "p50_ms": 582.0552,
+      "p95_ms": 621.7305,
+      "max_ms": 651.5481,
+      "cpu_total_ms": 11718.75,
+      "cpu_mean_ms": 585.9375
+    },
+    {
+      "documents": 50000,
+      "engine": "sqlite",
+      "case_id": 3,
+      "variant": "cap",
+      "n": 20,
+      "p50_ms": 394.22220000000004,
+      "p95_ms": 473.89189999999996,
+      "max_ms": 519.4377999999999,
+      "cpu_total_ms": 8125.0,
+      "cpu_mean_ms": 406.25
+    },
+    {
+      "documents": 50000,
+      "engine": "sqlite",
+      "case_id": 3,
+      "variant": "legacy",
+      "n": 20,
+      "p50_ms": 790.7869,
+      "p95_ms": 841.9046999999999,
+      "max_ms": 916.3249,
+      "cpu_total_ms": 15984.375,
+      "cpu_mean_ms": 799.21875
+    },
+    {
+      "documents": 50000,
+      "engine": "sqlite",
+      "case_id": 4,
+      "variant": "cap",
+      "n": 20,
+      "p50_ms": 238.8372,
+      "p95_ms": 292.09839999999997,
+      "max_ms": 322.6753,
+      "cpu_total_ms": 5000.0,
+      "cpu_mean_ms": 250.0
+    },
+    {
+      "documents": 50000,
+      "engine": "sqlite",
+      "case_id": 4,
+      "variant": "legacy",
+      "n": 20,
+      "p50_ms": 475.087,
+      "p95_ms": 523.7857,
+      "max_ms": 559.7559,
+      "cpu_total_ms": 9781.25,
+      "cpu_mean_ms": 489.0625
+    },
+    {
+      "documents": 50000,
+      "engine": "sqlite",
+      "case_id": 5,
+      "variant": "cap",
+      "n": 20,
+      "p50_ms": 235.9427,
+      "p95_ms": 285.6573,
+      "max_ms": 316.2581,
+      "cpu_total_ms": 4859.375,
+      "cpu_mean_ms": 242.96875
+    },
+    {
+      "documents": 50000,
+      "engine": "sqlite",
+      "case_id": 5,
+      "variant": "legacy",
+      "n": 20,
+      "p50_ms": 468.43050000000005,
+      "p95_ms": 542.8383,
+      "max_ms": 594.2596,
+      "cpu_total_ms": 9546.875,
+      "cpu_mean_ms": 477.34375
+    },
+    {
+      "documents": 50000,
+      "engine": "sqlite",
+      "case_id": 6,
+      "variant": "cap",
+      "n": 20,
+      "p50_ms": 252.3355,
+      "p95_ms": 293.3311,
+      "max_ms": 319.5307,
+      "cpu_total_ms": 5125.0,
+      "cpu_mean_ms": 256.25
+    },
+    {
+      "documents": 50000,
+      "engine": "sqlite",
+      "case_id": 6,
+      "variant": "legacy",
+      "n": 20,
+      "p50_ms": 501.6862,
+      "p95_ms": 550.7969,
+      "max_ms": 582.4105000000001,
+      "cpu_total_ms": 10187.5,
+      "cpu_mean_ms": 509.375
+    },
+    {
+      "documents": 50000,
+      "engine": "sqlite",
+      "case_id": 7,
+      "variant": "cap",
+      "n": 20,
+      "p50_ms": 66.00580000000001,
+      "p95_ms": 85.05749999999999,
+      "max_ms": 85.44200000000001,
+      "cpu_total_ms": 1312.5,
+      "cpu_mean_ms": 65.625
+    },
+    {
+      "documents": 50000,
+      "engine": "sqlite",
+      "case_id": 7,
+      "variant": "legacy",
+      "n": 20,
+      "p50_ms": 128.8109,
+      "p95_ms": 168.32639999999998,
+      "max_ms": 171.9287,
+      "cpu_total_ms": 2718.75,
+      "cpu_mean_ms": 135.9375
+    },
+    {
+      "documents": 50000,
+      "engine": "sqlite",
+      "case_id": 8,
+      "variant": "cap",
+      "n": 20,
+      "p50_ms": 283.9949,
+      "p95_ms": 315.4461,
+      "max_ms": 320.2495,
+      "cpu_total_ms": 5796.875,
+      "cpu_mean_ms": 289.84375
+    },
+    {
+      "documents": 50000,
+      "engine": "sqlite",
+      "case_id": 8,
+      "variant": "legacy",
+      "n": 20,
+      "p50_ms": 567.5383,
+      "p95_ms": 613.0535,
+      "max_ms": 621.6716,
+      "cpu_total_ms": 11515.625,
+      "cpu_mean_ms": 575.78125
+    },
+    {
+      "documents": 50000,
+      "engine": "sqlite",
+      "case_id": 9,
+      "variant": "cap",
+      "n": 20,
+      "p50_ms": 206.2745,
+      "p95_ms": 221.8466,
+      "max_ms": 244.2989,
+      "cpu_total_ms": 4234.375,
+      "cpu_mean_ms": 211.71875
+    },
+    {
+      "documents": 50000,
+      "engine": "sqlite",
+      "case_id": 9,
+      "variant": "legacy",
+      "n": 20,
+      "p50_ms": 411.50179999999995,
+      "p95_ms": 476.1991,
+      "max_ms": 477.19050000000004,
+      "cpu_total_ms": 8406.25,
+      "cpu_mean_ms": 420.3125
+    },
+    {
+      "documents": 50000,
+      "engine": "sqlite",
+      "case_id": 10,
+      "variant": "cap",
+      "n": 20,
+      "p50_ms": 310.5209,
+      "p95_ms": 331.7832,
+      "max_ms": 351.9551,
+      "cpu_total_ms": 6359.375,
+      "cpu_mean_ms": 317.96875
+    },
+    {
+      "documents": 50000,
+      "engine": "sqlite",
+      "case_id": 10,
+      "variant": "legacy",
+      "n": 20,
+      "p50_ms": 622.8759,
+      "p95_ms": 661.7650000000001,
+      "max_ms": 678.1679,
+      "cpu_total_ms": 12562.5,
+      "cpu_mean_ms": 628.125
+    },
+    {
+      "documents": 50000,
+      "engine": "sqlite",
+      "case_id": 11,
+      "variant": "cap",
+      "n": 20,
+      "p50_ms": 128.1191,
+      "p95_ms": 144.82410000000002,
+      "max_ms": 147.012,
+      "cpu_total_ms": 2593.75,
+      "cpu_mean_ms": 129.6875
+    },
+    {
+      "documents": 50000,
+      "engine": "sqlite",
+      "case_id": 11,
+      "variant": "legacy",
+      "n": 20,
+      "p50_ms": 249.9571,
+      "p95_ms": 264.68829999999997,
+      "max_ms": 289.4017,
+      "cpu_total_ms": 5046.875,
+      "cpu_mean_ms": 252.34375
+    },
+    {
+      "documents": 50000,
+      "engine": "sqlite",
+      "case_id": 12,
+      "variant": "cap",
+      "n": 20,
+      "p50_ms": 221.668,
+      "p95_ms": 237.6223,
+      "max_ms": 340.8092,
+      "cpu_total_ms": 4578.125,
+      "cpu_mean_ms": 228.90625
+    },
+    {
+      "documents": 50000,
+      "engine": "sqlite",
+      "case_id": 12,
+      "variant": "legacy",
+      "n": 20,
+      "p50_ms": 440.5693,
+      "p95_ms": 458.0589,
+      "max_ms": 487.4682,
+      "cpu_total_ms": 8734.375,
+      "cpu_mean_ms": 436.71875
+    },
+    {
+      "documents": 50000,
+      "engine": "sqlite",
+      "case_id": 13,
+      "variant": "cap",
+      "n": 20,
+      "p50_ms": 99.6309,
+      "p95_ms": 105.12100000000001,
+      "max_ms": 143.4938,
+      "cpu_total_ms": 2015.625,
+      "cpu_mean_ms": 100.78125
+    },
+    {
+      "documents": 50000,
+      "engine": "sqlite",
+      "case_id": 13,
+      "variant": "legacy",
+      "n": 20,
+      "p50_ms": 198.2976,
+      "p95_ms": 223.8158,
+      "max_ms": 229.42100000000002,
+      "cpu_total_ms": 4000.0,
+      "cpu_mean_ms": 200.0
+    },
+    {
+      "documents": 50000,
+      "engine": "sqlite",
+      "case_id": 14,
+      "variant": "cap",
+      "n": 20,
+      "p50_ms": 45.1488,
+      "p95_ms": 51.5786,
+      "max_ms": 71.3217,
+      "cpu_total_ms": 953.125,
+      "cpu_mean_ms": 47.65625
+    },
+    {
+      "documents": 50000,
+      "engine": "sqlite",
+      "case_id": 14,
+      "variant": "legacy",
+      "n": 20,
+      "p50_ms": 89.7388,
+      "p95_ms": 98.55120000000001,
+      "max_ms": 100.9814,
+      "cpu_total_ms": 1781.25,
+      "cpu_mean_ms": 89.0625
+    },
+    {
+      "documents": 50000,
+      "engine": "sqlite",
+      "case_id": 15,
+      "variant": "cap",
+      "n": 20,
+      "p50_ms": 188.4241,
+      "p95_ms": 201.6515,
+      "max_ms": 216.5734,
+      "cpu_total_ms": 3875.0,
+      "cpu_mean_ms": 193.75
+    },
+    {
+      "documents": 50000,
+      "engine": "sqlite",
+      "case_id": 15,
+      "variant": "legacy",
+      "n": 20,
+      "p50_ms": 377.52570000000003,
+      "p95_ms": 430.9452,
+      "max_ms": 459.4762,
+      "cpu_total_ms": 7625.0,
+      "cpu_mean_ms": 381.25
+    },
+    {
+      "documents": 50000,
+      "engine": "sqlite",
+      "case_id": 16,
+      "variant": "cap",
+      "n": 20,
+      "p50_ms": 150.0436,
+      "p95_ms": 169.9254,
+      "max_ms": 176.91109999999998,
+      "cpu_total_ms": 3078.125,
+      "cpu_mean_ms": 153.90625
+    },
+    {
+      "documents": 50000,
+      "engine": "sqlite",
+      "case_id": 16,
+      "variant": "legacy",
+      "n": 20,
+      "p50_ms": 298.547,
+      "p95_ms": 334.103,
+      "max_ms": 382.631,
+      "cpu_total_ms": 6093.75,
+      "cpu_mean_ms": 304.6875
+    },
+    {
+      "documents": 50000,
+      "engine": "sqlite",
+      "case_id": 17,
+      "variant": "cap",
+      "n": 20,
+      "p50_ms": 28.6524,
+      "p95_ms": 31.9848,
+      "max_ms": 34.2978,
+      "cpu_total_ms": 609.375,
+      "cpu_mean_ms": 30.46875
+    },
+    {
+      "documents": 50000,
+      "engine": "sqlite",
+      "case_id": 17,
+      "variant": "legacy",
+      "n": 20,
+      "p50_ms": 54.288799999999995,
+      "p95_ms": 65.17580000000001,
+      "max_ms": 67.71130000000001,
+      "cpu_total_ms": 1093.75,
+      "cpu_mean_ms": 54.6875
+    },
+    {
+      "documents": 50000,
+      "engine": "sqlite",
+      "case_id": 18,
+      "variant": "cap",
+      "n": 20,
+      "p50_ms": 192.8508,
+      "p95_ms": 210.44570000000002,
+      "max_ms": 212.77589999999998,
+      "cpu_total_ms": 3859.375,
+      "cpu_mean_ms": 192.96875
+    },
+    {
+      "documents": 50000,
+      "engine": "sqlite",
+      "case_id": 18,
+      "variant": "legacy",
+      "n": 20,
+      "p50_ms": 383.8349,
+      "p95_ms": 422.4502,
+      "max_ms": 485.6427,
+      "cpu_total_ms": 7968.75,
+      "cpu_mean_ms": 398.4375
+    },
+    {
+      "documents": 50000,
+      "engine": "sqlite",
+      "case_id": 19,
+      "variant": "cap",
+      "n": 20,
+      "p50_ms": 68.8741,
+      "p95_ms": 72.35659999999999,
+      "max_ms": 74.3734,
+      "cpu_total_ms": 1406.25,
+      "cpu_mean_ms": 70.3125
+    },
+    {
+      "documents": 50000,
+      "engine": "sqlite",
+      "case_id": 19,
+      "variant": "legacy",
+      "n": 20,
+      "p50_ms": 135.506,
+      "p95_ms": 146.8118,
+      "max_ms": 154.3104,
+      "cpu_total_ms": 2750.0,
+      "cpu_mean_ms": 137.5
+    },
+    {
+      "documents": 50000,
+      "engine": "sqlite",
+      "case_id": 20,
+      "variant": "cap",
+      "n": 20,
+      "p50_ms": 5.099,
+      "p95_ms": 5.7459,
+      "max_ms": 6.479699999999999,
+      "cpu_total_ms": 46.875,
+      "cpu_mean_ms": 2.34375
+    },
+    {
+      "documents": 50000,
+      "engine": "sqlite",
+      "case_id": 20,
+      "variant": "legacy",
+      "n": 20,
+      "p50_ms": 10.8331,
+      "p95_ms": 12.7468,
+      "max_ms": 14.6001,
+      "cpu_total_ms": 265.625,
+      "cpu_mean_ms": 13.28125
+    },
+    {
+      "documents": 50000,
+      "engine": "sqlite",
+      "case_id": 21,
+      "variant": "cap",
+      "n": 20,
+      "p50_ms": 21.5224,
+      "p95_ms": 23.6657,
+      "max_ms": 25.3152,
+      "cpu_total_ms": 468.75,
+      "cpu_mean_ms": 23.4375
+    },
+    {
+      "documents": 50000,
+      "engine": "sqlite",
+      "case_id": 21,
+      "variant": "legacy",
+      "n": 20,
+      "p50_ms": 41.9987,
+      "p95_ms": 46.8314,
+      "max_ms": 55.7559,
+      "cpu_total_ms": 843.75,
+      "cpu_mean_ms": 42.1875
+    },
+    {
+      "documents": 50000,
+      "engine": "sqlite",
+      "case_id": 22,
+      "variant": "cap",
+      "n": 20,
+      "p50_ms": 237.8743,
+      "p95_ms": 259.1275,
+      "max_ms": 261.0217,
+      "cpu_total_ms": 4750.0,
+      "cpu_mean_ms": 237.5
+    },
+    {
+      "documents": 50000,
+      "engine": "sqlite",
+      "case_id": 22,
+      "variant": "legacy",
+      "n": 20,
+      "p50_ms": 476.6048,
+      "p95_ms": 526.5576,
+      "max_ms": 540.9482,
+      "cpu_total_ms": 9718.75,
+      "cpu_mean_ms": 485.9375
+    },
+    {
+      "documents": 50000,
+      "engine": "sqlite",
+      "case_id": 23,
+      "variant": "cap",
+      "n": 20,
+      "p50_ms": 183.3435,
+      "p95_ms": 199.9179,
+      "max_ms": 241.6909,
+      "cpu_total_ms": 3796.875,
+      "cpu_mean_ms": 189.84375
+    },
+    {
+      "documents": 50000,
+      "engine": "sqlite",
+      "case_id": 23,
+      "variant": "legacy",
+      "n": 20,
+      "p50_ms": 362.90909999999997,
+      "p95_ms": 404.364,
+      "max_ms": 457.5243,
+      "cpu_total_ms": 7375.0,
+      "cpu_mean_ms": 368.75
+    },
+    {
+      "documents": 50000,
+      "engine": "sqlite",
+      "case_id": 24,
+      "variant": "cap",
+      "n": 20,
+      "p50_ms": 153.6873,
+      "p95_ms": 161.62699999999998,
+      "max_ms": 166.32,
+      "cpu_total_ms": 3093.75,
+      "cpu_mean_ms": 154.6875
+    },
+    {
+      "documents": 50000,
+      "engine": "sqlite",
+      "case_id": 24,
+      "variant": "legacy",
+      "n": 20,
+      "p50_ms": 307.0487,
+      "p95_ms": 364.20550000000003,
+      "max_ms": 402.0328,
+      "cpu_total_ms": 6343.75,
+      "cpu_mean_ms": 317.1875
+    },
+    {
+      "documents": 50000,
+      "engine": "sqlite",
+      "case_id": 25,
+      "variant": "cap",
+      "n": 20,
+      "p50_ms": 13.2988,
+      "p95_ms": 14.552900000000001,
+      "max_ms": 17.288999999999998,
+      "cpu_total_ms": 281.25,
+      "cpu_mean_ms": 14.0625
+    },
+    {
+      "documents": 50000,
+      "engine": "sqlite",
+      "case_id": 25,
+      "variant": "legacy",
+      "n": 20,
+      "p50_ms": 24.546,
+      "p95_ms": 27.9508,
+      "max_ms": 28.1575,
+      "cpu_total_ms": 500.0,
+      "cpu_mean_ms": 25.0
+    },
+    {
+      "documents": 50000,
+      "engine": "sqlite",
+      "case_id": 26,
+      "variant": "cap",
+      "n": 20,
+      "p50_ms": 121.0295,
+      "p95_ms": 128.5877,
+      "max_ms": 129.6226,
+      "cpu_total_ms": 2406.25,
+      "cpu_mean_ms": 120.3125
+    },
+    {
+      "documents": 50000,
+      "engine": "sqlite",
+      "case_id": 26,
+      "variant": "legacy",
+      "n": 20,
+      "p50_ms": 240.23729999999998,
+      "p95_ms": 264.8872,
+      "max_ms": 266.6911,
+      "cpu_total_ms": 4875.0,
+      "cpu_mean_ms": 243.75
+    },
+    {
+      "documents": 50000,
+      "engine": "sqlite",
+      "case_id": 27,
+      "variant": "cap",
+      "n": 20,
+      "p50_ms": 67.111,
+      "p95_ms": 70.4885,
+      "max_ms": 83.1379,
+      "cpu_total_ms": 1359.375,
+      "cpu_mean_ms": 67.96875
+    },
+    {
+      "documents": 50000,
+      "engine": "sqlite",
+      "case_id": 27,
+      "variant": "legacy",
+      "n": 20,
+      "p50_ms": 130.9428,
+      "p95_ms": 151.312,
+      "max_ms": 162.8195,
+      "cpu_total_ms": 2734.375,
+      "cpu_mean_ms": 136.71875
+    },
+    {
+      "documents": 50000,
+      "engine": "sqlite",
+      "case_id": 28,
+      "variant": "cap",
+      "n": 20,
+      "p50_ms": 154.4975,
+      "p95_ms": 173.3833,
+      "max_ms": 195.9651,
+      "cpu_total_ms": 3171.875,
+      "cpu_mean_ms": 158.59375
+    },
+    {
+      "documents": 50000,
+      "engine": "sqlite",
+      "case_id": 28,
+      "variant": "legacy",
+      "n": 20,
+      "p50_ms": 304.8859,
+      "p95_ms": 347.4162,
+      "max_ms": 378.84279999999995,
+      "cpu_total_ms": 6203.125,
+      "cpu_mean_ms": 310.15625
+    },
+    {
+      "documents": 50000,
+      "engine": "sqlite",
+      "case_id": 29,
+      "variant": "cap",
+      "n": 20,
+      "p50_ms": 7.6479,
+      "p95_ms": 10.2094,
+      "max_ms": 10.7076,
+      "cpu_total_ms": 156.25,
+      "cpu_mean_ms": 7.8125
+    },
+    {
+      "documents": 50000,
+      "engine": "sqlite",
+      "case_id": 29,
+      "variant": "legacy",
+      "n": 20,
+      "p50_ms": 12.222,
+      "p95_ms": 16.6977,
+      "max_ms": 18.1379,
+      "cpu_total_ms": 250.0,
+      "cpu_mean_ms": 12.5
+    },
+    {
+      "documents": 50000,
+      "engine": "sqlite",
+      "case_id": 30,
+      "variant": "cap",
+      "n": 20,
+      "p50_ms": 214.6089,
+      "p95_ms": 231.823,
+      "max_ms": 265.7993,
+      "cpu_total_ms": 4359.375,
+      "cpu_mean_ms": 217.96875
+    },
+    {
+      "documents": 50000,
+      "engine": "sqlite",
+      "case_id": 30,
+      "variant": "legacy",
+      "n": 20,
+      "p50_ms": 427.3752,
+      "p95_ms": 520.2822,
+      "max_ms": 551.6707,
+      "cpu_total_ms": 8859.375,
+      "cpu_mean_ms": 442.96875
+    },
+    {
+      "documents": 50000,
+      "engine": "sqlite",
+      "case_id": 31,
+      "variant": "cap",
+      "n": 20,
+      "p50_ms": 23.082600000000003,
+      "p95_ms": 25.1195,
+      "max_ms": 26.7933,
+      "cpu_total_ms": 515.625,
+      "cpu_mean_ms": 25.78125
+    },
+    {
+      "documents": 50000,
+      "engine": "sqlite",
+      "case_id": 31,
+      "variant": "legacy",
+      "n": 20,
+      "p50_ms": 44.567299999999996,
+      "p95_ms": 49.757999999999996,
+      "max_ms": 52.2364,
+      "cpu_total_ms": 875.0,
+      "cpu_mean_ms": 43.75
+    },
+    {
+      "documents": 50000,
+      "engine": "sqlite",
+      "case_id": 32,
+      "variant": "cap",
+      "n": 20,
+      "p50_ms": 90.04669999999999,
+      "p95_ms": 92.8415,
+      "max_ms": 93.51180000000001,
+      "cpu_total_ms": 1859.375,
+      "cpu_mean_ms": 92.96875
+    },
+    {
+      "documents": 50000,
+      "engine": "sqlite",
+      "case_id": 32,
+      "variant": "legacy",
+      "n": 20,
+      "p50_ms": 180.2399,
+      "p95_ms": 192.7347,
+      "max_ms": 194.61020000000002,
+      "cpu_total_ms": 3562.5,
+      "cpu_mean_ms": 178.125
+    },
+    {
+      "documents": 50000,
+      "engine": "sqlite",
+      "case_id": 33,
+      "variant": "cap",
+      "n": 20,
+      "p50_ms": 47.5345,
+      "p95_ms": 50.0971,
+      "max_ms": 50.4671,
+      "cpu_total_ms": 953.125,
+      "cpu_mean_ms": 47.65625
+    },
+    {
+      "documents": 50000,
+      "engine": "sqlite",
+      "case_id": 33,
+      "variant": "legacy",
+      "n": 20,
+      "p50_ms": 95.283,
+      "p95_ms": 101.02369999999999,
+      "max_ms": 106.4016,
+      "cpu_total_ms": 1906.25,
+      "cpu_mean_ms": 95.3125
+    },
+    {
+      "documents": 50000,
+      "engine": "sqlite",
+      "case_id": 34,
+      "variant": "cap",
+      "n": 20,
+      "p50_ms": 146.6449,
+      "p95_ms": 158.42229999999998,
+      "max_ms": 170.3023,
+      "cpu_total_ms": 2968.75,
+      "cpu_mean_ms": 148.4375
+    },
+    {
+      "documents": 50000,
+      "engine": "sqlite",
+      "case_id": 34,
+      "variant": "legacy",
+      "n": 20,
+      "p50_ms": 292.3618,
+      "p95_ms": 309.3762,
+      "max_ms": 314.8422,
+      "cpu_total_ms": 5812.5,
+      "cpu_mean_ms": 290.625
+    },
+    {
+      "documents": 50000,
+      "engine": "sqlite",
+      "case_id": 35,
+      "variant": "cap",
+      "n": 20,
+      "p50_ms": 346.1529,
+      "p95_ms": 375.9049,
+      "max_ms": 424.8369,
+      "cpu_total_ms": 7062.5,
+      "cpu_mean_ms": 353.125
+    },
+    {
+      "documents": 50000,
+      "engine": "sqlite",
+      "case_id": 35,
+      "variant": "legacy",
+      "n": 20,
+      "p50_ms": 685.9856,
+      "p95_ms": 727.4741,
+      "max_ms": 728.3302,
+      "cpu_total_ms": 13843.75,
+      "cpu_mean_ms": 692.1875
+    },
+    {
+      "documents": 50000,
+      "engine": "sqlite",
+      "case_id": 36,
+      "variant": "cap",
+      "n": 20,
+      "p50_ms": 489.0544,
+      "p95_ms": 521.4332,
+      "max_ms": 553.5436,
+      "cpu_total_ms": 10015.625,
+      "cpu_mean_ms": 500.78125
+    },
+    {
+      "documents": 50000,
+      "engine": "sqlite",
+      "case_id": 36,
+      "variant": "legacy",
+      "n": 20,
+      "p50_ms": 977.4436,
+      "p95_ms": 1036.5403,
+      "max_ms": 1079.4463999999998,
+      "cpu_total_ms": 19625.0,
+      "cpu_mean_ms": 981.25
+    },
+    {
+      "documents": 50000,
+      "engine": "sqlite",
+      "case_id": 37,
+      "variant": "cap",
+      "n": 20,
+      "p50_ms": 404.71810000000005,
+      "p95_ms": 442.8853,
+      "max_ms": 444.36740000000003,
+      "cpu_total_ms": 8156.25,
+      "cpu_mean_ms": 407.8125
+    },
+    {
+      "documents": 50000,
+      "engine": "sqlite",
+      "case_id": 37,
+      "variant": "legacy",
+      "n": 20,
+      "p50_ms": 812.1176,
+      "p95_ms": 876.59,
+      "max_ms": 878.8043,
+      "cpu_total_ms": 16453.125,
+      "cpu_mean_ms": 822.65625
+    },
+    {
+      "documents": 50000,
+      "engine": "sqlite",
+      "case_id": 38,
+      "variant": "cap",
+      "n": 20,
+      "p50_ms": 438.4867,
+      "p95_ms": 488.3066,
+      "max_ms": 538.8851999999999,
+      "cpu_total_ms": 8953.125,
+      "cpu_mean_ms": 447.65625
+    },
+    {
+      "documents": 50000,
+      "engine": "sqlite",
+      "case_id": 38,
+      "variant": "legacy",
+      "n": 20,
+      "p50_ms": 878.2335999999999,
+      "p95_ms": 921.6588999999999,
+      "max_ms": 941.8083,
+      "cpu_total_ms": 17687.5,
+      "cpu_mean_ms": 884.375
+    },
+    {
+      "documents": 50000,
+      "engine": "sqlite",
+      "case_id": 39,
+      "variant": "cap",
+      "n": 20,
+      "p50_ms": 0.2868,
+      "p95_ms": 0.3837,
+      "max_ms": 0.6506,
+      "cpu_total_ms": 0.0,
+      "cpu_mean_ms": 0.0
+    },
+    {
+      "documents": 50000,
+      "engine": "sqlite",
+      "case_id": 39,
+      "variant": "legacy",
+      "n": 20,
+      "p50_ms": 0.1258,
+      "p95_ms": 0.2017,
+      "max_ms": 0.261,
+      "cpu_total_ms": 0.0,
+      "cpu_mean_ms": 0.0
+    },
+    {
+      "documents": 50000,
+      "engine": "sqlite",
+      "case_id": 40,
+      "variant": "cap",
+      "n": 20,
+      "p50_ms": 2.2384000000000004,
+      "p95_ms": 2.5504,
+      "max_ms": 3.5206,
+      "cpu_total_ms": 31.25,
+      "cpu_mean_ms": 1.5625
+    },
+    {
+      "documents": 50000,
+      "engine": "sqlite",
+      "case_id": 40,
+      "variant": "legacy",
+      "n": 20,
+      "p50_ms": 4.832999999999999,
+      "p95_ms": 5.5473,
+      "max_ms": 6.4693,
+      "cpu_total_ms": 140.625,
+      "cpu_mean_ms": 7.03125
+    },
+    {
+      "documents": 100000,
+      "engine": "sqlite",
+      "case_id": 0,
+      "variant": "cap",
+      "n": 20,
+      "p50_ms": 594.9023,
+      "p95_ms": 631.9342999999999,
+      "max_ms": 672.9384,
+      "cpu_total_ms": 11937.5,
+      "cpu_mean_ms": 596.875
+    },
+    {
+      "documents": 100000,
+      "engine": "sqlite",
+      "case_id": 0,
+      "variant": "legacy",
+      "n": 20,
+      "p50_ms": 1182.0773,
+      "p95_ms": 1282.116,
+      "max_ms": 1365.2377,
+      "cpu_total_ms": 23890.625,
+      "cpu_mean_ms": 1194.53125
+    },
+    {
+      "documents": 100000,
+      "engine": "sqlite",
+      "case_id": 1,
+      "variant": "cap",
+      "n": 20,
+      "p50_ms": 544.6059,
+      "p95_ms": 603.382,
+      "max_ms": 631.6161,
+      "cpu_total_ms": 11156.25,
+      "cpu_mean_ms": 557.8125
+    },
+    {
+      "documents": 100000,
+      "engine": "sqlite",
+      "case_id": 1,
+      "variant": "legacy",
+      "n": 20,
+      "p50_ms": 1085.0268,
+      "p95_ms": 1153.4822,
+      "max_ms": 1244.6511,
+      "cpu_total_ms": 21921.875,
+      "cpu_mean_ms": 1096.09375
+    },
+    {
+      "documents": 100000,
+      "engine": "sqlite",
+      "case_id": 2,
+      "variant": "cap",
+      "n": 20,
+      "p50_ms": 704.3977,
+      "p95_ms": 775.8501,
+      "max_ms": 797.7377,
+      "cpu_total_ms": 14234.375,
+      "cpu_mean_ms": 711.71875
+    },
+    {
+      "documents": 100000,
+      "engine": "sqlite",
+      "case_id": 2,
+      "variant": "legacy",
+      "n": 20,
+      "p50_ms": 1413.9211,
+      "p95_ms": 1488.0312,
+      "max_ms": 1488.7695999999999,
+      "cpu_total_ms": 28390.625,
+      "cpu_mean_ms": 1419.53125
+    },
+    {
+      "documents": 100000,
+      "engine": "sqlite",
+      "case_id": 3,
+      "variant": "cap",
+      "n": 20,
+      "p50_ms": 958.2581,
+      "p95_ms": 1002.4295999999999,
+      "max_ms": 1034.8193999999999,
+      "cpu_total_ms": 19125.0,
+      "cpu_mean_ms": 956.25
+    },
+    {
+      "documents": 100000,
+      "engine": "sqlite",
+      "case_id": 3,
+      "variant": "legacy",
+      "n": 20,
+      "p50_ms": 1906.049,
+      "p95_ms": 2050.4691,
+      "max_ms": 2063.4343,
+      "cpu_total_ms": 38453.125,
+      "cpu_mean_ms": 1922.65625
+    },
+    {
+      "documents": 100000,
+      "engine": "sqlite",
+      "case_id": 4,
+      "variant": "cap",
+      "n": 20,
+      "p50_ms": 566.6537000000001,
+      "p95_ms": 597.5599000000001,
+      "max_ms": 648.8539,
+      "cpu_total_ms": 11406.25,
+      "cpu_mean_ms": 570.3125
+    },
+    {
+      "documents": 100000,
+      "engine": "sqlite",
+      "case_id": 4,
+      "variant": "legacy",
+      "n": 20,
+      "p50_ms": 1125.9487,
+      "p95_ms": 1244.7416,
+      "max_ms": 1413.2699,
+      "cpu_total_ms": 22828.125,
+      "cpu_mean_ms": 1141.40625
+    },
+    {
+      "documents": 100000,
+      "engine": "sqlite",
+      "case_id": 5,
+      "variant": "cap",
+      "n": 20,
+      "p50_ms": 571.2080000000001,
+      "p95_ms": 613.8430999999999,
+      "max_ms": 628.961,
+      "cpu_total_ms": 11328.125,
+      "cpu_mean_ms": 566.40625
+    },
+    {
+      "documents": 100000,
+      "engine": "sqlite",
+      "case_id": 5,
+      "variant": "legacy",
+      "n": 20,
+      "p50_ms": 1123.3607000000002,
+      "p95_ms": 1185.5496,
+      "max_ms": 1203.8732,
+      "cpu_total_ms": 22453.125,
+      "cpu_mean_ms": 1122.65625
+    },
+    {
+      "documents": 100000,
+      "engine": "sqlite",
+      "case_id": 6,
+      "variant": "cap",
+      "n": 20,
+      "p50_ms": 593.8093,
+      "p95_ms": 658.9264000000001,
+      "max_ms": 660.3542,
+      "cpu_total_ms": 12000.0,
+      "cpu_mean_ms": 600.0
+    },
+    {
+      "documents": 100000,
+      "engine": "sqlite",
+      "case_id": 6,
+      "variant": "legacy",
+      "n": 20,
+      "p50_ms": 1185.1525000000001,
+      "p95_ms": 1271.9755,
+      "max_ms": 1351.3873,
+      "cpu_total_ms": 24125.0,
+      "cpu_mean_ms": 1206.25
+    },
+    {
+      "documents": 100000,
+      "engine": "sqlite",
+      "case_id": 7,
+      "variant": "cap",
+      "n": 20,
+      "p50_ms": 148.73819999999998,
+      "p95_ms": 153.7635,
+      "max_ms": 162.2283,
+      "cpu_total_ms": 3078.125,
+      "cpu_mean_ms": 153.90625
+    },
+    {
+      "documents": 100000,
+      "engine": "sqlite",
+      "case_id": 7,
+      "variant": "legacy",
+      "n": 20,
+      "p50_ms": 293.61150000000004,
+      "p95_ms": 316.6107,
+      "max_ms": 317.4942,
+      "cpu_total_ms": 5843.75,
+      "cpu_mean_ms": 292.1875
+    },
+    {
+      "documents": 100000,
+      "engine": "sqlite",
+      "case_id": 8,
+      "variant": "cap",
+      "n": 20,
+      "p50_ms": 676.75,
+      "p95_ms": 710.4331999999999,
+      "max_ms": 718.2174,
+      "cpu_total_ms": 13453.125,
+      "cpu_mean_ms": 672.65625
+    },
+    {
+      "documents": 100000,
+      "engine": "sqlite",
+      "case_id": 8,
+      "variant": "legacy",
+      "n": 20,
+      "p50_ms": 1364.6417,
+      "p95_ms": 1410.8574,
+      "max_ms": 1411.5149000000001,
+      "cpu_total_ms": 27187.5,
+      "cpu_mean_ms": 1359.375
+    },
+    {
+      "documents": 100000,
+      "engine": "sqlite",
+      "case_id": 9,
+      "variant": "cap",
+      "n": 20,
+      "p50_ms": 488.6027,
+      "p95_ms": 528.1216,
+      "max_ms": 544.7081000000001,
+      "cpu_total_ms": 9906.25,
+      "cpu_mean_ms": 495.3125
+    },
+    {
+      "documents": 100000,
+      "engine": "sqlite",
+      "case_id": 9,
+      "variant": "legacy",
+      "n": 20,
+      "p50_ms": 972.2286,
+      "p95_ms": 1031.1723,
+      "max_ms": 1044.5636,
+      "cpu_total_ms": 19593.75,
+      "cpu_mean_ms": 979.6875
+    },
+    {
+      "documents": 100000,
+      "engine": "sqlite",
+      "case_id": 10,
+      "variant": "cap",
+      "n": 20,
+      "p50_ms": 743.516,
+      "p95_ms": 813.2495,
+      "max_ms": 900.7935,
+      "cpu_total_ms": 15031.25,
+      "cpu_mean_ms": 751.5625
+    },
+    {
+      "documents": 100000,
+      "engine": "sqlite",
+      "case_id": 10,
+      "variant": "legacy",
+      "n": 20,
+      "p50_ms": 1497.0696,
+      "p95_ms": 1562.6809,
+      "max_ms": 1633.2418,
+      "cpu_total_ms": 29890.625,
+      "cpu_mean_ms": 1494.53125
+    },
+    {
+      "documents": 100000,
+      "engine": "sqlite",
+      "case_id": 11,
+      "variant": "cap",
+      "n": 20,
+      "p50_ms": 300.80089999999996,
+      "p95_ms": 332.1258,
+      "max_ms": 332.7722,
+      "cpu_total_ms": 6031.25,
+      "cpu_mean_ms": 301.5625
+    },
+    {
+      "documents": 100000,
+      "engine": "sqlite",
+      "case_id": 11,
+      "variant": "legacy",
+      "n": 20,
+      "p50_ms": 598.3482,
+      "p95_ms": 648.4476,
+      "max_ms": 671.0066999999999,
+      "cpu_total_ms": 12312.5,
+      "cpu_mean_ms": 615.625
+    },
+    {
+      "documents": 100000,
+      "engine": "sqlite",
+      "case_id": 12,
+      "variant": "cap",
+      "n": 20,
+      "p50_ms": 526.3242,
+      "p95_ms": 579.9877,
+      "max_ms": 591.423,
+      "cpu_total_ms": 10718.75,
+      "cpu_mean_ms": 535.9375
+    },
+    {
+      "documents": 100000,
+      "engine": "sqlite",
+      "case_id": 12,
+      "variant": "legacy",
+      "n": 20,
+      "p50_ms": 1048.0962,
+      "p95_ms": 1122.6735,
+      "max_ms": 1127.5542999999998,
+      "cpu_total_ms": 21062.5,
+      "cpu_mean_ms": 1053.125
+    },
+    {
+      "documents": 100000,
+      "engine": "sqlite",
+      "case_id": 13,
+      "variant": "cap",
+      "n": 20,
+      "p50_ms": 239.527,
+      "p95_ms": 266.3369,
+      "max_ms": 273.24379999999996,
+      "cpu_total_ms": 4906.25,
+      "cpu_mean_ms": 245.3125
+    },
+    {
+      "documents": 100000,
+      "engine": "sqlite",
+      "case_id": 13,
+      "variant": "legacy",
+      "n": 20,
+      "p50_ms": 478.1157,
+      "p95_ms": 530.6414000000001,
+      "max_ms": 570.9155999999999,
+      "cpu_total_ms": 9625.0,
+      "cpu_mean_ms": 481.25
+    },
+    {
+      "documents": 100000,
+      "engine": "sqlite",
+      "case_id": 14,
+      "variant": "cap",
+      "n": 20,
+      "p50_ms": 101.1344,
+      "p95_ms": 117.24170000000001,
+      "max_ms": 136.752,
+      "cpu_total_ms": 2093.75,
+      "cpu_mean_ms": 104.6875
+    },
+    {
+      "documents": 100000,
+      "engine": "sqlite",
+      "case_id": 14,
+      "variant": "legacy",
+      "n": 20,
+      "p50_ms": 199.1552,
+      "p95_ms": 214.7617,
+      "max_ms": 254.0388,
+      "cpu_total_ms": 4000.0,
+      "cpu_mean_ms": 200.0
+    },
+    {
+      "documents": 100000,
+      "engine": "sqlite",
+      "case_id": 15,
+      "variant": "cap",
+      "n": 20,
+      "p50_ms": 449.0555,
+      "p95_ms": 481.7174,
+      "max_ms": 498.9823,
+      "cpu_total_ms": 9046.875,
+      "cpu_mean_ms": 452.34375
+    },
+    {
+      "documents": 100000,
+      "engine": "sqlite",
+      "case_id": 15,
+      "variant": "legacy",
+      "n": 20,
+      "p50_ms": 894.5902,
+      "p95_ms": 979.0238999999999,
+      "max_ms": 995.349,
+      "cpu_total_ms": 18125.0,
+      "cpu_mean_ms": 906.25
+    },
+    {
+      "documents": 100000,
+      "engine": "sqlite",
+      "case_id": 16,
+      "variant": "cap",
+      "n": 20,
+      "p50_ms": 355.3069,
+      "p95_ms": 381.2359,
+      "max_ms": 396.10360000000003,
+      "cpu_total_ms": 7187.5,
+      "cpu_mean_ms": 359.375
+    },
+    {
+      "documents": 100000,
+      "engine": "sqlite",
+      "case_id": 16,
+      "variant": "legacy",
+      "n": 20,
+      "p50_ms": 708.5822000000001,
+      "p95_ms": 757.6728,
+      "max_ms": 772.6671,
+      "cpu_total_ms": 14234.375,
+      "cpu_mean_ms": 711.71875
+    },
+    {
+      "documents": 100000,
+      "engine": "sqlite",
+      "case_id": 17,
+      "variant": "cap",
+      "n": 20,
+      "p50_ms": 66.4627,
+      "p95_ms": 70.1073,
+      "max_ms": 79.10979999999999,
+      "cpu_total_ms": 1328.125,
+      "cpu_mean_ms": 66.40625
+    },
+    {
+      "documents": 100000,
+      "engine": "sqlite",
+      "case_id": 17,
+      "variant": "legacy",
+      "n": 20,
+      "p50_ms": 129.5359,
+      "p95_ms": 149.6958,
+      "max_ms": 161.3579,
+      "cpu_total_ms": 2625.0,
+      "cpu_mean_ms": 131.25
+    },
+    {
+      "documents": 100000,
+      "engine": "sqlite",
+      "case_id": 18,
+      "variant": "cap",
+      "n": 20,
+      "p50_ms": 462.7122,
+      "p95_ms": 507.4279,
+      "max_ms": 521.0322,
+      "cpu_total_ms": 9359.375,
+      "cpu_mean_ms": 467.96875
+    },
+    {
+      "documents": 100000,
+      "engine": "sqlite",
+      "case_id": 18,
+      "variant": "legacy",
+      "n": 20,
+      "p50_ms": 921.0341,
+      "p95_ms": 977.8575000000001,
+      "max_ms": 989.4849,
+      "cpu_total_ms": 18562.5,
+      "cpu_mean_ms": 928.125
+    },
+    {
+      "documents": 100000,
+      "engine": "sqlite",
+      "case_id": 19,
+      "variant": "cap",
+      "n": 20,
+      "p50_ms": 163.659,
+      "p95_ms": 177.06279999999998,
+      "max_ms": 189.3302,
+      "cpu_total_ms": 3281.25,
+      "cpu_mean_ms": 164.0625
+    },
+    {
+      "documents": 100000,
+      "engine": "sqlite",
+      "case_id": 19,
+      "variant": "legacy",
+      "n": 20,
+      "p50_ms": 322.8301,
+      "p95_ms": 341.40930000000003,
+      "max_ms": 348.34409999999997,
+      "cpu_total_ms": 6484.375,
+      "cpu_mean_ms": 324.21875
+    },
+    {
+      "documents": 100000,
+      "engine": "sqlite",
+      "case_id": 20,
+      "variant": "cap",
+      "n": 20,
+      "p50_ms": 12.0449,
+      "p95_ms": 15.811300000000001,
+      "max_ms": 15.9351,
+      "cpu_total_ms": 234.375,
+      "cpu_mean_ms": 11.71875
+    },
+    {
+      "documents": 100000,
+      "engine": "sqlite",
+      "case_id": 20,
+      "variant": "legacy",
+      "n": 20,
+      "p50_ms": 24.8314,
+      "p95_ms": 27.234499999999997,
+      "max_ms": 29.264499999999998,
+      "cpu_total_ms": 468.75,
+      "cpu_mean_ms": 23.4375
+    },
+    {
+      "documents": 100000,
+      "engine": "sqlite",
+      "case_id": 21,
+      "variant": "cap",
+      "n": 20,
+      "p50_ms": 49.221599999999995,
+      "p95_ms": 58.6965,
+      "max_ms": 58.8022,
+      "cpu_total_ms": 1046.875,
+      "cpu_mean_ms": 52.34375
+    },
+    {
+      "documents": 100000,
+      "engine": "sqlite",
+      "case_id": 21,
+      "variant": "legacy",
+      "n": 20,
+      "p50_ms": 97.8456,
+      "p95_ms": 107.04610000000001,
+      "max_ms": 120.8289,
+      "cpu_total_ms": 1953.125,
+      "cpu_mean_ms": 97.65625
+    },
+    {
+      "documents": 100000,
+      "engine": "sqlite",
+      "case_id": 22,
+      "variant": "cap",
+      "n": 20,
+      "p50_ms": 564.5912,
+      "p95_ms": 596.8957,
+      "max_ms": 603.6108999999999,
+      "cpu_total_ms": 11375.0,
+      "cpu_mean_ms": 568.75
+    },
+    {
+      "documents": 100000,
+      "engine": "sqlite",
+      "case_id": 22,
+      "variant": "legacy",
+      "n": 20,
+      "p50_ms": 1141.7128,
+      "p95_ms": 1261.4283,
+      "max_ms": 1323.8771,
+      "cpu_total_ms": 23156.25,
+      "cpu_mean_ms": 1157.8125
+    },
+    {
+      "documents": 100000,
+      "engine": "sqlite",
+      "case_id": 23,
+      "variant": "cap",
+      "n": 20,
+      "p50_ms": 439.45889999999997,
+      "p95_ms": 459.0348,
+      "max_ms": 459.5804,
+      "cpu_total_ms": 8703.125,
+      "cpu_mean_ms": 435.15625
+    },
+    {
+      "documents": 100000,
+      "engine": "sqlite",
+      "case_id": 23,
+      "variant": "legacy",
+      "n": 20,
+      "p50_ms": 861.8538,
+      "p95_ms": 928.6025999999999,
+      "max_ms": 962.9311,
+      "cpu_total_ms": 17390.625,
+      "cpu_mean_ms": 869.53125
+    },
+    {
+      "documents": 100000,
+      "engine": "sqlite",
+      "case_id": 24,
+      "variant": "cap",
+      "n": 20,
+      "p50_ms": 364.8743,
+      "p95_ms": 395.0811,
+      "max_ms": 402.42830000000004,
+      "cpu_total_ms": 7375.0,
+      "cpu_mean_ms": 368.75
+    },
+    {
+      "documents": 100000,
+      "engine": "sqlite",
+      "case_id": 24,
+      "variant": "legacy",
+      "n": 20,
+      "p50_ms": 727.6899999999999,
+      "p95_ms": 749.3433,
+      "max_ms": 770.5562,
+      "cpu_total_ms": 14546.875,
+      "cpu_mean_ms": 727.34375
+    },
+    {
+      "documents": 100000,
+      "engine": "sqlite",
+      "case_id": 25,
+      "variant": "cap",
+      "n": 20,
+      "p50_ms": 32.7555,
+      "p95_ms": 34.2862,
+      "max_ms": 36.166,
+      "cpu_total_ms": 625.0,
+      "cpu_mean_ms": 31.25
+    },
+    {
+      "documents": 100000,
+      "engine": "sqlite",
+      "case_id": 25,
+      "variant": "legacy",
+      "n": 20,
+      "p50_ms": 63.07110000000001,
+      "p95_ms": 66.6489,
+      "max_ms": 67.40559999999999,
+      "cpu_total_ms": 1234.375,
+      "cpu_mean_ms": 61.71875
+    },
+    {
+      "documents": 100000,
+      "engine": "sqlite",
+      "case_id": 26,
+      "variant": "cap",
+      "n": 20,
+      "p50_ms": 283.913,
+      "p95_ms": 321.6787,
+      "max_ms": 360.7805,
+      "cpu_total_ms": 5781.25,
+      "cpu_mean_ms": 289.0625
+    },
+    {
+      "documents": 100000,
+      "engine": "sqlite",
+      "case_id": 26,
+      "variant": "legacy",
+      "n": 20,
+      "p50_ms": 566.2616,
+      "p95_ms": 655.8874999999999,
+      "max_ms": 691.9087000000001,
+      "cpu_total_ms": 11562.5,
+      "cpu_mean_ms": 578.125
+    },
+    {
+      "documents": 100000,
+      "engine": "sqlite",
+      "case_id": 27,
+      "variant": "cap",
+      "n": 20,
+      "p50_ms": 152.3501,
+      "p95_ms": 179.5756,
+      "max_ms": 194.1811,
+      "cpu_total_ms": 3125.0,
+      "cpu_mean_ms": 156.25
+    },
+    {
+      "documents": 100000,
+      "engine": "sqlite",
+      "case_id": 27,
+      "variant": "legacy",
+      "n": 20,
+      "p50_ms": 303.3064,
+      "p95_ms": 322.4787,
+      "max_ms": 352.1145,
+      "cpu_total_ms": 6015.625,
+      "cpu_mean_ms": 300.78125
+    },
+    {
+      "documents": 100000,
+      "engine": "sqlite",
+      "case_id": 28,
+      "variant": "cap",
+      "n": 20,
+      "p50_ms": 364.69509999999997,
+      "p95_ms": 387.8535,
+      "max_ms": 392.02209999999997,
+      "cpu_total_ms": 7328.125,
+      "cpu_mean_ms": 366.40625
+    },
+    {
+      "documents": 100000,
+      "engine": "sqlite",
+      "case_id": 28,
+      "variant": "legacy",
+      "n": 20,
+      "p50_ms": 735.4623,
+      "p95_ms": 781.385,
+      "max_ms": 848.0391000000001,
+      "cpu_total_ms": 14843.75,
+      "cpu_mean_ms": 742.1875
+    },
+    {
+      "documents": 100000,
+      "engine": "sqlite",
+      "case_id": 29,
+      "variant": "cap",
+      "n": 20,
+      "p50_ms": 21.0033,
+      "p95_ms": 21.648799999999998,
+      "max_ms": 21.8802,
+      "cpu_total_ms": 390.625,
+      "cpu_mean_ms": 19.53125
+    },
+    {
+      "documents": 100000,
+      "engine": "sqlite",
+      "case_id": 29,
+      "variant": "legacy",
+      "n": 20,
+      "p50_ms": 35.8508,
+      "p95_ms": 38.1749,
+      "max_ms": 41.5148,
+      "cpu_total_ms": 734.375,
+      "cpu_mean_ms": 36.71875
+    },
+    {
+      "documents": 100000,
+      "engine": "sqlite",
+      "case_id": 30,
+      "variant": "cap",
+      "n": 20,
+      "p50_ms": 509.73710000000005,
+      "p95_ms": 552.8842999999999,
+      "max_ms": 582.1524000000001,
+      "cpu_total_ms": 10250.0,
+      "cpu_mean_ms": 512.5
+    },
+    {
+      "documents": 100000,
+      "engine": "sqlite",
+      "case_id": 30,
+      "variant": "legacy",
+      "n": 20,
+      "p50_ms": 1013.1087000000001,
+      "p95_ms": 1104.4767,
+      "max_ms": 1152.0756000000001,
+      "cpu_total_ms": 20593.75,
+      "cpu_mean_ms": 1029.6875
+    },
+    {
+      "documents": 100000,
+      "engine": "sqlite",
+      "case_id": 31,
+      "variant": "cap",
+      "n": 20,
+      "p50_ms": 55.2385,
+      "p95_ms": 58.3988,
+      "max_ms": 59.452,
+      "cpu_total_ms": 1156.25,
+      "cpu_mean_ms": 57.8125
+    },
+    {
+      "documents": 100000,
+      "engine": "sqlite",
+      "case_id": 31,
+      "variant": "legacy",
+      "n": 20,
+      "p50_ms": 105.60640000000001,
+      "p95_ms": 119.2772,
+      "max_ms": 122.6636,
+      "cpu_total_ms": 2078.125,
+      "cpu_mean_ms": 103.90625
+    },
+    {
+      "documents": 100000,
+      "engine": "sqlite",
+      "case_id": 32,
+      "variant": "cap",
+      "n": 20,
+      "p50_ms": 213.72050000000002,
+      "p95_ms": 232.1201,
+      "max_ms": 233.1987,
+      "cpu_total_ms": 4328.125,
+      "cpu_mean_ms": 216.40625
+    },
+    {
+      "documents": 100000,
+      "engine": "sqlite",
+      "case_id": 32,
+      "variant": "legacy",
+      "n": 20,
+      "p50_ms": 429.05949999999996,
+      "p95_ms": 455.4103,
+      "max_ms": 525.3554,
+      "cpu_total_ms": 8718.75,
+      "cpu_mean_ms": 435.9375
+    },
+    {
+      "documents": 100000,
+      "engine": "sqlite",
+      "case_id": 33,
+      "variant": "cap",
+      "n": 20,
+      "p50_ms": 111.2346,
+      "p95_ms": 117.5489,
+      "max_ms": 126.5667,
+      "cpu_total_ms": 2234.375,
+      "cpu_mean_ms": 111.71875
+    },
+    {
+      "documents": 100000,
+      "engine": "sqlite",
+      "case_id": 33,
+      "variant": "legacy",
+      "n": 20,
+      "p50_ms": 222.2756,
+      "p95_ms": 239.4678,
+      "max_ms": 241.1702,
+      "cpu_total_ms": 4500.0,
+      "cpu_mean_ms": 225.0
+    },
+    {
+      "documents": 100000,
+      "engine": "sqlite",
+      "case_id": 34,
+      "variant": "cap",
+      "n": 20,
+      "p50_ms": 347.3957,
+      "p95_ms": 358.1237,
+      "max_ms": 398.30339999999995,
+      "cpu_total_ms": 6953.125,
+      "cpu_mean_ms": 347.65625
+    },
+    {
+      "documents": 100000,
+      "engine": "sqlite",
+      "case_id": 34,
+      "variant": "legacy",
+      "n": 20,
+      "p50_ms": 695.7402000000001,
+      "p95_ms": 753.2552000000001,
+      "max_ms": 755.0055,
+      "cpu_total_ms": 13968.75,
+      "cpu_mean_ms": 698.4375
+    },
+    {
+      "documents": 100000,
+      "engine": "sqlite",
+      "case_id": 35,
+      "variant": "cap",
+      "n": 20,
+      "p50_ms": 822.4068,
+      "p95_ms": 882.8863,
+      "max_ms": 922.2946,
+      "cpu_total_ms": 16609.375,
+      "cpu_mean_ms": 830.46875
+    },
+    {
+      "documents": 100000,
+      "engine": "sqlite",
+      "case_id": 35,
+      "variant": "legacy",
+      "n": 20,
+      "p50_ms": 1655.5683999999999,
+      "p95_ms": 1796.8631,
+      "max_ms": 1855.15,
+      "cpu_total_ms": 33031.25,
+      "cpu_mean_ms": 1651.5625
+    },
+    {
+      "documents": 100000,
+      "engine": "sqlite",
+      "case_id": 36,
+      "variant": "cap",
+      "n": 20,
+      "p50_ms": 1195.9165999999998,
+      "p95_ms": 1246.2295000000001,
+      "max_ms": 1258.0099,
+      "cpu_total_ms": 23781.25,
+      "cpu_mean_ms": 1189.0625
+    },
+    {
+      "documents": 100000,
+      "engine": "sqlite",
+      "case_id": 36,
+      "variant": "legacy",
+      "n": 20,
+      "p50_ms": 2370.6690999999996,
+      "p95_ms": 2495.5899,
+      "max_ms": 2546.2649,
+      "cpu_total_ms": 47218.75,
+      "cpu_mean_ms": 2360.9375
+    },
+    {
+      "documents": 100000,
+      "engine": "sqlite",
+      "case_id": 37,
+      "variant": "cap",
+      "n": 20,
+      "p50_ms": 984.4553000000001,
+      "p95_ms": 1019.0184,
+      "max_ms": 1037.628,
+      "cpu_total_ms": 19687.5,
+      "cpu_mean_ms": 984.375
+    },
+    {
+      "documents": 100000,
+      "engine": "sqlite",
+      "case_id": 37,
+      "variant": "legacy",
+      "n": 20,
+      "p50_ms": 1947.5343,
+      "p95_ms": 2112.0279,
+      "max_ms": 2114.4953,
+      "cpu_total_ms": 39156.25,
+      "cpu_mean_ms": 1957.8125
+    },
+    {
+      "documents": 100000,
+      "engine": "sqlite",
+      "case_id": 38,
+      "variant": "cap",
+      "n": 20,
+      "p50_ms": 1060.5445,
+      "p95_ms": 1095.7938000000001,
+      "max_ms": 1108.2361,
+      "cpu_total_ms": 21125.0,
+      "cpu_mean_ms": 1056.25
+    },
+    {
+      "documents": 100000,
+      "engine": "sqlite",
+      "case_id": 38,
+      "variant": "legacy",
+      "n": 20,
+      "p50_ms": 2140.3615,
+      "p95_ms": 2212.6272,
+      "max_ms": 2242.9251,
+      "cpu_total_ms": 42468.75,
+      "cpu_mean_ms": 2123.4375
+    },
+    {
+      "documents": 100000,
+      "engine": "sqlite",
+      "case_id": 39,
+      "variant": "cap",
+      "n": 20,
+      "p50_ms": 0.3591,
+      "p95_ms": 0.41859999999999997,
+      "max_ms": 0.4466,
+      "cpu_total_ms": 0.0,
+      "cpu_mean_ms": 0.0
+    },
+    {
+      "documents": 100000,
+      "engine": "sqlite",
+      "case_id": 39,
+      "variant": "legacy",
+      "n": 20,
+      "p50_ms": 0.1613,
+      "p95_ms": 0.1811,
+      "max_ms": 0.1897,
+      "cpu_total_ms": 15.625,
+      "cpu_mean_ms": 0.78125
+    },
+    {
+      "documents": 100000,
+      "engine": "sqlite",
+      "case_id": 40,
+      "variant": "cap",
+      "n": 20,
+      "p50_ms": 4.8303,
+      "p95_ms": 5.2747,
+      "max_ms": 5.4511,
+      "cpu_total_ms": 78.125,
+      "cpu_mean_ms": 3.90625
+    },
+    {
+      "documents": 100000,
+      "engine": "sqlite",
+      "case_id": 40,
+      "variant": "legacy",
+      "n": 20,
+      "p50_ms": 10.498000000000001,
+      "p95_ms": 11.2668,
+      "max_ms": 11.383799999999999,
+      "cpu_total_ms": 218.75,
+      "cpu_mean_ms": 10.9375
+    }
+  ],
+  "basic": [
+    {
+      "documents": 50000,
+      "engine": "fdb",
+      "ingest_samples_ms": [
+        39132.3249,
+        38441.0266
+      ],
+      "commit_samples_ms": [
+        34214.3706,
+        33642.5966
+      ],
+      "maintenance_samples_ms": [
+        4623.7268,
+        4492.965
+      ],
+      "peak_private_bytes": [
+        20914176,
+        20553728
+      ],
+      "peak_ws_bytes": [
+        25894912,
+        25096192
+      ],
+      "disk_bytes": [
+        300836628,
+        300836628
+      ]
+    },
+    {
+      "documents": 50000,
+      "engine": "sqlite",
+      "ingest_samples_ms": [
+        36184.678400000004,
+        36415.6579
+      ],
+      "commit_samples_ms": [
+        34647.4079,
+        34851.7748
+      ],
+      "maintenance_samples_ms": [
+        1537.2650999999998,
+        1563.8694
+      ],
+      "peak_private_bytes": [
+        18817024,
+        18792448
+      ],
+      "peak_ws_bytes": [
+        21385216,
+        20848640
+      ],
+      "disk_bytes": [
+        421736448,
+        421736448
+      ]
+    },
+    {
+      "documents": 100000,
+      "engine": "sqlite",
+      "ingest_samples_ms": [
+        95198.8235,
+        95121.7119
+      ],
+      "commit_samples_ms": [
+        91430.39140000001,
+        91178.46350000001
+      ],
+      "maintenance_samples_ms": [
+        3768.4185,
+        3943.2244
+      ],
+      "peak_private_bytes": [
+        19931136,
+        20062208
+      ],
+      "peak_ws_bytes": [
+        24576000,
+        24834048
+      ],
+      "disk_bytes": [
+        834961408,
+        834961408
+      ]
+    }
+  ],
+  "idle": [
+    {
+      "documents": 50000,
+      "engine": "fdb",
+      "private_samples_bytes": [
+        2162688,
+        2322432,
+        2330624,
+        2162688
+      ],
+      "working_set_samples_bytes": [
+        6283264,
+        6320128,
+        6287360,
+        6287360
+      ]
+    },
+    {
+      "documents": 50000,
+      "engine": "sqlite",
+      "private_samples_bytes": [
+        3158016,
+        3158016,
+        3162112,
+        3158016
+      ],
+      "working_set_samples_bytes": [
+        7589888,
+        7581696,
+        7585792,
+        7585792
+      ]
+    },
+    {
+      "documents": 100000,
+      "engine": "sqlite",
+      "private_samples_bytes": [
+        3424256,
+        3440640,
+        3432448,
+        3440640
+      ],
+      "working_set_samples_bytes": [
+        7847936,
+        7856128,
+        7847936,
+        7852032
+      ]
+    }
+  ],
+  "first": [
+    {
+      "documents": 50000,
+      "engine": "fdb",
+      "text": "akarsu",
+      "n": 2,
+      "session_p95_ms": 273.22950000000003,
+      "first_p95_ms": 301.5579,
+      "samples": [
+        {
+          "after_session_wait_and_search_ms": 29.001000000000033,
+          "cpu_ms": 312.5,
+          "first_ms": 295.7651,
+          "full_validation_ms": 266.7641,
+          "memory": {
+            "os_lifetime_peak_private_commit_bytes": 3649536,
+            "os_lifetime_peak_working_set_bytes": 7847936,
+            "private_bytes": 3440640,
+            "sample_interval_ms": 10,
+            "sampled_phase_peak_private_bytes": 3547136,
+            "sampled_phase_peak_working_set_bytes": 7757824,
+            "working_set_bytes": 7720960
+          },
+          "mode": "first-strict",
+          "phase": "first_result",
+          "returned": 50,
+          "session_ms": 266.7641,
+          "text": "akarsu",
+          "total": {
+            "at_least": 50
+          },
+          "validation": "verified",
+          "variant": "cap-hybrid"
+        },
+        {
+          "after_session_wait_and_search_ms": 28.328399999999988,
+          "cpu_ms": 296.875,
+          "first_ms": 301.5579,
+          "full_validation_ms": 273.22950000000003,
+          "memory": {
+            "os_lifetime_peak_private_commit_bytes": 3403776,
+            "os_lifetime_peak_working_set_bytes": 7753728,
+            "private_bytes": 3305472,
+            "sample_interval_ms": 10,
+            "sampled_phase_peak_private_bytes": 3203072,
+            "sampled_phase_peak_working_set_bytes": 7569408,
+            "working_set_bytes": 7651328
+          },
+          "mode": "first-strict",
+          "phase": "first_result",
+          "returned": 50,
+          "session_ms": 273.22950000000003,
+          "text": "akarsu",
+          "total": {
+            "at_least": 50
+          },
+          "validation": "verified",
+          "variant": "cap-hybrid"
+        }
+      ]
+    },
+    {
+      "documents": 50000,
+      "engine": "fdb",
+      "text": "furlong",
+      "n": 2,
+      "session_p95_ms": 275.278,
+      "first_p95_ms": 289.77000000000004,
+      "samples": [
+        {
+          "after_session_wait_and_search_ms": 14.492000000000019,
+          "cpu_ms": 265.625,
+          "first_ms": 289.77000000000004,
+          "full_validation_ms": 275.278,
+          "memory": {
+            "os_lifetime_peak_private_commit_bytes": 3481600,
+            "os_lifetime_peak_working_set_bytes": 7692288,
+            "private_bytes": 2969600,
+            "sample_interval_ms": 10,
+            "sampled_phase_peak_private_bytes": 2658304,
+            "sampled_phase_peak_working_set_bytes": 6684672,
+            "working_set_bytes": 7254016
+          },
+          "mode": "first-strict",
+          "phase": "first_result",
+          "returned": 4,
+          "session_ms": 275.278,
+          "text": "furlong",
+          "total": {
+            "exact": 4
+          },
+          "validation": "verified",
+          "variant": "cap-hybrid"
+        },
+        {
+          "after_session_wait_and_search_ms": 6.101699999999994,
+          "cpu_ms": 265.625,
+          "first_ms": 266.41589999999997,
+          "full_validation_ms": 260.31419999999997,
+          "memory": {
+            "os_lifetime_peak_private_commit_bytes": 3534848,
+            "os_lifetime_peak_working_set_bytes": 7749632,
+            "private_bytes": 3022848,
+            "sample_interval_ms": 10,
+            "sampled_phase_peak_private_bytes": 3293184,
+            "sampled_phase_peak_working_set_bytes": 7483392,
+            "working_set_bytes": 7307264
+          },
+          "mode": "first-strict",
+          "phase": "first_result",
+          "returned": 4,
+          "session_ms": 260.31419999999997,
+          "text": "furlong",
+          "total": {
+            "exact": 4
+          },
+          "validation": "verified",
+          "variant": "cap-hybrid"
+        }
+      ]
+    },
+    {
+      "documents": 50000,
+      "engine": "fdb",
+      "text": "ilçesine köyleri",
+      "n": 2,
+      "session_p95_ms": 271.139,
+      "first_p95_ms": 286.70869999999996,
+      "samples": [
+        {
+          "after_session_wait_and_search_ms": 15.697000000000003,
+          "cpu_ms": 265.625,
+          "first_ms": 273.229,
+          "full_validation_ms": 257.532,
+          "memory": {
+            "os_lifetime_peak_private_commit_bytes": 3727360,
+            "os_lifetime_peak_working_set_bytes": 7921664,
+            "private_bytes": 3608576,
+            "sample_interval_ms": 10,
+            "sampled_phase_peak_private_bytes": 3727360,
+            "sampled_phase_peak_working_set_bytes": 7913472,
+            "working_set_bytes": 7819264
+          },
+          "mode": "first-strict",
+          "phase": "first_result",
+          "returned": 50,
+          "session_ms": 257.532,
+          "text": "ilçesine köyleri",
+          "total": {
+            "at_least": 50
+          },
+          "validation": "verified",
+          "variant": "cap-hybrid"
+        },
+        {
+          "after_session_wait_and_search_ms": 15.569699999999955,
+          "cpu_ms": 281.25,
+          "first_ms": 286.70869999999996,
+          "full_validation_ms": 271.139,
+          "memory": {
+            "os_lifetime_peak_private_commit_bytes": 3665920,
+            "os_lifetime_peak_working_set_bytes": 7884800,
+            "private_bytes": 3543040,
+            "sample_interval_ms": 10,
+            "sampled_phase_peak_private_bytes": 3477504,
+            "sampled_phase_peak_working_set_bytes": 7688192,
+            "working_set_bytes": 7778304
+          },
+          "mode": "first-strict",
+          "phase": "first_result",
+          "returned": 50,
+          "session_ms": 271.139,
+          "text": "ilçesine köyleri",
+          "total": {
+            "at_least": 50
+          },
+          "validation": "verified",
+          "variant": "cap-hybrid"
+        }
+      ]
+    },
+    {
+      "documents": 50000,
+      "engine": "fdb",
+      "text": "olduğu",
+      "n": 2,
+      "session_p95_ms": 259.1773,
+      "first_p95_ms": 265.2827,
+      "samples": [
+        {
+          "after_session_wait_and_search_ms": 5.782000000000011,
+          "cpu_ms": 265.625,
+          "first_ms": 261.0107,
+          "full_validation_ms": 255.22869999999998,
+          "memory": {
+            "os_lifetime_peak_private_commit_bytes": 3096576,
+            "os_lifetime_peak_working_set_bytes": 7512064,
+            "private_bytes": 3096576,
+            "sample_interval_ms": 10,
+            "sampled_phase_peak_private_bytes": 3018752,
+            "sampled_phase_peak_working_set_bytes": 7417856,
+            "working_set_bytes": 7512064
+          },
+          "mode": "first-strict",
+          "phase": "first_result",
+          "returned": 50,
+          "session_ms": 255.22869999999998,
+          "text": "olduğu",
+          "total": {
+            "at_least": 50
+          },
+          "validation": "verified",
+          "variant": "cap-hybrid"
+        },
+        {
+          "after_session_wait_and_search_ms": 6.105399999999975,
+          "cpu_ms": 250.0,
+          "first_ms": 265.2827,
+          "full_validation_ms": 259.1773,
+          "memory": {
+            "os_lifetime_peak_private_commit_bytes": 3096576,
+            "os_lifetime_peak_working_set_bytes": 7520256,
+            "private_bytes": 3096576,
+            "sample_interval_ms": 10,
+            "sampled_phase_peak_private_bytes": 3002368,
+            "sampled_phase_peak_working_set_bytes": 7401472,
+            "working_set_bytes": 7520256
+          },
+          "mode": "first-strict",
+          "phase": "first_result",
+          "returned": 50,
+          "session_ms": 259.1773,
+          "text": "olduğu",
+          "total": {
+            "at_least": 50
+          },
+          "validation": "verified",
+          "variant": "cap-hybrid"
+        }
+      ]
+    },
+    {
+      "documents": 50000,
+      "engine": "fdb",
+      "text": "qzxkvwnever",
+      "n": 2,
+      "session_p95_ms": 263.01390000000004,
+      "first_p95_ms": 263.6755,
+      "samples": [
+        {
+          "after_session_wait_and_search_ms": 0.6751000000000431,
+          "cpu_ms": 265.625,
+          "first_ms": 259.4503,
+          "full_validation_ms": 258.7752,
+          "memory": {
+            "os_lifetime_peak_private_commit_bytes": 2699264,
+            "os_lifetime_peak_working_set_bytes": 6737920,
+            "private_bytes": 2510848,
+            "sample_interval_ms": 10,
+            "sampled_phase_peak_private_bytes": 2646016,
+            "sampled_phase_peak_working_set_bytes": 6676480,
+            "working_set_bytes": 6737920
+          },
+          "mode": "first-strict",
+          "phase": "first_result",
+          "returned": 0,
+          "session_ms": 258.7752,
+          "text": "qzxkvwnever",
+          "total": {
+            "exact": 0
+          },
+          "validation": "verified",
+          "variant": "cap-hybrid"
+        },
+        {
+          "after_session_wait_and_search_ms": 0.6615999999999644,
+          "cpu_ms": 265.625,
+          "first_ms": 263.6755,
+          "full_validation_ms": 263.01390000000004,
+          "memory": {
+            "os_lifetime_peak_private_commit_bytes": 2678784,
+            "os_lifetime_peak_working_set_bytes": 6733824,
+            "private_bytes": 2383872,
+            "sample_interval_ms": 10,
+            "sampled_phase_peak_private_bytes": 2650112,
+            "sampled_phase_peak_working_set_bytes": 6684672,
+            "working_set_bytes": 6733824
+          },
+          "mode": "first-strict",
+          "phase": "first_result",
+          "returned": 0,
+          "session_ms": 263.01390000000004,
+          "text": "qzxkvwnever",
+          "total": {
+            "exact": 0
+          },
+          "validation": "verified",
+          "variant": "cap-hybrid"
+        }
+      ]
+    },
+    {
+      "documents": 50000,
+      "engine": "fdb",
+      "text": "zx",
+      "n": 2,
+      "session_p95_ms": 281.82649999999995,
+      "first_p95_ms": 365.1989,
+      "samples": [
+        {
+          "after_session_wait_and_search_ms": 83.37240000000003,
+          "cpu_ms": 500.0,
+          "first_ms": 365.1989,
+          "full_validation_ms": 281.82649999999995,
+          "memory": {
+            "os_lifetime_peak_private_commit_bytes": 3637248,
+            "os_lifetime_peak_working_set_bytes": 7733248,
+            "private_bytes": 2863104,
+            "sample_interval_ms": 10,
+            "sampled_phase_peak_private_bytes": 3637248,
+            "sampled_phase_peak_working_set_bytes": 7729152,
+            "working_set_bytes": 7266304
+          },
+          "mode": "first-strict",
+          "phase": "first_result",
+          "returned": 28,
+          "session_ms": 281.82649999999995,
+          "text": "zx",
+          "total": {
+            "exact": 28
+          },
+          "validation": "verified",
+          "variant": "cap-hybrid"
+        },
+        {
+          "after_session_wait_and_search_ms": 82.5727,
+          "cpu_ms": 468.75,
+          "first_ms": 336.9993,
+          "full_validation_ms": 254.4266,
+          "memory": {
+            "os_lifetime_peak_private_commit_bytes": 3678208,
+            "os_lifetime_peak_working_set_bytes": 7720960,
+            "private_bytes": 2904064,
+            "sample_interval_ms": 10,
+            "sampled_phase_peak_private_bytes": 3678208,
+            "sampled_phase_peak_working_set_bytes": 7716864,
+            "working_set_bytes": 7311360
+          },
+          "mode": "first-strict",
+          "phase": "first_result",
+          "returned": 28,
+          "session_ms": 254.4266,
+          "text": "zx",
+          "total": {
+            "exact": 28
+          },
+          "validation": "verified",
+          "variant": "cap-hybrid"
+        }
+      ]
+    },
+    {
+      "documents": 50000,
+      "engine": "sqlite",
+      "text": "akarsu",
+      "n": 2,
+      "session_p95_ms": 1.7016,
+      "first_p95_ms": 108.2862,
+      "samples": [
+        {
+          "cpu_ms": 109.375,
+          "first_ms": 107.7017,
+          "full_validation_ms": null,
+          "memory": {
+            "os_lifetime_peak_private_commit_bytes": 4055040,
+            "os_lifetime_peak_working_set_bytes": 8859648,
+            "private_bytes": 4055040,
+            "sample_interval_ms": 10,
+            "sampled_phase_peak_private_bytes": 4022272,
+            "sampled_phase_peak_working_set_bytes": 8548352,
+            "working_set_bytes": 8859648
+          },
+          "mode": "first-sqlite",
+          "phase": "first_result",
+          "returned": 50,
+          "session_ms": 1.6881000000000002,
+          "text": "akarsu",
+          "total": {
+            "at_least": 50
+          },
+          "validation_contract": "SQLite default integrity policy, no FDB strict source pass"
+        },
+        {
+          "cpu_ms": 109.375,
+          "first_ms": 108.2862,
+          "full_validation_ms": null,
+          "memory": {
+            "os_lifetime_peak_private_commit_bytes": 4050944,
+            "os_lifetime_peak_working_set_bytes": 8843264,
+            "private_bytes": 4050944,
+            "sample_interval_ms": 10,
+            "sampled_phase_peak_private_bytes": 3919872,
+            "sampled_phase_peak_working_set_bytes": 8445952,
+            "working_set_bytes": 8843264
+          },
+          "mode": "first-sqlite",
+          "phase": "first_result",
+          "returned": 50,
+          "session_ms": 1.7016,
+          "text": "akarsu",
+          "total": {
+            "at_least": 50
+          },
+          "validation_contract": "SQLite default integrity policy, no FDB strict source pass"
+        }
+      ]
+    },
+    {
+      "documents": 50000,
+      "engine": "sqlite",
+      "text": "furlong",
+      "n": 2,
+      "session_p95_ms": 1.7573,
+      "first_p95_ms": 11.8087,
+      "samples": [
+        {
+          "cpu_ms": 15.625,
+          "first_ms": 11.8087,
+          "full_validation_ms": null,
+          "memory": {
+            "os_lifetime_peak_private_commit_bytes": 3919872,
+            "os_lifetime_peak_working_set_bytes": 8609792,
+            "private_bytes": 3919872,
+            "sample_interval_ms": 10,
+            "sampled_phase_peak_private_bytes": 3821568,
+            "sampled_phase_peak_working_set_bytes": 8339456,
+            "working_set_bytes": 8355840
+          },
+          "mode": "first-sqlite",
+          "phase": "first_result",
+          "returned": 4,
+          "session_ms": 1.6781000000000001,
+          "text": "furlong",
+          "total": {
+            "exact": 4
+          },
+          "validation_contract": "SQLite default integrity policy, no FDB strict source pass"
+        },
+        {
+          "cpu_ms": 15.625,
+          "first_ms": 11.220799999999999,
+          "full_validation_ms": null,
+          "memory": {
+            "os_lifetime_peak_private_commit_bytes": 3907584,
+            "os_lifetime_peak_working_set_bytes": 8609792,
+            "private_bytes": 3907584,
+            "sample_interval_ms": 10,
+            "sampled_phase_peak_private_bytes": 3907584,
+            "sampled_phase_peak_working_set_bytes": 8437760,
+            "working_set_bytes": 8355840
+          },
+          "mode": "first-sqlite",
+          "phase": "first_result",
+          "returned": 4,
+          "session_ms": 1.7573,
+          "text": "furlong",
+          "total": {
+            "exact": 4
+          },
+          "validation_contract": "SQLite default integrity policy, no FDB strict source pass"
+        }
+      ]
+    },
+    {
+      "documents": 50000,
+      "engine": "sqlite",
+      "text": "ilçesine köyleri",
+      "n": 2,
+      "session_p95_ms": 1.6166,
+      "first_p95_ms": 71.2734,
+      "samples": [
+        {
+          "cpu_ms": 78.125,
+          "first_ms": 71.2734,
+          "full_validation_ms": null,
+          "memory": {
+            "os_lifetime_peak_private_commit_bytes": 3911680,
+            "os_lifetime_peak_working_set_bytes": 8671232,
+            "private_bytes": 3911680,
+            "sample_interval_ms": 10,
+            "sampled_phase_peak_private_bytes": 3907584,
+            "sampled_phase_peak_working_set_bytes": 8413184,
+            "working_set_bytes": 8671232
+          },
+          "mode": "first-sqlite",
+          "phase": "first_result",
+          "returned": 50,
+          "session_ms": 1.6166,
+          "text": "ilçesine köyleri",
+          "total": {
+            "at_least": 50
+          },
+          "validation_contract": "SQLite default integrity policy, no FDB strict source pass"
+        },
+        {
+          "cpu_ms": 62.5,
+          "first_ms": 71.08670000000001,
+          "full_validation_ms": null,
+          "memory": {
+            "os_lifetime_peak_private_commit_bytes": 3903488,
+            "os_lifetime_peak_working_set_bytes": 8609792,
+            "private_bytes": 3903488,
+            "sample_interval_ms": 10,
+            "sampled_phase_peak_private_bytes": 3903488,
+            "sampled_phase_peak_working_set_bytes": 8425472,
+            "working_set_bytes": 8577024
+          },
+          "mode": "first-sqlite",
+          "phase": "first_result",
+          "returned": 50,
+          "session_ms": 1.5437999999999998,
+          "text": "ilçesine köyleri",
+          "total": {
+            "at_least": 50
+          },
+          "validation_contract": "SQLite default integrity policy, no FDB strict source pass"
+        }
+      ]
+    },
+    {
+      "documents": 50000,
+      "engine": "sqlite",
+      "text": "olduğu",
+      "n": 2,
+      "session_p95_ms": 1.589,
+      "first_p95_ms": 260.78950000000003,
+      "samples": [
+        {
+          "cpu_ms": 265.625,
+          "first_ms": 260.78950000000003,
+          "full_validation_ms": null,
+          "memory": {
+            "os_lifetime_peak_private_commit_bytes": 4435968,
+            "os_lifetime_peak_working_set_bytes": 9146368,
+            "private_bytes": 4435968,
+            "sample_interval_ms": 10,
+            "sampled_phase_peak_private_bytes": 4431872,
+            "sampled_phase_peak_working_set_bytes": 9052160,
+            "working_set_bytes": 9146368
+          },
+          "mode": "first-sqlite",
+          "phase": "first_result",
+          "returned": 50,
+          "session_ms": 1.5812000000000002,
+          "text": "olduğu",
+          "total": {
+            "at_least": 50
+          },
+          "validation_contract": "SQLite default integrity policy, no FDB strict source pass"
+        },
+        {
+          "cpu_ms": 250.0,
+          "first_ms": 250.091,
+          "full_validation_ms": null,
+          "memory": {
+            "os_lifetime_peak_private_commit_bytes": 4362240,
+            "os_lifetime_peak_working_set_bytes": 9158656,
+            "private_bytes": 4362240,
+            "sample_interval_ms": 10,
+            "sampled_phase_peak_private_bytes": 4362240,
+            "sampled_phase_peak_working_set_bytes": 9134080,
+            "working_set_bytes": 9158656
+          },
+          "mode": "first-sqlite",
+          "phase": "first_result",
+          "returned": 50,
+          "session_ms": 1.589,
+          "text": "olduğu",
+          "total": {
+            "at_least": 50
+          },
+          "validation_contract": "SQLite default integrity policy, no FDB strict source pass"
+        }
+      ]
+    },
+    {
+      "documents": 50000,
+      "engine": "sqlite",
+      "text": "qzxkvwnever",
+      "n": 2,
+      "session_p95_ms": 1.6581000000000001,
+      "first_p95_ms": 6.1442,
+      "samples": [
+        {
+          "cpu_ms": 0.0,
+          "first_ms": 6.1442,
+          "full_validation_ms": null,
+          "memory": {
+            "os_lifetime_peak_private_commit_bytes": 3166208,
+            "os_lifetime_peak_working_set_bytes": 7909376,
+            "private_bytes": 3166208,
+            "sample_interval_ms": 10,
+            "sampled_phase_peak_private_bytes": 741376,
+            "sampled_phase_peak_working_set_bytes": 4161536,
+            "working_set_bytes": 7909376
+          },
+          "mode": "first-sqlite",
+          "phase": "first_result",
+          "returned": 0,
+          "session_ms": 1.5848,
+          "text": "qzxkvwnever",
+          "total": {
+            "exact": 0
+          },
+          "validation_contract": "SQLite default integrity policy, no FDB strict source pass"
+        },
+        {
+          "cpu_ms": 15.625,
+          "first_ms": 5.2374,
+          "full_validation_ms": null,
+          "memory": {
+            "os_lifetime_peak_private_commit_bytes": 3166208,
+            "os_lifetime_peak_working_set_bytes": 7913472,
+            "private_bytes": 3166208,
+            "sample_interval_ms": 10,
+            "sampled_phase_peak_private_bytes": 741376,
+            "sampled_phase_peak_working_set_bytes": 4161536,
+            "working_set_bytes": 7913472
+          },
+          "mode": "first-sqlite",
+          "phase": "first_result",
+          "returned": 0,
+          "session_ms": 1.6581000000000001,
+          "text": "qzxkvwnever",
+          "total": {
+            "exact": 0
+          },
+          "validation_contract": "SQLite default integrity policy, no FDB strict source pass"
+        }
+      ]
+    },
+    {
+      "documents": 50000,
+      "engine": "sqlite",
+      "text": "zx",
+      "n": 2,
+      "session_p95_ms": 1.905,
+      "first_p95_ms": 447.3812,
+      "samples": [
+        {
+          "cpu_ms": 453.125,
+          "first_ms": 447.3812,
+          "full_validation_ms": null,
+          "memory": {
+            "os_lifetime_peak_private_commit_bytes": 5017600,
+            "os_lifetime_peak_working_set_bytes": 9588736,
+            "private_bytes": 5017600,
+            "sample_interval_ms": 10,
+            "sampled_phase_peak_private_bytes": 5017600,
+            "sampled_phase_peak_working_set_bytes": 9572352,
+            "working_set_bytes": 9588736
+          },
+          "mode": "first-sqlite",
+          "phase": "first_result",
+          "returned": 28,
+          "session_ms": 1.65,
+          "text": "zx",
+          "total": {
+            "exact": 28
+          },
+          "validation_contract": "SQLite default integrity policy, no FDB strict source pass"
+        },
+        {
+          "cpu_ms": 437.5,
+          "first_ms": 442.0152,
+          "full_validation_ms": null,
+          "memory": {
+            "os_lifetime_peak_private_commit_bytes": 4997120,
+            "os_lifetime_peak_working_set_bytes": 9682944,
+            "private_bytes": 4997120,
+            "sample_interval_ms": 10,
+            "sampled_phase_peak_private_bytes": 4837376,
+            "sampled_phase_peak_working_set_bytes": 9523200,
+            "working_set_bytes": 9682944
+          },
+          "mode": "first-sqlite",
+          "phase": "first_result",
+          "returned": 28,
+          "session_ms": 1.905,
+          "text": "zx",
+          "total": {
+            "exact": 28
+          },
+          "validation_contract": "SQLite default integrity policy, no FDB strict source pass"
+        }
+      ]
+    }
+  ],
+  "cpu_blocks": [
+    {
+      "documents": 50000,
+      "text": "ayrıca",
+      "variant": "cap",
+      "queries": 2000,
+      "cpu_total_ms": 9375.0,
+      "cpu_mean_ms": 4.6875
+    },
+    {
+      "documents": 50000,
+      "text": "ayrıca",
+      "variant": "cap-four",
+      "queries": 2000,
+      "cpu_total_ms": 79218.75,
+      "cpu_mean_ms": 39.609375
+    },
+    {
+      "documents": 50000,
+      "text": "ayrıca",
+      "variant": "cap-hybrid",
+      "queries": 2000,
+      "cpu_total_ms": 9343.75,
+      "cpu_mean_ms": 4.671875
+    },
+    {
+      "documents": 50000,
+      "text": "büyük",
+      "variant": "cap",
+      "queries": 2000,
+      "cpu_total_ms": 6578.125,
+      "cpu_mean_ms": 3.2890625
+    },
+    {
+      "documents": 50000,
+      "text": "büyük",
+      "variant": "cap-four",
+      "queries": 2000,
+      "cpu_total_ms": 49843.75,
+      "cpu_mean_ms": 24.921875
+    },
+    {
+      "documents": 50000,
+      "text": "büyük",
+      "variant": "cap-hybrid",
+      "queries": 2000,
+      "cpu_total_ms": 6531.25,
+      "cpu_mean_ms": 3.265625
+    },
+    {
+      "documents": 50000,
+      "text": "olduğu",
+      "variant": "cap",
+      "queries": 2000,
+      "cpu_total_ms": 9937.5,
+      "cpu_mean_ms": 4.96875
+    },
+    {
+      "documents": 50000,
+      "text": "olduğu",
+      "variant": "cap-four",
+      "queries": 2000,
+      "cpu_total_ms": 74218.75,
+      "cpu_mean_ms": 37.109375
+    },
+    {
+      "documents": 50000,
+      "text": "olduğu",
+      "variant": "cap-hybrid",
+      "queries": 2000,
+      "cpu_total_ms": 10281.25,
+      "cpu_mean_ms": 5.140625
+    }
+  ],
+  "query_ram": [
+    {
+      "documents": 50000,
+      "engine": "fdb",
+      "samples": [
+        {
+          "os_lifetime_peak_private_commit_bytes": 40284160,
+          "os_lifetime_peak_working_set_bytes": 44425216,
+          "private_bytes": 40116224,
+          "sample_interval_ms": 10,
+          "sampled_phase_peak_private_bytes": 40259584,
+          "sampled_phase_peak_working_set_bytes": 44421120,
+          "working_set_bytes": 44371968
+        },
+        {
+          "os_lifetime_peak_private_commit_bytes": 41328640,
+          "os_lifetime_peak_working_set_bytes": 45625344,
+          "private_bytes": 41148416,
+          "sample_interval_ms": 10,
+          "sampled_phase_peak_private_bytes": 41275392,
+          "sampled_phase_peak_working_set_bytes": 45608960,
+          "working_set_bytes": 45555712
+        }
+      ]
+    },
+    {
+      "documents": 50000,
+      "engine": "sqlite",
+      "samples": [
+        {
+          "os_lifetime_peak_private_commit_bytes": 36818944,
+          "os_lifetime_peak_working_set_bytes": 41451520,
+          "private_bytes": 36818944,
+          "sample_interval_ms": 10,
+          "sampled_phase_peak_private_bytes": 36818944,
+          "sampled_phase_peak_working_set_bytes": 41451520,
+          "working_set_bytes": 41447424
+        },
+        {
+          "os_lifetime_peak_private_commit_bytes": 37306368,
+          "os_lifetime_peak_working_set_bytes": 41877504,
+          "private_bytes": 36696064,
+          "sample_interval_ms": 10,
+          "sampled_phase_peak_private_bytes": 37257216,
+          "sampled_phase_peak_working_set_bytes": 41820160,
+          "working_set_bytes": 41107456
+        }
+      ]
+    },
+    {
+      "documents": 100000,
+      "engine": "sqlite",
+      "samples": [
+        {
+          "os_lifetime_peak_private_commit_bytes": 45686784,
+          "os_lifetime_peak_working_set_bytes": 50380800,
+          "private_bytes": 45555712,
+          "sample_interval_ms": 10,
+          "sampled_phase_peak_private_bytes": 45588480,
+          "sampled_phase_peak_working_set_bytes": 50307072,
+          "working_set_bytes": 50307072
+        },
+        {
+          "os_lifetime_peak_private_commit_bytes": 46198784,
+          "os_lifetime_peak_working_set_bytes": 50393088,
+          "private_bytes": 44949504,
+          "sample_interval_ms": 10,
+          "sampled_phase_peak_private_bytes": 45887488,
+          "sampled_phase_peak_working_set_bytes": 50253824,
+          "working_set_bytes": 49311744
+        }
+      ]
+    }
+  ],
+  "gates": [
+    {
+      "documents": 50000,
+      "full_fdb_measurement": true,
+      "gate": {
+        "documents": 50000,
+        "strict_open_samples_ms": [
+          261.60850000000005,
+          254.2572,
+          255.22869999999998,
+          266.7641,
+          275.278,
+          257.532,
+          281.82649999999995,
+          258.7752,
+          261.7779,
+          266.97769999999997,
+          259.1773,
+          273.22950000000003,
+          260.31419999999997,
+          271.139,
+          254.4266,
+          263.01390000000004
+        ],
+        "idle_private_samples": [
+          2162688,
+          2322432,
+          2330624,
+          2162688
+        ],
+        "ingest_peak_private_samples": [
+          20914176,
+          20553728
+        ],
+        "per_case": [
+          {
+            "case_id": 0,
+            "text": "olduğu",
+            "group": "very_common_20pct_plus",
+            "variant": "cap",
+            "p95_ms": 5.6038,
+            "limit_ms": 30,
+            "passed": true,
+            "excluded_short": false
+          },
+          {
+            "case_id": 0,
+            "text": "olduğu",
+            "group": "very_common_20pct_plus",
+            "variant": "cap-four",
+            "p95_ms": 16.3312,
+            "limit_ms": 30,
+            "passed": true,
+            "excluded_short": false
+          },
+          {
+            "case_id": 0,
+            "text": "olduğu",
+            "group": "very_common_20pct_plus",
+            "variant": "cap-hybrid",
+            "p95_ms": 5.1303,
+            "limit_ms": 30,
+            "passed": true,
+            "excluded_short": false
+          },
+          {
+            "case_id": 1,
+            "text": "büyük",
+            "group": "very_common_20pct_plus",
+            "variant": "cap",
+            "p95_ms": 4.993799999999999,
+            "limit_ms": 30,
+            "passed": true,
+            "excluded_short": false
+          },
+          {
+            "case_id": 1,
+            "text": "büyük",
+            "group": "very_common_20pct_plus",
+            "variant": "cap-four",
+            "p95_ms": 11.0022,
+            "limit_ms": 30,
+            "passed": true,
+            "excluded_short": false
+          },
+          {
+            "case_id": 1,
+            "text": "büyük",
+            "group": "very_common_20pct_plus",
+            "variant": "cap-hybrid",
+            "p95_ms": 3.3952999999999998,
+            "limit_ms": 30,
+            "passed": true,
+            "excluded_short": false
+          },
+          {
+            "case_id": 2,
+            "text": "ayrıca",
+            "group": "very_common_20pct_plus",
+            "variant": "cap",
+            "p95_ms": 6.011,
+            "limit_ms": 30,
+            "passed": true,
+            "excluded_short": false
+          },
+          {
+            "case_id": 2,
+            "text": "ayrıca",
+            "group": "very_common_20pct_plus",
+            "variant": "cap-four",
+            "p95_ms": 18.169999999999998,
+            "limit_ms": 30,
+            "passed": true,
+            "excluded_short": false
+          },
+          {
+            "case_id": 2,
+            "text": "ayrıca",
+            "group": "very_common_20pct_plus",
+            "variant": "cap-hybrid",
+            "p95_ms": 5.8718,
+            "limit_ms": 30,
+            "passed": true,
+            "excluded_short": false
+          },
+          {
+            "case_id": 3,
+            "text": "arasında",
+            "group": "very_common_20pct_plus",
+            "variant": "cap",
+            "p95_ms": 12.7783,
+            "limit_ms": 30,
+            "passed": true,
+            "excluded_short": false
+          },
+          {
+            "case_id": 3,
+            "text": "arasında",
+            "group": "very_common_20pct_plus",
+            "variant": "cap-four",
+            "p95_ms": 24.9614,
+            "limit_ms": 30,
+            "passed": true,
+            "excluded_short": false
+          },
+          {
+            "case_id": 3,
+            "text": "arasında",
+            "group": "very_common_20pct_plus",
+            "variant": "cap-hybrid",
+            "p95_ms": 13.5915,
+            "limit_ms": 30,
+            "passed": true,
+            "excluded_short": false
+          },
+          {
+            "case_id": 4,
+            "text": "birlikte",
+            "group": "very_common_20pct_plus",
+            "variant": "cap",
+            "p95_ms": 10.652099999999999,
+            "limit_ms": 30,
+            "passed": true,
+            "excluded_short": false
+          },
+          {
+            "case_id": 4,
+            "text": "birlikte",
+            "group": "very_common_20pct_plus",
+            "variant": "cap-four",
+            "p95_ms": 26.4203,
+            "limit_ms": 30,
+            "passed": true,
+            "excluded_short": false
+          },
+          {
+            "case_id": 4,
+            "text": "birlikte",
+            "group": "very_common_20pct_plus",
+            "variant": "cap-hybrid",
+            "p95_ms": 9.6968,
+            "limit_ms": 30,
+            "passed": true,
+            "excluded_short": false
+          },
+          {
+            "case_id": 5,
+            "text": "sanat",
+            "group": "common_5_to_20pct",
+            "variant": "cap",
+            "p95_ms": 6.4403999999999995,
+            "limit_ms": 30,
+            "passed": true,
+            "excluded_short": false
+          },
+          {
+            "case_id": 5,
+            "text": "sanat",
+            "group": "common_5_to_20pct",
+            "variant": "cap-four",
+            "p95_ms": 13.4395,
+            "limit_ms": 30,
+            "passed": true,
+            "excluded_short": false
+          },
+          {
+            "case_id": 5,
+            "text": "sanat",
+            "group": "common_5_to_20pct",
+            "variant": "cap-hybrid",
+            "p95_ms": 6.413600000000001,
+            "limit_ms": 30,
+            "passed": true,
+            "excluded_short": false
+          },
+          {
+            "case_id": 6,
+            "text": "görenler",
+            "group": "common_5_to_20pct",
+            "variant": "cap",
+            "p95_ms": 24.972,
+            "limit_ms": 30,
+            "passed": true,
+            "excluded_short": false
+          },
+          {
+            "case_id": 6,
+            "text": "görenler",
+            "group": "common_5_to_20pct",
+            "variant": "cap-four",
+            "p95_ms": 64.65469999999999,
+            "limit_ms": 30,
+            "passed": false,
+            "excluded_short": false
+          },
+          {
+            "case_id": 6,
+            "text": "görenler",
+            "group": "common_5_to_20pct",
+            "variant": "cap-hybrid",
+            "p95_ms": 25.1824,
+            "limit_ms": 30,
+            "passed": true,
+            "excluded_short": false
+          },
+          {
+            "case_id": 7,
+            "text": "millî",
+            "group": "common_5_to_20pct",
+            "variant": "cap",
+            "p95_ms": 3.8266,
+            "limit_ms": 30,
+            "passed": true,
+            "excluded_short": false
+          },
+          {
+            "case_id": 7,
+            "text": "millî",
+            "group": "common_5_to_20pct",
+            "variant": "cap-four",
+            "p95_ms": 10.636,
+            "limit_ms": 30,
+            "passed": true,
+            "excluded_short": false
+          },
+          {
+            "case_id": 7,
+            "text": "millî",
+            "group": "common_5_to_20pct",
+            "variant": "cap-hybrid",
+            "p95_ms": 3.381,
+            "limit_ms": 30,
+            "passed": true,
+            "excluded_short": false
+          },
+          {
+            "case_id": 8,
+            "text": "ikinci",
+            "group": "common_5_to_20pct",
+            "variant": "cap",
+            "p95_ms": 10.095,
+            "limit_ms": 30,
+            "passed": true,
+            "excluded_short": false
+          },
+          {
+            "case_id": 8,
+            "text": "ikinci",
+            "group": "common_5_to_20pct",
+            "variant": "cap-four",
+            "p95_ms": 20.1992,
+            "limit_ms": 30,
+            "passed": true,
+            "excluded_short": false
+          },
+          {
+            "case_id": 8,
+            "text": "ikinci",
+            "group": "common_5_to_20pct",
+            "variant": "cap-hybrid",
+            "p95_ms": 8.656799999999999,
+            "limit_ms": 30,
+            "passed": true,
+            "excluded_short": false
+          },
+          {
+            "case_id": 9,
+            "text": "toplam",
+            "group": "common_5_to_20pct",
+            "variant": "cap",
+            "p95_ms": 6.6364,
+            "limit_ms": 30,
+            "passed": true,
+            "excluded_short": false
+          },
+          {
+            "case_id": 9,
+            "text": "toplam",
+            "group": "common_5_to_20pct",
+            "variant": "cap-four",
+            "p95_ms": 18.5168,
+            "limit_ms": 30,
+            "passed": true,
+            "excluded_short": false
+          },
+          {
+            "case_id": 9,
+            "text": "toplam",
+            "group": "common_5_to_20pct",
+            "variant": "cap-hybrid",
+            "p95_ms": 8.963000000000001,
+            "limit_ms": 30,
+            "passed": true,
+            "excluded_short": false
+          },
+          {
+            "case_id": 10,
+            "text": "isimli",
+            "group": "common_5_to_20pct",
+            "variant": "cap",
+            "p95_ms": 19.5308,
+            "limit_ms": 30,
+            "passed": true,
+            "excluded_short": false
+          },
+          {
+            "case_id": 10,
+            "text": "isimli",
+            "group": "common_5_to_20pct",
+            "variant": "cap-four",
+            "p95_ms": 39.6815,
+            "limit_ms": 30,
+            "passed": false,
+            "excluded_short": false
+          },
+          {
+            "case_id": 10,
+            "text": "isimli",
+            "group": "common_5_to_20pct",
+            "variant": "cap-hybrid",
+            "p95_ms": 21.286099999999998,
+            "limit_ms": 30,
+            "passed": true,
+            "excluded_short": false
+          },
+          {
+            "case_id": 11,
+            "text": "öldürür",
+            "group": "mid_0_5_to_5pct",
+            "variant": "cap",
+            "p95_ms": 69.3544,
+            "limit_ms": 150,
+            "passed": true,
+            "excluded_short": false
+          },
+          {
+            "case_id": 11,
+            "text": "öldürür",
+            "group": "mid_0_5_to_5pct",
+            "variant": "cap-four",
+            "p95_ms": 103.5151,
+            "limit_ms": 150,
+            "passed": true,
+            "excluded_short": false
+          },
+          {
+            "case_id": 11,
+            "text": "öldürür",
+            "group": "mid_0_5_to_5pct",
+            "variant": "cap-hybrid",
+            "p95_ms": 67.778,
+            "limit_ms": 150,
+            "passed": true,
+            "excluded_short": false
+          },
+          {
+            "case_id": 12,
+            "text": "ölümü",
+            "group": "mid_0_5_to_5pct",
+            "variant": "cap",
+            "p95_ms": 6.433999999999999,
+            "limit_ms": 150,
+            "passed": true,
+            "excluded_short": false
+          },
+          {
+            "case_id": 12,
+            "text": "ölümü",
+            "group": "mid_0_5_to_5pct",
+            "variant": "cap-four",
+            "p95_ms": 13.2103,
+            "limit_ms": 150,
+            "passed": true,
+            "excluded_short": false
+          },
+          {
+            "case_id": 12,
+            "text": "ölümü",
+            "group": "mid_0_5_to_5pct",
+            "variant": "cap-hybrid",
+            "p95_ms": 6.122800000000001,
+            "limit_ms": 150,
+            "passed": true,
+            "excluded_short": false
+          },
+          {
+            "case_id": 13,
+            "text": "akarsu",
+            "group": "mid_0_5_to_5pct",
+            "variant": "cap",
+            "p95_ms": 28.8023,
+            "limit_ms": 150,
+            "passed": true,
+            "excluded_short": false
+          },
+          {
+            "case_id": 13,
+            "text": "akarsu",
+            "group": "mid_0_5_to_5pct",
+            "variant": "cap-four",
+            "p95_ms": 47.056599999999996,
+            "limit_ms": 150,
+            "passed": true,
+            "excluded_short": false
+          },
+          {
+            "case_id": 13,
+            "text": "akarsu",
+            "group": "mid_0_5_to_5pct",
+            "variant": "cap-hybrid",
+            "p95_ms": 36.6262,
+            "limit_ms": 150,
+            "passed": true,
+            "excluded_short": false
+          },
+          {
+            "case_id": 14,
+            "text": "demokratik",
+            "group": "mid_0_5_to_5pct",
+            "variant": "cap",
+            "p95_ms": 12.553099999999999,
+            "limit_ms": 150,
+            "passed": true,
+            "excluded_short": false
+          },
+          {
+            "case_id": 14,
+            "text": "demokratik",
+            "group": "mid_0_5_to_5pct",
+            "variant": "cap-four",
+            "p95_ms": 31.953799999999998,
+            "limit_ms": 150,
+            "passed": true,
+            "excluded_short": false
+          },
+          {
+            "case_id": 14,
+            "text": "demokratik",
+            "group": "mid_0_5_to_5pct",
+            "variant": "cap-hybrid",
+            "p95_ms": 15.866600000000002,
+            "limit_ms": 150,
+            "passed": true,
+            "excluded_short": false
+          },
+          {
+            "case_id": 15,
+            "text": "çalışmalarıyla",
+            "group": "mid_0_5_to_5pct",
+            "variant": "cap",
+            "p95_ms": 345.1081,
+            "limit_ms": 150,
+            "passed": false,
+            "excluded_short": false
+          },
+          {
+            "case_id": 15,
+            "text": "çalışmalarıyla",
+            "group": "mid_0_5_to_5pct",
+            "variant": "cap-four",
+            "p95_ms": 680.9603,
+            "limit_ms": 150,
+            "passed": false,
+            "excluded_short": false
+          },
+          {
+            "case_id": 15,
+            "text": "çalışmalarıyla",
+            "group": "mid_0_5_to_5pct",
+            "variant": "cap-hybrid",
+            "p95_ms": 585.3624,
+            "limit_ms": 150,
+            "passed": false,
+            "excluded_short": false
+          },
+          {
+            "case_id": 16,
+            "text": "üreticisi",
+            "group": "mid_0_5_to_5pct",
+            "variant": "cap",
+            "p95_ms": 97.2238,
+            "limit_ms": 150,
+            "passed": true,
+            "excluded_short": false
+          },
+          {
+            "case_id": 16,
+            "text": "üreticisi",
+            "group": "mid_0_5_to_5pct",
+            "variant": "cap-four",
+            "p95_ms": 155.40709999999999,
+            "limit_ms": 150,
+            "passed": false,
+            "excluded_short": false
+          },
+          {
+            "case_id": 16,
+            "text": "üreticisi",
+            "group": "mid_0_5_to_5pct",
+            "variant": "cap-hybrid",
+            "p95_ms": 122.6798,
+            "limit_ms": 150,
+            "passed": true,
+            "excluded_short": false
+          },
+          {
+            "case_id": 17,
+            "text": "joseph",
+            "group": "mid_0_5_to_5pct",
+            "variant": "cap",
+            "p95_ms": 1.6361999999999999,
+            "limit_ms": 150,
+            "passed": true,
+            "excluded_short": false
+          },
+          {
+            "case_id": 17,
+            "text": "joseph",
+            "group": "mid_0_5_to_5pct",
+            "variant": "cap-four",
+            "p95_ms": 3.384,
+            "limit_ms": 150,
+            "passed": true,
+            "excluded_short": false
+          },
+          {
+            "case_id": 17,
+            "text": "joseph",
+            "group": "mid_0_5_to_5pct",
+            "variant": "cap-hybrid",
+            "p95_ms": 1.2568,
+            "limit_ms": 150,
+            "passed": true,
+            "excluded_short": false
+          },
+          {
+            "case_id": 18,
+            "text": "leyla",
+            "group": "mid_0_5_to_5pct",
+            "variant": "cap",
+            "p95_ms": 53.5964,
+            "limit_ms": 150,
+            "passed": true,
+            "excluded_short": false
+          },
+          {
+            "case_id": 18,
+            "text": "leyla",
+            "group": "mid_0_5_to_5pct",
+            "variant": "cap-four",
+            "p95_ms": 109.6246,
+            "limit_ms": 150,
+            "passed": true,
+            "excluded_short": false
+          },
+          {
+            "case_id": 18,
+            "text": "leyla",
+            "group": "mid_0_5_to_5pct",
+            "variant": "cap-hybrid",
+            "p95_ms": 85.99249999999999,
+            "limit_ms": 150,
+            "passed": true,
+            "excluded_short": false
+          },
+          {
+            "case_id": 19,
+            "text": "protest",
+            "group": "rare_under_0_5pct",
+            "variant": "cap",
+            "p95_ms": 13.6697,
+            "limit_ms": 150,
+            "passed": true,
+            "excluded_short": false
+          },
+          {
+            "case_id": 19,
+            "text": "protest",
+            "group": "rare_under_0_5pct",
+            "variant": "cap-four",
+            "p95_ms": 21.8475,
+            "limit_ms": 150,
+            "passed": true,
+            "excluded_short": false
+          },
+          {
+            "case_id": 19,
+            "text": "protest",
+            "group": "rare_under_0_5pct",
+            "variant": "cap-hybrid",
+            "p95_ms": 14.546999999999999,
+            "limit_ms": 150,
+            "passed": true,
+            "excluded_short": false
+          },
+          {
+            "case_id": 20,
+            "text": "furlong",
+            "group": "rare_under_0_5pct",
+            "variant": "cap",
+            "p95_ms": 5.4398,
+            "limit_ms": 150,
+            "passed": true,
+            "excluded_short": false
+          },
+          {
+            "case_id": 20,
+            "text": "furlong",
+            "group": "rare_under_0_5pct",
+            "variant": "cap-four",
+            "p95_ms": 3.5425999999999997,
+            "limit_ms": 150,
+            "passed": true,
+            "excluded_short": false
+          },
+          {
+            "case_id": 20,
+            "text": "furlong",
+            "group": "rare_under_0_5pct",
+            "variant": "cap-hybrid",
+            "p95_ms": 5.7574000000000005,
+            "limit_ms": 150,
+            "passed": true,
+            "excluded_short": false
+          },
+          {
+            "case_id": 21,
+            "text": "korkaklığa",
+            "group": "rare_under_0_5pct",
+            "variant": "cap",
+            "p95_ms": 34.2616,
+            "limit_ms": 150,
+            "passed": true,
+            "excluded_short": false
+          },
+          {
+            "case_id": 21,
+            "text": "korkaklığa",
+            "group": "rare_under_0_5pct",
+            "variant": "cap-four",
+            "p95_ms": 16.562299999999997,
+            "limit_ms": 150,
+            "passed": true,
+            "excluded_short": false
+          },
+          {
+            "case_id": 21,
+            "text": "korkaklığa",
+            "group": "rare_under_0_5pct",
+            "variant": "cap-hybrid",
+            "p95_ms": 33.1783,
+            "limit_ms": 150,
+            "passed": true,
+            "excluded_short": false
+          },
+          {
+            "case_id": 22,
+            "text": "ormanların",
+            "group": "rare_under_0_5pct",
+            "variant": "cap",
+            "p95_ms": 524.428,
+            "limit_ms": 150,
+            "passed": false,
+            "excluded_short": false
+          },
+          {
+            "case_id": 22,
+            "text": "ormanların",
+            "group": "rare_under_0_5pct",
+            "variant": "cap-four",
+            "p95_ms": 667.0949,
+            "limit_ms": 150,
+            "passed": false,
+            "excluded_short": false
+          },
+          {
+            "case_id": 22,
+            "text": "ormanların",
+            "group": "rare_under_0_5pct",
+            "variant": "cap-hybrid",
+            "p95_ms": 689.5688,
+            "limit_ms": 150,
+            "passed": false,
+            "excluded_short": false
+          },
+          {
+            "case_id": 23,
+            "text": "yanıklarda",
+            "group": "rare_under_0_5pct",
+            "variant": "cap",
+            "p95_ms": 1235.9034,
+            "limit_ms": 150,
+            "passed": false,
+            "excluded_short": false
+          },
+          {
+            "case_id": 23,
+            "text": "yanıklarda",
+            "group": "rare_under_0_5pct",
+            "variant": "cap-four",
+            "p95_ms": 546.4341000000001,
+            "limit_ms": 150,
+            "passed": false,
+            "excluded_short": false
+          },
+          {
+            "case_id": 23,
+            "text": "yanıklarda",
+            "group": "rare_under_0_5pct",
+            "variant": "cap-hybrid",
+            "p95_ms": 582.0494000000001,
+            "limit_ms": 150,
+            "passed": false,
+            "excluded_short": false
+          },
+          {
+            "case_id": 24,
+            "text": "külliyatı",
+            "group": "rare_under_0_5pct",
+            "variant": "cap",
+            "p95_ms": 907.1116999999999,
+            "limit_ms": 150,
+            "passed": false,
+            "excluded_short": false
+          },
+          {
+            "case_id": 24,
+            "text": "külliyatı",
+            "group": "rare_under_0_5pct",
+            "variant": "cap-four",
+            "p95_ms": 394.781,
+            "limit_ms": 150,
+            "passed": false,
+            "excluded_short": false
+          },
+          {
+            "case_id": 24,
+            "text": "külliyatı",
+            "group": "rare_under_0_5pct",
+            "variant": "cap-hybrid",
+            "p95_ms": 458.67629999999997,
+            "limit_ms": 150,
+            "passed": false,
+            "excluded_short": false
+          },
+          {
+            "case_id": 25,
+            "text": "timmy",
+            "group": "rare_under_0_5pct",
+            "variant": "cap",
+            "p95_ms": 22.787000000000003,
+            "limit_ms": 150,
+            "passed": true,
+            "excluded_short": false
+          },
+          {
+            "case_id": 25,
+            "text": "timmy",
+            "group": "rare_under_0_5pct",
+            "variant": "cap-four",
+            "p95_ms": 10.4594,
+            "limit_ms": 150,
+            "passed": true,
+            "excluded_short": false
+          },
+          {
+            "case_id": 25,
+            "text": "timmy",
+            "group": "rare_under_0_5pct",
+            "variant": "cap-hybrid",
+            "p95_ms": 19.9298,
+            "limit_ms": 150,
+            "passed": true,
+            "excluded_short": false
+          },
+          {
+            "case_id": 26,
+            "text": "yüklük",
+            "group": "rare_under_0_5pct",
+            "variant": "cap",
+            "p95_ms": 44.2044,
+            "limit_ms": 150,
+            "passed": true,
+            "excluded_short": false
+          },
+          {
+            "case_id": 26,
+            "text": "yüklük",
+            "group": "rare_under_0_5pct",
+            "variant": "cap-four",
+            "p95_ms": 72.9464,
+            "limit_ms": 150,
+            "passed": true,
+            "excluded_short": false
+          },
+          {
+            "case_id": 26,
+            "text": "yüklük",
+            "group": "rare_under_0_5pct",
+            "variant": "cap-hybrid",
+            "p95_ms": 53.1745,
+            "limit_ms": 150,
+            "passed": true,
+            "excluded_short": false
+          },
+          {
+            "case_id": 27,
+            "text": "ilçesine köyleri",
+            "group": "and_pairs_mid",
+            "variant": "cap",
+            "p95_ms": 16.840999999999998,
+            "limit_ms": 150,
+            "passed": true,
+            "excluded_short": false
+          },
+          {
+            "case_id": 27,
+            "text": "ilçesine köyleri",
+            "group": "and_pairs_mid",
+            "variant": "cap-four",
+            "p95_ms": 38.320800000000006,
+            "limit_ms": 150,
+            "passed": true,
+            "excluded_short": false
+          },
+          {
+            "case_id": 27,
+            "text": "ilçesine köyleri",
+            "group": "and_pairs_mid",
+            "variant": "cap-hybrid",
+            "p95_ms": 14.4328,
+            "limit_ms": 150,
+            "passed": true,
+            "excluded_short": false
+          },
+          {
+            "case_id": 28,
+            "text": "geldiği buldu",
+            "group": "and_pairs_mid",
+            "variant": "cap",
+            "p95_ms": 124.4704,
+            "limit_ms": 150,
+            "passed": true,
+            "excluded_short": false
+          },
+          {
+            "case_id": 28,
+            "text": "geldiği buldu",
+            "group": "and_pairs_mid",
+            "variant": "cap-four",
+            "p95_ms": 205.91660000000002,
+            "limit_ms": 150,
+            "passed": false,
+            "excluded_short": false
+          },
+          {
+            "case_id": 28,
+            "text": "geldiği buldu",
+            "group": "and_pairs_mid",
+            "variant": "cap-hybrid",
+            "p95_ms": 154.3951,
+            "limit_ms": 150,
+            "passed": false,
+            "excluded_short": false
+          },
+          {
+            "case_id": 29,
+            "text": "chicago studio",
+            "group": "and_pairs_mid",
+            "variant": "cap",
+            "p95_ms": 7.251600000000001,
+            "limit_ms": 150,
+            "passed": true,
+            "excluded_short": false
+          },
+          {
+            "case_id": 29,
+            "text": "chicago studio",
+            "group": "and_pairs_mid",
+            "variant": "cap-four",
+            "p95_ms": 3.8735000000000004,
+            "limit_ms": 150,
+            "passed": true,
+            "excluded_short": false
+          },
+          {
+            "case_id": 29,
+            "text": "chicago studio",
+            "group": "and_pairs_mid",
+            "variant": "cap-hybrid",
+            "p95_ms": 8.187800000000001,
+            "limit_ms": 150,
+            "passed": true,
+            "excluded_short": false
+          },
+          {
+            "case_id": 30,
+            "text": "kısım dişli",
+            "group": "and_pairs_mid",
+            "variant": "cap",
+            "p95_ms": 526.7937000000001,
+            "limit_ms": 150,
+            "passed": false,
+            "excluded_short": false
+          },
+          {
+            "case_id": 30,
+            "text": "kısım dişli",
+            "group": "and_pairs_mid",
+            "variant": "cap-four",
+            "p95_ms": 535.3459,
+            "limit_ms": 150,
+            "passed": false,
+            "excluded_short": false
+          },
+          {
+            "case_id": 30,
+            "text": "kısım dişli",
+            "group": "and_pairs_mid",
+            "variant": "cap-hybrid",
+            "p95_ms": 561.5992,
+            "limit_ms": 150,
+            "passed": false,
+            "excluded_short": false
+          },
+          {
+            "case_id": 31,
+            "text": "güzeli zafer",
+            "group": "and_pairs_mid",
+            "variant": "cap",
+            "p95_ms": 44.5401,
+            "limit_ms": 150,
+            "passed": true,
+            "excluded_short": false
+          },
+          {
+            "case_id": 31,
+            "text": "güzeli zafer",
+            "group": "and_pairs_mid",
+            "variant": "cap-four",
+            "p95_ms": 21.6388,
+            "limit_ms": 150,
+            "passed": true,
+            "excluded_short": false
+          },
+          {
+            "case_id": 31,
+            "text": "güzeli zafer",
+            "group": "and_pairs_mid",
+            "variant": "cap-hybrid",
+            "p95_ms": 42.1536,
+            "limit_ms": 150,
+            "passed": true,
+            "excluded_short": false
+          },
+          {
+            "case_id": 32,
+            "text": "İnternetten hazinem",
+            "group": "and_pairs_mid",
+            "variant": "cap",
+            "p95_ms": 226.4274,
+            "limit_ms": 150,
+            "passed": false,
+            "excluded_short": false
+          },
+          {
+            "case_id": 32,
+            "text": "İnternetten hazinem",
+            "group": "and_pairs_mid",
+            "variant": "cap-four",
+            "p95_ms": 118.62480000000001,
+            "limit_ms": 150,
+            "passed": true,
+            "excluded_short": false
+          },
+          {
+            "case_id": 32,
+            "text": "İnternetten hazinem",
+            "group": "and_pairs_mid",
+            "variant": "cap-hybrid",
+            "p95_ms": 189.1736,
+            "limit_ms": 150,
+            "passed": false,
+            "excluded_short": false
+          },
+          {
+            "case_id": 33,
+            "text": "oyuncudur atlanta",
+            "group": "and_pairs_mid",
+            "variant": "cap",
+            "p95_ms": 195.5764,
+            "limit_ms": 150,
+            "passed": false,
+            "excluded_short": false
+          },
+          {
+            "case_id": 33,
+            "text": "oyuncudur atlanta",
+            "group": "and_pairs_mid",
+            "variant": "cap-four",
+            "p95_ms": 97.0959,
+            "limit_ms": 150,
+            "passed": true,
+            "excluded_short": false
+          },
+          {
+            "case_id": 33,
+            "text": "oyuncudur atlanta",
+            "group": "and_pairs_mid",
+            "variant": "cap-hybrid",
+            "p95_ms": 175.6258,
+            "limit_ms": 150,
+            "passed": false,
+            "excluded_short": false
+          },
+          {
+            "case_id": 34,
+            "text": "kendisine çıkacağını",
+            "group": "and_pairs_mid",
+            "variant": "cap",
+            "p95_ms": 1006.8045999999999,
+            "limit_ms": 150,
+            "passed": false,
+            "excluded_short": false
+          },
+          {
+            "case_id": 34,
+            "text": "kendisine çıkacağını",
+            "group": "and_pairs_mid",
+            "variant": "cap-four",
+            "p95_ms": 460.56570000000005,
+            "limit_ms": 150,
+            "passed": false,
+            "excluded_short": false
+          },
+          {
+            "case_id": 34,
+            "text": "kendisine çıkacağını",
+            "group": "and_pairs_mid",
+            "variant": "cap-hybrid",
+            "p95_ms": 523.0534,
+            "limit_ms": 150,
+            "passed": false,
+            "excluded_short": false
+          },
+          {
+            "case_id": 35,
+            "text": "ve",
+            "group": "fixed_short",
+            "variant": "cap",
+            "p95_ms": 0.8725999999999999,
+            "limit_ms": null,
+            "passed": true,
+            "excluded_short": true
+          },
+          {
+            "case_id": 35,
+            "text": "ve",
+            "group": "fixed_short",
+            "variant": "cap-four",
+            "p95_ms": 1.6772,
+            "limit_ms": null,
+            "passed": true,
+            "excluded_short": true
+          },
+          {
+            "case_id": 35,
+            "text": "ve",
+            "group": "fixed_short",
+            "variant": "cap-hybrid",
+            "p95_ms": 0.6604,
+            "limit_ms": null,
+            "passed": true,
+            "excluded_short": true
+          },
+          {
+            "case_id": 36,
+            "text": "if",
+            "group": "fixed_short",
+            "variant": "cap",
+            "p95_ms": 1.7162,
+            "limit_ms": null,
+            "passed": true,
+            "excluded_short": true
+          },
+          {
+            "case_id": 36,
+            "text": "if",
+            "group": "fixed_short",
+            "variant": "cap-four",
+            "p95_ms": 2.6787,
+            "limit_ms": null,
+            "passed": true,
+            "excluded_short": true
+          },
+          {
+            "case_id": 36,
+            "text": "if",
+            "group": "fixed_short",
+            "variant": "cap-hybrid",
+            "p95_ms": 1.7053,
+            "limit_ms": null,
+            "passed": true,
+            "excluded_short": true
+          },
+          {
+            "case_id": 37,
+            "text": "id",
+            "group": "fixed_short",
+            "variant": "cap",
+            "p95_ms": 1.2691,
+            "limit_ms": null,
+            "passed": true,
+            "excluded_short": true
+          },
+          {
+            "case_id": 37,
+            "text": "id",
+            "group": "fixed_short",
+            "variant": "cap-four",
+            "p95_ms": 2.2287,
+            "limit_ms": null,
+            "passed": true,
+            "excluded_short": true
+          },
+          {
+            "case_id": 37,
+            "text": "id",
+            "group": "fixed_short",
+            "variant": "cap-hybrid",
+            "p95_ms": 0.9633,
+            "limit_ms": null,
+            "passed": true,
+            "excluded_short": true
+          },
+          {
+            "case_id": 38,
+            "text": "zx",
+            "group": "fixed_short",
+            "variant": "cap",
+            "p95_ms": 248.78910000000002,
+            "limit_ms": null,
+            "passed": true,
+            "excluded_short": true
+          },
+          {
+            "case_id": 38,
+            "text": "zx",
+            "group": "fixed_short",
+            "variant": "cap-four",
+            "p95_ms": 110.66,
+            "limit_ms": null,
+            "passed": true,
+            "excluded_short": true
+          },
+          {
+            "case_id": 38,
+            "text": "zx",
+            "group": "fixed_short",
+            "variant": "cap-hybrid",
+            "p95_ms": 111.6727,
+            "limit_ms": null,
+            "passed": true,
+            "excluded_short": true
+          },
+          {
+            "case_id": 39,
+            "text": "qzxkvwnever",
+            "group": "fixed_negative",
+            "variant": "cap",
+            "p95_ms": 0.0386,
+            "limit_ms": 150,
+            "passed": true,
+            "excluded_short": false
+          },
+          {
+            "case_id": 39,
+            "text": "qzxkvwnever",
+            "group": "fixed_negative",
+            "variant": "cap-four",
+            "p95_ms": 0.3685,
+            "limit_ms": 150,
+            "passed": true,
+            "excluded_short": false
+          },
+          {
+            "case_id": 39,
+            "text": "qzxkvwnever",
+            "group": "fixed_negative",
+            "variant": "cap-hybrid",
+            "p95_ms": 0.612,
+            "limit_ms": 150,
+            "passed": true,
+            "excluded_short": false
+          },
+          {
+            "case_id": 40,
+            "text": "transubstantiationz",
+            "group": "fixed_negative",
+            "variant": "cap",
+            "p95_ms": 0.621,
+            "limit_ms": 150,
+            "passed": true,
+            "excluded_short": false
+          },
+          {
+            "case_id": 40,
+            "text": "transubstantiationz",
+            "group": "fixed_negative",
+            "variant": "cap-four",
+            "p95_ms": 0.8681,
+            "limit_ms": 150,
+            "passed": true,
+            "excluded_short": false
+          },
+          {
+            "case_id": 40,
+            "text": "transubstantiationz",
+            "group": "fixed_negative",
+            "variant": "cap-hybrid",
+            "p95_ms": 0.579,
+            "limit_ms": 150,
+            "passed": true,
+            "excluded_short": false
+          }
+        ],
+        "relative_hybrid": [
+          {
+            "kind": "hybrid_negative",
+            "text": "qzxkvwnever",
+            "control_p95_ms": 0.3685,
+            "hybrid_p95_ms": 0.612,
+            "limit_ms": 0.40535000000000004,
+            "passed": false
+          },
+          {
+            "kind": "hybrid_negative",
+            "text": "transubstantiationz",
+            "control_p95_ms": 0.8681,
+            "hybrid_p95_ms": 0.579,
+            "limit_ms": 0.95491,
+            "passed": true
+          },
+          {
+            "kind": "hybrid_positive_cpu",
+            "text": "olduğu",
+            "serial_total_cpu_ms": 9937.5,
+            "hybrid_total_cpu_ms": 10281.25,
+            "limit_ms": 10434.375,
+            "passed": true
+          },
+          {
+            "kind": "hybrid_positive_cpu",
+            "text": "büyük",
+            "serial_total_cpu_ms": 6578.125,
+            "hybrid_total_cpu_ms": 6531.25,
+            "limit_ms": 6907.03125,
+            "passed": true
+          },
+          {
+            "kind": "hybrid_positive_cpu",
+            "text": "ayrıca",
+            "serial_total_cpu_ms": 9375.0,
+            "hybrid_total_cpu_ms": 9343.75,
+            "limit_ms": 9843.75,
+            "passed": true
+          }
+        ],
+        "failures": [
+          {
+            "kind": "capped_query",
+            "case_id": 6,
+            "text": "görenler",
+            "variant": "cap-four",
+            "p95_ms": 64.65469999999999,
+            "limit_ms": 30
+          },
+          {
+            "kind": "capped_query",
+            "case_id": 10,
+            "text": "isimli",
+            "variant": "cap-four",
+            "p95_ms": 39.6815,
+            "limit_ms": 30
+          },
+          {
+            "kind": "capped_query",
+            "case_id": 15,
+            "text": "çalışmalarıyla",
+            "variant": "cap",
+            "p95_ms": 345.1081,
+            "limit_ms": 150
+          },
+          {
+            "kind": "capped_query",
+            "case_id": 15,
+            "text": "çalışmalarıyla",
+            "variant": "cap-four",
+            "p95_ms": 680.9603,
+            "limit_ms": 150
+          },
+          {
+            "kind": "capped_query",
+            "case_id": 15,
+            "text": "çalışmalarıyla",
+            "variant": "cap-hybrid",
+            "p95_ms": 585.3624,
+            "limit_ms": 150
+          },
+          {
+            "kind": "capped_query",
+            "case_id": 16,
+            "text": "üreticisi",
+            "variant": "cap-four",
+            "p95_ms": 155.40709999999999,
+            "limit_ms": 150
+          },
+          {
+            "kind": "capped_query",
+            "case_id": 22,
+            "text": "ormanların",
+            "variant": "cap",
+            "p95_ms": 524.428,
+            "limit_ms": 150
+          },
+          {
+            "kind": "capped_query",
+            "case_id": 22,
+            "text": "ormanların",
+            "variant": "cap-four",
+            "p95_ms": 667.0949,
+            "limit_ms": 150
+          },
+          {
+            "kind": "capped_query",
+            "case_id": 22,
+            "text": "ormanların",
+            "variant": "cap-hybrid",
+            "p95_ms": 689.5688,
+            "limit_ms": 150
+          },
+          {
+            "kind": "capped_query",
+            "case_id": 23,
+            "text": "yanıklarda",
+            "variant": "cap",
+            "p95_ms": 1235.9034,
+            "limit_ms": 150
+          },
+          {
+            "kind": "capped_query",
+            "case_id": 23,
+            "text": "yanıklarda",
+            "variant": "cap-four",
+            "p95_ms": 546.4341000000001,
+            "limit_ms": 150
+          },
+          {
+            "kind": "capped_query",
+            "case_id": 23,
+            "text": "yanıklarda",
+            "variant": "cap-hybrid",
+            "p95_ms": 582.0494000000001,
+            "limit_ms": 150
+          },
+          {
+            "kind": "capped_query",
+            "case_id": 24,
+            "text": "külliyatı",
+            "variant": "cap",
+            "p95_ms": 907.1116999999999,
+            "limit_ms": 150
+          },
+          {
+            "kind": "capped_query",
+            "case_id": 24,
+            "text": "külliyatı",
+            "variant": "cap-four",
+            "p95_ms": 394.781,
+            "limit_ms": 150
+          },
+          {
+            "kind": "capped_query",
+            "case_id": 24,
+            "text": "külliyatı",
+            "variant": "cap-hybrid",
+            "p95_ms": 458.67629999999997,
+            "limit_ms": 150
+          },
+          {
+            "kind": "capped_query",
+            "case_id": 28,
+            "text": "geldiği buldu",
+            "variant": "cap-four",
+            "p95_ms": 205.91660000000002,
+            "limit_ms": 150
+          },
+          {
+            "kind": "capped_query",
+            "case_id": 28,
+            "text": "geldiği buldu",
+            "variant": "cap-hybrid",
+            "p95_ms": 154.3951,
+            "limit_ms": 150
+          },
+          {
+            "kind": "capped_query",
+            "case_id": 30,
+            "text": "kısım dişli",
+            "variant": "cap",
+            "p95_ms": 526.7937000000001,
+            "limit_ms": 150
+          },
+          {
+            "kind": "capped_query",
+            "case_id": 30,
+            "text": "kısım dişli",
+            "variant": "cap-four",
+            "p95_ms": 535.3459,
+            "limit_ms": 150
+          },
+          {
+            "kind": "capped_query",
+            "case_id": 30,
+            "text": "kısım dişli",
+            "variant": "cap-hybrid",
+            "p95_ms": 561.5992,
+            "limit_ms": 150
+          },
+          {
+            "kind": "capped_query",
+            "case_id": 32,
+            "text": "İnternetten hazinem",
+            "variant": "cap",
+            "p95_ms": 226.4274,
+            "limit_ms": 150
+          },
+          {
+            "kind": "capped_query",
+            "case_id": 32,
+            "text": "İnternetten hazinem",
+            "variant": "cap-hybrid",
+            "p95_ms": 189.1736,
+            "limit_ms": 150
+          },
+          {
+            "kind": "capped_query",
+            "case_id": 33,
+            "text": "oyuncudur atlanta",
+            "variant": "cap",
+            "p95_ms": 195.5764,
+            "limit_ms": 150
+          },
+          {
+            "kind": "capped_query",
+            "case_id": 33,
+            "text": "oyuncudur atlanta",
+            "variant": "cap-hybrid",
+            "p95_ms": 175.6258,
+            "limit_ms": 150
+          },
+          {
+            "kind": "capped_query",
+            "case_id": 34,
+            "text": "kendisine çıkacağını",
+            "variant": "cap",
+            "p95_ms": 1006.8045999999999,
+            "limit_ms": 150
+          },
+          {
+            "kind": "capped_query",
+            "case_id": 34,
+            "text": "kendisine çıkacağını",
+            "variant": "cap-four",
+            "p95_ms": 460.56570000000005,
+            "limit_ms": 150
+          },
+          {
+            "kind": "capped_query",
+            "case_id": 34,
+            "text": "kendisine çıkacağını",
+            "variant": "cap-hybrid",
+            "p95_ms": 523.0534,
+            "limit_ms": 150
+          },
+          {
+            "kind": "hybrid_negative",
+            "text": "qzxkvwnever",
+            "control_p95_ms": 0.3685,
+            "hybrid_p95_ms": 0.612,
+            "limit_ms": 0.40535000000000004,
+            "passed": false
+          }
+        ],
+        "passed": false,
+        "gate_scope": "Capped N50; exact serial/four informational per explicit user reply; fixed_short excluded from search deadline"
+      },
+      "completed": [
+        {
+          "engine": "fdb",
+          "mode": "scale-seed",
+          "label": "n50000-pair0-seed",
+          "log": "trwiki-scale-20261028-v1-n50000-pair0-seed-fdb-scale-seed.jsonl",
+          "exit_code": 0,
+          "wall_s": 40.46899999998277
+        },
+        {
+          "engine": "sqlite",
+          "mode": "scale-seed",
+          "label": "n50000-pair0-seed",
+          "log": "trwiki-scale-20261028-v1-n50000-pair0-seed-sqlite-scale-seed.jsonl",
+          "exit_code": 0,
+          "wall_s": 37.96799999999348
+        },
+        {
+          "engine": "fdb",
+          "mode": "scale-idle",
+          "label": "n50000-pair0-idle0",
+          "log": "trwiki-scale-20261028-v1-n50000-pair0-idle0-fdb-scale-idle.jsonl",
+          "exit_code": 0,
+          "wall_s": 2.297000000020489
+        },
+        {
+          "engine": "sqlite",
+          "mode": "scale-idle",
+          "label": "n50000-pair0-idle0",
+          "log": "trwiki-scale-20261028-v1-n50000-pair0-idle0-sqlite-scale-idle.jsonl",
+          "exit_code": 0,
+          "wall_s": 2.030999999959022
+        },
+        {
+          "engine": "fdb",
+          "mode": "scale-idle",
+          "label": "n50000-pair0-idle1",
+          "log": "trwiki-scale-20261028-v1-n50000-pair0-idle1-fdb-scale-idle.jsonl",
+          "exit_code": 0,
+          "wall_s": 2.2820000000065193
+        },
+        {
+          "engine": "sqlite",
+          "mode": "scale-idle",
+          "label": "n50000-pair0-idle1",
+          "log": "trwiki-scale-20261028-v1-n50000-pair0-idle1-sqlite-scale-idle.jsonl",
+          "exit_code": 0,
+          "wall_s": 2.047000000020489
+        },
+        {
+          "engine": "fdb",
+          "mode": "scale-query-experiments",
+          "label": "n50000-pair0-matrix",
+          "log": "trwiki-scale-20261028-v1-n50000-pair0-matrix-fdb-scale-query-experiments.jsonl",
+          "exit_code": 0,
+          "wall_s": 639.890000000014
+        },
+        {
+          "engine": "sqlite",
+          "mode": "scale-query-experiments",
+          "label": "n50000-pair0-matrix",
+          "log": "trwiki-scale-20261028-v1-n50000-pair0-matrix-sqlite-scale-query-experiments.jsonl",
+          "exit_code": 0,
+          "wall_s": 254.43799999996554
+        },
+        {
+          "engine": "fdb",
+          "mode": "scale-query-cpu-blocks",
+          "label": "n50000-pair0-cpu",
+          "log": "trwiki-scale-20261028-v1-n50000-pair0-cpu-fdb-scale-query-cpu-blocks.jsonl",
+          "exit_code": 0,
+          "wall_s": 63.79700000002049
+        },
+        {
+          "engine": "fdb",
+          "mode": "first-strict",
+          "label": "n50000-pair0-first0",
+          "log": "trwiki-scale-20261028-v1-n50000-pair0-first0-fdb-first-strict.jsonl",
+          "exit_code": 0,
+          "wall_s": 2.687999999965541
+        },
+        {
+          "engine": "sqlite",
+          "mode": "first-sqlite",
+          "label": "n50000-pair0-first0",
+          "log": "trwiki-scale-20261028-v1-n50000-pair0-first0-sqlite-first-sqlite.jsonl",
+          "exit_code": 0,
+          "wall_s": 0.8589999999967404
+        },
+        {
+          "engine": "fdb",
+          "mode": "first-strict",
+          "label": "n50000-pair0-first1",
+          "log": "trwiki-scale-20261028-v1-n50000-pair0-first1-fdb-first-strict.jsonl",
+          "exit_code": 0,
+          "wall_s": 1.7030000000377186
+        },
+        {
+          "engine": "sqlite",
+          "mode": "first-sqlite",
+          "label": "n50000-pair0-first1",
+          "log": "trwiki-scale-20261028-v1-n50000-pair0-first1-sqlite-first-sqlite.jsonl",
+          "exit_code": 0,
+          "wall_s": 0.35999999998603016
+        },
+        {
+          "engine": "fdb",
+          "mode": "first-strict",
+          "label": "n50000-pair0-first2",
+          "log": "trwiki-scale-20261028-v1-n50000-pair0-first2-fdb-first-strict.jsonl",
+          "exit_code": 0,
+          "wall_s": 1.452999999979511
+        },
+        {
+          "engine": "sqlite",
+          "mode": "first-sqlite",
+          "label": "n50000-pair0-first2",
+          "log": "trwiki-scale-20261028-v1-n50000-pair0-first2-sqlite-first-sqlite.jsonl",
+          "exit_code": 0,
+          "wall_s": 0.0779999999795109
+        },
+        {
+          "engine": "fdb",
+          "mode": "first-strict",
+          "label": "n50000-pair0-first3",
+          "log": "trwiki-scale-20261028-v1-n50000-pair0-first3-fdb-first-strict.jsonl",
+          "exit_code": 0,
+          "wall_s": 1.8429999999934807
+        },
+        {
+          "engine": "sqlite",
+          "mode": "first-sqlite",
+          "label": "n50000-pair0-first3",
+          "log": "trwiki-scale-20261028-v1-n50000-pair0-first3-sqlite-first-sqlite.jsonl",
+          "exit_code": 0,
+          "wall_s": 0.2649999999557622
+        },
+        {
+          "engine": "fdb",
+          "mode": "first-strict",
+          "label": "n50000-pair0-first4",
+          "log": "trwiki-scale-20261028-v1-n50000-pair0-first4-fdb-first-strict.jsonl",
+          "exit_code": 0,
+          "wall_s": 1.7660000000032596
+        },
+        {
+          "engine": "sqlite",
+          "mode": "first-sqlite",
+          "label": "n50000-pair0-first4",
+          "log": "trwiki-scale-20261028-v1-n50000-pair0-first4-sqlite-first-sqlite.jsonl",
+          "exit_code": 0,
+          "wall_s": 1.422000000020489
+        },
+        {
+          "engine": "fdb",
+          "mode": "first-strict",
+          "label": "n50000-pair0-first5",
+          "log": "trwiki-scale-20261028-v1-n50000-pair0-first5-fdb-first-strict.jsonl",
+          "exit_code": 0,
+          "wall_s": 1.452999999979511
+        },
+        {
+          "engine": "sqlite",
+          "mode": "first-sqlite",
+          "label": "n50000-pair0-first5",
+          "log": "trwiki-scale-20261028-v1-n50000-pair0-first5-sqlite-first-sqlite.jsonl",
+          "exit_code": 0,
+          "wall_s": 0.062000000034458935
+        },
+        {
+          "engine": "sqlite",
+          "mode": "scale-seed",
+          "label": "n50000-pair1-seed",
+          "log": "trwiki-scale-20261028-v1-n50000-pair1-seed-sqlite-scale-seed.jsonl",
+          "exit_code": 0,
+          "wall_s": 38.04699999996228
+        },
+        {
+          "engine": "fdb",
+          "mode": "scale-seed",
+          "label": "n50000-pair1-seed",
+          "log": "trwiki-scale-20261028-v1-n50000-pair1-seed-fdb-scale-seed.jsonl",
+          "exit_code": 0,
+          "wall_s": 39.60899999999674
+        },
+        {
+          "engine": "sqlite",
+          "mode": "scale-idle",
+          "label": "n50000-pair1-idle0",
+          "log": "trwiki-scale-20261028-v1-n50000-pair1-idle0-sqlite-scale-idle.jsonl",
+          "exit_code": 0,
+          "wall_s": 2.0310000000172295
+        },
+        {
+          "engine": "fdb",
+          "mode": "scale-idle",
+          "label": "n50000-pair1-idle0",
+          "log": "trwiki-scale-20261028-v1-n50000-pair1-idle0-fdb-scale-idle.jsonl",
+          "exit_code": 0,
+          "wall_s": 2.297000000020489
+        },
+        {
+          "engine": "sqlite",
+          "mode": "scale-idle",
+          "label": "n50000-pair1-idle1",
+          "log": "trwiki-scale-20261028-v1-n50000-pair1-idle1-sqlite-scale-idle.jsonl",
+          "exit_code": 0,
+          "wall_s": 2.030999999959022
+        },
+        {
+          "engine": "fdb",
+          "mode": "scale-idle",
+          "label": "n50000-pair1-idle1",
+          "log": "trwiki-scale-20261028-v1-n50000-pair1-idle1-fdb-scale-idle.jsonl",
+          "exit_code": 0,
+          "wall_s": 2.297000000020489
+        },
+        {
+          "engine": "sqlite",
+          "mode": "scale-query-experiments",
+          "label": "n50000-pair1-matrix",
+          "log": "trwiki-scale-20261028-v1-n50000-pair1-matrix-sqlite-scale-query-experiments.jsonl",
+          "exit_code": 0,
+          "wall_s": 250.625
+        },
+        {
+          "engine": "fdb",
+          "mode": "scale-query-experiments",
+          "label": "n50000-pair1-matrix",
+          "log": "trwiki-scale-20261028-v1-n50000-pair1-matrix-fdb-scale-query-experiments.jsonl",
+          "exit_code": 0,
+          "wall_s": 647.7189999999828
+        },
+        {
+          "engine": "fdb",
+          "mode": "scale-query-cpu-blocks",
+          "label": "n50000-pair1-cpu",
+          "log": "trwiki-scale-20261028-v1-n50000-pair1-cpu-fdb-scale-query-cpu-blocks.jsonl",
+          "exit_code": 0,
+          "wall_s": 74.45300000003772
+        },
+        {
+          "engine": "sqlite",
+          "mode": "first-sqlite",
+          "label": "n50000-pair1-first0",
+          "log": "trwiki-scale-20261028-v1-n50000-pair1-first0-sqlite-first-sqlite.jsonl",
+          "exit_code": 0,
+          "wall_s": 0.8279999999795109
+        },
+        {
+          "engine": "fdb",
+          "mode": "first-strict",
+          "label": "n50000-pair1-first0",
+          "log": "trwiki-scale-20261028-v1-n50000-pair1-first0-fdb-first-strict.jsonl",
+          "exit_code": 0,
+          "wall_s": 2.702999999979511
+        },
+        {
+          "engine": "sqlite",
+          "mode": "first-sqlite",
+          "label": "n50000-pair1-first1",
+          "log": "trwiki-scale-20261028-v1-n50000-pair1-first1-sqlite-first-sqlite.jsonl",
+          "exit_code": 0,
+          "wall_s": 0.35899999999674037
+        },
+        {
+          "engine": "fdb",
+          "mode": "first-strict",
+          "label": "n50000-pair1-first1",
+          "log": "trwiki-scale-20261028-v1-n50000-pair1-first1-fdb-first-strict.jsonl",
+          "exit_code": 0,
+          "wall_s": 1.672000000020489
+        },
+        {
+          "engine": "sqlite",
+          "mode": "first-sqlite",
+          "label": "n50000-pair1-first2",
+          "log": "trwiki-scale-20261028-v1-n50000-pair1-first2-sqlite-first-sqlite.jsonl",
+          "exit_code": 0,
+          "wall_s": 0.0779999999795109
+        },
+        {
+          "engine": "fdb",
+          "mode": "first-strict",
+          "label": "n50000-pair1-first2",
+          "log": "trwiki-scale-20261028-v1-n50000-pair1-first2-fdb-first-strict.jsonl",
+          "exit_code": 0,
+          "wall_s": 1.422000000020489
+        },
+        {
+          "engine": "sqlite",
+          "mode": "first-sqlite",
+          "label": "n50000-pair1-first3",
+          "log": "trwiki-scale-20261028-v1-n50000-pair1-first3-sqlite-first-sqlite.jsonl",
+          "exit_code": 0,
+          "wall_s": 0.26600000000325963
+        },
+        {
+          "engine": "fdb",
+          "mode": "first-strict",
+          "label": "n50000-pair1-first3",
+          "log": "trwiki-scale-20261028-v1-n50000-pair1-first3-fdb-first-strict.jsonl",
+          "exit_code": 0,
+          "wall_s": 1.8589999999967404
+        },
+        {
+          "engine": "sqlite",
+          "mode": "first-sqlite",
+          "label": "n50000-pair1-first4",
+          "log": "trwiki-scale-20261028-v1-n50000-pair1-first4-sqlite-first-sqlite.jsonl",
+          "exit_code": 0,
+          "wall_s": 1.4060000000172295
+        },
+        {
+          "engine": "fdb",
+          "mode": "first-strict",
+          "label": "n50000-pair1-first4",
+          "log": "trwiki-scale-20261028-v1-n50000-pair1-first4-fdb-first-strict.jsonl",
+          "exit_code": 0,
+          "wall_s": 1.7339999999967404
+        },
+        {
+          "engine": "sqlite",
+          "mode": "first-sqlite",
+          "label": "n50000-pair1-first5",
+          "log": "trwiki-scale-20261028-v1-n50000-pair1-first5-sqlite-first-sqlite.jsonl",
+          "exit_code": 0,
+          "wall_s": 0.062000000034458935
+        },
+        {
+          "engine": "fdb",
+          "mode": "first-strict",
+          "label": "n50000-pair1-first5",
+          "log": "trwiki-scale-20261028-v1-n50000-pair1-first5-fdb-first-strict.jsonl",
+          "exit_code": 0,
+          "wall_s": 1.4689999999827705
+        }
+      ]
+    },
+    {
+      "documents": 100000,
+      "full_fdb_measurement": false,
+      "gate": {
+        "documents": 100000,
+        "strict_open_samples_ms": [],
+        "idle_private_samples": [],
+        "ingest_peak_private_samples": [],
+        "per_case": [],
+        "relative_hybrid": [],
+        "failures": [
+          {
+            "kind": "streamed_entry_limit",
+            "error": "streamed transaction exceeds entry/frame allowance",
+            "attempted_documents": 100000,
+            "committed_documents": 66000,
+            "sequence": 132,
+            "rejected_batch": [
+              66000,
+              66499
+            ],
+            "offending_document": 66498,
+            "text_bytes": 444345,
+            "per_entry_limit_bytes": 262144,
+            "transaction_limit_bytes": 67108864,
+            "rejected_batch_json_bytes": 2308679,
+            "raw_process": "trwiki-scale-20261028-v1-n100000-pair0-seed-fdb-scale-seed.process.json",
+            "stats": {
+              "compaction_running": false,
+              "delta_keys": 0,
+              "disk_index_bytes": 178263877,
+              "disk_posting_entries": 37009038,
+              "documents": 66000,
+              "generation": 345,
+              "log_bytes": 45,
+              "resident_documents": 0,
+              "resident_text_bytes": 0,
+              "segments": 12,
+              "sequence": 132,
+              "source_bytes": 225615947
+            },
+            "partial_state": "C:\\Users\\Serkan\\Documents\\ChatGPT\\fdb\\docs\\benchmarks\\trwiki-scale-20261028-v1-partial66000-fdb-state.json",
+            "partial_state_sha256": "C404FA1551FCD1E8E5AE80418A824B39CEB118A4F1A5C55A9382DDD8E1FCD256",
+            "fdb_100k_ingest_succeeded": false,
+            "fdb_retry": false,
+            "truncate_or_owned_fallback": false
+          }
+        ],
+        "passed": false,
+        "gate_scope": "FDB ingest FAILED, no complete 100k DB; SQLite independent repeats only, no completed balanced 100k A/B"
+      },
+      "completed": [
+        {
+          "engine": "sqlite",
+          "mode": "scale-seed",
+          "label": "n100000-pair0-seed",
+          "log": "trwiki-scale-20261028-v1-n100000-pair0-seed-sqlite-scale-seed.jsonl",
+          "exit_code": 0,
+          "wall_s": 99.21899999998277
+        },
+        {
+          "engine": "sqlite",
+          "mode": "scale-idle",
+          "label": "n100000-pair0-idle0",
+          "log": "trwiki-scale-20261028-v1-n100000-pair0-idle0-sqlite-scale-idle.jsonl",
+          "exit_code": 0,
+          "wall_s": 2.0310000000172295
+        },
+        {
+          "engine": "sqlite",
+          "mode": "scale-idle",
+          "label": "n100000-pair0-idle1",
+          "log": "trwiki-scale-20261028-v1-n100000-pair0-idle1-sqlite-scale-idle.jsonl",
+          "exit_code": 0,
+          "wall_s": 2.0320000000065193
+        },
+        {
+          "engine": "sqlite",
+          "mode": "scale-query-experiments",
+          "label": "n100000-pair0-matrix",
+          "log": "trwiki-scale-20261028-v1-n100000-pair0-matrix-sqlite-scale-query-experiments.jsonl",
+          "exit_code": 0,
+          "wall_s": 601.2189999999828
+        },
+        {
+          "engine": "sqlite",
+          "mode": "scale-seed",
+          "label": "n100000-pair1-seed",
+          "log": "trwiki-scale-20261028-v1-n100000-pair1-seed-sqlite-scale-seed.jsonl",
+          "exit_code": 0,
+          "wall_s": 99.5
+        },
+        {
+          "engine": "sqlite",
+          "mode": "scale-idle",
+          "label": "n100000-pair1-idle0",
+          "log": "trwiki-scale-20261028-v1-n100000-pair1-idle0-sqlite-scale-idle.jsonl",
+          "exit_code": 0,
+          "wall_s": 2.047000000020489
+        },
+        {
+          "engine": "sqlite",
+          "mode": "scale-idle",
+          "label": "n100000-pair1-idle1",
+          "log": "trwiki-scale-20261028-v1-n100000-pair1-idle1-sqlite-scale-idle.jsonl",
+          "exit_code": 0,
+          "wall_s": 2.047000000020489
+        },
+        {
+          "engine": "sqlite",
+          "mode": "scale-query-experiments",
+          "label": "n100000-pair1-matrix",
+          "log": "trwiki-scale-20261028-v1-n100000-pair1-matrix-sqlite-scale-query-experiments.jsonl",
+          "exit_code": 0,
+          "wall_s": 598.2969999999623
+        }
+      ]
+    }
+  ],
+  "gate_failed_at": 50000,
+  "new_source_unchanged": true
+}

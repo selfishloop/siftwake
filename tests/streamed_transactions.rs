@@ -248,6 +248,7 @@ fn covered_query_never_accepts_corrupt_source_with_valid_index_and_address_cache
         guard: Guard::Missing,
     })])
     .unwrap();
+    db.flush().unwrap();
     db.prepare_record_reads().unwrap();
     drop(db);
     let mut sources: Vec<_> = std::fs::read_dir(&temp.0)
@@ -258,7 +259,7 @@ fn covered_query_never_accepts_corrupt_source_with_valid_index_and_address_cache
                 && p.file_name().unwrap().to_string_lossy().starts_with("run-")
         })
         .collect();
-    // This one streamed commit publishes one run; generation WALs are not that source.
+    // Explicit flush publishes one run; generation WALs are not that source.
     assert_eq!(sources.len(), 1);
     let source = sources.pop().unwrap();
     let indexes: Vec<_> = std::fs::read_dir(&temp.0)
@@ -298,6 +299,18 @@ fn covered_query_never_accepts_corrupt_source_with_valid_index_and_address_cache
                 for text in ["the man", "he"] {
                     query.text = text.into();
                     assert!(matches!(db.search(&query), Err(Error::Corrupt(_))));
+                    assert!(matches!(db.search_first(&query), Err(Error::Corrupt(_))));
+                    assert!(matches!(
+                        db.search_with_execution(
+                            &query,
+                            fdb::SearchExecution {
+                                verification_workers: 4,
+                                coalesce_gap_bytes: 8192,
+                                reuse_validated_source_crc: true
+                            }
+                        ),
+                        Err(Error::Corrupt(_))
+                    ));
                 }
             }
             Err(error) => assert!(matches!(error, Error::Corrupt(_))),
@@ -321,6 +334,7 @@ fn covered_queries_reject_source_or_index_changed_after_successful_warm_search()
             guard: Guard::Missing,
         })])
         .unwrap();
+        db.flush().unwrap();
         let mut query = Query::new("şirket");
         query.text = "the".into();
         assert_eq!(db.search(&query).unwrap().total, 1);
@@ -378,6 +392,7 @@ fn immutable_source_lease_blocks_mutation_and_keeps_wal_writable() {
         guard: Guard::Missing,
     })])
     .unwrap();
+    db.flush().unwrap();
     let source = std::fs::read_dir(&dir)
         .unwrap()
         .map(|entry| entry.unwrap().path())
@@ -631,6 +646,32 @@ fn streamed_process_kill_before_ack_during_wal_publication_and_after_ack() {
                 assert_eq!(stored.version, 1);
                 assert_eq!(stored.document.text, "şirket teknoloji örnek ".repeat(500));
             }
+        }
+        let mut q = Query::new("şirket");
+        q.text = "teknoloji örnek".into();
+        let exact = db.search(&q).unwrap();
+        assert_eq!(db.search_first_hybrid(&q, 200).unwrap().hits, exact.hits);
+        assert_eq!(
+            db.search_first_hybrid_cancellable(&q, 200, &fdb::CancelToken::new())
+                .unwrap()
+                .hits,
+            exact.hits
+        );
+        assert_eq!(exact.total, if mode == "intake" { 0 } else { 500 });
+        for e in [
+            fdb::SearchExecution::default(),
+            fdb::SearchExecution {
+                verification_workers: 4,
+                coalesce_gap_bytes: 8192,
+                reuse_validated_source_crc: true,
+            },
+        ] {
+            let capped = db.search_first_with_execution(&q, e).unwrap();
+            assert_eq!(capped.hits, exact.hits);
+            assert_eq!(capped.sequence, exact.sequence);
+            let checked = db.search_with_execution(&q, e).unwrap();
+            assert_eq!(checked.hits, exact.hits);
+            assert_eq!(checked.total, exact.total);
         }
         db.check_integrity().unwrap();
     }

@@ -1,0 +1,4871 @@
+{
+  "p95": "nearest rank",
+  "pairs": [
+    {
+      "engine": "fdb",
+      "batch": "one",
+      "pair": 0,
+      "load_commits": 57,
+      "control_commits": 57,
+      "ops_s": 6.572372568383576,
+      "control_ops_s": 9.312778843183276,
+      "throughput_ratio": 0.7057369963417944,
+      "throughput_pass": false,
+      "commit_p95": 222.5925,
+      "commit_max": 232.9497,
+      "writer_elapsed_ms": 8672.6672,
+      "control_elapsed_ms": 6120.6221000000005,
+      "maintenance_ms": 2171.5252,
+      "control_maintenance_ms": 1295.482,
+      "queries": 760,
+      "writer_waited": 259,
+      "max_writer_wait_ms": 9.4514,
+      "max_query_writer_wait_ms": 9.4561,
+      "writer_wait_sum_ms": 23.1952,
+      "admission_waited": 0,
+      "max_admission_ms": 0.0,
+      "max_release_ms": 11.7119,
+      "release_reclaimed": 221,
+      "max_engine_ms": 238.8607,
+      "max_held_ms": 238.87,
+      "memory": {
+        "os_lifetime_peak_private_commit_bytes": 46845952,
+        "os_lifetime_peak_working_set_bytes": 50188288,
+        "private_bytes": 40648704,
+        "sample_interval_ms": 10,
+        "sampled_phase_peak_private_bytes": 46825472,
+        "sampled_phase_peak_working_set_bytes": 50184192,
+        "working_set_bytes": 44302336
+      },
+      "publication": {
+        "max_prepare_ns": 26186400,
+        "old_view_release_ns": 98900,
+        "pointer_ns": 7300,
+        "prepare_ns": 1113172000,
+        "publications": 79
+      },
+      "control_publication": {
+        "max_prepare_ns": 14183100,
+        "old_view_release_ns": 10920900,
+        "pointer_ns": 6200,
+        "prepare_ns": 571712900,
+        "publications": 79
+      },
+      "maintenance": {
+        "details": {
+          "jobs": [
+            {
+              "after": [
+                {
+                  "dead_payload_bytes": 0,
+                  "dead_records": 0,
+                  "index_bytes": 7623166,
+                  "live_records": 900,
+                  "payload_bytes": 24121822,
+                  "records": 900,
+                  "source_bytes": 24126441,
+                  "source_id": 104,
+                  "tombstones": 0
+                },
+                {
+                  "dead_payload_bytes": 0,
+                  "dead_records": 0,
+                  "index_bytes": 16360420,
+                  "live_records": 2000,
+                  "payload_bytes": 53014387,
+                  "records": 2000,
+                  "source_bytes": 53024654,
+                  "source_id": 20,
+                  "tombstones": 0
+                },
+                {
+                  "dead_payload_bytes": 0,
+                  "dead_records": 0,
+                  "index_bytes": 16358467,
+                  "live_records": 2000,
+                  "payload_bytes": 52958664,
+                  "records": 2000,
+                  "source_bytes": 52968931,
+                  "source_id": 30,
+                  "tombstones": 0
+                },
+                {
+                  "dead_payload_bytes": 0,
+                  "dead_records": 0,
+                  "index_bytes": 16468447,
+                  "live_records": 2000,
+                  "payload_bytes": 54130910,
+                  "records": 2000,
+                  "source_bytes": 54141177,
+                  "source_id": 40,
+                  "tombstones": 0
+                },
+                {
+                  "dead_payload_bytes": 0,
+                  "dead_records": 0,
+                  "index_bytes": 16547138,
+                  "live_records": 2000,
+                  "payload_bytes": 54225036,
+                  "records": 2000,
+                  "source_bytes": 54235303,
+                  "source_id": 50,
+                  "tombstones": 0
+                },
+                {
+                  "dead_payload_bytes": 232233,
+                  "dead_records": 8,
+                  "index_bytes": 9255844,
+                  "live_records": 1092,
+                  "payload_bytes": 29668115,
+                  "records": 1100,
+                  "source_bytes": 29673771,
+                  "source_id": 102,
+                  "tombstones": 0
+                },
+                {
+                  "dead_payload_bytes": 0,
+                  "dead_records": 0,
+                  "index_bytes": 209765,
+                  "live_records": 8,
+                  "payload_bytes": 232233,
+                  "records": 8,
+                  "source_bytes": 232318,
+                  "source_id": 98,
+                  "tombstones": 0
+                }
+              ],
+              "before": [
+                {
+                  "dead_payload_bytes": 29668115,
+                  "dead_records": 1100,
+                  "index_bytes": 16507377,
+                  "live_records": 900,
+                  "payload_bytes": 53789937,
+                  "records": 2000,
+                  "source_bytes": 53800204,
+                  "source_id": 10,
+                  "tombstones": 0
+                },
+                {
+                  "dead_payload_bytes": 0,
+                  "dead_records": 0,
+                  "index_bytes": 16360420,
+                  "live_records": 2000,
+                  "payload_bytes": 53014387,
+                  "records": 2000,
+                  "source_bytes": 53024654,
+                  "source_id": 20,
+                  "tombstones": 0
+                },
+                {
+                  "dead_payload_bytes": 0,
+                  "dead_records": 0,
+                  "index_bytes": 16358467,
+                  "live_records": 2000,
+                  "payload_bytes": 52958664,
+                  "records": 2000,
+                  "source_bytes": 52968931,
+                  "source_id": 30,
+                  "tombstones": 0
+                },
+                {
+                  "dead_payload_bytes": 0,
+                  "dead_records": 0,
+                  "index_bytes": 16468447,
+                  "live_records": 2000,
+                  "payload_bytes": 54130910,
+                  "records": 2000,
+                  "source_bytes": 54141177,
+                  "source_id": 40,
+                  "tombstones": 0
+                },
+                {
+                  "dead_payload_bytes": 0,
+                  "dead_records": 0,
+                  "index_bytes": 16547138,
+                  "live_records": 2000,
+                  "payload_bytes": 54225036,
+                  "records": 2000,
+                  "source_bytes": 54235303,
+                  "source_id": 50,
+                  "tombstones": 0
+                },
+                {
+                  "dead_payload_bytes": 232233,
+                  "dead_records": 8,
+                  "index_bytes": 9255844,
+                  "live_records": 1092,
+                  "payload_bytes": 29668115,
+                  "records": 1100,
+                  "source_bytes": 29673771,
+                  "source_id": 102,
+                  "tombstones": 0
+                },
+                {
+                  "dead_payload_bytes": 0,
+                  "dead_records": 0,
+                  "index_bytes": 209765,
+                  "live_records": 8,
+                  "payload_bytes": 232233,
+                  "records": 8,
+                  "source_bytes": 232318,
+                  "source_id": 98,
+                  "tombstones": 0
+                }
+              ],
+              "installed": true,
+              "rewrite": true,
+              "running": true
+            }
+          ],
+          "normal_merges_completed": 4,
+          "retirements": 0,
+          "revision_rewrites_completed": 1
+        },
+        "end_ms": 2903.5861999999997,
+        "start_ms": 732.0609999999999
+      },
+      "log": "snapshot-10k-20261026-fdb-one-r0-load-fdb-streamed-snapshot-one.jsonl",
+      "control_log": "snapshot-10k-20261026-fdb-one-r0-control-fdb-streamed-snapshot-control-one.jsonl",
+      "read_fails": {
+        "single": [
+          {
+            "case_id": 5,
+            "idle_ms": 72.4412,
+            "load_ms": 148.4503,
+            "delta_ms": 76.0091
+          },
+          {
+            "case_id": 18,
+            "idle_ms": 1.5028,
+            "load_ms": 4.5599,
+            "delta_ms": 3.0571
+          },
+          {
+            "case_id": 29,
+            "idle_ms": 80.2532,
+            "load_ms": 176.2667,
+            "delta_ms": 96.01349999999998
+          },
+          {
+            "case_id": 37,
+            "idle_ms": 1.4287,
+            "load_ms": 3.5223,
+            "delta_ms": 2.0936
+          }
+        ],
+        "four": []
+      }
+    },
+    {
+      "engine": "fdb",
+      "batch": "one",
+      "pair": 1,
+      "load_commits": 66,
+      "control_commits": 57,
+      "ops_s": 7.621943913740936,
+      "control_ops_s": 9.372696906385174,
+      "throughput_ratio": 0.8132071259605618,
+      "throughput_pass": true,
+      "commit_p95": 201.29569999999998,
+      "commit_max": 232.2611,
+      "writer_elapsed_ms": 8659.2083,
+      "control_elapsed_ms": 6081.494000000001,
+      "maintenance_ms": 2131.6993,
+      "control_maintenance_ms": 1264.8551000000002,
+      "queries": 760,
+      "writer_waited": 267,
+      "max_writer_wait_ms": 1.6371,
+      "max_query_writer_wait_ms": 1.6708,
+      "writer_wait_sum_ms": 17.3357,
+      "admission_waited": 0,
+      "max_admission_ms": 0.0,
+      "max_release_ms": 9.5729,
+      "release_reclaimed": 276,
+      "max_engine_ms": 242.3928,
+      "max_held_ms": 242.4066,
+      "memory": {
+        "os_lifetime_peak_private_commit_bytes": 43925504,
+        "os_lifetime_peak_working_set_bytes": 47124480,
+        "private_bytes": 36634624,
+        "sample_interval_ms": 10,
+        "sampled_phase_peak_private_bytes": 43913216,
+        "sampled_phase_peak_working_set_bytes": 47120384,
+        "working_set_bytes": 39440384
+      },
+      "publication": {
+        "max_prepare_ns": 23132600,
+        "old_view_release_ns": 1103000,
+        "pointer_ns": 7300,
+        "prepare_ns": 831683700,
+        "publications": 90
+      },
+      "control_publication": {
+        "max_prepare_ns": 15372700,
+        "old_view_release_ns": 11930100,
+        "pointer_ns": 4700,
+        "prepare_ns": 579114500,
+        "publications": 79
+      },
+      "maintenance": {
+        "details": {
+          "jobs": [
+            {
+              "after": [
+                {
+                  "dead_payload_bytes": 0,
+                  "dead_records": 0,
+                  "index_bytes": 7623166,
+                  "live_records": 900,
+                  "payload_bytes": 24121822,
+                  "records": 900,
+                  "source_bytes": 24126441,
+                  "source_id": 104,
+                  "tombstones": 0
+                },
+                {
+                  "dead_payload_bytes": 0,
+                  "dead_records": 0,
+                  "index_bytes": 16360420,
+                  "live_records": 2000,
+                  "payload_bytes": 53014387,
+                  "records": 2000,
+                  "source_bytes": 53024654,
+                  "source_id": 20,
+                  "tombstones": 0
+                },
+                {
+                  "dead_payload_bytes": 0,
+                  "dead_records": 0,
+                  "index_bytes": 16358467,
+                  "live_records": 2000,
+                  "payload_bytes": 52958664,
+                  "records": 2000,
+                  "source_bytes": 52968931,
+                  "source_id": 30,
+                  "tombstones": 0
+                },
+                {
+                  "dead_payload_bytes": 0,
+                  "dead_records": 0,
+                  "index_bytes": 16468447,
+                  "live_records": 2000,
+                  "payload_bytes": 54130910,
+                  "records": 2000,
+                  "source_bytes": 54141177,
+                  "source_id": 40,
+                  "tombstones": 0
+                },
+                {
+                  "dead_payload_bytes": 0,
+                  "dead_records": 0,
+                  "index_bytes": 16547138,
+                  "live_records": 2000,
+                  "payload_bytes": 54225036,
+                  "records": 2000,
+                  "source_bytes": 54235303,
+                  "source_id": 50,
+                  "tombstones": 0
+                },
+                {
+                  "dead_payload_bytes": 232233,
+                  "dead_records": 8,
+                  "index_bytes": 9255844,
+                  "live_records": 1092,
+                  "payload_bytes": 29668115,
+                  "records": 1100,
+                  "source_bytes": 29673771,
+                  "source_id": 102,
+                  "tombstones": 0
+                },
+                {
+                  "dead_payload_bytes": 0,
+                  "dead_records": 0,
+                  "index_bytes": 209765,
+                  "live_records": 8,
+                  "payload_bytes": 232233,
+                  "records": 8,
+                  "source_bytes": 232318,
+                  "source_id": 98,
+                  "tombstones": 0
+                }
+              ],
+              "before": [
+                {
+                  "dead_payload_bytes": 29668115,
+                  "dead_records": 1100,
+                  "index_bytes": 16507377,
+                  "live_records": 900,
+                  "payload_bytes": 53789937,
+                  "records": 2000,
+                  "source_bytes": 53800204,
+                  "source_id": 10,
+                  "tombstones": 0
+                },
+                {
+                  "dead_payload_bytes": 0,
+                  "dead_records": 0,
+                  "index_bytes": 16360420,
+                  "live_records": 2000,
+                  "payload_bytes": 53014387,
+                  "records": 2000,
+                  "source_bytes": 53024654,
+                  "source_id": 20,
+                  "tombstones": 0
+                },
+                {
+                  "dead_payload_bytes": 0,
+                  "dead_records": 0,
+                  "index_bytes": 16358467,
+                  "live_records": 2000,
+                  "payload_bytes": 52958664,
+                  "records": 2000,
+                  "source_bytes": 52968931,
+                  "source_id": 30,
+                  "tombstones": 0
+                },
+                {
+                  "dead_payload_bytes": 0,
+                  "dead_records": 0,
+                  "index_bytes": 16468447,
+                  "live_records": 2000,
+                  "payload_bytes": 54130910,
+                  "records": 2000,
+                  "source_bytes": 54141177,
+                  "source_id": 40,
+                  "tombstones": 0
+                },
+                {
+                  "dead_payload_bytes": 0,
+                  "dead_records": 0,
+                  "index_bytes": 16547138,
+                  "live_records": 2000,
+                  "payload_bytes": 54225036,
+                  "records": 2000,
+                  "source_bytes": 54235303,
+                  "source_id": 50,
+                  "tombstones": 0
+                },
+                {
+                  "dead_payload_bytes": 232233,
+                  "dead_records": 8,
+                  "index_bytes": 9255844,
+                  "live_records": 1092,
+                  "payload_bytes": 29668115,
+                  "records": 1100,
+                  "source_bytes": 29673771,
+                  "source_id": 102,
+                  "tombstones": 0
+                },
+                {
+                  "dead_payload_bytes": 0,
+                  "dead_records": 0,
+                  "index_bytes": 209765,
+                  "live_records": 8,
+                  "payload_bytes": 232233,
+                  "records": 8,
+                  "source_bytes": 232318,
+                  "source_id": 98,
+                  "tombstones": 0
+                }
+              ],
+              "installed": true,
+              "rewrite": true,
+              "running": true
+            }
+          ],
+          "normal_merges_completed": 4,
+          "retirements": 0,
+          "revision_rewrites_completed": 1
+        },
+        "end_ms": 2723.1553000000004,
+        "start_ms": 591.456
+      },
+      "log": "snapshot-10k-20261026-fdb-one-r1-load-fdb-streamed-snapshot-one.jsonl",
+      "control_log": "snapshot-10k-20261026-fdb-one-r1-control-fdb-streamed-snapshot-control-one.jsonl",
+      "read_fails": {
+        "single": [
+          {
+            "case_id": 2,
+            "idle_ms": 21.447,
+            "load_ms": 50.6483,
+            "delta_ms": 29.2013
+          },
+          {
+            "case_id": 4,
+            "idle_ms": 54.7641,
+            "load_ms": 114.4422,
+            "delta_ms": 59.6781
+          },
+          {
+            "case_id": 5,
+            "idle_ms": 62.138,
+            "load_ms": 124.4579,
+            "delta_ms": 62.3199
+          },
+          {
+            "case_id": 6,
+            "idle_ms": 8.6584,
+            "load_ms": 24.1899,
+            "delta_ms": 15.531500000000001
+          },
+          {
+            "case_id": 8,
+            "idle_ms": 53.4732,
+            "load_ms": 110.836,
+            "delta_ms": 57.3628
+          },
+          {
+            "case_id": 9,
+            "idle_ms": 49.0583,
+            "load_ms": 109.8157,
+            "delta_ms": 60.757400000000004
+          },
+          {
+            "case_id": 10,
+            "idle_ms": 46.1683,
+            "load_ms": 112.3296,
+            "delta_ms": 66.1613
+          },
+          {
+            "case_id": 11,
+            "idle_ms": 28.1223,
+            "load_ms": 62.3043,
+            "delta_ms": 34.182
+          },
+          {
+            "case_id": 14,
+            "idle_ms": 30.5689,
+            "load_ms": 73.2993,
+            "delta_ms": 42.7304
+          },
+          {
+            "case_id": 15,
+            "idle_ms": 18.8472,
+            "load_ms": 38.0443,
+            "delta_ms": 19.1971
+          },
+          {
+            "case_id": 17,
+            "idle_ms": 1.6699,
+            "load_ms": 3.3695,
+            "delta_ms": 1.6996
+          },
+          {
+            "case_id": 18,
+            "idle_ms": 1.3295,
+            "load_ms": 2.8244,
+            "delta_ms": 1.4949
+          },
+          {
+            "case_id": 29,
+            "idle_ms": 80.3131,
+            "load_ms": 172.9156,
+            "delta_ms": 92.6025
+          },
+          {
+            "case_id": 33,
+            "idle_ms": 1.6457,
+            "load_ms": 3.5086,
+            "delta_ms": 1.8629
+          },
+          {
+            "case_id": 34,
+            "idle_ms": 7.1327,
+            "load_ms": 14.4949,
+            "delta_ms": 7.3622
+          },
+          {
+            "case_id": 35,
+            "idle_ms": 12.3021,
+            "load_ms": 25.629,
+            "delta_ms": 13.326900000000002
+          },
+          {
+            "case_id": 37,
+            "idle_ms": 1.386,
+            "load_ms": 3.4261,
+            "delta_ms": 2.0401
+          }
+        ],
+        "four": []
+      }
+    },
+    {
+      "engine": "fdb",
+      "batch": "100",
+      "pair": 0,
+      "load_commits": 18,
+      "control_commits": 18,
+      "ops_s": 208.0944389905718,
+      "control_ops_s": 274.92126102350255,
+      "throughput_ratio": 0.7569237759781051,
+      "throughput_pass": false,
+      "commit_p95": 881.0489,
+      "commit_max": 881.0489,
+      "writer_elapsed_ms": 8649.9188,
+      "control_elapsed_ms": 6547.3292,
+      "maintenance_ms": 1949.0750999999996,
+      "control_maintenance_ms": 1148.1399000000001,
+      "queries": 760,
+      "writer_waited": 205,
+      "max_writer_wait_ms": 0.2729,
+      "max_query_writer_wait_ms": 0.4242,
+      "writer_wait_sum_ms": 6.4164,
+      "admission_waited": 0,
+      "max_admission_ms": 0.0,
+      "max_release_ms": 12.2378,
+      "release_reclaimed": 95,
+      "max_engine_ms": 230.862,
+      "max_held_ms": 239.2509,
+      "memory": {
+        "os_lifetime_peak_private_commit_bytes": 49266688,
+        "os_lifetime_peak_working_set_bytes": 52473856,
+        "private_bytes": 41406464,
+        "sample_interval_ms": 10,
+        "sampled_phase_peak_private_bytes": 49156096,
+        "sampled_phase_peak_working_set_bytes": 52457472,
+        "working_set_bytes": 44158976
+      },
+      "publication": {
+        "max_prepare_ns": 17269300,
+        "old_view_release_ns": 171800,
+        "pointer_ns": 2200,
+        "prepare_ns": 242018500,
+        "publications": 27
+      },
+      "control_publication": {
+        "max_prepare_ns": 16542900,
+        "old_view_release_ns": 5635100,
+        "pointer_ns": 2300,
+        "prepare_ns": 206508100,
+        "publications": 27
+      },
+      "maintenance": {
+        "details": {
+          "jobs": [
+            {
+              "after": [
+                {
+                  "dead_payload_bytes": 0,
+                  "dead_records": 0,
+                  "index_bytes": 7623166,
+                  "live_records": 900,
+                  "payload_bytes": 24121822,
+                  "records": 900,
+                  "source_bytes": 24126441,
+                  "source_id": 104,
+                  "tombstones": 0
+                },
+                {
+                  "dead_payload_bytes": 0,
+                  "dead_records": 0,
+                  "index_bytes": 16360420,
+                  "live_records": 2000,
+                  "payload_bytes": 53014387,
+                  "records": 2000,
+                  "source_bytes": 53024654,
+                  "source_id": 20,
+                  "tombstones": 0
+                },
+                {
+                  "dead_payload_bytes": 0,
+                  "dead_records": 0,
+                  "index_bytes": 16358467,
+                  "live_records": 2000,
+                  "payload_bytes": 52958664,
+                  "records": 2000,
+                  "source_bytes": 52968931,
+                  "source_id": 30,
+                  "tombstones": 0
+                },
+                {
+                  "dead_payload_bytes": 0,
+                  "dead_records": 0,
+                  "index_bytes": 16468447,
+                  "live_records": 2000,
+                  "payload_bytes": 54130910,
+                  "records": 2000,
+                  "source_bytes": 54141177,
+                  "source_id": 40,
+                  "tombstones": 0
+                },
+                {
+                  "dead_payload_bytes": 0,
+                  "dead_records": 0,
+                  "index_bytes": 16547138,
+                  "live_records": 2000,
+                  "payload_bytes": 54225036,
+                  "records": 2000,
+                  "source_bytes": 54235303,
+                  "source_id": 50,
+                  "tombstones": 0
+                },
+                {
+                  "dead_payload_bytes": 0,
+                  "dead_records": 0,
+                  "index_bytes": 9255904,
+                  "live_records": 1100,
+                  "payload_bytes": 29668115,
+                  "records": 1100,
+                  "source_bytes": 29673771,
+                  "source_id": 102,
+                  "tombstones": 0
+                }
+              ],
+              "before": [
+                {
+                  "dead_payload_bytes": 29668115,
+                  "dead_records": 1100,
+                  "index_bytes": 16507377,
+                  "live_records": 900,
+                  "payload_bytes": 53789937,
+                  "records": 2000,
+                  "source_bytes": 53800204,
+                  "source_id": 10,
+                  "tombstones": 0
+                },
+                {
+                  "dead_payload_bytes": 0,
+                  "dead_records": 0,
+                  "index_bytes": 16360420,
+                  "live_records": 2000,
+                  "payload_bytes": 53014387,
+                  "records": 2000,
+                  "source_bytes": 53024654,
+                  "source_id": 20,
+                  "tombstones": 0
+                },
+                {
+                  "dead_payload_bytes": 0,
+                  "dead_records": 0,
+                  "index_bytes": 16358467,
+                  "live_records": 2000,
+                  "payload_bytes": 52958664,
+                  "records": 2000,
+                  "source_bytes": 52968931,
+                  "source_id": 30,
+                  "tombstones": 0
+                },
+                {
+                  "dead_payload_bytes": 0,
+                  "dead_records": 0,
+                  "index_bytes": 16468447,
+                  "live_records": 2000,
+                  "payload_bytes": 54130910,
+                  "records": 2000,
+                  "source_bytes": 54141177,
+                  "source_id": 40,
+                  "tombstones": 0
+                },
+                {
+                  "dead_payload_bytes": 0,
+                  "dead_records": 0,
+                  "index_bytes": 16547138,
+                  "live_records": 2000,
+                  "payload_bytes": 54225036,
+                  "records": 2000,
+                  "source_bytes": 54235303,
+                  "source_id": 50,
+                  "tombstones": 0
+                },
+                {
+                  "dead_payload_bytes": 0,
+                  "dead_records": 0,
+                  "index_bytes": 9255904,
+                  "live_records": 1100,
+                  "payload_bytes": 29668115,
+                  "records": 1100,
+                  "source_bytes": 29673771,
+                  "source_id": 102,
+                  "tombstones": 0
+                }
+              ],
+              "installed": true,
+              "rewrite": true,
+              "running": true
+            }
+          ],
+          "normal_merges_completed": 2,
+          "retirements": 0,
+          "revision_rewrites_completed": 1
+        },
+        "end_ms": 5280.957899999999,
+        "start_ms": 3331.8828
+      },
+      "log": "snapshot-10k-20261026-fdb-100-r0-load-fdb-streamed-snapshot-100.jsonl",
+      "control_log": "snapshot-10k-20261026-fdb-100-r0-control-fdb-streamed-snapshot-control-100.jsonl",
+      "read_fails": {
+        "single": [
+          {
+            "case_id": 8,
+            "idle_ms": 51.7212,
+            "load_ms": 105.1872,
+            "delta_ms": 53.466
+          },
+          {
+            "case_id": 10,
+            "idle_ms": 45.8959,
+            "load_ms": 99.1237,
+            "delta_ms": 53.2278
+          },
+          {
+            "case_id": 11,
+            "idle_ms": 27.6955,
+            "load_ms": 59.1537,
+            "delta_ms": 31.4582
+          },
+          {
+            "case_id": 14,
+            "idle_ms": 30.0093,
+            "load_ms": 64.4661,
+            "delta_ms": 34.4568
+          },
+          {
+            "case_id": 29,
+            "idle_ms": 79.0097,
+            "load_ms": 158.77,
+            "delta_ms": 79.76030000000002
+          },
+          {
+            "case_id": 30,
+            "idle_ms": 0.4229,
+            "load_ms": 2.9437,
+            "delta_ms": 2.5208000000000004
+          },
+          {
+            "case_id": 36,
+            "idle_ms": 3.2722,
+            "load_ms": 7.3852,
+            "delta_ms": 4.1129999999999995
+          },
+          {
+            "case_id": 37,
+            "idle_ms": 1.4377,
+            "load_ms": 3.9568,
+            "delta_ms": 2.5191
+          }
+        ],
+        "four": []
+      }
+    },
+    {
+      "engine": "fdb",
+      "batch": "100",
+      "pair": 1,
+      "load_commits": 20,
+      "control_commits": 18,
+      "ops_s": 222.5293720968818,
+      "control_ops_s": 272.7336117175814,
+      "throughput_ratio": 0.8159220665743001,
+      "throughput_pass": true,
+      "commit_p95": 632.3455,
+      "commit_max": 939.6323,
+      "writer_elapsed_ms": 8987.5776,
+      "control_elapsed_ms": 6599.8466,
+      "maintenance_ms": 1993.1432,
+      "control_maintenance_ms": 1144.7335000000003,
+      "queries": 760,
+      "writer_waited": 205,
+      "max_writer_wait_ms": 0.3941,
+      "max_query_writer_wait_ms": 0.5188,
+      "writer_wait_sum_ms": 5.0331,
+      "admission_waited": 0,
+      "max_admission_ms": 0.0,
+      "max_release_ms": 12.1436,
+      "release_reclaimed": 97,
+      "max_engine_ms": 256.704,
+      "max_held_ms": 277.818,
+      "memory": {
+        "os_lifetime_peak_private_commit_bytes": 50860032,
+        "os_lifetime_peak_working_set_bytes": 54374400,
+        "private_bytes": 44236800,
+        "sample_interval_ms": 10,
+        "sampled_phase_peak_private_bytes": 49790976,
+        "sampled_phase_peak_working_set_bytes": 53321728,
+        "working_set_bytes": 47443968
+      },
+      "publication": {
+        "max_prepare_ns": 17192600,
+        "old_view_release_ns": 155100,
+        "pointer_ns": 1800,
+        "prepare_ns": 251446900,
+        "publications": 29
+      },
+      "control_publication": {
+        "max_prepare_ns": 16176800,
+        "old_view_release_ns": 5692300,
+        "pointer_ns": 2400,
+        "prepare_ns": 213175500,
+        "publications": 27
+      },
+      "maintenance": {
+        "details": {
+          "jobs": [
+            {
+              "after": [
+                {
+                  "dead_payload_bytes": 0,
+                  "dead_records": 0,
+                  "index_bytes": 7623166,
+                  "live_records": 900,
+                  "payload_bytes": 24121822,
+                  "records": 900,
+                  "source_bytes": 24126441,
+                  "source_id": 104,
+                  "tombstones": 0
+                },
+                {
+                  "dead_payload_bytes": 0,
+                  "dead_records": 0,
+                  "index_bytes": 16360420,
+                  "live_records": 2000,
+                  "payload_bytes": 53014387,
+                  "records": 2000,
+                  "source_bytes": 53024654,
+                  "source_id": 20,
+                  "tombstones": 0
+                },
+                {
+                  "dead_payload_bytes": 0,
+                  "dead_records": 0,
+                  "index_bytes": 16358467,
+                  "live_records": 2000,
+                  "payload_bytes": 52958664,
+                  "records": 2000,
+                  "source_bytes": 52968931,
+                  "source_id": 30,
+                  "tombstones": 0
+                },
+                {
+                  "dead_payload_bytes": 0,
+                  "dead_records": 0,
+                  "index_bytes": 16468447,
+                  "live_records": 2000,
+                  "payload_bytes": 54130910,
+                  "records": 2000,
+                  "source_bytes": 54141177,
+                  "source_id": 40,
+                  "tombstones": 0
+                },
+                {
+                  "dead_payload_bytes": 0,
+                  "dead_records": 0,
+                  "index_bytes": 16547138,
+                  "live_records": 2000,
+                  "payload_bytes": 54225036,
+                  "records": 2000,
+                  "source_bytes": 54235303,
+                  "source_id": 50,
+                  "tombstones": 0
+                },
+                {
+                  "dead_payload_bytes": 0,
+                  "dead_records": 0,
+                  "index_bytes": 9255904,
+                  "live_records": 1100,
+                  "payload_bytes": 29668115,
+                  "records": 1100,
+                  "source_bytes": 29673771,
+                  "source_id": 102,
+                  "tombstones": 0
+                }
+              ],
+              "before": [
+                {
+                  "dead_payload_bytes": 29668115,
+                  "dead_records": 1100,
+                  "index_bytes": 16507377,
+                  "live_records": 900,
+                  "payload_bytes": 53789937,
+                  "records": 2000,
+                  "source_bytes": 53800204,
+                  "source_id": 10,
+                  "tombstones": 0
+                },
+                {
+                  "dead_payload_bytes": 0,
+                  "dead_records": 0,
+                  "index_bytes": 16360420,
+                  "live_records": 2000,
+                  "payload_bytes": 53014387,
+                  "records": 2000,
+                  "source_bytes": 53024654,
+                  "source_id": 20,
+                  "tombstones": 0
+                },
+                {
+                  "dead_payload_bytes": 0,
+                  "dead_records": 0,
+                  "index_bytes": 16358467,
+                  "live_records": 2000,
+                  "payload_bytes": 52958664,
+                  "records": 2000,
+                  "source_bytes": 52968931,
+                  "source_id": 30,
+                  "tombstones": 0
+                },
+                {
+                  "dead_payload_bytes": 0,
+                  "dead_records": 0,
+                  "index_bytes": 16468447,
+                  "live_records": 2000,
+                  "payload_bytes": 54130910,
+                  "records": 2000,
+                  "source_bytes": 54141177,
+                  "source_id": 40,
+                  "tombstones": 0
+                },
+                {
+                  "dead_payload_bytes": 0,
+                  "dead_records": 0,
+                  "index_bytes": 16547138,
+                  "live_records": 2000,
+                  "payload_bytes": 54225036,
+                  "records": 2000,
+                  "source_bytes": 54235303,
+                  "source_id": 50,
+                  "tombstones": 0
+                },
+                {
+                  "dead_payload_bytes": 0,
+                  "dead_records": 0,
+                  "index_bytes": 9255904,
+                  "live_records": 1100,
+                  "payload_bytes": 29668115,
+                  "records": 1100,
+                  "source_bytes": 29673771,
+                  "source_id": 102,
+                  "tombstones": 0
+                }
+              ],
+              "installed": true,
+              "rewrite": true,
+              "running": true
+            }
+          ],
+          "normal_merges_completed": 2,
+          "retirements": 0,
+          "revision_rewrites_completed": 1
+        },
+        "end_ms": 5357.7909,
+        "start_ms": 3364.6477
+      },
+      "log": "snapshot-10k-20261026-fdb-100-r1-load-fdb-streamed-snapshot-100.jsonl",
+      "control_log": "snapshot-10k-20261026-fdb-100-r1-control-fdb-streamed-snapshot-control-100.jsonl",
+      "read_fails": {
+        "single": [
+          {
+            "case_id": 0,
+            "idle_ms": 2.2825,
+            "load_ms": 4.6991,
+            "delta_ms": 2.4165999999999994
+          },
+          {
+            "case_id": 4,
+            "idle_ms": 53.4926,
+            "load_ms": 118.5198,
+            "delta_ms": 65.0272
+          },
+          {
+            "case_id": 6,
+            "idle_ms": 8.8885,
+            "load_ms": 17.882,
+            "delta_ms": 8.993500000000001
+          },
+          {
+            "case_id": 9,
+            "idle_ms": 50.0205,
+            "load_ms": 115.2024,
+            "delta_ms": 65.1819
+          },
+          {
+            "case_id": 11,
+            "idle_ms": 31.1491,
+            "load_ms": 74.702,
+            "delta_ms": 43.552899999999994
+          },
+          {
+            "case_id": 12,
+            "idle_ms": 19.2756,
+            "load_ms": 44.3128,
+            "delta_ms": 25.037200000000002
+          },
+          {
+            "case_id": 22,
+            "idle_ms": 4.4837,
+            "load_ms": 10.6282,
+            "delta_ms": 6.1445
+          },
+          {
+            "case_id": 25,
+            "idle_ms": 63.4272,
+            "load_ms": 136.1976,
+            "delta_ms": 72.7704
+          },
+          {
+            "case_id": 29,
+            "idle_ms": 78.0089,
+            "load_ms": 173.4733,
+            "delta_ms": 95.4644
+          },
+          {
+            "case_id": 36,
+            "idle_ms": 3.1929,
+            "load_ms": 6.5101,
+            "delta_ms": 3.3172000000000006
+          },
+          {
+            "case_id": 37,
+            "idle_ms": 1.443,
+            "load_ms": 3.623,
+            "delta_ms": 2.18
+          }
+        ],
+        "four": []
+      }
+    },
+    {
+      "engine": "sqlite",
+      "batch": "one",
+      "pair": 0,
+      "load_commits": 2897,
+      "control_commits": 2897,
+      "ops_s": 97.25361073836434,
+      "control_ops_s": 140.95088346305997,
+      "throughput_ratio": 0.6899822714758103,
+      "throughput_pass": false,
+      "commit_p95": 17.6849,
+      "commit_max": 175.343,
+      "writer_elapsed_ms": 29788.097100000003,
+      "control_elapsed_ms": 20553.2589,
+      "maintenance_ms": 2375.3828999999996,
+      "control_maintenance_ms": 1617.1332,
+      "queries": 152,
+      "writer_waited": 0,
+      "max_writer_wait_ms": 0.0,
+      "max_query_writer_wait_ms": 0.0,
+      "writer_wait_sum_ms": 0.0,
+      "admission_waited": 0,
+      "max_admission_ms": 0.0,
+      "max_release_ms": 0.084,
+      "release_reclaimed": 0,
+      "max_engine_ms": 2954.6175,
+      "max_held_ms": 2954.8229,
+      "memory": {
+        "os_lifetime_peak_private_commit_bytes": 68263936,
+        "os_lifetime_peak_working_set_bytes": 71602176,
+        "private_bytes": 25935872,
+        "sample_interval_ms": 10,
+        "sampled_phase_peak_private_bytes": 68263936,
+        "sampled_phase_peak_working_set_bytes": 71602176,
+        "working_set_bytes": 30007296
+      },
+      "publication": {
+        "busy_wait": "busy-handler retry time, source not individually classified",
+        "kind": "SQLite WAL read transaction; meta sequence and rows from same BEGIN snapshot"
+      },
+      "control_publication": {
+        "busy_wait": "busy-handler retry time, source not individually classified",
+        "kind": "SQLite WAL read transaction; meta sequence and rows from same BEGIN snapshot"
+      },
+      "maintenance": {
+        "details": {
+          "fts_optimize_ms": 2375.3794,
+          "passive_checkpoint": [
+            0,
+            9856,
+            188
+          ],
+          "revision_rewrite": "not applicable to SQLite"
+        },
+        "end_ms": 2456.5134,
+        "start_ms": 81.1305
+      },
+      "log": "snapshot-10k-20261026-sqlite-one-r0-load-sqlite-streamed-snapshot-one.jsonl",
+      "control_log": "snapshot-10k-20261026-sqlite-one-r0-control-sqlite-streamed-snapshot-control-one.jsonl",
+      "read_fails": {
+        "single": [
+          {
+            "case_id": 0,
+            "idle_ms": 15.8867,
+            "load_ms": 33.9653,
+            "delta_ms": 18.0786
+          },
+          {
+            "case_id": 12,
+            "idle_ms": 114.8267,
+            "load_ms": 230.6522,
+            "delta_ms": 115.82549999999999
+          },
+          {
+            "case_id": 22,
+            "idle_ms": 15.4258,
+            "load_ms": 32.1436,
+            "delta_ms": 16.717799999999997
+          },
+          {
+            "case_id": 28,
+            "idle_ms": 14.4261,
+            "load_ms": 32.4706,
+            "delta_ms": 18.0445
+          },
+          {
+            "case_id": 30,
+            "idle_ms": 1044.1376,
+            "load_ms": 2217.9445,
+            "delta_ms": 1173.8069
+          },
+          {
+            "case_id": 31,
+            "idle_ms": 1088.4357,
+            "load_ms": 2217.2523,
+            "delta_ms": 1128.8166
+          },
+          {
+            "case_id": 32,
+            "idle_ms": 1064.0253,
+            "load_ms": 2213.8464,
+            "delta_ms": 1149.8211
+          },
+          {
+            "case_id": 33,
+            "idle_ms": 1057.3368,
+            "load_ms": 2234.536,
+            "delta_ms": 1177.1992
+          },
+          {
+            "case_id": 36,
+            "idle_ms": 10.8302,
+            "load_ms": 21.7841,
+            "delta_ms": 10.953899999999999
+          },
+          {
+            "case_id": 37,
+            "idle_ms": 6.4827,
+            "load_ms": 18.0073,
+            "delta_ms": 11.5246
+          }
+        ],
+        "four": []
+      }
+    },
+    {
+      "engine": "sqlite",
+      "batch": "one",
+      "pair": 1,
+      "load_commits": 2897,
+      "control_commits": 2897,
+      "ops_s": 98.37798373938594,
+      "control_ops_s": 140.8520840259452,
+      "throughput_ratio": 0.6984489041799661,
+      "throughput_pass": false,
+      "commit_p95": 17.4576,
+      "commit_max": 171.1806,
+      "writer_elapsed_ms": 29447.6456,
+      "control_elapsed_ms": 20567.6758,
+      "maintenance_ms": 2347.6955,
+      "control_maintenance_ms": 1605.5910999999999,
+      "queries": 152,
+      "writer_waited": 0,
+      "max_writer_wait_ms": 0.0,
+      "max_query_writer_wait_ms": 0.0,
+      "writer_wait_sum_ms": 0.0,
+      "admission_waited": 0,
+      "max_admission_ms": 0.0,
+      "max_release_ms": 0.0218,
+      "release_reclaimed": 0,
+      "max_engine_ms": 2915.5031,
+      "max_held_ms": 2915.8659,
+      "memory": {
+        "os_lifetime_peak_private_commit_bytes": 69763072,
+        "os_lifetime_peak_working_set_bytes": 73121792,
+        "private_bytes": 27987968,
+        "sample_interval_ms": 10,
+        "sampled_phase_peak_private_bytes": 69763072,
+        "sampled_phase_peak_working_set_bytes": 73121792,
+        "working_set_bytes": 30625792
+      },
+      "publication": {
+        "busy_wait": "busy-handler retry time, source not individually classified",
+        "kind": "SQLite WAL read transaction; meta sequence and rows from same BEGIN snapshot"
+      },
+      "control_publication": {
+        "busy_wait": "busy-handler retry time, source not individually classified",
+        "kind": "SQLite WAL read transaction; meta sequence and rows from same BEGIN snapshot"
+      },
+      "maintenance": {
+        "details": {
+          "fts_optimize_ms": 2347.6917999999996,
+          "passive_checkpoint": [
+            0,
+            9856,
+            188
+          ],
+          "revision_rewrite": "not applicable to SQLite"
+        },
+        "end_ms": 2416.5726,
+        "start_ms": 68.8771
+      },
+      "log": "snapshot-10k-20261026-sqlite-one-r1-load-sqlite-streamed-snapshot-one.jsonl",
+      "control_log": "snapshot-10k-20261026-sqlite-one-r1-control-sqlite-streamed-snapshot-control-one.jsonl",
+      "read_fails": {
+        "single": [
+          {
+            "case_id": 0,
+            "idle_ms": 15.1712,
+            "load_ms": 35.4989,
+            "delta_ms": 20.3277
+          },
+          {
+            "case_id": 18,
+            "idle_ms": 1038.7679,
+            "load_ms": 2124.0617,
+            "delta_ms": 1085.2938000000001
+          },
+          {
+            "case_id": 19,
+            "idle_ms": 1.3038,
+            "load_ms": 2.9712,
+            "delta_ms": 1.6674
+          },
+          {
+            "case_id": 27,
+            "idle_ms": 53.7717,
+            "load_ms": 108.8343,
+            "delta_ms": 55.062599999999996
+          },
+          {
+            "case_id": 30,
+            "idle_ms": 1036.9087,
+            "load_ms": 2150.6424,
+            "delta_ms": 1113.7337000000002
+          },
+          {
+            "case_id": 37,
+            "idle_ms": 5.7064,
+            "load_ms": 18.2468,
+            "delta_ms": 12.5404
+          }
+        ],
+        "four": []
+      }
+    },
+    {
+      "engine": "sqlite",
+      "batch": "100",
+      "pair": 0,
+      "load_commits": 34,
+      "control_commits": 34,
+      "ops_s": 118.5032348542523,
+      "control_ops_s": 187.99781475763606,
+      "throughput_ratio": 0.630343682489208,
+      "throughput_pass": false,
+      "commit_p95": 923.9414,
+      "commit_max": 1524.0872,
+      "writer_elapsed_ms": 28691.1999,
+      "control_elapsed_ms": 18085.3166,
+      "maintenance_ms": 2566.048999999999,
+      "control_maintenance_ms": 1643.0227,
+      "queries": 152,
+      "writer_waited": 0,
+      "max_writer_wait_ms": 0.0,
+      "max_query_writer_wait_ms": 0.0,
+      "writer_wait_sum_ms": 0.0,
+      "admission_waited": 0,
+      "max_admission_ms": 0.0,
+      "max_release_ms": 0.2638,
+      "release_reclaimed": 0,
+      "max_engine_ms": 2808.8305,
+      "max_held_ms": 2827.1907,
+      "memory": {
+        "os_lifetime_peak_private_commit_bytes": 61333504,
+        "os_lifetime_peak_working_set_bytes": 64282624,
+        "private_bytes": 39419904,
+        "sample_interval_ms": 10,
+        "sampled_phase_peak_private_bytes": 60796928,
+        "sampled_phase_peak_working_set_bytes": 63885312,
+        "working_set_bytes": 39174144
+      },
+      "publication": {
+        "busy_wait": "busy-handler retry time, source not individually classified",
+        "kind": "SQLite WAL read transaction; meta sequence and rows from same BEGIN snapshot"
+      },
+      "control_publication": {
+        "busy_wait": "busy-handler retry time, source not individually classified",
+        "kind": "SQLite WAL read transaction; meta sequence and rows from same BEGIN snapshot"
+      },
+      "maintenance": {
+        "details": {
+          "fts_optimize_ms": 2566.0460000000003,
+          "passive_checkpoint": [
+            0,
+            19278,
+            9538
+          ],
+          "revision_rewrite": "not applicable to SQLite"
+        },
+        "end_ms": 8609.366899999999,
+        "start_ms": 6043.3179
+      },
+      "log": "snapshot-10k-20261026-sqlite-100-r0-load-sqlite-streamed-snapshot-100.jsonl",
+      "control_log": "snapshot-10k-20261026-sqlite-100-r0-control-sqlite-streamed-snapshot-control-100.jsonl",
+      "read_fails": {
+        "single": [
+          {
+            "case_id": 0,
+            "idle_ms": 15.752,
+            "load_ms": 34.0864,
+            "delta_ms": 18.334399999999995
+          },
+          {
+            "case_id": 16,
+            "idle_ms": 1044.3041,
+            "load_ms": 2091.5593,
+            "delta_ms": 1047.2551999999998
+          },
+          {
+            "case_id": 22,
+            "idle_ms": 16.4913,
+            "load_ms": 33.2932,
+            "delta_ms": 16.8019
+          },
+          {
+            "case_id": 28,
+            "idle_ms": 14.5073,
+            "load_ms": 30.2446,
+            "delta_ms": 15.737299999999998
+          },
+          {
+            "case_id": 32,
+            "idle_ms": 1042.371,
+            "load_ms": 2096.0287,
+            "delta_ms": 1053.6576999999997
+          },
+          {
+            "case_id": 33,
+            "idle_ms": 1055.1011,
+            "load_ms": 2125.6312,
+            "delta_ms": 1070.5300999999997
+          },
+          {
+            "case_id": 36,
+            "idle_ms": 11.0892,
+            "load_ms": 25.002,
+            "delta_ms": 13.912799999999999
+          },
+          {
+            "case_id": 37,
+            "idle_ms": 5.4516,
+            "load_ms": 17.9026,
+            "delta_ms": 12.451
+          }
+        ],
+        "four": []
+      }
+    },
+    {
+      "engine": "sqlite",
+      "batch": "100",
+      "pair": 1,
+      "load_commits": 34,
+      "control_commits": 34,
+      "ops_s": 116.97207007653599,
+      "control_ops_s": 183.03600157725356,
+      "throughput_ratio": 0.639065916369277,
+      "throughput_pass": false,
+      "commit_p95": 953.2577,
+      "commit_max": 1539.8917999999999,
+      "writer_elapsed_ms": 29066.7678,
+      "control_elapsed_ms": 18575.580599999998,
+      "maintenance_ms": 2684.420000000001,
+      "control_maintenance_ms": 1638.3757000000005,
+      "queries": 152,
+      "writer_waited": 0,
+      "max_writer_wait_ms": 0.0,
+      "max_query_writer_wait_ms": 0.0,
+      "writer_wait_sum_ms": 0.0,
+      "admission_waited": 0,
+      "max_admission_ms": 0.0,
+      "max_release_ms": 0.0781,
+      "release_reclaimed": 0,
+      "max_engine_ms": 2902.1554,
+      "max_held_ms": 2920.5135,
+      "memory": {
+        "os_lifetime_peak_private_commit_bytes": 63561728,
+        "os_lifetime_peak_working_set_bytes": 66224128,
+        "private_bytes": 45408256,
+        "sample_interval_ms": 10,
+        "sampled_phase_peak_private_bytes": 63561728,
+        "sampled_phase_peak_working_set_bytes": 66224128,
+        "working_set_bytes": 49020928
+      },
+      "publication": {
+        "busy_wait": "busy-handler retry time, source not individually classified",
+        "kind": "SQLite WAL read transaction; meta sequence and rows from same BEGIN snapshot"
+      },
+      "control_publication": {
+        "busy_wait": "busy-handler retry time, source not individually classified",
+        "kind": "SQLite WAL read transaction; meta sequence and rows from same BEGIN snapshot"
+      },
+      "maintenance": {
+        "details": {
+          "fts_optimize_ms": 2684.4168,
+          "passive_checkpoint": [
+            0,
+            19278,
+            9538
+          ],
+          "revision_rewrite": "not applicable to SQLite"
+        },
+        "end_ms": 8745.0539,
+        "start_ms": 6060.6339
+      },
+      "log": "snapshot-10k-20261026-sqlite-100-r1-load-sqlite-streamed-snapshot-100.jsonl",
+      "control_log": "snapshot-10k-20261026-sqlite-100-r1-control-sqlite-streamed-snapshot-control-100.jsonl",
+      "read_fails": {
+        "single": [
+          {
+            "case_id": 0,
+            "idle_ms": 13.6877,
+            "load_ms": 34.3068,
+            "delta_ms": 20.619100000000003
+          },
+          {
+            "case_id": 16,
+            "idle_ms": 1053.2809,
+            "load_ms": 2150.3225,
+            "delta_ms": 1097.0416000000002
+          },
+          {
+            "case_id": 22,
+            "idle_ms": 15.4515,
+            "load_ms": 31.6235,
+            "delta_ms": 16.172
+          },
+          {
+            "case_id": 28,
+            "idle_ms": 15.1074,
+            "load_ms": 32.7508,
+            "delta_ms": 17.6434
+          },
+          {
+            "case_id": 31,
+            "idle_ms": 1058.5357,
+            "load_ms": 2122.3971,
+            "delta_ms": 1063.8614000000002
+          },
+          {
+            "case_id": 32,
+            "idle_ms": 1061.1354,
+            "load_ms": 2174.2557,
+            "delta_ms": 1113.1203000000003
+          },
+          {
+            "case_id": 33,
+            "idle_ms": 1068.0237,
+            "load_ms": 2139.0368,
+            "delta_ms": 1071.0131
+          },
+          {
+            "case_id": 34,
+            "idle_ms": 50.7458,
+            "load_ms": 110.6688,
+            "delta_ms": 59.923
+          },
+          {
+            "case_id": 35,
+            "idle_ms": 63.741,
+            "load_ms": 129.8291,
+            "delta_ms": 66.08810000000001
+          }
+        ],
+        "four": []
+      }
+    }
+  ],
+  "matrices": {
+    "fdb-one": [
+      {
+        "case_id": 0,
+        "query": {
+          "text": "quixote",
+          "offset": 0,
+          "limit": 50,
+          "base": 0
+        },
+        "n": 40,
+        "idle_single_ms": 2.4562,
+        "idle_four_ms": 4.8923,
+        "loaded_p50_ms": 3.6792,
+        "loaded_p95_ms": 4.3046,
+        "loaded_max_ms": 7.7246,
+        "single_pass": true,
+        "single_delta_ms": 1.8483999999999998,
+        "single_ratio": 1.7525445810601743,
+        "four_pass": true,
+        "four_delta_ms": -0.5876999999999999,
+        "four_ratio": 0.8798724526296425
+      },
+      {
+        "case_id": 1,
+        "query": {
+          "text": "zeuglodon",
+          "offset": 0,
+          "limit": 50,
+          "base": 1
+        },
+        "n": 40,
+        "idle_single_ms": 3.5873,
+        "idle_four_ms": 5.6311,
+        "loaded_p50_ms": 4.7049,
+        "loaded_p95_ms": 5.3889,
+        "loaded_max_ms": 6.0227,
+        "single_pass": true,
+        "single_delta_ms": 1.8015999999999996,
+        "single_ratio": 1.5022161514230759,
+        "four_pass": true,
+        "four_delta_ms": -0.24220000000000041,
+        "four_ratio": 0.9569888654081795
+      },
+      {
+        "case_id": 2,
+        "query": {
+          "text": "beagle",
+          "offset": 0,
+          "limit": 50,
+          "base": 2
+        },
+        "n": 40,
+        "idle_single_ms": 22.2848,
+        "idle_four_ms": 37.3484,
+        "loaded_p50_ms": 35.5744,
+        "loaded_p95_ms": 50.1936,
+        "loaded_max_ms": 51.6983,
+        "single_pass": false,
+        "single_delta_ms": 27.908800000000003,
+        "single_ratio": 2.25236932797243,
+        "four_pass": true,
+        "four_delta_ms": 12.845200000000006,
+        "four_ratio": 1.3439290572019151
+      },
+      {
+        "case_id": 3,
+        "query": {
+          "text": "mesopotamia",
+          "offset": 0,
+          "limit": 50,
+          "base": 3
+        },
+        "n": 40,
+        "idle_single_ms": 4.8702,
+        "idle_four_ms": 7.5116,
+        "loaded_p50_ms": 6.031,
+        "loaded_p95_ms": 7.3573,
+        "loaded_max_ms": 7.751,
+        "single_pass": true,
+        "single_delta_ms": 2.4871000000000008,
+        "single_ratio": 1.5106771795819476,
+        "four_pass": true,
+        "four_delta_ms": -0.15429999999999922,
+        "four_ratio": 0.9794584376164867
+      },
+      {
+        "case_id": 4,
+        "query": {
+          "text": "transubstantiation",
+          "offset": 0,
+          "limit": 50,
+          "base": 4
+        },
+        "n": 40,
+        "idle_single_ms": 59.5079,
+        "idle_four_ms": 102.4521,
+        "loaded_p50_ms": 85.9222,
+        "loaded_p95_ms": 105.7989,
+        "loaded_max_ms": 117.2317,
+        "single_pass": true,
+        "single_delta_ms": 46.291000000000004,
+        "single_ratio": 1.777896716234315,
+        "four_pass": true,
+        "four_delta_ms": 3.3468000000000018,
+        "four_ratio": 1.0326669731513556
+      },
+      {
+        "case_id": 5,
+        "query": {
+          "text": "harpoon",
+          "offset": 0,
+          "limit": 50,
+          "base": 5
+        },
+        "n": 40,
+        "idle_single_ms": 69.3568,
+        "idle_four_ms": 120.9785,
+        "loaded_p50_ms": 101.3484,
+        "loaded_p95_ms": 148.4503,
+        "loaded_max_ms": 157.2187,
+        "single_pass": false,
+        "single_delta_ms": 79.09349999999999,
+        "single_ratio": 2.1403856579311613,
+        "four_pass": true,
+        "four_delta_ms": 27.4718,
+        "four_ratio": 1.227080018350368
+      },
+      {
+        "case_id": 6,
+        "query": {
+          "text": "ishmael",
+          "offset": 0,
+          "limit": 50,
+          "base": 6
+        },
+        "n": 40,
+        "idle_single_ms": 9.4424,
+        "idle_four_ms": 15.1373,
+        "loaded_p50_ms": 13.2769,
+        "loaded_p95_ms": 20.0562,
+        "loaded_max_ms": 24.8337,
+        "single_pass": false,
+        "single_delta_ms": 10.613800000000001,
+        "single_ratio": 2.1240574430229606,
+        "four_pass": true,
+        "four_delta_ms": 4.918900000000001,
+        "four_ratio": 1.3249522702199203
+      },
+      {
+        "case_id": 7,
+        "query": {
+          "text": "invertebrata",
+          "offset": 0,
+          "limit": 50,
+          "base": 7
+        },
+        "n": 40,
+        "idle_single_ms": 13.8594,
+        "idle_four_ms": 23.1092,
+        "loaded_p50_ms": 21.421,
+        "loaded_p95_ms": 24.1664,
+        "loaded_max_ms": 33.8871,
+        "single_pass": true,
+        "single_delta_ms": 10.306999999999999,
+        "single_ratio": 1.743682987719526,
+        "four_pass": true,
+        "four_delta_ms": 1.0571999999999981,
+        "four_ratio": 1.0457480137780624
+      },
+      {
+        "case_id": 8,
+        "query": {
+          "text": "darcy",
+          "offset": 0,
+          "limit": 50,
+          "base": 8
+        },
+        "n": 40,
+        "idle_single_ms": 57.8527,
+        "idle_four_ms": 102.4372,
+        "loaded_p50_ms": 85.9966,
+        "loaded_p95_ms": 110.836,
+        "loaded_max_ms": 124.8165,
+        "single_pass": true,
+        "single_delta_ms": 52.9833,
+        "single_ratio": 1.9158310675214814,
+        "four_pass": true,
+        "four_delta_ms": 8.398799999999994,
+        "four_ratio": 1.0819897459126175
+      },
+      {
+        "case_id": 9,
+        "query": {
+          "text": "elizabeth",
+          "offset": 0,
+          "limit": 50,
+          "base": 9
+        },
+        "n": 40,
+        "idle_single_ms": 60.7922,
+        "idle_four_ms": 103.8393,
+        "loaded_p50_ms": 82.6208,
+        "loaded_p95_ms": 120.4912,
+        "loaded_max_ms": 133.1472,
+        "single_pass": true,
+        "single_delta_ms": 59.699000000000005,
+        "single_ratio": 1.9820174298676476,
+        "four_pass": true,
+        "four_delta_ms": 16.651900000000012,
+        "four_ratio": 1.1603622135357232
+      },
+      {
+        "case_id": 10,
+        "query": {
+          "text": "watson",
+          "offset": 0,
+          "limit": 50,
+          "base": 10
+        },
+        "n": 40,
+        "idle_single_ms": 52.0415,
+        "idle_four_ms": 90.5009,
+        "loaded_p50_ms": 81.5369,
+        "loaded_p95_ms": 111.4201,
+        "loaded_max_ms": 121.6633,
+        "single_pass": false,
+        "single_delta_ms": 59.378600000000006,
+        "single_ratio": 2.140985559601472,
+        "four_pass": true,
+        "four_delta_ms": 20.919200000000004,
+        "four_ratio": 1.2311490824953122
+      },
+      {
+        "case_id": 11,
+        "query": {
+          "text": "holmes",
+          "offset": 0,
+          "limit": 50,
+          "base": 11
+        },
+        "n": 40,
+        "idle_single_ms": 30.3263,
+        "idle_four_ms": 50.0121,
+        "loaded_p50_ms": 46.5014,
+        "loaded_p95_ms": 60.8424,
+        "loaded_max_ms": 67.9223,
+        "single_pass": false,
+        "single_delta_ms": 30.516099999999998,
+        "single_ratio": 2.0062585940256477,
+        "four_pass": true,
+        "four_delta_ms": 10.830300000000001,
+        "four_ratio": 1.2165535940302448
+      },
+      {
+        "case_id": 12,
+        "query": {
+          "text": "frankenstein",
+          "offset": 0,
+          "limit": 50,
+          "base": 12
+        },
+        "n": 40,
+        "idle_single_ms": 18.5879,
+        "idle_four_ms": 30.7976,
+        "loaded_p50_ms": 29.3571,
+        "loaded_p95_ms": 36.2104,
+        "loaded_max_ms": 44.5475,
+        "single_pass": true,
+        "single_delta_ms": 17.6225,
+        "single_ratio": 1.948062987212111,
+        "four_pass": true,
+        "four_delta_ms": 5.412800000000001,
+        "four_ratio": 1.1757539548536249
+      },
+      {
+        "case_id": 13,
+        "query": {
+          "text": "galapagos",
+          "offset": 0,
+          "limit": 50,
+          "base": 13
+        },
+        "n": 40,
+        "idle_single_ms": 13.8396,
+        "idle_four_ms": 20.0531,
+        "loaded_p50_ms": 18.4899,
+        "loaded_p95_ms": 22.1808,
+        "loaded_max_ms": 25.6792,
+        "single_pass": true,
+        "single_delta_ms": 8.3412,
+        "single_ratio": 1.6027052804994364,
+        "four_pass": true,
+        "four_delta_ms": 2.127700000000001,
+        "four_ratio": 1.1061032957497843
+      },
+      {
+        "case_id": 14,
+        "query": {
+          "text": "fossil",
+          "offset": 0,
+          "limit": 50,
+          "base": 14
+        },
+        "n": 40,
+        "idle_single_ms": 34.3197,
+        "idle_four_ms": 58.2864,
+        "loaded_p50_ms": 48.899,
+        "loaded_p95_ms": 69.0004,
+        "loaded_max_ms": 73.6797,
+        "single_pass": false,
+        "single_delta_ms": 34.6807,
+        "single_ratio": 2.0105187399656756,
+        "four_pass": true,
+        "four_delta_ms": 10.713999999999999,
+        "four_ratio": 1.1838164649043343
+      },
+      {
+        "case_id": 15,
+        "query": {
+          "text": "geologist",
+          "offset": 0,
+          "limit": 50,
+          "base": 15
+        },
+        "n": 40,
+        "idle_single_ms": 22.3011,
+        "idle_four_ms": 32.4522,
+        "loaded_p50_ms": 30.3719,
+        "loaded_p95_ms": 38.0443,
+        "loaded_max_ms": 41.7062,
+        "single_pass": true,
+        "single_delta_ms": 15.743199999999998,
+        "single_ratio": 1.7059382721031697,
+        "four_pass": true,
+        "four_delta_ms": 5.592100000000002,
+        "four_ratio": 1.1723180554785193
+      },
+      {
+        "case_id": 16,
+        "query": {
+          "text": "the",
+          "offset": 0,
+          "limit": 50,
+          "base": 16
+        },
+        "n": 40,
+        "idle_single_ms": 1.9499,
+        "idle_four_ms": 2.6788,
+        "loaded_p50_ms": 2.0906,
+        "loaded_p95_ms": 3.0636,
+        "loaded_max_ms": 3.4602,
+        "single_pass": true,
+        "single_delta_ms": 1.1137000000000001,
+        "single_ratio": 1.571157495256167,
+        "four_pass": true,
+        "four_delta_ms": 0.38480000000000025,
+        "four_ratio": 1.143646408839779
+      },
+      {
+        "case_id": 17,
+        "query": {
+          "text": "man",
+          "offset": 0,
+          "limit": 50,
+          "base": 17
+        },
+        "n": 40,
+        "idle_single_ms": 2.1266,
+        "idle_four_ms": 3.3301,
+        "loaded_p50_ms": 2.3548,
+        "loaded_p95_ms": 3.1997,
+        "loaded_max_ms": 3.5316,
+        "single_pass": true,
+        "single_delta_ms": 1.0731000000000002,
+        "single_ratio": 1.5046082949308757,
+        "four_pass": true,
+        "four_delta_ms": -0.13039999999999985,
+        "four_ratio": 0.9608420167562536
+      },
+      {
+        "case_id": 18,
+        "query": {
+          "text": "he",
+          "offset": 0,
+          "limit": 50,
+          "base": 18
+        },
+        "n": 40,
+        "idle_single_ms": 1.4224,
+        "idle_four_ms": 2.709,
+        "loaded_p50_ms": 1.9075,
+        "loaded_p95_ms": 3.6734,
+        "loaded_max_ms": 6.7792,
+        "single_pass": false,
+        "single_delta_ms": 2.251,
+        "single_ratio": 2.5825365579302586,
+        "four_pass": true,
+        "four_delta_ms": 0.9643999999999999,
+        "four_ratio": 1.355998523440384
+      },
+      {
+        "case_id": 19,
+        "query": {
+          "text": "zzxqnever",
+          "offset": 0,
+          "limit": 50,
+          "base": 19
+        },
+        "n": 40,
+        "idle_single_ms": 0.0688,
+        "idle_four_ms": 0.0895,
+        "loaded_p50_ms": 0.0795,
+        "loaded_p95_ms": 0.1224,
+        "loaded_max_ms": 0.1388,
+        "single_pass": true,
+        "single_delta_ms": 0.053599999999999995,
+        "single_ratio": 1.7790697674418603,
+        "four_pass": true,
+        "four_delta_ms": 0.0329,
+        "four_ratio": 1.3675977653631284
+      },
+      {
+        "case_id": 20,
+        "query": {
+          "text": "zx",
+          "offset": 0,
+          "limit": 50,
+          "base": 20
+        },
+        "n": 40,
+        "idle_single_ms": 155.3942,
+        "idle_four_ms": 216.3625,
+        "loaded_p50_ms": 222.7209,
+        "loaded_p95_ms": 237.565,
+        "loaded_max_ms": 241.396,
+        "single_pass": true,
+        "single_delta_ms": 82.17079999999999,
+        "single_ratio": 1.5287893627947502,
+        "four_pass": true,
+        "four_delta_ms": 21.202499999999986,
+        "four_ratio": 1.0979952625801606
+      },
+      {
+        "case_id": 21,
+        "query": {
+          "text": "the zx",
+          "offset": 0,
+          "limit": 50,
+          "base": 21
+        },
+        "n": 40,
+        "idle_single_ms": 165.9375,
+        "idle_four_ms": 216.6037,
+        "loaded_p50_ms": 220.7072,
+        "loaded_p95_ms": 236.441,
+        "loaded_max_ms": 242.3928,
+        "single_pass": true,
+        "single_delta_ms": 70.5035,
+        "single_ratio": 1.4248798493408663,
+        "four_pass": true,
+        "four_delta_ms": 19.8373,
+        "four_ratio": 1.091583384771359
+      },
+      {
+        "case_id": 22,
+        "query": {
+          "text": "quixote whale",
+          "offset": 0,
+          "limit": 50,
+          "base": 22
+        },
+        "n": 40,
+        "idle_single_ms": 4.9329,
+        "idle_four_ms": 7.3234,
+        "loaded_p50_ms": 5.9142,
+        "loaded_p95_ms": 7.7729,
+        "loaded_max_ms": 8.6906,
+        "single_pass": true,
+        "single_delta_ms": 2.84,
+        "single_ratio": 1.5757262462243304,
+        "four_pass": true,
+        "four_delta_ms": 0.44949999999999957,
+        "four_ratio": 1.061378594641833
+      },
+      {
+        "case_id": 23,
+        "query": {
+          "text": "holmes elementary",
+          "offset": 0,
+          "limit": 50,
+          "base": 23
+        },
+        "n": 40,
+        "idle_single_ms": 45.4577,
+        "idle_four_ms": 65.0214,
+        "loaded_p50_ms": 60.3783,
+        "loaded_p95_ms": 74.1329,
+        "loaded_max_ms": 88.5134,
+        "single_pass": true,
+        "single_delta_ms": 28.675200000000004,
+        "single_ratio": 1.630810621742851,
+        "four_pass": true,
+        "four_delta_ms": 9.111500000000007,
+        "four_ratio": 1.1401307877098925
+      },
+      {
+        "case_id": 24,
+        "query": {
+          "text": "fossil geologist",
+          "offset": 0,
+          "limit": 50,
+          "base": 24
+        },
+        "n": 40,
+        "idle_single_ms": 15.6234,
+        "idle_four_ms": 25.6107,
+        "loaded_p50_ms": 21.7239,
+        "loaded_p95_ms": 24.6242,
+        "loaded_max_ms": 35.5022,
+        "single_pass": true,
+        "single_delta_ms": 9.000799999999998,
+        "single_ratio": 1.576110193683833,
+        "four_pass": true,
+        "four_delta_ms": -0.986500000000003,
+        "four_ratio": 0.9614809435118914
+      },
+      {
+        "case_id": 25,
+        "query": {
+          "text": "whale harpoon",
+          "offset": 0,
+          "limit": 50,
+          "base": 25
+        },
+        "n": 40,
+        "idle_single_ms": 69.5644,
+        "idle_four_ms": 105.9014,
+        "loaded_p50_ms": 96.8692,
+        "loaded_p95_ms": 120.2833,
+        "loaded_max_ms": 139.146,
+        "single_pass": true,
+        "single_delta_ms": 50.71889999999999,
+        "single_ratio": 1.7290927543398633,
+        "four_pass": true,
+        "four_delta_ms": 14.381900000000002,
+        "four_ratio": 1.1358046258123122
+      },
+      {
+        "case_id": 26,
+        "query": {
+          "text": "QUİXOTE",
+          "offset": 0,
+          "limit": 50,
+          "base": 26
+        },
+        "n": 40,
+        "idle_single_ms": 3.9723,
+        "idle_four_ms": 7.0686,
+        "loaded_p50_ms": 5.2555,
+        "loaded_p95_ms": 6.9431,
+        "loaded_max_ms": 7.4984,
+        "single_pass": true,
+        "single_delta_ms": 2.9708,
+        "single_ratio": 1.747879062507867,
+        "four_pass": true,
+        "four_delta_ms": -0.12549999999999972,
+        "four_ratio": 0.982245423421894
+      },
+      {
+        "case_id": 27,
+        "query": {
+          "text": "İSHMAEL",
+          "offset": 0,
+          "limit": 50,
+          "base": 27
+        },
+        "n": 40,
+        "idle_single_ms": 9.8775,
+        "idle_four_ms": 15.3619,
+        "loaded_p50_ms": 12.6553,
+        "loaded_p95_ms": 15.2432,
+        "loaded_max_ms": 16.4728,
+        "single_pass": true,
+        "single_delta_ms": 5.3657,
+        "single_ratio": 1.5432245001265503,
+        "four_pass": true,
+        "four_delta_ms": -0.11870000000000047,
+        "four_ratio": 0.992273091219185
+      },
+      {
+        "case_id": 28,
+        "query": {
+          "text": "zxzxzxzxzxzxzxzxzxzxzxzxzxzxzxzxzxzxzxzxzxzxzxzxzxzxzxzxzxzxzxzxzxzxzxzxzxzxzxzxzxzxzxzxzxzxzxzxzxzxzxzxzxzxzxzxzxzxzxzxzxzxzxzxzxzxzxzxzxzxzxzxzxzxzxzxzxzxzxzxzxzxzxzxzxzxzxzxzxzxzxzxzxzxzxzxzxzxzxzxzxzxzxzxzxzxzxzxzxzxzxzxzxzxzxzxzxzxzxzxzxzxzxzxzxzxzxzxzxzxzxzxzxzxzxzxzxzxzxzxzxzxzxzxzxzxzxzxzxzx",
+          "offset": 0,
+          "limit": 50,
+          "base": 28
+        },
+        "n": 40,
+        "idle_single_ms": 0.0536,
+        "idle_four_ms": 0.0842,
+        "loaded_p50_ms": 0.0779,
+        "loaded_p95_ms": 0.1005,
+        "loaded_max_ms": 0.1022,
+        "single_pass": true,
+        "single_delta_ms": 0.046900000000000004,
+        "single_ratio": 1.875,
+        "four_pass": true,
+        "four_delta_ms": 0.01630000000000001,
+        "four_ratio": 1.1935866983372923
+      },
+      {
+        "case_id": 29,
+        "query": {
+          "text": "presumption",
+          "offset": 0,
+          "limit": 50,
+          "base": 29
+        },
+        "n": 40,
+        "idle_single_ms": 80.3131,
+        "idle_four_ms": 155.8843,
+        "loaded_p50_ms": 135.1839,
+        "loaded_p95_ms": 176.2667,
+        "loaded_max_ms": 213.7762,
+        "single_pass": false,
+        "single_delta_ms": 95.95359999999998,
+        "single_ratio": 2.1947440703944934,
+        "four_pass": true,
+        "four_delta_ms": 20.38239999999999,
+        "four_ratio": 1.1307533856841259
+      },
+      {
+        "case_id": 30,
+        "query": {
+          "text": "the",
+          "offset": 0,
+          "limit": 1,
+          "base": 16
+        },
+        "n": 40,
+        "idle_single_ms": 0.419,
+        "idle_four_ms": 1.1271,
+        "loaded_p50_ms": 0.7026,
+        "loaded_p95_ms": 1.3912,
+        "loaded_max_ms": 1.4927,
+        "single_pass": true,
+        "single_delta_ms": 0.9722,
+        "single_ratio": 3.3202863961813844,
+        "four_pass": true,
+        "four_delta_ms": 0.2641,
+        "four_ratio": 1.2343181616538017
+      },
+      {
+        "case_id": 31,
+        "query": {
+          "text": "the",
+          "offset": 0,
+          "limit": 200,
+          "base": 16
+        },
+        "n": 40,
+        "idle_single_ms": 5.5805,
+        "idle_four_ms": 7.6888,
+        "loaded_p50_ms": 5.5817,
+        "loaded_p95_ms": 7.9209,
+        "loaded_max_ms": 10.9571,
+        "single_pass": true,
+        "single_delta_ms": 2.3404,
+        "single_ratio": 1.4193889436430427,
+        "four_pass": true,
+        "four_delta_ms": 0.23209999999999997,
+        "four_ratio": 1.0301867651649153
+      },
+      {
+        "case_id": 32,
+        "query": {
+          "text": "the",
+          "offset": 5000,
+          "limit": 50,
+          "base": 16
+        },
+        "n": 40,
+        "idle_single_ms": 2.5641,
+        "idle_four_ms": 4.2486,
+        "loaded_p50_ms": 2.6203,
+        "loaded_p95_ms": 3.9054,
+        "loaded_max_ms": 4.0084,
+        "single_pass": true,
+        "single_delta_ms": 1.3413000000000004,
+        "single_ratio": 1.5231075231075233,
+        "four_pass": true,
+        "four_delta_ms": -0.3431999999999995,
+        "four_ratio": 0.9192204490891118
+      },
+      {
+        "case_id": 33,
+        "query": {
+          "text": "the",
+          "offset": 9950,
+          "limit": 50,
+          "base": 16
+        },
+        "n": 40,
+        "idle_single_ms": 1.8278,
+        "idle_four_ms": 3.4823,
+        "loaded_p50_ms": 2.0287,
+        "loaded_p95_ms": 3.5086,
+        "loaded_max_ms": 3.6447,
+        "single_pass": true,
+        "single_delta_ms": 1.6807999999999998,
+        "single_ratio": 1.9195754458912353,
+        "four_pass": true,
+        "four_delta_ms": 0.02629999999999999,
+        "four_ratio": 1.0075524796829682
+      },
+      {
+        "case_id": 34,
+        "query": {
+          "text": "ishmael",
+          "offset": 130,
+          "limit": 1,
+          "base": 6
+        },
+        "n": 40,
+        "idle_single_ms": 7.5152,
+        "idle_four_ms": 14.0727,
+        "loaded_p50_ms": 12.5545,
+        "loaded_p95_ms": 14.5489,
+        "loaded_max_ms": 21.992,
+        "single_pass": true,
+        "single_delta_ms": 7.0337,
+        "single_ratio": 1.9359298488396848,
+        "four_pass": true,
+        "four_delta_ms": 0.4762000000000004,
+        "four_ratio": 1.0338385668706076
+      },
+      {
+        "case_id": 35,
+        "query": {
+          "text": "ishmael",
+          "offset": 60,
+          "limit": 200,
+          "base": 6
+        },
+        "n": 40,
+        "idle_single_ms": 13.3811,
+        "idle_four_ms": 23.7496,
+        "loaded_p50_ms": 21.0217,
+        "loaded_p95_ms": 25.629,
+        "loaded_max_ms": 33.0951,
+        "single_pass": true,
+        "single_delta_ms": 12.247900000000001,
+        "single_ratio": 1.9153133897811092,
+        "four_pass": true,
+        "four_delta_ms": 1.8794000000000004,
+        "four_ratio": 1.079133964361505
+      },
+      {
+        "case_id": 36,
+        "query": {
+          "text": "quixote",
+          "offset": 28,
+          "limit": 10,
+          "base": 0
+        },
+        "n": 40,
+        "idle_single_ms": 3.2122,
+        "idle_four_ms": 6.5346,
+        "loaded_p50_ms": 4.8227,
+        "loaded_p95_ms": 6.1968,
+        "loaded_max_ms": 6.4543,
+        "single_pass": true,
+        "single_delta_ms": 2.9845999999999995,
+        "single_ratio": 1.929145134175954,
+        "four_pass": true,
+        "four_delta_ms": -0.33780000000000054,
+        "four_ratio": 0.9483059406849692
+      },
+      {
+        "case_id": 37,
+        "query": {
+          "text": "quixote",
+          "offset": 57,
+          "limit": 50,
+          "base": 0
+        },
+        "n": 40,
+        "idle_single_ms": 1.3934,
+        "idle_four_ms": 3.3044,
+        "loaded_p50_ms": 2.8877,
+        "loaded_p95_ms": 3.5223,
+        "loaded_max_ms": 4.521,
+        "single_pass": false,
+        "single_delta_ms": 2.1289,
+        "single_ratio": 2.5278455576288215,
+        "four_pass": true,
+        "four_delta_ms": 0.2179000000000002,
+        "four_ratio": 1.0659423798571601
+      }
+    ],
+    "fdb-100": [
+      {
+        "case_id": 0,
+        "query": {
+          "text": "quixote",
+          "offset": 0,
+          "limit": 50,
+          "base": 0
+        },
+        "n": 40,
+        "idle_single_ms": 2.548,
+        "idle_four_ms": 5.9001,
+        "loaded_p50_ms": 3.7338,
+        "loaded_p95_ms": 4.7487,
+        "loaded_max_ms": 11.9234,
+        "single_pass": true,
+        "single_delta_ms": 2.2007000000000003,
+        "single_ratio": 1.863697017268446,
+        "four_pass": true,
+        "four_delta_ms": -1.1513999999999998,
+        "four_ratio": 0.8048507652412672
+      },
+      {
+        "case_id": 1,
+        "query": {
+          "text": "zeuglodon",
+          "offset": 0,
+          "limit": 50,
+          "base": 1
+        },
+        "n": 40,
+        "idle_single_ms": 3.6948,
+        "idle_four_ms": 5.7511,
+        "loaded_p50_ms": 4.9921,
+        "loaded_p95_ms": 5.8172,
+        "loaded_max_ms": 6.692,
+        "single_pass": true,
+        "single_delta_ms": 2.1224,
+        "single_ratio": 1.5744289271408465,
+        "four_pass": true,
+        "four_delta_ms": 0.0660999999999996,
+        "four_ratio": 1.011493453426301
+      },
+      {
+        "case_id": 2,
+        "query": {
+          "text": "beagle",
+          "offset": 0,
+          "limit": 50,
+          "base": 2
+        },
+        "n": 40,
+        "idle_single_ms": 22.2979,
+        "idle_four_ms": 37.0449,
+        "loaded_p50_ms": 34.5715,
+        "loaded_p95_ms": 40.965,
+        "loaded_max_ms": 43.5188,
+        "single_pass": true,
+        "single_delta_ms": 18.667100000000005,
+        "single_ratio": 1.8371685225962986,
+        "four_pass": true,
+        "four_delta_ms": 3.920100000000005,
+        "four_ratio": 1.1058202343642447
+      },
+      {
+        "case_id": 3,
+        "query": {
+          "text": "mesopotamia",
+          "offset": 0,
+          "limit": 50,
+          "base": 3
+        },
+        "n": 40,
+        "idle_single_ms": 4.8609,
+        "idle_four_ms": 8.2661,
+        "loaded_p50_ms": 6.8144,
+        "loaded_p95_ms": 7.9158,
+        "loaded_max_ms": 8.2819,
+        "single_pass": true,
+        "single_delta_ms": 3.0549,
+        "single_ratio": 1.6284638647164105,
+        "four_pass": true,
+        "four_delta_ms": -0.35029999999999983,
+        "four_ratio": 0.957622095062968
+      },
+      {
+        "case_id": 4,
+        "query": {
+          "text": "transubstantiation",
+          "offset": 0,
+          "limit": 50,
+          "base": 4
+        },
+        "n": 40,
+        "idle_single_ms": 53.4926,
+        "idle_four_ms": 98.8822,
+        "loaded_p50_ms": 86.2981,
+        "loaded_p95_ms": 111.9719,
+        "loaded_max_ms": 128.2446,
+        "single_pass": false,
+        "single_delta_ms": 58.4793,
+        "single_ratio": 2.0932222400855447,
+        "four_pass": true,
+        "four_delta_ms": 13.089700000000008,
+        "four_ratio": 1.1323767068289339
+      },
+      {
+        "case_id": 5,
+        "query": {
+          "text": "harpoon",
+          "offset": 0,
+          "limit": 50,
+          "base": 5
+        },
+        "n": 40,
+        "idle_single_ms": 63.3627,
+        "idle_four_ms": 119.9988,
+        "loaded_p50_ms": 99.3761,
+        "loaded_p95_ms": 131.3137,
+        "loaded_max_ms": 157.8744,
+        "single_pass": false,
+        "single_delta_ms": 67.95100000000002,
+        "single_ratio": 2.0724132652175493,
+        "four_pass": true,
+        "four_delta_ms": 11.314900000000009,
+        "four_ratio": 1.094291776251096
+      },
+      {
+        "case_id": 6,
+        "query": {
+          "text": "ishmael",
+          "offset": 0,
+          "limit": 50,
+          "base": 6
+        },
+        "n": 40,
+        "idle_single_ms": 9.1122,
+        "idle_four_ms": 15.2655,
+        "loaded_p50_ms": 13.3486,
+        "loaded_p95_ms": 16.1126,
+        "loaded_max_ms": 20.0727,
+        "single_pass": true,
+        "single_delta_ms": 7.000400000000001,
+        "single_ratio": 1.7682447707469109,
+        "four_pass": true,
+        "four_delta_ms": 0.8471000000000011,
+        "four_ratio": 1.055491140152632
+      },
+      {
+        "case_id": 7,
+        "query": {
+          "text": "invertebrata",
+          "offset": 0,
+          "limit": 50,
+          "base": 7
+        },
+        "n": 40,
+        "idle_single_ms": 13.7327,
+        "idle_four_ms": 22.4812,
+        "loaded_p50_ms": 21.1378,
+        "loaded_p95_ms": 24.1081,
+        "loaded_max_ms": 35.3603,
+        "single_pass": true,
+        "single_delta_ms": 10.3754,
+        "single_ratio": 1.75552513344062,
+        "four_pass": true,
+        "four_delta_ms": 1.6268999999999991,
+        "four_ratio": 1.0723671334270413
+      },
+      {
+        "case_id": 8,
+        "query": {
+          "text": "darcy",
+          "offset": 0,
+          "limit": 50,
+          "base": 8
+        },
+        "n": 40,
+        "idle_single_ms": 54.8194,
+        "idle_four_ms": 99.5017,
+        "loaded_p50_ms": 86.1857,
+        "loaded_p95_ms": 109.2567,
+        "loaded_max_ms": 139.5806,
+        "single_pass": true,
+        "single_delta_ms": 54.43729999999999,
+        "single_ratio": 1.993029839801238,
+        "four_pass": true,
+        "four_delta_ms": 9.754999999999995,
+        "four_ratio": 1.098038525974933
+      },
+      {
+        "case_id": 9,
+        "query": {
+          "text": "elizabeth",
+          "offset": 0,
+          "limit": 50,
+          "base": 9
+        },
+        "n": 40,
+        "idle_single_ms": 51.6577,
+        "idle_four_ms": 98.4731,
+        "loaded_p50_ms": 80.6364,
+        "loaded_p95_ms": 115.2024,
+        "loaded_max_ms": 120.2295,
+        "single_pass": false,
+        "single_delta_ms": 63.5447,
+        "single_ratio": 2.230110903118025,
+        "four_pass": true,
+        "four_delta_ms": 16.729299999999995,
+        "four_ratio": 1.169887004674373
+      },
+      {
+        "case_id": 10,
+        "query": {
+          "text": "watson",
+          "offset": 0,
+          "limit": 50,
+          "base": 10
+        },
+        "n": 40,
+        "idle_single_ms": 48.4853,
+        "idle_four_ms": 83.7262,
+        "loaded_p50_ms": 76.3646,
+        "loaded_p95_ms": 99.1237,
+        "loaded_max_ms": 109.0709,
+        "single_pass": false,
+        "single_delta_ms": 50.6384,
+        "single_ratio": 2.044407273957261,
+        "four_pass": true,
+        "four_delta_ms": 15.397499999999994,
+        "four_ratio": 1.1839030076606845
+      },
+      {
+        "case_id": 11,
+        "query": {
+          "text": "holmes",
+          "offset": 0,
+          "limit": 50,
+          "base": 11
+        },
+        "n": 40,
+        "idle_single_ms": 31.1491,
+        "idle_four_ms": 51.4467,
+        "loaded_p50_ms": 47.5055,
+        "loaded_p95_ms": 72.5087,
+        "loaded_max_ms": 75.5404,
+        "single_pass": false,
+        "single_delta_ms": 41.3596,
+        "single_ratio": 2.327794382502223,
+        "four_pass": true,
+        "four_delta_ms": 21.062000000000005,
+        "four_ratio": 1.4093945773003906
+      },
+      {
+        "case_id": 12,
+        "query": {
+          "text": "frankenstein",
+          "offset": 0,
+          "limit": 50,
+          "base": 12
+        },
+        "n": 40,
+        "idle_single_ms": 19.2756,
+        "idle_four_ms": 30.1663,
+        "loaded_p50_ms": 28.8453,
+        "loaded_p95_ms": 38.5349,
+        "loaded_max_ms": 45.9964,
+        "single_pass": true,
+        "single_delta_ms": 19.2593,
+        "single_ratio": 1.9991543713295565,
+        "four_pass": true,
+        "four_delta_ms": 8.3686,
+        "four_ratio": 1.2774155265975609
+      },
+      {
+        "case_id": 13,
+        "query": {
+          "text": "galapagos",
+          "offset": 0,
+          "limit": 50,
+          "base": 13
+        },
+        "n": 40,
+        "idle_single_ms": 12.9674,
+        "idle_four_ms": 20.109,
+        "loaded_p50_ms": 18.1777,
+        "loaded_p95_ms": 21.9959,
+        "loaded_max_ms": 26.9382,
+        "single_pass": true,
+        "single_delta_ms": 9.0285,
+        "single_ratio": 1.696245970664898,
+        "four_pass": true,
+        "four_delta_ms": 1.8868999999999971,
+        "four_ratio": 1.093833606842707
+      },
+      {
+        "case_id": 14,
+        "query": {
+          "text": "fossil",
+          "offset": 0,
+          "limit": 50,
+          "base": 14
+        },
+        "n": 40,
+        "idle_single_ms": 31.012,
+        "idle_four_ms": 53.554,
+        "loaded_p50_ms": 50.6789,
+        "loaded_p95_ms": 63.9202,
+        "loaded_max_ms": 64.4817,
+        "single_pass": false,
+        "single_delta_ms": 32.9082,
+        "single_ratio": 2.0611440732619632,
+        "four_pass": true,
+        "four_delta_ms": 10.3662,
+        "four_ratio": 1.1935653732681033
+      },
+      {
+        "case_id": 15,
+        "query": {
+          "text": "geologist",
+          "offset": 0,
+          "limit": 50,
+          "base": 15
+        },
+        "n": 40,
+        "idle_single_ms": 24.6037,
+        "idle_four_ms": 32.835,
+        "loaded_p50_ms": 30.2608,
+        "loaded_p95_ms": 37.6221,
+        "loaded_max_ms": 53.7498,
+        "single_pass": true,
+        "single_delta_ms": 13.018400000000003,
+        "single_ratio": 1.5291236683913396,
+        "four_pass": true,
+        "four_delta_ms": 4.787100000000002,
+        "four_ratio": 1.1457925993604385
+      },
+      {
+        "case_id": 16,
+        "query": {
+          "text": "the",
+          "offset": 0,
+          "limit": 50,
+          "base": 16
+        },
+        "n": 40,
+        "idle_single_ms": 2.0231,
+        "idle_four_ms": 2.7759,
+        "loaded_p50_ms": 1.941,
+        "loaded_p95_ms": 2.4867,
+        "loaded_max_ms": 2.7278,
+        "single_pass": true,
+        "single_delta_ms": 0.4636,
+        "single_ratio": 1.2291532796203846,
+        "four_pass": true,
+        "four_delta_ms": -0.2892000000000001,
+        "four_ratio": 0.8958175726791311
+      },
+      {
+        "case_id": 17,
+        "query": {
+          "text": "man",
+          "offset": 0,
+          "limit": 50,
+          "base": 17
+        },
+        "n": 40,
+        "idle_single_ms": 2.1177,
+        "idle_four_ms": 3.1819,
+        "loaded_p50_ms": 2.2341,
+        "loaded_p95_ms": 2.9248,
+        "loaded_max_ms": 9.8438,
+        "single_pass": true,
+        "single_delta_ms": 0.8070999999999997,
+        "single_ratio": 1.381121027529867,
+        "four_pass": true,
+        "four_delta_ms": -0.25710000000000033,
+        "four_ratio": 0.9191992205914704
+      },
+      {
+        "case_id": 18,
+        "query": {
+          "text": "he",
+          "offset": 0,
+          "limit": 50,
+          "base": 18
+        },
+        "n": 40,
+        "idle_single_ms": 1.4296,
+        "idle_four_ms": 2.3185,
+        "loaded_p50_ms": 1.4825,
+        "loaded_p95_ms": 2.4711,
+        "loaded_max_ms": 2.6245,
+        "single_pass": true,
+        "single_delta_ms": 1.0414999999999999,
+        "single_ratio": 1.7285254616675993,
+        "four_pass": true,
+        "four_delta_ms": 0.15260000000000007,
+        "four_ratio": 1.0658184170800087
+      },
+      {
+        "case_id": 19,
+        "query": {
+          "text": "zzxqnever",
+          "offset": 0,
+          "limit": 50,
+          "base": 19
+        },
+        "n": 40,
+        "idle_single_ms": 0.0674,
+        "idle_four_ms": 0.0826,
+        "loaded_p50_ms": 0.0724,
+        "loaded_p95_ms": 0.0929,
+        "loaded_max_ms": 0.112,
+        "single_pass": true,
+        "single_delta_ms": 0.025499999999999995,
+        "single_ratio": 1.3783382789317506,
+        "four_pass": true,
+        "four_delta_ms": 0.01029999999999999,
+        "four_ratio": 1.1246973365617432
+      },
+      {
+        "case_id": 20,
+        "query": {
+          "text": "zx",
+          "offset": 0,
+          "limit": 50,
+          "base": 20
+        },
+        "n": 40,
+        "idle_single_ms": 157.1584,
+        "idle_four_ms": 215.7823,
+        "loaded_p50_ms": 213.5231,
+        "loaded_p95_ms": 227.9772,
+        "loaded_max_ms": 230.862,
+        "single_pass": true,
+        "single_delta_ms": 70.81880000000001,
+        "single_ratio": 1.4506205204430689,
+        "four_pass": true,
+        "four_delta_ms": 12.194900000000018,
+        "four_ratio": 1.056514829993007
+      },
+      {
+        "case_id": 21,
+        "query": {
+          "text": "the zx",
+          "offset": 0,
+          "limit": 50,
+          "base": 21
+        },
+        "n": 40,
+        "idle_single_ms": 146.1021,
+        "idle_four_ms": 215.3523,
+        "loaded_p50_ms": 217.3829,
+        "loaded_p95_ms": 235.846,
+        "loaded_max_ms": 256.704,
+        "single_pass": true,
+        "single_delta_ms": 89.7439,
+        "single_ratio": 1.6142546890154215,
+        "four_pass": true,
+        "four_delta_ms": 20.49369999999999,
+        "four_ratio": 1.0951635993671764
+      },
+      {
+        "case_id": 22,
+        "query": {
+          "text": "quixote whale",
+          "offset": 0,
+          "limit": 50,
+          "base": 22
+        },
+        "n": 40,
+        "idle_single_ms": 4.5555,
+        "idle_four_ms": 7.0688,
+        "loaded_p50_ms": 6.4284,
+        "loaded_p95_ms": 10.6282,
+        "loaded_max_ms": 20.2536,
+        "single_pass": false,
+        "single_delta_ms": 6.072699999999999,
+        "single_ratio": 2.3330479639995607,
+        "four_pass": true,
+        "four_delta_ms": 3.5593999999999992,
+        "four_ratio": 1.503536668175645
+      },
+      {
+        "case_id": 23,
+        "query": {
+          "text": "holmes elementary",
+          "offset": 0,
+          "limit": 50,
+          "base": 23
+        },
+        "n": 40,
+        "idle_single_ms": 41.7734,
+        "idle_four_ms": 65.1115,
+        "loaded_p50_ms": 59.9789,
+        "loaded_p95_ms": 73.9318,
+        "loaded_max_ms": 76.9569,
+        "single_pass": true,
+        "single_delta_ms": 32.15839999999999,
+        "single_ratio": 1.7698296044851507,
+        "four_pass": true,
+        "four_delta_ms": 8.820299999999989,
+        "four_ratio": 1.1354645492731696
+      },
+      {
+        "case_id": 24,
+        "query": {
+          "text": "fossil geologist",
+          "offset": 0,
+          "limit": 50,
+          "base": 24
+        },
+        "n": 40,
+        "idle_single_ms": 16.1958,
+        "idle_four_ms": 25.0957,
+        "loaded_p50_ms": 23.8456,
+        "loaded_p95_ms": 27.3731,
+        "loaded_max_ms": 41.8585,
+        "single_pass": true,
+        "single_delta_ms": 11.177300000000002,
+        "single_ratio": 1.6901357141975082,
+        "four_pass": true,
+        "four_delta_ms": 2.2774,
+        "four_ratio": 1.0907486143044427
+      },
+      {
+        "case_id": 25,
+        "query": {
+          "text": "whale harpoon",
+          "offset": 0,
+          "limit": 50,
+          "base": 25
+        },
+        "n": 40,
+        "idle_single_ms": 67.2982,
+        "idle_four_ms": 101.4779,
+        "loaded_p50_ms": 94.5128,
+        "loaded_p95_ms": 123.7051,
+        "loaded_max_ms": 145.7654,
+        "single_pass": true,
+        "single_delta_ms": 56.40690000000001,
+        "single_ratio": 1.8381635764403805,
+        "four_pass": true,
+        "four_delta_ms": 22.227199999999996,
+        "four_ratio": 1.2190348834573832
+      },
+      {
+        "case_id": 26,
+        "query": {
+          "text": "QUİXOTE",
+          "offset": 0,
+          "limit": 50,
+          "base": 26
+        },
+        "n": 40,
+        "idle_single_ms": 3.9519,
+        "idle_four_ms": 6.742,
+        "loaded_p50_ms": 5.953,
+        "loaded_p95_ms": 7.1768,
+        "loaded_max_ms": 15.5736,
+        "single_pass": true,
+        "single_delta_ms": 3.2249,
+        "single_ratio": 1.8160378552088867,
+        "four_pass": true,
+        "four_delta_ms": 0.4348000000000001,
+        "four_ratio": 1.0644912488875704
+      },
+      {
+        "case_id": 27,
+        "query": {
+          "text": "İSHMAEL",
+          "offset": 0,
+          "limit": 50,
+          "base": 27
+        },
+        "n": 40,
+        "idle_single_ms": 8.8218,
+        "idle_four_ms": 14.4166,
+        "loaded_p50_ms": 13.018,
+        "loaded_p95_ms": 15.4347,
+        "loaded_max_ms": 16.6901,
+        "single_pass": true,
+        "single_delta_ms": 6.6129,
+        "single_ratio": 1.7496089233489764,
+        "four_pass": true,
+        "four_delta_ms": 1.0180999999999987,
+        "four_ratio": 1.0706199797455709
+      },
+      {
+        "case_id": 28,
+        "query": {
+          "text": "zxzxzxzxzxzxzxzxzxzxzxzxzxzxzxzxzxzxzxzxzxzxzxzxzxzxzxzxzxzxzxzxzxzxzxzxzxzxzxzxzxzxzxzxzxzxzxzxzxzxzxzxzxzxzxzxzxzxzxzxzxzxzxzxzxzxzxzxzxzxzxzxzxzxzxzxzxzxzxzxzxzxzxzxzxzxzxzxzxzxzxzxzxzxzxzxzxzxzxzxzxzxzxzxzxzxzxzxzxzxzxzxzxzxzxzxzxzxzxzxzxzxzxzxzxzxzxzxzxzxzxzxzxzxzxzxzxzxzxzxzxzxzxzxzxzxzxzxzxzx",
+          "offset": 0,
+          "limit": 50,
+          "base": 28
+        },
+        "n": 40,
+        "idle_single_ms": 0.0569,
+        "idle_four_ms": 0.0782,
+        "loaded_p50_ms": 0.0674,
+        "loaded_p95_ms": 0.0866,
+        "loaded_max_ms": 0.0968,
+        "single_pass": true,
+        "single_delta_ms": 0.029699999999999997,
+        "single_ratio": 1.5219683655536027,
+        "four_pass": true,
+        "four_delta_ms": 0.00839999999999999,
+        "four_ratio": 1.1074168797953963
+      },
+      {
+        "case_id": 29,
+        "query": {
+          "text": "presumption",
+          "offset": 0,
+          "limit": 50,
+          "base": 29
+        },
+        "n": 40,
+        "idle_single_ms": 79.0097,
+        "idle_four_ms": 152.4928,
+        "loaded_p50_ms": 131.3053,
+        "loaded_p95_ms": 172.044,
+        "loaded_max_ms": 195.1095,
+        "single_pass": false,
+        "single_delta_ms": 93.03430000000002,
+        "single_ratio": 2.1775047873868654,
+        "four_pass": true,
+        "four_delta_ms": 19.551200000000023,
+        "four_ratio": 1.1282106433877535
+      },
+      {
+        "case_id": 30,
+        "query": {
+          "text": "the",
+          "offset": 0,
+          "limit": 1,
+          "base": 16
+        },
+        "n": 40,
+        "idle_single_ms": 0.414,
+        "idle_four_ms": 0.9841,
+        "loaded_p50_ms": 0.5332,
+        "loaded_p95_ms": 1.3459,
+        "loaded_max_ms": 3.1392,
+        "single_pass": true,
+        "single_delta_ms": 0.9319000000000002,
+        "single_ratio": 3.2509661835748798,
+        "four_pass": true,
+        "four_delta_ms": 0.3618000000000001,
+        "four_ratio": 1.367645564475155
+      },
+      {
+        "case_id": 31,
+        "query": {
+          "text": "the",
+          "offset": 0,
+          "limit": 200,
+          "base": 16
+        },
+        "n": 40,
+        "idle_single_ms": 5.5133,
+        "idle_four_ms": 7.9571,
+        "loaded_p50_ms": 5.7152,
+        "loaded_p95_ms": 8.2853,
+        "loaded_max_ms": 13.5083,
+        "single_pass": true,
+        "single_delta_ms": 2.7719999999999994,
+        "single_ratio": 1.5027841764460486,
+        "four_pass": true,
+        "four_delta_ms": 0.3281999999999998,
+        "four_ratio": 1.0412461826544848
+      },
+      {
+        "case_id": 32,
+        "query": {
+          "text": "the",
+          "offset": 5000,
+          "limit": 50,
+          "base": 16
+        },
+        "n": 40,
+        "idle_single_ms": 2.4105,
+        "idle_four_ms": 4.6865,
+        "loaded_p50_ms": 2.5993,
+        "loaded_p95_ms": 4.4148,
+        "loaded_max_ms": 5.6059,
+        "single_pass": true,
+        "single_delta_ms": 2.0042999999999997,
+        "single_ratio": 1.8314872433105165,
+        "four_pass": true,
+        "four_delta_ms": -0.27170000000000005,
+        "four_ratio": 0.9420249653259362
+      },
+      {
+        "case_id": 33,
+        "query": {
+          "text": "the",
+          "offset": 9950,
+          "limit": 50,
+          "base": 16
+        },
+        "n": 40,
+        "idle_single_ms": 1.7496,
+        "idle_four_ms": 3.1962,
+        "loaded_p50_ms": 2.1216,
+        "loaded_p95_ms": 2.8844,
+        "loaded_max_ms": 3.2054,
+        "single_pass": true,
+        "single_delta_ms": 1.1347999999999998,
+        "single_ratio": 1.6486053955189757,
+        "four_pass": true,
+        "four_delta_ms": -0.3118000000000003,
+        "four_ratio": 0.9024466554032913
+      },
+      {
+        "case_id": 34,
+        "query": {
+          "text": "ishmael",
+          "offset": 130,
+          "limit": 1,
+          "base": 6
+        },
+        "n": 40,
+        "idle_single_ms": 8.1798,
+        "idle_four_ms": 14.4713,
+        "loaded_p50_ms": 12.4184,
+        "loaded_p95_ms": 14.6193,
+        "loaded_max_ms": 23.0305,
+        "single_pass": true,
+        "single_delta_ms": 6.439500000000001,
+        "single_ratio": 1.7872441868994353,
+        "four_pass": true,
+        "four_delta_ms": 0.14800000000000146,
+        "four_ratio": 1.0102271392342086
+      },
+      {
+        "case_id": 35,
+        "query": {
+          "text": "ishmael",
+          "offset": 60,
+          "limit": 200,
+          "base": 6
+        },
+        "n": 40,
+        "idle_single_ms": 13.2189,
+        "idle_four_ms": 23.8019,
+        "loaded_p50_ms": 20.5754,
+        "loaded_p95_ms": 24.0234,
+        "loaded_max_ms": 38.1781,
+        "single_pass": true,
+        "single_delta_ms": 10.804499999999999,
+        "single_ratio": 1.8173524272064998,
+        "four_pass": true,
+        "four_delta_ms": 0.22149999999999892,
+        "four_ratio": 1.009305979774724
+      },
+      {
+        "case_id": 36,
+        "query": {
+          "text": "quixote",
+          "offset": 28,
+          "limit": 10,
+          "base": 0
+        },
+        "n": 40,
+        "idle_single_ms": 3.2137,
+        "idle_four_ms": 5.8328,
+        "loaded_p50_ms": 5.2501,
+        "loaded_p95_ms": 7.1672,
+        "loaded_max_ms": 7.8138,
+        "single_pass": false,
+        "single_delta_ms": 3.9535000000000005,
+        "single_ratio": 2.2302019479105084,
+        "four_pass": true,
+        "four_delta_ms": 1.3344000000000005,
+        "four_ratio": 1.2287752023042107
+      },
+      {
+        "case_id": 37,
+        "query": {
+          "text": "quixote",
+          "offset": 57,
+          "limit": 50,
+          "base": 0
+        },
+        "n": 40,
+        "idle_single_ms": 1.443,
+        "idle_four_ms": 3.4854,
+        "loaded_p50_ms": 2.9671,
+        "loaded_p95_ms": 3.9568,
+        "loaded_max_ms": 11.2922,
+        "single_pass": false,
+        "single_delta_ms": 2.5138,
+        "single_ratio": 2.742065142065142,
+        "four_pass": true,
+        "four_delta_ms": 0.47140000000000004,
+        "four_ratio": 1.1352498995811098
+      }
+    ],
+    "sqlite-one": [
+      {
+        "case_id": 0,
+        "query": {
+          "text": "quixote",
+          "offset": 0,
+          "limit": 50,
+          "base": 0
+        },
+        "n": 8,
+        "idle_single_ms": 15.8867,
+        "idle_four_ms": 35.71,
+        "loaded_p50_ms": 23.513,
+        "loaded_p95_ms": 35.4989,
+        "loaded_max_ms": 35.4989,
+        "single_pass": false,
+        "single_delta_ms": 19.6122,
+        "single_ratio": 2.234504333813819,
+        "four_pass": true,
+        "four_delta_ms": -0.21110000000000184,
+        "four_ratio": 0.9940884906188742
+      },
+      {
+        "case_id": 1,
+        "query": {
+          "text": "zeuglodon",
+          "offset": 0,
+          "limit": 50,
+          "base": 1
+        },
+        "n": 8,
+        "idle_single_ms": 11.1614,
+        "idle_four_ms": 20.6895,
+        "loaded_p50_ms": 17.9315,
+        "loaded_p95_ms": 19.589,
+        "loaded_max_ms": 19.589,
+        "single_pass": true,
+        "single_delta_ms": 8.427599999999998,
+        "single_ratio": 1.7550665687100182,
+        "four_pass": true,
+        "four_delta_ms": -1.1005000000000003,
+        "four_ratio": 0.9468087677324246
+      },
+      {
+        "case_id": 2,
+        "query": {
+          "text": "beagle",
+          "offset": 0,
+          "limit": 50,
+          "base": 2
+        },
+        "n": 8,
+        "idle_single_ms": 145.7296,
+        "idle_four_ms": 252.6101,
+        "loaded_p50_ms": 248.8619,
+        "loaded_p95_ms": 255.1802,
+        "loaded_max_ms": 255.1802,
+        "single_pass": true,
+        "single_delta_ms": 109.45060000000001,
+        "single_ratio": 1.7510526344682207,
+        "four_pass": true,
+        "four_delta_ms": 2.570100000000025,
+        "four_ratio": 1.0101741775170512
+      },
+      {
+        "case_id": 3,
+        "query": {
+          "text": "mesopotamia",
+          "offset": 0,
+          "limit": 50,
+          "base": 3
+        },
+        "n": 8,
+        "idle_single_ms": 13.3685,
+        "idle_four_ms": 23.4683,
+        "loaded_p50_ms": 21.7188,
+        "loaded_p95_ms": 24.6894,
+        "loaded_max_ms": 24.6894,
+        "single_pass": true,
+        "single_delta_ms": 11.3209,
+        "single_ratio": 1.8468339753899092,
+        "four_pass": true,
+        "four_delta_ms": 1.2210999999999999,
+        "four_ratio": 1.0520318898258503
+      },
+      {
+        "case_id": 4,
+        "query": {
+          "text": "transubstantiation",
+          "offset": 0,
+          "limit": 50,
+          "base": 4
+        },
+        "n": 8,
+        "idle_single_ms": 544.9748,
+        "idle_four_ms": 848.6388,
+        "loaded_p50_ms": 840.4143,
+        "loaded_p95_ms": 855.9247,
+        "loaded_max_ms": 855.9247,
+        "single_pass": true,
+        "single_delta_ms": 310.94990000000007,
+        "single_ratio": 1.5705766578564735,
+        "four_pass": true,
+        "four_delta_ms": 7.285900000000083,
+        "four_ratio": 1.0085853958126827
+      },
+      {
+        "case_id": 5,
+        "query": {
+          "text": "harpoon",
+          "offset": 0,
+          "limit": 50,
+          "base": 5
+        },
+        "n": 8,
+        "idle_single_ms": 552.01,
+        "idle_four_ms": 858.9823,
+        "loaded_p50_ms": 851.9946,
+        "loaded_p95_ms": 879.1625,
+        "loaded_max_ms": 879.1625,
+        "single_pass": true,
+        "single_delta_ms": 327.15250000000003,
+        "single_ratio": 1.5926568359268853,
+        "four_pass": true,
+        "four_delta_ms": 20.180200000000013,
+        "four_ratio": 1.0234931499752673
+      },
+      {
+        "case_id": 6,
+        "query": {
+          "text": "ishmael",
+          "offset": 0,
+          "limit": 50,
+          "base": 6
+        },
+        "n": 8,
+        "idle_single_ms": 62.4731,
+        "idle_four_ms": 104.2743,
+        "loaded_p50_ms": 100.8339,
+        "loaded_p95_ms": 104.8225,
+        "loaded_max_ms": 104.8225,
+        "single_pass": true,
+        "single_delta_ms": 42.3494,
+        "single_ratio": 1.6778821604818714,
+        "four_pass": true,
+        "four_delta_ms": 0.5482000000000085,
+        "four_ratio": 1.0052572877497141
+      },
+      {
+        "case_id": 7,
+        "query": {
+          "text": "invertebrata",
+          "offset": 0,
+          "limit": 50,
+          "base": 7
+        },
+        "n": 8,
+        "idle_single_ms": 98.393,
+        "idle_four_ms": 166.5253,
+        "loaded_p50_ms": 163.7772,
+        "loaded_p95_ms": 169.1579,
+        "loaded_max_ms": 169.1579,
+        "single_pass": true,
+        "single_delta_ms": 70.76490000000001,
+        "single_ratio": 1.7192066508796358,
+        "four_pass": true,
+        "four_delta_ms": 2.632600000000025,
+        "four_ratio": 1.015809009201605
+      },
+      {
+        "case_id": 8,
+        "query": {
+          "text": "darcy",
+          "offset": 0,
+          "limit": 50,
+          "base": 8
+        },
+        "n": 8,
+        "idle_single_ms": 403.5685,
+        "idle_four_ms": 739.2022,
+        "loaded_p50_ms": 721.0839,
+        "loaded_p95_ms": 756.995,
+        "loaded_max_ms": 756.995,
+        "single_pass": true,
+        "single_delta_ms": 353.42650000000003,
+        "single_ratio": 1.875753434670942,
+        "four_pass": true,
+        "four_delta_ms": 17.792800000000057,
+        "four_ratio": 1.0240702746826242
+      },
+      {
+        "case_id": 9,
+        "query": {
+          "text": "elizabeth",
+          "offset": 0,
+          "limit": 50,
+          "base": 9
+        },
+        "n": 8,
+        "idle_single_ms": 390.5389,
+        "idle_four_ms": 668.3419,
+        "loaded_p50_ms": 659.5838,
+        "loaded_p95_ms": 685.5082,
+        "loaded_max_ms": 685.5082,
+        "single_pass": true,
+        "single_delta_ms": 294.9693,
+        "single_ratio": 1.755287885534578,
+        "four_pass": true,
+        "four_delta_ms": 17.16629999999998,
+        "four_ratio": 1.025684907679737
+      },
+      {
+        "case_id": 10,
+        "query": {
+          "text": "watson",
+          "offset": 0,
+          "limit": 50,
+          "base": 10
+        },
+        "n": 8,
+        "idle_single_ms": 374.4613,
+        "idle_four_ms": 602.7696,
+        "loaded_p50_ms": 609.4874,
+        "loaded_p95_ms": 632.103,
+        "loaded_max_ms": 632.103,
+        "single_pass": true,
+        "single_delta_ms": 257.64169999999996,
+        "single_ratio": 1.6880329155509526,
+        "four_pass": true,
+        "four_delta_ms": 29.333399999999983,
+        "four_ratio": 1.0486643652898222
+      },
+      {
+        "case_id": 11,
+        "query": {
+          "text": "holmes",
+          "offset": 0,
+          "limit": 50,
+          "base": 11
+        },
+        "n": 8,
+        "idle_single_ms": 194.1314,
+        "idle_four_ms": 344.87,
+        "loaded_p50_ms": 338.6404,
+        "loaded_p95_ms": 353.2515,
+        "loaded_max_ms": 353.2515,
+        "single_pass": true,
+        "single_delta_ms": 159.1201,
+        "single_ratio": 1.819651534991248,
+        "four_pass": true,
+        "four_delta_ms": 8.381500000000017,
+        "four_ratio": 1.0243033606866356
+      },
+      {
+        "case_id": 12,
+        "query": {
+          "text": "frankenstein",
+          "offset": 0,
+          "limit": 50,
+          "base": 12
+        },
+        "n": 8,
+        "idle_single_ms": 128.6548,
+        "idle_four_ms": 222.1679,
+        "loaded_p50_ms": 215.193,
+        "loaded_p95_ms": 230.6522,
+        "loaded_max_ms": 230.6522,
+        "single_pass": true,
+        "single_delta_ms": 101.9974,
+        "single_ratio": 1.7927990249877968,
+        "four_pass": true,
+        "four_delta_ms": 8.48429999999999,
+        "four_ratio": 1.038188685224103
+      },
+      {
+        "case_id": 13,
+        "query": {
+          "text": "galapagos",
+          "offset": 0,
+          "limit": 50,
+          "base": 13
+        },
+        "n": 8,
+        "idle_single_ms": 64.7586,
+        "idle_four_ms": 121.407,
+        "loaded_p50_ms": 118.0711,
+        "loaded_p95_ms": 124.1031,
+        "loaded_max_ms": 124.1031,
+        "single_pass": true,
+        "single_delta_ms": 59.3445,
+        "single_ratio": 1.9163956601903067,
+        "four_pass": true,
+        "four_delta_ms": 2.6961000000000013,
+        "four_ratio": 1.0222071215004078
+      },
+      {
+        "case_id": 14,
+        "query": {
+          "text": "fossil",
+          "offset": 0,
+          "limit": 50,
+          "base": 14
+        },
+        "n": 8,
+        "idle_single_ms": 257.1466,
+        "idle_four_ms": 453.8705,
+        "loaded_p50_ms": 443.9673,
+        "loaded_p95_ms": 458.3111,
+        "loaded_max_ms": 458.3111,
+        "single_pass": true,
+        "single_delta_ms": 201.16450000000003,
+        "single_ratio": 1.7822950021505244,
+        "four_pass": true,
+        "four_delta_ms": 4.440600000000018,
+        "four_ratio": 1.0097838480359487
+      },
+      {
+        "case_id": 15,
+        "query": {
+          "text": "geologist",
+          "offset": 0,
+          "limit": 50,
+          "base": 15
+        },
+        "n": 8,
+        "idle_single_ms": 129.1251,
+        "idle_four_ms": 237.7102,
+        "loaded_p50_ms": 232.7319,
+        "loaded_p95_ms": 247.1392,
+        "loaded_max_ms": 247.1392,
+        "single_pass": true,
+        "single_delta_ms": 118.01409999999998,
+        "single_ratio": 1.9139516639290113,
+        "four_pass": true,
+        "four_delta_ms": 9.429000000000002,
+        "four_ratio": 1.039665946181527
+      },
+      {
+        "case_id": 16,
+        "query": {
+          "text": "the",
+          "offset": 0,
+          "limit": 50,
+          "base": 16
+        },
+        "n": 8,
+        "idle_single_ms": 1210.9362,
+        "idle_four_ms": 2132.8754,
+        "loaded_p50_ms": 2135.5146,
+        "loaded_p95_ms": 2167.7851,
+        "loaded_max_ms": 2167.7851,
+        "single_pass": true,
+        "single_delta_ms": 956.8489,
+        "single_ratio": 1.7901728431274908,
+        "four_pass": true,
+        "four_delta_ms": 34.90970000000016,
+        "four_ratio": 1.0163674352472725
+      },
+      {
+        "case_id": 17,
+        "query": {
+          "text": "man",
+          "offset": 0,
+          "limit": 50,
+          "base": 17
+        },
+        "n": 8,
+        "idle_single_ms": 1128.8566,
+        "idle_four_ms": 2153.9062,
+        "loaded_p50_ms": 2184.0963,
+        "loaded_p95_ms": 2248.3323,
+        "loaded_max_ms": 2248.3323,
+        "single_pass": true,
+        "single_delta_ms": 1119.4757,
+        "single_ratio": 1.9916899099495895,
+        "four_pass": true,
+        "four_delta_ms": 94.42610000000013,
+        "four_ratio": 1.0438394671039992
+      },
+      {
+        "case_id": 18,
+        "query": {
+          "text": "he",
+          "offset": 0,
+          "limit": 50,
+          "base": 18
+        },
+        "n": 8,
+        "idle_single_ms": 1120.3393,
+        "idle_four_ms": 2093.5351,
+        "loaded_p50_ms": 2074.4353,
+        "loaded_p95_ms": 2167.662,
+        "loaded_max_ms": 2167.662,
+        "single_pass": true,
+        "single_delta_ms": 1047.3226999999997,
+        "single_ratio": 1.9348263512669774,
+        "four_pass": true,
+        "four_delta_ms": 74.12689999999975,
+        "four_ratio": 1.0354075267235785
+      },
+      {
+        "case_id": 19,
+        "query": {
+          "text": "zzxqnever",
+          "offset": 0,
+          "limit": 50,
+          "base": 19
+        },
+        "n": 8,
+        "idle_single_ms": 1.424,
+        "idle_four_ms": 3.5212,
+        "loaded_p50_ms": 2.1085,
+        "loaded_p95_ms": 2.9712,
+        "loaded_max_ms": 2.9712,
+        "single_pass": false,
+        "single_delta_ms": 1.5472000000000001,
+        "single_ratio": 2.0865168539325842,
+        "four_pass": true,
+        "four_delta_ms": -0.5499999999999998,
+        "four_ratio": 0.8438032488924231
+      },
+      {
+        "case_id": 20,
+        "query": {
+          "text": "zx",
+          "offset": 0,
+          "limit": 50,
+          "base": 20
+        },
+        "n": 8,
+        "idle_single_ms": 1503.7143,
+        "idle_four_ms": 2789.8583,
+        "loaded_p50_ms": 2739.1609,
+        "loaded_p95_ms": 2831.6251,
+        "loaded_max_ms": 2831.6251,
+        "single_pass": true,
+        "single_delta_ms": 1327.9108,
+        "single_ratio": 1.8830871662256587,
+        "four_pass": true,
+        "four_delta_ms": 41.76680000000033,
+        "four_ratio": 1.0149709395634898
+      },
+      {
+        "case_id": 21,
+        "query": {
+          "text": "the zx",
+          "offset": 0,
+          "limit": 50,
+          "base": 21
+        },
+        "n": 8,
+        "idle_single_ms": 1579.3565,
+        "idle_four_ms": 2892.4106,
+        "loaded_p50_ms": 2911.9703,
+        "loaded_p95_ms": 2954.6175,
+        "loaded_max_ms": 2954.6175,
+        "single_pass": true,
+        "single_delta_ms": 1375.2609999999997,
+        "single_ratio": 1.8707730015357518,
+        "four_pass": true,
+        "four_delta_ms": 62.20689999999968,
+        "four_ratio": 1.0215069395749
+      },
+      {
+        "case_id": 22,
+        "query": {
+          "text": "quixote whale",
+          "offset": 0,
+          "limit": 50,
+          "base": 22
+        },
+        "n": 8,
+        "idle_single_ms": 15.5172,
+        "idle_four_ms": 31.5996,
+        "loaded_p50_ms": 27.8712,
+        "loaded_p95_ms": 32.1436,
+        "loaded_max_ms": 32.1436,
+        "single_pass": false,
+        "single_delta_ms": 16.626399999999997,
+        "single_ratio": 2.07148196839636,
+        "four_pass": true,
+        "four_delta_ms": 0.5440000000000005,
+        "four_ratio": 1.017215407789972
+      },
+      {
+        "case_id": 23,
+        "query": {
+          "text": "holmes elementary",
+          "offset": 0,
+          "limit": 50,
+          "base": 23
+        },
+        "n": 8,
+        "idle_single_ms": 312.9128,
+        "idle_four_ms": 518.27,
+        "loaded_p50_ms": 517.7953,
+        "loaded_p95_ms": 535.7502,
+        "loaded_max_ms": 535.7502,
+        "single_pass": true,
+        "single_delta_ms": 222.83739999999995,
+        "single_ratio": 1.7121389729023546,
+        "four_pass": true,
+        "four_delta_ms": 17.480199999999968,
+        "four_ratio": 1.03372797962452
+      },
+      {
+        "case_id": 24,
+        "query": {
+          "text": "fossil geologist",
+          "offset": 0,
+          "limit": 50,
+          "base": 24
+        },
+        "n": 8,
+        "idle_single_ms": 96.3985,
+        "idle_four_ms": 179.7242,
+        "loaded_p50_ms": 177.8803,
+        "loaded_p95_ms": 181.8786,
+        "loaded_max_ms": 181.8786,
+        "single_pass": true,
+        "single_delta_ms": 85.48010000000001,
+        "single_ratio": 1.8867368268178448,
+        "four_pass": true,
+        "four_delta_ms": 2.1544000000000096,
+        "four_ratio": 1.01198725602896
+      },
+      {
+        "case_id": 25,
+        "query": {
+          "text": "whale harpoon",
+          "offset": 0,
+          "limit": 50,
+          "base": 25
+        },
+        "n": 8,
+        "idle_single_ms": 406.8606,
+        "idle_four_ms": 751.4981,
+        "loaded_p50_ms": 751.1311,
+        "loaded_p95_ms": 777.9322,
+        "loaded_max_ms": 777.9322,
+        "single_pass": true,
+        "single_delta_ms": 371.0716,
+        "single_ratio": 1.9120362109282638,
+        "four_pass": true,
+        "four_delta_ms": 26.434099999999944,
+        "four_ratio": 1.035175205366454
+      },
+      {
+        "case_id": 26,
+        "query": {
+          "text": "QUİXOTE",
+          "offset": 0,
+          "limit": 50,
+          "base": 26
+        },
+        "n": 8,
+        "idle_single_ms": 13.2391,
+        "idle_four_ms": 24.575,
+        "loaded_p50_ms": 22.8796,
+        "loaded_p95_ms": 24.8314,
+        "loaded_max_ms": 24.8314,
+        "single_pass": true,
+        "single_delta_ms": 11.592299999999998,
+        "single_ratio": 1.8756108798936482,
+        "four_pass": true,
+        "four_delta_ms": 0.2563999999999993,
+        "four_ratio": 1.0104333672431332
+      },
+      {
+        "case_id": 27,
+        "query": {
+          "text": "İSHMAEL",
+          "offset": 0,
+          "limit": 50,
+          "base": 27
+        },
+        "n": 8,
+        "idle_single_ms": 54.2376,
+        "idle_four_ms": 110.8219,
+        "loaded_p50_ms": 101.1633,
+        "loaded_p95_ms": 108.8343,
+        "loaded_max_ms": 108.8343,
+        "single_pass": false,
+        "single_delta_ms": 54.5967,
+        "single_ratio": 2.0066208681800077,
+        "four_pass": true,
+        "four_delta_ms": -1.9876000000000005,
+        "four_ratio": 0.9820649167718655
+      },
+      {
+        "case_id": 28,
+        "query": {
+          "text": "zxzxzxzxzxzxzxzxzxzxzxzxzxzxzxzxzxzxzxzxzxzxzxzxzxzxzxzxzxzxzxzxzxzxzxzxzxzxzxzxzxzxzxzxzxzxzxzxzxzxzxzxzxzxzxzxzxzxzxzxzxzxzxzxzxzxzxzxzxzxzxzxzxzxzxzxzxzxzxzxzxzxzxzxzxzxzxzxzxzxzxzxzxzxzxzxzxzxzxzxzxzxzxzxzxzxzxzxzxzxzxzxzxzxzxzxzxzxzxzxzxzxzxzxzxzxzxzxzxzxzxzxzxzxzxzxzxzxzxzxzxzxzxzxzxzxzxzxzxzx",
+          "offset": 0,
+          "limit": 50,
+          "base": 28
+        },
+        "n": 8,
+        "idle_single_ms": 15.3161,
+        "idle_four_ms": 30.4613,
+        "loaded_p50_ms": 25.2652,
+        "loaded_p95_ms": 32.4706,
+        "loaded_max_ms": 32.4706,
+        "single_pass": false,
+        "single_delta_ms": 17.1545,
+        "single_ratio": 2.1200305560815087,
+        "four_pass": true,
+        "four_delta_ms": 2.009299999999996,
+        "four_ratio": 1.065962385059075
+      },
+      {
+        "case_id": 29,
+        "query": {
+          "text": "presumption",
+          "offset": 0,
+          "limit": 50,
+          "base": 29
+        },
+        "n": 8,
+        "idle_single_ms": 558.7712,
+        "idle_four_ms": 1032.6758,
+        "loaded_p50_ms": 1015.5959,
+        "loaded_p95_ms": 1038.1625,
+        "loaded_max_ms": 1038.1625,
+        "single_pass": true,
+        "single_delta_ms": 479.3912999999999,
+        "single_ratio": 1.8579384549525815,
+        "four_pass": true,
+        "four_delta_ms": 5.486699999999928,
+        "four_ratio": 1.005313090516888
+      },
+      {
+        "case_id": 30,
+        "query": {
+          "text": "the",
+          "offset": 0,
+          "limit": 1,
+          "base": 16
+        },
+        "n": 8,
+        "idle_single_ms": 1044.1376,
+        "idle_four_ms": 2142.3551,
+        "loaded_p50_ms": 2089.7267,
+        "loaded_p95_ms": 2217.9445,
+        "loaded_max_ms": 2217.9445,
+        "single_pass": false,
+        "single_delta_ms": 1173.8069,
+        "single_ratio": 2.124187942278872,
+        "four_pass": true,
+        "four_delta_ms": 75.58939999999984,
+        "four_ratio": 1.035283319744705
+      },
+      {
+        "case_id": 31,
+        "query": {
+          "text": "the",
+          "offset": 0,
+          "limit": 200,
+          "base": 16
+        },
+        "n": 8,
+        "idle_single_ms": 1268.7287,
+        "idle_four_ms": 2136.5783,
+        "loaded_p50_ms": 2172.0914,
+        "loaded_p95_ms": 2217.2523,
+        "loaded_max_ms": 2217.2523,
+        "single_pass": true,
+        "single_delta_ms": 948.5236000000002,
+        "single_ratio": 1.7476173590145792,
+        "four_pass": true,
+        "four_delta_ms": 80.67399999999998,
+        "four_ratio": 1.037758503865737
+      },
+      {
+        "case_id": 32,
+        "query": {
+          "text": "the",
+          "offset": 5000,
+          "limit": 50,
+          "base": 16
+        },
+        "n": 8,
+        "idle_single_ms": 1172.4989,
+        "idle_four_ms": 2144.9773,
+        "loaded_p50_ms": 2162.8029,
+        "loaded_p95_ms": 2213.8464,
+        "loaded_max_ms": 2213.8464,
+        "single_pass": true,
+        "single_delta_ms": 1041.3474999999999,
+        "single_ratio": 1.888143690369347,
+        "four_pass": true,
+        "four_delta_ms": 68.86909999999989,
+        "four_ratio": 1.0321071463087277
+      },
+      {
+        "case_id": 33,
+        "query": {
+          "text": "the",
+          "offset": 9950,
+          "limit": 50,
+          "base": 16
+        },
+        "n": 8,
+        "idle_single_ms": 1375.1612,
+        "idle_four_ms": 2140.2921,
+        "loaded_p50_ms": 2158.7252,
+        "loaded_p95_ms": 2234.536,
+        "loaded_max_ms": 2234.536,
+        "single_pass": true,
+        "single_delta_ms": 859.3748,
+        "single_ratio": 1.6249265904244536,
+        "four_pass": true,
+        "four_delta_ms": 94.24389999999994,
+        "four_ratio": 1.0440331952820832
+      },
+      {
+        "case_id": 34,
+        "query": {
+          "text": "ishmael",
+          "offset": 130,
+          "limit": 1,
+          "base": 6
+        },
+        "n": 8,
+        "idle_single_ms": 56.0303,
+        "idle_four_ms": 95.6095,
+        "loaded_p50_ms": 94.9789,
+        "loaded_p95_ms": 99.1108,
+        "loaded_max_ms": 99.1108,
+        "single_pass": true,
+        "single_delta_ms": 43.0805,
+        "single_ratio": 1.768878624601332,
+        "four_pass": true,
+        "four_delta_ms": 3.5013000000000005,
+        "four_ratio": 1.0366208378874484
+      },
+      {
+        "case_id": 35,
+        "query": {
+          "text": "ishmael",
+          "offset": 60,
+          "limit": 200,
+          "base": 6
+        },
+        "n": 8,
+        "idle_single_ms": 81.6742,
+        "idle_four_ms": 119.1922,
+        "loaded_p50_ms": 118.3942,
+        "loaded_p95_ms": 120.6713,
+        "loaded_max_ms": 120.6713,
+        "single_pass": true,
+        "single_delta_ms": 38.9971,
+        "single_ratio": 1.4774714658974315,
+        "four_pass": true,
+        "four_delta_ms": 1.4791000000000025,
+        "four_ratio": 1.0124093690694524
+      },
+      {
+        "case_id": 36,
+        "query": {
+          "text": "quixote",
+          "offset": 28,
+          "limit": 10,
+          "base": 0
+        },
+        "n": 8,
+        "idle_single_ms": 11.1933,
+        "idle_four_ms": 20.4954,
+        "loaded_p50_ms": 19.8717,
+        "loaded_p95_ms": 21.7841,
+        "loaded_max_ms": 21.7841,
+        "single_pass": true,
+        "single_delta_ms": 10.590799999999998,
+        "single_ratio": 1.946173157156513,
+        "four_pass": true,
+        "four_delta_ms": 1.2886999999999986,
+        "four_ratio": 1.0628775237370336
+      },
+      {
+        "case_id": 37,
+        "query": {
+          "text": "quixote",
+          "offset": 57,
+          "limit": 50,
+          "base": 0
+        },
+        "n": 8,
+        "idle_single_ms": 6.4827,
+        "idle_four_ms": 12.7636,
+        "loaded_p50_ms": 17.4276,
+        "loaded_p95_ms": 18.2468,
+        "loaded_max_ms": 18.2468,
+        "single_pass": false,
+        "single_delta_ms": 11.7641,
+        "single_ratio": 2.8146914094435957,
+        "four_pass": true,
+        "four_delta_ms": 5.4832,
+        "four_ratio": 1.4295966655175656
+      }
+    ],
+    "sqlite-100": [
+      {
+        "case_id": 0,
+        "query": {
+          "text": "quixote",
+          "offset": 0,
+          "limit": 50,
+          "base": 0
+        },
+        "n": 8,
+        "idle_single_ms": 15.752,
+        "idle_four_ms": 36.2023,
+        "loaded_p50_ms": 17.2187,
+        "loaded_p95_ms": 34.3068,
+        "loaded_max_ms": 34.3068,
+        "single_pass": false,
+        "single_delta_ms": 18.5548,
+        "single_ratio": 2.177932960893855,
+        "four_pass": true,
+        "four_delta_ms": -1.8954999999999984,
+        "four_ratio": 0.9476414481952804
+      },
+      {
+        "case_id": 1,
+        "query": {
+          "text": "zeuglodon",
+          "offset": 0,
+          "limit": 50,
+          "base": 1
+        },
+        "n": 8,
+        "idle_single_ms": 13.575,
+        "idle_four_ms": 20.3354,
+        "loaded_p50_ms": 16.7914,
+        "loaded_p95_ms": 19.5535,
+        "loaded_max_ms": 19.5535,
+        "single_pass": true,
+        "single_delta_ms": 5.9785,
+        "single_ratio": 1.4404051565377534,
+        "four_pass": true,
+        "four_delta_ms": -0.7819000000000003,
+        "four_ratio": 0.961549809691474
+      },
+      {
+        "case_id": 2,
+        "query": {
+          "text": "beagle",
+          "offset": 0,
+          "limit": 50,
+          "base": 2
+        },
+        "n": 8,
+        "idle_single_ms": 161.6588,
+        "idle_four_ms": 251.0903,
+        "loaded_p50_ms": 240.7585,
+        "loaded_p95_ms": 259.5661,
+        "loaded_max_ms": 259.5661,
+        "single_pass": true,
+        "single_delta_ms": 97.90729999999999,
+        "single_ratio": 1.605641635345555,
+        "four_pass": true,
+        "four_delta_ms": 8.475799999999992,
+        "four_ratio": 1.0337559834051733
+      },
+      {
+        "case_id": 3,
+        "query": {
+          "text": "mesopotamia",
+          "offset": 0,
+          "limit": 50,
+          "base": 3
+        },
+        "n": 8,
+        "idle_single_ms": 13.5898,
+        "idle_four_ms": 23.8943,
+        "loaded_p50_ms": 21.7136,
+        "loaded_p95_ms": 23.9262,
+        "loaded_max_ms": 23.9262,
+        "single_pass": true,
+        "single_delta_ms": 10.336400000000001,
+        "single_ratio": 1.7605998616609517,
+        "four_pass": true,
+        "four_delta_ms": 0.03190000000000026,
+        "four_ratio": 1.0013350464336683
+      },
+      {
+        "case_id": 4,
+        "query": {
+          "text": "transubstantiation",
+          "offset": 0,
+          "limit": 50,
+          "base": 4
+        },
+        "n": 8,
+        "idle_single_ms": 516.3576,
+        "idle_four_ms": 840.7275,
+        "loaded_p50_ms": 827.2033,
+        "loaded_p95_ms": 857.2443,
+        "loaded_max_ms": 857.2443,
+        "single_pass": true,
+        "single_delta_ms": 340.8866999999999,
+        "single_ratio": 1.6601756224755864,
+        "four_pass": true,
+        "four_delta_ms": 16.51679999999999,
+        "four_ratio": 1.0196458424400296
+      },
+      {
+        "case_id": 5,
+        "query": {
+          "text": "harpoon",
+          "offset": 0,
+          "limit": 50,
+          "base": 5
+        },
+        "n": 8,
+        "idle_single_ms": 476.9015,
+        "idle_four_ms": 849.1385,
+        "loaded_p50_ms": 819.3661,
+        "loaded_p95_ms": 852.0068,
+        "loaded_max_ms": 852.0068,
+        "single_pass": true,
+        "single_delta_ms": 375.1053,
+        "single_ratio": 1.7865466977981825,
+        "four_pass": true,
+        "four_delta_ms": 2.8682999999999765,
+        "four_ratio": 1.00337789418334
+      },
+      {
+        "case_id": 6,
+        "query": {
+          "text": "ishmael",
+          "offset": 0,
+          "limit": 50,
+          "base": 6
+        },
+        "n": 8,
+        "idle_single_ms": 55.3368,
+        "idle_four_ms": 102.2554,
+        "loaded_p50_ms": 97.7465,
+        "loaded_p95_ms": 106.8851,
+        "loaded_max_ms": 106.8851,
+        "single_pass": true,
+        "single_delta_ms": 51.5483,
+        "single_ratio": 1.9315374217518904,
+        "four_pass": true,
+        "four_delta_ms": 4.6297,
+        "four_ratio": 1.0452758485126459
+      },
+      {
+        "case_id": 7,
+        "query": {
+          "text": "invertebrata",
+          "offset": 0,
+          "limit": 50,
+          "base": 7
+        },
+        "n": 8,
+        "idle_single_ms": 99.5789,
+        "idle_four_ms": 166.9835,
+        "loaded_p50_ms": 158.9735,
+        "loaded_p95_ms": 168.3945,
+        "loaded_max_ms": 168.3945,
+        "single_pass": true,
+        "single_delta_ms": 68.81559999999999,
+        "single_ratio": 1.6910660792597627,
+        "four_pass": true,
+        "four_delta_ms": 1.4110000000000014,
+        "four_ratio": 1.0084499366703896
+      },
+      {
+        "case_id": 8,
+        "query": {
+          "text": "darcy",
+          "offset": 0,
+          "limit": 50,
+          "base": 8
+        },
+        "n": 8,
+        "idle_single_ms": 394.8741,
+        "idle_four_ms": 736.7387,
+        "loaded_p50_ms": 705.552,
+        "loaded_p95_ms": 775.58,
+        "loaded_max_ms": 775.58,
+        "single_pass": true,
+        "single_delta_ms": 380.70590000000004,
+        "single_ratio": 1.9641197029635522,
+        "four_pass": true,
+        "four_delta_ms": 38.84130000000005,
+        "four_ratio": 1.052720591439
+      },
+      {
+        "case_id": 9,
+        "query": {
+          "text": "elizabeth",
+          "offset": 0,
+          "limit": 50,
+          "base": 9
+        },
+        "n": 8,
+        "idle_single_ms": 352.3972,
+        "idle_four_ms": 670.6152,
+        "loaded_p50_ms": 642.8311,
+        "loaded_p95_ms": 662.7481,
+        "loaded_max_ms": 662.7481,
+        "single_pass": true,
+        "single_delta_ms": 310.3509,
+        "single_ratio": 1.8806849203115121,
+        "four_pass": true,
+        "four_delta_ms": -7.867099999999937,
+        "four_ratio": 0.988268831365588
+      },
+      {
+        "case_id": 10,
+        "query": {
+          "text": "watson",
+          "offset": 0,
+          "limit": 50,
+          "base": 10
+        },
+        "n": 8,
+        "idle_single_ms": 321.6989,
+        "idle_four_ms": 602.696,
+        "loaded_p50_ms": 583.1495,
+        "loaded_p95_ms": 602.6056,
+        "loaded_max_ms": 602.6056,
+        "single_pass": true,
+        "single_delta_ms": 280.9067,
+        "single_ratio": 1.8731975769889173,
+        "four_pass": true,
+        "four_delta_ms": -0.09040000000004511,
+        "four_ratio": 0.9998500073005295
+      },
+      {
+        "case_id": 11,
+        "query": {
+          "text": "holmes",
+          "offset": 0,
+          "limit": 50,
+          "base": 11
+        },
+        "n": 8,
+        "idle_single_ms": 174.8112,
+        "idle_four_ms": 341.3726,
+        "loaded_p50_ms": 329.3296,
+        "loaded_p95_ms": 336.3133,
+        "loaded_max_ms": 336.3133,
+        "single_pass": true,
+        "single_delta_ms": 161.5021,
+        "single_ratio": 1.923865862141556,
+        "four_pass": true,
+        "four_delta_ms": -5.059299999999951,
+        "four_ratio": 0.9851795369634236
+      },
+      {
+        "case_id": 12,
+        "query": {
+          "text": "frankenstein",
+          "offset": 0,
+          "limit": 50,
+          "base": 12
+        },
+        "n": 8,
+        "idle_single_ms": 116.0331,
+        "idle_four_ms": 221.5917,
+        "loaded_p50_ms": 208.1386,
+        "loaded_p95_ms": 217.9976,
+        "loaded_max_ms": 217.9976,
+        "single_pass": true,
+        "single_delta_ms": 101.9645,
+        "single_ratio": 1.8787535625610279,
+        "four_pass": true,
+        "four_delta_ms": -3.5940999999999974,
+        "four_ratio": 0.9837805296859043
+      },
+      {
+        "case_id": 13,
+        "query": {
+          "text": "galapagos",
+          "offset": 0,
+          "limit": 50,
+          "base": 13
+        },
+        "n": 8,
+        "idle_single_ms": 64.5991,
+        "idle_four_ms": 120.5133,
+        "loaded_p50_ms": 113.6905,
+        "loaded_p95_ms": 119.0675,
+        "loaded_max_ms": 119.0675,
+        "single_pass": true,
+        "single_delta_ms": 54.46839999999999,
+        "single_ratio": 1.8431758337190454,
+        "four_pass": true,
+        "four_delta_ms": -1.4458000000000055,
+        "four_ratio": 0.9880029839030214
+      },
+      {
+        "case_id": 14,
+        "query": {
+          "text": "fossil",
+          "offset": 0,
+          "limit": 50,
+          "base": 14
+        },
+        "n": 8,
+        "idle_single_ms": 242.0348,
+        "idle_four_ms": 455.6071,
+        "loaded_p50_ms": 435.4449,
+        "loaded_p95_ms": 447.6838,
+        "loaded_max_ms": 447.6838,
+        "single_pass": true,
+        "single_delta_ms": 205.64900000000003,
+        "single_ratio": 1.849667072668889,
+        "four_pass": true,
+        "four_delta_ms": -7.923299999999983,
+        "four_ratio": 0.9826093579314282
+      },
+      {
+        "case_id": 15,
+        "query": {
+          "text": "geologist",
+          "offset": 0,
+          "limit": 50,
+          "base": 15
+        },
+        "n": 8,
+        "idle_single_ms": 131.0676,
+        "idle_four_ms": 237.9792,
+        "loaded_p50_ms": 231.77,
+        "loaded_p95_ms": 244.2171,
+        "loaded_max_ms": 244.2171,
+        "single_pass": true,
+        "single_delta_ms": 113.14949999999999,
+        "single_ratio": 1.8632911566245205,
+        "four_pass": true,
+        "four_delta_ms": 6.237899999999996,
+        "four_ratio": 1.0262119546582222
+      },
+      {
+        "case_id": 16,
+        "query": {
+          "text": "the",
+          "offset": 0,
+          "limit": 50,
+          "base": 16
+        },
+        "n": 8,
+        "idle_single_ms": 1053.2809,
+        "idle_four_ms": 2110.4279,
+        "loaded_p50_ms": 2051.7896,
+        "loaded_p95_ms": 2150.3225,
+        "loaded_max_ms": 2150.3225,
+        "single_pass": false,
+        "single_delta_ms": 1097.0416000000002,
+        "single_ratio": 2.041547036502798,
+        "four_pass": true,
+        "four_delta_ms": 39.89460000000008,
+        "four_ratio": 1.018903559794675
+      },
+      {
+        "case_id": 17,
+        "query": {
+          "text": "man",
+          "offset": 0,
+          "limit": 50,
+          "base": 17
+        },
+        "n": 8,
+        "idle_single_ms": 1140.5018,
+        "idle_four_ms": 2141.8846,
+        "loaded_p50_ms": 2094.4122,
+        "loaded_p95_ms": 2191.037,
+        "loaded_max_ms": 2191.037,
+        "single_pass": true,
+        "single_delta_ms": 1050.5351999999998,
+        "single_ratio": 1.921116652336717,
+        "four_pass": true,
+        "four_delta_ms": 49.15239999999994,
+        "four_ratio": 1.0229482017845406
+      },
+      {
+        "case_id": 18,
+        "query": {
+          "text": "he",
+          "offset": 0,
+          "limit": 50,
+          "base": 18
+        },
+        "n": 8,
+        "idle_single_ms": 1048.1717,
+        "idle_four_ms": 2064.1838,
+        "loaded_p50_ms": 1988.6795,
+        "loaded_p95_ms": 2066.8396,
+        "loaded_max_ms": 2066.8396,
+        "single_pass": true,
+        "single_delta_ms": 1018.6678999999997,
+        "single_ratio": 1.9718521307148433,
+        "four_pass": true,
+        "four_delta_ms": 2.6557999999999993,
+        "four_ratio": 1.0012866102330615
+      },
+      {
+        "case_id": 19,
+        "query": {
+          "text": "zzxqnever",
+          "offset": 0,
+          "limit": 50,
+          "base": 19
+        },
+        "n": 8,
+        "idle_single_ms": 1.3787,
+        "idle_four_ms": 3.3006,
+        "loaded_p50_ms": 1.5811,
+        "loaded_p95_ms": 2.2192,
+        "loaded_max_ms": 2.2192,
+        "single_pass": true,
+        "single_delta_ms": 0.8404999999999998,
+        "single_ratio": 1.609632262276057,
+        "four_pass": true,
+        "four_delta_ms": -1.0814000000000004,
+        "four_ratio": 0.6723626007392595
+      },
+      {
+        "case_id": 20,
+        "query": {
+          "text": "zx",
+          "offset": 0,
+          "limit": 50,
+          "base": 20
+        },
+        "n": 8,
+        "idle_single_ms": 1453.232,
+        "idle_four_ms": 2781.3556,
+        "loaded_p50_ms": 2637.6825,
+        "loaded_p95_ms": 2705.8902,
+        "loaded_max_ms": 2705.8902,
+        "single_pass": true,
+        "single_delta_ms": 1252.6581999999999,
+        "single_ratio": 1.861980881235756,
+        "four_pass": true,
+        "four_delta_ms": -75.46540000000005,
+        "four_ratio": 0.9728674032187757
+      },
+      {
+        "case_id": 21,
+        "query": {
+          "text": "the zx",
+          "offset": 0,
+          "limit": 50,
+          "base": 21
+        },
+        "n": 8,
+        "idle_single_ms": 1515.1659,
+        "idle_four_ms": 2867.0652,
+        "loaded_p50_ms": 2797.1784,
+        "loaded_p95_ms": 2902.1554,
+        "loaded_max_ms": 2902.1554,
+        "single_pass": true,
+        "single_delta_ms": 1386.9895000000001,
+        "single_ratio": 1.9154043791508244,
+        "four_pass": true,
+        "four_delta_ms": 35.090200000000095,
+        "four_ratio": 1.0122390659270672
+      },
+      {
+        "case_id": 22,
+        "query": {
+          "text": "quixote whale",
+          "offset": 0,
+          "limit": 50,
+          "base": 22
+        },
+        "n": 8,
+        "idle_single_ms": 16.4913,
+        "idle_four_ms": 32.6765,
+        "loaded_p50_ms": 27.3203,
+        "loaded_p95_ms": 33.2932,
+        "loaded_max_ms": 33.2932,
+        "single_pass": false,
+        "single_delta_ms": 16.8019,
+        "single_ratio": 2.0188341731700956,
+        "four_pass": true,
+        "four_delta_ms": 0.6167000000000016,
+        "four_ratio": 1.0188728903034292
+      },
+      {
+        "case_id": 23,
+        "query": {
+          "text": "holmes elementary",
+          "offset": 0,
+          "limit": 50,
+          "base": 23
+        },
+        "n": 8,
+        "idle_single_ms": 317.1257,
+        "idle_four_ms": 519.8649,
+        "loaded_p50_ms": 512.8897,
+        "loaded_p95_ms": 521.8664,
+        "loaded_max_ms": 521.8664,
+        "single_pass": true,
+        "single_delta_ms": 204.7407,
+        "single_ratio": 1.6456137109039097,
+        "four_pass": true,
+        "four_delta_ms": 2.0014999999999645,
+        "four_ratio": 1.0038500387312164
+      },
+      {
+        "case_id": 24,
+        "query": {
+          "text": "fossil geologist",
+          "offset": 0,
+          "limit": 50,
+          "base": 24
+        },
+        "n": 8,
+        "idle_single_ms": 97.6338,
+        "idle_four_ms": 182.9682,
+        "loaded_p50_ms": 173.6092,
+        "loaded_p95_ms": 187.1343,
+        "loaded_max_ms": 187.1343,
+        "single_pass": true,
+        "single_delta_ms": 89.5005,
+        "single_ratio": 1.9166958573772608,
+        "four_pass": true,
+        "four_delta_ms": 4.1661,
+        "four_ratio": 1.0227695304429951
+      },
+      {
+        "case_id": 25,
+        "query": {
+          "text": "whale harpoon",
+          "offset": 0,
+          "limit": 50,
+          "base": 25
+        },
+        "n": 8,
+        "idle_single_ms": 413.4309,
+        "idle_four_ms": 746.9801,
+        "loaded_p50_ms": 728.7928,
+        "loaded_p95_ms": 802.9515,
+        "loaded_max_ms": 802.9515,
+        "single_pass": true,
+        "single_delta_ms": 389.5206,
+        "single_ratio": 1.9421661515866375,
+        "four_pass": true,
+        "four_delta_ms": 55.97140000000002,
+        "four_ratio": 1.074930242452242
+      },
+      {
+        "case_id": 26,
+        "query": {
+          "text": "QUİXOTE",
+          "offset": 0,
+          "limit": 50,
+          "base": 26
+        },
+        "n": 8,
+        "idle_single_ms": 13.8326,
+        "idle_four_ms": 24.6533,
+        "loaded_p50_ms": 22.327,
+        "loaded_p95_ms": 24.301,
+        "loaded_max_ms": 24.301,
+        "single_pass": true,
+        "single_delta_ms": 10.468399999999999,
+        "single_ratio": 1.7567919263189855,
+        "four_pass": true,
+        "four_delta_ms": -0.35230000000000317,
+        "four_ratio": 0.985709823836971
+      },
+      {
+        "case_id": 27,
+        "query": {
+          "text": "İSHMAEL",
+          "offset": 0,
+          "limit": 50,
+          "base": 27
+        },
+        "n": 8,
+        "idle_single_ms": 54.4229,
+        "idle_four_ms": 110.4346,
+        "loaded_p50_ms": 97.5526,
+        "loaded_p95_ms": 106.6208,
+        "loaded_max_ms": 106.6208,
+        "single_pass": true,
+        "single_delta_ms": 52.197900000000004,
+        "single_ratio": 1.9591164748662788,
+        "four_pass": true,
+        "four_delta_ms": -3.8138000000000005,
+        "four_ratio": 0.9654655334469451
+      },
+      {
+        "case_id": 28,
+        "query": {
+          "text": "zxzxzxzxzxzxzxzxzxzxzxzxzxzxzxzxzxzxzxzxzxzxzxzxzxzxzxzxzxzxzxzxzxzxzxzxzxzxzxzxzxzxzxzxzxzxzxzxzxzxzxzxzxzxzxzxzxzxzxzxzxzxzxzxzxzxzxzxzxzxzxzxzxzxzxzxzxzxzxzxzxzxzxzxzxzxzxzxzxzxzxzxzxzxzxzxzxzxzxzxzxzxzxzxzxzxzxzxzxzxzxzxzxzxzxzxzxzxzxzxzxzxzxzxzxzxzxzxzxzxzxzxzxzxzxzxzxzxzxzxzxzxzxzxzxzxzxzxzxzx",
+          "offset": 0,
+          "limit": 50,
+          "base": 28
+        },
+        "n": 8,
+        "idle_single_ms": 15.1074,
+        "idle_four_ms": 33.9336,
+        "loaded_p50_ms": 21.5677,
+        "loaded_p95_ms": 32.7508,
+        "loaded_max_ms": 32.7508,
+        "single_pass": false,
+        "single_delta_ms": 17.6434,
+        "single_ratio": 2.167864755020718,
+        "four_pass": true,
+        "four_delta_ms": -1.1828000000000003,
+        "four_ratio": 0.9651436923874861
+      },
+      {
+        "case_id": 29,
+        "query": {
+          "text": "presumption",
+          "offset": 0,
+          "limit": 50,
+          "base": 29
+        },
+        "n": 8,
+        "idle_single_ms": 576.4114,
+        "idle_four_ms": 1020.8987,
+        "loaded_p50_ms": 991.6731,
+        "loaded_p95_ms": 1032.9605,
+        "loaded_max_ms": 1032.9605,
+        "single_pass": true,
+        "single_delta_ms": 456.54909999999995,
+        "single_ratio": 1.7920542515293765,
+        "four_pass": true,
+        "four_delta_ms": 12.061799999999948,
+        "four_ratio": 1.0118148842779406
+      },
+      {
+        "case_id": 30,
+        "query": {
+          "text": "the",
+          "offset": 0,
+          "limit": 1,
+          "base": 16
+        },
+        "n": 8,
+        "idle_single_ms": 1073.1696,
+        "idle_four_ms": 2103.2699,
+        "loaded_p50_ms": 2054.2735,
+        "loaded_p95_ms": 2085.2703,
+        "loaded_max_ms": 2085.2703,
+        "single_pass": true,
+        "single_delta_ms": 1012.1007000000002,
+        "single_ratio": 1.943094828627274,
+        "four_pass": true,
+        "four_delta_ms": -17.999599999999646,
+        "four_ratio": 0.9914420873897356
+      },
+      {
+        "case_id": 31,
+        "query": {
+          "text": "the",
+          "offset": 0,
+          "limit": 200,
+          "base": 16
+        },
+        "n": 8,
+        "idle_single_ms": 1058.5357,
+        "idle_four_ms": 2127.9266,
+        "loaded_p50_ms": 2078.9134,
+        "loaded_p95_ms": 2122.3971,
+        "loaded_max_ms": 2122.3971,
+        "single_pass": false,
+        "single_delta_ms": 1063.8614000000002,
+        "single_ratio": 2.0050311954523594,
+        "four_pass": true,
+        "four_delta_ms": -5.5294999999996435,
+        "four_ratio": 0.9974014611218265
+      },
+      {
+        "case_id": 32,
+        "query": {
+          "text": "the",
+          "offset": 5000,
+          "limit": 50,
+          "base": 16
+        },
+        "n": 8,
+        "idle_single_ms": 1061.1354,
+        "idle_four_ms": 2130.9891,
+        "loaded_p50_ms": 2066.313,
+        "loaded_p95_ms": 2174.2557,
+        "loaded_max_ms": 2174.2557,
+        "single_pass": false,
+        "single_delta_ms": 1113.1203000000003,
+        "single_ratio": 2.048989883854596,
+        "four_pass": true,
+        "four_delta_ms": 43.26660000000038,
+        "four_ratio": 1.020303529473708
+      },
+      {
+        "case_id": 33,
+        "query": {
+          "text": "the",
+          "offset": 9950,
+          "limit": 50,
+          "base": 16
+        },
+        "n": 8,
+        "idle_single_ms": 1068.0237,
+        "idle_four_ms": 2133.4227,
+        "loaded_p50_ms": 2074.7208,
+        "loaded_p95_ms": 2139.0368,
+        "loaded_max_ms": 2139.0368,
+        "single_pass": false,
+        "single_delta_ms": 1071.0131,
+        "single_ratio": 2.002799001557737,
+        "four_pass": true,
+        "four_delta_ms": 5.61409999999978,
+        "four_ratio": 1.0026314991398562
+      },
+      {
+        "case_id": 34,
+        "query": {
+          "text": "ishmael",
+          "offset": 130,
+          "limit": 1,
+          "base": 6
+        },
+        "n": 8,
+        "idle_single_ms": 50.7458,
+        "idle_four_ms": 95.0032,
+        "loaded_p50_ms": 91.1825,
+        "loaded_p95_ms": 110.6688,
+        "loaded_max_ms": 110.6688,
+        "single_pass": false,
+        "single_delta_ms": 59.923,
+        "single_ratio": 2.1808464936999714,
+        "four_pass": true,
+        "four_delta_ms": 15.665599999999998,
+        "four_ratio": 1.1648954982569009
+      },
+      {
+        "case_id": 35,
+        "query": {
+          "text": "ishmael",
+          "offset": 60,
+          "limit": 200,
+          "base": 6
+        },
+        "n": 8,
+        "idle_single_ms": 63.741,
+        "idle_four_ms": 121.0666,
+        "loaded_p50_ms": 114.3638,
+        "loaded_p95_ms": 129.8291,
+        "loaded_max_ms": 129.8291,
+        "single_pass": false,
+        "single_delta_ms": 66.08810000000001,
+        "single_ratio": 2.0368224533659656,
+        "four_pass": true,
+        "four_delta_ms": 8.762500000000017,
+        "four_ratio": 1.0723775178290298
+      },
+      {
+        "case_id": 36,
+        "query": {
+          "text": "quixote",
+          "offset": 28,
+          "limit": 10,
+          "base": 0
+        },
+        "n": 8,
+        "idle_single_ms": 11.0892,
+        "idle_four_ms": 20.7902,
+        "loaded_p50_ms": 18.4049,
+        "loaded_p95_ms": 25.002,
+        "loaded_max_ms": 25.002,
+        "single_pass": false,
+        "single_delta_ms": 13.912799999999999,
+        "single_ratio": 2.254626122713992,
+        "four_pass": true,
+        "four_delta_ms": 4.2118,
+        "four_ratio": 1.2025858337101134
+      },
+      {
+        "case_id": 37,
+        "query": {
+          "text": "quixote",
+          "offset": 57,
+          "limit": 50,
+          "base": 0
+        },
+        "n": 8,
+        "idle_single_ms": 6.2776,
+        "idle_four_ms": 11.4875,
+        "loaded_p50_ms": 10.313,
+        "loaded_p95_ms": 17.9026,
+        "loaded_max_ms": 17.9026,
+        "single_pass": false,
+        "single_delta_ms": 11.625,
+        "single_ratio": 2.851822352491398,
+        "four_pass": true,
+        "four_delta_ms": 6.415099999999999,
+        "four_ratio": 1.558441784548422
+      }
+    ]
+  },
+  "raw": [
+    {
+      "path": "snapshot-10k-20261026-fdb-one-r0-load-fdb-streamed-snapshot-one.jsonl",
+      "bytes": 1800152,
+      "sha256": "1F5562F1ECB62B274F8B537FC94C860ED51BD8A83489068382ED2A0A59A88419"
+    },
+    {
+      "path": "snapshot-10k-20261026-fdb-one-r0-control-fdb-streamed-snapshot-control-one.jsonl",
+      "bytes": 7868,
+      "sha256": "78572B66EA4E427AA780F9F6CA012153C4DA88DD8FD604ABD90378434DEFBDE8"
+    },
+    {
+      "path": "snapshot-10k-20261026-fdb-one-r1-load-fdb-streamed-snapshot-one.jsonl",
+      "bytes": 1800623,
+      "sha256": "A4C9075D533B665FA48D30096AF365D3F6D1A0F89C3070F5D9B8414637CBE4D6"
+    },
+    {
+      "path": "snapshot-10k-20261026-fdb-one-r1-control-fdb-streamed-snapshot-control-one.jsonl",
+      "bytes": 7839,
+      "sha256": "7F6158132327FF536E79544E061B6C4F799BB640908E19119BA91E6B62E046F5"
+    },
+    {
+      "path": "snapshot-10k-20261026-fdb-100-r0-load-fdb-streamed-snapshot-100.jsonl",
+      "bytes": 1795342,
+      "sha256": "8709E817B1A71C5B7E168BF3AF1B49A320056E1B2F2EC8AEB86998A0FC475566"
+    },
+    {
+      "path": "snapshot-10k-20261026-fdb-100-r0-control-fdb-streamed-snapshot-control-100.jsonl",
+      "bytes": 4972,
+      "sha256": "3563E20A18A70DDA86A5B7D00565FF191579975EE5F4F12465EC84AC01D7529C"
+    },
+    {
+      "path": "snapshot-10k-20261026-fdb-100-r1-load-fdb-streamed-snapshot-100.jsonl",
+      "bytes": 1795572,
+      "sha256": "F7D761140F9CF439F26949F14D87FE26EF62215CB7A9091D8A9D266A4BA65A96"
+    },
+    {
+      "path": "snapshot-10k-20261026-fdb-100-r1-control-fdb-streamed-snapshot-control-100.jsonl",
+      "bytes": 4996,
+      "sha256": "62C07A0C34FBF0F99A9226534B6C8948B0F61E2D8F9AE1002B77F7A02B685DFF"
+    },
+    {
+      "path": "snapshot-10k-20261026-sqlite-one-r0-load-sqlite-streamed-snapshot-one.jsonl",
+      "bytes": 552777,
+      "sha256": "379FB03680EE33711E10205D9F15B69CC2110C9E93D4DAFB74F8E1E5A137713B"
+    },
+    {
+      "path": "snapshot-10k-20261026-sqlite-one-r0-control-sqlite-streamed-snapshot-control-one.jsonl",
+      "bytes": 190104,
+      "sha256": "EA99B8250340253D59065DE4DBC30C38570F7F897F541A88F5BB0FA4A1CDC9E1"
+    },
+    {
+      "path": "snapshot-10k-20261026-sqlite-one-r1-load-sqlite-streamed-snapshot-one.jsonl",
+      "bytes": 552338,
+      "sha256": "DD69C427ECF4732B412692A9556384F4C25E05168BE43A467BF936BE24D42ADD"
+    },
+    {
+      "path": "snapshot-10k-20261026-sqlite-one-r1-control-sqlite-streamed-snapshot-control-one.jsonl",
+      "bytes": 190338,
+      "sha256": "8BE3342A69706711C417FBB906E27EC6E0E2B89C2BE7ED4E4221ED93C2D71F74"
+    },
+    {
+      "path": "snapshot-10k-20261026-sqlite-100-r0-load-sqlite-streamed-snapshot-100.jsonl",
+      "bytes": 365277,
+      "sha256": "B754BF5CCC277602AA8AB4E923AC716544170C82AFC2453FCB988A15692E3FE6"
+    },
+    {
+      "path": "snapshot-10k-20261026-sqlite-100-r0-control-sqlite-streamed-snapshot-control-100.jsonl",
+      "bytes": 3858,
+      "sha256": "1A548F6D91E89C6B4433804E131AAAE0D33015CDE1B9549756917BEAE44EB46C"
+    },
+    {
+      "path": "snapshot-10k-20261026-sqlite-100-r1-load-sqlite-streamed-snapshot-100.jsonl",
+      "bytes": 365252,
+      "sha256": "2A05953E8CB78A20B861ECB761D3188B77BB89B7ECFB0DA4B263197AF264E283"
+    },
+    {
+      "path": "snapshot-10k-20261026-sqlite-100-r1-control-sqlite-streamed-snapshot-control-100.jsonl",
+      "bytes": 3951,
+      "sha256": "E359C43DB0E4D650DF3318619FBBE8693D55DADDA4452E03400D3A5F89338A4E"
+    }
+  ]
+}

@@ -31,6 +31,10 @@ pub(super) struct Control {
     activity: Arc<Activity>,
 }
 impl Control {
+    #[cfg(test)]
+    pub(super) fn is_cancelled(&self) -> bool {
+        self.cancelled.load(Ordering::Acquire)
+    }
     pub fn new(activity: Arc<Activity>) -> Self {
         Self {
             cancelled: AtomicBool::new(false),

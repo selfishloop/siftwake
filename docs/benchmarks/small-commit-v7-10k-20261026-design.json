@@ -1,0 +1,58 @@
+{
+  "protected_before": [
+    {
+      "path": "data\\rkyv-corpus-20261009\\json.payload-bench",
+      "bytes": 2740862279,
+      "sha256": "11F826FCE3F4AE790FEB9FC6DF9B1169F52C2FD699E89FC4A8A4B77AAA41731B"
+    },
+    {
+      "path": "tests\\fixtures\\v1\\checkpoint.fdb",
+      "bytes": 1507,
+      "sha256": "E87667C0FABE64D5A1F59EF86B99F7E612DB755D239B41677DA2ADC24BE7BF57"
+    },
+    {
+      "path": "tests\\fixtures\\v1\\checkpoint.ready",
+      "bytes": 28,
+      "sha256": "BC82C18F8D5C3A209328BD59B12D828D8922BEC4D26CB4D557FD4A493A4A9C2F"
+    }
+  ],
+  "program": "output\\small-commit-fdb-20261026-v7.exe",
+  "sha256": "2C703E05DA3D9A6F5B82C933022B388F24C7652B7BC1241B6FED1A0B6FC42522",
+  "completed": [
+    {
+      "engine": "fdb",
+      "mode": "small-latency",
+      "api": "streamed",
+      "log": "small-commit-v7-10k-20261026-current-slot-fdb-streamed-small-latency.jsonl",
+      "exit_code": 0,
+      "wall_s": 2.187000000005355
+    },
+    {
+      "engine": "fdb",
+      "mode": "verify",
+      "api": "streamed",
+      "log": "small-commit-v7-10k-20261026-current-slot-fdb-streamed-verify.jsonl",
+      "exit_code": 0,
+      "wall_s": 2.827999999994063
+    }
+  ],
+  "scope": "same existing final10k;final per-entry shadow-cache coverage guard;small96 verification,not a new balanced throughput comparison",
+  "protected_after": [
+    {
+      "path": "data\\rkyv-corpus-20261009\\json.payload-bench",
+      "bytes": 2740862279,
+      "sha256": "11F826FCE3F4AE790FEB9FC6DF9B1169F52C2FD699E89FC4A8A4B77AAA41731B"
+    },
+    {
+      "path": "tests\\fixtures\\v1\\checkpoint.fdb",
+      "bytes": 1507,
+      "sha256": "E87667C0FABE64D5A1F59EF86B99F7E612DB755D239B41677DA2ADC24BE7BF57"
+    },
+    {
+      "path": "tests\\fixtures\\v1\\checkpoint.ready",
+      "bytes": 28,
+      "sha256": "BC82C18F8D5C3A209328BD59B12D828D8922BEC4D26CB4D557FD4A493A4A9C2F"
+    }
+  ],
+  "complete": true
+}

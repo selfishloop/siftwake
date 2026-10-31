@@ -1,0 +1,1411 @@
+{
+  "protected": [
+    {
+      "path": "data\\rkyv-corpus-20261009\\json.payload-bench",
+      "bytes": 2740862279,
+      "sha256": "11F826FCE3F4AE790FEB9FC6DF9B1169F52C2FD699E89FC4A8A4B77AAA41731B"
+    },
+    {
+      "path": "tests\\fixtures\\v1\\checkpoint.fdb",
+      "bytes": 1507,
+      "sha256": "E87667C0FABE64D5A1F59EF86B99F7E612DB755D239B41677DA2ADC24BE7BF57"
+    },
+    {
+      "path": "tests\\fixtures\\v1\\checkpoint.ready",
+      "bytes": 28,
+      "sha256": "BC82C18F8D5C3A209328BD59B12D828D8922BEC4D26CB4D557FD4A493A4A9C2F"
+    }
+  ],
+  "designs": [
+    "small-commit-10k-20261026-design.json",
+    "small-commit-final-10k-20261026-design.json",
+    "small-commit-final-v4-10k-20261026-design.json",
+    "small-commit-final-v6-10k-20261026-design.json",
+    "small-commit-mask-10k-20261026-design.json",
+    "small-commit-snapshot-10k-20261026-fdb-100-r0-design.json",
+    "small-commit-snapshot-10k-20261026-fdb-100-r1-design.json",
+    "small-commit-snapshot-10k-20261026-fdb-one-r0-design.json",
+    "small-commit-snapshot-10k-20261026-fdb-one-r1-design.json",
+    "small-commit-snapshot-v4-10k-20261026-fdb-100-r0-design.json",
+    "small-commit-snapshot-v4-10k-20261026-fdb-100-r1-design.json",
+    "small-commit-snapshot-v4-10k-20261026-fdb-one-r0-design.json",
+    "small-commit-snapshot-v4-10k-20261026-fdb-one-r1-design.json",
+    "small-commit-snapshot-v6-10k-20261026-fdb-100-r0-design.json",
+    "small-commit-snapshot-v6-10k-20261026-fdb-100-r1-design.json",
+    "small-commit-snapshot-v6-10k-20261026-fdb-one-r0-design.json",
+    "small-commit-snapshot-v6-10k-20261026-fdb-one-r1-design.json",
+    "small-commit-v2-10k-20261026-design.json",
+    "small-commit-v4-10k-20261026-design.json",
+    "small-commit-v6-10k-20261026-design.json",
+    "small-commit-v7-10k-20261026-design.json"
+  ],
+  "fixed_slots": [
+    "fdb",
+    "sqlite"
+  ],
+  "test_counts": {
+    "passed": 226,
+    "failed": 0,
+    "ignored": 13
+  },
+  "working_source_sha256": {
+    "Cargo.toml": "2AD92FD6068AF86BD772D4D39018F2888CA2B8959B63B55E95084DE101B41520",
+    "src/engine.rs": "1FA9637696262EBD65AAB23F06320F420925E0B08813CCCA63A4BDF711CCAF0C",
+    "src/engine/light.rs": "685440EA10BF83C2A90B9DDBF31A9945CA4BE5B059F02FF4F9DD2B7520C1B916",
+    "src/engine/streamed.rs": "0D7290B819AF4264EB7BC46CB9A18B1F1FFB8473E4D8DF0C7D59344146EFD5D2",
+    "src/engine/snapshot.rs": "094322FBECB7A300DB9EB8BC35A459E5C0801D957027FEFE9BF82CE35A62407C",
+    "src/query.rs": "A0CBD5F85FC52734B253AEF8F2347913CCE09BFEA39BC661C65214C2ACFEEFBE",
+    "src/format.rs": "02FA36BF4C0E9CF8210BDF6449D76803DAED8E9A449B9888369DF971AC45725B"
+  },
+  "balanced_performance_program": {
+    "path": "output/small-commit-fdb-20261026-v6.exe",
+    "sha256": "93641EDE1659DFE762CDB07264EE22DFEDCFEFF3D6F5671DDE9BE474BC802ABD"
+  },
+  "final_correctness_guard": "v7 per-entry dense/sparse shadow coverage, tested after cache miss",
+  "source_format_changed": false,
+  "power_loss_claim": false,
+  "final_program": {
+    "path": "output/small-commit-fdb-20261026-v7.exe",
+    "sha256": "2C703E05DA3D9A6F5B82C933022B388F24C7652B7BC1241B6FED1A0B6FC42522"
+  },
+  "final_normal_kill_windows": 7,
+  "final_small_wal_kill_boundaries": 3,
+  "old_reader": true,
+  "evidence": [
+    {
+      "path": "small-commit-10k-20261026-design.json",
+      "bytes": 8105,
+      "sha256": "DF52CE9C9813168467F8CE8AD23DE1715F52D6C4774C999F64C2714060BD70BA"
+    },
+    {
+      "path": "small-commit-10k-20261026-r0-dirty-fdb-streamed-small-open.jsonl",
+      "bytes": 1256,
+      "sha256": "CEE73C52BDC42EC8BCCBA6B9E4CA6902FBE5D14AF8007D69D61ECCF59342A246"
+    },
+    {
+      "path": "small-commit-10k-20261026-r0-dirty-sqlite-streamed-small-open.jsonl",
+      "bytes": 1116,
+      "sha256": "E564DD20A21054701A63EB177A5686DE21D6307CC6944C18CE915B9DC6C18B5A"
+    },
+    {
+      "path": "small-commit-10k-20261026-r0-fdb-streamed-seed.jsonl",
+      "bytes": 1180,
+      "sha256": "BC514DBB71302E5E25C045B423B47EBBC3D54CE00C41C9CF5F4CB015853DC067"
+    },
+    {
+      "path": "small-commit-10k-20261026-r0-fdb-streamed-small-dirty.jsonl",
+      "bytes": 6081,
+      "sha256": "B00DFD9841C98E7BE0296A1F68D022797646ED7B6DCA4F87B58FC60F9E77CC2B"
+    },
+    {
+      "path": "small-commit-10k-20261026-r0-fdb-streamed-small-latency.jsonl",
+      "bytes": 19030,
+      "sha256": "C7629FAC95DCACA45DBD140F445E66831C2FA15380EDB35617109F4AE170E270"
+    },
+    {
+      "path": "small-commit-10k-20261026-r0-fdb-streamed-small-open.jsonl",
+      "bytes": 1238,
+      "sha256": "D9D1FD389C1CC95CA81159BF8EAB1712C00D1B7C2F19E12DD15B9276F192E836"
+    },
+    {
+      "path": "small-commit-10k-20261026-r0-fdb-streamed-verify.jsonl",
+      "bytes": 7581,
+      "sha256": "22D2309BEB6CA3D5282BD87492C4D428A5C50B1503A6E73109BB5463E37CD8FD"
+    },
+    {
+      "path": "small-commit-10k-20261026-r0-final-fdb-streamed-verify.jsonl",
+      "bytes": 7365,
+      "sha256": "2D2847E9D5E3B41C42242148CD0DF9CD0290BFB2AA17D878D18FC64E5079EF8E"
+    },
+    {
+      "path": "small-commit-10k-20261026-r0-final-sqlite-streamed-verify.jsonl",
+      "bytes": 7239,
+      "sha256": "C2CE95509C3A684E7F3BEEA795B9ED1416BD8C168E975E5F9703D08593BDFB85"
+    },
+    {
+      "path": "small-commit-10k-20261026-r0-sqlite-streamed-seed.jsonl",
+      "bytes": 1070,
+      "sha256": "860D635EAE639CD54651C592DC4F6A9749646C8F593F3F3622B8B4CF7398775F"
+    },
+    {
+      "path": "small-commit-10k-20261026-r0-sqlite-streamed-small-dirty.jsonl",
+      "bytes": 6095,
+      "sha256": "9AD9AA03971FBCA7D1FD8C5255DA1447EE7B5DD9793EEB93118DC67CEC37AD8E"
+    },
+    {
+      "path": "small-commit-10k-20261026-r0-sqlite-streamed-small-latency.jsonl",
+      "bytes": 19124,
+      "sha256": "C9E1E7BD84F3A89262D7F8970402CAECE84571A8AC2862DE58E17F16B0E4C9E7"
+    },
+    {
+      "path": "small-commit-10k-20261026-r0-sqlite-streamed-small-open.jsonl",
+      "bytes": 1116,
+      "sha256": "B37C27A075131FBE650D173D589132610801FAC42E8DE27D50E7D4F94BC37EED"
+    },
+    {
+      "path": "small-commit-10k-20261026-r0-sqlite-streamed-verify.jsonl",
+      "bytes": 7283,
+      "sha256": "559A3BDB1B0E81CDB72F14686A69826A94579EAA3E4A7F5E75F29D53B472DFFC"
+    },
+    {
+      "path": "small-commit-10k-20261026-r1-dirty-fdb-streamed-small-open.jsonl",
+      "bytes": 1256,
+      "sha256": "2355455BADF0A5302F29566C0406CA01F0491825D45439832B4753D4AE31D6D5"
+    },
+    {
+      "path": "small-commit-10k-20261026-r1-dirty-sqlite-streamed-small-open.jsonl",
+      "bytes": 1127,
+      "sha256": "189AF666556954DC309C5C0DD025E82080810F48197A41FF20104C1431089940"
+    },
+    {
+      "path": "small-commit-10k-20261026-r1-fdb-streamed-seed.jsonl",
+      "bytes": 1168,
+      "sha256": "5EB8CC729C1AE791FBBA230AA97E81FD58263971BF3E8296361729774469AF09"
+    },
+    {
+      "path": "small-commit-10k-20261026-r1-fdb-streamed-small-dirty.jsonl",
+      "bytes": 6121,
+      "sha256": "7FF2831E863166045C87515DB5EF687448A711A924CBB7994C432EFA945F1B06"
+    },
+    {
+      "path": "small-commit-10k-20261026-r1-fdb-streamed-small-latency.jsonl",
+      "bytes": 19087,
+      "sha256": "EFB68B4B9C7BCCDE2A8452E10E170294A44D220CA55A3D2920FC8F3548634912"
+    },
+    {
+      "path": "small-commit-10k-20261026-r1-fdb-streamed-small-open.jsonl",
+      "bytes": 1228,
+      "sha256": "303CCCA7A816D6AD23779DDE811C42335A360BC1E315B890706CDEBE9E94F23B"
+    },
+    {
+      "path": "small-commit-10k-20261026-r1-fdb-streamed-verify.jsonl",
+      "bytes": 7385,
+      "sha256": "C868E6E46105E7BC90976BABC6EF1CFD868334C3A7DFD53745448725AE0FCC40"
+    },
+    {
+      "path": "small-commit-10k-20261026-r1-final-fdb-streamed-verify.jsonl",
+      "bytes": 7325,
+      "sha256": "313AEE1B79072C7D942F8712C72E55B36792440DE85C79765A6DBE9408785F11"
+    },
+    {
+      "path": "small-commit-10k-20261026-r1-final-sqlite-streamed-verify.jsonl",
+      "bytes": 7571,
+      "sha256": "8449C47C4179C729D0D83AC3FC13BD0F1B6B9E5ADEEE27F8E6AE7EFDDD5C0F4B"
+    },
+    {
+      "path": "small-commit-10k-20261026-r1-sqlite-streamed-seed.jsonl",
+      "bytes": 1066,
+      "sha256": "9037274582A6C7F3C19E4A0525FB320F794CB6FEA9DB47AED9AC64863EF373EA"
+    },
+    {
+      "path": "small-commit-10k-20261026-r1-sqlite-streamed-small-dirty.jsonl",
+      "bytes": 6041,
+      "sha256": "1219A5A1E7E18449207C04423ED332B2A1A277ACE2C5526D9DF6AFE342213FEB"
+    },
+    {
+      "path": "small-commit-10k-20261026-r1-sqlite-streamed-small-latency.jsonl",
+      "bytes": 19132,
+      "sha256": "AC3C06E87FFF64954CBDDD47A1A4926575F652F1867F444C8BD1C07577B80CFC"
+    },
+    {
+      "path": "small-commit-10k-20261026-r1-sqlite-streamed-small-open.jsonl",
+      "bytes": 1116,
+      "sha256": "F6E707A78E7320B563D4284E418E26CD83D3192C8892A9FC68985C8B1E066101"
+    },
+    {
+      "path": "small-commit-10k-20261026-r1-sqlite-streamed-verify.jsonl",
+      "bytes": 7287,
+      "sha256": "F56B4022B4CE58AA3A961ABB4D0EA402C6EC3CBAA14AA8DD71DCA558CA2579C0"
+    },
+    {
+      "path": "small-commit-final-10k-20261026-current-slot-fdb-streamed-small-boundary.jsonl",
+      "bytes": 142327,
+      "sha256": "13B7BAA91757CACC7B659080DC1EB15A8F90B87E3F88FF73AE90D05F8DE81597"
+    },
+    {
+      "path": "small-commit-final-10k-20261026-current-slot-fdb-streamed-small-catchup.jsonl",
+      "bytes": 15891,
+      "sha256": "5EE170944D8B017FF2AF3609FFB730F579D7A99A05AC479C70DC4D2E58ACA67D"
+    },
+    {
+      "path": "small-commit-final-10k-20261026-current-slot-fdb-streamed-small-chunks.jsonl",
+      "bytes": 2214,
+      "sha256": "4A3A2FBE7D766CF56EFD877687594351A56C154D65B008984C44ACA657DA7BCA"
+    },
+    {
+      "path": "small-commit-final-10k-20261026-current-slot-fdb-streamed-verify.jsonl",
+      "bytes": 7173,
+      "sha256": "AF82F493B3CD96640B68DE2638B6D78BB9C4B9667A9B569A296209472E296F8A"
+    },
+    {
+      "path": "small-commit-final-10k-20261026-design.json",
+      "bytes": 2439,
+      "sha256": "171A31EC1F00ED69D0BED05BBD8EF246750DF2439E67EBC59D0AB5EAE84906E8"
+    },
+    {
+      "path": "small-commit-final-v4-10k-20261026-current-slot-fdb-streamed-small-boundary.jsonl",
+      "bytes": 141961,
+      "sha256": "2276662B26C8E817D4C41834F0529E133506BAFC6ECE99A58A8529AA66A2831F"
+    },
+    {
+      "path": "small-commit-final-v4-10k-20261026-current-slot-fdb-streamed-small-catchup.jsonl",
+      "bytes": 15904,
+      "sha256": "31542EDAE19C30DDA6B95573439E9C14D0FDC8F14E2F1942F260D74E124867B4"
+    },
+    {
+      "path": "small-commit-final-v4-10k-20261026-current-slot-fdb-streamed-small-chunks.jsonl",
+      "bytes": 2232,
+      "sha256": "A02CBC486A3631DA2C2433B12A19A227F4014375EAEE2D3CC34A8649622DB539"
+    },
+    {
+      "path": "small-commit-final-v4-10k-20261026-current-slot-fdb-streamed-verify.jsonl",
+      "bytes": 7467,
+      "sha256": "3032A04E2C7BD42BDA78521CCE000CBEC50F335422478848DF85BAC582236DD9"
+    },
+    {
+      "path": "small-commit-final-v4-10k-20261026-design.json",
+      "bytes": 2452,
+      "sha256": "7914F8203357C9B2FD132338E4B4A404ED7DEB1D584E89C29D994E3A69B35633"
+    },
+    {
+      "path": "small-commit-final-v6-10k-20261026-current-slot-fdb-streamed-small-boundary.jsonl",
+      "bytes": 142313,
+      "sha256": "B39CC4F029BF0CBEA8D6419C76C5121493E1D30578189259A1AB3FB28EA32973"
+    },
+    {
+      "path": "small-commit-final-v6-10k-20261026-current-slot-fdb-streamed-small-catchup.jsonl",
+      "bytes": 15895,
+      "sha256": "F7546D438BEEA81B373295A22405D006762B0BE90591B5DE607F16171B833FB1"
+    },
+    {
+      "path": "small-commit-final-v6-10k-20261026-current-slot-fdb-streamed-small-chunks.jsonl",
+      "bytes": 2231,
+      "sha256": "D3063D003F9731C6C471C64DA9E8779785200D2959DEEBB0469F5BA64E9C0419"
+    },
+    {
+      "path": "small-commit-final-v6-10k-20261026-current-slot-fdb-streamed-verify.jsonl",
+      "bytes": 7255,
+      "sha256": "45DD34321C117B7AFDAE2744A3322F9E3D6D022755354395A79E291A8B7B8923"
+    },
+    {
+      "path": "small-commit-final-v6-10k-20261026-design.json",
+      "bytes": 2453,
+      "sha256": "E2DD4060BC8735FB8231D4F776156C55F39FAABCB88E7E96C323BC5B1FC1854E"
+    },
+    {
+      "path": "small-commit-kill-10k-20261026-cache.jsonl",
+      "bytes": 0,
+      "sha256": "E3B0C44298FC1C149AFBF4C8996FB92427AE41E4649B934CA495991B7852B855"
+    },
+    {
+      "path": "small-commit-kill-10k-20261026-flush.jsonl",
+      "bytes": 729,
+      "sha256": "A9EBD5843205E8B7B8DE7F88DED5A30DDEE8146D130ABAA08DF826E789EFC48B"
+    },
+    {
+      "path": "small-commit-kill-10k-20261026-iterator.jsonl",
+      "bytes": 708,
+      "sha256": "7EBE88DCBBC00780990939D95C9F303F98D79BF1467336BDDD3B65E78248EABE"
+    },
+    {
+      "path": "small-commit-kill-10k-20261026-kill-cache-fdb-owned-verify.jsonl",
+      "bytes": 7362,
+      "sha256": "B173B6FE9878611E723D752CF37A7B6A1FB31BA596FEF1051E7B8ECEA58CFEF9"
+    },
+    {
+      "path": "small-commit-kill-10k-20261026-kill-cancel-fdb-streamed-verify.jsonl",
+      "bytes": 7451,
+      "sha256": "2DC3CD38B235A2E5351F45385CCFDC5BB5D7DCE357694C73FFC4A79DE4FA790A"
+    },
+    {
+      "path": "small-commit-kill-10k-20261026-kill-cancel.jsonl",
+      "bytes": 847,
+      "sha256": "61462DF82BE06850A3D03E0A47C8A290B794CF1D5CD8941E7DC2297F94257AF4"
+    },
+    {
+      "path": "small-commit-kill-10k-20261026-kill-flush-fdb-owned-verify.jsonl",
+      "bytes": 7360,
+      "sha256": "BD4DEEDCAD90BC1A5A2C5A75FAC1DA9C1DC7CAD843BD54563771E0E4ACB5F9FB"
+    },
+    {
+      "path": "small-commit-kill-10k-20261026-kill-iterator-fdb-owned-verify.jsonl",
+      "bytes": 7469,
+      "sha256": "083B14208DD3A3B67B14FB503F003D28A6C9EFD55687527A1B2B8BB3FFA7FD1A"
+    },
+    {
+      "path": "small-commit-kill-10k-20261026-kill-merge-fdb-owned-verify.jsonl",
+      "bytes": 7366,
+      "sha256": "59721AEBA2EBB1077E7B37E052ED947E23E8E82CBF6F1537F730A27FC905CD3C"
+    },
+    {
+      "path": "small-commit-kill-10k-20261026-kill-retire-after-fdb-streamed-verify.jsonl",
+      "bytes": 7571,
+      "sha256": "7E99D30EA6AD8C009662AA10473518BEAEF8544E9BA71BA094EAB5AC55E02296"
+    },
+    {
+      "path": "small-commit-kill-10k-20261026-kill-retire-after.jsonl",
+      "bytes": 1501,
+      "sha256": "1289871680A5787C25DCE41FFFC2C9DF3B18B323CEEC21976D30AEF494F2899B"
+    },
+    {
+      "path": "small-commit-kill-10k-20261026-kill-retire-before-fdb-streamed-verify.jsonl",
+      "bytes": 7243,
+      "sha256": "613C09EC95F0768853A32B55325F1014913CC9C9FE0B7EC694727411E4A18B46"
+    },
+    {
+      "path": "small-commit-kill-10k-20261026-kill-retire-before.jsonl",
+      "bytes": 1500,
+      "sha256": "8B02AD22754443C2250CD56968B3C3DE7D96A7B1077D6D1129AFB3971C2D62D5"
+    },
+    {
+      "path": "small-commit-kill-10k-20261026-merge.jsonl",
+      "bytes": 1005,
+      "sha256": "8CDC9285B99183BC7B465F5D634B3707FA23487F2CB0DADE7DC95C64002FFAF2"
+    },
+    {
+      "path": "small-commit-kill-10k-20261026-old-reader-fdb-streamed-verify.jsonl",
+      "bytes": 7161,
+      "sha256": "7A165E8CBCAC2D92CB45B6DC4A5A255528A903677CB308693F0FE6E76FDCB3BD"
+    },
+    {
+      "path": "small-commit-kill-10k-20261026-summary.json",
+      "bytes": 139784,
+      "sha256": "B2F17249624A88AEA660A569D12657BB2C4D5B42FFC6C07CFB3BD5D24D059590"
+    },
+    {
+      "path": "small-commit-kill-v4-10k-20261026-cache.jsonl",
+      "bytes": 0,
+      "sha256": "E3B0C44298FC1C149AFBF4C8996FB92427AE41E4649B934CA495991B7852B855"
+    },
+    {
+      "path": "small-commit-kill-v4-10k-20261026-flush.jsonl",
+      "bytes": 729,
+      "sha256": "33E4914FA915D3AD43B2947665A252AD998A1F86D5C3015C71C00BAA6E80AE28"
+    },
+    {
+      "path": "small-commit-kill-v4-10k-20261026-iterator.jsonl",
+      "bytes": 708,
+      "sha256": "9D8919E510196DDA8E9FFDD20778D1544F6C64A0CC6867659C4C8C59C45484AE"
+    },
+    {
+      "path": "small-commit-kill-v4-10k-20261026-kill-cache-fdb-owned-verify.jsonl",
+      "bytes": 7347,
+      "sha256": "5AD6D788F434AE8D3F00B9C92BC7B6F8BFEF00EF8AEA66809FDA62E636E64ECA"
+    },
+    {
+      "path": "small-commit-kill-v4-10k-20261026-kill-cancel-fdb-streamed-verify.jsonl",
+      "bytes": 7377,
+      "sha256": "B154784ABBFD405670BBC8BDF6769AE4694D427F2CCCAAFE3E801CBE0FE9F795"
+    },
+    {
+      "path": "small-commit-kill-v4-10k-20261026-kill-cancel.jsonl",
+      "bytes": 859,
+      "sha256": "D266AEB3FE5912E8B6AE8A0CE952648BA3C36EE4C30B2F10F6936518B99004C7"
+    },
+    {
+      "path": "small-commit-kill-v4-10k-20261026-kill-flush-fdb-owned-verify.jsonl",
+      "bytes": 7262,
+      "sha256": "F86E51CE0D32CC6096F3410272C37969201225FFDCA859CA00004322392EE74E"
+    },
+    {
+      "path": "small-commit-kill-v4-10k-20261026-kill-iterator-fdb-owned-verify.jsonl",
+      "bytes": 7446,
+      "sha256": "8DF720C9851D21F709BF55320F563C7322418D39DA317541F05AFA1E7B693087"
+    },
+    {
+      "path": "small-commit-kill-v4-10k-20261026-kill-merge-fdb-owned-verify.jsonl",
+      "bytes": 7498,
+      "sha256": "A7E428785E20C144F271B1DC293E27B52850BB6C8E652569210AF08618EB2281"
+    },
+    {
+      "path": "small-commit-kill-v4-10k-20261026-kill-retire-after-fdb-streamed-verify.jsonl",
+      "bytes": 7445,
+      "sha256": "DEA5FE3357BBB8EF5CB6170A3C2FEE43611242D5378732B2EE549D0A2AF184EE"
+    },
+    {
+      "path": "small-commit-kill-v4-10k-20261026-kill-retire-after.jsonl",
+      "bytes": 1501,
+      "sha256": "D4C9164B23831985A1D13C4E1C6B3B879BAB85CA0BC71937C3065DB66C0F24C6"
+    },
+    {
+      "path": "small-commit-kill-v4-10k-20261026-kill-retire-before-fdb-streamed-verify.jsonl",
+      "bytes": 7347,
+      "sha256": "6E833BE546D089F823E87C0BD2ECDE0FE0758553690663B8F8A0FCD45465C7A5"
+    },
+    {
+      "path": "small-commit-kill-v4-10k-20261026-kill-retire-before.jsonl",
+      "bytes": 1501,
+      "sha256": "DBF44D0C783BC59D4871914946B0DE7FAE4040ACCA048812FB7876F7D2748D8D"
+    },
+    {
+      "path": "small-commit-kill-v4-10k-20261026-merge.jsonl",
+      "bytes": 1006,
+      "sha256": "6793E51EE4019FE3068C64F023B4E8FD786A5DFA6556503D7FCBC476A8B891D4"
+    },
+    {
+      "path": "small-commit-kill-v4-10k-20261026-old-reader-fdb-streamed-verify.jsonl",
+      "bytes": 7201,
+      "sha256": "5427D7570DEF68B6257A5F042C3D71B1FDAAAF1532605CA28029704F1305E93A"
+    },
+    {
+      "path": "small-commit-kill-v4-10k-20261026-summary.json",
+      "bytes": 139440,
+      "sha256": "7D90A4C22DFCF1FF79195063A45B9C8D4658ED6E4D8A7318902E1B76B9128D9D"
+    },
+    {
+      "path": "small-commit-kill-v6-10k-20261026-cache.jsonl",
+      "bytes": 0,
+      "sha256": "E3B0C44298FC1C149AFBF4C8996FB92427AE41E4649B934CA495991B7852B855"
+    },
+    {
+      "path": "small-commit-kill-v6-10k-20261026-flush.jsonl",
+      "bytes": 729,
+      "sha256": "82AD6DB57AA811EDB3C8403344F5049F3FE190910B21B4D9C378F472AB53A183"
+    },
+    {
+      "path": "small-commit-kill-v6-10k-20261026-iterator.jsonl",
+      "bytes": 707,
+      "sha256": "33CE6382619CD2690383E8659D5DFFCA254353527340C8DD72DA782BEA0C4E98"
+    },
+    {
+      "path": "small-commit-kill-v6-10k-20261026-kill-cache-fdb-owned-verify.jsonl",
+      "bytes": 7438,
+      "sha256": "0244BE7181BB3EBBDA7EA7B09C4ADF8E4056F316E50E0742C4D57D15D4B5FD1A"
+    },
+    {
+      "path": "small-commit-kill-v6-10k-20261026-kill-cancel-fdb-streamed-verify.jsonl",
+      "bytes": 7373,
+      "sha256": "2129209D821652B0FC509EF236592C76CC718A3DAEC11087CA1DD54FB5F9975A"
+    },
+    {
+      "path": "small-commit-kill-v6-10k-20261026-kill-cancel.jsonl",
+      "bytes": 859,
+      "sha256": "6757159B13A27553476F88FAEEB5D4193EBE6640494DB1C63D2FC3D98A80ADD7"
+    },
+    {
+      "path": "small-commit-kill-v6-10k-20261026-kill-flush-fdb-owned-verify.jsonl",
+      "bytes": 7330,
+      "sha256": "D0053D0F3EDD1C8B0B7883465CB853C4F37E8B583015A9F508F6FB63ACD2909A"
+    },
+    {
+      "path": "small-commit-kill-v6-10k-20261026-kill-iterator-fdb-owned-verify.jsonl",
+      "bytes": 7290,
+      "sha256": "956EA4C3B6B0A31614B28663BE5662F07C8FFB3F3C54BA418FE0DCD4C81F9B62"
+    },
+    {
+      "path": "small-commit-kill-v6-10k-20261026-kill-merge-fdb-owned-verify.jsonl",
+      "bytes": 7316,
+      "sha256": "DA7FF8525E9962752A02FB22E4A7CDE5670C80C8CF0CDB0D7ECE8D3A6832E43C"
+    },
+    {
+      "path": "small-commit-kill-v6-10k-20261026-kill-retire-after-fdb-streamed-verify.jsonl",
+      "bytes": 7475,
+      "sha256": "48596F8F054A603668AE40883B5B5DE065FCC6F89A61FC257978A6B34B216BC7"
+    },
+    {
+      "path": "small-commit-kill-v6-10k-20261026-kill-retire-after.jsonl",
+      "bytes": 1501,
+      "sha256": "875B87D9B9BB57E512DCCA9E71666348FA5D4F47B2C0B3382873938A3A0CC6F5"
+    },
+    {
+      "path": "small-commit-kill-v6-10k-20261026-kill-retire-before-fdb-streamed-verify.jsonl",
+      "bytes": 7291,
+      "sha256": "3C2AEE1AB51E0A956EA85990E795AC0CE86099976C06799A7D450A737B211496"
+    },
+    {
+      "path": "small-commit-kill-v6-10k-20261026-kill-retire-before.jsonl",
+      "bytes": 1512,
+      "sha256": "FF5E5B836A72C57EF3CA053A724766FFF13166B142C90A0BFE309F86BFBCE731"
+    },
+    {
+      "path": "small-commit-kill-v6-10k-20261026-merge.jsonl",
+      "bytes": 1006,
+      "sha256": "E372CA682D4ADEDF2A7397A02E1BD14142C7D59D6BE1A8F405C23895E58AFB83"
+    },
+    {
+      "path": "small-commit-kill-v6-10k-20261026-old-reader-fdb-streamed-verify.jsonl",
+      "bytes": 7459,
+      "sha256": "CC75AF28C44AA1F312A5E9725E340B7DC59B256F862E6D5849652517FBD594D2"
+    },
+    {
+      "path": "small-commit-kill-v6-10k-20261026-summary.json",
+      "bytes": 137400,
+      "sha256": "396EAFC2B4067F66BF7DA6C60A2B4B11D30B802E4B1FF2C7644D8515F18D71A2"
+    },
+    {
+      "path": "small-commit-kill-v7-10k-20261026-cache.jsonl",
+      "bytes": 0,
+      "sha256": "E3B0C44298FC1C149AFBF4C8996FB92427AE41E4649B934CA495991B7852B855"
+    },
+    {
+      "path": "small-commit-kill-v7-10k-20261026-flush.jsonl",
+      "bytes": 729,
+      "sha256": "0CAFBA06A55B3D1256AB8FB798366B50222EC98D8B0A759649CD90443CDF9708"
+    },
+    {
+      "path": "small-commit-kill-v7-10k-20261026-iterator.jsonl",
+      "bytes": 708,
+      "sha256": "CF87DC57A9F457ED630F12DA5ABACCD8C4184D231D61B62886341B5736EFA372"
+    },
+    {
+      "path": "small-commit-kill-v7-10k-20261026-kill-cache-fdb-owned-verify.jsonl",
+      "bytes": 7312,
+      "sha256": "EAB778894154453D23C23CF8193AD6612AC8CA40C487C5EF75566C2F10CDFD2D"
+    },
+    {
+      "path": "small-commit-kill-v7-10k-20261026-kill-cancel-fdb-streamed-verify.jsonl",
+      "bytes": 7205,
+      "sha256": "6BAC0D412E42FD73EDD42DD19ADDDF18321C6A49558DE8FFF2B481F554F49964"
+    },
+    {
+      "path": "small-commit-kill-v7-10k-20261026-kill-cancel.jsonl",
+      "bytes": 858,
+      "sha256": "D9699EC38DA15701D0878B66B1FD41A322807B7DFFF76E84C5CA385188331EDC"
+    },
+    {
+      "path": "small-commit-kill-v7-10k-20261026-kill-flush-fdb-owned-verify.jsonl",
+      "bytes": 7402,
+      "sha256": "22E77B8490D70F08BF88520AC8DE34AD8A61DF5002AA081BFD7E11B3223B8B50"
+    },
+    {
+      "path": "small-commit-kill-v7-10k-20261026-kill-iterator-fdb-owned-verify.jsonl",
+      "bytes": 7446,
+      "sha256": "AA726EB790C6E94E24D60519482138CA743C2F78ED4D26628D59DFBF0F29D116"
+    },
+    {
+      "path": "small-commit-kill-v7-10k-20261026-kill-merge-fdb-owned-verify.jsonl",
+      "bytes": 7294,
+      "sha256": "9663254E477563DCC08F0BF0275C1859E7A1FAADF43FC77ADB5D908EA86AF524"
+    },
+    {
+      "path": "small-commit-kill-v7-10k-20261026-kill-retire-after-fdb-streamed-verify.jsonl",
+      "bytes": 7291,
+      "sha256": "3CDB069B41051F0BB487959E80F90A01D1E3E66F414C6F8E59E8EA31779EE59D"
+    },
+    {
+      "path": "small-commit-kill-v7-10k-20261026-kill-retire-after.jsonl",
+      "bytes": 1501,
+      "sha256": "A91B1993387D621167A73F3D6AF5BB26EEAFEE7B74A9197DEF4DEDB2F14C430C"
+    },
+    {
+      "path": "small-commit-kill-v7-10k-20261026-kill-retire-before-fdb-streamed-verify.jsonl",
+      "bytes": 7294,
+      "sha256": "83F156D7C742D808E0E733373A96CBD7277534DDD40CE5F121A91BCB6BD13A69"
+    },
+    {
+      "path": "small-commit-kill-v7-10k-20261026-kill-retire-before.jsonl",
+      "bytes": 1517,
+      "sha256": "76470410338562A4DFC51178D988B65E922C8942DD2A07C063F355ECA681C4C9"
+    },
+    {
+      "path": "small-commit-kill-v7-10k-20261026-merge.jsonl",
+      "bytes": 1004,
+      "sha256": "6376DF508B94FC27D71A1C633499E324EED23B1D16522C5C0A66E520C3941D76"
+    },
+    {
+      "path": "small-commit-kill-v7-10k-20261026-old-reader-fdb-streamed-verify.jsonl",
+      "bytes": 7521,
+      "sha256": "2B91EF4E11D7C88C65DA46DE421939EF9D626D001060C69BEFC5C469025B8585"
+    },
+    {
+      "path": "small-commit-kill-v7-10k-20261026-summary.json",
+      "bytes": 91348,
+      "sha256": "9671278A843FE9358F8E964D13442ED9340E0C5D9E6F9D946E23032FBCFF9FC3"
+    },
+    {
+      "path": "small-commit-mask-10k-20261026-design.json",
+      "bytes": 1712,
+      "sha256": "184E3F509A32ECCCB995048294DFC097B4807E0C3BF37C9EA6FA98482DBECC95"
+    },
+    {
+      "path": "small-commit-mask-10k-20261026-r0-before-fdb-streamed-snapshot-pilot.jsonl",
+      "bytes": 12462,
+      "sha256": "01CAFEBD4DC11FA5223444783AFDF5C2A8A4831F809857E2E2BCE688980660B5"
+    },
+    {
+      "path": "small-commit-mask-10k-20261026-r1-after-fdb-streamed-snapshot-pilot.jsonl",
+      "bytes": 12696,
+      "sha256": "6A40D62A66FBF8459324012E2F329781249A4DA6CEFEC3D1FE489C7BFF26D68E"
+    },
+    {
+      "path": "small-commit-mask-10k-20261026-r2-after-fdb-streamed-snapshot-pilot.jsonl",
+      "bytes": 12611,
+      "sha256": "10709655AE21906F11F9DBFD3DD13536FE4A248A053ECD301FB8DE8B505462BA"
+    },
+    {
+      "path": "small-commit-mask-10k-20261026-r3-before-fdb-streamed-snapshot-pilot.jsonl",
+      "bytes": 12510,
+      "sha256": "98A9B931072F689F09366361BC18C1B7821AA418C57BADB7DBBE5F5BFB28F397"
+    },
+    {
+      "path": "small-commit-snapshot-10k-20261026-fdb-100-r0-control-fdb-streamed-seed.jsonl",
+      "bytes": 1168,
+      "sha256": "B1E6D8C831F3CA6499BA25ED68E45ADD074890976451D4BBAF43BAED824E3206"
+    },
+    {
+      "path": "small-commit-snapshot-10k-20261026-fdb-100-r0-control-fdb-streamed-snapshot-control-100.jsonl",
+      "bytes": 5433,
+      "sha256": "A934172FDBCE9F0A41B9F6796D13F0E38FCC666EC5E3BC58E0D36C9A4ADE1B11"
+    },
+    {
+      "path": "small-commit-snapshot-10k-20261026-fdb-100-r0-control-fdb-streamed-verify.jsonl",
+      "bytes": 7239,
+      "sha256": "2E54240C01CD629DD637B16B163F0963D27B0B2AB2ADAFF43FBFD8EF40B4F439"
+    },
+    {
+      "path": "small-commit-snapshot-10k-20261026-fdb-100-r0-design.json",
+      "bytes": 14318,
+      "sha256": "A6C85760233A273984DBAB3A7722F56C43C51137AB95088EFAC96BE3383ACD25"
+    },
+    {
+      "path": "small-commit-snapshot-10k-20261026-fdb-100-r0-load-fdb-streamed-seed.jsonl",
+      "bytes": 1179,
+      "sha256": "5C02B458DFD3EDB10DE54129459C6C5B83F0C2422A7F1CD1F52B691989FD05D0"
+    },
+    {
+      "path": "small-commit-snapshot-10k-20261026-fdb-100-r0-load-fdb-streamed-snapshot-100.jsonl",
+      "bytes": 1796680,
+      "sha256": "356CF0152C423861D3DD81BE8970092A6F9F925572DF032B4DDB1C84A24CD4B7"
+    },
+    {
+      "path": "small-commit-snapshot-10k-20261026-fdb-100-r0-load-fdb-streamed-verify.jsonl",
+      "bytes": 7191,
+      "sha256": "09FBCD15E1BE563646981801E5825F72B1F9A9875D435A46ABAC1E1E3B68335D"
+    },
+    {
+      "path": "small-commit-snapshot-10k-20261026-fdb-100-r1-control-fdb-streamed-seed.jsonl",
+      "bytes": 1167,
+      "sha256": "9B911A5FDB22E1FAFB8E3F9A8E2B07C1C786D613DACE8115010009C98F25BC75"
+    },
+    {
+      "path": "small-commit-snapshot-10k-20261026-fdb-100-r1-control-fdb-streamed-snapshot-control-100.jsonl",
+      "bytes": 5420,
+      "sha256": "43C2A43410C44172351F851EEA939887B33488809343E41E4DD9EE80C038ECF7"
+    },
+    {
+      "path": "small-commit-snapshot-10k-20261026-fdb-100-r1-control-fdb-streamed-verify.jsonl",
+      "bytes": 7327,
+      "sha256": "F09DFFDA4041E7B8B3E42B6ACC8DF4F11FCCB265D4C2D9EED60B29CDB90411CE"
+    },
+    {
+      "path": "small-commit-snapshot-10k-20261026-fdb-100-r1-design.json",
+      "bytes": 14316,
+      "sha256": "3F5B50FF16D42F55F1D1E909228BFFC4BDA984DCA3E01C8508ADC9AC3F0D9EF9"
+    },
+    {
+      "path": "small-commit-snapshot-10k-20261026-fdb-100-r1-load-fdb-streamed-seed.jsonl",
+      "bytes": 1168,
+      "sha256": "E465CC5F04E5DF3057818B0DC735D435DE939CCB064485BC2A4B9F4665B72A25"
+    },
+    {
+      "path": "small-commit-snapshot-10k-20261026-fdb-100-r1-load-fdb-streamed-snapshot-100.jsonl",
+      "bytes": 1796159,
+      "sha256": "57DAD443F77EC9D3AE560BA0FEA15D5BB6C131645F18384189A625AA5F744380"
+    },
+    {
+      "path": "small-commit-snapshot-10k-20261026-fdb-100-r1-load-fdb-streamed-verify.jsonl",
+      "bytes": 7733,
+      "sha256": "1AF04C23B553824413D854E915396D041DE5C534FC2D47F819ECE15707995F5C"
+    },
+    {
+      "path": "small-commit-snapshot-10k-20261026-fdb-one-r0-control-fdb-streamed-seed.jsonl",
+      "bytes": 1168,
+      "sha256": "5270A76209627D543B96C1D0D8599632FBE64FE4EDEEA09558C95FF3B8DECB64"
+    },
+    {
+      "path": "small-commit-snapshot-10k-20261026-fdb-one-r0-control-fdb-streamed-snapshot-control-one.jsonl",
+      "bytes": 150532,
+      "sha256": "CFA9D1990F19385F14F18B39A736035B988809347460F9F93DDC0696362F4983"
+    },
+    {
+      "path": "small-commit-snapshot-10k-20261026-fdb-one-r0-control-fdb-streamed-verify.jsonl",
+      "bytes": 7271,
+      "sha256": "2A69060F55ADD7183D2BA70DFD50E56BB3C31ABD7EB59204A9CB15452D288898"
+    },
+    {
+      "path": "small-commit-snapshot-10k-20261026-fdb-one-r0-design.json",
+      "bytes": 14303,
+      "sha256": "875DD336AEEE2529AF0806A5326E746178380CA346B7CDF9780C4BA46145F3FF"
+    },
+    {
+      "path": "small-commit-snapshot-10k-20261026-fdb-one-r0-load-fdb-streamed-seed.jsonl",
+      "bytes": 1180,
+      "sha256": "6279F3810E7772D1527DAEB1123B521E69FA7FB3197460B748E79CC495076952"
+    },
+    {
+      "path": "small-commit-snapshot-10k-20261026-fdb-one-r0-load-fdb-streamed-snapshot-one.jsonl",
+      "bytes": 1943872,
+      "sha256": "BE06BDFFF5D2E6FBAB01A5089CF6A68E867621EDE1C9AFB2F611D05FFB2E8E76"
+    },
+    {
+      "path": "small-commit-snapshot-10k-20261026-fdb-one-r0-load-fdb-streamed-verify.jsonl",
+      "bytes": 7421,
+      "sha256": "48F8281FF47954C70184ED03D1197526B41FAF2C476FD6E6B8C3E4DB109E0875"
+    },
+    {
+      "path": "small-commit-snapshot-10k-20261026-fdb-one-r1-control-fdb-streamed-seed.jsonl",
+      "bytes": 1168,
+      "sha256": "CCD6983A98EE966CFE8F2745A04B3F6814738DE00265D44099475E9C0F9461CF"
+    },
+    {
+      "path": "small-commit-snapshot-10k-20261026-fdb-one-r1-control-fdb-streamed-snapshot-control-one.jsonl",
+      "bytes": 150927,
+      "sha256": "A45C0E0F58CAAE7D62E14F90A16B57FB7292850A8753682F32E823C314293B98"
+    },
+    {
+      "path": "small-commit-snapshot-10k-20261026-fdb-one-r1-control-fdb-streamed-verify.jsonl",
+      "bytes": 7381,
+      "sha256": "123086CFAB1D152E0BC3426D44228FF30244A2CBD651D4ACA23A06B7581DD964"
+    },
+    {
+      "path": "small-commit-snapshot-10k-20261026-fdb-one-r1-design.json",
+      "bytes": 14301,
+      "sha256": "5E2EACB99A397A17DE5E1D9F3097512A4B3332E69F2B84F045539AC82A8A09B1"
+    },
+    {
+      "path": "small-commit-snapshot-10k-20261026-fdb-one-r1-load-fdb-streamed-seed.jsonl",
+      "bytes": 1168,
+      "sha256": "C7F32E9EF6ACA1439DFDFC8BF20117673DA597A14CF32133D3D3A10367D22D1F"
+    },
+    {
+      "path": "small-commit-snapshot-10k-20261026-fdb-one-r1-load-fdb-streamed-snapshot-one.jsonl",
+      "bytes": 1940356,
+      "sha256": "0A3524AB02196BB611AB22C226AEECA838F5CADB3D27DE1521703BDE074806BA"
+    },
+    {
+      "path": "small-commit-snapshot-10k-20261026-fdb-one-r1-load-fdb-streamed-verify.jsonl",
+      "bytes": 7281,
+      "sha256": "6E15854E842F6129F7C15B4F3A3F22ACAB2759D612E064987E83B14B8EE0906B"
+    },
+    {
+      "path": "small-commit-snapshot-v4-10k-20261026-fdb-100-r0-control-fdb-streamed-seed.jsonl",
+      "bytes": 1168,
+      "sha256": "5DD5BD5F9568ACB9EB7B3A369991F197C8E273E579FC48D4995E4FDCC1D27D59"
+    },
+    {
+      "path": "small-commit-snapshot-v4-10k-20261026-fdb-100-r0-control-fdb-streamed-snapshot-control-100.jsonl",
+      "bytes": 5455,
+      "sha256": "E9766A5611C6FE89BF03A1B23EDE8178B2757061D2773DB5EA89B76DF4F6B140"
+    },
+    {
+      "path": "small-commit-snapshot-v4-10k-20261026-fdb-100-r0-control-fdb-streamed-verify.jsonl",
+      "bytes": 7341,
+      "sha256": "86D26BC40E6161ADCDF4F5BC27744A94D86E7654635417C5F1407A192AB2E6B2"
+    },
+    {
+      "path": "small-commit-snapshot-v4-10k-20261026-fdb-100-r0-design.json",
+      "bytes": 14356,
+      "sha256": "083FC6631BF9E054D2194BB4B9D2E1A1D84D2B16FAECF647AFE292C40E9A0B7A"
+    },
+    {
+      "path": "small-commit-snapshot-v4-10k-20261026-fdb-100-r0-load-fdb-streamed-seed.jsonl",
+      "bytes": 1168,
+      "sha256": "D1846D62F31676CE948FB3494D2E0BBCCF95086C79CBCBF40EA0CD76F0661442"
+    },
+    {
+      "path": "small-commit-snapshot-v4-10k-20261026-fdb-100-r0-load-fdb-streamed-snapshot-100.jsonl",
+      "bytes": 1795712,
+      "sha256": "D2315699F7E7BE53F8518E8B356817ACBD421795968A3EE23054232B5D22392F"
+    },
+    {
+      "path": "small-commit-snapshot-v4-10k-20261026-fdb-100-r0-load-fdb-streamed-verify.jsonl",
+      "bytes": 7379,
+      "sha256": "CD47A4BECAF392FAAB3D3AC825BF63406E771F31638396BFE11A26E0A8FDF688"
+    },
+    {
+      "path": "small-commit-snapshot-v4-10k-20261026-fdb-100-r1-control-fdb-streamed-seed.jsonl",
+      "bytes": 1168,
+      "sha256": "A57E6216AA526798E79786EA604AECBE4B74205CCCB60DFDE5DADABF9DBAA561"
+    },
+    {
+      "path": "small-commit-snapshot-v4-10k-20261026-fdb-100-r1-control-fdb-streamed-snapshot-control-100.jsonl",
+      "bytes": 5399,
+      "sha256": "6039A583D292A23B5877A3B4065E022542C3048AFFF5C434692F0E46BA566429"
+    },
+    {
+      "path": "small-commit-snapshot-v4-10k-20261026-fdb-100-r1-control-fdb-streamed-verify.jsonl",
+      "bytes": 7379,
+      "sha256": "0DD8436289068B8951D674BB4DFAF458AD782E10B7C134E6A8C4493F4D27A0B7"
+    },
+    {
+      "path": "small-commit-snapshot-v4-10k-20261026-fdb-100-r1-design.json",
+      "bytes": 14338,
+      "sha256": "09D447EBB0A7DD821EFC0418D559D50201F262BE1A380825431E9C814AB3469A"
+    },
+    {
+      "path": "small-commit-snapshot-v4-10k-20261026-fdb-100-r1-load-fdb-streamed-seed.jsonl",
+      "bytes": 1179,
+      "sha256": "EA2FB07D3FAD95178E6B4A8982BD8D1FD6EF59F68D50930630E0C25F94182090"
+    },
+    {
+      "path": "small-commit-snapshot-v4-10k-20261026-fdb-100-r1-load-fdb-streamed-snapshot-100.jsonl",
+      "bytes": 1796733,
+      "sha256": "9E5AB1692E636581BD565A9E4D85D1C4269C9F91BCD86C663F4494E0901A69BF"
+    },
+    {
+      "path": "small-commit-snapshot-v4-10k-20261026-fdb-100-r1-load-fdb-streamed-verify.jsonl",
+      "bytes": 7317,
+      "sha256": "AF04A7E0F85809F08B98402BEC0E8CF702A7001B819B3442BE9301135774491F"
+    },
+    {
+      "path": "small-commit-snapshot-v4-10k-20261026-fdb-one-r0-control-fdb-streamed-seed.jsonl",
+      "bytes": 1169,
+      "sha256": "392CAAA6EC7E0851C69024FCCDD5F28B45901BDF43574220A89D002D8DCDDC36"
+    },
+    {
+      "path": "small-commit-snapshot-v4-10k-20261026-fdb-one-r0-control-fdb-streamed-snapshot-control-one.jsonl",
+      "bytes": 111093,
+      "sha256": "42941A47B6428D2C4EEC74782419476CA904D2B18BF2BF9CE90AE74860DEEC05"
+    },
+    {
+      "path": "small-commit-snapshot-v4-10k-20261026-fdb-one-r0-control-fdb-streamed-verify.jsonl",
+      "bytes": 7399,
+      "sha256": "73F2981F89D5CADEA2114B4EE2AE00EF6EB03D7A421A5F6428508729D7C0AC7F"
+    },
+    {
+      "path": "small-commit-snapshot-v4-10k-20261026-fdb-one-r0-design.json",
+      "bytes": 14354,
+      "sha256": "A18E5AE0AAFB90334D5C63DF88125F3FE9A94FA316B65403A9CE7A5AA1846107"
+    },
+    {
+      "path": "small-commit-snapshot-v4-10k-20261026-fdb-one-r0-load-fdb-streamed-seed.jsonl",
+      "bytes": 1169,
+      "sha256": "E1E5E2940967B013552162DE6F1A0D55A9D23ACD58C6EC75954C3550E69A03E6"
+    },
+    {
+      "path": "small-commit-snapshot-v4-10k-20261026-fdb-one-r0-load-fdb-streamed-snapshot-one.jsonl",
+      "bytes": 1903206,
+      "sha256": "24CCF40B1231877DCEE64238FD3A1DF202F1976B6174A1A44BCCAB973EBEA672"
+    },
+    {
+      "path": "small-commit-snapshot-v4-10k-20261026-fdb-one-r0-load-fdb-streamed-verify.jsonl",
+      "bytes": 7447,
+      "sha256": "FCBAE4BF0C2A93939A80AEEEE986421D4FDFED17D6F6C825297E78DA22844126"
+    },
+    {
+      "path": "small-commit-snapshot-v4-10k-20261026-fdb-one-r1-control-fdb-streamed-seed.jsonl",
+      "bytes": 1168,
+      "sha256": "D69D7C62D2B1341DC76D03514E75C93608FF3FCB950DDD91E638210835FCEE7C"
+    },
+    {
+      "path": "small-commit-snapshot-v4-10k-20261026-fdb-one-r1-control-fdb-streamed-snapshot-control-one.jsonl",
+      "bytes": 111013,
+      "sha256": "F2012B3F736FB5BDACD5C09F1FBB95D0B1E2F2B72BBE6768DA43C6125CE0E3F8"
+    },
+    {
+      "path": "small-commit-snapshot-v4-10k-20261026-fdb-one-r1-control-fdb-streamed-verify.jsonl",
+      "bytes": 7390,
+      "sha256": "99404E8EBA3814DA3E646315DB659F41869FD85614F0B2D2DD9898F2E0B0D8A6"
+    },
+    {
+      "path": "small-commit-snapshot-v4-10k-20261026-fdb-one-r1-design.json",
+      "bytes": 14330,
+      "sha256": "7129A0A6B17462799DE583DB25CAA454E7E59E7BD1CD079DE8F56639C7546FEB"
+    },
+    {
+      "path": "small-commit-snapshot-v4-10k-20261026-fdb-one-r1-load-fdb-streamed-seed.jsonl",
+      "bytes": 1179,
+      "sha256": "1AE0C8FE7268C458F8E9C752E54AEB5A8A78A2D895B79D94BD06F6FE0F1FC3B5"
+    },
+    {
+      "path": "small-commit-snapshot-v4-10k-20261026-fdb-one-r1-load-fdb-streamed-snapshot-one.jsonl",
+      "bytes": 1901113,
+      "sha256": "517B5C992A8A8636A0198E86555686329D5688535E0C4E20EB3174AF8AB67208"
+    },
+    {
+      "path": "small-commit-snapshot-v4-10k-20261026-fdb-one-r1-load-fdb-streamed-verify.jsonl",
+      "bytes": 7493,
+      "sha256": "2D7AB889AF3ECDA9BDE45E9104D698E7EC0F86CC9BADD4B5A37C5676AEFB1F4A"
+    },
+    {
+      "path": "small-commit-snapshot-v6-10k-20261026-fdb-100-r0-control-fdb-streamed-seed.jsonl",
+      "bytes": 1168,
+      "sha256": "4CA2765F28D22B3497B0F29C0C64348A870702A897FCAAAD26A707B9375CC27C"
+    },
+    {
+      "path": "small-commit-snapshot-v6-10k-20261026-fdb-100-r0-control-fdb-streamed-snapshot-control-100.jsonl",
+      "bytes": 5393,
+      "sha256": "BF123E6BC91372AE63FF5897AB9BF6AF487E921CF7E230D43BE20692BAE26912"
+    },
+    {
+      "path": "small-commit-snapshot-v6-10k-20261026-fdb-100-r0-control-fdb-streamed-verify.jsonl",
+      "bytes": 7435,
+      "sha256": "33A6F9BF2879DA7E37D06126973CB4C9AC2FFC5FFBE8FDA48518A1F8E51DFA58"
+    },
+    {
+      "path": "small-commit-snapshot-v6-10k-20261026-fdb-100-r0-design.json",
+      "bytes": 14328,
+      "sha256": "B6B9D5DF3945BA2180F2DBCFE4F120162870011B245C91EA19F32C9896E88632"
+    },
+    {
+      "path": "small-commit-snapshot-v6-10k-20261026-fdb-100-r0-load-fdb-streamed-seed.jsonl",
+      "bytes": 1179,
+      "sha256": "78184607C63E5970F945ED0184E26756E32CFC8EE9124C1C26455688DD4F1226"
+    },
+    {
+      "path": "small-commit-snapshot-v6-10k-20261026-fdb-100-r0-load-fdb-streamed-snapshot-100.jsonl",
+      "bytes": 1795639,
+      "sha256": "F36F02A736666424D106B42BCC50EBC84F7BD6125158B417D1B26E2A2AA648B1"
+    },
+    {
+      "path": "small-commit-snapshot-v6-10k-20261026-fdb-100-r0-load-fdb-streamed-verify.jsonl",
+      "bytes": 7099,
+      "sha256": "EEB3274FC0C375D5E9AD48A52D3870088643650EB7AABBB7535471B5355E09A5"
+    },
+    {
+      "path": "small-commit-snapshot-v6-10k-20261026-fdb-100-r1-control-fdb-streamed-seed.jsonl",
+      "bytes": 1167,
+      "sha256": "2A71192A8A26764FE1C041B8423C4C46143E3A08382B64E063DB8A398F7DC339"
+    },
+    {
+      "path": "small-commit-snapshot-v6-10k-20261026-fdb-100-r1-control-fdb-streamed-snapshot-control-100.jsonl",
+      "bytes": 5392,
+      "sha256": "9D870E6D00B973EADB9BE4169A9BABB318F3ACB2EACD7A54DF7DBA47FB6D7AEE"
+    },
+    {
+      "path": "small-commit-snapshot-v6-10k-20261026-fdb-100-r1-control-fdb-streamed-verify.jsonl",
+      "bytes": 7235,
+      "sha256": "9A5F24A76103BC726A5C89427480B4B5DC000191C48D3DEB0DE949CA4C9ECDC7"
+    },
+    {
+      "path": "small-commit-snapshot-v6-10k-20261026-fdb-100-r1-design.json",
+      "bytes": 14326,
+      "sha256": "AA559B7F7B2AADE8D0F4D58A4045C754A99E5D9D93AD8D73605B9A5F74F48EB3"
+    },
+    {
+      "path": "small-commit-snapshot-v6-10k-20261026-fdb-100-r1-load-fdb-streamed-seed.jsonl",
+      "bytes": 1168,
+      "sha256": "EF55AFB27F3952DD234236B3A760FEE332959CEAE69AEA57DE7AF6B402C14829"
+    },
+    {
+      "path": "small-commit-snapshot-v6-10k-20261026-fdb-100-r1-load-fdb-streamed-snapshot-100.jsonl",
+      "bytes": 1796445,
+      "sha256": "1E33F8669CB23B56A4EFF2986876F73FF381A8C6309DFA79A4EFA6963EA0AD6A"
+    },
+    {
+      "path": "small-commit-snapshot-v6-10k-20261026-fdb-100-r1-load-fdb-streamed-verify.jsonl",
+      "bytes": 7535,
+      "sha256": "EBAB3974A01E4D726EDA5065D42DFD533B313A3B542FAC9D42461499D6CFD1EF"
+    },
+    {
+      "path": "small-commit-snapshot-v6-10k-20261026-fdb-one-r0-control-fdb-streamed-seed.jsonl",
+      "bytes": 1179,
+      "sha256": "540FD0CFB827E6AE32F1B5A58848C053F68DC1AC31836D59952B2489DBB7A2B7"
+    },
+    {
+      "path": "small-commit-snapshot-v6-10k-20261026-fdb-one-r0-control-fdb-streamed-snapshot-control-one.jsonl",
+      "bytes": 103043,
+      "sha256": "342A73220D31AFEED5DC48A79921D09276AF10DDB70EFBB5BBD10800D68FDBFC"
+    },
+    {
+      "path": "small-commit-snapshot-v6-10k-20261026-fdb-one-r0-control-fdb-streamed-verify.jsonl",
+      "bytes": 7393,
+      "sha256": "5877B38C5057D3CE700BA3CD854F654541163046C30988F64B4F0EFCE8EF9A26"
+    },
+    {
+      "path": "small-commit-snapshot-v6-10k-20261026-fdb-one-r0-design.json",
+      "bytes": 14353,
+      "sha256": "D8518245F47B248872D4551BBFDF06A68EF11BA1AAA8F620A3B4D9031D1A8B3A"
+    },
+    {
+      "path": "small-commit-snapshot-v6-10k-20261026-fdb-one-r0-load-fdb-streamed-seed.jsonl",
+      "bytes": 1169,
+      "sha256": "61069223488C7C9223273F15B18D4E82E69A2CB4ED6C00B4CA9D16F960E89B74"
+    },
+    {
+      "path": "small-commit-snapshot-v6-10k-20261026-fdb-one-r0-load-fdb-streamed-snapshot-one.jsonl",
+      "bytes": 1893589,
+      "sha256": "679CD476368D3F6EF00678ADB272913682A2624AA249ECBC54DA8FE733DEFE9D"
+    },
+    {
+      "path": "small-commit-snapshot-v6-10k-20261026-fdb-one-r0-load-fdb-streamed-verify.jsonl",
+      "bytes": 7433,
+      "sha256": "1F81E781D5252AC6CA905FC6B57AE7D1E78EB1DCF73B5F303F25E557EF220C80"
+    },
+    {
+      "path": "small-commit-snapshot-v6-10k-20261026-fdb-one-r1-control-fdb-streamed-seed.jsonl",
+      "bytes": 1168,
+      "sha256": "2613D67AEF08D0FA8DF246BDDB751846ECD5A0E4DCE454E0047EB0C1F0DC54CB"
+    },
+    {
+      "path": "small-commit-snapshot-v6-10k-20261026-fdb-one-r1-control-fdb-streamed-snapshot-control-one.jsonl",
+      "bytes": 103275,
+      "sha256": "93B75D58E54B025CF1187324EBB197E3520BDDE24D9A472D5F278D49523EC436"
+    },
+    {
+      "path": "small-commit-snapshot-v6-10k-20261026-fdb-one-r1-control-fdb-streamed-verify.jsonl",
+      "bytes": 7333,
+      "sha256": "BF3038625BC97124338D4BBFD9EF50805A2971F08356AA9AF62291723757C7B9"
+    },
+    {
+      "path": "small-commit-snapshot-v6-10k-20261026-fdb-one-r1-design.json",
+      "bytes": 14330,
+      "sha256": "69542A7EA7E8A07C0E4BA0FE5F9D3EA31E1B09A0E0BBA7A269740835BA9C3554"
+    },
+    {
+      "path": "small-commit-snapshot-v6-10k-20261026-fdb-one-r1-load-fdb-streamed-seed.jsonl",
+      "bytes": 1167,
+      "sha256": "13CC8CCCEC958E767495A987919479783F34C3EE5C36172693798F138F9D5333"
+    },
+    {
+      "path": "small-commit-snapshot-v6-10k-20261026-fdb-one-r1-load-fdb-streamed-snapshot-one.jsonl",
+      "bytes": 1894499,
+      "sha256": "969CE0E382BAC54AE0AA3221AE83A5BB787585189A817FE5925CEA90F468E5FA"
+    },
+    {
+      "path": "small-commit-snapshot-v6-10k-20261026-fdb-one-r1-load-fdb-streamed-verify.jsonl",
+      "bytes": 7372,
+      "sha256": "7B289BA98174C09F534501B9F11042B8C1047B4789B0E6B4A0394B393306B53C"
+    },
+    {
+      "path": "small-commit-v2-10k-20261026-design.json",
+      "bytes": 8205,
+      "sha256": "DEA782884AEE9A4EEA431670EE8C4BB5CF15817C03DC927377B102418395C281"
+    },
+    {
+      "path": "small-commit-v2-10k-20261026-r0-dirty-fdb-streamed-small-open.jsonl",
+      "bytes": 1246,
+      "sha256": "6654B77D672A28C3721AD7C836E651A019F065303610220D668CFDA5822A979D"
+    },
+    {
+      "path": "small-commit-v2-10k-20261026-r0-dirty-sqlite-streamed-small-open.jsonl",
+      "bytes": 1128,
+      "sha256": "6EABF8D467D39DB4B922AFA876AA9E310A34DC88AC56DC5557F5205224B43703"
+    },
+    {
+      "path": "small-commit-v2-10k-20261026-r0-fdb-streamed-seed.jsonl",
+      "bytes": 1168,
+      "sha256": "7D9996CB3149CD120A6EE11E88B548EF359023DAD49FE4B793F1ACBD0DC4A2EF"
+    },
+    {
+      "path": "small-commit-v2-10k-20261026-r0-fdb-streamed-small-dirty.jsonl",
+      "bytes": 6195,
+      "sha256": "B337996CAB1A5305B3AB5013576C32A8112CD603BD23D609629210701C3E0547"
+    },
+    {
+      "path": "small-commit-v2-10k-20261026-r0-fdb-streamed-small-latency.jsonl",
+      "bytes": 19029,
+      "sha256": "6D6ADC95D9491ABC278B994A094A1651A8D8402A69BC1FAFC04F7C3EA5D5F8DD"
+    },
+    {
+      "path": "small-commit-v2-10k-20261026-r0-fdb-streamed-small-open.jsonl",
+      "bytes": 1228,
+      "sha256": "451F054F22D8EB52E746F568E5B30ACC073A53F59FED8043854F7E77003FBEA0"
+    },
+    {
+      "path": "small-commit-v2-10k-20261026-r0-fdb-streamed-verify.jsonl",
+      "bytes": 7332,
+      "sha256": "7F8BDD2E60CDD5960057A54809AFB614CD163D943DFA1732581D7D864F09C7E6"
+    },
+    {
+      "path": "small-commit-v2-10k-20261026-r0-final-fdb-streamed-verify.jsonl",
+      "bytes": 7429,
+      "sha256": "DB21EBC79C718E68E25E9A5084EC86418BEB271830198158D9B6AA1E02CD3D8F"
+    },
+    {
+      "path": "small-commit-v2-10k-20261026-r0-final-sqlite-streamed-verify.jsonl",
+      "bytes": 7267,
+      "sha256": "E2D5D5E536B1CF6EB6C8EB3778A2F6C16B442C8048922888CA20AB8665A80A8F"
+    },
+    {
+      "path": "small-commit-v2-10k-20261026-r0-sqlite-streamed-seed.jsonl",
+      "bytes": 1066,
+      "sha256": "C456D53C00D7131F1784FF760BCD809BB078E4A58113537241025F70A7FFD41E"
+    },
+    {
+      "path": "small-commit-v2-10k-20261026-r0-sqlite-streamed-small-dirty.jsonl",
+      "bytes": 5988,
+      "sha256": "733AEB23BB27B78EE675E371A34A94262B2076B93B285BA4A8C17DA30D08A0C7"
+    },
+    {
+      "path": "small-commit-v2-10k-20261026-r0-sqlite-streamed-small-latency.jsonl",
+      "bytes": 19144,
+      "sha256": "9028E034464A0650E95F90330415E11E78BBE993E1DF163728ABBA03D8F21AB0"
+    },
+    {
+      "path": "small-commit-v2-10k-20261026-r0-sqlite-streamed-small-open.jsonl",
+      "bytes": 1116,
+      "sha256": "58CB48B8A8DC0F2C059BAD4E4448DC98701188ABAEF8A08B569B394204EE6324"
+    },
+    {
+      "path": "small-commit-v2-10k-20261026-r0-sqlite-streamed-verify.jsonl",
+      "bytes": 7479,
+      "sha256": "4C581101154F198AE8CADE7495D760F693DD5598FD70F012AA31AF913B8A4F68"
+    },
+    {
+      "path": "small-commit-v2-10k-20261026-r1-dirty-fdb-streamed-small-open.jsonl",
+      "bytes": 1246,
+      "sha256": "476C242B634A0130BE53D8FCE05F4C9C32FC4F876AF494AC95A814BFCDAB6EEC"
+    },
+    {
+      "path": "small-commit-v2-10k-20261026-r1-dirty-sqlite-streamed-small-open.jsonl",
+      "bytes": 1116,
+      "sha256": "2ADB66BBCA185E649491C30345A47C4B93CE06CB414596973B633A4E479A311E"
+    },
+    {
+      "path": "small-commit-v2-10k-20261026-r1-fdb-streamed-seed.jsonl",
+      "bytes": 1168,
+      "sha256": "A11648E458457719686A2B96F8E77BE94A3430F9631259CC09FC938FBEF4E750"
+    },
+    {
+      "path": "small-commit-v2-10k-20261026-r1-fdb-streamed-small-dirty.jsonl",
+      "bytes": 6180,
+      "sha256": "A2D31D3EAFF5964A3F2130E1576400E236D26FD8950785A5EBFEC51176BED2FD"
+    },
+    {
+      "path": "small-commit-v2-10k-20261026-r1-fdb-streamed-small-latency.jsonl",
+      "bytes": 18875,
+      "sha256": "64E51EA81E903C1EBE7976F052BF150DDFAF793F9BE5BCAC5D884760D6F706C5"
+    },
+    {
+      "path": "small-commit-v2-10k-20261026-r1-fdb-streamed-small-open.jsonl",
+      "bytes": 1228,
+      "sha256": "415120D94CB7DEADD6FB1BD3FC851530E91564A8F4B2BA59BB46BA792BBF1E6A"
+    },
+    {
+      "path": "small-commit-v2-10k-20261026-r1-fdb-streamed-verify.jsonl",
+      "bytes": 7633,
+      "sha256": "18B6A62ACEE4E86DD8C79C2D5CECC94B6736876E6D96EA71CE35C3959E14088D"
+    },
+    {
+      "path": "small-commit-v2-10k-20261026-r1-final-fdb-streamed-verify.jsonl",
+      "bytes": 7461,
+      "sha256": "283AFE829D3D3E69B079B9051BFEE3FF3294166D4F0D300443770BAD10412363"
+    },
+    {
+      "path": "small-commit-v2-10k-20261026-r1-final-sqlite-streamed-verify.jsonl",
+      "bytes": 7219,
+      "sha256": "CD380655266C7C201313DA2639BB9E1462CBB993BEE71BA62CC4AC34F634D8B3"
+    },
+    {
+      "path": "small-commit-v2-10k-20261026-r1-sqlite-streamed-seed.jsonl",
+      "bytes": 1066,
+      "sha256": "11EC6480BC99D37A58AE488906E76EBEC55DF7303EFAC3A4106822B0B4AEDBBA"
+    },
+    {
+      "path": "small-commit-v2-10k-20261026-r1-sqlite-streamed-small-dirty.jsonl",
+      "bytes": 6096,
+      "sha256": "61E18554AC2E9DB21CAA1DF27D253527DFAEFDB66C6E5D7155F33FA722AF6FA7"
+    },
+    {
+      "path": "small-commit-v2-10k-20261026-r1-sqlite-streamed-small-latency.jsonl",
+      "bytes": 19025,
+      "sha256": "D92549E7BAB9008FEEBE490811DFB551EC20AF65A54D6979E1AC73A69315FBFA"
+    },
+    {
+      "path": "small-commit-v2-10k-20261026-r1-sqlite-streamed-small-open.jsonl",
+      "bytes": 1116,
+      "sha256": "415F549BB388C90B538A8F8F157952844AAB4350220ACB7133CC7315EFF97767"
+    },
+    {
+      "path": "small-commit-v2-10k-20261026-r1-sqlite-streamed-verify.jsonl",
+      "bytes": 7463,
+      "sha256": "36718D39C9CF971C452460086C1F9E6A1DFF160067C34FFEB6FE0CD6F1B51249"
+    },
+    {
+      "path": "small-commit-v4-10k-20261026-design.json",
+      "bytes": 4739,
+      "sha256": "EA42AE0A5AE3F9668741B6E8219397ECEE8E24659A5E29C673DA0FA78486F477"
+    },
+    {
+      "path": "small-commit-v4-10k-20261026-r0-dirty-fdb-streamed-small-open.jsonl",
+      "bytes": 1257,
+      "sha256": "26B11D3F26B3A5CB55436EA38E9C79D650F0FDAE039E6FAFD07FC70ABB713720"
+    },
+    {
+      "path": "small-commit-v4-10k-20261026-r0-fdb-streamed-seed.jsonl",
+      "bytes": 1179,
+      "sha256": "EB02F93B29BE8B68A376DCFE45F96FC93BAC13E1B577BB61A14725F5A170CB58"
+    },
+    {
+      "path": "small-commit-v4-10k-20261026-r0-fdb-streamed-small-dirty.jsonl",
+      "bytes": 6261,
+      "sha256": "1CD7D36946EBB4A79F508C3DBA4C107B536EFEE8C4ADE9843D10578DD04FE2F4"
+    },
+    {
+      "path": "small-commit-v4-10k-20261026-r0-fdb-streamed-small-latency.jsonl",
+      "bytes": 19020,
+      "sha256": "0A15E264B42E72A910813583C7994EC345D306ED1B87D67572F0F13DD293CDBC"
+    },
+    {
+      "path": "small-commit-v4-10k-20261026-r0-fdb-streamed-small-open.jsonl",
+      "bytes": 1238,
+      "sha256": "1D16631794E1B17CB9F06D9799170EC8C24DE1F2A70777CB076542EDB46B6BE7"
+    },
+    {
+      "path": "small-commit-v4-10k-20261026-r0-fdb-streamed-verify.jsonl",
+      "bytes": 7363,
+      "sha256": "1785CE6338B57975030AF52CFB21E6ABA6853AA4CC4A1350AB8B56AB298FF2C7"
+    },
+    {
+      "path": "small-commit-v4-10k-20261026-r0-final-fdb-streamed-verify.jsonl",
+      "bytes": 7519,
+      "sha256": "1D99533E3BC579822E561EE9A39B31BDA4A1E1A169672D14CE4CE693F0F37488"
+    },
+    {
+      "path": "small-commit-v4-10k-20261026-r1-dirty-fdb-streamed-small-open.jsonl",
+      "bytes": 1247,
+      "sha256": "99CA1B2EB7F1D28ED97B363E96E989E8EEC4AEFE4DF9FF847D729EEF0FC18779"
+    },
+    {
+      "path": "small-commit-v4-10k-20261026-r1-fdb-streamed-seed.jsonl",
+      "bytes": 1168,
+      "sha256": "1CF309B301575B07EE188C757E3895085826B2C18F4873B6EEEF0ADDA13915F5"
+    },
+    {
+      "path": "small-commit-v4-10k-20261026-r1-fdb-streamed-small-dirty.jsonl",
+      "bytes": 6195,
+      "sha256": "027EB43B31AD3A07D41C351DE7DBD547DA082775882EBC7786BF064DF708BD61"
+    },
+    {
+      "path": "small-commit-v4-10k-20261026-r1-fdb-streamed-small-latency.jsonl",
+      "bytes": 19122,
+      "sha256": "0EEC3418E6314BEB3F7B06615E2C1BBB1713285D5CB4A5015D0FE4B1A2129918"
+    },
+    {
+      "path": "small-commit-v4-10k-20261026-r1-fdb-streamed-small-open.jsonl",
+      "bytes": 1238,
+      "sha256": "EFE6752C7BB3213F8432989EBD4446E3F1D2CCC5B80952F76300A103C28E17F4"
+    },
+    {
+      "path": "small-commit-v4-10k-20261026-r1-fdb-streamed-verify.jsonl",
+      "bytes": 7385,
+      "sha256": "6D0F649CEBA39949D47FC4E2406A8E01BDD308424848B7A8F07A8738F1EDE1D4"
+    },
+    {
+      "path": "small-commit-v4-10k-20261026-r1-final-fdb-streamed-verify.jsonl",
+      "bytes": 7161,
+      "sha256": "37D6C4DB03578362DF03751298817BF88FBF62C2169EFCE832FDE3D75F8DC3BB"
+    },
+    {
+      "path": "small-commit-v6-10k-20261026-design.json",
+      "bytes": 4735,
+      "sha256": "A306CC3FF1B13F3F3C10DAFAF722FBE7E6848F04EF80431FFC2F3A456A8F77EA"
+    },
+    {
+      "path": "small-commit-v6-10k-20261026-r0-dirty-fdb-streamed-small-open.jsonl",
+      "bytes": 1247,
+      "sha256": "F1043273D06E000F4E5F4FCE3FCBCC2B8F5F8FF69ED4DE1BE68A86895D2AA6F6"
+    },
+    {
+      "path": "small-commit-v6-10k-20261026-r0-fdb-streamed-seed.jsonl",
+      "bytes": 1168,
+      "sha256": "29F74D42B05329DB9055E0FD001FC32FD4C5E59B26F0479B0490A078EA832B8E"
+    },
+    {
+      "path": "small-commit-v6-10k-20261026-r0-fdb-streamed-small-dirty.jsonl",
+      "bytes": 6113,
+      "sha256": "44F92198B341BB6A7A20FC5A009FB55590B06A6A0565C00C6945963D5985093D"
+    },
+    {
+      "path": "small-commit-v6-10k-20261026-r0-fdb-streamed-small-latency.jsonl",
+      "bytes": 19017,
+      "sha256": "195CA1B54976194E39F07254615FBCF573891227E319C8F8B73DECB97317B25C"
+    },
+    {
+      "path": "small-commit-v6-10k-20261026-r0-fdb-streamed-small-open.jsonl",
+      "bytes": 1228,
+      "sha256": "82EADF2A0EA3C3766DA63B90B165B24CC47EBA1EB7817E38EC3A1C87CCAED898"
+    },
+    {
+      "path": "small-commit-v6-10k-20261026-r0-fdb-streamed-verify.jsonl",
+      "bytes": 7097,
+      "sha256": "2D8CC859540454AC04759480BF6D642C825C4A0B719BFF965B488FC43D3FEAB5"
+    },
+    {
+      "path": "small-commit-v6-10k-20261026-r0-final-fdb-streamed-verify.jsonl",
+      "bytes": 7161,
+      "sha256": "9DAEDBFC88AD2FCBA950DF0B994C97EDBABD4C52613A150E33FA1FCCEAA16705"
+    },
+    {
+      "path": "small-commit-v6-10k-20261026-r1-dirty-fdb-streamed-small-open.jsonl",
+      "bytes": 1247,
+      "sha256": "A443427FEDD10B40E1F5003D69D66E305CDBB84F03F5559ED98F647B0673D71B"
+    },
+    {
+      "path": "small-commit-v6-10k-20261026-r1-fdb-streamed-seed.jsonl",
+      "bytes": 1168,
+      "sha256": "63DF6B48774B017CCD2E78143C6530B45BF745E4849B297D16BEA1AEB19EB300"
+    },
+    {
+      "path": "small-commit-v6-10k-20261026-r1-fdb-streamed-small-dirty.jsonl",
+      "bytes": 6169,
+      "sha256": "6250FE0A9EF0CE7B871F29EB1A80CA17094CC180D71C4D524C36DD4E724C8B1C"
+    },
+    {
+      "path": "small-commit-v6-10k-20261026-r1-fdb-streamed-small-latency.jsonl",
+      "bytes": 18865,
+      "sha256": "24988E268B68DB9594B5F4134BD894FE049C7F663E2E3845D5F78D8308E49341"
+    },
+    {
+      "path": "small-commit-v6-10k-20261026-r1-fdb-streamed-small-open.jsonl",
+      "bytes": 1238,
+      "sha256": "2A84C5DAF1E4C63F909D9326CB3C18948A9D5324677D0DE8FB991C582F7DE6CF"
+    },
+    {
+      "path": "small-commit-v6-10k-20261026-r1-fdb-streamed-verify.jsonl",
+      "bytes": 7301,
+      "sha256": "6EABD756A9D34C8DA3A63A1124237B5FC1C7E9E73F482D2AD26006614A938DCF"
+    },
+    {
+      "path": "small-commit-v6-10k-20261026-r1-final-fdb-streamed-verify.jsonl",
+      "bytes": 7232,
+      "sha256": "3805BFC79F5C25D8284EA0D52378D0B6512A407F57DA4ADCC088D53D3F896FFE"
+    },
+    {
+      "path": "small-commit-v7-10k-20261026-current-slot-fdb-streamed-small-latency.jsonl",
+      "bytes": 19119,
+      "sha256": "9AEB404BE5AE51FF1945D8D12E96AEA1E2BA21CC1234AB204AFB91D302265CCD"
+    },
+    {
+      "path": "small-commit-v7-10k-20261026-current-slot-fdb-streamed-verify.jsonl",
+      "bytes": 7113,
+      "sha256": "8B7D4EF1803E5BCF472E35E915672187719FA7E90145740D7D215942BCD7FCB0"
+    },
+    {
+      "path": "small-commit-v7-10k-20261026-design.json",
+      "bytes": 1953,
+      "sha256": "0D1F975F5529F4EDF27D995435DFF83559847D9DE67BE296E88F6F8B359F834A"
+    },
+    {
+      "path": "snapshot-10k-20261026-validation-small-v7-all-features.log",
+      "bytes": 138,
+      "sha256": "3EF309658A44AF000427AD6665FC685028437E84A31B913CA17D6A7CBD765D6B"
+    },
+    {
+      "path": "snapshot-10k-20261026-validation-small-v7-clippy.log",
+      "bytes": 138,
+      "sha256": "9B75C2E7BB3BAE50204CC4B893EE1BCAC03F33C7748B037D03D2B61C31F40D40"
+    },
+    {
+      "path": "snapshot-10k-20261026-validation-small-v7-fmt.log",
+      "bytes": 0,
+      "sha256": "E3B0C44298FC1C149AFBF4C8996FB92427AE41E4649B934CA495991B7852B855"
+    },
+    {
+      "path": "snapshot-10k-20261026-validation-small-v7-no-default.log",
+      "bytes": 138,
+      "sha256": "1C50F090BFA0AFC65C5FC9934D2BA0C0674BCBCEC7CD50184AB42068E59F682E"
+    },
+    {
+      "path": "snapshot-10k-20261026-validation-small-v7-sqlite-clippy.log",
+      "bytes": 243,
+      "sha256": "265B4AEDE94A7E4F15FA97135BDEC107929B33FF0B5C1A703EDD5F87E96E51F4"
+    },
+    {
+      "path": "snapshot-10k-20261026-validation-small-v7-sqlite-fmt.log",
+      "bytes": 0,
+      "sha256": "E3B0C44298FC1C149AFBF4C8996FB92427AE41E4649B934CA495991B7852B855"
+    },
+    {
+      "path": "snapshot-10k-20261026-validation-small-v7-sqlite-test.log",
+      "bytes": 559,
+      "sha256": "FB6CC73F628A2B1DC6F92C3F693BDC4F9E36EC6490241239EBE91AB78543A4F4"
+    },
+    {
+      "path": "snapshot-10k-20261026-validation-small-v7-test.log",
+      "bytes": 30269,
+      "sha256": "707F46D92DCA5619549BA6FDD731DD679AEBE1E6451ECF540D6CE4ED9DF493D5"
+    }
+  ]
+}

@@ -10,6 +10,7 @@ pub(crate) struct Location {
     pub checksum: u32,
 }
 
+#[derive(Clone)]
 pub(crate) struct Row {
     pub location: Location,
     pub version: u64,
