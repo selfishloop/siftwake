@@ -1,0 +1,15 @@
+   Compiling fdb v0.3.1 (C:\Users\Serkan\Documents\ChatGPT\fdb)
+    Finished `test` profile [unoptimized + debuginfo] target(s) in 9.44s
+     Running unittests src\lib.rs (target\debug\deps\fdb-390fb1988551a740.exe)
+
+running 5 tests
+test engine::background_revision::tests::unpublished_output_child ... ignored, subprocess for unpublished background output recovery
+
+running 1 test
+test engine::background_revision::tests::disabling_default_reclaim_discards_even_a_finished_rewrite ... ok
+test engine::background_revision::tests::default_write_schedules_revision_and_never_joins_a_paused_worker ... ok
+test engine::background_revision::tests::kill_before_revision_publication_keeps_source_and_cleans_output ... ok
+test engine::background_revision::tests::finished_revision_is_published_only_for_the_captured_prefix ... ok
+
+test result: ok. 4 passed; 0 failed; 1 ignored; 0 measured; 175 filtered out; finished in 0.80s
+

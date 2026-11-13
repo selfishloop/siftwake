@@ -748,6 +748,7 @@ impl Database {
             delta_bytes: self.delta_bytes,
             options: self.options.clone(),
             job: None,
+            background_revision: background_revision::State::default(),
             revision_reclamation: false,
             revision_responsive: self.revision_responsive,
             query_visibility_pruning: self.query_visibility_pruning,

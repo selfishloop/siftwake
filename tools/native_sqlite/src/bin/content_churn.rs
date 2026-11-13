@@ -2,6 +2,8 @@
 mod block2_scale;
 #[path = "../../../bench_support/churn.rs"]
 mod churn;
+#[path = "../../../bench_support/live_disk50.rs"]
+mod live_disk50;
 #[path = "../../../bench_support/small_commit.rs"]
 mod small_commit;
 #[path = "../../../bench_support/snapshot_common.rs"]
@@ -157,6 +159,19 @@ impl Backend for Engine {
         self.db.execute_batch("PRAGMA wal_checkpoint(TRUNCATE);")?;
         Ok(json!({"before":before,"after":self.stats()?,"merge_completions":null}))
     }
+    fn idle_notify(&mut self) -> Result<Value> {
+        if std::env::var_os("FDB_LIVE_DISK50").is_none() {
+            return self.maintain();
+        }
+        self.db
+            .execute("INSERT INTO search(search) VALUES('optimize')", [])?;
+        let checkpoint: (i64, i64, i64) =
+            self.db
+                .query_row("PRAGMA wal_checkpoint(TRUNCATE)", [], |r| {
+                    Ok((r.get(0)?, r.get(1)?, r.get(2)?))
+                })?;
+        Ok(json!({"truncate_checkpoint":checkpoint}))
+    }
     fn start_merge(&mut self) -> Result<bool> {
         Ok(false)
     }
@@ -197,6 +212,9 @@ fn main() -> Result<()> {
     let sequence = db.query_row("SELECT sequence FROM meta", [], |r| r.get::<_, i64>(0))? as u64;
     let mut engine = Engine { db, sequence };
     let session_ms = start.elapsed().as_secs_f64() * 1000.;
+    if mode == "live-disk50-first" {
+        return live_disk50::first(&engine, start, session_ms);
+    }
     churn::emit(
         json!({"phase":"opened","engine":"sqlite","mode":mode,"open_ms":start.elapsed().as_secs_f64()*1000.,"strict":false,"memory":churn::memory(),"stats":engine.stats()?}),
     );
@@ -244,6 +262,9 @@ fn main() -> Result<()> {
     if mode == "write-churn-idle-30" {
         let mut engine = engine;
         return write_hardening::idle_each_round(&mut engine, &args[2], path);
+    }
+    if mode.starts_with("live-disk50-") {
+        return live_disk50::run(&mut engine, mode, &args[2], path);
     }
     churn::run(engine, mode, &args[1], &args[2], path)
 }

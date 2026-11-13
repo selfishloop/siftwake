@@ -1,5 +1,652 @@
 # FDB açık işler
 
+12 Kasım güncel karar — Arka planda revizyon geri kazanımı (4b)
+**varsayılan AÇIK**. Yazıcı hazır işi yayımlar, boşta
+`poll_maintenance()` ile ilerletir. 50k/30 tur disk kapısı **GEÇTİ
+30/30**, en yüksek 1,281×, son 1,212×. 100'lük commit >1 s
+23/3.000, en uzun 2,093 s. 50k/41 kill/reopen ve eski okuyucu geçti.
+Uzun snapshot, aralıksız yazı ve gerçek Frunner anahtarıyla disk
+sınırı, 100'lük uçların aşama profili, açılış, geniş arama ve C ABI
+açık. [Varsayılan karar ve doğrulama](BACKGROUND-RECLAIM-DEFAULT-50K-20261112.md)
+
+Aşağıdaki önceki denemeler kendi ayarlarıyla tarihsel kayıttır.
+
+12 Kasım — İkinci seçenek, yazıcıda dilimli revizyon, 50k/1R+1W
+görünürlüğünde **GEÇTİ** (24/24, p95/max 159/166 ms), disk kapısında
+**KALDI** (27/30, en yüksek 1,519×, son 1,29985×). Arka plan adayı
+30/30, en yüksek 1,290×, son 1,183×. Dilimli adayda 100'lük >1 s
+33→80/3.000, en uzun 2,075→1,767 s, yazı+boşluk oranı 1.416→1.307
+işlem/s. En uzun yazıcı indeks bitirme adımı 876 ms, olay örneği
+bu adımın tamamını beklemedi. 50k/41 kill/reopen, eski okuyucu ve
+staged CRC/pin testleri geçti. İki seçenek için üretim kararı açık,
+reclaim varsayılanı KAPALI. Uzun snapshot, aralıksız yazı ve gerçek
+Frunner anahtarıyla disk sınırı, 100'lük uçların iç profili, açılış,
+geniş arama ve C ABI açık.
+[Dilimli aday ve karşılaştırma](SLICED-RECLAIM-50K-20261112.md)
+
+12 Kasım — Arka plan revizyonu geçici prototipi 50k/1R+1W dosya olayı
+kapısını geçti. 24/24 aday olay ≤1 s, p95/max 127/129 ms. Hazırlıkla
+örtüşen altı olayda kuyruk max 0,034 ms. İki saniye yazmasız arayla 30/30
+tur disk ≤1,3×, max 1,290×, son 1,183×, örnekli geçici tepe 1,493×.
+100’lük committe 33/3.000 >1 s, max 2,075 s; neden aşama düzeyinde
+bilinmiyor. Tepe private proses 89,73 MiB; motor-only ölçüm değil.
+50k/41 kill/reopen ve dondurulmuş okuyucu iki kolda geçti. Üretim
+reclaim varsayılanı KAPALI. Uzun snapshot, aralıksız yazı ve gerçek
+Frunner anahtarıyla disk sınırı, açılış, geniş arama uçları ve C ABI açık.
+[Arka plan revizyonu deneyi](BACKGROUND-RECLAIM-50K-20261112.md)
+
+12 Kasım — Senkron idle bakımında gelen 24/24 dosya olayı 1 s üstü.
+50k/1R+1W adayında olay→ilk sonuç p50/p95 9,07/12,40 s, eşleşmiş bakım
+yok kontrolü 66,76/145,27 ms. Toplam gecikmenin %99,24’ü kalan bakım.
+48 olay oracle, kill/reopen ve eski okuyucu geçti. Frunner’da senkron
+çağrı sırasında yazı kuyruğu açık kalıyor. Arka plan hazırlığı/yayım,
+prefix ucu, uzun snapshot, gerçek anahtar disk tavanı ve C ABI açık.
+[Bakım sürerken olay ölçümü](RECLAIM-ARRIVAL-50K-20261112.md)
+
+12 Kasım — Idle-only reclaim geçici adayında 50k/30 tur disk kapısı
+GEÇTİ 2/2, bakım sonrası max 1,266×. 100’lük commit >1 s 211→15/6.000,
+p99 1,91–2,11→0,79–0,82 s. Yazı+bakım throughput’u 746→1.020 işlem/s,
+bakım toplamı 304→375 s. Aday yazı yolunda revizyon plan/start/join
+0/0/0. Geçici disk tepesi 1,591×. Kill/reopen ve eski okuyucu 4/4.
+Genel reclaim KAPALI. Yazı maintenance sürerken gelirse kuyruk etkisi,
+seq 624/prefix ucu, uzun snapshot, gerçek Frunner anahtarı ve C ABI açık.
+[Idle-only reclaim sonucu](RECLAIM-IDLE-ONLY-50K-20261112.md)
+
+12 Kasım — Reclaim profil ABBA ve ayrı kapalı kol tamamlandı. Açık >1 s
+66 commitin 62’sinde join baskın, join’ler toplam %59,27. Foreground
+revizyon planı %18,78. B1 seq 724 aynı committe iki revizyon işçisi için
+3,92 s bekledi. Kapalı 0/1.300 >1 s, en kötü 960 ms ve 694 ms prefix join.
+Tarihsel seq 693/1324 uç büyüklükleri tekrarlanmadı. Genel reclaim kapalı,
+idle’a taşıma yalnız kod görüşü. Uzun snapshot, gruplu yazma uçları,
+gerçek Frunner anahtarıyla disk tavanı, arama uçları ve C ABI açık.
+[Kuyruk tanısı](RECLAIM-PROFILE-50K-20261112.md)
+
+11 Kasım — Reclaim yazma ucu tanı tasarımı hazır. Küçük WAL yolu açıkken
+otomatik prefix/fallback akışı revizyon planlamasına girebiliyor. Eski
+3,94–4,59 s uçların nedeni bilinmiyor. 23 run karşılaştırmasında fiziksel
+kayıt 150.000 / 60.297, maske ve run yükleme payları ölçülmedi. Profil
+onayı bekleniyor. Tek pin deneyi ayrı onayda, genel varsayılan KAPALI.
+[Tanı tasarımı](RECLAIM-DIAGNOSIS-DESIGN-50K-20261111.md) ·
+[Varsayılan karar özeti](RECLAIM-DEFAULT-DECISION-50K-20261111.md)
+
+11 Kasım — Canlı 50k, 1R+1W, 30 tur tamamlandı. Reclaim açık **disk kapısı
+GEÇTİ 2/2**, son 1,200–1,251×. Kapalı 5,712× ve 63 run, KALDI 2/2.
+Son sıcak strict-open p50 kapalı 1.138–1.199 ms, açık 281–286 ms.
+100’lük commit p95 44–48→197–204 ms, max 3,94–4,59 s. Aşama nedeni
+bilinmiyor. SQLite son 1,225–1,230×, `busy` checkpoint’lerde en yüksek
+bakım sonrası 3,671–4,633×. Oracle/kill 6/6, eski FDB okuyucu 4/4.
+Genel reclaim KAPALI. Gerçek Frunner anahtarı/uzun pin disk sınırı,
+gruplu yazma uçları, arama uçları ve C ABI açık.
+[Canlı disk ve açılış raporu](LIVE-DISK-50K-20261111.md)
+
+11 Kasım — SEG05 dönüşümlü terim tamponu geçici derlemede. Önceki sayfa
+sınırı adayına karşı 52 run sıcak strict-open p50 385,51→365,74 ms,
+ilk sonuç p50 483,92→462,33 ms, ikisi de 10/10 blok. Açılış tepe private
+p95 +0,398 MiB. 789.189 terim/posting ve 6.174 sayfa sınırı eşit, 50k/41
+kill/reopen ve dondurulmuş okuyucu geçti. Bu adayın
+temiz ve gerçek soğuk açılışı ölçülmedi. Canlı disk tavanı, bakım/yazma
+kuyrukları, arama uçları, eşzamanlı yük ve C ABI açık.
+[SEG05 tampon deneyi](STRICT-OPEN-SEG05-DECODE-20261111.md)
+
+11 Kasım — SEG05 sayfa sınırı adayı geçici derlemede. 52 run sıcak
+strict-open p50 415,28→383,93 ms, ilk sonuç p95 588,58→515,03 ms,
+10/10 blok. Açılış tepe private p95 +0,035 MiB. 6.174 sınır alan alan
+eşit. 50k/41 kill/reopen ve frozen okuyucu geçti. Terim çözümleme
+örneklenen sürenin %37’si. Canlı disk tavanı, bakım/yazma kuyrukları,
+eşzamanlı yük, arama uçları ve C ABI açık.
+[SEG05 terim ve sayfa sınırı raporu](STRICT-OPEN-SEG05-TERMS-20261111.md)
+
+10 Kasım — SEG05/MET04 iç ölçümünde terim/posting döngüsü baskın.
+İki işçide 212,42 ms birikim, bölümün %83’ü. MET04 sayfa/CRC %2,1,
+kayıt karşılaştırması %3,45. Ayrıntılı sayaç açılış eşleşmiş medyan
++2,19 ms. Sonraki aday terim decode ile Bloom/fence hazırlığını ayırmak.
+[SEG05/MET04 ayrımı](STRICT-OPEN-SEG05-MET04-PHASES-20261110.md)
+
+10 Kasım — iki işçili sıcak strict-open fazları ölçüldü. 52 run yükleme
+p50 265,08 ms. En büyük alt aşama SEG05 parse + MET04 sayfa/kayıt
+karşılaştırması, iki işçide 252,39 ms toplam ve 174,29 ms duvar kapsamı.
+Sayaç açık/kapalı eşleşmiş açılış farkı +1,38 ms. SEG05/MET04 tekrar
+okunan mantıksal alan 41,93 MiB. Alt aşama payları ve gerçek kazanç açık.
+[Faz raporu](STRICT-OPEN-RUN-PHASES-20261110.md)
+
+10 Kasım — iki işçili strict-open motorda. Ortak iki izin hemen yoksa
+seri açılış. Seri cache onarımı, strict CRC ve manifest sırası korundu.
+261 test, 50k/41 kill/reopen ve frozen okuyucu geçti. 52 run sıcak
+açılış p50 668,20→430,17 ms, ilk sonuç p95 785,80→576,06 ms, 6/6 blok.
+Açılış tepe private p95 +0,445 MiB, CPU p50 +15,63 ms. Sıradaki öneri
+canlı disk tavanı ile 1R+1W bakım ve gruplu yazma kuyruğunu ölçmek.
+[Birleştirme ve doğrulama](STRICT-OPEN-TWO-WORKERS-MERGED-20261110.md)
+
+10 Kasım — iki işçili FDB gerçek soğuk karşılaştırması 4/4 geçerli.
+İlk sonuç 1115,91→835,13 ve ters çiftte 1056,93→733,34 ms. 54/54
+dosya atfı, fiziksel DiskIO ve birleşik kayıp 0. Collector bazı ölçülemedi.
+Sıcak ve soğuk ölçümler prototip kabulünü destekliyor. Motora alma kararı
+açık. SQLite/Q30 2b kapsamı, canlı disk tavanı ve C ABI açık.
+[Soğuk tekrar ve arşiv](STRICT-OPEN-TWO-WORKERS-COLD-RETRY-20261110.md)
+
+9 Kasım — iki işçi temiz sıcak 50k ve 100k’da 12/12 blokta daha hızlı.
+Strict-open p50 268,78→188,94 ve 541,80→304,50 ms. Açılış tepe private
+p95 +1,070 ve +1,012 MiB. Gerçek soğuk 0/4 geçerli. Tek işçi oracle’ı
+geçti, 32 MiB collector doldu ve birleşik ETL oluşmadı. İki işçi soğuk
+kolu başlamadı. Prototip kabulü ve 2b gerçek soğuk açık.
+[Ölçek ve soğuk takip raporu](STRICT-OPEN-TWO-WORKERS-FOLLOWUP-20261109.md)
+
+9 Kasım — iki işçili run doğrulaması geçici derlemede, 52 run / 50k
+sıcak strict-open p50 701,72→444,91 ms, ilk sonuç p95 816,53→567,01 ms,
+12/12 blok. Açılış tepe private p95 +0,871 MiB, CPU p50 +15,625 ms.
+50k/41 kill/reopen, frozen okuyucu ve seri cache onarım testi geçti.
+Üretime alınmadı. Az run, 100k ve soğuk açılış etkisi açık.
+[İki işçi raporu](STRICT-OPEN-TWO-WORKERS-50K-20261109.md)
+
+9 Kasım — sıralı açılış maskesi motorda. 52 run / 50k sıcak strict-open
+p50 1322,84→697,11 ms, ilk sonuç p95 1746,19→955,30 ms. Property,
+259 test, 50k/41 kill/reopen ve frozen okuyucu geçti. Temiz 50k/100k
+açılışında tutarlı süre gerilemesi yok. 100k açılış tepe private p95
+4,121→4,270 MiB, fark maske çağrısından önce mevcut. Kullanıcı ölçülen
+RAM farkını kabul etti. Kalan aşamaların salt-okuma incelemesi tamamlandı.
+Sınırlı run paralelliği yalnız tasarım adayı. 2b gerçek soğuk, canlı disk
+tavanı ve C ABI açık.
+[Birleştirme raporu](STRICT-OPEN-KEY-SWEEP-MERGED-20261109.md) ·
+[Kalan aşamalar](STRICT-OPEN-REMAINING-PHASES-20261109.md)
+
+9 Kasım — sıcak strict-open için sıralı anahtar taraması prototipi,
+52 run / 50k kopyada 12/12 blokta hızlandı. Açılış p50 1350,65→730,71 ms,
+ilk sonuç p95 1593,08→907,23 ms. Maske bit eşit. İlk sonuca kadar tepe
+private p95 +0,20 MiB. Üretim motoru ve varsayılan aynı. 2b gerçek soğuk,
+canlı disk tavanı ve C ABI açık.
+[Sıralı tarama raporu](STRICT-OPEN-KEY-SWEEP-50K-20261109.md)
+
+8 Kasım — 2b tamamlama penceresinde SQLite sıcak kolu 150 oracle’lı
+örnekle bitti. Sıcak ilk sonuç FDB/SQLite 1507,22/302,03 ms,
+2–30. sorgular p95 109,01/605,44 ms. Ters çiftin yönetici purge adımı
+pencere içinde çalıştırılmadı, yeni cold örnek yok. İki motorun kill/reopen
+ve 50.000 GET/version + 41 sorgu oracle’ı geçti. 2b KISMEN.
+[Tamamlama raporu](BLOCK2B-COLD-PAIRED-COMPLETION-50K-20261108.md)
+
+8 Kasım — 2b iki dengeli çift denemesi 2/4 başlatıldı, 1/4 teknik
+geçerli ve 1/4 süre geçişi. FDB 1868,88 ms ≤2000, 54/54 FileIO ve
+DiskIO, birleşik kayıp 0. FDB Q30 cold/warm 131,50/102,81 ms.
+SQLite ham 4622,54 ms, System Collector 56 MiB doldu, birleşik iz
+yok. Ters çift durdu. İki motor oracle/kill/reopen, FDB eski
+okuyucu ve ana dosya/model SHA geçti. 2b KISMEN, disk churn ve C ABI açık.
+[İki çift raporu](BLOCK2B-COLD-2S-PAIRED-50K-20261108.md)
+
+
+8 Kasım — kullanıcı 2b ilk sonuç kapısını **2000 ms** yaptı ve tekrar
+istedi. İlk tekrar 1/8 başlatıldı, 0/8 geçerli. Ham FDB 1895,46 ms,
+ancak 32 MiB System Collector doldu, WPR birleşik iz çıkarmadı. Warm ve
+SQLite başlamadı. 30 ham oracle, kill/reopen/eski okuyucu ve envanter
+geçti. Önceki geçerli 1893,59 ms eski 1000 ms kararıyla saklanıyor.
+2b açık. SQLite yan dosya oluşumu onaylı, bu tur kullanılmadı.
+[2.000 ms tekrar raporu](BLOCK2B-COLD-2S-RETEST-50K-20261108.md)
+
+
+8 Kasım — dar ETW 2b ana koşusu ilk FDB denemesinde durdu. Ana 1/8
+başlatıldı, 1/8 teknik geçerli, süre kapısı 0/8. 54/54 FileIO ve
+DiskIO, birleşik kayıp 0. 12 CSV farkı uzlaştırıldı. Cold ilk sonuç
+1893,59 ms >1000, warm 1416,95 ms. Q30 cold/warm 96,09/91,52 ms,
+yakınsama kararı kullanıcıda. 180 oracle, FDB kill/reopen/eski okuyucu
+ve slot/model hash geçti. SQLite performans yok. 2b açık, disk churn
+ve C ABI bekliyor.
+[Dar ETW ana koşu raporu](BLOCK2B-COLD-SHORT-MAIN-50K-20261108.md)
+
+
+8 Kasım — kısa cold 2b teknik ön testi GEÇTİ. Bir purge ve bir
+kayıt, 54/54 aynı-pencere FileIO ve 54/54 fiziksel DiskIO tanığı,
+53.059.584 B hedef okuma, birleşik kayıp 0, collector bazı ölçülemedi.
+CSV özet farkı üç iz meta olayı ve cold pencere dışı bir Create
+olarak uzlaştırıldı. Tek ilk sonuç 2030,38 ms, 1 s çizgisinin
+üstünde. Ana 0/8, 2b açık, kapılar aynı. Disk churn ve C ABI bekliyor.
+[Kısa cold ön test sonucu](BLOCK2B-COLD-SHORT-PREFLIGHT-LIVE-50K-20261108.md)
+
+
+8 Kasım — 2b kısa cold ön testi hazırlandı. Yönetici çağrısı UTC
+penceresinde başlamadı, normal okuyucu sinyal süresinde çıktı. 0 purge,
+0 WPR, 0 yeni cold açılış. 54/54, DiskIO ve kayıp olay kapıları
+ÖLÇÜLMEDİ. 2b açık, ana geçerli 0/8. Disk churn ve C ABI bekliyor.
+[Kısa ön test kaydı](BLOCK2B-COLD-SHORT-PREFLIGHT-50K-20261108.md)
+
+
+8 Kasım — 2b mevcut cold ETL çevrimdışı sonuna kadar çözüldü.
+302,86 MB CSV named pipe üzerinden süzüldü, yeni ham CSV yazılmadı.
+Eski kesme noktasında ve tam EOF’ta 50/54. Dört eksik kaynak için
+cold PID’de adsız FileKey okuma sinyali ve sonraki PID’lerde ad var,
+aynı pencere ad/nesne bağı eksik. Birleşik kayıp 0, collector bazı
+ölçülemedi. Geçerli cold 0/8, kapı aynı. Yeni purge/ETW ve 50k disk
+churn ayrı onay bekler.
+[Çevrimdışı iz raporu](BLOCK2B-COLD-ETW-OFFLINE-50K-20261108.md)
+
+
+7 Kasım — 50k açılış paralel maske deneyi ve Frunner hazırlık tablosu.
+Seri strict-open p50 1274,55 ms. 2/4/8 işçi eşleşmiş medyan +258/+907/+908
+ms, 0/12 daha hızlı. CPU arttı. 52 run maskesi ve cache 1/2/4/8’de bayt
+bayt eşit, 48/48 case0, slot/kopya/model hash geçti. Üretim ve kapılar
+aynı. 2b cold, 2c uzun snapshot, 50k 4R+100 ve drain, 3a, C ABI açık.
+[Paralel açılış deneyi](STRICT-OPEN-PARALLEL-50K-20261107.md) ·
+[Frunner hazırlık tablosu](FRUNNER-READINESS-20261107.md)
+
+
+7 Kasım — 50k hafif maske tanısı tamamlandı. 20 hafif örnekte açılış
+maskesi p50/p95 764,05/801,74 ms, toplamın %59,97’si. 697/1326 çift
+aralık kontrolünü geçti. Yeni run’ı 1024–8191 slot olan 288 çift,
+ölçülen hide_keys süresinin %91,93’ü. Sayaçsız kontrol 1251,08 ms p50,
+hafif kol eşlenmiş fark medyan +36,37 ms. 40/40 case0 ve slot/model hash
+geçti. WPR’nin ilk sırası 5+5 ham örnek üretti, System Collector 48 MiB
+doldu ve stop 0x800705DE ile kaldı. Ters sıra başlamadı, WPR etkisi
+bilinmiyor. 2b açık, yeni purge/çözümleme/optimizasyon yok, kapılar aynı.
+[Hafif maske ve WPR raporu](STRICT-OPEN-MASK-WPR-50K-20261107.md)
+
+
+7 Kasım — 50k sıcak strict-open aşama tanısı tamamlandı. Profilsiz
+p50/p95 1272,43/1313,83 ms. Profilli doğrudan p50 1742,12 ms ve
+görünürlük maskesi profilli toplamın %69,67’si. Ayrıntılı profil on
+eşleşmiş blokta medyan +476,28 ms. Profilsiz maskenin mutlak süresi ve
+WPR maliyeti bilinmiyor. 40/40 case0 oracle, canlı slot/kopya 159/159 SHA
+ve model hash geçti. 2b açık, cold kapıları ve varsayılan aynı. WPR
+karşılaştırması ve cold tekrar ayrı onay bekler.
+[Sıcak açılış aşama raporu](STRICT-OPEN-PHASES-50K-20261107.md)
+
+
+7 Kasım — 2b ana koşu ilk denemede durdu. FDB ham ilk sonuç 1770,33 ms,
+warm 1384,58 ms. Collector sınırı ve 50/54 okuma tanığı nedeniyle iz
+geçersiz. Birleşik kayıp 0, collector bazı ölçülemedi. Ana 1/8 başlatıldı,
+0/8 geçerli. SQLite performans yok. Oracle/kill/reopen/eski okuyucu geçti.
+SQLite ana DB SHA aynı, boş WAL/SHM kapanışta eksik, yerleşim KALDI.
+Toplam izlenen 410,9 MiB, ETL kapanış 61,8 MiB. Yalnız kendi geçici CSV'si
+kanıt süzüldükten sonra silindi. 2b açık ve tekrar kullanıcı kararı bekler.
+[Ana koşu raporu](BLOCK2B-COLD-ETW-MAIN-50K-20261107.md)
+
+7 Kasım — kullanıcı ETW ön testinin sıcak/cold zincirini kabul etti.
+Ana iz kuralı birleşik tracerpt kayıp 0 ve eksiksiz hedef okumaları.
+Her satırda “collector bazı ölçülemedi”. Tek satırdan çağrılan yönetici
+betiği AST hatası 0. Disk rezervi ve yalnız kendi geçici CSV'sini silme
+kuralı hazırlandı. Ana 0/8, ayrı “başla” bekliyor.
+[Ana koşu planı](BLOCK2B-COLD-ETW-MAIN-PLAN-50K-20261107.md)
+
+7 Kasım — tek satırlık bağlantı provası ACK aldı. Sonraki ETW ön testi
+1 purge ve 1 kayıt üretti. Sıcak eşlenen DiskIO iki hedefte 0. Purge
+sonrası okuyucuya FDB 2 KiB ve SQLite 64 KiB bağlandı. Birleşik kayıp 0,
+collector sayaçları açık. Ana 0/8 ve kapılar ölçülmedi. Ana ETL bütçesi
+de doğrulanmadı. 2b açık.
+[ETW kanıt raporu](BLOCK2B-ETW-LINK-PREFLIGHT-50K-20261107.md)
+
+7 Kasım — onaylı ETW ön testi için okuyucu hazırlandı. Yönetici bloğundan
+başlangıç sinyali gelmedi, başlatma penceresi doldu. Okuma fazı 0/3,
+purge 0, ETW 0, ana deneme 0/8. **Gerçek cold kanıtlanamadı.** Dosya/PID,
+kayıp olay ve performans kapıları ölçülmedi.
+[ETW ön test raporu](BLOCK2B-ETW-PREFLIGHT-50K-20261107.md)
+
+7 Kasım — kullanıcı 0 purge, 0 ETW ve 0/8 ana deneme sonucunu kabul etti.
+Yeni tasarım, elle RAMMap tanığı yerine tek ETW kaydında sıcak okuma,
+purge ve aynı aralığın cold okumasıyla ön test öneriyor. Dosya/PID ve
+FileIO/DiskIO eşlemesi ile kayıp olay 0 kapısı açık. Sekiz ana deneme
+aynı purge + ETW kanıt etiketiyle planlandı. 10 dk ön test onayı ve
+sonrasında ayrı ana “başla” onayı bekleniyor. 2b kapısı ölçülmedi.
+[ETW tasarımı](BLOCK2B-COLD-ETW-DESIGN-50K-20261107.md)
+
+7 Kasım — onaylı dar 2b ön testi durdu. Canlı 1.853 B kaynak manifest CRC
+kontrolünden geçti ve salt okunur olarak okundu. RAMMap pozitif `Total > 0`
+tanığı gelmedi. Purge 0, ETW 0, ana trial 0/8. Cold kapısı ölçülmedi.
+[Ön test raporu](BLOCK2B-COLD-PREFLIGHT-50K-20261107.md)
+
+4 Kasım — kullanıcı sonraki RAMMap görüntüsünde hedef-prefix için iki yönde
+RAM sayfası saptanmamasını **yalnız o an için kabul etti**; eski purge anını
+geriye dönük kanıtlamaz. [Tasarım revizyonu](BLOCK2B-COLD-CACHE-REDUCED-DESIGN-50K-20261104.md)
+hazır: küçük canlı DB dosyasında bir pozitif→purge→negatif denemesi, bir kısa
+ETW uygunluk kaydı; ana case0 `olduğu`,4 dengeli çift/8 cold+8 warm,
+1440 zamanlı sorgu, ilk/son RAMMap, ara6 ETW destekli. Toplam40dk, preflight
+dahil9 purge/9 trace önerisi **ONAY BEKLİYOR; bugün yürütme yok**.
+ETW gerçek dosya/PID/storage eşleme ve lost-event0 hâlâ doğrulanmadı;
+ara6'da disk izi tüm dosyaların resident0 olduğunu tek başına kanıtlamaz,
+kanıt kapsamı ayrı belirtilir.≤1s Open-start→ilk sonuç ve yakınsama kararı
+aynı.2b ana ölçüm başlamadı;3a KISMEN,2c/4 ve önceki açık işler aynı.
+
+4 Kasım [beş dakikalık ek preflight](BLOCK2B-PREFLIGHT3-50K-20261104.md):
+File Summary/Find görüldü; purge öncesi prefix bulunamadı, tam kapsamı bilinmiyor.
+Tek `-Es`→`-Et` dizisi denendi (1/1), iki parent exit0. Resident0 tanığı yok;
+**gerçek cold kanıtlanamadı**, ana2b/ETW başlamadı. Önceki purge0 kayıtları
+yalnız kendi tarihsel pencerelerine aittir; toplam deneme artık1.
+
+4 Kasım — **ikinci 2b preflight:** yerel RAMMap1.63 kendi Usage ekranı
+ve `-Es`/`-Et` CLI desteği doğrulandı; menüyle24 purge zorunlu değil.
+[Yeni rapor](BLOCK2B-PREFLIGHT2-50K-20261104.md). Yönetici penceresine
+otomasyon girdisi işlemiyor; hedef dosyaların resident0 tanığı alınamadı.
+**Gerçek cold kanıtlanamadı; purge0/1, ETW kaydı0, ana koşu başlamadı.**
+WPR yalnız yetenek kontrolü: gerçek file/PID eşleme ve event kaybı bilinmiyor.
+SQLite read-view önkoşulu tekrar geçti (sequence1026311, ana DB SHA aynı).
+Süre başlangıç/bitiş kaydı rapor ve JSON'dadır. Slot/model/varsayılan/kod
+değişmedi. Ana koşu için ayrıca “başla” gerekir; tanık/ETW önkoşulları açık.
+3a KISMEN/özgün kapı ölçülmedi;2c/4 ve yazma/arama/RAM-disk/eşzamanlı
+yükte önceki açık maddeler aynı, başka bloğa geçilmedi.
+
+Önceki preflight'ın tarihsel kayıtları:
+
+4 Kasım ek bilgi — RAMMap yolu sonradan geldi:
+`C:/Users/Serkan/Downloads/RAMMap/RAMMap.exe`, sürüm1.63, Microsoft imzası
+Valid (yalnız metadata). İlk15dk preflight penceresi dolmuş olduğundan
+çalıştırma/yardım/purge yapılmadı. [Ek kanıt](BLOCK2B-PREFLIGHT-50K-20261104.md).
+Cold hâlâ kanıtlanmadı; kalan kontroller için yeni süre onayı, ana koşu için
+ayrıca “başla” gerekir. Diğer bloklara geçilmedi.
+
+4 Kasım 2026 — **2b preflight: GERÇEK COLD KANITLANAMADI; DURULDU.**
+[Rapor/kanıt](BLOCK2B-PREFLIGHT-50K-20261104.md): kontroller555s, rapor dahil777/900s;
+RAMMap aranan yerlerde yok, yerel yardım/CLI/otomasyon bilinmiyor, kullanıcıya
+yol soruldu. Purge0/1, resident0 tanığı yok. WPR yerel yardım/profil metadata'sı
+alındı; gerçek file/PID eşlemesi, event kaybı ve sert ETL boyut sınırı kayıt
+olmadan doğrulanmadı. ETW kaydı yetki dışıydı; kayıt başlatılmadı.
+SQLite readOnly/query_only iki ardışık view önkoşulu NodeSQLite'da geçti;
+future Rust harness doğrulaması değildir. DB SHA/sequence aynı; slot kaydı
+değişmedi. Ana koşu/boot/yeni araç/diğer bloklar yok. GUI zorunluysa24 purge
+12–36dk tahmini;12/16/8 purge seçenekleri raporda, kapsam kararı kullanıcıda.
+Önkoşullar kapanınca ana koşu için ayrıca **“başla”** onayı gerekir.
+3a KISMEN/özgün kapı ölçülmedi, yeni3a turu yok; diğer açık işler korunur.
+
+Önceki tasarım kayıtları:
+
+4 Kasım 2026 — **Yalnız belge/tasarım tamamlandı.**
+[Blok4 karar tablosu](BLOCK4-DECISIONS-20261104.md): mevcut kanıt/artı-eksi/
+eksik test/öneri ayrı; küçük WAL genel default KAPALI, Frunner opt-in adayı;
+reclaim KAPALI kararı korunur, tek okuyucuda koşulsuz disk tavanı yok;
+Owned azaltma imkânsız denmedi, Frunner-only-streamed API işareti onay ve
+giriş/atomiklik/bellek doğrulaması bekler. Varsayılan veya API etiketi uygulanmadı.
+
+[2b gerçek-soğuk cache tasarımı](BLOCK2B-COLD-CACHE-DESIGN-50K-20261104.md)
+hazır; **ölçüm BAŞLAMADI**. Ana yöntem yönetici RAMMap + cache/disk tanığı;
+restart ayrı seçilen/onaylanan alternatif. Önceden sabit24cold/24warm,
+4320 zamanlı sorgu; hazırlık15 + ölçüm/doğrulama45 = toplam60dk üst sınır.
+4 Kasım kullanıcı kararı: **açılış dahil ilk sonuç≤1s**;30. arama sıcak A/A
+yayılımıyla yan yana sunulur, **sayısal kabulü kullanıcı sonuçta kararlaştırır**.
+Tanımlar kabul edildi; ölçüm/yönetici cache temizliği için ayrı uygulama onayı
+beklenir. Yeni eşik yok.
+Bu tur kod/ölçüm/DB işlemi/test/eviction/reboot yapılmadı; slotlar onarımda
+doğrulandıkları ready durumunda bırakıldı, güncel DB kontrolü iddiası yok.
+**3a KISMEN, özgün kapı ÖLÇÜLMEDİ; yeni3a turu yok.** 2c/diğer bloklar ve
+C ABI başlamadı; yazma/bakım, arama, RAM/disk/eşzamanlı yük açıkları korunur.
+
+Önceki kabul/onarım kayıtları:
+
+3 Kasım 2026 — **Yalnız çalışma alanı onarımı TAMAMLANDI.**
+[Temizlik raporu/ham kanıt](BLOCK3A-REPAIR-20261103.md): iki motorda izinli16
+anahtar tam GET/content/version doğrulamasından sonra silindi. Ana50k'ya
+mutation gönderilmedi. Reopen →50k GET/version+41digest →kill/reopen →aynı
+kontroller ve eski okuyucular geçti. SQLite'ın gerçek pre-delete sequence'i
+1026310; hazırlıktan sonra **1** update gözlendi. Son/model sequence'leri
+FDB529967,SQLite1026311. Model rows/dead/next değişmedi; iki slot **ready**,
+pending_diagnostic blokesi kaldırıldı. Açık onarım işi kalmadı.
+
+**3a: KISMEN, tanı yeterli sinyal verdi; özgün kapı (zx/the zx ≥%30,
+diğer36 ±%5 + A/A) ÖLÇÜLMEDİ.** Gap/run ve zx adjacency sinyalleri raporda
+“sinyal, kanıt değil” olarak korunur; önceki kötü/eksik sonuçlar silinmedi.
+Yeni ölçüm/harness düzeltmesi/bakım/payload optimizasyonu0. Motor/fixture/
+corpus/eski harness SHA'ları aynı. 2b/2c/4 ve diğer açık işler için kullanıcı
+kararı beklenir; sonraki bloğa geçilmedi, kapı/eşik değişmedi.
+
+Önceki onarım-öncesi tarihsel durum:
+
+3 Kasım 2026 — **3a tanısı YARIM: ölçüm adaptörü hatasında DURULDU.**
+[Son rapor/ham tablo](BLOCK3A-DIAGNOSIS-20261103.md): SQLite eski snapshot ve
+yeni acquire aynı bağlantıda nested BEGIN yaptı; motor doğruluk hatası kanıtı
+değil. DB bloğu131,430/1200s, derleme/test801,754/1800s. A/A tamamlanmadı;
+tek bakım çağrısı0, L1 yok. Yeni tur/optimizasyon yok. FDB tek kol zx/the zx
+p95 128,776/46,877ms, gap16,831ms; çift yok, kazanç veya gürültü sonucu değil.
+Normal gapte4 aktif okuyuculu örnek0: 4R kabul verisi sayılamaz.
+
+**İki owner slotu `blocked_partial_diagnostic`:** mevcut ayrı
+`keybench-numeric` koleksiyonunda16 anahtar (`0000000000..0000000015`) kaldı.
+Model dosyaları ana50k için korunur, sequence stale; ready diye kullanılmaz.
+Hata sonrası DB reopen/temizlik yapılmadı. Devam onayıyla önce havuz ve ana
+oracle doğrulaması, yalnız bu kayıtların temizliği/model eşitlemesi; ölçüm
+adaptöründe ayrı pin client ve bounded okuyucu örtüşmesi ele alınmalı.
+Bu işler otomatik yeni koşu onayı değildir. Payload birleştirme **ÖNERİ-YOK**;
+run–gap nedenselliği bilinmiyor. Özgün3a 10k/38 kapısı ölçülmedi, eşikler aynı.
+Default230/diag234 + son sayaç3/example26 test; fmt/normal+diag clippy geçti.
+Gerçek50k son kill/reopen/eski okuyucu eksik; fixture testleri yerine sayılmaz.
+Yazma/bakım, arama, RAM/disk/eşzamanlı yük ve diğer bloklar açık kalır.
+
+Önceki ara durum:
+
+3 Kasım 2026 — 3a'nın **yalnız 50k tanısı kullanıcıca onaylandı ve başladı**.
+[Tanı raporu/ham kanıt](BLOCK3A-DIAGNOSIS-20261103.md),
+[1200 s ölçüm / 1800 s derleme-test ve örnek üst sınırları](benchmarks/block3a-20261103-plan.md).
+Önce aynı yerleşimde A/A; tek mevcut bakım çağrısından sonra run azalırsa L1.
+Yeni aday/ayar/optimizasyon yok; özgün 10k/38-case kapısı henüz ölçülmedi.
+Diğer yazma/bakım, arama, RAM/disk/eşzamanlı yük açıkları korunur.
+
+Önceki durum kayıtları aşağıdadır.
+
+3 Kasım 2026 — **Brife göre numaralama düzeltildi.**
+[Tek sayfa 1a–4c durum tablosu](BRIEF-BLOCK-STATUS-20261103.md) esas alınır:
+Blok 1 kabul edilen 10k kapsamında kapalı; Blok 2 KISMEN (2b/2c başlamadı),
+3a/3b kısmen tanılandı; 4a/4c tamamlanmadı, 4b KAPALI bırakma kararı korunur.
+[3a tanı-önce tasarımı](BLOCK3A-DIAGNOSIS-DESIGN-20261103.md) ayrı onay bekler;
+bu tur kod/ölçüm yok. Eski kitap case34 ishmael /130/1 ile TR case34 farklıdır.
+Geniş tarama/yerleşim, yazma-bakım/100'lü ve 500 drain, RAM/disk/eşzamanlı
+yük açıkları kendi rapor kapsamlarıyla korunur; kapı/eşik değişmedi.
+
+3 Kasım 2026 — **son cache takip deneyi Ek-TC kapandı; A/D varsayılan yapılmadı, mevcut
+try/seri K korunuyor.** [Kapanış/kapılar/ham tablolar](TERM-CACHE-50K-20261102.md).
+2 Kasım başlayan sabit K/A/SQLite/D4x4 matris tamamlandı; yeni tur yok.
+
+|Kapı|K|A: tek decoder/kilit dışında|D: yalnız4MiB sayfa|
+|---|---|---|---|
+|Normal41 N60, blok geçti/41|41/40/40/40 KALDI|41/40/41/41 KALDI|40/41/41/40 KALDI|
+|Toplam gap/ilk-query net kazanımı|Referans|2/4 hızlı,2/4 yavaş: KANITLANMADI|2/4 hızlı,2/4 yavaş: KANITLANMADI|
+|Havuz tekli commit20/50/100ms|GEÇTİ|GEÇTİ|GEÇTİ|
+|Havuz görünürlük20/50/100ms|KALDI|KALDI|KALDI|
+|Uzun16k commit20/50/100ms p95/p99/p99,9|GEÇTİ|GEÇTİ|GEÇTİ|
+|Yazma korunum >=%75|%88,416 GEÇTİ|%84,821 GEÇTİ|%83,488 GEÇTİ|
+|SQLite pooled%85,103 üstü korunum|GEÇTİ|KALDI|KALDI|
+|Fresh/warm motor-only idle<=15MiB|GEÇTİ|GEÇTİ|GEÇTİ|
+|Oracle/CRC/sıra-pin/kill-reopen/eski okuyucu|GEÇTİ|GEÇTİ|GEÇTİ|
+
+Eşik/kural değiştirilmedi. A gap p95 farkları+2,223/−5,460/−4,875/+0,372ms;
+D+3,953/−2,574/−5,108/+2,412ms. K'nın kendisi12,338→32,385ms ilerledi.
+Normal bloklar sonrası canlı run7, havuz sonrası52: aynı mantıksal veri,
+aynı fiziksel yerleşim değildir; kaynağın ilerlemesi/owner/tahliye paylarının
+kesin nedenselliği bu bloktan ayrıştırılmadı. Kilit etkisi ve kapasite etkisi
+raporda ayrı; sayaç küçülmesi tek başına başarı sayılmadı.
+
+D fresh idle3,418–3,641MiB, warm10,801–12,980MiB. A'nın normal-page kontrollü
+resident+in-flight rezervasyon tepesi960KiB, çıkışta0; allocator/RSS sayacı
+değildir. 4R+W proses peak tablosu model/oracle/history içerir, motor-only diye
+sunulmaz; A tüm süreç peak artmaması kanıtlanmadı. Ingest60MiB yeniden ölçülmedi.
+15 kill tanığı strict-open+oracle sonrasındadır; in-flight/power-loss iddiası yok.
+Root test/fmt/clippy ve SQLite adaptör kontrolleri geçti; ölçülen frozen ikili
+ve source hashleri sabit, corpus/0.1 kaynakları korundu; havuzlar temiz/ana50k
+korundu. Büyük log satırı okuyan tek yardımcı izleyici durduruldu; native kola
+dokunulmadı, zamanlama etkisi bilinmiyor ve seçici tekrar yapılmadı.
+
+A/D yalnız diagnostic opt-in; B/C veya yeni aday/ayar/ölçüm turu açılmayacak.
+100lü/C500drain/2,6sn/WAL handle/File::open/zx iyileştirmesi/reclaim varsayılanı/
+C ABI yapılmadı. Reclaim varsayılan KAPALI; önceki signed-zero, geniş tarama/
+case34, yazma/bakım ve disk/sorguRAM/eşzamanlı yük maddeleri açık kalır.
+
+Aşağıdaki kayıtlar bu deneyin başlangıcı ve önceki adımların tarihsel durumudur.
+
+2 Kasım son cache takip deneyi Ek-TC kullanıcı onayıyla uygulama/doğrulama aşamasında.
+K/A/SQLite/D dengeli4x4 sıra uygulama öncesi kullanıcıya gösterildi ve
+TERM-CACHE-DESIGN başına kaydedildi. D yalnız4MiB page,64KiB descriptor;
+A tek decoder/kilit dışı read-CRC-decode. K mevcut varsayılan kalır.
+Henüz performans sonucu yok; kapı/varsayılan değişmedi. Yeni DB kopyası/ingest
+yok; B/C ve diğer kapalı işler başlamaz. Doğrulukta hemen dur, sabit performans
+bloğu sonunda net kazanç yoksa veya kapı kalırsa Ek-TC kapanır.
+
+2 Kasım kullanıcı kararı: VISIBILITY-PHASE (Ek-VP, 2a takip) tanısı kabul edildi. Ek-TC için
+**son sınırlı deney tasarımı yazıldı; uygulama/ölçüm başlamadı.**
+[Kod incelemesi, üç aday ve değişmeyen kapılar](TERM-CACHE-DESIGN-50K-20261102.md).
+Her commit cache'i temizlemiyor: snapshot mevcut Arc/owner'ları paylaşır;
+yeni indeks owner'ı ve kapasite tahliyesi ayrı mekanizmalardır. Önceki miss'lerin
+bu nedenlere dağılımı bilinmiyor. Öneri tek global decode slotuyla read/CRC/decode'u
+cache mutex'i dışına almak; mevcut byte sınırları, legacy/cancel/pin korunmalı.
+Tek-uçuş ve sharding yalnız alternatif tasarımdır; uygulama onayı değildir.
+Onay gelirse aynı N60 normal41 + Frunner gap, dört dengeli A/SQLite/B çifti;
+eşikler aynı, bütün iyi/kötü sonuçlar. Net iyileşme yoksa veya kapı kalırsa
+mevcut varsayılan korunup Ek-TC kapanır; yeni aday/ayar/tekrar turu açılmaz.
+Doğruluk hatasında hemen durulur. Bu tur kod/DB/corpus/test/benchmark değişikliği
+yok. 100lü/C/2,6sn/WAL handle/File::open/zx/reclaim-default/C ABI başlamaz.
+
+2 Kasım görünürlük tanısı **TAMAMLANDI; kapı yok, bu turda duruldu.** Tek
+dengeli blok/numeric-Frunner×FDB-SQLite, aynı257-record havuz,4096+1 işlem,
+4R veN60+. Motor/format/try-seri default kaynakSHA aynı; optimizasyon yok.
+
+|Ölçülen ortalama ms|FDB numeric|FDB Frunner|SQLite numeric|SQLite Frunner|
+|---|---:|---:|---:|---:|
+|Commit|2,847|2,905|8,716|8,678|
+|Commit→visibility gap|26,936|30,115|5,742|5,689|
+|Acquire|0,000359|0,000405|0,141919|0,143148|
+|İlk marker sorgusu|26,929|30,108|5,572|5,519|
+|Posting/sözlük hazırlığı (sorgu altı)|26,555|29,710|ÖLÇÜLMEDİ|ÖLÇÜLMEDİ|
+|Term-cache edinimi (posting altı)|11,501|13,329|ÖLÇÜLMEDİ|ÖLÇÜLMEDİ|
+|Term-page read/CRC/decode (posting altı)|8,780|9,454|ÖLÇÜLMEDİ|ÖLÇÜLMEDİ|
+|Query maskesi|0,024|0,027|ÖLÇÜLMEDİ|ÖLÇÜLMEDİ|
+|Delta filtre|0,239|0,247|ÖLÇÜLMEDİ|ÖLÇÜLMEDİ|
+
+Gapin%99,97'si ilk sorgu,%98,6'sı posting hazırlığı. İki alt kalem olan
+cache edinimi ve sayfa read/CRC/decode üst toplamlarla tekrar toplanmaz.
+Term-cache kilidinde gerçekten bloklanan genel-cache sayaçları da11,385/
+13,197ms ölçüldü; hangi mutex sahibi threadin nedeni olduğu bilinmiyor.
+Probe başına306/331 term-page miss ve1,28/1,38MB istenen read byte var;
+bunlar fiziksel disk/OS-cache miss sayısı değildir. Snapshot prepare0,185/
+0,223ms ve snapshot.mask0,097/0,129ms **commit içinde** ölçüldü. Acquire aynı
+sequence'i hemen verdi. Bu koşuda süre yayım kuyruğunda değil, ilk doğrulama
+aramasında birikiyor; özgül blocker paylaşılmış terim-cache/sözlük yolunda.
+
+SQLite query'nin numeric/Frunner için5,514/5,459ms SQL-step+payload-copy maliyeti ve
+0,040/0,042ms JSONdecode ölçüldü; gerçek EXPLAIN FTS virtual-table L0 yolunu
+gösterdi. Yeni tanıdaki fark ölçüldü; eski B bloklarının neden değiştiği
+bilinmiyor. Profil açık gap27–30ms: eski~15ms ile aynı sayı üretilemedi.
+Profilleme maliyeti/oturum/ilerlemiş yerleşim etkisi ayrı ölçülmedi. Eski
+profilsiz örneklerin tam aşama dağılımı bilinmiyor. Scheduler/antivirüs ya da
+CRC vsdecodeCPU ayrımı için ölçülmemiş neden atfı yapılmadı.
+
+16.388 işlem timeline'ı monoton; ardışık aşamalar visibility toplamına tam
+eşit, toplama/JSON/EXPLAIN visibility dışındadır.256+161+3 test/fmt/default ve
+diagnostic clippy,9kill/reopen/eski okuyucu ve ana50k GET/41case/SQLdigest
+geçti. Havuzlar iki motorda0 canlı kayıtla temizlendi. Yeni corpus/DB kopyası/
+50k re-ingest yok. [Tanı, ham sıralı örnekler ve sınırlar](VISIBILITY-PHASE-50K-20261102.md).
+100lü,C500drain,2,6sn,WAL handle/File::open,zx,reclaim varsayılanı,C ABI yok.
+Geniş tarama/case34,signed-zero,yazma/bakım,disk/sorguRAM başlıkları açık.
+
+2 Kasım kullanıcı kararı: B sonucu kabul edildi; Frunner anahtarı doğruluk ve
+commit açısından kabul. Görünürlük p95 ham kararı **KALDI** olarak korunur.
+**SONRADAN REVİZE: kullanıcı kararıyla ilerlendi, eşik değiştirilmedi.**
+Gözlemler: numeric kontrol de blok3'te görünürlük31–32ms ile kaldı. Blok0–2'de
+Frunner görünürlük p95 farkları işlem tiplerine göre+1,834..+9,164ms; ilk50
+metin4247315B vs144412B olduğundan anahtar/payload maliyeti ayrılmadı.
+Numeric pooled görünürlük p50 bloklarda3,912→7,977→9,872→19,681ms arttı
+(yaklaşık4→20ms). Bunlar gözlemdir, kural/eşik veya neden atfı değildir.
+
+Kabul anındaki tek seferlik görünürlük aşama tanısı planı (yukarıda tamamlandı):
+Commit dönüşü, benchmark history yayımı, acquire, sorgu hazırlığı, ilk sorgu
+ve release ayrı; mevcut opt-in sayaçlarla snapshot maskesi ve query delta
+filtre/maskesi ayrılır. Aynı havuz/gövde/yol/4096 işlem ve4R düzeni; tek
+dengeli numeric/Frunner×FDB/SQLite bloğu, yeni DB kopyası/reset yok.
+Ölçülmeyen alt nedenler bilinmiyor yazılır. Optimizasyon/sonraki işler yok.
+
+2 Kasım B kapanışı: **Frunner anahtarı ayrı havuzda ölçüldü; performans kapısı
+KALDI, bu adımda duruldu.** Ölçüm planı önce gösterildi; kullanıcı küçük havuz
+ve ayrı collection istedi. Mevcut50k `texts` aynı;256 mevcut donör+1 uzun-yol
+slotu `keybench-numeric`/`keybench-frunner` içinde. Yeniden50k ingest/rekey,
+DB kopyası veya yeni corpus yok. Dört dengeli blokta16 native kol tamamlandı.
+
+|B kapısı|Sonuç|Karar|
+|---|---|---|
+|Frunner tekli commit p95/p99/max20/50/100ms|Normal tip p95 2,22–4,94ms; bütün commit kuyrukları eşik içinde|GEÇTİ|
+|Frunner görünürlük p95/p99/max20/50/100ms|p95 20,148–26,749ms; p99/max geçiyor, p95 geçmiyor|KALDI|
+|Havuz5 N60 okuma, idle≤30→loaded≤30; aksi≤2×idle|Frunner3/5,3/5,4/5,3/5; numeric3/5,4/5,3/5,3/5|KALDI|
+|SQLite aynı havuz okuma referansı|Numeric5/5 her blok; Frunner5/5,5/5,4/5,5/5|REFERANS|
+|Ters-mtime başa ekleme;atomik sil+ekle;eski snapshot;1000B yol|Her havuz model oracle'ı geçti;1017B ID sınır içinde|GEÇTİ|
+|CRC/kill-reopen/eski okuyucu;ana50k koruma|9 tanıklı kill,8 FDB pool kolu legacy257GET+ilk50;ana50k oracle/digest|GEÇTİ|
+
+Yalnız anahtar boyutuna neden atfı yok: son marker ilk50 metni numeric144412B,
+Frunner4247315B. Girdi donörleri aynı fakat ters-mtime farklı ve daha büyük
+ilk50 belgeleri döndürüyor; saf key-byte CPU maliyeti izole edilmedi. Kaçırmanın
+kanıtlanmış aşaması/kök nedeni yok; profil/optimizasyon yapılmadı. Commit/s
+görünürlük ve her-işlem oracle'ı dahil, eski uzun-seri ops/s ile doğrudan
+kıyaslanmaz. Kaynak/yerleşim ve sequence de ilerliyor; gürültü iddiası yok.
+
+İki havuz canlı kaydı0,ana50k50000; post-inspect iki motorda doğrulandı.
+Logical cleanup başlangıç fiziksel alanına dönüş değildir: FDB canlı kaynak
+(WAL dahil)186768163→255349925B,.idx140057305→167065177B; retained son
+422418358B. SQLite retained477908992B. Başlangıç toplam retained sayılmadı,
+büyüme oranı verilmedi. Reclaim default kapalı. Model/oracle/history/API
+sonuçları içeren süreç peak RAM'i D motor-only kapısı diye sunulmadı.
+
+256 default+161 diagnostic+3 SQLite test;fmt/root ve diagnostic clippy,
+son ilgili3 havuz testi/SQL3test geçti. 65.552 commit örneği,1024 body×path
+hücresinde64'er örnek;240 read-phase satırındaN60–3984. Motor sourceSHA,
+korpus/0.1fixture ve frozen ikililer korundu;engine accepted-default ile aynı.
+İki hazırlık hatası(DB worker açılmadan donor duplicate/str-Path) düzeltildi;
+eski loglar saklandı.35 normal ölçüm/cleanup/inspect child exit0; bilinmeyen
+kapanış yok. [B sonuçları ve ham tablolar](FRUNNER-KEY-50K-20261102.md).
+
+Yeni default korunur;100lü,C500drain,2,6sn,WAL handle/File::open,zx iyileştirmesi
+başlamadı. Geniş tarama/case34,signed-zero,yazma/bakım/disk/sorguRAM açık.
+Aşağıdaki kabul notu ve eşikleri değiştirilmemiş önceki sonuçlar korunur.
+
+2 Kasım 2026 kullanıcı kabulü: HYBRID-DEFAULT sonucu kabul edildi, yeni
+try/seri varsayılan kalır. Normal41 ham kararı **KALDI** olarak korunur.
+**SONRADAN REVİZE: kullanıcı kararıyla ilerlendi, eşik/kural değiştirilmedi.**
+Gözlem: kapı kendi idle değerinin30ms basamağına bağlı olduğundan daha hızlı
+mutlak süreyi de bırakabilir. Aynı çiftte korkaklığa: eski42,433→65,630ms
+GEÇTİ; yeni26,160→41,535ms KALDI. Kaçırmalar mevcut sınıra göre
+0,425–15,239ms; güzeli zafer'in0,425ms aşımı30ms'ye değil61,383ms sınırınadır.
+Bazı ağır örneklerde birkaç kat kazanç var: pair0 timmy245,358→36,186ms
+(6,78×), pair2 yüklük167,595→33,018ms(5,08×), güzeli zafer308,149→61,808ms
+(4,99×). Bu bütün kaçırmalar için4–10× demek değildir: pair1 görenler
+25,862→41,747ms geriledi. Bunlar gözlemdir; kural veya ham tablo değişmedi.
+
+Sıradaki B, kullanıcı seçimiyle mevcut50k tabanın yanında **ayrı havuz
+koleksiyonları** kullanır; bütün50k yeniden anahtarlanmaz. Numeric kontrol
+ve Frunner havuzları karışmaz. En yeni dosyanın ters-mtime ile başa gelmesi,
+mtime sil+ekle atomikliği ve küçük N60 okuma kontrolü ölçülür.
+[Önceden yazılan ölçümler ve eşikler](FRUNNER-KEY-DESIGN-50K-20261102.md).
+100lü,C(500drain),2,6sn,WAL handle/File::open,zx iyileştirmesi başlamaz.
+
+2 Kasım 2026 — **SONRADAN REVİZE: kullanıcı kararıyla try/seri VARSAYILAN.**
+Hibrit200 bütçesinden sonra tek non-blocking WORKERS.try_lock(); izin yoksa
+aynı cursor/frontier ile çağıran threadde seri devam, yeni thread/tekrar yok.
+`REFERENCE_WAIT=true` gizli thread-local tanı/geri dönüş anahtarı olarak kaldı.
+Exact/serial, capped sonuç/sequence, cancel, global izin/bellek muhasebesi,
+strict CRC, pin ve kalıcı biçim değişmedi. Kabul edilmiş maske+capped delta korundu.
+
+|Önceki sıfır-toleranslı kapı|Ham karar|Kullanıcı kararı|
+|---|---|---|
+|4R+W peak private artmama|KALDI: +1,5..+4,2 MiB (yaklaşık33→36 MiB)|SONRADAN REVİZE: kullanıcı kararıyla bilinen maliyet olarak kabul edildi, kapı eşiği değiştirilmedi|
+|Altılı p95 artmama|KALDI: 4R zx1055→1387ms (+%31)|SONRADAN REVİZE: kullanıcı kararıyla bilinen maliyet olarak kabul edildi, kapı eşiği değiştirilmedi|
+|Altılı/full41 CPU artmama|KALDI: altılı4R zx504→607ms/query (~+%20), full41+W zx+%7,6|SONRADAN REVİZE: kullanıcı kararıyla bilinen maliyet olarak kabul edildi, kapı eşiği değiştirilmedi|
+
+Tek-sorgu the zx4R CPU +%30..49; p95 ise475→341ms iyileşti. Bu maliyetler
+kapanmış/iyileşmiş sayılmadı. Eski SIDE-COST/ESTIMATOR tabloları değişmedi.
+SQLite korunum>%100 olduğu için okuyucusuz kontrol tavan değildir; ops/s esas.
+**2ms condvar ara-yolu uygulanmayacak.** N60 dört dengeli çift tamamlandı;
+normal41 kapısı **KALDI**, eşik değişmedi:
+
+|Yol, geçen sorgu/41|Çift0|Çift1|Çift2|Çift3|Karar|
+|---|---:|---:|---:|---:|---|
+|Yeni try/seri varsayılan|40|38|38|39|KALDI|
+|REFERENCE_WAIT=true geri dönüş|40|40|40|41|KALDI|
+|SQLite FTS5 trigram|41|41|41|41|GEÇTİ|
+
+Yeni defaultta toplam9 pair/sorgu kaçırması: timmy(0,1),görenler(1),
+akarsu(1),korkaklığa(2,3),yüklük(2,3),güzeli zafer(2). Örnek: timmy
+pair1 idle22,438→loaded45,239ms>sınır30; güzeli zafer pair2
+30,692→61,808ms>sınır61,383. Gürültü veya belirli bir motor nedenine atıf
+yapılmadı. Default kullanıcı kararıyla korunur; bu tur sonraki işe geçilmedi.
+253 default+161 diagnostic test,fmt/iki clippy,CRC/oracle,önce/sonra3'er
+kill/reopen ve frozen eski okuyucu GEÇTİ. 1476 faz satırında60–88 örnek;
+sayısal p95=max olan satır0; 15 normal child exit0. Corpus/0.1fixture/frozen ikili hashleri aynı;
+reset/yeniden ingest/DB kopyası yok. Yeni override'sız default ve true geri
+dönüş bekleme/iptal/aynı sonuç yolu test edildi.
+Bu tur yazma çıktısı da saklandı: pair1 default throughput kontrolden düşük;
+önceki SIDE-COST4/4 tüm-pozitif sonuç yeniden gerçekleşmiş sayılmadı.
+CPU/RAM bu tur yeniden ölçülmedi; önceki bilinen bedellerin kabulü devam ediyor.
+[Ölçüm raporu](HYBRID-DEFAULT-50K-20261102.md). Reclaim default kapalı;
+geniş negatif/case34,signed-zero,yazma/bakım,disk/sorguRAM açık.100lü/B/C,
+2,6sn,WAL handle/File::open,zx iyileştirmesi ve diğer onaysız işler başlamadı.
+
+Aşağıdaki kayıtlar önceki turların tarihsel sonuç ve kararlarıdır.
+
 31 Ekim yan maliyet bloğu **TAMAMLANDI**. Kullanıcı kararıyla yazma/CPU/RAM
 birlikte ölçülüp raporlandı; sonraki çalışma başlamadı. Motor kaynakları ve
 format/bütçe değişmedi. `REFERENCE_WAIT=true` varsayılan; prototip diagnostics

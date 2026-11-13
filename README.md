@@ -1,4 +1,64 @@
-# FDB
+# FDB 0.4.0
+
+12 Kasım: Revizyon geri kazanımı yeni yazıcı oturumlarında varsayılan açık.
+İşçi planlama ve yeniden yazmayı arka planda yapar. Yazıcı hazır sonucu
+mevcut manifest üzerinden yayımlar. Olay döngüsü yazı gelmediğinde
+`Database::poll_maintenance()` ile bir adım ilerletebilir.
+`set_revision_reclamation(false)` otomatik revizyon geri kazanımını
+oturum için kapatır. [Karar ve doğrulama](docs/BACKGROUND-RECLAIM-DEFAULT-50K-20261112.md)
+
+4 Kasım: [Blok4 karar tablosu](docs/BLOCK4-DECISIONS-20261104.md) ve
+[2b soğuk cache tasarımı](docs/BLOCK2B-COLD-CACHE-DESIGN-50K-20261104.md)
+hazır. Yalnız belge; varsayılan/kod/DB değişikliği veya yeni ölçüm yok.
+3a KISMEN/özgün kapı ölçülmedi, yeni3a turu yok; uygulama kullanıcı onayı bekler.
+
+3 Kasım: [yalnız çalışma alanı onarımı tamamlandı](docs/BLOCK3A-REPAIR-20261103.md).
+İki motorda izinli16 kayıt doğrulanıp silindi;50k oracle/41case/kill-reopen/eski
+okuyucu geçti. Slotlar ready, model sequence'leri529967/1026311. 3a KISMEN:
+tanı yeterli sinyal verdi, özgün≥%30/±%5+A/A kapısı ÖLÇÜLMEDİ. Yeni ölçüm,
+harness düzeltmesi, bakım veya optimizasyon yok; sonraki blok kararı kullanıcıda.
+
+3 Kasım numaralama düzeltmesi: [brife göre blok durum tablosu](docs/BRIEF-BLOCK-STATUS-20261103.md).
+Brifteki Blok 2 KISMEN; soğuk cache ve uzun snapshot başlamadı. Son cache takip
+deneyi **Ek-TC** kapandı. Kilit dışında tek decoder A ve yalnız
+4MiB sayfa kapasitesi D, dört dengeli blokta tutarlı toplam gap/ilk-query kazancı
+kanıtlamadı; normal41 kapısı da KALDI. Varsayılan try/seri K korunur; A/D yalnız
+diagnostic opt-in. D warm motor-only idle10,8–13,0MiB ile15MiB altında; süreç
+RAM/CPU bedelleri, yerleşimin7→52 run ilerlemesi ve bütün kötü sonuçlar kayıtta.
+Oracle/CRC/eski okuyucu/15kill-reopen geçti; yeni performans turu yok.
+[Kapanış ve ham tablolar](docs/TERM-CACHE-50K-20261102.md).
+
+Aşağıdaki kayıtlar önceki adımların tarihsel sonuçlarıdır.
+
+2 Kasım tek görünürlük tanısı: Frunner gap30,115ms'nin%99,97'si ilk marker
+sorgusu; posting/sözlük hazırlığı29,710ms,term-cache edinimi13,329ms ve
+sayfa read/CRC/decode9,454ms. Acquire0,000405ms;mask/delta baskın değil.
+Profil maliyeti/eski oturum farkı ölçülmedi,eski~15ms dağılımı bilinmiyor.
+Motor değişmedi,kapı eklenmedi;256+161+3 test/CRC/oracle/9kill/legacy geçti.
+[Tanı ve bütün sınırlar](docs/VISIBILITY-PHASE-50K-20261102.md).
+B kabulü OPEN-WORK'e işlendi;eşikler aynı. Sonraki işe geçilmedi.
+
+Aşağıdaki kayıtlar önceki adım sonuçlarıdır.
+
+2 Kasım B: ayrı Frunner havuzu, dört dengeli blok/16 kol tamamlandı.
+Commit kapısı geçti; görünürlük p95 20,15–26,75ms ile20ms kapısında kaldı;
+havuz okuma3/5,3/5,4/5,3/5. 9 kill/CRC/oracle/eski okuyucu ve testler geçti;
+ana50k korundu,havuzlar temizlendi. Motor/try-seri default aynı; bu adımda duruldu.
+[B ham ölçümleri ve sınırlar](docs/FRUNNER-KEY-50K-20261102.md).
+Önceki normal41 KALDI kullanıcı kararıyla kabul edildi;eşik değişmedi.
+
+Aşağıdaki kayıtlar önceki adım sonuçlarıdır.
+
+2 Kasım 2026: kullanıcı kararıyla hibrit200 sonrası try/seri varsayılan;
+REFERENCE_WAIT=true gizli tanı/geri dönüş yolu olarak korundu. Exact/serial
+ve opt-in melez API aynı. Geniş tarama CPU ve loadedRAM bedelleri kabul
+kaydıyla açık; eski KALDI kapıları/eşikleri değişmedi. N60 dört çift tamam:
+normal41 kapısı KALDI; default40/38/38/39, geri dönüş40/40/40/41,
+SQLite41/41/41/41 geçti.253+161 test/fmt/clippy/CRC/oracle,6kill/reopen ve
+eski okuyucu geçti. Yeniden ingest/reset yok; bu adımda duruldu.
+[Güncel rapor](docs/HYBRID-DEFAULT-50K-20261102.md).
+
+Aşağıdaki kayıtlar tarihseldir.
 
 31 Ekim yan maliyet ölçümü: yazma paired throughput A/B farkları
 +%15,44/+%4,16/+%2,16/+%0,87; altılı4R zx p95 1055,26→1386,81ms;
@@ -756,11 +816,11 @@ RocksDB, LMDB, sled, Tantivy veya başka bir veritabanı/arama motoru kullanılm
 Depolama biçimi, işlem günlüğü, kurtarma, indeksler ve checkpoint mekanizması bu
 repository'de uygulanır. `serde` ve `serde_json` yalnızca veri serileştirme içindir.
 
-Bu sürüm çalıştırılabilir **0.3.1 çekirdeğidir**. Ürün kapsamı bağımsız DB motorudur;
+Bu sürüm çalıştırılabilir **0.4.0 çekirdeğidir**. Ürün kapsamı bağımsız DB motorudur;
 SDB ve Fundops yalnız veri modeli ihtiyaçlarına referanstır. Rust API, yerel
 JSON Lines süreci ve örnek istemci/aktarım yardımcıları hazırdır.
 
-Güncel ölçüm ve hata testleri: [0.3.1 doğrulama sonuçları](docs/VALIDATION-0.3.1.md).
+Güncel ölçüm ve hata testleri [0.4.0 reclaim doğrulamasında](docs/BACKGROUND-RECLAIM-DEFAULT-50K-20261112.md).
 Bir milyon kayıt için ayrı benchmark: [SQLite karşılaştırması](docs/SQLITE-COMPARISON.md).
 SQLite yalnız karşılaştırma aracında kullanılır; FDB motorunun bağımlılığı değildir.
 

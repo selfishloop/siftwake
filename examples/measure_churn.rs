@@ -2,6 +2,8 @@
 mod block2_scale;
 #[path = "../tools/bench_support/churn.rs"]
 mod churn;
+#[path = "../tools/bench_support/live_disk50.rs"]
+mod live_disk50;
 #[path = "../tools/bench_support/mask_only.rs"]
 mod mask_only;
 #[path = "../tools/bench_support/revision_cost.rs"]
@@ -257,9 +259,8 @@ impl snapshot_common::View for BenchView {
         Ok(self.0.search_with_waits(q)?)
     }
     fn first(&self, q: &Query) -> Result<fdb::FirstPage> {
-        let _reference = fdb::Database::hybrid_wait_reference_for_diagnostics(
-            std::env::var_os("FDB_HYBRID_WAIT_REFERENCE").is_some(),
-        );
+        let _reference = std::env::var_os("FDB_HYBRID_WAIT_REFERENCE")
+            .map(|_| fdb::Database::hybrid_wait_reference_for_diagnostics(true));
         #[cfg(feature = "diagnostic-timing")]
         let _limit = fdb::timing::request::WorkerLimit::new(
             std::env::var("FDB_HYBRID_WORKERS")
@@ -359,9 +360,8 @@ impl snapshot_common::Writer for Engine {
 }
 impl Backend for Engine {
     fn query_variant(&self, text: &str, variant: &str) -> Result<fdb::FirstPage> {
-        let _reference = fdb::Database::hybrid_wait_reference_for_diagnostics(
-            std::env::var_os("FDB_HYBRID_WAIT_REFERENCE").is_some(),
-        );
+        let _reference = std::env::var_os("FDB_HYBRID_WAIT_REFERENCE")
+            .map(|_| fdb::Database::hybrid_wait_reference_for_diagnostics(true));
         let mut q = Query::new("shared");
         q.collection = Some("texts".into());
         q.text = text.into();
@@ -425,6 +425,9 @@ impl Backend for Engine {
     fn idle_notify(&mut self) -> Result<Value> {
         Ok(json!(self.0.maintain_idle()?))
     }
+    fn poll_idle(&mut self) -> Result<bool> {
+        Ok(self.0.poll_maintenance()?)
+    }
     fn get(&self, id: usize) -> Result<Option<StoredDocument>> {
         Ok(self.0.get(&churn::key(id))?)
     }
@@ -475,6 +478,12 @@ impl Backend for Engine {
     }
 }
 fn main() -> Result<()> {
+    let result = run();
+    #[cfg(feature = "diagnostic-timing")]
+    churn::emit(json!({"phase":"term_cache_diagnostics","counters":fdb::term_cache_diagnostics()}));
+    result
+}
+fn run() -> Result<()> {
     #[cfg(feature = "diagnostic-timing")]
     fdb::timing::maintenance::enable();
     let args: Vec<_> = std::env::args().skip(1).collect();
@@ -560,6 +569,10 @@ fn main() -> Result<()> {
     }
     let start = Instant::now();
     let mut engine = Engine(Database::open(path)?);
+    let strict_open_ms = start.elapsed().as_secs_f64() * 1000.;
+    if mode == "live-disk50-first" {
+        return live_disk50::first(&engine, start, strict_open_ms);
+    }
     let _mask_reference = Database::snapshot_mask_reference_for_diagnostics(
         std::env::var_os("FDB_SNAPSHOT_MASK_REFERENCE").is_some(),
     );
@@ -572,10 +585,9 @@ fn main() -> Result<()> {
         None
     };
     let _pinned_snapshot = _snapshot_reader.as_ref().map(|r| r.acquire()).transpose()?;
-    // Benchmark policy A/B is explicit, independent of product defaults.
-    engine
-        .0
-        .set_revision_reclamation(std::env::var_os("FDB_RECLAMATION_CONTROL").is_none());
+    if std::env::var_os("FDB_RECLAMATION_CONTROL").is_some() {
+        engine.0.set_revision_reclamation(false);
+    }
     engine
         .0
         .set_revision_maintenance_responsive(std::env::var_os("FDB_COST_LEGACY").is_none());
@@ -618,6 +630,9 @@ fn main() -> Result<()> {
     }
     if mode == "write-churn-idle-30" {
         return write_hardening::idle_each_round(&mut engine, state, path);
+    }
+    if mode.starts_with("live-disk50-") {
+        return live_disk50::run(&mut engine, mode, state, path);
     }
     if mode == "write-idle-check" {
         let mut corpus = Corpus::open()?;

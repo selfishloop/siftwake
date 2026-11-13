@@ -1,4 +1,74 @@
-# FDB mimarisi — 0.3.1
+# FDB mimarisi — 0.4.0
+
+12 Kasım: Otomatik revizyon geri kazanımı varsayılan açık. Yazıcı başına
+bir revizyon işçisi immutable run referanslarından planı ve çıktıyı
+hazırlar. Commit yolu yalnız tamamlanmış sonucu devralır. Aynı sıralı
+run öneki doğrulanmadan çıktı yayımlanmaz. Araya yeni run eklenebilir.
+İşçinin girdileri, çıktısı ve okuyucu snapshot'ları dosya temizliğine
+karşı korunur. Boşta ilerleme için `poll_maintenance()`, bilinçli
+senkron bakım için `maintain_idle()` kullanılır. [Doğrulama](BACKGROUND-RECLAIM-DEFAULT-50K-20261112.md)
+
+4 Kasım: [Blok4 karar önerileri](BLOCK4-DECISIONS-20261104.md) ile küçük WAL/
+reclaim/Owned API kapsamları ve [2b tasarımı](BLOCK2B-COLD-CACHE-DESIGN-50K-20261104.md)
+yazıldı. Kod/varsayılan/format değişmedi; yalnız belge, uygulama onayı bekler.
+
+3 Kasım 3a tanısı: diagnostic request içinde en çok64 term owner + overflow0,
+owner/run eşlemesi ve sabit payload gap histogramı eklendi; doğrulama/worker/
+format/varsayılan semantiği aynı. SQLite tanı client'ında nested BEGIN hatası
+nedeniyle A/A tamamlanmadan duruldu; optimizasyon yapılmadı. Sonraki yalnız
+[çalışma alanı onarımında](BLOCK3A-REPAIR-20261103.md) izinli16 kayıt guarded
+delete ile temizlendi;50k oracle/41case/kill-reopen/eski okuyucular geçti,
+slotlar ready. Yeni ölçüm, harness düzeltmesi veya bakım çağrısı yok.
+
+3 Kasım son cache deneyi: yalnız `diagnostic-timing` içinde startup
+`FDB_TERM_CACHE_ARM=K|A|D`; yoksa K, normal build de K. A normal SEG05 page
+miss'inde tek process-wide decoder/RAII/cancel scope ile read/CRC/decode'u
+metadata mutex'i dışına alır; resident+in-flight allowance960KiB, lookup64KiB.
+Legacy/oversized fallback seri, strict doğrulama aynı. D K yolunda yalnız page
+allowance4MiB; lookup64KiB. Yeni thread/WORKERS izni/kalıcı format yok.
+K/A/D ortak bounded eviction/owner sayaçları kullanır. Normal wall'da ayrıntılı
+timing kapalı, açık Request tanı örnekleri ayrı tutulur. Kaynak/indeks CRC,
+snapshot sequence/pin ve exact/capped semantiği korunur. İki aday da net toplam
+gap kazancı/normal41 kapısını birlikte geçmedi: default değişmedi, **Ek-TC** kapandı.
+Bu, brifteki Blok 2'nin kapanışı değildir; ölçek kapsamı KISMEN, gerçek soğuk
+cache ve uzun snapshot başlamadı. [Brife göre durum](BRIEF-BLOCK-STATUS-20261103.md).
+[Sınırlar, kaynak SHA ve bütün sonuçlar](TERM-CACHE-50K-20261102.md).
+
+Aşağıdaki kayıtlar önceki adımların tarihsel sonuçlarıdır.
+
+2 Kasım görünürlük tanısı: yalnız benchmark zaman sınırları ve mevcut opt-in
+request/commit sayaçları açıldı; motor sourceSHA aynı. Tek4R havuz bloğunda
+gapin%99,97'si ilk sorgu,%98,6'sı posting/sözlük hazırlığı; snapshot hazırlığı
+commitin içinde küçük. Terim önbelleği süreçte ortak; miss sayfasının
+read/CRC/decode'u cache guard içinde. Kilit edinimi/read-decode süreleri
+ölçüldü; mutex sahibi/OS-cache/scheduler nedeni ölçülmedi. Optimizasyon yok.
+[Ayrık timeline,nested sayaçlar ve profil sınırı](VISIBILITY-PHASE-50K-20261102.md).
+
+Aşağıdaki kayıtlar önceki adım sonuçlarıdır.
+
+2 Kasım B'de engine kaynakları accepted try/seri default ile SHA eşit kaldı.
+Yalnız ayrı benchmark koleksiyonları/araçları eklendi. Ters-mtime başa ekleme,
+atomik mtime sil+ekle,1000B yol/1017B ID,eski snapshot/CRC/kill/legacy geçti.
+Commit kapısı geçti; görünürlük ve havuz okuma kapıları KALDI,sonraki işler yok.
+Ana50k payload/version korundu;havuz canlı kayıtları temizlendi. Dönen ilk50
+payload farklı olduğu için okuma farkı saf key-byte maliyeti değildir.
+[Ölçüm yöntemi ve bütün sonuçlar](FRUNNER-KEY-50K-20261102.md).
+
+Aşağıdaki kayıtlar önceki adım sonuçlarıdır.
+
+2 Kasım 2026: kullanıcı onayıyla hibrit200 tek try/seri varsayılan oldu.
+Gizli thread-local REFERENCE_WAIT=true eski bloklayan geri dönüş yolunu korur.
+İzin yoksa aynı frontier caller'da seri; ek thread/tekrar/bekleme yok.
+Exact/serial arama ve opt-in melez API seçimi, cancel/snapshot/CRC/pin/bütçe,
+kalıcı biçimler ve kabul edilmiş maske+capped delta aynı. Önceki üç artmama
+kapısı KALDI olarak korunur; kullanıcı bilinen CPU/geniş tarama/loadedRAM
+bedellerini sonradan kabul etti, eşikler değiştirilmedi. N60 tekrarında normal41
+kapısı KALDI: default40/38/38/39, gizli geri dönüş40/40/40/41,
+SQLite41/41/41/41.253+161 test/fmt/iki clippy,CRC/oracle,6kill/reopen ve
+eski okuyucu geçti. Varsayılan kullanıcı kararıyla korunur; sonraki işler yok.
+[Rapor](HYBRID-DEFAULT-50K-20261102.md).
+
+Aşağıdaki kayıtlar tarihseldir.
 
 31 Ekim yan maliyet bloğu: engine kaynak SHA aynı; mevcut diagnostic-timing
 ikilisiyle request caller+child CPU, ayrı normal ikiliyle p95, ayrı native

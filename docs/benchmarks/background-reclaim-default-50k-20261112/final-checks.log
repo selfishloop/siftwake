@@ -1,0 +1,18 @@
+fmt PASS
+    Checking fdb v0.3.1 (C:\Users\Serkan\Documents\ChatGPT\fdb)
+    Finished `dev` profile [unoptimized + debuginfo] target(s) in 3.50s
+clippy PASS
+    Checking fdb v0.3.1 (C:\Users\Serkan\Documents\ChatGPT\fdb)
+warning: associated function `empty` is never used
+  --> src\segment\posting_pages.rs:33:19
+   |
+32 | impl Pages {
+   | ---------- associated function in this implementation
+33 |     pub(super) fn empty() -> Self {
+   |                   ^^^^^
+   |
+   = note: `#[warn(dead_code)]` (part of `#[warn(unused)]`) on by default
+
+warning: `fdb` (lib) generated 1 warning
+    Finished `dev` profile [unoptimized + debuginfo] target(s) in 1.06s
+no default feature check PASS

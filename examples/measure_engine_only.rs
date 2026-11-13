@@ -132,6 +132,15 @@ fn main() -> Result<(), Box<dyn std::error::Error>> {
             result
         })?;
         db.maintain_idle()?;
+    } else if mode == "idle-warm" {
+        let texts: Vec<String> =
+            serde_json::from_slice(&std::fs::read(std::env::var("FDB_RAM_QUERY_LIST")?)?)?;
+        for text in texts {
+            let mut q = fdb::Query::new("shared");
+            q.collection = Some("texts".into());
+            q.text = text;
+            drop(reader.acquire()?.search_first_hybrid(&q, 200)?);
+        }
     } else if mode != "idle" {
         return Err("unknown mode".into());
     }

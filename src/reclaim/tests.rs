@@ -313,6 +313,7 @@ fn deferred_open_preserves_old_files_until_explicit_full_check() {
 fn reclaim_child() {
     let path = std::env::var_os("FDB_TEST_RECLAIM_ROOT").unwrap();
     let mut db = Database::open_deferred(path).unwrap();
+    db.set_revision_reclamation(false); // Isolate cleanup after normal publication.
     if std::env::var_os("FDB_TEST_RECLAIM_FLUSH").is_some() {
         db.commit(vec![put("c")]).unwrap();
         db.flush().unwrap();

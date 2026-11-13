@@ -241,7 +241,7 @@ impl Database {
                 self.sequence,
                 self.active.id,
             );
-            self.poll_compaction()?;
+            self.poll_normal_compaction()?;
         }
         let sequence = self
             .sequence
@@ -306,6 +306,10 @@ impl Database {
         }
         stage.finish(sequence)?;
         drop(stage_profile);
+        self.finish_background_revision(false)?;
+        if self.runs.len() > 1 {
+            self.schedule_background_revision()?;
+        }
         if self.streamed_wal_layer
             && stage.rows.len() <= 128
             && stage.length <= 8 * 1024 * 1024
@@ -411,7 +415,7 @@ impl Database {
             #[cfg(feature = "diagnostic-timing")]
             let _span = crate::timing::span("stream.fallback_worker_drain");
             self.preempt_revision_work()?;
-            self.wait_for_compaction()?;
+            self.wait_for_merge()?;
         }
         {
             let _phase = super::profile::phase(
@@ -433,7 +437,7 @@ impl Database {
             );
             #[cfg(feature = "diagnostic-timing")]
             let _span = crate::timing::span("stream.fallback_post_flush_drain");
-            self.wait_for_compaction()?;
+            self.wait_for_merge()?;
         }
         let intake = crate::write_budget::WorkingScope::streamed()?;
         // Large/fallback transactions still reuse the staged inverted index.
@@ -451,7 +455,7 @@ impl Database {
         // Existing normal commits may have populated a delta. Publish that delta
         // first; the validated streamed transaction still has the next sequence.
         self.flush()?;
-        self.wait_for_compaction()?;
+        self.wait_for_merge()?;
         let result = (|| {
             #[cfg(feature = "diagnostic-timing")]
             let _span = crate::timing::span("stream.fallback_transaction_publish");

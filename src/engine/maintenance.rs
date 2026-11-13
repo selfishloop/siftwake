@@ -1,5 +1,4 @@
-//! Cooperative cancellation only for unpublished revision work. Normal merges
-//! retain their existing behavior. A writer joins cancellation before admission.
+//! Cooperative cancellation for unpublished revision work.
 use std::{
     cell::RefCell,
     sync::{
@@ -31,7 +30,6 @@ pub(super) struct Control {
     activity: Arc<Activity>,
 }
 impl Control {
-    #[cfg(test)]
     pub(super) fn is_cancelled(&self) -> bool {
         self.cancelled.load(Ordering::Acquire)
     }

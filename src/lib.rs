@@ -31,6 +31,11 @@ mod reclaim;
 #[cfg(feature = "experimental-rkyv-payload")]
 pub mod rkyv_payload;
 mod segment;
+/// Bounded volatile cache counters for the final K/A/D diagnostic experiment.
+#[cfg(all(feature = "diagnostic-timing", feature = "bounded-engine"))]
+pub fn term_cache_diagnostics() -> serde_json::Value {
+    segment::term_cache_diagnostics()
+}
 #[cfg(all(
     feature = "experimental-shared-documents",
     not(feature = "experimental-wal-delta")

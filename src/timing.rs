@@ -32,21 +32,26 @@ fn counters() -> &'static Mutex<BTreeMap<&'static str, Counter>> {
 }
 pub struct Span {
     name: &'static str,
-    start: Instant,
+    start: Option<Instant>,
+}
+fn disabled() -> bool {
+    static DISABLED: OnceLock<bool> = OnceLock::new();
+    *DISABLED.get_or_init(|| std::env::var_os("FDB_TIMING_DISABLED").is_some())
+        && !request::active()
 }
 pub fn span(name: &'static str) -> Span {
     Span {
         name,
-        start: Instant::now(),
+        start: (!disabled()).then(Instant::now),
     }
 }
 impl Drop for Span {
     fn drop(&mut self) {
+        let Some(start) = self.start else {
+            return;
+        };
         let end = Instant::now();
-        let elapsed = end
-            .duration_since(self.start)
-            .as_nanos()
-            .min(u64::MAX as u128) as u64;
+        let elapsed = end.duration_since(start).as_nanos().min(u64::MAX as u128) as u64;
         if request::record(self.name, 1, elapsed) {
             return;
         }
@@ -54,7 +59,7 @@ impl Drop for Span {
         let before = boundary.map_or(elapsed, |boundary| {
             boundary
                 .min(end)
-                .saturating_duration_since(self.start)
+                .saturating_duration_since(start)
                 .as_nanos()
                 .min(u64::MAX as u128) as u64
         });
@@ -64,8 +69,7 @@ impl Drop for Span {
         value.elapsed_ns = value.elapsed_ns.saturating_add(elapsed);
         value.before_drain_ns = value.before_drain_ns.saturating_add(before);
         value.after_drain_ns = value.after_drain_ns.saturating_add(elapsed - before);
-        value.started_before_drain +=
-            u64::from(boundary.is_none_or(|boundary| self.start < boundary));
+        value.started_before_drain += u64::from(boundary.is_none_or(|boundary| start < boundary));
     }
 }
 /// Call after workers finish for a complete phase. Taking a snapshot while a
@@ -75,6 +79,9 @@ pub fn take() -> BTreeMap<&'static str, Counter> {
 }
 
 pub(crate) fn count(name: &'static str, calls: usize) {
+    if disabled() {
+        return;
+    }
     if request::record(name, calls as u64, 0) {
         return;
     }
@@ -156,6 +163,66 @@ pub(crate) struct PayloadReads {
     pub hits: u64,
     pub read_bytes: u64,
     pub requested_bytes: u64,
+    previous_end: Option<u64>,
+    ranges: u64,
+    neighbor: u64,
+    gap_le_4k: u64,
+    gap_le_64k: u64,
+    gap_far_or_reverse: u64,
+    positive_gap_bytes: u64,
+}
+impl PayloadReads {
+    pub fn observe(&mut self, offset: u64, len: u64) {
+        if !request::active() {
+            return;
+        }
+        self.ranges += 1;
+        if let Some(end) = self.previous_end {
+            match offset.checked_sub(end) {
+                Some(gap) => {
+                    self.positive_gap_bytes = self.positive_gap_bytes.saturating_add(gap);
+                    if gap <= 42 {
+                        self.neighbor += 1;
+                    } else if gap <= 4096 {
+                        self.gap_le_4k += 1;
+                    } else if gap <= 65536 {
+                        self.gap_le_64k += 1;
+                    } else {
+                        self.gap_far_or_reverse += 1;
+                    }
+                }
+                None => self.gap_far_or_reverse += 1,
+            }
+        }
+        self.previous_end = offset.checked_add(len);
+    }
+}
+#[cfg(test)]
+mod payload_diagnostic_tests {
+    use super::*;
+    #[test]
+    fn request_range_histogram_counts_gaps_once_without_payload_storage() {
+        let request = request::Request::new();
+        let mut reads = PayloadReads::default();
+        for (offset, len) in [(100, 100), (205, 10), (300, 10), (10000, 10), (0, 10)] {
+            reads.observe(offset, len);
+        }
+        assert_eq!(reads.ranges, 5);
+        assert_eq!(reads.neighbor, 1);
+        assert_eq!(reads.gap_le_4k, 1);
+        assert_eq!(reads.gap_le_64k, 1);
+        assert_eq!(reads.gap_far_or_reverse, 1);
+        assert_eq!(reads.positive_gap_bytes, 9780);
+        drop(reads);
+        let work = QueryWork {
+            candidates: 7,
+            ..QueryWork::default()
+        };
+        drop(work);
+        let sample = request.finish();
+        assert_eq!(sample.counters["query.payload_ranges"].calls, 5);
+        assert_eq!(sample.counters["query.payload_candidates"].calls, 7);
+    }
 }
 impl Drop for PayloadReads {
     fn drop(&mut self) {
@@ -165,6 +232,12 @@ impl Drop for PayloadReads {
             ("query.payload_window_hits", self.hits),
             ("query.payload_read_bytes", self.read_bytes),
             ("query.payload_requested_bytes", self.requested_bytes),
+            ("query.payload_ranges", self.ranges),
+            ("query.payload_neighbor_le42", self.neighbor),
+            ("query.payload_gap_le4k", self.gap_le_4k),
+            ("query.payload_gap_le64k", self.gap_le_64k),
+            ("query.payload_gap_far_reverse", self.gap_far_or_reverse),
+            ("query.payload_gap_bytes", self.positive_gap_bytes),
         ] {
             if request::record(name, count, 0) {
                 continue;
@@ -205,6 +278,9 @@ impl Drop for QueryWork {
                 self.intersection_ns,
             ),
         ] {
+            if request::record(name, calls, elapsed_ns) {
+                continue;
+            }
             let value = values.entry(name).or_default();
             value.calls = value.calls.saturating_add(calls);
             value.elapsed_ns = value.elapsed_ns.saturating_add(elapsed_ns);

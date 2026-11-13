@@ -5,17 +5,22 @@ use crate::segment::first::{Candidates, Verifier};
 use crate::{FirstPage, MatchTotal, SearchExecution, ValidationStatus};
 use std::sync::{Condvar, Mutex, TryLockError};
 
-thread_local! {static REFERENCE_WAIT:std::cell::Cell<bool>=const{std::cell::Cell::new(true)};}
+thread_local! {static REFERENCE_WAIT:std::cell::Cell<bool>=const{std::cell::Cell::new(false)};}
 #[cfg(test)]
 thread_local! {static FALLBACK_STEP:std::cell::RefCell<Option<Box<dyn FnOnce()>>>=const{std::cell::RefCell::new(None)};}
+#[cfg(test)]
+thread_local! {static WAIT_STEP:std::cell::RefCell<Option<Box<dyn FnOnce()>>>=const{std::cell::RefCell::new(None)};}
 
 static WORKERS: Mutex<usize> = Mutex::new(4);
 static AVAILABLE: Condvar = Condvar::new();
 #[cfg(test)]
-static EXCLUSIVE_PERMIT_TEST: Mutex<()> = Mutex::new(());
+pub(super) static EXCLUSIVE_PERMIT_TEST: Mutex<()> = Mutex::new(());
 pub(super) struct Permits(pub(super) usize);
 impl Permits {
-    fn try_acquire(requested: usize, token: Option<&CancelToken>) -> Result<Option<Self>> {
+    pub(super) fn try_acquire(
+        requested: usize,
+        token: Option<&CancelToken>,
+    ) -> Result<Option<Self>> {
         crate::cancel::check(token)?;
         #[cfg(feature = "diagnostic-timing")]
         let _profile = crate::timing::span("first.permit_try");
@@ -47,6 +52,12 @@ impl Permits {
         drop(mutex_wait);
         while *free == 0 {
             crate::cancel::check(token)?;
+            #[cfg(test)]
+            WAIT_STEP.with(|s| {
+                if let Some(step) = s.borrow_mut().take() {
+                    step();
+                }
+            });
             #[cfg(feature = "diagnostic-timing")]
             let _wait = crate::timing::span("first.permit_condvar_wait");
             free = if token.is_some() {
@@ -116,8 +127,9 @@ fn validate(q: &Query, e: SearchExecution, first: bool) -> Result<()> {
     Ok(())
 }
 impl Database {
-    /// Calling-thread-only benchmark reference; never persisted. The prototype
-    /// is explicitly enabled with false until its gates pass. Exact/serial ignore it.
+    /// Calling-thread-only diagnostic rollback; never persisted. True restores
+    /// blocking admission, false selects the default single try/serial frontier.
+    /// Exact/serial ignore this scope; dropping it restores the previous policy.
     #[doc(hidden)]
     pub fn hybrid_wait_reference_for_diagnostics(enabled: bool) -> impl Drop {
         struct Restore(bool, std::marker::PhantomData<std::rc::Rc<()>>);
@@ -798,7 +810,6 @@ mod tests {
         }
     }
     fn compare(db: &Database, q: &Query) {
-        let _prototype = Database::hybrid_wait_reference_for_diagnostics(false);
         let exact = db.search(q).unwrap();
         for n in [1, 10, 50, 200] {
             let mut query = q.clone();
@@ -1048,6 +1059,97 @@ mod tests {
         }
     }
     #[test]
+    fn hybrid_default_and_nested_diagnostic_rollback_are_thread_local() {
+        assert!(!REFERENCE_WAIT.with(std::cell::Cell::get));
+        {
+            let _reference = Database::hybrid_wait_reference_for_diagnostics(true);
+            assert!(REFERENCE_WAIT.with(std::cell::Cell::get));
+            std::thread::spawn(|| assert!(!REFERENCE_WAIT.with(std::cell::Cell::get)))
+                .join()
+                .unwrap();
+            {
+                let _default = Database::hybrid_wait_reference_for_diagnostics(false);
+                assert!(!REFERENCE_WAIT.with(std::cell::Cell::get));
+            }
+            assert!(REFERENCE_WAIT.with(std::cell::Cell::get));
+        }
+        assert!(!REFERENCE_WAIT.with(std::cell::Cell::get));
+    }
+    #[test]
+    fn diagnostic_rollback_still_waits_cancels_and_returns_the_same_page() {
+        let _exclusive = EXCLUSIVE_PERMIT_TEST.lock().unwrap();
+        let t = Temp::new();
+        let mut db = Database::open(&t.0).unwrap();
+        let text = "abcdefghijklmnop";
+        db.commit(
+            (0..700)
+                .map(|id| {
+                    put(
+                        id,
+                        if id < 620 {
+                            "abc bcd cde def efg fgh ghi hij ijk jkl klm lmn mno nop"
+                        } else {
+                            text
+                        },
+                    )
+                })
+                .collect(),
+        )
+        .unwrap();
+        db.flush().unwrap();
+        let mut q = Query::new("shared");
+        q.text = text.into();
+        q.limit = 50;
+        let expected = db.search_first_hybrid(&q, 200).unwrap();
+        let mut leases = vec![];
+        let mut held = 0;
+        while held < 4 {
+            let lease = Permits::acquire(4 - held).unwrap();
+            held += lease.0;
+            leases.push(lease);
+        }
+        let token = CancelToken::new();
+        std::thread::scope(|scope| {
+            let (entered, waiting) = std::sync::mpsc::channel();
+            let token_ref = &token;
+            let db_ref = &db;
+            let q_ref = &q;
+            let worker = scope.spawn(move || {
+                let _reference = Database::hybrid_wait_reference_for_diagnostics(true);
+                WAIT_STEP
+                    .with(|s| *s.borrow_mut() = Some(Box::new(move || entered.send(()).unwrap())));
+                db_ref.search_first_hybrid_cancellable(q_ref, 200, token_ref)
+            });
+            waiting
+                .recv_timeout(std::time::Duration::from_secs(5))
+                .unwrap();
+            token.cancel();
+            assert!(matches!(worker.join().unwrap(), Err(Error::Cancelled)));
+        });
+        std::thread::scope(|scope| {
+            let (entered, waiting) = std::sync::mpsc::channel();
+            let db_ref = &db;
+            let q_ref = &q;
+            let worker = scope.spawn(move || {
+                let _reference = Database::hybrid_wait_reference_for_diagnostics(true);
+                WAIT_STEP
+                    .with(|s| *s.borrow_mut() = Some(Box::new(move || entered.send(()).unwrap())));
+                db_ref.search_first_hybrid(q_ref, 200)
+            });
+            waiting
+                .recv_timeout(std::time::Duration::from_secs(5))
+                .unwrap();
+            drop(leases);
+            let got = worker.join().unwrap().unwrap();
+            assert_eq!(
+                (got.hits, got.total, got.sequence),
+                (expected.hits, expected.total, expected.sequence)
+            );
+        });
+        assert!(!REFERENCE_WAIT.with(std::cell::Cell::get));
+        db.check_integrity().unwrap();
+    }
+    #[test]
     fn handoff_try_is_nonblocking_on_mutex_and_preserves_cancel() {
         let held = WORKERS.lock().unwrap();
         assert!(Permits::try_acquire(1, None).unwrap().is_none());
@@ -1062,7 +1164,7 @@ mod tests {
     #[test]
     fn exhausted_hybrid_continues_same_frontier_with_no_permit_or_new_worker() {
         let _exclusive = EXCLUSIVE_PERMIT_TEST.lock().unwrap();
-        let _prototype = Database::hybrid_wait_reference_for_diagnostics(false);
+        assert!(!REFERENCE_WAIT.with(std::cell::Cell::get));
         let t = Temp::new();
         let mut db = Database::open(&t.0).unwrap();
         let word = "abcdefghijklmnop";

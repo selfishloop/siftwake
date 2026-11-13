@@ -292,6 +292,7 @@ fn paused_stream_never_publishes_half_of_a_group() {
 fn writer_cancels_rewrite_while_snapshot_keeps_old_source_pinned() {
     let t = Temp::new();
     let mut db = seeded(&t);
+    db.set_revision_reclamation(false); // Exercise the explicitly scheduled rewrite.
     let path = db.runs[0].source.path(&t.0, "fdb");
     let reader = db.snapshot_reader().unwrap();
     let old = reader.acquire().unwrap();

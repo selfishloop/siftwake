@@ -12,6 +12,8 @@ use std::{
 pub struct Sample {
     pub counters: BTreeMap<&'static str, super::Counter>,
     pub threads: Vec<ThreadSample>,
+    /// At most 64 distinct owners plus owner 0 for overflow; no document keys.
+    pub owners: BTreeMap<u64, BTreeMap<&'static str, super::Counter>>,
 }
 #[derive(serde::Serialize)]
 pub struct ThreadSample {
@@ -27,6 +29,7 @@ struct Local {
     counters: BTreeMap<&'static str, super::Counter>,
     start: Instant,
     cpu: Option<(u64, u64)>,
+    owners: BTreeMap<u64, BTreeMap<&'static str, super::Counter>>,
 }
 thread_local! {
     static LOCAL: RefCell<Option<Local>> = const { RefCell::new(None) };
@@ -51,6 +54,9 @@ pub(crate) fn hybrid_workers() -> usize {
 pub fn current() -> Option<Handle> {
     LOCAL.with(|s| s.borrow().as_ref().map(|l| l.handle.clone()))
 }
+pub(super) fn active() -> bool {
+    LOCAL.with(|s| s.borrow().is_some())
+}
 pub struct Scope(Option<Local>, bool);
 pub fn attach(handle: Option<Handle>) -> Scope {
     match handle {
@@ -61,6 +67,7 @@ pub fn attach(handle: Option<Handle>) -> Scope {
                     counters: BTreeMap::new(),
                     start: Instant::now(),
                     cpu: cpu(),
+                    owners: BTreeMap::new(),
                 }))
             }),
             true,
@@ -88,6 +95,59 @@ impl Drop for Scope {
             let v = out.counters.entry(name).or_default();
             v.calls += c.calls;
             v.elapsed_ns += c.elapsed_ns;
+        }
+        for (owner, counters) in local.owners {
+            let owner = bounded_owner(&out.owners, owner);
+            let target = out.owners.entry(owner).or_default();
+            for (name, counter) in counters {
+                let value = target.entry(name).or_default();
+                value.calls = value.calls.saturating_add(counter.calls);
+                value.elapsed_ns = value.elapsed_ns.saturating_add(counter.elapsed_ns);
+            }
+        }
+    }
+}
+fn bounded_owner<T>(owners: &BTreeMap<u64, T>, owner: u64) -> u64 {
+    if owners.contains_key(&owner)
+        || owners
+            .len()
+            .saturating_sub(usize::from(owners.contains_key(&0)))
+            < 64
+    {
+        owner
+    } else {
+        0
+    }
+}
+/// Fixed engine call sites only. Detached/normal requests retain no owner data.
+pub(crate) fn owner_record(owner: u64, name: &'static str, calls: u64, ns: u64) {
+    LOCAL.with(|slot| {
+        let mut local = slot.borrow_mut();
+        let Some(local) = local.as_mut() else { return };
+        let owner = bounded_owner(&local.owners, owner);
+        let counter = local
+            .owners
+            .entry(owner)
+            .or_default()
+            .entry(name)
+            .or_default();
+        counter.calls = counter.calls.saturating_add(calls);
+        counter.elapsed_ns = counter.elapsed_ns.saturating_add(ns);
+    });
+}
+pub(crate) struct OwnerSpan(u64, &'static str, Option<Instant>);
+pub(crate) fn owner_span(owner: u64, name: &'static str) -> OwnerSpan {
+    OwnerSpan(owner, name, active().then(Instant::now))
+}
+impl Drop for OwnerSpan {
+    fn drop(&mut self) {
+        if let Some(at) = self.2 {
+            owner_record(
+                self.0,
+                self.1,
+                1,
+                at.elapsed().as_nanos().min(u64::MAX as u128) as u64,
+            );
         }
     }
 }
@@ -157,6 +217,34 @@ fn cpu() -> Option<(u64, u64)> {
 #[cfg(test)]
 mod tests {
     use super::*;
+    #[test]
+    fn owner_diagnostics_are_bounded_and_request_isolated() {
+        let request = Request::new();
+        for owner in 1..=100 {
+            owner_record(owner, "lookup", 1, 2);
+        }
+        let child = current();
+        std::thread::spawn(move || {
+            let _scope = attach(child);
+            for owner in 101..=200 {
+                owner_record(owner, "lookup", 1, 2);
+            }
+        })
+        .join()
+        .unwrap();
+        let sample = request.finish();
+        assert_eq!(sample.owners.len(), 65);
+        assert_eq!(
+            sample
+                .owners
+                .values()
+                .map(|c| c["lookup"].calls)
+                .sum::<u64>(),
+            200
+        );
+        assert_eq!(sample.owners[&0]["lookup"].calls, 136);
+        assert!(Request::new().finish().owners.is_empty());
+    }
     #[test]
     fn child_request_counts_are_joined_without_cross_request_leaks() {
         let request = Request::new();

@@ -34,6 +34,10 @@ pub(crate) use covering::SourceLease;
 mod posting_spool;
 #[cfg(feature = "experimental-streaming-open")]
 mod term_pages;
+#[cfg(all(feature = "diagnostic-timing", feature = "bounded-engine"))]
+pub(crate) fn term_cache_diagnostics() -> serde_json::Value {
+    term_pages::isolated::diagnostics()
+}
 #[cfg(feature = "bounded-engine")]
 type PostingOutput = posting_spool::Postings;
 #[cfg(not(feature = "bounded-engine"))]
@@ -1101,6 +1105,19 @@ pub(crate) fn read_at(file: &File, mut offset: u64, mut buffer: &mut [u8]) -> Re
 type KeyParts<'a> = (&'a str, &'a str, &'a str);
 
 impl DiskIndex {
+    #[cfg(feature = "diagnostic-timing")]
+    pub(crate) fn diagnostic_term_owner(&self) -> Option<u64> {
+        #[cfg(feature = "experimental-streaming-open")]
+        {
+            self.term_pages
+                .as_ref()
+                .map(|pages| pages.diagnostic_owner())
+        }
+        #[cfg(not(feature = "experimental-streaming-open"))]
+        {
+            None
+        }
+    }
     #[cfg(feature = "experimental-merge-postings")]
     fn term_cursor(&self) -> TermCursor<'_> {
         #[cfg(feature = "experimental-streaming-open")]
@@ -1646,7 +1663,7 @@ impl DiskIndex {
         }
         None
     }
-    fn bounds(&self) -> Option<(KeyParts<'_>, KeyParts<'_>)> {
+    pub(crate) fn bounds(&self) -> Option<(KeyParts<'_>, KeyParts<'_>)> {
         #[cfg(feature = "experimental-paged-metadata")]
         if let Some(paged) = &self.paged {
             return paged.bounds().map(|(a, b)| {
@@ -1813,6 +1830,8 @@ impl DiskIndex {
         capture: &mut impl FnMut(u32, &crate::payload::View<'_>, &[u8]),
     ) -> Result<bool> {
         let r = self.query_metadata(id, scratch)?;
+        #[cfg(feature = "diagnostic-timing")]
+        scratch.reads.observe(r.offset, u64::from(r.len));
         scratch.payload.resize(r.len as usize, 0);
         {
             #[cfg(feature = "diagnostic-timing")]
@@ -1921,6 +1940,8 @@ impl DiskIndex {
             scratch.read_len = 0;
             return self.binary_exact_matches(id, scratch, terms, cache, cached_bytes, capture);
         }
+        #[cfg(feature = "diagnostic-timing")]
+        scratch.reads.observe(r.offset, u64::from(r.len));
         #[cfg(feature = "diagnostic-timing")]
         {
             scratch.reads.requested_bytes += r.len as u64;

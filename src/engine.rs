@@ -6,7 +6,10 @@ use crate::{
     Error, Guard, Key, Mutation, Options, Query, Result, SearchPage, Stats, StoredDocument,
     validate_doc, validate_key,
 };
+mod background_revision;
 pub(crate) mod maintenance;
+#[cfg(feature = "experimental-paged-metadata")]
+mod open_masks;
 mod revisions;
 mod snapshot;
 #[cfg(test)]
@@ -106,6 +109,85 @@ struct Run {
     deferred: Option<Arc<std::sync::Mutex<bool>>>,
     source_records: Option<Arc<crate::source_records::Records>>,
 }
+
+fn load_runs_parallel<T: Send>(
+    sources: &[Source],
+    workers: usize,
+    load: impl Fn(Source) -> Result<T> + Sync,
+) -> Result<Vec<T>> {
+    use std::sync::atomic::{AtomicUsize, Ordering};
+
+    let next = AtomicUsize::new(0);
+    let work = || -> Result<Vec<(usize, T)>> {
+        let mut result = Vec::new();
+        loop {
+            let n = next.fetch_add(1, Ordering::Relaxed);
+            let Some(source) = sources.get(n) else { break };
+            result.push((n, load(source.clone())?));
+        }
+        Ok(result)
+    };
+    let mut all = std::thread::scope(|scope| -> Result<Vec<(usize, T)>> {
+        let handles: Vec<_> = (1..workers).map(|_| scope.spawn(work)).collect();
+        let mut all = work();
+        // Join every worker, even when another worker reported an error.
+        for handle in handles {
+            match handle.join() {
+                Ok(Ok(values)) => {
+                    if let Ok(all) = &mut all {
+                        all.extend(values);
+                    }
+                }
+                Ok(Err(e)) => all = Err(e),
+                Err(_) => all = Err(Error::Poisoned),
+            }
+        }
+        all
+    })?;
+    all.sort_unstable_by_key(|(n, _)| *n);
+    Ok(all.into_iter().map(|(_, value)| value).collect())
+}
+
+#[cfg(feature = "bounded-engine")]
+fn load_strict_runs(dir: &Path, sources: Vec<Source>) -> Result<Vec<Run>> {
+    if sources.len() > 1
+        && sources.iter().all(|s| s.kind == Kind::Run)
+        && let Some(permits) = first::Permits::try_acquire(2, None)?.filter(|p| p.0 == 2)
+    {
+        let outcomes = load_runs_parallel(&sources, permits.0, |source| {
+            // Keep each result so fallback runs in manifest order.
+            Ok(open_source_policy(dir, source, false, false))
+        })?;
+        drop(permits);
+        return finish_strict_runs(dir, sources, outcomes);
+    }
+    sources
+        .into_iter()
+        .map(|s| open_source_policy(dir, s, false, true))
+        .collect()
+}
+
+#[cfg(feature = "bounded-engine")]
+fn finish_strict_runs(
+    dir: &Path,
+    sources: Vec<Source>,
+    outcomes: Vec<Result<Run>>,
+) -> Result<Vec<Run>> {
+    sources
+        .into_iter()
+        .zip(outcomes)
+        .map(|(source, result)| match result {
+            // The serial open revalidates the authoritative source before
+            // it can repair any derived cache.
+            Err(Error::Corrupt(_)) => open_source_policy(dir, source, false, true),
+            Err(Error::Io(e)) if e.kind() == std::io::ErrorKind::NotFound => {
+                open_source_policy(dir, source, false, true)
+            }
+            result => result,
+        })
+        .collect()
+}
+
 struct Job {
     inputs: Vec<Source>,
     output_id: u64,
@@ -222,6 +304,7 @@ mod merge_selection_tests {
 
 #[cfg(feature = "experimental-paged-metadata")]
 #[derive(Default, Clone)]
+#[cfg_attr(test, derive(Debug, PartialEq, Eq))]
 struct MaskCache {
     entries: Vec<(u64, HiddenMask)>,
     bytes: usize,
@@ -229,6 +312,7 @@ struct MaskCache {
 }
 #[cfg(feature = "experimental-paged-metadata")]
 #[derive(Clone)]
+#[cfg_attr(test, derive(Debug, PartialEq, Eq))]
 enum HiddenMask {
     Sparse(Box<[u32]>),
     Dense(Box<[u64]>),
@@ -325,6 +409,7 @@ pub struct Database {
     delta_bytes: usize,
     options: Options,
     job: Option<Job>,
+    background_revision: background_revision::State,
     revision_reclamation: bool,
     revision_responsive: bool,
     query_visibility_pruning: bool,
@@ -1120,39 +1205,17 @@ impl Database {
                     }
                 };
                 let runs = if workers == 1 {
-                    m.runs.into_iter().map(load).collect::<Result<Vec<_>>>()?
-                } else {
-                    let next = std::sync::atomic::AtomicUsize::new(0);
-                    let work = || -> Result<Vec<(usize, Run)>> {
-                        let mut result = Vec::new();
-                        loop {
-                            let n = next.fetch_add(1, std::sync::atomic::Ordering::Relaxed);
-                            let Some(source) = m.runs.get(n) else {
-                                break;
-                            };
-                            result.push((n, load(source.clone())?));
-                        }
-                        Ok(result)
+                    #[cfg(feature = "bounded-engine")]
+                    let runs = if !deferred && !cache_only {
+                        load_strict_runs(&dir, m.runs)?
+                    } else {
+                        m.runs.into_iter().map(load).collect::<Result<Vec<_>>>()?
                     };
-                    let mut all = std::thread::scope(|scope| -> Result<Vec<(usize, Run)>> {
-                        let handles: Vec<_> = (1..workers).map(|_| scope.spawn(work)).collect();
-                        let mut all = work();
-                        // Always join every worker even when one source fails.
-                        for h in handles {
-                            match h.join() {
-                                Ok(Ok(values)) => {
-                                    if let Ok(all) = &mut all {
-                                        all.extend(values);
-                                    }
-                                }
-                                Ok(Err(e)) => all = Err(e),
-                                Err(_) => all = Err(Error::Poisoned),
-                            }
-                        }
-                        all
-                    })?;
-                    all.sort_by_key(|(n, _)| *n);
-                    all.into_iter().map(|(_, r)| r).collect()
+                    #[cfg(not(feature = "bounded-engine"))]
+                    let runs = m.runs.into_iter().map(load).collect::<Result<Vec<_>>>()?;
+                    runs
+                } else {
+                    load_runs_parallel(&m.runs, workers, load)?
                 };
                 (runs, m.active, false)
             }
@@ -1300,7 +1363,11 @@ impl Database {
         })?;
         let mut count = docs.len();
         #[cfg(feature = "experimental-paged-metadata")]
-        let mut mask_cache = MaskCache::default();
+        let (mask_cache, run_documents) = open_masks::build(&runs, &shadow)?;
+        #[cfg(feature = "experimental-paged-metadata")]
+        {
+            count += run_documents;
+        }
         #[cfg(not(feature = "experimental-paged-metadata"))]
         for item in MergeKeys::new(&runs)? {
             let (n, id) = item?;
@@ -1309,20 +1376,6 @@ impl Database {
             {
                 count += 1;
             }
-        }
-        #[cfg(feature = "experimental-paged-metadata")]
-        for (n, run) in runs.iter().enumerate() {
-            let mut mask = vec![0u64; run.index.len().div_ceil(64)];
-            for newer in &runs[n + 1..] {
-                run.index.hide_keys(&newer.index, &mut mask)?;
-            }
-            mask_cache.remember(run.source.id, &mask);
-            for key in &shadow {
-                if let Some(id) = run.index.find(key)? {
-                    mask[id as usize / 64] |= 1 << (id % 64);
-                }
-            }
-            count += run.index.visible_count(&mask)?;
         }
         let mut index = Index::default();
         #[allow(unused_mut)]
@@ -1382,7 +1435,8 @@ impl Database {
             job: None,
             // The measured prototype retains its disk win, but its read-p95
             // acceptance gate is still open. Explicit opt-in until resolved.
-            revision_reclamation: false,
+            background_revision: background_revision::State::default(),
+            revision_reclamation: true,
             revision_responsive: true,
             query_visibility_pruning: false,
             maintenance_activity: Arc::default(),
@@ -1709,6 +1763,9 @@ impl Database {
         #[cfg(feature = "diagnostic-timing")]
         let maintenance = crate::timing::span("commit.foreground_maintenance");
         self.poll_compaction()?;
+        if self.runs.len() > 1 {
+            self.schedule_background_revision()?;
+        }
         if self.needs_flush() {
             #[cfg(feature = "diagnostic-memory")]
             crate::memory::observe("commit.before_flush", seq);
@@ -2415,6 +2472,7 @@ impl Database {
             live.insert((Kind::Run, job.output_id));
             live.extend(job.inputs.iter().map(|source| (source.kind, source.id)));
         }
+        self.background_revision.protect(&mut live);
         if let Some(context) = &self.snapshot_context {
             return context
                 .gc
@@ -2577,7 +2635,30 @@ impl Database {
     pub fn start_compaction(&mut self) -> Result<bool> {
         self.start_compaction_mode(false)
     }
-    fn start_compaction_mode(&mut self, _automatic: bool) -> Result<bool> {
+    fn start_compaction_mode(&mut self, automatic: bool) -> Result<bool> {
+        if self.start_normal_compaction(automatic)? {
+            return Ok(true);
+        }
+        if !self.revision_reclamation {
+            return Ok(false);
+        }
+        if self.revision_responsive {
+            return if automatic {
+                Ok(false) // The live write path or idle poll schedules revision work.
+            } else {
+                self.schedule_background_revision()
+            };
+        }
+        #[cfg(feature = "bounded-engine")]
+        let progressing = self.streamed_wal_layer;
+        #[cfg(not(feature = "bounded-engine"))]
+        let progressing = false;
+        if automatic && !progressing {
+            return Ok(false);
+        }
+        self.start_revision_reclamation()
+    }
+    fn start_normal_compaction(&mut self, _automatic: bool) -> Result<bool> {
         #[cfg(feature = "diagnostic-timing")]
         let _plan = crate::timing::maintenance::span("planning_metadata");
         self.healthy()?;
@@ -2614,17 +2695,7 @@ impl Database {
             selected
         };
         let Some((start, end)) = selected else {
-            // Size-tier merging alone cannot reclaim revisions in large or
-            // dissimilar runs. Explicit maintenance also drains one stale run.
-            #[cfg(feature = "bounded-engine")]
-            let progressing = self.streamed_wal_layer;
-            #[cfg(not(feature = "bounded-engine"))]
-            let progressing = false;
-            return if (_automatic && !progressing) || !self.revision_reclamation {
-                Ok(false)
-            } else {
-                self.start_revision_reclamation()
-            };
+            return Ok(false);
         };
         let inputs = self.runs[start..end].to_vec();
         #[cfg(feature = "diagnostic-timing")]
@@ -2761,13 +2832,22 @@ impl Database {
         drop(join);
         #[cfg(feature = "diagnostic-timing")]
         drop(join_stage);
+        self.install_output(&job.inputs, output, true)
+    }
+    fn install_output(
+        &mut self,
+        inputs: &[Source],
+        output: JobOutput,
+        collect: bool,
+    ) -> Result<bool> {
+        let _writer = crate::access::WriterScope::enter();
         if matches!(output, JobOutput::Cancelled) {
             return Ok(false);
         }
         let Some(start) = self
             .runs
-            .windows(job.inputs.len())
-            .position(|window| window.iter().map(|r| &r.source).eq(job.inputs.iter()))
+            .windows(inputs.len())
+            .position(|window| window.iter().map(|r| &r.source).eq(inputs.iter()))
         else {
             return Err(Error::Corrupt("compaction inputs changed".into()));
         };
@@ -2778,7 +2858,7 @@ impl Database {
         };
         let mut descriptors = self.descriptors();
         descriptors.splice(
-            start..start + job.inputs.len(),
+            start..start + inputs.len(),
             replacement.iter().map(|r| r.source.clone()),
         );
         let id = self.allocate()?;
@@ -2790,10 +2870,7 @@ impl Database {
                 active: self.active.clone(),
             },
         )?;
-        for old in self
-            .runs
-            .splice(start..start + job.inputs.len(), replacement)
-        {
+        for old in self.runs.splice(start..start + inputs.len(), replacement) {
             self.retired.push((old.source, Arc::downgrade(&old.index)));
         }
         #[cfg(feature = "experimental-paged-metadata")]
@@ -2805,10 +2882,15 @@ impl Database {
                 MaskCache::default();
         }
         self.refresh_snapshots()?;
-        self.try_reclaim();
+        if collect {
+            self.try_reclaim();
+        }
         Ok(true)
     }
     pub fn poll_compaction(&mut self) -> Result<bool> {
+        Ok(self.poll_normal_compaction()? || self.finish_background_revision(false)?)
+    }
+    fn poll_normal_compaction(&mut self) -> Result<bool> {
         self.healthy()?;
         self.ensure_sources()?;
         if self.job.as_ref().is_some_and(|j| j.handle.is_finished()) {
@@ -2818,6 +2900,10 @@ impl Database {
         Ok(false)
     }
     pub fn wait_for_compaction(&mut self) -> Result<bool> {
+        let merged = self.wait_for_merge()?;
+        Ok(self.finish_background_revision(true)? || merged)
+    }
+    fn wait_for_merge(&mut self) -> Result<bool> {
         self.healthy()?;
         #[cfg(feature = "bounded-engine")]
         self.light_flush_ready(true)?;
@@ -2827,8 +2913,36 @@ impl Database {
             Ok(false)
         }
     }
+    /// Advance maintenance by one step between writes or while the writer is
+    /// idle. Finished work can publish or collect files. An unfinished revision
+    /// worker is never joined here. Returns whether this call made progress.
+    pub fn poll_maintenance(&mut self) -> Result<bool> {
+        self.healthy()?;
+        self.ensure_sources()?;
+        #[cfg(feature = "bounded-engine")]
+        if self.light_flush_ready(false)? {
+            return Ok(true);
+        }
+        if self.poll_compaction()?
+            || self.collect_background_revision()?
+            || self.schedule_background_revision()?
+        {
+            return Ok(true);
+        }
+        if self.job.is_some() || self.background_revision.pending() {
+            return Ok(false);
+        }
+        if self.start_normal_compaction(false)? {
+            return Ok(true);
+        }
+        #[cfg(feature = "bounded-engine")]
+        if self.start_light_flush()? {
+            return Ok(true);
+        }
+        Ok(false)
+    }
     /// One synchronous idle notification drains flush/merge/revision jobs and
-    /// retries orphan collection. Revision rewrites still require explicit opt-in.
+    /// retries orphan collection. Use poll_maintenance for a live write loop.
     /// Readers retain their snapshots; a long-lived pin can retain disk space.
     pub fn maintain_idle(&mut self) -> Result<Stats> {
         self.flush()?;
@@ -2852,6 +2966,14 @@ impl Database {
         crate::reclaim::collect_open_temporaries(&self.dir)?;
         self.collect_obsolete()?;
         self.stats()
+    }
+    /// Diagnostic owner identities only; no cache mutation or payload access.
+    #[cfg(feature = "diagnostic-timing")]
+    pub fn diagnostic_run_owners(&self) -> Vec<(u64, Option<u64>)> {
+        self.runs
+            .iter()
+            .map(|run| (run.source.id, run.index.diagnostic_term_owner()))
+            .collect()
     }
     pub fn stats(&self) -> Result<Stats> {
         self.healthy()?;
@@ -2891,7 +3013,7 @@ impl Database {
             resident_text_bytes: self.index.folded_bytes(),
             delta_keys: self.shadow.len(),
             segments: self.runs.len(),
-            compaction_running: self.job.is_some(),
+            compaction_running: self.job.is_some() || self.background_revision.pending(),
             source_bytes: self.runs.iter().map(|r| r.source.end).sum::<u64>()
                 + self.log.metadata()?.len(),
         })
@@ -2899,6 +3021,7 @@ impl Database {
 }
 impl Drop for Database {
     fn drop(&mut self) {
+        self.background_revision.cancel();
         #[cfg(feature = "bounded-engine")]
         if let Some(pending) = self.light_flush.take() {
             pending.finish();
@@ -2906,8 +3029,12 @@ impl Drop for Database {
         if let Some(job) = self.job.take() {
             let _ = job.handle.join();
         }
+        self.background_revision.finish_on_close();
     }
 }
 
 #[cfg(test)]
 mod reclaim_tests;
+
+#[cfg(all(test, feature = "bounded-engine"))]
+mod strict_open_tests;

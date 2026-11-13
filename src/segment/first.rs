@@ -58,6 +58,9 @@ impl<'a> Candidates<'a> {
         let _profile = crate::timing::span("first.posting_setup");
         crate::cancel::check(cancel)?;
         let terms = DiskIndex::query_terms(q);
+        #[cfg(feature = "diagnostic-timing")]
+        let _term_cancel =
+            term_pages::isolated::enabled().then(|| term_pages::isolated::cancel_scope(cancel));
         let mut groups = vec![match &q.collection {
             Some(c) => index.one(Term::Collection(q.scope.clone(), c.clone()))?,
             None => index.one(Term::Scope(q.scope.clone()))?,

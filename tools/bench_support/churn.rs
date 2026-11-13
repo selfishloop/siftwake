@@ -237,7 +237,12 @@ impl Corpus {
                     doc.document.text.truncate(end);
                     doc.document.text.push(' ');
                     doc.document.text.push_str(&token);
-                    assert!((2048..=200_000).contains(&doc.document.text.len()));
+                    let minimum = if std::env::var_os("FDB_LIVE_DISK50").is_some() {
+                        511
+                    } else {
+                        2048
+                    };
+                    assert!((minimum..=200_000).contains(&doc.document.text.len()));
                     return Ok(doc.document);
                 }
                 return Err("provided-corpus stage is read/seed only; revision mutation needs a separate oracle".into());
@@ -318,6 +323,9 @@ pub trait Backend: Send {
     fn maintain(&mut self) -> Result<Value>;
     fn idle_notify(&mut self) -> Result<Value> {
         self.maintain()
+    }
+    fn poll_idle(&mut self) -> Result<bool> {
+        Err("nonblocking maintenance unsupported".into())
     }
     #[allow(dead_code)]
     fn start_merge(&mut self) -> Result<bool>;

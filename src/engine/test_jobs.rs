@@ -14,25 +14,38 @@ struct Gate {
     state: Mutex<State>,
     wake: Condvar,
 }
-fn gates() -> &'static Mutex<BTreeMap<PathBuf, Arc<Gate>>> {
-    static GATES: OnceLock<Mutex<BTreeMap<PathBuf, Arc<Gate>>>> = OnceLock::new();
-    GATES.get_or_init(Mutex::default)
+type Gates = Mutex<BTreeMap<PathBuf, Arc<Gate>>>;
+fn gates(revision: bool) -> &'static Gates {
+    static NORMAL: OnceLock<Gates> = OnceLock::new();
+    static REVISION: OnceLock<Gates> = OnceLock::new();
+    if revision { &REVISION } else { &NORMAL }.get_or_init(Mutex::default)
 }
 pub(super) struct Pause {
     path: PathBuf,
     gate: Arc<Gate>,
+    revision: bool,
 }
 pub(super) fn pause(path: &Path) -> Pause {
+    pause_for(path, false)
+}
+pub(super) fn pause_revision(path: &Path) -> Pause {
+    pause_for(path, true)
+}
+fn pause_for(path: &Path, revision: bool) -> Pause {
     let path = path.canonicalize().unwrap();
     let gate = Arc::new(Gate::default());
     assert!(
-        gates()
+        gates(revision)
             .lock()
             .unwrap()
             .insert(path.clone(), gate.clone())
             .is_none()
     );
-    Pause { path, gate }
+    Pause {
+        path,
+        gate,
+        revision,
+    }
 }
 impl Pause {
     pub fn wait_entered(&self) {
@@ -47,15 +60,21 @@ impl Pause {
 }
 impl Drop for Pause {
     fn drop(&mut self) {
-        gates().lock().unwrap().remove(&self.path);
+        gates(self.revision).lock().unwrap().remove(&self.path);
         let mut state = self.gate.state.lock().unwrap();
         state.released = true;
         self.gate.wake.notify_all();
     }
 }
 pub(super) fn wait(path: &Path) {
+    wait_for(path, false);
+}
+pub(super) fn wait_revision(path: &Path) {
+    wait_for(path, true);
+}
+fn wait_for(path: &Path, revision: bool) {
     let path = path.canonicalize().unwrap();
-    let gate = gates().lock().unwrap().get(&path).cloned();
+    let gate = gates(revision).lock().unwrap().get(&path).cloned();
     if let Some(gate) = gate {
         let mut state = gate.state.lock().unwrap();
         state.arrived = true;

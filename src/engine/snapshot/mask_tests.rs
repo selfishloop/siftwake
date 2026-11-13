@@ -112,6 +112,7 @@ fn install_window(db: &mut Database, start: usize, end: usize) {
 fn verify_window(start: usize, end: usize, base: usize, shadow: bool) {
     let t = Temp::new();
     let mut db = layout(&t, base);
+    db.set_revision_reclamation(false); // Isolate the controlled merge window.
     let reader = db.snapshot_reader().unwrap();
     if shadow {
         let mut document = doc("0001");

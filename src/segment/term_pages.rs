@@ -11,6 +11,15 @@ const CACHE_BYTES: usize = 1024 * 1024;
 // Hot descriptors share the existing allowance; no document/text cache is added.
 const LOOKUP_BYTES: usize = 64 * 1024;
 const PAGE_CACHE_BYTES: usize = CACHE_BYTES - LOOKUP_BYTES;
+#[cfg(all(feature = "diagnostic-timing", feature = "bounded-engine"))]
+pub(super) mod isolated;
+fn page_cache_bytes() -> usize {
+    #[cfg(all(feature = "diagnostic-timing", feature = "bounded-engine"))]
+    if isolated::large_cache() {
+        return 4 * 1024 * 1024;
+    }
+    PAGE_CACHE_BYTES
+}
 static OWNER: AtomicU64 = AtomicU64::new(1);
 pub(super) struct Bloom {
     words: Vec<u64>,
@@ -145,6 +154,8 @@ impl Cache {
                 .expect("nonempty lookup accounting");
             let entries = self.lookups.get_mut(&oldest.0).unwrap();
             self.lookup_bytes -= entries.remove(&oldest.1).unwrap().bytes;
+            #[cfg(all(feature = "diagnostic-timing", feature = "bounded-engine"))]
+            isolated::count(isolated::LOOKUP_EVICTIONS, 1);
             if entries.is_empty() {
                 self.lookups.remove(&oldest.0);
                 self.lookup_bytes -= 128;
@@ -197,7 +208,18 @@ pub(super) struct Pages {
 }
 impl Drop for Pages {
     fn drop(&mut self) {
+        #[cfg(all(feature = "diagnostic-timing", feature = "bounded-engine"))]
+        isolated::count(isolated::OWNER_DROPPED, 1);
         if let Ok(mut cache) = cache().lock() {
+            #[cfg(all(feature = "diagnostic-timing", feature = "bounded-engine"))]
+            isolated::count(
+                isolated::DROP_PAGES,
+                cache
+                    .entries
+                    .iter()
+                    .filter(|e| e.owner == self.owner)
+                    .count(),
+            );
             cache.entries.retain(|e| e.owner != self.owner);
             cache.bytes = cache.entries.iter().map(|e| e.bytes).sum();
             cache.forget(self.owner);
@@ -205,6 +227,10 @@ impl Drop for Pages {
     }
 }
 impl Pages {
+    #[cfg(feature = "diagnostic-timing")]
+    pub(super) fn diagnostic_owner(&self) -> u64 {
+        self.owner
+    }
     pub fn new(
         file: &File,
         mut fences: Vec<Fence>,
@@ -226,6 +252,8 @@ impl Pages {
             fence.checksum = !state;
         }
         let count = fences.iter().map(|p| p.count).sum();
+        #[cfg(all(feature = "diagnostic-timing", feature = "bounded-engine"))]
+        isolated::count(isolated::OWNER_CREATED, 1);
         fences.shrink_to_fit();
         #[cfg(feature = "bounded-engine")]
         let binary = {
@@ -260,6 +288,15 @@ impl Pages {
                 .sum::<usize>()
     }
     fn decode(&self, page: usize) -> Result<Vec<(Term, Posting)>> {
+        #[cfg(feature = "diagnostic-timing")]
+        let _owner = crate::timing::request::owner_span(self.owner, "decode");
+        #[cfg(feature = "diagnostic-timing")]
+        crate::timing::request::owner_record(
+            self.owner,
+            "read_bytes",
+            self.fences[page].len as u64,
+            0,
+        );
         #[cfg(feature = "diagnostic-timing")]
         let _span = crate::timing::span("query.term_page_decode");
         let p = &self.fences[page];
@@ -296,6 +333,10 @@ impl Pages {
         Ok(values)
     }
     fn with_page<T>(&self, page: usize, f: impl FnOnce(&[(Term, Posting)]) -> T) -> Result<T> {
+        #[cfg(all(feature = "diagnostic-timing", feature = "bounded-engine"))]
+        if isolated::enabled() {
+            return self.with_page_isolated(page, f);
+        }
         let mut cache = query_cache_lock()?;
         // The common working pool earmarks cache/scratch allowance at creation.
         // Never wait for workspace admission while holding this cache mutex.
@@ -305,7 +346,11 @@ impl Pages {
             .position(|e| e.owner == self.owner && e.page == page)
         {
             #[cfg(feature = "diagnostic-timing")]
+            crate::timing::request::owner_record(self.owner, "page_hit", 1, 0);
+            #[cfg(feature = "diagnostic-timing")]
             crate::timing::count("query.term_page_hits", 1);
+            #[cfg(all(feature = "diagnostic-timing", feature = "bounded-engine"))]
+            isolated::count(isolated::PAGE_HITS, 1);
             let entry = cache.entries.remove(pos).unwrap();
             let result = f(&entry.values);
             cache.entries.push_front(entry);
@@ -313,19 +358,28 @@ impl Pages {
         }
         #[cfg(feature = "diagnostic-timing")]
         crate::timing::count("query.term_page_misses", 1);
+        #[cfg(feature = "diagnostic-timing")]
+        crate::timing::request::owner_record(self.owner, "page_miss", 1, 0);
+        #[cfg(all(feature = "diagnostic-timing", feature = "bounded-engine"))]
+        isolated::count(isolated::PAGE_MISSES, 1);
         // A page's decoded Term enum/String overhead is larger than its JSON.
         // Release old pages before decoding. Oversized legacy scalars are uncached.
         let estimate = self.fences[page].len.saturating_mul(2)
             + self.fences[page].count.next_power_of_two() * std::mem::size_of::<(Term, Posting)>();
-        while cache.bytes.saturating_add(estimate) > PAGE_CACHE_BYTES && !cache.entries.is_empty() {
+        while cache.bytes.saturating_add(estimate) > page_cache_bytes() && !cache.entries.is_empty()
+        {
+            #[cfg(all(feature = "diagnostic-timing", feature = "bounded-engine"))]
+            isolated::count(isolated::CAPACITY_PAGES, 1);
             cache.bytes -= cache.entries.pop_back().unwrap().bytes;
         }
         let values = self.decode(page)?;
         let bytes = values.capacity() * std::mem::size_of::<(Term, Posting)>()
             + values.iter().map(|(t, _)| strings(t)).sum::<usize>();
         let result = f(&values);
-        if bytes <= PAGE_CACHE_BYTES {
-            while cache.bytes + bytes > PAGE_CACHE_BYTES {
+        if bytes <= page_cache_bytes() {
+            while cache.bytes + bytes > page_cache_bytes() {
+                #[cfg(all(feature = "diagnostic-timing", feature = "bounded-engine"))]
+                isolated::count(isolated::CAPACITY_PAGES, 1);
                 cache.bytes -= cache.entries.pop_back().unwrap().bytes;
             }
             cache.bytes += bytes;
@@ -335,6 +389,9 @@ impl Pages {
                 values,
                 bytes,
             });
+        } else {
+            #[cfg(all(feature = "diagnostic-timing", feature = "bounded-engine"))]
+            isolated::count(isolated::OVERSIZED_PAGES, 1);
         }
         Ok(result)
     }
@@ -347,6 +404,8 @@ impl Pages {
         end != 0 && term <= &self.fences[end - 1].last
     }
     pub fn get(&self, term: &Term) -> Result<Option<Posting>> {
+        #[cfg(feature = "diagnostic-timing")]
+        let _owner = crate::timing::request::owner_span(self.owner, "lookup");
         if !self.bloom.contains(term) {
             #[cfg(feature = "diagnostic-timing")]
             crate::timing::count("query.term_bloom_rejects", 1);
@@ -355,10 +414,14 @@ impl Pages {
         if let Some(posting) = query_cache_lock()?.lookup(self.owner, term) {
             #[cfg(feature = "diagnostic-timing")]
             crate::timing::count("query.term_lookup_hits", 1);
+            #[cfg(all(feature = "diagnostic-timing", feature = "bounded-engine"))]
+            isolated::count(isolated::LOOKUP_HITS, 1);
             return Ok(posting);
         }
         #[cfg(feature = "diagnostic-timing")]
         crate::timing::count("query.term_lookup_misses", 1);
+        #[cfg(all(feature = "diagnostic-timing", feature = "bounded-engine"))]
+        isolated::count(isolated::LOOKUP_MISSES, 1);
         let end = self.fences.partition_point(|p| &p.first <= term);
         if end == 0 || term > &self.fences[end - 1].last {
             return Ok(None);
