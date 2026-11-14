@@ -159,6 +159,13 @@ impl Database {
             self.log = pending.log;
             self.active = pending.active;
             self.runs.push(run);
+            // Keys formerly hidden by the WAL are now hidden by the new run.
+            // Writer masks cached before the append do not cover that run.
+            *self
+                .mask_cache
+                .get_mut()
+                .map_err(|_| Error::Corrupt("visibility cache poisoned".into()))? =
+                MaskCache::default();
             self.refresh_snapshots()?;
             self.try_reclaim();
             if self.runs.len() >= 4 {

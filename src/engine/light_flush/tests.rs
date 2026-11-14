@@ -104,6 +104,62 @@ fn frozen_prefix_tail_relocation_and_last_snapshot_wal_pin() {
     oracle(&Database::open(&t.0).unwrap());
 }
 
+#[test]
+fn wal_prefix_install_invalidates_writer_visibility_masks() {
+    fn check(db: &Database, query: &Query, sequence: u64, total: usize, text: &str) {
+        let expected = db.get(&doc("a").key).unwrap().unwrap();
+        assert_eq!(expected.document.text, text);
+        assert_eq!(expected.version, sequence);
+        let exact = db.search(query).unwrap();
+        assert_eq!(exact.total, total);
+        assert_eq!(exact.sequence, sequence);
+        let capped = db.search_first(query).unwrap();
+        assert_eq!(capped.sequence, sequence);
+        assert_eq!(capped.hits, exact.hits);
+        assert_eq!(exact.hits.len(), total);
+        assert_eq!(exact.hits[0], expected);
+    }
+
+    let t = Temp::new();
+    let mut db = seed(&t);
+    db.flush().unwrap();
+    let mut query = Query::new("shared");
+    query.text = "oldmarker".into();
+    query.limit = 3;
+    // Prime the base run's mask on the writer, independently of the reader.
+    check(&db, &query, 1, 2, "oldmarker");
+    let reader = db.snapshot_reader().unwrap();
+    let old = reader.acquire().unwrap();
+    db.commit_streamed([
+        Ok(put("a", "oldmarker revised")),
+        Ok(Mutation::Delete {
+            key: doc("b").key,
+            guard: Guard::Any,
+        }),
+    ])
+    .unwrap();
+    check(&db, &query, 2, 1, "oldmarker revised");
+    assert!(db.start_light_flush().unwrap());
+    assert!(db.light_flush_ready(true).unwrap());
+    assert_eq!(db.runs.len(), 2);
+    assert!(db.shadow.is_empty());
+    check(&db, &query, 2, 1, "oldmarker revised");
+    for (view, sequence, total, text) in [
+        (reader.acquire().unwrap(), 2, 1, "oldmarker revised"),
+        (old, 1, 2, "oldmarker"),
+    ] {
+        let exact = view.search(&query).unwrap();
+        assert_eq!((exact.sequence, exact.total), (sequence, total));
+        assert_eq!(view.search_first(&query).unwrap().hits, exact.hits);
+        assert_eq!(exact.hits[0].document.text, text);
+        assert_eq!(exact.hits[0].version, sequence);
+    }
+    drop((reader, db));
+    let reopened = Database::open(&t.0).unwrap();
+    reopened.check_integrity().unwrap();
+    check(&reopened, &query, 2, 1, "oldmarker revised");
+}
+
 // Isolated witness of the old test pause's lock cycle. The timeout releases
 // the artificial lock so this probe never leaves a deadlocked process behind.
 #[test]

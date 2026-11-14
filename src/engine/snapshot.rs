@@ -880,5 +880,7 @@ impl Database {
 mod mask_tests;
 #[cfg(all(feature = "diagnostic-timing", feature = "bounded-engine"))]
 mod probe;
+#[cfg(all(test, feature = "bounded-engine"))]
+mod publication_oracle;
 #[cfg(test)]
 mod tests;
