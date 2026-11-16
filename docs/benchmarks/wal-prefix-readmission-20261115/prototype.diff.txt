@@ -1,0 +1,101 @@
+diff --git a/target/wal-prefix-first-pass-20261114/source/src/engine/streamed.rs b/target/wal-prefix-readmission-20261115/source/src/engine/streamed.rs
+index 30df1a2..858080b 100644
+--- a/target/wal-prefix-first-pass-20261114/source/src/engine/streamed.rs
++++ b/target/wal-prefix-readmission-20261115/source/src/engine/streamed.rs
+@@ -223,16 +223,34 @@ impl Database {
+         mutations: impl IntoIterator<Item = Result<Mutation>>,
+     ) -> Result<u64> {
+         static DEFER: std::sync::OnceLock<bool> = std::sync::OnceLock::new();
+-        self.commit_streamed_with_merge(
++        static READMIT: std::sync::OnceLock<bool> = std::sync::OnceLock::new();
++        self.commit_streamed_policy(
+             mutations,
+             *DEFER.get_or_init(|| std::env::var_os("FDB_BENCH_DEFER_FLUSH_MERGE").is_some()),
++            *READMIT.get_or_init(|| std::env::var_os("FDB_BENCH_PREFIX_READMISSION").is_some()),
+         )
+     }
+ 
++    #[cfg(test)]
+     fn commit_streamed_with_merge(
+         &mut self,
+         mutations: impl IntoIterator<Item = Result<Mutation>>,
+         defer_flush_merge: bool,
++    ) -> Result<u64> {
++        self.commit_streamed_policy(mutations, defer_flush_merge, false)
++    }
++
++    fn short_wal_room(&self, stage: &Stage) -> Result<bool> {
++        Ok(self.shadow.len() + stage.rows.len() <= 2048
++            && self.log.metadata()?.len() + stage.length as u64 <= 64 * 1024 * 1024
++            && !self.needs_flush())
++    }
++
++    fn commit_streamed_policy(
++        &mut self,
++        mutations: impl IntoIterator<Item = Result<Mutation>>,
++        defer_flush_merge: bool,
++        readmit_after_prefix: bool,
+     ) -> Result<u64> {
+         let _writer = crate::access::WriterScope::enter();
+         let _profile = super::profile::Scope::enter(&self.write_profile, self.sequence);
+@@ -270,7 +288,8 @@ impl Database {
+             self.sequence,
+             self.active.id,
+         );
+-        let intake = crate::write_budget::reserve_working(6 * 1024 * 1024)?;
++        const INTAKE_BYTES: usize = 6 * 1024 * 1024;
++        let mut intake = Some(crate::write_budget::reserve_working(INTAKE_BYTES)?);
+         let mut stage = Stage::new(&self.dir)?;
+         stage.build_filters = self.streamed_wal_layer;
+         let mut count = self.count;
+@@ -343,14 +362,34 @@ impl Database {
+                     .is_some_and(super::light_flush::Pending::is_finished),
+             });
+         }
+-        if self.streamed_wal_layer
++        let eligible = self.streamed_wal_layer
+             && stage.rows.len() <= 128
+             && stage.length <= 8 * 1024 * 1024
+-            && self.docs.is_empty()
+-            && self.shadow.len() + stage.rows.len() <= 2048
+-            && self.log.metadata()?.len() + stage.length as u64 <= 64 * 1024 * 1024
+-            && !self.needs_flush()
+-        {
++            && self.docs.is_empty();
++        let mut short_wal = eligible && self.short_wal_room(&stage)?;
++        if readmit_after_prefix && eligible && !short_wal && self.light_flush.is_some() {
++            drop(intake.take());
++            let _retry = profile::phase(
++                self.write_profile.is_some(),
++                "stream.prefix_readmission",
++                self.sequence,
++                self.active.id,
++            );
++            // A prefix install changes WAL addresses, not the logical sequence
++            // or versions checked while staging. The stage has its own file.
++            self.light_flush_ready(true)?;
++            short_wal = self.short_wal_room(&stage)?;
++            if short_wal {
++                let _resume = profile::phase(
++                    self.write_profile.is_some(),
++                    "stream.prefix_readmitted",
++                    self.sequence,
++                    self.active.id,
++                );
++                intake = Some(crate::write_budget::reserve_working(INTAKE_BYTES)?);
++            }
++        }
++        if short_wal {
+             // A synced existing-codec WAL frame is the commit boundary. No
+             // manifest/index/worker drain is needed to expose this active layer.
+             use std::io::Seek;
+@@ -553,6 +592,9 @@ impl Database {
+ #[cfg(test)]
+ mod defer_tests;
+ 
++#[cfg(test)]
++mod readmission_tests;
++
+ #[cfg(test)]
+ mod tests {
+     use super::*;

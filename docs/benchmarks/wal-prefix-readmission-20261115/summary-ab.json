@@ -1,0 +1,759 @@
+{
+  "arms": {
+    "A1": {
+      "commit": {
+        "p50": 11.9186,
+        "p95": 52.1169,
+        "p99": 1055.0732,
+        "max": 1540.7872
+      },
+      "over_1s": 4,
+      "tails": [
+        {
+          "ms": 1055.0732,
+          "sequence": 241,
+          "timing": {
+            "prefix.worker_join": 468.2246,
+            "stream.prefix_readmission": 0.0,
+            "stream.prefix_readmitted": 0.0,
+            "stream.worker_drain": 490.3597,
+            "stream.delta_flush": 409.7294,
+            "merge.join": 0.0
+          },
+          "prefix_overlap": [
+            {
+              "run": 348,
+              "phase": "budget.source_workspace",
+              "ms": 0.0002
+            },
+            {
+              "run": 348,
+              "phase": "budget.reserve",
+              "ms": 0.0002
+            },
+            {
+              "run": 348,
+              "phase": "source.prepare",
+              "ms": 36.7334
+            },
+            {
+              "run": 348,
+              "phase": "budget.builder_workspace",
+              "ms": 0.0001
+            },
+            {
+              "run": 348,
+              "phase": "budget.reserve",
+              "ms": 0.0002
+            },
+            {
+              "run": 348,
+              "phase": "index.prepare",
+              "ms": 187.5743
+            },
+            {
+              "run": 348,
+              "phase": "worker.wall",
+              "ms": 467.7555
+            }
+          ]
+        },
+        {
+          "ms": 1540.7872,
+          "sequence": 262,
+          "timing": {
+            "prefix.worker_join": 27.7421,
+            "stream.prefix_readmission": 0.0,
+            "stream.prefix_readmitted": 0.0,
+            "stream.worker_drain": 40.9319,
+            "stream.delta_flush": 1395.52,
+            "merge.join": 0.0
+          },
+          "prefix_overlap": [
+            {
+              "run": 359,
+              "phase": "index.prepare",
+              "ms": 25.5469
+            },
+            {
+              "run": 359,
+              "phase": "worker.wall",
+              "ms": 27.4752
+            }
+          ]
+        },
+        {
+          "ms": 1133.2359000000001,
+          "sequence": 293,
+          "timing": {
+            "prefix.worker_join": 235.5846,
+            "stream.prefix_readmission": 0.0,
+            "stream.prefix_readmitted": 0.0,
+            "stream.worker_drain": 253.3381,
+            "stream.delta_flush": 720.1736,
+            "merge.join": 0.0
+          },
+          "prefix_overlap": [
+            {
+              "run": 376,
+              "phase": "budget.source_workspace",
+              "ms": 125.695
+            },
+            {
+              "run": 376,
+              "phase": "source.prepare",
+              "ms": 12.8033
+            },
+            {
+              "run": 376,
+              "phase": "budget.reserve",
+              "ms": 0.0005
+            },
+            {
+              "run": 376,
+              "phase": "budget.reserve",
+              "ms": 0.0001
+            },
+            {
+              "run": 376,
+              "phase": "index.prepare",
+              "ms": 95.1264
+            },
+            {
+              "run": 376,
+              "phase": "worker.wall",
+              "ms": 235.3085
+            }
+          ]
+        },
+        {
+          "ms": 1094.3872,
+          "sequence": 341,
+          "timing": {
+            "prefix.worker_join": 529.156,
+            "stream.prefix_readmission": 0.0,
+            "stream.prefix_readmitted": 0.0,
+            "stream.worker_drain": 545.0263,
+            "stream.delta_flush": 439.723,
+            "merge.join": 0.0
+          },
+          "prefix_overlap": [
+            {
+              "run": 415,
+              "phase": "budget.reserve",
+              "ms": 6.4004
+            },
+            {
+              "run": 415,
+              "phase": "budget.source_workspace",
+              "ms": 0.0002
+            },
+            {
+              "run": 415,
+              "phase": "budget.reserve",
+              "ms": 0.0001
+            },
+            {
+              "run": 415,
+              "phase": "source.prepare",
+              "ms": 20.5814
+            },
+            {
+              "run": 415,
+              "phase": "budget.builder_workspace",
+              "ms": 0.0001
+            },
+            {
+              "run": 415,
+              "phase": "budget.reserve",
+              "ms": 0.0002
+            },
+            {
+              "run": 415,
+              "phase": "index.prepare",
+              "ms": 126.0658
+            },
+            {
+              "run": 415,
+              "phase": "worker.wall",
+              "ms": 528.7211
+            }
+          ]
+        }
+      ],
+      "phases": {
+        "prefix.worker_join": {
+          "count": 21,
+          "ms": 2534.2915,
+          "max_ms": 535.5604
+        },
+        "stream.prefix_readmission": {
+          "count": 0,
+          "ms": 0,
+          "max_ms": 0
+        },
+        "stream.prefix_readmitted": {
+          "count": 0,
+          "ms": 0,
+          "max_ms": 0
+        },
+        "stream.worker_drain": {
+          "count": 12,
+          "ms": 2716.9788,
+          "max_ms": 549.3016
+        },
+        "stream.delta_flush": {
+          "count": 12,
+          "ms": 6168.9109,
+          "max_ms": 1395.52
+        },
+        "merge.join": {
+          "count": 2,
+          "ms": 0.0189,
+          "max_ms": 0.0109
+        }
+      },
+      "ops_s": 1503.2376657683433,
+      "private_peak_bytes": 48193536,
+      "reader": {
+        "p50": 12.7473,
+        "p95": 112.5149,
+        "p99": 126.79799999999999,
+        "max": 156.2588
+      },
+      "round_end_ratios": [
+        1.2138607418218172,
+        1.0391006444901025,
+        1.1132727010875116
+      ],
+      "disk_peak_ratio": 1.3797220027836965
+    },
+    "B1": {
+      "commit": {
+        "p50": 12.3277,
+        "p95": 294.8306,
+        "p99": 789.4399,
+        "max": 1124.2119
+      },
+      "over_1s": 1,
+      "tails": [
+        {
+          "ms": 1124.2119,
+          "sequence": 243,
+          "timing": {
+            "prefix.worker_join": 1083.3201,
+            "stream.prefix_readmission": 1101.9688,
+            "stream.prefix_readmitted": 0.0006,
+            "stream.worker_drain": 0.0,
+            "stream.delta_flush": 0.0,
+            "merge.join": 0.0
+          },
+          "prefix_overlap": [
+            {
+              "run": 332,
+              "phase": "budget.source_workspace",
+              "ms": 576.3705
+            },
+            {
+              "run": 332,
+              "phase": "budget.reserve",
+              "ms": 0.0001
+            },
+            {
+              "run": 332,
+              "phase": "source.prepare",
+              "ms": 25.8274
+            },
+            {
+              "run": 332,
+              "phase": "budget.reserve",
+              "ms": 0.0002
+            },
+            {
+              "run": 332,
+              "phase": "budget.reserve",
+              "ms": 0.0001
+            },
+            {
+              "run": 332,
+              "phase": "index.prepare",
+              "ms": 160.9774
+            },
+            {
+              "run": 332,
+              "phase": "worker.wall",
+              "ms": 1082.8535
+            }
+          ]
+        }
+      ],
+      "phases": {
+        "prefix.worker_join": {
+          "count": 27,
+          "ms": 9119.0769,
+          "max_ms": 1083.3201
+        },
+        "stream.prefix_readmission": {
+          "count": 22,
+          "ms": 9532.6813,
+          "max_ms": 1101.9688
+        },
+        "stream.prefix_readmitted": {
+          "count": 22,
+          "ms": 0.0148,
+          "max_ms": 0.001
+        },
+        "stream.worker_drain": {
+          "count": 0,
+          "ms": 0,
+          "max_ms": 0
+        },
+        "stream.delta_flush": {
+          "count": 0,
+          "ms": 0,
+          "max_ms": 0
+        },
+        "merge.join": {
+          "count": 3,
+          "ms": 0.0215,
+          "max_ms": 0.0081
+        }
+      },
+      "ops_s": 1505.3542590822465,
+      "private_peak_bytes": 46772224,
+      "reader": {
+        "p50": 11.985100000000001,
+        "p95": 111.4628,
+        "p99": 126.51809999999999,
+        "max": 148.21390000000002
+      },
+      "round_end_ratios": [
+        1.2255628102068463,
+        1.0272306806192273,
+        1.1777186764659473
+      ],
+      "disk_peak_ratio": 1.4847283417532375
+    },
+    "B2": {
+      "commit": {
+        "p50": 11.826,
+        "p95": 177.8995,
+        "p99": 759.4971,
+        "max": 1441.5175
+      },
+      "over_1s": 2,
+      "tails": [
+        {
+          "ms": 1153.621,
+          "sequence": 245,
+          "timing": {
+            "prefix.worker_join": 1115.0605,
+            "stream.prefix_readmission": 1132.0348,
+            "stream.prefix_readmitted": 0.0005,
+            "stream.worker_drain": 0.0,
+            "stream.delta_flush": 0.0,
+            "merge.join": 0.0
+          },
+          "prefix_overlap": [
+            {
+              "run": 334,
+              "phase": "budget.source_workspace",
+              "ms": 516.3682
+            },
+            {
+              "run": 334,
+              "phase": "budget.reserve",
+              "ms": 0.0001
+            },
+            {
+              "run": 334,
+              "phase": "source.prepare",
+              "ms": 28.4451
+            },
+            {
+              "run": 334,
+              "phase": "budget.reserve",
+              "ms": 0.0002
+            },
+            {
+              "run": 334,
+              "phase": "budget.reserve",
+              "ms": 0.0001
+            },
+            {
+              "run": 334,
+              "phase": "index.prepare",
+              "ms": 153.0379
+            },
+            {
+              "run": 334,
+              "phase": "worker.wall",
+              "ms": 1113.8425
+            }
+          ]
+        },
+        {
+          "ms": 1441.5175,
+          "sequence": 329,
+          "timing": {
+            "prefix.worker_join": 1400.4223,
+            "stream.prefix_readmission": 1420.2217,
+            "stream.prefix_readmitted": 0.0007,
+            "stream.worker_drain": 0.0,
+            "stream.delta_flush": 0.0,
+            "merge.join": 0.0
+          },
+          "prefix_overlap": [
+            {
+              "run": 379,
+              "phase": "budget.reserve",
+              "ms": 768.7501
+            },
+            {
+              "run": 379,
+              "phase": "budget.source_workspace",
+              "ms": 0.0002
+            },
+            {
+              "run": 379,
+              "phase": "budget.reserve",
+              "ms": 0.0001
+            },
+            {
+              "run": 379,
+              "phase": "source.prepare",
+              "ms": 22.3111
+            },
+            {
+              "run": 379,
+              "phase": "budget.reserve",
+              "ms": 0.0005
+            },
+            {
+              "run": 379,
+              "phase": "index.prepare",
+              "ms": 169.4517
+            },
+            {
+              "run": 379,
+              "phase": "worker.wall",
+              "ms": 1399.9691
+            }
+          ]
+        }
+      ],
+      "phases": {
+        "prefix.worker_join": {
+          "count": 27,
+          "ms": 9114.127700000001,
+          "max_ms": 1400.4223
+        },
+        "stream.prefix_readmission": {
+          "count": 21,
+          "ms": 9497.3522,
+          "max_ms": 1420.2217
+        },
+        "stream.prefix_readmitted": {
+          "count": 21,
+          "ms": 0.0141,
+          "max_ms": 0.0013
+        },
+        "stream.worker_drain": {
+          "count": 0,
+          "ms": 0,
+          "max_ms": 0
+        },
+        "stream.delta_flush": {
+          "count": 0,
+          "ms": 0,
+          "max_ms": 0
+        },
+        "merge.join": {
+          "count": 3,
+          "ms": 0.0245,
+          "max_ms": 0.0092
+        }
+      },
+      "ops_s": 1556.2341877852703,
+      "private_peak_bytes": 48951296,
+      "reader": {
+        "p50": 11.9574,
+        "p95": 110.18809999999999,
+        "p99": 124.7645,
+        "max": 145.8186
+      },
+      "round_end_ratios": [
+        1.167938369682013,
+        1.0969268660772677,
+        1.178778177457388
+      ],
+      "disk_peak_ratio": 1.4622725224586015
+    },
+    "A2": {
+      "commit": {
+        "p50": 12.2267,
+        "p95": 45.3178,
+        "p99": 1116.1094,
+        "max": 1457.8329
+      },
+      "over_1s": 5,
+      "tails": [
+        {
+          "ms": 1017.2379000000001,
+          "sequence": 241,
+          "timing": {
+            "prefix.worker_join": 560.5379,
+            "stream.prefix_readmission": 0.0,
+            "stream.prefix_readmitted": 0.0,
+            "stream.worker_drain": 582.8174,
+            "stream.delta_flush": 301.2823,
+            "merge.join": 0.0
+          },
+          "prefix_overlap": [
+            {
+              "run": 348,
+              "phase": "budget.source_workspace",
+              "ms": 0.0003
+            },
+            {
+              "run": 348,
+              "phase": "budget.reserve",
+              "ms": 0.0001
+            },
+            {
+              "run": 348,
+              "phase": "source.prepare",
+              "ms": 42.2635
+            },
+            {
+              "run": 348,
+              "phase": "budget.builder_workspace",
+              "ms": 0.0002
+            },
+            {
+              "run": 348,
+              "phase": "budget.reserve",
+              "ms": 0.0004
+            },
+            {
+              "run": 348,
+              "phase": "index.prepare",
+              "ms": 171.5553
+            },
+            {
+              "run": 348,
+              "phase": "worker.wall",
+              "ms": 560.0117
+            }
+          ]
+        },
+        {
+          "ms": 1457.8329,
+          "sequence": 262,
+          "timing": {
+            "prefix.worker_join": 32.6827,
+            "stream.prefix_readmission": 0.0,
+            "stream.prefix_readmitted": 0.0,
+            "stream.worker_drain": 46.5185,
+            "stream.delta_flush": 1342.7796,
+            "merge.join": 0.0
+          },
+          "prefix_overlap": [
+            {
+              "run": 359,
+              "phase": "index.prepare",
+              "ms": 31.1642
+            },
+            {
+              "run": 359,
+              "phase": "worker.wall",
+              "ms": 32.4968
+            }
+          ]
+        },
+        {
+          "ms": 1116.1094,
+          "sequence": 294,
+          "timing": {
+            "prefix.worker_join": 237.3899,
+            "stream.prefix_readmission": 0.0,
+            "stream.prefix_readmitted": 0.0,
+            "stream.worker_drain": 253.3044,
+            "stream.delta_flush": 720.6663,
+            "merge.join": 0.0
+          },
+          "prefix_overlap": [
+            {
+              "run": 376,
+              "phase": "budget.source_workspace",
+              "ms": 117.6667
+            },
+            {
+              "run": 376,
+              "phase": "budget.reserve",
+              "ms": 0.0001
+            },
+            {
+              "run": 376,
+              "phase": "source.prepare",
+              "ms": 6.3824
+            },
+            {
+              "run": 376,
+              "phase": "budget.reserve",
+              "ms": 0.0002
+            },
+            {
+              "run": 376,
+              "phase": "budget.reserve",
+              "ms": 0.0001
+            },
+            {
+              "run": 376,
+              "phase": "index.prepare",
+              "ms": 111.848
+            },
+            {
+              "run": 376,
+              "phase": "worker.wall",
+              "ms": 237.1475
+            }
+          ]
+        },
+        {
+          "ms": 1332.3562,
+          "sequence": 318,
+          "timing": {
+            "prefix.worker_join": 11.0123,
+            "stream.prefix_readmission": 0.0,
+            "stream.prefix_readmitted": 0.0,
+            "stream.worker_drain": 496.8174,
+            "stream.delta_flush": 724.7764,
+            "merge.join": 455.9199
+          },
+          "prefix_overlap": [
+            {
+              "run": 402,
+              "phase": "index.prepare",
+              "ms": 8.1536
+            },
+            {
+              "run": 402,
+              "phase": "worker.wall",
+              "ms": 10.7575
+            }
+          ]
+        },
+        {
+          "ms": 1138.4578999999999,
+          "sequence": 342,
+          "timing": {
+            "prefix.worker_join": 662.9866,
+            "stream.prefix_readmission": 0.0,
+            "stream.prefix_readmitted": 0.0,
+            "stream.worker_drain": 685.5699,
+            "stream.delta_flush": 332.0094,
+            "merge.join": 0.0
+          },
+          "prefix_overlap": [
+            {
+              "run": 415,
+              "phase": "budget.reserve",
+              "ms": 30.0454
+            },
+            {
+              "run": 415,
+              "phase": "budget.source_workspace",
+              "ms": 0.0002
+            },
+            {
+              "run": 415,
+              "phase": "budget.reserve",
+              "ms": 0.0001
+            },
+            {
+              "run": 415,
+              "phase": "source.prepare",
+              "ms": 31.3713
+            },
+            {
+              "run": 415,
+              "phase": "budget.reserve",
+              "ms": 0.0002
+            },
+            {
+              "run": 415,
+              "phase": "budget.reserve",
+              "ms": 0.0001
+            },
+            {
+              "run": 415,
+              "phase": "index.prepare",
+              "ms": 192.2164
+            },
+            {
+              "run": 415,
+              "phase": "worker.wall",
+              "ms": 662.3429
+            }
+          ]
+        }
+      ],
+      "phases": {
+        "prefix.worker_join": {
+          "count": 21,
+          "ms": 2694.4685,
+          "max_ms": 662.9866
+        },
+        "stream.prefix_readmission": {
+          "count": 0,
+          "ms": 0,
+          "max_ms": 0
+        },
+        "stream.prefix_readmitted": {
+          "count": 0,
+          "ms": 0,
+          "max_ms": 0
+        },
+        "stream.worker_drain": {
+          "count": 12,
+          "ms": 3363.6054,
+          "max_ms": 685.5699
+        },
+        "stream.delta_flush": {
+          "count": 12,
+          "ms": 5966.582,
+          "max_ms": 1342.7796
+        },
+        "merge.join": {
+          "count": 3,
+          "ms": 455.9428,
+          "max_ms": 455.9199
+        }
+      },
+      "ops_s": 1485.3760200429906,
+      "private_peak_bytes": 46051328,
+      "reader": {
+        "p50": 12.2554,
+        "p95": 112.5804,
+        "p99": 129.2833,
+        "max": 137.80790000000002
+      },
+      "round_end_ratios": [
+        1.2123551339251124,
+        1.0384114715646928,
+        1.1149736912104944
+      ],
+      "disk_peak_ratio": 1.3798320926804621
+    }
+  },
+  "archived_sqlite": {
+    "commit": {
+      "p50": 131.8519,
+      "p95": 298.29519999999997,
+      "p99": 435.61850000000004,
+      "max": 791.0042000000001
+    },
+    "over_1s": 0
+  }
+}

@@ -1,0 +1,127 @@
+{
+  "technical_pass": false,
+  "errors": [
+    "merged loss or full event count"
+  ],
+  "merged_lost": 0,
+  "decoded_events": 539005,
+  "engine": "sqlite",
+  "count_differences": [
+    [
+      "EventTrace",
+      "EndExtension",
+      "0",
+      "2",
+      1
+    ],
+    [
+      "EventTrace",
+      "Extension",
+      "0",
+      "2",
+      1
+    ],
+    [
+      "EventTrace",
+      "RDComplete",
+      "0",
+      "2",
+      1
+    ],
+    [
+      "FileIo",
+      "Create",
+      "0",
+      "3",
+      1
+    ]
+  ],
+  "protected_fileio_sha": "70f5b4dbeea28a4ebc121e3c39c62513dca8a424c5fad1338019590b39cc57e2",
+  "protected_fileio_rows": 297486,
+  "summary_events": 539009,
+  "loss_scope": "collector bazı ölçülemedi",
+  "stream_bytes": 223833394,
+  "stream_sha256": "27fc95243db9707476c2cf5d07f4f9359f7bfbee15f5bfe8a154acd32ebf79eb",
+  "target_pid": 60060,
+  "trace_headers": [
+    [
+      134392038583437091,
+      134392038667343736
+    ]
+  ],
+  "purge_end_filetime": 134392038595742534,
+  "cold_window_filetime": [
+    134392038596550879,
+    134392038663513630
+  ],
+  "expected_files": 1,
+  "matched_files": 1,
+  "missing": [],
+  "unknown_cold_read_rows": 58,
+  "total_attributed_disk_bytes": 207298560,
+  "disk_bytes_by_name": {
+    "sqlite.db": 207298560
+  },
+  "foreign_count": 0,
+  "foreign_first": [],
+  "ambiguous_count": 0,
+  "ambiguous_rows": [],
+  "cold_open_ms": 17.5524,
+  "cold_first_result_ms": 6696.271000000001,
+  "per_required_file": {
+    "sqlite.db": {
+      "create": {
+        "row": 36336,
+        "filetime": 134392038596591105,
+        "pid": 60060,
+        "tid": "0x0000A720",
+        "path": "\\Device\\HarddiskVolume3\\Users\\Serkan\\Documents\\ChatGPT\\fdb\\data\\benchmark-work\\sqlite\\sqlite.db",
+        "file_object": "0xFFFFD10F206A3280"
+      },
+      "first_read": {
+        "row": 36389,
+        "filetime": 134392038596594295,
+        "pid": 60060,
+        "tid": "0x0000A720",
+        "file_object": "0xFFFFD10F206A0530",
+        "file_key": "0xFFFF9201548DFA50",
+        "requested_bytes": 100,
+        "create": {
+          "row": 36351,
+          "filetime": 134392038596591709,
+          "pid": 60060,
+          "tid": "0x0000A720",
+          "path": "\\Device\\HarddiskVolume3\\Users\\Serkan\\Documents\\ChatGPT\\fdb\\data\\benchmark-work\\sqlite\\sqlite.db",
+          "file_object": "0xFFFFD10F206A0530"
+        }
+      },
+      "last_read": {
+        "row": 491263,
+        "filetime": 134392038663513288,
+        "pid": 60060,
+        "tid": "0x0000A720",
+        "file_object": "0xFFFFD10F206A0530",
+        "file_key": "0xFFFF9201548DFA50",
+        "requested_bytes": 1828,
+        "create": {
+          "row": 36351,
+          "filetime": 134392038596591709,
+          "pid": 60060,
+          "tid": "0x0000A720",
+          "path": "\\Device\\HarddiskVolume3\\Users\\Serkan\\Documents\\ChatGPT\\fdb\\data\\benchmark-work\\sqlite\\sqlite.db",
+          "file_object": "0xFFFFD10F206A0530"
+        }
+      },
+      "count": 107388,
+      "storage_bytes": 207298560,
+      "disk_witness": {
+        "row": 36434,
+        "init_row": 36399,
+        "filetime": 134392038596596905,
+        "init_filetime": 134392038596594741,
+        "file_key": "0xFFFF9201548DFA50",
+        "bytes": 4096
+      }
+    }
+  }
+}

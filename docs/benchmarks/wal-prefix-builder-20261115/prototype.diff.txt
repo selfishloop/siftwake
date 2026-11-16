@@ -1,0 +1,273 @@
+diff --git a/target/wal-prefix-first-pass-20261114/source/src/engine/profile.rs b/target/wal-prefix-builder-20261115/source/src/engine/profile.rs
+index 4250123..7f21a23 100644
+--- a/target/wal-prefix-first-pass-20261114/source/src/engine/profile.rs
++++ b/target/wal-prefix-builder-20261115/source/src/engine/profile.rs
+@@ -56,6 +56,7 @@ pub(super) struct PrefixSample {
+     pub add_builder_ns: u64,
+     pub first_pass_cpu_ns: Option<u64>,
+     pub worker_cpu_ns: Option<u64>,
++    pub builder_detail_ns: Option<[u64; 4]>,
+ }
+ 
+ pub(super) fn measuring() -> bool {
+diff --git a/target/wal-prefix-first-pass-20261114/source/src/engine/light_flush.rs b/target/wal-prefix-builder-20261115/source/src/engine/light_flush.rs
+index 4226556..128c4e8 100644
+--- a/target/wal-prefix-first-pass-20261114/source/src/engine/light_flush.rs
++++ b/target/wal-prefix-builder-20261115/source/src/engine/light_flush.rs
+@@ -52,6 +52,9 @@ impl Database {
+         let light = self.light.clone();
+         let dir = self.dir.clone();
+         let metrics = profile::measuring();
++        static FAST_TERMS: std::sync::OnceLock<bool> = std::sync::OnceLock::new();
++        let fast_terms =
++            *FAST_TERMS.get_or_init(|| std::env::var_os("FDB_PREFIX_POSTING_CANDIDATE").is_some());
+         let captured_payload_bytes = self.delta_bytes;
+         let handle = std::thread::spawn(move || {
+             let _trace = profile::WorkerScope::enter("prefix", output);
+@@ -77,6 +80,10 @@ impl Database {
+                 })
+             };
+             let mut index = Index::default();
++            let mut fast = fast_terms.then(crate::index::PrefixGrams::default);
++            #[cfg(feature = "diagnostic-timing")]
++            let detail = (metrics && std::env::var_os("FDB_PREFIX_DETAILED").is_some())
++                .then(crate::timing::request::Request::new);
+             let measured = if metrics {
+                 let cpu = profile::thread_cpu_ns();
+                 let start = std::time::Instant::now();
+@@ -87,7 +94,7 @@ impl Database {
+                     let after_read = std::time::Instant::now();
+                     row_time += after_read.duration_since(boundary);
+                     if let Change::Put { stored } = change? {
+-                        index.add_builder(&stored)?;
++                        index.add_prefix_builder(&stored, fast.as_mut())?;
+                         boundary = std::time::Instant::now();
+                         build_time += boundary.duration_since(after_read);
+                     } else {
+@@ -102,11 +109,35 @@ impl Database {
+             } else {
+                 for change in changes() {
+                     if let Change::Put { stored } = change? {
+-                        index.add_builder(&stored)?;
++                        index.add_prefix_builder(&stored, fast.as_mut())?;
+                     }
+                 }
+                 None
+             };
++            #[cfg(feature = "diagnostic-timing")]
++            let builder_detail_ns = detail.map(|request| {
++                let sample = request.finish();
++                [
++                    "body.fold",
++                    "body.grams",
++                    "index.gram_posting_loop",
++                    "index.change_total",
++                ]
++                .map(|name| {
++                    sample
++                        .counters
++                        .get(name)
++                        .map_or(0, |value| value.elapsed_ns)
++                })
++            });
++            #[cfg(not(feature = "diagnostic-timing"))]
++            let builder_detail_ns = None;
++            {
++                let _phase = profile::observe("prefix.gram_sort");
++                if let Some(fast) = fast {
++                    fast.finish(&mut index);
++                }
++            }
+             let result = write_run_prepared(&dir, output, sequence, changes(), |source| {
+                 let records = shadow
+                     .iter()
+@@ -135,6 +166,7 @@ impl Database {
+                     add_builder_ns: build_time.as_nanos() as u64,
+                     first_pass_cpu_ns,
+                     worker_cpu_ns,
++                    builder_detail_ns,
+                 });
+             }
+             result
+diff --git a/target/wal-prefix-first-pass-20261114/source/src/index.rs b/target/wal-prefix-builder-20261115/source/src/index.rs
+index a70c71b..85489b2 100644
+--- a/target/wal-prefix-first-pass-20261114/source/src/index.rs
++++ b/target/wal-prefix-builder-20261115/source/src/index.rs
+@@ -250,6 +250,8 @@ pub(crate) fn grams(text: &str) -> BTreeSet<String> {
+ #[cfg(feature = "bounded-engine")]
+ mod gram_insert;
+ #[cfg(feature = "bounded-engine")]
++pub(crate) use gram_insert::PrefixGrams;
++#[cfg(feature = "bounded-engine")]
+ mod packed_grams;
+ 
+ #[cfg(feature = "experimental-compact-delta-postings")]
+@@ -569,11 +571,26 @@ impl Index {
+         add: bool,
+         provided: Option<Arc<Key>>,
+     ) -> crate::Result<()> {
+-        self.change_impl(stored, add, provided, true)
++        self.change_impl(
++            stored,
++            add,
++            provided,
++            true,
++            #[cfg(feature = "bounded-engine")]
++            None,
++        )
+     }
+     #[cfg(feature = "bounded-engine")]
+     pub(crate) fn add_builder(&mut self, stored: &StoredDocument) -> crate::Result<()> {
+-        self.change_impl(stored, true, None, false)
++        self.change_impl(stored, true, None, false, None)
++    }
++    #[cfg(feature = "bounded-engine")]
++    pub(crate) fn add_prefix_builder(
++        &mut self,
++        stored: &StoredDocument,
++        grams: Option<&mut PrefixGrams>,
++    ) -> crate::Result<()> {
++        self.change_impl(stored, true, None, false, grams)
+     }
+     fn change_impl(
+         &mut self,
+@@ -581,6 +598,7 @@ impl Index {
+         add: bool,
+         provided: Option<Arc<Key>>,
+         retain_text: bool,
++        #[cfg(feature = "bounded-engine")] prefix_grams: Option<&mut PrefixGrams>,
+     ) -> crate::Result<()> {
+         let doc = &stored.document;
+         #[cfg(feature = "diagnostic-timing")]
+@@ -674,14 +692,23 @@ impl Index {
+         if let Some(scope_grams) = scope_grams {
+             #[cfg(feature = "bounded-engine")]
+             let batched = add
+-                && gram_insert::try_add(
++                && (prefix_grams.is_some_and(|fast| {
++                    fast.add(
++                        &key.scope,
++                        scope_grams,
++                        &title_grams,
++                        &body.grams,
++                        posting_key,
++                        &mut self.builder_gram_bytes,
++                    )
++                }) || gram_insert::try_add(
+                     scope_grams,
+                     &title_grams,
+                     &body.grams,
+                     posting_key,
+                     retain_text,
+                     &mut self.builder_gram_bytes,
+-                );
++                ));
+             #[cfg(not(feature = "bounded-engine"))]
+             let batched = false;
+             if !batched {
+diff --git a/target/wal-prefix-first-pass-20261114/source/src/index/gram_insert.rs b/target/wal-prefix-builder-20261115/source/src/index/gram_insert.rs
+index cdd8207..03472d5 100644
+--- a/target/wal-prefix-first-pass-20261114/source/src/index/gram_insert.rs
++++ b/target/wal-prefix-builder-20261115/source/src/index/gram_insert.rs
+@@ -1,7 +1,56 @@
+ //! Bounded merge of sorted document grams into the existing RAM dictionary.
+ use super::{BTreeMap, BTreeSet, Posting};
++use std::collections::HashMap;
+ const BATCH: usize = 64;
+ const VISITS_PER_GRAM: usize = 8;
++const PREFIX_FAST_TERMS: usize = 4096;
++
++/// One prefix worker's first scope, with an exact sorted overflow dictionary.
++/// Keys and postings are owned by one dictionary at a time.
++#[derive(Default)]
++pub(crate) struct PrefixGrams(Option<(String, HashMap<String, Posting>)>);
++
++impl PrefixGrams {
++    pub(super) fn add(
++        &mut self,
++        scope: &str,
++        overflow: &mut BTreeMap<String, Posting>,
++        title: &BTreeSet<String>,
++        body: &BTreeSet<String>,
++        id: u32,
++        bytes: &mut usize,
++    ) -> bool {
++        let (owner, fast) = self
++            .0
++            .get_or_insert_with(|| (scope.to_owned(), HashMap::with_capacity(PREFIX_FAST_TERMS)));
++        if owner != scope {
++            return false;
++        }
++        for gram in title.union(body) {
++            if let Some(posting) = fast.get_mut(gram.as_str()) {
++                insert(posting, id, false, bytes);
++            } else if fast.len() == PREFIX_FAST_TERMS {
++                lookup(overflow, gram, id, false, bytes);
++            } else {
++                let mut posting = Posting::default();
++                posting.insert(id);
++                fast.insert(gram.clone(), posting);
++                *bytes += 96 + gram.len();
++            }
++        }
++        true
++    }
++
++    pub(crate) fn finish(self, index: &mut super::Index) {
++        if let Some((scope, fast)) = self.0 {
++            let sorted = index.grams.entry(scope).or_default();
++            for (gram, posting) in fast {
++                let previous = sorted.insert(gram, posting);
++                debug_assert!(previous.is_none());
++            }
++        }
++    }
++}
+ 
+ fn insert(posting: &mut Posting, id: u32, retain_text: bool, bytes: &mut usize) {
+     let before = posting.heap_bytes();
+@@ -112,6 +161,44 @@ mod tests {
+             assert_eq!(av.heap_bytes(), bv.heap_bytes());
+         }
+     }
++
++    #[test]
++    fn bounded_prefix_dictionary_matches_sorted_postings_and_accounting() {
++        let mut fast = PrefixGrams::default();
++        let mut index = super::super::Index::default();
++        let overflow = index.grams.entry("scope".into()).or_default();
++        let mut reference = BTreeMap::new();
++        let title = ["a00", "a01", "İş🦀"].map(str::to_owned).into();
++        let body = (0..PREFIX_FAST_TERMS + 40)
++            .map(|number| format!("{number:03x}"))
++            .collect();
++        let mut fast_bytes = 0;
++        let mut reference_bytes = 0;
++        for id in (0..80).chain([5, 5, 124, 250]) {
++            assert!(fast.add("scope", overflow, &title, &body, id, &mut fast_bytes));
++            scalar(
++                &mut reference,
++                &title,
++                &body,
++                id,
++                false,
++                &mut reference_bytes,
++            );
++        }
++        assert!(!overflow.is_empty());
++        assert!(!fast.add(
++            "other",
++            &mut BTreeMap::new(),
++            &title,
++            &body,
++            0,
++            &mut fast_bytes
++        ));
++        assert_eq!(fast.0.as_ref().unwrap().1.len(), PREFIX_FAST_TERMS);
++        fast.finish(&mut index);
++        equal(&index.grams["scope"], &reference);
++        assert_eq!(fast_bytes, reference_bytes);
++    }
+     #[test]
+     fn capped_ranges_missing_grams_duplicates_and_reused_ids_match_lookup() {
+         for retain in [false, true] {

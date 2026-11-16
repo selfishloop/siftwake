@@ -1,0 +1,38 @@
+   Compiling proc-macro2 v1.0.107
+   Compiling unicode-ident v1.0.26
+   Compiling quote v1.0.47
+   Compiling serde_core v1.0.229
+   Compiling zmij v1.0.23
+   Compiling serde_json v1.0.151
+   Compiling serde v1.0.229
+   Compiling crc32fast v1.5.0
+   Compiling cfg-if v1.0.5
+   Compiling memchr v2.8.3
+   Compiling itoa v1.0.18
+   Compiling simdutf8 v0.1.5
+   Compiling syn v3.0.6
+   Compiling serde_derive v1.0.229
+   Compiling fdb v0.4.0 (C:\Users\Serkan\Documents\ChatGPT\fdb\target\wal-prefix-publication-oracle-20261114)
+    Finished `test` profile [unoptimized + debuginfo] target(s) in 23.43s
+     Running unittests src\lib.rs (target\wal-prefix-publication-oracle-20261114\build\debug\deps\fdb-bba6c792839c96dd.exe)
+
+running 1 test
+test engine::snapshot::publication_oracle::seeded_model_checks_writer_and_snapshots_across_publication_and_gc ... FAILED
+
+failures:
+
+---- engine::snapshot::publication_oracle::seeded_model_checks_writer_and_snapshots_across_publication_and_gc stdout ----
+
+thread 'engine::snapshot::publication_oracle::seeded_model_checks_writer_and_snapshots_across_publication_and_gc' (50656) panicked at src\engine\snapshot\publication_oracle.rs:116:13:
+assertion `left == right` failed: seed 1, after prefix, generation 6, history [[Put(0), Put(1), Put(2), Put(3), Put(4), Put(5), Put(6), Put(7), Put(8), Put(9), Put(10), Put(11), Put(12), Put(13), Put(14), Put(15), Put(16), Put(17), Put(18), Put(19), Put(20), Put(21), Put(22), Put(23), Put(24), Put(25), Put(26), Put(27), Put(28), Put(29), Put(30), Put(31), Put(32), Put(33), Put(34), Put(35), Put(36), Put(37), Put(38), Put(39), Put(40), Put(41), Put(42), Put(43), Put(44), Put(45), Put(46), Put(47)], [Put(0), Put(1), Put(2), Put(3), Put(4), Put(5), Put(6), Put(7), Put(8), Put(9), Put(10), Put(11), Put(12), Put(13), Put(14), Put(15), Put(16), Put(17), Put(18), Put(19), Put(20), Put(21), Put(22), Put(23), Put(24), Put(25), Put(26), Put(27), Delete(28), Delete(29), Delete(30), Delete(31)], [Put(0), Put(28), Put(60)]], writer: exact total marker0001version0001
+  left: (3, 1)
+ right: (3, 0)
+note: run with `RUST_BACKTRACE=1` environment variable to display a backtrace
+
+
+failures:
+    engine::snapshot::publication_oracle::seeded_model_checks_writer_and_snapshots_across_publication_and_gc
+
+test result: FAILED. 0 passed; 1 failed; 0 ignored; 0 measured; 181 filtered out; finished in 0.18s
+
+error: test failed, to rerun pass `--lib`

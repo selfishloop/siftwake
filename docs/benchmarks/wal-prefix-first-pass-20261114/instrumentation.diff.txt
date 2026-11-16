@@ -1,0 +1,262 @@
+diff --git a/target/normal-merge-defer-20261114/source/src/engine/profile.rs b/target/wal-prefix-first-pass-20261114/source/src/engine/profile.rs
+index 536c8e4..4250123 100644
+--- a/target/normal-merge-defer-20261114/source/src/engine/profile.rs
++++ b/target/wal-prefix-first-pass-20261114/source/src/engine/profile.rs
+@@ -15,8 +15,99 @@ const MAX_AUX: usize = 100_000;
+ static ENABLED: AtomicBool = AtomicBool::new(false);
+ static CLOCK: OnceLock<Instant> = OnceLock::new();
+ static AUX: Mutex<(u64, Vec<Aux>)> = Mutex::new((0, Vec::new()));
++const MAX_PREFIX_SAMPLES: usize = 1024;
++static PREFIX: Mutex<(u64, Vec<PrefixSample>)> = Mutex::new((0, Vec::new()));
+ thread_local! { static WORKER: std::cell::Cell<Option<(&'static str, u64)>> = const { std::cell::Cell::new(None) }; }
+ 
++#[derive(Debug, serde::Serialize)]
++pub(super) struct Admission {
++    pub streamed_wal: bool,
++    pub owned_delta: bool,
++    pub stage_keys: usize,
++    pub stage_bytes: usize,
++    pub shadow_keys: usize,
++    pub live_bytes: usize,
++    pub wal_bytes: u64,
++    pub max_delta_keys: usize,
++    pub max_delta_bytes: usize,
++    pub worker_pending: bool,
++    pub worker_finished: bool,
++}
++
++pub(super) fn admission(value: Admission) {
++    CURRENT.with(|current| {
++        if let Some(active) = current.borrow_mut().as_mut() {
++            active.frame.admission = Some(value);
++        }
++    });
++}
++
++#[derive(serde::Serialize)]
++pub(super) struct PrefixSample {
++    pub output: u64,
++    pub capture_sequence: u64,
++    pub captured_keys: usize,
++    pub captured_payload_bytes: usize,
++    pub captured_wal_bytes: u64,
++    pub worker_start_ns: u64,
++    pub first_pass_start_ns: u64,
++    pub first_pass_end_ns: u64,
++    pub wal_rows_ns: u64,
++    pub add_builder_ns: u64,
++    pub first_pass_cpu_ns: Option<u64>,
++    pub worker_cpu_ns: Option<u64>,
++}
++
++pub(super) fn measuring() -> bool {
++    ENABLED.load(Ordering::Relaxed)
++}
++
++pub(super) fn timestamp(now: Instant) -> u64 {
++    ts(now)
++}
++
++pub(super) fn prefix_sample(sample: PrefixSample) {
++    let mut sink = PREFIX.lock().unwrap();
++    if sink.1.len() >= MAX_PREFIX_SAMPLES {
++        sink.0 += 1;
++    } else {
++        sink.1.push(sample);
++    }
++}
++
++pub(super) fn thread_cpu_ns() -> Option<u64> {
++    #[cfg(windows)]
++    {
++        #[link(name = "kernel32")]
++        unsafe extern "system" {
++            fn GetCurrentThread() -> *mut std::ffi::c_void;
++            fn GetThreadTimes(
++                thread: *mut std::ffi::c_void,
++                creation: *mut u64,
++                exit: *mut u64,
++                kernel: *mut u64,
++                user: *mut u64,
++            ) -> i32;
++        }
++        let (mut creation, mut exit, mut kernel, mut user) = (0, 0, 0, 0);
++        // An aligned u64 has the same eight-byte representation as FILETIME.
++        let ok = unsafe {
++            GetThreadTimes(
++                GetCurrentThread(),
++                &mut creation,
++                &mut exit,
++                &mut kernel,
++                &mut user,
++            ) != 0
++        };
++        ok.then_some((kernel + user) * 100)
++    }
++    #[cfg(not(windows))]
++    {
++        None
++    }
++}
++
+ #[derive(serde::Serialize)]
+ struct Aux {
+     kind: &'static str,
+@@ -125,6 +216,7 @@ pub struct WriteFrame {
+     pub phases: Vec<WritePhase>,
+     pub start_ns: u64,
+     pub end_ns: u64,
++    admission: Option<Admission>,
+ }
+ #[derive(Debug, serde::Serialize)]
+ pub struct WriteTrace {
+@@ -166,6 +258,7 @@ impl Scope {
+                 phases: Vec::new(),
+                 start_ns: ts(began),
+                 end_ns: 0,
++                admission: None,
+             },
+         };
+         Self {
+@@ -245,7 +338,10 @@ impl Database {
+         }
+         ENABLED.store(enabled, Ordering::Relaxed);
+         let (lost, rows) = std::mem::take(&mut *AUX.lock().unwrap());
+-        serde_json::json!({ "lost": lost, "aux": rows })
++        let (prefix_lost, prefix) = std::mem::take(&mut *PREFIX.lock().unwrap());
++        serde_json::json!({
++            "lost": lost, "aux": rows, "prefix_lost": prefix_lost, "prefix": prefix,
++        })
+     }
+     /// Enable an in-memory wall trace, disabled by default. Records are keyed
+     /// to the enclosing commit's prospective sequence, including publications
+diff --git a/target/normal-merge-defer-20261114/source/src/engine/streamed.rs b/target/wal-prefix-first-pass-20261114/source/src/engine/streamed.rs
+index 22658cf..30df1a2 100644
+--- a/target/normal-merge-defer-20261114/source/src/engine/streamed.rs
++++ b/target/wal-prefix-first-pass-20261114/source/src/engine/streamed.rs
+@@ -325,6 +325,24 @@ impl Database {
+         if self.runs.len() > 1 {
+             self.schedule_background_revision()?;
+         }
++        if self.write_profile.is_some() {
++            profile::admission(profile::Admission {
++                streamed_wal: self.streamed_wal_layer,
++                owned_delta: !self.docs.is_empty(),
++                stage_keys: stage.rows.len(),
++                stage_bytes: stage.length,
++                shadow_keys: self.shadow.len(),
++                live_bytes: self.delta_bytes,
++                wal_bytes: self.log.metadata()?.len(),
++                max_delta_keys: self.options.max_delta_keys,
++                max_delta_bytes: self.options.max_delta_bytes,
++                worker_pending: self.light_flush.is_some(),
++                worker_finished: self
++                    .light_flush
++                    .as_ref()
++                    .is_some_and(super::light_flush::Pending::is_finished),
++            });
++        }
+         if self.streamed_wal_layer
+             && stage.rows.len() <= 128
+             && stage.length <= 8 * 1024 * 1024
+diff --git a/target/normal-merge-defer-20261114/source/src/engine/light_flush.rs b/target/wal-prefix-first-pass-20261114/source/src/engine/light_flush.rs
+index 06f6dba..4226556 100644
+--- a/target/normal-merge-defer-20261114/source/src/engine/light_flush.rs
++++ b/target/wal-prefix-first-pass-20261114/source/src/engine/light_flush.rs
+@@ -51,8 +51,12 @@ impl Database {
+         let shadow = self.shadow.clone();
+         let light = self.light.clone();
+         let dir = self.dir.clone();
++        let metrics = profile::measuring();
++        let captured_payload_bytes = self.delta_bytes;
+         let handle = std::thread::spawn(move || {
+             let _trace = profile::WorkerScope::enter("prefix", output);
++            let worker_start = metrics.then(std::time::Instant::now);
++            let worker_cpu = metrics.then(profile::thread_cpu_ns).flatten();
+             #[cfg(test)]
+             test_jobs::wait(&dir);
+             let _writer = crate::access::WriterScope::enter();
+@@ -73,12 +77,37 @@ impl Database {
+                 })
+             };
+             let mut index = Index::default();
+-            for change in changes() {
+-                if let Change::Put { stored } = change? {
+-                    index.add_builder(&stored)?;
++            let measured = if metrics {
++                let cpu = profile::thread_cpu_ns();
++                let start = std::time::Instant::now();
++                let mut boundary = start;
++                let (mut row_time, mut build_time) =
++                    (std::time::Duration::ZERO, std::time::Duration::ZERO);
++                for change in changes() {
++                    let after_read = std::time::Instant::now();
++                    row_time += after_read.duration_since(boundary);
++                    if let Change::Put { stored } = change? {
++                        index.add_builder(&stored)?;
++                        boundary = std::time::Instant::now();
++                        build_time += boundary.duration_since(after_read);
++                    } else {
++                        boundary = after_read;
++                    }
+                 }
+-            }
+-            write_run_prepared(&dir, output, sequence, changes(), |source| {
++                let end = std::time::Instant::now();
++                let cpu_delta = profile::thread_cpu_ns()
++                    .zip(cpu)
++                    .map(|(a, b)| a.saturating_sub(b));
++                Some((start, end, row_time, build_time, cpu_delta))
++            } else {
++                for change in changes() {
++                    if let Change::Put { stored } = change? {
++                        index.add_builder(&stored)?;
++                    }
++                }
++                None
++            };
++            let result = write_run_prepared(&dir, output, sequence, changes(), |source| {
+                 let records = shadow
+                     .iter()
+                     .enumerate()
+@@ -86,7 +115,29 @@ impl Database {
+                     .collect();
+                 reused_builder(&dir, source)?.finish_delta(&index, &records)?;
+                 Ok(())
+-            })
++            });
++            if let Some(((start, end, row_time, build_time, first_pass_cpu_ns), worker_start)) =
++                measured.zip(worker_start)
++            {
++                let worker_cpu_ns = profile::thread_cpu_ns()
++                    .zip(worker_cpu)
++                    .map(|(a, b)| a.saturating_sub(b));
++                profile::prefix_sample(profile::PrefixSample {
++                    output,
++                    capture_sequence: sequence,
++                    captured_keys: shadow.len(),
++                    captured_payload_bytes,
++                    captured_wal_bytes: old_tail,
++                    worker_start_ns: profile::timestamp(worker_start),
++                    first_pass_start_ns: profile::timestamp(start),
++                    first_pass_end_ns: profile::timestamp(end),
++                    wal_rows_ns: row_time.as_nanos() as u64,
++                    add_builder_ns: build_time.as_nanos() as u64,
++                    first_pass_cpu_ns,
++                    worker_cpu_ns,
++                });
++            }
++            result
+         });
+         self.light_flush = Some(Pending {
+             handle,
+@@ -202,6 +253,9 @@ fn kill_barrier(stage: &str) {
+ mod tests;
+ 
+ impl Pending {
++    pub(super) fn is_finished(&self) -> bool {
++        self.handle.is_finished()
++    }
+     #[cfg(test)]
+     pub(super) fn ready(&self) -> bool {
+         self.handle.is_finished()

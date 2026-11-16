@@ -1,0 +1,38 @@
+{
+  "examined_joins": 97,
+  "reconstructed": 86,
+  "trigger_counts": {
+    "shadow": 86,
+    "live_payload": 0,
+    "wal": 0,
+    "stage": 0
+  },
+  "extrema": {
+    "live_payload_bytes": {
+      "min": 279066,
+      "max": 7552041
+    },
+    "stage_bytes": {
+      "min": 3805,
+      "max": 471562
+    },
+    "wal_plus_stage_bytes": {
+      "min": 356356,
+      "max": 7948601
+    }
+  },
+  "unclassified": {
+    "169": "no_in_commit_creation_witness",
+    "220": "no_in_commit_creation_witness",
+    "265": "no_in_commit_creation_witness",
+    "321": "crosses_maintenance_window",
+    "417": "crosses_maintenance_window",
+    "567": "no_in_commit_creation_witness",
+    "909": "crosses_maintenance_window",
+    "1015": "crosses_maintenance_window",
+    "2016": "crosses_maintenance_window",
+    "2616": "crosses_maintenance_window",
+    "2816": "crosses_maintenance_window"
+  },
+  "corpus_entries_crc_checked": 49437
+}

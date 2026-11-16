@@ -1,0 +1,2405 @@
+{
+  "technical_pass": false,
+  "errors": [
+    "merged loss or full event count"
+  ],
+  "merged_lost": 0,
+  "decoded_events": 172394,
+  "engine": "fdb",
+  "count_differences": [
+    [
+      "EventTrace",
+      "EndExtension",
+      "0",
+      "2",
+      1
+    ],
+    [
+      "EventTrace",
+      "Extension",
+      "0",
+      "2",
+      1
+    ],
+    [
+      "EventTrace",
+      "RDComplete",
+      "0",
+      "2",
+      1
+    ],
+    [
+      "FileIo",
+      "Create",
+      "0",
+      "3",
+      1
+    ]
+  ],
+  "protected_fileio_sha": "53c54078cc6c96136705d24f92b45fa8a4303e1e6315e03b102dc4974e5a2efe",
+  "protected_fileio_rows": 69596,
+  "summary_events": 172398,
+  "loss_scope": "collector bazı ölçülemedi",
+  "stream_bytes": 73440967,
+  "stream_sha256": "7184f208aded38ea50f6671e775cafd292b4f275b5192e93d5d9c3b1e0297a82",
+  "target_pid": 56096,
+  "trace_headers": [
+    [
+      134392038294673350,
+      134392038321703245
+    ]
+  ],
+  "purge_end_filetime": 134392038307018626,
+  "cold_window_filetime": [
+    134392038308318935,
+    134392038317405172
+  ],
+  "expected_files": 41,
+  "matched_files": 41,
+  "missing": [],
+  "unknown_cold_read_rows": 72,
+  "total_attributed_disk_bytes": 72555520,
+  "disk_bytes_by_name": {
+    "generation-0000000000000605.ready": 3584,
+    "run-00000000000003c9.fdb": 4096,
+    "run-00000000000003b8.fdb": 4096,
+    "run-00000000000003c9.idx": 3026944,
+    "run-00000000000003c9.records04.idx": 60928,
+    "run-00000000000003b8.idx": 3023360,
+    "run-00000000000003b8.records04.idx": 60416,
+    "run-00000000000003da.fdb": 4096,
+    "run-00000000000003da.idx": 3024896,
+    "run-00000000000003df.fdb": 4096,
+    "run-00000000000003da.records04.idx": 5632,
+    "run-00000000000003df.idx": 1847808,
+    "run-00000000000003df.records04.idx": 4096,
+    "run-00000000000003f8.fdb": 4096,
+    "run-0000000000000449.fdb": 16384,
+    "run-00000000000003f8.idx": 3024384,
+    "run-00000000000003f8.records04.idx": 60928,
+    "run-0000000000000534.fdb": 4096,
+    "run-0000000000000534.idx": 1669120,
+    "run-0000000000000534.records04.idx": 4096,
+    "run-000000000000046c.fdb": 4096,
+    "run-0000000000000449.idx": 3023360,
+    "run-0000000000000449.records04.idx": 72704,
+    "run-000000000000046c.idx": 3025408,
+    "run-000000000000046c.records04.idx": 60928,
+    "run-0000000000000510.fdb": 4096,
+    "run-0000000000000510.idx": 4096,
+    "run-0000000000000510.records04.idx": 1024,
+    "run-00000000000004cf.fdb": 4096,
+    "run-00000000000004e3.fdb": 4096,
+    "run-00000000000004e3.idx": 3026944,
+    "run-00000000000004e3.records04.idx": 60928,
+    "run-00000000000004f4.fdb": 4096,
+    "run-00000000000004cf.idx": 3023872,
+    "run-00000000000004f4.idx": 3023872,
+    "run-00000000000004f4.records04.idx": 60928,
+    "run-00000000000004cf.records04.idx": 71680,
+    "run-00000000000004f5.fdb": 4096,
+    "run-00000000000004f5.idx": 4096,
+    "run-00000000000004f5.records04.idx": 4096,
+    "run-00000000000004f8.fdb": 4096,
+    "run-00000000000004f8.idx": 4096,
+    "run-00000000000004f8.records04.idx": 4096,
+    "run-0000000000000595.fdb": 4096,
+    "run-0000000000000595.idx": 4096,
+    "run-0000000000000595.records04.idx": 4096,
+    "run-000000000000051a.fdb": 4096,
+    "run-0000000000000546.fdb": 4096,
+    "run-0000000000000546.idx": 4096,
+    "run-0000000000000546.records04.idx": 4096,
+    "run-000000000000051e.fdb": 4096,
+    "run-000000000000051e.idx": 4096,
+    "run-000000000000051a.idx": 3026944,
+    "run-000000000000051e.records04.idx": 4096,
+    "run-0000000000000521.fdb": 4096,
+    "run-0000000000000521.idx": 4096,
+    "run-0000000000000521.records04.idx": 5120,
+    "run-0000000000000531.fdb": 4096,
+    "run-000000000000051a.records04.idx": 60928,
+    "run-0000000000000531.idx": 3023360,
+    "run-0000000000000531.records04.idx": 5632,
+    "run-0000000000000536.fdb": 65536,
+    "run-000000000000053b.fdb": 4096,
+    "run-0000000000000536.idx": 1982464,
+    "run-0000000000000536.records04.idx": 4096,
+    "run-000000000000053b.idx": 3023360,
+    "run-000000000000053b.records04.idx": 5632,
+    "run-000000000000058d.fdb": 4096,
+    "run-000000000000058d.idx": 4096,
+    "run-000000000000058d.records04.idx": 4096,
+    "run-00000000000005b9.fdb": 4096,
+    "run-00000000000005b9.idx": 6656,
+    "run-00000000000005b9.records04.idx": 4096,
+    "run-0000000000000568.fdb": 4096,
+    "run-0000000000000579.fdb": 4096,
+    "run-0000000000000579.idx": 3023360,
+    "run-0000000000000579.records04.idx": 60416,
+    "run-0000000000000568.idx": 3026944,
+    "run-0000000000000568.records04.idx": 60416,
+    "run-000000000000057a.fdb": 4096,
+    "run-000000000000057a.idx": 4096,
+    "run-000000000000057a.records04.idx": 4096,
+    "run-00000000000005be.fdb": 4096,
+    "run-00000000000005be.idx": 2073600,
+    "run-00000000000005be.records04.idx": 4096,
+    "run-000000000000058a.fdb": 65536,
+    "run-000000000000058a.idx": 1437184,
+    "run-00000000000005e0.fdb": 4096,
+    "run-000000000000058a.records04.idx": 6144,
+    "run-00000000000005d5.fdb": 4096,
+    "run-00000000000005d5.idx": 1077248,
+    "run-00000000000005d5.records04.idx": 6656,
+    "run-00000000000005d8.fdb": 4096,
+    "run-00000000000005d8.idx": 3024896,
+    "run-00000000000005d8.records04.idx": 4096,
+    "run-00000000000005e0.idx": 3025920,
+    "run-00000000000005db.fdb": 4096,
+    "run-00000000000005db.idx": 2013184,
+    "run-00000000000005db.records04.idx": 4096,
+    "run-00000000000005e0.records04.idx": 71168,
+    "run-00000000000005e2.fdb": 4096,
+    "run-00000000000005e2.idx": 4072448,
+    "run-00000000000005e2.records04.idx": 7680,
+    "run-00000000000005e4.fdb": 4096,
+    "run-00000000000005e4.idx": 386048,
+    "run-00000000000005e4.records04.idx": 4096,
+    "run-00000000000005e7.fdb": 4096,
+    "run-00000000000005fc.fdb": 4096,
+    "run-00000000000005e7.idx": 993280,
+    "run-00000000000005e7.records04.idx": 4096,
+    "run-00000000000005fd.fdb": 4096,
+    "run-00000000000005fd.idx": 4096,
+    "run-00000000000005fd.records04.idx": 4096,
+    "run-0000000000000600.fdb": 4096,
+    "run-00000000000005fc.idx": 3024896,
+    "run-0000000000000600.idx": 2273280,
+    "run-0000000000000600.records04.idx": 4096,
+    "run-00000000000005fc.records04.idx": 60928,
+    "generation-0000000000000601.fdb": 20480
+  },
+  "foreign_count": 0,
+  "foreign_first": [],
+  "ambiguous_count": 0,
+  "ambiguous_rows": [],
+  "cold_open_ms": 727.3825,
+  "cold_first_result_ms": 908.6187,
+  "per_required_file": {
+    "generation-0000000000000601.fdb": {
+      "create": {
+        "row": 105279,
+        "filetime": 134392038313965859,
+        "pid": 56096,
+        "tid": "0x0000E474",
+        "path": "\\Device\\HarddiskVolume3\\Users\\Serkan\\Documents\\ChatGPT\\fdb\\data\\benchmark-work\\fdb\\generation-0000000000000601.fdb",
+        "file_object": "0xFFFFD10F18D69AD0"
+      },
+      "first_read": {
+        "row": 105287,
+        "filetime": 134392038313968972,
+        "pid": 56096,
+        "tid": "0x0000E474",
+        "file_object": "0xFFFFD10F18D69AD0",
+        "file_key": "0xFFFF92015970D180",
+        "requested_bytes": 8,
+        "create": {
+          "row": 105279,
+          "filetime": 134392038313965859,
+          "pid": 56096,
+          "tid": "0x0000E474",
+          "path": "\\Device\\HarddiskVolume3\\Users\\Serkan\\Documents\\ChatGPT\\fdb\\data\\benchmark-work\\fdb\\generation-0000000000000601.fdb",
+          "file_object": "0xFFFFD10F18D69AD0"
+        }
+      },
+      "last_read": {
+        "row": 114628,
+        "filetime": 134392038315607090,
+        "pid": 56096,
+        "tid": "0x0000E474",
+        "file_object": "0xFFFFD10F18D69AD0",
+        "file_key": "0xFFFF92015970D180",
+        "requested_bytes": 3319,
+        "create": {
+          "row": 105279,
+          "filetime": 134392038313965859,
+          "pid": 56096,
+          "tid": "0x0000E474",
+          "path": "\\Device\\HarddiskVolume3\\Users\\Serkan\\Documents\\ChatGPT\\fdb\\data\\benchmark-work\\fdb\\generation-0000000000000601.fdb",
+          "file_object": "0xFFFFD10F18D69AD0"
+        }
+      },
+      "count": 119,
+      "storage_bytes": 20480,
+      "disk_witness": {
+        "row": 105290,
+        "init_row": 105289,
+        "filetime": 134392038313970781,
+        "init_filetime": 134392038313969851,
+        "file_key": "0xFFFF92015970D180",
+        "bytes": 4096
+      }
+    },
+    "generation-0000000000000605.ready": {
+      "create": {
+        "row": 38077,
+        "filetime": 134392038308360086,
+        "pid": 56096,
+        "tid": "0x0000E474",
+        "path": "\\Device\\HarddiskVolume3\\Users\\Serkan\\Documents\\ChatGPT\\fdb\\data\\benchmark-work\\fdb\\generation-0000000000000605.ready",
+        "file_object": "0xFFFFD10F28758320"
+      },
+      "first_read": {
+        "row": 38079,
+        "filetime": 134392038308360403,
+        "pid": 56096,
+        "tid": "0x0000E474",
+        "file_object": "0xFFFFD10F28758320",
+        "file_key": "0xFFFF92015970DA00",
+        "requested_bytes": 32,
+        "create": {
+          "row": 38077,
+          "filetime": 134392038308360086,
+          "pid": 56096,
+          "tid": "0x0000E474",
+          "path": "\\Device\\HarddiskVolume3\\Users\\Serkan\\Documents\\ChatGPT\\fdb\\data\\benchmark-work\\fdb\\generation-0000000000000605.ready",
+          "file_object": "0xFFFFD10F28758320"
+        }
+      },
+      "last_read": {
+        "row": 114462,
+        "filetime": 134392038315587339,
+        "pid": 56096,
+        "tid": "0x0000E474",
+        "file_object": "0xFFFFD10F1E9A1B10",
+        "file_key": "0xFFFF92015970DA00",
+        "requested_bytes": 576,
+        "create": {
+          "row": 114444,
+          "filetime": 134392038315586557,
+          "pid": 56096,
+          "tid": "0x0000E474",
+          "path": "\\Device\\HarddiskVolume3\\Users\\Serkan\\Documents\\ChatGPT\\fdb\\data\\benchmark-work\\fdb\\generation-0000000000000605.ready",
+          "file_object": "0xFFFFD10F1E9A1B10"
+        }
+      },
+      "count": 19,
+      "storage_bytes": 3584,
+      "disk_witness": {
+        "row": 38082,
+        "init_row": 38081,
+        "filetime": 134392038308362519,
+        "init_filetime": 134392038308360661,
+        "file_key": "0xFFFF92015970DA00",
+        "bytes": 3584
+      }
+    },
+    "run-00000000000003b8.fdb": {
+      "create": {
+        "row": 38108,
+        "filetime": 134392038308366649,
+        "pid": 56096,
+        "tid": "0x0000E474",
+        "path": "\\Device\\HarddiskVolume3\\Users\\Serkan\\Documents\\ChatGPT\\fdb\\data\\benchmark-work\\fdb\\run-00000000000003b8.fdb",
+        "file_object": "0xFFFFD10F28A604D0"
+      },
+      "first_read": {
+        "row": 38446,
+        "filetime": 134392038308376798,
+        "pid": 56096,
+        "tid": "0x0000E474",
+        "file_object": "0xFFFFD10F28A607F0",
+        "file_key": "0xFFFF9201534C3180",
+        "requested_bytes": 8,
+        "create": {
+          "row": 38270,
+          "filetime": 134392038308372382,
+          "pid": 56096,
+          "tid": "0x0000E474",
+          "path": "\\Device\\HarddiskVolume3\\Users\\Serkan\\Documents\\ChatGPT\\fdb\\data\\benchmark-work\\fdb\\run-00000000000003b8.fdb",
+          "file_object": "0xFFFFD10F28A607F0"
+        }
+      },
+      "last_read": {
+        "row": 41303,
+        "filetime": 134392038308653810,
+        "pid": 56096,
+        "tid": "0x0000E474",
+        "file_object": "0xFFFFD10F28A607F0",
+        "file_key": "0xFFFF9201534C3180",
+        "requested_bytes": 9875,
+        "create": {
+          "row": 38270,
+          "filetime": 134392038308372382,
+          "pid": 56096,
+          "tid": "0x0000E474",
+          "path": "\\Device\\HarddiskVolume3\\Users\\Serkan\\Documents\\ChatGPT\\fdb\\data\\benchmark-work\\fdb\\run-00000000000003b8.fdb",
+          "file_object": "0xFFFFD10F28A607F0"
+        }
+      },
+      "count": 225,
+      "storage_bytes": 4096,
+      "disk_witness": {
+        "row": 38453,
+        "init_row": 38449,
+        "filetime": 134392038308380179,
+        "init_filetime": 134392038308377106,
+        "file_key": "0xFFFF9201534C3180",
+        "bytes": 4096
+      }
+    },
+    "run-00000000000003c9.fdb": {
+      "create": {
+        "row": 38114,
+        "filetime": 134392038308367340,
+        "pid": 56096,
+        "tid": "0x0000DA74",
+        "path": "\\Device\\HarddiskVolume3\\Users\\Serkan\\Documents\\ChatGPT\\fdb\\data\\benchmark-work\\fdb\\run-00000000000003c9.fdb",
+        "file_object": "0xFFFFD10F287563E0"
+      },
+      "first_read": {
+        "row": 38435,
+        "filetime": 134392038308376533,
+        "pid": 56096,
+        "tid": "0x0000DA74",
+        "file_object": "0xFFFFD10F2875B9D0",
+        "file_key": "0xFFFF920156F4A180",
+        "requested_bytes": 8,
+        "create": {
+          "row": 38278,
+          "filetime": 134392038308372613,
+          "pid": 56096,
+          "tid": "0x0000DA74",
+          "path": "\\Device\\HarddiskVolume3\\Users\\Serkan\\Documents\\ChatGPT\\fdb\\data\\benchmark-work\\fdb\\run-00000000000003c9.fdb",
+          "file_object": "0xFFFFD10F2875B9D0"
+        }
+      },
+      "last_read": {
+        "row": 40141,
+        "filetime": 134392038308557696,
+        "pid": 56096,
+        "tid": "0x0000DA74",
+        "file_object": "0xFFFFD10F2875B9D0",
+        "file_key": "0xFFFF920156F4A180",
+        "requested_bytes": 28333,
+        "create": {
+          "row": 38278,
+          "filetime": 134392038308372613,
+          "pid": 56096,
+          "tid": "0x0000DA74",
+          "path": "\\Device\\HarddiskVolume3\\Users\\Serkan\\Documents\\ChatGPT\\fdb\\data\\benchmark-work\\fdb\\run-00000000000003c9.fdb",
+          "file_object": "0xFFFFD10F2875B9D0"
+        }
+      },
+      "count": 161,
+      "storage_bytes": 4096,
+      "disk_witness": {
+        "row": 38450,
+        "init_row": 38447,
+        "filetime": 134392038308379814,
+        "init_filetime": 134392038308376809,
+        "file_key": "0xFFFF920156F4A180",
+        "bytes": 4096
+      }
+    },
+    "run-00000000000003da.fdb": {
+      "create": {
+        "row": 42898,
+        "filetime": 134392038308809875,
+        "pid": 56096,
+        "tid": "0x0000DA74",
+        "path": "\\Device\\HarddiskVolume3\\Users\\Serkan\\Documents\\ChatGPT\\fdb\\data\\benchmark-work\\fdb\\run-00000000000003da.fdb",
+        "file_object": "0xFFFFD10F1E991490"
+      },
+      "first_read": {
+        "row": 43070,
+        "filetime": 134392038308819840,
+        "pid": 56096,
+        "tid": "0x0000DA74",
+        "file_object": "0xFFFFD10F15D6F890",
+        "file_key": "0xFFFF920153A1F470",
+        "requested_bytes": 8,
+        "create": {
+          "row": 42984,
+          "filetime": 134392038308816424,
+          "pid": 56096,
+          "tid": "0x0000DA74",
+          "path": "\\Device\\HarddiskVolume3\\Users\\Serkan\\Documents\\ChatGPT\\fdb\\data\\benchmark-work\\fdb\\run-00000000000003da.fdb",
+          "file_object": "0xFFFFD10F15D6F890"
+        }
+      },
+      "last_read": {
+        "row": 43780,
+        "filetime": 134392038308901071,
+        "pid": 56096,
+        "tid": "0x0000DA74",
+        "file_object": "0xFFFFD10F15D6F890",
+        "file_key": "0xFFFF920153A1F470",
+        "requested_bytes": 29539,
+        "create": {
+          "row": 42984,
+          "filetime": 134392038308816424,
+          "pid": 56096,
+          "tid": "0x0000DA74",
+          "path": "\\Device\\HarddiskVolume3\\Users\\Serkan\\Documents\\ChatGPT\\fdb\\data\\benchmark-work\\fdb\\run-00000000000003da.fdb",
+          "file_object": "0xFFFFD10F15D6F890"
+        }
+      },
+      "count": 80,
+      "storage_bytes": 4096,
+      "disk_witness": {
+        "row": 43073,
+        "init_row": 43072,
+        "filetime": 134392038308823160,
+        "init_filetime": 134392038308820235,
+        "file_key": "0xFFFF920153A1F470",
+        "bytes": 4096
+      }
+    },
+    "run-00000000000003df.fdb": {
+      "create": {
+        "row": 44654,
+        "filetime": 134392038308918378,
+        "pid": 56096,
+        "tid": "0x0000E474",
+        "path": "\\Device\\HarddiskVolume3\\Users\\Serkan\\Documents\\ChatGPT\\fdb\\data\\benchmark-work\\fdb\\run-00000000000003df.fdb",
+        "file_object": "0xFFFFD10F2875D140"
+      },
+      "first_read": {
+        "row": 44842,
+        "filetime": 134392038308930462,
+        "pid": 56096,
+        "tid": "0x0000E474",
+        "file_object": "0xFFFFD10F1415FC30",
+        "file_key": "0xFFFF92015715B470",
+        "requested_bytes": 8,
+        "create": {
+          "row": 44751,
+          "filetime": 134392038308924183,
+          "pid": 56096,
+          "tid": "0x0000E474",
+          "path": "\\Device\\HarddiskVolume3\\Users\\Serkan\\Documents\\ChatGPT\\fdb\\data\\benchmark-work\\fdb\\run-00000000000003df.fdb",
+          "file_object": "0xFFFFD10F1415FC30"
+        }
+      },
+      "last_read": {
+        "row": 45108,
+        "filetime": 134392038308969346,
+        "pid": 56096,
+        "tid": "0x0000E474",
+        "file_object": "0xFFFFD10F1415FC30",
+        "file_key": "0xFFFF92015715B470",
+        "requested_bytes": 29368,
+        "create": {
+          "row": 44751,
+          "filetime": 134392038308924183,
+          "pid": 56096,
+          "tid": "0x0000E474",
+          "path": "\\Device\\HarddiskVolume3\\Users\\Serkan\\Documents\\ChatGPT\\fdb\\data\\benchmark-work\\fdb\\run-00000000000003df.fdb",
+          "file_object": "0xFFFFD10F1415FC30"
+        }
+      },
+      "count": 31,
+      "storage_bytes": 4096,
+      "disk_witness": {
+        "row": 44846,
+        "init_row": 44844,
+        "filetime": 134392038308931800,
+        "init_filetime": 134392038308930809,
+        "file_key": "0xFFFF92015715B470",
+        "bytes": 4096
+      }
+    },
+    "run-00000000000003f8.fdb": {
+      "create": {
+        "row": 45782,
+        "filetime": 134392038309053940,
+        "pid": 56096,
+        "tid": "0x0000DA74",
+        "path": "\\Device\\HarddiskVolume3\\Users\\Serkan\\Documents\\ChatGPT\\fdb\\data\\benchmark-work\\fdb\\run-00000000000003f8.fdb",
+        "file_object": "0xFFFFD10F28A60340"
+      },
+      "first_read": {
+        "row": 46262,
+        "filetime": 134392038309062660,
+        "pid": 56096,
+        "tid": "0x0000DA74",
+        "file_object": "0xFFFFD10F28A5D140",
+        "file_key": "0xFFFF920156528470",
+        "requested_bytes": 8,
+        "create": {
+          "row": 45960,
+          "filetime": 134392038309059700,
+          "pid": 56096,
+          "tid": "0x0000DA74",
+          "path": "\\Device\\HarddiskVolume3\\Users\\Serkan\\Documents\\ChatGPT\\fdb\\data\\benchmark-work\\fdb\\run-00000000000003f8.fdb",
+          "file_object": "0xFFFFD10F28A5D140"
+        }
+      },
+      "last_read": {
+        "row": 47934,
+        "filetime": 134392038309254807,
+        "pid": 56096,
+        "tid": "0x0000DA74",
+        "file_object": "0xFFFFD10F28A5D140",
+        "file_key": "0xFFFF920156528470",
+        "requested_bytes": 38502,
+        "create": {
+          "row": 45960,
+          "filetime": 134392038309059700,
+          "pid": 56096,
+          "tid": "0x0000DA74",
+          "path": "\\Device\\HarddiskVolume3\\Users\\Serkan\\Documents\\ChatGPT\\fdb\\data\\benchmark-work\\fdb\\run-00000000000003f8.fdb",
+          "file_object": "0xFFFFD10F28A5D140"
+        }
+      },
+      "count": 177,
+      "storage_bytes": 4096,
+      "disk_witness": {
+        "row": 46279,
+        "init_row": 46264,
+        "filetime": 134392038309065347,
+        "init_filetime": 134392038309063086,
+        "file_key": "0xFFFF920156528470",
+        "bytes": 4096
+      }
+    },
+    "run-0000000000000449.fdb": {
+      "create": {
+        "row": 46265,
+        "filetime": 134392038309063318,
+        "pid": 56096,
+        "tid": "0x0000E474",
+        "path": "\\Device\\HarddiskVolume3\\Users\\Serkan\\Documents\\ChatGPT\\fdb\\data\\benchmark-work\\fdb\\run-0000000000000449.fdb",
+        "file_object": "0xFFFFD10F28762410"
+      },
+      "first_read": {
+        "row": 46446,
+        "filetime": 134392038309070409,
+        "pid": 56096,
+        "tid": "0x0000E474",
+        "file_object": "0xFFFFD10F28761470",
+        "file_key": "0xFFFF9201532E1470",
+        "requested_bytes": 8,
+        "create": {
+          "row": 46358,
+          "filetime": 134392038309067701,
+          "pid": 56096,
+          "tid": "0x0000E474",
+          "path": "\\Device\\HarddiskVolume3\\Users\\Serkan\\Documents\\ChatGPT\\fdb\\data\\benchmark-work\\fdb\\run-0000000000000449.fdb",
+          "file_object": "0xFFFFD10F28761470"
+        }
+      },
+      "last_read": {
+        "row": 52968,
+        "filetime": 134392038309740914,
+        "pid": 56096,
+        "tid": "0x0000E474",
+        "file_object": "0xFFFFD10F28761470",
+        "file_key": "0xFFFF9201532E1470",
+        "requested_bytes": 22068,
+        "create": {
+          "row": 46358,
+          "filetime": 134392038309067701,
+          "pid": 56096,
+          "tid": "0x0000E474",
+          "path": "\\Device\\HarddiskVolume3\\Users\\Serkan\\Documents\\ChatGPT\\fdb\\data\\benchmark-work\\fdb\\run-0000000000000449.fdb",
+          "file_object": "0xFFFFD10F28761470"
+        }
+      },
+      "count": 616,
+      "storage_bytes": 16384,
+      "disk_witness": {
+        "row": 46456,
+        "init_row": 46450,
+        "filetime": 134392038309072454,
+        "init_filetime": 134392038309070736,
+        "file_key": "0xFFFF9201532E1470",
+        "bytes": 4096
+      }
+    },
+    "run-000000000000046c.fdb": {
+      "create": {
+        "row": 52260,
+        "filetime": 134392038309668122,
+        "pid": 56096,
+        "tid": "0x0000DA74",
+        "path": "\\Device\\HarddiskVolume3\\Users\\Serkan\\Documents\\ChatGPT\\fdb\\data\\benchmark-work\\fdb\\run-000000000000046c.fdb",
+        "file_object": "0xFFFFD10F28762280"
+      },
+      "first_read": {
+        "row": 52475,
+        "filetime": 134392038309676966,
+        "pid": 56096,
+        "tid": "0x0000DA74",
+        "file_object": "0xFFFFD10F19D04590",
+        "file_key": "0xFFFF9201629DFB00",
+        "requested_bytes": 8,
+        "create": {
+          "row": 52368,
+          "filetime": 134392038309673897,
+          "pid": 56096,
+          "tid": "0x0000DA74",
+          "path": "\\Device\\HarddiskVolume3\\Users\\Serkan\\Documents\\ChatGPT\\fdb\\data\\benchmark-work\\fdb\\run-000000000000046c.fdb",
+          "file_object": "0xFFFFD10F19D04590"
+        }
+      },
+      "last_read": {
+        "row": 55331,
+        "filetime": 134392038309982927,
+        "pid": 56096,
+        "tid": "0x0000DA74",
+        "file_object": "0xFFFFD10F19D04590",
+        "file_key": "0xFFFF9201629DFB00",
+        "requested_bytes": 36371,
+        "create": {
+          "row": 52368,
+          "filetime": 134392038309673897,
+          "pid": 56096,
+          "tid": "0x0000DA74",
+          "path": "\\Device\\HarddiskVolume3\\Users\\Serkan\\Documents\\ChatGPT\\fdb\\data\\benchmark-work\\fdb\\run-000000000000046c.fdb",
+          "file_object": "0xFFFFD10F19D04590"
+        }
+      },
+      "count": 228,
+      "storage_bytes": 4096,
+      "disk_witness": {
+        "row": 52489,
+        "init_row": 52479,
+        "filetime": 134392038309682338,
+        "init_filetime": 134392038309677353,
+        "file_key": "0xFFFF9201629DFB00",
+        "bytes": 4096
+      }
+    },
+    "run-00000000000004cf.fdb": {
+      "create": {
+        "row": 58511,
+        "filetime": 134392038310282861,
+        "pid": 56096,
+        "tid": "0x0000DA74",
+        "path": "\\Device\\HarddiskVolume3\\Users\\Serkan\\Documents\\ChatGPT\\fdb\\data\\benchmark-work\\fdb\\run-00000000000004cf.fdb",
+        "file_object": "0xFFFFD10F28760B10"
+      },
+      "first_read": {
+        "row": 59304,
+        "filetime": 134392038310291731,
+        "pid": 56096,
+        "tid": "0x0000DA74",
+        "file_object": "0xFFFFD10F287673C0",
+        "file_key": "0xFFFF9201653D3180",
+        "requested_bytes": 8,
+        "create": {
+          "row": 59031,
+          "filetime": 134392038310288480,
+          "pid": 56096,
+          "tid": "0x0000DA74",
+          "path": "\\Device\\HarddiskVolume3\\Users\\Serkan\\Documents\\ChatGPT\\fdb\\data\\benchmark-work\\fdb\\run-00000000000004cf.fdb",
+          "file_object": "0xFFFFD10F287673C0"
+        }
+      },
+      "last_read": {
+        "row": 67343,
+        "filetime": 134392038310973368,
+        "pid": 56096,
+        "tid": "0x0000DA74",
+        "file_object": "0xFFFFD10F287673C0",
+        "file_key": "0xFFFF9201653D3180",
+        "requested_bytes": 25716,
+        "create": {
+          "row": 59031,
+          "filetime": 134392038310288480,
+          "pid": 56096,
+          "tid": "0x0000DA74",
+          "path": "\\Device\\HarddiskVolume3\\Users\\Serkan\\Documents\\ChatGPT\\fdb\\data\\benchmark-work\\fdb\\run-00000000000004cf.fdb",
+          "file_object": "0xFFFFD10F287673C0"
+        }
+      },
+      "count": 662,
+      "storage_bytes": 4096,
+      "disk_witness": {
+        "row": 59329,
+        "init_row": 59315,
+        "filetime": 134392038310292879,
+        "init_filetime": 134392038310292113,
+        "file_key": "0xFFFF9201653D3180",
+        "bytes": 4096
+      }
+    },
+    "run-00000000000004e3.fdb": {
+      "create": {
+        "row": 59282,
+        "filetime": 134392038310291290,
+        "pid": 56096,
+        "tid": "0x0000E474",
+        "path": "\\Device\\HarddiskVolume3\\Users\\Serkan\\Documents\\ChatGPT\\fdb\\data\\benchmark-work\\fdb\\run-00000000000004e3.fdb",
+        "file_object": "0xFFFFD10F28A64B20"
+      },
+      "first_read": {
+        "row": 59643,
+        "filetime": 134392038310299882,
+        "pid": 56096,
+        "tid": "0x0000E474",
+        "file_object": "0xFFFFD10F28A65160",
+        "file_key": "0xFFFF92015369C180",
+        "requested_bytes": 8,
+        "create": {
+          "row": 59481,
+          "filetime": 134392038310296296,
+          "pid": 56096,
+          "tid": "0x0000E474",
+          "path": "\\Device\\HarddiskVolume3\\Users\\Serkan\\Documents\\ChatGPT\\fdb\\data\\benchmark-work\\fdb\\run-00000000000004e3.fdb",
+          "file_object": "0xFFFFD10F28A65160"
+        }
+      },
+      "last_read": {
+        "row": 61668,
+        "filetime": 134392038310537890,
+        "pid": 56096,
+        "tid": "0x0000E474",
+        "file_object": "0xFFFFD10F28A65160",
+        "file_key": "0xFFFF92015369C180",
+        "requested_bytes": 53680,
+        "create": {
+          "row": 59481,
+          "filetime": 134392038310296296,
+          "pid": 56096,
+          "tid": "0x0000E474",
+          "path": "\\Device\\HarddiskVolume3\\Users\\Serkan\\Documents\\ChatGPT\\fdb\\data\\benchmark-work\\fdb\\run-00000000000004e3.fdb",
+          "file_object": "0xFFFFD10F28A65160"
+        }
+      },
+      "count": 222,
+      "storage_bytes": 4096,
+      "disk_witness": {
+        "row": 59683,
+        "init_row": 59653,
+        "filetime": 134392038310302550,
+        "init_filetime": 134392038310300208,
+        "file_key": "0xFFFF92015369C180",
+        "bytes": 4096
+      }
+    },
+    "run-00000000000004f4.fdb": {
+      "create": {
+        "row": 65488,
+        "filetime": 134392038310814683,
+        "pid": 56096,
+        "tid": "0x0000E474",
+        "path": "\\Device\\HarddiskVolume3\\Users\\Serkan\\Documents\\ChatGPT\\fdb\\data\\benchmark-work\\fdb\\run-00000000000004f4.fdb",
+        "file_object": "0xFFFFD10F28A66A60"
+      },
+      "first_read": {
+        "row": 65696,
+        "filetime": 134392038310824373,
+        "pid": 56096,
+        "tid": "0x0000E474",
+        "file_object": "0xFFFFD10F19643A30",
+        "file_key": "0xFFFF9201567EC180",
+        "requested_bytes": 8,
+        "create": {
+          "row": 65603,
+          "filetime": 134392038310820948,
+          "pid": 56096,
+          "tid": "0x0000E474",
+          "path": "\\Device\\HarddiskVolume3\\Users\\Serkan\\Documents\\ChatGPT\\fdb\\data\\benchmark-work\\fdb\\run-00000000000004f4.fdb",
+          "file_object": "0xFFFFD10F19643A30"
+        }
+      },
+      "last_read": {
+        "row": 67384,
+        "filetime": 134392038310979620,
+        "pid": 56096,
+        "tid": "0x0000E474",
+        "file_object": "0xFFFFD10F19643A30",
+        "file_key": "0xFFFF9201567EC180",
+        "requested_bytes": 15580,
+        "create": {
+          "row": 65603,
+          "filetime": 134392038310820948,
+          "pid": 56096,
+          "tid": "0x0000E474",
+          "path": "\\Device\\HarddiskVolume3\\Users\\Serkan\\Documents\\ChatGPT\\fdb\\data\\benchmark-work\\fdb\\run-00000000000004f4.fdb",
+          "file_object": "0xFFFFD10F19643A30"
+        }
+      },
+      "count": 170,
+      "storage_bytes": 4096,
+      "disk_witness": {
+        "row": 65708,
+        "init_row": 65700,
+        "filetime": 134392038310826336,
+        "init_filetime": 134392038310824891,
+        "file_key": "0xFFFF9201567EC180",
+        "bytes": 4096
+      }
+    },
+    "run-00000000000004f5.fdb": {
+      "create": {
+        "row": 70457,
+        "filetime": 134392038311247302,
+        "pid": 56096,
+        "tid": "0x0000E474",
+        "path": "\\Device\\HarddiskVolume3\\Users\\Serkan\\Documents\\ChatGPT\\fdb\\data\\benchmark-work\\fdb\\run-00000000000004f5.fdb",
+        "file_object": "0xFFFFD10F2876F3E0"
+      },
+      "first_read": {
+        "row": 70629,
+        "filetime": 134392038311255343,
+        "pid": 56096,
+        "tid": "0x0000E474",
+        "file_object": "0xFFFFD10F1A9749D0",
+        "file_key": "0xFFFF92013C26A180",
+        "requested_bytes": 8,
+        "create": {
+          "row": 70543,
+          "filetime": 134392038311252545,
+          "pid": 56096,
+          "tid": "0x0000E474",
+          "path": "\\Device\\HarddiskVolume3\\Users\\Serkan\\Documents\\ChatGPT\\fdb\\data\\benchmark-work\\fdb\\run-00000000000004f5.fdb",
+          "file_object": "0xFFFFD10F1A9749D0"
+        }
+      },
+      "last_read": {
+        "row": 70639,
+        "filetime": 134392038311257392,
+        "pid": 56096,
+        "tid": "0x0000E474",
+        "file_object": "0xFFFFD10F1A9749D0",
+        "file_key": "0xFFFF92013C26A180",
+        "requested_bytes": 34245,
+        "create": {
+          "row": 70543,
+          "filetime": 134392038311252545,
+          "pid": 56096,
+          "tid": "0x0000E474",
+          "path": "\\Device\\HarddiskVolume3\\Users\\Serkan\\Documents\\ChatGPT\\fdb\\data\\benchmark-work\\fdb\\run-00000000000004f5.fdb",
+          "file_object": "0xFFFFD10F1A9749D0"
+        }
+      },
+      "count": 3,
+      "storage_bytes": 4096,
+      "disk_witness": {
+        "row": 70632,
+        "init_row": 70631,
+        "filetime": 134392038311256781,
+        "init_filetime": 134392038311255753,
+        "file_key": "0xFFFF92013C26A180",
+        "bytes": 4096
+      }
+    },
+    "run-00000000000004f8.fdb": {
+      "create": {
+        "row": 70757,
+        "filetime": 134392038311278341,
+        "pid": 56096,
+        "tid": "0x0000E474",
+        "path": "\\Device\\HarddiskVolume3\\Users\\Serkan\\Documents\\ChatGPT\\fdb\\data\\benchmark-work\\fdb\\run-00000000000004f8.fdb",
+        "file_object": "0xFFFFD10F19D040E0"
+      },
+      "first_read": {
+        "row": 70949,
+        "filetime": 134392038311285767,
+        "pid": 56096,
+        "tid": "0x0000E474",
+        "file_object": "0xFFFFD10F1B43C990",
+        "file_key": "0xFFFF920166996A80",
+        "requested_bytes": 8,
+        "create": {
+          "row": 70855,
+          "filetime": 134392038311283029,
+          "pid": 56096,
+          "tid": "0x0000E474",
+          "path": "\\Device\\HarddiskVolume3\\Users\\Serkan\\Documents\\ChatGPT\\fdb\\data\\benchmark-work\\fdb\\run-00000000000004f8.fdb",
+          "file_object": "0xFFFFD10F1B43C990"
+        }
+      },
+      "last_read": {
+        "row": 70968,
+        "filetime": 134392038311287418,
+        "pid": 56096,
+        "tid": "0x0000E474",
+        "file_object": "0xFFFFD10F1B43C990",
+        "file_key": "0xFFFF920166996A80",
+        "requested_bytes": 19045,
+        "create": {
+          "row": 70855,
+          "filetime": 134392038311283029,
+          "pid": 56096,
+          "tid": "0x0000E474",
+          "path": "\\Device\\HarddiskVolume3\\Users\\Serkan\\Documents\\ChatGPT\\fdb\\data\\benchmark-work\\fdb\\run-00000000000004f8.fdb",
+          "file_object": "0xFFFFD10F1B43C990"
+        }
+      },
+      "count": 3,
+      "storage_bytes": 4096,
+      "disk_witness": {
+        "row": 70962,
+        "init_row": 70952,
+        "filetime": 134392038311286947,
+        "init_filetime": 134392038311286057,
+        "file_key": "0xFFFF920166996A80",
+        "bytes": 4096
+      }
+    },
+    "run-0000000000000510.fdb": {
+      "create": {
+        "row": 57224,
+        "filetime": 134392038310248951,
+        "pid": 56096,
+        "tid": "0x0000DA74",
+        "path": "\\Device\\HarddiskVolume3\\Users\\Serkan\\Documents\\ChatGPT\\fdb\\data\\benchmark-work\\fdb\\run-0000000000000510.fdb",
+        "file_object": "0xFFFFD10F2875EBD0"
+      },
+      "first_read": {
+        "row": 57396,
+        "filetime": 134392038310258738,
+        "pid": 56096,
+        "tid": "0x0000DA74",
+        "file_object": "0xFFFFD10F1A968B30",
+        "file_key": "0xFFFF92016693B710",
+        "requested_bytes": 8,
+        "create": {
+          "row": 57312,
+          "filetime": 134392038310255416,
+          "pid": 56096,
+          "tid": "0x0000DA74",
+          "path": "\\Device\\HarddiskVolume3\\Users\\Serkan\\Documents\\ChatGPT\\fdb\\data\\benchmark-work\\fdb\\run-0000000000000510.fdb",
+          "file_object": "0xFFFFD10F1A968B30"
+        }
+      },
+      "last_read": {
+        "row": 57408,
+        "filetime": 134392038310261595,
+        "pid": 56096,
+        "tid": "0x0000DA74",
+        "file_object": "0xFFFFD10F1A968B30",
+        "file_key": "0xFFFF92016693B710",
+        "requested_bytes": 21745,
+        "create": {
+          "row": 57312,
+          "filetime": 134392038310255416,
+          "pid": 56096,
+          "tid": "0x0000DA74",
+          "path": "\\Device\\HarddiskVolume3\\Users\\Serkan\\Documents\\ChatGPT\\fdb\\data\\benchmark-work\\fdb\\run-0000000000000510.fdb",
+          "file_object": "0xFFFFD10F1A968B30"
+        }
+      },
+      "count": 3,
+      "storage_bytes": 4096,
+      "disk_witness": {
+        "row": 57401,
+        "init_row": 57398,
+        "filetime": 134392038310261094,
+        "init_filetime": 134392038310259110,
+        "file_key": "0xFFFF92016693B710",
+        "bytes": 4096
+      }
+    },
+    "run-000000000000051a.fdb": {
+      "create": {
+        "row": 71482,
+        "filetime": 134392038311322088,
+        "pid": 56096,
+        "tid": "0x0000E474",
+        "path": "\\Device\\HarddiskVolume3\\Users\\Serkan\\Documents\\ChatGPT\\fdb\\data\\benchmark-work\\fdb\\run-000000000000051a.fdb",
+        "file_object": "0xFFFFD10F1B406980"
+      },
+      "first_read": {
+        "row": 71726,
+        "filetime": 134392038311331571,
+        "pid": 56096,
+        "tid": "0x0000E474",
+        "file_object": "0xFFFFD10F1B405080",
+        "file_key": "0xFFFF920166740180",
+        "requested_bytes": 8,
+        "create": {
+          "row": 71635,
+          "filetime": 134392038311328342,
+          "pid": 56096,
+          "tid": "0x0000E474",
+          "path": "\\Device\\HarddiskVolume3\\Users\\Serkan\\Documents\\ChatGPT\\fdb\\data\\benchmark-work\\fdb\\run-000000000000051a.fdb",
+          "file_object": "0xFFFFD10F1B405080"
+        }
+      },
+      "last_read": {
+        "row": 75706,
+        "filetime": 134392038311554624,
+        "pid": 56096,
+        "tid": "0x0000E474",
+        "file_object": "0xFFFFD10F1B405080",
+        "file_key": "0xFFFF920166740180",
+        "requested_bytes": 58991,
+        "create": {
+          "row": 71635,
+          "filetime": 134392038311328342,
+          "pid": 56096,
+          "tid": "0x0000E474",
+          "path": "\\Device\\HarddiskVolume3\\Users\\Serkan\\Documents\\ChatGPT\\fdb\\data\\benchmark-work\\fdb\\run-000000000000051a.fdb",
+          "file_object": "0xFFFFD10F1B405080"
+        }
+      },
+      "count": 227,
+      "storage_bytes": 4096,
+      "disk_witness": {
+        "row": 71740,
+        "init_row": 71729,
+        "filetime": 134392038311332960,
+        "init_filetime": 134392038311331927,
+        "file_key": "0xFFFF920166740180",
+        "bytes": 4096
+      }
+    },
+    "run-000000000000051e.fdb": {
+      "create": {
+        "row": 75452,
+        "filetime": 134392038311540496,
+        "pid": 56096,
+        "tid": "0x0000DA74",
+        "path": "\\Device\\HarddiskVolume3\\Users\\Serkan\\Documents\\ChatGPT\\fdb\\data\\benchmark-work\\fdb\\run-000000000000051e.fdb",
+        "file_object": "0xFFFFD10F19D09220"
+      },
+      "first_read": {
+        "row": 75676,
+        "filetime": 134392038311550096,
+        "pid": 56096,
+        "tid": "0x0000DA74",
+        "file_object": "0xFFFFD10F1A974B60",
+        "file_key": "0xFFFF920157380710",
+        "requested_bytes": 8,
+        "create": {
+          "row": 75572,
+          "filetime": 134392038311546724,
+          "pid": 56096,
+          "tid": "0x0000DA74",
+          "path": "\\Device\\HarddiskVolume3\\Users\\Serkan\\Documents\\ChatGPT\\fdb\\data\\benchmark-work\\fdb\\run-000000000000051e.fdb",
+          "file_object": "0xFFFFD10F1A974B60"
+        }
+      },
+      "last_read": {
+        "row": 75692,
+        "filetime": 134392038311552403,
+        "pid": 56096,
+        "tid": "0x0000DA74",
+        "file_object": "0xFFFFD10F1A974B60",
+        "file_key": "0xFFFF920157380710",
+        "requested_bytes": 30445,
+        "create": {
+          "row": 75572,
+          "filetime": 134392038311546724,
+          "pid": 56096,
+          "tid": "0x0000DA74",
+          "path": "\\Device\\HarddiskVolume3\\Users\\Serkan\\Documents\\ChatGPT\\fdb\\data\\benchmark-work\\fdb\\run-000000000000051e.fdb",
+          "file_object": "0xFFFFD10F1A974B60"
+        }
+      },
+      "count": 3,
+      "storage_bytes": 4096,
+      "disk_witness": {
+        "row": 75684,
+        "init_row": 75678,
+        "filetime": 134392038311551810,
+        "init_filetime": 134392038311550463,
+        "file_key": "0xFFFF920157380710",
+        "bytes": 4096
+      }
+    },
+    "run-0000000000000521.fdb": {
+      "create": {
+        "row": 75859,
+        "filetime": 134392038311568746,
+        "pid": 56096,
+        "tid": "0x0000DA74",
+        "path": "\\Device\\HarddiskVolume3\\Users\\Serkan\\Documents\\ChatGPT\\fdb\\data\\benchmark-work\\fdb\\run-0000000000000521.fdb",
+        "file_object": "0xFFFFD10F1A979340"
+      },
+      "first_read": {
+        "row": 76082,
+        "filetime": 134392038311577745,
+        "pid": 56096,
+        "tid": "0x0000DA74",
+        "file_object": "0xFFFFD10F28776AA0",
+        "file_key": "0xFFFF920166930180",
+        "requested_bytes": 8,
+        "create": {
+          "row": 75989,
+          "filetime": 134392038311574153,
+          "pid": 56096,
+          "tid": "0x0000DA74",
+          "path": "\\Device\\HarddiskVolume3\\Users\\Serkan\\Documents\\ChatGPT\\fdb\\data\\benchmark-work\\fdb\\run-0000000000000521.fdb",
+          "file_object": "0xFFFFD10F28776AA0"
+        }
+      },
+      "last_read": {
+        "row": 76102,
+        "filetime": 134392038311579689,
+        "pid": 56096,
+        "tid": "0x0000DA74",
+        "file_object": "0xFFFFD10F28776AA0",
+        "file_key": "0xFFFF920166930180",
+        "requested_bytes": 49445,
+        "create": {
+          "row": 75989,
+          "filetime": 134392038311574153,
+          "pid": 56096,
+          "tid": "0x0000DA74",
+          "path": "\\Device\\HarddiskVolume3\\Users\\Serkan\\Documents\\ChatGPT\\fdb\\data\\benchmark-work\\fdb\\run-0000000000000521.fdb",
+          "file_object": "0xFFFFD10F28776AA0"
+        }
+      },
+      "count": 3,
+      "storage_bytes": 4096,
+      "disk_witness": {
+        "row": 76090,
+        "init_row": 76085,
+        "filetime": 134392038311579061,
+        "init_filetime": 134392038311578058,
+        "file_key": "0xFFFF920166930180",
+        "bytes": 4096
+      }
+    },
+    "run-0000000000000531.fdb": {
+      "create": {
+        "row": 76378,
+        "filetime": 134392038311603751,
+        "pid": 56096,
+        "tid": "0x0000DA74",
+        "path": "\\Device\\HarddiskVolume3\\Users\\Serkan\\Documents\\ChatGPT\\fdb\\data\\benchmark-work\\fdb\\run-0000000000000531.fdb",
+        "file_object": "0xFFFFD10F15D7EAC0"
+      },
+      "first_read": {
+        "row": 76617,
+        "filetime": 134392038311617612,
+        "pid": 56096,
+        "tid": "0x0000DA74",
+        "file_object": "0xFFFFD10F18D668D0",
+        "file_key": "0xFFFF9201669AE710",
+        "requested_bytes": 8,
+        "create": {
+          "row": 76491,
+          "filetime": 134392038311611189,
+          "pid": 56096,
+          "tid": "0x0000DA74",
+          "path": "\\Device\\HarddiskVolume3\\Users\\Serkan\\Documents\\ChatGPT\\fdb\\data\\benchmark-work\\fdb\\run-0000000000000531.fdb",
+          "file_object": "0xFFFFD10F18D668D0"
+        }
+      },
+      "last_read": {
+        "row": 77384,
+        "filetime": 134392038311696495,
+        "pid": 56096,
+        "tid": "0x0000DA74",
+        "file_object": "0xFFFFD10F18D668D0",
+        "file_key": "0xFFFF9201669AE710",
+        "requested_bytes": 44407,
+        "create": {
+          "row": 76491,
+          "filetime": 134392038311611189,
+          "pid": 56096,
+          "tid": "0x0000DA74",
+          "path": "\\Device\\HarddiskVolume3\\Users\\Serkan\\Documents\\ChatGPT\\fdb\\data\\benchmark-work\\fdb\\run-0000000000000531.fdb",
+          "file_object": "0xFFFFD10F18D668D0"
+        }
+      },
+      "count": 81,
+      "storage_bytes": 4096,
+      "disk_witness": {
+        "row": 76626,
+        "init_row": 76623,
+        "filetime": 134392038311619099,
+        "init_filetime": 134392038311618242,
+        "file_key": "0xFFFF9201669AE710",
+        "bytes": 4096
+      }
+    },
+    "run-0000000000000534.fdb": {
+      "create": {
+        "row": 50779,
+        "filetime": 134392038309528178,
+        "pid": 56096,
+        "tid": "0x0000DA74",
+        "path": "\\Device\\HarddiskVolume3\\Users\\Serkan\\Documents\\ChatGPT\\fdb\\data\\benchmark-work\\fdb\\run-0000000000000534.fdb",
+        "file_object": "0xFFFFD10F1E995310"
+      },
+      "first_read": {
+        "row": 50993,
+        "filetime": 134392038309536494,
+        "pid": 56096,
+        "tid": "0x0000DA74",
+        "file_object": "0xFFFFD10F14161080",
+        "file_key": "0xFFFF920159191180",
+        "requested_bytes": 8,
+        "create": {
+          "row": 50895,
+          "filetime": 134392038309533529,
+          "pid": 56096,
+          "tid": "0x0000DA74",
+          "path": "\\Device\\HarddiskVolume3\\Users\\Serkan\\Documents\\ChatGPT\\fdb\\data\\benchmark-work\\fdb\\run-0000000000000534.fdb",
+          "file_object": "0xFFFFD10F14161080"
+        }
+      },
+      "last_read": {
+        "row": 51259,
+        "filetime": 134392038309565048,
+        "pid": 56096,
+        "tid": "0x0000DA74",
+        "file_object": "0xFFFFD10F14161080",
+        "file_key": "0xFFFF920159191180",
+        "requested_bytes": 41976,
+        "create": {
+          "row": 50895,
+          "filetime": 134392038309533529,
+          "pid": 56096,
+          "tid": "0x0000DA74",
+          "path": "\\Device\\HarddiskVolume3\\Users\\Serkan\\Documents\\ChatGPT\\fdb\\data\\benchmark-work\\fdb\\run-0000000000000534.fdb",
+          "file_object": "0xFFFFD10F14161080"
+        }
+      },
+      "count": 28,
+      "storage_bytes": 4096,
+      "disk_witness": {
+        "row": 51010,
+        "init_row": 50996,
+        "filetime": 134392038309539345,
+        "init_filetime": 134392038309536900,
+        "file_key": "0xFFFF920159191180",
+        "bytes": 4096
+      }
+    },
+    "run-0000000000000536.fdb": {
+      "create": {
+        "row": 79440,
+        "filetime": 134392038311838193,
+        "pid": 56096,
+        "tid": "0x0000E474",
+        "path": "\\Device\\HarddiskVolume3\\Users\\Serkan\\Documents\\ChatGPT\\fdb\\data\\benchmark-work\\fdb\\run-0000000000000536.fdb",
+        "file_object": "0xFFFFD10F287806E0"
+      },
+      "first_read": {
+        "row": 80138,
+        "filetime": 134392038311854245,
+        "pid": 56096,
+        "tid": "0x0000E474",
+        "file_object": "0xFFFFD10F1964F8D0",
+        "file_key": "0xFFFF920165D96180",
+        "requested_bytes": 8,
+        "create": {
+          "row": 79857,
+          "filetime": 134392038311848777,
+          "pid": 56096,
+          "tid": "0x0000E474",
+          "path": "\\Device\\HarddiskVolume3\\Users\\Serkan\\Documents\\ChatGPT\\fdb\\data\\benchmark-work\\fdb\\run-0000000000000536.fdb",
+          "file_object": "0xFFFFD10F1964F8D0"
+        }
+      },
+      "last_read": {
+        "row": 80602,
+        "filetime": 134392038311888698,
+        "pid": 56096,
+        "tid": "0x0000E474",
+        "file_object": "0xFFFFD10F1964F8D0",
+        "file_key": "0xFFFF920165D96180",
+        "requested_bytes": 51156,
+        "create": {
+          "row": 79857,
+          "filetime": 134392038311848777,
+          "pid": 56096,
+          "tid": "0x0000E474",
+          "path": "\\Device\\HarddiskVolume3\\Users\\Serkan\\Documents\\ChatGPT\\fdb\\data\\benchmark-work\\fdb\\run-0000000000000536.fdb",
+          "file_object": "0xFFFFD10F1964F8D0"
+        }
+      },
+      "count": 35,
+      "storage_bytes": 65536,
+      "disk_witness": {
+        "row": 80162,
+        "init_row": 80144,
+        "filetime": 134392038311855861,
+        "init_filetime": 134392038311854821,
+        "file_key": "0xFFFF920165D96180",
+        "bytes": 4096
+      }
+    },
+    "run-000000000000053b.fdb": {
+      "create": {
+        "row": 80088,
+        "filetime": 134392038311852217,
+        "pid": 56096,
+        "tid": "0x0000DA74",
+        "path": "\\Device\\HarddiskVolume3\\Users\\Serkan\\Documents\\ChatGPT\\fdb\\data\\benchmark-work\\fdb\\run-000000000000053b.fdb",
+        "file_object": "0xFFFFD10F1416DD30"
+      },
+      "first_read": {
+        "row": 80352,
+        "filetime": 134392038311862408,
+        "pid": 56096,
+        "tid": "0x0000DA74",
+        "file_object": "0xFFFFD10F15D81B30",
+        "file_key": "0xFFFF920156BC33B0",
+        "requested_bytes": 8,
+        "create": {
+          "row": 80244,
+          "filetime": 134392038311858054,
+          "pid": 56096,
+          "tid": "0x0000DA74",
+          "path": "\\Device\\HarddiskVolume3\\Users\\Serkan\\Documents\\ChatGPT\\fdb\\data\\benchmark-work\\fdb\\run-000000000000053b.fdb",
+          "file_object": "0xFFFFD10F15D81B30"
+        }
+      },
+      "last_read": {
+        "row": 81004,
+        "filetime": 134392038311942828,
+        "pid": 56096,
+        "tid": "0x0000DA74",
+        "file_object": "0xFFFFD10F15D81B30",
+        "file_key": "0xFFFF920156BC33B0",
+        "requested_bytes": 17912,
+        "create": {
+          "row": 80244,
+          "filetime": 134392038311858054,
+          "pid": 56096,
+          "tid": "0x0000DA74",
+          "path": "\\Device\\HarddiskVolume3\\Users\\Serkan\\Documents\\ChatGPT\\fdb\\data\\benchmark-work\\fdb\\run-000000000000053b.fdb",
+          "file_object": "0xFFFFD10F15D81B30"
+        }
+      },
+      "count": 81,
+      "storage_bytes": 4096,
+      "disk_witness": {
+        "row": 80367,
+        "init_row": 80365,
+        "filetime": 134392038311863679,
+        "init_filetime": 134392038311862897,
+        "file_key": "0xFFFF920156BC33B0",
+        "bytes": 4096
+      }
+    },
+    "run-0000000000000546.fdb": {
+      "create": {
+        "row": 75062,
+        "filetime": 134392038311510965,
+        "pid": 56096,
+        "tid": "0x0000DA74",
+        "path": "\\Device\\HarddiskVolume3\\Users\\Serkan\\Documents\\ChatGPT\\fdb\\data\\benchmark-work\\fdb\\run-0000000000000546.fdb",
+        "file_object": "0xFFFFD10F28A6B240"
+      },
+      "first_read": {
+        "row": 75271,
+        "filetime": 134392038311520071,
+        "pid": 56096,
+        "tid": "0x0000DA74",
+        "file_object": "0xFFFFD10F1B40E680",
+        "file_key": "0xFFFF92015AD02A50",
+        "requested_bytes": 8,
+        "create": {
+          "row": 75173,
+          "filetime": 134392038311516952,
+          "pid": 56096,
+          "tid": "0x0000DA74",
+          "path": "\\Device\\HarddiskVolume3\\Users\\Serkan\\Documents\\ChatGPT\\fdb\\data\\benchmark-work\\fdb\\run-0000000000000546.fdb",
+          "file_object": "0xFFFFD10F1B40E680"
+        }
+      },
+      "last_read": {
+        "row": 75290,
+        "filetime": 134392038311521939,
+        "pid": 56096,
+        "tid": "0x0000DA74",
+        "file_object": "0xFFFFD10F1B40E680",
+        "file_key": "0xFFFF92015AD02A50",
+        "requested_bytes": 15245,
+        "create": {
+          "row": 75173,
+          "filetime": 134392038311516952,
+          "pid": 56096,
+          "tid": "0x0000DA74",
+          "path": "\\Device\\HarddiskVolume3\\Users\\Serkan\\Documents\\ChatGPT\\fdb\\data\\benchmark-work\\fdb\\run-0000000000000546.fdb",
+          "file_object": "0xFFFFD10F1B40E680"
+        }
+      },
+      "count": 3,
+      "storage_bytes": 4096,
+      "disk_witness": {
+        "row": 75283,
+        "init_row": 75275,
+        "filetime": 134392038311521442,
+        "init_filetime": 134392038311520447,
+        "file_key": "0xFFFF92015AD02A50",
+        "bytes": 4096
+      }
+    },
+    "run-0000000000000568.fdb": {
+      "create": {
+        "row": 82812,
+        "filetime": 134392038312066752,
+        "pid": 56096,
+        "tid": "0x0000E474",
+        "path": "\\Device\\HarddiskVolume3\\Users\\Serkan\\Documents\\ChatGPT\\fdb\\data\\benchmark-work\\fdb\\run-0000000000000568.fdb",
+        "file_object": "0xFFFFD10F19D0DEB0"
+      },
+      "first_read": {
+        "row": 83009,
+        "filetime": 134392038312076375,
+        "pid": 56096,
+        "tid": "0x0000E474",
+        "file_object": "0xFFFFD10F2069C520",
+        "file_key": "0xFFFF9201534D2A50",
+        "requested_bytes": 8,
+        "create": {
+          "row": 82919,
+          "filetime": 134392038312072856,
+          "pid": 56096,
+          "tid": "0x0000E474",
+          "path": "\\Device\\HarddiskVolume3\\Users\\Serkan\\Documents\\ChatGPT\\fdb\\data\\benchmark-work\\fdb\\run-0000000000000568.fdb",
+          "file_object": "0xFFFFD10F2069C520"
+        }
+      },
+      "last_read": {
+        "row": 86190,
+        "filetime": 134392038312317290,
+        "pid": 56096,
+        "tid": "0x0000E474",
+        "file_object": "0xFFFFD10F2069C520",
+        "file_key": "0xFFFF9201534D2A50",
+        "requested_bytes": 55913,
+        "create": {
+          "row": 82919,
+          "filetime": 134392038312072856,
+          "pid": 56096,
+          "tid": "0x0000E474",
+          "path": "\\Device\\HarddiskVolume3\\Users\\Serkan\\Documents\\ChatGPT\\fdb\\data\\benchmark-work\\fdb\\run-0000000000000568.fdb",
+          "file_object": "0xFFFFD10F2069C520"
+        }
+      },
+      "count": 218,
+      "storage_bytes": 4096,
+      "disk_witness": {
+        "row": 83026,
+        "init_row": 83014,
+        "filetime": 134392038312077747,
+        "init_filetime": 134392038312076760,
+        "file_key": "0xFFFF9201534D2A50",
+        "bytes": 4096
+      }
+    },
+    "run-0000000000000579.fdb": {
+      "create": {
+        "row": 83629,
+        "filetime": 134392038312089821,
+        "pid": 56096,
+        "tid": "0x0000DA74",
+        "path": "\\Device\\HarddiskVolume3\\Users\\Serkan\\Documents\\ChatGPT\\fdb\\data\\benchmark-work\\fdb\\run-0000000000000579.fdb",
+        "file_object": "0xFFFFD10F1E9A17F0"
+      },
+      "first_read": {
+        "row": 83854,
+        "filetime": 134392038312099058,
+        "pid": 56096,
+        "tid": "0x0000DA74",
+        "file_object": "0xFFFFD10F1A97FBF0",
+        "file_key": "0xFFFF9201535A1A10",
+        "requested_bytes": 8,
+        "create": {
+          "row": 83745,
+          "filetime": 134392038312095997,
+          "pid": 56096,
+          "tid": "0x0000DA74",
+          "path": "\\Device\\HarddiskVolume3\\Users\\Serkan\\Documents\\ChatGPT\\fdb\\data\\benchmark-work\\fdb\\run-0000000000000579.fdb",
+          "file_object": "0xFFFFD10F1A97FBF0"
+        }
+      },
+      "last_read": {
+        "row": 85681,
+        "filetime": 134392038312249714,
+        "pid": 56096,
+        "tid": "0x0000DA74",
+        "file_object": "0xFFFFD10F1A97FBF0",
+        "file_key": "0xFFFF9201535A1A10",
+        "requested_bytes": 38680,
+        "create": {
+          "row": 83745,
+          "filetime": 134392038312095997,
+          "pid": 56096,
+          "tid": "0x0000DA74",
+          "path": "\\Device\\HarddiskVolume3\\Users\\Serkan\\Documents\\ChatGPT\\fdb\\data\\benchmark-work\\fdb\\run-0000000000000579.fdb",
+          "file_object": "0xFFFFD10F1A97FBF0"
+        }
+      },
+      "count": 157,
+      "storage_bytes": 4096,
+      "disk_witness": {
+        "row": 83892,
+        "init_row": 83860,
+        "filetime": 134392038312101984,
+        "init_filetime": 134392038312099591,
+        "file_key": "0xFFFF9201535A1A10",
+        "bytes": 4096
+      }
+    },
+    "run-000000000000057a.fdb": {
+      "create": {
+        "row": 87735,
+        "filetime": 134392038312496193,
+        "pid": 56096,
+        "tid": "0x0000DA74",
+        "path": "\\Device\\HarddiskVolume3\\Users\\Serkan\\Documents\\ChatGPT\\fdb\\data\\benchmark-work\\fdb\\run-000000000000057a.fdb",
+        "file_object": "0xFFFFD10F28754E00"
+      },
+      "first_read": {
+        "row": 87905,
+        "filetime": 134392038312508007,
+        "pid": 56096,
+        "tid": "0x0000DA74",
+        "file_object": "0xFFFFD10F1A9803C0",
+        "file_key": "0xFFFF920156C82A10",
+        "requested_bytes": 8,
+        "create": {
+          "row": 87821,
+          "filetime": 134392038312503855,
+          "pid": 56096,
+          "tid": "0x0000DA74",
+          "path": "\\Device\\HarddiskVolume3\\Users\\Serkan\\Documents\\ChatGPT\\fdb\\data\\benchmark-work\\fdb\\run-000000000000057a.fdb",
+          "file_object": "0xFFFFD10F1A9803C0"
+        }
+      },
+      "last_read": {
+        "row": 87917,
+        "filetime": 134392038312510307,
+        "pid": 56096,
+        "tid": "0x0000DA74",
+        "file_object": "0xFFFFD10F1A9803C0",
+        "file_key": "0xFFFF920156C82A10",
+        "requested_bytes": 11445,
+        "create": {
+          "row": 87821,
+          "filetime": 134392038312503855,
+          "pid": 56096,
+          "tid": "0x0000DA74",
+          "path": "\\Device\\HarddiskVolume3\\Users\\Serkan\\Documents\\ChatGPT\\fdb\\data\\benchmark-work\\fdb\\run-000000000000057a.fdb",
+          "file_object": "0xFFFFD10F1A9803C0"
+        }
+      },
+      "count": 3,
+      "storage_bytes": 4096,
+      "disk_witness": {
+        "row": 87910,
+        "init_row": 87907,
+        "filetime": 134392038312509540,
+        "init_filetime": 134392038312508391,
+        "file_key": "0xFFFF920156C82A10",
+        "bytes": 4096
+      }
+    },
+    "run-000000000000058a.fdb": {
+      "create": {
+        "row": 89395,
+        "filetime": 134392038312638413,
+        "pid": 56096,
+        "tid": "0x0000E474",
+        "path": "\\Device\\HarddiskVolume3\\Users\\Serkan\\Documents\\ChatGPT\\fdb\\data\\benchmark-work\\fdb\\run-000000000000058a.fdb",
+        "file_object": "0xFFFFD10F28A738A0"
+      },
+      "first_read": {
+        "row": 89713,
+        "filetime": 134392038312648911,
+        "pid": 56096,
+        "tid": "0x0000E474",
+        "file_object": "0xFFFFD10F1A947B10",
+        "file_key": "0xFFFF920156252A10",
+        "requested_bytes": 8,
+        "create": {
+          "row": 89579,
+          "filetime": 134392038312645501,
+          "pid": 56096,
+          "tid": "0x0000E474",
+          "path": "\\Device\\HarddiskVolume3\\Users\\Serkan\\Documents\\ChatGPT\\fdb\\data\\benchmark-work\\fdb\\run-000000000000058a.fdb",
+          "file_object": "0xFFFFD10F1A947B10"
+        }
+      },
+      "last_read": {
+        "row": 90305,
+        "filetime": 134392038312678264,
+        "pid": 56096,
+        "tid": "0x0000E474",
+        "file_object": "0xFFFFD10F1A947B10",
+        "file_key": "0xFFFF920156252A10",
+        "requested_bytes": 4428,
+        "create": {
+          "row": 89579,
+          "filetime": 134392038312645501,
+          "pid": 56096,
+          "tid": "0x0000E474",
+          "path": "\\Device\\HarddiskVolume3\\Users\\Serkan\\Documents\\ChatGPT\\fdb\\data\\benchmark-work\\fdb\\run-000000000000058a.fdb",
+          "file_object": "0xFFFFD10F1A947B10"
+        }
+      },
+      "count": 28,
+      "storage_bytes": 65536,
+      "disk_witness": {
+        "row": 89739,
+        "init_row": 89720,
+        "filetime": 134392038312650367,
+        "init_filetime": 134392038312649363,
+        "file_key": "0xFFFF920156252A10",
+        "bytes": 4096
+      }
+    },
+    "run-000000000000058d.fdb": {
+      "create": {
+        "row": 81976,
+        "filetime": 134392038311991240,
+        "pid": 56096,
+        "tid": "0x0000E474",
+        "path": "\\Device\\HarddiskVolume3\\Users\\Serkan\\Documents\\ChatGPT\\fdb\\data\\benchmark-work\\fdb\\run-000000000000058d.fdb",
+        "file_object": "0xFFFFD10F28A74B60"
+      },
+      "first_read": {
+        "row": 82196,
+        "filetime": 134392038312000949,
+        "pid": 56096,
+        "tid": "0x0000E474",
+        "file_object": "0xFFFFD10F28A70380",
+        "file_key": "0xFFFF9201545EEA10",
+        "requested_bytes": 8,
+        "create": {
+          "row": 82108,
+          "filetime": 134392038311997940,
+          "pid": 56096,
+          "tid": "0x0000E474",
+          "path": "\\Device\\HarddiskVolume3\\Users\\Serkan\\Documents\\ChatGPT\\fdb\\data\\benchmark-work\\fdb\\run-000000000000058d.fdb",
+          "file_object": "0xFFFFD10F28A70380"
+        }
+      },
+      "last_read": {
+        "row": 82209,
+        "filetime": 134392038312003739,
+        "pid": 56096,
+        "tid": "0x0000E474",
+        "file_object": "0xFFFFD10F28A70380",
+        "file_key": "0xFFFF9201545EEA10",
+        "requested_bytes": 22845,
+        "create": {
+          "row": 82108,
+          "filetime": 134392038311997940,
+          "pid": 56096,
+          "tid": "0x0000E474",
+          "path": "\\Device\\HarddiskVolume3\\Users\\Serkan\\Documents\\ChatGPT\\fdb\\data\\benchmark-work\\fdb\\run-000000000000058d.fdb",
+          "file_object": "0xFFFFD10F28A70380"
+        }
+      },
+      "count": 3,
+      "storage_bytes": 4096,
+      "disk_witness": {
+        "row": 82201,
+        "init_row": 82200,
+        "filetime": 134392038312003252,
+        "init_filetime": 134392038312001250,
+        "file_key": "0xFFFF9201545EEA10",
+        "bytes": 4096
+      }
+    },
+    "run-0000000000000595.fdb": {
+      "create": {
+        "row": 71123,
+        "filetime": 134392038311302444,
+        "pid": 56096,
+        "tid": "0x0000E474",
+        "path": "\\Device\\HarddiskVolume3\\Users\\Serkan\\Documents\\ChatGPT\\fdb\\data\\benchmark-work\\fdb\\run-0000000000000595.fdb",
+        "file_object": "0xFFFFD10F28771AF0"
+      },
+      "first_read": {
+        "row": 71357,
+        "filetime": 134392038311311432,
+        "pid": 56096,
+        "tid": "0x0000E474",
+        "file_object": "0xFFFFD10F14164BE0",
+        "file_key": "0xFFFF9201537D0A10",
+        "requested_bytes": 8,
+        "create": {
+          "row": 71227,
+          "filetime": 134392038311307388,
+          "pid": 56096,
+          "tid": "0x0000E474",
+          "path": "\\Device\\HarddiskVolume3\\Users\\Serkan\\Documents\\ChatGPT\\fdb\\data\\benchmark-work\\fdb\\run-0000000000000595.fdb",
+          "file_object": "0xFFFFD10F14164BE0"
+        }
+      },
+      "last_read": {
+        "row": 71389,
+        "filetime": 134392038311313226,
+        "pid": 56096,
+        "tid": "0x0000E474",
+        "file_object": "0xFFFFD10F14164BE0",
+        "file_key": "0xFFFF9201537D0A10",
+        "requested_bytes": 3845,
+        "create": {
+          "row": 71227,
+          "filetime": 134392038311307388,
+          "pid": 56096,
+          "tid": "0x0000E474",
+          "path": "\\Device\\HarddiskVolume3\\Users\\Serkan\\Documents\\ChatGPT\\fdb\\data\\benchmark-work\\fdb\\run-0000000000000595.fdb",
+          "file_object": "0xFFFFD10F14164BE0"
+        }
+      },
+      "count": 3,
+      "storage_bytes": 4096,
+      "disk_witness": {
+        "row": 71380,
+        "init_row": 71361,
+        "filetime": 134392038311312598,
+        "init_filetime": 134392038311311738,
+        "file_key": "0xFFFF9201537D0A10",
+        "bytes": 4096
+      }
+    },
+    "run-00000000000005b9.fdb": {
+      "create": {
+        "row": 82322,
+        "filetime": 134392038312024805,
+        "pid": 56096,
+        "tid": "0x0000E474",
+        "path": "\\Device\\HarddiskVolume3\\Users\\Serkan\\Documents\\ChatGPT\\fdb\\data\\benchmark-work\\fdb\\run-00000000000005b9.fdb",
+        "file_object": "0xFFFFD10F1B410A70"
+      },
+      "first_read": {
+        "row": 82501,
+        "filetime": 134392038312036579,
+        "pid": 56096,
+        "tid": "0x0000E474",
+        "file_object": "0xFFFFD10F1416AB30",
+        "file_key": "0xFFFF920122F93BD0",
+        "requested_bytes": 8,
+        "create": {
+          "row": 82416,
+          "filetime": 134392038312032672,
+          "pid": 56096,
+          "tid": "0x0000E474",
+          "path": "\\Device\\HarddiskVolume3\\Users\\Serkan\\Documents\\ChatGPT\\fdb\\data\\benchmark-work\\fdb\\run-00000000000005b9.fdb",
+          "file_object": "0xFFFFD10F1416AB30"
+        }
+      },
+      "last_read": {
+        "row": 82542,
+        "filetime": 134392038312047193,
+        "pid": 56096,
+        "tid": "0x0000E474",
+        "file_object": "0xFFFFD10F1416AB30",
+        "file_key": "0xFFFF920122F93BD0",
+        "requested_bytes": 2909,
+        "create": {
+          "row": 82416,
+          "filetime": 134392038312032672,
+          "pid": 56096,
+          "tid": "0x0000E474",
+          "path": "\\Device\\HarddiskVolume3\\Users\\Serkan\\Documents\\ChatGPT\\fdb\\data\\benchmark-work\\fdb\\run-00000000000005b9.fdb",
+          "file_object": "0xFFFFD10F1416AB30"
+        }
+      },
+      "count": 4,
+      "storage_bytes": 4096,
+      "disk_witness": {
+        "row": 82519,
+        "init_row": 82507,
+        "filetime": 134392038312038951,
+        "init_filetime": 134392038312037050,
+        "file_key": "0xFFFF920122F93BD0",
+        "bytes": 4096
+      }
+    },
+    "run-00000000000005be.fdb": {
+      "create": {
+        "row": 87991,
+        "filetime": 134392038312526419,
+        "pid": 56096,
+        "tid": "0x0000DA74",
+        "path": "\\Device\\HarddiskVolume3\\Users\\Serkan\\Documents\\ChatGPT\\fdb\\data\\benchmark-work\\fdb\\run-00000000000005be.fdb",
+        "file_object": "0xFFFFD10F1A981B30"
+      },
+      "first_read": {
+        "row": 88161,
+        "filetime": 134392038312534146,
+        "pid": 56096,
+        "tid": "0x0000DA74",
+        "file_object": "0xFFFFD10F1A9437E0",
+        "file_key": "0xFFFF920156935A50",
+        "requested_bytes": 8,
+        "create": {
+          "row": 88077,
+          "filetime": 134392038312531353,
+          "pid": 56096,
+          "tid": "0x0000DA74",
+          "path": "\\Device\\HarddiskVolume3\\Users\\Serkan\\Documents\\ChatGPT\\fdb\\data\\benchmark-work\\fdb\\run-00000000000005be.fdb",
+          "file_object": "0xFFFFD10F1A9437E0"
+        }
+      },
+      "last_read": {
+        "row": 88327,
+        "filetime": 134392038312572428,
+        "pid": 56096,
+        "tid": "0x0000DA74",
+        "file_object": "0xFFFFD10F1A9437E0",
+        "file_key": "0xFFFF920156935A50",
+        "requested_bytes": 7039,
+        "create": {
+          "row": 88077,
+          "filetime": 134392038312531353,
+          "pid": 56096,
+          "tid": "0x0000DA74",
+          "path": "\\Device\\HarddiskVolume3\\Users\\Serkan\\Documents\\ChatGPT\\fdb\\data\\benchmark-work\\fdb\\run-00000000000005be.fdb",
+          "file_object": "0xFFFFD10F1A9437E0"
+        }
+      },
+      "count": 37,
+      "storage_bytes": 4096,
+      "disk_witness": {
+        "row": 88164,
+        "init_row": 88163,
+        "filetime": 134392038312535732,
+        "init_filetime": 134392038312534724,
+        "file_key": "0xFFFF920156935A50",
+        "bytes": 4096
+      }
+    },
+    "run-00000000000005d5.fdb": {
+      "create": {
+        "row": 91201,
+        "filetime": 134392038312765474,
+        "pid": 56096,
+        "tid": "0x0000E474",
+        "path": "\\Device\\HarddiskVolume3\\Users\\Serkan\\Documents\\ChatGPT\\fdb\\data\\benchmark-work\\fdb\\run-00000000000005d5.fdb",
+        "file_object": "0xFFFFD10F28A7AC40"
+      },
+      "first_read": {
+        "row": 91416,
+        "filetime": 134392038312776333,
+        "pid": 56096,
+        "tid": "0x0000E474",
+        "file_object": "0xFFFFD10F15D463A0",
+        "file_key": "0xFFFF9201567AB180",
+        "requested_bytes": 8,
+        "create": {
+          "row": 91314,
+          "filetime": 134392038312772223,
+          "pid": 56096,
+          "tid": "0x0000E474",
+          "path": "\\Device\\HarddiskVolume3\\Users\\Serkan\\Documents\\ChatGPT\\fdb\\data\\benchmark-work\\fdb\\run-00000000000005d5.fdb",
+          "file_object": "0xFFFFD10F15D463A0"
+        }
+      },
+      "last_read": {
+        "row": 91578,
+        "filetime": 134392038312795926,
+        "pid": 56096,
+        "tid": "0x0000E474",
+        "file_object": "0xFFFFD10F15D463A0",
+        "file_key": "0xFFFF9201567AB180",
+        "requested_bytes": 10760,
+        "create": {
+          "row": 91314,
+          "filetime": 134392038312772223,
+          "pid": 56096,
+          "tid": "0x0000E474",
+          "path": "\\Device\\HarddiskVolume3\\Users\\Serkan\\Documents\\ChatGPT\\fdb\\data\\benchmark-work\\fdb\\run-00000000000005d5.fdb",
+          "file_object": "0xFFFFD10F15D463A0"
+        }
+      },
+      "count": 18,
+      "storage_bytes": 4096,
+      "disk_witness": {
+        "row": 91429,
+        "init_row": 91422,
+        "filetime": 134392038312777927,
+        "init_filetime": 134392038312776813,
+        "file_key": "0xFFFF9201567AB180",
+        "bytes": 4096
+      }
+    },
+    "run-00000000000005d8.fdb": {
+      "create": {
+        "row": 92282,
+        "filetime": 134392038312870434,
+        "pid": 56096,
+        "tid": "0x0000E474",
+        "path": "\\Device\\HarddiskVolume3\\Users\\Serkan\\Documents\\ChatGPT\\fdb\\data\\benchmark-work\\fdb\\run-00000000000005d8.fdb",
+        "file_object": "0xFFFFD10F1E9A2470"
+      },
+      "first_read": {
+        "row": 92494,
+        "filetime": 134392038312881518,
+        "pid": 56096,
+        "tid": "0x0000E474",
+        "file_object": "0xFFFFD10F2875A0D0",
+        "file_key": "0xFFFF92014EDB6180",
+        "requested_bytes": 8,
+        "create": {
+          "row": 92392,
+          "filetime": 134392038312877110,
+          "pid": 56096,
+          "tid": "0x0000E474",
+          "path": "\\Device\\HarddiskVolume3\\Users\\Serkan\\Documents\\ChatGPT\\fdb\\data\\benchmark-work\\fdb\\run-00000000000005d8.fdb",
+          "file_object": "0xFFFFD10F2875A0D0"
+        }
+      },
+      "last_read": {
+        "row": 93129,
+        "filetime": 134392038312960954,
+        "pid": 56096,
+        "tid": "0x0000E474",
+        "file_object": "0xFFFFD10F2875A0D0",
+        "file_key": "0xFFFF92014EDB6180",
+        "requested_bytes": 63770,
+        "create": {
+          "row": 92392,
+          "filetime": 134392038312877110,
+          "pid": 56096,
+          "tid": "0x0000E474",
+          "path": "\\Device\\HarddiskVolume3\\Users\\Serkan\\Documents\\ChatGPT\\fdb\\data\\benchmark-work\\fdb\\run-00000000000005d8.fdb",
+          "file_object": "0xFFFFD10F2875A0D0"
+        }
+      },
+      "count": 78,
+      "storage_bytes": 4096,
+      "disk_witness": {
+        "row": 92505,
+        "init_row": 92500,
+        "filetime": 134392038312883284,
+        "init_filetime": 134392038312882178,
+        "file_key": "0xFFFF92014EDB6180",
+        "bytes": 4096
+      }
+    },
+    "run-00000000000005db.fdb": {
+      "create": {
+        "row": 94714,
+        "filetime": 134392038313112946,
+        "pid": 56096,
+        "tid": "0x0000E474",
+        "path": "\\Device\\HarddiskVolume3\\Users\\Serkan\\Documents\\ChatGPT\\fdb\\data\\benchmark-work\\fdb\\run-00000000000005db.fdb",
+        "file_object": "0xFFFFD10F28A7A600"
+      },
+      "first_read": {
+        "row": 95014,
+        "filetime": 134392038313123386,
+        "pid": 56096,
+        "tid": "0x0000E474",
+        "file_object": "0xFFFFD10F28756BB0",
+        "file_key": "0xFFFF92014D796A10",
+        "requested_bytes": 8,
+        "create": {
+          "row": 94871,
+          "filetime": 134392038313118188,
+          "pid": 56096,
+          "tid": "0x0000E474",
+          "path": "\\Device\\HarddiskVolume3\\Users\\Serkan\\Documents\\ChatGPT\\fdb\\data\\benchmark-work\\fdb\\run-00000000000005db.fdb",
+          "file_object": "0xFFFFD10F28756BB0"
+        }
+      },
+      "last_read": {
+        "row": 95358,
+        "filetime": 134392038313168598,
+        "pid": 56096,
+        "tid": "0x0000E474",
+        "file_object": "0xFFFFD10F28756BB0",
+        "file_key": "0xFFFF92014D796A10",
+        "requested_bytes": 39515,
+        "create": {
+          "row": 94871,
+          "filetime": 134392038313118188,
+          "pid": 56096,
+          "tid": "0x0000E474",
+          "path": "\\Device\\HarddiskVolume3\\Users\\Serkan\\Documents\\ChatGPT\\fdb\\data\\benchmark-work\\fdb\\run-00000000000005db.fdb",
+          "file_object": "0xFFFFD10F28756BB0"
+        }
+      },
+      "count": 35,
+      "storage_bytes": 4096,
+      "disk_witness": {
+        "row": 95052,
+        "init_row": 95023,
+        "filetime": 134392038313126636,
+        "init_filetime": 134392038313123799,
+        "file_key": "0xFFFF92014D796A10",
+        "bytes": 4096
+      }
+    },
+    "run-00000000000005e0.fdb": {
+      "create": {
+        "row": 90307,
+        "filetime": 134392038312678532,
+        "pid": 56096,
+        "tid": "0x0000DA74",
+        "path": "\\Device\\HarddiskVolume3\\Users\\Serkan\\Documents\\ChatGPT\\fdb\\data\\benchmark-work\\fdb\\run-00000000000005e0.fdb",
+        "file_object": "0xFFFFD10F20699C80"
+      },
+      "first_read": {
+        "row": 90515,
+        "filetime": 134392038312688361,
+        "pid": 56096,
+        "tid": "0x0000DA74",
+        "file_object": "0xFFFFD10F28A78850",
+        "file_key": "0xFFFF920156A2EA10",
+        "requested_bytes": 8,
+        "create": {
+          "row": 90420,
+          "filetime": 134392038312684609,
+          "pid": 56096,
+          "tid": "0x0000DA74",
+          "path": "\\Device\\HarddiskVolume3\\Users\\Serkan\\Documents\\ChatGPT\\fdb\\data\\benchmark-work\\fdb\\run-00000000000005e0.fdb",
+          "file_object": "0xFFFFD10F28A78850"
+        }
+      },
+      "last_read": {
+        "row": 94491,
+        "filetime": 134392038313109746,
+        "pid": 56096,
+        "tid": "0x0000DA74",
+        "file_object": "0xFFFFD10F28A78850",
+        "file_key": "0xFFFF920156A2EA10",
+        "requested_bytes": 56491,
+        "create": {
+          "row": 90420,
+          "filetime": 134392038312684609,
+          "pid": 56096,
+          "tid": "0x0000DA74",
+          "path": "\\Device\\HarddiskVolume3\\Users\\Serkan\\Documents\\ChatGPT\\fdb\\data\\benchmark-work\\fdb\\run-00000000000005e0.fdb",
+          "file_object": "0xFFFFD10F28A78850"
+        }
+      },
+      "count": 419,
+      "storage_bytes": 4096,
+      "disk_witness": {
+        "row": 90518,
+        "init_row": 90517,
+        "filetime": 134392038312689812,
+        "init_filetime": 134392038312688793,
+        "file_key": "0xFFFF920156A2EA10",
+        "bytes": 4096
+      }
+    },
+    "run-00000000000005e2.fdb": {
+      "create": {
+        "row": 96480,
+        "filetime": 134392038313277725,
+        "pid": 56096,
+        "tid": "0x0000E474",
+        "path": "\\Device\\HarddiskVolume3\\Users\\Serkan\\Documents\\ChatGPT\\fdb\\data\\benchmark-work\\fdb\\run-00000000000005e2.fdb",
+        "file_object": "0xFFFFD10F2069C200"
+      },
+      "first_read": {
+        "row": 96652,
+        "filetime": 134392038313289172,
+        "pid": 56096,
+        "tid": "0x0000E474",
+        "file_object": "0xFFFFD10F15D4B800",
+        "file_key": "0xFFFF920131683A10",
+        "requested_bytes": 8,
+        "create": {
+          "row": 96566,
+          "filetime": 134392038313284629,
+          "pid": 56096,
+          "tid": "0x0000E474",
+          "path": "\\Device\\HarddiskVolume3\\Users\\Serkan\\Documents\\ChatGPT\\fdb\\data\\benchmark-work\\fdb\\run-00000000000005e2.fdb",
+          "file_object": "0xFFFFD10F15D4B800"
+        }
+      },
+      "last_read": {
+        "row": 124204,
+        "filetime": 134392038317404783,
+        "pid": 56096,
+        "tid": "0x0000E474",
+        "file_object": "0xFFFFD10F15D4B800",
+        "file_key": "0xFFFF920131683A10",
+        "requested_bytes": 2762,
+        "create": {
+          "row": 96566,
+          "filetime": 134392038313284629,
+          "pid": 56096,
+          "tid": "0x0000E474",
+          "path": "\\Device\\HarddiskVolume3\\Users\\Serkan\\Documents\\ChatGPT\\fdb\\data\\benchmark-work\\fdb\\run-00000000000005e2.fdb",
+          "file_object": "0xFFFFD10F15D4B800"
+        }
+      },
+      "count": 210,
+      "storage_bytes": 4096,
+      "disk_witness": {
+        "row": 96655,
+        "init_row": 96654,
+        "filetime": 134392038313290854,
+        "init_filetime": 134392038313289618,
+        "file_key": "0xFFFF920131683A10",
+        "bytes": 4096
+      }
+    },
+    "run-00000000000005e4.fdb": {
+      "create": {
+        "row": 99421,
+        "filetime": 134392038313525323,
+        "pid": 56096,
+        "tid": "0x0000DA74",
+        "path": "\\Device\\HarddiskVolume3\\Users\\Serkan\\Documents\\ChatGPT\\fdb\\data\\benchmark-work\\fdb\\run-00000000000005e4.fdb",
+        "file_object": "0xFFFFD10F2875ABC0"
+      },
+      "first_read": {
+        "row": 99593,
+        "filetime": 134392038313535872,
+        "pid": 56096,
+        "tid": "0x0000DA74",
+        "file_object": "0xFFFFD10F1B410110",
+        "file_key": "0xFFFF92012745C710",
+        "requested_bytes": 8,
+        "create": {
+          "row": 99509,
+          "filetime": 134392038313532289,
+          "pid": 56096,
+          "tid": "0x0000DA74",
+          "path": "\\Device\\HarddiskVolume3\\Users\\Serkan\\Documents\\ChatGPT\\fdb\\data\\benchmark-work\\fdb\\run-00000000000005e4.fdb",
+          "file_object": "0xFFFFD10F1B410110"
+        }
+      },
+      "last_read": {
+        "row": 99649,
+        "filetime": 134392038313545890,
+        "pid": 56096,
+        "tid": "0x0000DA74",
+        "file_object": "0xFFFFD10F1B410110",
+        "file_key": "0xFFFF92012745C710",
+        "requested_bytes": 16908,
+        "create": {
+          "row": 99509,
+          "filetime": 134392038313532289,
+          "pid": 56096,
+          "tid": "0x0000DA74",
+          "path": "\\Device\\HarddiskVolume3\\Users\\Serkan\\Documents\\ChatGPT\\fdb\\data\\benchmark-work\\fdb\\run-00000000000005e4.fdb",
+          "file_object": "0xFFFFD10F1B410110"
+        }
+      },
+      "count": 8,
+      "storage_bytes": 4096,
+      "disk_witness": {
+        "row": 99598,
+        "init_row": 99595,
+        "filetime": 134392038313537147,
+        "init_filetime": 134392038313536249,
+        "file_key": "0xFFFF92012745C710",
+        "bytes": 4096
+      }
+    },
+    "run-00000000000005e7.fdb": {
+      "create": {
+        "row": 100374,
+        "filetime": 134392038313570025,
+        "pid": 56096,
+        "tid": "0x0000E474",
+        "path": "\\Device\\HarddiskVolume3\\Users\\Serkan\\Documents\\ChatGPT\\fdb\\data\\benchmark-work\\fdb\\run-00000000000005e7.fdb",
+        "file_object": "0xFFFFD10F28A44910"
+      },
+      "first_read": {
+        "row": 100616,
+        "filetime": 134392038313581665,
+        "pid": 56096,
+        "tid": "0x0000E474",
+        "file_object": "0xFFFFD10F287560C0",
+        "file_key": "0xFFFF92015357E180",
+        "requested_bytes": 8,
+        "create": {
+          "row": 100489,
+          "filetime": 134392038313576874,
+          "pid": 56096,
+          "tid": "0x0000E474",
+          "path": "\\Device\\HarddiskVolume3\\Users\\Serkan\\Documents\\ChatGPT\\fdb\\data\\benchmark-work\\fdb\\run-00000000000005e7.fdb",
+          "file_object": "0xFFFFD10F287560C0"
+        }
+      },
+      "last_read": {
+        "row": 101286,
+        "filetime": 134392038313602271,
+        "pid": 56096,
+        "tid": "0x0000E474",
+        "file_object": "0xFFFFD10F287560C0",
+        "file_key": "0xFFFF92015357E180",
+        "requested_bytes": 26176,
+        "create": {
+          "row": 100489,
+          "filetime": 134392038313576874,
+          "pid": 56096,
+          "tid": "0x0000E474",
+          "path": "\\Device\\HarddiskVolume3\\Users\\Serkan\\Documents\\ChatGPT\\fdb\\data\\benchmark-work\\fdb\\run-00000000000005e7.fdb",
+          "file_object": "0xFFFFD10F287560C0"
+        }
+      },
+      "count": 17,
+      "storage_bytes": 4096,
+      "disk_witness": {
+        "row": 100663,
+        "init_row": 100628,
+        "filetime": 134392038313584556,
+        "init_filetime": 134392038313582119,
+        "file_key": "0xFFFF92015357E180",
+        "bytes": 4096
+      }
+    },
+    "run-00000000000005fc.fdb": {
+      "create": {
+        "row": 100965,
+        "filetime": 134392038313592006,
+        "pid": 56096,
+        "tid": "0x0000DA74",
+        "path": "\\Device\\HarddiskVolume3\\Users\\Serkan\\Documents\\ChatGPT\\fdb\\data\\benchmark-work\\fdb\\run-00000000000005fc.fdb",
+        "file_object": "0xFFFFD10F2069B3F0"
+      },
+      "first_read": {
+        "row": 101288,
+        "filetime": 134392038313602297,
+        "pid": 56096,
+        "tid": "0x0000DA74",
+        "file_object": "0xFFFFD10F26377EF0",
+        "file_key": "0xFFFF92013C3BAA10",
+        "requested_bytes": 8,
+        "create": {
+          "row": 101133,
+          "filetime": 134392038313598183,
+          "pid": 56096,
+          "tid": "0x0000DA74",
+          "path": "\\Device\\HarddiskVolume3\\Users\\Serkan\\Documents\\ChatGPT\\fdb\\data\\benchmark-work\\fdb\\run-00000000000005fc.fdb",
+          "file_object": "0xFFFFD10F26377EF0"
+        }
+      },
+      "last_read": {
+        "row": 103106,
+        "filetime": 134392038313746936,
+        "pid": 56096,
+        "tid": "0x0000DA74",
+        "file_object": "0xFFFFD10F26377EF0",
+        "file_key": "0xFFFF92013C3BAA10",
+        "requested_bytes": 64510,
+        "create": {
+          "row": 101133,
+          "filetime": 134392038313598183,
+          "pid": 56096,
+          "tid": "0x0000DA74",
+          "path": "\\Device\\HarddiskVolume3\\Users\\Serkan\\Documents\\ChatGPT\\fdb\\data\\benchmark-work\\fdb\\run-00000000000005fc.fdb",
+          "file_object": "0xFFFFD10F26377EF0"
+        }
+      },
+      "count": 135,
+      "storage_bytes": 4096,
+      "disk_witness": {
+        "row": 101315,
+        "init_row": 101297,
+        "filetime": 134392038313603814,
+        "init_filetime": 134392038313602782,
+        "file_key": "0xFFFF92013C3BAA10",
+        "bytes": 4096
+      }
+    },
+    "run-00000000000005fd.fdb": {
+      "create": {
+        "row": 102097,
+        "filetime": 134392038313670697,
+        "pid": 56096,
+        "tid": "0x0000E474",
+        "path": "\\Device\\HarddiskVolume3\\Users\\Serkan\\Documents\\ChatGPT\\fdb\\data\\benchmark-work\\fdb\\run-00000000000005fd.fdb",
+        "file_object": "0xFFFFD10F28A44C30"
+      },
+      "first_read": {
+        "row": 102312,
+        "filetime": 134392038313679741,
+        "pid": 56096,
+        "tid": "0x0000E474",
+        "file_object": "0xFFFFD10F2875DAA0",
+        "file_key": "0xFFFF920145F36A10",
+        "requested_bytes": 8,
+        "create": {
+          "row": 102213,
+          "filetime": 134392038313676565,
+          "pid": 56096,
+          "tid": "0x0000E474",
+          "path": "\\Device\\HarddiskVolume3\\Users\\Serkan\\Documents\\ChatGPT\\fdb\\data\\benchmark-work\\fdb\\run-00000000000005fd.fdb",
+          "file_object": "0xFFFFD10F2875DAA0"
+        }
+      },
+      "last_read": {
+        "row": 102327,
+        "filetime": 134392038313681789,
+        "pid": 56096,
+        "tid": "0x0000E474",
+        "file_object": "0xFFFFD10F2875DAA0",
+        "file_key": "0xFFFF920145F36A10",
+        "requested_bytes": 26645,
+        "create": {
+          "row": 102213,
+          "filetime": 134392038313676565,
+          "pid": 56096,
+          "tid": "0x0000E474",
+          "path": "\\Device\\HarddiskVolume3\\Users\\Serkan\\Documents\\ChatGPT\\fdb\\data\\benchmark-work\\fdb\\run-00000000000005fd.fdb",
+          "file_object": "0xFFFFD10F2875DAA0"
+        }
+      },
+      "count": 3,
+      "storage_bytes": 4096,
+      "disk_witness": {
+        "row": 102318,
+        "init_row": 102315,
+        "filetime": 134392038313681077,
+        "init_filetime": 134392038313680145,
+        "file_key": "0xFFFF920145F36A10",
+        "bytes": 4096
+      }
+    },
+    "run-0000000000000600.fdb": {
+      "create": {
+        "row": 102579,
+        "filetime": 134392038313701378,
+        "pid": 56096,
+        "tid": "0x0000E474",
+        "path": "\\Device\\HarddiskVolume3\\Users\\Serkan\\Documents\\ChatGPT\\fdb\\data\\benchmark-work\\fdb\\run-0000000000000600.fdb",
+        "file_object": "0xFFFFD10F19D0ACB0"
+      },
+      "first_read": {
+        "row": 102802,
+        "filetime": 134392038313709319,
+        "pid": 56096,
+        "tid": "0x0000E474",
+        "file_object": "0xFFFFD10F15D539B0",
+        "file_key": "0xFFFF920154DACA50",
+        "requested_bytes": 8,
+        "create": {
+          "row": 102704,
+          "filetime": 134392038313706320,
+          "pid": 56096,
+          "tid": "0x0000E474",
+          "path": "\\Device\\HarddiskVolume3\\Users\\Serkan\\Documents\\ChatGPT\\fdb\\data\\benchmark-work\\fdb\\run-0000000000000600.fdb",
+          "file_object": "0xFFFFD10F15D539B0"
+        }
+      },
+      "last_read": {
+        "row": 103216,
+        "filetime": 134392038313761097,
+        "pid": 56096,
+        "tid": "0x0000E474",
+        "file_object": "0xFFFFD10F15D539B0",
+        "file_key": "0xFFFF920154DACA50",
+        "requested_bytes": 61641,
+        "create": {
+          "row": 102704,
+          "filetime": 134392038313706320,
+          "pid": 56096,
+          "tid": "0x0000E474",
+          "path": "\\Device\\HarddiskVolume3\\Users\\Serkan\\Documents\\ChatGPT\\fdb\\data\\benchmark-work\\fdb\\run-0000000000000600.fdb",
+          "file_object": "0xFFFFD10F15D539B0"
+        }
+      },
+      "count": 39,
+      "storage_bytes": 4096,
+      "disk_witness": {
+        "row": 102825,
+        "init_row": 102805,
+        "filetime": 134392038313712420,
+        "init_filetime": 134392038313709723,
+        "file_key": "0xFFFF920154DACA50",
+        "bytes": 4096
+      }
+    }
+  }
+}

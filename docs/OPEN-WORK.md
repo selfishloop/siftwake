@@ -1,5 +1,126 @@
 # FDB açık işler
 
+15 Kasım — Gerçek soğuk 50k karşılaştırması, SQLite→FDB ve FDB→SQLite
+tamamlandı. İşlemci override'ı olmadan güncel FDB strict-open,
+39 run. Açılıştan ilk sonuca FDB 885–909 ms, SQLite 6.663–6.696 ms.
+Sıcak karşılıkları FDB 627–640 ms, SQLite 297–339 ms. Dört soğuk
+iz geçerli, birleşik kayıp 0, collector bazı ölçülemedi. SQLite
+süresi için kapı uygulanmadı. Q30 yakınsamasının sayısal kararı ve
+başka sorgu/yerleşimler açık. 50k/41 oracle, kill/reopen ve eski FDB
+okuyucu geçti. [İki soğuk çift ve zaman ayrımı](COLD-OPEN-PAIRED-50K-20261115.md)
+
+15 Kasım — Prefix kurulunca kısa WAL yoluna yeniden giriş adayı
+43/43 grubun senkron delta flush'ını önledi. Kısa çiftlerde p99
+%25,2/%32,0 düştü, p95 5,66×/3,93× oldu. Kesintisiz 30 turda kontrol
+disk kapısını 30/30 geçti, aday 4/30 (**KALDI**, tepe tur sonu 1,835×).
+Son tur farkının %96'sı canlı manifest dosyalarında, revizyon yayımı
+226→93. Aday geçici kopyada, üretim ayarları aynı. Oracle/CRC/kill/
+eski okuyucu ve tam paket geçti. Prefix çalışma bütçesi, reclaim
+ilerlemesi, geniş arama ve motor-only RAM açık.
+[Yeniden giriş ve kesintisiz disk raporu](WAL-PREFIX-READMISSION-50K-20261115.md)
+
+15 Kasım — WAL prefix indeks profilinde posting ekleme %57,5,
+trigram çıkarma %29,0, gövde normalleştirme %3,5. Geçici, 4.096
+terimle sınırlı posting adayı iki çiftte de prefix join toplamını
+%14,9/%58,8 ve commit p99'u %15,8/%4,2 düşürdü. >1 s adetleri
+7→4 ve 6→5. Commit max iki çiftte arttı, p95 ikinci çiftte %21,4
+arttı. Aday geçici kopyada. 50k/41 oracle, kill/reopen ve eski
+okuyucu 5/5, tam test paketi geçti. Foreground delta flush ve normal
+merge uçları, geniş arama, motor-only RAM ve uzun disk kapıları ayrı açık.
+[İki çift, aşamalar ve ham sonuçlar](WAL-PREFIX-POSTING-BUILDER-50K-20261115.md)
+
+14 Kasım — Üç tur, 300 akışlı commit. 12 uzun yolun tek tetikleyicisi
+2.048 anahtar sınırı. Sekiz beklemeli prefix işçisinde ilk geçişin
+%95,2'si indeks oluşturma çağrısında, %4,8'i WAL satırı edinme ve
+doğrulamada. Join toplamında ilk geçiş %42,5, sonraki indeks hazırlığı
+%48,4. En uzun commit'te 1,27 s normal merge join; 100'lük kuyruk ve
+foreground flush açık. 50k/41 oracle, kill/reopen, eski okuyucu ve tam test
+paketi geçti. Ölçüm disk bütçesi içindeydi, ardından debug test çıktıları
+geçici derleme tavanını aştı. Üretim kodu ve varsayılanlar aynı.
+[İlk geçiş profili ve ham tablolar](WAL-PREFIX-FIRST-PASS-50K-20261114.md)
+
+14 Kasım — WAL prefix beklemesinin çevrimdışı tanısı. Profilli kontroldeki
+97 belirgin beklemenin yeniden kurulabilen 86'sında 2.000 + 100 anahtar
+2.048 sınırını aştı. Kalan 11 tetikleyici bilinmiyor. 40,57 s beklemenin
+%53,8'i kaynak yazımı öncesi, %36,1'i indeks hazırlığında. İlk WAL
+doğrulaması ile gram/posting hazırlığının ayrı maliyeti ve 100'lük
+commit uçları açık. Mevcut motor ve slotlar üzerinde yeni koşu yapılmadı.
+[Sequence eşlemesi ve tanı](WAL-PREFIX-WAIT-DIAGNOSIS-50K-20261114.md)
+
+14 Kasım — Geçici merge erteleme adayı, delta flush sonrası join'i
+sıfırladı. Profilsiz p99 1.289 → 1.055 ms, profilli p99
+1.318 → 1.328 ms. Profilli toplam normal merge join 8,68 → 9,97 s.
+50k oracle/kill/eski okuyucu ve 30/30 disk kapısı geçti (1,2974×).
+24/24 olay ≤1 s, rewrite örtüşmesi yok. Sürücü burada durdu, motor-only
+RAM ölçülmedi. Aday geçici derlemede. İlk drain ve WAL prefix açık.
+[Aday raporu](NORMAL-MERGE-DEFER-50K-20261114.md)
+
+14 Kasım — WAL prefix doğruluk düzeltmesi ve model testi `ddb263b` ile
+commit edildi. İki profilli 50k kolda 100 uzun commit'in tamamı akışlı
+uzun yoldaydı. Beşinde delta flush yeni normal merge başlatıp hemen
+bekledi, toplam 4,23 s. İlk aday yalnız bu işi ACK sonrasına ertelemek.
+İlk drain, WAL prefix ve bütçe beklemeleri açık.
+[Kod incelemesi ve deney tasarımı](NORMAL-MERGE-WAIT-DESIGN-50K-20261114.md)
+
+14 Kasım — Maske düzeltmesi sonrası tekrarlar tamamlandı. Olay görünürlüğü
+24/24 ≤1 s, p95 84,34 → 110,47 ms, başlangıç 52 → 63 run. Kesintisiz
+disk 30/30 ≤1,3×, en yüksek 1,285×. Orijinal 120 s pin tekrarında
+1,075×, eski WAL temizliği ve canlı yazıcıda 41 exact sorgu **GEÇTİ**.
+Kill/reopen ve eski okuyucu tüm ölçüm kollarında geçti. Pin sırasında
+revizyon rewrite yayımı 0. ABBA'daki 3,11 s uçta normal merge join
+1,89 s. Düzeltmenin bağımsız süre maliyeti ayrıştırılmadı.
+FDB slotu ready, 10k sequence 41. 100'lük uçlar ve geniş taramalar açık.
+[Önce/sonra raporu](WAL-PREFIX-FOLLOWUP-20261114.md)
+
+14 Kasım — 16 tohumlu prefix/merge/reclaim/GC oracle'ı **GEÇTİ**.
+Maske reset'i çıkarılan geçici derleme, yalnız eski revizyonla eşleşen
+sorguda sessiz yanlış sonucu yakaladı (exact toplam 1, model 0).
+Performans ve orijinal pin tekrarları yukarıdaki ayrı raporda.
+[Model testi ve ham kanıt](WAL-PREFIX-PUBLICATION-ORACLE-20261114.md)
+
+14 Kasım — WAL prefix yayımından sonra yazıcının eski run maskelerini
+kullanması küçük testte aynı `checked page slot mismatch` hatasını verdi.
+Yayımda yazıcının maskesi geçersiz kılındı. Eski snapshot, 10k GET/version,
+41 exact/seri capped/melez capped, process-kill/strict reopen ve
+dondurulmuş okuyucu **GEÇTİ**. FDB slotu `ready`, sequence 41.
+120 s disk/pin testi tekrarlanmadı. Toplu yazma uçları ve geniş taramalar
+açık. [Düzeltme ve kanıt](WAL-PREFIX-VISIBILITY-10K-20261114.md)
+
+14 Kasım — 10k / 120 s uzun snapshot tanısında disk örnekleri
+≤2× (1,075×), eski snapshot digest ve pinli eski WAL temizliği
+başarılı. Revizyon rewrite yayımı 0. Yeni 10k GET/version geçti,
+ilk exact sorguda `checked page slot mismatch` ile **doğruluk
+KALDI**. Deney sequence 40'ta durdu. Kill/reopen ve eski
+okuyucu bu deneyde çalıştırılmadı. [Yarım rapor](RECLAIM-LONG-SNAPSHOT-10K-20261114.md)
+
+14 Kasım — 0.4.0 motor-only RAM **GEÇTİ**, varsayılan ingest
+15,49–16,36 MiB ve temiz idle 2,20–2,26 MiB. Planlama ölçüldü,
+aktif rewrite tepesi doğrulanamadı. 4/4 kill/reopen/eski okuyucu geçti.
+120 s uzun snapshot ayrı başlatma onayı bekliyor. 100'lük uçlar
+ve yoğun arama altında RAM açık. [Motor-only ölçüm](RECLAIM-MOTOR-ONLY-RAM-50K-20261114.md)
+
+14 Kasım — Kesintisiz 50k yazıda 30/30 tur ≤1,3× **GEÇTİ**.
+En yüksek ve son tur 1,275×, örnekli geçici tepe 1,528×.
+92 run ve 78/3.000 adet >1 s commit. 50k/41, kill/reopen
+ve eski okuyucu geçti. [Kesintisiz disk koşusu](RECLAIM-CONTINUOUS-DISK-50K-20261114.md)
+
+14 Kasım — 50k/100'lük ABBA commit profili 12.000 commit ve
+4/4 kill/reopen+eski okuyucu ile tamamlandı. 144 profilli >1 s
+committe 68 prefix join, 15 normal merge join, 6 bütçe ve 55
+açıklanamayan süre en büyük kalem. Hazır revizyon join ≤0,02 ms.
+Eski seq 2511 ucu hiçbir kolda tekrarlanmadı. [Commit profili](RECLAIM-COMMIT-PROFILE-50K-20261114.md)
+
+14 Kasım — 0.4.0 varsayılan reclaim dosya olayı kapısı **GEÇTİ**.
+24/24 aday ≤1 s, p95/max 84,34/106,28 ms. Bir rewrite ve iki
+yayım örtüşmesi görüldü. 50k/41 oracle, kill/reopen ve eski
+okuyucu geçti. [Ölçüm](RECLAIM-ARRIVAL-DEFAULT-50K-20261114.md)
+
+13 Kasım — FDB 0.4.0 varsayılan reclaim için dosya olayı,
+100'lük commit fazları, kesintisiz yazıda disk, motor-only RAM ve
+120 s snapshot tasarımı hazır. İlk dört ölçüm için kullanıcı
+başlatma onayı, uzun snapshot için ayrı onay bekleniyor. C ABI
+bakım tiki ve istatistik alanları taslak. [Tasarım ve sınırlar](RECLAIM-FOLLOWUP-DESIGN-20261113.md)
+
 12 Kasım güncel karar — Arka planda revizyon geri kazanımı (4b)
 **varsayılan AÇIK**. Yazıcı hazır işi yayımlar, boşta
 `poll_maintenance()` ile ilerletir. 50k/30 tur disk kapısı **GEÇTİ

@@ -1,0 +1,846 @@
+[
+  {
+    "label": "A1-default",
+    "engine": "fdb",
+    "default": true,
+    "ingest": {
+      "writes_done": {
+        "memory": {
+          "peak_private_commit_bytes": 16240640,
+          "peak_working_set_bytes": 21303296,
+          "private_bytes": 14962688,
+          "working_set_bytes": 19685376
+        },
+        "phase": "writes_done"
+      },
+      "worker_witness": {
+        "background_revision_installs": 0,
+        "memory": {
+          "order": [
+            "none",
+            "planning",
+            "rewrite"
+          ],
+          "private_max_bytes": [
+            16183296,
+            14974976,
+            0
+          ],
+          "samples": [
+            4670,
+            322,
+            0
+          ],
+          "working_set_max_bytes": [
+            21094400,
+            20099072,
+            0
+          ]
+        },
+        "phase": "worker_witness"
+      },
+      "ingest": {
+        "caller_input": "at most one bounded JSON document +8KiB stdin buffer; runtime included, no subtraction; loaded has41 small query definitions",
+        "documents": 50000,
+        "excluded": "corpus/catalog,model,oracle,history,profiling all outside process",
+        "memory": {
+          "peak_private_commit_bytes": 16240640,
+          "peak_working_set_bytes": 21303296,
+          "private_bytes": 12058624,
+          "working_set_bytes": 16187392
+        },
+        "phase": "ingest",
+        "query_counts": [],
+        "snapshot_reader": false,
+        "writer_mutations": 50000
+      }
+    },
+    "idle": {
+      "idle": {
+        "caller_input": "at most one bounded JSON document +8KiB stdin buffer; runtime included, no subtraction; loaded has41 small query definitions",
+        "documents": 50000,
+        "excluded": "corpus/catalog,model,oracle,history,profiling all outside process",
+        "memory": {
+          "peak_private_commit_bytes": 3534848,
+          "peak_working_set_bytes": 6938624,
+          "private_bytes": 2367488,
+          "working_set_bytes": 6254592
+        },
+        "phase": "idle",
+        "query_counts": [],
+        "snapshot_reader": false,
+        "writer_mutations": 0
+      }
+    },
+    "churn": {
+      "writes_done": {
+        "memory": {
+          "peak_private_commit_bytes": 24793088,
+          "peak_working_set_bytes": 29069312,
+          "private_bytes": 12505088,
+          "working_set_bytes": 16306176
+        },
+        "phase": "writes_done"
+      },
+      "worker_witness": {
+        "background_revision_installs": 0,
+        "memory": {
+          "order": [
+            "none",
+            "planning",
+            "rewrite"
+          ],
+          "private_max_bytes": [
+            23715840,
+            18919424,
+            0
+          ],
+          "samples": [
+            413,
+            99,
+            0
+          ],
+          "working_set_max_bytes": [
+            28016640,
+            22269952,
+            0
+          ]
+        },
+        "phase": "worker_witness"
+      },
+      "churn": {
+        "caller_input": "at most one bounded JSON document +8KiB stdin buffer; runtime included, no subtraction; loaded has41 small query definitions",
+        "documents": 50000,
+        "excluded": "corpus/catalog,model,oracle,history,profiling all outside process",
+        "memory": {
+          "peak_private_commit_bytes": 24793088,
+          "peak_working_set_bytes": 29069312,
+          "private_bytes": 10047488,
+          "working_set_bytes": 14594048
+        },
+        "phase": "churn",
+        "query_counts": [],
+        "snapshot_reader": false,
+        "writer_mutations": 10000
+      }
+    },
+    "ingest_mib": 15.48828125,
+    "idle_mib": 2.2578125,
+    "gate": true,
+    "reopen": {
+      "cases": 41,
+      "deleted_keys": 2501,
+      "documents": 50000,
+      "marker_sample": {
+        "checked": [
+          {
+            "hits": 1,
+            "id": 0,
+            "kind": "current",
+            "revision": 1
+          },
+          {
+            "hits": 1,
+            "id": 1072,
+            "kind": "current",
+            "revision": 1
+          },
+          {
+            "hits": 1,
+            "id": 2143,
+            "kind": "current",
+            "revision": 1
+          },
+          {
+            "hits": 1,
+            "id": 3214,
+            "kind": "current",
+            "revision": 1
+          },
+          {
+            "hits": 1,
+            "id": 4286,
+            "kind": "current",
+            "revision": 1
+          },
+          {
+            "hits": 1,
+            "id": 50357,
+            "kind": "current",
+            "revision": 1
+          },
+          {
+            "hits": 1,
+            "id": 51428,
+            "kind": "current",
+            "revision": 1
+          },
+          {
+            "hits": 1,
+            "id": 52500,
+            "kind": "current",
+            "revision": 1
+          },
+          {
+            "hits": 0,
+            "id": 404,
+            "kind": "superseded",
+            "revision": 1
+          },
+          {
+            "hits": 0,
+            "id": 405,
+            "kind": "superseded",
+            "revision": 1
+          },
+          {
+            "hits": 0,
+            "id": 406,
+            "kind": "deleted",
+            "revision": 1
+          }
+        ],
+        "current_population": 7500,
+        "deleted_population": 1,
+        "superseded_population": 2
+      },
+      "oracle": true,
+      "phase": "live_disk50_verified",
+      "sequence": 201
+    },
+    "frozen_reader": true
+  },
+  {
+    "label": "B1-off",
+    "engine": "fdb",
+    "default": false,
+    "ingest": {
+      "writes_done": {
+        "memory": {
+          "peak_private_commit_bytes": 15065088,
+          "peak_working_set_bytes": 19386368,
+          "private_bytes": 13996032,
+          "working_set_bytes": 18382848
+        },
+        "phase": "writes_done"
+      },
+      "worker_witness": {
+        "background_revision_installs": 0,
+        "memory": {
+          "order": [
+            "none",
+            "planning",
+            "rewrite"
+          ],
+          "private_max_bytes": [
+            15212544,
+            0,
+            0
+          ],
+          "samples": [
+            4956,
+            0,
+            0
+          ],
+          "working_set_max_bytes": [
+            19689472,
+            0,
+            0
+          ]
+        },
+        "phase": "worker_witness"
+      },
+      "ingest": {
+        "caller_input": "at most one bounded JSON document +8KiB stdin buffer; runtime included, no subtraction; loaded has41 small query definitions",
+        "documents": 50000,
+        "excluded": "corpus/catalog,model,oracle,history,profiling all outside process",
+        "memory": {
+          "peak_private_commit_bytes": 15245312,
+          "peak_working_set_bytes": 19689472,
+          "private_bytes": 10211328,
+          "working_set_bytes": 14663680
+        },
+        "phase": "ingest",
+        "query_counts": [],
+        "snapshot_reader": false,
+        "writer_mutations": 50000
+      }
+    },
+    "idle": {
+      "idle": {
+        "caller_input": "at most one bounded JSON document +8KiB stdin buffer; runtime included, no subtraction; loaded has41 small query definitions",
+        "documents": 50000,
+        "excluded": "corpus/catalog,model,oracle,history,profiling all outside process",
+        "memory": {
+          "peak_private_commit_bytes": 3743744,
+          "peak_working_set_bytes": 6868992,
+          "private_bytes": 2306048,
+          "working_set_bytes": 6221824
+        },
+        "phase": "idle",
+        "query_counts": [],
+        "snapshot_reader": false,
+        "writer_mutations": 0
+      }
+    },
+    "churn": {
+      "writes_done": {
+        "memory": {
+          "peak_private_commit_bytes": 23744512,
+          "peak_working_set_bytes": 28016640,
+          "private_bytes": 13799424,
+          "working_set_bytes": 16355328
+        },
+        "phase": "writes_done"
+      },
+      "worker_witness": {
+        "background_revision_installs": 0,
+        "memory": {
+          "order": [
+            "none",
+            "planning",
+            "rewrite"
+          ],
+          "private_max_bytes": [
+            22654976,
+            0,
+            0
+          ],
+          "samples": [
+            506,
+            0,
+            0
+          ],
+          "working_set_max_bytes": [
+            26963968,
+            0,
+            0
+          ]
+        },
+        "phase": "worker_witness"
+      },
+      "churn": {
+        "caller_input": "at most one bounded JSON document +8KiB stdin buffer; runtime included, no subtraction; loaded has41 small query definitions",
+        "documents": 50000,
+        "excluded": "corpus/catalog,model,oracle,history,profiling all outside process",
+        "memory": {
+          "peak_private_commit_bytes": 23744512,
+          "peak_working_set_bytes": 28016640,
+          "private_bytes": 11784192,
+          "working_set_bytes": 15507456
+        },
+        "phase": "churn",
+        "query_counts": [],
+        "snapshot_reader": false,
+        "writer_mutations": 10000
+      }
+    },
+    "ingest_mib": 14.5390625,
+    "idle_mib": 2.19921875,
+    "gate": true,
+    "reopen": {
+      "cases": 41,
+      "deleted_keys": 2501,
+      "documents": 50000,
+      "marker_sample": {
+        "checked": [
+          {
+            "hits": 1,
+            "id": 0,
+            "kind": "current",
+            "revision": 1
+          },
+          {
+            "hits": 1,
+            "id": 1072,
+            "kind": "current",
+            "revision": 1
+          },
+          {
+            "hits": 1,
+            "id": 2143,
+            "kind": "current",
+            "revision": 1
+          },
+          {
+            "hits": 1,
+            "id": 3214,
+            "kind": "current",
+            "revision": 1
+          },
+          {
+            "hits": 1,
+            "id": 4286,
+            "kind": "current",
+            "revision": 1
+          },
+          {
+            "hits": 1,
+            "id": 50357,
+            "kind": "current",
+            "revision": 1
+          },
+          {
+            "hits": 1,
+            "id": 51428,
+            "kind": "current",
+            "revision": 1
+          },
+          {
+            "hits": 1,
+            "id": 52500,
+            "kind": "current",
+            "revision": 1
+          },
+          {
+            "hits": 0,
+            "id": 404,
+            "kind": "superseded",
+            "revision": 1
+          },
+          {
+            "hits": 0,
+            "id": 405,
+            "kind": "superseded",
+            "revision": 1
+          },
+          {
+            "hits": 0,
+            "id": 406,
+            "kind": "deleted",
+            "revision": 1
+          }
+        ],
+        "current_population": 7500,
+        "deleted_population": 1,
+        "superseded_population": 2
+      },
+      "oracle": true,
+      "phase": "live_disk50_verified",
+      "sequence": 201
+    },
+    "frozen_reader": true
+  },
+  {
+    "label": "B2-off",
+    "engine": "fdb",
+    "default": false,
+    "ingest": {
+      "writes_done": {
+        "memory": {
+          "peak_private_commit_bytes": 14647296,
+          "peak_working_set_bytes": 19144704,
+          "private_bytes": 13361152,
+          "working_set_bytes": 17653760
+        },
+        "phase": "writes_done"
+      },
+      "worker_witness": {
+        "background_revision_installs": 0,
+        "memory": {
+          "order": [
+            "none",
+            "planning",
+            "rewrite"
+          ],
+          "private_max_bytes": [
+            14577664,
+            0,
+            0
+          ],
+          "samples": [
+            4959,
+            0,
+            0
+          ],
+          "working_set_max_bytes": [
+            19120128,
+            0,
+            0
+          ]
+        },
+        "phase": "worker_witness"
+      },
+      "ingest": {
+        "caller_input": "at most one bounded JSON document +8KiB stdin buffer; runtime included, no subtraction; loaded has41 small query definitions",
+        "documents": 50000,
+        "excluded": "corpus/catalog,model,oracle,history,profiling all outside process",
+        "memory": {
+          "peak_private_commit_bytes": 14647296,
+          "peak_working_set_bytes": 19144704,
+          "private_bytes": 8245248,
+          "working_set_bytes": 12742656
+        },
+        "phase": "ingest",
+        "query_counts": [],
+        "snapshot_reader": false,
+        "writer_mutations": 50000
+      }
+    },
+    "idle": {
+      "idle": {
+        "caller_input": "at most one bounded JSON document +8KiB stdin buffer; runtime included, no subtraction; loaded has41 small query definitions",
+        "documents": 50000,
+        "excluded": "corpus/catalog,model,oracle,history,profiling all outside process",
+        "memory": {
+          "peak_private_commit_bytes": 3477504,
+          "peak_working_set_bytes": 6938624,
+          "private_bytes": 2207744,
+          "working_set_bytes": 6307840
+        },
+        "phase": "idle",
+        "query_counts": [],
+        "snapshot_reader": false,
+        "writer_mutations": 0
+      }
+    },
+    "churn": {
+      "writes_done": {
+        "memory": {
+          "peak_private_commit_bytes": 24256512,
+          "peak_working_set_bytes": 28332032,
+          "private_bytes": 12136448,
+          "working_set_bytes": 16224256
+        },
+        "phase": "writes_done"
+      },
+      "worker_witness": {
+        "background_revision_installs": 0,
+        "memory": {
+          "order": [
+            "none",
+            "planning",
+            "rewrite"
+          ],
+          "private_max_bytes": [
+            23162880,
+            0,
+            0
+          ],
+          "samples": [
+            513,
+            0,
+            0
+          ],
+          "working_set_max_bytes": [
+            27279360,
+            0,
+            0
+          ]
+        },
+        "phase": "worker_witness"
+      },
+      "churn": {
+        "caller_input": "at most one bounded JSON document +8KiB stdin buffer; runtime included, no subtraction; loaded has41 small query definitions",
+        "documents": 50000,
+        "excluded": "corpus/catalog,model,oracle,history,profiling all outside process",
+        "memory": {
+          "peak_private_commit_bytes": 24256512,
+          "peak_working_set_bytes": 28332032,
+          "private_bytes": 10268672,
+          "working_set_bytes": 14721024
+        },
+        "phase": "churn",
+        "query_counts": [],
+        "snapshot_reader": false,
+        "writer_mutations": 10000
+      }
+    },
+    "ingest_mib": 13.96875,
+    "idle_mib": 2.10546875,
+    "gate": true,
+    "reopen": {
+      "cases": 41,
+      "deleted_keys": 2501,
+      "documents": 50000,
+      "marker_sample": {
+        "checked": [
+          {
+            "hits": 1,
+            "id": 0,
+            "kind": "current",
+            "revision": 1
+          },
+          {
+            "hits": 1,
+            "id": 1072,
+            "kind": "current",
+            "revision": 1
+          },
+          {
+            "hits": 1,
+            "id": 2143,
+            "kind": "current",
+            "revision": 1
+          },
+          {
+            "hits": 1,
+            "id": 3214,
+            "kind": "current",
+            "revision": 1
+          },
+          {
+            "hits": 1,
+            "id": 4286,
+            "kind": "current",
+            "revision": 1
+          },
+          {
+            "hits": 1,
+            "id": 50357,
+            "kind": "current",
+            "revision": 1
+          },
+          {
+            "hits": 1,
+            "id": 51428,
+            "kind": "current",
+            "revision": 1
+          },
+          {
+            "hits": 1,
+            "id": 52500,
+            "kind": "current",
+            "revision": 1
+          },
+          {
+            "hits": 0,
+            "id": 404,
+            "kind": "superseded",
+            "revision": 1
+          },
+          {
+            "hits": 0,
+            "id": 405,
+            "kind": "superseded",
+            "revision": 1
+          },
+          {
+            "hits": 0,
+            "id": 406,
+            "kind": "deleted",
+            "revision": 1
+          }
+        ],
+        "current_population": 7500,
+        "deleted_population": 1,
+        "superseded_population": 2
+      },
+      "oracle": true,
+      "phase": "live_disk50_verified",
+      "sequence": 201
+    },
+    "frozen_reader": true
+  },
+  {
+    "label": "A2-default",
+    "engine": "fdb",
+    "default": true,
+    "ingest": {
+      "writes_done": {
+        "memory": {
+          "peak_private_commit_bytes": 17149952,
+          "peak_working_set_bytes": 21774336,
+          "private_bytes": 15843328,
+          "working_set_bytes": 20357120
+        },
+        "phase": "writes_done"
+      },
+      "worker_witness": {
+        "background_revision_installs": 0,
+        "memory": {
+          "order": [
+            "none",
+            "planning",
+            "rewrite"
+          ],
+          "private_max_bytes": [
+            17084416,
+            16306176,
+            0
+          ],
+          "samples": [
+            4602,
+            340,
+            0
+          ],
+          "working_set_max_bytes": [
+            21774336,
+            20901888,
+            0
+          ]
+        },
+        "phase": "worker_witness"
+      },
+      "ingest": {
+        "caller_input": "at most one bounded JSON document +8KiB stdin buffer; runtime included, no subtraction; loaded has41 small query definitions",
+        "documents": 50000,
+        "excluded": "corpus/catalog,model,oracle,history,profiling all outside process",
+        "memory": {
+          "peak_private_commit_bytes": 17149952,
+          "peak_working_set_bytes": 21774336,
+          "private_bytes": 11079680,
+          "working_set_bytes": 15233024
+        },
+        "phase": "ingest",
+        "query_counts": [],
+        "snapshot_reader": false,
+        "writer_mutations": 50000
+      }
+    },
+    "idle": {
+      "idle": {
+        "caller_input": "at most one bounded JSON document +8KiB stdin buffer; runtime included, no subtraction; loaded has41 small query definitions",
+        "documents": 50000,
+        "excluded": "corpus/catalog,model,oracle,history,profiling all outside process",
+        "memory": {
+          "peak_private_commit_bytes": 3690496,
+          "peak_working_set_bytes": 6905856,
+          "private_bytes": 2306048,
+          "working_set_bytes": 6250496
+        },
+        "phase": "idle",
+        "query_counts": [],
+        "snapshot_reader": false,
+        "writer_mutations": 0
+      }
+    },
+    "churn": {
+      "writes_done": {
+        "memory": {
+          "peak_private_commit_bytes": 24723456,
+          "peak_working_set_bytes": 28958720,
+          "private_bytes": 13377536,
+          "working_set_bytes": 17068032
+        },
+        "phase": "writes_done"
+      },
+      "worker_witness": {
+        "background_revision_installs": 0,
+        "memory": {
+          "order": [
+            "none",
+            "planning",
+            "rewrite"
+          ],
+          "private_max_bytes": [
+            23609344,
+            18845696,
+            0
+          ],
+          "samples": [
+            394,
+            110,
+            0
+          ],
+          "working_set_max_bytes": [
+            27906048,
+            22044672,
+            0
+          ]
+        },
+        "phase": "worker_witness"
+      },
+      "churn": {
+        "caller_input": "at most one bounded JSON document +8KiB stdin buffer; runtime included, no subtraction; loaded has41 small query definitions",
+        "documents": 50000,
+        "excluded": "corpus/catalog,model,oracle,history,profiling all outside process",
+        "memory": {
+          "peak_private_commit_bytes": 24723456,
+          "peak_working_set_bytes": 28958720,
+          "private_bytes": 10665984,
+          "working_set_bytes": 14729216
+        },
+        "phase": "churn",
+        "query_counts": [],
+        "snapshot_reader": false,
+        "writer_mutations": 10000
+      }
+    },
+    "ingest_mib": 16.35546875,
+    "idle_mib": 2.19921875,
+    "gate": true,
+    "reopen": {
+      "cases": 41,
+      "deleted_keys": 2501,
+      "documents": 50000,
+      "marker_sample": {
+        "checked": [
+          {
+            "hits": 1,
+            "id": 0,
+            "kind": "current",
+            "revision": 1
+          },
+          {
+            "hits": 1,
+            "id": 1072,
+            "kind": "current",
+            "revision": 1
+          },
+          {
+            "hits": 1,
+            "id": 2143,
+            "kind": "current",
+            "revision": 1
+          },
+          {
+            "hits": 1,
+            "id": 3214,
+            "kind": "current",
+            "revision": 1
+          },
+          {
+            "hits": 1,
+            "id": 4286,
+            "kind": "current",
+            "revision": 1
+          },
+          {
+            "hits": 1,
+            "id": 50357,
+            "kind": "current",
+            "revision": 1
+          },
+          {
+            "hits": 1,
+            "id": 51428,
+            "kind": "current",
+            "revision": 1
+          },
+          {
+            "hits": 1,
+            "id": 52500,
+            "kind": "current",
+            "revision": 1
+          },
+          {
+            "hits": 0,
+            "id": 404,
+            "kind": "superseded",
+            "revision": 1
+          },
+          {
+            "hits": 0,
+            "id": 405,
+            "kind": "superseded",
+            "revision": 1
+          },
+          {
+            "hits": 0,
+            "id": 406,
+            "kind": "deleted",
+            "revision": 1
+          }
+        ],
+        "current_population": 7500,
+        "deleted_population": 1,
+        "superseded_population": 2
+      },
+      "oracle": true,
+      "phase": "live_disk50_verified",
+      "sequence": 201
+    },
+    "frozen_reader": true
+  }
+]

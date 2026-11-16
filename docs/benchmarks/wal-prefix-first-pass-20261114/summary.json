@@ -1,0 +1,377 @@
+{
+  "frames": {
+    "count": 300,
+    "sum": 16809.7088,
+    "p50": 14.5769,
+    "p95": 53.822,
+    "max": 2146.7325
+  },
+  "wall_commit": {
+    "count": 300,
+    "sum": 16810.0067,
+    "p50": 14.5776,
+    "p95": 53.822799999999994,
+    "max": 2146.7338,
+    "p99": 1167.1333,
+    "over_1s": 6
+  },
+  "archived_first_three": {
+    "A1-control": {
+      "count": 300,
+      "sum": 16195.4184,
+      "p50": 13.8242,
+      "p95": 50.266600000000004,
+      "max": 1629.0104,
+      "p99": 1056.8185,
+      "over_1s": 5
+    },
+    "A2-control": {
+      "count": 300,
+      "sum": 16896.2953,
+      "p50": 12.579500000000001,
+      "p95": 39.3549,
+      "max": 2200.6632,
+      "p99": 1152.9121,
+      "over_1s": 6
+    }
+  },
+  "observed_throughput": 1314.8513964155732,
+  "fallbacks": {
+    "shadow_limit": 12
+  },
+  "waits": {
+    "count": 8,
+    "sum": 2226.5783,
+    "p50": 255.2039,
+    "p95": 611.0986,
+    "max": 611.0986
+  },
+  "compile_and_run_profile_scope": "mechanism only, one profiled arm",
+  "timing_tails_over_1s": 6,
+  "slow_wait_failed_checks": {
+    "shadow_limit": 8
+  },
+  "slow_wait_overlap": {
+    "first_pass_overlap_ms": 946.4367,
+    "builder_overlap_min_ms": 862.7035999999999,
+    "builder_overlap_max_ms": 946.4367,
+    "source_overlap_ms": 173.1064,
+    "index_overlap_ms": 1076.828,
+    "source_workspace_overlap_ms": 0.0014,
+    "builder_workspace_overlap_ms": 0.0007
+  },
+  "all_workers": {
+    "worker_ms": {
+      "count": 25,
+      "sum": 5981.5426,
+      "p50": 203.2916,
+      "p95": 585.5578,
+      "max": 716.6885
+    },
+    "first_pass_ms": {
+      "count": 25,
+      "sum": 3306.4093,
+      "p50": 102.7052,
+      "p95": 373.8929,
+      "max": 503.8169
+    },
+    "wal_rows_ms": {
+      "count": 25,
+      "sum": 160.276,
+      "p50": 5.05,
+      "p95": 16.3591,
+      "max": 24.102
+    },
+    "add_builder_ms": {
+      "count": 25,
+      "sum": 3146.1097,
+      "p50": 97.557,
+      "p95": 357.5325,
+      "max": 479.7133
+    },
+    "first_pass_cpu_ms": {
+      "count": 25,
+      "sum": 3171.875,
+      "p50": 93.75,
+      "p95": 343.75,
+      "max": 500.0
+    },
+    "worker_cpu_ms": {
+      "count": 25,
+      "sum": 4703.125,
+      "p50": 156.25,
+      "p95": 500.0,
+      "max": 656.25
+    },
+    "source_ms": {
+      "count": 25,
+      "sum": 297.7394,
+      "p50": 7.9377,
+      "p95": 33.9074,
+      "max": 35.2845
+    },
+    "index_ms": {
+      "count": 25,
+      "sum": 2322.0394,
+      "p50": 87.1051,
+      "p95": 172.6145,
+      "max": 176.7
+    },
+    "captured_keys": {
+      "count": 25,
+      "sum": 14000,
+      "p50": 300,
+      "p95": 1300,
+      "max": 1400
+    },
+    "captured_payload_bytes": {
+      "count": 25,
+      "sum": 36368076,
+      "p50": 1034361,
+      "p95": 4505537,
+      "max": 4850807
+    }
+  },
+  "waited_workers": {
+    "worker_ms": {
+      "count": 8,
+      "sum": 3588.7337,
+      "p50": 403.5028,
+      "p95": 716.6885,
+      "max": 716.6885
+    },
+    "first_pass_ms": {
+      "count": 8,
+      "sum": 2248.1156,
+      "p50": 256.5708,
+      "p95": 503.8169,
+      "max": 503.8169
+    },
+    "wal_rows_ms": {
+      "count": 8,
+      "sum": 107.8844,
+      "p50": 13.2958,
+      "p95": 24.102,
+      "max": 24.102
+    },
+    "add_builder_ms": {
+      "count": 8,
+      "sum": 2140.2228,
+      "p50": 243.2744,
+      "p95": 479.7133,
+      "max": 479.7133
+    },
+    "first_pass_cpu_ms": {
+      "count": 8,
+      "sum": 2156.25,
+      "p50": 234.375,
+      "p95": 500.0,
+      "max": 500.0
+    },
+    "worker_cpu_ms": {
+      "count": 8,
+      "sum": 3062.5,
+      "p50": 328.125,
+      "p95": 656.25,
+      "max": 656.25
+    },
+    "source_ms": {
+      "count": 8,
+      "sum": 191.8744,
+      "p50": 27.9214,
+      "p95": 35.2845,
+      "max": 35.2845
+    },
+    "index_ms": {
+      "count": 8,
+      "sum": 1121.2503,
+      "p50": 131.6696,
+      "p95": 176.7,
+      "max": 176.7
+    },
+    "captured_keys": {
+      "count": 8,
+      "sum": 7600,
+      "p50": 800,
+      "p95": 1400,
+      "max": 1400
+    },
+    "captured_payload_bytes": {
+      "count": 8,
+      "sum": 25078912,
+      "p50": 2984094,
+      "p95": 4850807,
+      "max": 4850807
+    }
+  },
+  "examples": [
+    {
+      "sequence": 241,
+      "commit_ms": 1167.1321,
+      "failed_checks": "shadow_limit",
+      "join_ms": 611.0986,
+      "drained": true,
+      "age_ms": 106.0738,
+      "first_pass_overlap_ms": 397.7456,
+      "builder_overlap_min_ms": 373.642,
+      "builder_overlap_max_ms": 397.7456,
+      "source_overlap_ms": 30.0739,
+      "index_overlap_ms": 176.7,
+      "source_workspace_overlap_ms": 0.0003,
+      "builder_workspace_overlap_ms": 0.0001,
+      "output": 345,
+      "capture_sequence": 234,
+      "captured_keys": 1400,
+      "captured_payload_bytes": 4850807,
+      "captured_wal_bytes": 4858370,
+      "worker_ms": 716.6885,
+      "first_pass_ms": 503.8169,
+      "wal_rows_ms": 24.102,
+      "add_builder_ms": 479.7133,
+      "first_pass_cpu_ms": 500.0,
+      "worker_cpu_ms": 656.25,
+      "source_ms": 30.0739,
+      "index_ms": 176.7
+    },
+    {
+      "sequence": 340,
+      "commit_ms": 1136.7776,
+      "failed_checks": "shadow_limit",
+      "join_ms": 391.3853,
+      "drained": true,
+      "age_ms": 194.5359,
+      "first_pass_overlap_ms": 179.3619,
+      "builder_overlap_min_ms": 163.0015,
+      "builder_overlap_max_ms": 179.3619,
+      "source_overlap_ms": 35.2845,
+      "index_overlap_ms": 172.6145,
+      "source_workspace_overlap_ms": 0.0004,
+      "builder_workspace_overlap_ms": 0.0002,
+      "output": 408,
+      "capture_sequence": 329,
+      "captured_keys": 1000,
+      "captured_payload_bytes": 3350798,
+      "captured_wal_bytes": 3356213,
+      "worker_ms": 585.5578,
+      "first_pass_ms": 373.8929,
+      "wal_rows_ms": 16.3591,
+      "add_builder_ms": 357.5325,
+      "first_pass_cpu_ms": 343.75,
+      "worker_cpu_ms": 500.0,
+      "source_ms": 35.2845,
+      "index_ms": 172.6145
+    },
+    {
+      "sequence": 124,
+      "commit_ms": 759.8374,
+      "failed_checks": "shadow_limit",
+      "join_ms": 369.2699,
+      "drained": true,
+      "age_ms": 110.5213,
+      "first_pass_overlap_ms": 167.4016,
+      "builder_overlap_min_ms": 153.6224,
+      "builder_overlap_max_ms": 167.4016,
+      "source_overlap_ms": 33.9074,
+      "index_overlap_ms": 163.7439,
+      "source_workspace_overlap_ms": 0.0001,
+      "builder_workspace_overlap_ms": 0.0001,
+      "output": 276,
+      "capture_sequence": 116,
+      "captured_keys": 1300,
+      "captured_payload_bytes": 4505537,
+      "captured_wal_bytes": 4512563,
+      "worker_ms": 479.4723,
+      "first_pass_ms": 277.9211,
+      "wal_rows_ms": 13.7786,
+      "add_builder_ms": 264.1419,
+      "first_pass_cpu_ms": 281.25,
+      "worker_cpu_ms": 390.625,
+      "source_ms": 33.9074,
+      "index_ms": 163.7439
+    },
+    {
+      "sequence": 148,
+      "commit_ms": 704.0885,
+      "failed_checks": "shadow_limit",
+      "join_ms": 280.9164,
+      "drained": true,
+      "age_ms": 121.475,
+      "first_pass_overlap_ms": 122.2251,
+      "builder_overlap_min_ms": 110.5593,
+      "builder_overlap_max_ms": 122.2251,
+      "source_overlap_ms": 33.4799,
+      "index_overlap_ms": 121.6575,
+      "source_workspace_overlap_ms": 0.0002,
+      "builder_workspace_overlap_ms": 0.0001,
+      "output": 288,
+      "capture_sequence": 139,
+      "captured_keys": 1200,
+      "captured_payload_bytes": 3930229,
+      "captured_wal_bytes": 3936718,
+      "worker_ms": 401.9956,
+      "first_pass_ms": 243.6984,
+      "wal_rows_ms": 11.665,
+      "add_builder_ms": 232.0326,
+      "first_pass_cpu_ms": 234.375,
+      "worker_cpu_ms": 328.125,
+      "source_ms": 33.4799,
+      "index_ms": 121.6575
+    },
+    {
+      "sequence": 397,
+      "commit_ms": 1511.3908,
+      "failed_checks": "shadow_limit",
+      "join_ms": 255.2039,
+      "drained": true,
+      "age_ms": 206.9516,
+      "first_pass_overlap_ms": 75.2499,
+      "builder_overlap_min_ms": 61.8784,
+      "builder_overlap_max_ms": 75.2499,
+      "source_overlap_ms": 27.9214,
+      "index_overlap_ms": 149.5381,
+      "source_workspace_overlap_ms": 0.0002,
+      "builder_workspace_overlap_ms": 0.0001,
+      "output": 438,
+      "capture_sequence": 384,
+      "captured_keys": 800,
+      "captured_payload_bytes": 2984094,
+      "captured_wal_bytes": 2988435,
+      "worker_ms": 461.8698,
+      "first_pass_ms": 282.1988,
+      "wal_rows_ms": 13.3709,
+      "add_builder_ms": 268.8273,
+      "first_pass_cpu_ms": 281.25,
+      "worker_cpu_ms": 406.25,
+      "source_ms": 27.9214,
+      "index_ms": 149.5381
+    },
+    {
+      "sequence": 316,
+      "commit_ms": 973.0164,
+      "failed_checks": "shadow_limit",
+      "join_ms": 151.7619,
+      "drained": true,
+      "age_ms": 252.1206,
+      "first_pass_overlap_ms": 4.4526,
+      "builder_overlap_min_ms": 0.0,
+      "builder_overlap_max_ms": 4.4526,
+      "source_overlap_ms": 12.4393,
+      "index_overlap_ms": 130.8277,
+      "source_workspace_overlap_ms": 0.0002,
+      "builder_workspace_overlap_ms": 0.0001,
+      "output": 395,
+      "capture_sequence": 301,
+      "captured_keys": 600,
+      "captured_payload_bytes": 1837550,
+      "captured_wal_bytes": 1840817,
+      "worker_ms": 403.5028,
+      "first_pass_ms": 256.5708,
+      "wal_rows_ms": 13.2958,
+      "add_builder_ms": 243.2744,
+      "first_pass_cpu_ms": 218.75,
+      "worker_cpu_ms": 328.125,
+      "source_ms": 12.4393,
+      "index_ms": 130.8277
+    }
+  ]
+}

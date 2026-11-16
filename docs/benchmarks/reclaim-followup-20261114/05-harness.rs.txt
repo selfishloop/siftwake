@@ -1,0 +1,289 @@
+use super::{Backend, Corpus, Model, Result, Writer, changes, churn, verify};
+use fdb::{Snapshot, SnapshotReader, StoredDocument};
+use serde_json::{Value, json};
+use std::{
+    collections::{BTreeMap, BTreeSet},
+    path::Path,
+    sync::{
+        Arc,
+        atomic::{AtomicBool, Ordering},
+    },
+    time::{Duration, Instant},
+};
+
+fn root(path: &Path) -> Result<(u64, BTreeSet<String>)> {
+    let latest = std::fs::read_dir(path)?
+        .filter_map(|entry| entry.ok().and_then(|e| e.file_name().into_string().ok()))
+        .filter(|name| name.starts_with("generation-") && name.ends_with(".ready"))
+        .max()
+        .ok_or("missing manifest")?;
+    let generation = u64::from_str_radix(&latest[11..27], 16)?;
+    let data = std::fs::read(path.join(&latest))?;
+    assert!(data.len() >= 24 && &data[..8] == b"FDBMAN03");
+    assert_eq!(
+        data.len(),
+        24 + u32::from_le_bytes(data[16..20].try_into()?) as usize
+    );
+    assert_eq!(u64::from_le_bytes(data[8..16].try_into()?), generation);
+    assert_eq!(
+        crc32fast::hash(&data[..data.len() - 4]),
+        u32::from_le_bytes(data[data.len() - 4..].try_into()?)
+    );
+    let manifest: Value = serde_json::from_slice(&data[20..data.len() - 4])?;
+    let active = manifest["active"]["id"].as_u64().ok_or("active id")?;
+    let mut stems = BTreeSet::from([format!("generation-{active:016x}")]);
+    for source in manifest["runs"].as_array().ok_or("runs")? {
+        let id = source["id"].as_u64().ok_or("source id")?;
+        let kind = if source["kind"] == "Run" {
+            "run"
+        } else {
+            "generation"
+        };
+        stems.insert(format!("{kind}-{id:016x}"));
+    }
+    Ok((generation, stems))
+}
+
+fn sample(
+    path: &Path,
+    pinned: &BTreeSet<String>,
+    base_generation: u64,
+    start: Instant,
+    phase: &str,
+) -> Result<Value> {
+    let at = start.elapsed().as_secs_f64();
+    let (generation, stems) = root(path)?;
+    let mut files = BTreeMap::new();
+    for item in std::fs::read_dir(path)? {
+        let item = item?;
+        if let Ok(meta) = item.metadata()
+            && meta.is_file()
+        {
+            files.insert(
+                item.file_name().into_string().map_err(|_| "filename")?,
+                meta.len(),
+            );
+        }
+    }
+    let current_root = format!("generation-{generation:016x}.ready");
+    let mut retired = BTreeMap::new();
+    let mut live = 0;
+    for (name, size) in &files {
+        let stem = name.split('.').next().unwrap();
+        let published = (name.ends_with(".fdb") || name.ends_with(".idx")) && stems.contains(stem);
+        if name == &current_root || published {
+            live += size;
+        }
+        if pinned.contains(stem)
+            && !stems.contains(stem)
+            && (name.ends_with(".fdb") || name.ends_with(".idx"))
+        {
+            retired.insert(name.clone(), *size);
+        }
+    }
+    let retained: u64 = files.values().sum();
+    let stable = root(path)?.0 == generation;
+    Ok(
+        json!({"phase":phase, "elapsed_s":at, "generation":generation,
+        "snapshot_generation":base_generation, "manifest_stable":stable, "run_and_wal_count":stems.len(),
+        "retained_bytes":retained, "manifest_live_bytes":live, "retained_to_live":retained as f64/live as f64,
+        "pinned_retired_bytes":retired.values().sum::<u64>(), "pinned_retired_files":retired,
+        "memory":churn::memory()}),
+    )
+}
+
+fn checked(
+    path: &Path,
+    pinned: &BTreeSet<String>,
+    generation: u64,
+    start: Instant,
+    phase: &str,
+) -> Result<Value> {
+    for _ in 0..5 {
+        match sample(path, pinned, generation, start, phase) {
+            Ok(row) if row["manifest_stable"] == true => return Ok(row),
+            Ok(_) => {}
+            Err(error)
+                if error
+                    .downcast_ref::<std::io::Error>()
+                    .is_some_and(|io| io.kind() == std::io::ErrorKind::NotFound) => {}
+            Err(error) => return Err(error),
+        }
+    }
+    Err("manifest moved across five samples".into())
+}
+
+fn old_gets(
+    snapshot: &Snapshot,
+    original: &Model,
+    full: &Model,
+    corpus: &mut Corpus,
+) -> Result<()> {
+    assert_eq!(snapshot.sequence(), original.sequence);
+    for id in [0, 999, 1000, 1499, 1500, 9999, 10000, 10499] {
+        let key = churn::key(id);
+        let wanted = original
+            .rows
+            .get(&id)
+            .map(|row| -> Result<StoredDocument> {
+                Ok(StoredDocument {
+                    document: corpus.document(id, row)?,
+                    version: row.version,
+                })
+            })
+            .transpose()?;
+        assert_eq!(snapshot.get(&key)?, wanted);
+        if full.rows.get(&id).is_some_and(|row| row.revision == 1) {
+            let q = super::query(&churn::marker(id, 1));
+            assert_eq!(snapshot.search(&q)?.total, 0);
+        }
+    }
+    let case = snapshot.search(&super::query("olduğu"))?;
+    assert_eq!(case.sequence, original.sequence);
+    churn::emit(
+        json!({"phase":"held_oracle","sequence":snapshot.sequence(),"get_keys":8,"case0_hits":case.hits.len(),
+        "case0_digest":crc32fast::hash(&serde_json::to_vec(&case.hits)?),"oracle":true}),
+    );
+    Ok(())
+}
+
+pub(super) fn run(
+    db: &mut impl Writer,
+    corpus: &mut Corpus,
+    model: &mut Model,
+    state: &str,
+    path: &str,
+) -> Result<()> {
+    let path = Path::new(path);
+    let original = model.clone();
+    // Same snapshot handle throughout all samples and the final old-view oracle.
+    let reader: SnapshotReader = db.long_snapshot_reader()?;
+    let pin = reader.acquire()?;
+    let generation = pin.generation();
+    let (initial_gen, pinned) = root(path)?;
+    assert_eq!(initial_gen, generation);
+    let start = Instant::now();
+    let base = checked(path, &pinned, generation, start, "pin_start")?;
+    churn::emit(base);
+    let original_case = pin.search(&super::query("olduğu"))?;
+    let original_digest = crc32fast::hash(&serde_json::to_vec(&original_case.hits)?);
+    drop(original_case);
+    let done = Arc::new(AtomicBool::new(false));
+    let all = std::thread::scope(|scope| -> Result<Vec<Value>> {
+        let ticker = done.clone();
+        let samples = scope.spawn(move || -> Result<Vec<Value>> {
+            let mut rows = Vec::new();
+            let mut seen_generation = generation;
+            let mut first_retired = false;
+            for second in [5, 30, 120] {
+                let at = start + Duration::from_secs(second);
+                while Instant::now() < at {
+                    if ticker.load(Ordering::Acquire) {
+                        return Err("pin experiment ended before its clock".into());
+                    }
+                    if let Ok(row) = sample(path, &pinned, generation, start, "inventory_event")
+                        && row["manifest_stable"] == true
+                    {
+                        let current_gen = row["generation"].as_u64().unwrap();
+                        let retired = row["pinned_retired_bytes"].as_u64().unwrap() != 0;
+                        if current_gen != seen_generation || (retired && !first_retired) {
+                            seen_generation = current_gen;
+                            first_retired |= retired;
+                            churn::emit(row);
+                        }
+                    }
+                    std::thread::sleep(
+                        at.saturating_duration_since(Instant::now())
+                            .min(Duration::from_millis(100)),
+                    );
+                }
+                let mut row = checked(path, &pinned, generation, start, "pin_sample")?;
+                row["target_s"] = json!(second);
+                churn::emit(row.clone());
+                rows.push(row);
+            }
+            Ok(rows)
+        });
+        let writes = (|| -> Result<()> {
+            let edits = changes(model, 0);
+            for chunk in edits.chunks_exact(100) {
+                let seq = db.commit(corpus, chunk, true)?;
+                churn::apply(model, chunk, seq);
+            }
+            model.save(state)?;
+            churn::emit(
+                json!({"phase":"churn_done","elapsed_s":start.elapsed().as_secs_f64(),
+                "sequence":model.sequence,"installs":db.arrival_installs()}),
+            );
+            let mut installs = db.arrival_installs();
+            while start.elapsed() < Duration::from_secs(120) && !samples.is_finished() {
+                db.poll_idle()?;
+                let now = db.arrival_installs();
+                if now != installs {
+                    churn::emit(
+                        json!({"phase":"revision_published","elapsed_s":start.elapsed().as_secs_f64(),
+                        "installs":now,"stats":db.stats()?}),
+                    );
+                    installs = now;
+                }
+                std::thread::sleep(Duration::from_millis(15));
+            }
+            Ok(())
+        })();
+        if writes.is_err() {
+            done.store(true, Ordering::Release);
+        }
+        let sampled = samples.join().map_err(|_| "inventory sampler panicked")?;
+        writes?;
+        sampled
+    })?;
+    let final_case = pin.search(&super::query("olduğu"))?;
+    assert_eq!(
+        crc32fast::hash(&serde_json::to_vec(&final_case.hits)?),
+        original_digest
+    );
+    drop(final_case);
+    old_gets(&pin, &original, model, corpus)?;
+    let (current_gen, _) = root(path)?;
+    let before = checked(
+        path,
+        &BTreeSet::new(),
+        current_gen,
+        start,
+        "before_release_total",
+    )?;
+    let pending = all.last().unwrap()["pinned_retired_files"]
+        .as_object()
+        .unwrap();
+    churn::emit(before);
+    let release_at = start.elapsed().as_secs_f64();
+    let timer = Instant::now();
+    let released = pin.release();
+    let release_ms = timer.elapsed().as_secs_f64() * 1000.;
+    assert!(released.cleanup_error.is_none());
+    let mut cleaned_ms = None;
+    while timer.elapsed() < Duration::from_secs(2) {
+        if !pending.is_empty() && pending.keys().all(|n| !path.join(n).exists()) {
+            cleaned_ms = Some(timer.elapsed().as_secs_f64() * 1000.);
+            break;
+        }
+        if pending.is_empty() {
+            break;
+        }
+        db.poll_idle()?;
+        std::thread::sleep(Duration::from_millis(10));
+    }
+    churn::emit(checked(
+        path,
+        &BTreeSet::new(),
+        current_gen,
+        start,
+        "after_release",
+    )?);
+    churn::emit(
+        json!({"phase":"release","held_s":release_at,"release_ms":release_ms,
+        "all_pinned_files_gone_ms":cleaned_ms,"release":released,
+        "pending_files_at_120s":pending.len(),"revision_installs":db.arrival_installs()}),
+    );
+    verify(db, corpus, model, true)
+}

@@ -1,0 +1,26 @@
+<WindowsPerformanceRecorder Version="1.0">
+  <Profiles>
+    <SystemCollector Id="ColdSystemCollector" Name="FDB Cold System Collector">
+      <BufferSize Value="1024" />
+      <Buffers Value="40" />
+      <MaximumFileSize Value="96" FileMode="Sequential" />
+    </SystemCollector>
+    <SystemProvider Id="ColdSystemProvider">
+      <Keywords>
+        <Keyword Value="DiskIO" />
+        <Keyword Value="DiskIOInit" />
+        <Keyword Value="FileIO" />
+        <Keyword Value="FileIOInit" />
+        <Keyword Value="ProcessThread" />
+      </Keywords>
+    </SystemProvider>
+    <Profile Id="ColdIdentity.Light.File" Name="ColdIdentity" Description="FDB one cold open and one query" LoggingMode="File" DetailLevel="Light">
+      <Collectors>
+        <SystemCollectorId Value="ColdSystemCollector">
+          <SystemProviderId Value="ColdSystemProvider" />
+        </SystemCollectorId>
+      </Collectors>
+    </Profile>
+  </Profiles>
+</WindowsPerformanceRecorder>
+

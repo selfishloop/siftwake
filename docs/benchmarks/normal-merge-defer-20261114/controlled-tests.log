@@ -1,0 +1,25 @@
+   Compiling proc-macro2 v1.0.107
+   Compiling unicode-ident v1.0.26
+   Compiling quote v1.0.47
+   Compiling serde_core v1.0.229
+   Compiling zmij v1.0.23
+   Compiling serde_json v1.0.151
+   Compiling crc32fast v1.5.0
+   Compiling serde v1.0.229
+   Compiling memchr v2.8.3
+   Compiling cfg-if v1.0.5
+   Compiling itoa v1.0.18
+   Compiling simdutf8 v0.1.5
+   Compiling syn v3.0.6
+   Compiling serde_derive v1.0.229
+   Compiling fdb v0.4.0 (C:\Users\Serkan\Documents\ChatGPT\fdb\target\normal-merge-defer-20261114\source)
+    Finished `test` profile [unoptimized + debuginfo] target(s) in 25.24s
+     Running unittests src\lib.rs (target\normal-merge-defer-20261114\build\debug\deps\fdb-bba6c792839c96dd.exe)
+
+running 3 tests
+test engine::streamed::defer_tests::kill_child ... ignored, subprocess for candidate ACK and merge publication recovery
+test engine::streamed::defer_tests::candidate_process_kill_after_ack_before_and_after_merge_recovers ... ok
+test engine::streamed::defer_tests::post_flush_merge_waits_in_control_and_publishes_later_in_candidate ... ok
+
+test result: ok. 2 passed; 0 failed; 1 ignored; 0 measured; 182 filtered out; finished in 0.52s
+

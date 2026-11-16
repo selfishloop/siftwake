@@ -1,0 +1,116 @@
+use super::*;
+use crate::reclaim::tests::{Temp, doc};
+use std::sync::mpsc;
+use std::time::Duration;
+
+fn key(id: usize) -> Key {
+    Key::new("shared", "texts", &format!("{id:05}"))
+}
+
+fn put(id: usize, text: &str, guard: Guard) -> Mutation {
+    let mut body = doc("");
+    body.key = key(id);
+    body.text = text.into();
+    Mutation::Put {
+        document: body,
+        guard,
+    }
+}
+
+fn check(db: &Database, sequence: u64) {
+    assert_eq!(db.stats().unwrap().sequence, sequence);
+    assert_eq!(db.stats().unwrap().documents, 2094);
+    assert_eq!(db.get(&key(0)).unwrap().unwrap().version, sequence);
+    assert!(db.get(&key(1)).unwrap().is_none());
+    assert_eq!(db.get(&key(300)).unwrap().unwrap().version, sequence);
+    assert!(db.get(&key(301)).unwrap().is_none());
+    let mut q = Query::new("shared");
+    q.text = "newmarker東京".into();
+    q.limit = 50;
+    let exact = db.search(&q).unwrap();
+    assert_eq!(exact.total, 98);
+    assert_eq!(db.search_first_hybrid(&q, 200).unwrap().hits, exact.hits);
+}
+
+#[test]
+fn pending_prefix_recheck_keeps_atomic_wal_commit_and_old_snapshot() {
+    for candidate in [false, true] {
+        let temp = Temp::new();
+        let mut db = Database::open(&temp.0).unwrap();
+        db.set_streamed_wal_layer(true).unwrap();
+        db.set_revision_reclamation(false);
+        for first in [0, 100] {
+            db.commit_streamed_policy(
+                (first..first + 100).map(|id| Ok(put(id, "prefixmarker", Guard::Missing))),
+                false,
+                candidate,
+            )
+            .unwrap();
+        }
+        let pause = test_jobs::pause(&db.dir);
+        assert!(db.start_light_flush().unwrap());
+        pause.wait_entered();
+        for first in (200..2000).step_by(100) {
+            db.commit_streamed_policy(
+                (first..first + 100).map(|id| Ok(put(id, "tailmarker", Guard::Missing))),
+                false,
+                candidate,
+            )
+            .unwrap();
+        }
+        assert_eq!(db.shadow.len(), 2000);
+        let reader = db.snapshot_reader().unwrap();
+        let old = reader.acquire().unwrap();
+        assert_eq!(old.sequence(), 20);
+        assert_eq!(old.get(&key(300)).unwrap().unwrap().version, 4);
+        let (staging_tx, staging_rx) = mpsc::sync_channel(0);
+        let (release_tx, release_rx) = mpsc::sync_channel(0);
+        db.start_write_profile(8).unwrap();
+        let writer = std::thread::spawn(move || {
+            let guard = |version| Guard::Version { version };
+            let operations = std::iter::once_with(move || {
+                staging_tx.send(()).unwrap();
+                release_rx.recv().unwrap();
+                Ok(put(0, "newmarker東京", Guard::Version { version: 1 }))
+            });
+            let remainder = [
+                Ok(Mutation::Delete {
+                    key: key(1),
+                    guard: guard(1),
+                }),
+                Ok(put(300, "newmarker東京", guard(4))),
+                Ok(Mutation::Delete {
+                    key: key(301),
+                    guard: guard(4),
+                }),
+            ]
+            .into_iter()
+            .chain((2000..2096).map(|id| Ok(put(id, "newmarker東京", Guard::Missing))));
+            let sequence = db.commit_streamed_policy(operations.chain(remainder), false, candidate);
+            (db, sequence.unwrap())
+        });
+        staging_rx.recv_timeout(Duration::from_secs(15)).unwrap();
+        assert_eq!(reader.acquire().unwrap().sequence(), 20);
+        drop(pause);
+        release_tx.send(()).unwrap();
+        let (mut db, seq) = writer.join().unwrap();
+        assert_eq!(seq, 21);
+        let trace = db.take_write_profile().unwrap();
+        let frame = &trace.frames[0];
+        assert_eq!(frame.operation_sequence, 21);
+        let has = |name| frame.phases.iter().any(|phase| phase.name == name);
+        assert_eq!(has("stream.prefix_readmitted"), candidate);
+        assert_eq!(has("stream.delta_flush"), !candidate);
+        assert!(has("prefix.worker_join"));
+        assert_eq!(db.shadow.len(), if candidate { 1898 } else { 0 });
+        check(&db, seq);
+        assert_eq!(reader.acquire().unwrap().sequence(), seq);
+        assert_eq!(old.get(&key(0)).unwrap().unwrap().version, 1);
+        assert_eq!(old.get(&key(301)).unwrap().unwrap().version, 4);
+        assert!(old.get(&key(2095)).unwrap().is_none());
+        drop((old, reader, db));
+        let reopened = Database::open(&temp.0).unwrap();
+        reopened.check_integrity().unwrap();
+        check(&reopened, seq);
+    }
+}

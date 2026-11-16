@@ -1,0 +1,984 @@
+--- src\engine\background_revision.rs
++++ src\engine\background_revision.rs
+@@ -1,11 +1,30 @@
+ //! Prepare one revision rewrite off the writer. Only the writer publishes it.
+ use super::*;
++use std::sync::atomic::{AtomicU8, Ordering};
++
++struct BenchPhase(Arc<AtomicU8>);
++
++impl BenchPhase {
++    fn enter(phase: Arc<AtomicU8>, value: u8) -> Self {
++        phase.store(value, Ordering::Release);
++        Self(phase)
++    }
++}
++
++impl Drop for BenchPhase {
++    fn drop(&mut self) {
++        self.0.store(0, Ordering::Release);
++    }
++}
+ 
+ #[derive(Default)]
+ pub(super) struct State {
+     job: Option<Pending>,
+     examined: Option<Vec<Source>>,
+     collect: bool,
++    bench_worker: Arc<AtomicU8>,
++    bench_writer: Arc<AtomicU8>,
++    bench_installs: u64,
+ }
+ 
+ struct Pending {
+@@ -60,6 +79,19 @@
+ }
+ 
+ impl Database {
++    #[doc(hidden)]
++    pub fn bench_revision_phases(&self) -> (Arc<AtomicU8>, Arc<AtomicU8>) {
++        (
++            self.background_revision.bench_worker.clone(),
++            self.background_revision.bench_writer.clone(),
++        )
++    }
++
++    #[doc(hidden)]
++    pub fn bench_revision_installs(&self) -> u64 {
++        self.background_revision.bench_installs
++    }
++
+     pub(super) fn schedule_background_revision(&mut self) -> Result<bool> {
+         let state = &self.background_revision;
+         if !self.revision_reclamation
+@@ -80,15 +112,25 @@
+         let id = self.allocate()?;
+         let control = Arc::new(maintenance::Control::new(self.maintenance_activity.clone()));
+         let worker_control = control.clone();
++        let phase = self.background_revision.bench_worker.clone();
+         let handle = std::thread::Builder::new()
+             .name("fdb-revision".into())
+             .spawn(move || {
++                #[cfg(feature = "bounded-engine")]
++                let _trace = profile::WorkerScope::enter("revision", id);
+                 let _scope = maintenance::Scope::enter(Some(worker_control.clone()));
+                 #[cfg(test)]
+                 test_jobs::wait_revision(&dir);
++                let _phase = BenchPhase::enter(phase.clone(), 1);
++                #[cfg(feature = "bounded-engine")]
++                let plan_phase = profile::observe("revision.plan");
+                 let Some(plan) = revisions::plan(&runs, true)? else {
+                     return Ok(None);
+                 };
++                #[cfg(feature = "bounded-engine")]
++                drop(plan_phase);
++                drop(_phase);
++                let _phase = BenchPhase::enter(phase, 2);
+                 let range = plan.start..plan.end;
+                 let output = revisions::rewrite(
+                     &dir,
+@@ -120,10 +162,19 @@
+             return Ok(false);
+         }
+         let job = state.job.take().unwrap();
++        #[cfg(feature = "bounded-engine")]
++        let join = profile::phase(
++            self.write_profile.is_some(),
++            "revision.ready_join",
++            self.sequence,
++            job.id,
++        );
+         let prepared = job
+             .handle
+             .join()
+             .map_err(|_| Error::Invalid("revision worker panicked".into()))?;
++        #[cfg(feature = "bounded-engine")]
++        drop(join);
+         if job.control.is_cancelled() || !prefix_matches(&self.runs, &job.base) {
+             state.collect = true;
+             return Ok(false);
+@@ -133,13 +184,17 @@
+             return Ok(false);
+         };
+         state.collect = true;
+-        self.install_output(&job.base[prepared.range], prepared.output, false)
++        let _phase = BenchPhase::enter(state.bench_writer.clone(), 3);
++        let installed = self.install_output(&job.base[prepared.range], prepared.output, false)?;
++        self.background_revision.bench_installs += u64::from(installed);
++        Ok(installed)
+     }
+ 
+     pub(super) fn collect_background_revision(&mut self) -> Result<bool> {
+         if !self.background_revision.collect {
+             return Ok(false);
+         }
++        let _phase = BenchPhase::enter(self.background_revision.bench_writer.clone(), 4);
+         self.collect_obsolete()?;
+         self.background_revision.collect = false;
+         Ok(true)
+--- src\engine\light_flush.rs
++++ src\engine\light_flush.rs
+@@ -52,6 +52,7 @@
+         let light = self.light.clone();
+         let dir = self.dir.clone();
+         let handle = std::thread::spawn(move || {
++            let _trace = profile::WorkerScope::enter("prefix", output);
+             #[cfg(test)]
+             test_jobs::wait(&dir);
+             let _writer = crate::access::WriterScope::enter();
+@@ -122,7 +123,7 @@
+                     self.write_profile.is_some(),
+                     "prefix.worker_join",
+                     self.sequence,
+-                    self.active.id,
++                    pending.output,
+                 );
+                 pending
+                     .handle
+--- src\engine\profile.rs
++++ src\engine\profile.rs
+@@ -1,7 +1,112 @@
+ //! Opt-in, bounded per-commit wall trace. Query/document loops are not traced.
+ //! Nested phases overlap; their durations must not be summed as exclusive time.
+ use super::*;
+-use std::{cell::RefCell, collections::VecDeque, sync::Mutex, time::Instant};
++use std::{
++    cell::RefCell,
++    collections::VecDeque,
++    sync::{
++        Mutex, OnceLock,
++        atomic::{AtomicBool, Ordering},
++    },
++    time::Instant,
++};
++
++const MAX_AUX: usize = 100_000;
++static ENABLED: AtomicBool = AtomicBool::new(false);
++static CLOCK: OnceLock<Instant> = OnceLock::new();
++static AUX: Mutex<(u64, Vec<Aux>)> = Mutex::new((0, Vec::new()));
++thread_local! { static WORKER: std::cell::Cell<Option<(&'static str, u64)>> = const { std::cell::Cell::new(None) }; }
++
++#[derive(serde::Serialize)]
++struct Aux {
++    kind: &'static str,
++    id: u64,
++    phase: &'static str,
++    start_ns: u64,
++    end_ns: u64,
++}
++
++fn ts(now: Instant) -> u64 {
++    now.duration_since(*CLOCK.get_or_init(|| now)).as_nanos() as u64
++}
++
++fn push_aux(kind: &'static str, id: u64, phase: &'static str, start: Instant, end: Instant) {
++    let mut sink = AUX.lock().unwrap();
++    if sink.1.len() == MAX_AUX {
++        sink.0 += 1;
++    } else {
++        sink.1.push(Aux {
++            kind,
++            id,
++            phase,
++            start_ns: ts(start),
++            end_ns: ts(end),
++        });
++    }
++}
++
++pub(crate) struct WorkerScope(Option<(&'static str, u64, Instant)>);
++impl WorkerScope {
++    pub(crate) fn enter(kind: &'static str, id: u64) -> Self {
++        Self(ENABLED.load(Ordering::Relaxed).then(|| {
++            WORKER.with(|role| role.set(Some((kind, id))));
++            (kind, id, Instant::now())
++        }))
++    }
++}
++impl Drop for WorkerScope {
++    fn drop(&mut self) {
++        if let Some((kind, id, start)) = self.0 {
++            WORKER.with(|role| role.set(None));
++            push_aux(kind, id, "worker.wall", start, Instant::now());
++        }
++    }
++}
++
++pub(crate) struct ReleaseScope(Option<Instant>);
++impl ReleaseScope {
++    pub(crate) fn new() -> Self {
++        Self(ENABLED.load(Ordering::Relaxed).then(Instant::now))
++    }
++}
++impl Drop for ReleaseScope {
++    fn drop(&mut self) {
++        if let Some(start) = self.0 {
++            let end = Instant::now();
++            if end.duration_since(start).as_micros() >= 1000 {
++                push_aux("snapshot_release", 0, "gc.release_wall", start, end);
++            }
++        }
++    }
++}
++
++pub(crate) struct Observe(Option<(&'static str, Instant)>);
++pub(crate) fn observe(name: &'static str) -> Observe {
++    Observe(
++        ENABLED
++            .load(Ordering::Relaxed)
++            .then(|| (name, Instant::now())),
++    )
++}
++impl Drop for Observe {
++    fn drop(&mut self) {
++        if let Some((name, start)) = self.0 {
++            let end = Instant::now();
++            if let Some((kind, id)) = WORKER.with(|role| role.get()) {
++                push_aux(kind, id, name, start, end);
++            } else {
++                record_at(
++                    name,
++                    0,
++                    0,
++                    end.duration_since(start).as_nanos() as u64,
++                    ts(start),
++                    ts(end),
++                );
++            }
++        }
++    }
++}
+ 
+ #[derive(Debug, serde::Serialize)]
+ pub struct WritePhase {
+@@ -9,6 +114,8 @@
+     pub visible_sequence: u64,
+     pub active_wal_id: u64,
+     pub elapsed_ns: u64,
++    pub start_ns: u64,
++    pub end_ns: u64,
+ }
+ #[derive(Debug, serde::Serialize)]
+ pub struct WriteFrame {
+@@ -16,6 +123,8 @@
+     pub operation_sequence: u64,
+     pub elapsed_ns: u64,
+     pub phases: Vec<WritePhase>,
++    pub start_ns: u64,
++    pub end_ns: u64,
+ }
+ #[derive(Debug, serde::Serialize)]
+ pub struct WriteTrace {
+@@ -46,14 +155,17 @@
+                 previous: None,
+             };
+         };
++        let began = Instant::now();
+         let active = Active {
+             output: handle.clone(),
+-            began: Instant::now(),
++            began,
+             frame: WriteFrame {
+                 entry_sequence,
+                 operation_sequence: entry_sequence.saturating_add(1),
+                 elapsed_ns: 0,
+                 phases: Vec::new(),
++                start_ns: ts(began),
++                end_ns: 0,
+             },
+         };
+         Self {
+@@ -70,7 +182,9 @@
+         let mut active = CURRENT
+             .with(|c| c.replace(self.previous.take()))
+             .expect("write trace scope");
+-        active.frame.elapsed_ns = active.began.elapsed().as_nanos() as u64;
++        let end = Instant::now();
++        active.frame.elapsed_ns = end.duration_since(active.began).as_nanos() as u64;
++        active.frame.end_ns = ts(end);
+         let mut output = active.output.lock().unwrap_or_else(|e| e.into_inner());
+         if output.frames.len() == output.capacity {
+             output.frames.pop_front();
+@@ -80,6 +194,16 @@
+     }
+ }
+ pub(super) fn record(name: &'static str, sequence: u64, wal: u64, elapsed_ns: u64) {
++    record_at(name, sequence, wal, elapsed_ns, 0, 0);
++}
++fn record_at(
++    name: &'static str,
++    sequence: u64,
++    wal: u64,
++    elapsed_ns: u64,
++    start_ns: u64,
++    end_ns: u64,
++) {
+     CURRENT.with(|c| {
+         if let Some(active) = c.borrow_mut().as_mut() {
+             active.frame.phases.push(WritePhase {
+@@ -87,6 +211,8 @@
+                 visible_sequence: sequence,
+                 active_wal_id: wal,
+                 elapsed_ns,
++                start_ns,
++                end_ns,
+             });
+         }
+     });
+@@ -98,12 +224,29 @@
+ impl Drop for Phase {
+     fn drop(&mut self) {
+         if let Some((start, name, seq, wal)) = self.0 {
+-            record(name, seq, wal, start.elapsed().as_nanos() as u64);
++            let end = Instant::now();
++            record_at(
++                name,
++                seq,
++                wal,
++                end.duration_since(start).as_nanos() as u64,
++                ts(start),
++                ts(end),
++            );
+         }
+     }
+ }
+ 
+ impl Database {
++    #[doc(hidden)]
++    pub fn bench_profile_aux(&self, enabled: bool) -> serde_json::Value {
++        if enabled {
++            CLOCK.get_or_init(Instant::now);
++        }
++        ENABLED.store(enabled, Ordering::Relaxed);
++        let (lost, rows) = std::mem::take(&mut *AUX.lock().unwrap());
++        serde_json::json!({ "lost": lost, "aux": rows })
++    }
+     /// Enable an in-memory wall trace, disabled by default. Records are keyed
+     /// to the enclosing commit's prospective sequence, including publications
+     /// of an earlier sequence during prefix install. No data format changes.
+--- src\engine\snapshot.rs
++++ src\engine\snapshot.rs
+@@ -98,6 +98,8 @@
+ }
+ impl Reclaimer {
+     pub(super) fn writer_guard(&self) -> Result<WriterGuard<'_>> {
++        #[cfg(feature = "bounded-engine")]
++        let _wait = profile::observe("gc.writer_mutex");
+         let guard = self
+             .state
+             .lock()
+@@ -127,6 +129,8 @@
+             }
+         }
+         state.pending = live.iter().any(|id| !state.live.contains(id));
++        #[cfg(feature = "bounded-engine")]
++        let _gc = profile::observe("gc.inventory_unlink");
+         crate::reclaim::collect(&self.dir, state.generation, &live)
+     }
+     pub(super) fn collect_writer(
+@@ -143,6 +147,8 @@
+         self.perform(&mut guard._guard)
+     }
+     fn release(&self) -> SnapshotRelease {
++        #[cfg(feature = "bounded-engine")]
++        let _timing = profile::ReleaseScope::new();
+         let start = Instant::now();
+         let mut report = SnapshotRelease::default();
+         let guard = match self.state.try_lock() {
+--- src\engine\streamed.rs
++++ src\engine\streamed.rs
+@@ -150,6 +150,7 @@
+     fn append(&mut self, wal: &mut File) -> Result<()> {
+         #[cfg(feature = "diagnostic-timing")]
+         let _span = crate::timing::span("stream.wal_copy_and_sync");
++        let copy = super::profile::observe("wal.copy");
+         let file = self.file.as_mut().unwrap();
+         file.seek(SeekFrom::Start(0))?;
+         wal.seek(SeekFrom::End(0))?;
+@@ -161,7 +162,9 @@
+             wal.write_all(&bytes[..n])?;
+             remaining -= n;
+         }
+-        {
++        drop(copy);
++        {
++            let _fsync = super::profile::observe("wal.fsync");
+             #[cfg(feature = "diagnostic-timing")]
+             let _sync = crate::timing::span("stream.wal_sync");
+             wal.sync_all()?;
+@@ -459,7 +462,10 @@
+         let result = (|| {
+             #[cfg(feature = "diagnostic-timing")]
+             let _span = crate::timing::span("stream.fallback_transaction_publish");
+-            stage.append(&mut self.log)?;
++            {
++                let _wal = super::profile::observe("wal.authoritative_fallback");
++                stage.append(&mut self.log)?;
++            }
+             let id = self.allocate()?;
+             let run = write_run_prepared(&self.dir, id, sequence, stage.changes()?, |source| {
+                 let records = stage
+--- src\engine.rs
++++ src\engine.rs
+@@ -22,7 +22,7 @@
+ #[cfg(feature = "bounded-engine")]
+ mod light_flush;
+ #[cfg(feature = "bounded-engine")]
+-mod profile;
++pub(crate) mod profile;
+ #[cfg(feature = "bounded-engine")]
+ pub use light::{ChunkedCommit, ChunkedCommitError};
+ #[cfg(feature = "bounded-engine")]
+@@ -211,6 +211,7 @@
+     if std::env::var_os("FDB_LOCK_TRACE").is_some() {
+         eprintln!("source-workspace request {:?}", std::thread::current().id());
+     }
++    let _budget = profile::observe("budget.source_workspace");
+     let guard = WORKSPACE
+         .lock()
+         .map_err(|_| Error::Invalid("maintenance workspace poisoned".into()))?;
+@@ -229,6 +230,7 @@
+     #[cfg(feature = "diagnostic-timing")]
+     let _wait = crate::timing::span("maintenance.builder_workspace_wait");
+     static WORKSPACE: std::sync::Mutex<()> = std::sync::Mutex::new(());
++    let _budget = profile::observe("budget.builder_workspace");
+     WORKSPACE
+         .lock()
+         .map_err(|_| Error::Invalid("builder workspace poisoned".into()))
+@@ -929,6 +931,8 @@
+     let _workspace = maintenance_workspace()?;
+     #[cfg(feature = "diagnostic-timing")]
+     let _run = crate::timing::span("run.write_source_rebuild");
++    #[cfg(feature = "bounded-engine")]
++    let _source = profile::observe("source.prepare");
+     let mut source = Source {
+         kind: Kind::Run,
+         id,
+@@ -995,6 +999,10 @@
+     drop(file);
+     #[cfg(feature = "experimental-write-maintenance-slots")]
+     drop(_workspace);
++    #[cfg(feature = "bounded-engine")]
++    drop(_source);
++    #[cfg(feature = "bounded-engine")]
++    let _index = profile::observe("index.prepare");
+     // The large source Batch/encode buffers have been dropped before waiting.
+     // A single source writer and a single builder may overlap, never two of either.
+     #[cfg(feature = "bounded-engine")]
+@@ -2437,6 +2445,8 @@
+     }
+ 
+     fn collect_obsolete(&mut self) -> Result<crate::ReclaimStats> {
++        #[cfg(feature = "bounded-engine")]
++        let _gc = profile::observe("gc.writer_total");
+         self.healthy()?;
+         if manifest::inventory(&self.dir)?.0 != Some(self.generation) {
+             return Err(Error::Corrupt("reclaim latest publication changed".into()));
+@@ -2710,6 +2720,8 @@
+         let dir = self.dir.clone();
+         let id = self.allocate()?;
+         let handle = std::thread::spawn(move || {
++            #[cfg(feature = "bounded-engine")]
++            let _trace = profile::WorkerScope::enter("merge", id);
+             #[cfg(test)]
+             test_jobs::wait(&dir);
+             let _writer = crate::access::WriterScope::enter();
+@@ -2820,7 +2832,7 @@
+             self.write_profile.is_some(),
+             "merge.join",
+             self.sequence,
+-            self.active.id,
++            job.output_id,
+         );
+         let output = job
+             .handle
+--- src\manifest.rs
++++ src\manifest.rs
+@@ -189,17 +189,25 @@
+     bytes.extend_from_slice(&payload);
+     bytes.extend_from_slice(&crc(&bytes).to_le_bytes());
+     let pending = path(dir, id, "pending");
++    #[cfg(feature = "bounded-engine")]
++    let writing = crate::engine::profile::observe("manifest.write");
+     let mut f = OpenOptions::new()
+         .write(true)
+         .create_new(true)
+         .open(&pending)?;
+     f.write_all(&bytes)?;
++    #[cfg(feature = "bounded-engine")]
++    drop(writing);
+     {
++        #[cfg(feature = "bounded-engine")]
++        let _sync = crate::engine::profile::observe("manifest.fsync");
+         #[cfg(feature = "diagnostic-timing")]
+         let _sync = crate::timing::span("manifest.sync");
+         f.sync_all()?;
+     }
+     drop(f);
++    #[cfg(feature = "bounded-engine")]
++    let _publication = crate::engine::profile::observe("manifest.ready");
+     publish_ready(&pending, &path(dir, id, "ready"))?;
+     sync_dir(dir)
+ }
+--- src\write_budget.rs
++++ src\write_budget.rs
+@@ -43,6 +43,8 @@
+         if minimum == 0 || preferred < minimum || preferred > self.limit {
+             return Err(Error::Invalid("invalid write buffer reservation".into()));
+         }
++        #[cfg(feature = "bounded-engine")]
++        let _wait = crate::engine::profile::observe("budget.reserve");
+         let mut state = self
+             .state
+             .lock()
+--- examples\measure_churn.rs
++++ examples\measure_churn.rs
+@@ -425,6 +425,34 @@
+     fn idle_notify(&mut self) -> Result<Value> {
+         Ok(json!(self.0.maintain_idle()?))
+     }
++    fn arrival_phases(
++        &self,
++    ) -> (
++        std::sync::Arc<std::sync::atomic::AtomicU8>,
++        std::sync::Arc<std::sync::atomic::AtomicU8>,
++    ) {
++        self.0.bench_revision_phases()
++    }
++    fn arrival_reclaim(&mut self, enabled: bool) -> Result<()> {
++        self.0.set_revision_reclamation(enabled);
++        if !enabled {
++            self.0.wait_for_compaction()?;
++        }
++        Ok(())
++    }
++    fn arrival_installs(&self) -> u64 {
++        self.0.bench_revision_installs()
++    }
++    fn followup_profile(&mut self, enabled: bool) -> Result<Value> {
++        if enabled {
++            self.0.bench_profile_aux(true);
++            self.0.start_write_profile(3000)?;
++            Ok(Value::Null)
++        } else {
++            let commits = self.0.take_write_profile();
++            Ok(json!({ "commits": commits, "workers": self.0.bench_profile_aux(false) }))
++        }
++    }
+     fn poll_idle(&mut self) -> Result<bool> {
+         Ok(self.0.poll_maintenance()?)
+     }
+--- tools\bench_support\churn.rs
++++ tools\bench_support\churn.rs
+@@ -324,6 +324,15 @@
+     fn idle_notify(&mut self) -> Result<Value> {
+         self.maintain()
+     }
++    fn arrival_phases(
++        &self,
++    ) -> (
++        std::sync::Arc<std::sync::atomic::AtomicU8>,
++        std::sync::Arc<std::sync::atomic::AtomicU8>,
++    );
++    fn arrival_reclaim(&mut self, enabled: bool) -> Result<()>;
++    fn arrival_installs(&self) -> u64;
++    fn followup_profile(&mut self, enabled: bool) -> Result<Value>;
+     fn poll_idle(&mut self) -> Result<bool> {
+         Err("nonblocking maintenance unsupported".into())
+     }
+--- tools\bench_support\live_disk50.rs
++++ tools\bench_support\live_disk50.rs
+@@ -1,4 +1,6 @@
+ //! Fixed-slot Frunner disk and reopen measurement, with one short-snapshot reader.
++#[path = "maintenance_arrival.rs"]
++mod maintenance_arrival;
+ use super::{
+     churn::{self, Backend, Change, Corpus, Model, Result, Row},
+     snapshot_common::{Client, Factory, View, Writer},
+@@ -328,8 +330,9 @@
+     assert_eq!(model.rows.len(), DOCUMENTS);
+     assert_eq!(db.stats()?["sequence"], model.sequence);
+     match mode {
+-        "live-disk50-churn" | "live-disk50-default-churn" => {
+-            let background = mode == "live-disk50-default-churn";
++        "live-disk50-churn" | "live-disk50-default-churn" | "live-disk50-profile-churn" => {
++            let background = mode != "live-disk50-churn";
++            let profiled = mode == "live-disk50-profile-churn";
+             let factory = db.factory()?;
+             let queries = corpus
+                 .index
+@@ -339,6 +342,9 @@
+                 .collect();
+             let stop = AtomicBool::new(false);
+             let phase = AtomicUsize::new(0);
++            if profiled {
++                db.followup_profile(true)?;
++            }
+             std::thread::scope(|scope| -> Result<()> {
+                 let reader = scope.spawn(|| read_loop(factory, queries, &stop, &phase));
+                 let guard = StopReader(&stop);
+@@ -355,7 +361,13 @@
+                 reader.join().map_err(|_| "snapshot reader panicked")??;
+                 written
+             })?;
+-        }
++            if profiled {
++                churn::emit(
++                    json!({"phase": "followup_profile", "trace": db.followup_profile(false)?}),
++                );
++            }
++        }
++        "live-disk50-queue" => maintenance_arrival::run(db, &mut corpus, &mut model, state, path)?,
+         "live-disk50-verify" => verify(db, &mut corpus, &model, true)?,
+         "live-disk50-kill" => {
+             let group = churn::plan(&mut model, "mixed", 4, 4);
+--- tools\bench_support\maintenance_arrival.rs
++++ tools\bench_support\maintenance_arrival.rs
+@@ -0,0 +1,347 @@
++//! Single-writer service queue. Event producer and snapshot reader have separate clocks.
++use super::{
++    Backend, Change, Client, Corpus, Factory, Model, Result, Row, StopReader, View, Writer,
++    changes, churn, query,
++};
++use fdb::{MatchTotal, Query, ValidationStatus};
++use serde_json::{Value, json};
++use std::{
++    sync::{
++        atomic::{AtomicBool, Ordering},
++        mpsc::{self, Receiver, RecvTimeoutError, Sender, TryRecvError},
++    },
++    time::{Duration, Instant},
++};
++
++const CYCLES: usize = 6;
++const OFFSETS_MS: [u64; 4] = [50, 500, 1500, 3000];
++const BANDS: [(usize, usize); 4] = [(511, 2048), (2048, 8192), (8192, 32768), (32768, 200001)];
++const TIMEOUT: Duration = Duration::from_secs(40);
++
++struct Arrival {
++    index: usize,
++    at: Instant,
++    worker_phase: u8,
++    writer_phase: u8,
++}
++
++struct Check {
++    id: usize,
++    revision: u64,
++    sequence: u64,
++}
++
++struct Observation {
++    begin: Instant,
++    acquired: Instant,
++    first: Instant,
++    sequence: u64,
++}
++
++struct Commit {
++    arrival: Arrival,
++    start: Instant,
++    end: Instant,
++    id: usize,
++    body_bytes: usize,
++    old_revision: u64,
++    sequence: u64,
++}
++
++fn see(view: &impl View, check: &Check) -> Result<Instant> {
++    let marker = churn::marker(check.id, check.revision);
++    let page = view.first(&query(&marker))?;
++    let first = Instant::now();
++    assert_eq!(page.validation, ValidationStatus::Verified);
++    assert_eq!(page.sequence, view.sequence());
++    assert!(page.sequence >= check.sequence);
++    assert_eq!(page.total, MatchTotal::Exact(1));
++    assert_eq!(page.hits.len(), 1);
++    assert_eq!(page.hits[0].document.key, churn::key(check.id));
++    assert_eq!(page.hits[0].version, check.sequence);
++    Ok(first)
++}
++
++fn reader<F: Factory>(
++    factory: F,
++    queries: Vec<Query>,
++    checks: Receiver<Check>,
++    observations: Sender<Observation>,
++    stop: &AtomicBool,
++) -> Result<()> {
++    let mut client = factory.open()?;
++    let mut index = 0;
++    while !stop.load(Ordering::Acquire) {
++        match checks.try_recv() {
++            Ok(check) => {
++                let begin = Instant::now();
++                let (view, _) = client.acquire()?;
++                let acquired = Instant::now();
++                let first = see(&view, &check)?;
++                let sequence = view.sequence();
++                assert!(view.release()?.cleanup_error.is_none());
++                observations.send(Observation {
++                    begin,
++                    acquired,
++                    first,
++                    sequence,
++                })?;
++            }
++            Err(TryRecvError::Empty) => {
++                let (view, _) = client.acquire()?;
++                let page = view.first(&queries[index])?;
++                assert_eq!(page.sequence, view.sequence());
++                assert_eq!(page.validation, ValidationStatus::Verified);
++                assert!(view.release()?.cleanup_error.is_none());
++                index = (index + 1) % queries.len();
++            }
++            Err(TryRecvError::Disconnected) => return Ok(()),
++        }
++    }
++    Ok(())
++}
++
++struct ClientQueue {
++    checks: Sender<Check>,
++    observations: Receiver<Observation>,
++}
++
++fn ms(duration: Duration) -> f64 {
++    duration.as_secs_f64() * 1000.
++}
++
++fn paired_ids(corpus: &Corpus, model: &Model, cycle: usize) -> [usize; 4] {
++    BANDS.map(|(low, high)| {
++        let eligible: Vec<_> = model
++            .rows
++            .iter()
++            .filter(|(_, row)| {
++                let n = corpus.index.entries[row.body].text_bytes;
++                low <= n && n < high
++            })
++            .map(|(&id, _)| id)
++            .collect();
++        eligible[(cycle * 701 + 17) % eligible.len()]
++    })
++}
++
++fn commit_event(
++    db: &mut impl Backend,
++    corpus: &mut Corpus,
++    model: &mut Model,
++    id: usize,
++    arrival: Arrival,
++    queue: &ClientQueue,
++) -> Result<Commit> {
++    let old = model.rows[&id].clone();
++    let new = Row {
++        body: old.body,
++        revision: old.revision + 1,
++        version: 0,
++    };
++    let change = Change {
++        id,
++        old: Some(old.clone()),
++        new: Some(new.clone()),
++        kind: "update".into(),
++    };
++    let start = Instant::now();
++    let sequence = db.commit(corpus, std::slice::from_ref(&change), true)?;
++    let end = Instant::now();
++    churn::apply(model, std::slice::from_ref(&change), sequence);
++    queue.checks.send(Check {
++        id,
++        revision: new.revision,
++        sequence,
++    })?;
++    Ok(Commit {
++        arrival,
++        start,
++        end,
++        id,
++        body_bytes: corpus.index.entries[new.body].text_bytes,
++        old_revision: old.revision,
++        sequence,
++    })
++}
++
++fn producer(
++    origin: Instant,
++    sender: Sender<Arrival>,
++    phase: (
++        std::sync::Arc<std::sync::atomic::AtomicU8>,
++        std::sync::Arc<std::sync::atomic::AtomicU8>,
++    ),
++) -> Result<()> {
++    for (index, offset) in OFFSETS_MS.into_iter().enumerate() {
++        let deadline = origin + Duration::from_millis(offset);
++        while let Some(remaining) = deadline.checked_duration_since(Instant::now()) {
++            std::thread::sleep(remaining);
++        }
++        sender.send(Arrival {
++            index,
++            at: Instant::now(),
++            worker_phase: phase.0.load(Ordering::Acquire),
++            writer_phase: phase.1.load(Ordering::Acquire),
++        })?;
++    }
++    Ok(())
++}
++
++fn measure_phase(
++    db: &mut impl Backend,
++    corpus: &mut Corpus,
++    model: &mut Model,
++    queue: &ClientQueue,
++    ids: [usize; 4],
++    maintenance: bool,
++) -> Result<Vec<Value>> {
++    let (send, receive) = mpsc::channel();
++    let phase = db.arrival_phases();
++    std::thread::scope(|scope| {
++        let origin = Instant::now();
++        let worker = scope.spawn(move || producer(origin, send, phase));
++        let mut commits = Vec::new();
++        for _ in ids {
++            let arrival = if maintenance {
++                next_with_maintenance(db, &receive)?
++            } else {
++                receive.recv_timeout(TIMEOUT)?
++            };
++            let id = ids[arrival.index];
++            commits.push(commit_event(db, corpus, model, id, arrival, queue)?);
++        }
++        worker.join().map_err(|_| "arrival producer panicked")??;
++        let mut output = Vec::new();
++        for c in &commits {
++            let observed = match queue.observations.recv_timeout(TIMEOUT) {
++                Err(RecvTimeoutError::Timeout) => {
++                    return Err("visibility response timed out".into());
++                }
++                other => other?,
++            };
++            assert!(observed.begin >= c.end);
++            assert!(observed.sequence >= c.sequence);
++            output.push(json!({
++                "condition": if maintenance { "background" } else { "control" },
++                "worker_phase": c.arrival.worker_phase, "writer_phase": c.arrival.writer_phase,
++                "event_index": c.arrival.index, "offset_ms": OFFSETS_MS[c.arrival.index],
++                "arrival_ms": ms(c.arrival.at.duration_since(origin)),
++                "id": c.id, "body_bytes": c.body_bytes, "sequence": c.sequence, "snapshot_sequence": observed.sequence,
++                "queue_ms": ms(c.start.duration_since(c.arrival.at)),
++                "commit_ms": ms(c.end.duration_since(c.start)),
++                "commit_to_reader_ms": ms(observed.begin.duration_since(c.end)),
++                "acquire_ms": ms(observed.acquired.duration_since(observed.begin)),
++                "first_query_ms": ms(observed.first.duration_since(observed.acquired)),
++                "arrival_to_visible_ms": ms(observed.first.duration_since(c.arrival.at)),
++                "oracle": true
++            }));
++        }
++        // These exact GET and stale-marker checks are deliberately outside the
++        // observation loop so that one event cannot slow down the next probe.
++        for c in &commits {
++            let row = &model.rows[&c.id];
++            assert_eq!(
++                db.get(c.id)?,
++                Some(fdb::StoredDocument {
++                    document: corpus.document(c.id, row)?,
++                    version: c.sequence,
++                })
++            );
++            assert_eq!(
++                db.search(&churn::marker(c.id, c.old_revision), 0, 1)?.total,
++                0
++            );
++        }
++        Ok(output)
++    })
++}
++
++fn next_with_maintenance(db: &mut impl Backend, receive: &Receiver<Arrival>) -> Result<Arrival> {
++    let stop = Instant::now() + TIMEOUT;
++    while Instant::now() < stop {
++        match receive.try_recv() {
++            Ok(arrival) => return Ok(arrival),
++            Err(TryRecvError::Empty) => {}
++            Err(error) => return Err(error.into()),
++        }
++        db.poll_idle()?;
++        match receive.recv_timeout(Duration::from_millis(5)) {
++            Ok(arrival) => return Ok(arrival),
++            Err(RecvTimeoutError::Timeout) => {}
++            Err(error) => return Err(error.into()),
++        }
++    }
++    Err("event queue timeout".into())
++}
++
++fn workload(
++    db: &mut impl Backend,
++    corpus: &mut Corpus,
++    model: &mut Model,
++    state: &str,
++    path: &str,
++    queue: &ClientQueue,
++) -> Result<()> {
++    for cycle in 0..CYCLES {
++        for group in changes(model, 30 + cycle).as_chunks::<100>().0 {
++            let sequence = db.commit(corpus, group, true)?;
++            churn::apply(model, group, sequence);
++        }
++        model.save(state)?;
++        let ids = paired_ids(corpus, model, cycle);
++        let order = if cycle % 2 == 0 {
++            [true, false]
++        } else {
++            [false, true]
++        };
++        for maintenance in order {
++            if !maintenance {
++                db.arrival_reclaim(false)?;
++            }
++            let events = measure_phase(db, corpus, model, queue, ids, maintenance)?;
++            model.save(state)?;
++            churn::emit(json!({"phase":"arrival_events","cycle":cycle+1,"events":events}));
++            if !maintenance {
++                db.arrival_reclaim(true)?;
++            }
++        }
++        churn::emit(
++            json!({"phase":"arrival_cycle","cycle":cycle+1,"stats":db.stats()?,"disk":churn::disk(path)?,"revision_installs":db.arrival_installs()}),
++        );
++    }
++    Ok(())
++}
++
++pub(super) fn run(
++    db: &mut impl Writer,
++    corpus: &mut Corpus,
++    model: &mut Model,
++    state: &str,
++    path: &str,
++) -> Result<()> {
++    assert_eq!(model.rows.len(), 50000);
++    let factory = db.factory()?;
++    let queries = corpus
++        .index
++        .cases
++        .iter()
++        .map(|case| query(&case.text))
++        .collect();
++    let (check_tx, check_rx) = mpsc::channel();
++    let (seen_tx, seen_rx) = mpsc::channel();
++    let stop = AtomicBool::new(false);
++    std::thread::scope(|scope| -> Result<()> {
++        let task = scope.spawn(|| reader(factory, queries, check_rx, seen_tx, &stop));
++        let guard = StopReader(&stop);
++        let queue = ClientQueue {
++            checks: check_tx,
++            observations: seen_rx,
++        };
++        let result = workload(db, corpus, model, state, path, &queue);
++        drop(guard);
++        task.join().map_err(|_| "snapshot reader panicked")??;
++        result
++    })?;
++    Ok(())
++}
