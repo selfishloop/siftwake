@@ -1,6 +1,6 @@
 #[cfg(feature = "bounded-engine")]
 fn main() -> Result<(), Box<dyn std::error::Error>> {
-    use fdb::{Database, IndexCacheLayout};
+    use siftwake::{Database, IndexCacheLayout};
     let path = std::path::Path::new("data/benchmark-work/fdb");
     if !path.is_dir() {
         return Err("existing fixed 10k slot required".into());

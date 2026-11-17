@@ -4,8 +4,8 @@ mod churn;
 mod tantivy_arm;
 
 use churn::{Case, Corpus, Result, Row, cpu_ms, emit, key, memory};
-use fdb::{Database, Document, Guard, MatchTotal, Mutation, Query, Snapshot};
 use serde_json::json;
+use siftwake::{Database, Document, Guard, MatchTotal, Mutation, Query, Snapshot};
 use std::{
     env, fs,
     path::Path,
@@ -159,7 +159,7 @@ fn seed(arm: Arm, path: &Path) -> Result<()> {
                             document,
                             guard: Guard::Missing,
                         })
-                        .map_err(|e| fdb::Error::Invalid(e.to_string()))
+                        .map_err(|e| siftwake::Error::Invalid(e.to_string()))
                 }))?;
                 commits.push(ms(at));
                 if first % 5000 == 0 {
@@ -359,7 +359,7 @@ fn matrix(arm: Arm, path: &Path, block: usize, samples: usize) -> Result<()> {
 // One writer lives on the stack per visibility run.
 #[allow(clippy::large_enum_variant)]
 enum Writer {
-    Fdb(Database, fdb::SnapshotReader),
+    Fdb(Database, siftwake::SnapshotReader),
     Tantivy(Fields, IndexReader, tantivy::IndexWriter),
 }
 

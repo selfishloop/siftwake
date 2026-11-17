@@ -1,6 +1,6 @@
 //! Shared by the FDB and isolated native SQLite benchmarks.
-use fdb::{Document, Key};
 use serde_json::{Value, json};
+use siftwake::{Document, Key};
 use std::collections::BTreeMap;
 
 pub fn key(id: usize) -> Key {

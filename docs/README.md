@@ -1,7 +1,7 @@
 # Siftwake documentation
 
-Siftwake `0.1.5-preview` is the public identity of the Rust engine developed as FDB.
-The Cargo package, crate and executable currently retain the `fdb` name.
+Siftwake `0.1.5-preview` is an embedded document database and content search
+engine. The Cargo package, Rust crate and executable are named `siftwake`.
 
 | Start here | Purpose |
 | --- | --- |

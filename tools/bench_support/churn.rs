@@ -1,7 +1,7 @@
 //! Measurement-only workload. No engine hooks, format changes or corpus generation.
-use fdb::{Document, Guard, Key, Mutation, SearchPage, StoredDocument};
 use serde::{Deserialize, Serialize};
 use serde_json::{Value, json};
+use siftwake::{Document, Guard, Key, Mutation, SearchPage, StoredDocument};
 use std::{
     collections::BTreeMap,
     fs::{self, File},
@@ -301,16 +301,16 @@ pub struct Change {
     pub kind: String,
 }
 pub trait Backend: Send {
-    fn query_variant(&self, text: &str, variant: &str) -> Result<fdb::FirstPage> {
+    fn query_variant(&self, text: &str, variant: &str) -> Result<siftwake::FirstPage> {
         if variant != "legacy" {
             return Err("query experiments unsupported".into());
         }
         let p = self.search(text, 0, 50)?;
-        Ok(fdb::FirstPage {
-            total: fdb::MatchTotal::Exact(p.total),
+        Ok(siftwake::FirstPage {
+            total: siftwake::MatchTotal::Exact(p.total),
             sequence: p.sequence,
             hits: p.hits,
-            validation: fdb::ValidationStatus::Verified,
+            validation: siftwake::ValidationStatus::Verified,
         })
     }
     fn query_profile_reset(&self) {}
@@ -335,12 +335,12 @@ pub trait Backend: Send {
     }
 }
 #[allow(dead_code)] // SQLite consumes the same descriptors directly.
-pub fn mutation(corpus: &mut Corpus, c: &Change) -> fdb::Result<Mutation> {
+pub fn mutation(corpus: &mut Corpus, c: &Change) -> siftwake::Result<Mutation> {
     match &c.new {
         Some(r) => Ok(Mutation::Put {
             document: corpus
                 .document(c.id, r)
-                .map_err(|e| fdb::Error::Invalid(e.to_string()))?,
+                .map_err(|e| siftwake::Error::Invalid(e.to_string()))?,
             guard: Guard::Any,
         }),
         None => Ok(Mutation::Delete {

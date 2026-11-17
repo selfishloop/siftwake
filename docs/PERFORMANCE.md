@@ -3,14 +3,20 @@
 Results describe the named corpus, implementation, settings, physical layout
 and session. The reports preserve failed runs and known limitations.
 
-## FDB and Tantivy, 50k
+## Siftwake, SQLite and Tantivy, 50k
 
-On 16 November 2026, the FDB implementation and Tantivy 0.27.0 processed
+The README summary uses the paired 16 November Siftwake/Tantivy measurements
+and the 29 October SQLite baseline on the same cap200k 50k prefix.
+The SQLite column comes from a separate session with its recorded settings.
+The complete 41-case first-page table is included in the README.
+[SQLite baseline](TRWIKI-CAP200K-SCALE-20261029.md)
+
+On 16 November 2026, Siftwake and Tantivy 0.27.0 processed
 the same first 50,000 documents of the audited cap200k Turkish corpus.
-Successful arm order was FDB → Tantivy → Tantivy → FDB. Each query path has
+Successful arm order was Siftwake → Tantivy → Tantivy → Siftwake. Each query path has
 24 warm samples across two blocks.
 
-| Measurement | FDB implementation | Tantivy comparator |
+| Measurement | Siftwake | Tantivy comparator |
 | --- | ---: | ---: |
 | First-page cases with lower p95 | 39 / 41 | 2 / 41 |
 | Exact cases with lower p95 | 40 / 41 | 1 / 41 |
@@ -21,9 +27,9 @@ Successful arm order was FDB → Tantivy → Tantivy → FDB. Each query path ha
 | Warm open to first result p95 | 217.93 ms | 12.43 ms |
 | Single update to visible result p95 | 143.23 ms | 81.17 ms |
 
-FDB used strict open. Tantivy's full checksum verification ran in a separate
+Siftwake used strict open. Tantivy's full checksum verification ran in a separate
 oracle phase. Its stored documents use LZ4, and the comparator builds a text
-candidate index. FDB also indexes metadata and links. FDB's small streamed
+candidate index. Siftwake also indexes metadata and links. Its small streamed
 WAL option was disabled, as in its current default configuration.
 
 Tantivy had four interrupted seed attempts and one interrupted update series
@@ -41,8 +47,8 @@ These process memory values include the specified harness state.
 
 ## Cold open against SQLite
 
-The recorded 15 November run used the existing 50k churn layout with 39 FDB
-runs. Four ETW-supported cold trials produced FDB open-to-first-result
+The recorded 15 November run used the existing 50k churn layout with 39 Siftwake
+runs. Four ETW-supported cold trials produced Siftwake open-to-first-result
 885–909 ms and SQLite 6,663–6,696 ms. Corresponding warm results were
 627–640 ms and 297–339 ms.
 

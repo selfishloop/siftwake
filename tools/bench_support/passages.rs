@@ -1,7 +1,7 @@
 //! Same oracle document reconstruction as measure_engine_fold.
-use fdb::{Document, Key, StoredDocument};
 use serde::Deserialize;
 use serde_json::json;
+use siftwake::{Document, Key, StoredDocument};
 use std::collections::BTreeMap;
 #[derive(Deserialize)]
 pub(crate) struct Source {

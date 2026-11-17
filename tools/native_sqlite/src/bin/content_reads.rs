@@ -6,9 +6,9 @@ mod matrix;
 mod read_probe;
 #[path = "../../../bench_support/content_reads.rs"]
 mod reads;
-use fdb::StoredDocument;
 use rusqlite::{Connection, OpenFlags, OptionalExtension, params, params_from_iter};
 use serde_json::json;
+use siftwake::StoredDocument;
 use std::time::Instant;
 fn main() -> input::Result<()> {
     let start = Instant::now();
@@ -37,7 +37,7 @@ fn main() -> input::Result<()> {
     }
     if std::env::args().any(|arg| arg == "--first-use-probe") {
         let start = Instant::now();
-        let doc = get(&db, &fdb::Key::new("shared", "texts", "0000009999"))?.unwrap();
+        let doc = get(&db, &siftwake::Key::new("shared", "texts", "0000009999"))?.unwrap();
         let first_get_ms = start.elapsed().as_secs_f64() * 1000.;
         assert_eq!(doc.version, 20);
         let start = Instant::now();
@@ -101,7 +101,7 @@ fn main() -> input::Result<()> {
         |text| search(&db, text, 0, 50),
     )
 }
-fn get(db: &Connection, key: &fdb::Key) -> input::Result<Option<StoredDocument>> {
+fn get(db: &Connection, key: &siftwake::Key) -> input::Result<Option<StoredDocument>> {
     let payload: Option<String> = db
         .prepare_cached("SELECT payload FROM docs WHERE scope=? AND collection=? AND id=?")?
         .query_row(params![key.scope, key.collection, key.id], |row| row.get(0))

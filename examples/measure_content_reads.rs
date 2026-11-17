@@ -15,8 +15,8 @@ mod matrix;
 mod read_probe;
 #[path = "../tools/bench_support/content_reads.rs"]
 mod reads;
-use fdb::{Database, Query};
 use serde_json::json;
+use siftwake::{Database, Query};
 use std::{path::Path, time::Instant};
 fn main() -> input::Result<()> {
     let path = "data/benchmark-work/fdb";
@@ -66,7 +66,7 @@ fn main() -> input::Result<()> {
                 assert_eq!(page.sequence, 20);
                 println!(
                     "{}",
-                    json!({"phase":"query_allocation","text":case.text,"offset":case.offset,"limit":case.limit,"iteration":iteration,"hits":page.hits.len(),"capacity":page.hits.capacity(),"stored_document_bytes":std::mem::size_of::<fdb::StoredDocument>(),"additional_requested_peak_bytes":peak.saturating_sub(before),"live_requested_delta_bytes":live as i64-before as i64,"allocation_calls":calls,"includes_os_memory":false,"timings_are_invalid":true,"full_document_and_version_checks":true})
+                    json!({"phase":"query_allocation","text":case.text,"offset":case.offset,"limit":case.limit,"iteration":iteration,"hits":page.hits.len(),"capacity":page.hits.capacity(),"stored_document_bytes":std::mem::size_of::<siftwake::StoredDocument>(),"additional_requested_peak_bytes":peak.saturating_sub(before),"live_requested_delta_bytes":live as i64-before as i64,"allocation_calls":calls,"includes_os_memory":false,"timings_are_invalid":true,"full_document_and_version_checks":true})
                 );
             }
         }
@@ -116,11 +116,11 @@ fn main() -> input::Result<()> {
     }
     if std::env::args().any(|arg| arg == "--deferred-probe") {
         #[cfg(feature = "diagnostic-timing")]
-        let _ = fdb::timing::take();
+        let _ = siftwake::timing::take();
         let pending = db.pending_source_checks()?;
         let start = Instant::now();
         let doc = db
-            .get(&fdb::Key::new("shared", "texts", "0000009999"))?
+            .get(&siftwake::Key::new("shared", "texts", "0000009999"))?
             .unwrap();
         let first_get_ms = start.elapsed().as_secs_f64() * 1000.;
         assert_eq!(doc.version, 20);
@@ -128,7 +128,7 @@ fn main() -> input::Result<()> {
         #[cfg(feature = "diagnostic-timing")]
         println!(
             "{}",
-            json!({"phase":"first_get_profile","counters":fdb::timing::take(),"nested_spans_do_not_sum":true})
+            json!({"phase":"first_get_profile","counters":siftwake::timing::take(),"nested_spans_do_not_sum":true})
         );
         let mut query = Query::new("shared");
         query.collection = Some("texts".into());
@@ -142,7 +142,7 @@ fn main() -> input::Result<()> {
         #[cfg(feature = "diagnostic-timing")]
         println!(
             "{}",
-            json!({"phase":"first_search_profile","counters":fdb::timing::take(),"nested_spans_do_not_sum":true})
+            json!({"phase":"first_search_profile","counters":siftwake::timing::take(),"nested_spans_do_not_sum":true})
         );
         let start = Instant::now();
         let repeated = db.search(&query)?;
@@ -158,7 +158,7 @@ fn main() -> input::Result<()> {
         #[cfg(feature = "diagnostic-timing")]
         println!(
             "{}",
-            json!({"phase":"open_profile","counters":fdb::timing::take(),"instrumented":true,"nested_spans_do_not_sum":true})
+            json!({"phase":"open_profile","counters":siftwake::timing::take(),"instrumented":true,"nested_spans_do_not_sum":true})
         );
         return Ok(());
     }
@@ -236,7 +236,7 @@ fn main() -> input::Result<()> {
     }) {
         if std::env::args().any(|arg| arg == "--profile-covering") {
             let pending = db.pending_source_checks()?;
-            let _ = fdb::timing::take();
+            let _ = siftwake::timing::take();
             let mut query = Query::new("shared");
             query.collection = Some("texts".into());
             query.text = "the".into();
@@ -249,7 +249,7 @@ fn main() -> input::Result<()> {
             assert_eq!(db.pending_source_checks()?, 0);
             println!(
                 "{}",
-                json!({"phase":"covered_first_use","text":"the","elapsed_ms":first_ms,"pending_before":pending,"pending_after":0,"counters":fdb::timing::take(),"instrumented":true,"no_os_cache_eviction":true,"includes_source_validation":true,"nested_spans_do_not_sum":true})
+                json!({"phase":"covered_first_use","text":"the","elapsed_ms":first_ms,"pending_before":pending,"pending_after":0,"counters":siftwake::timing::take(),"instrumented":true,"no_os_cache_eviction":true,"includes_source_validation":true,"nested_spans_do_not_sum":true})
             );
         }
         let matrix = matrix::Matrix::load()?;
@@ -302,7 +302,7 @@ fn main() -> input::Result<()> {
             query.limit = case.limit;
             query.offset = case.offset;
             let _ = db.search(&query)?;
-            let _ = fdb::timing::take();
+            let _ = siftwake::timing::take();
             for iteration in 0..if pages { 30 } else { 3 } {
                 let cycle_start = cycles::read();
                 let start = Instant::now();
@@ -311,7 +311,7 @@ fn main() -> input::Result<()> {
                 let thread_cycles = cycle_start
                     .zip(cycles::read())
                     .and_then(|(first, last)| last.checked_sub(first));
-                let counters = fdb::timing::take();
+                let counters = siftwake::timing::take();
                 assert_eq!(page.total, case.total);
                 let expected: Vec<_> = case
                     .ids
@@ -335,10 +335,10 @@ fn main() -> input::Result<()> {
             query.collection = Some("texts".into());
             query.text = (*text).into();
             let _ = db.search(&query)?;
-            let _ = fdb::timing::take();
+            let _ = siftwake::timing::take();
             for iteration in 0..3 {
                 let page = db.search(&query)?;
-                let counters = fdb::timing::take();
+                let counters = siftwake::timing::take();
                 assert_eq!(page.total, oracle.totals[n]);
                 assert_eq!(page.hits, oracle.pages[n]);
                 println!(

@@ -1,6 +1,6 @@
 #![cfg(feature = "bounded-engine")]
-use fdb::{Database, Document, Error, Guard, Key, Mutation, Query, Range};
 use serde_json::json;
+use siftwake::{Database, Document, Error, Guard, Key, Mutation, Query, Range};
 use std::{collections::BTreeMap, path::PathBuf};
 struct Temp(PathBuf);
 impl Temp {
@@ -54,7 +54,7 @@ fn covered_grams_preserve_unicode_mixed_terms_visibility_and_numbered_pages() {
             value
                 .fields
                 .insert("unused_text".into(), json!("the 東京🦀"));
-            fdb::StoredDocument {
+            siftwake::StoredDocument {
                 document: value,
                 version: 1,
             }
@@ -68,7 +68,7 @@ fn covered_grams_preserve_unicode_mixed_terms_visibility_and_numbered_pages() {
         })
     }))
     .unwrap();
-    fn check(db: &Database, rows: &[fdb::StoredDocument]) {
+    fn check(db: &Database, rows: &[siftwake::StoredDocument]) {
         fn fold(text: &str) -> String {
             text.chars()
                 .flat_map(|c| match c {
@@ -150,7 +150,7 @@ fn short_coverage_and_isolated_short_fallback_match_independent_oracle() {
                 document.key.collection = "other".into();
             }
             document.fields.insert("excluded".into(), json!("zx"));
-            fdb::StoredDocument {
+            siftwake::StoredDocument {
                 document,
                 version: 1,
             }
@@ -165,7 +165,7 @@ fn short_coverage_and_isolated_short_fallback_match_independent_oracle() {
         })
     }))
     .unwrap();
-    fn check(db: &Database, rows: &[fdb::StoredDocument]) {
+    fn check(db: &Database, rows: &[siftwake::StoredDocument]) {
         for text in [
             "HE",
             "th",
@@ -303,7 +303,7 @@ fn covered_query_never_accepts_corrupt_source_with_valid_index_and_address_cache
                     assert!(matches!(
                         db.search_with_execution(
                             &query,
-                            fdb::SearchExecution {
+                            siftwake::SearchExecution {
                                 verification_workers: 4,
                                 coalesce_gap_bytes: 8192,
                                 reuse_validated_source_crc: true
@@ -652,15 +652,15 @@ fn streamed_process_kill_before_ack_during_wal_publication_and_after_ack() {
         let exact = db.search(&q).unwrap();
         assert_eq!(db.search_first_hybrid(&q, 200).unwrap().hits, exact.hits);
         assert_eq!(
-            db.search_first_hybrid_cancellable(&q, 200, &fdb::CancelToken::new())
+            db.search_first_hybrid_cancellable(&q, 200, &siftwake::CancelToken::new())
                 .unwrap()
                 .hits,
             exact.hits
         );
         assert_eq!(exact.total, if mode == "intake" { 0 } else { 500 });
         for e in [
-            fdb::SearchExecution::default(),
-            fdb::SearchExecution {
+            siftwake::SearchExecution::default(),
+            siftwake::SearchExecution {
                 verification_workers: 4,
                 coalesce_gap_bytes: 8192,
                 reuse_validated_source_crc: true,

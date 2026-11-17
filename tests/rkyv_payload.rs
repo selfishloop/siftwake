@@ -1,5 +1,5 @@
 #![cfg(feature = "experimental-rkyv-payload")]
-use fdb::{
+use siftwake::{
     Document, Key, StoredDocument,
     rkyv_payload::{
         self as payload,
@@ -117,9 +117,9 @@ fn old_json_fixture_still_opens_with_rkyv_feature_enabled() {
         )
         .unwrap();
     }
-    let db = fdb::Database::open(&temp.0).unwrap();
+    let db = siftwake::Database::open(&temp.0).unwrap();
     assert_eq!(db.stats().unwrap().documents, 4);
-    let mut query = fdb::Query::new("shared");
+    let mut query = siftwake::Query::new("shared");
     query.text = "TEKNOLOJİ yatırımları".into();
     assert_eq!(db.search(&query).unwrap().total, 2);
     assert_eq!(
@@ -223,12 +223,12 @@ fn overlay_database(root: &std::path::Path) -> Vec<StoredDocument> {
             d
         })
         .collect();
-    let mut db = fdb::Database::open(root).unwrap();
+    let mut db = siftwake::Database::open(root).unwrap();
     db.commit(
         docs.iter()
-            .map(|d| fdb::Mutation::Put {
+            .map(|d| siftwake::Mutation::Put {
                 document: d.document.clone(),
-                guard: fdb::Guard::Any,
+                guard: siftwake::Guard::Any,
             })
             .collect(),
     )
@@ -259,12 +259,12 @@ fn real_engine_overlay_pages_filters_and_mismatched_cache_fail_closed() {
             }
             writer.finish().unwrap();
         }
-        let mut db = fdb::Database::open(&root).unwrap();
+        let mut db = siftwake::Database::open(&root).unwrap();
         assert!(db.attach_payload_benchmark(&bad, codec).is_err());
         assert_eq!(db.get(&docs[0].document.key).unwrap().unwrap(), docs[0]);
         db.attach_payload_benchmark(&good, codec).unwrap();
         assert!(db.attach_payload_benchmark(&good, codec).is_err());
-        let mut q = fdb::Query::new("shared");
+        let mut q = siftwake::Query::new("shared");
         q.collection = Some("texts".into());
         q.text = "istanbul şirket 🦀".into();
         q.limit = 2;
@@ -288,7 +288,7 @@ fn real_engine_overlay_pages_filters_and_mismatched_cache_fail_closed() {
         drop(db);
         // Overlay is never discovered automatically on normal reopen.
         assert_eq!(
-            fdb::Database::open(&root)
+            siftwake::Database::open(&root)
                 .unwrap()
                 .get(&docs[0].document.key)
                 .unwrap()
@@ -304,7 +304,7 @@ fn real_engine_overlay_pages_filters_and_mismatched_cache_fail_closed() {
         let at = bytes.len() - 1;
         bytes[at] ^= 1;
         fs::write(source, bytes).unwrap();
-        assert!(fdb::Database::open(&root).is_err());
+        assert!(siftwake::Database::open(&root).is_err());
     }
 }
 
@@ -315,9 +315,9 @@ fn overlay_engine_child() {
     use std::io::Write;
     let root = std::env::var_os("FDB_OVERLAY_TEST_DB").unwrap();
     let path = std::env::var_os("FDB_OVERLAY_TEST_PAYLOAD").unwrap();
-    let mut db = fdb::Database::open(root).unwrap();
+    let mut db = siftwake::Database::open(root).unwrap();
     db.attach_payload_benchmark(path, Codec::Binary).unwrap();
-    let mut q = fdb::Query::new("shared");
+    let mut q = siftwake::Query::new("shared");
     q.text = "şirket".into();
     assert_eq!(db.search(&q).unwrap().total, 4);
     println!("FDB_OVERLAY_READY");
@@ -383,7 +383,7 @@ fn overlay_engine_process_kill() {
     for (p, b) in before {
         assert_eq!(fs::read(p).unwrap(), b);
     }
-    let db = fdb::Database::open(&root).unwrap();
+    let db = siftwake::Database::open(&root).unwrap();
     assert_eq!(db.get(&docs[0].document.key).unwrap().unwrap(), docs[0]);
 }
 #[test]

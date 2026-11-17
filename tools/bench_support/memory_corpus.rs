@@ -1,6 +1,6 @@
 //! Bounded streaming input shared by memory probes; no books/oracle resident.
-use fdb::StoredDocument;
 use serde_json::json;
+use siftwake::StoredDocument;
 use std::{
     fs::File,
     io::{BufReader, Read},

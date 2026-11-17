@@ -1,5 +1,5 @@
-use fdb::{Database, Document, Error, Guard, Key, Mutation, Options, Query, Range};
 use serde_json::{Value, json};
+use siftwake::{Database, Document, Error, Guard, Key, Mutation, Options, Query, Range};
 use std::collections::BTreeMap;
 use std::fs;
 use std::path::PathBuf;
@@ -291,7 +291,7 @@ fn full_filter_prefix_preserves_complete_hits_and_falls_back_for_hidden_slots() 
         .map(|id| {
             let mut value = doc(&format!("{id:04}"), "the man 東京🦀", 2);
             value.title = "THE".into();
-            fdb::StoredDocument {
+            siftwake::StoredDocument {
                 document: value,
                 version: 1,
             }
@@ -306,7 +306,7 @@ fn full_filter_prefix_preserves_complete_hits_and_falls_back_for_hidden_slots() 
     )
     .unwrap();
     db.flush().unwrap();
-    fn check(db: &Database, rows: &[fdb::StoredDocument]) {
+    fn check(db: &Database, rows: &[siftwake::StoredDocument]) {
         let mut query = Query::new("shared");
         query.collection = Some("reports".into());
         query.exact.insert("tag".into(), json!("even"));
@@ -817,7 +817,7 @@ fn process_kill_after_scheduling_merge_recovers_acknowledged_sources() {
     use std::io::{BufRead, BufReader, Write};
     use std::process::{Command, Stdio};
     let t = Temp::new();
-    let mut child = Command::new(env!("CARGO_BIN_EXE_fdb"))
+    let mut child = Command::new(env!("CARGO_BIN_EXE_siftwake"))
         .arg(&t.0)
         .arg("--stdio")
         .stdin(Stdio::piped())

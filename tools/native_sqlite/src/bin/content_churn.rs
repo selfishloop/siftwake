@@ -15,9 +15,9 @@ mod write50;
 #[path = "../../../bench_support/write_hardening.rs"]
 mod write_hardening;
 use churn::{Backend, Change, Corpus, Result};
-use fdb::{SearchPage, StoredDocument};
 use rusqlite::{Connection, OptionalExtension, params, params_from_iter};
 use serde_json::{Value, json};
+use siftwake::{SearchPage, StoredDocument};
 use std::{path::Path, time::Instant};
 fn search_connection(
     db: &Connection,
@@ -74,20 +74,20 @@ struct Engine {
     sequence: u64,
 }
 impl Backend for Engine {
-    fn query_variant(&self, text: &str, variant: &str) -> Result<fdb::FirstPage> {
+    fn query_variant(&self, text: &str, variant: &str) -> Result<siftwake::FirstPage> {
         let capped = variant.starts_with("cap");
         let tx = self.db.unchecked_transaction()?;
         let p = search_connection_mode(&tx, self.sequence, text, 0, 50, capped)?;
         tx.commit()?;
-        Ok(fdb::FirstPage {
+        Ok(siftwake::FirstPage {
             total: if capped && p.hits.len() == 50 {
-                fdb::MatchTotal::AtLeast(50)
+                siftwake::MatchTotal::AtLeast(50)
             } else {
-                fdb::MatchTotal::Exact(p.total)
+                siftwake::MatchTotal::Exact(p.total)
             },
             sequence: p.sequence,
             hits: p.hits,
-            validation: fdb::ValidationStatus::Verified,
+            validation: siftwake::ValidationStatus::Verified,
         })
     }
     fn get(&self, id: usize) -> Result<Option<StoredDocument>> {

@@ -59,17 +59,6 @@ source = "registry+https://github.com/rust-lang/crates.io-index"
 checksum = "877a4ace8713b0bcf2a4e7eec82529c029f1d0619886d18145fea96c3ffe5c0f"
 
 [[package]]
-name = "fdb"
-version = "0.1.5-preview"
-dependencies = [
- "crc32fast",
- "rkyv",
- "serde",
- "serde_json",
- "simdutf8",
-]
-
-[[package]]
 name = "futures-core"
 version = "0.3.34"
 source = "registry+https://github.com/rust-lang/crates.io-index"
@@ -297,6 +286,17 @@ dependencies = [
  "serde",
  "serde_core",
  "zmij",
+]
+
+[[package]]
+name = "siftwake"
+version = "0.1.5-preview"
+dependencies = [
+ "crc32fast",
+ "rkyv",
+ "serde",
+ "serde_json",
+ "simdutf8",
 ]
 
 [[package]]

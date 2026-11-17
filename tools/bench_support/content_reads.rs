@@ -1,7 +1,7 @@
 //! Read-only comparison on the existing first 10k records. Oracle work is untimed.
 use crate::input;
-use fdb::{Key, StoredDocument};
 use serde_json::json;
+use siftwake::{Key, StoredDocument};
 use std::time::Instant;
 
 pub const QUERIES: [&str; 4] = ["the", "quixote", "he", "the man"];

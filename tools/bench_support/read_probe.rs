@@ -1,7 +1,7 @@
 //! Oracle-free process-memory probe; full payload equality is checked by Matrix.
 use crate::input;
-use fdb::{Key, StoredDocument};
 use serde_json::json;
+use siftwake::{Key, StoredDocument};
 use std::{thread, time::Duration};
 
 pub fn measure<G, S>(mut get: G, mut search: S) -> input::Result<()>

@@ -6,7 +6,7 @@ fn main() -> Result<(), Box<dyn std::error::Error>> {
     }
     // Defer automatic startup reclamation so this probe can report the explicit
     // operation. reclaim_obsolete itself completes full integrity validation.
-    let mut db = fdb::Database::open_deferred(path)?;
+    let mut db = siftwake::Database::open_deferred(path)?;
     let before = db.stats()?;
     if before.documents != 10_000 || before.delta_keys != 0 {
         return Err("expected immutable first10000 benchmark documents".into());

@@ -36,11 +36,11 @@ pub fn run(engine: &Engine, state: &str, mode: &str) -> Result<()> {
             let page = engine.search(&case.text, case.offset, case.limit)?;
             churn::check_page(&mut corpus, &model, case, &page)?;
             for repeat in 0..5 {
-                let _discard = fdb::timing::take();
+                let _discard = siftwake::timing::take();
                 let at = Instant::now();
                 let page = engine.search(&case.text, case.offset, case.limit)?;
                 let elapsed_ms = at.elapsed().as_secs_f64() * 1000.;
-                let counters = fdb::timing::take();
+                let counters = siftwake::timing::take();
                 churn::check_page(&mut corpus, &model, case, &page)?;
                 churn::emit(
                     json!({"phase":"search_profile","case_id":case_id,"case":case,"repeat":repeat,"elapsed_ms":elapsed_ms,"total":page.total,"returned":page.hits.len(),"counters":counters,"oracle":true}),

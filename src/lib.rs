@@ -1,4 +1,4 @@
-//! Standalone FDB engine: transactional WAL and immutable indexed segments.
+//! Siftwake engine: transactional WAL and immutable indexed segments.
 //!
 //! The default `bounded-engine` profile provides paged indexes, checked grouped
 //! search and `Database::commit_streamed` for bounded streamed ingest. The

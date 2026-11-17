@@ -1,8 +1,8 @@
-"""Run: python clients/demo.py target/release/fdb.exe data/python-demo"""
+"""Run: python clients/demo.py target/release/siftwake.exe data/python-demo"""
 import sys
-from fdb_client import FdbClient
+from siftwake_client import SiftwakeClient
 
-with FdbClient(sys.argv[1], sys.argv[2]) as db:
+with SiftwakeClient(sys.argv[1], sys.argv[2]) as db:
     key = {"scope": "shared", "collection": "kap_reports", "id": "sample-python-report"}
     print(db.request("commit", mutations=[{
         "op": "put", "document": {
@@ -17,6 +17,6 @@ with FdbClient(sys.argv[1], sys.argv[2]) as db:
     db.request("compact")
     db.request("wait_compaction")
 
-with FdbClient(sys.argv[1], sys.argv[2]) as db:
+with SiftwakeClient(sys.argv[1], sys.argv[2]) as db:
     assert db.request("get", key=key)["document"]["fields"]["fund_code"] == "ABC"
     print("Python roundtrip and durable reopen: OK")

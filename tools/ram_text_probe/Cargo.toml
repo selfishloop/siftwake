@@ -1,13 +1,13 @@
 [package]
-name = "fdb-ram-text-probe"
+name = "siftwake-ram-text-probe"
 version = "0.1.0"
 edition = "2024"
 rust-version = "1.89"
 publish = false
 
-# Isolated read-only experiment. No compression dependency in the FDB engine.
+# Isolated read-only experiment. No compression dependency in the Siftwake engine.
 [dependencies]
-fdb = { path = "../..", default-features = false }
+siftwake = { path = "../..", default-features = false }
 serde_json = "1"
 crc32fast = "=1.5.0"
 lz4_flex = { version = "=0.14.0", default-features = false, features = ["std", "safe-encode", "safe-decode", "checked-decode"] }

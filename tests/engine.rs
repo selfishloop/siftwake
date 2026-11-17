@@ -1,5 +1,5 @@
-use fdb::{Database, Document, Error, Guard, Key, Mutation, Query, Range};
 use serde_json::json;
+use siftwake::{Database, Document, Error, Guard, Key, Mutation, Query, Range};
 use std::collections::BTreeMap;
 use std::fs::{self, OpenOptions};
 use std::io::Write;
@@ -196,7 +196,7 @@ fn checked_page_preserves_global_order_visibility_filters_and_fallback_pages() {
         put(doc("delta", "needle İstanbul")),
     ])
     .unwrap();
-    let mut reused_page = fdb::SearchPage {
+    let mut reused_page = siftwake::SearchPage {
         total: 0,
         sequence: 0,
         hits: Vec::new(),
@@ -577,7 +577,7 @@ fn complete_garbage_header_is_not_a_torn_write() {
 
 #[test]
 fn adapters_preserve_volume_hardlinks_and_fund_identity() {
-    use fdb::adapters::*;
+    use siftwake::adapters::*;
     let a = file_entry("shared", "C", u64::MAX, 5, "a", "C:/a", 0).unwrap();
     let b = file_entry("shared", "D", u64::MAX, 5, "a", "D:/a", 0).unwrap();
     let c = file_entry("shared", "C", u64::MAX, 6, "a", "C:/b/a", 0).unwrap();
@@ -599,7 +599,7 @@ fn acknowledged_commit_survives_process_kill() {
     use std::io::{BufRead, BufReader};
     use std::process::{Command, Stdio};
     let tmp = Temp::new();
-    let mut child = Command::new(env!("CARGO_BIN_EXE_fdb"))
+    let mut child = Command::new(env!("CARGO_BIN_EXE_siftwake"))
         .arg(&tmp.0)
         .arg("--stdio")
         .stdin(Stdio::piped())

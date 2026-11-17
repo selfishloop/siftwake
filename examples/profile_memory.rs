@@ -2,8 +2,8 @@
 //! may perform FDB's cache rebuild/torn WAL recovery; use a healthy benchmark DB.
 #[path = "../tools/bench_support/allocation.rs"]
 mod allocation;
-use fdb::{Database, Query, Range};
 use serde_json::json;
+use siftwake::{Database, Query, Range};
 
 #[global_allocator]
 static ALLOCATOR: allocation::Tracking = allocation::Tracking;

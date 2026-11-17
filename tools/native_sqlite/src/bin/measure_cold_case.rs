@@ -4,8 +4,8 @@ mod churn;
 #[path = "../../../bench_support/cold_case.rs"]
 mod cold_case;
 use churn::Result;
-use fdb::{FirstPage, Key, MatchTotal, Query, StoredDocument, ValidationStatus};
 use rusqlite::{Connection, OpenFlags, OptionalExtension, params, params_from_iter};
+use siftwake::{FirstPage, Key, MatchTotal, Query, StoredDocument, ValidationStatus};
 
 struct Reader {
     db: Connection,

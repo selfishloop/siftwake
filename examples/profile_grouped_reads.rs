@@ -14,8 +14,8 @@ fn main() {
 
 #[cfg(feature = "experimental-grouped-read")]
 fn main() -> Result<(), Box<dyn std::error::Error>> {
-    use fdb::{Database, Query, Range};
     use serde_json::json;
+    use siftwake::{Database, Query, Range};
     let path = std::env::args()
         .nth(1)
         .ok_or("profile_grouped_reads <healthy-db>")?;

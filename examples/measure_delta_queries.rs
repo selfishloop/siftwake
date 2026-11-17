@@ -1,8 +1,8 @@
 //! Bounded long-text query comparison; reset only the owned fixed FDB workspace.
 #[path = "../tools/bench_support/memory_corpus.rs"]
 mod input;
-use fdb::{Database, Guard, Mutation, Options, Query, StoredDocument};
 use serde_json::json;
+use siftwake::{Database, Guard, Mutation, Options, Query, StoredDocument};
 use std::time::Instant;
 
 fn fold(text: &str) -> String {
@@ -21,7 +21,7 @@ fn fold(text: &str) -> String {
         })
         .collect()
 }
-fn commit(db: &mut Database, changes: Vec<Mutation>, streamed: bool) -> fdb::Result<u64> {
+fn commit(db: &mut Database, changes: Vec<Mutation>, streamed: bool) -> siftwake::Result<u64> {
     if streamed {
         #[cfg(feature = "bounded-engine")]
         {
@@ -29,7 +29,7 @@ fn commit(db: &mut Database, changes: Vec<Mutation>, streamed: bool) -> fdb::Res
         }
         #[cfg(not(feature = "bounded-engine"))]
         {
-            return Err(fdb::Error::Invalid(
+            return Err(siftwake::Error::Invalid(
                 "streamed input requires experimental-builder-budget".into(),
             ));
         }
@@ -64,7 +64,7 @@ fn queries(db: &Database, docs: &[StoredDocument], state: &str) -> input::Result
         let mut samples = Vec::new();
         for turn in 0..11 {
             #[cfg(feature = "diagnostic-timing")]
-            let _ = fdb::timing::take();
+            let _ = siftwake::timing::take();
             let start = Instant::now();
             let page = db.search(&q)?;
             let elapsed = start.elapsed().as_secs_f64() * 1000.;
@@ -72,7 +72,7 @@ fn queries(db: &Database, docs: &[StoredDocument], state: &str) -> input::Result
             if turn == 1 {
                 println!(
                     "{}",
-                    json!({"phase":"query_profile","state":state,"text":text,"elapsed_ms":elapsed,"counters":fdb::timing::take(),"instrumented":true,"nested_spans_do_not_sum":true})
+                    json!({"phase":"query_profile","state":state,"text":text,"elapsed_ms":elapsed,"counters":siftwake::timing::take(),"instrumented":true,"nested_spans_do_not_sum":true})
                 );
             }
             assert_eq!(page.total, expected.len(), "{state} {text}");

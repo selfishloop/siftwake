@@ -3,9 +3,9 @@ use super::{
     churn,
     key_pool::{Client, Factory, Result, Store, View},
 };
-use fdb::{Document, FirstPage, Guard, Key, MatchTotal, Mutation, Query, StoredDocument};
 use serde::Deserialize;
 use serde_json::{Value, json};
+use siftwake::{Document, FirstPage, Guard, Key, MatchTotal, Mutation, Query, StoredDocument};
 use std::{
     collections::BTreeMap,
     io::{BufRead, Read, Seek, SeekFrom},

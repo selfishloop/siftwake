@@ -5,11 +5,11 @@ use super::{
     search_connection, search_connection_mode,
     snapshot_common::{self, Client, Factory, View},
 };
-use fdb::{
-    Query, SearchPage, SnapshotAdmission, SnapshotReadWait, SnapshotRelease, StoredDocument,
-};
 use rusqlite::{Connection, OptionalExtension};
 use serde_json::{Value, json};
+use siftwake::{
+    Query, SearchPage, SnapshotAdmission, SnapshotReadWait, SnapshotRelease, StoredDocument,
+};
 use std::{
     cell::Cell,
     rc::Rc,
@@ -70,17 +70,17 @@ impl Client for SqlClient {
     }
 }
 impl View for SqlView {
-    fn first(&self, q: &Query) -> Result<fdb::FirstPage> {
+    fn first(&self, q: &Query) -> Result<siftwake::FirstPage> {
         let p = search_connection_mode(&self.db, self.seq, &q.text, q.offset, q.limit, true)?;
-        Ok(fdb::FirstPage {
+        Ok(siftwake::FirstPage {
             total: if p.hits.len() == q.limit {
-                fdb::MatchTotal::AtLeast(q.limit)
+                siftwake::MatchTotal::AtLeast(q.limit)
             } else {
-                fdb::MatchTotal::Exact(p.hits.len())
+                siftwake::MatchTotal::Exact(p.hits.len())
             },
             sequence: self.seq,
             hits: p.hits,
-            validation: fdb::ValidationStatus::Verified,
+            validation: siftwake::ValidationStatus::Verified,
         })
     }
     fn sequence(&self) -> u64 {

@@ -1,5 +1,5 @@
-use fdb::{Database, Document, Guard, Key, Mutation, Query, Range, adapters};
 use serde_json::json;
+use siftwake::{Database, Document, Guard, Key, Mutation, Query, Range, adapters};
 use std::collections::BTreeMap;
 
 fn main() -> Result<(), Box<dyn std::error::Error>> {

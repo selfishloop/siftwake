@@ -71,7 +71,7 @@ def main():
     corpus = ROOT / 'data/rkyv-corpus-20261009/json.payload-bench'
     corpus_sha = stages.sha(corpus)
     assert corpus_sha == '11F826FCE3F4AE790FEB9FC6DF9B1169F52C2FD699E89FC4A8A4B77AAA41731B'
-    cli = ROOT / 'target/release/fdb.exe'
+    cli = ROOT / 'target/release/siftwake.exe'
     requests = [dict(op='stats')] + [dict(op='search', query=dict(scope='shared',
                 collection='texts', text=text, limit=limit)) for text, _, limit in identities]
     run = subprocess.run([str(cli), 'data/benchmark-work/fdb', '--stdio'], cwd=ROOT,

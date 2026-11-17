@@ -6,9 +6,9 @@ mod block3a;
 mod churn;
 #[path = "../../../bench_support/key_pool.rs"]
 mod key_pool;
-use fdb::{FirstPage, Key, MatchTotal, Mutation, Query, StoredDocument, ValidationStatus};
 use key_pool::{Client, Factory, Result, Store, View};
 use rusqlite::{Connection, OptionalExtension, params, params_from_iter};
+use siftwake::{FirstPage, Key, MatchTotal, Mutation, Query, StoredDocument, ValidationStatus};
 use std::{
     cell::{Cell, RefCell},
     rc::Rc,

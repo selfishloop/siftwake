@@ -1,5 +1,5 @@
-use fdb::{Database, Document, Error, Guard, Key, Mutation, Options, Query, Range};
 use serde_json::json;
+use siftwake::{Database, Document, Error, Guard, Key, Mutation, Options, Query, Range};
 use std::collections::BTreeMap;
 use std::fs;
 use std::path::PathBuf;
@@ -273,7 +273,7 @@ fn runtime_document_corruption_is_reported_before_returning_payload() {
     // Native default payloads now live only in the checked, leased source.
     #[cfg(feature = "bounded-engine")]
     {
-        db.repack_index_cache(fdb::IndexCacheLayout::JsonPayloadCopy)
+        db.repack_index_cache(siftwake::IndexCacheLayout::JsonPayloadCopy)
             .unwrap();
         db = Database::open(&temp.0).unwrap();
     }
@@ -385,7 +385,7 @@ fn v01_checkpoint_fixture_opens_without_rewriting_authoritative_bytes() {
             db.search_first(&q).unwrap().hits,
             db.search(&q).unwrap().hits
         );
-        let e = fdb::SearchExecution {
+        let e = siftwake::SearchExecution {
             verification_workers: 4,
             coalesce_gap_bytes: 8192,
             reuse_validated_source_crc: true,
@@ -428,7 +428,7 @@ fn killing_compaction_before_publication_preserves_acknowledged_data() {
     use std::process::{Command, Stdio};
     use std::time::{Duration, Instant};
     let temp = Temp::new();
-    let mut child = Command::new(env!("CARGO_BIN_EXE_fdb"))
+    let mut child = Command::new(env!("CARGO_BIN_EXE_siftwake"))
         .arg(&temp.0)
         .arg("--stdio")
         .stdin(Stdio::piped())

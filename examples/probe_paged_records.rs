@@ -1,9 +1,9 @@
 //! Experimental metadata paging only; not a production cache format or DB reader.
 //! Uses a healthy SEG03 benchmark after normal Database validation. Output goes
 //! into a new directory, never into the database. Timings exclude source loading.
-use fdb::{Database, Key};
 use serde::Deserialize;
 use serde_json::json;
+use siftwake::{Database, Key};
 use std::collections::VecDeque;
 use std::fs::{File, OpenOptions};
 use std::io::{Read, Seek, SeekFrom, Write};

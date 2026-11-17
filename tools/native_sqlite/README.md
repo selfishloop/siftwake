@@ -43,7 +43,7 @@ Cargo.lock pins the bundled SQLite build. Build and execute from the FDB root:
 
 ```powershell
 cargo build --release --locked --manifest-path tools/native_sqlite/Cargo.toml
-.\tools\measure-native.ps1 -Executable tools/native_sqlite/target/release/fdb-native-sqlite-bench.exe -DatabasePath data/new-sqlite -OutputPrefix output/new-sqlite
+.\tools\measure-native.ps1 -Executable tools/native_sqlite/target/release/siftwake-native-sqlite-bench.exe -DatabasePath data/new-sqlite -OutputPrefix output/new-sqlite
 .\tools\measure-native.ps1 -Executable target/release/examples/measure_scale.exe -DatabasePath data/new-fdb -OutputPrefix output/new-fdb
 ```
 

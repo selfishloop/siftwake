@@ -1,6 +1,6 @@
 //! Native persistent binary format; no optional payload feature or overlay.
-use fdb::{Database, Document, Error, Guard, Key, Mutation, Query};
 use serde_json::json;
+use siftwake::{Database, Document, Error, Guard, Key, Mutation, Query};
 use std::{
     collections::BTreeMap,
     fs,
@@ -361,7 +361,7 @@ fn deferred_index_rejects_an_unopened_payload_block_before_returning_document() 
     // index payload block; source corruption is covered by the address tests.
     #[cfg(feature = "bounded-engine")]
     {
-        db.repack_index_cache(fdb::IndexCacheLayout::JsonPayloadCopy)
+        db.repack_index_cache(siftwake::IndexCacheLayout::JsonPayloadCopy)
             .unwrap();
         db = Database::open(&temp.0).unwrap();
     }

@@ -1,6 +1,6 @@
 //! Independent oracle for the explicitly supported synthetic workload.
 //! Full payload/version/order checks happen outside timed query intervals.
-use fdb::StoredDocument;
+use siftwake::StoredDocument;
 
 pub fn expected(
     kind: &str,

@@ -49,7 +49,7 @@ pub fn run<W: Writer>(engine: &mut W, state: &str, mode: &str) -> Result<()> {
         let (view, admission) = client.acquire()?;
         assert_eq!(view.sequence(), seq);
         for c in group {
-            let mut q = fdb::Query::new("shared");
+            let mut q = siftwake::Query::new("shared");
             q.collection = Some("texts".into());
             if let Some(new) = &c.new {
                 q.text = churn::marker(c.id, new.revision);

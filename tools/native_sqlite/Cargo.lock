@@ -52,7 +52,7 @@ source = "registry+https://github.com/rust-lang/crates.io-index"
 checksum = "7360491ce676a36bf9bb3c56c1aa791658183a54d2744120f27285738d90465a"
 
 [[package]]
-name = "fdb"
+name = "siftwake"
 version = "0.1.5-preview"
 dependencies = [
  "crc32fast",
@@ -62,11 +62,11 @@ dependencies = [
 ]
 
 [[package]]
-name = "fdb-native-sqlite-bench"
+name = "siftwake-native-sqlite-bench"
 version = "0.1.0"
 dependencies = [
  "crc32fast",
- "fdb",
+ "siftwake",
  "rusqlite",
  "serde",
  "serde_json",

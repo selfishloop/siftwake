@@ -1,12 +1,12 @@
 [package]
-name = "fdb-native-sqlite-bench"
+name = "siftwake-native-sqlite-bench"
 version = "0.1.0"
 edition = "2024"
 publish = false
 
-# Isolated comparator only. Never add SQLite to the FDB engine manifest.
+# Isolated comparator only. Never add SQLite to the Siftwake engine manifest.
 [dependencies]
-fdb = { path = "../..", default-features = false }
+siftwake = { path = "../..", default-features = false }
 rusqlite = { version = "=0.40.2", features = ["bundled"] }
 serde_json = "1"
 serde = { version = "1", features = ["derive"] }

@@ -1,5 +1,5 @@
 #![cfg(feature = "bounded-engine")]
-use fdb::{Database, Document, IndexCacheLayout as Layout, Key, Mutation, Query};
+use siftwake::{Database, Document, IndexCacheLayout as Layout, Key, Mutation, Query};
 use std::{collections::BTreeMap, path::PathBuf};
 
 struct Temp(PathBuf);
@@ -44,7 +44,7 @@ impl Temp {
                     ]),
                     links: vec![Key::new("shared", "texts", "a")],
                 },
-                guard: fdb::Guard::Any,
+                guard: siftwake::Guard::Any,
             }])
             .unwrap();
         }
@@ -71,7 +71,7 @@ impl Temp {
         let mut q = Query::new("shared");
         q.collection = Some("texts".into());
         q.exact.insert("n".into(), serde_json::json!(-123));
-        q.ranges.push(fdb::Range {
+        q.ranges.push(siftwake::Range {
             field: "n".into(),
             min: -124,
             max: -122,
@@ -146,7 +146,7 @@ fn default_flush_rebuild_and_merge_write_source_references_without_conversion() 
     let mut db = Database::open(&t.0).unwrap();
     db.commit(vec![Mutation::Delete {
         key: Key::new("shared", "texts", "b"),
-        guard: fdb::Guard::Any,
+        guard: siftwake::Guard::Any,
     }])
     .unwrap();
     db.flush().unwrap();
@@ -215,7 +215,7 @@ fn native_layout_roundtrip_query_get_maintenance_and_source_bytes() {
     let mut db = Database::open(&t.0).unwrap();
     db.commit(vec![Mutation::Delete {
         key: Key::new("shared", "texts", "b"),
-        guard: fdb::Guard::Any,
+        guard: siftwake::Guard::Any,
     }])
     .unwrap();
     db.flush().unwrap();

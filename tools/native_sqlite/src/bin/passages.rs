@@ -1,10 +1,10 @@
 //! Isolated long-passage SQLite comparator. Never part of the FDB runtime.
 #[path = "../../../bench_support/passages.rs"]
 mod passages;
-use fdb::StoredDocument;
 use passages::{Corpus, Request, document};
 use rusqlite::{Connection, OpenFlags, params};
 use serde_json::json;
+use siftwake::StoredDocument;
 use std::{fs, io::Read, path::Path, time::Instant};
 type Result<T> = std::result::Result<T, Box<dyn std::error::Error>>;
 const SCHEMA: &str = "CREATE TABLE meta(sequence INTEGER NOT NULL);
@@ -280,8 +280,8 @@ mod tests {
         ] {
             let stored = StoredDocument {
                 version: 1,
-                document: fdb::Document {
-                    key: fdb::Key::new("shared", "texts", &format!("{id:010}")),
+                document: siftwake::Document {
+                    key: siftwake::Key::new("shared", "texts", &format!("{id:010}")),
                     title: title.into(),
                     text: body.into(),
                     fields: Default::default(),

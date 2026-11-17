@@ -3,9 +3,9 @@
 mod corpus;
 #[path = "../../bench_support/verify.rs"]
 mod verify;
-use fdb::StoredDocument;
 use rusqlite::{Connection, OptionalExtension, params};
 use serde_json::{Value, json};
+use siftwake::StoredDocument;
 use std::path::Path;
 use std::time::Instant;
 type Result<T> = std::result::Result<T, Box<dyn std::error::Error>>;

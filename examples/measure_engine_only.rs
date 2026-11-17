@@ -1,6 +1,6 @@
 //! Isolated engine process: bounded stdin document, no corpus/model/oracle/history.
 #[cfg(all(windows, feature = "bounded-engine"))]
-use fdb::{Database, Guard, Mutation};
+use siftwake::{Database, Guard, Mutation};
 #[cfg(all(windows, feature = "bounded-engine"))]
 use std::io::{BufRead, BufReader};
 #[cfg(all(windows, feature = "bounded-engine"))]
@@ -36,11 +36,11 @@ fn memory() -> serde_json::Value {
     serde_json::json!({"private_bytes":c.private,"working_set_bytes":c.ws,"peak_private_commit_bytes":c.peak_pagefile,"peak_working_set_bytes":c.peak_ws})
 }
 #[cfg(all(windows, feature = "bounded-engine"))]
-fn read_mutation(input: &mut impl BufRead) -> fdb::Result<Mutation> {
+fn read_mutation(input: &mut impl BufRead) -> siftwake::Result<Mutation> {
     let mut line = String::new();
     input.read_line(&mut line)?;
     if line.len() > 1024 * 1024 {
-        return Err(fdb::Error::Invalid("stdin record bound".into()));
+        return Err(siftwake::Error::Invalid("stdin record bound".into()));
     }
     Ok(Mutation::Put {
         document: serde_json::from_str(&line)?,
@@ -76,7 +76,7 @@ fn main() -> Result<(), Box<dyn std::error::Error>> {
             texts
                 .into_iter()
                 .map(|text| {
-                    let mut q = fdb::Query::new("shared");
+                    let mut q = siftwake::Query::new("shared");
                     q.collection = Some("texts".into());
                     q.text = text;
                     q
@@ -86,14 +86,14 @@ fn main() -> Result<(), Box<dyn std::error::Error>> {
         let active = Arc::new(AtomicBool::new(true));
         let barrier = Arc::new(Barrier::new(5));
         let reference = std::env::var_os("FDB_HYBRID_WAIT_REFERENCE").is_some();
-        std::thread::scope(|scope| -> fdb::Result<()> {
+        std::thread::scope(|scope| -> siftwake::Result<()> {
             let handles: Vec<_> = (0..4)
                 .map(|id| {
                     let reader = reader.clone();
                     let queries = queries.clone();
                     let active = active.clone();
                     let barrier = barrier.clone();
-                    scope.spawn(move || -> fdb::Result<usize> {
+                    scope.spawn(move || -> siftwake::Result<usize> {
                         let _reference = Database::hybrid_wait_reference_for_diagnostics(reference);
                         barrier.wait();
                         let mut n = 0;
@@ -104,7 +104,7 @@ fn main() -> Result<(), Box<dyn std::error::Error>> {
                             let _ = std::hint::black_box(&page);
                             drop(page);
                             if let Some(error) = snapshot.release().cleanup_error {
-                                return Err(fdb::Error::Corrupt(error));
+                                return Err(siftwake::Error::Corrupt(error));
                             }
                             n += 1;
                         }
@@ -113,7 +113,7 @@ fn main() -> Result<(), Box<dyn std::error::Error>> {
                 })
                 .collect();
             barrier.wait();
-            let result = (|| -> fdb::Result<()> {
+            let result = (|| -> siftwake::Result<()> {
                 let mut input = BufReader::with_capacity(8192, std::io::stdin().lock());
                 for n in 0..16384 {
                     db.commit_streamed(std::iter::once_with(|| read_mutation(&mut input)))?;
@@ -125,7 +125,7 @@ fn main() -> Result<(), Box<dyn std::error::Error>> {
             })();
             active.store(false, Ordering::Release);
             for handle in handles {
-                let count = handle.join().map_err(|_| fdb::Error::Poisoned)??;
+                let count = handle.join().map_err(|_| siftwake::Error::Poisoned)??;
                 assert!(count > 0);
                 query_counts.push(count);
             }
@@ -136,7 +136,7 @@ fn main() -> Result<(), Box<dyn std::error::Error>> {
         let texts: Vec<String> =
             serde_json::from_slice(&std::fs::read(std::env::var("FDB_RAM_QUERY_LIST")?)?)?;
         for text in texts {
-            let mut q = fdb::Query::new("shared");
+            let mut q = siftwake::Query::new("shared");
             q.collection = Some("texts".into());
             q.text = text;
             drop(reader.acquire()?.search_first_hybrid(&q, 200)?);

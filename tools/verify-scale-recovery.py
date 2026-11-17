@@ -5,12 +5,12 @@ import time
 from pathlib import Path
 
 sys.path.insert(0, str(Path(__file__).resolve().parents[1] / "clients"))
-from fdb_client import FdbClient
+from siftwake_client import SiftwakeClient
 
 binary, directory, count = sys.argv[1], sys.argv[2], int(sys.argv[3])
 key = {"scope": "shared", "collection": "contents", "id": "recovery-sentinel"}
 start = time.perf_counter()
-client = FdbClient(binary, directory)
+client = SiftwakeClient(binary, directory)
 before = client.request("stats")
 assert before["documents"] == count - 50
 assert client.request("get", key=key) is None
@@ -21,7 +21,7 @@ ack = client.request("commit", mutations=[{
 client._process.kill()
 client._process.wait(timeout=10)
 client.close()
-with FdbClient(binary, directory) as client:
+with SiftwakeClient(binary, directory) as client:
     after = client.request("stats")
     stored = client.request("get", key=key)
     assert after["sequence"] == ack["sequence"] == before["sequence"] + 1

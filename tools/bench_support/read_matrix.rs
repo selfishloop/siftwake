@@ -1,7 +1,7 @@
 //! Bounded independent oracle; existing corpus only, no DB/corpus writes.
 use crate::{input, reads};
-use fdb::{Key, StoredDocument};
 use serde_json::json;
+use siftwake::{Key, StoredDocument};
 use std::collections::{BTreeMap, BTreeSet};
 use std::time::Instant;
 #[path = "thread_observation.rs"]

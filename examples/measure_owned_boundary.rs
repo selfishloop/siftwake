@@ -2,8 +2,8 @@
 #[path = "../tools/bench_support/memory_corpus.rs"]
 #[allow(dead_code)]
 mod input;
-use fdb::{Database, Guard, Mutation, Query};
 use serde_json::json;
+use siftwake::{Database, Guard, Mutation, Query};
 use std::{hint::black_box, path::Path, time::Instant};
 
 fn main() -> input::Result<()> {

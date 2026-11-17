@@ -11,8 +11,8 @@ fn main() {
 
 #[cfg(feature = "experimental-wal-sync-control")]
 fn main() -> Result<(), Box<dyn std::error::Error>> {
-    use fdb::{Database, Guard, Mutation, Options, StoredDocument};
     use serde_json::json;
+    use siftwake::{Database, Guard, Mutation, Options, StoredDocument};
     use std::time::Instant;
     let mut args = std::env::args().skip(1);
     let path = args

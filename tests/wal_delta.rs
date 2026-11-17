@@ -1,5 +1,5 @@
 #![cfg(feature = "experimental-wal-delta")]
-use fdb::{Database, Document, Error, Guard, Key, Mutation, Query};
+use siftwake::{Database, Document, Error, Guard, Key, Mutation, Query};
 use std::{
     fs,
     io::{Seek, SeekFrom, Write},

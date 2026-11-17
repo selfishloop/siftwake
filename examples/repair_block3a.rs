@@ -5,11 +5,11 @@ mod churn;
 #[path = "../tools/bench_support/block3a_repair.rs"]
 mod repair;
 use churn::Result;
-use fdb::{
+use serde_json::{Value, json};
+use siftwake::{
     Database, FirstPage, Guard, Key, MatchTotal, Mutation, Query, SearchPage, StoredDocument,
     ValidationStatus,
 };
-use serde_json::{Value, json};
 use std::{
     io::{BufRead, BufReader, Write},
     process::{Child, ChildStdin, ChildStdout, Command, Stdio},

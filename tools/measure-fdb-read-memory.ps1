@@ -2,7 +2,7 @@
 # Private is sampled after replies, not a peak. Peak WS is cumulative since launch.
 param(
     [Parameter(Mandatory=$true)][string]$DatabasePath,
-    [string]$BinaryPath='target/release/fdb.exe',
+    [string]$BinaryPath='target/release/siftwake.exe',
     [string]$OutputPath='output/fdb-read-memory.json'
 )
 $ErrorActionPreference='Stop'

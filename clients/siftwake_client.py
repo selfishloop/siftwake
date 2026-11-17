@@ -6,7 +6,7 @@ from pathlib import Path
 from threading import Lock
 
 
-class FdbClient:
+class SiftwakeClient:
     def __init__(self, executable: str | Path, database: str | Path):
         self._lock = Lock()
         self._process = subprocess.Popen(
@@ -18,12 +18,12 @@ class FdbClient:
     def request(self, op: str, **arguments):
         with self._lock:
             if self._process.poll() is not None:
-                raise RuntimeError("FDB process is closed")
+                raise RuntimeError("Siftwake process is closed")
             self._process.stdin.write(json.dumps({"op": op, **arguments}, ensure_ascii=False) + "\n")
             self._process.stdin.flush()
             line = self._process.stdout.readline()
             if not line:
-                raise RuntimeError("FDB connection ended; outcome of an in-flight write is unknown")
+                raise RuntimeError("Siftwake connection ended; outcome of an in-flight write is unknown")
             response = json.loads(line)
             if not response["ok"]:
                 raise RuntimeError(response["error"])

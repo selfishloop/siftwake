@@ -1,6 +1,6 @@
-use fdb::{Database, Key, Mutation, Query};
 use serde::Deserialize;
 use serde_json::{Value, json};
+use siftwake::{Database, Key, Mutation, Query};
 use std::io::{self, BufRead, Read, Write};
 
 #[derive(Deserialize)]
@@ -16,7 +16,7 @@ enum Request {
     Stats,
 }
 
-fn execute(db: &mut Database, request: Request) -> fdb::Result<Value> {
+fn execute(db: &mut Database, request: Request) -> siftwake::Result<Value> {
     Ok(match request {
         Request::Commit { mutations } => json!({"sequence": db.commit(mutations)?}),
         Request::Get { key } => serde_json::to_value(db.get(&key)?)?,
@@ -33,7 +33,7 @@ fn run() -> Result<(), Box<dyn std::error::Error>> {
     let mut args = std::env::args().skip(1);
     let dir = args
         .next()
-        .ok_or("usage: fdb <database-directory> [request.json | --stdio]")?;
+        .ok_or("usage: siftwake <database-directory> [request.json | --stdio]")?;
     let mode = args.next().unwrap_or_else(|| "--stdio".into());
     if args.next().is_some() {
         return Err("too many arguments".into());
@@ -63,7 +63,7 @@ fn run() -> Result<(), Box<dyn std::error::Error>> {
             return Err("request line exceeds 96 MiB".into());
         }
         let response = match serde_json::from_str::<Request>(&line)
-            .map_err(fdb::Error::from)
+            .map_err(siftwake::Error::from)
             .and_then(|r| execute(&mut db, r))
         {
             Ok(result) => json!({"ok": true, "result": result}),

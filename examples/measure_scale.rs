@@ -4,15 +4,15 @@ mod corpus;
 #[path = "../tools/bench_support/verify.rs"]
 mod verify;
 use corpus::{key, samples};
-use fdb::{Database, Guard, Mutation, Options, Query, Range};
 use serde_json::{Value, json};
+use siftwake::{Database, Guard, Mutation, Options, Query, Range};
 use std::time::Instant;
 
 fn diagnostic(phase: &str) {
     #[cfg(feature = "diagnostic-timing")]
     println!(
         "{}",
-        json!({"phase":"diagnostic_timing","window":phase,"counters":fdb::timing::take(),"wall_spans_overlap":true,"not_cpu_time":true,"instrumented":true})
+        json!({"phase":"diagnostic_timing","window":phase,"counters":siftwake::timing::take(),"wall_spans_overlap":true,"not_cpu_time":true,"instrumented":true})
     );
     #[cfg(not(feature = "diagnostic-timing"))]
     let _ = phase;
@@ -23,9 +23,9 @@ fn report(value: Value) {
 fn query(
     db: &Database,
     q: &Query,
-    expected: &(usize, Vec<fdb::StoredDocument>),
+    expected: &(usize, Vec<siftwake::StoredDocument>),
     repeats: usize,
-) -> fdb::Result<Value> {
+) -> siftwake::Result<Value> {
     let mut times = vec![];
     for repeat in 0..=repeats {
         let start = Instant::now();
@@ -183,7 +183,7 @@ fn main() -> Result<(), Box<dyn std::error::Error>> {
         let start = Instant::now();
         let found = (0..100)
             .map(|n| db.get(&key(n * (count / 100))))
-            .collect::<fdb::Result<Vec<_>>>()?;
+            .collect::<siftwake::Result<Vec<_>>>()?;
         let elapsed = start.elapsed().as_secs_f64() * 1000.0;
         if repeat != 0 {
             get_times.push(elapsed);

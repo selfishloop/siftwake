@@ -76,7 +76,7 @@ def main():
     requests = [dict(op='stats')] + [dict(op='search', query=dict(scope='shared',
                 collection='texts', text=text, limit=200 if text == 'the' else 50))
                 for text in ['the', 'holmes', 'watson', 'darcy', 'quixote', 'zx']]
-    cli = ROOT / 'target/release/fdb.exe'
+    cli = ROOT / 'target/release/siftwake.exe'
     run = subprocess.run([str(cli), 'data/benchmark-work/fdb', '--stdio'], cwd=ROOT,
                          input=''.join(json.dumps(row) + '\n' for row in requests),
                          capture_output=True, text=True, encoding='utf-8', check=True,

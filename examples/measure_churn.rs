@@ -23,8 +23,8 @@ mod write50;
 #[path = "../tools/bench_support/write_hardening.rs"]
 mod write_hardening;
 use churn::{Backend, Change, Corpus, Result};
-use fdb::{Database, Query, SearchPage, StoredDocument};
 use serde_json::{Value, json};
+use siftwake::{Database, Query, SearchPage, StoredDocument};
 use std::{path::Path, time::Instant};
 struct Engine(Database);
 fn long_cancel_probe(engine: &Engine, state: &str) -> Result<()> {
@@ -66,13 +66,13 @@ fn long_cancel_probe(engine: &Engine, state: &str) -> Result<()> {
         let expected = engine.0.search(&q)?;
         for repeat in 0..40 {
             for variant in ["serial", "four", "hybrid", "exact-four"] {
-                let token = fdb::CancelToken::observed();
+                let token = siftwake::CancelToken::observed();
                 let (status, latency, progress) = std::thread::scope(|scope| -> Result<_> {
                     let (tx, rx) = std::sync::mpsc::channel();
                     let q = &q;
                     let t = &token;
                     let worker = scope.spawn(move || {
-                        let e = fdb::SearchExecution {
+                        let e = siftwake::SearchExecution {
                             verification_workers: if variant == "serial" { 1 } else { 4 },
                             ..Default::default()
                         };
@@ -110,7 +110,7 @@ fn long_cancel_probe(engine: &Engine, state: &str) -> Result<()> {
                     let result = worker.join().map_err(|_| "long cancel worker panicked")?;
                     let elapsed = at.elapsed().as_secs_f64() * 1000.;
                     match result {
-                        Err(fdb::Error::Cancelled) => {
+                        Err(siftwake::Error::Cancelled) => {
                             assert_eq!(progress, 1);
                             Ok(("cancelled", Some(elapsed), progress))
                         }
@@ -156,7 +156,7 @@ fn cancel_probe(engine: &Engine, state: &str) -> Result<()> {
         for target in [32u64, 256] {
             for repeat in 0..10 {
                 for variant in ["serial", "four", "hybrid", "exact-four"] {
-                    let token = fdb::CancelToken::observed();
+                    let token = siftwake::CancelToken::observed();
                     let began = Instant::now();
                     let cpu = churn::cpu_ms();
                     let (status, latency, progress) = std::thread::scope(|scope| -> Result<_> {
@@ -164,7 +164,7 @@ fn cancel_probe(engine: &Engine, state: &str) -> Result<()> {
                         let t = &token;
                         let q = &q;
                         let worker = scope.spawn(move || {
-                            let e = fdb::SearchExecution {
+                            let e = siftwake::SearchExecution {
                                 verification_workers: if variant == "serial" { 1 } else { 4 },
                                 ..Default::default()
                             };
@@ -201,7 +201,7 @@ fn cancel_probe(engine: &Engine, state: &str) -> Result<()> {
                         let result = worker.join().map_err(|_| "cancel probe query panicked")?;
                         let latency = cancelled_at.elapsed().as_secs_f64() * 1000.;
                         match result {
-                            Err(fdb::Error::Cancelled) => {
+                            Err(siftwake::Error::Cancelled) => {
                                 Ok(("cancelled", Some(latency), progress))
                             }
                             Ok(hits) => {
@@ -232,9 +232,9 @@ fn cancel_probe(engine: &Engine, state: &str) -> Result<()> {
     Ok(())
 }
 #[derive(Clone)]
-struct BenchFactory(fdb::SnapshotReader);
-struct BenchClient(fdb::SnapshotReader);
-struct BenchView(fdb::Snapshot);
+struct BenchFactory(siftwake::SnapshotReader);
+struct BenchClient(siftwake::SnapshotReader);
+struct BenchView(siftwake::Snapshot);
 impl snapshot_common::Factory for BenchFactory {
     type Client = BenchClient;
     fn open(&self) -> Result<Self::Client> {
@@ -243,7 +243,7 @@ impl snapshot_common::Factory for BenchFactory {
 }
 impl snapshot_common::Client for BenchClient {
     type View = BenchView;
-    fn acquire(&mut self) -> Result<(Self::View, fdb::SnapshotAdmission)> {
+    fn acquire(&mut self) -> Result<(Self::View, siftwake::SnapshotAdmission)> {
         let (v, a) = self.0.acquire_timed()?;
         Ok((BenchView(v), a))
     }
@@ -255,14 +255,14 @@ impl snapshot_common::View for BenchView {
     fn get(&self, id: usize) -> Result<Option<StoredDocument>> {
         Ok(self.0.get(&churn::key(id))?)
     }
-    fn search(&self, q: &Query) -> Result<(SearchPage, fdb::SnapshotReadWait)> {
+    fn search(&self, q: &Query) -> Result<(SearchPage, siftwake::SnapshotReadWait)> {
         Ok(self.0.search_with_waits(q)?)
     }
-    fn first(&self, q: &Query) -> Result<fdb::FirstPage> {
+    fn first(&self, q: &Query) -> Result<siftwake::FirstPage> {
         let _reference = std::env::var_os("FDB_HYBRID_WAIT_REFERENCE")
-            .map(|_| fdb::Database::hybrid_wait_reference_for_diagnostics(true));
+            .map(|_| siftwake::Database::hybrid_wait_reference_for_diagnostics(true));
         #[cfg(feature = "diagnostic-timing")]
-        let _limit = fdb::timing::request::WorkerLimit::new(
+        let _limit = siftwake::timing::request::WorkerLimit::new(
             std::env::var("FDB_HYBRID_WORKERS")
                 .ok()
                 .map(|s| s.parse::<usize>())
@@ -271,16 +271,16 @@ impl snapshot_common::View for BenchView {
         );
         Ok(self.0.search_first_hybrid(q, 200)?)
     }
-    fn first_profiled(&self, q: &Query) -> Result<(fdb::FirstPage, Value)> {
+    fn first_profiled(&self, q: &Query) -> Result<(siftwake::FirstPage, Value)> {
         #[cfg(feature = "diagnostic-timing")]
         if std::env::var_os("FDB_QUERY_PROFILE").is_some() {
-            let request = fdb::timing::request::Request::new();
+            let request = siftwake::timing::request::Request::new();
             let page = self.first(q)?;
             return Ok((page, json!(request.finish())));
         }
         Ok((self.first(q)?, Value::Null))
     }
-    fn release(self) -> Result<fdb::SnapshotRelease> {
+    fn release(self) -> Result<siftwake::SnapshotRelease> {
         Ok(self.0.release())
     }
 }
@@ -303,12 +303,12 @@ impl snapshot_common::Writer for Engine {
     }
     fn reset_timing(&self) {
         #[cfg(feature = "diagnostic-timing")]
-        let _ = fdb::timing::take();
+        let _ = siftwake::timing::take();
     }
     fn take_timing(&self) -> Value {
         #[cfg(feature = "diagnostic-timing")]
         {
-            json!(fdb::timing::take())
+            json!(siftwake::timing::take())
         }
         #[cfg(not(feature = "diagnostic-timing"))]
         {
@@ -359,30 +359,30 @@ impl snapshot_common::Writer for Engine {
     }
 }
 impl Backend for Engine {
-    fn query_variant(&self, text: &str, variant: &str) -> Result<fdb::FirstPage> {
+    fn query_variant(&self, text: &str, variant: &str) -> Result<siftwake::FirstPage> {
         let _reference = std::env::var_os("FDB_HYBRID_WAIT_REFERENCE")
-            .map(|_| fdb::Database::hybrid_wait_reference_for_diagnostics(true));
+            .map(|_| siftwake::Database::hybrid_wait_reference_for_diagnostics(true));
         let mut q = Query::new("shared");
         q.collection = Some("texts".into());
         q.text = text.into();
         if variant.starts_with("cap-hybrid") {
             return Ok(if variant.contains("cancel") {
                 self.0
-                    .search_first_hybrid_cancellable(&q, 200, &fdb::CancelToken::new())?
+                    .search_first_hybrid_cancellable(&q, 200, &siftwake::CancelToken::new())?
             } else {
                 self.0.search_first_hybrid(&q, 200)?
             });
         }
         if variant == "legacy" {
             let p = self.0.search(&q)?;
-            return Ok(fdb::FirstPage {
-                total: fdb::MatchTotal::Exact(p.total),
+            return Ok(siftwake::FirstPage {
+                total: siftwake::MatchTotal::Exact(p.total),
                 sequence: p.sequence,
                 hits: p.hits,
-                validation: fdb::ValidationStatus::Verified,
+                validation: siftwake::ValidationStatus::Verified,
             });
         }
-        let mut e = fdb::SearchExecution::default();
+        let mut e = siftwake::SearchExecution::default();
         if variant.contains("four") {
             e.verification_workers = 4;
         }
@@ -398,27 +398,27 @@ impl Backend for Engine {
         if variant.contains("cancel") {
             return Ok(self
                 .0
-                .search_first_cancellable(&q, e, &fdb::CancelToken::new())?);
+                .search_first_cancellable(&q, e, &siftwake::CancelToken::new())?);
         }
         if variant.starts_with("cap") {
             Ok(self.0.search_first_with_execution(&q, e)?)
         } else {
             let p = self.0.search_with_execution(&q, e)?;
-            Ok(fdb::FirstPage {
-                total: fdb::MatchTotal::Exact(p.total),
+            Ok(siftwake::FirstPage {
+                total: siftwake::MatchTotal::Exact(p.total),
                 sequence: p.sequence,
                 hits: p.hits,
-                validation: fdb::ValidationStatus::Verified,
+                validation: siftwake::ValidationStatus::Verified,
             })
         }
     }
     fn query_profile_reset(&self) {
         #[cfg(feature = "diagnostic-timing")]
-        let _discard = fdb::timing::take();
+        let _discard = siftwake::timing::take();
     }
     fn query_profile_take(&self) -> Value {
         #[cfg(feature = "diagnostic-timing")]
-        return json!(fdb::timing::take());
+        return json!(siftwake::timing::take());
         #[cfg(not(feature = "diagnostic-timing"))]
         Value::Null
     }
@@ -444,14 +444,15 @@ impl Backend for Engine {
         Ok(if streamed {
             self.0.commit_streamed(mutations)?
         } else {
-            self.0.commit(mutations.collect::<fdb::Result<Vec<_>>>()?)?
+            self.0
+                .commit(mutations.collect::<siftwake::Result<Vec<_>>>()?)?
         })
     }
     fn maintain(&mut self) -> Result<Value> {
         #[cfg(feature = "diagnostic-timing")]
-        let window = fdb::timing::maintenance::window();
+        let window = siftwake::timing::maintenance::window();
         #[cfg(feature = "diagnostic-timing")]
-        let _discard = fdb::timing::take();
+        let _discard = siftwake::timing::take();
         let before = serde_json::to_value(self.0.stats()?)?;
         self.0.flush()?;
         let mut completed = usize::from(self.0.wait_for_compaction()?);
@@ -463,7 +464,7 @@ impl Backend for Engine {
         #[cfg(feature = "diagnostic-timing")]
         {
             result["cost_profile"] = window.finish();
-            result["cost_timing_counters"] = serde_json::to_value(fdb::timing::take())?;
+            result["cost_timing_counters"] = serde_json::to_value(siftwake::timing::take())?;
         }
         Ok(result.take())
     }
@@ -480,12 +481,14 @@ impl Backend for Engine {
 fn main() -> Result<()> {
     let result = run();
     #[cfg(feature = "diagnostic-timing")]
-    churn::emit(json!({"phase":"term_cache_diagnostics","counters":fdb::term_cache_diagnostics()}));
+    churn::emit(
+        json!({"phase":"term_cache_diagnostics","counters":siftwake::term_cache_diagnostics()}),
+    );
     result
 }
 fn run() -> Result<()> {
     #[cfg(feature = "diagnostic-timing")]
-    fdb::timing::maintenance::enable();
+    siftwake::timing::maintenance::enable();
     let args: Vec<_> = std::env::args().skip(1).collect();
     if args
         .first()
@@ -523,7 +526,7 @@ fn run() -> Result<()> {
         let started = Instant::now();
         let cpu = churn::cpu_ms();
         let (page, db, full_ms, session_ms) = if mode == "first-background" {
-            let mut session = fdb::OpeningDatabase::open_for_search(path)?;
+            let mut session = siftwake::OpeningDatabase::open_for_search(path)?;
             let session_ms = started.elapsed().as_secs_f64() * 1000.;
             churn::emit(
                 json!({"phase":"session_return","session_ms":session_ms,"status":session.validation_status()}),
@@ -547,7 +550,7 @@ fn run() -> Result<()> {
             json!({"phase":"first_result","mode":mode,"variant":if mode=="first-background" {"cap-four".to_owned()} else {std::env::var("FDB_FIRST_VARIANT").unwrap_or_else(|_|"cap-four".into())},"text":q.text,"session_ms":session_ms,"first_ms":first_ms,"full_validation_ms":full_ms,"after_session_wait_and_search_ms":first_ms-session_ms,"cpu_ms":cpu_ms,"returned":page.hits.len(),"total":page.total,"validation":page.validation,"memory":churn::memory()}),
         );
         #[cfg(feature = "diagnostic-timing")]
-        churn::emit(json!({"phase":"background_open_profile","counters":fdb::timing::take()}));
+        churn::emit(json!({"phase":"background_open_profile","counters":siftwake::timing::take()}));
         let mut corpus = Corpus::open()?;
         let model = churn::Model::load(state)?;
         let case = corpus
@@ -609,7 +612,7 @@ fn run() -> Result<()> {
     if mode == "open-profile" {
         #[cfg(feature = "diagnostic-timing")]
         churn::emit(
-            json!({"phase":"strict_open_profile","counters":fdb::timing::take(),"memory":churn::memory(),"stats":engine.stats()?}),
+            json!({"phase":"strict_open_profile","counters":siftwake::timing::take(),"memory":churn::memory(),"stats":engine.stats()?}),
         );
         #[cfg(not(feature = "diagnostic-timing"))]
         return Err("open-profile needs diagnostic-timing".into());

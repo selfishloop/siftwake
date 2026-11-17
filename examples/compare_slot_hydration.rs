@@ -7,8 +7,8 @@ fn main() {
 
 #[cfg(feature = "experimental-direct-slot")]
 fn main() -> Result<(), Box<dyn std::error::Error>> {
-    use fdb::{Database, Query, Range};
     use serde_json::json;
+    use siftwake::{Database, Query, Range};
     use std::time::Instant;
     let path = std::env::args()
         .nth(1)

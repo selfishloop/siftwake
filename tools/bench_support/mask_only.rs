@@ -1,8 +1,8 @@
 //!100k setup without ingest/open/query/RAM timing; only the requested mask pair.
 use super::churn::{self, Corpus, Result, Row};
-use fdb::Database;
+use siftwake::Database;
 #[cfg(all(feature = "diagnostic-timing", feature = "bounded-engine"))]
-use fdb::Key;
+use siftwake::Key;
 
 pub fn run(mode: &str, path: &str) -> Result<()> {
     if std::env::var("FDB_SCALE_DOCUMENTS")? != "100000" {
@@ -20,11 +20,11 @@ pub fn run(mode: &str, path: &str) -> Result<()> {
                     version: 0,
                 };
                 c.document(id, &row)
-                    .map(|document| fdb::Mutation::Put {
+                    .map(|document| siftwake::Mutation::Put {
                         document,
-                        guard: fdb::Guard::Any,
+                        guard: siftwake::Guard::Any,
                     })
-                    .map_err(|e| fdb::Error::Invalid(e.to_string()))
+                    .map_err(|e| siftwake::Error::Invalid(e.to_string()))
             }))?;
             if (first + 500) % 10000 == 0 {
                 churn::emit(

@@ -1,13 +1,13 @@
-//! Read-only SDB TSV importer. Writes only the separately supplied FDB directory.
-use fdb::{Database, Guard, Mutation, adapters};
+//! Read-only SDB TSV importer. Writes only the separately supplied Siftwake directory.
 use serde_json::json;
+use siftwake::{Database, Guard, Mutation, adapters};
 use std::io::{BufRead, BufReader};
 
 fn run() -> Result<(), Box<dyn std::error::Error>> {
     let args: Vec<String> = std::env::args().skip(1).collect();
     if !(4..=5).contains(&args.len()) {
         return Err(
-            "usage: fdb-import-sdb <db-dir> <tsv-file> <export-namespace> <scope> [max-records]"
+            "usage: siftwake-import-sdb <db-dir> <tsv-file> <export-namespace> <scope> [max-records]"
                 .into(),
         );
     }

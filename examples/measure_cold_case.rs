@@ -4,7 +4,7 @@ mod churn;
 #[path = "../tools/bench_support/cold_case.rs"]
 mod cold_case;
 use churn::Result;
-use fdb::{Database, FirstPage, Key, Query, StoredDocument};
+use siftwake::{Database, FirstPage, Key, Query, StoredDocument};
 
 impl cold_case::Reader for Database {
     fn get(&mut self, key: &Key) -> Result<Option<StoredDocument>> {

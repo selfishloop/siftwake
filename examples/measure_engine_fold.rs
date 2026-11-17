@@ -1,7 +1,7 @@
 //! Actual Database::search on the long-passage corpus; no payload-only shortcut.
-use fdb::{Database, Document, Key, Query, StoredDocument};
 use serde::Deserialize;
 use serde_json::json;
+use siftwake::{Database, Document, Key, Query, StoredDocument};
 use std::{collections::BTreeMap, fs, path::Path, time::Instant};
 #[derive(Deserialize)]
 struct Source {
@@ -79,8 +79,8 @@ fn main() -> Result<(), Box<dyn std::error::Error>> {
     #[cfg(feature = "experimental-rkyv-payload")]
     if overlay != "native" {
         let codec = match overlay.as_str() {
-            "json" => fdb::rkyv_payload::bench::Codec::Json,
-            "binary" => fdb::rkyv_payload::bench::Codec::Binary,
+            "json" => siftwake::rkyv_payload::bench::Codec::Json,
+            "binary" => siftwake::rkyv_payload::bench::Codec::Binary,
             _ => return Err("invalid benchmark payload".into()),
         };
         let attach = Instant::now();
@@ -125,7 +125,7 @@ fn main() -> Result<(), Box<dyn std::error::Error>> {
             let found = expected
                 .iter()
                 .map(|d| db.get(&d.document.key))
-                .collect::<fdb::Result<Vec<_>>>()?;
+                .collect::<siftwake::Result<Vec<_>>>()?;
             let elapsed = start.elapsed().as_secs_f64() * 1000.;
             assert_eq!(
                 found,
@@ -165,7 +165,7 @@ fn main() -> Result<(), Box<dyn std::error::Error>> {
             let mut times = Vec::new();
             for repeat in 0..repeats + usize::from(page_index == 0) {
                 #[cfg(feature = "diagnostic-timing")]
-                let _ = fdb::timing::take();
+                let _ = siftwake::timing::take();
                 let start = Instant::now();
                 let page = db.search(&q)?;
                 let elapsed = start.elapsed().as_secs_f64() * 1000.;
@@ -178,7 +178,7 @@ fn main() -> Result<(), Box<dyn std::error::Error>> {
                 #[cfg(feature = "diagnostic-timing")]
                 println!(
                     "{}",
-                    json!({"phase":"profile","query":request.name,"offset":offset,"repeat":repeat,"elapsed_ms":elapsed,"counters":fdb::timing::take(),"instrumented":true})
+                    json!({"phase":"profile","query":request.name,"offset":offset,"repeat":repeat,"elapsed_ms":elapsed,"counters":siftwake::timing::take(),"instrumented":true})
                 );
             }
             times.sort_by(f64::total_cmp);

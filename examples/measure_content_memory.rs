@@ -7,8 +7,8 @@ mod input;
 #[cfg(feature = "diagnostic-memory")]
 #[global_allocator]
 static ALLOCATOR: allocation::Tracking = allocation::Tracking;
-use fdb::{Database, Guard, Mutation, Query};
 use serde_json::json;
+use siftwake::{Database, Guard, Mutation, Query};
 use std::{
     path::Path,
     thread,
@@ -17,8 +17,8 @@ use std::{
 fn main() -> input::Result<()> {
     #[cfg(feature = "diagnostic-memory")]
     {
-        fdb::memory::install(allocation::origin);
-        fdb::memory::install_observer(allocation_checkpoint);
+        siftwake::memory::install(allocation::origin);
+        siftwake::memory::install_observer(allocation_checkpoint);
     }
     let args: Vec<_> = std::env::args().skip(1).collect();
     if args.len() != 4 && !(args.len() == 5 && args[4] == "--streamed") {
@@ -72,12 +72,12 @@ fn main() -> input::Result<()> {
     let start = Instant::now();
     for first in (from..to).step_by(500) {
         #[cfg(feature = "diagnostic-memory")]
-        let caller_origin = fdb::memory::Scope::new(1);
+        let caller_origin = siftwake::memory::Scope::new(1);
         let mut expected = Vec::new();
         let changes = (first..first + 500).map(|id| -> input::Result<Mutation> {
             let stored = {
                 #[cfg(feature = "diagnostic-timing")]
-                let _input = fdb::timing::span("input.corpus_crc_json");
+                let _input = siftwake::timing::span("input.corpus_crc_json");
                 source.read()?
             };
             if id == first || id == first + 499 {
@@ -92,7 +92,7 @@ fn main() -> input::Result<()> {
             #[cfg(feature = "bounded-engine")]
             {
                 db.commit_streamed(
-                    changes.map(|r| r.map_err(|e| fdb::Error::Invalid(e.to_string()))),
+                    changes.map(|r| r.map_err(|e| siftwake::Error::Invalid(e.to_string()))),
                 )?
             }
             #[cfg(not(feature = "bounded-engine"))]
@@ -113,7 +113,7 @@ fn main() -> input::Result<()> {
             let (live, peak, total, total_peak) = allocation::snapshot();
             println!(
                 "{}",
-                json!({"phase":"allocation","records":first+500,"origin_names":fdb::memory::NAMES,"requested_live":live,"requested_peak":peak,"total_live":total,"total_peak":total_peak,"not_rss":true,"not_normal_timing":true})
+                json!({"phase":"allocation","records":first+500,"origin_names":siftwake::memory::NAMES,"requested_live":live,"requested_peak":peak,"total_live":total,"total_peak":total_peak,"not_rss":true,"not_normal_timing":true})
             );
         }
         if (first + 500).is_multiple_of(10000) {
@@ -126,13 +126,13 @@ fn main() -> input::Result<()> {
     let ingest_ms = start.elapsed().as_secs_f64() * 1000.;
     #[cfg(feature = "diagnostic-timing")]
     {
-        fdb::timing::mark_drain();
+        siftwake::timing::mark_drain();
         println!("{}", json!({"phase":"before_drain","stats":db.stats()?}));
     }
     #[cfg(feature = "diagnostic-timing")]
     println!(
         "{}",
-        json!({"phase":"profile_ingest","counters":fdb::timing::take(),"instrumented":true,"overlapping_spans_do_not_sum":true})
+        json!({"phase":"profile_ingest","counters":siftwake::timing::take(),"instrumented":true,"overlapping_spans_do_not_sum":true})
     );
     input::phase("maintenance");
     let start = Instant::now();
@@ -145,24 +145,24 @@ fn main() -> input::Result<()> {
     #[cfg(feature = "experimental-write-buffer-budget")]
     println!(
         "{}",
-        json!({"phase":"controlled_buffer_budget","write":fdb::write_budget::snapshot(),"not_total_process_memory":true})
+        json!({"phase":"controlled_buffer_budget","write":siftwake::write_budget::snapshot(),"not_total_process_memory":true})
     );
     #[cfg(feature = "bounded-engine")]
     println!(
         "{}",
-        json!({"phase":"controlled_posting_budget","posting":fdb::write_budget::posting_snapshot(),"working":fdb::write_budget::working_snapshot(),"streamed_input":streamed,"not_total_process_memory":true})
+        json!({"phase":"controlled_posting_budget","posting":siftwake::write_budget::posting_snapshot(),"working":siftwake::write_budget::working_snapshot(),"streamed_input":streamed,"not_total_process_memory":true})
     );
     #[cfg(feature = "diagnostic-timing")]
     println!(
         "{}",
-        json!({"phase":"profile_maintenance","counters":fdb::timing::take(),"instrumented":true,"overlapping_spans_do_not_sum":true})
+        json!({"phase":"profile_maintenance","counters":siftwake::timing::take(),"instrumented":true,"overlapping_spans_do_not_sum":true})
     );
     #[cfg(feature = "diagnostic-memory")]
     {
         let (live, peak, total, total_peak) = allocation::snapshot();
         println!(
             "{}",
-            json!({"phase":"allocation_final","origin_names":fdb::memory::NAMES,"requested_live":live,"requested_peak":peak,"total_live":total,"total_peak":total_peak,"not_rss":true,"not_normal_timing":true})
+            json!({"phase":"allocation_final","origin_names":siftwake::memory::NAMES,"requested_live":live,"requested_peak":peak,"total_live":total,"total_peak":total_peak,"not_rss":true,"not_normal_timing":true})
         );
     }
     let stats = db.stats()?;
@@ -181,7 +181,7 @@ fn allocation_checkpoint(stage: &'static str, sequence: u64) {
     println!(
         "{}",
         json!({"phase":"allocation_checkpoint","stage":stage,"sequence":sequence,
-            "origin_names":fdb::memory::NAMES,"requested_live":live,"requested_peak":peak,
+            "origin_names":siftwake::memory::NAMES,"requested_live":live,"requested_peak":peak,
             "total_live":total,"total_peak":total_peak,"not_rss":true,"not_normal_timing":true})
     );
 }

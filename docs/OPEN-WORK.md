@@ -1,4 +1,12 @@
-# FDB açık işler
+# Siftwake açık işler
+
+17 Kasım — Paket, Rust crate, CLI ve Python istemcisi Siftwake olarak
+yeniden adlandırıldı. README'de Siftwake/SQLite/Tantivy yan yana
+özet ve 41 sorgunun p95 tablosu bulunur. SQLite sütunu aynı 50k korpusun
+29 Ekim oturumundan, diğer iki sütun 16 Kasım eşleştirmesinden gelir.
+Ayrıntılı raporlar ve açık performans maddeleri kaynak belgelerde izlenir.
+Yeniden adlandırma sonrası 239 test, format/Clippy, yeni release CLI ve
+üç karşılaştırma/ölçüm paketi derleme kontrolleri geçti.
 
 17 Kasım — Siftwake kurumsal kimliği ve `0.1.5-preview` yayın
 belgeleri hazırlandı. Yeni README, Rust başlangıç/API, CLI, güncel motor

@@ -18,8 +18,8 @@ dependencies = [
 ]
 
 [[package]]
-name = "fdb"
-version = "0.4.0"
+name = "siftwake"
+version = "0.1.5-preview"
 dependencies = [
  "crc32fast",
  "serde",
@@ -28,11 +28,11 @@ dependencies = [
 ]
 
 [[package]]
-name = "fdb-ram-text-probe"
+name = "siftwake-ram-text-probe"
 version = "0.1.0"
 dependencies = [
  "crc32fast",
- "fdb",
+ "siftwake",
  "lz4_flex",
  "serde_json",
 ]

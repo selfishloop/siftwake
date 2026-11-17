@@ -13,9 +13,9 @@ mod matrix;
 #[path = "../tools/bench_support/content_reads.rs"]
 #[allow(dead_code)]
 mod reads;
-use fdb::{Database, Query, SearchPage};
 use serde::Deserialize;
 use serde_json::json;
+use siftwake::{Database, Query, SearchPage};
 use std::{
     io::{BufRead, Write},
     path::Path,
@@ -108,13 +108,13 @@ fn memory_probe(db: &Database, reuse: bool) -> input::Result<()> {
         // Match the ordinary oracle-free probe's lifetime and key reads.
         for n in 0..256 {
             let id = n * 9999 / 255;
-            let key = fdb::Key::new("shared", "texts", &format!("{id:010}"));
+            let key = siftwake::Key::new("shared", "texts", &format!("{id:010}"));
             let got = db.get(&key)?.ok_or("missing key")?;
             assert_eq!(got.document.key, key);
             assert_eq!(got.version, (id / 500 + 1) as u64);
         }
         assert!(
-            db.get(&fdb::Key::new("shared", "texts", "9999999999"))?
+            db.get(&siftwake::Key::new("shared", "texts", "9999999999"))?
                 .is_none()
         );
     }
@@ -151,7 +151,7 @@ fn main() -> input::Result<()> {
             let c = &matrix.cases[n];
             let q = query(&c.text, c.offset, c.limit);
             #[cfg(feature = "diagnostic-timing")]
-            let _ = fdb::timing::take();
+            let _ = siftwake::timing::take();
             #[cfg(feature = "diagnostic-memory")]
             let before = allocation::reset();
             run(&db, &q, &mut page, reuse)?;
@@ -167,7 +167,7 @@ fn main() -> input::Result<()> {
             }
             #[cfg(feature = "diagnostic-timing")]
             {
-                row["spans"] = json!(fdb::timing::take());
+                row["spans"] = json!(siftwake::timing::take());
             }
             check(&matrix, c, &page);
             println!("{row}");

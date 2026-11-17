@@ -3,8 +3,8 @@ use super::{
     churn::{self, Backend, Change, Corpus, Model, Result, Row},
     snapshot_common::{Client, Factory, View, Writer},
 };
-use fdb::{Query, ValidationStatus};
 use serde_json::json;
+use siftwake::{Query, ValidationStatus};
 use std::{
     sync::atomic::{AtomicBool, AtomicUsize, Ordering},
     time::{Duration, Instant},
@@ -151,7 +151,7 @@ fn verify(db: &impl Backend, corpus: &mut Corpus, model: &Model, markers: bool) 
         }
         assert_eq!(
             db.get(id)?,
-            Some(fdb::StoredDocument {
+            Some(siftwake::StoredDocument {
                 document,
                 version: row.version
             }),
@@ -174,7 +174,7 @@ fn verify(db: &impl Backend, corpus: &mut Corpus, model: &Model, markers: bool) 
             let row = &model.rows[&id];
             assert_eq!(
                 *actual,
-                fdb::StoredDocument {
+                siftwake::StoredDocument {
                     document: corpus.document(id, row)?,
                     version: row.version
                 }

@@ -6,8 +6,8 @@ mod block3a;
 mod churn;
 #[path = "../tools/bench_support/key_pool.rs"]
 mod key_pool;
-use fdb::{Database, Key, Mutation, Query, Snapshot, SnapshotReader, StoredDocument};
 use key_pool::{Client, Factory, Result, Store, View};
+use siftwake::{Database, Key, Mutation, Query, Snapshot, SnapshotReader, StoredDocument};
 struct Engine(Database);
 #[derive(Clone)]
 struct Readers(SnapshotReader);
@@ -28,18 +28,18 @@ impl View for Snapshot {
     fn sequence(&self) -> u64 {
         self.sequence()
     }
-    fn first(&self, q: &Query) -> Result<fdb::FirstPage> {
+    fn first(&self, q: &Query) -> Result<siftwake::FirstPage> {
         #[cfg(feature = "diagnostic-timing")]
         let _isolated = (std::env::var_os("POOL_VISIBILITY_PROFILE").is_some()
             && std::env::var_os("FDB_TIMING_DISABLED").is_none()
-            && fdb::timing::request::current().is_none())
-        .then(fdb::timing::request::Request::new);
+            && siftwake::timing::request::current().is_none())
+        .then(siftwake::timing::request::Request::new);
         Ok(self.search_first_hybrid(q, 200)?)
     }
     fn begin_probe_diagnostic(&self) -> Box<dyn FnOnce() -> serde_json::Value> {
         #[cfg(feature = "diagnostic-timing")]
         {
-            let request = fdb::timing::request::Request::new();
+            let request = siftwake::timing::request::Request::new();
             Box::new(move || serde_json::to_value(request.finish()).unwrap())
         }
         #[cfg(not(feature = "diagnostic-timing"))]
@@ -94,7 +94,7 @@ fn main() -> Result<()> {
     let result = run();
     #[cfg(feature = "diagnostic-timing")]
     churn::emit(
-        serde_json::json!({"phase":"term_cache_diagnostics","counters":fdb::term_cache_diagnostics()}),
+        serde_json::json!({"phase":"term_cache_diagnostics","counters":siftwake::term_cache_diagnostics()}),
     );
     result
 }

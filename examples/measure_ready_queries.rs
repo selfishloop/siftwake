@@ -3,15 +3,15 @@
 mod corpus;
 #[path = "../tools/bench_support/verify.rs"]
 mod verify;
-use fdb::{Database, Query, Range, StoredDocument};
 use serde_json::{Value, json};
+use siftwake::{Database, Query, Range, StoredDocument};
 use std::time::Instant;
 fn measured(
     db: &Database,
     q: &Query,
     expected: (usize, Vec<StoredDocument>),
     repeats: usize,
-) -> fdb::Result<Value> {
+) -> siftwake::Result<Value> {
     let mut times = Vec::new();
     for repeat in 0..repeats + 10 {
         let start = Instant::now();
@@ -85,7 +85,7 @@ fn main() -> Result<(), Box<dyn std::error::Error>> {
         let start = Instant::now();
         let actual = (0..100)
             .map(|n| db.get(&corpus::key(n * 997 + 1)))
-            .collect::<fdb::Result<Vec<_>>>()?;
+            .collect::<siftwake::Result<Vec<_>>>()?;
         let ms = start.elapsed().as_secs_f64() * 1000.;
         assert_eq!(
             actual,

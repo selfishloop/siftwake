@@ -1,4 +1,7 @@
-# FDB mimarisi — 0.4.0
+# Siftwake mimarisi ve geliştirme geçmişi
+
+Güncel önizlemenin sözleşmeleri [motor kılavuzunda](ENGINE.md).
+Aşağıdaki tarihli geliştirme kayıtları, o aşamadaki FDB adını ve sürümlerini kullanır.
 
 12 Kasım: Otomatik revizyon geri kazanımı varsayılan açık. Yazıcı başına
 bir revizyon işçisi immutable run referanslarından planı ve çıktıyı

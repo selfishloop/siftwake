@@ -1,4 +1,4 @@
-param([Parameter(Mandatory=$true)][string]$DatabasePath, [string]$OutputPath='output/fdb-idle.json', [string]$BinaryPath='target/release/fdb.exe')
+param([Parameter(Mandatory=$true)][string]$DatabasePath, [string]$OutputPath='output/fdb-idle.json', [string]$BinaryPath='target/release/siftwake.exe')
 $ErrorActionPreference='Stop'
 $startInfo=[System.Diagnostics.ProcessStartInfo]::new()
 $startInfo.FileName=[System.IO.Path]::GetFullPath($BinaryPath)

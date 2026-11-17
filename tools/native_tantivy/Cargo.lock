@@ -249,7 +249,7 @@ source = "registry+https://github.com/rust-lang/crates.io-index"
 checksum = "da7c62ceae207dd37ea5b845da6a0696c799f85e97da1ab5b7910be3c1c80223"
 
 [[package]]
-name = "fdb"
+name = "siftwake"
 version = "0.1.5-preview"
 dependencies = [
  "crc32fast",
@@ -259,11 +259,11 @@ dependencies = [
 ]
 
 [[package]]
-name = "fdb-native-tantivy-bench"
+name = "siftwake-native-tantivy-bench"
 version = "0.1.0"
 dependencies = [
  "crc32fast",
- "fdb",
+ "siftwake",
  "serde",
  "serde_json",
  "tantivy",

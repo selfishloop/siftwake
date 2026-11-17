@@ -1,17 +1,17 @@
 # Local JSON Lines CLI
 
-The executable is currently named `fdb`. It opens one database directory,
+The executable is named `siftwake`. It opens one database directory,
 executes requests in order, and writes one JSON response per request.
 
 ```powershell
-cargo build --release --bin fdb
-.\target\release\fdb.exe data/mydb --stdio
+cargo build --release --bin siftwake
+.\target\release\siftwake.exe data/mydb --stdio
 ```
 
 A request file can contain formatted JSON.
 
 ```powershell
-.\target\release\fdb.exe data/mydb request.json
+.\target\release\siftwake.exe data/mydb request.json
 ```
 
 ## Operations
@@ -53,5 +53,4 @@ exit with status 1. A stdio request line is limited to 96 MiB.
 Use `stats` to inspect logical source and index bytes. Measure retained files
 and OS process memory separately when diagnosing disk or RAM.
 
-File names and protocol operation names retain their historical spelling in
-this preview. [Rust API](API.md) · [Engine contracts](ENGINE.md)
+[Rust API](API.md) · [Engine contracts](ENGINE.md)

@@ -1,6 +1,6 @@
 use crate::Page;
 use crate::churn::{self, Result};
-use fdb::{Document, Key};
+use siftwake::{Document, Key};
 use std::borrow::Cow;
 use std::cmp::Reverse;
 use std::collections::{BTreeMap, BTreeSet, BinaryHeap};

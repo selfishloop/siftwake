@@ -1,8 +1,8 @@
 //! Authorized repair only: guarded deletes of exactly 16 keys; no maintenance.
 use super::churn::{self, Corpus, Model, Result};
-use fdb::{Document, FirstPage, Key, MatchTotal, Query, StoredDocument};
 use serde::Deserialize;
 use serde_json::{Value, json};
+use siftwake::{Document, FirstPage, Key, MatchTotal, Query, StoredDocument};
 use std::{
     fs::{self, File, OpenOptions},
     io::{Read, Seek, SeekFrom, Write},

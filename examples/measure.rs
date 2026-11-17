@@ -1,5 +1,5 @@
-use fdb::{Database, Guard, Mutation, Query, adapters};
 use serde_json::json;
+use siftwake::{Database, Guard, Mutation, Query, adapters};
 use std::time::Instant;
 
 fn main() -> Result<(), Box<dyn std::error::Error>> {

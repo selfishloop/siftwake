@@ -1,9 +1,9 @@
 //! Isolated SQLite comparator for phase-separated memory baselines.
 #[path = "../../../bench_support/memory_corpus.rs"]
 mod input;
-use fdb::StoredDocument;
 use rusqlite::{Connection, OpenFlags, params};
 use serde_json::json;
+use siftwake::StoredDocument;
 use std::{
     path::Path,
     thread,

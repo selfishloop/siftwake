@@ -5,8 +5,8 @@ mod churn;
 #[path = "../../../bench_support/block3a_repair.rs"]
 mod repair;
 use churn::Result;
-use fdb::{FirstPage, Key, MatchTotal, Query, StoredDocument, ValidationStatus};
 use rusqlite::{Connection, OptionalExtension, params, params_from_iter};
+use siftwake::{FirstPage, Key, MatchTotal, Query, StoredDocument, ValidationStatus};
 struct Engine(Connection);
 impl repair::Store for Engine {
     fn sequence(&mut self) -> Result<u64> {

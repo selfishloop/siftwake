@@ -1,6 +1,6 @@
 //! Synthetic content benchmark; does not read either application project.
-use fdb::{Database, Document, Guard, Key, Mutation, Query, Range};
 use serde_json::json;
+use siftwake::{Database, Document, Guard, Key, Mutation, Query, Range};
 use std::collections::BTreeMap;
 use std::time::Instant;
 
@@ -9,7 +9,7 @@ fn timing(
     query: &Query,
     expected: usize,
     repeats: usize,
-) -> fdb::Result<serde_json::Value> {
+) -> siftwake::Result<serde_json::Value> {
     let mut samples = vec![];
     for _ in 0..repeats {
         let start = Instant::now();

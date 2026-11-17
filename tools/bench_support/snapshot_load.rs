@@ -35,7 +35,7 @@ pub fn pilot(engine: &mut Engine, state: &str) -> Result<()> {
                 assert_eq!(snapshot.sequence(), seq);
                 assert_eq!(
                     snapshot.get(&churn::key(*id))?,
-                    Some(fdb::StoredDocument {
+                    Some(siftwake::StoredDocument {
                         document: corpus.document(*id, &model.rows[id])?,
                         version: seq
                     })

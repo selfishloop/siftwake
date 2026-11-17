@@ -1,5 +1,5 @@
 #![cfg(feature = "experimental-write-buffer-budget")]
-use fdb::{Database, Document, Guard, Key, Mutation};
+use siftwake::{Database, Document, Guard, Key, Mutation};
 #[test]
 fn concurrent_databases_stream_sources_and_release_shared_buffer_reservations() {
     let root = std::env::temp_dir().join(format!(
@@ -50,12 +50,12 @@ fn concurrent_databases_stream_sources_and_release_shared_buffer_reservations() 
     for worker in workers {
         worker.join().unwrap();
     }
-    let budget = fdb::write_budget::snapshot();
+    let budget = siftwake::write_budget::snapshot();
     assert_eq!(budget.in_use_bytes, 0);
     assert!(budget.peak_reserved_bytes <= budget.limit_bytes);
     #[cfg(feature = "bounded-engine")]
     {
-        let postings = fdb::write_budget::posting_snapshot();
+        let postings = siftwake::write_budget::posting_snapshot();
         assert_eq!(postings.in_use_bytes, 0);
         assert!(postings.peak_reserved_bytes <= postings.limit_bytes);
         assert_eq!(postings.limit_bytes, 2 * 1024 * 1024);

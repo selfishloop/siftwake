@@ -1,7 +1,7 @@
 //! Isolated key-cost pool in the existing owner database; never creates a corpus.
-use fdb::{Document, FirstPage, Guard, Key, MatchTotal, Mutation, Query, StoredDocument};
 use serde::{Deserialize, Serialize};
 use serde_json::json;
+use siftwake::{Document, FirstPage, Guard, Key, MatchTotal, Mutation, Query, StoredDocument};
 use std::{
     fs::File,
     io::{Read, Seek, SeekFrom},

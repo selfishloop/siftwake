@@ -1,12 +1,12 @@
 # Getting started
 
 Siftwake `0.1.5-preview` builds from this checkout. The package and executable
-are named `fdb`. The following commands run from the repository root.
+are named `siftwake`. The following commands run from the repository root.
 
 ## Build
 
 ```powershell
-cargo build --release --bin fdb
+cargo build --release --bin siftwake
 ```
 
 The manifest declares Rust 1.89. Recorded validation used Rust 1.99 on
@@ -16,11 +16,11 @@ The API documentation can be generated with `cargo doc --no-deps`.
 ## Embed in Rust
 
 For a local checkout stored next to your application, add a path dependency.
-Cargo's dependency alias allows application code to use `siftwake`.
+Application code imports the `siftwake` crate directly.
 
 ```toml
 [dependencies]
-siftwake = { package = "fdb", path = "../siftwake" }
+siftwake = { path = "../siftwake" }
 ```
 
 The path points to the directory containing the engine's `Cargo.toml`.
@@ -92,11 +92,11 @@ selecting it for an application. [Engine contracts](ENGINE.md)
 ## CLI
 
 ```powershell
-.\target\release\fdb.exe data/mydb --stdio
+.\target\release\siftwake.exe data/mydb --stdio
 ```
 
 Send one JSON request per line and read one response per line. For a request
-file, use `fdb.exe data/mydb request.json`. [CLI reference](CLI.md)
+file, use `siftwake.exe data/mydb request.json`. [CLI reference](CLI.md)
 
 ## Validate a build
 

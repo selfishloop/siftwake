@@ -1,12 +1,12 @@
 [package]
-name = "fdb-native-tantivy-bench"
+name = "siftwake-native-tantivy-bench"
 version = "0.1.0"
 edition = "2024"
 publish = false
 
 # Isolated comparator. Neither engine loads the other at runtime.
 [dependencies]
-fdb = { path = "../.." }
+siftwake = { path = "../.." }
 tantivy = { version = "=0.27.0", default-features = false, features = ["mmap", "lz4-compression"] }
 serde = { version = "1", features = ["derive"] }
 serde_json = "1"

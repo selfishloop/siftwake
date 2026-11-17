@@ -5,13 +5,13 @@ mod allocation;
 #[path = "../tools/bench_support/corpus.rs"]
 #[allow(dead_code)] // This diagnostic uses the generator, not timing quantiles.
 mod corpus;
-use fdb::{Database, Guard, Mutation};
 use serde_json::json;
+use siftwake::{Database, Guard, Mutation};
 
 #[global_allocator]
 static ALLOCATOR: allocation::Tracking = allocation::Tracking;
 
-fn report(phase: &str, records: usize, db: &Database) -> fdb::Result<()> {
+fn report(phase: &str, records: usize, db: &Database) -> siftwake::Result<()> {
     let (live, peak, calls) = allocation::snapshot();
     println!(
         "{}",

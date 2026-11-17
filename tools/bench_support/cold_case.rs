@@ -1,8 +1,8 @@
 //! Fixed 50k case-0 benchmark. The model and full oracle stay out of the timed path.
 use super::churn::{self, Corpus, Model, Result};
-use fdb::{FirstPage, Key, MatchTotal, Query, StoredDocument, ValidationStatus};
 use serde::Deserialize;
 use serde_json::json;
+use siftwake::{FirstPage, Key, MatchTotal, Query, StoredDocument, ValidationStatus};
 use std::{
     fs,
     time::{Instant, SystemTime, UNIX_EPOCH},

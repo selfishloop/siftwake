@@ -3,8 +3,8 @@
 mod corpus;
 #[path = "../tools/bench_support/verify.rs"]
 mod verify;
-use fdb::{Database, Query, Range};
 use serde_json::json;
+use siftwake::{Database, Query, Range};
 use std::time::Instant;
 
 // Independent normalization oracle, rather than the engine's index helpers.
@@ -99,7 +99,7 @@ fn main() -> Result<(), Box<dyn std::error::Error>> {
         let mut times = Vec::new();
         let mut first_ms = 0.;
         #[cfg(feature = "diagnostic-timing")]
-        let _ = fdb::timing::take();
+        let _ = siftwake::timing::take();
         for repeat in 0..=repeats {
             let start = Instant::now();
             let page = db.search(&q)?;
@@ -119,7 +119,7 @@ fn main() -> Result<(), Box<dyn std::error::Error>> {
         #[cfg(feature = "diagnostic-timing")]
         println!(
             "{}",
-            json!({"query": name, "instrumented": true, "counters": fdb::timing::take(), "nested_spans_overlap": true})
+            json!({"query": name, "instrumented": true, "counters": siftwake::timing::take(), "nested_spans_overlap": true})
         );
     }
     Ok(())

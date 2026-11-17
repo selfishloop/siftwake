@@ -9,8 +9,8 @@ documentation covers streamed writes, exact and capped search, snapshot
 readers, cancellation, maintenance, recovery contracts and measured limits.
 
 The package version is `0.1.5-preview`. The Cargo package, library import and
-executable retain the name `fdb`. Applications can use a local Cargo dependency
-alias named `siftwake`.
+executable are named `siftwake`. The importer is `siftwake-import-sdb`, and
+the Python client is `siftwake_client.SiftwakeClient`.
 
 Local historical tags were mapped to `v0.1.0` through `v0.1.4`. Their commit
 contents retain the earlier package versions. Source, manifest and cache format

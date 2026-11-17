@@ -7,15 +7,15 @@ fn main() {
 
 #[cfg(feature = "experimental-rkyv-payload")]
 mod experiment {
-    use fdb::{
+    use serde::{Deserialize, Serialize};
+    use serde_json::json;
+    use siftwake::{
         Document, Key, StoredDocument,
         rkyv_payload::{
             self as payload,
             bench::{Codec, Reader, Writer, identity, verify_crc},
         },
     };
-    use serde::{Deserialize, Serialize};
-    use serde_json::json;
     use std::{
         collections::BTreeMap,
         fs::{self, File},
@@ -136,7 +136,11 @@ mod experiment {
         contains_ms: f64,
         page_decode_ms: f64,
     }
-    fn span<T>(enabled: bool, ms: &mut f64, f: impl FnOnce() -> fdb::Result<T>) -> fdb::Result<T> {
+    fn span<T>(
+        enabled: bool,
+        ms: &mut f64,
+        f: impl FnOnce() -> siftwake::Result<T>,
+    ) -> siftwake::Result<T> {
         if !enabled {
             return f();
         }
@@ -152,7 +156,7 @@ mod experiment {
         terms: &[String],
         profile: bool,
         p: &mut Profile,
-    ) -> fdb::Result<bool> {
+    ) -> siftwake::Result<bool> {
         span(profile, &mut p.normalization_ms, || {
             matcher.prepare_title(title);
             Ok(())
@@ -175,7 +179,7 @@ mod experiment {
         query: &Request,
         profile: bool,
         strategy: payload::FoldStrategy,
-    ) -> fdb::Result<(usize, Vec<StoredDocument>, Profile)> {
+    ) -> siftwake::Result<(usize, Vec<StoredDocument>, Profile)> {
         let mut p = Profile::default();
         let terms = payload::query_terms(&query.text);
         let codec = reader.codec;

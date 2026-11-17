@@ -8,9 +8,9 @@ mod matrix;
 #[path = "../tools/bench_support/content_reads.rs"]
 #[allow(dead_code)]
 mod reads;
-use fdb::{Database, Query};
 use serde::Deserialize;
 use serde_json::json;
+use siftwake::{Database, Query};
 use std::{
     io::{BufRead, Write},
     path::Path,

@@ -29,13 +29,12 @@ The new tags establish the Siftwake sequence retrospectively.
 | --- | --- |
 | Product and repository identity | Siftwake |
 | Public preview version | `0.1.5-preview` |
-| Cargo package, crate and CLI | `fdb` |
-| Application dependency alias | `siftwake = { package = "fdb", path = "..." }` |
+| Cargo package, crate and CLI | `siftwake` |
+| Local application dependency | `siftwake = { path = "../siftwake" }` |
 | Source and cache format identifiers | Existing FDB/MAN/SEG/MET identifiers |
 
-Package renaming and a registry publication need their own packaging work.
-The documentation uses a local Cargo alias to make embedding examples
-consistent with the product name.
+The package, Rust import, CLI, importer and Python client use the Siftwake name.
+Registry publication is a separate distribution step.
 
 ## Preview policy
 

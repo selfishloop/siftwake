@@ -148,8 +148,8 @@ pub fn run(db: &mut impl Backend, mode: &str, state: &str, path: &str) -> Result
                 assert_eq!(p.hits, exact.hits);
                 assert_eq!(p.sequence, exact.sequence);
                 match p.total {
-                    fdb::MatchTotal::Exact(n) => assert_eq!(n, exact.total),
-                    fdb::MatchTotal::AtLeast(n) => assert!(n == 50 && exact.total >= n),
+                    siftwake::MatchTotal::Exact(n) => assert_eq!(n, exact.total),
+                    siftwake::MatchTotal::AtLeast(n) => assert!(n == 50 && exact.total >= n),
                 }
             }
             churn::emit(
@@ -200,8 +200,8 @@ pub fn run(db: &mut impl Backend, mode: &str, state: &str, path: &str) -> Result
                     assert_eq!(p.sequence, exact.sequence);
                     assert_eq!(p.hits, exact.hits, "{variant} {}", c.text);
                     match p.total {
-                        fdb::MatchTotal::Exact(n) => assert_eq!(n, exact.total),
-                        fdb::MatchTotal::AtLeast(n) => assert!(n == 50 && exact.total >= n),
+                        siftwake::MatchTotal::Exact(n) => assert_eq!(n, exact.total),
+                        siftwake::MatchTotal::AtLeast(n) => assert!(n == 50 && exact.total >= n),
                     }
                     if repeat != 0 {
                         churn::emit(

@@ -1,9 +1,9 @@
 //! Common fixed-corpus load/oracle for native FDB and the isolated SQLite reference.
 use super::churn::{self, Backend, Change, Corpus, Model, Result, Row};
-use fdb::{
+use serde_json::{Value, json};
+use siftwake::{
     Query, SearchPage, SnapshotAdmission, SnapshotReadWait, SnapshotRelease, StoredDocument,
 };
-use serde_json::{Value, json};
 use std::{
     collections::BTreeMap,
     sync::{
@@ -58,10 +58,10 @@ pub trait View {
     fn sequence(&self) -> u64;
     fn get(&self, id: usize) -> Result<Option<StoredDocument>>;
     fn search(&self, q: &Query) -> Result<(SearchPage, SnapshotReadWait)>;
-    fn first(&self, _q: &Query) -> Result<fdb::FirstPage> {
+    fn first(&self, _q: &Query) -> Result<siftwake::FirstPage> {
         Err("first-page benchmark adapter unsupported".into())
     }
-    fn first_profiled(&self, q: &Query) -> Result<(fdb::FirstPage, Value)> {
+    fn first_profiled(&self, q: &Query) -> Result<(siftwake::FirstPage, Value)> {
         Ok((self.first(q)?, Value::Null))
     }
     fn release(self) -> Result<SnapshotRelease>;
@@ -90,7 +90,7 @@ pub trait Writer: Backend {
         Value::Null
     }
 }
-impl View for fdb::Snapshot {
+impl View for siftwake::Snapshot {
     fn sequence(&self) -> u64 {
         self.sequence()
     }
@@ -104,13 +104,13 @@ impl View for fdb::Snapshot {
         Ok(self.release())
     }
 }
-impl Client for fdb::SnapshotReader {
-    type View = fdb::Snapshot;
+impl Client for siftwake::SnapshotReader {
+    type View = siftwake::Snapshot;
     fn acquire(&mut self) -> Result<(Self::View, SnapshotAdmission)> {
         Ok(self.acquire_timed()?)
     }
 }
-impl Factory for fdb::SnapshotReader {
+impl Factory for siftwake::SnapshotReader {
     type Client = Self;
     fn open(&self) -> Result<Self> {
         Ok(self.clone())
@@ -205,15 +205,15 @@ fn readers<F: Factory>(
                 let first_mode=std::env::var_os("FDB_SNAPSHOT_FIRST_HYBRID").is_some();
                 let start=Instant::now();
                 let (page,waits,total_kind,query_profile)=if first_mode {
-                    let (p,profile)=view.first_profiled(&q)?;let total=p.total;let numeric=match total {fdb::MatchTotal::Exact(n)|fdb::MatchTotal::AtLeast(n)=>n};
+                    let (p,profile)=view.first_profiled(&q)?;let total=p.total;let numeric=match total {siftwake::MatchTotal::Exact(n)|siftwake::MatchTotal::AtLeast(n)=>n};
                     let mut waits=SnapshotReadWait::default();if let Some(counter)=profile.get("counters").and_then(|v|v.get("lock.cache_wait")){waits.cache_wait_ns=counter["elapsed_ns"].as_u64().unwrap_or(0);waits.cache_contentions=counter["calls"].as_u64().unwrap_or(0);}
                     (SearchPage{total:numeric,sequence:p.sequence,hits:p.hits},waits,total,profile)
-                }else{let(p,w)=view.search(&q)?;let total=fdb::MatchTotal::Exact(p.total);(p,w,total,Value::Null)};
+                }else{let(p,w)=view.search(&q)?;let total=siftwake::MatchTotal::Exact(p.total);(p,w,total,Value::Null)};
                 let search_ns=start.elapsed().as_nanos() as u64;assert_eq!(page.sequence,seq);
                 let oracle=Instant::now();let waiting=Instant::now();let locked=history.read().unwrap();let oracle_lock_ns=waiting.elapsed().as_nanos() as u64;
                 let expected_ids=&expected[case_id];let expected_page:Vec<_>=expected_ids.iter().skip(case.offset).take(case.limit).map(|&id|(id,locked.row(&base,id,seq))).collect();
                 let group=if checked_seq!=Some(seq){locked.groups.range(..=seq).next_back().map(|(_,ids)|ids.iter().map(|&id|(id,locked.row(&base,id,seq))).collect::<Vec<_>>()).unwrap_or_default()}else{vec![]};drop(locked);
-                match total_kind {fdb::MatchTotal::Exact(n)=>assert_eq!(n,expected_ids.len()),fdb::MatchTotal::AtLeast(n)=>assert!(n==case.limit && expected_ids.len()>=n)};assert_eq!(page.hits.len(),expected_page.len());
+                match total_kind {siftwake::MatchTotal::Exact(n)=>assert_eq!(n,expected_ids.len()),siftwake::MatchTotal::AtLeast(n)=>assert!(n==case.limit && expected_ids.len()>=n)};assert_eq!(page.hits.len(),expected_page.len());
                 for (actual,(id,row)) in page.hits.iter().zip(&expected_page){assert_eq!(*actual,StoredDocument{document:corpus.document(*id,row)?,version:row.version});}
                 for (id,row) in &group {assert_eq!(view.get(*id)?,Some(StoredDocument{document:corpus.document(*id,row)?,version:row.version}));}
                 if position==0 && let Some((id,row))=group.first() && row.revision!=0 {let mut old=Query::new("shared");old.collection=Some("texts".into());old.text=churn::marker(*id,row.revision-1);assert_eq!(view.search(&old)?.0.total,0);}

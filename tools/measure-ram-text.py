@@ -26,7 +26,7 @@ def main():
     report = lambda suffix: Path(f'{prefix}-{suffix}')
     if prefix.parent != ROOT / 'docs/benchmarks' or report('design.json').exists():
         raise RuntimeError('Unused docs/benchmarks prefix required')
-    program = ROOT / 'target/ram-text-probe/release/fdb-ram-text-probe.exe'
+    program = ROOT / 'target/ram-text-probe/release/siftwake-ram-text-probe.exe'
     design = dict(
         executable=str(program.relative_to(ROOT)), sha256=bench.sha(program),
         codec='lz4_flex0.14.0;safe-encode,safe-decode,checked-decode,std;block per document;no trained/inter-document dictionary',

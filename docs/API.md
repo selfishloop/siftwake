@@ -1,6 +1,6 @@
 # Rust API
 
-The Cargo package is `fdb`. Examples here use the dependency alias `siftwake`
+The Cargo package and crate are `siftwake`. Examples use the local dependency
 from [Getting started](GETTING-STARTED.md). Public types are exported from
 [lib.rs](../src/lib.rs).
 

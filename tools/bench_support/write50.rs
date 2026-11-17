@@ -56,7 +56,7 @@ fn perform<W: Writer, C: Client>(
         .as_ref()
         .map(|r| (r.revision, 1))
         .unwrap_or_else(|| (changed.old.as_ref().unwrap().revision, 0));
-    let mut probe = fdb::Query::new("shared");
+    let mut probe = siftwake::Query::new("shared");
     probe.collection = Some("texts".into());
     probe.text = churn::marker(changed.id, revision);
     let visible = view.search(&probe)?.0;
@@ -68,10 +68,11 @@ fn perform<W: Writer, C: Client>(
             .new
             .as_ref()
             .map(|r| {
-                c.document(x.id, r).map(|document| fdb::StoredDocument {
-                    document,
-                    version: seq,
-                })
+                c.document(x.id, r)
+                    .map(|document| siftwake::StoredDocument {
+                        document,
+                        version: seq,
+                    })
             })
             .transpose()?;
         assert_eq!(view.get(x.id)?, expected);
@@ -83,7 +84,7 @@ fn perform<W: Writer, C: Client>(
             .into_iter()
             .chain(x.new.as_ref().map(|r| (r.revision, 1)))
         {
-            let mut q = fdb::Query::new("shared");
+            let mut q = siftwake::Query::new("shared");
             q.collection = Some("texts".into());
             q.text = churn::marker(x.id, revision);
             assert_eq!(view.search(&q)?.0.total, total);

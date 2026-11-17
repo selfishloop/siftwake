@@ -109,7 +109,7 @@ def main():
         assert 'Finished' in log and 'error:' not in log
     assert not (REPORTS / 'search-hydration-fmt-20261017.log').read_text().strip()
     requests = [dict(op='stats')] + [dict(op='search', query=dict(scope='shared', collection='texts', text=text, limit=limit)) for text, limit in [('the', 200), ('quixote', 50), ('zx', 50)]]
-    cli = ROOT / 'target/release/fdb.exe'
+    cli = ROOT / 'target/release/siftwake.exe'
     run = subprocess.run([str(cli), 'data/benchmark-work/fdb', '--stdio'], cwd=ROOT,
                          input=''.join(json.dumps(row) + '\n' for row in requests),
                          capture_output=True, text=True, encoding='utf-8', check=True,
