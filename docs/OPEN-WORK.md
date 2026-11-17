@@ -1,5 +1,71 @@
 # FDB açık işler
 
+17 Kasım — Siftwake kurumsal kimliği ve `0.1.5-preview` yayın
+belgeleri hazırlandı. Yeni README, Rust başlangıç/API, CLI, güncel motor
+sözleşmeleri, performans özeti, marka kılavuzu ve sürüm eşlemesi eklendi.
+Önceki README geliştirme arşivinde korundu. Eski sürüm adları raporların
+tarihsel bağlamında kalır. Yerel sürüm etiketleri kullanıcı kararıyla
+yeniden numaralanır. Yazma/bakım, arama, RAM/disk ve eşzamanlı yükteki
+açık performans maddeleri izlenmeye devam eder.
+[Belgeler](README.md) · [Marka](BRAND.md) · [Sürümler](VERSIONING.md)
+
+16 Kasım — FDB ve Tantivy 0.27.0, ilk 50k Türkçe belge üzerinde iki
+dengeli blok. FDB ilk 50'de 39/41, exact 40/41 daha düşük p95.
+Tantivy'nin başarılı kollarında ingest 16,44–16,79 s ve disk
+137,82 MB, FDB 39,61–46,43 s ve 300,84 MB. Tantivy sıcak ilk
+sonuçta önde, FDB indeksleme private commit tepesinde düşük.
+Tantivy tarafında dört seed kesintisi ve bir OS 5 güncelleme
+kesintisi kayıtta. Başarılı kollar 50k payload/41 sorgu oracle'ını
+geçti. Gerçek soğuk ve sürekli churn bu koşuda ölçülmedi.
+[Karşılaştırma ve ham kanıt](TANTIVY-COMPARISON-50K-20261116.md)
+
+### Tantivy kıyasından kalan yapılacaklar
+
+- [ ] **Tekli güncelleme.** İlk iş, güncel FDB'de küçük WAL katmanı
+  kapalı/açık eşleştirmesi. İlk 50k üzerinde rapordaki aynı 24
+  dosya güncellemesi ve gövde boyutlarıyla commit, görünüm yayımı
+  ve ilk doğru sonuç sürelerini ayır. p95 143 ms (FDB varsayılan)
+  ve 81 ms (Tantivy, başarılı örnekler) taban. WAL açık kolda
+  foreground flush/merge beklemesi, dirty reopen ve sürekli yazmada
+  reclaim/disk ilerlemesini izle. Başarısız deneme ve tekrar süresini
+  da kaydet. [Küçük WAL karar tablosu](BLOCK4-DECISIONS-20261104.md)
+- [ ] **İlk indeksleme.** 39,6–46,4 sn (FDB) ve 16,4–16,8 sn
+  (Tantivy, başarılı koşular) taban. Aynı 100×500 akışlı yükte
+  normalleştirme/trigram, posting üretimi, kaynak ve indeks yazımı,
+  WAL ve son bakım/bütünlük kontrolü sürelerini ayrı ölç. Profilde
+  baskın çıkarsa önce posting işini sınırlı tamponla azaltmayı dene.
+  Önceki 4.096 terimli adayın join kazancı ve commit uçlarındaki
+  gerilemeler karşılaştırmada kalsın. [Posting üretimi profili](WAL-PREFIX-POSTING-BUILDER-50K-20261115.md)
+- [ ] **Disk.** Temiz 50k tabanı 300,8 MB (FDB) ve 137,8 MB
+  (Tantivy). FDB'de kaynak payload, içerik indeksi, fields/links
+  indeksleri ve WAL payını çıkar. Tantivy'nin LZ4 sıkıştırması ve
+  fields/links için saklama sözleşmesi ayrı değişkenler. En büyük paya
+  göre Frunner için yalnız içerik indeksleme profili veya blok
+  sıkıştırması tasarla. Disk kazancını okuma CPU'su, ilk sayfa p95'i,
+  ingest RAM'i ve churn sonrası retained disk ile birlikte ölç. Kalıcı
+  biçim etkisi varsa sürüm ve uyumluluk planını önce onaya sun.
+- [ ] **Açılıştan ilk sonuç.** Sıcak p95 218 ms (FDB strict) ve
+  12,4 ms (Tantivy normal). Tantivy tam checksum kontrolünün maliyetini
+  ayrı ölç, FDB'de açılış/ilk doğru sonuç/tam doğrulamayı temiz ve
+  churn görmüş yerleşimde ayır. Sonraki tasarım adayı olarak aynı
+  run üzerinde tespit edilen mükerrer doğrulama okumalarını birleştirme veya
+  mevcut arka plan açılışında doğrulama durumunu açıkça yayımlama
+  değerlendirilebilir. Kazancı doğrulanmış ilk sonuçla ölç. Gerçek
+  soğuk ölçümü ayrı koşu olarak kaydet. [Strict-open aşamaları](STRICT-OPEN-REMAINING-PHASES-20261109.md)
+- [ ] **Boşta RAM.** Temiz private commit 2,37 MiB (FDB) ve 1,10 MiB
+  (Tantivy). Daha düşük öncelikle okuyucu hazır, ilk arama sonrası ve
+  temiz boşta haritalanan sayfalar, private commit ve working set'i
+  ayır. Baskın tahsis doğrulanırsa cache veya scratch başlatmasını
+  ertelemenin ilk arama ve sıcak p95 maliyetini ölç. [Motor-only RAM ölçümü](RECLAIM-MOTOR-ONLY-RAM-50K-20261114.md)
+
+Sonraki adaylarda aynı korpus, dengeli sıra ve 41 sorgu oracle'ı
+kullanılır. FDB'nin ilk 50'de 39/41 ve exact'te 40/41 p95 üstünlüğü ile
+17,9 MiB ingest private commit tabanı korunacak ölçümler. Yazma ve bakım
+adaylarında 100'lük commit uçları, kesintisiz churn'de disk, tam
+revizyon yeniden yazımında motor-only RAM ve eşzamanlı okuma/yazma
+ayrı izlenir.
+Mevcut eşikler, varsayılanlar ve onay kuralları geçerli.
+
 15 Kasım — Gerçek soğuk 50k karşılaştırması, SQLite→FDB ve FDB→SQLite
 tamamlandı. İşlemci override'ı olmadan güncel FDB strict-open,
 39 run. Açılıştan ilk sonuca FDB 885–909 ms, SQLite 6.663–6.696 ms.

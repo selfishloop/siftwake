@@ -1,0 +1,17 @@
+[package]
+name = "fdb-native-tantivy-bench"
+version = "0.1.0"
+edition = "2024"
+publish = false
+
+# Isolated comparator. Neither engine loads the other at runtime.
+[dependencies]
+fdb = { path = "../.." }
+tantivy = { version = "=0.27.0", default-features = false, features = ["mmap", "lz4-compression"] }
+serde = { version = "1", features = ["derive"] }
+serde_json = "1"
+crc32fast = "=1.5.0"
+
+[profile.release]
+lto = "thin"
+codegen-units = 1
