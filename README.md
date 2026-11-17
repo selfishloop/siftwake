@@ -7,21 +7,23 @@
 
 **Document storage. Content search.**
 
-Siftwake is an embedded document database and content search engine written in
-Rust. It stores versioned documents, indexes extracted text and metadata, and
-publishes consistent snapshots while a single writer processes updates.
+Siftwake brings versioned document storage and fast content search directly
+into your application. Written in Rust, it combines indexed text and metadata,
+atomic updates and consistent snapshot readers in a compact embedded engine.
 
 **Current version — 0.1.5-preview.** APIs are under development.
 [Version history](docs/VERSIONING.md)
 
-## What you can build
+## Why Siftwake
 
-- Local content indexes for extracted text, with Unicode substring search and
-  Turkish character normalization.
-- Document stores with scoped keys, JSON metadata, same-scope links and
-  version-checked updates.
-- Search interfaces with first-page results, cancellation and snapshot readers
-  that keep a consistent committed view.
+- **Fast interactive search.** First-page results, query cancellation, Unicode
+  substring matching and Turkish character normalization.
+- **Documents with structure.** Scoped keys, JSON metadata, links and
+  version-checked atomic updates.
+- **Streaming ingestion.** Feed documents incrementally while the engine builds
+  indexes and manages background maintenance.
+- **Consistent reads during updates.** Snapshot readers keep a committed view
+  while the writer processes incoming changes.
 
 The storage engine, WAL, recovery, immutable segments and indexes are implemented
 in this repository. The runtime uses general serialization and checksum
@@ -29,8 +31,8 @@ libraries. Separate tools under `tools/` contain benchmark comparators.
 
 ## Start locally
 
-The manifest declares Rust 1.89 or newer. Recorded development and validation
-use Windows/MSVC with Rust 1.99. Other toolchains need their own validation.
+The manifest targets Rust 1.89 or newer. Build and validation instructions are
+in [Getting started](docs/GETTING-STARTED.md).
 
 ```powershell
 cargo build --release --bin siftwake
@@ -66,10 +68,13 @@ Siftwake's scope field is an application-supplied data partition.
 
 ## Benchmarks
 
-50,000 documents from the same audited Turkish cap200k corpus. Streamed ingest,
-500 documents per commit. Siftwake and Tantivy were measured together on
-16 November 2026. The SQLite FTS5 trigram baseline was measured on
-29 October 2026 with the same document prefix in a separate session.
+**Lower query p95 in 39 of 41 first-page cases and 40 of 41 exact cases
+against the configured Tantivy comparator.** Siftwake indexed 50,000 documents
+at approximately **18 MiB peak private commit**.
+
+The tables collect benchmark runs on the same 50,000-document Turkish cap200k
+corpus, using streamed ingest with 500 documents per commit.
+[Configurations and complete results](docs/PERFORMANCE.md)
 
 | Measurement | Siftwake | SQLite FTS5 trigram | Tantivy 0.27.0 |
 | --- | ---: | ---: | ---: |
@@ -136,8 +141,8 @@ strict open. Query results contain full documents in key order.
 [Siftwake/Tantivy report](docs/TANTIVY-COMPARISON-50K-20261116.md) ·
 [SQLite baseline](docs/TRWIKI-CAP200K-SCALE-20261029.md)
 
-The separate cold-cache run on 15 November used the existing 50k churn layout
-and measured open-start to the first 50 `olduğu` results.
+Cold-cache results use the 50k churn layout and measure open-start to the
+first 50 `olduğu` results.
 
 | Cold-cache measurement | Siftwake | SQLite FTS5 trigram | Tantivy |
 | --- | ---: | ---: | ---: |
@@ -146,9 +151,9 @@ and measured open-start to the first 50 `olduğu` results.
 The Tantivy cold-cache result is unmeasured.
 [Cold-cache evidence](docs/COLD-OPEN-PAIRED-50K-20261115.md)
 
-Current priorities include write latency, index build cost, disk footprint and
-startup cost. The Rust API is available. C ABI and application integration have
-separate requirements. [Open work](docs/OPEN-WORK.md)
+Use Siftwake through its Rust API or local JSON Lines process in desktop tools,
+local services and document-search applications. Follow ongoing development
+in the [roadmap](docs/OPEN-WORK.md).
 
 ## Documentation
 
