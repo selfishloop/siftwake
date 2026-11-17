@@ -7,7 +7,7 @@
 
 **Document storage. Content search.**
 
-Siftwake brings versioned document storage and fast content search directly
+Siftwake brings document storage and fast content search directly
 into your application. Written in Rust, it combines indexed text and metadata,
 atomic updates and consistent snapshot readers in a compact embedded engine.
 
@@ -19,7 +19,7 @@ atomic updates and consistent snapshot readers in a compact embedded engine.
 - **Fast interactive search.** First-page results, query cancellation, Unicode
   substring matching and Turkish character normalization.
 - **Documents with structure.** Scoped keys, JSON metadata, links and
-  version-checked atomic updates.
+  atomic updates with conflict detection.
 - **Streaming ingestion.** Feed documents incrementally while the engine builds
   indexes and manages background maintenance.
 - **Consistent reads during updates.** Snapshot readers keep a committed view
